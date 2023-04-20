@@ -2,3 +2,43 @@ baseURL = 'https://postfiatorg.github.io'
 languageCode = 'en-us'
 title = 'Alexsite'
 theme = 'PaperMod'
+
+enableInlineShortcodes = true
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+enableEmoji = true
+pygmentsUseClasses = true
+# googleAnalytics = "UA-123-45"
+
+[minify]
+disableXML = true
+# minifyOutput = true
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+    [languages.en.taxonomies]
+      category = "categories"
+      tag = "tags"
+      series = "series"
+    [[languages.en.menu.main]]
+      name = "Archive"
+      url = "archives"
+      weight = 5
+    [[languages.en.menu.main]]
+      name = "Search"
+      url = "search/"
+      weight = 10
+    [[languages.en.menu.main]]
+      name = "Tags"
+      url = "tags/"
+      weight = 10
+    [[languages.en.menu.main]]
+      name = "WiKi"
+      url = "https://github.com/adityatelange/hugo-PaperMod/wiki/"
+    [[languages.en.menu.main]]
+      name = "Discord"
+      url = "https://discord.gg/ahpmTvhVmp"
