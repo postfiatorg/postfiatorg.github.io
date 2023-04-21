@@ -65,7 +65,8 @@ disableXML = true
   ShowToc = true
   # comments = false
   images = ["papermod-cover.png"]
-
+  [markup.goldmark.renderer]
+    unsafe = true
   [params.profileMode]
     enabled = false
     title = "PaperMod"
@@ -84,7 +85,7 @@ disableXML = true
     Title = "GoodAlexander"
     Content = """
 Welcome to <strong>GoodAlexander</strong><br>
-- PaperMod is based on theme <a href="https://github.com/nanxiaobei/hugo-paper">Paper</a>.
+- Sub To Newsletter <a href="https://github.com/nanxiaobei/hugo-paper">Paper</a>.
 """
 
   [[params.socialIcons]]
@@ -93,9 +94,6 @@ Welcome to <strong>GoodAlexander</strong><br>
   [[params.socialIcons]]
     name = "Twitter"
     url = "https://www.twitter.com/goodalexander"
-  [[params.socialIcons]]
-    name = "Rss"
-    url = "index.xml"
 
   [params.editPost]
     URL = "https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content"
