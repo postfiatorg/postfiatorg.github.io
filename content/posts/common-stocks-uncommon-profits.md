@@ -1,14 +1,16 @@
 ---
-layout:     post
-title:      Common Stocks and Uncommon Profits Book Summary
-date:       2018-02-10 11:21:29
-summary:    Rote changes in revenue and earnings are less interesting than their quality and repeatability. Invest in a company with capable, honest and adaptive management entering an under penetrated market that invests its resources in such a way to give it optionality into new spaces.  High quality sales organizations, and long term investments into customer support with expanding margins due to automation are the killer combination. 
-categories: book summary
+title:      "Common Stocks and Uncommon Profits Book Summary"
+date:       2018-02-10T11:21:29Z
+draft:      false
 ---
 
 Common Stocks and Uncommon Profits gets frequently recommended to me by top performing equity managers. It's 15 rules for evaluating growth stocks. I read it and summarized it.
 
 ## Summary
+
+Rote changes in revenue and earnings are less interesting than their quality and repeatability. Invest in a company with capable, honest and adaptive management entering an under penetrated market that invests its resources in such a way to give it optionality into new spaces.  High quality sales organizations, and long term investments into customer support with expanding margins due to automation are the killer combination. 
+categories: book summary
+
 
 ### 1. Does the company have products or services with sufficient market potential to make possible a sizable increase in sales for at least several years?
 
