@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "Enlightened Hedonism"
 date: 2023-08-10T11:21:29Z
 draft: false

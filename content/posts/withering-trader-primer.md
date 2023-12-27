@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "A Withering Trader’s Illustrated Primer"
 date: 2023-07-14T11:21:29Z
 draft: false

@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "Week 2 - Decline and Fall"
 date: 2023-04-20T18:21:51Z
 draft: false

@@ -1,11 +1,5 @@
 ---
-layout:     post
-title:      
-date:       
-summary:    
----
-
----
+author: ["goodalexander"]
 title: "Daily Notes / Pre Market thoughts"
 date: 2021-11-16T11:21:29Z
 draft: false

@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "Consciousness as a Building Block"
 date: 2023-07-06T11:21:29Z
 draft: false

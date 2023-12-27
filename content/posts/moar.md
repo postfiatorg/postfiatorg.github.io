@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "Journal Thur Nov 18"
 date: 2021-11-18T11:21:29Z
 draft: false

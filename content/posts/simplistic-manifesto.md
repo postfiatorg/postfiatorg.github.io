@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "A Simplistic Manifesto"
 date: 2023-11-20T11:21:29Z
 draft: false

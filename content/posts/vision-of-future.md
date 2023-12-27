@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "A Vision of the Future"
 date: 2023-07-29T11:21:29Z
 draft: false

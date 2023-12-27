@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "Stress Zero "
 date: 2023-07-09T11:21:29Z
 draft: false

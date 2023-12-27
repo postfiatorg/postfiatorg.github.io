@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "Discussion on the Study of Asset Price Movement"
 date: 2022-06-24T11:21:29Z
 draft: false

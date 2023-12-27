@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "Common Stocks and Uncommon Profits"
 date: 2018-04-20T18:25:51Z
 draft: false

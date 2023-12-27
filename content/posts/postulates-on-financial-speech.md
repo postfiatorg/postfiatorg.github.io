@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "Postulates on Useful Financial Speech"
 date: 2022-09-20T11:21:29Z
 draft: false

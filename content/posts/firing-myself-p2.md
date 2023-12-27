@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "Firing Myself P2"
 date: 2023-07-05T11:21:29Z
 draft: false

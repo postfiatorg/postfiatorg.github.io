@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "What Do Markets Mean to Me"
 date: 2023-12-12T11:21:29Z
 draft: false

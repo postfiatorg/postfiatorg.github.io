@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "The Mo"
 date: 2023-09-12T11:21:29Z
 draft: false

@@ -1,4 +1,5 @@
 ---
+author: ["goodalexander"]
 title: "Asylum Sidepots. How to Escape the Matrix and Stay Out"
 date: 2023-08-05T11:21:29Z
 draft: false
