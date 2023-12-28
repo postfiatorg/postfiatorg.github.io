@@ -124,9 +124,9 @@ Going back to the breakdown of the authority of governments and the denial of re
 
 Fascists or communists would argue to democratic electorates that they’d need to hard reset society to a racial, cultural or ideological origin. However - these “alternatives” never work. Communism and fascism might work for a bit if you get lucky with leadership. But they end up failing because leadership either gets corrupt, or overly militaristic and risk seeking with no checks and balances. 
 
-Nazi Germany built good roads, without a doubt. But ended up ruining the country because it relied on a hyper centralized authority model that wasn’t served by Hitler getting high on meth and waging a multi-front war. China has accomplished an economic miracle since the 70s, but now its stock market is collapsing as Xi runs an increasingly insular and disconnected push towards what he perceives as virtue. 
+Nazi Germany built good roads, without a doubt. But ended up ruining the country because it relied on a hyper centralized authority model that wasn’t served by Hitler getting high on meth and waging a multi-front war. China has accomplished an economic miracle since the 70s, but now its stock market is collapsing as Xi runs an increasingly insular and disconnected push towards what he perceives as virtue. And "efficacy" issues aside - most totalitarian governments murder their own citizens en masse. When you account for state-sponsored murder of civilians, murder rates across the 20th Century were far higher in totalitarian countries than even the most dangerous democratic nations. 
 
-You can argue American democracy is broken, and that a full-scale restructuring of society is needed. But towards what?
+You can argue American democracy is broken, and that a full-scale restructuring of society is needed. But towards what? Given the above it's hard to take totalitarians seriously. 
 
 People are talking about how ChatGPT will replace Google. But if you use ChatGPT regularly - you will note that it’s not special for its ability to retrieve information. It’s special because of its ability to reason. 
 
