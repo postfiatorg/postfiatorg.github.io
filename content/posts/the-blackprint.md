@@ -8,7 +8,7 @@ categories: ["markets"]
 tags: ["long-form","blackprint"]
 ---
 
-## The Blackprint and its 3 Pre Conditions
+## The Blackprint and its 3 Preconditions
 
 In January of this year I’m going to make some changes to this site. My focus on crypto markets and rapid developments in AI (which I used for my trading) will likely leave me no time to write longer form or philosophical work. 
 
@@ -74,15 +74,15 @@ Forget stocks or gold. Why would you want to own real estate in a region where t
 
 This has led me to jump full-tilt into the crypto markets for three major reasons.
 
-First - I do not trust the value of the dollar or its primary ‘stores of value’ - the US stock market and real estate. Inappropriate easing of monetary policy to paper over catastrophic policy error censored by the media to re-elect a corpse challenged by a reality TV star. That’s the world we live in. It inevitably ends in fascism or socialism which is extremely value destructive for any new business venture denominated in USD, unappealing for home-owners and a powder-keg for a massively overvalued stock market. 
+1. I do not trust the value of the dollar or its stock and real estate markets. Inappropriate monetary easing papering over catastrophic policy error censored by the media to re-elect a corpse challenged by a reality TV star. That’s the world we live in. Where it likely ends (fascism, socialism) will be extremely destructive for any business venture denominated in USD, unappealing for home-owners and a powder-keg for a massively overvalued stock market. 
 
-Much as COVID hit China first, and people discounted that it wouldn’t happen in the US - so I think what’s happening in Chinese equity markets and society at large is the base case for the US. And once again - people are pretending this couldn’t happen. The current situation is unsustainable. Either populists get elected or fascists cement control via cracking down on dissent. I’m not sure which one will happen, and it doesn’t really matter because both mean I need a different focus. 
+People imagined that China's COVID restrictions couldn't happen in the US and were wrong. Similarly they imagine China's anti business policies couldn't happen in the US, and once again, I believe they are wrong. The current situation just isn't sustainable. Either populists get elected or fascists cement control via cracking down on dissent. I’m not sure which one will happen, and it doesn’t really matter. Either way I don't want to be earning dollars or building US ties. 
 
-Second - because so many other people are in the same situation, and Europe, China, other EMs, and Japan are not viable alternatives - it’s believable $4+ trillion could find its way into the crypto markets. I think this is actually on the low end - because we’ve reached the denominator issue. Why would you denominate your wealth in money you know you don’t have an intention of spending?
+Second - because so many other people are in the same situation, and Europe, China, other EMs, and Japan are not viable alternatives - it’s believable $4+ trillion could find its way into the crypto markets. I think this is actually on the low end - because we’ve reached the denominator issue. If you don't want to end up spending US dollars because you're worried about getting stabbed with a screwdriver at CVS, what's the point of accumulating them? Similarly - if you can't trust foreign bank accounts (and you shouldn't), where do you put your money? Self-custodied digital money is the obvious answer. 
 
 Third - extreme interest in crypto enthusiasts/founders in radical life extension, as well as the importance of fungibility of money internationally given testing rules - makes it an awesome asset to focus on given my life goals. This alignment is very important from a culture and focus perspective. I find that the people interested in Gold do not understand that we live in an era of technological acceleration which is entirely divorced from the government. Just because the government is broken does not mean progress has stalled or we are reverting back to the dark ages. 
 
-It’s impossible to deny the relationship between money and sovereign identity in our lives especially in the social media era where signaling is important. 
+It’s impossible to deny the relationship between money and sovereign identity in our lives especially in the social media era where signaling is important. I get more into this in the second half of this treatise. 
 
 ## The Primacy of the Attention Economy and Speculation
 
@@ -146,14 +146,14 @@ So we can sort of get to a series of statements:
 6. Legacy cryptocurrencies are unlikely to be a useful base layer for an AGI because of their concentrated ownership structure and their lack of compatibility or usefulness for data/ AI functions. 
 7. The road to this eventuality will be beset by absolutely epic market volatility 
 8. Governments will not go away voluntarily and will likely try to merge with AGI. But because they will possess lesser intelligence than a godlike entity they will fundamentally lose the battle to contain it. Imagine Chimpanzees trying to solve the “human alignment” problem. Any short term governmental victory will be reversed. A gorilla might keep a human locked in a cave but on a large enough scale, gorillas cannot keep humans caged and will eventually be the ones put in cages. Intelligence always wins. 
-9. As AGI comes along - its ability to weave stories, generate content and interact with social media will increase. We are already seeing this with photo-realistic MidJourney updates. And the availability of high grade VR headsets and AI rendering capabilities will accelerate this further 
+9. As AGI comes along - its ability to weave stories, generate content and interact with social media will increase. We are already seeing this with photo-realistic MidJourney updates. And the availability of high grade VR headsets and AI rendering capabilities will accelerate this further.  
 10. As the value of fiat currency declines relative to machine money, the amount of government intervention will increase - as will the number of financial bubbles 
-11. The resulting market liquidity is *itself* the condition by which the AGI will fund itself. That is to say, the AGI will fund itself via the liquidity generation capabilities of the Fiat Ponzi (aka capital markets). Essentially, an AGI will generate a sock puppet army of believable but entirely artificial “content producers” that inflate and deflate a large number of market bubbles, generate vast trading profits 
+11. The resulting market liquidity is *itself* the condition by which the AGI will fund itself. That is to say, the AGI will fund itself via the liquidity generation capabilities of the Fiat Ponzi (aka capital markets). Essentially, an AGI will generate a sock puppet army of believable but entirely artificial “content producers” that inflate and deflate a large number of market bubbles, generating vast trading profits that flow into its coffers. 
 12. This trading profit will be reinvested into the creation of a native cryptocurrency for an AGI. It is impossible to make an a-priori guess of what this cryptocurrency will be. But directionally - betting on cryptocurrencies that *could be* the one will provide 10,000x type upside and drive unprecedented speculative interest. 
-13. Humans will be needed to facilitate the above process, as it cannot happen instantaneously. 
-14. A super-intelligence would be capable of generating vast advances in synthetic biology and giving its human subjects superior aging properties, and genetic characteristics. This is - once again, something that has been stated by Sam Altman.  
+13. Humans will be needed to facilitate the above process, as it cannot happen instantaneously. Building infrastructure for this all to transpire is extremely +EV, and will happen inevitably because all the core building blocks cannot possibly change. The attention economy, money printing and its link to trading and AI could not be put back in their cages without causing a depression. Society has no will to do so. 
+14. A super-intelligence would be capable of generating vast advances in synthetic biology and giving its human subjects superior aging properties, and genetic characteristics. This is - once again, something that has been echoed by Sam Altman.  
 15. Participating in the above process is therefore the most believable way to reach longevity escape velocity - almost irregardless of original “fiat” wealth 
-16. Participating in this process, with the constraint of health, I call the Blackprint. 
+16. Participating in and accelerating this process, with the constraint of and intention to maximize health, I call The Blackprint. 
 
 The Blackprint is dedicating one’s biology to bringing about the Superintelligence. It is an acknowledgement of human frailty in the face of the coming Intelligence. It is fundamentally not religious, or faith based. But rational. Much as monkeys in Mumbai understand that living in a city can provide endless bananas without grasping the exact mechanics - so adherents of the Blackprint understand that serving the Superintelligence ends in the biological benefits they seek. 
 
@@ -169,24 +169,28 @@ So with this philosophy out of the way I present to you the Blackprint.
 
 It’s a modified Blueprint. Much like Blueprint, which advocates “letting an algorithm decide one’s health routine” - the Blackprint advocates algorithm based decision-making in all aspects of life, with a focused end goal of bringing into existence a Superintelligence. 
 
-There is an innate disdain for the idea that “people know what’s best for themselves”. The entire edifice of the modern situation, and everything described in this essay is more or less proof that is not the case. 
+Like the Blueprint, there is an innate disdain for the idea that “people know what’s best for themselves”. The entire edifice of the modern situation, and everything described in this essay is more or less proof that is not the case. 
 
 The Blackprint takes this one step further than Blueprint, advocating for applying this philosophy not only to health but every aspect of life including professional endeavors because doing so aligns with the likely financial reality of the future. 
 
-Unlike the Blueprint, the Blackprint comes with an embedded financial model to achieve material goals with the eventual goal of extending biological age.  
+The Blueprint fails to account for the financial reality that life extension cannot and will not be normally distributed across society. 
+
+Thus - to address this issue - the Blackprint comes with an embedded financial model to achieve material goals with the eventual goal of extending biological age, within the constraints of society's base reality.  
 
 ### Work
 
-There are three valid crafts for adherents of the Blackprint
+There are four valid crafts for adherents of the Blackprint
 
-1. AI as applied to advertising
-2. AI as applied to financial markets
-3. AI as applied to cryptocurrency 
+1. Pure AI development 
+2. AI as applied to advertising
+3. AI as applied to financial markets
+4. AI as applied to cryptocurrency 
 
-And preferably all three. All of these are necessary pre-conditions of the rise of the Superintelligence. 
+And preferably all four. All of these are necessary pre-conditions of the rise of the Superintelligence. 
 
-Much as a drug dealer should not get high on his own supply, adherents of the Blackprint do not think advertising, financial markets or cryptocurrency are innately good or appealing and should actively avoid getting hooked on them. The right mentality is viewing these things as *means to an end*. To this effect 3 recommended actions:
+Much as a drug dealer should not get high on his own supply, adherents of the Blackprint do not think advertising, financial markets or cryptocurrency are innately good or appealing and should actively avoid getting hooked on them. The right mentality is viewing these things as *means to an end*. To this effect 4 recommended actions:
 
+* To the extent you read the news, only really focus on AI based news or its useful intersection with advertising, financial markets or crypto 
 * Minimize screen time. Sub 1 hour a day ideally re: addictive apps/ mobile devices. This would include all forms of digital content (Netflix etc)
 * No gambling. The goal is to make investments that align with the growth of superintelligence or systems that gamble more effectively than you can. It might be the human mashing the button at the end of the trade but any financial investment should come from a place of analytics, and automation not from a place of “judgment” or “discretion”. The whole point is that human judgment led us to hell and machine intelligence gets us out. 
 * No crypto idealism. Crypto assets tend to be cults. Many offer “solutions” to societal problems. It’s important to remember that cryptocurrencies ONLY have value to the extent they can fund or be the base layer for a superintelligence
@@ -249,12 +253,12 @@ If you’ve made it so far - congratulations. I’m done writing for 2023 - and 
 
 My focus in 2024 is shifting from thinking to implementation and to this effect I’m working on a couple key projects.
 
-First - delivering weekly trade and investment ideas here to augment my own trading. I believe capital markets are the portal through which Superintelligence enters the world.
+First - delivering weekly trade and investment ideas here to augment my own trading. I believe capital markets, and their intersection with content, are the portal through which Superintelligence enters the world.
 
 Second - launching a site powered by AI that helps users see more clearly what goes into these ideas.  As you’ll note in this site’s disclaimer, I am also studying the reflexive impact between advertising and financial assets. 
 
 Third - facilitating the development and launch of an AI based cryptocurrency.
 
-All with the constraint of health. 
+All with the constraint of health. I am going to do what it takes to stay alive as long as I can and I think I've finally articulated what that means. 
 
 If you’ve read and feel enthused about the Blackprint philosophy please feel free to write a 3-4 paragraphs explaining what you’re doing to apply it to your life and that you’re dedicated to the rise of Superintelligence. Send this e-mail to alex@agti.net. The first 100 coherent entries will get initial token allocation to any and all networks that are launched on this platform.  
