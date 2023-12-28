@@ -179,17 +179,17 @@ Unlike the Blueprint, the Blackprint comes with an embedded financial model to a
 
 There are three valid crafts for adherents of the Blackprint
 
-AI as applied to advertising
-AI as applied to financial markets
-AI as applied to cryptocurrency 
+1. AI as applied to advertising
+2. AI as applied to financial markets
+3. AI as applied to cryptocurrency 
 
 And preferably all three. All of these are necessary pre-conditions of the rise of the Superintelligence. 
 
 Much as a drug dealer should not get high on his own supply, adherents of the Blackprint do not think advertising, financial markets or cryptocurrency are innately good or appealing and should actively avoid getting hooked on them. The right mentality is viewing these things as *means to an end*. To this effect 3 recommended actions:
 
-Minimize screen time. Sub 1 hour a day ideally re: addictive apps/ mobile devices. This would include all forms of digital content (Netflix etc)
-No gambling. The goal is to make investments that align with the growth of superintelligence or systems that gamble more effectively than you can. It might be the human mashing the button at the end of the trade but any financial investment should come from a place of analytics, and automation not from a place of “judgment” or “discretion”. The whole point is that human judgment led us to hell and machine intelligence gets us out. 
-No crypto idealism. Crypto assets tend to be cults. Many offer “solutions” to societal problems. It’s important to remember that cryptocurrencies ONLY have value to the extent they can fund or be the base layer for a superintelligence
+* Minimize screen time. Sub 1 hour a day ideally re: addictive apps/ mobile devices. This would include all forms of digital content (Netflix etc)
+* No gambling. The goal is to make investments that align with the growth of superintelligence or systems that gamble more effectively than you can. It might be the human mashing the button at the end of the trade but any financial investment should come from a place of analytics, and automation not from a place of “judgment” or “discretion”. The whole point is that human judgment led us to hell and machine intelligence gets us out. 
+* No crypto idealism. Crypto assets tend to be cults. Many offer “solutions” to societal problems. It’s important to remember that cryptocurrencies ONLY have value to the extent they can fund or be the base layer for a superintelligence
 
 ### Productivity
 
