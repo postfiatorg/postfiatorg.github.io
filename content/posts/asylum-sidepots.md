@@ -3,6 +3,8 @@ author: ["goodalexander"]
 title: "Asylum Sidepots. How to Escape the Matrix and Stay Out"
 date: 2023-08-05T11:21:29Z
 draft: false
+categories: ["markets"]
+tags: ["long-form","markets"]
 ---
 Escaping the socio-spiritual prison from the starting position of a speculator 
 

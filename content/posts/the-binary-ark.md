@@ -3,6 +3,7 @@ author: ["goodalexander"]
 title: "The Binary Ark"
 date: 2023-07-17T11:21:29Z
 draft: false
+tags: ["long-form","philosophy"]
 ---
 
 An exploration into accelerationist extremism and its logical conclusions 

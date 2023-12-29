@@ -3,6 +3,7 @@ author: ["goodalexander"]
 title: "Utility Gaps"
 date: 2023-08-21T11:21:29Z
 draft: false
+tags: ["long-form","philosophy"]
 ---
 What the Optimization Bros Have Wrong and How to Fix It
 

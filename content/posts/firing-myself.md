@@ -3,6 +3,7 @@ author: ["goodalexander"]
 title: "Firing Myself"
 date: 2023-07-02T11:21:29Z
 draft: false
+tags: ["long-form","philosophy"]
 ---
 deprecating Alex 1.0, applied accelerationism, ego death with a postgres backend 
 

@@ -3,6 +3,7 @@ author: ["goodalexander"]
 title: "Consciousness as a Building Block"
 date: 2023-07-06T11:21:29Z
 draft: false
+tags: ["long-form","philosophy"]
 ---
 the subject synthesizes various life experiences, failures and ideas into a singular life philosophy revolving around consciousness 
 

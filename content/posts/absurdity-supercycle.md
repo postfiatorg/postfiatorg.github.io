@@ -5,7 +5,7 @@ date: 2022-02-20T11:21:29Z
 draft: false
 summary: "reflections on recent price action, ARK investments, Palantir, and crypto"
 categories: ["markets"]
-tags: ["crypto","stocks"]
+tags: ["long-form","markets"]
 ---
 
 I’ve been deeply confused by fundamental investing for several years, which is – perhaps, why I tend to stick to short term trading. But given recent moves in markets, there is some reflection to be done.

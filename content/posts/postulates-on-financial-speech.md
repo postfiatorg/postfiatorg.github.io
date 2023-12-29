@@ -3,6 +3,7 @@ author: ["goodalexander"]
 title: "Postulates on Useful Financial Speech"
 date: 2022-09-20T11:21:29Z
 draft: false
+tags: ["long-form","markets"]
 ---
 
 Previously I wrote about the evolution of media and how it ends in a poorly defined digital Colosseum. Here I write in detail about how/ why that Colosseum will entail the creation of financial eSports

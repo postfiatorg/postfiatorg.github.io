@@ -3,6 +3,8 @@ author: ["goodalexander"]
 title: "A Vision of the Future"
 date: 2023-07-29T11:21:29Z
 draft: false
+tags: ["long-form","markets"]
+
 ---
 A hypothetical exploration of the world we are heading towards
 

@@ -3,6 +3,7 @@ author: ["goodalexander"]
 title: "The Left Curve Path"
 date: 2023-12-02T11:21:29Z
 draft: false
+tags: ["long-form","markets","crypto"]
 ---
 AI Good. Fiat Bad. What's your plan, anon? 
 

@@ -3,6 +3,7 @@ author: ["goodalexander"]
 title: "Stepping into Phase Seven"
 date: 2022-08-14T11:21:29Z
 draft: false
+tags: ["long-form","philosophy","markets"]
 ---
 one last musing before the descent into the digital colosseum
 
