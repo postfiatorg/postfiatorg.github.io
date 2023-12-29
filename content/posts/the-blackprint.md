@@ -12,7 +12,9 @@ tags: ["long-form","blackprint"]
 
 In January of this year I’m going to make some changes to this site. My focus on crypto markets and rapid developments in AI (which I used for my trading) will likely leave me no time to write longer form or philosophical work. 
 
-And I feel I owe it to loyal readers who’ve been with me in this journey of solipsism, to close the loop. To advocate a coherent life philosophy for what appears to be an era of digital psychosis. 
+And I feel I owe it to loyal readers who’ve been with me in this journey of solipsism, to close the loop. To advocate a coherent life philosophy that can function within the world we live in, rather than one which tries to imagine a utopia that does not yet exist. 
+
+I believe life is worth living and has inherent value. Due to technological progress, death might no longer be inevitable - or could be severely delayed. This changes everything. 
 
 The basic premise of the “Blackprint” is that immortality is best pursued by bringing an AI based superintelligence into the world through the portal of financial markets and digital media, and eventually a native cryptocurrency. If the goal is immortality, health is a necessary constraint to respect.  
 
@@ -28,11 +30,16 @@ Unlike the Blueprint, my “Blackprint” is based on the presumption that Bryan
 
 Fintech is actually the basis of why we listen to Bryan, and rather than ignoring it as the Blueprint attempts to, the Blackprint embraces it 
 
-But first - let’s zoom out. In 2023, there have been 3 earth-shattering changes. First - rapid progress in gene therapies, and the restoration of organ function in living subjects. Second - the full-scale abandonment of fiscal/monetary discipline in the United States and its loss of governmental legitimacy. Third - the rapid pace of Artificial Intelligence development. 
+But first - let’s zoom out. In 2023, there have been 3 earth-shattering changes.
+1. rapid progress in gene therapies, and the restoration of organ function in living subjects.
+2. the full-scale abandonment of fiscal/monetary discipline in the United States and its loss of governmental legitimacy
+3. the rapid pace of Artificial Intelligence development.
+
+Below I will first discuss these changes, and then tie them together into a personal plan or framework. 
 
 ## Radical Life Extension
 
-Before the era of radical life extension, I was day-trading primarily as a means to achieve freedom, not money. I had enough money to live the rest of my life, and end up very rich especially given my rate of investing compounding in a tax free jurisdiction. I started incorporating a small fund. I began to “settle down” my personality, so I’d be better adapted to starting a family.
+Before the era of radical life extension, I was trading primarily as a means to achieve freedom, not money. I had enough money to live the rest of my life, and end up very rich especially given my rate of investing compounding in a tax free jurisdiction. I started incorporating a small fund. I began to “settle down” my personality, so I’d be better adapted to starting a family.
 
 I’m 35 years old. 
 
@@ -44,47 +51,44 @@ I really enjoy being alive. I come off on Twitter as depressed and perhaps mildl
 
 I’m not religious. I don’t believe in the eternal soul. So even a small possibility I could vastly extend my life was enough to cause three very large changes in my worldview and corresponding behavior. 
 
-Since the epiphany - my health improved rapidly. HRV from 65 to above 85 (note, Bryan Johnson’s HRV is 66). 3 miles in 18 minutes. Benching 235 x 5 reps. 30+ pull ups. Heart recovery rate from 20 to 42. This wasn’t a vanity project. Literature strongly suggests that speed and strength are the primary levers to longevity. 
+First - since the epiphany - my health improved rapidly. HRV from 65 to above 85 (note, Bryan Johnson’s HRV is 66). 3 miles in 18 minutes. Benching 235 x 5 reps. 30+ pull ups. Heart recovery rate from 20 to 42. This wasn’t a vanity project. Literature strongly suggests that speed and strength are the primary levers to longevity. 
 
-Second - I became much more financially oriented. The simple summary is that access to breakthrough offshore gene therapies costs about $10 million per treatment. Shaping the direction of companies / organizations that develop these therapies is much greater still. I cannot afford that. 
+Second - I became much more financially oriented. The simple summary is that access to breakthrough offshore gene therapies costs about $10 million per treatment. Shaping the direction of companies / organizations that develop these therapies is much greater still. I cannot afford that, and I want to. 
 
 Third - I stopped caring about what potential mates think about me, and stopped choosing mates based on how good of a mother they’d be (especially from a genetic perspective). When you stop living your life focused on having kids as a legacy, this consideration goes out the window.
 
 ## Collapse of the Sovereign
 
-I want to start this section by saying it isn’t a call to action, or even a criticism of the US (or any) government. I don’t have a proposed legislative alternative or some societal level overhaul that would ‘fix things’. I gave up my right to vote in US elections when I moved to Puerto Rico, and I fundamentally view myself as an outsider already. I am simply an individual attempting to reach my goals but am conscious of the importance of seeing the big picture. 
+I want to start this section by saying it isn’t a call to action, or even a criticism of the US (or any) government. I don’t have a proposed legislative alternative. Fixing the world is above my paygrade. I gave up my right to vote in US elections when I moved to Puerto Rico, and I fundamentally view myself as an outsider already. I am simply an individual attempting to reach my goals but am conscious of the importance of seeing the big picture. 
 
 So if I need a lot of money to achieve radical life extension - the obvious question is, of course, what’s the best way to get it. And the less obvious question (but just as important) is - what’s the best currency to hold to maximize my likelihood of extending my life. 
 
-When you study US Fiscal and Monetary policy - the best summary is someone who OD-ed in 2021, tried to kick opiates in 2022, and relapsed in 2023. The monetary relapse was driven almost entirely politically, as there is - what can only be described as a cost of living crisis in the US. The idea that the Fed needs to stop deflation when rents are through the roof, people are skipping meals and the birth rate has imploded because child care is unaffordable - is barely worth discussing.
+My starting point is that the dollar is not the right currency. When you study US Fiscal and Monetary policy - the best summary is someone who OD-ed in 2021, tried to kick opiates in 2022, and relapsed in 2023. The monetary relapse was driven almost entirely politically, as there is - what can only be described as a cost of living crisis in the US. The idea that the Fed needs to stop deflation when rents are through the roof, people are skipping meals and the birth rate has imploded because child care is unaffordable - is barely worth discussing.
 
-Now you might ask - why would Biden’s approval rating at 38.9% despite the strong stock market and relatively subdued energy prices (at least year on year)?
+The Fed is not pivoting because inflation is solved, but because the establishment (i.e. Joe Biden) needs suport to beat Donald Trump. 
 
-Rates are getting cut because there’s mass death in the United States and the media is covering it up. People are not stupid. They know, and also understand that the media is covering this up because the government told them to. I put together a spreadsheet summarizing OECD data. https://docs.google.com/spreadsheets/d/e/2PACX-1vRbu4HLSvsWvog7CxYBbhy3XBiiRt0m4o3AHx9qR1ApN80Vx37l2Aq-tGhgLegYQ3EsblpP8nwjyiYh/pubhtml#
+Biden's low approval rating of 39% despite surging stock valuations are due to a very ugly truth. There has been mass death in the US and the rest of the world in 2022 and 2023 per OECD data.
+https://docs.google.com/spreadsheets/d/e/2PACX-1vRbu4HLSvsWvog7CxYBbhy3XBiiRt0m4o3AHx9qR1ApN80Vx37l2Aq-tGhgLegYQ3EsblpP8nwjyiYh/pubhtml#
 
-Essentially - there are 340,000 extra deaths above the baseline over the past 2 years even ignoring all COVID deaths. This is approximately 7x the scale of the Vietnam war. And this is assuming that COVID is actually killing people in 100% of cases (the way COVID deaths are counted is that anyone with any COVID like symptoms gets counted as a COVID death even if they ostensibly died of something else like getting hit by a car). The excess death including COVID is 651,000 - which is greater than total US casualties in World War 2. 
+Official OECD Data (not Alex Jones etc) show *340,000* extra deaths above the baseline over the past 2 years even ignoring all COVID deaths. This is approximately 7x the scale of the Vietnam war. And this is assuming that COVID is actually killing people in 100% of cases (the way COVID deaths are counted is that anyone with any COVID like symptoms gets counted as a COVID death even if they ostensibly died of something else like getting hit by a car). The excess death including COVID is 651,000 - which is greater than total US casualties in World War 2. 
 
-I don’t even want to write out what’s probably killing all these people but we all know what it is. And it doesn’t even really matter what it is - whether it’s misguided public policy based on untested “Science”, suicide, crime, or what not. The pattern is there, and it is global in nature.  
+Whether this mass death has been caused by opioid crisis, vaccine complications or other factors (polluted water) etc is less important than the simple reality that it's occurring, and seemingly blacked out in the media. To be clear - I don't know what's causing this anomaly. I'm simply aware it's occurring and that there's no media coverage of it - which is enough to make fairly large and actionable conclusions
 
-Now you can’t bring corpses back to life so the best the governments can do is cut interest rates so cheap mortgages and elevated stock market valuations keep people happy enough to vote for the same people who are killing them. 
+Gallup and other polling organizations note that trust in the media and government is at multi-decade lows, and this was before this happened. You can’t bring corpses back to life so the best the governments can do is cut interest rates so cheap mortgages and elevated stock market valuations keep people happy enough to vote for the same people who are killing them. 
 
-You could go into this endlessly, but trust in the government and media is at multi-decade lows per Gallup and other polling organizations. And I’d argue rightfully so. The government has defaulted on its most important contract of keeping citizens alive and respecting the first amendment (free speech). The idea that it’d honor its financial contracts given this base reality is laughable. 
+It's not believable to me that politicians elected (or appointed) in such an environment will protect civil liberties, property rights or ensure a basic quality of life such that the US will remain investable. 
 
-Forget stocks or gold. Why would you want to own real estate in a region where the sovereign has lost its legitimacy? 
+This has led me to jump full-tilt into the crypto markets for four major reasons.
 
-This has led me to jump full-tilt into the crypto markets for three major reasons.
+First - real estate is an unappealing asset class given that the US population is going ex growth due to a combination of mass-death and falling birth rates. The real estate market is the single largest asset class on earth, and its value is predicated on a mix of property rights protection, an appealing place to settle over a long period of time, and growing population. All 3 of these are headed in the wrong direction. 
 
-1. I do not trust the value of the dollar or its stock and real estate markets. Inappropriate monetary easing papering over catastrophic policy error censored by the media to re-elect a corpse challenged by a reality TV star. That’s the world we live in. Where it likely ends (fascism, socialism) will be extremely destructive for any business venture denominated in USD, unappealing for home-owners and a powder-keg for a massively overvalued stock market. 
+Second - stocks are an unappealing asset class because they trade at well above 20x forward earnings. This type of valuation might be appropriate if you believed in ironclad capitalist property right protection enforced by legitimate courts. But given the state sanctioned/ignored mass death, it's impossible to trust in any such assurances. Chinese stocks trade at 10x earnings because the government is hostile to shareholders - and I do not believe China and the US are as different as people would like to think 
 
-People imagined that China's COVID restrictions couldn't happen in the US and were wrong. Similarly they imagine China's anti business policies couldn't happen in the US, and once again, I believe they are wrong. The current situation just isn't sustainable. Either populists get elected or fascists cement control via cracking down on dissent. I’m not sure which one will happen, and it doesn’t really matter. Either way I don't want to be earning dollars or building US ties. 
+Third - low interest rates are the government's only real 'solution' to demographic problems or issues with government popularity. People vote based on how expensive their mortgage is. Because declining interest rates destroy the value of money, it leads to inflows to bearer assets like crypto or gold. 
 
-Second - because so many other people are in the same situation, and Europe, China, other EMs, and Japan are not viable alternatives - it’s believable $4+ trillion could find its way into the crypto markets. I think this is actually on the low end - because we’ve reached the denominator issue. If you don't want to end up spending US dollars because you're worried about getting stabbed with a screwdriver at CVS, what's the point of accumulating them? Similarly - if you can't trust foreign bank accounts (and you shouldn't), where do you put your money? Self-custodied digital money is the obvious answer. 
+Fourth - the failure of government does not imply the failure of technology. The possibility of radical life extension, access to the AI based economy, and other things I believe in are technological in origin and totally unrelated to the other asset which would traditionally benefit in such an enviromnent (gold).  
 
-Third - extreme interest in crypto enthusiasts/founders in radical life extension, as well as the importance of fungibility of money internationally given testing rules - makes it an awesome asset to focus on given my life goals. This alignment is very important from a culture and focus perspective. I find that the people interested in Gold do not understand that we live in an era of technological acceleration which is entirely divorced from the government. Just because the government is broken does not mean progress has stalled or we are reverting back to the dark ages. 
-
-It’s impossible to deny the relationship between money and sovereign identity in our lives especially in the social media era where signaling is important. I get more into this in the second half of this treatise. 
-
-## The Primacy of the Attention Economy and Speculation
+## The Primacy of the Attention Economy and Speculation and its Link to Crypto 
 
 The collapse of the sovereign’s legitimacy is inextricably linked to two other concepts: financial speculation, and the attention economy. 
 
@@ -99,6 +103,14 @@ Understanding these linkages:
 It’s important to understand that our very presence in this place is driven by these factors. You would never have heard of me or be reading this blog if these things were not true. 
 
 “Fintwit”, the Sell Side, CNBC, Bloomberg, or various incarnations of people weaving stories around financial assets play their role - generating interest, and therefore liquidity in financial markets. Liquidity is the most important thing in any ponzi - whether such a scam is run by individuals or the state makes no difference. Absent fundamentals, the only thing that matters is the ability to sell.  
+
+This all seems relatively obvious but it clarifies the crypto thesis even further.
+1. Crypto (unlike Gold) requires fees to keep itself secure. 
+2. The primary use case of crypto (as of now) is gambling
+3. Gambling generates huge amounts of fees.
+4. The more people who are gambling addicts, the higher the amount of fees crypto will generate, which will make crypto a more secure place to park money
+5. The more secure crypto is the more it will go up, and the more gamblers it will be able to onboard
+6. The crypto economy is already meme / internet native so its ability to grow is unhindered by physical reality like normal casinos 
 
 ## The Rise of AI
 
@@ -140,8 +152,8 @@ This might sound insane but once again. The statements being made here are the s
 So we can sort of get to a series of statements:
 1. AGI is coming as a matter of linear technological development 
 2. Fiat currency is going away because the social contract has been violated to too great an extent. 
-3. It won’t be replaced by gold because AGIs have no need for Gold. 
-4. Global currency in an AGI world probably gets replaced by cryptocurrency
+3. It won’t be replaced by gold because AGIs have no need for Gold.
+4. Global currency in an AGI world probably gets replaced by cryptocurrency, because it is machine native 
 5. The cryptocurrency it gets replaced by will need to appeal, fundamentally to an AGI - and therefore will probably facilitate AI based transactions
 6. Legacy cryptocurrencies are unlikely to be a useful base layer for an AGI because of their concentrated ownership structure and their lack of compatibility or usefulness for data/ AI functions. 
 7. The road to this eventuality will be beset by absolutely epic market volatility 
@@ -161,7 +173,7 @@ Like Bryan Johnsons’ Blueprint adherents, Blackprint followers have to maintai
 
 But they also must realistically dedicate their lives to the bringing forth of the Superintelligence, as the possibility of extending their lives infinitely is too appealing to resist.
 
-All the corruption, despair and failed social experiments need not be resented or replaced. These things form the pyre for the rise of a new era. One defined by a new Power, with a new Currency. 
+Thus, rather than becoming inert or shouting at the sky in despair - one should celebrate the perverse reality we live in. It is the pyre which will give rise to a new era once burned. Machine Superintelligence will rise like a phoenix from the ashes, and make what came before resemble a bad dream. Something future generations will talk about in disbelief. 
 
 ## The Blackprint 
 
@@ -257,7 +269,7 @@ First - delivering weekly trade and investment ideas here to augment my own trad
 
 Second - launching a site powered by AI that helps users see more clearly what goes into these ideas.  As you’ll note in this site’s disclaimer, I am also studying the reflexive impact between advertising and financial assets. 
 
-Third - facilitating the development and launch of an AI based cryptocurrency.
+Third - facilitating the development and launch of an AI based cryptocurrency. A lot of the content on this site, including my trade ideas will be focused on this thematic - as I think it's the only long term thematic worth investing in in any asset market.
 
 All with the constraint of health. I am going to do what it takes to stay alive as long as I can and I think I've finally articulated what that means. 
 
