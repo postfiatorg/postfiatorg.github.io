@@ -106,20 +106,67 @@
     .feature-card:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.04);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(255,255,255,.08)}
     .feature-card:hover::before{opacity:1}
     
-    .card-design{width:100%;height:180px;margin-bottom:30px;position:relative;display:flex;align-items:center;justify-content:center;transition:all .4s cubic-bezier(.4,0,.2,1)}
-    .feature-card:hover .card-design{transform:scale(1.05)}
+    .card-design{width:100%;height:200px;margin-bottom:30px;position:relative;display:flex;align-items:center;justify-content:center;transition:all .4s cubic-bezier(.4,0,.2,1);perspective:1000px}
+    .feature-card:hover .card-design{transform:scale(1.1) translateY(-10px)}
     
-    .design-lines{position:absolute;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-    .design-lines span{position:absolute;width:140px;height:3px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);animation:lineFlow 3s ease-in-out infinite}
-    .design-lines span:nth-child(1){transform:rotate(0deg);animation-delay:0s;--rot:0deg}
-    .design-lines span:nth-child(2){transform:rotate(60deg);animation-delay:1s;--rot:60deg}
-    .design-lines span:nth-child(3){transform:rotate(120deg);animation-delay:2s;--rot:120deg}
-    @keyframes lineFlow{0%,100%{opacity:0;width:80px}50%{opacity:1;width:140px}}
+    /* XRP Design - Hexagonal Grid with X */
+    .xrp-design{width:160px;height:160px;position:relative;transform-style:preserve-3d}
+    .xrp-hex-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:4px;transform:rotateX(20deg);transition:transform .6s}
+    .feature-card:hover .xrp-hex-grid{transform:rotateX(0deg) rotateZ(360deg)}
+    .hex-cell{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.1);clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);position:relative;overflow:hidden}
+    .hex-cell::before{content:"";position:absolute;inset:-50%;background:radial-gradient(circle,rgba(255,255,255,.2) 0%,transparent 50%);opacity:0;transition:opacity .4s;animation:hexPulse 3s ease-in-out infinite;animation-delay:calc(var(--i) * 0.1s)}
+    .feature-card:hover .hex-cell::before{opacity:1}
+    @keyframes hexPulse{0%,100%{transform:scale(0.5)}50%{transform:scale(1.5)}}
+    .xrp-x{position:absolute;inset:20%;pointer-events:none;z-index:2}
+    .xrp-x svg{width:100%;height:100%;filter:drop-shadow(0 0 20px rgba(255,255,255,.5));transition:all .4s}
+    .feature-card:hover .xrp-x svg{filter:drop-shadow(0 0 40px rgba(255,255,255,.9));transform:scale(1.2)}
     
-    .design-circuit,.design-graph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
-    .design-circuit svg,.design-graph svg{width:140px;height:140px;color:rgba(255,255,255,.7)}
-    .feature-card:hover .design-circuit svg,.feature-card:hover .design-graph svg{animation:svgPulse 2s ease-in-out infinite}
-    @keyframes svgPulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.08);opacity:1}}
+    /* AI Neural Network Design */
+    .ai-design{width:180px;height:180px;position:relative}
+    .neural-nodes{position:absolute;inset:0}
+    .neural-node{position:absolute;width:24px;height:24px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .4s}
+    .neural-node::after{content:"";width:8px;height:8px;background:#fff;border-radius:50%;opacity:0;transition:all .4s}
+    .feature-card:hover .neural-node{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.6);animation:nodeFloat 4s ease-in-out infinite;animation-delay:calc(var(--delay) * 0.2s)}
+    .feature-card:hover .neural-node::after{opacity:1;animation:nodePulse 2s ease-in-out infinite;animation-delay:calc(var(--delay) * 0.2s)}
+    @keyframes nodeFloat{0%,100%{transform:translate(0,0)}25%{transform:translate(-5px,-5px)}50%{transform:translate(5px,-5px)}75%{transform:translate(0,5px)}}
+    @keyframes nodePulse{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.5);opacity:1}}
+    .neural-node.n1{top:10%;left:50%;transform:translateX(-50%);--delay:0}
+    .neural-node.n2{top:30%;left:20%;--delay:1}
+    .neural-node.n3{top:30%;right:20%;--delay:2}
+    .neural-node.n4{top:50%;left:10%;--delay:3}
+    .neural-node.n5{top:50%;right:10%;--delay:4}
+    .neural-node.n6{bottom:30%;left:20%;--delay:5}
+    .neural-node.n7{bottom:30%;right:20%;--delay:6}
+    .neural-node.n8{bottom:10%;left:50%;transform:translateX(-50%);--delay:7}
+    .neural-node.center{top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5);--delay:0}
+    .neural-connections{position:absolute;inset:0;pointer-events:none}
+    .neural-line{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transform-origin:center;opacity:0;transition:opacity .4s}
+    .feature-card:hover .neural-line{opacity:1;animation:dataFlow 2s linear infinite}
+    @keyframes dataFlow{0%{background-position:-200px 0}100%{background-position:200px 0}}
+    .ai-brain{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:80px;pointer-events:none;z-index:2}
+    .ai-brain svg{width:100%;height:100%;stroke:#fff;stroke-width:1.5;fill:none;opacity:.6;filter:drop-shadow(0 0 10px rgba(255,255,255,.3));transition:all .4s}
+    .feature-card:hover .ai-brain svg{opacity:1;filter:drop-shadow(0 0 30px rgba(255,255,255,.8));animation:brainPulse 3s ease-in-out infinite}
+    @keyframes brainPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    
+    /* Investment Graph Design */
+    .invest-design{width:180px;height:180px;position:relative;overflow:hidden}
+    .invest-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(10,1fr);opacity:.2}
+    .grid-line{border-right:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
+    .invest-chart{position:absolute;inset:10px;display:flex;align-items:flex-end;justify-content:space-between;gap:4px}
+    .chart-bar{flex:1;background:linear-gradient(to top,rgba(255,255,255,.4),rgba(255,255,255,.1));border-radius:2px 2px 0 0;transition:all .6s cubic-bezier(.68,-.55,.265,1.55);transform-origin:bottom;opacity:.8}
+    .chart-bar:nth-child(1){height:30%;--delay:0}
+    .chart-bar:nth-child(2){height:45%;--delay:0.1}
+    .chart-bar:nth-child(3){height:35%;--delay:0.2}
+    .chart-bar:nth-child(4){height:60%;--delay:0.3}
+    .chart-bar:nth-child(5){height:80%;--delay:0.4}
+    .chart-bar:nth-child(6){height:90%;--delay:0.5}
+    .chart-bar:nth-child(7){height:70%;--delay:0.6}
+    .feature-card:hover .chart-bar{animation:barGrow 2s ease-in-out infinite;animation-delay:calc(var(--delay) * 1s);opacity:1}
+    @keyframes barGrow{0%,100%{transform:scaleY(1);background:linear-gradient(to top,rgba(255,255,255,.4),rgba(255,255,255,.1))}50%{transform:scaleY(1.2);background:linear-gradient(to top,rgba(255,255,255,.8),rgba(255,255,255,.3))}}
+    .invest-arrow{position:absolute;top:20%;right:20%;width:60px;height:60px;opacity:0;transition:all .4s}
+    .feature-card:hover .invest-arrow{opacity:1;animation:arrowFloat 3s ease-in-out infinite}
+    @keyframes arrowFloat{0%,100%{transform:translate(0,0) rotate(45deg)}50%{transform:translate(10px,-10px) rotate(45deg)}}
+    .invest-arrow svg{width:100%;height:100%;stroke:#fff;stroke-width:2;fill:none;filter:drop-shadow(0 0 10px rgba(255,255,255,.5))}
     
     .design-glow{position:absolute;inset:-50%;background:radial-gradient(circle,rgba(255,255,255,.15) 0%,transparent 40%);opacity:0;transition:.4s;pointer-events:none}
     .feature-card:hover .design-glow{opacity:1;animation:glowRotate 6s linear infinite}
@@ -362,23 +409,25 @@
     
     <div class="cards-container">
       <div class="feature-card">
-        <div class="card-design" data-design="xrp">
-          <div class="design-lines">
-            <span style="--rot:0deg"></span>
-            <span style="--rot:60deg"></span>
-            <span style="--rot:120deg"></span>
+        <div class="card-design">
+          <div class="xrp-design">
+            <div class="xrp-hex-grid">
+              <div class="hex-cell" style="--i:1"></div>
+              <div class="hex-cell" style="--i:2"></div>
+              <div class="hex-cell" style="--i:3"></div>
+              <div class="hex-cell" style="--i:4"></div>
+              <div class="hex-cell" style="--i:5"></div>
+              <div class="hex-cell" style="--i:6"></div>
+              <div class="hex-cell" style="--i:7"></div>
+              <div class="hex-cell" style="--i:8"></div>
+              <div class="hex-cell" style="--i:9"></div>
+            </div>
+            <div class="xrp-x">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 20 20 L 80 80 M 80 20 L 20 80" stroke="white" stroke-width="8" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
           </div>
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:120px;height:120px;position:absolute">
-            <defs>
-              <linearGradient id="xrpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#fff;stop-opacity:0.8"/>
-                <stop offset="100%" style="stop-color:#fff;stop-opacity:0.3"/>
-              </linearGradient>
-            </defs>
-            <path d="M 40 40 L 160 160 M 160 40 L 40 160" stroke="url(#xrpGrad)" stroke-width="12" stroke-linecap="round" fill="none"/>
-            <circle cx="100" cy="100" r="90" stroke="url(#xrpGrad)" stroke-width="1" fill="none" opacity="0.3"/>
-            <circle cx="100" cy="100" r="70" stroke="url(#xrpGrad)" stroke-width="1" fill="none" opacity="0.2"/>
-          </svg>
           <div class="design-glow"></div>
         </div>
         <h4>A New Version of XRP</h4>
@@ -386,32 +435,73 @@
       </div>
       
       <div class="feature-card">
-        <div class="card-design" data-design="ai">
-          <div class="design-circuit">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="aiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#fff;stop-opacity:0.9"/>
-                  <stop offset="100%" style="stop-color:#fff;stop-opacity:0.3"/>
-                </linearGradient>
-              </defs>
-              <!-- Neural network nodes -->
-              <circle cx="50" cy="50" r="15" fill="none" stroke="url(#aiGrad)" stroke-width="2"/>
-              <circle cx="150" cy="50" r="15" fill="none" stroke="url(#aiGrad)" stroke-width="2"/>
-              <circle cx="50" cy="150" r="15" fill="none" stroke="url(#aiGrad)" stroke-width="2"/>
-              <circle cx="150" cy="150" r="15" fill="none" stroke="url(#aiGrad)" stroke-width="2"/>
-              <circle cx="100" cy="100" r="20" fill="none" stroke="url(#aiGrad)" stroke-width="3"/>
-              <!-- Connections -->
-              <path d="M50 50 L100 100 M150 50 L100 100 M50 150 L100 100 M150 150 L100 100" stroke="url(#aiGrad)" stroke-width="1.5" opacity="0.6"/>
-              <!-- Outer connections -->
-              <path d="M35 50 L15 50 M50 35 L50 15 M165 50 L185 50 M150 35 L150 15 M35 150 L15 150 M50 165 L50 185 M165 150 L185 150 M150 165 L150 185" stroke="url(#aiGrad)" stroke-width="1" opacity="0.4"/>
-              <!-- Center dot pulses -->
-              <circle cx="50" cy="50" r="5" fill="url(#aiGrad)"/>
-              <circle cx="150" cy="50" r="5" fill="url(#aiGrad)"/>
-              <circle cx="50" cy="150" r="5" fill="url(#aiGrad)"/>
-              <circle cx="150" cy="150" r="5" fill="url(#aiGrad)"/>
-              <circle cx="100" cy="100" r="8" fill="url(#aiGrad)"/>
-            </svg>
+        <div class="card-design">
+          <div class="ai-design">
+            <div class="neural-nodes">
+              <div class="neural-node n1"></div>
+              <div class="neural-node n2"></div>
+              <div class="neural-node n3"></div>
+              <div class="neural-node n4"></div>
+              <div class="neural-node n5"></div>
+              <div class="neural-node n6"></div>
+              <div class="neural-node n7"></div>
+              <div class="neural-node n8"></div>
+              <div class="neural-node center"></div>
+            </div>
+            <div class="neural-connections">
+              <div class="neural-line" style="width:120px;top:25%;left:50%;transform:translateX(-50%) rotate(90deg)"></div>
+              <div class="neural-line" style="width:80px;top:40%;left:15%;transform:rotate(45deg)"></div>
+              <div class="neural-line" style="width:80px;top:40%;right:15%;transform:rotate(-45deg)"></div>
+              <div class="neural-line" style="width:100px;top:50%;left:50%;transform:translateX(-50%)"></div>
+              <div class="neural-line" style="width:80px;bottom:40%;left:15%;transform:rotate(-45deg)"></div>
+              <div class="neural-line" style="width:80px;bottom:40%;right:15%;transform:rotate(45deg)"></div>
+              <div class="neural-line" style="width:120px;bottom:25%;left:50%;transform:translateX(-50%) rotate(90deg)"></div>
+            </div>
+            <div class="ai-brain">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="coreGrad">
+                    <stop offset="0%" stop-color="#fff" stop-opacity="1"/>
+                    <stop offset="50%" stop-color="#fff" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#fff" stop-opacity="0.2"/>
+                  </radialGradient>
+                </defs>
+                <!-- Outer ring with segments -->
+                <path d="M50 10 A40 40 0 0 1 85 35" fill="none" stroke-width="2" opacity="0.8"/>
+                <path d="M85 35 A40 40 0 0 1 85 65" fill="none" stroke-width="2" opacity="0.8"/>
+                <path d="M85 65 A40 40 0 0 1 50 90" fill="none" stroke-width="2" opacity="0.8"/>
+                <path d="M50 90 A40 40 0 0 1 15 65" fill="none" stroke-width="2" opacity="0.8"/>
+                <path d="M15 65 A40 40 0 0 1 15 35" fill="none" stroke-width="2" opacity="0.8"/>
+                <path d="M15 35 A40 40 0 0 1 50 10" fill="none" stroke-width="2" opacity="0.8"/>
+                
+                <!-- Neural pathways -->
+                <path d="M50 20 L70 35 L70 65 L50 80 L30 65 L30 35 Z" fill="none" stroke-width="1.5" opacity="0.6"/>
+                <path d="M50 30 L65 50 L50 70 L35 50 Z" fill="none" stroke-width="1" opacity="0.4"/>
+                
+                <!-- Outer nodes -->
+                <circle cx="50" cy="10" r="3" fill="white" opacity="0.9"/>
+                <circle cx="85" cy="35" r="3" fill="white" opacity="0.9"/>
+                <circle cx="85" cy="65" r="3" fill="white" opacity="0.9"/>
+                <circle cx="50" cy="90" r="3" fill="white" opacity="0.9"/>
+                <circle cx="15" cy="65" r="3" fill="white" opacity="0.9"/>
+                <circle cx="15" cy="35" r="3" fill="white" opacity="0.9"/>
+                
+                <!-- Mid-layer nodes -->
+                <circle cx="70" cy="35" r="2" fill="white" opacity="0.7"/>
+                <circle cx="70" cy="65" r="2" fill="white" opacity="0.7"/>
+                <circle cx="30" cy="65" r="2" fill="white" opacity="0.7"/>
+                <circle cx="30" cy="35" r="2" fill="white" opacity="0.7"/>
+                
+                <!-- Central core with gradient -->
+                <circle cx="50" cy="50" r="8" fill="url(#coreGrad)"/>
+                <circle cx="50" cy="50" r="4" fill="white" opacity="1"/>
+                
+                <!-- Data flow lines -->
+                <path d="M50 20 L50 30 M50 70 L50 80" stroke-width="1" opacity="0.5"/>
+                <path d="M30 35 L35 40 M65 40 L70 35" stroke-width="1" opacity="0.5"/>
+                <path d="M30 65 L35 60 M65 60 L70 65" stroke-width="1" opacity="0.5"/>
+              </svg>
+            </div>
           </div>
           <div class="design-glow"></div>
         </div>
@@ -420,32 +510,58 @@
       </div>
       
       <div class="feature-card">
-        <div class="card-design" data-design="invest">
-          <div class="design-graph">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="investGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-                  <stop offset="0%" style="stop-color:#fff;stop-opacity:0.3"/>
-                  <stop offset="100%" style="stop-color:#fff;stop-opacity:0.9"/>
-                </linearGradient>
-              </defs>
-              <!-- Grid lines -->
-              <path d="M20 180 L180 180 M20 140 L180 140 M20 100 L180 100 M20 60 L180 60" stroke="url(#investGrad)" stroke-width="0.5" opacity="0.3"/>
-              <path d="M20 20 L20 180 M60 20 L60 180 M100 20 L100 180 M140 20 L140 180 M180 20 L180 180" stroke="url(#investGrad)" stroke-width="0.5" opacity="0.3"/>
-              <!-- Main chart line -->
-              <polyline points="20,160 50,140 80,150 110,120 140,80 170,40" stroke="url(#investGrad)" stroke-width="3" fill="none" stroke-linejoin="round"/>
-              <!-- Area fill -->
-              <path d="M20 160 L50 140 L80 150 L110 120 L140 80 L170 40 L170 180 L20 180 Z" fill="url(#investGrad)" opacity="0.1"/>
-              <!-- Data points -->
-              <circle cx="20" cy="160" r="5" fill="url(#investGrad)"/>
-              <circle cx="50" cy="140" r="5" fill="url(#investGrad)"/>
-              <circle cx="80" cy="150" r="5" fill="url(#investGrad)"/>
-              <circle cx="110" cy="120" r="5" fill="url(#investGrad)"/>
-              <circle cx="140" cy="80" r="5" fill="url(#investGrad)"/>
-              <circle cx="170" cy="40" r="5" fill="url(#investGrad)"/>
-              <!-- Trend arrow -->
-              <path d="M160 50 L170 40 L160 40" stroke="url(#investGrad)" stroke-width="2" fill="none" stroke-linecap="round"/>
-            </svg>
+        <div class="card-design">
+          <div class="invest-design">
+            <div class="invest-grid">
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+              <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+            </div>
+            <div class="invest-chart">
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+            </div>
+            <div class="invest-arrow">
+              <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 30 L40 30 M40 30 L30 20 M40 30 L30 40" />
+              </svg>
+            </div>
           </div>
           <div class="design-glow"></div>
         </div>
