@@ -150,7 +150,7 @@
     .use-cases-header h2{font-family:'Orbitron',sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:600;letter-spacing:.15em;background:linear-gradient(90deg,#fff,#bbb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0;position:relative;z-index:1}
     .use-cases-header::after{content:"";position:absolute;left:50%;bottom:-20px;transform:translateX(-50%);width:60px;height:2px;background:linear-gradient(90deg,transparent,#fff,transparent)}
     
-    .slideshow-container{max-width:1400px;margin:0 auto;position:relative;min-height:600px}
+    .slideshow-container{max-width:1400px;margin:0 auto;position:relative;min-height:600px;padding-bottom:100px}
     
     .slide{display:none;align-items:center;justify-content:center;gap:80px;animation:slideIn .8s cubic-bezier(.4,0,.2,1);position:relative;padding:40px}
     .slide.active{display:flex}
@@ -163,8 +163,6 @@
     .slide-text{flex:1;padding:40px;position:relative}
     
     .use-case-title{font-size:clamp(2.5rem,4vw,3.5rem);font-weight:700;margin-bottom:30px;letter-spacing:.05em;line-height:1.1;position:relative}
-    .use-case-title::after{content:"";position:absolute;left:0;bottom:-10px;width:60px;height:3px;background:#fff;transition:width .3s}
-    .slide:hover .use-case-title::after{width:100px}
     
     .use-case-text{font-size:1.15rem;color:#999;line-height:1.8;letter-spacing:.3px;font-weight:300}
     
@@ -249,19 +247,21 @@
     .dot.active{background:#fff;width:60px}
     
     @media(max-width:968px){
-      .slide-content{flex-direction:column;gap:40px}
-      .slide-visual{height:250px}
-      .etf-visual,.compliance-visual,.expert-visual,.ritual-visual{transform:scale(.7)}
-      .use-case-title{font-size:2rem;text-align:center}
-      .use-case-text{font-size:1rem;text-align:center}
-      .slide-text{padding:20px}
+      .slideshow-container{min-height:auto;padding-bottom:140px}
+      .slide{padding:20px;min-height:500px}
+      .slide-content{flex-direction:column;gap:30px}
+      .slide-visual{height:200px;flex:none}
+      .etf-visual,.compliance-visual,.expert-visual,.ritual-visual{transform:scale(.6)}
+      .use-case-title{font-size:1.8rem;text-align:center;margin-bottom:20px}
+      .use-case-text{font-size:0.95rem;text-align:center;margin-bottom:60px}
+      .slide-text{padding:10px;flex:none}
       .use-cases-header h2{font-size:2.5rem}
-      .use-cases-section{padding:60px 20px 120px}
-      .arrow-controls{bottom:60px;gap:20px}
+      .use-cases-section{padding:60px 20px 40px}
+      .arrow-controls{position:fixed;bottom:80px;gap:20px}
       .slide-arrow{width:50px;height:50px}
       .slide-arrow svg{width:20px;height:20px}
-      .slide-number{font-size:3rem;top:20px;right:20px}
-      .slide-dots{bottom:10px}
+      .slide-number{font-size:2.5rem;top:10px;right:10px}
+      .slide-dots{position:fixed;bottom:20px}
     }
   </style>
 </head>
