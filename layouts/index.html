@@ -237,29 +237,31 @@
     @keyframes ritualFloat{0%{opacity:0;transform:translate(0,0) scale(1)}25%{opacity:.8}50%{opacity:.6;transform:translate(var(--rx),var(--ry)) scale(1.5)}75%{opacity:.3}100%{opacity:0;transform:translate(calc(var(--rx) * 2),calc(var(--ry) * 2)) scale(.5)}}
     
     /* Arrow Navigation */
-    .arrow-controls{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;gap:30px;z-index:10}
+    .arrow-controls{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);display:flex;gap:30px;z-index:10}
     .slide-arrow{width:60px;height:60px;background:transparent;border:2px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
     .slide-arrow::before{content:"";position:absolute;inset:0;background:rgba(255,255,255,.1);transform:scale(0);border-radius:50%;transition:transform .3s}
     .slide-arrow:hover{border-color:rgba(255,255,255,.5)}
     .slide-arrow:hover::before{transform:scale(1)}
     .slide-arrow svg{width:24px;height:24px;stroke:#fff;stroke-width:2;fill:none;position:relative;z-index:1}
     
-    .slide-dots{display:flex;justify-content:center;gap:16px;position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);width:100%}
-    .dot{width:40px;height:3px;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s;border:none;border-radius:2px}
-    .dot.active{background:#fff;transform:scaleX(1.5)}
+    .slide-dots{display:flex;justify-content:center;gap:16px;position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:100%}
+    .dot{width:40px;height:3px;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s;border:none;border-radius:2px;outline:none}
+    .dot.active{background:#fff;width:60px}
     
     @media(max-width:968px){
       .slide-content{flex-direction:column;gap:40px}
       .slide-visual{height:250px}
-      .etf-visual,.compliance-visual,.expert-visual{transform:scale(.7)}
+      .etf-visual,.compliance-visual,.expert-visual,.ritual-visual{transform:scale(.7)}
       .use-case-title{font-size:2rem;text-align:center}
       .use-case-text{font-size:1rem;text-align:center}
       .slide-text{padding:20px}
       .use-cases-header h2{font-size:2.5rem}
-      .arrow-controls{bottom:20px}
+      .use-cases-section{padding:60px 20px 120px}
+      .arrow-controls{bottom:60px;gap:20px}
       .slide-arrow{width:50px;height:50px}
       .slide-arrow svg{width:20px;height:20px}
       .slide-number{font-size:3rem;top:20px;right:20px}
+      .slide-dots{bottom:10px}
     }
   </style>
 </head>
