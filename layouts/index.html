@@ -69,6 +69,15 @@
     .signup button{padding:14px 30px;border:none;border-radius:999px;background:linear-gradient(90deg,#fff,#aaa);color:#000;font-weight:700;font-size:.9rem;letter-spacing:.8px;cursor:pointer;transition:.3s}
     .signup button:hover{transform:translateY(-2px);box-shadow:0 0 20px rgba(255,255,255,.25)}
     
+    /* Ghost Signup Form Overrides */
+    .ghost-signup-container{width:100%;max-width:500px;margin:0 auto}
+    .ghost-signup-container iframe{width:100% !important;min-height:120px;border:none}
+    .ghost-signup-container [data-testid="signup-form"]{background:transparent !important}
+    .ghost-signup-container input[type="email"]{background:rgba(255,255,255,.06) !important;border:1px solid rgba(255,255,255,.18) !important;border-radius:999px !important;padding:14px 20px !important;color:#fff !important;font-size:.95rem !important}
+    .ghost-signup-container input[type="email"]:focus{border-color:rgba(255,255,255,.35) !important;background:rgba(255,255,255,.08) !important}
+    .ghost-signup-container button[type="submit"]{border-radius:999px !important;padding:14px 30px !important;font-weight:700 !important;font-size:.9rem !important;letter-spacing:.8px !important;background:linear-gradient(90deg,#fff,#aaa) !important;transition:.3s !important}
+    .ghost-signup-container button[type="submit"]:hover{transform:translateY(-2px) !important;box-shadow:0 0 20px rgba(255,255,255,.25) !important}
+    
     /* Social Icons */
     .social-section{text-align:center;margin-top:40px}
     .social-icons{display:flex;justify-content:center;gap:30px;margin-top:20px}
@@ -260,8 +269,7 @@
     <div class="brand-name">Post Fiat</div>
     <nav class="nav-links">
       <a href="#" class="nav-link">Whitepaper</a>
-      <a href="#" class="nav-link">Task Node</a>
-      <a href="#" class="nav-link">Documentation</a>
+      <a href="https://docs.postfiat.org/Discord-Wallet-Guide-170573318648807a8cd0d4f5022d1a08" class="nav-link">Task Node</a>
       <a href="https://discord.gg/3wJsg3T5Au" class="nav-link">Community</a>
     </nav>
     <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
@@ -286,8 +294,8 @@
 
     <div class="action-grid">
       <a href="#" class="action-button">Read the Whitepaper</a>
-      <a href="#" class="action-button">Use the Task Node</a>
-      <a href="#" class="action-button">AI Bloomberg Chat</a>
+      <a href="https://docs.postfiat.org/Discord-Wallet-Guide-170573318648807a8cd0d4f5022d1a08" class="action-button">Use the Task Node</a>
+      <a href="https://chatgpt.com/gpts/editor/g-68268260ac008191aef8162442354bbb" class="action-button">Learn About Post Fiat on ChatGPT</a>
     </div>
   </section>
 
@@ -295,10 +303,20 @@
   <section class="signup">
     <h2>Stay Updated</h2>
     <p>Be the first to know about network launches, token events, and major updates.</p>
-    <form class="signup-form" onsubmit="event.preventDefault();alert('Thank you! You\'re on the list.');">
-      <input type="email" placeholder="Enter your email" required>
-      <button type="submit">Subscribe</button>
-    </form>
+    <div class="ghost-signup-container">
+      <script 
+        src="https://cdn.jsdelivr.net/ghost/signup-form@~0.2/umd/signup-form.min.js" 
+        data-background-color="transparent"    
+        data-text-color="#ffffff"
+        data-button-color="#ffffff"       
+        data-button-text-color="#000000"
+        data-title="" 
+        data-description="" 
+        data-site="https://goodalexander.ghost.io/" 
+        data-locale="en" 
+        async>
+      </script>
+    </div>
     
     <div class="social-section">
       <div class="social-icons">
