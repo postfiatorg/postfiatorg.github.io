@@ -309,6 +309,20 @@
       .slide-arrow svg{width:20px;height:20px}
       .slide-number{font-size:2.5rem;top:10px;right:10px}
       .slide-dots{position:fixed;bottom:20px}
+      
+      /* Trigger animations on scroll for mobile */
+      .feature-card.in-view .xrp-hex-grid{transform:rotateX(0deg) rotateZ(360deg)}
+      .feature-card.in-view .hex-cell::before{opacity:1}
+      .feature-card.in-view .xrp-x svg{filter:drop-shadow(0 0 40px rgba(255,255,255,.9));transform:scale(1.2)}
+      
+      .feature-card.in-view .neural-node{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.6);animation:nodeFloat 4s ease-in-out infinite;animation-delay:calc(var(--delay) * 0.2s)}
+      .feature-card.in-view .neural-node::after{opacity:1;animation:nodePulse 2s ease-in-out infinite;animation-delay:calc(var(--delay) * 0.2s)}
+      .feature-card.in-view .neural-line{opacity:1;animation:dataFlow 2s linear infinite}
+      .feature-card.in-view .ai-brain svg{opacity:1;filter:drop-shadow(0 0 30px rgba(255,255,255,.8));animation:brainPulse 3s ease-in-out infinite}
+      
+      .feature-card.in-view .chart-bar{animation:barGrow 2s ease-in-out infinite;animation-delay:calc(var(--delay) * 1s);opacity:1}
+      .feature-card.in-view .invest-arrow{opacity:1;animation:arrowFloat 3s ease-in-out infinite}
+      .feature-card.in-view .design-glow{opacity:1;animation:glowRotate 6s linear infinite}
     }
   </style>
 </head>
@@ -723,6 +737,28 @@
   </section>
 
   <script>
+    /* ===== Intersection Observer for scroll animations ===== */
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3 // Trigger when 30% of element is visible
+    };
+
+    const animationObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          // Optional: stop observing after animation triggers
+          // animationObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all feature cards
+    document.querySelectorAll('.feature-card').forEach(card => {
+      animationObserver.observe(card);
+    });
+
     /* ===== Hamburger menu toggle ===== */
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.querySelector('.nav-links');
