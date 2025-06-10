@@ -1,3 +1,4 @@
+Post Fiat Whitepaper (Draft, June 10, 2025)
 
 # Introduction
 
@@ -130,6 +131,8 @@ This [code](https://gist.github.com/goodalexander/88aab442fb8879c5896530b1f84cc0
 
 In this example, we use a much more powerful model (Claude Sonnett 4). More powerful reasoning models are trusted by users and provide better outputs. So it is useful to assess if they also are deterministic 
 
+Note that this is run on real XRP validator data which can be found [here on XRPScan](https://xrpscan.com/validators)
+
 Here is the prompt used:
 _____
 You are the Post Fiat validator judgment system. You are presented with a single validator URL and output 50 word responses.
@@ -186,7 +189,7 @@ And here are the outputs. If you run the example code with Claude Sonnett 4 you 
 | jon-nilsen.no | 15 | 15 |
 | katczynski.net | 15 | 15 |
 
-You can see that the results are intuitive, with hobbyists and strange organizations such as XRP Goat scoring poorly with credibile universities such as Berkeley scoring well.
+You can see that the results are intuitive, with hobbyists and strange organizations such as XRP Goat scoring poorly with credibile universities such as Berkeley scoring well. More importantly, across different runs and machines - even with some noise -- scores converge on high quality models to identical mode values. Berkeley is consistently an 85 and XRPGoat is consistently 25 assuming you're using the same prompts and same models
 
 Here are some examples of the reasoning for top scoring validators:
 
@@ -198,6 +201,101 @@ Here are some examples of the reasoning for top scoring validators:
 
 And here are some examples of the reasoning for bottom scoring validators
 
-Sources:
+| Validator | Run 1 Score | Run 1 Text |
+|-----------|-------------|------------|
+| ekiserrepe.es | 15 | **Organization:** Ekiserrepe.es appears to be an unknown Spanish website or domain with no clear organizational identity or public presence.<br>**Credibility Assessment:** This organization lacks institutional size, has no demonstrated censorship resistance capabilities, and shows no evidence of technological expertise for network operations. The domain appears to be either inactive, personal, or represents a very small entity with minimal public footprint.<br>**Score:** 15 |
+| jon-nilsen.no | 15 | **Organization:** Jon Nilsen (Individual/Personal Website)<br>**Credibility Assessment:** This appears to be a personal website belonging to an individual named Jon Nilsen. As a personal site with no apparent institutional backing, it lacks significant economic weight, censorship resistance, and proven technical capabilities for network operations.<br>**Score:** 15<br>The low score reflects the individual nature of this validator, limited institutional size, uncertain technical capabilities, and lack of established credibility in blockchain validation |
+| katczynski.net | 15 | **Organization:** Katczynski.net appears to be a personal website or blog, likely referencing Theodore Kaczynski (the Unabomber).<br>**Credibility Assessment:** This is a small personal website with minimal institutional size, unknown technological capabilities, and unclear governance structure. While potentially censorship-resistant due to its independent nature, it lacks the scale, resources, and established reputation necessary for high credibility in validator operations.<br>**Score:** 15 |
 
-1. 
+# Understanding the Mathematical Underpinnings of this
+
+The phenomenon that makes the above possible is that of Greedy Decoding -- a concept brought up in [Holztman on Neural Text degeneration](https://arxiv.org/abs/1904.09751) and elaborated further in Song's [The Good the Bad and the Greedy]'(https://arxiv.org/abs/2407.10457) 
+
+\section{Mathematical Foundations of Deterministic LLM Output}
+
+\subsection{Greedy Decoding and Temperature-Controlled Sampling}
+
+The deterministic behavior observed in the empirical examples above can be explained through the mathematical framework of \textit{greedy decoding} \cite{holtzman2020curious, song2024good}.
+
+\subsubsection{Temperature-Controlled Softmax}
+
+Given logits $u_1, u_2, ..., u_{|V|}$ for vocabulary $V$, the probability of selecting token $x_i$ is computed as:
+
+\begin{equation}
+P(x_i | x_{1:i-1}) = \frac{\exp(u_i / \tau)}{\sum_{j=1}^{|V|} \exp(u_j / \tau)}
+\end{equation}
+
+where $\tau$ is the temperature parameter. As $\tau \rightarrow 0$, this distribution converges to:
+
+\begin{equation}
+\lim_{\tau \rightarrow 0} P(x_i | x_{1:i-1}) = \begin{cases}
+1 & \text{if } i = \arg\max_j u_j \\
+0 & \text{otherwise}
+\end{cases}
+\end{equation}
+
+This limit represents \textbf{greedy decoding}, where the model deterministically selects the token with the highest logit value.
+
+\subsubsection{Why Your Examples Show Perfect Determinism}
+
+Your empirical results demonstrate that:
+\begin{itemize}
+    \item For phrases like ``A blue whale dives'' $\rightarrow$ 120 (100\% consistency)
+    \item For phrases like ``A tiny ant works'' $\rightarrow$ mode of 42 (with higher variance)
+\end{itemize}
+
+This occurs because:
+
+\begin{enumerate}
+    \item \textbf{Greedy Decoding Convergence}: When $\tau \approx 0$, the softmax function becomes highly peaked, effectively performing $\arg\max$ selection. This explains the 0\% difference in the Run 1 vs Run 2 results.
+    
+    \item \textbf{Model Confidence Patterns}: The variation in standard deviations (e.g., 0.0 for ``A blue whale dives'' vs 40.7 for ``A tiny ant works'') reflects the model's varying confidence levels. This can be formalized as:
+    
+    \begin{equation}
+    \text{Var}[X | \text{phrase}] = f(\text{entropy}(P(x | \text{phrase})))
+    \end{equation}
+    
+    where higher entropy in the underlying distribution leads to higher variance even under low-temperature sampling.
+\end{enumerate}
+
+\subsection{Application to XRP Validator Scoring}
+
+The validator scoring results (e.g., Berkeley consistently scoring 85) demonstrate that this determinism extends to complex qualitative judgments. Following \cite{song2024good}, this can be understood as:
+
+\begin{equation}
+\text{Score}(\text{validator}) = \arg\max_{s \in [0,100]} P(s | \text{context}, \text{validator\_info})
+\end{equation}
+
+Under greedy decoding, this becomes a deterministic mapping:
+\begin{equation}
+\text{Score}: \text{ValidatorInfo} \rightarrow [0, 100]
+\end{equation}
+
+\subsection{Theoretical Justification}
+
+The theoretical foundation for this behavior comes from several sources:
+
+\begin{enumerate}
+    \item \textbf{Mode Collapse in Low-Temperature Regimes}: As shown in \cite{holtzman2020curious}, neural text generation exhibits ``mode collapse'' at low temperatures, where the model consistently selects the same high-probability sequences.
+    
+    \item \textbf{Deterministic Argmax Selection}: \cite{song2024good} demonstrates that greedy decoding (selecting $\arg\max$ at each step) produces consistent outputs across runs, with performance often exceedin
+
+
+## References
+
+- Holtzman, A., Buys, J., Du, L., Forbes, M., & Choi, Y. (2020). The curious case of neural text degeneration. International Conference on Learning Representations (ICLR). [https://arxiv.org/abs/1904.09751](https://arxiv.org/abs/1904.09751)
+
+- Song, Y., Wang, G., Li, S., & Lin, B. Y. (2024). The Good, The Bad, and The Greedy: Evaluation of LLMs Should Not Ignore Non-Determinism. [https://arxiv.org/abs/2407.10457](https://arxiv.org/abs/2407.10457)
+```
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],
+      displayMath: [['$$', '$$']]
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
