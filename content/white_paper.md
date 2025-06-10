@@ -10,20 +10,22 @@ Unlike Solana or Ethereum - which require high capital outlays to validate the n
 
 The XRPL Foundation has close ties with a single entity - Ripple Labs, that explicitly or implicitly funds many of its validators. Ripple Labs receives 80% of XRP while Ripple founders receive 20% - keeping the distribution of the network tight, and controlled by a single actor that is all-in on the remittance and transaction banking use case of the Network.
 
-This created substantial issues for XRP in the past - including a multi billion dollar lawsuit with the SEC and problems with Ripple Labs working with financial institutions. This had the effect of surpressing XRP's price. After Donald Trump won the 2024 election, XRP's price rocked from $.55 to $2.40 - as the risk that its validators would face legal scrutiny collapsed completely, and the SEC was instructed to step back. 
+This created substantial issues for XRP in the past - including a multi billion dollar lawsuit with the SEC and problems with Ripple Labs working with financial institutions. This had the effect of surpressing XRP's price. After Donald Trump won the 2024 election, XRP's price rocked from $0.55 to a high above $3 - as the risk that its validators would face legal scrutiny collapsed completely, and the SEC was instructed to step back. 
 
 However, as with all things political - the winds can easily shift. Post Fiat poses the question, "How can we make the Unique Node Selection fundamental to XRP transparent, fair and decentralized in a way that does not require government support?"
 
 ## The Solution 
 
-The selection of XRP's Unique Node List is a neccesarily opaque, qualitative process - that nonetheless determines XRP's network security. In order to build some faith in the selection - XRP publishes the identities of its validators.
+Post Fiat is a new Layer 1 Blockchain that uses AI to re-imagine XRP for the new economy. 
+
+The selection of XRP's Unique Node List is a neccesarily opaque, qualitative process - that nonetheless determines its network security. 
 
 Before LLMs it was impossible for people to agree on the validity of qualitative judgments without expensive judicial and legal procedures.
 
 Post Fiat is a new version of XRP that uses Large Language Models to select and reward members of the Unique Node List. Unlike XRP which sends 80% of FDV to a single entity, Ripple Labs - Post Fiat distributes 55% of FDV to validators following a pre-determined LLM driven process. While generous this is substantially less dilutive than XRP and far less centralized - and encourages development of multiple use cases on the network. 
 
 This process operates at 2 levels:
-1. **Entity Level Scoring** - using LLMs to determine the credibility of specific validators - called Nodes on Post Fiat. Nation states or megacap corporations, for example, are assigned higher weights than hobbyists or anonymous/unknown orgs.
+1. **Entity Level Scoring** - In order to build some faith in the selection - XRP publishes the identities of its validators. Post Fiat uses LLMs to determine the credibility of specific validators - called Nodes on Post Fiat. Nation states or megacap corporations, for example, are assigned higher weights than hobbyists or anonymous/unknown orgs.
 2. **Transaction Level Scoring** - Unlike many blockchains, XRP is filled with plain english memos that accompany its transactions. In Post Fiat, Nodes are associated with groups of addresses. The transactions and text of these addresses are scored
 
 Here's a clearer rewrite of the Post Fiat consensus mechanism:
@@ -66,7 +68,20 @@ After submission deadline:
   - Credibility scores
   - Network activity metrics
   - Statistical validity of submissions
-- Rewards (55% of network tokens) are distributed monthly to selected validators
+- A threshold score is designated for a combination of quantitative factors (node health, upgrade status, uptime, processing stats, transaction throughput for associated addresses, and network desnity) as well as the LLM 'qualitative factors' which weight the institution credibility and sampled transaction content
+- All nodes above the threshhold score can be on the UNL  
+- Rewards (55% of network tokens) are distributed monthly to selected validators in proportion to their score ranking on the threshhold score described above
+
+It is important to note here that the Post Fiat Foundation initially selects the models, prompts, and executes distribution through a single-purpose foundation structure similar to IKEA's Stichting INGKA model. This foundation is constitutionally bound to operate the Post Fiat consensus mechanism and cannot repurpose tokens for any other use. The foundation holds no beneficial ownership - it exists solely to execute the deterministic validator selection process. This irreversible structure ensures that even the bootstrap phase remains committed to decentralization, as the foundation cannot deviate from its mandate to distribute tokens according to LLM scoring. Over time, the model and prompt selection transitions to deterministic generation, but the foundation's single-purpose constraint remains permanent, preventing any entity from capturing or redirecting the distribution mechanism.
+
+This structure creates important safeguards against collusion and sybil attacks:
+* Model and prompt selection remain centralized with the foundation during bootstrap, but this centralization prevents node collusion since validators cannot influence the scoring criteria
+* Claims of corruption or favoritism are solved for by the fact that all prompts, and model selections are innately transparent. Favoritism would have to be hard coded into the prompts 
+* Nodes must submit their scores without knowing other submissions due to encryption, preventing coordinated manipulation
+The foundation acts as a neutral arbiter - it cannot favor specific validators since its single-purpose mandate requires following the deterministic LLM outputs
+* Final scoring and distribution are administered by the foundation, creating a separation between those being evaluated (nodes) and the evaluation mechanism itself
+* This temporary centralization paradoxically enhances decentralization by preventing cartels from gaming the system before AI systems advance sufficiently to handle fully autonomous sybil resistance
+* The foundation's inability to change its purpose means even its centralized role cannot be corrupted for other ends
 
 ### 6. Long-Term Sustainability
 The reward structure follows a 6-year distribution schedule, after which:
@@ -281,8 +296,9 @@ When validators execute the following protocol:
 3. **At low temperature** (τ ≈ 0)
 4. **For a large number of runs** (n ≥ 100)
 5. **Return statistical metrics**: mode, mean, median, and standard deviation
+6. **Return reasoning samples**: selected text outputs or 'justification strings'
 
-They produce **statistically verifiable qualitative judgments** that can be independently validated by any network participant.
+They produce **statistically verifiable qualitative judgments** that can be independently validated by any network participant. The scores alone are hard to fingerprint but the combination of aggregate statistics for multiple runs, and precise output strings create a statistically meaningful hash for any party to verify the fact that a judgment has been rendered according to spec. 
 
 ## Mathematical Foundations
 
@@ -350,7 +366,7 @@ This empirical validation strengthens our theoretical framework in several criti
 
 #### Mathematical Formalization of Universal Convergence
 
-The vec2vec findings demonstrate that for models $M_1$ and $M_2$ with different architectures, there exists a learnable translation function $F: \mathbb{R}^{d_1} \to \mathbb{R}^{d_2}$ such that:
+The Jha findings demonstrate that for models $M_1$ and $M_2$ with different architectures, there exists a learnable translation function $F: \mathbb{R}^{d_1} \to \mathbb{R}^{d_2}$ such that:
 
 $$\cos(F(M_1(x)), M_2(x)) \geq 0.92$$
 
@@ -409,7 +425,7 @@ However, these sources produce:
 
 Put differently - error coefficients are themselves a verification methodology. And more conceptually, even closed source models - 3rd party resellers of the model such as OpenRouter (which accept Crypto as payment for global customers) provide statistically deterministic output with the correct prompt / sampling methodology. 
 
-One level deeper - the prompts themselves can be optimized to drop non deterministic output, as non-deterministic prompt responses are themselves predictable. This allows for the Post Fiat Consensus to be designed in such a way that errors can be reduced and consensus can be reached more efficiently 
+One level deeper - the prompts themselves can be optimized to drop non deterministic output, as non-deterministic prompt responses are themselves predictable. This allows for the Post Fiat Consensus to be designed in such a way that errors can be reduced and consensus can be reached more efficiently. For example - it's unlikely that the consensus model would choose a Mixture of Experts reasoning model as its default - due to its probabilistically high variance. 
 
 ## Verification Protocol Mathematics
 
@@ -597,14 +613,14 @@ The vec2vec findings (Jha et al., 2025) prove that the universal geometric struc
 
 $$\forall M_{\text{closed}}, M_{\text{open}}: \exists F \text{ such that } \cos(F(M_{\text{closed}}(x)), M_{\text{open}}(x)) > 0.9$$
 
-This means closed and open source models can be used interchangeably in the consensus mechanism, with validators free to choose based on performance, cost, or compliance needs.
+This means closed and open source models can be used interchangeably in the consensus mechanism, with validators free to choose based on performance, cost, or compliance needs. 
 
 ### Practical Implementation
 
 Post Fiat validators can leverage closed source models by:
 
 1. **Timestamp Anchoring**: Recording exact query time and model version
-2. **Parallel Verification**: Multiple validators query within a narrow time window
+2. **Parallel Verification**: Multiple validators query within a narrow time window. It is unlikely that a model will be changed within this window, and once again - the possibility of a provider tweaking a model will be apriori included in the initial model selection 
 3. **Statistical Consensus**: Requiring agreement on fingerprint metrics, not exact outputs
 4. **Provider Diversity**: Using multiple providers (OpenAI, Anthropic, Google) for robustness
 
@@ -624,7 +640,7 @@ The key insight: **consensus doesn't require permanent model access, only tempor
   * the sampling params (`τ = 0`, `n = 100`, seed)
 
   Anyone can replay the scoring locally and verify the statistical fingerprint.
-* **Why it’s still better than XRP’s UNL today** – XRP’s validator lists are assembled behind closed doors by Ripple/XRPL Fdn; the only public signal is *which* keys made it onto the list, not *why*. Publishing the full prompt+model pair exposes the decision rule itself. ([xrpl.org][1])
+* **Why it’s still better than XRP’s UNL today** – XRP’s validator lists are assembled behind closed doors by Ripple/XRPL Fdn; the only public signal is *which* keys made it onto the list, not *why*. Publishing the full prompt+model pair exposes the decision rule itself. 
 
 ---
 
@@ -632,13 +648,15 @@ The key insight: **consensus doesn't require permanent model access, only tempor
 
 * **Road-map** – After ≥ N checkpoints, the network upgrades to *agentic* governance.
 
+Much as LLMs can generate deterministic output about a particular validator, they can also create deterministic statements about the appeal of a particular validator selection process. This 'meta' capability combined with AI agents theoretically enables the creation of an entirely LLM created social contract that is statistically verifiable.
+
   1. Validators run a “meta-agent” that proposes candidate prompts & model choices.
   2. Candidates are evaluated by the existing deterministic scoring loop.
   3. A Borda-count (or similar) elects the next-round prompt+model.
   4. The whole ballot, scores and winning hash are written on-chain.
 
   Determinism is preserved because every proposal is still evaluated at τ≈0 with 100-sample statistics, so anyone can replay the election.
-* **Feasibility reference** – Recent work such as the **Darwin Gödel Machine** shows open-ended, self-improving agent swarms that rewrite their own code and empirically test upgrades, pushing task success from 20 → 50 % on SWE-Bench in a few iterations. ([arxiv.org][2])  That trajectory strongly suggests a path toward fully autonomous, but still verifiable, prompt/model evolution.
+* **Feasibility reference** – Recent work such as the **Darwin Gödel Machine** shows open-ended, self-improving agent swarms that rewrite their own code and empirically test upgrades, pushing task success from 20 → 50 % on SWE-Bench in a few iterations. That trajectory strongly suggests a path toward fully autonomous, but still verifiable, prompt/model evolution.
 
 ---
 
@@ -649,10 +667,10 @@ The key insight: **consensus doesn't require permanent model access, only tempor
   1. Host `/.well-known/xrp-ledger.toml` over **HTTPS** with a publicly trusted TLS cert.
   2. Embed its validator public key and the domain in that TOML.
 
-  The XRPL Foundation already treats this as a gate to listing. ([xrpl.org][1], [xrpl.org][3])
+  The XRPL Foundation already treats this as a gate to listing.
 * **Why it works** –
 
-  * A CA will only issue a cert after verifying domain control (e.g., DNS-01 or HTTP-01 challenge). ([cloud.google.com][4])
+  * A CA will only issue a cert after verifying domain control (e.g., DNS-01 or HTTP-01 challenge).
   * The TOML + cert create a cryptographic binding: attacker must own the DNS zone or hijack CA issuance.
 * **Residual centralization** – The Web-PKI inherits a *single-point-of-failure* problem: compromise or distrust of one CA can undermine the trust graph. Academic surveys detail how a rogue CA can spoof any site until browsers react. ([css.csail.mit.edu][5])
 
@@ -672,6 +690,25 @@ Key observation: every cheating strategy requires *publicly observable* deviatio
 
 
 ---
+### Economic Security Analysis
+
+**Attack Cost Calculation**:
+Assuming 55% of 100B tokens distributed over 6 years = 9.17B tokens/year to 35 validators = 262M tokens per validator annually.
+
+**Sybil Attack Economics**:
+- Domain + SSL cert: ~$100/year
+- Fake transaction volume (1M transactions): ~$50,000 in fees
+- Credibility manipulation: Requires corrupting training data of multiple LLMs (est. >$10M)
+- Success probability: <5% due to established institution bias
+- Expected value: 262M tokens × 0.05 × token_price
+- **Break-even token price**: >$0.0004
+
+**Collusion Attack**:
+- Requires corrupting 28/35 validators (80% consensus)
+- Each legitimate institution risks: reputation, regulatory penalties, network value
+- Estimated cost to bribe Berkeley, MIT, etc.: >$1B per institution
+- **Conclusion**: Economically infeasible at any reasonable token valuation
+
 ## Addressing Common Concerns
 
 ### "Isn't this just swapping Ripple's centralization for dependence on AI companies?"
