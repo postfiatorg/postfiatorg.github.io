@@ -209,77 +209,62 @@ And here are some examples of the reasoning for bottom scoring validators
 
 # Understanding the Mathematical Underpinnings of this
 
-The phenomenon that makes the above possible is that of Greedy Decoding -- a concept brought up in [Holztman on Neural Text degeneration](https://arxiv.org/abs/1904.09751) and elaborated further in Song's [The Good the Bad and the Greedy]'(https://arxiv.org/abs/2407.10457) 
+The phenomenon that makes the above possible is that of Greedy Decoding -- a concept brought up in [Holtzman on Neural Text degeneration](https://arxiv.org/abs/1904.09751) and elaborated further in Song's [The Good the Bad and the Greedy](https://arxiv.org/abs/2407.10457).
 
-\section{Mathematical Foundations of Deterministic LLM Output}
+## Mathematical Foundations of Deterministic LLM Output
 
-\subsection{Greedy Decoding and Temperature-Controlled Sampling}
+### Greedy Decoding and Temperature-Controlled Sampling
 
-The deterministic behavior observed in the empirical examples above can be explained through the mathematical framework of \textit{greedy decoding} \cite{holtzman2020curious, song2024good}.
+The deterministic behavior observed in the empirical examples above can be explained through the mathematical framework of *greedy decoding* (Holtzman et al., 2020; Song et al., 2024).
 
-\subsubsection{Temperature-Controlled Softmax}
+#### Temperature-Controlled Softmax
 
 Given logits $u_1, u_2, ..., u_{|V|}$ for vocabulary $V$, the probability of selecting token $x_i$ is computed as:
 
-\begin{equation}
-P(x_i | x_{1:i-1}) = \frac{\exp(u_i / \tau)}{\sum_{j=1}^{|V|} \exp(u_j / \tau)}
-\end{equation}
+$$P(x_i | x_{1:i-1}) = \frac{\exp(u_i / \tau)}{\sum_{j=1}^{|V|} \exp(u_j / \tau)}$$
 
 where $\tau$ is the temperature parameter. As $\tau \rightarrow 0$, this distribution converges to:
 
-\begin{equation}
-\lim_{\tau \rightarrow 0} P(x_i | x_{1:i-1}) = \begin{cases}
+$$\lim_{\tau \rightarrow 0} P(x_i | x_{1:i-1}) = \begin{cases}
 1 & \text{if } i = \arg\max_j u_j \\
 0 & \text{otherwise}
-\end{cases}
-\end{equation}
+\end{cases}$$
 
-This limit represents \textbf{greedy decoding}, where the model deterministically selects the token with the highest logit value.
+This limit represents **greedy decoding**, where the model deterministically selects the token with the highest logit value.
 
-\subsubsection{Why Your Examples Show Perfect Determinism}
+#### Why Your Examples Show Perfect Determinism
 
 Your empirical results demonstrate that:
-\begin{itemize}
-    \item For phrases like ``A blue whale dives'' $\rightarrow$ 120 (100\% consistency)
-    \item For phrases like ``A tiny ant works'' $\rightarrow$ mode of 42 (with higher variance)
-\end{itemize}
+- For phrases like "A blue whale dives" → 120 (100% consistency)
+- For phrases like "A tiny ant works" → mode of 42 (with higher variance)
 
 This occurs because:
 
-\begin{enumerate}
-    \item \textbf{Greedy Decoding Convergence}: When $\tau \approx 0$, the softmax function becomes highly peaked, effectively performing $\arg\max$ selection. This explains the 0\% difference in the Run 1 vs Run 2 results.
-    
-    \item \textbf{Model Confidence Patterns}: The variation in standard deviations (e.g., 0.0 for ``A blue whale dives'' vs 40.7 for ``A tiny ant works'') reflects the model's varying confidence levels. This can be formalized as:
-    
-    \begin{equation}
-    \text{Var}[X | \text{phrase}] = f(\text{entropy}(P(x | \text{phrase})))
-    \end{equation}
-    
-    where higher entropy in the underlying distribution leads to higher variance even under low-temperature sampling.
-\end{enumerate}
+1. **Greedy Decoding Convergence**: When $\tau \approx 0$, the softmax function becomes highly peaked, effectively performing $\arg\max$ selection. This explains the 0% difference in the Run 1 vs Run 2 results.
 
-\subsection{Application to XRP Validator Scoring}
+2. **Model Confidence Patterns**: The variation in standard deviations (e.g., 0.0 for "A blue whale dives" vs 40.7 for "A tiny ant works") reflects the model's varying confidence levels. This can be formalized as:
 
-The validator scoring results (e.g., Berkeley consistently scoring 85) demonstrate that this determinism extends to complex qualitative judgments. Following \cite{song2024good}, this can be understood as:
+   $$\text{Var}[X | \text{phrase}] = f(\text{entropy}(P(x | \text{phrase})))$$
 
-\begin{equation}
-\text{Score}(\text{validator}) = \arg\max_{s \in [0,100]} P(s | \text{context}, \text{validator\_info})
-\end{equation}
+   where higher entropy in the underlying distribution leads to higher variance even under low-temperature sampling.
+
+### Application to XRP Validator Scoring
+
+The validator scoring results (e.g., Berkeley consistently scoring 85) demonstrate that this determinism extends to complex qualitative judgments. Following Song et al. (2024), this can be understood as:
+
+$$\text{Score}(\text{validator}) = \arg\max_{s \in [0,100]} P(s | \text{context}, \text{validator\_info})$$
 
 Under greedy decoding, this becomes a deterministic mapping:
-\begin{equation}
-\text{Score}: \text{ValidatorInfo} \rightarrow [0, 100]
-\end{equation}
 
-\subsection{Theoretical Justification}
+$$\text{Score}: \text{ValidatorInfo} \rightarrow [0, 100]$$
+
+### Theoretical Justification
 
 The theoretical foundation for this behavior comes from several sources:
 
-\begin{enumerate}
-    \item \textbf{Mode Collapse in Low-Temperature Regimes}: As shown in \cite{holtzman2020curious}, neural text generation exhibits ``mode collapse'' at low temperatures, where the model consistently selects the same high-probability sequences.
-    
-    \item \textbf{Deterministic Argmax Selection}: \cite{song2024good} demonstrates that greedy decoding (selecting $\arg\max$ at each step) produces consistent outputs across runs, with performance often exceedin
+1. **Mode Collapse in Low-Temperature Regimes**: As shown in Holtzman et al. (2020), neural text generation exhibits "mode collapse" at low temperatures, where the model consistently selects the same high-probability sequences.
 
+2. **Deterministic Argmax Selection**: Song et al. (2024) demonstrates that greedy decoding (selecting $\arg\max$ at each step) produces consistent outputs across runs, with performance often exceeding sampling methods for tasks requiring factual accuracy.
 
 ## References
 
@@ -287,14 +272,12 @@ The theoretical foundation for this behavior comes from several sources:
 
 - Song, Y., Wang, G., Li, S., & Lin, B. Y. (2024). The Good, The Bad, and The Greedy: Evaluation of LLMs Should Not Ignore Non-Determinism. [https://arxiv.org/abs/2407.10457](https://arxiv.org/abs/2407.10457)
 
-
 <script>
   MathJax = {
     tex: {
       inlineMath: [['$', '$']],
-      displayMath: [['$$', '$$']]
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
     }
   };
 </script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
