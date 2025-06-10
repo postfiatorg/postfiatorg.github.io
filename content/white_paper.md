@@ -8,7 +8,6 @@ ShowPostNavLinks: false
 ---
 
 Post Fiat Whitepaper (Draft, June 10, 2025)
-Here's the rewritten text with escaped dollar signs:
 
 # Introduction
 
