@@ -2,7 +2,7 @@ Post Fiat Whitepaper (Draft, June 10, 2025)
 
 # Introduction
 
-XRP is a $230 billion asset with ten uninterrupted years of high performance transaction processing without double spends. It has achieved this with a very simple consensus method, known as RPCA that operates by selecting a group of 30-35 trusted validators. These validators - who receive no rewards - reach 80% consensus on transaction validity, which is all that is required to add transactions to the chain.
+XRP is a $230 billion FDV asset with 13 uninterrupted years of high performance transaction processing without double spends. It has achieved this with a very simple consensus method, known as RPCA that operates by selecting a group of 30-35 trusted validators. These validators - who receive no rewards - reach 80% consensus on transaction validity, which is all that is required to add transactions to the chain.
 
 Unlike Solana or Ethereum - which require high capital outlays to validate the network, which in turn demands rewards, XRP can be validated on relatively cheap commodity hardware. This is because the selection of the Unique Node List (UNL) - is extremely light weight. It achieves this efficiency but does so at the expense of Network Decentralization. 
 
@@ -20,7 +20,7 @@ The selection of XRP's Unique Node List is a neccesarily opaque, qualitative pro
 
 Before LLMs it was impossible for people to agree on the validity of qualitative judgments without expensive judicial and legal procedures.
 
-Post Fiat is a new version of XRP that uses Large Language Models to select and reward members of the Unique Node List. Unlike XRP which sends 80% of FDV to a single entity, Ripple Labs - Post Fiat distributes 55% of FDV to validators following a pre-determined LLM driven process. 
+Post Fiat is a new version of XRP that uses Large Language Models to select and reward members of the Unique Node List. Unlike XRP which sends 80% of FDV to a single entity, Ripple Labs - Post Fiat distributes 55% of FDV to validators following a pre-determined LLM driven process. While generous this is substantially less dilutive than XRP and far less centralized - and encourages development of multiple use cases on the network. 
 
 This process operates at 2 levels:
 1. **Entity Level Scoring** - using LLMs to determine the credibility of specific validators - called Nodes on Post Fiat. Nation states or megacap corporations, for example, are assigned higher weights than hobbyists or anonymous/unknown orgs.
@@ -74,7 +74,20 @@ The reward structure follows a 6-year distribution schedule, after which:
 - Similar to XRP's model: initial rewards create network effects, ongoing operations sustain participation
 - Network transitions from reward-driven to utility-driven validation
 
-This mechanism ensures trustless, verifiable validator selection while maintaining network security through statistical verification and community oversight.
+**Additional Objective Metrics for UNL Selection**
+
+Beyond LLM-based credibility scoring, Post Fiat incorporates quantitative safeguards against gaming:
+
+1. **Transaction Volume Requirements** - Nodes must demonstrate genuine network usage through their associated addresses. Since each transaction burns fees, creating fake volume becomes economically prohibitive.
+
+2. **Network Topology Analysis** - Validators are evaluated on their connectivity patterns and relationship density within the network, making isolated Sybil attacks detectable.
+
+3. **Performance Standards** - Similar to XRP, validators must maintain:
+   - Minimum uptime thresholds (e.g., 99.9% availability)
+   - Timely protocol updates and patches
+   - Consistent transaction validation rates
+
+These objective metrics complement the LLM scoring, creating a multi-factor selection process that's both transparent and resistant to manipulation. The combination ensures that selected validators are not only credible institutions but also active, reliable network participants.
 
 # Example 
 
@@ -657,16 +670,73 @@ The key insight: **consensus doesn't require permanent model access, only tempor
 
 Key observation: every cheating strategy requires *publicly observable* deviations (wrong fingerprints, missing CT entry, etc.). That converts the game into a repeated-game with perfect monitoring where the grim-trigger of delisting/slashing makes defection irrational.
 
----
-
-#### 5 · Governance Hooks
-
-* **Emergency override** – ⅔ of current validators can freeze a malicious prompt/model hash.
-* **Upgrade cadence** – Meta-elections can occur every 90 days with a one-epoch grace period.
-* **Parameter creep guardrails** – Hard caps on temperature ≤ 0.05, runs ≥ 50, σ-tolerance ≤ ε keep determinism intact.
 
 ---
+## Addressing Common Concerns
 
+### "Isn't this just swapping Ripple's centralization for dependence on AI companies?"
+
+This fundamentally misunderstands how Post Fiat works. Unlike Ripple's permanent control over validator selection, Post Fiat creates **deterministic verification of unpredictable inputs** that no single entity can manipulate:
+
+**1. Uncontrollable Query Space**
+No AI company can pre-determine responses because they cannot predict:
+- Which organizations will apply as validators (berkeley.edu vs xrpgoat.com)
+- What transaction memos will contain (infinite possible text combinations)  
+- When validators will submit their scores (temporal uniqueness)
+
+Even if OpenAI wanted to manipulate outcomes, they cannot anticipate what entities need scoring.
+
+**2. Model Rotation & Convergence**
+- Post Fiat continuously rotates between different LLM providers
+- As training datasets become more comprehensive, all models converge on similar assessments
+- The vec2vec research proves different architectures already achieve >90% alignment
+
+**3. Public Verifiability**
+Anyone can replay the scoring with the same inputs. If a model provider tried to give different answers to different validators, the statistical fingerprints would immediately diverge, exposing manipulation.
+
+**4. Beneficial Safety Filters**
+Closed-source safety features actually strengthen the network by automatically flagging OFAC-sanctioned entities or terrorist organizations - valuable compliance work that protects validators from legal risk.
+
+The result: closed-source models become mere calculators performing deterministic operations on unpredictable data. They can't centralize what they can't anticipate.
+
+### "How do you prevent gaming through prompt manipulation?"
+
+Post Fiat employs multiple defensive layers that make gaming both technically difficult and economically irrational:
+
+**Three-Factor Scoring System:**
+1. **Entity Credibility**: LLM assessment of institutional reputation (Berkeley: 85, XRP Goat: 25)
+2. **Transaction Analysis**: Pattern evaluation from associated addresses with real economic cost
+3. **Objective Metrics**: Hard requirements like uptime, transaction volume, network topology
+
+**Why Gaming Fails:**
+- **Unpredictable Targets**: Attackers can't optimize when they don't know which validators will participate
+- **Economic Reality**: You can't prompt-inject credibility. When the LLM evaluates "berkeley.edu vs xrpgoat.com," the answer emerges from training on the entire internet's assessment
+- **Adaptive Defense**: Each round incorporates lessons from previous attempts, creating an evolutionary system favoring legitimate validators
+
+**Natural Selection**: 
+The system design ensures that established, credible institutions will capture the majority of rewards regardless of prompt engineering attempts. A hobbyist trying to boost their score from 25 to 35 gains minimal rewards compared to the resources required.
+
+### "Won't distributing 55% of tokens crash the price?"
+
+This concern overlooks both the distribution mechanism and natural market dynamics:
+
+**Superior Distribution Model:**
+- **Post Fiat**: 55% distributed across 30-35 global institutions (universities, corporations, sovereigns)
+- **Current XRP**: 80% concentrated in Ripple Labs alone
+- **Result**: 25% less dilution with 30x better distribution
+
+**Predictable Recipient Profile:**
+The LLM scoring naturally favors large, credible institutions that:
+- Have trillion-dollar balance sheets (no need to dump for liquidity)
+- Use the network for actual business operations (dumping undermines their infrastructure)
+- Face reputational risk from market manipulation (unlike anonymous validators)
+
+**Market Dynamics:**
+- **Natural HODLers**: Berkeley, major banks, and sovereign entities become long-term holders by default
+- **Aligned Incentives**: Validators earn rewards for securing infrastructure they actively use
+- **Historical Precedent**: Ethereum distributed even higher percentages through mining without collapse
+
+The key insight: Post Fiat's design **predictably channels rewards to entities least likely to dump**. This isn't hopeful thinking - it's the mathematical outcome of scoring institutional credibility. The same factors that make an entity score highly (size, reputation, technological capability) also make them natural long-term holders.
 
 ## Conclusion
 
