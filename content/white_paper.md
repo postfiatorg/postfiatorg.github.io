@@ -1,3 +1,9 @@
+---
+title: "Post Fiat Whitepaper"
+date: 2025-06-10
+draft: false
+---
+
 Post Fiat Whitepaper (Draft, June 10, 2025)
 
 # Introduction
