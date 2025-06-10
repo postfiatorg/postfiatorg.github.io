@@ -608,10 +608,10 @@ The system naturally selects established institutions. A hobbyist boosting their
 - XRP: 80% to Ripple Labs alone
 - Result: 25% less dilution, 30x better distribution
 
-**Natural HODLers:**
+**Natural Holders:**
 LLM scoring selects entities that:
-- Have trillion-dollar balance sheets (no liquidity needs)
-- Use the network operationally (dumping hurts them)
+- Have large balance sheets (no liquidity needs)
+- Use the network operationally so no need to aggressively sell 
 - Face reputational risk from manipulation
 
 **Key Insight:** The same factors that score highly (size, reputation, capability) create natural long-term holders. This isn't hope—it's mathematical design.
