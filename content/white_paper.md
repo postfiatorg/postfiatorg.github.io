@@ -206,7 +206,6 @@ And here are some examples of the reasoning for bottom scoring validators
 | ekiserrepe.es | 15 | **Organization:** Ekiserrepe.es appears to be an unknown Spanish website or domain with no clear organizational identity or public presence.<br>**Credibility Assessment:** This organization lacks institutional size, has no demonstrated censorship resistance capabilities, and shows no evidence of technological expertise for network operations. The domain appears to be either inactive, personal, or represents a very small entity with minimal public footprint.<br>**Score:** 15 |
 | jon-nilsen.no | 15 | **Organization:** Jon Nilsen (Individual/Personal Website)<br>**Credibility Assessment:** This appears to be a personal website belonging to an individual named Jon Nilsen. As a personal site with no apparent institutional backing, it lacks significant economic weight, censorship resistance, and proven technical capabilities for network operations.<br>**Score:** 15<br>The low score reflects the individual nature of this validator, limited institutional size, uncertain technical capabilities, and lack of established credibility in blockchain validation |
 | katczynski.net | 15 | **Organization:** Katczynski.net appears to be a personal website or blog, likely referencing Theodore Kaczynski (the Unabomber).<br>**Credibility Assessment:** This is a small personal website with minimal institutional size, unknown technological capabilities, and unclear governance structure. While potentially censorship-resistant due to its independent nature, it lacks the scale, resources, and established reputation necessary for high credibility in validator operations.<br>**Score:** 15 |
-
 # Understanding the Mathematical Underpinnings
 
 The deterministic behavior enabling trustless qualitative judgment emerges from fundamental mathematical properties of Large Language Models operating under specific conditions. This section presents the theoretical foundations that explain why submitting a prompt to a model at low temperature for multiple runs produces statistically verifiable outputs.
@@ -280,15 +279,15 @@ This determinism emerges because:
 
 #### Model-Specific Behavioral Signatures
 
-Recent research on LLM fingerprinting demonstrates that models produce unique statistical signatures. As shown in gradient-based fingerprinting research:
+Recent research on LLM fingerprinting demonstrates that models produce unique statistical signatures. As shown in TensorGuard's gradient-based fingerprinting research (Xu et al., 2024):
 
 "Statistical features including mean, standard deviation, and norm construct fingerprint vectors that characterize the model's behavioral patterns."
 
 This creates unique signatures because:
 
 1. **Model Architecture Dependency**: Different architectures produce distinct logit distributions
-2. **Training Data Influence**: "By looking at things like the unconditioned distribution, it is probably relatively easy to fingerprint the models or datasets that are being used just from a few simple test prompts"
-3. **Numerical Precision Effects**: Even at temperature=0, variations arise from floating-point operations
+2. **Training Data Influence**: According to Beren Millidge's analysis of unconditioned distributions (2023): "By looking at things like the unconditioned distribution, it is probably relatively easy to fingerprint the models or datasets that are being used just from a few simple test prompts"
+3. **Numerical Precision Effects**: Even at temperature=0, variations arise from floating-point operations (Schmalbach, 2025)
 
 #### Mathematical Formalization of Fingerprints
 
@@ -307,9 +306,9 @@ The security property emerges from:
 
 Even at τ = 0, perfect determinism isn't guaranteed due to several factors:
 
-1. **Floating-Point Non-Associativity**: "Non-associativity becomes relevant in parallel computations, such as those performed on GPUs"
-2. **Mixture of Experts (MoE) Architecture**: "The MoE approach introduces non-determinism because the contents of each batch must be mapped to experts"
-3. **Hardware Race Conditions**: "Race conditions in GPU FLOPs...the order of arithmetic operations can differ"
+1. **Floating-Point Non-Associativity**: As noted by Šubonis (2025): "Non-associativity becomes relevant in parallel computations, such as those performed on GPUs"
+2. **Mixture of Experts (MoE) Architecture**: According to Chann (2023), cited in Šubonis (2025): "The MoE approach introduces non-determinism because the contents of each batch must be mapped to experts"
+3. **Hardware Race Conditions**: From Taivo.ai's analysis (2025): "Race conditions in GPU FLOPs...the order of arithmetic operations can differ"
 
 However, these sources produce:
 - Bounded variance: $\sigma < \sigma_{max}$ for valid execution
@@ -444,6 +443,19 @@ This enables Post Fiat to implement trustless consensus on validator credibility
 - Rodríguez Gálvez, B., Thobaben, R., & Skoglund, M. (2020). The Convex Information Bottleneck Lagrangian. Entropy, 22(1), 98.
 
 - Saxe, A. M., Bansal, Y., Dapello, J., Advani, M., Kolchinsky, A., Tracey, B. D., & Cox, D. D. (2019). On the information bottleneck theory of deep learning. Journal of Statistical Mechanics: Theory and Experiment.
+
+- Xu, J., et al. (2024). Gradient-Based Model Fingerprinting for LLM Similarity Detection and Family Classification. https://arxiv.org/html/2506.01631v1
+
+- Millidge, B. (2023). Fingerprinting LLMs with their unconditioned distribution. https://www.beren.io/2023-02-26-Fingerprinting-LLMs-with-unconditioned-distribution/
+
+- Schmalbach, V. (2025). Does temperature 0 guarantee deterministic LLM outputs? https://www.vincentschmalbach.com/does-temperature-0-guarantee-deterministic-llm-outputs/
+
+- Šubonis, M. (2025). Zero Temperature Randomness in LLMs. https://martynassubonis.substack.com/p/zero-temperature-randomness-in-llms
+
+- Chann, S. (2023). Non-determinism in GPT-4 is caused by Sparse MoE. (Cited in Šubonis, 2025)
+
+- Taivo.ai (2025). Are LLMs deterministic? https://www.taivo.ai/__are-llms-deterministic/
+
 
 <script>
   MathJax = {
