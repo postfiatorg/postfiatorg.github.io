@@ -713,6 +713,12 @@ Post Fiat employs multiple defensive layers that make gaming both technically di
 - **Economic Reality**: You can't prompt-inject credibility. When the LLM evaluates "berkeley.edu vs xrpgoat.com," the answer emerges from training on the entire internet's assessment
 - **Adaptive Defense**: Each round incorporates lessons from previous attempts, creating an evolutionary system favoring legitimate validators
 
+This is an important point: you cannot easily game the Post Fiat system without succesfully gaming the training data and process of multi billion dollar reseaerch companies. For example - in order to fabricate an entity that could harvest rewards you would need to 
+1. Predict what model would be used in the distribution process
+2. Ensure that model hallucinated that your fictional entity was very large or credible
+
+This would be extraordinarily difficult to do -- as models are trained on interactions between websites, organizations and other academic documents that would not reference the entity you invented. 
+
 **Natural Selection**: 
 The system design ensures that established, credible institutions will capture the majority of rewards regardless of prompt engineering attempts. A hobbyist trying to boost their score from 25 to 35 gains minimal rewards compared to the resources required.
 
@@ -737,6 +743,8 @@ The LLM scoring naturally favors large, credible institutions that:
 - **Historical Precedent**: Ethereum distributed even higher percentages through mining without collapse
 
 The key insight: Post Fiat's design **predictably channels rewards to entities least likely to dump**. This isn't hopeful thinking - it's the mathematical outcome of scoring institutional credibility. The same factors that make an entity score highly (size, reputation, technological capability) also make them natural long-term holders.
+
+The purported weakness of Post Fiat (ending the reward distribution) is the exact same weakness of XRP. The initial rewards bootstrap the network adoption and once the network is generating significant enough utility, rewards are no longer neccesary to ensure continuous validation of the Network. This has functioned extremely well on XRP even though XRP has provided zero validator rewards to any member of its UNL. The end state of Post Fiat would be distribution to top government and academic bodies that add substantial security to the network, and gain utility from its applications to enhancing the quality of their markets. 
 
 ## Conclusion
 
