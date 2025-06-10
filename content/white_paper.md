@@ -286,7 +286,6 @@ The theoretical foundation for this behavior comes from several sources:
 - Holtzman, A., Buys, J., Du, L., Forbes, M., & Choi, Y. (2020). The curious case of neural text degeneration. International Conference on Learning Representations (ICLR). [https://arxiv.org/abs/1904.09751](https://arxiv.org/abs/1904.09751)
 
 - Song, Y., Wang, G., Li, S., & Lin, B. Y. (2024). The Good, The Bad, and The Greedy: Evaluation of LLMs Should Not Ignore Non-Determinism. [https://arxiv.org/abs/2407.10457](https://arxiv.org/abs/2407.10457)
-```
 
 
 <script>
