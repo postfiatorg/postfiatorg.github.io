@@ -24,7 +24,57 @@ Post Fiat is a new version of XRP that uses Large Language Models to select and 
 
 This process operates at 2 levels:
 1. **Entity Level Scoring** - using LLMs to determine the credibility of specific validators - called Nodes on Post Fiat. Nation states or megacap corporations, for example, are assigned higher weights than hobbyists or anonymous/unknown orgs.
-2. **Transaction Level Scoring** - Unlike many blockchains, XRP is filled with plain english memos that accompany its transactions. In Post Fiat, Nodes are associated with groups of addresses. The transactions and text of these addresses are scored 
+2. **Transaction Level Scoring** - Unlike many blockchains, XRP is filled with plain english memos that accompany its transactions. In Post Fiat, Nodes are associated with groups of addresses. The transactions and text of these addresses are scored
+
+Here's a clearer rewrite of the Post Fiat consensus mechanism:
+
+## Post Fiat Consensus Mechanism: Technical Implementation
+
+The Post Fiat network operates on a monthly consensus cycle with the following steps:
+
+### 1. Monthly Protocol Publication
+Each month, the network publishes:
+- **Model specification**: Selected LLM(s) optimized for low variance and high availability
+- **Prompt templates**: Standardized scoring prompts for validator evaluation
+- **Quantitative justification**: Metrics demonstrating why these selections minimize scoring variance
+
+*Note: Initially centralized, this selection process will transition to deterministic generation based on network performance metrics.*
+
+### 2. Node Scoring Phase
+All nodes seeking rewards must:
+- Execute the specified prompts against the designated model(s)
+- Generate comprehensive result sets including:
+  - Raw credibility scores (0-100)
+  - Sample reasoning outputs
+  - Statistical fingerprints: mean, median, mode, and standard deviation from multiple runs
+
+### 3. Encrypted Submission
+Nodes encrypt their result sets and submit to a designated network address. The encryption ensures:
+- Nodes cannot copy each other's submissions
+- Results remain hidden until the submission deadline
+- Statistical fingerprints make forgery computationally infeasible
+
+### 4. Community Verification
+The protocol enables decentralized verification:
+- Any community member can reproduce the scoring using published models/prompts
+- Post Fiat provides open-source tools for independent validation
+- Monthly audited reports confirm scoring integrity
+
+### 5. UNL Selection and Reward Distribution
+After submission deadline:
+- Unique Node List (UNL) is selected based on:
+  - Credibility scores
+  - Network activity metrics
+  - Statistical validity of submissions
+- Rewards (55% of network tokens) are distributed monthly to selected validators
+
+### 6. Long-Term Sustainability
+The reward structure follows a 6-year distribution schedule, after which:
+- Validators maintain participation due to network utility and transaction fees
+- Similar to XRP's model: initial rewards create network effects, ongoing operations sustain participation
+- Network transitions from reward-driven to utility-driven validation
+
+This mechanism ensures trustless, verifiable validator selection while maintaining network security through statistical verification and community oversight.
 
 # Example 
 
@@ -486,8 +536,6 @@ While neural networks are universal approximators, the combination of:
 
 Creates a system where different architectures converge to consistent outputs for constrained tasks.
 
-
-
 ## Closed Source Models and Temporal Consensus
 
 The deterministic properties enabling trustless judgment apply equally to closed source models, with additional practical advantages for consensus systems.
@@ -550,9 +598,79 @@ Post Fiat validators can leverage closed source models by:
 The key insight: **consensus doesn't require permanent model access, only temporal consistency during the verification window**. This makes closed source models not just viable but potentially superior for production blockchain systems requiring compliance, performance, and cost efficiency.
 
 
+### ✦ Game-Theory Addendum: Prompt/Model Governance & Anti-Sybil Design ✦
+
+---
+
+#### 1 · Bootstrap Phase – **Transparent but Central Curation**
+
+* **Mechanics** – At launch, the Post Fiat Foundation publishes (on-chain & IPFS)
+
+  * the exact system-prompt text (SHA-256 hashed)
+  * the model identifier & version string (e.g., `claude-3-sonnet-2025-05-20`)
+  * the sampling params (`τ = 0`, `n = 100`, seed)
+
+  Anyone can replay the scoring locally and verify the statistical fingerprint.
+* **Why it’s still better than XRP’s UNL today** – XRP’s validator lists are assembled behind closed doors by Ripple/XRPL Fdn; the only public signal is *which* keys made it onto the list, not *why*. Publishing the full prompt+model pair exposes the decision rule itself. ([xrpl.org][1])
+
+---
+
+#### 2 · Evolution Phase – **Agentic Prompt / Model Selection**
+
+* **Road-map** – After ≥ N checkpoints, the network upgrades to *agentic* governance.
+
+  1. Validators run a “meta-agent” that proposes candidate prompts & model choices.
+  2. Candidates are evaluated by the existing deterministic scoring loop.
+  3. A Borda-count (or similar) elects the next-round prompt+model.
+  4. The whole ballot, scores and winning hash are written on-chain.
+
+  Determinism is preserved because every proposal is still evaluated at τ≈0 with 100-sample statistics, so anyone can replay the election.
+* **Feasibility reference** – Recent work such as the **Darwin Gödel Machine** shows open-ended, self-improving agent swarms that rewrite their own code and empirically test upgrades, pushing task success from 20 → 50 % on SWE-Bench in a few iterations. ([arxiv.org][2])  That trajectory strongly suggests a path toward fully autonomous, but still verifiable, prompt/model evolution.
+
+---
+
+#### 3 · Anti-Gaming: Domain & SSL/TLS Ownership Proof
+
+* **Requirement** – To be eligible for rewards, a Node must:
+
+  1. Host `/.well-known/xrp-ledger.toml` over **HTTPS** with a publicly trusted TLS cert.
+  2. Embed its validator public key and the domain in that TOML.
+
+  The XRPL Foundation already treats this as a gate to listing. ([xrpl.org][1], [xrpl.org][3])
+* **Why it works** –
+
+  * A CA will only issue a cert after verifying domain control (e.g., DNS-01 or HTTP-01 challenge). ([cloud.google.com][4])
+  * The TOML + cert create a cryptographic binding: attacker must own the DNS zone or hijack CA issuance.
+* **Residual centralization** – The Web-PKI inherits a *single-point-of-failure* problem: compromise or distrust of one CA can undermine the trust graph. Academic surveys detail how a rogue CA can spoof any site until browsers react. ([css.csail.mit.edu][5])
+
+  * **Mitigations** you can layer in later: DNSSEC proofs, Certificate-Transparency log inclusion, or even a side-chain PKI to distribute root-of-trust.
+
+---
+
+#### 4 · Incentive & Game-Theory Sketch
+
+| Actor move                                  | Immediate payoff                                                                 | Counter-move                                      | Long-run equilibrium                                               |
+| ------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------ |
+| **Honest node** follows prompt, owns domain | Reward ≈ validator share                                                         | Competes on uptime & quality                      | Nash equilibrium: honest behavior dominates (greater expected ROI) |
+| **Sybil node** spoofs “berkeley.edu”        | Must defeat CA + TOML hash; stake slashed on discovery                           | Community uses CT logs & cross-check fingerprints | Cost ≫ reward ⇒ deterred                                           |
+| **Cartel** colludes to tweak meta-prompt    | Needs 80 % supermajority; fingerprint drift is detectable; other validators veto | Validators can fork back to last good prompt      | Only Pareto-improving prompt upgrades survive                      |
+
+Key observation: every cheating strategy requires *publicly observable* deviations (wrong fingerprints, missing CT entry, etc.). That converts the game into a repeated-game with perfect monitoring where the grim-trigger of delisting/slashing makes defection irrational.
+
+---
+
+#### 5 · Governance Hooks
+
+* **Emergency override** – ⅔ of current validators can freeze a malicious prompt/model hash.
+* **Upgrade cadence** – Meta-elections can occur every 90 days with a one-epoch grace period.
+* **Parameter creep guardrails** – Hard caps on temperature ≤ 0.05, runs ≥ 50, σ-tolerance ≤ ε keep determinism intact.
+
+---
+
+
 ## Conclusion
 
-This mathematical framework, now empirically validated by the vec2vec findings, demonstrates that LLM determinism emerges from deep theoretical principles—not merely implementation artifacts. The combination of:
+This mathematical framework demonstrates that LLM determinism emerges from deep theoretical principles—not merely implementation artifacts. The combination of:
 
 1. **Greedy decoding convergence** (softmax limit behavior)
 2. **Information bottleneck compression** (task-relevant feature extraction)
@@ -568,33 +686,46 @@ This enables Post Fiat to implement trustless consensus on validator credibility
 
 This is robust to the open vs closed source debate, and provides a simple way for a group of network participants to agree on a list of validators as well as distribute rewards fairly. 
 
+
 ## References
 
-- Holtzman, A., Buys, J., Du, L., Forbes, M., & Choi, Y. (2020). The curious case of neural text degeneration. International Conference on Learning Representations (ICLR). https://arxiv.org/abs/1904.09751
+* Holtzman, A., Buys, J., Du, L., Forbes, M., & Choi, Y. (2020). *The curious case of neural text degeneration.* International Conference on Learning Representations (ICLR). [https://arxiv.org/abs/1904.09751](https://arxiv.org/abs/1904.09751)
 
-- Jha, R., Zhang, C., Shmatikov, V., & Morris, J. X. (2025). Harnessing the Universal Geometry of Embeddings. arXiv preprint arXiv:2505.12540.
+* Jha, R., Zhang, C., Shmatikov, V., & Morris, J. X. (2025). *Harnessing the Universal Geometry of Embeddings.* arXiv:2505.12540. [https://arxiv.org/abs/2505.12540](https://arxiv.org/abs/2505.12540)
 
-- Song, Y., Wang, G., Li, S., & Lin, B. Y. (2024). The Good, The Bad, and The Greedy: Evaluation of LLMs Should Not Ignore Non-Determinism. https://arxiv.org/abs/2407.10457
+* Song, Y., Wang, G., Li, S., & Lin, B. Y. (2024). *The Good, The Bad, and The Greedy: Evaluation of LLMs Should Not Ignore Non-Determinism.* [https://arxiv.org/abs/2407.10457](https://arxiv.org/abs/2407.10457)
 
-- Tishby, N., Pereira, F. C., & Bialek, W. (1999). The information bottleneck method. 37th Allerton Conference on Communication, Control, and Computing.
+* Tishby, N., Pereira, F. C., & Bialek, W. (1999). *The information bottleneck method.* 37th Allerton Conference on Communication, Control, and Computing.
 
-- Kolchinsky, A., Tracey, B. D., & Van Kuyk, S. (2019). Caveats for information bottleneck in deterministic scenarios. International Conference on Learning Representations (ICLR).
+* Kolchinsky, A., Tracey, B. D., & Van Kuyk, S. (2019). *Caveats for information bottleneck in deterministic scenarios.* International Conference on Learning Representations (ICLR).
 
-- Rodríguez Gálvez, B., Thobaben, R., & Skoglund, M. (2020). The Convex Information Bottleneck Lagrangian. Entropy, 22(1), 98.
+* Rodríguez Gálvez, B., Thobaben, R., & Skoglund, M. (2020). *The Convex Information Bottleneck Lagrangian.* *Entropy,* 22(1), 98. [https://doi.org/10.3390/e22010098](https://doi.org/10.3390/e22010098)
 
-- Saxe, A. M., Bansal, Y., Dapello, J., Advani, M., Kolchinsky, A., Tracey, B. D., & Cox, D. D. (2019). On the information bottleneck theory of deep learning. Journal of Statistical Mechanics: Theory and Experiment.
+* Saxe, A. M., Bansal, Y., Dapello, J., Advani, M., Kolchinsky, A., Tracey, B. D., & Cox, D. D. (2019). *On the information bottleneck theory of deep learning.* *Journal of Statistical Mechanics: Theory and Experiment.* [https://doi.org/10.1088/1742-5468/ab2d02](https://doi.org/10.1088/1742-5468/ab2d02)
 
-- Xu, J., et al. (2024). Gradient-Based Model Fingerprinting for LLM Similarity Detection and Family Classification. https://arxiv.org/html/2506.01631v1
+* Xu, J., et al. (2024). *Gradient-Based Model Fingerprinting for LLM Similarity Detection and Family Classification.* [https://arxiv.org/abs/2506.01631](https://arxiv.org/abs/2506.01631)
 
-- Millidge, B. (2023). Fingerprinting LLMs with their unconditioned distribution. https://www.beren.io/2023-02-26-Fingerprinting-LLMs-with-unconditioned-distribution/
+* Millidge, B. (2023). *Fingerprinting LLMs with their unconditioned distribution.* [https://www.beren.io/2023-02-26-Fingerprinting-LLMs-with-unconditioned-distribution/](https://www.beren.io/2023-02-26-Fingerprinting-LLMs-with-unconditioned-distribution/)
 
-- Schmalbach, V. (2025). Does temperature 0 guarantee deterministic LLM outputs? https://www.vincentschmalbach.com/does-temperature-0-guarantee-deterministic-llm-outputs/
+* Schmalbach, V. (2025). *Does temperature 0 guarantee deterministic LLM outputs?* [https://www.vincentschmalbach.com/does-temperature-0-guarantee-deterministic-llm-outputs/](https://www.vincentschmalbach.com/does-temperature-0-guarantee-deterministic-llm-outputs/)
 
-- Šubonis, M. (2025). Zero Temperature Randomness in LLMs. https://martynassubonis.substack.com/p/zero-temperature-randomness-in-llms
+* Šubonis, M. (2025). *Zero Temperature Randomness in LLMs.* [https://martynassubonis.substack.com/p/zero-temperature-randomness-in-llms](https://martynassubonis.substack.com/p/zero-temperature-randomness-in-llms)
 
-- Chann, S. (2023). Non-determinism in GPT-4 is caused by Sparse MoE. (Cited in Šubonis, 2025)
+* Chann, S. (2023). *Non-determinism in GPT-4 is caused by Sparse MoE.* (cited in Šubonis, 2025).
 
-- Taivo.ai (2025). Are LLMs deterministic? https://www.taivo.ai/__are-llms-deterministic/
+* Taivo.ai (2025). *Are LLMs deterministic?* [https://www.taivo.ai/\_\_are-llms-deterministic/](https://www.taivo.ai/__are-llms-deterministic/)
+
+* Zhang, R., et al. (2025). *Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents.* arXiv:2505.22954. [https://arxiv.org/abs/2505.22954](https://arxiv.org/abs/2505.22954)
+
+* XRP Ledger Docs. *Unique Node List (UNL).* [https://xrpl.org/docs/concepts/consensus-protocol/unl](https://xrpl.org/docs/concepts/consensus-protocol/unl)
+
+* XRP Ledger Docs. *xrp-ledger.toml.* [https://xrpl.org/docs/references/xrp-ledger-toml/](https://xrpl.org/docs/references/xrp-ledger-toml/)
+
+* Google Cloud. (2025, June 5). *Web-PKI Trust Model.* [https://cloud.google.com/certificate-authority-service/docs/trust-model](https://cloud.google.com/certificate-authority-service/docs/trust-model)
+
+* Clark, J., & van Oorschot, P. C. (2013). *SoK: SSL and HTTPS – Revisiting Past Challenges and Evaluating Certificate-Trust Model Enhancements.* IEEE Symposium on Security & Privacy. [https://css.csail.mit.edu/6.858/2018/readings/sok-ssl-https.pdf](https://css.csail.mit.edu/6.858/2018/readings/sok-ssl-https.pdf)
+
+
 
 
 <script>
