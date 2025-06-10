@@ -9,6 +9,13 @@ ShowPostNavLinks: false
 
 Post Fiat Whitepaper (Draft, June 10, 2025)
 
+
+# Executive Summary
+
+Post Fiat is a new L1 that aims to use AI to improve XRP's governance. It uses the statistical property of LLM's to converge on deterministic values for qualitative scoring to set a new Unique Node List that is transparently selected versus the status quo for XRP. Post Fiat can use either Open or Closed source models to accomplish this - and statistically deterministic outputs do not require having model weights as shown in the example code accompanying this document. 
+
+Making the Unique Node List selection and token distribution of XRP fair and transparent would unlock major value for crypto's oldest protocol other than Bitcoin. 
+
 # Introduction
 
 As of June 10th 2025, at 2.30 per token, XRP is a 230 billion dollar Fully Diluted Value network that has processed transactions flawlessly for 13 years. Its consensus mechanism (RPCA) relies on 30-35 trusted validators who receive no rewards yet maintain the network's integrity.
@@ -601,10 +608,10 @@ The system naturally selects established institutions. A hobbyist boosting their
 - XRP: 80% to Ripple Labs alone
 - Result: 25% less dilution, 30x better distribution
 
-**Natural HODLers:**
+**Natural Holders:**
 LLM scoring selects entities that:
-- Have trillion-dollar balance sheets (no liquidity needs)
-- Use the network operationally (dumping hurts them)
+- Have large balance sheets (no liquidity needs)
+- Use the network operationally so no need to aggressively sell 
 - Face reputational risk from manipulation
 
 **Key Insight:** The same factors that score highly (size, reputation, capability) create natural long-term holders. This isn't hope—it's mathematical design.
