@@ -8,18 +8,18 @@ ShowPostNavLinks: false
 ---
 
 Post Fiat Whitepaper (Draft, June 10, 2025)
+Here's the rewritten text with escaped dollar signs:
 
 # Introduction
 
-As of June 10th 2025, at $2.30 per token, XRP is a $230 billion Fully Diluted Value network that has processed transactions flawlessly for 13 years. Its consensus mechanism (RPCA) relies on 30-35 trusted validators who receive no rewards yet maintain the network's integrity.
+As of June 10th 2025, at \$2.30 per token, XRP is a \$230 billion Fully Diluted Value network that has processed transactions flawlessly for 13 years. Its consensus mechanism (RPCA) relies on 30-35 trusted validators who receive no rewards yet maintain the network's integrity.
 
 Unlike Ethereum or Solana—where validators need expensive hardware and expect rewards—XRP runs on commodity servers. This efficiency comes from its lightweight Unique Node List (UNL) selection process. The tradeoff: centralized control over who validates.
 
 ## The Problem
-
 Ripple Labs controls XRP's validator selection and holds 80% of all tokens. This concentration of power led to a multi-billion dollar SEC lawsuit and suppressed XRP's price for years.
 
-When Trump won in 2024, XRP surged from $0.55 to over $3 as regulatory pressure evaporated. But political winds shift. 
+When Trump won in 2024, XRP surged from \$0.55 to over \$3 as regulatory pressure evaporated. But political winds shift. 
 
 Post Fiat asks: How can we make validator selection transparent and decentralized without relying on government favor?
 
