@@ -2,7 +2,7 @@ Post Fiat Whitepaper (Draft, June 10, 2025)
 
 # Introduction
 
-XRP is a $230 billion network that has processed transactions flawlessly for 13 years. Its consensus mechanism (RPCA) relies on 30-35 trusted validators who receive no rewards yet maintain the network's integrity.
+As of June 10th 2025, at $2.3 per token - XRP is a $230 billion Fully Diluted Value network that has processed transactions flawlessly for 13 years. Its consensus mechanism (RPCA) relies on 30-35 trusted validators who receive no rewards yet maintain the network's integrity.
 
 Unlike Ethereum or Solana—where validators need expensive hardware and expect rewards—XRP runs on commodity servers. This efficiency comes from its lightweight Unique Node List (UNL) selection process. The tradeoff: centralized control over who validates.
 
