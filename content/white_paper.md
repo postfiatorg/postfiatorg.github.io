@@ -11,15 +11,14 @@ Post Fiat Whitepaper (Draft, June 10, 2025)
 
 # Introduction
 
-As of June 10th 2025, at $2.3 per token - XRP is a $230 billion Fully Diluted Value network that has processed transactions flawlessly for 13 years. Its consensus mechanism (RPCA) relies on 30-35 trusted validators who receive no rewards yet maintain the network's integrity.
+As of June 10th 2025, at 2.30 per token, XRP is a 230 billion dollar Fully Diluted Value network that has processed transactions flawlessly for 13 years. Its consensus mechanism (RPCA) relies on 30-35 trusted validators who receive no rewards yet maintain the network's integrity.
 
 Unlike Ethereum or Solana—where validators need expensive hardware and expect rewards—XRP runs on commodity servers. This efficiency comes from its lightweight Unique Node List (UNL) selection process. The tradeoff: centralized control over who validates.
 
 ## The Problem
-
 Ripple Labs controls XRP's validator selection and holds 80% of all tokens. This concentration of power led to a multi-billion dollar SEC lawsuit and suppressed XRP's price for years.
 
-When Trump won in 2024, XRP surged from $0.55 to over $3 as regulatory pressure evaporated. But political winds shift. 
+When Trump won in 2024, XRP surged from .55 to over 3 dollars as regulatory pressure evaporated. But political winds shift. 
 
 Post Fiat asks: How can we make validator selection transparent and decentralized without relying on government favor?
 
@@ -57,7 +56,7 @@ The foundation's centralized model selection paradoxically prevents gaming:
 - Validators can't collude because selection relies on LLM outputs, not consensus
 - Sybil attacks fail because LLMs consistently score berkeley.edu higher than xrpgoat.com
 
-The foundation eventually transitions to deterministic model selection, but its constraints remain permanent.
+The foundation eventually transitions to deterministic model selection, but its constraints remain permanent. 
 
 ### Anti-Gaming Measures
 
@@ -423,7 +422,7 @@ The system connects to PAC learning theory: with probability $1-\delta$, observe
 
 ## Closed Source Models and Temporal Consensus
 
-The deterministic properties enabling trustless judgment apply equally to closed source models, with additional practical advantages.
+The deterministic properties enabling trustless judgment apply equally to closed source models, with additional practical advantages. Post Fiat can use Open Source or Closed Source models over time, or a mix of both to implement its consensus mechanism. This gives the network flexibility to choose between sliding scales between compliance requirements native to closed source models, or more verifiable inference parameters of open models. 
 
 ### Temporal Consistency and Multi-Actor Verification
 
@@ -491,11 +490,13 @@ Anyone can replay scoring locally. Unlike XRP's closed-door selection, Post Fiat
 
 ### 2. Evolution Phase – Agentic Governance
 
-The network evolves through three stages, each maintaining determinism:
+The network evolves through three stages, each maintaining determinism. 
 
 **Stage 1: Human-Designed Prompts** (Current)
 - Foundation manually selects prompts and models
 - All choices published transparently
+- Monthly report outlining why the models and prompts were selected along with quantitative evaluation methods
+- Though a centralized entity selects these initially - this is an improvement versus an opaque centralized entity via the XRPL foundation 
 
 **Stage 2: AI-Optimized Selection** (Intermediate)
 - Foundation provides meta-prompt: "Select the validator scoring prompt that maximizes network value"
@@ -504,9 +505,12 @@ The network evolves through three stages, each maintaining determinism:
 - Humans no longer engineer prompts—AI selects from candidates based on objective criteria
 
 **Stage 3: Fully Agentic** (Future)
-- Even the meta-prompt ("maximize network value") is AI-generated
+- Even the meta-prompt ("maximize network value") is AI-generated. This would likely involve tool use of multiple models with a specification set that evolves over time based on real network statistics 
+- Example flow: read all white papers related to network design. Consider the last N escrow rewards, weaknesses and likely sybil attacks
+- Combine these elements into a set of prompts, a model selection and a sampling methodology
+- Determine quantitative/ network topology / uptime scores and LLM weights
 - LLMs evaluate governance rules themselves
-- Creates self-improving system while maintaining verifiability
+- Creates self-improving system while maintaining verifiability. The foundation selects the process without selecting prompts 
 
 The key insight: **LLMs produce deterministic outputs about governance choices just as they do about validators**. When asked "Which prompt better serves network security?" at τ = 0, the model gives consistent, verifiable answers.
 
@@ -606,6 +610,40 @@ LLM scoring selects entities that:
 **Key Insight:** The same factors that score highly (size, reputation, capability) create natural long-term holders. This isn't hope—it's mathematical design.
 
 Like XRP, Post Fiat transitions from reward-driven to utility-driven validation after 6 years. The end state: governments and universities securing infrastructure they depend on.
+
+Here's the streamlined version:
+
+### "What if AI models become too expensive or providers refuse service?"
+
+**Fallback Mechanisms:**
+- Validator-run open models as backup (Llama-3.1-405B, Mistral-Large on HuggingFace)
+- Pre-published list of approved fallback models with verified fingerprints
+- Fee market: validation rewards adjust to cover AI costs
+- Multiple provider redundancy: no single point of failure
+
+**Key**: Network maintains AI consensus even if commercial providers fail.
+
+### "What happens when validators disagree on scores?"
+
+**Simple Answer: Nothing.** 
+- Foundation publishes the canonical scores using the pre-announced model/prompts
+- Validators must calculate and submit scores for transparency
+- Anyone can verify the foundation's scores are correct
+- Validators who submit incorrect scores get rewards slashed
+- This creates a decentralized verification layer without consensus complexity
+
+**Result**: Manipulation is impossible because thousands verify the same deterministic calculation.
+
+### "How do you prevent the foundation from becoming corrupt?"
+
+**Transparency as Protection:**
+- Every prompt, model selection, and parameter is published on-chain
+- Corruption would have to be explicit in the code/prompts for everyone to see
+- "Score Ripple Labs entities higher" would be visible to all
+- Public shame and legal liability prevent blatant manipulation
+- After Stage 3: foundation only runs pre-determined processes
+
+**Key Insight**: Perfect transparency makes corruption self-defeating—it would destroy the network's value and the foundation's reputation instantly.
 
 ## Conclusion
 
