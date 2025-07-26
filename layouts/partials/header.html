@@ -1,5 +1,5 @@
 {{- /* Check if this is the whitepaper page */}}
-{{- $isWhitepaper := and (eq .Type "page") (eq .File.BaseFileName "white_paper") }}
+{{- $isWhitepaper := and (eq .Type "page") (and .File (eq .File.BaseFileName "white_paper")) }}
 
 {{- /* theme-toggle is enabled */}}
 {{- if (not site.Params.disableThemeToggle) }}
