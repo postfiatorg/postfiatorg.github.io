@@ -20,16 +20,14 @@ The Task Node combines Post Fiat's indexing technologies with an expert network 
 
 ## Getting Started
 
-**Redirecting to Task Node documentation...**
-
-<script>
-  // Redirect after a brief delay to show the page content
-  setTimeout(function() {
-    window.location.href = 'https://docs.postfiat.org/Discord-Wallet-Guide-170573318648807a8cd0d4f5022d1a08';
-  }, 2000);
-</script>
-
-If you are not redirected automatically, [click here to access the Task Node documentation](https://docs.postfiat.org/Discord-Wallet-Guide-170573318648807a8cd0d4f5022d1a08).
+<div style="background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 32px; margin: 32px 0; text-align: center;">
+  <h2 style="margin-bottom: 16px; color: #fff;">🚀 Access the Task Node</h2>
+  <p style="margin-bottom: 24px; color: #ccc;">Set up your wallet and start earning tokens by providing insights to AI agents and portfolio managers.</p>
+  <a href="https://docs.postfiat.org/Discord-Wallet-Guide-170573318648807a8cd0d4f5022d1a08" 
+     style="display: inline-block; background: linear-gradient(90deg, #fff, #aaa); color: #000; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; letter-spacing: 1px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(255,255,255,0.2);">
+    📖 Open Task Node Documentation →
+  </a>
+</div>
 
 ## Community Integration
 
