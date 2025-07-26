@@ -1,7 +1,7 @@
 ---
 title: "Subscribe"
 layout: "single"
-url: "/subscribe"
+url: "/subscribe/"
 summary: "subscribe"
 ---
 
