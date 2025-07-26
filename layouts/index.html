@@ -331,9 +331,9 @@
   <header>
     <div class="brand-name">Post Fiat</div>
     <nav class="nav-links">
-      <a href="/white_paper/" class="nav-link">Whitepaper</a>
-      <a href="https://docs.postfiat.org/Discord-Wallet-Guide-170573318648807a8cd0d4f5022d1a08" class="nav-link">Task Node</a>
-      <a href="https://discord.gg/3wJsg3T5Au" class="nav-link">Community</a>
+      {{ range .Site.Menus.main }}
+        <a href="{{ .URL }}" class="nav-link">{{ .Name }}</a>
+      {{ end }}
     </nav>
     <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
   </header>
