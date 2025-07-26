@@ -1,10 +1,8 @@
 ---
 title: "Post Fiat Whitepaper"
-date: 2025-06-10
-draft: false
-hideMeta: true
-disableShare: true
-ShowPostNavLinks: false
+layout: "single"
+url: "/whitepaper/"
+summary: "Post Fiat Whitepaper"
 ---
 
 Post Fiat Whitepaper (Draft, June 10, 2025)

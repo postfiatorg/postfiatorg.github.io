@@ -1,5 +1,5 @@
 {{- /* Check if this is the whitepaper page */}}
-{{- $isWhitepaper := and (eq .Type "page") (and .File (eq .File.BaseFileName "white_paper")) }}
+{{- $isWhitepaper := and (eq .Type "page") (and .File (eq .File.BaseFileName "whitepaper")) }}
 
 {{- /* theme-toggle is enabled */}}
 {{- if (not site.Params.disableThemeToggle) }}
@@ -120,13 +120,6 @@
         </div>
         {{- $currentPage := . }}
         <ul id="menu">
-            {{- if $isWhitepaper }}
-            <li>
-                <a href="{{ "/" | absLangURL }}" title="Return Home">
-                    <span>Return Home</span>
-                </a>
-            </li>
-            {{- else }}
             {{- range site.Menus.main }}
             {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
             {{- $page_url:= $currentPage.Permalink | absLangURL }}
@@ -149,7 +142,6 @@
                     {{- end }}
                 </a>
             </li>
-            {{- end }}
             {{- end }}
         </ul>
     </nav>
