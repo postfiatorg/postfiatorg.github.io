@@ -1,0 +1,11 @@
+{{- /* Google Analytics - This is a placeholder. Add your GA code here if needed. */ -}}
+{{- if site.Params.GoogleAnalytics -}}
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.Params.GoogleAnalytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ site.Params.GoogleAnalytics }}');
+</script>
+{{- end -}} 
