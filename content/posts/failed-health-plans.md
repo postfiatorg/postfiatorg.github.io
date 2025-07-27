@@ -3,7 +3,7 @@ author: ["goodalexander"]
 title: "Failed Health Plans"
 date: 2023-09-24T11:21:29Z
 draft: false
-tags: ["long-form","health"]
+tags: ["health","philosophy","meta"]
 ---
 Maybe the Optimization Bros were a little right afterall. Implementing some changes
 

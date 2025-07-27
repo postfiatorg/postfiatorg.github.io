@@ -3,6 +3,7 @@ author: ["goodalexander"]
 title: "Mid Nov Market Update"
 date: 2021-11-15T11:21:29Z
 draft: false
+tags: ["meta"]
 ---
 
 Thinking about best risk reward opportunities

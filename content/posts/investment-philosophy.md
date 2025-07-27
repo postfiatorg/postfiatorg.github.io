@@ -3,7 +3,7 @@ author: ["goodalexander"]
 title: "What Do Markets Mean to Me"
 date: 2023-12-12T11:21:29Z
 draft: false
-tags: ["long-form","markets"]
+tags: ["philosophy", "markets", "strategy"]
 ---
 My Investment Philosophy as Best as I can explain. dfuq do I actually do
 

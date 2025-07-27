@@ -3,7 +3,7 @@ author: ["goodalexander"]
 title: "Tokyo Swerve- Careful What You Wish For"
 date: 2022-10-12T11:21:29Z
 draft: false
-tags: ["long-form","markets"]
+tags: ["markets", "strategy"]
 ---
 extreme FX and interest rate volatility paints a picture of 2 very different worlds. which shall we step into?
 

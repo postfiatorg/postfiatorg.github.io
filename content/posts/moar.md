@@ -1,7 +1,8 @@
 ---
 author: ["goodalexander"]
-title: "Journal Thur Nov 18"
+title: "Moar"
 date: 2021-11-18T11:21:29Z
+tags: ["meta"]
 draft: false
 ---
 Another day in the trenches

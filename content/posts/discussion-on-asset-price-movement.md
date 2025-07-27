@@ -3,7 +3,7 @@ author: ["goodalexander"]
 title: "Discussion on the Study of Asset Price Movement"
 date: 2022-06-24T11:21:29Z
 draft: false
-tags: ["long-form","markets"]
+tags: ["markets", "psychology"]
 ---
 A 35 point summary of how I define speculation, its 6 core components and thoughts around implementation
 

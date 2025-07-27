@@ -5,7 +5,7 @@ date: 2023-12-28T11:21:29Z
 draft: false
 summary: "how to survive and thrive in the post nation-state AI driven reality"
 categories: ["markets"]
-tags: ["long-form","blackprint"]
+tags: ["blackprint","philosophy"]
 ---
 
 ## The Blackprint and its 3 Preconditions

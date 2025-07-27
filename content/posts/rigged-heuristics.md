@@ -2,6 +2,7 @@
 author: ["goodalexander"]
 title: "Heuristics for Rigged Markets"
 date: 2023-12-27T11:21:29Z
+tags: ["psychology", "philosophy", "strategy"]
 draft: false
 ---
 going to talk a bit about some things I've learned about rigged markets, signal extraction and how to fit market manipulation into your overall mosaic 

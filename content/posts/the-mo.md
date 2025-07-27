@@ -3,7 +3,7 @@ author: ["goodalexander"]
 title: "The Mo"
 date: 2023-09-12T11:21:29Z
 draft: false
-tags: ["long-form","philosophy","markets"]
+tags: ["psychology", "philosophy", "markets"]
 ---
 channeling momentum, mojo, reading the universal mosaic
 

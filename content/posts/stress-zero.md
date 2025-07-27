@@ -3,7 +3,7 @@ author: ["goodalexander"]
 title: "Stress Zero "
 date: 2023-07-09T11:21:29Z
 draft: false
-tags: ["long-form","health"]
+tags: ["psychology", "strategy", "health"]
 ---
 how to use CBT augmented with accelerationist religious fanaticism to improve your work performance 
 

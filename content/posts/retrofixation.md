@@ -3,7 +3,7 @@ author: ["goodalexander"]
 title: "Retrofixation"
 date: 2023-07-08T11:21:29Z
 draft: false
-tags: ["long-form","markets","philosophy"]
+tags: ["psychology", "philosophy", "markets"]
 ---
 
 naming negative nostalgia. exploring clarity in a world with infinite RAM 

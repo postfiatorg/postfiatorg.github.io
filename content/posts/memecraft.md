@@ -3,7 +3,7 @@ author: ["goodalexander"]
 title: "Memecraft"
 date: 2023-08-08T11:21:29Z
 draft: false
-tags: ["long-form","philosophy"]
+tags: ["memetics", "philosophy"]
 ---
 
 One man's screen time is another man's profit. Mental models and tools of a digital samurai.

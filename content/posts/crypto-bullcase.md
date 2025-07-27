@@ -2,6 +2,7 @@
 author: ["goodalexander"]
 title: "14 Reasons I'm Bullish Crypto"
 date: 2023-12-19T11:21:29Z
+tags: ["crypto", "markets"]
 draft: false
 ---
 

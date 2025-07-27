@@ -2,6 +2,7 @@
 author: ["goodalexander"]
 title: "New Beginnings"
 date: 2021-01-02T11:21:29Z
+tags: ["meta"]
 draft: false
 ---
 Here I detail some analysis of newsflow over the last week and where I see best risk reward going into the start of the year

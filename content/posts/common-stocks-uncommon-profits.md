@@ -3,7 +3,7 @@ author: ["goodalexander"]
 title: "Common Stocks and Uncommon Profits"
 date: 2018-04-20T18:25:51Z
 draft: false
-tags: ["long-form","markets"]
+tags: ["markets", "strategy"]
 ---
 
 Common Stocks and Uncommon Profits gets frequently recommended to me by top performing equity managers. It's 15 rules for evaluating growth stocks. I read it and summarized it.

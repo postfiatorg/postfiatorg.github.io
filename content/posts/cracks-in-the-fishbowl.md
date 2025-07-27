@@ -3,7 +3,7 @@ author: ["goodalexander"]
 title: "Cracks in the Fishbowl "
 date: 2023-04-20T18:21:51Z
 draft: false
-tags: ["long-form","philosophy","markets"]
+tags: ["philosophy","markets","psychology"]
 ---
 a reflection on Nietzsche, Artificial Intelligence, goldfish, and new Gods
 

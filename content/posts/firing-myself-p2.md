@@ -1,9 +1,9 @@
 ---
 author: ["goodalexander"]
-title: "Firing Myself P2"
+title: "Firing Myself, Part 2"
 date: 2023-07-05T11:21:29Z
 draft: false
-tags: ["long-form","philosophy"]
+tags: ["strategy", "meta", "philosophy"]
 ---
 minimum viable execution marching towards the singularity 
 

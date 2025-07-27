@@ -3,6 +3,7 @@ author: ["goodalexander"]
 title: "Daily Notes / Pre Market thoughts"
 date: 2021-11-16T11:21:29Z
 draft: false
+tags: ["markets", "strategy"]
 ---
 Responding to China data etc etc
 

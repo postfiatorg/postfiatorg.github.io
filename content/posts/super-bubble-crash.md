@@ -2,6 +2,7 @@
 author: ["goodalexander"]
 title: "The Crash of the Super Bubble"
 date: 2023-12-08T11:21:29Z
+tags: ["markets", "strategy"]
 draft: false
 ---
 
