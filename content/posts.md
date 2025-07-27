@@ -1,8 +1,8 @@
 ---
-title: "Positions"
-layout: "single"
-url: "/positions"
-summary: "Current trading positions and market analysis"
+title: "Posts"
+layout: "archives"
+url: "/posts/"
+summary: "archives"
 ---
 
 # Trading Positions & Market Analysis
