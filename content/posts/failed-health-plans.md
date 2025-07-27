@@ -5,6 +5,11 @@ date: 2023-09-24T11:21:29Z
 draft: false
 tags: ["health","philosophy","meta"]
 ---
+
+This reflection on personal strategy is an application of the self-assessment principles in [The Blackprint]({{< ref "the-blackprint.md" >}}).
+
+---
+
 Maybe the Optimization Bros were a little right afterall. Implementing some changes
 
 Failed Health Plans

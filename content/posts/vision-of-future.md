@@ -6,6 +6,8 @@ draft: false
 tags: ["philosophy", "ai", "markets"]
 
 ---
+This post outlines my vision for the future, which is built upon the ideas presented in my core philosophical documents, [The Blackprint]({{< ref "the-blackprint.md" >}}) and [The Binary Ark]({{< ref "the-binary-ark.md" >}}). The market implications are explored further in [A Withering Trader's Illustrated Primer]({{< ref "withering-trader-primer.md" >}}).
+
 A hypothetical exploration of the world we are heading towards
 
 There have been 3 major technology shifts since 2022. The market has weighted one much higher in terms of valuation - Artificial Intelligence. But a second, more subtle shift was the launch of the MetaQuest Pro and improvement of visual tracking in Virtual Reality. A third, and final tech change is the rise of ZK technology in cryptocurrency enabling highly scalable, verifiable and largely anonymous currency transactions.

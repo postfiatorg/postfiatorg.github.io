@@ -6,7 +6,13 @@ draft: false
 tags: ["markets", "strategy", "psychology"]
 ---
 
+_This primer is a distillation of the market-related aspects of my personal framework, [The Blackprint]({{< ref "the-blackprint.md" >}}). For a deeper dive into the principles that guide my trading, you can read my [investment philosophy]({{< ref "investment-philosophy.md" >}}). A core concept I frequently apply is understanding market momentum, which I call [The Mo]({{< ref "the-mo.md" >}})._
+
+---
+
 the Last Samurai, Darth Vader, the world of entertainment bleeding into the world of things 
+
+I want to tell you about something I’ve noticed. 
 
 
 “There are only two industries. This has always been true....There is the industry of things, and the industry of entertainment....After people have the things they need to live, everything else is entertainment. Everything.” 
@@ -101,7 +107,7 @@ I believe I have my answer, and a rough formulation or a hypothesis - but before
 
 One thing which hedge funds continually cannot adapt to is the reflexive, internet and metaverse native world that we live in. Meme stocks. Doge. Pepe. The fact Elon Musk is the richest man in the world. That we elected a meme as President. And look like we’re considering doing it again. 
 
-The reflexive world has a data scale which hedge funds simply do not want to engage with, because it exists at a click level. As one $40+B’s fund head of data put it to me “Look. I know there’s alpha in your world. But it’s not something we, as a firm, will engage with. Even if it makes money. It’s simply not something our investors would be happy about. Would be proud of, what we’d want to tell our kids about -  or - is - from a risk management perspective - the type of thing we’d want to underwrite. And - just to reiterate this, I know memes are real. I’m not dumb. I know Tesla is huge, options, what not. It’s just - at a personal level - something I am not going to put a lot of thought into and I don’t think anyone serious is going to either.” 
+The reflexive world has a data scale which hedge funds simply do not want to engage with, because it exists at a click level. As one $40+B’s fund head of data put it to me “Look. I know there's alpha in your world. But it's not something we, as a firm, will engage with. Even if it makes money. It's simply not something our investors would be happy about. Would be proud of, what we'd want to tell our kids about -  or - is - from a risk management perspective - the type of thing we'd want to underwrite. And - just to reiterate this, I know memes are real. I'm not dumb. I know Tesla is huge, options, what not. It's just - at a personal level - something I am not going to put a lot of thought into and I don't think anyone serious is going to either.” 
 
 This meeting obviously went very well. Kek. But it echoes a lot of how hedge funds think about mimetic finance. Or crypto largely. 
 

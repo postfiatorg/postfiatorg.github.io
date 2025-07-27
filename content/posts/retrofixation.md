@@ -6,6 +6,10 @@ draft: false
 tags: ["psychology", "philosophy", "markets"]
 ---
 
+Understanding and overcoming retrofixation is a key psychological component of the philosophy outlined in [The Blackprint]({{< ref "the-blackprint.md" >}}).
+
+---
+
 naming negative nostalgia. exploring clarity in a world with infinite RAM 
 
 ## Naming the Culprit 

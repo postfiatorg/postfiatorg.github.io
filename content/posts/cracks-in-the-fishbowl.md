@@ -5,6 +5,11 @@ date: 2023-04-20T18:21:51Z
 draft: false
 tags: ["philosophy","markets","psychology"]
 ---
+
+The ideas in this post about breaking down perceived realities are a key part of the mindset behind [The Blackprint]({{< ref "the-blackprint.md" >}}).
+
+---
+
 a reflection on Nietzsche, Artificial Intelligence, goldfish, and new Gods
 
 

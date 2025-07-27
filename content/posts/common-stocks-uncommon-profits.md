@@ -6,6 +6,10 @@ draft: false
 tags: ["markets", "strategy"]
 ---
 
+This post reflects on classic investment wisdom, which aligns with my broader [investment philosophy]({{< ref "investment-philosophy.md" >}}).
+
+---
+
 Common Stocks and Uncommon Profits gets frequently recommended to me by top performing equity managers. It's 15 rules for evaluating growth stocks. I read it and summarized it.
 
 ## Summary

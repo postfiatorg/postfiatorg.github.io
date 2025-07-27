@@ -6,6 +6,10 @@ tags: ["crypto", "markets"]
 draft: false
 ---
 
+While this post focuses on crypto, the underlying market principles are part of the framework discussed in my [Withering Trader's Illustrated Primer]({{< ref "withering-trader-primer.md" >}}).
+
+---
+
 longer form thoughts on crypto. Lots of bearishness. 
 
 I remain bullish. Why:

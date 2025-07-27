@@ -6,6 +6,11 @@ draft: false
 categories: ["markets"]
 tags: ["markets", "crypto", "strategy"]
 ---
+
+This is a deep dive into crypto market structure, building on some of the core ideas from my [Withering Trader's Illustrated Primer]({{< ref "withering-trader-primer.md" >}}).
+
+---
+
 Escaping the socio-spiritual prison from the starting position of a speculator 
 
 ## Sidepots in the Asylum

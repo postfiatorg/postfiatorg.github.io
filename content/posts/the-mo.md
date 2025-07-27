@@ -5,6 +5,11 @@ date: 2023-09-12T11:21:29Z
 draft: false
 tags: ["psychology", "philosophy", "markets"]
 ---
+
+"The Mo" is a core concept in my personal philosophy, [The Blackprint]({{< ref "the-blackprint.md" >}}), and a key part of my trading strategy.
+
+---
+
 channeling momentum, mojo, reading the universal mosaic
 
 Below I explore the idea of “the Mo” - or being in tune with the universe, in a useful way that allows you to take larger risks and do better work - but only in short bursts.

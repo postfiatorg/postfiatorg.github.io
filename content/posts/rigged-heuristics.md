@@ -5,6 +5,11 @@ date: 2023-12-27T11:21:29Z
 tags: ["psychology", "philosophy", "strategy"]
 draft: false
 ---
+
+The heuristics in this post are practical strategies that build upon the foundational concepts in my [Withering Trader's Illustrated Primer]({{< ref "withering-trader-primer.md" >}}).
+
+---
+
 going to talk a bit about some things I've learned about rigged markets, signal extraction and how to fit market manipulation into your overall mosaic 
 
 ## Rule 1: understanding you're a gremlin not a genius.

@@ -74,3 +74,9 @@ The thought exercise, for me - has been clarifying. It’s pointless to pretend 
 
 If you believe in the Ark, and don’t reject its premise, it’s an all or nothing bet. There can be no hedges or half measures. Due to the extreme risk and controversy of the topic - it really is going to be one of those things where you’re either in, or you’re out. Seeing things clearly is a prerequisite to move forward. 
 
+This is a concept that fits into the broader framework of [The Blackprint]({{< ref "the-blackprint.md" >}}), my personal operating system for navigating our rapidly changing world.
+
+The core idea is this: we are building a digital lifeboat, a "Binary Ark," to carry humanity's consciousness and culture through the technological singularity.
+
+---
+

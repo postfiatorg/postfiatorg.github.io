@@ -5,6 +5,10 @@ date: 2023-08-10T11:21:29Z
 draft: false
 tags: ["long-form","philosophy"]
 ---
+
+This concept of enlightened hedonism is a key module within the overarching philosophy of [The Blackprint]({{< ref "the-blackprint.md" >}}).
+
+---
 a philosophy for simple folk pursuing Faustian bargains with future Intelligence 
 
 

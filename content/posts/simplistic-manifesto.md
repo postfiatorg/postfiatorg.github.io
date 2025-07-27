@@ -6,6 +6,10 @@ draft: false
 tags: ["markets", "philosophy"]
 ---
 
+This manifesto contains early ideas that were later refined and expanded in [The Blackprint]({{< ref "the-blackprint.md" >}}).
+
+---
+
 Why am I doing what I am doing? A direct summary of all the esoteric garbage I've produced. 
 
 ## Dumbing it all down

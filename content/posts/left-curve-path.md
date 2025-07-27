@@ -5,6 +5,11 @@ date: 2023-12-02T11:21:29Z
 draft: false
 tags: ["markets","crypto","philosophy"]
 ---
+
+This post explores a specific philosophical path that is highly relevant to the core ideas in [The Blackprint]({{< ref "the-blackprint.md" >}}).
+
+---
+
 AI Good. Fiat Bad. What's your plan, anon? 
 
 ## What Is The Left Curve

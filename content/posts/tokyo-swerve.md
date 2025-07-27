@@ -5,6 +5,11 @@ date: 2022-10-12T11:21:29Z
 draft: false
 tags: ["markets", "strategy"]
 ---
+
+This analysis of FX and interest rate volatility is a specific application of the global macro principles discussed in [A Withering Trader's Illustrated Primer]({{< ref "withering-trader-primer.md" >}}).
+
+---
+
 extreme FX and interest rate volatility paints a picture of 2 very different worlds. which shall we step into?
 
 Let's start with a question. If Japan has rock bottom risk-free rates, shouldn't its companies command higher multiples? Shouldn't Japan be a global hub of innovation - because low rates and structural deflation allow for investment in growth?

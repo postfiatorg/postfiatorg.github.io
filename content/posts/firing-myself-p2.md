@@ -5,6 +5,11 @@ date: 2023-07-05T11:21:29Z
 draft: false
 tags: ["strategy", "meta", "philosophy"]
 ---
+
+This post continues the discussion on evolving my personal and project strategy, a core tenet of [The Blackprint]({{< ref "the-blackprint.md" >}}).
+
+---
+
 minimum viable execution marching towards the singularity 
 
 ## Minimum Viable Execution

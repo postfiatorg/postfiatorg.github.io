@@ -6,6 +6,10 @@ draft: false
 tags: ["memetics", "philosophy"]
 ---
 
+Memetics are a crucial part of the spiritual framework of [The Blackprint]({{< ref "the-blackprint.md" >}}).
+
+---
+
 One man's screen time is another man's profit. Mental models and tools of a digital samurai.
 
 ## Screentime Check

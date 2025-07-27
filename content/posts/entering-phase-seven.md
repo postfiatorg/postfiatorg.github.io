@@ -5,6 +5,11 @@ date: 2022-08-14T11:21:29Z
 draft: false
 tags: ["strategy", "meta"]
 ---
+
+This post marks a new phase in the project, guided by the principles of [The Blackprint]({{< ref "the-blackprint.md" >}}).
+
+---
+
 one last musing before the descent into the digital colosseum
 
 Digital assets and the political media have wrapped around each other, a double helix of increasingly epic proportions. It has not always been like this, but a glimpse of where we are today, before discussing the portal that’s opened behind my casomputer chair that I am about to step through -

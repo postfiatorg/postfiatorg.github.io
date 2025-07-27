@@ -5,6 +5,11 @@ date: 2023-08-21T11:21:29Z
 draft: false
 tags: ["philosophy"]
 ---
+
+The concept of "Utility Gaps" is a core part of the philosophical framework I introduce in [The Blackprint]({{< ref "the-blackprint.md" >}}).
+
+---
+
 What the Optimization Bros Have Wrong and How to Fix It
 
 

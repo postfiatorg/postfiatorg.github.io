@@ -6,6 +6,10 @@ tags: ["markets", "strategy"]
 draft: false
 ---
 
+My analysis of the super bubble is based on the trading framework I outline in [A Withering Trader's Illustrated Primer]({{< ref "withering-trader-primer.md" >}}).
+
+---
+
 George Soros wrote a book more people should read, “The New Paradigm for Financial Markets: The 2008 Crash and What It Means”. 
 
 I’ll summarize the salient points here and apply it to what’s happening with my own interpretation.

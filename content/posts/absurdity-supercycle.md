@@ -8,6 +8,10 @@ categories: ["markets"]
 tags: ["markets", "psychology", "strategy"]
 ---
 
+This post explores the concept of market cycles and bubbles, a topic I cover in more detail in my [Withering Trader's Illustrated Primer]({{< ref "withering-trader-primer.md" >}}).
+
+---
+
 I’ve been deeply confused by fundamental investing for several years, which is – perhaps, why I tend to stick to short term trading. But given recent moves in markets, there is some reflection to be done.
 
 I started my journey trading in 2006, when it made a lot of sense financially. By 2011 it was clear that trading was to become a vastly less appealing career. But it was too late - I’d already invested, and had personal reasons to be in the space. Not to mention a love of markets. Nonetheless - I was economically rational. I saw the tech bubble forming and reluctantly jumped in – making sure to keep my focus on capital markets so I’d had optionality to get back into trading. I joined Palantir Technologies.

@@ -6,6 +6,10 @@ draft: false
 tags: ["philosophy", "markets", "memetics"]
 ---
 
+This post bridges the philosophical ideas in [The Blackprint]({{< ref "the-blackprint.md" >}}) with the practical market realities discussed in the [Withering Trader's Illustrated Primer]({{< ref "withering-trader-primer.md" >}}).
+
+---
+
 Previously I wrote about the evolution of media and how it ends in a poorly defined digital Colosseum. Here I write in detail about how/ why that Colosseum will entail the creation of financial eSports
 
 1.	Financial markets are unique from politics, science, or other arenas of the media because they are accompanied by Timeseries.

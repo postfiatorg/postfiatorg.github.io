@@ -5,6 +5,11 @@ date: 2023-07-09T11:21:29Z
 draft: false
 tags: ["psychology", "strategy", "health"]
 ---
+
+Achieving a state of "Stress Zero" is a core objective of the mental and psychological modules of [The Blackprint]({{< ref "the-blackprint.md" >}}).
+
+---
+
 how to use CBT augmented with accelerationist religious fanaticism to improve your work performance 
 
 

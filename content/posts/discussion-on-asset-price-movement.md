@@ -5,6 +5,11 @@ date: 2022-06-24T11:21:29Z
 draft: false
 tags: ["markets", "psychology"]
 ---
+
+This post is a foundational piece that complements the practical strategies discussed in [A Withering Trader's Illustrated Primer]({{< ref "withering-trader-primer.md" >}}).
+
+---
+
 A 35 point summary of how I define speculation, its 6 core components and thoughts around implementation
 
 

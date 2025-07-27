@@ -5,6 +5,10 @@ date: 2023-07-02T11:21:29Z
 draft: false
 tags: ["philosophy","strategy","meta"]
 ---
+
+My thoughts on radical personal change, a practical application of the philosophy outlined in [The Blackprint]({{< ref "the-blackprint.md" >}}).
+
+---
 deprecating Alex 1.0, applied accelerationism, ego death with a postgres backend 
 
 ## Encountering the Power of AI in Financial Decisions 

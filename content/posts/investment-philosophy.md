@@ -5,6 +5,11 @@ date: 2023-12-12T11:21:29Z
 draft: false
 tags: ["philosophy", "markets", "strategy"]
 ---
+My investment philosophy is a direct extension of my broader life philosophy, which I call [The Blackprint]({{< ref "the-blackprint.md" >}}). It's about applying a systematic, algorithmic approach to markets.
+
+For a more detailed, practical guide on how I apply these ideas in trading, see [A Withering Trader's Illustrated Primer]({{< ref "withering-trader-primer.md" >}}).
+
+---
 My Investment Philosophy as Best as I can explain. dfuq do I actually do
 
 A lot of people think I’m “insane” or “on drugs”, per Twitter discourse .I want to explain what I do for a living and how it all fits together. 

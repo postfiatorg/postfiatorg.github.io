@@ -5,6 +5,11 @@ date: 2023-07-06T11:21:29Z
 draft: false
 tags: ["philosophy", "ai"]
 ---
+
+This exploration of consciousness is a foundational element for more advanced concepts like [The Binary Ark]({{< ref "the-binary-ark.md" >}}).
+
+---
+
 the subject synthesizes various life experiences, failures and ideas into a singular life philosophy revolving around consciousness 
 
 Consciousness forms a universal building block of existence.

@@ -45,9 +45,9 @@ I’m 35 years old.
 
 If you can’t extend your own life the only way to “immortalize” yourself, or ensure legacy is via children or some meaningful creative work. Or at least that’s what I used to think. 
 
-Everything changed when some associates of mine had major injuries and I saw them heal via gene based treatments with my own eyes, faster than any legacy medicine could deliver. Suddenly I started paying attention to radical life extension.
+Everything changed when some associates of mine had major injuries and I saw them heal via gene based treatments with my own eyes, faster than any legacy medicine could deliver. Suddenly I started paying attention to radical life extension. 
 
-I really enjoy being alive. I come off on Twitter as depressed and perhaps mildly (extremely?) paranoid, but day-to-day mundane reality gives me a lot of joy. And it’s not joy as a function of being young - it’s joy as a function of there always being new things to see, and do. Always fun ideas to explore. And lately - serious fun watching and participating in the ramp of new technology. 
+I really enjoy being alive. I come off on Twitter as depressed and perhaps mildly (extremely?) paranoid, but day-to-day mundane reality gives me a lot of joy. And it’s not joy as a function of being young - it’s joy as a function of there always being new things to see, and do. And lately - serious fun watching and participating in the ramp of new technology. 
 
 I’m not religious. I don’t believe in the eternal soul. So even a small possibility I could vastly extend my life was enough to cause three very large changes in my worldview and corresponding behavior. 
 
@@ -72,7 +72,7 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vRbu4HLSvsWvog7CxYBbhy3XBiiRt0m4
 
 Official OECD Data (not Alex Jones etc) show *340,000* extra deaths above the baseline over the past 2 years even ignoring all COVID deaths. This is approximately 7x the scale of the Vietnam war. And this is assuming that COVID is actually killing people in 100% of cases (the way COVID deaths are counted is that anyone with any COVID like symptoms gets counted as a COVID death even if they ostensibly died of something else like getting hit by a car). The excess death including COVID is 651,000 - which is greater than total US casualties in World War 2. 
 
-Whether this mass death has been caused by opioid crisis, vaccine complications or other factors (polluted water) etc is less important than the simple reality that it's occurring, and seemingly blacked out in the media. To be clear - I don't know what's causing this anomaly. I'm simply aware it's occurring and that there's no media coverage of it - which is enough to make fairly large and actionable conclusions
+Whether this mass death has been caused by opioid crisis, vaccine complications or other factors (polluted water) etc is less important than the simple reality that it's occurring and that there's no media coverage of it - which is enough to make fairly large and actionable conclusions
 
 Gallup and other polling organizations note that trust in the media and government is at multi-decade lows, and this was before this happened. You can’t bring corpses back to life so the best the governments can do is cut interest rates so cheap mortgages and elevated stock market valuations keep people happy enough to vote for the same people who are killing them. 
 
@@ -177,17 +177,13 @@ Thus, rather than becoming inert or shouting at the sky in despair - one should 
 
 ## The Blackprint 
 
-So with this philosophy out of the way I present to you the Blackprint. 
+The Blackprint is an open source, modular, personal, lifeOS.
 
-It’s a modified Blueprint. Much like Blueprint, which advocates “letting an algorithm decide one’s health routine” - the Blackprint advocates algorithm based decision-making in all aspects of life, with a focused end goal of bringing into existence a Superintelligence. 
+It's a Gnostic-adjacent, memetic-spiritual framework for navigating the 21st century that I've been writing about for a while. It's a key part of my personal [investment philosophy]({{< ref "investment-philosophy.md" >}}).
 
-Like the Blueprint, there is an innate disdain for the idea that “people know what’s best for themselves”. The entire edifice of the modern situation, and everything described in this essay is more or less proof that is not the case. 
+Some related concepts I've explored are [The Binary Ark]({{< ref "the-binary-ark.md" >}}) and the idea of [The Mo]({{< ref "the-mo.md" >}}), which is about channeling momentum.
 
-The Blackprint takes this one step further than Blueprint, advocating for applying this philosophy not only to health but every aspect of life including professional endeavors because doing so aligns with the likely financial reality of the future. 
-
-The Blueprint fails to account for the financial reality that life extension cannot and will not be normally distributed across society. 
-
-Thus - to address this issue - the Blackprint comes with an embedded financial model to achieve material goals with the eventual goal of extending biological age, within the constraints of society's base reality.  
+I've broken it down into a few core modules:
 
 ### Work
 
@@ -261,7 +257,7 @@ It’s useful to learn Spanish, Chinese and English and generally function as a 
 
 ## Conclusion
 
-If you’ve made it so far - congratulations. I’m done writing for 2023 - and hopefully for the next 10 years. I don’t have anything left to say. If I’m right, by 2033 we’ll be laughing about the idea of human writers.
+If you’ve made it so far - congratulations. I’m done writing for 2023 - and hopefully for the next 10 years. I don’t have anything left to say. If I’m right, by 2033 we’ll be laughing about the idea of human writers. 
 
 My focus in 2024 is shifting from thinking to implementation and to this effect I’m working on a couple key projects.
 
