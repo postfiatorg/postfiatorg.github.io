@@ -3,7 +3,7 @@ author: ["goodalexander"]
 title: "A Withering Trader’s Illustrated Primer"
 date: 2023-07-14T11:21:29Z
 draft: false
-tags: ["long-form","markets"]
+tags: ["markets", "strategy", "psychology"]
 ---
 
 the Last Samurai, Darth Vader, the world of entertainment bleeding into the world of things 
