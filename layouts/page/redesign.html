@@ -111,16 +111,13 @@
     
     .cards-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;max-width:1200px;margin:0 auto}
     
-    .feature-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:30px;position:relative;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);min-height:420px;display:flex;flex-direction:column}
+    .feature-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:30px;position:relative;overflow:visible;transition:all .4s cubic-bezier(.4,0,.2,1);min-height:420px;display:flex;flex-direction:column}
     .feature-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.06) 0%,transparent 70%);opacity:0;transition:.4s}
-    .feature-card:hover{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.03)}
+    .feature-card:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.06);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(255,255,255,.12)}
     .feature-card:hover::before{opacity:1}
-    /* The AI card gets lift, glow, and visible overflow for the animation */
-    .feature-card.card-interactive{overflow:visible}
-    .feature-card.card-interactive:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.06);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(255,255,255,.12)}
 
     .card-design{width:100%;height:200px;margin-bottom:30px;position:relative;display:flex;align-items:center;justify-content:center;transition:all .4s cubic-bezier(.4,0,.2,1);perspective:1000px}
-    .feature-card.card-interactive:hover .card-design{transform:scale(1.1) translateY(-10px)}
+    .feature-card:hover .card-design{transform:scale(1.1) translateY(-10px)}
     
     /* XRP Design - Hexagonal Grid with X */
     .xrp-design{width:160px;height:160px;position:relative;transform-style:preserve-3d}
@@ -182,7 +179,7 @@
     .invest-arrow svg{width:100%;height:100%;stroke:#fff;stroke-width:2;fill:none;filter:drop-shadow(0 0 10px rgba(255,255,255,.5))}
     
     .design-glow{position:absolute;inset:-50%;background:radial-gradient(circle,rgba(255,255,255,.15) 0%,transparent 40%);opacity:0;transition:.4s;pointer-events:none}
-    .feature-card.card-interactive:hover .design-glow{opacity:1;animation:glowRotate 6s linear infinite}
+    .feature-card:hover .design-glow{opacity:1;animation:glowRotate 6s linear infinite}
     @keyframes glowRotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
     
     .feature-card h4{font-size:1.25rem;font-weight:600;margin-bottom:15px;color:#fff;letter-spacing:.5px;text-align:center;position:relative;z-index:1}
@@ -489,7 +486,7 @@
         <p>Digital Scarcity or "Code is Law" are not viable alternatives to advanced social systems. Institutional blockchains are uninteresting when institutions are failing.</p>
       </div>
 
-      <div class="feature-card card-interactive">
+      <div class="feature-card">
         <div class="card-design">
           <div class="ai-design">
             <div class="neural-nodes">
