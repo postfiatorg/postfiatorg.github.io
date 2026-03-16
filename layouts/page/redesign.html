@@ -142,21 +142,30 @@
     @keyframes govBrokenCollapse{0%,100%{transform:translate(0,0) rotate(0deg);opacity:.28}35%{transform:translate(2px,6px) rotate(7deg);opacity:.55}65%{transform:translate(-1px,3px) rotate(2deg);opacity:.45}}
     @keyframes govDustRise{0%,100%{transform:translateY(0) scale(1);opacity:.2}50%{transform:translateY(-7px) scale(1.08);opacity:.75}}
 
-    .crypto-currency path{stroke-width:1.5}
-    .crypto-link-left,.crypto-link-right{transform-origin:center}
-    .crypto-fracture{stroke-dasharray:6 10}
-    .feature-card:is(:hover,.in-view) .crypto-link-left{animation:cryptoLinkLeft 2.5s cubic-bezier(.4,0,.2,1) infinite}
-    .feature-card:is(:hover,.in-view) .crypto-link-right{animation:cryptoLinkRight 2.5s cubic-bezier(.4,0,.2,1) infinite}
-    .feature-card:is(:hover,.in-view) .crypto-stub{animation:cryptoStubPulse 2s ease-in-out infinite}
-    .feature-card:is(:hover,.in-view) .crypto-fracture{animation:cryptoSpark 1.4s linear infinite}
-    .feature-card:is(:hover,.in-view) .crypto-currency-left{animation:cryptoCurrencyRise 2.6s ease-in-out infinite}
-    .feature-card:is(:hover,.in-view) .crypto-currency-right{animation:cryptoCurrencySink 2.6s ease-in-out infinite .2s}
-    @keyframes cryptoLinkLeft{0%,100%{transform:translateX(0) rotate(0deg);opacity:.6}35%{transform:translateX(-5px) rotate(-3deg);opacity:.85}65%{transform:translateX(-10px) rotate(-8deg);opacity:.45}}
-    @keyframes cryptoLinkRight{0%,100%{transform:translateX(0) rotate(0deg);opacity:.6}35%{transform:translateX(5px) rotate(3deg);opacity:.85}65%{transform:translateX(10px) rotate(8deg);opacity:.45}}
-    @keyframes cryptoStubPulse{0%,100%{opacity:.3}50%{opacity:.8}}
-    @keyframes cryptoSpark{0%{opacity:.25;stroke-dashoffset:0}50%{opacity:1;stroke-dashoffset:-8}100%{opacity:.25;stroke-dashoffset:-16}}
-    @keyframes cryptoCurrencyRise{0%,100%{transform:translateY(0) scale(1);opacity:.25}50%{transform:translateY(-10px) scale(1.05);opacity:.6}}
-    @keyframes cryptoCurrencySink{0%,100%{transform:translateY(0) scale(1);opacity:.12}50%{transform:translateY(9px) scale(.94);opacity:.45}}
+    .crypto-scarcity-shell,.crypto-scarcity-orbit-ring,.crypto-code-frame,.crypto-code-line,.crypto-governance-link,.crypto-barrier{vector-effect:non-scaling-stroke}
+    .crypto-scarcity-system,.crypto-code-system,.crypto-governance-network{transform-origin:center}
+    .crypto-code-line{--code-delay:0s}
+    .crypto-governance-link,.crypto-governance-node,.crypto-governance-halo{opacity:.22}
+    .feature-card:is(:hover,.in-view) .crypto-scarcity-system{animation:cryptoScarcityPush 2.8s cubic-bezier(.4,0,.2,1) infinite}
+    .feature-card:is(:hover,.in-view) .crypto-scarcity-shell{animation:cryptoScarcityPulse 2.8s ease-in-out infinite}
+    .feature-card:is(:hover,.in-view) .crypto-scarcity-core{animation:cryptoScarcityCore 2.8s ease-in-out infinite}
+    .feature-card:is(:hover,.in-view) .crypto-scarcity-orbit{animation:cryptoScarcityOrbit 2.2s linear infinite}
+    .feature-card:is(:hover,.in-view) .crypto-code-system{animation:cryptoCodePush 2.8s cubic-bezier(.4,0,.2,1) infinite}
+    .feature-card:is(:hover,.in-view) .crypto-code-frame{animation:cryptoCodeClamp 2.8s ease-in-out infinite}
+    .feature-card:is(:hover,.in-view) .crypto-code-line{animation:cryptoCodeBlink 1.5s steps(2,end) infinite;animation-delay:var(--code-delay)}
+    .feature-card:is(:hover,.in-view) .crypto-barrier{animation:cryptoBarrierFlicker 1.3s linear infinite}
+    .feature-card:is(:hover,.in-view) .crypto-governance-network{animation:cryptoGovernanceStrain 2.8s ease-in-out infinite}
+    .feature-card:is(:hover,.in-view) .crypto-governance-halo{animation:cryptoGovernanceHalo 2.8s ease-in-out infinite}
+    @keyframes cryptoScarcityPush{0%,100%{transform:translateX(0);opacity:.72}40%{transform:translateX(12px);opacity:.95}60%{transform:translateX(9px);opacity:.82}}
+    @keyframes cryptoScarcityPulse{0%,100%{opacity:.4}50%{opacity:.8}}
+    @keyframes cryptoScarcityCore{0%,100%{transform:scale(1);opacity:.3}50%{transform:scale(1.22);opacity:.72}}
+    @keyframes cryptoScarcityOrbit{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes cryptoCodePush{0%,100%{transform:translateX(0);opacity:.72}40%{transform:translateX(-12px);opacity:.95}60%{transform:translateX(-9px);opacity:.82}}
+    @keyframes cryptoCodeClamp{0%,100%{opacity:.45}45%{opacity:.88}60%{opacity:.58}}
+    @keyframes cryptoCodeBlink{0%,100%{opacity:.2}45%{opacity:.7}55%{opacity:1}}
+    @keyframes cryptoBarrierFlicker{0%,100%{opacity:.24;stroke-dashoffset:0}50%{opacity:1;stroke-dashoffset:-10}}
+    @keyframes cryptoGovernanceStrain{0%,100%{opacity:.22}45%{opacity:.5}60%{opacity:.26}}
+    @keyframes cryptoGovernanceHalo{0%,100%{transform:scale(.92);opacity:.08}50%{transform:scale(1.18);opacity:.32}}
 
     /* AI Neural Network Design */
     .ai-design{width:180px;height:180px;position:relative}
@@ -473,22 +482,39 @@
 
       <div class="feature-card crypto-card">
         <div class="card-design">
-          <!-- Broken chain link -->
+          <!-- Scarcity plus rigid code failing to become governance -->
           <svg class="crypto-illustration" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
-            <rect class="crypto-link-left" x="15" y="50" width="50" height="60" rx="25" opacity=".6"/>
-            <path class="crypto-link-right" d="M95 50 A25 25 0 0 1 120 75 L120 85 A25 25 0 0 1 95 110" opacity=".6"/>
-            <path class="crypto-stub" d="M95 50 L95 42" opacity=".4"/>
-            <path class="crypto-stub" d="M95 110 L95 118" opacity=".4"/>
-            <line class="crypto-fracture" x1="72" y1="68" x2="82" y2="62" opacity=".5"/>
-            <line class="crypto-fracture" x1="70" y1="80" x2="84" y2="80" opacity=".5"/>
-            <line class="crypto-fracture" x1="72" y1="92" x2="82" y2="98" opacity=".5"/>
-            <g class="crypto-currency crypto-currency-left" opacity=".3">
-              <path d="M30 68V96"/>
-              <path d="M37 73C34 69 24 69 23 76C22 83 36 80 36 88C36 95 25 96 22 91"/>
+            <g class="crypto-scarcity-system">
+              <polygon class="crypto-scarcity-shell" points="26,78 38,58 62,58 74,78 62,98 38,98" opacity=".46"/>
+              <polygon class="crypto-scarcity-shell" points="33,78 41,65 59,65 67,78 59,91 41,91" opacity=".22"/>
+              <circle class="crypto-scarcity-core" cx="50" cy="78" r="7" fill="#fff" stroke="none" opacity=".28"/>
+              <g class="crypto-scarcity-orbit">
+                <circle class="crypto-scarcity-orbit-ring" cx="50" cy="78" r="18" opacity=".14"/>
+                <circle cx="50" cy="60" r="2.5" fill="#fff" stroke="none" opacity=".82"/>
+              </g>
             </g>
-            <g class="crypto-currency crypto-currency-right" opacity=".15">
-              <path d="M108 68V96"/>
-              <path d="M115 73C112 69 102 69 101 76C100 83 114 80 114 88C114 95 103 96 100 91"/>
+
+            <line class="crypto-barrier" x1="80" y1="48" x2="80" y2="104" opacity=".28" stroke-dasharray="4 7"/>
+            <line class="crypto-barrier" x1="74" y1="70" x2="86" y2="82" opacity=".18" stroke-dasharray="3 5"/>
+            <line class="crypto-barrier" x1="86" y1="70" x2="74" y2="82" opacity=".18" stroke-dasharray="3 5"/>
+
+            <g class="crypto-code-system">
+              <path class="crypto-code-frame" d="M102 56 H95 V100 H102" opacity=".5"/>
+              <path class="crypto-code-frame" d="M126 56 H133 V100 H126" opacity=".5"/>
+              <line class="crypto-code-line" x1="106" y1="66" x2="122" y2="66" opacity=".2" style="--code-delay:0s"/>
+              <line class="crypto-code-line" x1="106" y1="78" x2="120" y2="78" opacity=".2" style="--code-delay:.2s"/>
+              <line class="crypto-code-line" x1="106" y1="90" x2="124" y2="90" opacity=".2" style="--code-delay:.4s"/>
+            </g>
+
+            <g class="crypto-governance-network">
+              <circle class="crypto-governance-halo" cx="80" cy="110" r="16"/>
+              <line class="crypto-governance-link" x1="48" y1="116" x2="80" y2="110"/>
+              <line class="crypto-governance-link" x1="80" y1="110" x2="112" y2="116"/>
+              <line class="crypto-governance-link" x1="80" y1="110" x2="80" y2="130"/>
+              <circle class="crypto-governance-node" cx="48" cy="116" r="5.5"/>
+              <circle class="crypto-governance-node" cx="80" cy="110" r="6.5"/>
+              <circle class="crypto-governance-node" cx="112" cy="116" r="5.5"/>
+              <circle class="crypto-governance-node" cx="80" cy="130" r="5"/>
             </g>
           </svg>
           <div class="design-glow"></div>
