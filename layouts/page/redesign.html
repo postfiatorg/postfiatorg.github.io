@@ -116,70 +116,77 @@
     .feature-card:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.06);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(255,255,255,.12)}
     .feature-card:hover::before{opacity:1}
 
-    .card-design{width:100%;height:200px;margin-bottom:30px;position:relative;display:flex;align-items:center;justify-content:center;transition:all .4s cubic-bezier(.4,0,.2,1);perspective:1000px}
-    .feature-card:hover .card-design{transform:scale(1.1) translateY(-10px)}
-    
-    /* XRP Design - Hexagonal Grid with X */
-    .xrp-design{width:160px;height:160px;position:relative;transform-style:preserve-3d}
-    .xrp-hex-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:4px;transform:rotateX(20deg);transition:transform .6s}
-    .feature-card:hover .xrp-hex-grid{transform:rotateX(0deg) rotateZ(360deg)}
-    .hex-cell{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.1);clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);position:relative;overflow:hidden}
-    .hex-cell::before{content:"";position:absolute;inset:-50%;background:radial-gradient(circle,rgba(255,255,255,.2) 0%,transparent 50%);opacity:0;transition:opacity .4s;animation:hexPulse 3s ease-in-out infinite;animation-delay:calc(var(--i) * 0.1s)}
-    .feature-card:hover .hex-cell::before{opacity:1}
-    @keyframes hexPulse{0%,100%{transform:scale(0.5)}50%{transform:scale(1.5)}}
-    .xrp-x{position:absolute;inset:20%;pointer-events:none;z-index:2}
-    .xrp-x svg{width:100%;height:100%;filter:drop-shadow(0 0 20px rgba(255,255,255,.5));transition:all .4s}
-    .feature-card:hover .xrp-x svg{filter:drop-shadow(0 0 40px rgba(255,255,255,.9));transform:scale(1.2)}
-    
+    .card-design{width:100%;height:200px;margin-bottom:30px;position:relative;display:flex;align-items:center;justify-content:center;transition:all .4s cubic-bezier(.4,0,.2,1);perspective:1000px;user-select:none}
+    .feature-card:hover .card-design{transform:scale(1.08) translateY(-10px)}
+    .feature-card.in-view{border-color:rgba(255,255,255,.16)}
+
+    /* Why Post Fiat card illustrations */
+    .government-illustration,.crypto-illustration{width:140px;height:140px;overflow:visible;pointer-events:none}
+    .government-illustration *,.crypto-illustration *{transform-box:fill-box;transform-origin:center;transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .3s ease}
+
+    .gov-column-1{--gov-delay:0s}
+    .gov-column-2{--gov-delay:.15s}
+    .gov-column-3{--gov-delay:.3s}
+    .gov-column-4{--gov-delay:.45s}
+    .gov-broken-column{transform-box:fill-box;transform-origin:center bottom}
+    .gov-debris-left{--dust-delay:.1s}
+    .gov-debris-right{--dust-delay:.35s}
+    .feature-card:is(:hover,.in-view) .gov-roof{animation:govRoofShift 3.2s ease-in-out infinite}
+    .feature-card:is(:hover,.in-view) .gov-crack{animation:govCrackPulse 1.8s linear infinite}
+    .feature-card:is(:hover,.in-view) .gov-column{animation:govColumnTremor 2.6s ease-in-out infinite;animation-delay:var(--gov-delay,0s)}
+    .feature-card:is(:hover,.in-view) .gov-broken-column{animation:govBrokenCollapse 2.3s cubic-bezier(.55,0,.35,1) infinite .2s}
+    .feature-card:is(:hover,.in-view) .gov-debris{animation:govDustRise 2s ease-in-out infinite;animation-delay:var(--dust-delay,0s)}
+    @keyframes govRoofShift{0%,100%{transform:translateY(0) rotate(0deg);opacity:.7}35%{transform:translateY(-2px) rotate(-1deg);opacity:.95}65%{transform:translateY(1px) rotate(.8deg);opacity:.8}}
+    @keyframes govCrackPulse{0%,100%{opacity:.25;stroke-dashoffset:0}50%{opacity:.85;stroke-dashoffset:-6}}
+    @keyframes govColumnTremor{0%,100%{transform:translateY(0) rotate(0deg);opacity:.5}25%{transform:translateY(-1px) rotate(-1deg)}50%{transform:translateY(3px) rotate(1.2deg);opacity:.8}75%{transform:translateY(1px) rotate(-.6deg)}}
+    @keyframes govBrokenCollapse{0%,100%{transform:translate(0,0) rotate(0deg);opacity:.28}35%{transform:translate(2px,6px) rotate(7deg);opacity:.55}65%{transform:translate(-1px,3px) rotate(2deg);opacity:.45}}
+    @keyframes govDustRise{0%,100%{transform:translateY(0) scale(1);opacity:.2}50%{transform:translateY(-7px) scale(1.08);opacity:.75}}
+
+    .crypto-currency path{stroke-width:1.5}
+    .crypto-link-left,.crypto-link-right{transform-origin:center}
+    .crypto-fracture{stroke-dasharray:6 10}
+    .feature-card:is(:hover,.in-view) .crypto-link-left{animation:cryptoLinkLeft 2.5s cubic-bezier(.4,0,.2,1) infinite}
+    .feature-card:is(:hover,.in-view) .crypto-link-right{animation:cryptoLinkRight 2.5s cubic-bezier(.4,0,.2,1) infinite}
+    .feature-card:is(:hover,.in-view) .crypto-stub{animation:cryptoStubPulse 2s ease-in-out infinite}
+    .feature-card:is(:hover,.in-view) .crypto-fracture{animation:cryptoSpark 1.4s linear infinite}
+    .feature-card:is(:hover,.in-view) .crypto-currency-left{animation:cryptoCurrencyRise 2.6s ease-in-out infinite}
+    .feature-card:is(:hover,.in-view) .crypto-currency-right{animation:cryptoCurrencySink 2.6s ease-in-out infinite .2s}
+    @keyframes cryptoLinkLeft{0%,100%{transform:translateX(0) rotate(0deg);opacity:.6}35%{transform:translateX(-5px) rotate(-3deg);opacity:.85}65%{transform:translateX(-10px) rotate(-8deg);opacity:.45}}
+    @keyframes cryptoLinkRight{0%,100%{transform:translateX(0) rotate(0deg);opacity:.6}35%{transform:translateX(5px) rotate(3deg);opacity:.85}65%{transform:translateX(10px) rotate(8deg);opacity:.45}}
+    @keyframes cryptoStubPulse{0%,100%{opacity:.3}50%{opacity:.8}}
+    @keyframes cryptoSpark{0%{opacity:.25;stroke-dashoffset:0}50%{opacity:1;stroke-dashoffset:-8}100%{opacity:.25;stroke-dashoffset:-16}}
+    @keyframes cryptoCurrencyRise{0%,100%{transform:translateY(0) scale(1);opacity:.25}50%{transform:translateY(-10px) scale(1.05);opacity:.6}}
+    @keyframes cryptoCurrencySink{0%,100%{transform:translateY(0) scale(1);opacity:.12}50%{transform:translateY(9px) scale(.94);opacity:.45}}
+
     /* AI Neural Network Design */
     .ai-design{width:180px;height:180px;position:relative}
     .neural-nodes{position:absolute;inset:0}
-    .neural-node{position:absolute;width:24px;height:24px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .4s}
+    .neural-node{position:absolute;width:24px;height:24px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .4s;--node-base-x:0px;--node-base-y:0px}
     .neural-node::after{content:"";width:8px;height:8px;background:#fff;border-radius:50%;opacity:0;transition:all .4s}
-    .feature-card:hover .neural-node{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.6);animation:nodeFloat 4s ease-in-out infinite;animation-delay:calc(var(--delay) * 0.2s)}
-    .feature-card:hover .neural-node::after{opacity:1;animation:nodePulse 2s ease-in-out infinite;animation-delay:calc(var(--delay) * 0.2s)}
-    @keyframes nodeFloat{0%,100%{transform:translate(0,0)}25%{transform:translate(-5px,-5px)}50%{transform:translate(5px,-5px)}75%{transform:translate(0,5px)}}
+    .feature-card:is(:hover,.in-view) .neural-node{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.6);animation:nodeFloat 4s ease-in-out infinite;animation-delay:calc(var(--delay) * 0.2s)}
+    .feature-card:is(:hover,.in-view) .neural-node::after{opacity:1;animation:nodePulse 2s ease-in-out infinite;animation-delay:calc(var(--delay) * 0.2s)}
+    @keyframes nodeFloat{0%,100%{transform:translate(var(--node-base-x),var(--node-base-y))}25%{transform:translate(calc(var(--node-base-x) - 5px),calc(var(--node-base-y) - 5px))}50%{transform:translate(calc(var(--node-base-x) + 5px),calc(var(--node-base-y) - 5px))}75%{transform:translate(var(--node-base-x),calc(var(--node-base-y) + 5px))}}
     @keyframes nodePulse{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.5);opacity:1}}
-    .neural-node.n1{top:10%;left:50%;transform:translateX(-50%);--delay:0}
+    .neural-node.n1{top:10%;left:50%;transform:translate(-50%,0);--node-base-x:-50%;--node-base-y:0%;--delay:0}
     .neural-node.n2{top:30%;left:20%;--delay:1}
     .neural-node.n3{top:30%;right:20%;--delay:2}
     .neural-node.n4{top:50%;left:10%;--delay:3}
     .neural-node.n5{top:50%;right:10%;--delay:4}
     .neural-node.n6{bottom:30%;left:20%;--delay:5}
     .neural-node.n7{bottom:30%;right:20%;--delay:6}
-    .neural-node.n8{bottom:10%;left:50%;transform:translateX(-50%);--delay:7}
-    .neural-node.center{top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5);--delay:0}
+    .neural-node.n8{bottom:10%;left:50%;transform:translate(-50%,0);--node-base-x:-50%;--node-base-y:0%;--delay:7}
+    .neural-node.center{top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5);--node-base-x:-50%;--node-base-y:-50%;--delay:0}
     .neural-connections{position:absolute;inset:0;pointer-events:none}
     .neural-line{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transform-origin:center;opacity:0;transition:opacity .4s}
-    .feature-card:hover .neural-line{opacity:1;animation:dataFlow 2s linear infinite}
+    .feature-card:is(:hover,.in-view) .neural-line{opacity:1;animation:dataFlow 2s linear infinite}
     @keyframes dataFlow{0%{background-position:-200px 0}100%{background-position:200px 0}}
     .ai-brain{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:80px;pointer-events:none;z-index:2}
     .ai-brain svg{width:100%;height:100%;stroke:#fff;stroke-width:1.5;fill:none;opacity:.6;filter:drop-shadow(0 0 10px rgba(255,255,255,.3));transition:all .4s}
-    .feature-card:hover .ai-brain svg{opacity:1;filter:drop-shadow(0 0 30px rgba(255,255,255,.8));animation:brainPulse 3s ease-in-out infinite}
+    .feature-card:is(:hover,.in-view) .ai-brain svg{opacity:1;filter:drop-shadow(0 0 30px rgba(255,255,255,.8));animation:brainPulse 3s ease-in-out infinite}
     @keyframes brainPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-    
-    /* Investment Graph Design */
-    .invest-design{width:180px;height:180px;position:relative;overflow:hidden}
-    .invest-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(10,1fr);opacity:.2}
-    .grid-line{border-right:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
-    .invest-chart{position:absolute;inset:10px;display:flex;align-items:flex-end;justify-content:space-between;gap:4px}
-    .chart-bar{flex:1;background:linear-gradient(to top,rgba(255,255,255,.4),rgba(255,255,255,.1));border-radius:2px 2px 0 0;transition:all .6s cubic-bezier(.68,-.55,.265,1.55);transform-origin:bottom;opacity:.8}
-    .chart-bar:nth-child(1){height:30%;--delay:0}
-    .chart-bar:nth-child(2){height:45%;--delay:0.1}
-    .chart-bar:nth-child(3){height:35%;--delay:0.2}
-    .chart-bar:nth-child(4){height:60%;--delay:0.3}
-    .chart-bar:nth-child(5){height:80%;--delay:0.4}
-    .chart-bar:nth-child(6){height:90%;--delay:0.5}
-    .chart-bar:nth-child(7){height:70%;--delay:0.6}
-    .feature-card:hover .chart-bar{animation:barGrow 2s ease-in-out infinite;animation-delay:calc(var(--delay) * 1s);opacity:1}
-    @keyframes barGrow{0%,100%{transform:scaleY(1);background:linear-gradient(to top,rgba(255,255,255,.4),rgba(255,255,255,.1))}50%{transform:scaleY(1.2);background:linear-gradient(to top,rgba(255,255,255,.8),rgba(255,255,255,.3))}}
-    .invest-arrow{position:absolute;top:20%;right:20%;width:60px;height:60px;opacity:0;transition:all .4s}
-    .feature-card:hover .invest-arrow{opacity:1;animation:arrowFloat 3s ease-in-out infinite}
-    @keyframes arrowFloat{0%,100%{transform:translate(0,0) rotate(45deg)}50%{transform:translate(10px,-10px) rotate(45deg)}}
-    .invest-arrow svg{width:100%;height:100%;stroke:#fff;stroke-width:2;fill:none;filter:drop-shadow(0 0 10px rgba(255,255,255,.5))}
-    
+
     .design-glow{position:absolute;inset:-50%;background:radial-gradient(circle,rgba(255,255,255,.15) 0%,transparent 40%);opacity:0;transition:.4s;pointer-events:none}
-    .feature-card:hover .design-glow{opacity:1;animation:glowRotate 6s linear infinite}
+    .feature-card:is(:hover,.in-view) .design-glow{opacity:1;animation:glowRotate 6s linear infinite}
     @keyframes glowRotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
     
     .feature-card h4{font-size:1.25rem;font-weight:600;margin-bottom:15px;color:#fff;letter-spacing:.5px;text-align:center;position:relative;z-index:1}
@@ -193,7 +200,8 @@
       .cards-container{grid-template-columns:1fr;gap:30px}
       .feature-card{padding:25px;min-height:380px}
       .card-design{height:150px}
-      .design-circuit svg,.design-graph svg{width:100px;height:100px}
+      .government-illustration,.crypto-illustration{width:120px;height:120px}
+      .ai-design{transform:scale(.88)}
       .feature-card h4{font-size:1.1rem}
       .feature-card p{font-size:0.8rem}
     }
@@ -319,20 +327,15 @@
       .slide-arrow svg{width:20px;height:20px}
       .slide-number{font-size:2.5rem;top:10px;right:10px}
       .slide-dots{position:absolute;bottom:20px}
-      
-      /* Trigger animations on scroll for mobile */
-      .feature-card.in-view .xrp-hex-grid{transform:rotateX(0deg) rotateZ(360deg)}
-      .feature-card.in-view .hex-cell::before{opacity:1}
-      .feature-card.in-view .xrp-x svg{filter:drop-shadow(0 0 40px rgba(255,255,255,.9));transform:scale(1.2)}
-      
-      .feature-card.in-view .neural-node{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.6);animation:nodeFloat 4s ease-in-out infinite;animation-delay:calc(var(--delay) * 0.2s)}
-      .feature-card.in-view .neural-node::after{opacity:1;animation:nodePulse 2s ease-in-out infinite;animation-delay:calc(var(--delay) * 0.2s)}
-      .feature-card.in-view .neural-line{opacity:1;animation:dataFlow 2s linear infinite}
-      .feature-card.in-view .ai-brain svg{opacity:1;filter:drop-shadow(0 0 30px rgba(255,255,255,.8));animation:brainPulse 3s ease-in-out infinite}
-      
-      .feature-card.in-view .chart-bar{animation:barGrow 2s ease-in-out infinite;animation-delay:calc(var(--delay) * 1s);opacity:1}
-      .feature-card.in-view .invest-arrow{opacity:1;animation:arrowFloat 3s ease-in-out infinite}
-      .feature-card.in-view .design-glow{opacity:1;animation:glowRotate 6s linear infinite}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      .why-post-fiat .feature-card,
+      .why-post-fiat .feature-card *,
+      .why-post-fiat .feature-card::before,
+      .why-post-fiat .feature-card::after{animation:none !important;transition:none !important}
+      .why-post-fiat .feature-card:hover,
+      .why-post-fiat .feature-card:hover .card-design{transform:none}
     }
   </style>
 </head>
@@ -445,20 +448,22 @@
     </div>
     
     <div class="cards-container">
-      <div class="feature-card">
+      <div class="feature-card governance-card">
         <div class="card-design">
           <!-- Crumbling pillars -->
-          <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:140px;height:140px" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round">
-            <path d="M20 60 L80 20 L140 60" opacity=".7"/>
-            <line x1="75" y1="35" x2="68" y2="55" opacity=".4" stroke-dasharray="3 2"/>
-            <rect x="30" y="60" width="12" height="70" rx="2" opacity=".5"/>
-            <rect x="55" y="60" width="12" height="70" rx="2" opacity=".5"/>
-            <rect x="80" y="60" width="12" height="35" rx="2" opacity=".5"/>
-            <rect x="83" y="105" width="12" height="25" rx="2" opacity=".3" transform="rotate(12 89 117)"/>
-            <rect x="108" y="60" width="12" height="70" rx="2" opacity=".5"/>
-            <line x1="20" y1="130" x2="140" y2="130" opacity=".6"/>
-            <path d="M60 130 L55 145 L62 150" opacity=".3" stroke-dasharray="2 2"/>
-            <path d="M100 130 L105 142 L98 148" opacity=".3" stroke-dasharray="2 2"/>
+          <svg class="government-illustration" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round">
+            <path class="gov-roof" d="M20 60 L80 20 L140 60" opacity=".7"/>
+            <line class="gov-crack" x1="75" y1="35" x2="68" y2="55" opacity=".4" stroke-dasharray="3 2"/>
+            <rect class="gov-column gov-column-1" x="30" y="60" width="12" height="70" rx="2" opacity=".5"/>
+            <rect class="gov-column gov-column-2" x="55" y="60" width="12" height="70" rx="2" opacity=".5"/>
+            <rect class="gov-column gov-column-3" x="80" y="60" width="12" height="35" rx="2" opacity=".5"/>
+            <g class="gov-broken-column">
+              <rect x="83" y="105" width="12" height="25" rx="2" opacity=".3" transform="rotate(12 89 117)"/>
+            </g>
+            <rect class="gov-column gov-column-4" x="108" y="60" width="12" height="70" rx="2" opacity=".5"/>
+            <line class="gov-base" x1="20" y1="130" x2="140" y2="130" opacity=".6"/>
+            <path class="gov-debris gov-debris-left" d="M60 130 L55 145 L62 150" opacity=".3" stroke-dasharray="2 2"/>
+            <path class="gov-debris gov-debris-right" d="M100 130 L105 142 L98 148" opacity=".3" stroke-dasharray="2 2"/>
           </svg>
           <div class="design-glow"></div>
         </div>
@@ -466,19 +471,25 @@
         <p>COVID vaccines, endless wars, declining standards of living combined with record spending and record low accountability spell the need for new governance systems.</p>
       </div>
 
-      <div class="feature-card">
+      <div class="feature-card crypto-card">
         <div class="card-design">
           <!-- Broken chain link -->
-          <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:140px;height:140px" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
-            <rect x="15" y="50" width="50" height="60" rx="25" opacity=".6"/>
-            <path d="M95 50 A25 25 0 0 1 120 75 L120 85 A25 25 0 0 1 95 110" opacity=".6"/>
-            <path d="M95 50 L95 42" opacity=".4"/>
-            <path d="M95 110 L95 118" opacity=".4"/>
-            <line x1="72" y1="68" x2="82" y2="62" opacity=".5"/>
-            <line x1="70" y1="80" x2="84" y2="80" opacity=".5"/>
-            <line x1="72" y1="92" x2="82" y2="98" opacity=".5"/>
-            <text x="30" y="86" font-size="18" fill="#fff" opacity=".3" stroke="none" text-anchor="middle" font-family="Inter">$</text>
-            <text x="108" y="86" font-size="18" fill="#fff" opacity=".15" stroke="none" text-anchor="middle" font-family="Inter">$</text>
+          <svg class="crypto-illustration" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+            <rect class="crypto-link-left" x="15" y="50" width="50" height="60" rx="25" opacity=".6"/>
+            <path class="crypto-link-right" d="M95 50 A25 25 0 0 1 120 75 L120 85 A25 25 0 0 1 95 110" opacity=".6"/>
+            <path class="crypto-stub" d="M95 50 L95 42" opacity=".4"/>
+            <path class="crypto-stub" d="M95 110 L95 118" opacity=".4"/>
+            <line class="crypto-fracture" x1="72" y1="68" x2="82" y2="62" opacity=".5"/>
+            <line class="crypto-fracture" x1="70" y1="80" x2="84" y2="80" opacity=".5"/>
+            <line class="crypto-fracture" x1="72" y1="92" x2="82" y2="98" opacity=".5"/>
+            <g class="crypto-currency crypto-currency-left" opacity=".3">
+              <path d="M30 68V96"/>
+              <path d="M37 73C34 69 24 69 23 76C22 83 36 80 36 88C36 95 25 96 22 91"/>
+            </g>
+            <g class="crypto-currency crypto-currency-right" opacity=".15">
+              <path d="M108 68V96"/>
+              <path d="M115 73C112 69 102 69 101 76C100 83 114 80 114 88C114 95 103 96 100 91"/>
+            </g>
           </svg>
           <div class="design-glow"></div>
         </div>
@@ -486,7 +497,7 @@
         <p>Digital Scarcity or "Code is Law" are not viable alternatives to advanced social systems. Institutional blockchains are uninteresting when institutions are failing.</p>
       </div>
 
-      <div class="feature-card">
+      <div class="feature-card ai-card">
         <div class="card-design">
           <div class="ai-design">
             <div class="neural-nodes">
@@ -700,16 +711,16 @@
     /* ===== Intersection Observer for scroll animations ===== */
     const observerOptions = {
       root: null,
-      rootMargin: '0px',
-      threshold: 0.3 // Trigger when 30% of element is visible
+      rootMargin: '0px 0px -12% 0px',
+      threshold: 0.15
     };
 
     const animationObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view');
-          // Optional: stop observing after animation triggers
-          // animationObserver.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('in-view');
         }
       });
     }, observerOptions);
