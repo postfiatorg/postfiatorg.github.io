@@ -115,8 +115,9 @@
     .feature-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.06) 0%,transparent 70%);opacity:0;transition:.4s}
     .feature-card:hover{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.03)}
     .feature-card:hover::before{opacity:1}
-    /* Only the interactive card gets the lift + glow */
-    .feature-card.card-interactive:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.04);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(255,255,255,.08)}
+    /* The AI card gets lift, glow, and visible overflow for the animation */
+    .feature-card.card-interactive{overflow:visible}
+    .feature-card.card-interactive:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.06);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(255,255,255,.12)}
 
     .card-design{width:100%;height:200px;margin-bottom:30px;position:relative;display:flex;align-items:center;justify-content:center;transition:all .4s cubic-bezier(.4,0,.2,1);perspective:1000px}
     .feature-card.card-interactive:hover .card-design{transform:scale(1.1) translateY(-10px)}
