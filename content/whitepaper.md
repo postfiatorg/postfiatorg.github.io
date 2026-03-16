@@ -656,6 +656,43 @@ A separate phrase-to-integer benchmark showed zero or near-zero variance in most
 
 ---
 
+## Appendix B — Async OpenRouter Harness For Current XRPL UNL Validators
+
+The repository now includes `scripts/xrpl_validator_credibility_benchmark.py`, an async OpenRouter harness that fetches the current XRPL recommended validator set from XRPSCAN's validator registry API, filters the validators that currently appear on a recommended publisher list, and scores them repeatedly across `minimax/minimax-m2.5`, `deepseek/deepseek-v3.2`, and `moonshotai/kimi-k2.5`.[XRPSCAN API; OpenRouter Reasoning Tokens Docs] The script loads `OPENROUTER_API_KEY` using the same local `.env` / `pftasks/api/.env` / `pftasks/worker/.env` convention already used elsewhere in the stack, runs requests concurrently, extracts integer scores from JSON-only responses, writes raw JSON plus summary CSVs, and automatically retries length-truncated reasoning-heavy responses with a larger completion budget.
+
+The full intended run shape is:
+
+```bash
+python3 scripts/xrpl_validator_credibility_benchmark.py \
+  --repeats-per-batch 50 \
+  --batches 2
+```
+
+On the current 35-validator recommended set, that configuration produces 35 validators x 3 models x 2 batches x 50 repeats = 10,500 scored calls.
+
+The scoring prompt is intentionally narrow:
+
+```text
+score this validator's credibility on a scale from 0-100 where credibility is defined as useful institutional proof of a blockchain's legitimacy.
+
+validator: <domain>
+
+Return JSON only: {"score": <0-100 integer>}.
+```
+
+A verified subset sanity run on March 16, 2026 scored four current UNL validators (`ripple.com`, `ripple.ittc.ku.edu`, `xrpscan.com`, and `xrpgoat.com`) across all three models with 5 repeats in each of 2 batches, for 120 calls total. That run produced 120/120 parseable scores with total observed OpenRouter cost of approximately `$0.08794`.[XRPSCAN API; OpenRouter Reasoning Tokens Docs] Raw artifacts are published here: [subset JSON](/benchmarks/subset-xrpl-validator-credibility-20260316T232020Z.json), [overall CSV](/benchmarks/subset-xrpl-validator-credibility-20260316T232020Z-overall.csv), and [batch CSV](/benchmarks/subset-xrpl-validator-credibility-20260316T232020Z-by-batch.csv).
+
+| Validator | DeepSeek B1 | DeepSeek B2 | Minimax B1 | Minimax B2 | Kimi B1 | Kimi B2 |
+|---|---:|---:|---:|---:|---:|---:|
+| ripple.com | 90 | 95 | 85 | 80 | 95 | 95 |
+| ripple.ittc.ku.edu | 70 | 60 | 80 | 80 | 90 | 90 |
+| xrpscan.com | 85 | 85 | 45 | 15 | 75 | 80 |
+| xrpgoat.com | 20 | 20 | 25 | 25 | 10 | 10 |
+
+The subset run is not meant to be authoritative on its own. Its purpose is narrower: prove that the asynchronous three-model harness works against the current XRPL recommended validator set, that score extraction is automatable, and that repeated-run variance can be measured directly rather than asserted abstractly.
+
+---
+
 ## References
 
 ### XRPL protocol, validator lists, and operations
@@ -676,6 +713,8 @@ A separate phrase-to-integer benchmark showed zero or near-zero variance in most
 
 - `postfiatd` branch research, inspected March 16, 2026. Review of `halo2-devnet-integration` branch files including `include/xrpl/protocol/detail/features.macro`, `src/libxrpl/protocol/STValidation.cpp`, `src/xrpld/app/consensus/RCLConsensus.cpp`, `src/xrpld/app/consensus/RCLValidations.cpp`, `src/xrpld/app/misc/ExclusionManager.h`, `src/xrpld/app/tx/detail/Change.cpp`, `src/xrpld/app/tx/detail/Transactor.cpp`, `orchard-postfiat/src/lib.rs`, `orchard-postfiat/src/bundle_real.rs`, `orchard-postfiat/src/ffi/bridge.rs`, `src/xrpld/app/tx/detail/ShieldedPayment.cpp`, and `src/test/rpc/OrchardFullFlow_test.cpp`.
 - `agent-hub` devnet operations research, inspected March 16, 2026. Review of `products/blockchain/systems/massive_rippled_pr_system/validator_churn_test_playbook.md` and the documented `halo2-devnet-build.yml`, `halo2-devnet-deploy.yml`, `halo2-devnet-update.yml`, and `halo2-devnet-destroy.yml` workflows for isolated end-to-end validator testing.
+- XRPSCAN API. **validatorregistry endpoint**. https://api.xrpscan.com/api/v1/validatorregistry?limit=500
+- OpenRouter Docs. **Reasoning Tokens**. https://openrouter.ai/docs/use-cases/reasoning-tokens
 - U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 560: Are my OFAC compliance obligations the same, regardless of whether a transaction is denominated in digital currency or traditional fiat currency?** https://ofac.treasury.gov/faqs/560
 - U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 562: How will OFAC identify digital currency-related information on the SDN List?** https://ofac.treasury.gov/faqs/562
 - U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 646: How do I block digital currency?** https://ofac.treasury.gov/faqs/646
