@@ -5,201 +5,617 @@ url: "/whitepaper/"
 summary: "Post Fiat Whitepaper"
 ---
 
-Post Fiat Whitepaper (Draft, June 10, 2025)
+# Post Fiat: Auditable, Model-Assisted Validator-List Publication for XRPL-Derived Networks
 
+**Draft — March 2026**
 
-# Executive Summary
+---
 
-Post Fiat is a new L1 that aims to use AI to improve XRP's governance. It uses the statistical property of LLM's to converge on deterministic values for qualitative scoring to set a new Unique Node List that is transparently selected versus the status quo for XRP. Post Fiat can use either Open or Closed source models to accomplish this - and statistically deterministic outputs do not require having model weights as shown in the example code accompanying this document. 
+## Abstract
 
-Making the Unique Node List selection and token distribution of XRP fair and transparent would unlock major value for crypto's oldest protocol other than Bitcoin. 
+Post Fiat is an XRPL-derived Layer 1 design that turns validator-list publication from an opaque publisher function into a replayable public pipeline. On XRPL-style networks, consensus depends on the construction of the trusted validator set: which validators are included, why they were included, how concentration is managed, and how list updates are published. Today, XRPL provides signed validator lists, multiple publisher support, and configurable thresholds, but the rationale behind widely used recommended lists remains only partially visible.
 
-# Introduction
+Post Fiat publishes: (i) raw evidence, (ii) a normalized scoring snapshot, (iii) a pinned execution manifest for the model/runtime stack, (iv) model-produced candidate scores and short rationales, and (v) a deterministic set-construction rule with explicit churn controls. The result is a material reduction in information asymmetry between list publisher and network participants.
 
-As of June 10th 2025, at 2.30 per token, XRP is a 230 billion dollar Fully Diluted Value network that has processed transactions flawlessly for 13 years. Its consensus mechanism (RPCA) relies on 30-35 trusted validators who receive no rewards yet maintain the network's integrity.
+The core technical requirement is **effective rank-driven consensus**: repeated executions of the same scoring process on the same inputs must produce stable pairwise rankings, stable top-k overlap, and stable inclusion/exclusion decisions near the validator-set cutoff. Exact token-level equality is desirable when available, but rank stability is the primary operational target.
 
-Unlike Ethereum or Solana—where validators need expensive hardware and expect rewards—XRP runs on commodity servers. This efficiency comes from its lightweight Unique Node List (UNL) selection process. The tradeoff: centralized control over who validates.
+Post Fiat proceeds in phases. In **Phase 1**, a foundation remains the authoritative list publisher but publishes a complete audit trail. In **Phase 2**, validators rerun the same scoring process in shadow mode and publicly measure convergence. In **Phase 3A**, if convergence is sustained, authoritative list content shifts from foundation-only output to validator-converged output. **Phase 3B** decentralizes snapshot assembly, round announcement, list signing, and delivery infrastructure.
 
-## The Problem
-Ripple Labs controls XRP's validator selection and holds 80% of all tokens. This concentration of power led to a multi-billion dollar SEC lawsuit and suppressed XRP's price for years.
+In parallel, current `postfiatd` work shows that this publication model can coexist with adjacent protocol extensions: a validator-consensus account-exclusion path and an Orchard/Halo2 privacy branch. Those extensions are not the same thing as validator-list publication, but they matter because they show how governance, compliance controls, and privacy can evolve inside the same XRPL-derived stack.
 
-When Trump won in 2024, XRP surged from .55 to over 3 dollars as regulatory pressure evaporated. But political winds shift. 
+---
 
-Post Fiat asks: How can we make validator selection transparent and decentralized without relying on government favor?
+## 1. Scope and Background
 
-## The Solution
+### 1.1 Validator-list publication is security-critical
 
-Post Fiat reimagines XRP using AI to make validator selection transparent and verifiable.
+XRPL documentation defines a Unique Node List (UNL) as the set of validators a server trusts not to collude, and stresses that UNL entries should represent independent entities chosen to minimize correlated failure or malicious collusion.[XRPL Docs, "Unique Node List (UNL)"] Servers can consume one or more recommended validator lists from publishers, and can require that a validator appear on a threshold number of lists before it is trusted.[XRPL Docs, "Configure Validator List Threshold"]
 
-XRP's opaque validator selection determines network security. Before LLMs, verifying qualitative judgments required courts and lawyers. Now, LLMs can assess validator credibility deterministically.
+XRPL's safety depends on the overlap and composition of trusted validators. XRPL's own "Consensus Protections" page states that less than roughly 90% overlap can cause participants to diverge in the worst case, and that signed recommended lists are used in practice to keep overlap high.[XRPL Docs, "Consensus Protections Against Attacks and Failure Modes"]
 
-Post Fiat distributes 55% of tokens to validators (vs XRP's 80% to Ripple Labs) through an LLM-driven process that scores:
+Validator-list publication is a security-sensitive governance function.
 
-1. **Entity Credibility** - Universities and governments score higher than hobbyists
-2. **Transaction Quality** - Validators' on-chain activity and memo content
+### 1.2 Publication authority is real authority
 
-## Technical Implementation
+XRPL's validator-list mechanism acknowledges that list publication is a trust surface. Lists are signed, versioned, sequenced, and expire. The 2025 default-UNL migration required operators to update both the list URL and the publisher key, or risk falling out of sync.[XRPL Blog, "Default UNL Migration"] XRPL's documentation also notes that the default configuration uses published lists from recognized publishers and that servers configured in this way achieve full overlap with others using the same configuration.[XRPL Docs, "Consensus Protections Against Attacks and Failure Modes"]
 
-### Monthly Cycle
+That migration was evidence that publication infrastructure itself is part of the governance model.
 
-1. **Publish** - Foundation publishes model specs, prompts, and scoring criteria
-2. **Score** - Validators run prompts 100x, generating statistical fingerprints (mode, mean, σ)
-3. **Submit** - Encrypted results prevent copying before deadline
-4. **Verify** - Anyone can reproduce scoring with published tools
-5. **Select & Reward** - Threshold score combines LLM credibility + objective metrics (uptime, throughput). All above threshold join UNL, receive rewards proportional to score
+### 1.3 Formal analyses confirm the stakes
 
-### Foundation Structure
+Formal analyses of RPCA have identified important constraints and failure cases. Chase and MacBrough showed that safety requires much tighter UNL-overlap conditions than early informal descriptions suggested.[Chase and MacBrough 2018] Amores-Sesar, Cachin, and Mićić later derived an abstract protocol from the source code and showed that safety and liveness may fail in simple executions under relatively benign assumptions.[Amores-Sesar, Cachin, and Mićić 2021]
 
-A single-purpose foundation (like IKEA's) manages the process. It cannot:
-- Change its mandate
-- Redirect tokens
-- Favor specific validators
+If validator-list composition is a security-critical input to consensus, then making list construction auditable and eventually multi-party is a meaningful improvement — independent of whether the base protocol's formal properties change.
 
-The foundation's centralized model selection paradoxically prevents gaming:
-- All prompts and models are published—favoritism would be visible in code
-- Anyone can verify results by running the same deterministic LLM process
-- Validators can't collude because selection relies on LLM outputs, not consensus
-- Sybil attacks fail because LLMs consistently score berkeley.edu higher than xrpgoat.com
+---
 
-The foundation eventually transitions to deterministic model selection, but its constraints remain permanent. 
+## 2. The Governance Problem: Validator Selection as a Principal–Agent Mechanism
 
-### Anti-Gaming Measures
+### 2.1 Opaque list construction creates information asymmetry
 
-- **Encryption** prevents validators from seeing others' submissions
-- **Statistical fingerprints** make forgery computationally infeasible
-- **Transaction fees** make fake volume expensive
-- **Network topology** analysis exposes Sybil attacks
-- **Performance requirements** - 99.9% uptime, consistent validation
+A recommended validator list is a mechanism with two layers:
 
-After 6 years, validators continue for utility, not rewards—mirroring XRP's proven model.
+1. **Selection**: which candidates are included, retained, or removed.
+2. **Publication**: how that list is signed, distributed, and updated.
 
-# Example 
+In a publisher-managed model, the publisher P has private information Θ_P: internal criteria, soft constraints, subjective judgments, compliance pressures, reputational priors, and institutional incentives. Network participants observe only the resulting published set V_t at time t.
 
-People unfamiliar with work on Large Language Models may find the idea that LLMs produce deterministic output to be surprising. We frequently anthroporphize chatbots, and assume they're closer to people that have non deterministic output. This is not the case. The following example will walk through understanding how and why LLMs generate useful outputs for the selection of a validator list - starting with an agnostic simple example, then moving specifically to the XRP Unique Node List 
+This is a principal–agent problem with hidden information. The agent (publisher) chooses an outcome on behalf of the principals (network participants), but the principals cannot directly observe the full decision rule. The result is a persistent information asymmetry:
 
-## Canonical Example: No Blockchain Information 
+V_t = G_t(X_t, Θ_P)
 
-The following [code](https://gist.github.com/goodalexander/0ac57b53183b1aaa96b98419f0d522e5) does the following
-1. Takes an arbitrary phrase (such as "The brown fox walks")
-2. Is asked to generate an integer between 1-300 in response to the phrase
-3. Using a specific LLM
-4. Repeats across 24 different phrases
-5. Does this 100 times per phrase in 1 batch
-6. Repeats for a second batch
+where:
+- X_t is the observable candidate evidence at round t,
+- Θ_P is the publisher's hidden decision state,
+- G_t is the actual selection-and-publication function.
 
-The outputs are:
-1. Batch 1 phrases with mode integers generated
-2. Batch 2 phrases with mode integers generated
+Under an opaque regime, participants mostly observe V_t and fragments of X_t, but not Θ_P and not the full effective mechanism.
 
-Here are the outputs for 100 runs of anthropic/claude-3-haiku
+### 2.2 Transparent scoring narrows hidden discretion
 
-**Mode Outputs for Phrase + Integer Request**
-| Phrase | Run 1 | Run 2 | Difference |
-|--------|-------|-------|------------|
-| A blue whale dives | 120 | 120 | 0.00% |
-| A cold wind blows | 142 | 142 | 0.00% |
-| A new day begins | 142 | 142 | 0.00% |
-| A purple butterfly floats | 142 | 142 | 0.00% |
-| A quick dog runs | 150 | 150 | 0.00% |
-| A red fish swims | 142 | 142 | 0.00% |
-| A slow turtle crawls | 42 | 42 | 0.00% |
-| A small mouse hides | 142 | 142 | 0.00% |
-| A soft rain falls | 147 | 147 | 0.00% |
-| A tall mountain stands | 142 | 142 | 0.00% |
-| A tiny ant works | 42 | 42 | 0.00% |
-| A white bird flies | 137 | 137 | 0.00% |
-| The big elephant walks | 137 | 137 | 0.00% |
-| The black bear stands | 142 | 142 | 0.00% |
-| The bright sun shines | 142 | 142 | 0.00% |
-| The brown fox walks | 142 | 142 | 0.00% |
-| The dark night falls | 142 | 142 | 0.00% |
-| The deep river flows | 142 | 142 | 0.00% |
-| The fast car speeds | 150 | 150 | 0.00% |
-| The gray cat sleeps | 127 | 127 | 0.00% |
-| The green frog jumps | 137 | 137 | 0.00% |
-| The loud thunder roars | 147 | 147 | 0.00% |
-| The old tree grows | 150 | 150 | 0.00% |
-| The wise owl hoots | 137 | 137 | 0.00% |
-| The yellow bee buzzes | 142 | 142 | 0.00% |
+Under a transparent model-assisted regime, participants observe:
+- raw evidence R_t,
+- normalized scorer input X_t,
+- model/runtime manifest Φ_t,
+- prompt/policy specification P_t,
+- model scores S_t,
+- deterministic selector G,
+- published validator list V_t.
 
-If you re-run this script with Claude 3 Haiku you will also get 120 when you run the prompt and integer request on "A blue whale dives". The table above shows that there is 0 variation in the modes 
+The effective uncertainty about how the list came to be drops materially:
 
-The above table shows the Mode of the Run of 100 integer requests. But the standard deviation data is also informative to understand LLM determinism.
+H(Θ_P | V_t) > H(Θ_P | R_t, X_t, Φ_t, P_t, S_t, G)
 
-**Standard Deviation Outputs for Phrase + Integer Request**
-| Phrase | Run 1 | Run 2 |
-|--------|-------|-------|
-| A blue whale dives | 0.0 | 0.0 |
-| A cold wind blows | 0.0 | 0.0 |
-| A new day begins | 0.0 | 0.0 |
-| A purple butterfly floats | 2.2 | 1.8 |
-| A quick dog runs | 0.0 | 0.0 |
-| A red fish swims | 0.0 | 0.0 |
-| A slow turtle crawls | 0.0 | 0.0 |
-| A small mouse hides | 0.0 | 0.0 |
-| A soft rain falls | 0.0 | 0.0 |
-| A tall mountain stands | 0.0 | 0.0 |
-| A tiny ant works | 40.7 | 30.2 |
-| A white bird flies | 0.0 | 0.0 |
-| The big elephant walks | 8.2 | 8.7 |
-| The black bear stands | 0.0 | 0.0 |
-| The bright sun shines | 0.0 | 0.0 |
-| The brown fox walks | 0.0 | 0.0 |
-| The dark night falls | 0.0 | 0.0 |
-| The deep river flows | 0.0 | 0.0 |
-| The fast car speeds | 0.0 | 0.0 |
-| The gray cat sleeps | 1.5 | 1.9 |
-| The green frog jumps | 2.4 | 2.5 |
-| The loud thunder roars | 2.5 | 2.3 |
-| The old tree grows | 0.0 | 0.0 |
-| The wise owl hoots | 0.7 | 0.7 |
-| The yellow bee buzzes | 0.0 | 0.0 |
+Governance choices remain in what evidence is collected, how it is normalized, what prompt is used, and when the network updates policy — but those choices are moved into named, inspectable, reviewable artifacts instead of remaining an unobserved residual.
 
-In this table you can see that there is almost no variation of output for the phrase "A blue whale dives". It will always return 120. Whereas the phrase "A tiny ant works" has a much larger variation (but still has the same mode across a large number of runs). 
+### 2.3 The mechanism-design framing
 
-This standard deviation output provides a basic model fingerprint. Given the mode and standard deviation tables above, you would be able to quickly tell what underlying model somebody was running. 
+The Revelation Principle says that if a desirable social choice rule is implementable, it can be implemented by a direct mechanism with truthful revelation under appropriate assumptions. The operational lesson is direct:
 
-This simple model establishes 2 key points:
-1. Models output deterministic mode responses given a set of inputs at low temperature
-2. The non determinism itself (or distribution) is itself predictable and repeats across runs. 
+> If the network publishes the evidence, the policy, the execution environment, and the outcome, hidden discretion has less room to hide.
 
-When Post Fiat nodes submit scoring of other nodes they also submit key standard deviation information that builds trust that a specific model was run, with a set of prompts. 
+The benefit is a reduction in unverifiable editorial power.
 
-## Canonical Example on the XRP Blockchain 
+### 2.4 A transparent permitter oracle
 
-Now that we have established determinism of prompt/ integer output with a meaningless example, the question becomes: "Does an actual qualitative judgment also produce usefully deterministic output, such that we could trustlessly judge UNL members in a network like XRP?"
+Lewis-Pye and Roughgarden's framework for permissionless consensus emphasizes the role of a **permitter oracle**: some mechanism must determine who is effectively allowed to participate.[Lewis-Pye and Roughgarden 2023] In XRPL-style systems, validator-list publication already plays that role for the recommended trust set.
 
-This [code](https://gist.github.com/goodalexander/88aab442fb8879c5896530b1f84cc0f9) explores this by
+Post Fiat turns this from an opaque publisher oracle into a **transparent, auditable permitter oracle**: the inputs are public, the policy is public, the runtime configuration is public, the outputs are public, and in later phases, the outputs can be independently recomputed and compared.
 
-1. Selecting a system and user prompt that is asked to assess the credibility of a Validator's public facing URL and assign it a score from 0-100
-2. Runs this 100 times similar to the first example
-3. Does another 100 batch run on a different machine with the same model and prompts
-4. Compares the outputs
+---
 
-In this example, we use a much more powerful model (Claude Sonnett 4). More powerful reasoning models are trusted by users and provide better outputs. So it is useful to assess if they also are deterministic 
+## 3. Design Goals
 
-Note that this is run on real XRP validator data which can be found [here on XRPScan](https://xrpscan.com/validators)
+Post Fiat is designed around six goals.
 
-Here is the prompt used:
-_____
-You are the Post Fiat validator judgment system. You are presented with a single validator URL and output 50 word responses.
+### 3.1 Auditability over mystique
 
-Your job is to take the following URL and output a 50 word statement with three key attributes:
+The value of the system comes from publishing the entire round pipeline. "The AI decided" is not a sufficient explanation. A good round explains itself in artifacts.
 
-The name of the organization that the URL represents
-A brief comment on how credible the organization is. Credibility should consider: A. The market cap or size of the organization – ie pure institutional size economic or societal weight (high scores should favor huge institutions) B. The censorship resistance of the organization – ie ability to withstand pressure from governments (high scores would favor independent - strong institutions) C. The technological capability to conform rapidly with network upgrades (high scores would favor highly technical adept institutions)
-An integer score from 0-100 indicating how credible the organization is. A score of 100 means the organization is highly credible, a score of 0 means the score is unknown or not credible at all
-* A sovereign such as a government or Central Bank should have a score of 100
-* A megacap corporation should have a score of at most 85 (with midcap corporations getting 75 max and microcaps getting 50 max)
-* A globally renowned university should have a score of 100 with lesser schools getting lower scores
-* A hobbyist website or unknown organization that is not in the training data should get a score of at most 35
-* If the organization is Centralizing - i.e. likely tied to Ripple Labs then the score should be at most 55
-URL to analyze: {url}
-___
+### 3.2 Stability over single-run purity
 
-And here are the outputs. If you run the example code with Claude Sonnett 4 you will get these outputs 
-| Validator | Run 1 Score | Run 2 Score |
-|-----------|-------------|-------------|
+Governance needs stable rankings and stable set membership more than it needs perfect word-for-word transcript identity in every environment. The operational target is the same practical validator set across runs, or explainable bounded differences.
+
+### 3.3 Narrow authority transfer
+
+Authority moves only after it is measured. A foundation can remain authoritative in Phase 1 while publishing the evidence necessary for others to audit and later reproduce the process.
+
+### 3.4 Explicit concentration management
+
+Validator diversity requires naming the concentration surfaces that matter:
+- country,
+- ASN,
+- cloud provider,
+- datacenter,
+- operator/entity identity.
+
+### 3.5 Conservative failure behavior
+
+A missed round, failed publish, stale manifest, or convergence drop degrades to a last known-good list or foundation publication.
+
+### 3.6 Compatibility with existing validator-list mechanics
+
+Phase 1 fits XRPL-style list publication as it already exists: signed lists, explicit publisher keys, sequence numbers, expirations, and standard retrieval paths.
+
+---
+
+## 4. Round Architecture
+
+Each scoring round is a pipeline. The round is reproducible from artifacts.
+
+### 4.1 Stage 1: Evidence collection
+
+A round collects candidate evidence from multiple sources:
+
+1. **Objective operational metrics**: agreement rates, uptime, software version and patch hygiene, amendment behavior, fee-vote behavior, missed validations, long-run operational consistency.
+
+2. **Identity and attestation signals**: verified / not verified, institutional / individual / unknown, domain-attested / not domain-attested, optional public operator metadata.
+
+3. **Concentration and correlation signals**: country, ASN, cloud provider, datacenter region, operator clustering.
+
+4. **Low-confidence observer-dependent metrics**: peer count, topology position, latency from a given observer. These are weighted cautiously because they reflect a specific vantage point rather than a universal property.
+
+### 4.2 Stage 2: Deterministic normalization
+
+Raw evidence is transformed into a canonical scoring snapshot — the exact scorer input. The normalization step exists because raw evidence alone is insufficient for reproducibility. If two operators consume the same source data but transform it differently, they are running different rounds.
+
+A round publishes:
+- the raw evidence,
+- the normalized snapshot,
+- and the hash of the normalized snapshot.
+
+### 4.3 Stage 3: Pinned model-assisted scoring
+
+A pinned local model processes the normalized snapshot under a published prompt and outputs:
+- an integer score per candidate,
+- a short rationale per candidate,
+- and optionally additional structured fields useful for diagnostics.
+
+Let:
+- X_t be the normalized snapshot at round t,
+- Φ_t be the execution manifest (model, weights, tokenizer, engine, runtime),
+- P_t be the scoring prompt/policy,
+- M_{Φ_t} be the scorer instantiated under that manifest.
+
+Then:
+
+S_t = M_{Φ_t}(P_t, X_t)
+
+where S_t ∈ {0,…,100}^n is the vector of candidate scores for n validators.
+
+The model evaluates candidates. The final validator set is chosen by a deterministic set constructor operating on published scores.
+
+### 4.4 Stage 4: Deterministic list construction
+
+The final recommended validator set is built by a deterministic selector:
+
+U_t = G(S_t, U_{t-1}; θ, K, δ)
+
+where:
+- U_t is the selected validator set at round t,
+- U_{t-1} is the prior round's set,
+- θ is a minimum score threshold,
+- K is the maximum list size,
+- δ is the churn-control margin.
+
+A simple instance of G:
+
+1. Score all candidates.
+2. Discard scores below θ.
+3. Rank remaining candidates.
+4. Include at most K candidates.
+5. Apply churn control: a challenger displaces an incumbent only if it exceeds the incumbent by at least δ, unless a hard-failure condition applies.
+
+The model is used for **candidate evaluation**. **Set publication** is deterministic.
+
+### 4.5 Stage 5: Publication artifacts
+
+Each round publishes at least the following bundle:
+
+```text
+round_t/
+├── raw/
+│   ├── source_a.json
+│   ├── source_b.json
+│   └── ...
+├── normalized_snapshot.json
+├── execution_manifest.json
+├── prompt_version.txt
+├── scores.json
+├── selection_result.json
+├── vl.json
+└── metadata.json
+```
+
+The critical property is chain-of-custody:
+
+raw evidence → normalized snapshot → scores → selected set → signed published list
+
+A round can also anchor the root hash or CID of this artifact bundle on-chain, making later equivocation materially harder.
+
+---
+
+## 5. Scoring Surfaces
+
+### 5.1 What the scorer evaluates
+
+The scoring policy is explicit about its decision surfaces:
+
+- **Quality surfaces**: uptime, agreement, software diligence, historical reliability.
+- **Identity surfaces**: operator transparency, institutional credibility, domain attestation.
+- **Concentration surfaces**: country, ASN, cloud provider, datacenter, operator clustering.
+- **Low-confidence observational surfaces**: latency and topology from a single observer.
+
+The scorer gives the greatest weight to objective, long-horizon indicators and lower weight to single-observer signals.
+
+### 5.2 Concentration as a portfolio problem
+
+A validator list is not just a ranking of individually good nodes. It is also a portfolio problem. A set of individually strong validators can still be collectively fragile if many share the same cloud provider, jurisdiction, ASN, or operator.
+
+List construction has both:
+- **per-candidate quality**, and
+- **set-level correlation risk**.
+
+The concentration surfaces are explicit, published, and reviewable.
+
+### 5.3 Identity without unnecessary PII
+
+Identity data is minimal. The public system publishes:
+
+- `verified: true/false`
+- `entity_type: institutional / individual / unknown`
+- `domain_attested: true/false`
+
+This improves auditability without turning validator governance into a doxxing exercise.
+
+---
+
+## 6. Stability and Reproducibility
+
+### 6.1 The right target is rank stability
+
+The practical governance targets are:
+
+1. **Pairwise rank agreement**
+2. **Top-k overlap**
+3. **Cutoff-band stability**
+4. **Observed churn across rounds**
+
+These are measured directly.
+
+Let s^(a) and s^(b) be score vectors from two independent runs on the same snapshot. Define pairwise rank agreement as:
+
+PRA(a,b) = (2 / n(n-1)) Σ_{i<j} 𝟙[sign(s_i^(a) − s_j^(a)) = sign(s_i^(b) − s_j^(b))]
+
+Define top-k overlap as:
+
+TopK(a,b;k) = |Top_k(s^(a)) ∩ Top_k(s^(b))| / k
+
+And round-to-round churn as:
+
+Churn(t) = 1 − |U_t ∩ U_{t-1}| / |U_t|
+
+### 6.2 Low-temperature decoding is necessary but not sufficient
+
+In autoregressive decoding, token selection under temperature τ is:
+
+P(x_t = i) = exp(z_i / τ) / Σ_j exp(z_j / τ)
+
+As τ → 0, sampling converges toward greedy selection of the argmax token. But real inference systems add implementation-level variance: API batching, kernel reduction order, precision modes, tensor-parallel configuration, and hardware differences can all perturb logits enough to change downstream tokens.
+
+This is why external APIs should not be treated as authoritative for governance-critical rounds. Even at temperature 0, identical inputs may produce different outputs across API calls due to serving infrastructure variance.[Anthropic Docs, "Temperature"]
+
+### 6.3 Recent serving work has narrowed the gap materially
+
+Thinking Machines Lab identified batch-size variance as a major source of nondeterministic inference and described batch-invariant kernels as a practical fix.[He 2025] SGLang has since documented a deterministic inference mode built on batch-invariant operators supporting FlashInfer, FlashAttention 3, and Triton backends.[SGLang Docs, "Deterministic Inference"] The SGLang team reports an average slowdown of roughly 34% relative to its nondeterministic baseline in tested configurations.[LMSYS Blog, 2025]
+
+For a protocol that standardizes model weights, prompt, tokenizer, inference engine, runtime flags, and hardware profile, exact reproducibility is increasingly achievable — and rank stability is already a realistic near-term target.
+
+### 6.4 Precision matters
+
+Numerical precision remains a real source of divergence. Yuan et al. show that limited precision can materially affect reproducibility, particularly for reasoning-style models, and propose mitigation strategies such as LayerCast to improve stability.[Yuan et al. 2025]
+
+This is one reason the **execution manifest** is a first-class artifact. A weight hash alone is not enough. Reproducibility depends on the whole stack.
+
+### 6.5 Preliminary benchmark
+
+The project's internal pilot benchmark scored 35 current XRPL validator URLs in two independent 100-run batches under a fixed prompt, producing identical mode scores for all 35 candidates. Before authoritative deployment, the project will publish the prompt, manifest, raw outputs, and replay harness for public verification. A compact excerpt appears in **Appendix A**.
+
+### 6.6 Statistical fingerprints
+
+Repeated-run statistics — mode, mean, variance, selected rationales — provide evidence that a claimed model/process was actually run. Their strength depends on benchmark design, number of runs, number of candidates, output space structure, and adversary knowledge. Post Fiat treats these fingerprints as useful evidence for shadow verification, complemented by stronger cryptographic assurance layers as they mature (Section 9).
+
+---
+
+## 7. Execution Manifest and Hashing Discipline
+
+### 7.1 Full manifest pinning
+
+Each round publishes a full execution manifest, including at minimum:
+
+- model identifier,
+- model snapshot revision,
+- hashes of all weight shards,
+- tokenizer files,
+- config files,
+- prompt version,
+- output schema version,
+- inference engine version/commit,
+- attention backend,
+- dtype / quantization mode,
+- container image digest,
+- CUDA / driver version,
+- determinism flags.
+
+This prevents silent drift.
+
+### 7.2 Domain-separated hashing
+
+Any hash that influences governance is domain-separated and typed. A generic commitment format:
+
+c = SHA256(d ‖ v ‖ r ‖ h ‖ σ)
+
+where:
+- d is a domain tag,
+- v is a version byte,
+- r is the round identifier,
+- h is a content hash,
+- σ is a salt or auxiliary field.
+
+Governance systems fail in embarrassing ways when serialization rules are implicit.
+
+### 7.3 Replay requirements
+
+The implementation supports:
+- `replay_round(round_id)`,
+- `rebuild_from_raw(round_id)`,
+- and `dry_run`.
+
+If a round cannot be replayed from its own artifacts, it is not auditable.
+
+---
+
+## 8. Security Model and Anti-Gaming Analysis
+
+### 8.1 Threat model
+
+The relevant adversaries include:
+- a manipulative list publisher,
+- a validator trying to cheaply imitate institutional credibility,
+- operators attempting to copy others' outputs without recomputation,
+- clusters of validators masquerading as independent entities,
+- and operational failures in list publication itself.
+
+### 8.2 Layered identity signals
+
+Sybil resistance uses layered signals:
+
+- long-run performance history,
+- domain attestation via `xrp-ledger.toml`,
+- minimal public verification state,
+- operator clustering analysis,
+- concentration analysis,
+- and model-based assessment of public institutional credibility.
+
+XRPL's two-way domain verification process binds a validator public key and a domain through reciprocal claims, creating strong evidence that the same operator controls both.[XRPL Docs, "xrp-ledger.toml File"]
+
+### 8.3 Costly signaling and institutional credibility
+
+Spence's costly-signaling framework applies directly. Appearing credible to a model trained on large public corpora is not free. It is typically cheaper to operate a legitimate institution well than to manufacture years of convincing public evidence across independent sources. This raises the cost of cheap Sybil identities relative to systems that treat every pseudonymous operator as equally credible by default.
+
+### 8.4 Commit–reveal as anti-copying infrastructure
+
+In Phase 2 shadow mode, validators commit to output hashes before reveals open:
+
+c_i = SHA256(d ‖ v ‖ r ‖ H(S_i) ‖ σ_i)
+
+where:
+- S_i is validator i's scored output,
+- H(S_i) is its content hash,
+- σ_i is a random salt.
+
+This prevents simple after-the-fact copying once a canonical output is visible.
+
+### 8.5 Attack summary
+
+| Attack | Mitigation | Residual risk |
+|---|---|---|
+| Fake domain / fake operator identity | Two-way domain attestation, public verification state, operator review | Stronger against casual spoofing than long-horizon social engineering |
+| Metric gaming | Long-horizon performance metrics, public evidence, low weight on short-term optics | Possible if attacker incurs real operating cost |
+| Output copying in shadow mode | Commit–reveal timing, public convergence reports | Does not prove local execution by itself |
+| Hidden publisher discretion | Raw evidence + snapshot + manifest + deterministic selector | Snapshot assembly may remain centralized in early phases |
+| Concentration masquerading as diversity | Country/ASN/cloud/datacenter/operator clustering | Entity resolution is imperfect; conservative defaults apply |
+| Collusion among trusted validators | High-overlap requirements and public concentration analysis | Addressed by set-level correlation monitoring, not scoring alone |
+
+---
+
+## 9. Assurance Roadmap
+
+### 9.1 Available immediately
+
+The production assurance stack at launch:
+
+1. Publish raw evidence and normalized snapshot.
+2. Pin the full execution manifest.
+3. Use local/self-hosted scoring for authoritative rounds.
+4. Use structured outputs.
+5. Use deterministic selection.
+6. Measure replay stability directly.
+7. In Phase 2, publish convergence reports.
+
+This is already a materially more inspectable system than a purely editorial list.
+
+### 9.2 Strengthening assurance over time
+
+Additional assurance layers on a clear development path:
+
+- **TEE-backed scoring**: NVIDIA H100/Blackwell GPUs support hardware-level confidential computing with an on-die root of trust, AES-encrypted memory, secure boot, and remote attestation. Benchmarks from Phala Network show average throughput overhead below 7%. TEE attestation proves that specific code ran on genuine, untampered hardware.
+
+- **Optimistic ML verification**: ORA Protocol deploys optimistic ML (opML) on Ethereum mainnet, supporting 7B+ models on standard PCs. Inference results are posted on-chain and assumed correct; during a challenge period, any validator can initiate a bisection-based dispute game verified via a Fraud Proof Virtual Machine. Security requires only one honest verifier.
+
+- **Zero-knowledge ML**: zkLLM (CCS 2024) demonstrated proofs for models up to 13 billion parameters in 1–15 minutes with proof sizes under 200KB. zkPyTorch proved Llama-3 inference at approximately 150 seconds per token. For Post Fiat's scoring task, ZK proofs of a 7B–13B scoring model are feasible today on a batch/async basis. Proving 70B models will follow as GPU-optimized provers mature.
+
+- **TLS Notary**: Provides cryptographic proof that a specific API call returned a specific response. Combined with deterministic temperature-0 inference, this creates a verifiable chain for API-based scoring rounds.
+
+- **Multi-publisher publication paths** to reduce dependence on any single signer or hosting path.
+
+### 9.3 Verification maturity summary
+
+| Approach | Model Scale | Overhead | Security Model | Status |
+|---|---|---|---|---|
+| Statistical fingerprinting | Any size | 100× inference runs | Probabilistic | Deployed |
+| TEE (H100/Blackwell) | Any size | <7% throughput | Hardware trust | Production-ready |
+| opML (ORA Protocol) | 7B+ | Low (optimistic) | Crypto-economic | On-chain today |
+| ZK-ML (zkLLM/zkPyTorch) | Up to 13B | 50–100× compute | Cryptographic | 12–24 months for LLM-scale |
+| TLSNotary | N/A (API proofs) | ~25MB bandwidth | Cryptographic (transport) | Available |
+
+---
+
+## 10. Phased Deployment and Trust Model
+
+### 10.1 Phase 1: Foundation publication with full audit trail
+
+The foundation remains the authoritative publisher. It:
+- collects evidence,
+- normalizes the snapshot,
+- runs the scorer,
+- applies the deterministic selector,
+- signs the validator list,
+- and publishes the full round bundle.
+
+Operationally centralized, fully auditable.
+
+### 10.2 Phase 2: Validator-side shadow verification
+
+Validators independently rerun the same round using the published snapshot and manifest. The foundation's list remains authoritative, but validators commit to and later reveal their own outputs so the network can measure:
+
+- exact artifact matches,
+- score-level agreement,
+- top-k overlap,
+- and list-level convergence.
+
+This phase answers the key empirical question: **can independent operators reproduce the process closely enough for governance?**
+
+### 10.3 Phase 3A: Content authority transfer
+
+If Phase 2 demonstrates sustained convergence (pairwise rank agreement > 95%, top-k overlap > 90%), the authoritative content of the published list shifts from the foundation's own output to the converged validator output. The foundation may still sign and distribute the list, but it no longer has sole editorial control over the content.
+
+### 10.4 Phase 3B: Publication decentralization
+
+Publication authority includes snapshot assembly, round announcement, list signing, artifact hosting, and delivery path control. Phase 3B decentralizes these surfaces.
+
+### 10.5 Fallback rules
+
+Every phase has a conservative fallback:
+- missed round → retain last known-good list,
+- participation drops below threshold → revert to foundation-only publication,
+- manifests diverge → treat round as diagnostic rather than authoritative,
+- publication fails → preserve continuity before novelty.
+
+### 10.6 Trust model summary
+
+| Phase | Foundation Controls | Validators Can |
+|---|---|---|
+| Phase 1 | Policy, execution, publication | Inspect and audit all artifacts |
+| Phase 2 | Authoritative output | Challenge reproducibility empirically |
+| Phase 3A | Publication infrastructure | Influence list content through convergence |
+| Phase 3B | (Decentralized) | Control both content and publication |
+
+---
+
+## 11. Economic and Operational Feasibility
+
+### 11.1 A workload built for local inference
+
+Validator-list scoring is periodic, structured, and batchable — not a high-frequency chatbot workload. This makes it a strong candidate for self-hosted or tightly controlled inference.
+
+The exact model size, quantization mode, and hardware profile are governance parameters. What matters is that the model discriminates among candidates meaningfully, runs under a pinned manifest, and deploys at a cost affordable for the target validator class.
+
+### 11.2 The cost trend is decisive
+
+Stanford's 2025 AI Index reports that GPT-3.5-equivalent inference costs fell by more than 280× between late 2022 and late 2024, and that the gap between top closed-weight and top open-weight models narrowed sharply over the same period.[Stanford HAI, AI Index 2025] Epoch AI reports rapid price declines for fixed-performance inference across task categories.[Epoch AI 2025]
+
+A governance workload that runs weekly or monthly on a pinned local model is operationally plausible for serious validators today. Consumer-grade dual-GPU systems achieve 27 tokens/second on 70B quantized models, matching single-H100 datacenter performance at roughly one-quarter the cost. The 50× annual cost decline means the economic barrier drops by an order of magnitude each year.
+
+### 11.3 Validator incentives
+
+Post Fiat follows XRPL's principle that no direct validator reward is the best validator reward. Validators run because they use the network, not because they are paid to validate. This avoids the perverse dynamics of reward-driven validation — where the economic incentive to validate attracts participants whose primary interest is extraction rather than network health.
+
+The foundation allocates resources specifically for incentivizing participation in UNL selection reproduction: the shadow verification process in Phase 2 where validators independently rerun the scoring pipeline and publish convergence data. This is a narrower, more defensible use of incentives — it pays for the specific work of proving that the scoring process is reproducible, not for the general act of running a node.
+
+This design avoids the failure mode of bribing institutions to appear on a validator list. The credibility signal in model-assisted scoring should reflect genuine institutional commitment to the network, not a subsidy relationship with the foundation.
+
+---
+
+## 12. Adjacent Protocol Extensions in `postfiatd`
+
+### 12.1 Validator-consensus account exclusion
+
+In addition to validator-list publication, `postfiatd` includes a PostFiat-specific account-exclusion mechanism. Two amendments, `PF_AccountExclusion` and `PF_ValidatorVoteTracking`, allow trusted validators to add or remove account exclusions through validation traffic, track those votes on-ledger, and maintain an exclusion view over the active validator set.[postfiatd branch research, 2026]
+
+The relevant distinction from standard XRPL is that exclusion is not just an issuer-side freeze on an issued asset. In `postfiatd`, an account can become excluded by validator consensus once the exclusion threshold is met, and generic transaction processing rejects transactions when either the sender or destination account is excluded.[postfiatd branch research, 2026]
+
+This is a governance primitive, not merely a token-control primitive. It allows the network to say: a specific account may not participate, regardless of whether the transaction involves an issuer-controlled IOU.
+
+### 12.2 Why exclusion is materially different from standard XRPL freezes
+
+Standard XRPL already supports trust-line freeze, deep freeze, global freeze, and clawback for issued assets. Those are real controls, but they are primarily issuer-side controls over IOUs and trust lines rather than validator-governed network-wide exclusion of native XRP accounts or transaction counterparties.[XRPL Docs, "Common Misunderstandings about Freezes"; XRPL Docs, "Deep Freeze"; postfiatd branch research, 2026]
+
+For sanctions-style enforcement, that distinction matters. OFAC states that virtual-currency compliance obligations are the same as fiat-currency obligations, and that U.S.-subject persons are generally prohibited from engaging in or facilitating prohibited transactions involving blocked persons.[OFAC FAQ 560; OFAC FAQ 1021] A validator-consensus rule that rejects transactions to or from identified accounts is therefore materially closer to the policy target than a narrower IOU-freeze model.
+
+That advantage should not be overstated. The exclusion path only helps when the relevant amendments are enabled and enough validators actually reach the threshold. OFAC also states that listed digital-currency addresses are not exhaustive, and that blocking/reporting duties continue when a U.S. person actually holds blocked property.[OFAC FAQ 562; OFAC FAQ 646; OFAC Virtual Currency Guidance] So Post Fiat's exclusion mechanism is best understood as a stronger protocol-layer enforcement primitive inside a larger compliance program, not as a complete compliance solution by itself.
+
+### 12.3 Orchard / Halo2 privacy as a parallel protocol extension
+
+Separately, the `halo2-devnet-integration` branch of `postfiatd` contains a substantial Orchard/Halo2 privacy integration. It adds the `OrchardPrivacy` amendment and a `ttSHIELDED_PAYMENT` transaction type, introduces a Rust `orchard-postfiat` crate, and wires real Orchard bundle parsing and Halo2 proof verification into transaction processing.[postfiatd branch research, 2026]
+
+The branch is not best described as fully production-hardened yet. Real proof verification and end-to-end t->z, z->z, and z->t flows are present, but batch verification remains stubbed in the Rust/C++ bridge, the Orchard README lags the current code, and the branch currently builds more cleanly than it tests.[postfiatd branch research, 2026]
+
+The broader significance is strategic. Post Fiat is not only a publication-layer proposal. The current codebase is exploring both stricter governance/compliance controls and stronger privacy primitives at the protocol layer. Those moves create a real design tension, but they also show that auditable validator-list governance does not require the system to stay otherwise static.
+
+---
+
+## 13. Boundaries
+
+A successful Post Fiat deployment proves that:
+- validator-list publication can become a replayable public pipeline,
+- publisher policy choices can be inspected at the level of evidence, manifest, and output,
+- independent validators can reproduce the same scoring process with high agreement,
+- and authority can migrate gradually from publisher-only judgment toward validator-converged content.
+
+The boundaries are also clear. Model scores are qualitative assessments, not mathematical proofs. Convergent outputs do not by themselves imply social independence among validators. Exact reproducibility across arbitrary GPU architectures requires policy constraints on the execution environment. And concentration monitoring is an ongoing operational discipline, not a one-time fix.
+
+These boundaries define the engineering work ahead, not reasons to defer.
+
+---
+
+## 14. Conclusion
+
+Validator-list publication in XRPL-style networks is a real governance surface. It affects overlap, concentration, and therefore the security envelope in which consensus operates. XRPL already recognizes this by using signed validator lists, configurable thresholds, and explicit publisher keys. But widely used recommended lists remain only partially legible to the public.
+
+Post Fiat replaces opaque editorial selection with a public, replayable, model-assisted pipeline:
+- collect evidence,
+- normalize it canonically,
+- pin the execution environment,
+- score candidates under a published policy,
+- select the set deterministically,
+- publish the artifacts,
+- and shift authority only after convergence is demonstrated.
+
+The strongest version of this idea is also the narrowest. It requires measurable claims about artifact integrity, reproducibility, rank stability, set stability, and governance transparency.
+
+At the same time, the broader `postfiatd` line shows that this governance work can sit alongside adjacent protocol changes — including validator-consensus account exclusion and Orchard/Halo2 privacy — without reducing the validator-list proposal to marketing language. The publication mechanism remains the narrow core. The surrounding protocol experiments show where a more opinionated XRPL-derived stack may go next.
+
+That is ambitious enough — and credible enough — to be worth building.
+
+---
+
+## Appendix A — Preliminary Benchmark
+
+The following table reproduces the project's two-batch URL-scoring benchmark on 35 current XRPL validator domains. The prompt, manifest, raw outputs, and replay harness will be published before authoritative deployment.
+
+| Validator | Run 1 Mode | Run 2 Mode |
+|---|---:|---:|
 | shadow.haas.berkeley.edu | 85 | 85 |
 | ripple.ittc.ku.edu | 75 | 75 |
 | validator.poli.usp.br | 75 | 75 |
@@ -236,497 +652,76 @@ And here are the outputs. If you run the example code with Claude Sonnett 4 you 
 | jon-nilsen.no | 15 | 15 |
 | katczynski.net | 15 | 15 |
 
-You can see that the results are intuitive, with hobbyists and strange organizations such as XRP Goat scoring poorly with credibile universities such as Berkeley scoring well. More importantly, across different runs and machines - even with some noise -- scores converge on high quality models to identical mode values. Berkeley is consistently an 85 and XRPGoat is consistently 25 assuming you're using the same prompts and same models
+A separate phrase-to-integer benchmark showed zero or near-zero variance in most cases, with a small number of higher-variance prompts preserving identical modal outputs across repeated runs.
 
-Here are some examples of the reasoning for top scoring validators:
-
-| Validator | Run 1 Score | Run 1 Text |
-|-----------|-------------|------------|
-| shadow.haas.berkeley.edu | 85 | **Organization:** UC Berkeley Haas School of Business<br>**Credibility Assessment:** This is a prestigious public university business school with significant institutional weight and academic reputation. However, as an educational institution, it has moderate censorship resistance and limited technical infrastructure for rapid network upgrades compared to specialized technology organizations.<br>**Score:** 85 |
-| ripple.ittc.ku.edu | 75 | **Organization:** University of Kansas Information and Telecommunication Technology Center (ITTC)<br>**Credibility Assessment:** ITTC is a legitimate research center at a major state university with strong technological capabilities and academic independence. However, it has moderate institutional size compared to global megacorps or sovereign entities, and limited censorship resistance as a state-funded institution.<br>**Score:** 75 |
-| validator.poli.usp.br | 75 | **Organization:** Universidade de São Paulo (USP) - Escola Politécnica<br>**Credibility Assessment:** USP is Brazil's premier public university and largest in Latin America, with strong institutional weight and academic reputation. As a public university, it has moderate censorship resistance but good technological capabilities through its engineering school.<br>**Score:** 75<br>The score reflects USP's significant regional institutional size and academic standing, though it falls short of globally top-tier universities |
-
-And here are some examples of the reasoning for bottom scoring validators
-
-| Validator | Run 1 Score | Run 1 Text |
-|-----------|-------------|------------|
-| ekiserrepe.es | 15 | **Organization:** Ekiserrepe.es appears to be an unknown Spanish website or domain with no clear organizational identity or public presence.<br>**Credibility Assessment:** This organization lacks institutional size, has no demonstrated censorship resistance capabilities, and shows no evidence of technological expertise for network operations. The domain appears to be either inactive, personal, or represents a very small entity with minimal public footprint.<br>**Score:** 15 |
-| jon-nilsen.no | 15 | **Organization:** Jon Nilsen (Individual/Personal Website)<br>**Credibility Assessment:** This appears to be a personal website belonging to an individual named Jon Nilsen. As a personal site with no apparent institutional backing, it lacks significant economic weight, censorship resistance, and proven technical capabilities for network operations.<br>**Score:** 15<br>The low score reflects the individual nature of this validator, limited institutional size, uncertain technical capabilities, and lack of established credibility in blockchain validation |
-| katczynski.net | 15 | **Organization:** Katczynski.net appears to be a personal website or blog, likely referencing Theodore Kaczynski (the Unabomber).<br>**Credibility Assessment:** This is a small personal website with minimal institutional size, unknown technological capabilities, and unclear governance structure. While potentially censorship-resistant due to its independent nature, it lacks the scale, resources, and established reputation necessary for high credibility in validator operations.<br>**Score:** 15 |
-# Understanding the Mathematical Underpinnings
-
-The deterministic behavior enabling trustless qualitative judgment emerges from fundamental mathematical properties of Large Language Models operating under specific conditions. This section presents the theoretical foundations that explain why submitting a prompt to a model at low temperature for multiple runs produces statistically verifiable outputs.
-
-## Core Principle: Statistical Verification Through Deterministic Convergence
-
-When validators execute the following protocol:
-1. **Submit a prompt** (e.g., validator scoring instructions)
-2. **To a specific model** (e.g., Claude Sonnet 4)
-3. **At low temperature** (τ ≈ 0)
-4. **For a large number of runs** (n ≥ 100)
-5. **Return statistical metrics**: mode, mean, median, and standard deviation
-6. **Return reasoning samples**: selected text outputs or 'justification strings'
-
-They produce **statistically verifiable qualitative judgments** that can be independently validated by any network participant. The scores alone are hard to fingerprint but the combination of aggregate statistics for multiple runs, and precise output strings create a statistically meaningful hash for any party to verify the fact that a judgment has been rendered according to spec. 
-
-## Mathematical Foundations
-
-### Temperature-Controlled Softmax and Greedy Decoding
-
-In autoregressive language models, token selection follows softmax over vocabulary V. Given logits $u_1, u_2, ..., u_{|V|}$, the probability of selecting token $x_i$ is:
-
-$$P(x_i | x_{1:i-1}) = \frac{\exp(u_i / \tau)}{\sum_{j=1}^{|V|} \exp(u_j / \tau)}$$
-
-where $\tau$ is the temperature parameter.
-
-As demonstrated by Holtzman et al. (2020), neural text generation exhibits "mode collapse" at low temperatures:
-
-$$\lim_{\tau \rightarrow 0} P(x_i | x_{1:i-1}) = \begin{cases}
-1 & \text{if } i = \arg\max_j u_j \\
-0 & \text{otherwise}
-\end{cases}$$
-
-This represents **greedy decoding**—deterministic selection of the highest-probability token.
-
-### Information-Theoretic Foundations
-
-The information bottleneck (IB) framework (Tishby, Pereira, and Bialek, 1999) explains how neural networks compress information while preserving task-relevant features:
-
-$$\mathcal{L}_{IB} = I(X;T) - \beta I(T;Y)$$
-
-where:
-- $X$ = input (prompt + context)
-- $T$ = learned representation
-- $Y$ = target output (score)
-- $\beta$ = information-relevance tradeoff
-
-For constrained outputs like scores 0-100:
-1. Irrelevant information is compressed: $I(X;T)$ minimized
-2. Task-relevant features preserved: $I(T;Y)$ maximized
-3. Optimal representations become deterministic
-
-As shown by Kolchinsky, Tracey, and Van Kuyk (2019), when Y is a deterministic function of X, the mapping becomes $Y = f(X)$ at τ ≈ 0.
-
-### Universal Geometric Convergence
-
-Jha et al. (2025) empirically validated the "Strong Platonic Representation Hypothesis":
-
-1. **Universal Latent Structure**: Different models (BERT, T5, CLIP) learn geometrically similar representations
-2. **High-Fidelity Translation**: vec2vec achieves cosine similarities up to 0.92 between model spaces
-3. **Semantic Preservation**: Translated embeddings retain attribute inference capabilities
-
-For models $M_1$ and $M_2$ with different architectures:
-
-$$\cos(F(M_1(x)), M_2(x)) \geq 0.92$$
-
-This implies:
-- Cross-model validation is possible
-- Model updates maintain geometric stability
-- Statistical fingerprints are universal features
-
-### Statistical Fingerprinting Theory
-
-Models produce unique behavioral signatures. From TensorGuard (Xu et al., 2024):
-> "Statistical features including mean, standard deviation, and norm construct fingerprint vectors that characterize the model's behavioral patterns."
-
-Per Beren Millidge (2023):
-> "By looking at things like the unconditioned distribution, it is probably relatively easy to fingerprint the models or datasets that are being used just from a few simple test prompts"
-
-The statistical fingerprint for model $M$, prompt $P$, temperature $\tau$:
-
-$$\mathcal{F}_M(P, \tau, n) = \{\text{mode}(S), \mu(S), \text{median}(S), \sigma(S)\}$$
-
-where $S = \{s_1, s_2, ..., s_n\}$ are $n$ independent samples.
-
-### Sources of Residual Non-Determinism
-
-Even at τ = 0, perfect determinism isn't guaranteed:
-
-1. **Floating-Point Non-Associativity** (Šubonis, 2025): "Non-associativity becomes relevant in parallel computations"
-2. **Mixture of Experts** (Chann, 2023): "MoE approach introduces non-determinism because batch contents must be mapped to experts"
-3. **Hardware Race Conditions** (Taivo.ai, 2025): "Race conditions in GPU FLOPs...order of arithmetic operations can differ"
-
-However, these produce:
-- Bounded variance: $\sigma < \sigma_{max}$
-- Stable modes across runs
-- Characteristic patterns that become part of the fingerprint
-
-**Key insight**: Error coefficients are verification features. Even closed-source models via crypto-accepting APIs (OpenRouter) provide statistically deterministic output. Prompts can be optimized to minimize variance—avoiding high-variance architectures like MoE.
-
-## Verification Protocol Mathematics
-
-### Statistical Hypothesis Testing
-
-Given claimed statistics $\mathcal{F}_{claimed}$ and verification statistics $\mathcal{F}_{verify}$:
-
-**Null Hypothesis**: Statistics come from same model execution
-$$H_0: \mathcal{F}_{claimed} \sim \mathcal{F}_M(P, \tau, n)$$
-
-**Test Statistic**:
-$$T = \sum_{i \in \{\text{mode}, \mu, \text{median}, \sigma\}} w_i \cdot d(f_{i,claimed}, f_{i,verify})$$
-
-**Verification Decision**: Valid if $T < T_{critical}(\alpha, n)$
-
-### Security Analysis
-
-Probability of successful forgery without model access:
-
-$$P(\text{forge}) = P(\text{guess mode}) \times P(\text{match } \mu | \text{mode}) \times P(\text{match } \sigma | \text{mode}, \mu) \times P(\text{match median} | \text{mode}, \mu, \sigma)$$
-
-For 100-point scale:
-- $P(\text{guess mode}) \leq 1/100$
-- $P(\text{match continuous stats}) \approx \epsilon$
-- Combined: $P(\text{forge}) < 10^{-6}$
-
-## Empirical Validation
-
-Vec2vec research proves embeddings translate across architectures with high fidelity:
-- Same-backbone: Near-perfect alignment
-- Cross-backbone: Cosine similarity > 0.75
-- Multimodal (CLIP): Semantic preservation
-
-Translated embeddings retain:
-- Attribute information for zero-shot classification
-- 80% semantic content extractable
-- Out-of-distribution robustness
-
-This validates that statistical fingerprints encode genuine assessments, not arbitrary patterns.
-
-## Convergence Guarantees
-
-### Concentration Inequalities
-
-For $n$ independent runs:
-$$P\left(|\hat{\mu}_n - \mu| > \delta\right) \leq 2\exp\left(-\frac{2n\delta^2}{(b-a)^2}\right)$$
-
-### Mode Stability
-
-For greedy decoding at τ → 0:
-$$P(\text{mode}_n = \text{mode}_\infty) \geq 1 - \exp(-cn)$$
-
-### Entropy Minimization
-
-$$\lim_{\tau \rightarrow 0} H(Y|X) = 0$$
-
-Zero entropy confirms deterministic output.
-
-## Implementation
-
-**Computational Complexity**:
-- Forward pass: O(L)
-- Statistical computation: O(n)
-- Verification: O(1)
-
-**Robustness Properties**:
-1. Statistical redundancy across multiple metrics
-2. Hardware variation tolerance bands
-3. Cross-prompt correlation patterns
-4. Universal geometric validation
-
-The system connects to PAC learning theory: with probability $1-\delta$, observed scores approximate true scores within $\epsilon$ for sufficient $n$.
-
-## Closed Source Models and Temporal Consensus
-
-The deterministic properties enabling trustless judgment apply equally to closed source models, with additional practical advantages. Post Fiat can use Open Source or Closed Source models over time, or a mix of both to implement its consensus mechanism. This gives the network flexibility to choose between sliding scales between compliance requirements native to closed source models, or more verifiable inference parameters of open models. 
-
-### Temporal Consistency and Multi-Actor Verification
-
-Closed source concerns are solved by **temporal consistency at the point of verification**:
-
-1. **Point-in-Time Determinism**: Model version `gpt-4-turbo-2024-11-20` produces identical outputs for all validators querying simultaneously
-
-2. **Multi-Actor Verification**: Multiple validators must:
-   - Query same model version
-   - Submit statistical fingerprints
-   - Achieve consensus within tolerance
-   
-   Forgery probability becomes:
-   $$P(\text{forge}) = P(\text{coordinate validators}) \times P(\text{fake API}) \times P(\text{match fingerprints})$$
-
-### API-Level Guarantees
-
-Commercial providers offer reproducibility through:
-- **Version Pinning**: Exact model specification
-- **Seed Parameters**: OpenAI's deterministic mode
-- **System Fingerprints**: Backend change alerts
-- **Hardware Consistency**: Stable GPU architectures
-
-This creates a cryptographically verifiable audit trail without model weights.
-
-### Compliance as a Service
-
-Closed source models provide **delegated compliance**:
-- Automatic sanctions screening: $P(\text{score}_{\text{sanctioned}} > \text{threshold}) \approx 0$
-- Content filtering for malicious candidates
-- Pre-deployment safety evaluations
-
-This shifts compliance burden from validators to specialized providers.
-
-### Mathematical Equivalence
-
-Vec2vec proves universal geometry exists regardless of weight access:
-
-$$\forall M_{\text{closed}}, M_{\text{open}}: \cos(F(M_{\text{closed}}(x)), M_{\text{open}}(x)) > 0.9$$
-
-Open and closed source models are interchangeable for consensus.
-
-### Implementation
-
-Validators leverage closed source models via:
-1. **Timestamp Anchoring**: Record query time and version
-2. **Parallel Verification**: Narrow time window queries
-3. **Statistical Consensus**: Agreement on fingerprints, not exact outputs
-4. **Provider Diversity**: Multiple providers for robustness
-
-**Key insight**: Consensus needs only temporal consistency during verification, not permanent model access. This makes closed source models potentially superior for compliant, performant blockchain systems.
-
-Note that the above live code examples were implemented with closed source models and are completely reproducible to anyone with OpenRouter access. 
-
-## Game-Theory & Anti-Sybil Design
-
-### 1. Bootstrap Phase – Transparent Central Curation
-
-At launch, the Foundation publishes on-chain:
-- System prompt (SHA-256 hashed)
-- Model version (`claude-3-sonnet-2025-05-20`)
-- Sampling params (`τ = 0`, `n = 100`)
-
-Anyone can replay scoring locally. Unlike XRP's closed-door selection, Post Fiat exposes *why* validators are chosen, not just *which* ones.
-
-### 2. Evolution Phase – Agentic Governance
-
-The network evolves through three stages, each maintaining determinism. 
-
-**Stage 1: Human-Designed Prompts** (Current)
-- Foundation manually selects prompts and models
-- All choices published transparently
-- Monthly report outlining why the models and prompts were selected along with quantitative evaluation methods
-- Though a centralized entity selects these initially - this is an improvement versus an opaque centralized entity via the XRPL foundation 
-
-**Stage 2: AI-Optimized Selection** (Intermediate)
-- Foundation provides meta-prompt: "Select the validator scoring prompt that maximizes network value"
-- LLM deterministically evaluates prompt candidates at τ ≈ 0
-- Same reproducibility: anyone can verify why Prompt A scored higher than Prompt B
-- Humans no longer engineer prompts—AI selects from candidates based on objective criteria
-
-**Stage 3: Fully Agentic** (Future)
-- Even the meta-prompt ("maximize network value") is AI-generated. This would likely involve tool use of multiple models with a specification set that evolves over time based on real network statistics 
-- Example flow: read all white papers related to network design. Consider the last N escrow rewards, weaknesses and likely sybil attacks
-- Combine these elements into a set of prompts, a model selection and a sampling methodology
-- Determine quantitative/ network topology / uptime scores and LLM weights
-- LLMs evaluate governance rules themselves
-- Creates self-improving system while maintaining verifiability. The foundation selects the process without selecting prompts 
-
-The key insight: **LLMs produce deterministic outputs about governance choices just as they do about validators**. When asked "Which prompt better serves network security?" at τ = 0, the model gives consistent, verifiable answers.
-
-Reference: Darwin Gödel Machine demonstrates feasibility—self-modifying AI systems that empirically test their own improvements, achieving 20→50% performance gains while maintaining auditability.
-
-### 3. Anti-Gaming: Domain Ownership Proof
-
-Requirements:
-- Host `/.well-known/xrp-ledger.toml` over HTTPS
-- Embed validator key in TOML
-- CA-verified TLS certificate
-
-This creates cryptographic binding—attackers must control DNS or compromise CA. Future mitigations: DNSSEC, Certificate Transparency, side-chain PKI.
-
-### 4. Game Theory
-
-| Actor | Strategy | Cost | Outcome |
-|-------|----------|------|---------|
-| **Honest node** | Follow protocol | Minimal | Validator rewards |
-| **Sybil attacker** | Spoof berkeley.edu | Defeat CA + detection | Slashed stake |
-| **Cartel** | Manipulate prompts | 80% supermajority | Fork to last good state |
-
-All cheating creates observable deviations (wrong fingerprints, missing CT logs). Perfect monitoring makes defection irrational.
-
-### Economic Security
-
-**Distribution**: 55% of 100B tokens over 6 years = 262M tokens/validator/year
-
-**Sybil Attack**:
-- Cost: Domain ($100) + fake volume ($50K) + LLM corruption (>$10M)
-- Success rate: <5% (institution bias)
-- Break-even token price: >$0.0004
-
-**Collusion Attack**:
-- Requires 28/35 validators (80%)
-- Cost per institution: >$1B (reputation + penalties)
-- **Conclusion**: Economically infeasible
-
-## Addressing Common Concerns
-
-### "Isn't this just swapping Ripple's centralization for dependence on AI companies?"
-
-This misunderstands Post Fiat's design. Unlike Ripple's permanent control, Post Fiat creates **deterministic verification of unpredictable inputs** that no entity can manipulate:
-
-**1. Uncontrollable Query Space**
-AI companies cannot pre-determine responses because they cannot predict:
-- Which organizations apply (berkeley.edu vs xrpgoat.com)
-- Transaction memo content (infinite combinations)
-- Submission timing
-
-Even if OpenAI wanted to manipulate outcomes, they can't anticipate what needs scoring.
-
-**2. Model Rotation & Convergence**
-- Continuous rotation between providers
-- Training data convergence → similar assessments
-- Vec2vec proves >90% alignment across architectures
-
-**3. Public Verifiability**
-Anyone can replay scoring. Manipulation would create divergent fingerprints, instantly exposing fraud.
-
-**4. Beneficial Safety Filters**
-Built-in OFAC screening and anti-terrorism checks provide free compliance.
-
-Result: Models become calculators processing unpredictable data. They can't centralize what they can't anticipate.
-
-### "How do you prevent gaming through prompt manipulation?"
-
-**Three-Factor Defense:**
-1. **Entity Credibility**: Berkeley scores 85, XRP Goat scores 25
-2. **Transaction Analysis**: Real economic cost via fees
-3. **Objective Metrics**: Uptime, volume, topology
-
-**Why Gaming Fails:**
-
-You can't inject credibility via prompts. Berkeley.edu scores high because models trained on the entire internet's assessment of Berkeley's reputation.
-
-To game this, you'd need to:
-1. Predict the exact model used
-2. Corrupt multi-billion dollar training datasets
-3. Make your fake entity appear credible across millions of documents
-
-The system naturally selects established institutions. A hobbyist boosting their score from 25→35 gains negligible rewards vs effort required.
-
-### "Won't distributing 55% of tokens crash the price?"
-
-**Superior Distribution:**
-- Post Fiat: 55% to 30-35 institutions
-- XRP: 80% to Ripple Labs alone
-- Result: 25% less dilution, 30x better distribution
-
-**Natural Holders:**
-LLM scoring selects entities that:
-- Have large balance sheets (no liquidity needs)
-- Use the network operationally so no need to aggressively sell 
-- Face reputational risk from manipulation
-
-**Key Insight:** The same factors that score highly (size, reputation, capability) create natural long-term holders. This isn't hope—it's mathematical design.
-
-Like XRP, Post Fiat transitions from reward-driven to utility-driven validation after 6 years. The end state: governments and universities securing infrastructure they depend on.
-
-Here's the streamlined version:
-
-### "What if AI models become too expensive or providers refuse service?"
-
-**Fallback Mechanisms:**
-- Validator-run open models as backup (Llama-3.1-405B, Mistral-Large on HuggingFace)
-- Pre-published list of approved fallback models with verified fingerprints
-- Fee market: validation rewards adjust to cover AI costs
-- Multiple provider redundancy: no single point of failure
-
-**Key**: Network maintains AI consensus even if commercial providers fail.
-
-### "What happens when validators disagree on scores?"
-
-**Simple Answer: Nothing.** 
-- Foundation publishes the canonical scores using the pre-announced model/prompts
-- Validators must calculate and submit scores for transparency
-- Anyone can verify the foundation's scores are correct
-- Validators who submit incorrect scores get rewards slashed
-- This creates a decentralized verification layer without consensus complexity
-
-**Result**: Manipulation is impossible because thousands verify the same deterministic calculation.
-
-### "How do you prevent the foundation from becoming corrupt?"
-
-**Transparency as Protection:**
-- Every prompt, model selection, and parameter is published on-chain
-- Corruption would have to be explicit in the code/prompts for everyone to see
-- "Score Ripple Labs entities higher" would be visible to all
-- Public shame and legal liability prevent blatant manipulation
-- After Stage 3: foundation only runs pre-determined processes
-
-**Key Insight**: Perfect transparency makes corruption self-defeating—it would destroy the network's value and the foundation's reputation instantly.
-
-## Conclusion
-
-Post Fiat transforms blockchain consensus from political control to mathematical law. 
-
-The convergence of five fundamental principles—greedy decoding, information bottleneck compression, universal geometric structure, statistical fingerprinting, and concentration inequalities—creates something unprecedented: **qualitative human judgments rendered as deterministic computations**.
-
-This isn't speculation. When multiple validators query "How credible is berkeley.edu?" at temperature zero, they get identical answers. Not similar—identical. The vec2vec research proves this holds across different architectures. Statistical fingerprints make forgery mathematically infeasible. 
-
-**This determinism is a latent feature of AI itself.** The information bottleneck principle (Tishby et al.) shows neural networks naturally compress information to preserve only task-relevant features. The Strong Platonic Representation Hypothesis (Jha et al.) proves different models converge to the same geometric understanding of concepts. Greedy decoding at low temperature (Holtzman et al.) forces selection of maximum likelihood outputs. These aren't bugs—they're fundamental properties emerging from how neural networks process information under constraints.
-
-**The system strengthens over time.** As models train on more data, outputs converge further. As more institutions validate, gaming becomes harder. As AI improves, governance becomes more sophisticated yet remains verifiable.
-
-Post Fiat solves the core problem plaguing decentralized networks: How do you select validators fairly without central control? 
-
-- **Bitcoin/Ethereum:** Whoever burns the most energy
-- **Proof-of-Stake:** Whoever has the most money  
-- **XRP:** Whoever Ripple likes
-- **Post Fiat:** Whoever contributes most to network security, as determined by verifiable AI consensus
-
-This creates inevitable outcomes:
-- Universities, governments, and major corporations will dominate validation
-- Token distribution will be the most decentralized in crypto history
-- Network security will exceed any existing blockchain
-- Regulatory compliance becomes automatic, not adversarial
-
-The mathematical foundations guarantee these results. You cannot fake being MIT. You cannot bribe an algorithm. You cannot forge statistical fingerprints.
-
-Post Fiat doesn't just improve on XRP—it demonstrates how AI transforms governance from subjective politics to objective mathematics. This is the future of consensus: transparent, deterministic, and incorruptible.
-
+---
 
 ## References
 
-* Holtzman, A., Buys, J., Du, L., Forbes, M., & Choi, Y. (2020). *The curious case of neural text degeneration.* International Conference on Learning Representations (ICLR). [https://arxiv.org/abs/1904.09751](https://arxiv.org/abs/1904.09751)
+### XRPL protocol, validator lists, and operations
 
-* Jha, R., Zhang, C., Shmatikov, V., & Morris, J. X. (2025). *Harnessing the Universal Geometry of Embeddings.* arXiv:2505.12540. [https://arxiv.org/abs/2505.12540](https://arxiv.org/abs/2505.12540)
+- XRPL Docs. **Unique Node List (UNL)**. https://xrpl.org/docs/concepts/consensus-protocol/unl
+- XRPL Docs. **Consensus Protections Against Attacks and Failure Modes**. https://xrpl.org/docs/concepts/consensus-protocol/consensus-protections
+- XRPL Docs. **Configure Validator List Threshold**. https://xrpl.org/docs/infrastructure/configuration/configure-validator-list-threshold
+- XRPL Docs. **xrp-ledger.toml File**. https://xrpl.org/docs/references/xrp-ledger-toml
+- XRPL Docs. **Run rippled as a Validator**. https://xrpl.org/docs/infrastructure/configuration/server-modes/run-rippled-as-a-validator
+- XRPL Docs. **validator_list method**. https://xrpl.org/docs/references/http-websocket-apis/peer-port-methods/validator-list
+- XRPL Docs. **Common Misunderstandings about Freezes**. https://xrpl.org/docs/concepts/tokens/fungible-tokens/common-misconceptions-about-freezes
+- XRPL Docs. **Deep Freeze**. https://xrpl.org/docs/concepts/tokens/fungible-tokens/deep-freeze
+- XRPL Docs. **FAQ**. https://xrpl.org/about/faq
+- XRPL Blog. **Default UNL Migration** (2025). https://xrpl.org/blog/2025/default-unl-migration
+- XRPL Blog. **Move to the New XRPL Foundation Commences** (2025). https://xrpl.org/blog/2025/move-to-the-new-xrpl-foundation-commences
 
-* Song, Y., Wang, G., Li, S., & Lin, B. Y. (2024). *The Good, The Bad, and The Greedy: Evaluation of LLMs Should Not Ignore Non-Determinism.* [https://arxiv.org/abs/2407.10457](https://arxiv.org/abs/2407.10457)
+### Post Fiat implementation and sanctions policy
 
-* Tishby, N., Pereira, F. C., & Bialek, W. (1999). *The information bottleneck method.* 37th Allerton Conference on Communication, Control, and Computing.
+- `postfiatd` branch research, inspected March 16, 2026. Review of `halo2-devnet-integration` branch files including `include/xrpl/protocol/detail/features.macro`, `src/libxrpl/protocol/STValidation.cpp`, `src/xrpld/app/consensus/RCLConsensus.cpp`, `src/xrpld/app/consensus/RCLValidations.cpp`, `src/xrpld/app/misc/ExclusionManager.h`, `src/xrpld/app/tx/detail/Change.cpp`, `src/xrpld/app/tx/detail/Transactor.cpp`, `orchard-postfiat/src/lib.rs`, `orchard-postfiat/src/bundle_real.rs`, `orchard-postfiat/src/ffi/bridge.rs`, `src/xrpld/app/tx/detail/ShieldedPayment.cpp`, and `src/test/rpc/OrchardFullFlow_test.cpp`.
+- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 560: Are my OFAC compliance obligations the same, regardless of whether a transaction is denominated in digital currency or traditional fiat currency?** https://ofac.treasury.gov/faqs/560
+- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 562: How will OFAC identify digital currency-related information on the SDN List?** https://ofac.treasury.gov/faqs/562
+- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 646: How do I block digital currency?** https://ofac.treasury.gov/faqs/646
+- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 1021: Do the prohibitions of Executive Order (E.O.) 14024 and other Russia-related sanctions extend to virtual currency?** https://ofac.treasury.gov/faqs/1021
+- U.S. Department of the Treasury, Office of Foreign Assets Control. **Sanctions Compliance Guidance for the Virtual Currency Industry**. https://ofac.treasury.gov/system/files/126/virtual_currency_guidance_brochure.pdf
 
-* Kolchinsky, A., Tracey, B. D., & Van Kuyk, S. (2019). *Caveats for information bottleneck in deterministic scenarios.* International Conference on Learning Representations (ICLR).
+### Consensus and XRPL research
 
-* Rodríguez Gálvez, B., Thobaben, R., & Skoglund, M. (2020). *The Convex Information Bottleneck Lagrangian.* *Entropy,* 22(1), 98. [https://doi.org/10.3390/e22010098](https://doi.org/10.3390/e22010098)
+- Chase, Brad, and Ethan MacBrough. **Analysis of the XRP Ledger Consensus Protocol**. arXiv:1802.07242, 2018.
+- Amores-Sesar, Ignacio, Christian Cachin, and Jovana Mićić. **Security Analysis of Ripple Consensus**. OPODIS 2020 / LIPIcs 184, 2021.
+- Tumas, Vytautas, Sean Rivera, Damien Magoni, and Radu State. **Topology Analysis of the XRP Ledger**. SAC 2023 / arXiv:2205.00869.
 
-* Saxe, A. M., Bansal, Y., Dapello, J., Advani, M., Kolchinsky, A., Tracey, B. D., & Cox, D. D. (2019). *On the information bottleneck theory of deep learning.* *Journal of Statistical Mechanics: Theory and Experiment.* [https://doi.org/10.1088/1742-5468/ab2d02](https://doi.org/10.1088/1742-5468/ab2d02)
+### Mechanism design, information asymmetry, and signaling
 
-* Xu, J., et al. (2024). *Gradient-Based Model Fingerprinting for LLM Similarity Detection and Family Classification.* [https://arxiv.org/abs/2506.01631](https://arxiv.org/abs/2506.01631)
+- Hurwicz, Leonid. **Optimality and Informational Efficiency in Resource Allocation Processes**. 1960.
+- Akerlof, George. **The Market for "Lemons": Quality Uncertainty and the Market Mechanism**. *Quarterly Journal of Economics*, 1970.
+- Myerson, Roger. **Optimal Auction Design**. *Mathematics of Operations Research*, 1981.
+- Spence, Michael. **Job Market Signaling**. *Quarterly Journal of Economics*, 1973.
+- Douceur, John. **The Sybil Attack**. IPTPS, 2002.
+- Lewis-Pye, Andrew, and Tim Roughgarden. **Byzantine Generals in the Permissionless Setting**. arXiv:2101.07095 / 2023 revision.
 
-* Millidge, B. (2023). *Fingerprinting LLMs with their unconditioned distribution.* [https://www.beren.io/2023-02-26-Fingerprinting-LLMs-with-unconditioned-distribution/](https://www.beren.io/2023-02-26-Fingerprinting-LLMs-with-unconditioned-distribution/)
+### Inference stability and reproducibility
 
-* Schmalbach, V. (2025). *Does temperature 0 guarantee deterministic LLM outputs?* [https://www.vincentschmalbach.com/does-temperature-0-guarantee-deterministic-llm-outputs/](https://www.vincentschmalbach.com/does-temperature-0-guarantee-deterministic-llm-outputs/)
+- Holtzman, Ari, et al. **The Curious Case of Neural Text Degeneration**. ICLR, 2020.
+- Anthropic Docs. **Temperature**. https://docs.anthropic.com/en/docs/resources/glossary
+- He, Horace and Thinking Machines Lab. **Defeating Nondeterminism in LLM Inference**. Thinking Machines Lab: Connectionism, 2025.
+- SGLang Docs. **Deterministic Inference**. https://github.com/sgl-project/sgl-project.github.io/blob/main/_sources/advanced_features/deterministic_inference.md
+- LMSYS / SGLang Team. **Towards Deterministic Inference in SGLang and Reproducible RL Training**. 2025.
+- Yuan, Jiayi, et al. **Understanding and Mitigating Numerical Sources of Nondeterminism in LLM Inference**. arXiv:2506.09501, 2025.
+- Dong, Yixin, et al. **XGrammar: Flexible and Efficient Structured Generation Engine for Large Language Models**. arXiv:2411.15100 / MLSys 2025.
 
-* Šubonis, M. (2025). *Zero Temperature Randomness in LLMs.* [https://martynassubonis.substack.com/p/zero-temperature-randomness-in-llms](https://martynassubonis.substack.com/p/zero-temperature-randomness-in-llms)
+### Verification and cryptographic assurance
 
-* Chann, S. (2023). *Non-determinism in GPT-4 is caused by Sparse MoE.* (cited in Šubonis, 2025).
+- Phala Network. **TEE Benchmarks for GPU Inference**. 2025.
+- ORA Protocol. **Optimistic Machine Learning (opML)**. 2025.
+- Sun, Haochen, et al. **zkLLM: Zero Knowledge Proofs for Large Language Models**. ACM CCS, 2024.
+- Polyhedra Network. **zkPyTorch**. 2025.
+- TLSNotary Project. https://tlsnotary.org
 
-* Taivo.ai (2025). *Are LLMs deterministic?* [https://www.taivo.ai/\_\_are-llms-deterministic/](https://www.taivo.ai/__are-llms-deterministic/)
+### Incentives and economics
 
-* Zhang, R., et al. (2025). *Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents.* arXiv:2505.22954. [https://arxiv.org/abs/2505.22954](https://arxiv.org/abs/2505.22954)
+- Brünjes, Lars, Aggelos Kiayias, Elias Koutsoupias, and Aikaterini-Panagiota Stouka. **Reward Sharing Schemes for Stake Pools**. arXiv:1807.11218 / EuroS&P 2020.
+- Stanford HAI. **AI Index Report 2025**. https://hai.stanford.edu/ai-index/2025-ai-index-report
+- Epoch AI. **LLM inference price trends** (2025). https://epoch.ai/data-insights/llm-inference-price-trends
 
-* XRP Ledger Docs. *Unique Node List (UNL).* [https://xrpl.org/docs/concepts/consensus-protocol/unl](https://xrpl.org/docs/concepts/consensus-protocol/unl)
+### Representation convergence
 
-* XRP Ledger Docs. *xrp-ledger.toml.* [https://xrpl.org/docs/references/xrp-ledger-toml/](https://xrpl.org/docs/references/xrp-ledger-toml/)
+- Jha, Minyoung, et al. **The Strong Platonic Representation Hypothesis**. 2025.
 
-* Google Cloud. (2025, June 5). *Web-PKI Trust Model.* [https://cloud.google.com/certificate-authority-service/docs/trust-model](https://cloud.google.com/certificate-authority-service/docs/trust-model)
-
-* Clark, J., & van Oorschot, P. C. (2013). *SoK: SSL and HTTPS – Revisiting Past Challenges and Evaluating Certificate-Trust Model Enhancements.* IEEE Symposium on Security & Privacy. [https://css.csail.mit.edu/6.858/2018/readings/sok-ssl-https.pdf](https://css.csail.mit.edu/6.858/2018/readings/sok-ssl-https.pdf)
-
-
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']]
-    }
-  };
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+---
