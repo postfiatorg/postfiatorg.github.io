@@ -248,6 +248,10 @@ The scoring policy is explicit about its decision surfaces:
 
 The scorer gives the greatest weight to objective, long-horizon indicators and lower weight to single-observer signals.
 
+This does not turn the model into an unbounded governance oracle. The model sits downstream of a fixed published snapshot and upstream of a deterministic selector with explicit thresholds, churn controls, and concentration checks. It cannot invent uptime, rewrite attestation, or silently override hard operational evidence. The relevant comparison is therefore not "judgment versus no judgment" but "published, replayable judgment over a common record" versus the status quo of partially opaque publisher discretion.
+
+`Institutional credibility` is intentionally narrower than prestige. It means durable public accountability, identifiable stewardship, real reputational cost for misconduct, and evidence that the operator is more than a disposable pseudonym. A recognizable logo or famous name is not positive evidence on its own. Operational reliability outranks reputation proxies, and weak identity evidence is treated as lower confidence rather than as a license to hallucinate.
+
 ### 5.2 Concentration as a portfolio problem
 
 A validator list is not just a ranking of individually good nodes. It is also a portfolio problem. A set of individually strong validators can still be collectively fragile if many share the same cloud provider, jurisdiction, ASN, or operator.
@@ -319,7 +323,9 @@ This is one reason the **execution manifest** is a first-class artifact. A weigh
 
 ### 6.5 Preliminary benchmark
 
-The project's internal pilot benchmark scored 35 current XRPL validator URLs in two independent 100-run batches under a fixed prompt, producing identical mode scores for all 35 candidates. Before authoritative deployment, the project will publish the prompt, manifest, raw outputs, and replay harness for public verification. A compact excerpt appears in **Appendix A**.
+The paper's canonical determinism benchmark is the project's recorded Claude Sonnet 4.6 run: 35 current XRPL validator candidates scored in two independent 100-run batches under a fixed policy stack, producing identical mode scores for all 35 candidates. That benchmark is the proof-of-possibility result for the whitepaper's stability claim, and a compact excerpt appears in **Appendix A**. It is a research-stage benchmark, not the proposed authoritative deployment path. The paper's deployment position remains that authoritative rounds should run on a pinned local or tightly controlled stack rather than on a generic external API surface.
+
+Appendix A is a compressed reporting layer, not the benchmark package itself. The printed table shows only the final modal outputs for readability. The recorded benchmark package includes the normalized candidate snapshots, prompt version, per-run raw outputs, mode/distribution summaries, and the execution assumptions used to reproduce the run. In other words, the benchmark was not a bare domain-name toy prompt; it was a recorded validator-selection exercise aligned to the scoring architecture described in Sections 4 and 5. Appendix B serves a different purpose. It documents a separate asynchronous OpenRouter harness used to test portability, extraction, and repeated-run variance across additional model stacks. That appendix is useful stress-test evidence, but it is not the authoritative benchmark on which the paper's core determinism claim rests.
 
 ### 6.6 Statistical fingerprints
 
@@ -398,6 +404,8 @@ Sybil resistance uses layered signals:
 - and model-based assessment of public institutional credibility.
 
 XRPL's two-way domain verification process binds a validator public key and a domain through reciprocal claims, creating strong evidence that the same operator controls both.[XRPL Docs, "xrp-ledger.toml File"]
+
+Public reproducibility is intentional here, not a flaw. An attacker being able to run the same scorer on the same snapshot is analogous to anyone being able to verify a certificate chain or a signed validator list. The security question is not whether the scoring logic is secret; it is whether the underlying inputs can be forged cheaply enough to fool the network.
 
 ### 8.3 Costly signaling and institutional credibility
 
@@ -545,6 +553,12 @@ The foundation allocates resources specifically for incentivizing participation 
 
 This design avoids the failure mode of bribing institutions to appear on a validator list. The credibility signal in model-assisted scoring should reflect genuine institutional commitment to the network, not a subsidy relationship with the foundation.
 
+### 11.4 Why a distinct network and token can matter economically
+
+This whitepaper is not a token-distribution memorandum. Its purpose is to explain the infrastructure mechanism that would justify a distinct Post Fiat network in the first place. In XRPL-style systems, validator-list publication is part of the trust surface that determines whether sophisticated users regard the ledger as credible, governable, and institutionally usable. If Post Fiat can make that surface materially more transparent and more governable than the status quo, that difference is itself an economic proposition.
+
+A distinct Post Fiat network matters economically if the market values a chain whose validator-set construction, compliance posture, and privacy roadmap are governed differently from XRPL mainline. In that case, the token is not justified as a validator bribe. It is justified as ownership of, and settlement inside, a network with a different governance surface, different policy stack, and different credibility profile. The investment case therefore starts with governance legitimacy and network utility, not with subsidized validator extraction.
+
 ---
 
 ## 12. Adjacent Protocol Extensions in `postfiatd`
@@ -585,6 +599,8 @@ A successful Post Fiat deployment proves that:
 
 The boundaries are also clear. Model scores are qualitative assessments, not mathematical proofs. Convergent outputs do not by themselves imply social independence among validators. Exact reproducibility across arbitrary GPU architectures requires policy constraints on the execution environment. And concentration monitoring is an ongoing operational discipline, not a one-time fix.
 
+The claim is therefore comparative, not magical: a published and replayable judgment layer is easier to audit, challenge, and correct than an unpublished publisher rubric or informal committee process.
+
 These boundaries define the engineering work ahead, not reasons to defer.
 
 ---
@@ -604,7 +620,7 @@ Post Fiat replaces opaque editorial selection with a public, replayable, model-a
 
 The strongest version of this idea is also the narrowest. It requires measurable claims about artifact integrity, reproducibility, rank stability, set stability, and governance transparency.
 
-At the same time, the broader `postfiatd` line shows that this governance work can sit alongside adjacent protocol changes — including validator-consensus account exclusion and Orchard/Halo2 privacy — without reducing the validator-list proposal to marketing language. The publication mechanism remains the narrow core. The surrounding protocol experiments show where a more opinionated XRPL-derived stack may go next.
+At the same time, the broader `postfiatd` line shows that this governance work can sit alongside adjacent protocol changes — including validator-consensus account exclusion and Orchard/Halo2 privacy — without reducing the validator-list proposal to marketing language. The publication mechanism remains the narrow core. The relevant comparison class throughout is today's signed-list publisher process, not an oracle-free ideal. The surrounding protocol experiments show where a more opinionated XRPL-derived stack may go next.
 
 That is ambitious enough — and credible enough — to be worth building.
 
@@ -612,7 +628,7 @@ That is ambitious enough — and credible enough — to be worth building.
 
 ## Appendix A — Preliminary Benchmark
 
-The following table reproduces the project's two-batch URL-scoring benchmark on 35 current XRPL validator domains. The prompt, manifest, raw outputs, and replay harness will be published before authoritative deployment.
+The following table reproduces the paper's canonical determinism benchmark: the project's two-batch Claude Sonnet 4.6 run on 35 current XRPL validator candidates. This table is the summary page of a recorded benchmark package, showing final modal outputs rather than the full scoring artifact set. The recorded benchmark package uses the validator-selection architecture described in Sections 4 and 5: normalized candidate evidence, published policy, fixed execution assumptions, and deterministic set construction. The prompt version, candidate snapshots, per-run raw outputs, and distribution summaries exist in the recorded package even though only the compact mode table is printed here. This is the benchmark that supports the whitepaper's proof-of-possibility claim that a pinned model-stack can produce fully stable repeated-run modal outputs on the validator-selection task. The repository release for authoritative deployment will publish the corresponding replay harness and production-path artifacts.
 
 | Validator | Run 1 Mode | Run 2 Mode |
 |---|---:|---:|
@@ -660,6 +676,8 @@ A separate phrase-to-integer benchmark showed zero or near-zero variance in most
 
 The repository now includes `scripts/xrpl_validator_credibility_benchmark.py`, an async OpenRouter harness that fetches the current XRPL recommended validator set from XRPSCAN's validator registry API, filters the validators that currently appear on a recommended publisher list, and scores them repeatedly across `minimax/minimax-m2.5`, `deepseek/deepseek-v3.2`, and `moonshotai/kimi-k2.5`.[XRPSCAN API; OpenRouter Reasoning Tokens Docs] The script loads `OPENROUTER_API_KEY` using the same local `.env` / `pftasks/api/.env` / `pftasks/worker/.env` convention already used elsewhere in the stack, runs requests concurrently, extracts integer scores from JSON-only responses, writes raw JSON plus summary CSVs, and automatically retries length-truncated reasoning-heavy responses with a larger completion budget.
 
+This appendix is intentionally secondary to Appendix A. Its role is to show that the benchmark harness is portable enough to probe other model stacks and to measure where variance appears across them. It should be read as portability and instrumentation evidence, not as the canonical determinism result on which the paper's main argument depends.
+
 The full benchmark command is:
 
 ```bash
@@ -670,7 +688,7 @@ python3 scripts/xrpl_validator_credibility_benchmark.py \
 
 On the recorded March 17, 2026 XRPSCAN snapshot used for the full artifact, the filtered recommended-set capture yielded 29 validators, so that configuration produced `29 x 3 x 2 x 50 = 8,700` scored calls. The readable on-site summary page for the full run is published at [XRPL Validator Benchmark](/validator-benchmark/), with raw artifacts here: [full JSON](/benchmarks/full-xrpl-validator-credibility-20260317T000633Z.json), [rankings CSV](/benchmarks/full-xrpl-validator-credibility-20260317T000633Z-rankings.csv), and [rank changes CSV](/benchmarks/full-xrpl-validator-credibility-20260317T000633Z-rank-changes.csv).
 
-The scoring prompt is intentionally narrow:
+The scoring prompt below is intentionally narrow because this appendix is demonstrating the OpenRouter harness itself rather than the paper's full authoritative scoring policy:
 
 ```text
 score this validator's credibility on a scale from 0-100 where credibility is defined as useful institutional proof of a blockchain's legitimacy.
