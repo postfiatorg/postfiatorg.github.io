@@ -1,0 +1,410 @@
+{{- define "main" }}
+<article class="post-single benchmark-page">
+  <header class="post-header">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 class="post-title entry-hint-parent">{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">{{ .Description }}</div>
+    {{- end }}
+  </header>
+
+  <div class="benchmark-shell" data-summary-url="{{ .Params.summary_data }}">
+    <section class="benchmark-intro">
+      <div class="benchmark-card">
+        <p>
+          This page renders the recorded OpenRouter benchmark for XRPL validator
+          credibility modes across Minimax, DeepSeek, and Kimi, split into Run 1 and Run 2.
+        </p>
+        <p id="benchmark-note">Loading benchmark metadata...</p>
+      </div>
+      <div class="benchmark-card benchmark-links">
+        <strong>Raw artifacts</strong>
+        <ul id="artifact-links">
+          <li>Loading...</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="benchmark-controls">
+      <label class="benchmark-search">
+        <span>Filter validators</span>
+        <input id="validator-filter" type="search" placeholder="Search domain or UNL publisher" />
+      </label>
+    </section>
+
+    <section class="benchmark-section">
+      <h2>Validator Modes And Ranks</h2>
+      <div class="table-wrap">
+        <table class="benchmark-table" id="validator-table">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="benchmark-section">
+      <h2>Same-Model Run Stability</h2>
+      <div class="table-wrap">
+        <table class="benchmark-table compact-table" id="stability-table">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="benchmark-section">
+      <h2>Pearson Correlation Of Mode Scores</h2>
+      <div class="table-wrap">
+        <table class="benchmark-table matrix-table" id="pearson-table">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="benchmark-section">
+      <h2>Spearman Correlation Of Per-Run Rankings</h2>
+      <div class="table-wrap">
+        <table class="benchmark-table matrix-table" id="spearman-table">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</article>
+
+<style>
+  .benchmark-page {
+    max-width: 1500px;
+  }
+
+  .benchmark-shell {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .benchmark-intro {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .benchmark-card {
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1rem 1.1rem;
+    background:
+      radial-gradient(circle at top right, rgba(46, 87, 170, 0.08), transparent 42%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+  }
+
+  .benchmark-card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .benchmark-links ul {
+    margin: 0.6rem 0 0;
+    padding-left: 1.1rem;
+  }
+
+  .benchmark-controls {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .benchmark-search {
+    display: grid;
+    gap: 0.35rem;
+    width: min(460px, 100%);
+  }
+
+  .benchmark-search span {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .benchmark-search input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.8rem 1rem;
+    background: var(--entry);
+    color: var(--primary);
+  }
+
+  .benchmark-section h2 {
+    margin-bottom: 0.8rem;
+  }
+
+  .table-wrap {
+    overflow: auto;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--entry);
+  }
+
+  .benchmark-table {
+    width: 100%;
+    min-width: 980px;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .benchmark-table th,
+  .benchmark-table td {
+    padding: 0.85rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .benchmark-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: color-mix(in srgb, var(--theme) 90%, #0d2a4d 10%);
+  }
+
+  .benchmark-table tbody tr:nth-child(odd) td {
+    background: color-mix(in srgb, var(--entry) 88%, #0f2030 12%);
+  }
+
+  .benchmark-table tbody tr:hover td {
+    background: color-mix(in srgb, var(--entry) 70%, #10386f 30%);
+  }
+
+  .benchmark-table th:first-child,
+  .benchmark-table td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: inherit;
+  }
+
+  .benchmark-table thead th:first-child {
+    z-index: 3;
+  }
+
+  .validator-cell {
+    min-width: 240px;
+  }
+
+  .validator-domain {
+    display: block;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .validator-meta {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.78rem;
+    color: var(--secondary);
+    white-space: normal;
+  }
+
+  .score-box {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .score-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .score-rank,
+  .score-detail {
+    font-size: 0.78rem;
+    color: var(--secondary);
+  }
+
+  .compact-table {
+    min-width: 520px;
+  }
+
+  .matrix-table {
+    min-width: 880px;
+  }
+
+  .matrix-cell {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .matrix-strong {
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  @media (max-width: 900px) {
+    .benchmark-table th,
+    .benchmark-table td {
+      padding: 0.75rem 0.8rem;
+    }
+
+    .validator-cell {
+      min-width: 200px;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const container = document.querySelector(".benchmark-shell");
+    if (!container) return;
+
+    const summaryUrl = container.dataset.summaryUrl;
+    const validatorTable = document.getElementById("validator-table");
+    const stabilityTable = document.getElementById("stability-table");
+    const pearsonTable = document.getElementById("pearson-table");
+    const spearmanTable = document.getElementById("spearman-table");
+    const filterInput = document.getElementById("validator-filter");
+    const note = document.getElementById("benchmark-note");
+    const artifactLinks = document.getElementById("artifact-links");
+
+    const escapeHtml = (value) =>
+      String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+
+    const formatNumber = (value) => {
+      if (value === null || value === undefined) return "n/a";
+      return Number(value).toFixed(4);
+    };
+
+    const renderValidatorTable = (summary, query = "") => {
+      const normalized = query.trim().toLowerCase();
+      const rows = summary.validators.filter((validator) => {
+        if (!normalized) return true;
+        const haystack = [
+          validator.domain,
+          ...(validator.unl_publishers || []),
+          validator.server_version || "",
+        ]
+          .join(" ")
+          .toLowerCase();
+        return haystack.includes(normalized);
+      });
+
+      validatorTable.querySelector("thead").innerHTML = `
+        <tr>
+          <th>Validator</th>
+          ${summary.series
+            .map((series) => `<th>${escapeHtml(series.label)}</th>`)
+            .join("")}
+        </tr>
+      `;
+
+      validatorTable.querySelector("tbody").innerHTML = rows
+        .map((validator) => {
+          const publishers = (validator.unl_publishers || []).join(", ");
+          const meta = [
+            validator.verified ? "verified" : "unverified",
+            validator.server_version || "version n/a",
+            publishers || "publisher n/a",
+          ].join(" | ");
+          return `
+            <tr>
+              <td class="validator-cell">
+                <span class="validator-domain">${escapeHtml(validator.domain)}</span>
+                <span class="validator-meta">${escapeHtml(meta)}</span>
+              </td>
+              ${summary.series
+                .map((series) => {
+                  const cell = validator.cells[series.key];
+                  return `
+                    <td>
+                      <div class="score-box">
+                        <span class="score-value">${escapeHtml(cell.mode)}</span>
+                        <span class="score-rank">rank #${escapeHtml(cell.rank)}</span>
+                        <span class="score-detail">n=${escapeHtml(cell.n)} | parse=${escapeHtml(cell.parse_errors)}</span>
+                      </div>
+                    </td>
+                  `;
+                })
+                .join("")}
+            </tr>
+          `;
+        })
+        .join("");
+    };
+
+    const renderStabilityTable = (summary) => {
+      stabilityTable.querySelector("thead").innerHTML = `
+        <tr>
+          <th>Model</th>
+          <th>Pearson</th>
+          <th>Spearman</th>
+        </tr>
+      `;
+      stabilityTable.querySelector("tbody").innerHTML = summary.same_model_stability
+        .map(
+          (row) => `
+            <tr>
+              <td>${escapeHtml(row.label)}<div class="score-detail">Run 1 vs Run 2</div></td>
+              <td class="matrix-cell matrix-strong">${formatNumber(row.pearson_mode)}</td>
+              <td class="matrix-cell matrix-strong">${formatNumber(row.spearman_rank)}</td>
+            </tr>
+          `
+        )
+        .join("");
+    };
+
+    const renderMatrixTable = (table, matrix) => {
+      table.querySelector("thead").innerHTML = `
+        <tr>
+          <th>Run</th>
+          ${matrix.labels.map((label) => `<th>${escapeHtml(label)}</th>`).join("")}
+        </tr>
+      `;
+      table.querySelector("tbody").innerHTML = matrix.rows
+        .map(
+          (row) => `
+            <tr>
+              <td>${escapeHtml(row.label)}</td>
+              ${row.values
+                .map((value) => `<td class="matrix-cell">${formatNumber(value)}</td>`)
+                .join("")}
+            </tr>
+          `
+        )
+        .join("");
+    };
+
+    fetch(summaryUrl)
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then((summary) => {
+        note.textContent = `${summary.requested_validator_note} Artifact time: ${summary.artifact_generated_at}.`;
+        artifactLinks.innerHTML = [
+          summary.artifact_path,
+          ...(summary.artifact_supporting_paths || []),
+        ]
+          .map((path) => `<li><a href="${escapeHtml(path)}">${escapeHtml(path)}</a></li>`)
+          .join("");
+
+        renderValidatorTable(summary);
+        renderStabilityTable(summary);
+        renderMatrixTable(pearsonTable, summary.pearson_mode_matrix);
+        renderMatrixTable(spearmanTable, summary.spearman_rank_matrix);
+
+        filterInput.addEventListener("input", () => {
+          renderValidatorTable(summary, filterInput.value);
+        });
+      })
+      .catch((error) => {
+        note.textContent = `Failed to load benchmark summary: ${error.message}`;
+        artifactLinks.innerHTML = "<li>Summary data unavailable.</li>";
+      });
+  })();
+</script>
+{{- end }}

@@ -425,6 +425,26 @@ def compute_mode(values: list[int]) -> int | None:
     return modes[0]
 
 
+def assign_competition_ranks(rows: list[dict[str, Any]], score_key: str, mean_key: str) -> list[dict[str, Any]]:
+    sorted_rows = sorted(
+        rows,
+        key=lambda row: (
+            -(row.get(score_key) if isinstance(row.get(score_key), (int, float)) else -10_000),
+            -(row.get(mean_key) if isinstance(row.get(mean_key), (int, float)) else -10_000),
+            row.get("domain", ""),
+        ),
+    )
+    current_rank = 0
+    last_score: Any = object()
+    for index, row in enumerate(sorted_rows, start=1):
+        score = row.get(score_key)
+        if score != last_score:
+            current_rank = index
+            last_score = score
+        row["rank"] = current_rank
+    return sorted_rows
+
+
 def build_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
     total_cost = 0.0
     total_completion_tokens = 0.0
@@ -478,6 +498,10 @@ def build_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
 
     batch_rows: list[dict[str, Any]] = []
     overall_rows: list[dict[str, Any]] = []
+    rankings_by_run: list[dict[str, Any]] = []
+    rank_changes_by_model: list[dict[str, Any]] = []
+    composite_rankings: list[dict[str, Any]] = []
+    composite_rank_changes: list[dict[str, Any]] = []
 
     for key in sorted(by_model_batch_meta):
         domain, model, batch = key
@@ -573,6 +597,111 @@ def build_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
             }
         )
 
+    domains = sorted({row["domain"] for row in overall_rows})
+    models = sorted({row["model"] for row in overall_rows})
+    batches = sorted({row["batch"] for row in batch_rows})
+
+    batch_rows_by_key = {(row["domain"], row["model"], row["batch"]): row for row in batch_rows}
+
+    for model in models:
+        run_rows_by_batch: dict[int, list[dict[str, Any]]] = {}
+        for batch in batches:
+            run_rows = []
+            for domain in domains:
+                batch_row = batch_rows_by_key.get((domain, model, batch))
+                if not batch_row:
+                    continue
+                run_rows.append(
+                    {
+                        "domain": domain,
+                        "model": model,
+                        "batch": batch,
+                        "mode": batch_row["mode"],
+                        "mean": batch_row["mean"],
+                        "n": batch_row["n"],
+                        "errors": batch_row["errors"],
+                        "parse_errors": batch_row["parse_errors"],
+                    }
+                )
+            ranked = assign_competition_ranks(run_rows, "mode", "mean")
+            rankings_by_run.extend(ranked)
+            run_rows_by_batch[batch] = ranked
+
+        batch_1_index = {row["domain"]: row for row in run_rows_by_batch.get(1, [])}
+        batch_2_index = {row["domain"]: row for row in run_rows_by_batch.get(2, [])}
+        for domain in domains:
+            row1 = batch_1_index.get(domain)
+            row2 = batch_2_index.get(domain)
+            rank_changes_by_model.append(
+                {
+                    "domain": domain,
+                    "model": model,
+                    "batch_1_mode": row1["mode"] if row1 else None,
+                    "batch_2_mode": row2["mode"] if row2 else None,
+                    "batch_1_rank": row1["rank"] if row1 else None,
+                    "batch_2_rank": row2["rank"] if row2 else None,
+                    "rank_delta_b2_minus_b1": (
+                        (row2["rank"] - row1["rank"])
+                        if row1 and row2 and row1["rank"] is not None and row2["rank"] is not None
+                        else None
+                    ),
+                }
+            )
+
+    for batch in batches:
+        batch_composite_rows: list[dict[str, Any]] = []
+        for domain in domains:
+            model_modes: dict[str, int | None] = {}
+            model_means: dict[str, float | None] = {}
+            numeric_modes: list[int] = []
+            for model in models:
+                row = batch_rows_by_key.get((domain, model, batch))
+                if not row:
+                    model_modes[model] = None
+                    model_means[model] = None
+                    continue
+                model_modes[model] = row["mode"]
+                model_means[model] = row["mean"]
+                if isinstance(row["mode"], (int, float)):
+                    numeric_modes.append(int(row["mode"]))
+            composite_mode = compute_mode(numeric_modes)
+            batch_composite_rows.append(
+                {
+                    "domain": domain,
+                    "batch": batch,
+                    "composite_mode": composite_mode,
+                    "deepseek_mode": model_modes.get("deepseek/deepseek-v3.2"),
+                    "minimax_mode": model_modes.get("minimax/minimax-m2.5"),
+                    "kimi_mode": model_modes.get("moonshotai/kimi-k2.5"),
+                    "deepseek_mean": model_means.get("deepseek/deepseek-v3.2"),
+                    "minimax_mean": model_means.get("minimax/minimax-m2.5"),
+                    "kimi_mean": model_means.get("moonshotai/kimi-k2.5"),
+                }
+            )
+        ranked = assign_competition_ranks(batch_composite_rows, "composite_mode", "composite_mode")
+        composite_rankings.extend(ranked)
+
+    composite_by_batch = defaultdict(dict)
+    for row in composite_rankings:
+        composite_by_batch[row["batch"]][row["domain"]] = row
+    for domain in domains:
+        row1 = composite_by_batch.get(1, {}).get(domain)
+        row2 = composite_by_batch.get(2, {}).get(domain)
+        composite_rank_changes.append(
+            {
+                "domain": domain,
+                "batch_1_composite_mode": row1["composite_mode"] if row1 else None,
+                "batch_2_composite_mode": row2["composite_mode"] if row2 else None,
+                "batch_1_rank": row1["rank"] if row1 else None,
+                "batch_2_rank": row2["rank"] if row2 else None,
+                "rank_delta_b2_minus_b1": (
+                    (row2["rank"] - row1["rank"])
+                    if row1 and row2 and row1["rank"] is not None and row2["rank"] is not None
+                    else None
+                ),
+            }
+        )
+
     return {
         "totals": {
             "request_count": len(results),
@@ -582,6 +711,10 @@ def build_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
         },
         "by_batch": batch_rows,
         "overall": overall_rows,
+        "rankings_by_run": rankings_by_run,
+        "rank_changes_by_model": rank_changes_by_model,
+        "composite_rankings": composite_rankings,
+        "composite_rank_changes": composite_rank_changes,
     }
 
 
@@ -687,6 +820,10 @@ async def run_async(args: argparse.Namespace, script_path: Path) -> int:
     json_path = output_root / f"{args.output_prefix}-{timestamp}.json"
     batch_csv_path = output_root / f"{args.output_prefix}-{timestamp}-by-batch.csv"
     overall_csv_path = output_root / f"{args.output_prefix}-{timestamp}-overall.csv"
+    rankings_csv_path = output_root / f"{args.output_prefix}-{timestamp}-rankings.csv"
+    rank_changes_csv_path = output_root / f"{args.output_prefix}-{timestamp}-rank-changes.csv"
+    composite_rankings_csv_path = output_root / f"{args.output_prefix}-{timestamp}-composite-rankings.csv"
+    composite_rank_changes_csv_path = output_root / f"{args.output_prefix}-{timestamp}-composite-rank-changes.csv"
 
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -714,10 +851,18 @@ async def run_async(args: argparse.Namespace, script_path: Path) -> int:
     json_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     write_summary_csv(batch_csv_path, summary["by_batch"])
     write_summary_csv(overall_csv_path, summary["overall"])
+    write_summary_csv(rankings_csv_path, summary["rankings_by_run"])
+    write_summary_csv(rank_changes_csv_path, summary["rank_changes_by_model"])
+    write_summary_csv(composite_rankings_csv_path, summary["composite_rankings"])
+    write_summary_csv(composite_rank_changes_csv_path, summary["composite_rank_changes"])
 
     print(f"wrote {json_path}")
     print(f"wrote {batch_csv_path}")
     print(f"wrote {overall_csv_path}")
+    print(f"wrote {rankings_csv_path}")
+    print(f"wrote {rank_changes_csv_path}")
+    print(f"wrote {composite_rankings_csv_path}")
+    print(f"wrote {composite_rank_changes_csv_path}")
     return 0
 
 

@@ -660,7 +660,7 @@ A separate phrase-to-integer benchmark showed zero or near-zero variance in most
 
 The repository now includes `scripts/xrpl_validator_credibility_benchmark.py`, an async OpenRouter harness that fetches the current XRPL recommended validator set from XRPSCAN's validator registry API, filters the validators that currently appear on a recommended publisher list, and scores them repeatedly across `minimax/minimax-m2.5`, `deepseek/deepseek-v3.2`, and `moonshotai/kimi-k2.5`.[XRPSCAN API; OpenRouter Reasoning Tokens Docs] The script loads `OPENROUTER_API_KEY` using the same local `.env` / `pftasks/api/.env` / `pftasks/worker/.env` convention already used elsewhere in the stack, runs requests concurrently, extracts integer scores from JSON-only responses, writes raw JSON plus summary CSVs, and automatically retries length-truncated reasoning-heavy responses with a larger completion budget.
 
-The full intended run shape is:
+The full benchmark command is:
 
 ```bash
 python3 scripts/xrpl_validator_credibility_benchmark.py \
@@ -668,7 +668,7 @@ python3 scripts/xrpl_validator_credibility_benchmark.py \
   --batches 2
 ```
 
-On the current 35-validator recommended set, that configuration produces 35 validators x 3 models x 2 batches x 50 repeats = 10,500 scored calls.
+On the recorded March 17, 2026 XRPSCAN snapshot used for the full artifact, the filtered recommended-set capture yielded 29 validators, so that configuration produced `29 x 3 x 2 x 50 = 8,700` scored calls. The readable on-site summary page for the full run is published at [XRPL Validator Benchmark](/validator-benchmark/), with raw artifacts here: [full JSON](/benchmarks/full-xrpl-validator-credibility-20260317T000633Z.json), [rankings CSV](/benchmarks/full-xrpl-validator-credibility-20260317T000633Z-rankings.csv), and [rank changes CSV](/benchmarks/full-xrpl-validator-credibility-20260317T000633Z-rank-changes.csv).
 
 The scoring prompt is intentionally narrow:
 
