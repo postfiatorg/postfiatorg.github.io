@@ -1,14 +1,23 @@
 {{- define "main" }}
-<article class="post-single benchmark-page">
-  <header class="post-header">
-    {{ partial "breadcrumbs.html" . }}
-    <h1 class="post-title entry-hint-parent">{{ .Title }}</h1>
-    {{- if .Description }}
-    <div class="post-description">{{ .Description }}</div>
-    {{- end }}
-  </header>
-
+<section class="benchmark-page-shell">
   <div class="benchmark-shell" data-summary-url="{{ .Params.summary_data }}">
+    <header class="benchmark-hero">
+      <div class="benchmark-hero-copy">
+        <p class="benchmark-kicker">XRPL Validator Credibility Benchmark</p>
+        <h1>{{ .Title }}</h1>
+        {{- if .Description }}
+        <p class="benchmark-description">{{ .Description }}</p>
+        {{- end }}
+      </div>
+      <div class="benchmark-hero-card">
+        <strong>Table behavior</strong>
+        <p>
+          The validator table below is intentionally oversized. Scroll horizontally for all six
+          run columns and vertically through the full validator set.
+        </p>
+      </div>
+    </header>
+
     <section class="benchmark-intro">
       <div class="benchmark-card">
         <p>
@@ -34,7 +43,8 @@
 
     <section class="benchmark-section">
       <h2>Validator Modes And Ranks</h2>
-      <div class="table-wrap">
+      <p class="benchmark-scroll-note">Scroll sideways to compare all runs. The validator column stays pinned.</p>
+      <div class="table-wrap table-wrap-primary">
         <table class="benchmark-table" id="validator-table">
           <thead></thead>
           <tbody></tbody>
@@ -72,16 +82,62 @@
       </div>
     </section>
   </div>
-</article>
+</section>
 
 <style>
-  .benchmark-page {
-    max-width: 1500px;
+  .benchmark-page-shell {
+    width: min(1880px, calc(100vw - 1rem));
+    max-width: none;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 0 2rem;
   }
 
   .benchmark-shell {
     display: grid;
     gap: 1.5rem;
+  }
+
+  .benchmark-hero {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.9fr);
+    align-items: end;
+  }
+
+  .benchmark-kicker {
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    color: #85a9e8;
+  }
+
+  .benchmark-hero h1 {
+    margin: 0;
+    font-size: clamp(2.4rem, 3vw, 4rem);
+    line-height: 0.96;
+  }
+
+  .benchmark-description {
+    margin: 0.75rem 0 0;
+    max-width: 58rem;
+    font-size: 1rem;
+    color: var(--secondary);
+  }
+
+  .benchmark-hero-card {
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1rem 1.1rem;
+    background:
+      linear-gradient(135deg, rgba(14, 43, 89, 0.88), rgba(11, 24, 44, 0.92)),
+      radial-gradient(circle at top right, rgba(114, 159, 255, 0.25), transparent 44%);
+  }
+
+  .benchmark-hero-card p {
+    margin: 0.45rem 0 0;
+    color: rgba(255, 255, 255, 0.78);
   }
 
   .benchmark-intro {
@@ -137,16 +193,29 @@
     margin-bottom: 0.8rem;
   }
 
+  .benchmark-scroll-note {
+    margin: 0 0 0.7rem;
+    color: var(--secondary);
+    font-size: 0.9rem;
+  }
+
   .table-wrap {
     overflow: auto;
     border: 1px solid var(--border);
     border-radius: 18px;
     background: var(--entry);
+    scrollbar-gutter: stable both-edges;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-wrap-primary {
+    max-height: min(74vh, 980px);
+    overscroll-behavior: contain;
   }
 
   .benchmark-table {
     width: 100%;
-    min-width: 980px;
+    min-width: 1320px;
     border-collapse: separate;
     border-spacing: 0;
   }
@@ -227,7 +296,7 @@
   }
 
   .matrix-table {
-    min-width: 880px;
+    min-width: 980px;
   }
 
   .matrix-cell {
@@ -241,6 +310,14 @@
   }
 
   @media (max-width: 900px) {
+    .benchmark-page-shell {
+      width: calc(100vw - 0.5rem);
+    }
+
+    .benchmark-hero {
+      grid-template-columns: 1fr;
+    }
+
     .benchmark-table th,
     .benchmark-table td {
       padding: 0.75rem 0.8rem;
@@ -248,6 +325,10 @@
 
     .validator-cell {
       min-width: 200px;
+    }
+
+    .table-wrap-primary {
+      max-height: min(70vh, 820px);
     }
   }
 </style>
