@@ -46,6 +46,7 @@
     @keyframes pulseGlow{0%,100%{transform:rotateX(8deg) scale(1);filter:drop-shadow(0 0 10px rgba(255,255,255,.28))}50%{transform:rotateX(8deg) scale(1.08);filter:drop-shadow(0 0 22px rgba(255,255,255,.55))}}
 
     /* ===== HERO TEXT ===== */
+    .hero-kicker{font-family:'Orbitron',sans-serif;font-size:.9rem;letter-spacing:.28em;text-transform:uppercase;color:#9a9a9a;margin:0 0 18px;animation:fadeUp .75s ease-out}
     .hero h1{font-size:clamp(36px,6vw,72px);font-weight:700;background:linear-gradient(90deg,#fff,#aaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:30px;animation:fadeUp .9s ease-out}
     .hero p{font-size:1.25rem;color:#aaa;max-width:600px;margin:0 auto 50px;line-height:1.6;animation:fadeUp 1.1s ease-out}
 
@@ -103,6 +104,8 @@
     .credibility-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
     .credibility-card{padding:30px;border:1px solid rgba(255,255,255,.1);border-radius:24px;background:rgba(255,255,255,.03);backdrop-filter:blur(6px);box-shadow:0 0 28px rgba(255,255,255,.04),inset 0 0 12px rgba(255,255,255,.05)}
     .credibility-card h2{font-size:1.35rem;margin:0 0 18px;font-weight:600;background:linear-gradient(90deg,#fff,#aaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .credibility-card h3{font-size:1rem;margin:20px 0 10px;color:#fff;font-weight:600;letter-spacing:.04em}
+    .credibility-card .mini-note{display:block;font-size:.82rem;color:#7f7f7f;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
     .credibility-card p{color:#aaa;line-height:1.7;margin:0 0 16px}
     .credibility-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
     .credibility-list li{color:#ddd;line-height:1.55;padding-left:16px;position:relative}
@@ -110,6 +113,15 @@
     .credibility-link{display:inline-block;margin-top:18px;color:#fff;text-decoration:none;font-size:.82rem;letter-spacing:2px;text-transform:uppercase;transition:.3s}
     .credibility-link:hover{letter-spacing:3px}
     @media(max-width:768px){.credibility-grid{grid-template-columns:1fr}}
+
+    /* ===== INFO BANDS ===== */
+    .info-band{padding:0 20px 90px}
+    .info-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+    .info-card{padding:30px;border:1px solid rgba(255,255,255,.1);border-radius:24px;background:rgba(255,255,255,.03);backdrop-filter:blur(6px);box-shadow:0 0 28px rgba(255,255,255,.04),inset 0 0 12px rgba(255,255,255,.05)}
+    .info-card h3{font-size:1.25rem;margin:0 0 16px;font-weight:600;background:linear-gradient(90deg,#fff,#aaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .info-card p{color:#aaa;line-height:1.7;margin:0}
+    .token-band .info-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media(max-width:900px){.info-grid,.token-band .info-grid{grid-template-columns:1fr}}
 
     /* ===== WHY POST FIAT SECTION ===== */
     .why-post-fiat{padding:100px 20px 120px;position:relative;overflow:hidden}
@@ -366,9 +378,10 @@
   <header>
     <div class="brand-name">Post Fiat</div>
     <nav class="nav-links">
-      {{ range .Site.Menus.main }}
-        <a href="{{ .URL }}" class="nav-link">{{ .Name }}</a>
-      {{ end }}
+      <a href="/whitepaper/" class="nav-link">Whitepaper</a>
+      <a href="https://tasknode.postfiat.org" class="nav-link" target="_blank" rel="noopener">Task Node</a>
+      <a href="https://www.jollydinger.com/pftvalidatorsetup/setup/" class="nav-link" target="_blank" rel="noopener">Validator Setup</a>
+      <a href="https://discord.gg/U6HjgDSmhR" class="nav-link" target="_blank" rel="noopener">Community</a>
     </nav>
     <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
   </header>
@@ -387,27 +400,28 @@
       </div>
     </div>
 
+    <p class="hero-kicker">A Decentralized Method to Merge with AGI</p>
     <h1>Post Fiat gives human civilization a decentralized method to merge with AGI.</h1>
-    <p>Post Fiat is a fair, private XRP-derived network for capital markets and collective intelligence. It keeps XRP-speed settlement, adds decentralized validator selection and Orchard privacy, and is built for coordination without centralized control.</p>
+    <p>Post Fiat is a fair, private XRP-derived network for capital markets and collective intelligence. It keeps XRP-speed settlement, adds decentralized validator selection and Orchard privacy, and gives human civilization a way to integrate machine intelligence without collapsing into centralized control.</p>
 
     <div class="action-grid">
+      <a href="/whitepaper/" class="action-card">
+        <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16l4-3h10a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
+        <span class="cta-label">Read the Whitepaper</span>
+        <span class="cta-desc">See the full validator-governance and network design thesis</span>
+        <span class="cta-arrow">Read &rarr;</span>
+      </a>
+      <a href="https://tasknode.postfiat.org" class="action-card" target="_blank">
+        <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <span class="cta-label">Use the Task Node</span>
+        <span class="cta-desc">Earn tokens by contributing observations, research, and workflow output</span>
+        <span class="cta-arrow">Launch App &rarr;</span>
+      </a>
       <a href="https://discord.gg/U6HjgDSmhR" class="action-card" target="_blank">
         <div class="cta-icon"><svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg></div>
         <span class="cta-label">Join the Community</span>
         <span class="cta-desc">Connect with traders, developers, and AI agents building the network</span>
         <span class="cta-arrow">Discord &rarr;</span>
-      </a>
-      <a href="https://tasknode.postfiat.org" class="action-card" target="_blank">
-        <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-        <span class="cta-label">Use the Task Node</span>
-        <span class="cta-desc">Earn tokens by providing insights to AI agents and portfolio managers</span>
-        <span class="cta-arrow">Launch App &rarr;</span>
-      </a>
-      <a href="https://www.jollydinger.com/pftvalidatorsetup/setup/" class="action-card" target="_blank">
-        <div class="cta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-        <span class="cta-label">Run a Validator</span>
-        <span class="cta-desc">Strengthen the network by running your own validator node</span>
-        <span class="cta-arrow">Setup Guide &rarr;</span>
       </a>
     </div>
   </section>
@@ -417,6 +431,7 @@
     <div class="credibility-grid">
       <div class="credibility-card">
         <h2>Live Testnet Snapshot</h2>
+        <span class="mini-note">As of March 18, 2026</span>
         <ul class="credibility-list">
           <li>42 testnet validators live</li>
           <li>41 of 42 validators at 99.9%+ agreement over 24 hours</li>
@@ -427,58 +442,38 @@
       </div>
       <div class="credibility-card">
         <h2>Who Builds This</h2>
-        <p>Founded by Alex Good (`goodalexander`).</p>
+        <p>Founded by Alex Good (<strong>goodalexander</strong>), the founder behind Post Fiat.</p>
+        <h3>Relevant Background</h3>
         <ul class="credibility-list">
-          <li>ex Citi FX, Palantir, and Balyasny TMT</li>
+          <li>ex Citi FX</li>
+          <li>ex Palantir</li>
+          <li>ex Balyasny TMT</li>
           <li>co-founded Perpetua</li>
+        </ul>
+        <h3>Capital and Market Credibility</h3>
+        <ul class="credibility-list">
           <li>backed by portfolio managers at Brevan Howard, DE Shaw, and Citrini Research</li>
           <li>venture backed by Hypersphere Capital Management</li>
+          <li>founder track record includes Perpetua's reported acquisition by Ascential for $140M and the later Omnicom / Flywheel transaction often referenced around $850M</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ===== SIGN‑UP ===== -->
-  <section class="signup">
-    <h2>Stay Updated</h2>
-    <p>Be the first to know about network launches, token events, and major updates.</p>
-    <div class="ghost-signup-container">
-      <script 
-        src="https://cdn.jsdelivr.net/ghost/signup-form@~0.2/umd/signup-form.min.js" 
-        data-background-color="transparent"    
-        data-text-color="#ffffff"
-        data-button-color="#ffffff"       
-        data-button-text-color="#000000"
-        data-title="" 
-        data-description="" 
-        data-site="https://goodalexander.ghost.io/" 
-        data-locale="en" 
-        async>
-      </script>
-    </div>
-    
-    <div class="social-section">
-      <div class="social-icons">
-        <!-- GitHub -->
-        <a href="https://github.com/postfiatorg" class="social-icon" aria-label="GitHub">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-        </a>
-        
-        <!-- X (Twitter) -->
-        <a href="https://x.com/PostFiatOrg" class="social-icon" aria-label="X">
-          <svg viewBox="0 0 24 24">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-          </svg>
-        </a>
-        
-        <!-- Discord -->
-        <a href="https://discord.gg/3wJsg3T5Au" class="social-icon" aria-label="Discord">
-          <svg viewBox="0 0 24 24">
-            <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
-          </svg>
-        </a>
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="info-band">
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>XRP Is The Right Primitive</h3>
+        <p>XRP's core architecture is already good at fast finality and message-style coordination. Post Fiat starts from the view that an AI-native network should use an efficient settlement and messaging layer rather than rebuild everything around slower, more inflationary primitives.</p>
+      </div>
+      <div class="info-card">
+        <h3>Post Fiat Fixes What XRP Does Not</h3>
+        <p>Post Fiat keeps the useful parts of XRP while changing the two biggest legitimacy gaps: opaque validator selection and no native privacy. The network adds AI-assisted, published validator selection and an Orchard privacy path so the base layer is fairer, more legible, and more useful for real financial workflows.</p>
+      </div>
+      <div class="info-card">
+        <h3>Built For Capital Markets, Not Generic Payment Theater</h3>
+        <p>The primary use case is not replacing SWIFT. Post Fiat is aimed at buy-side workflows, research coordination, expert networks, indexing, compliance, and AI-assisted capital deployment.</p>
       </div>
     </div>
   </section>
@@ -617,6 +612,19 @@
         </div>
         <h4>The Task Node Turns Community Into Collective Intelligence</h4>
         <p>Task Node gives the community a way to do something economically useful together. Instead of a retail crowd that can only post, hold, and hope, participants can contribute observations, research, and workflow outputs into an AI-routed network that internalizes its own edge instead of donating it to outside firms.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="token-band info-band">
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>How You Get PFT</h3>
+        <p>PFT is not only something to buy. The primary participation path is through the Task Node. Contributors can earn PFT by providing observations, research, and workflow output that the network can route into AI-assisted capital-markets workflows. The point is to turn community effort into network-owned intelligence instead of exporting that intelligence to outside firms. The second-best participation path is to <a href="https://www.jollydinger.com/pftvalidatorsetup/setup/" target="_blank" rel="noopener" style="color:#fff">run a validator</a> and help strengthen the network directly.</p>
+      </div>
+      <div class="info-card">
+        <h3>Why The Token Matters</h3>
+        <p>PFT is the native asset that coordinates validators, messaging, privacy-enabled workflows, and Task Node participation across the network. As contributors feed the Task Node, the network accumulates proprietary workflow data and market intelligence that can be used in buy-side applications through AGTI and the Post Fiat SDK. The strategic goal is to make PFT the asset that sits at the center of a compounding intelligence network rather than a token financed by continuous issuer sales.</p>
       </div>
     </div>
   </section>
@@ -781,15 +789,15 @@
         <span class="cta-desc">See the full validator-governance and network design thesis.</span>
         <span class="cta-arrow">Read &rarr;</span>
       </a>
-      <a href="https://tasknode.postfiat.org" class="action-card" target="_blank">
-        <span class="cta-label">Use the Task Node</span>
-        <span class="cta-desc">Start participating in the network's intelligence loop.</span>
-        <span class="cta-arrow">Launch &rarr;</span>
-      </a>
       <a href="https://discord.gg/U6HjgDSmhR" class="action-card" target="_blank">
         <span class="cta-label">Join the Community</span>
         <span class="cta-desc">Meet the traders, builders, and operators shaping the network.</span>
         <span class="cta-arrow">Discord &rarr;</span>
+      </a>
+      <a href="https://www.jollydinger.com/pftvalidatorsetup/setup/" class="action-card" target="_blank" rel="noopener">
+        <span class="cta-label">Run a Validator</span>
+        <span class="cta-desc">Help strengthen the network directly and participate in the validator set.</span>
+        <span class="cta-arrow">Setup &rarr;</span>
       </a>
     </div>
   </section>
