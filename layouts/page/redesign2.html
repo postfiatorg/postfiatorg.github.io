@@ -106,6 +106,7 @@
     .credibility-card h3{font-size:1rem;margin:20px 0 10px;color:#fff;font-weight:600;letter-spacing:.04em}
     .credibility-card .mini-note{display:block;font-size:.82rem;color:#7f7f7f;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
     .credibility-card p{color:#aaa;line-height:1.7;margin:0 0 16px}
+    .credibility-card code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#fff;background:rgba(255,255,255,.08);padding:.12rem .35rem;border-radius:6px;font-size:.92em}
     .credibility-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
     .credibility-list li{color:#ddd;line-height:1.55;padding-left:16px;position:relative}
     .credibility-list li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.7)}
@@ -115,6 +116,9 @@
 
     /* ===== INFO BANDS ===== */
     .info-band{padding:0 20px 90px}
+    .info-header{text-align:center;max-width:1000px;margin:0 auto 46px}
+    .info-header h2{font-family:'Orbitron',sans-serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:600;letter-spacing:.15em;background:linear-gradient(90deg,#fff,#bbb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0;position:relative}
+    .info-header h2::after{content:"";position:absolute;left:50%;bottom:-18px;transform:translateX(-50%);width:60px;height:2px;background:linear-gradient(90deg,transparent,#fff,transparent)}
     .info-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
     .info-card{padding:30px;border:1px solid rgba(255,255,255,.1);border-radius:24px;background:rgba(255,255,255,.03);backdrop-filter:blur(6px);box-shadow:0 0 28px rgba(255,255,255,.04),inset 0 0 12px rgba(255,255,255,.05)}
     .info-card h3{font-size:1.25rem;margin:0 0 16px;font-weight:600;background:linear-gradient(90deg,#fff,#aaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -430,12 +434,12 @@
           <li>35 of 42 validators at 99%+ agreement over 30 days</li>
           <li>20 validators publishing domains in the explorer</li>
         </ul>
-        <a class="credibility-link" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank">View Explorer &rarr;</a>
+        <a class="credibility-link" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank">View the Testnet Explorer</a>
       </div>
       <div class="credibility-card">
         <h2>Who Builds This</h2>
         <h3>Founded by Alex Good</h3>
-        <p>Alex Good (<strong>goodalexander</strong>) is the founder behind Post Fiat.</p>
+        <p>Alex Good (<code>goodalexander</code>) is the founder behind Post Fiat.</p>
         <h3>Relevant Background</h3>
         <ul class="credibility-list">
           <li>ex Citi FX</li>
@@ -455,6 +459,9 @@
 
   <!-- ===== HOW IT WORKS ===== -->
   <section class="info-band">
+    <div class="info-header">
+      <h2>How It Works</h2>
+    </div>
     <div class="info-grid">
       <div class="info-card">
         <h3>XRP Is The Right Primitive</h3>
@@ -631,7 +638,6 @@
 
       <!-- ETFs Slide -->
       <div class="slide active" data-slide="0">
-        <div class="slide-number">01</div>
         <div class="slide-content">
           <div class="slide-visual">
             <div class="etf-visual">
@@ -657,7 +663,6 @@
 
       <!-- Compliance Slide -->
       <div class="slide" data-slide="1">
-        <div class="slide-number">02</div>
         <div class="slide-content">
           <div class="slide-visual">
             <div class="compliance-visual">
@@ -684,7 +689,6 @@
 
       <!-- Expert Networks Slide -->
       <div class="slide" data-slide="2">
-        <div class="slide-number">03</div>
         <div class="slide-content">
           <div class="slide-visual">
             <div class="expert-visual">
@@ -707,25 +711,14 @@
         </div>
       </div>
 
-      <!-- AI Based Religions Slide -->
+      <!-- Validator Governance Slide -->
       <div class="slide" data-slide="3">
-        <div class="slide-number">04</div>
         <div class="slide-content">
           <div class="slide-visual">
             <div class="ritual-visual">
               <div class="ritual-circle"></div>
               <div class="ritual-circle"></div>
               <div class="ritual-circle"></div>
-              <div class="ritual-symbols">
-                <div class="ritual-symbol">∞</div>
-                <div class="ritual-symbol">◊</div>
-                <div class="ritual-symbol">△</div>
-                <div class="ritual-symbol">○</div>
-                <div class="ritual-symbol">✦</div>
-                <div class="ritual-symbol">◈</div>
-                <div class="ritual-symbol">▽</div>
-                <div class="ritual-symbol">◉</div>
-              </div>
               <div class="ritual-core">
                 <div class="ritual-ai-symbol">
                   <svg viewBox="0 0 100 100">
