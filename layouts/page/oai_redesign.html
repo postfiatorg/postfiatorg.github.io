@@ -679,16 +679,20 @@
         radial-gradient(circle at 50% 0%, rgba(141,184,255,.12) 0%, rgba(141,184,255,0) 58%);
     }
     .token-visual{
-      height:196px;
+      height:auto;
+      min-height:236px;
       margin:-6px -6px 22px;
+      padding:14px 12px 14px;
       border-radius:24px;
       border:1px solid rgba(255,255,255,.08);
       background:
         linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)),
         radial-gradient(circle at 50% 10%, rgba(141,184,255,.16) 0%, rgba(141,184,255,0) 52%);
       display:flex;
+      flex-direction:column;
       align-items:center;
       justify-content:center;
+      gap:10px;
       position:relative;
       overflow:hidden;
       box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
@@ -705,7 +709,7 @@
     .token-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;position:relative;z-index:1}
     .token-chip{font-size:.72rem;color:#d9e4fb;padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);letter-spacing:.04em;text-transform:uppercase;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
 
-    .token-flow-svg,.token-orbit-svg{width:100%;height:100%}
+    .token-flow-svg,.token-orbit-svg{display:block;width:100%;height:166px;flex:0 0 auto}
     .token-flow-svg *,.token-orbit-svg *{transform-box:fill-box;transform-origin:center}
     .flow-node-shell,.orbit-ring,.orbit-node{opacity:.26;transition:.4s}
     .flow-link,.orbit-link{opacity:.18;transition:.4s}
@@ -728,10 +732,8 @@
     @keyframes orbitTravel{0%{opacity:.85;offset-distance:0%}100%{opacity:.85;offset-distance:100%}}
 
     .token-card .visual-caption{
-      position:absolute;
-      left:18px;
-      right:18px;
-      bottom:16px;
+      position:static;
+      margin-top:2px;
       font-size:.68rem;
       letter-spacing:.22em;
       line-height:1.35;
@@ -745,21 +747,10 @@
 
     @media(max-width:900px){.info-grid,.token-band .info-grid{grid-template-columns:1fr}}
     @media(max-width:768px){
-      .token-visual{
-        height:auto;
-        min-height:238px;
-        padding:12px 10px 12px;
-        display:flex;
-        flex-direction:column;
-        justify-content:flex-start;
-        gap:10px;
-      }
+      .token-visual{min-height:238px;padding:12px 10px 12px;justify-content:flex-start}
       .token-flow-svg,
       .token-orbit-svg{
-        display:block;
-        width:100%;
         height:158px;
-        flex:0 0 auto;
       }
       .flow-label,
       .orbit-label{
@@ -772,14 +763,9 @@
       }
       .orbit-permanence-label,
       .orbit-privacy-label{
-        transform:translateY(14px);
+        transform:translateY(8px);
       }
       .token-card .visual-caption{
-        position:static;
-        left:auto;
-        right:auto;
-        bottom:auto;
-        margin-top:2px;
         font-size:.6rem;
         letter-spacing:.14em;
       }
@@ -909,16 +895,22 @@
     .slide-text{flex:1;padding:40px;position:relative}
     .use-case-title{font-size:clamp(2.5rem,4vw,3.6rem);font-weight:800;margin-bottom:24px;letter-spacing:-.03em;line-height:1.02;position:relative;background:linear-gradient(180deg,#fff,#dfe8ff,#a8c7ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
     .use-case-text{font-size:1.06rem;color:var(--muted);line-height:1.9;letter-spacing:.01em;font-weight:400;max-width:540px}
-    .slide-number{position:absolute;top:34px;right:38px;font-family:'Orbitron',sans-serif;font-size:5rem;font-weight:700;color:rgba(255,255,255,.04);z-index:0}
+    .slide-number{position:absolute;top:34px;right:38px;font-family:'Orbitron',sans-serif;font-size:5rem;font-weight:700;color:rgba(255,255,255,.07);z-index:0}
 
     .etf-visual{width:300px;height:300px;position:relative}
     .etf-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:15px;padding:20px}
-    .etf-cell{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:14px;position:relative;overflow:hidden;transition:all .4s;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+    .etf-cell{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:14px;position:relative;overflow:hidden;transition:all .4s;box-shadow:inset 0 1px 0 rgba(255,255,255,.04);padding:12px 10px 10px;display:flex;flex-direction:column;justify-content:space-between}
     .etf-cell::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.1) 50%,transparent 60%);transform:translateX(-100%) translateY(-100%);transition:transform .8s}
     .slide.active .etf-cell:nth-child(odd)::before{animation:shimmer 3s ease-in-out infinite;animation-delay:calc(var(--i) * .2s)}
     .slide.active .etf-cell:nth-child(even)::before{animation:shimmer 3s ease-in-out infinite reverse;animation-delay:calc(var(--i) * .15s)}
     @keyframes shimmer{0%,100%{transform:translateX(-100%) translateY(-100%)}50%{transform:translateX(100%) translateY(100%)}}
     .etf-center{grid-column:2;grid-row:2;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.28);transform:scale(1.1);box-shadow:0 0 26px rgba(141,184,255,.14)}
+    .etf-cell-label{position:relative;z-index:1;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#dfe8ff}
+    .etf-cell-bar{position:relative;z-index:1;height:6px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+    .etf-cell-bar::after{content:"";display:block;height:100%;width:var(--fill,65%);border-radius:inherit;background:linear-gradient(90deg,#7c5cff,#8db8ff,#90f3ff);opacity:.9}
+    .etf-cell-meta{position:relative;z-index:1;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#8ea0c1}
+    .etf-center .etf-cell-label{font-size:.74rem;font-weight:700;color:#fff}
+    .etf-center .etf-cell-meta{color:#d6e3ff}
 
     .compliance-visual{width:320px;height:320px;position:relative}
     .lock-container{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
@@ -1389,15 +1381,51 @@
           <div class="slide-visual">
             <div class="etf-visual">
               <div class="etf-grid">
-                <div class="etf-cell" style="--i:1"></div>
-                <div class="etf-cell" style="--i:2"></div>
-                <div class="etf-cell" style="--i:3"></div>
-                <div class="etf-cell" style="--i:4"></div>
-                <div class="etf-cell etf-center" style="--i:5"></div>
-                <div class="etf-cell" style="--i:6"></div>
-                <div class="etf-cell" style="--i:7"></div>
-                <div class="etf-cell" style="--i:8"></div>
-                <div class="etf-cell" style="--i:9"></div>
+                <div class="etf-cell" style="--i:1;--fill:78%">
+                  <span class="etf-cell-label">CUSIP</span>
+                  <span class="etf-cell-bar"></span>
+                  <span class="etf-cell-meta">equity id</span>
+                </div>
+                <div class="etf-cell" style="--i:2;--fill:72%">
+                  <span class="etf-cell-label">ISIN</span>
+                  <span class="etf-cell-bar"></span>
+                  <span class="etf-cell-meta">global id</span>
+                </div>
+                <div class="etf-cell" style="--i:3;--fill:69%">
+                  <span class="etf-cell-label">TOKEN</span>
+                  <span class="etf-cell-bar"></span>
+                  <span class="etf-cell-meta">crypto asset</span>
+                </div>
+                <div class="etf-cell" style="--i:4;--fill:74%">
+                  <span class="etf-cell-label">NAV</span>
+                  <span class="etf-cell-bar"></span>
+                  <span class="etf-cell-meta">fund state</span>
+                </div>
+                <div class="etf-cell etf-center" style="--i:5;--fill:92%">
+                  <span class="etf-cell-label">INDEX</span>
+                  <span class="etf-cell-bar"></span>
+                  <span class="etf-cell-meta">post fiat</span>
+                </div>
+                <div class="etf-cell" style="--i:6;--fill:76%">
+                  <span class="etf-cell-label">SCREEN</span>
+                  <span class="etf-cell-bar"></span>
+                  <span class="etf-cell-meta">selection</span>
+                </div>
+                <div class="etf-cell" style="--i:7;--fill:63%">
+                  <span class="etf-cell-label">SWAPS</span>
+                  <span class="etf-cell-bar"></span>
+                  <span class="etf-cell-meta">perpetuals</span>
+                </div>
+                <div class="etf-cell" style="--i:8;--fill:71%">
+                  <span class="etf-cell-label">AI</span>
+                  <span class="etf-cell-bar"></span>
+                  <span class="etf-cell-meta">signals</span>
+                </div>
+                <div class="etf-cell" style="--i:9;--fill:80%">
+                  <span class="etf-cell-label">PFT</span>
+                  <span class="etf-cell-bar"></span>
+                  <span class="etf-cell-meta">settlement</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1523,10 +1551,10 @@
             <circle class="flow-pulse fp1" r="4" fill="#fff" style="offset-path:path('M 82 96 L 210 52 L 338 96');offset-rotate:0deg"/>
             <circle class="flow-pulse fp2" r="3.6" fill="#fff" style="offset-path:path('M 82 96 L 210 138 L 338 96');offset-rotate:0deg"/>
             <circle class="flow-pulse fp3" r="3.4" fill="#fff" style="offset-path:path('M 210 52 L 210 138');offset-rotate:0deg"/>
-            <text class="flow-label flow-task-label" x="82" y="135" text-anchor="middle" fill="#dfe8ff" font-size="11" letter-spacing="2">TASK NODE</text>
-            <text class="flow-label flow-contribute-label" x="210" y="20" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="2">CONTRIBUTE</text>
-            <text class="flow-label flow-validate-label" x="210" y="173" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="2">VALIDATE</text>
-            <text class="flow-label flow-earn-label" x="338" y="135" text-anchor="middle" fill="#dfe8ff" font-size="11" letter-spacing="2">EARN PFT</text>
+            <text class="flow-label flow-task-label" x="82" y="136" text-anchor="middle" fill="#dfe8ff" font-size="11" letter-spacing="2">TASK NODE</text>
+            <text class="flow-label flow-contribute-label" x="210" y="21" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="2">CONTRIBUTE</text>
+            <text class="flow-label flow-validate-label" x="210" y="169" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="2">VALIDATE</text>
+            <text class="flow-label flow-earn-label" x="338" y="136" text-anchor="middle" fill="#dfe8ff" font-size="11" letter-spacing="2">EARN PFT</text>
           </svg>
           <div class="visual-caption">Participation Flow</div>
         </div>
@@ -1582,10 +1610,10 @@
             <circle class="orbit-pulse op2" r="3.6" fill="#fff" style="offset-path:path('M 298 95 A 88 88 0 1 1 297.9 95');offset-rotate:0deg"/>
             <circle class="orbit-pulse op3" r="3.2" fill="#fff" style="offset-path:path('M 328 95 A 118 56 0 1 1 327.9 95');offset-rotate:0deg"/>
 
-            <text class="orbit-label orbit-auth-label" x="210" y="20" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="2">AUTHENTICATION</text>
-            <text class="orbit-label orbit-permanence-label" x="116" y="100" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="1.5">PERMANENCE</text>
-            <text class="orbit-label orbit-privacy-label" x="304" y="100" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="1.5">PRIVACY</text>
-            <text class="orbit-label orbit-tasknode-label" x="210" y="173" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="2">TASK NODE</text>
+            <text class="orbit-label orbit-auth-label" x="210" y="21" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="2">AUTHENTICATION</text>
+            <text class="orbit-label orbit-permanence-label" x="108" y="122" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="1.5">PERMANENCE</text>
+            <text class="orbit-label orbit-privacy-label" x="312" y="122" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="1.5">PRIVACY</text>
+            <text class="orbit-label orbit-tasknode-label" x="210" y="169" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="2">TASK NODE</text>
             <text class="orbit-label orbit-center-label" x="210" y="127" text-anchor="middle" fill="#dfe8ff" font-size="8.5" letter-spacing="2">VALIDATORS • MESSAGING</text>
           </svg>
           <div class="visual-caption">Authentication • Permanence • Privacy</div>
