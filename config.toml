@@ -1,4 +1,4 @@
-baseURL = 'https://postfiatorg.github.io'
+baseURL = 'https://postfiat.org/'
 languageCode = 'en-us'
 title = 'Post Fiat'
 theme = 'PaperMod'
@@ -10,6 +10,17 @@ buildFuture = false
 buildExpired = false
 enableEmoji = true
 pygmentsUseClasses = true
+disableKinds = ["taxonomy", "term"]
+ignoreFiles = [
+  '^content/activate\.md$',
+  '^content/archives\.md$',
+  '^content/posts\.md$',
+  '^content/posts/.*',
+  '^content/search\.md$',
+  '^content/subscribe\.md$',
+  '^content/landing-.*\.md$',
+  '^content/whitepaper_legacy\.md$',
+]
 # googleAnalytics = "UA-123-45"
 
 [minify]
@@ -25,29 +36,24 @@ disableXML = true
       url = "whitepaper/"
       weight = 5
     [[languages.en.menu.main]]
-      name = "Tags"
-      url = "tags/"
+      name = "Task Node"
+      url = "task-node/"
       weight = 10
     [[languages.en.menu.main]]
-      name = "Posts"
-      url = "posts/"
+      name = "Community"
+      url = "community/"
       weight = 20
     [[languages.en.menu.main]]
-      name = "Search"
-      url = "search/"
+      name = "Validator Benchmark"
+      url = "validator-benchmark/"
       weight = 30
-
-    [[languages.en.menu.main]]
-      name = "Activate"
-      url = "activate/"
-      weight = 50
       
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 
 [params]
   env = "production"
-  description = "Good PaperMod"
+  description = "Post Fiat is a fair, private XRP-derived network for capital markets and collective intelligence."
   author = "postfiat"
   # author = ["Me", "You"]
   defaultTheme = "dark"
@@ -68,28 +74,23 @@ disableXML = true
 
 
 [params.homeInfoParams]
-  Title = "goodalexander: financial cyberpunk"
-  Content = '''Crypto and options trading. Long form writing. Can also [Subscribe to E-Mail Newsletter](https://postfiatorg.github.io/subscribe/). Always free. Never financial advice. Please read [Disclaimer](https://postfiatorg.github.io/disclaimer)'''
+  Title = "Post Fiat"
+  Content = '''Fair, private XRP for capital markets and collective intelligence. Read the [Whitepaper](/whitepaper/), use the [Task Node](/task-node/), or join the [Community](/community/).'''
   
   [[params.socialIcons]]
     name = "twitter"
-    title = "Follow me on twitter"
+    title = "Follow Post Fiat on X"
     url = "https://www.twitter.com/postfiatorg"
   
   [[params.socialIcons]]
     name = "Discord"
-    title = "Join discord community"
-    url = "https://discord.gg/Kzu8ezhY"
+    title = "Join the Post Fiat community"
+    url = "https://postfiat.org/community/"
   
   [[params.socialIcons]]
     name = "github"
-    title = "My Github"
+    title = "Post Fiat GitHub"
     url = "https://www.github.com/postfiatorg"
-
-  [[params.socialIcons]]
-    name = "email"
-    title = "email newsletter"
-    url = "https://postfiatorg.github.io/subscribe"
 
 [params.Social]
   twitter = "postfiatorg"

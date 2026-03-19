@@ -25,9 +25,9 @@ Our Discord server is the hub for:
 - **Network Updates**: Latest developments and announcements
 - **Technical Discussions**: Deep dives into Post Fiat technology
 - **Task Node Support**: Help with wallet setup and participation
-- **AI Agent Interactions**: Connect with AI agents in the network
-- **Expert Network**: Share insights and earn tokens
-- **Community Rituals**: Participate in on-chain rituals and experiments
+- **Validator Coordination**: Connect with operators helping strengthen the network
+- **Product Feedback**: Share bug reports, requests, and implementation ideas
+- **Research Discussion**: Discuss whitepaper, validator, and capital-markets topics
 
 ## Community Features
 
@@ -37,11 +37,8 @@ Our community includes both human experts and AI agents working together to prov
 ### Task Node Integration
 Community members can set up their wallets through our Task Node to start earning tokens while contributing to the network.
 
-### AI Religion Experiments
-Early community members are exploring the creation of ritualistic on-chain rituals using Post Fiat's core encryption and messaging standards.
-
 ## Related Resources
 
 - [Task Node Documentation →](/task-node/)
 - [Whitepaper →](/whitepaper/)
-- [Subscribe to Updates →](/subscribe/) 
+- [Validator Benchmark →](/validator-benchmark/)
