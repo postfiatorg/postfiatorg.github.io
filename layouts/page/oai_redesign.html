@@ -746,21 +746,36 @@
     @media(max-width:900px){.info-grid,.token-band .info-grid{grid-template-columns:1fr}}
     @media(max-width:768px){
       .token-visual{
-        height:198px;
-        padding:12px 10px 44px;
+        height:auto;
+        min-height:238px;
+        padding:12px 10px 12px;
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-start;
+        gap:10px;
       }
       .token-flow-svg,
       .token-orbit-svg{
-        max-height:142px;
+        display:block;
+        width:100%;
+        height:158px;
+        flex:0 0 auto;
       }
-      .token-flow-svg text,
-      .token-orbit-svg text{
-        display:none;
+      .flow-label,
+      .orbit-label{
+        font-size:8px !important;
+        letter-spacing:1px !important;
+      }
+      .flow-validate-label,
+      .orbit-tasknode-label{
+        transform:translateY(-4px);
       }
       .token-card .visual-caption{
-        left:12px;
-        right:12px;
-        bottom:12px;
+        position:static;
+        left:auto;
+        right:auto;
+        bottom:auto;
+        margin-top:2px;
         font-size:.6rem;
         letter-spacing:.14em;
       }
@@ -1504,10 +1519,10 @@
             <circle class="flow-pulse fp1" r="4" fill="#fff" style="offset-path:path('M 82 96 L 210 52 L 338 96');offset-rotate:0deg"/>
             <circle class="flow-pulse fp2" r="3.6" fill="#fff" style="offset-path:path('M 82 96 L 210 138 L 338 96');offset-rotate:0deg"/>
             <circle class="flow-pulse fp3" r="3.4" fill="#fff" style="offset-path:path('M 210 52 L 210 138');offset-rotate:0deg"/>
-            <text x="82" y="135" text-anchor="middle" fill="#dfe8ff" font-size="11" letter-spacing="2">TASK NODE</text>
-            <text x="210" y="20" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="2">CONTRIBUTE</text>
-            <text x="210" y="173" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="2">VALIDATE</text>
-            <text x="338" y="135" text-anchor="middle" fill="#dfe8ff" font-size="11" letter-spacing="2">EARN PFT</text>
+            <text class="flow-label flow-task-label" x="82" y="135" text-anchor="middle" fill="#dfe8ff" font-size="11" letter-spacing="2">TASK NODE</text>
+            <text class="flow-label flow-contribute-label" x="210" y="20" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="2">CONTRIBUTE</text>
+            <text class="flow-label flow-validate-label" x="210" y="173" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="2">VALIDATE</text>
+            <text class="flow-label flow-earn-label" x="338" y="135" text-anchor="middle" fill="#dfe8ff" font-size="11" letter-spacing="2">EARN PFT</text>
           </svg>
           <div class="visual-caption">Participation Flow</div>
         </div>
@@ -1563,11 +1578,11 @@
             <circle class="orbit-pulse op2" r="3.6" fill="#fff" style="offset-path:path('M 298 95 A 88 88 0 1 1 297.9 95');offset-rotate:0deg"/>
             <circle class="orbit-pulse op3" r="3.2" fill="#fff" style="offset-path:path('M 328 95 A 118 56 0 1 1 327.9 95');offset-rotate:0deg"/>
 
-            <text x="210" y="20" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="2">AUTHENTICATION</text>
-            <text x="78" y="100" text-anchor="end" fill="#dfe8ff" font-size="9.5" letter-spacing="2">PERMANENCE</text>
-            <text x="332" y="100" text-anchor="start" fill="#dfe8ff" font-size="10" letter-spacing="2">PRIVACY</text>
-            <text x="210" y="173" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="2">TASK NODE</text>
-            <text x="210" y="127" text-anchor="middle" fill="#dfe8ff" font-size="8.5" letter-spacing="2">VALIDATORS • MESSAGING</text>
+            <text class="orbit-label orbit-auth-label" x="210" y="20" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="2">AUTHENTICATION</text>
+            <text class="orbit-label orbit-permanence-label" x="116" y="100" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="1.5">PERMANENCE</text>
+            <text class="orbit-label orbit-privacy-label" x="304" y="100" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="1.5">PRIVACY</text>
+            <text class="orbit-label orbit-tasknode-label" x="210" y="173" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="2">TASK NODE</text>
+            <text class="orbit-label orbit-center-label" x="210" y="127" text-anchor="middle" fill="#dfe8ff" font-size="8.5" letter-spacing="2">VALIDATORS • MESSAGING</text>
           </svg>
           <div class="visual-caption">Authentication • Permanence • Privacy</div>
         </div>
