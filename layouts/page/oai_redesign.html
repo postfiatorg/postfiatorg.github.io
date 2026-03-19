@@ -730,10 +730,13 @@
     .token-card .visual-caption{
       position:absolute;
       left:18px;
+      right:18px;
       bottom:16px;
       font-size:.68rem;
       letter-spacing:.22em;
+      line-height:1.35;
       text-transform:uppercase;
+      text-align:center;
       color:#8ea0c1;
       z-index:1;
     }
@@ -741,7 +744,27 @@
     .token-band .info-card a{color:#fff;text-decoration-thickness:1px;text-underline-offset:3px}
 
     @media(max-width:900px){.info-grid,.token-band .info-grid{grid-template-columns:1fr}}
-    @media(max-width:768px){.token-visual{height:178px}}
+    @media(max-width:768px){
+      .token-visual{
+        height:198px;
+        padding:12px 10px 44px;
+      }
+      .token-flow-svg,
+      .token-orbit-svg{
+        max-height:142px;
+      }
+      .token-flow-svg text,
+      .token-orbit-svg text{
+        display:none;
+      }
+      .token-card .visual-caption{
+        left:12px;
+        right:12px;
+        bottom:12px;
+        font-size:.6rem;
+        letter-spacing:.14em;
+      }
+    }
 
     /* ===== WHY POST FIAT SECTION ===== */
     .why-post-fiat{padding:106px 20px 126px;position:relative;overflow:hidden}
