@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post Fiat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#06070a;
+      --bg-2:#0b0d12;
+      --panel:rgba(255,255,255,.055);
+      --panel-2:rgba(255,255,255,.035);
+      --stroke:rgba(255,255,255,.12);
+      --stroke-strong:rgba(255,255,255,.24);
+      --text:#f5f7fb;
+      --muted:#99a1b3;
+      --soft:#c8d0df;
+      --accent:#8db8ff;
+      --accent-2:#7c5cff;
+      --accent-3:#90f3ff;
+      --shadow:0 20px 70px rgba(0,0,0,.45);
+      --glow:0 0 40px rgba(141,184,255,.18),0 0 80px rgba(124,92,255,.10);
+      --radius:28px;
+      --radius-sm:18px;
+      --max:1280px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    html,body{
+      margin:0;
+      padding:0;
+      font-family:'Inter',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,.18) 0%, rgba(124,92,255,0) 28%),
+        radial-gradient(circle at 85% 18%, rgba(144,243,255,.16) 0%, rgba(144,243,255,0) 24%),
+        radial-gradient(circle at 50% 110%, rgba(141,184,255,.18) 0%, rgba(141,184,255,0) 30%),
+        linear-gradient(180deg,#090b10 0%, #050609 38%, #040506 100%);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size:72px 72px;
+      mask-image:radial-gradient(circle at center, black 35%, transparent 100%);
+      opacity:.26;
+      pointer-events:none;
+      z-index:-3;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+      opacity:.55;
+      mix-blend-mode:soft-light;
+      pointer-events:none;
+      z-index:-2;
+    }
+
+    .aurora{
+      position:fixed;
+      inset:auto;
+      width:46vw;
+      height:46vw;
+      border-radius:50%;
+      filter:blur(80px);
+      opacity:.16;
+      pointer-events:none;
+      z-index:-1;
+      animation:auroraFloat 16s ease-in-out infinite;
+    }
+    .aurora.a1{top:-12vw;left:-10vw;background:radial-gradient(circle, rgba(124,92,255,.95) 0%, rgba(124,92,255,0) 66%)}
+    .aurora.a2{top:18vh;right:-10vw;background:radial-gradient(circle, rgba(144,243,255,.9) 0%, rgba(144,243,255,0) 64%);animation-delay:-5s}
+    .aurora.a3{bottom:-18vw;left:28vw;background:radial-gradient(circle, rgba(141,184,255,.95) 0%, rgba(141,184,255,0) 66%);animation-delay:-9s}
+    @keyframes auroraFloat{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(2vw,-1.5vw,0) scale(1.08)}}
+
+    .spotlight{
+      position:fixed;
+      width:520px;
+      height:520px;
+      margin:-260px 0 0 -260px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.075) 0%, rgba(141,184,255,.05) 18%, rgba(255,255,255,0) 68%);
+      pointer-events:none;
+      z-index:0;
+      opacity:.55;
+      mix-blend-mode:screen;
+      transition:transform .08s linear, opacity .2s ease;
+    }
+
+    a{color:inherit}
+
+    section{position:relative;z-index:1}
+
+    /* ========= HEADER ========= */
+    header{
+      position:sticky;
+      top:14px;
+      z-index:100;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      width:min(calc(100% - 24px), 1240px);
+      margin:14px auto 0;
+      padding:1rem 1.2rem;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(10,12,18,.82) 0%, rgba(8,10,16,.66) 100%);
+      backdrop-filter:blur(24px) saturate(140%);
+      -webkit-backdrop-filter:blur(24px) saturate(140%);
+      box-shadow:0 12px 40px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.08);
+      overflow:visible;
+    }
+    header::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(110deg, transparent 0%, rgba(255,255,255,.08) 18%, transparent 36%);
+      transform:translateX(-120%);
+      animation:headerSweep 8s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes headerSweep{to{transform:translateX(220%)}}
+
+    .brand-name{
+      position:relative;
+      font-family:'Orbitron',sans-serif;
+      font-size:1.05rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.34em;
+      padding-left:.9rem;
+      background:linear-gradient(90deg,#fff 0%, #dbe5ff 45%, #94b8ff 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 0 22px rgba(141,184,255,.18);
+      white-space:nowrap;
+    }
+    .brand-name::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:50%;
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      transform:translateY(-50%);
+      background:radial-gradient(circle, #fff 0%, #9cc4ff 55%, rgba(156,196,255,0) 75%);
+      box-shadow:0 0 18px rgba(141,184,255,.55);
+    }
+
+    .nav-links{display:flex;gap:.6rem;align-items:center}
+    .nav-link{
+      font-size:.74rem;
+      color:#c7d1e4;
+      text-decoration:none;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      position:relative;
+      padding:.82rem 1rem;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition:all .28s cubic-bezier(.4,0,.2,1);
+      overflow:hidden;
+    }
+    .nav-link::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,0));
+      opacity:0;
+      transition:.28s;
+    }
+    .nav-link:hover{
+      color:#fff;
+      border-color:rgba(255,255,255,.14);
+      background:rgba(255,255,255,.05);
+      transform:translateY(-1px);
+      box-shadow:0 8px 24px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .nav-link:hover::before{opacity:1}
+
+    .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;width:24px;height:24px;justify-content:center;position:relative;z-index:2}
+    .hamburger span{display:block;width:100%;height:2px;border-radius:999px;background:#fff;transition:.3s}
+    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .hamburger.active span:nth-child(2){opacity:0}
+    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+    @media(max-width:900px){
+      header{top:10px;width:min(calc(100% - 20px), 1240px)}
+      .nav-links{
+        display:none;
+        position:absolute;
+        top:calc(100% + 10px);
+        left:0;
+        right:0;
+        z-index:120;
+        padding:.8rem;
+        flex-direction:column;
+        align-items:stretch;
+        gap:.55rem;
+        background:linear-gradient(180deg, rgba(10,12,18,.95) 0%, rgba(7,8,12,.92) 100%);
+        border:1px solid rgba(255,255,255,.12);
+        border-radius:18px;
+        box-shadow:var(--shadow);
+      }
+      .nav-links.active{display:flex}
+      .nav-link{text-align:center}
+      .hamburger{display:flex}
+    }
+
+    /* ========= HERO ========= */
+    .hero{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:110px 20px 86px;
+      text-align:center;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      top:90px;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(920px, 92vw);
+      height:520px;
+      background:
+        radial-gradient(circle at 50% 12%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 44%),
+        radial-gradient(circle at 30% 40%, rgba(124,92,255,.12) 0%, rgba(124,92,255,0) 30%),
+        radial-gradient(circle at 72% 40%, rgba(144,243,255,.12) 0%, rgba(144,243,255,0) 28%);
+      filter:blur(8px);
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .hero-logo-container{
+      width:300px;
+      height:300px;
+      margin:0 auto 54px;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 38%, rgba(255,255,255,0) 68%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        inset 0 -24px 60px rgba(124,92,255,.08),
+        0 20px 80px rgba(0,0,0,.45),
+        0 0 90px rgba(141,184,255,.10);
+      overflow:visible;
+      transform-style:preserve-3d;
+      isolation:isolate;
+    }
+    .hero-logo-container::before,
+    .hero-logo-container::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      inset:-14px;
+      border:1px solid rgba(255,255,255,.08);
+      background:conic-gradient(from 120deg, rgba(255,255,255,0) 0 18%, rgba(141,184,255,.35) 28%, rgba(124,92,255,.25) 46%, rgba(255,255,255,0) 58% 100%);
+      mask:radial-gradient(circle, transparent 66%, black 67%, black 69%, transparent 70%);
+      animation:spinField 12s linear infinite;
+      pointer-events:none;
+      z-index:0;
+    }
+    .hero-logo-container::after{
+      inset:-34px;
+      opacity:.45;
+      filter:blur(2px);
+      animation-direction:reverse;
+      animation-duration:18s;
+    }
+
+    .logo-core-glow{
+      position:absolute;
+      width:55%;
+      height:55%;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.16) 0%, rgba(141,184,255,.14) 28%, rgba(124,92,255,.08) 46%, transparent 74%);
+      filter:blur(12px);
+      animation:coreBreath 4.6s ease-in-out infinite;
+      z-index:1;
+    }
+    @keyframes coreBreath{0%,100%{transform:scale(.96);opacity:.65}50%{transform:scale(1.12);opacity:1}}
+
+    .spoke-field{position:absolute;inset:0;border-radius:50%;animation:spinField 18s linear infinite;z-index:2}
+    @keyframes spinField{to{transform:rotate(360deg)}}
+    .spoke{position:absolute;left:50%;top:50%;width:4px;height:var(--len);background:linear-gradient(to bottom, rgba(255,255,255,.9) 0%, rgba(141,184,255,.45) 20%, transparent 100%);transform-origin:center bottom;transform:translate(-50%,-100%) rotate(var(--angle)) scaleY(1);opacity:.55;animation:spokePulse var(--spd) ease-in-out infinite;animation-delay:var(--delay)}
+    @keyframes spokePulse{0%,100%{opacity:.18;transform:translate(-50%,-100%) rotate(var(--angle)) scaleY(.64)}50%{opacity:.95;transform:translate(-50%,-100%) rotate(var(--angle)) scaleY(1.35)}}
+
+    .hero-logo{
+      position:relative;
+      width:132px;
+      height:132px;
+      transform:rotateX(10deg) translateZ(20px);
+      animation:pulseGlow 4.2s ease-in-out infinite;
+      filter:drop-shadow(0 0 14px rgba(255,255,255,.30)) drop-shadow(0 0 34px rgba(141,184,255,.30));
+      z-index:3;
+    }
+    .hero-logo svg{width:100%;height:100%}
+    @keyframes pulseGlow{0%,100%{transform:rotateX(10deg) scale(1);filter:drop-shadow(0 0 14px rgba(255,255,255,.24)) drop-shadow(0 0 26px rgba(141,184,255,.24))}50%{transform:rotateX(10deg) scale(1.08);filter:drop-shadow(0 0 22px rgba(255,255,255,.55)) drop-shadow(0 0 52px rgba(141,184,255,.34))}}
+
+    .hero h1{
+      max-width:1000px;
+      margin:0 auto 22px;
+      font-size:clamp(44px,7vw,92px);
+      line-height:1.03;
+      padding-bottom:.08em;
+      font-weight:800;
+      letter-spacing:-.04em;
+      background:linear-gradient(180deg, #ffffff 0%, #e7eeff 34%, #bad0ff 72%, #ffffff 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 0 40px rgba(141,184,255,.12);
+      animation:fadeUp .9s ease-out;
+    }
+    .hero p{
+      font-size:1.1rem;
+      color:var(--muted);
+      max-width:840px;
+      margin:0 auto 42px;
+      line-height:1.82;
+      letter-spacing:.01em;
+      animation:fadeUp 1.1s ease-out;
+    }
+
+    .action-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+      max-width:980px;
+      margin:0 auto;
+      animation:fadeUp 1.25s ease-out;
+    }
+    .action-card{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
+      min-height:164px;
+      padding:26px 22px;
+      text-decoration:none;
+      color:#fff;
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.065) 0%, rgba(255,255,255,.025) 100%),
+        radial-gradient(circle at 50% 0%, rgba(141,184,255,.16) 0%, rgba(141,184,255,0) 60%);
+      box-shadow:0 14px 40px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.08);
+      transition:all .38s cubic-bezier(.4,0,.2,1);
+      isolation:isolate;
+    }
+    .action-card::before{
+      content:"";
+      position:absolute;
+      inset:1px;
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+      pointer-events:none;
+    }
+    .action-card::after{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.16) 18%, transparent 36%);
+      transform:translateX(-140%);
+      transition:transform .8s ease;
+      pointer-events:none;
+    }
+    .action-card:hover{
+      transform:translateY(-8px) scale(1.012);
+      border-color:rgba(255,255,255,.22);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.11) 0%, rgba(255,255,255,.04) 100%),
+        radial-gradient(circle at 50% 0%, rgba(141,184,255,.24) 0%, rgba(141,184,255,0) 64%);
+      box-shadow:0 26px 80px rgba(0,0,0,.42), 0 0 40px rgba(141,184,255,.12), inset 0 1px 0 rgba(255,255,255,.1);
+    }
+    .action-card:hover::after{transform:translateX(180%)}
+    .action-card .cta-icon{
+      width:58px;
+      height:58px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.18);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:all .35s;
+      flex-shrink:0;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.1), 0 12px 24px rgba(0,0,0,.18);
+    }
+    .action-card:hover .cta-icon{
+      transform:translateY(-2px) scale(1.06);
+      border-color:rgba(255,255,255,.34);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 12px 26px rgba(0,0,0,.22), 0 0 24px rgba(141,184,255,.18);
+      background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+    }
+    .action-card .cta-icon svg{width:24px;height:24px;fill:none;stroke:#fff;opacity:.95;transition:.3s}
+    .action-card .cta-label{font-size:1rem;font-weight:700;letter-spacing:.02em;text-align:center;line-height:1.3}
+    .action-card .cta-desc{font-size:.8rem;color:#8690a6;line-height:1.55;text-align:center;transition:.3s}
+    .action-card:hover .cta-desc{color:#c7d1e4}
+    .action-card .cta-arrow{font-size:.72rem;color:#7b869c;letter-spacing:.24em;text-transform:uppercase;transition:.3s;margin-top:auto}
+    .action-card:hover .cta-arrow{color:#fff;letter-spacing:.3em}
+
+    @media(max-width:900px){.action-grid{grid-template-columns:1fr;max-width:420px}}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ===== SIGN-UP SECTION ===== */
+    .signup{
+      max-width:920px;
+      margin:0 auto 120px;
+      padding:44px 28px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:32px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.028) 100%),
+        radial-gradient(circle at 50% 0%, rgba(141,184,255,.14) 0%, rgba(141,184,255,0) 65%);
+      backdrop-filter:blur(14px) saturate(120%);
+      box-shadow:0 26px 70px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.08);
+      text-align:center;
+      animation:fadeUp 1.4s ease-out;
+      overflow:hidden;
+      position:relative;
+    }
+    .signup::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.12) 18%, transparent 34%);
+      transform:translateX(-140%);
+      animation:panelSweep 9s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes panelSweep{to{transform:translateX(180%)}}
+
+    .signup h2{font-size:1.95rem;margin:0 0 14px;font-weight:700;letter-spacing:-.02em;background:linear-gradient(90deg,#fff,#dce7ff,#9abeff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .signup p{max-width:720px;color:var(--muted);margin:0 auto 28px;line-height:1.7}
+
+    /* Social Icons */
+    .social-section{text-align:center;margin-top:40px}
+    .social-icons{display:flex;justify-content:center;gap:30px;margin-top:20px}
+    .social-icon{width:50px;height:50px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .3s;position:relative;overflow:hidden}
+    .social-icon::before{content:"";position:absolute;inset:0;background:rgba(255,255,255,.05);transform:scale(0);border-radius:50%;transition:transform .3s}
+    .social-icon:hover{border-color:rgba(255,255,255,.5);transform:translateY(-3px)}
+    .social-icon:hover::before{transform:scale(1)}
+    .social-icon svg{width:24px;height:24px;fill:#fff;opacity:.8;transition:opacity .3s;position:relative;z-index:1}
+    .social-icon:hover svg{opacity:1}
+
+    /* ===== PROOF / CREDIBILITY BAND ===== */
+    .credibility-band{padding:0 20px 96px}
+    .credibility-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+    .credibility-card{
+      padding:34px 32px;
+      border:1px solid rgba(255,255,255,.11);
+      border-radius:28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,.022) 100%),
+        radial-gradient(circle at 100% 0%, rgba(141,184,255,.12) 0%, rgba(141,184,255,0) 40%);
+      backdrop-filter:blur(16px) saturate(120%);
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .credibility-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)}
+    .credibility-card::after{content:"";position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 72%);pointer-events:none}
+
+    .cred-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;gap:12px}
+    .cred-header h2{font-size:1.16rem;margin:0;font-weight:700;color:#fff;letter-spacing:.03em}
+    .cred-badge{font-size:.66rem;color:#d1dcf4;letter-spacing:.18em;text-transform:uppercase;padding:7px 13px;border:1px solid rgba(255,255,255,.1);border-radius:999px;white-space:nowrap;background:rgba(255,255,255,.04)}
+
+    .stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px}
+    .stat-block{
+      padding:22px 18px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.028));
+      border:1px solid rgba(255,255,255,.08);
+      position:relative;
+      overflow:hidden;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .stat-block::before{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(141,184,255,.5),rgba(255,255,255,0))}
+    .stat-number{font-family:'Orbitron',sans-serif;font-size:2.6rem;font-weight:700;color:#fff;line-height:1;margin-bottom:8px;letter-spacing:.02em;text-shadow:0 0 20px rgba(141,184,255,.16)}
+    .stat-number .stat-unit{font-size:.9rem;font-weight:400;color:#8fa0be;margin-left:2px;letter-spacing:.06em}
+    .stat-label{font-size:.72rem;color:#95a2bb;letter-spacing:.16em;text-transform:uppercase;line-height:1.45}
+
+    .metric-rows{display:flex;flex-direction:column;gap:16px;margin-bottom:24px}
+    .metric-item{display:flex;flex-direction:column;gap:8px}
+    .metric-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+    .metric-label{font-size:.8rem;color:#a9b4c9;letter-spacing:.02em}
+    .metric-value{font-family:'Orbitron',sans-serif;font-size:.84rem;color:#fff;letter-spacing:.06em}
+    .metric-bar{width:100%;height:7px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+    .metric-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,rgba(124,92,255,.55),rgba(141,184,255,.95),rgba(144,243,255,.9));transition:width 1.5s cubic-bezier(.4,0,.2,1);position:relative;box-shadow:0 0 24px rgba(141,184,255,.3)}
+    .metric-fill::after{content:"";position:absolute;right:0;top:50%;transform:translate(50%,-50%);width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 0 14px rgba(255,255,255,.75)}
+
+    .cred-explorer-link{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;padding:12px 20px;border:1px solid rgba(255,255,255,.15);border-radius:999px;transition:all .3s;background:rgba(255,255,255,.04);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+    .cred-explorer-link:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.09);transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.28), 0 0 20px rgba(141,184,255,.12)}
+    .cred-explorer-link svg{width:14px;height:14px;stroke:#fff;stroke-width:2;fill:none;opacity:.75;transition:.3s}
+    .cred-explorer-link:hover svg{opacity:1;transform:translateX(2px)}
+
+    .founder-block{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.08)}
+    .founder-avatar{width:52px;height:52px;border-radius:15px;background:linear-gradient(135deg,rgba(141,184,255,.28),rgba(124,92,255,.16));border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Orbitron',sans-serif;font-size:.96rem;color:#fff;letter-spacing:.08em;box-shadow:0 0 24px rgba(141,184,255,.16)}
+    .founder-info{flex:1}
+    .founder-name{font-size:1rem;font-weight:700;color:#fff;margin-bottom:4px}
+    .founder-handle{font-size:.8rem;color:#90a2c4;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+    .cred-section-label{font-size:.66rem;color:#73819d;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px}
+    .cred-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+    .cred-tag{font-size:.75rem;color:#d9e4fb;padding:7px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);letter-spacing:.02em;transition:all .3s;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+    .cred-tag:hover{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.07);transform:translateY(-1px)}
+
+    .backer-grid{display:flex;flex-direction:column;gap:10px}
+    .backer-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);transition:all .3s}
+    .backer-item:hover{border-color:rgba(255,255,255,.1);background:rgba(255,255,255,.05)}
+    .backer-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(180deg,#fff,#93b6ff);margin-top:6px;flex-shrink:0;box-shadow:0 0 10px rgba(141,184,255,.4)}
+    .backer-text{font-size:.84rem;color:#adb6c9;line-height:1.58}
+    .backer-text strong{color:#eef3ff;font-weight:600}
+
+    @media(max-width:900px){
+      .credibility-grid{grid-template-columns:1fr}
+      .stat-row{grid-template-columns:1fr}
+      .stat-number{font-size:2.2rem}
+    }
+
+    /* ===== HOW IT WORKS ===== */
+    .hiw{padding:106px 20px 108px;position:relative;overflow:hidden}
+    .hiw::before,.why-post-fiat::before,.use-cases-section::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent 10%,rgba(255,255,255,.12) 50%,transparent 90%)}
+    .hiw::after{
+      content:"";
+      position:absolute;
+      inset:80px auto auto 50%;
+      transform:translateX(-50%);
+      width:min(1100px, 100%);
+      height:300px;
+      background:radial-gradient(circle at 50% 50%, rgba(141,184,255,.12) 0%, rgba(141,184,255,0) 60%);
+      filter:blur(16px);
+      pointer-events:none;
+      z-index:-1;
+    }
+    .hiw-title,.info-header,.use-cases-header{text-align:center;margin-bottom:60px}
+    .hiw-title h2,.info-header h2,.use-cases-header h2{
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(2.4rem,4vw,3.8rem);
+      font-weight:700;
+      letter-spacing:.16em;
+      background:linear-gradient(90deg,#fff 0%, #dfe8ff 50%, #9ec2ff 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin:0;
+      position:relative;
+      text-transform:uppercase;
+    }
+    .hiw-title h2::after,.info-header h2::after,.use-cases-header::after{content:"";position:absolute;left:50%;bottom:-18px;transform:translateX(-50%);width:84px;height:2px;background:linear-gradient(90deg,transparent,rgba(141,184,255,.85),transparent);box-shadow:0 0 18px rgba(141,184,255,.3)}
+    .use-cases-header::after{bottom:-20px}
+
+    .hiw-flow{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:0}
+    .hiw-step{position:relative;padding:0}
+    .hiw-step-inner{
+      height:100%;
+      padding:32px 28px 28px;
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:26px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,.022) 100%),
+        radial-gradient(circle at 50% 0%, rgba(141,184,255,.12) 0%, rgba(141,184,255,0) 60%);
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      transition:all .4s cubic-bezier(.4,0,.2,1);
+      box-shadow:0 16px 42px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .hiw-step-inner::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent)}
+    .hiw-step-inner:hover{border-color:rgba(255,255,255,.18);background:linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.028) 100%), radial-gradient(circle at 50% 0%, rgba(141,184,255,.18) 0%, rgba(141,184,255,0) 60%);transform:translateY(-6px);box-shadow:0 20px 56px rgba(0,0,0,.34),0 0 30px rgba(141,184,255,.08), inset 0 1px 0 rgba(255,255,255,.08)}
+
+    .hiw-step-num{font-family:'Orbitron',sans-serif;font-size:.66rem;letter-spacing:.22em;color:#7a8ba8;margin-bottom:16px;text-transform:uppercase}
+    .hiw-vis{width:100%;height:126px;margin-bottom:20px;position:relative;display:flex;align-items:center;justify-content:center;overflow:visible}
+    .hiw-vis svg{overflow:visible}
+
+    .hiw-speed-svg{width:140px;height:100px}
+    .hiw-speed-svg *{transform-box:fill-box;transform-origin:center}
+    .speed-node{opacity:.38;transition:.4s}
+    .speed-link{opacity:.14;transition:.4s}
+    .speed-pulse{opacity:0}
+    .hiw-step-inner:hover .speed-node{opacity:.95}
+    .hiw-step-inner:hover .speed-link{opacity:.45}
+    .hiw-step-inner:hover .speed-pulse{animation:speedTravel 1.8s ease-in-out infinite}
+    .speed-pulse.sp2{animation-delay:.6s !important}
+    .speed-pulse.sp3{animation-delay:1.2s !important}
+    @keyframes speedTravel{0%{opacity:0;offset-distance:0%}15%{opacity:1}85%{opacity:1}100%{opacity:0;offset-distance:100%}}
+
+    .hiw-shield-svg{width:120px;height:110px}
+    .hiw-shield-svg *{transform-box:fill-box;transform-origin:center}
+    .shield-body{opacity:.28;transition:.4s}
+    .shield-ring{opacity:.13;transition:.4s}
+    .shield-tick{opacity:0;transition:.4s}
+    .shield-orbit-dot{opacity:0}
+    .hiw-step-inner:hover .shield-body{opacity:.72}
+    .hiw-step-inner:hover .shield-ring{opacity:.4;animation:shieldRingSpin 8s linear infinite}
+    .hiw-step-inner:hover .shield-tick{opacity:1;animation:shieldTickIn .5s ease-out .2s both}
+    .hiw-step-inner:hover .shield-orbit-dot{animation:shieldOrbit 3s linear infinite}
+    .shield-orbit-dot.so2{animation-delay:-1s !important}
+    .shield-orbit-dot.so3{animation-delay:-2s !important}
+    @keyframes shieldRingSpin{to{transform:rotate(360deg)}}
+    @keyframes shieldTickIn{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+    @keyframes shieldOrbit{0%{opacity:.7;offset-distance:0%}100%{opacity:.7;offset-distance:100%}}
+
+    .hiw-pulse-svg{width:160px;height:100px}
+    .hiw-pulse-svg *{transform-box:fill-box;transform-origin:center}
+    .pulse-line{opacity:.22;transition:.4s;stroke-dasharray:300;stroke-dashoffset:300}
+    .pulse-dot{opacity:0;transition:.4s}
+    .pulse-glow{opacity:0}
+    .hiw-step-inner:hover .pulse-line{opacity:.84;stroke-dashoffset:0;transition:stroke-dashoffset 1.5s ease-out,opacity .3s}
+    .hiw-step-inner:hover .pulse-dot{opacity:1;transition:opacity .3s ease-out .8s}
+    .hiw-step-inner:hover .pulse-glow{animation:pulseGlowMove 2.5s ease-in-out infinite .5s}
+    @keyframes pulseGlowMove{0%,100%{opacity:0;transform:translateX(-60px)}20%{opacity:.55}50%{opacity:.82;transform:translateX(0)}80%{opacity:.55}90%{opacity:0;transform:translateX(60px)}}
+
+    .hiw-step h3{font-size:1.14rem;font-weight:700;color:#fff;margin:0 0 12px;letter-spacing:.01em;line-height:1.35}
+    .hiw-step p{font-size:.88rem;color:var(--muted);line-height:1.72;margin:0;transition:.3s}
+    .hiw-step-inner:hover p{color:#c3cee0}
+
+    .hiw-connector{display:flex;align-items:center;justify-content:center;padding:0 8px}
+    .hiw-connector-line{width:52px;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(141,184,255,.32),rgba(255,255,255,.04));position:relative;box-shadow:0 0 12px rgba(141,184,255,.12)}
+    .hiw-connector-line::after{content:"";position:absolute;right:-3px;top:-3px;width:7px;height:7px;border-right:1px solid rgba(141,184,255,.65);border-top:1px solid rgba(141,184,255,.65);transform:rotate(45deg)}
+
+    @media(max-width:980px){
+      .hiw-flow{grid-template-columns:1fr;gap:0}
+      .hiw-connector{padding:14px 0;transform:rotate(90deg)}
+      .hiw-connector-line{width:34px}
+    }
+
+    /* ===== INFO BANDS ===== */
+    .info-band{padding:0 20px 100px}
+    .info-header{text-align:center;max-width:1000px;margin:0 auto 46px}
+    .info-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+    .info-card{
+      padding:34px;
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:30px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,.022) 100%),
+        radial-gradient(circle at 50% 0%, rgba(124,92,255,.1) 0%, rgba(124,92,255,0) 60%);
+      backdrop-filter:blur(10px);
+      box-shadow:0 18px 48px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06);
+      transition:transform .35s ease,border-color .35s ease, box-shadow .35s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .info-card::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)}
+    .info-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.18);box-shadow:0 24px 64px rgba(0,0,0,.34), 0 0 24px rgba(124,92,255,.08), inset 0 1px 0 rgba(255,255,255,.08)}
+    .info-card h3{font-size:1.28rem;margin:0 0 16px;font-weight:700;letter-spacing:-.01em;background:linear-gradient(90deg,#fff,#dce7ff,#9abeff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .info-card p{color:var(--muted);line-height:1.78;margin:0 0 14px;position:relative;z-index:1}
+    .info-card p:last-child{margin-bottom:0}
+    .token-band .info-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+    .token-card{
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.024) 100%),
+        radial-gradient(circle at 50% 0%, rgba(141,184,255,.12) 0%, rgba(141,184,255,0) 58%);
+    }
+    .token-visual{
+      height:196px;
+      margin:-6px -6px 22px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)),
+        radial-gradient(circle at 50% 10%, rgba(141,184,255,.16) 0%, rgba(141,184,255,0) 52%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .token-visual::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.12) 20%, transparent 38%);
+      transform:translateX(-140%);
+      animation:panelSweep 10s linear infinite;
+      pointer-events:none;
+    }
+    .token-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;position:relative;z-index:1}
+    .token-chip{font-size:.72rem;color:#d9e4fb;padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);letter-spacing:.04em;text-transform:uppercase;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+
+    .token-flow-svg,.token-orbit-svg{width:100%;height:100%}
+    .token-flow-svg *,.token-orbit-svg *{transform-box:fill-box;transform-origin:center}
+    .flow-node-shell,.orbit-ring,.orbit-node{opacity:.26;transition:.4s}
+    .flow-link,.orbit-link{opacity:.18;transition:.4s}
+    .flow-core,.orbit-core{filter:drop-shadow(0 0 14px rgba(141,184,255,.24))}
+    .flow-pulse,.orbit-pulse{opacity:0}
+    .token-card:hover .flow-node-shell,
+    .token-card:hover .orbit-ring,
+    .token-card:hover .orbit-node{opacity:.82}
+    .token-card:hover .flow-link,
+    .token-card:hover .orbit-link{opacity:.42}
+    .token-card:hover .flow-pulse{animation:flowTravel 2s ease-in-out infinite}
+    .token-card:hover .flow-pulse.fp2{animation-delay:.65s}
+    .token-card:hover .flow-pulse.fp3{animation-delay:1.25s}
+    .token-card:hover .orbit-ring.r2{animation:shieldRingSpin 10s linear infinite reverse}
+    .token-card:hover .orbit-ring.r1{animation:shieldRingSpin 14s linear infinite}
+    .token-card:hover .orbit-pulse{animation:orbitTravel 3.8s linear infinite}
+    .token-card:hover .orbit-pulse.op2{animation-delay:-1.2s}
+    .token-card:hover .orbit-pulse.op3{animation-delay:-2.4s}
+    @keyframes flowTravel{0%{opacity:0;offset-distance:0%}12%{opacity:1}84%{opacity:1}100%{opacity:0;offset-distance:100%}}
+    @keyframes orbitTravel{0%{opacity:.85;offset-distance:0%}100%{opacity:.85;offset-distance:100%}}
+
+    .token-card .visual-caption{
+      position:absolute;
+      left:18px;
+      bottom:16px;
+      font-size:.68rem;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:#8ea0c1;
+      z-index:1;
+    }
+
+    .token-band .info-card a{color:#fff;text-decoration-thickness:1px;text-underline-offset:3px}
+
+    @media(max-width:900px){.info-grid,.token-band .info-grid{grid-template-columns:1fr}}
+    @media(max-width:768px){.token-visual{height:178px}}
+
+    /* ===== WHY POST FIAT SECTION ===== */
+    .why-post-fiat{padding:106px 20px 126px;position:relative;overflow:hidden}
+    .why-post-fiat::after{
+      content:"";
+      position:absolute;
+      top:110px;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(1000px, 90vw);
+      height:280px;
+      background:radial-gradient(circle at 50% 50%, rgba(124,92,255,.14) 0%, rgba(124,92,255,0) 56%);
+      filter:blur(18px);
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .section-intro{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:18px;animation:fadeUp 1.5s ease-out}
+    .pf-logo-small{width:64px;height:64px;position:relative;filter:drop-shadow(0 0 18px rgba(141,184,255,.3))}
+    .pf-logo-small svg{width:100%;height:100%}
+    .section-title{font-family:'Orbitron',sans-serif;font-size:clamp(2.2rem,4vw,3rem);font-weight:700;letter-spacing:.14em;background:linear-gradient(90deg,#fff,#dfe8ff,#9dc1ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0;text-transform:uppercase}
+    .section-header{text-align:center;font-size:1.42rem;font-weight:300;color:var(--muted);margin-bottom:80px;letter-spacing:.04em;animation:fadeUp 1.6s ease-out}
+
+    .cards-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;max-width:var(--max);margin:0 auto}
+    .feature-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.022) 100%);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:30px;
+      padding:30px;
+      position:relative;
+      overflow:hidden;
+      transition:all .4s cubic-bezier(.4,0,.2,1);
+      min-height:430px;
+      display:flex;
+      flex-direction:column;
+      box-shadow:0 18px 48px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.06);
+      isolation:isolate;
+    }
+    .feature-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(141,184,255,.16) 0%,transparent 72%);opacity:0;transition:.4s}
+    .feature-card::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)}
+    .feature-card:hover{transform:translateY(-10px);border-color:rgba(255,255,255,.22);background:linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.028) 100%);box-shadow:0 24px 72px rgba(0,0,0,.38),0 0 36px rgba(141,184,255,.10), inset 0 1px 0 rgba(255,255,255,.08)}
+    .feature-card:hover::before{opacity:1}
+
+    .card-design{width:100%;height:200px;margin-bottom:30px;position:relative;display:flex;align-items:center;justify-content:center;transition:all .4s cubic-bezier(.4,0,.2,1);perspective:1000px;user-select:none}
+    .feature-card:hover .card-design{transform:scale(1.08) translateY(-10px)}
+    .feature-card.in-view{border-color:rgba(255,255,255,.16)}
+
+    .government-illustration,.crypto-illustration{width:140px;height:140px;overflow:visible;pointer-events:none}
+    .government-illustration *,.crypto-illustration *{transform-box:fill-box;transform-origin:center;transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .3s ease}
+
+    .gov-column-1{--gov-delay:0s}.gov-column-2{--gov-delay:.15s}.gov-column-3{--gov-delay:.3s}.gov-column-4{--gov-delay:.45s}
+    .gov-broken-column{transform-box:fill-box;transform-origin:center bottom}.gov-debris-left{--dust-delay:.1s}.gov-debris-right{--dust-delay:.35s}
+    .feature-card:is(:hover,.in-view) .gov-roof{animation:govRoofShift 3.2s ease-in-out infinite}.feature-card:is(:hover,.in-view) .gov-crack{animation:govCrackPulse 1.8s linear infinite}.feature-card:is(:hover,.in-view) .gov-column{animation:govColumnTremor 2.6s ease-in-out infinite;animation-delay:var(--gov-delay,0s)}.feature-card:is(:hover,.in-view) .gov-broken-column{animation:govBrokenCollapse 2.3s cubic-bezier(.55,0,.35,1) infinite .2s}.feature-card:is(:hover,.in-view) .gov-debris{animation:govDustRise 2s ease-in-out infinite;animation-delay:var(--dust-delay,0s)}
+    @keyframes govRoofShift{0%,100%{transform:translateY(0) rotate(0deg);opacity:.7}35%{transform:translateY(-2px) rotate(-1deg);opacity:.95}65%{transform:translateY(1px) rotate(.8deg);opacity:.8}}
+    @keyframes govCrackPulse{0%,100%{opacity:.25;stroke-dashoffset:0}50%{opacity:.85;stroke-dashoffset:-6}}
+    @keyframes govColumnTremor{0%,100%{transform:translateY(0) rotate(0deg);opacity:.5}25%{transform:translateY(-1px) rotate(-1deg)}50%{transform:translateY(3px) rotate(1.2deg);opacity:.8}75%{transform:translateY(1px) rotate(-.6deg)}}
+    @keyframes govBrokenCollapse{0%,100%{transform:translate(0,0) rotate(0deg);opacity:.28}35%{transform:translate(2px,6px) rotate(7deg);opacity:.55}65%{transform:translate(-1px,3px) rotate(2deg);opacity:.45}}
+    @keyframes govDustRise{0%,100%{transform:translateY(0) scale(1);opacity:.2}50%{transform:translateY(-7px) scale(1.08);opacity:.75}}
+
+    .crypto-scarcity-shell,.crypto-scarcity-orbit-ring,.crypto-code-frame,.crypto-code-line,.crypto-governance-link,.crypto-barrier{vector-effect:non-scaling-stroke}
+    .crypto-scarcity-system,.crypto-code-system,.crypto-governance-network{transform-origin:center}
+    .crypto-code-line{--code-delay:0s}.crypto-governance-link,.crypto-governance-node,.crypto-governance-halo{opacity:.22}
+    .feature-card:is(:hover,.in-view) .crypto-scarcity-system{animation:cryptoScarcityPush 2.8s cubic-bezier(.4,0,.2,1) infinite}.feature-card:is(:hover,.in-view) .crypto-scarcity-shell{animation:cryptoScarcityPulse 2.8s ease-in-out infinite}.feature-card:is(:hover,.in-view) .crypto-scarcity-core{animation:cryptoScarcityCore 2.8s ease-in-out infinite}.feature-card:is(:hover,.in-view) .crypto-scarcity-orbit{animation:cryptoScarcityOrbit 2.2s linear infinite}.feature-card:is(:hover,.in-view) .crypto-code-system{animation:cryptoCodePush 2.8s cubic-bezier(.4,0,.2,1) infinite}.feature-card:is(:hover,.in-view) .crypto-code-frame{animation:cryptoCodeClamp 2.8s ease-in-out infinite}.feature-card:is(:hover,.in-view) .crypto-code-line{animation:cryptoCodeBlink 1.5s steps(2,end) infinite;animation-delay:var(--code-delay)}.feature-card:is(:hover,.in-view) .crypto-barrier{animation:cryptoBarrierFlicker 1.3s linear infinite}.feature-card:is(:hover,.in-view) .crypto-governance-network{animation:cryptoGovernanceStrain 2.8s ease-in-out infinite}.feature-card:is(:hover,.in-view) .crypto-governance-halo{animation:cryptoGovernanceHalo 2.8s ease-in-out infinite}
+    @keyframes cryptoScarcityPush{0%,100%{transform:translateX(0);opacity:.72}40%{transform:translateX(12px);opacity:.95}60%{transform:translateX(9px);opacity:.82}}
+    @keyframes cryptoScarcityPulse{0%,100%{opacity:.4}50%{opacity:.8}}
+    @keyframes cryptoScarcityCore{0%,100%{transform:scale(1);opacity:.3}50%{transform:scale(1.22);opacity:.72}}
+    @keyframes cryptoScarcityOrbit{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes cryptoCodePush{0%,100%{transform:translateX(0);opacity:.72}40%{transform:translateX(-12px);opacity:.95}60%{transform:translateX(-9px);opacity:.82}}
+    @keyframes cryptoCodeClamp{0%,100%{opacity:.45}45%{opacity:.88}60%{opacity:.58}}
+    @keyframes cryptoCodeBlink{0%,100%{opacity:.2}45%{opacity:.7}55%{opacity:1}}
+    @keyframes cryptoBarrierFlicker{0%,100%{opacity:.24;stroke-dashoffset:0}50%{opacity:1;stroke-dashoffset:-10}}
+    @keyframes cryptoGovernanceStrain{0%,100%{opacity:.22}45%{opacity:.5}60%{opacity:.26}}
+    @keyframes cryptoGovernanceHalo{0%,100%{transform:scale(.92);opacity:.08}50%{transform:scale(1.18);opacity:.32}}
+
+    .ai-design{width:180px;height:180px;position:relative}
+    .neural-nodes{position:absolute;inset:0}
+    .neural-node{position:absolute;width:24px;height:24px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .4s;--node-base-x:0px;--node-base-y:0px}
+    .neural-node::after{content:"";width:8px;height:8px;background:#fff;border-radius:50%;opacity:0;transition:all .4s}
+    .feature-card:is(:hover,.in-view) .neural-node{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.6);animation:nodeFloat 4s ease-in-out infinite;animation-delay:calc(var(--delay) * 0.2s)}
+    .feature-card:is(:hover,.in-view) .neural-node::after{opacity:1;animation:nodePulse 2s ease-in-out infinite;animation-delay:calc(var(--delay) * 0.2s)}
+    @keyframes nodeFloat{0%,100%{transform:translate(var(--node-base-x),var(--node-base-y))}25%{transform:translate(calc(var(--node-base-x) - 5px),calc(var(--node-base-y) - 5px))}50%{transform:translate(calc(var(--node-base-x) + 5px),calc(var(--node-base-y) - 5px))}75%{transform:translate(var(--node-base-x),calc(var(--node-base-y) + 5px))}}
+    @keyframes nodePulse{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.5);opacity:1}}
+    .neural-node.n1{top:10%;left:50%;transform:translate(-50%,0);--node-base-x:-50%;--node-base-y:0%;--delay:0}
+    .neural-node.n2{top:30%;left:20%;--delay:1}.neural-node.n3{top:30%;right:20%;--delay:2}.neural-node.n4{top:50%;left:10%;--delay:3}.neural-node.n5{top:50%;right:10%;--delay:4}.neural-node.n6{bottom:30%;left:20%;--delay:5}.neural-node.n7{bottom:30%;right:20%;--delay:6}.neural-node.n8{bottom:10%;left:50%;transform:translate(-50%,0);--node-base-x:-50%;--node-base-y:0%;--delay:7}.neural-node.center{top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5);--node-base-x:-50%;--node-base-y:-50%;--delay:0}
+    .neural-connections{position:absolute;inset:0;pointer-events:none}
+    .neural-line{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);background-size:200px 100%;transform-origin:center;opacity:0;transition:opacity .4s}
+    .feature-card:is(:hover,.in-view) .neural-line{opacity:1;animation:dataFlow 2s linear infinite}
+    @keyframes dataFlow{0%{background-position:-200px 0}100%{background-position:200px 0}}
+    .ai-brain{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:80px;pointer-events:none;z-index:2}
+    .ai-brain svg{width:100%;height:100%;stroke:#fff;stroke-width:1.5;fill:none;opacity:.6;filter:drop-shadow(0 0 10px rgba(255,255,255,.3));transition:all .4s}
+    .feature-card:is(:hover,.in-view) .ai-brain svg{opacity:1;filter:drop-shadow(0 0 30px rgba(141,184,255,.8));animation:brainPulse 3s ease-in-out infinite}
+    @keyframes brainPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+
+    .design-glow{position:absolute;inset:-50%;background:radial-gradient(circle,rgba(141,184,255,.15) 0%,transparent 40%);opacity:0;transition:.4s;pointer-events:none}
+    .feature-card:is(:hover,.in-view) .design-glow{opacity:1;animation:glowRotate 6s linear infinite}
+    @keyframes glowRotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+    .feature-card h4{font-size:1.28rem;font-weight:700;margin-bottom:15px;color:#fff;letter-spacing:.01em;text-align:center;position:relative;z-index:1}
+    .feature-card p{color:var(--muted);line-height:1.68;font-size:.9rem;position:relative;z-index:1;transition:.3s;text-align:center}
+    .feature-card:hover p{color:#c7d1e4}
+
+    @media(max-width:768px){
+      .section-intro{flex-direction:column;gap:10px}
+      .section-header{font-size:1.18rem;margin-bottom:50px}
+      .cards-container{grid-template-columns:1fr;gap:24px}
+      .feature-card{padding:25px;min-height:380px}
+      .card-design{height:150px}
+      .government-illustration,.crypto-illustration{width:120px;height:120px}
+      .ai-design{transform:scale(.88)}
+      .feature-card h4{font-size:1.12rem}
+      .feature-card p{font-size:.84rem}
+    }
+
+    /* ========= USE CASES SLIDESHOW ========= */
+    .use-cases-section{padding:106px 20px 160px;position:relative;background:transparent;overflow:hidden}
+    .slideshow-container{max-width:1400px;margin:0 auto;position:relative;min-height:620px;padding-bottom:100px}
+    .slide{display:none;align-items:center;justify-content:center;gap:80px;animation:slideIn .8s cubic-bezier(.4,0,.2,1);position:relative;padding:40px;border:1px solid rgba(255,255,255,.08);border-radius:34px;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));backdrop-filter:blur(12px);box-shadow:0 24px 70px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.06)}
+    .slide.active{display:flex}
+    @keyframes slideIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+    .slide-content{display:flex;align-items:center;gap:80px;width:100%;max-width:1200px}
+    .slide-visual{flex:1;position:relative;height:400px;display:flex;align-items:center;justify-content:center}
+    .slide-text{flex:1;padding:40px;position:relative}
+    .use-case-title{font-size:clamp(2.5rem,4vw,3.6rem);font-weight:800;margin-bottom:24px;letter-spacing:-.03em;line-height:1.02;position:relative;background:linear-gradient(180deg,#fff,#dfe8ff,#a8c7ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .use-case-text{font-size:1.06rem;color:var(--muted);line-height:1.9;letter-spacing:.01em;font-weight:400;max-width:540px}
+    .slide-number{position:absolute;top:34px;right:38px;font-family:'Orbitron',sans-serif;font-size:5rem;font-weight:700;color:rgba(255,255,255,.04);z-index:0}
+
+    .etf-visual{width:300px;height:300px;position:relative}
+    .etf-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:15px;padding:20px}
+    .etf-cell{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:14px;position:relative;overflow:hidden;transition:all .4s;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+    .etf-cell::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.1) 50%,transparent 60%);transform:translateX(-100%) translateY(-100%);transition:transform .8s}
+    .slide.active .etf-cell:nth-child(odd)::before{animation:shimmer 3s ease-in-out infinite;animation-delay:calc(var(--i) * .2s)}
+    .slide.active .etf-cell:nth-child(even)::before{animation:shimmer 3s ease-in-out infinite reverse;animation-delay:calc(var(--i) * .15s)}
+    @keyframes shimmer{0%,100%{transform:translateX(-100%) translateY(-100%)}50%{transform:translateX(100%) translateY(100%)}}
+    .etf-center{grid-column:2;grid-row:2;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.28);transform:scale(1.1);box-shadow:0 0 26px rgba(141,184,255,.14)}
+
+    .compliance-visual{width:320px;height:320px;position:relative}
+    .lock-container{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
+    .lock-icon{width:120px;height:120px;position:relative}
+    .lock-icon svg{width:100%;height:100%;stroke:#fff;stroke-width:2;fill:none;opacity:.88;filter:drop-shadow(0 0 18px rgba(141,184,255,.14))}
+    .data-particles{position:absolute;inset:0}
+    .particle{position:absolute;width:4px;height:4px;background:#fff;border-radius:50%;opacity:0;box-shadow:0 0 10px rgba(255,255,255,.45)}
+    .slide.active .particle{animation:float 4s ease-in-out infinite}
+    @keyframes float{0%,100%{opacity:0;transform:translate(0,0)}20%{opacity:.6}50%{opacity:.9;transform:translate(var(--tx),var(--ty))}80%{opacity:.6}}
+    .encryption-ring{position:absolute;inset:-40px;border:2px solid rgba(255,255,255,.1);border-radius:50%;animation:rotate 20s linear infinite}
+    .encryption-ring::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:10px;height:10px;background:#fff;border-radius:50%;box-shadow:0 0 20px rgba(255,255,255,.5)}
+    @keyframes rotate{to{transform:rotate(360deg)}}
+
+    .expert-visual{width:350px;height:350px;position:relative}
+    .network-container{width:100%;height:100%;position:relative}
+    .network-node{position:absolute;width:60px;height:60px;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .4s;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+    .network-node::after{content:"";position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;opacity:.8;box-shadow:0 0 20px rgba(141,184,255,.18)}
+    .network-node.center{top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:80px;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4)}
+    .network-node.n1{top:20%;left:50%;transform:translateX(-50%)}.network-node.n2{top:35%;right:15%}.network-node.n3{bottom:35%;right:15%}.network-node.n4{bottom:20%;left:50%;transform:translateX(-50%)}.network-node.n5{bottom:35%;left:15%}.network-node.n6{top:35%;left:15%}
+    .network-line{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(141,184,255,.5),transparent);transform-origin:left center;box-shadow:0 0 12px rgba(141,184,255,.14)}
+    .slide.active .network-node{animation:pulse 3s ease-in-out infinite;animation-delay:calc(var(--delay) * .2s)}
+    @keyframes pulse{0%,100%{transform:translate(var(--tx,-50%),var(--ty,-50%)) scale(1);opacity:.8}50%{transform:translate(var(--tx,-50%),var(--ty,-50%)) scale(1.1);opacity:1}}
+
+    .ritual-visual{width:360px;height:360px;position:relative;display:flex;align-items:center;justify-content:center}
+    .ritual-circle{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.2);animation:ritualPulse 4s ease-in-out infinite}
+    .ritual-circle:nth-child(1){width:100%;height:100%;animation-delay:0s}
+    .ritual-circle:nth-child(2){width:80%;height:80%;animation-delay:.5s}
+    .ritual-circle:nth-child(3){width:60%;height:60%;animation-delay:1s}
+    @keyframes ritualPulse{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:.6;transform:scale(1.05)}}
+
+    .ritual-core{position:absolute;width:120px;height:120px;display:flex;align-items:center;justify-content:center}
+    .ritual-ai-symbol{width:80px;height:80px;position:relative}
+    .ritual-ai-symbol svg{width:100%;height:100%;stroke:#fff;stroke-width:1.5;fill:none;opacity:.9;filter:drop-shadow(0 0 20px rgba(141,184,255,.35));animation:aiGlow 3s ease-in-out infinite}
+    @keyframes aiGlow{0%,100%{opacity:.7;filter:drop-shadow(0 0 15px rgba(141,184,255,.25))}50%{opacity:1;filter:drop-shadow(0 0 30px rgba(141,184,255,.7))}}
+
+    .ritual-particles{position:absolute;inset:0;pointer-events:none}
+    .ritual-particle{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:0;box-shadow:0 0 8px rgba(255,255,255,.45)}
+    .slide.active .ritual-particle{animation:ritualFloat 6s ease-in-out infinite}
+    @keyframes ritualFloat{0%{opacity:0;transform:translate(0,0) scale(1)}25%{opacity:.8}50%{opacity:.6;transform:translate(var(--rx),var(--ry)) scale(1.5)}75%{opacity:.3}100%{opacity:0;transform:translate(calc(var(--rx) * 2),calc(var(--ry) * 2)) scale(.5)}}
+
+    .arrow-controls{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);display:flex;gap:20px;z-index:10}
+    .slide-arrow{width:62px;height:62px;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.16);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.06)}
+    .slide-arrow::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at center, rgba(141,184,255,.16), rgba(141,184,255,0) 70%);transform:scale(0);border-radius:50%;transition:transform .3s}
+    .slide-arrow:hover{border-color:rgba(255,255,255,.34);transform:translateY(-2px)}
+    .slide-arrow:hover::before{transform:scale(1)}
+    .slide-arrow svg{width:24px;height:24px;stroke:#fff;stroke-width:2;fill:none;position:relative;z-index:1}
+
+    .slide-dots{display:flex;justify-content:center;gap:12px;position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:100%}
+    .dot{width:42px;height:4px;background:rgba(255,255,255,.18);cursor:pointer;transition:all .3s;border:none;border-radius:999px;outline:none;box-shadow:none}
+    .dot.active{background:linear-gradient(90deg,#7c5cff,#8db8ff,#90f3ff);width:72px;box-shadow:0 0 18px rgba(141,184,255,.25)}
+
+    @media(max-width:968px){
+      .slideshow-container{min-height:auto;padding-bottom:140px}
+      .slide{padding:20px;min-height:500px}
+      .slide-content{flex-direction:column;gap:30px}
+      .slide-visual{height:220px;flex:none}
+      .etf-visual,.compliance-visual,.expert-visual,.ritual-visual{transform:scale(.64)}
+      .use-case-title{font-size:1.9rem;text-align:center;margin-bottom:16px}
+      .use-case-text{font-size:.96rem;text-align:center;margin-bottom:60px}
+      .slide-text{padding:10px;flex:none}
+      .use-cases-section{padding:80px 20px 40px}
+      .arrow-controls{position:absolute;bottom:80px;gap:16px}
+      .slide-arrow{width:52px;height:52px}
+      .slide-arrow svg{width:20px;height:20px}
+      .slide-number{font-size:2.8rem;top:10px;right:14px}
+      .slide-dots{position:absolute;bottom:20px}
+    }
+
+    @media(max-width:768px){
+      .hero{padding-top:86px}
+      .hero-logo-container{width:240px;height:240px}
+      .hero-logo{width:108px;height:108px}
+      .hero p{font-size:1rem}
+      .signup{margin-left:20px;margin-right:20px;padding:36px 20px;border-radius:26px}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+      .why-post-fiat .feature-card:hover,
+      .why-post-fiat .feature-card:hover .card-design,
+      .action-card:hover,
+      .hiw-step-inner:hover,
+      .info-card:hover{transform:none}
+      .spotlight{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora a1"></div>
+  <div class="aurora a2"></div>
+  <div class="aurora a3"></div>
+  <div class="spotlight" id="spotlight"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="brand-name">Post Fiat</div>
+    <nav class="nav-links">
+      <a href="/whitepaper/" class="nav-link">Whitepaper</a>
+      <a href="https://tasknode.postfiat.org" class="nav-link" target="_blank" rel="noopener">Task Node</a>
+      <a href="https://www.jollydinger.com/pftvalidatorsetup/setup/" class="nav-link" target="_blank" rel="noopener">Validator Setup</a>
+      <a href="https://discord.gg/U6HjgDSmhR" class="nav-link" target="_blank" rel="noopener">Community</a>
+    </nav>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-logo-container">
+      <div class="logo-core-glow"></div>
+      <div class="spoke-field" id="spokeField"></div>
+      <div class="hero-logo" aria-label="Post Fiat Logo">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 40 40 L 160 160 M 160 40 L 40 160" stroke="white" stroke-width="20" stroke-linecap="round" fill="none"/>
+          <line x1="40" y1="160" x2="160" y2="160" stroke="white" stroke-width="20" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <h1>A Decentralized Method to Merge with AGI</h1>
+    <p>Post Fiat is a fair, private XRP-derived network for capital markets and collective intelligence. It keeps XRP-speed settlement, adds decentralized validator selection and Orchard privacy, and gives human civilization a way to integrate machine intelligence without collapsing into centralized control.</p>
+
+    <div class="action-grid">
+      <a href="/whitepaper/" class="action-card">
+        <div class="cta-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16l4-3h10a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
+        <span class="cta-label">Read the Whitepaper</span>
+      </a>
+      <a href="https://tasknode.postfiat.org" class="action-card" target="_blank" rel="noopener">
+        <div class="cta-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <span class="cta-label">Use the Task Node</span>
+      </a>
+      <a href="https://discord.gg/U6HjgDSmhR" class="action-card" target="_blank" rel="noopener">
+        <div class="cta-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg></div>
+        <span class="cta-label">Join the Community</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== LIVE PROOF / CREDIBILITY ===== -->
+  <section class="credibility-band">
+    <div class="credibility-grid">
+      <div class="credibility-card">
+        <div class="cred-header">
+          <h2>Live Testnet</h2>
+          <span class="cred-badge">March 18, 2026</span>
+        </div>
+        <div class="stat-row">
+          <div class="stat-block">
+            <div class="stat-number">42</div>
+            <div class="stat-label">Validators Live</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-number">20</div>
+            <div class="stat-label">Publishing Domains</div>
+          </div>
+        </div>
+        <div class="metric-rows">
+          <div class="metric-item">
+            <div class="metric-top">
+              <span class="metric-label">24h agreement (41 of 42)</span>
+              <span class="metric-value">99.9%+</span>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" style="width:97.6%"></div></div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-top">
+              <span class="metric-label">30d agreement (35 of 42)</span>
+              <span class="metric-value">99%+</span>
+            </div>
+            <div class="metric-bar"><div class="metric-fill" style="width:83.3%"></div></div>
+          </div>
+        </div>
+        <a class="cred-explorer-link" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">
+          View the Testnet Explorer
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+      </div>
+
+      <div class="credibility-card">
+        <div class="cred-header">
+          <h2>Who Builds This</h2>
+        </div>
+        <div class="founder-block">
+          <div class="founder-avatar">AG</div>
+          <div class="founder-info">
+            <div class="founder-name">Alex Good</div>
+            <div class="founder-handle">goodalexander</div>
+          </div>
+        </div>
+        <div class="backer-text">Alex Good (<code>goodalexander</code>) is the founder behind Post Fiat.</div>
+
+        <div class="cred-section-label">Background</div>
+        <div class="cred-tags">
+          <span class="cred-tag">Citi FX</span>
+          <span class="cred-tag">Palantir</span>
+          <span class="cred-tag">Balyasny TMT</span>
+          <span class="cred-tag">Co-founded Perpetua</span>
+        </div>
+
+        <div class="cred-section-label">Capital &amp; Market Credibility</div>
+        <div class="backer-grid">
+          <div class="backer-item">
+            <div class="backer-dot"></div>
+            <div class="backer-text">backed by portfolio managers at <strong>Brevan Howard</strong>, <strong>DE Shaw</strong>, and <strong>Citrini Research</strong></div>
+          </div>
+          <div class="backer-item">
+            <div class="backer-dot"></div>
+            <div class="backer-text">Venture backed by <strong>Hypersphere Capital Management</strong></div>
+          </div>
+          <div class="backer-item">
+            <div class="backer-dot"></div>
+            <div class="backer-text">founder track record includes Perpetua's reported acquisition by Ascential for <strong>$140M</strong> and the later Omnicom / Flywheel transaction often referenced around <strong>$850M</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="hiw">
+    <div class="hiw-title">
+      <h2>How It Works</h2>
+    </div>
+    <div class="hiw-flow">
+
+      <div class="hiw-step">
+        <div class="hiw-step-inner">
+          <div class="hiw-step-num">01 — Foundation</div>
+          <div class="hiw-vis">
+            <svg class="hiw-speed-svg" viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round">
+              <line class="speed-link" x1="20" y1="50" x2="70" y2="20"/>
+              <line class="speed-link" x1="70" y1="20" x2="120" y2="50"/>
+              <line class="speed-link" x1="20" y1="50" x2="70" y2="80"/>
+              <line class="speed-link" x1="70" y1="80" x2="120" y2="50"/>
+              <line class="speed-link" x1="20" y1="50" x2="120" y2="50"/>
+              <line class="speed-link" x1="70" y1="20" x2="70" y2="80"/>
+              <circle class="speed-node" cx="20" cy="50" r="8" fill="rgba(255,255,255,.06)" stroke-width="1.5"/>
+              <circle class="speed-node" cx="20" cy="50" r="3" fill="#fff" stroke="none"/>
+              <circle class="speed-node" cx="70" cy="20" r="8" fill="rgba(255,255,255,.06)" stroke-width="1.5"/>
+              <circle class="speed-node" cx="70" cy="20" r="3" fill="#fff" stroke="none"/>
+              <circle class="speed-node" cx="120" cy="50" r="8" fill="rgba(255,255,255,.06)" stroke-width="1.5"/>
+              <circle class="speed-node" cx="120" cy="50" r="3" fill="#fff" stroke="none"/>
+              <circle class="speed-node" cx="70" cy="80" r="8" fill="rgba(255,255,255,.06)" stroke-width="1.5"/>
+              <circle class="speed-node" cx="70" cy="80" r="3" fill="#fff" stroke="none"/>
+              <circle class="speed-pulse sp1" r="3" fill="#fff" style="offset-path:path('M 20 50 L 70 20 L 120 50');offset-rotate:0deg"/>
+              <circle class="speed-pulse sp2" r="3" fill="#fff" style="offset-path:path('M 120 50 L 70 80 L 20 50');offset-rotate:0deg"/>
+              <circle class="speed-pulse sp3" r="2.5" fill="#fff" style="offset-path:path('M 70 20 L 70 80');offset-rotate:0deg"/>
+            </svg>
+          </div>
+          <h3>XRP Is The Right Primitive</h3>
+          <p>XRP's core architecture is already good at fast finality and message-style coordination. Post Fiat starts from the view that an AI-native network should use an efficient settlement and messaging layer rather than rebuild everything around slower, more inflationary primitives.</p>
+        </div>
+      </div>
+
+      <div class="hiw-connector"><div class="hiw-connector-line"></div></div>
+
+      <div class="hiw-step">
+        <div class="hiw-step-inner">
+          <div class="hiw-step-num">02 — Differentiation</div>
+          <div class="hiw-vis">
+            <svg class="hiw-shield-svg" viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <ellipse class="shield-ring" cx="60" cy="52" rx="52" ry="48" stroke-dasharray="4 6" stroke-width="1"/>
+              <path class="shield-body" d="M60 8 L95 28 L95 56 Q95 85 60 100 Q25 85 25 56 L25 28 Z" stroke-width="1.5"/>
+              <path class="shield-body" d="M60 20 L82 34 L82 55 Q82 76 60 88 Q38 76 38 55 L38 34 Z" stroke-width="1" opacity=".15"/>
+              <polyline class="shield-tick" points="48,54 56,64 74,42" stroke-width="2.5" stroke="#fff"/>
+              <circle class="shield-orbit-dot so1" r="3" fill="#fff" style="offset-path:path('M 112 52 A 52 48 0 1 1 112 51.9');offset-rotate:0deg"/>
+              <circle class="shield-orbit-dot so2" r="2.5" fill="#fff" style="offset-path:path('M 112 52 A 52 48 0 1 1 112 51.9');offset-rotate:0deg"/>
+              <circle class="shield-orbit-dot so3" r="2" fill="#fff" style="offset-path:path('M 112 52 A 52 48 0 1 1 112 51.9');offset-rotate:0deg"/>
+            </svg>
+          </div>
+          <h3>Post Fiat Fixes What XRP Does Not</h3>
+          <p>Post Fiat keeps the useful parts of XRP while changing the two biggest legitimacy gaps: opaque validator selection and no native privacy. The network adds AI-assisted, published validator selection and an Orchard privacy path so the base layer is fairer, more legible, and more useful for real financial workflows.</p>
+        </div>
+      </div>
+
+      <div class="hiw-connector"><div class="hiw-connector-line"></div></div>
+
+      <div class="hiw-step">
+        <div class="hiw-step-inner">
+          <div class="hiw-step-num">03 — Application</div>
+          <div class="hiw-vis">
+            <svg class="hiw-pulse-svg" viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="10" y1="20" x2="150" y2="20" stroke-width=".5" opacity=".06"/>
+              <line x1="10" y1="40" x2="150" y2="40" stroke-width=".5" opacity=".06"/>
+              <line x1="10" y1="60" x2="150" y2="60" stroke-width=".5" opacity=".06"/>
+              <line x1="10" y1="80" x2="150" y2="80" stroke-width=".5" opacity=".06"/>
+              <polyline class="pulse-line" points="10,70 25,65 38,72 50,55 62,60 72,35 82,42 95,22 108,30 120,18 132,25 145,15" stroke-width="2"/>
+              <polygon class="pulse-line" points="10,70 25,65 38,72 50,55 62,60 72,35 82,42 95,22 108,30 120,18 132,25 145,15 145,90 10,90" fill="url(#pulseGrad)" stroke="none" style="stroke-dasharray:none;stroke-dashoffset:0"/>
+              <circle class="pulse-dot" cx="50" cy="55" r="3" fill="#fff"/>
+              <circle class="pulse-dot" cx="72" cy="35" r="3" fill="#fff"/>
+              <circle class="pulse-dot" cx="95" cy="22" r="4" fill="#fff"/>
+              <circle class="pulse-dot" cx="120" cy="18" r="3" fill="#fff"/>
+              <circle class="pulse-dot" cx="145" cy="15" r="3" fill="#fff"/>
+              <circle class="pulse-glow" cx="80" cy="40" r="18" fill="rgba(255,255,255,.12)" stroke="none"/>
+              <defs>
+                <linearGradient id="pulseGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#fff" stop-opacity=".08"/>
+                  <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h3>Built For Capital Markets, Not Generic Payment Theater</h3>
+          <p>The primary use case is not replacing SWIFT. Post Fiat is aimed at buy-side workflows, research coordination, expert networks, indexing, compliance, and AI-assisted capital deployment.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== WHY POST FIAT SECTION ===== -->
+  <section class="why-post-fiat">
+    <div class="section-intro">
+      <div class="pf-logo-small">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 40 40 L 160 160 M 160 40 L 40 160" stroke="white" stroke-width="20" stroke-linecap="round" fill="none"/>
+          <line x1="40" y1="160" x2="160" y2="160" stroke="white" stroke-width="20" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2 class="section-title">Why Post Fiat</h2>
+    </div>
+
+    <div class="cards-container">
+      <div class="feature-card governance-card">
+        <div class="card-design">
+          <svg class="government-illustration" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round">
+            <path class="gov-roof" d="M20 60 L80 20 L140 60" opacity=".7"/>
+            <line class="gov-crack" x1="75" y1="35" x2="68" y2="55" opacity=".4" stroke-dasharray="3 2"/>
+            <rect class="gov-column gov-column-1" x="30" y="60" width="12" height="70" rx="2" opacity=".5"/>
+            <rect class="gov-column gov-column-2" x="55" y="60" width="12" height="70" rx="2" opacity=".5"/>
+            <rect class="gov-column gov-column-3" x="80" y="60" width="12" height="35" rx="2" opacity=".5"/>
+            <g class="gov-broken-column">
+              <rect x="83" y="105" width="12" height="25" rx="2" opacity=".3" transform="rotate(12 89 117)"/>
+            </g>
+            <rect class="gov-column gov-column-4" x="108" y="60" width="12" height="70" rx="2" opacity=".5"/>
+            <line class="gov-base" x1="20" y1="130" x2="140" y2="130" opacity=".6"/>
+            <path class="gov-debris gov-debris-left" d="M60 130 L55 145 L62 150" opacity=".3" stroke-dasharray="2 2"/>
+            <path class="gov-debris gov-debris-right" d="M100 130 L105 142 L98 148" opacity=".3" stroke-dasharray="2 2"/>
+          </svg>
+          <div class="design-glow"></div>
+        </div>
+        <h4>AGI Defaults to Centralization</h4>
+        <p>If machine intelligence scales inside a handful of firms or states, most humans become dependent participants in systems they do not control. Post Fiat starts from the premise that coordination at AGI scale needs a decentralized substrate.</p>
+      </div>
+
+      <div class="feature-card crypto-card">
+        <div class="card-design">
+          <svg class="crypto-illustration" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+            <g class="crypto-scarcity-system">
+              <polygon class="crypto-scarcity-shell" points="26,78 38,58 62,58 74,78 62,98 38,98" opacity=".46"/>
+              <polygon class="crypto-scarcity-shell" points="33,78 41,65 59,65 67,78 59,91 41,91" opacity=".22"/>
+              <circle class="crypto-scarcity-core" cx="50" cy="78" r="7" fill="#fff" stroke="none" opacity=".28"/>
+              <g class="crypto-scarcity-orbit">
+                <circle class="crypto-scarcity-orbit-ring" cx="50" cy="78" r="18" opacity=".14"/>
+                <circle cx="50" cy="60" r="2.5" fill="#fff" stroke="none" opacity=".82"/>
+              </g>
+            </g>
+
+            <line class="crypto-barrier" x1="80" y1="48" x2="80" y2="104" opacity=".28" stroke-dasharray="4 7"/>
+            <line class="crypto-barrier" x1="74" y1="70" x2="86" y2="82" opacity=".18" stroke-dasharray="3 5"/>
+            <line class="crypto-barrier" x1="86" y1="70" x2="74" y2="82" opacity=".18" stroke-dasharray="3 5"/>
+
+            <g class="crypto-code-system">
+              <path class="crypto-code-frame" d="M102 56 H95 V100 H102" opacity=".5"/>
+              <path class="crypto-code-frame" d="M126 56 H133 V100 H126" opacity=".5"/>
+              <line class="crypto-code-line" x1="106" y1="66" x2="122" y2="66" opacity=".2" style="--code-delay:0s"/>
+              <line class="crypto-code-line" x1="106" y1="78" x2="120" y2="78" opacity=".2" style="--code-delay:.2s"/>
+              <line class="crypto-code-line" x1="106" y1="90" x2="124" y2="90" opacity=".2" style="--code-delay:.4s"/>
+            </g>
+
+            <g class="crypto-governance-network">
+              <circle class="crypto-governance-halo" cx="80" cy="110" r="16"/>
+              <line class="crypto-governance-link" x1="48" y1="116" x2="80" y2="110"/>
+              <line class="crypto-governance-link" x1="80" y1="110" x2="112" y2="116"/>
+              <line class="crypto-governance-link" x1="80" y1="110" x2="80" y2="130"/>
+              <circle class="crypto-governance-node" cx="48" cy="116" r="5.5"/>
+              <circle class="crypto-governance-node" cx="80" cy="110" r="6.5"/>
+              <circle class="crypto-governance-node" cx="112" cy="116" r="5.5"/>
+              <circle class="crypto-governance-node" cx="80" cy="130" r="5"/>
+            </g>
+          </svg>
+          <div class="design-glow"></div>
+        </div>
+        <h4>Fair, Private XRP Is More Useful Than Generic Crypto</h4>
+        <p>Digital scarcity and settlement speed matter, but they do not solve validator selection, institutional accountability, privacy, or human coordination. Post Fiat keeps XRP-speed settlement and messaging efficiency while adding fair validator selection and privacy that standard XRP does not provide.</p>
+      </div>
+
+      <div class="feature-card ai-card">
+        <div class="card-design">
+          <div class="ai-design">
+            <div class="neural-nodes">
+              <div class="neural-node n1"></div>
+              <div class="neural-node n2"></div>
+              <div class="neural-node n3"></div>
+              <div class="neural-node n4"></div>
+              <div class="neural-node n5"></div>
+              <div class="neural-node n6"></div>
+              <div class="neural-node n7"></div>
+              <div class="neural-node n8"></div>
+              <div class="neural-node center"></div>
+            </div>
+            <div class="neural-connections">
+              <div class="neural-line" style="width:120px;top:25%;left:50%;transform:translateX(-50%) rotate(90deg)"></div>
+              <div class="neural-line" style="width:80px;top:40%;left:15%;transform:rotate(45deg)"></div>
+              <div class="neural-line" style="width:80px;top:40%;right:15%;transform:rotate(-45deg)"></div>
+              <div class="neural-line" style="width:100px;top:50%;left:50%;transform:translateX(-50%)"></div>
+              <div class="neural-line" style="width:80px;bottom:40%;left:15%;transform:rotate(-45deg)"></div>
+              <div class="neural-line" style="width:80px;bottom:40%;right:15%;transform:rotate(45deg)"></div>
+              <div class="neural-line" style="width:120px;bottom:25%;left:50%;transform:translateX(-50%) rotate(90deg)"></div>
+            </div>
+            <div class="ai-brain">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="coreGrad">
+                    <stop offset="0%" stop-color="#fff" stop-opacity="1"/>
+                    <stop offset="50%" stop-color="#fff" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#fff" stop-opacity="0.2"/>
+                  </radialGradient>
+                </defs>
+                <path d="M50 10 A40 40 0 0 1 85 35" fill="none" stroke-width="2" opacity="0.8"/>
+                <path d="M85 35 A40 40 0 0 1 85 65" fill="none" stroke-width="2" opacity="0.8"/>
+                <path d="M85 65 A40 40 0 0 1 50 90" fill="none" stroke-width="2" opacity="0.8"/>
+                <path d="M50 90 A40 40 0 0 1 15 65" fill="none" stroke-width="2" opacity="0.8"/>
+                <path d="M15 65 A40 40 0 0 1 15 35" fill="none" stroke-width="2" opacity="0.8"/>
+                <path d="M15 35 A40 40 0 0 1 50 10" fill="none" stroke-width="2" opacity="0.8"/>
+                <path d="M50 20 L70 35 L70 65 L50 80 L30 65 L30 35 Z" fill="none" stroke-width="1.5" opacity="0.6"/>
+                <path d="M50 30 L65 50 L50 70 L35 50 Z" fill="none" stroke-width="1" opacity="0.4"/>
+                <circle cx="50" cy="10" r="3" fill="white" opacity="0.9"/>
+                <circle cx="85" cy="35" r="3" fill="white" opacity="0.9"/>
+                <circle cx="85" cy="65" r="3" fill="white" opacity="0.9"/>
+                <circle cx="50" cy="90" r="3" fill="white" opacity="0.9"/>
+                <circle cx="15" cy="65" r="3" fill="white" opacity="0.9"/>
+                <circle cx="15" cy="35" r="3" fill="white" opacity="0.9"/>
+                <circle cx="50" cy="50" r="8" fill="url(#coreGrad)"/>
+                <circle cx="50" cy="50" r="4" fill="white" opacity="1"/>
+              </svg>
+            </div>
+          </div>
+          <div class="design-glow"></div>
+        </div>
+        <h4>The Task Node Turns Community Into Collective Intelligence</h4>
+        <p>Task Node gives the community a way to do something economically useful together. Instead of a retail crowd that can only post, hold, and hope, participants can contribute observations, research, and workflow outputs into an AI-routed network that internalizes its own edge instead of donating it to outside firms.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== USE CASES SLIDESHOW ===== -->
+  <section class="use-cases-section">
+    <div class="use-cases-header">
+      <h2>Use Cases</h2>
+    </div>
+    <div class="slideshow-container">
+      <div class="arrow-controls">
+        <div class="slide-arrow prev" onclick="prevSlide()">
+          <svg viewBox="0 0 24 24">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </div>
+        <div class="slide-arrow next" onclick="nextSlide()">
+          <svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <div class="slide active" data-slide="0">
+        <div class="slide-number">01</div>
+        <div class="slide-content">
+          <div class="slide-visual">
+            <div class="etf-visual">
+              <div class="etf-grid">
+                <div class="etf-cell" style="--i:1"></div>
+                <div class="etf-cell" style="--i:2"></div>
+                <div class="etf-cell" style="--i:3"></div>
+                <div class="etf-cell" style="--i:4"></div>
+                <div class="etf-cell etf-center" style="--i:5"></div>
+                <div class="etf-cell" style="--i:6"></div>
+                <div class="etf-cell" style="--i:7"></div>
+                <div class="etf-cell" style="--i:8"></div>
+                <div class="etf-cell" style="--i:9"></div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-text">
+            <h3 class="use-case-title">ETFs and Indexing</h3>
+            <p class="use-case-text">Post Fiat indices create a machine-readable ontology for assets, portfolios, and market structures that can support index products, screening systems, and new financial products.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide" data-slide="1">
+        <div class="slide-number">02</div>
+        <div class="slide-content">
+          <div class="slide-visual">
+            <div class="compliance-visual">
+              <div class="lock-container">
+                <div class="encryption-ring"></div>
+                <div class="lock-icon">
+                  <svg viewBox="0 0 100 100">
+                    <rect x="20" y="45" width="60" height="45" rx="5" />
+                    <path d="M30 45 V30 Q30 10 50 10 Q70 10 70 30 V45" fill="none" />
+                    <circle cx="50" cy="65" r="5" fill="#fff" />
+                    <line x1="50" y1="70" x2="50" y2="80" stroke="#fff" />
+                  </svg>
+                </div>
+                <div class="data-particles" id="particles"></div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-text">
+            <h3 class="use-case-title">Compliance and Private Coordination</h3>
+            <p class="use-case-text">Encrypted memos, privacy tooling, and stronger policy controls make Post Fiat more useful for institutional workflows than a generic public chain that only optimizes for transfers.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide" data-slide="2">
+        <div class="slide-number">03</div>
+        <div class="slide-content">
+          <div class="slide-visual">
+            <div class="expert-visual">
+              <div class="network-container">
+                <div class="network-node center" style="--delay:0"></div>
+                <div class="network-node n1" style="--delay:1;--tx:-50%;--ty:0"></div>
+                <div class="network-node n2" style="--delay:2;--tx:0;--ty:0"></div>
+                <div class="network-node n3" style="--delay:3;--tx:0;--ty:0"></div>
+                <div class="network-node n4" style="--delay:4;--tx:-50%;--ty:0"></div>
+                <div class="network-node n5" style="--delay:5;--tx:0;--ty:0"></div>
+                <div class="network-node n6" style="--delay:6;--tx:0;--ty:0"></div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-text">
+            <h3 class="use-case-title">Buy-Side Expert Networks</h3>
+            <p class="use-case-text">Task Node lets contributors provide proprietary observations, research, and workflow outputs to paying AI agents and portfolio managers while keeping the resulting coordination and settlement native to the network.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide" data-slide="3">
+        <div class="slide-number">04</div>
+        <div class="slide-content">
+          <div class="slide-visual">
+            <div class="ritual-visual">
+              <div class="ritual-circle"></div>
+              <div class="ritual-circle"></div>
+              <div class="ritual-circle"></div>
+              <div class="ritual-core">
+                <div class="ritual-ai-symbol">
+                  <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="35" />
+                    <circle cx="50" cy="30" r="8" fill="#fff" />
+                    <circle cx="30" cy="50" r="8" fill="#fff" />
+                    <circle cx="70" cy="50" r="8" fill="#fff" />
+                    <circle cx="50" cy="70" r="8" fill="#fff" />
+                    <path d="M50 30 L50 70 M30 50 L70 50" />
+                    <path d="M50 30 L30 50 L50 70 L70 50 Z" fill="none" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ritual-particles" id="ritualParticles"></div>
+            </div>
+          </div>
+          <div class="slide-text">
+            <h3 class="use-case-title">Validator Governance</h3>
+            <p class="use-case-text">Post Fiat's core thesis is that validator-list publication should be auditable, replayable, and eventually multi-party rather than hidden inside opaque publisher discretion.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-dots">
+        <span class="dot active" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="token-band info-band">
+    <div class="info-grid">
+      <div class="info-card token-card">
+        <div class="token-visual" aria-hidden="true">
+          <svg class="token-flow-svg" viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <defs>
+              <linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#7c5cff" stop-opacity="0.95"/>
+                <stop offset="55%" stop-color="#8db8ff" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#90f3ff" stop-opacity="0.95"/>
+              </linearGradient>
+            </defs>
+            <path class="flow-link" d="M82 96 L210 52 L338 96"/>
+            <path class="flow-link" d="M82 96 L210 138 L338 96"/>
+            <path class="flow-link" d="M210 52 L210 138"/>
+            <circle class="flow-node-shell" cx="82" cy="96" r="28"/>
+            <circle class="flow-node-shell" cx="210" cy="52" r="24"/>
+            <circle class="flow-node-shell" cx="210" cy="138" r="24"/>
+            <circle class="flow-node-shell" cx="338" cy="96" r="28"/>
+            <circle class="flow-core" cx="82" cy="96" r="8" fill="url(#flowGrad)" stroke="none"/>
+            <circle class="flow-core" cx="210" cy="52" r="7" fill="url(#flowGrad)" stroke="none"/>
+            <circle class="flow-core" cx="210" cy="138" r="7" fill="url(#flowGrad)" stroke="none"/>
+            <circle class="flow-core" cx="338" cy="96" r="8" fill="url(#flowGrad)" stroke="none"/>
+            <circle class="flow-pulse fp1" r="4" fill="#fff" style="offset-path:path('M 82 96 L 210 52 L 338 96');offset-rotate:0deg"/>
+            <circle class="flow-pulse fp2" r="3.6" fill="#fff" style="offset-path:path('M 82 96 L 210 138 L 338 96');offset-rotate:0deg"/>
+            <circle class="flow-pulse fp3" r="3.4" fill="#fff" style="offset-path:path('M 210 52 L 210 138');offset-rotate:0deg"/>
+            <text x="82" y="135" text-anchor="middle" fill="#dfe8ff" font-size="11" letter-spacing="2">TASK NODE</text>
+            <text x="210" y="20" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="2">CONTRIBUTE</text>
+            <text x="210" y="173" text-anchor="middle" fill="#dfe8ff" font-size="10" letter-spacing="2">VALIDATE</text>
+            <text x="338" y="135" text-anchor="middle" fill="#dfe8ff" font-size="11" letter-spacing="2">EARN PFT</text>
+          </svg>
+          <div class="visual-caption">Participation Flow</div>
+        </div>
+        <div class="token-chip-row">
+          <span class="token-chip">Task Node</span>
+          <span class="token-chip">Contribute</span>
+          <span class="token-chip">Validate</span>
+        </div>
+        <h3>How You Get PFT</h3>
+        <p>PFT is not only something to buy. The primary participation path is through the Task Node.</p>
+        <p>Contributors can earn PFT by providing observations, research, and workflow output that the network can route into AI-assisted capital-markets workflows. The point is to turn community effort into network-owned intelligence instead of exporting that intelligence to outside firms.</p>
+        <p>The second-best participation path is to <a href="https://www.jollydinger.com/pftvalidatorsetup/setup/" target="_blank" rel="noopener">run a validator</a> and help strengthen the network directly.</p>
+      </div>
+      <div class="info-card token-card">
+        <div class="token-visual" aria-hidden="true">
+          <svg class="token-orbit-svg" viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <defs>
+              <linearGradient id="orbitGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+                <stop offset="55%" stop-color="#8db8ff" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#7c5cff" stop-opacity="0.95"/>
+              </linearGradient>
+            </defs>
+            <ellipse class="orbit-ring r1" cx="210" cy="95" rx="118" ry="56" stroke-dasharray="5 8"/>
+            <ellipse class="orbit-ring r2" cx="210" cy="95" rx="88" ry="88" stroke-dasharray="4 8"/>
+
+            <line class="orbit-link" x1="210" y1="95" x2="210" y2="32"/>
+            <line class="orbit-link" x1="210" y1="95" x2="108" y2="95"/>
+            <line class="orbit-link" x1="210" y1="95" x2="312" y2="95"/>
+            <line class="orbit-link" x1="210" y1="95" x2="210" y2="158"/>
+
+            <circle class="orbit-node" cx="210" cy="32" r="18"/>
+            <circle class="orbit-node" cx="108" cy="95" r="18"/>
+            <circle class="orbit-node" cx="312" cy="95" r="18"/>
+            <circle class="orbit-node" cx="210" cy="158" r="18"/>
+
+            <circle class="orbit-core" cx="210" cy="95" r="34" fill="url(#orbitGrad)" stroke="none"/>
+            <circle cx="210" cy="95" r="42" stroke="rgba(255,255,255,.22)"/>
+            <path d="M196 88 L224 88 M196 102 L224 102" stroke="#08111f" stroke-width="3.2" stroke-linecap="round" opacity=".95"/>
+            <path d="M203 79 L217 79 L225 88 L225 102 L217 111 L203 111 L195 102 L195 88 Z" stroke="#08111f" stroke-width="2.2" opacity=".88"/>
+
+            <circle class="orbit-core" cx="210" cy="32" r="6" fill="#fff" stroke="none"/>
+            <circle class="orbit-core" cx="108" cy="95" r="6" fill="#fff" stroke="none"/>
+            <circle class="orbit-core" cx="312" cy="95" r="6" fill="#fff" stroke="none"/>
+            <circle class="orbit-core" cx="210" cy="158" r="6" fill="#fff" stroke="none"/>
+
+            <circle class="orbit-pulse op1" r="4" fill="#fff" style="offset-path:path('M 328 95 A 118 56 0 1 1 327.9 95');offset-rotate:0deg"/>
+            <circle class="orbit-pulse op2" r="3.6" fill="#fff" style="offset-path:path('M 298 95 A 88 88 0 1 1 297.9 95');offset-rotate:0deg"/>
+            <circle class="orbit-pulse op3" r="3.2" fill="#fff" style="offset-path:path('M 328 95 A 118 56 0 1 1 327.9 95');offset-rotate:0deg"/>
+
+            <text x="210" y="20" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="2">AUTHENTICATION</text>
+            <text x="78" y="100" text-anchor="end" fill="#dfe8ff" font-size="9.5" letter-spacing="2">PERMANENCE</text>
+            <text x="332" y="100" text-anchor="start" fill="#dfe8ff" font-size="10" letter-spacing="2">PRIVACY</text>
+            <text x="210" y="173" text-anchor="middle" fill="#dfe8ff" font-size="9.5" letter-spacing="2">TASK NODE</text>
+            <text x="210" y="127" text-anchor="middle" fill="#dfe8ff" font-size="8.5" letter-spacing="2">VALIDATORS • MESSAGING</text>
+          </svg>
+          <div class="visual-caption">Authentication • Permanence • Privacy</div>
+        </div>
+        <div class="token-chip-row">
+          <span class="token-chip">Authentication</span>
+          <span class="token-chip">Permanence</span>
+          <span class="token-chip">Privacy</span>
+          <span class="token-chip">Task Node</span>
+        </div>
+        <h3>Why The Token Matters</h3>
+        <p>PFT is the native asset that coordinates validators, messaging, privacy-enabled workflows, and Task Node participation across the network.</p>
+        <p>As contributors feed the Task Node, the network accumulates proprietary workflow data and market intelligence that can be used in buy-side applications through AGTI and the Post Fiat SDK. The strategic goal is to make PFT the asset that sits at the center of a compounding intelligence network rather than a token financed by continuous issuer sales.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="signup">
+    <h2>Join Before the Coordination Layer Hardens</h2>
+    <p>If AGI restructures markets, governance, and labor, the winning networks will be the ones that let human participants coordinate with machine intelligence without handing the future to one center of control.</p>
+    <div class="action-grid">
+      <a href="/whitepaper/" class="action-card">
+        <div class="cta-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16l4-3h10a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg></div>
+        <span class="cta-label">Read the Whitepaper</span>
+        <span class="cta-desc">Protocol design, validator logic, privacy path, and network thesis.</span>
+      </a>
+      <a href="https://discord.gg/U6HjgDSmhR" class="action-card" target="_blank" rel="noopener">
+        <div class="cta-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg></div>
+        <span class="cta-label">Join the Community</span>
+        <span class="cta-desc">Enter the network, track launches, and coordinate with contributors.</span>
+      </a>
+      <a href="https://www.jollydinger.com/pftvalidatorsetup/setup/" class="action-card" target="_blank" rel="noopener">
+        <div class="cta-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4z"/><path d="M12 7v10"/><path d="M7 9.5l5 3 5-3"/></svg></div>
+        <span class="cta-label">Run a Validator</span>
+        <span class="cta-desc">Strengthen the network directly and participate in infrastructure.</span>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -12% 0px',
+      threshold: 0.15
+    };
+
+    const animationObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        } else {
+          entry.target.classList.remove('in-view');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-card').forEach(card => {
+      animationObserver.observe(card);
+    });
+
+    const metricObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.metric-fill').forEach(fill => {
+            const w = fill.style.width;
+            fill.style.width = '0%';
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => { fill.style.width = w; });
+            });
+          });
+          metricObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.credibility-card').forEach(card => {
+      metricObserver.observe(card);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      }
+    });
+
+    const SPOKES = 72;
+    const field = document.getElementById('spokeField');
+    for(let i=0;i<SPOKES;i++){
+      const el=document.createElement('span');
+      el.className='spoke';
+      const angle=(360/SPOKES)*i;
+      const len = (Math.random()*130+120).toFixed(0);
+      const dur = (Math.random()*4+4).toFixed(2);
+      const delay = (-Math.random()*dur).toFixed(2);
+      el.style.setProperty('--angle',angle+'deg');
+      el.style.setProperty('--len',len+'px');
+      el.style.setProperty('--spd',dur+'s');
+      el.style.setProperty('--delay',delay+'s');
+      field.appendChild(el);
+    }
+
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let slideInterval;
+
+    function showSlide(n) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+
+      if (n >= slides.length) currentSlideIndex = 0;
+      if (n < 0) currentSlideIndex = slides.length - 1;
+
+      slides[currentSlideIndex].classList.add('active');
+      dots[currentSlideIndex].classList.add('active');
+    }
+
+    function currentSlide(n) {
+      currentSlideIndex = n;
+      showSlide(currentSlideIndex);
+      resetAutoplay();
+    }
+
+    function nextSlide() {
+      currentSlideIndex++;
+      showSlide(currentSlideIndex);
+      resetAutoplay();
+    }
+
+    function prevSlide() {
+      currentSlideIndex--;
+      showSlide(currentSlideIndex);
+      resetAutoplay();
+    }
+
+    function startAutoplay() {
+      slideInterval = setInterval(() => {
+        currentSlideIndex++;
+        showSlide(currentSlideIndex);
+      }, 5600);
+    }
+
+    function resetAutoplay() {
+      clearInterval(slideInterval);
+      startAutoplay();
+    }
+
+    startAutoplay();
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    const slideshowContainer = document.querySelector('.slideshow-container');
+    if (slideshowContainer) {
+      slideshowContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
+      slideshowContainer.addEventListener('mouseleave', startAutoplay);
+    }
+
+    const particlesContainer = document.getElementById('particles');
+    if (particlesContainer) {
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
+        particle.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
+        particle.style.animationDelay = Math.random() * 4 + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    function createNetworkLines() {
+      const container = document.querySelector('.network-container');
+      if (!container) return;
+      container.querySelectorAll('.network-line').forEach(line => line.remove());
+
+      const center = container.querySelector('.center');
+      const nodes = container.querySelectorAll('.network-node:not(.center)');
+
+      nodes.forEach(node => {
+        const line = document.createElement('div');
+        line.className = 'network-line';
+
+        const centerRect = center.getBoundingClientRect();
+        const nodeRect = node.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+
+        const x1 = centerRect.left + centerRect.width / 2 - containerRect.left;
+        const y1 = centerRect.top + centerRect.height / 2 - containerRect.top;
+        const x2 = nodeRect.left + nodeRect.width / 2 - containerRect.left;
+        const y2 = nodeRect.top + nodeRect.height / 2 - containerRect.top;
+
+        const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+
+        line.style.width = length + 'px';
+        line.style.left = x1 + 'px';
+        line.style.top = y1 + 'px';
+        line.style.transform = `rotate(${angle}deg)`;
+
+        container.insertBefore(line, container.firstChild);
+      });
+    }
+
+    const slideMutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          const slide = mutation.target;
+          if (slide.classList.contains('active') && slide.querySelector('.network-container')) {
+            setTimeout(createNetworkLines, 100);
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll('.slide').forEach(slide => {
+      slideMutationObserver.observe(slide, { attributes: true });
+    });
+
+    window.addEventListener('resize', createNetworkLines);
+    window.addEventListener('load', createNetworkLines);
+
+    const ritualParticlesContainer = document.getElementById('ritualParticles');
+    if (ritualParticlesContainer) {
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'ritual-particle';
+        const angle = (i / 30) * Math.PI * 2;
+        const radius = 120 + Math.random() * 60;
+        particle.style.left = '50%';
+        particle.style.top = '50%';
+        particle.style.setProperty('--rx', Math.cos(angle) * radius + 'px');
+        particle.style.setProperty('--ry', Math.sin(angle) * radius + 'px');
+        particle.style.animationDelay = (i * 0.2) + 's';
+        ritualParticlesContainer.appendChild(particle);
+      }
+    }
+
+    const spotlight = document.getElementById('spotlight');
+    if (spotlight && window.matchMedia('(pointer:fine)').matches) {
+      document.addEventListener('pointermove', (e) => {
+        spotlight.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      });
+      document.addEventListener('pointerleave', () => spotlight.style.opacity = '.2');
+      document.addEventListener('pointerenter', () => spotlight.style.opacity = '.55');
+    } else if (spotlight) {
+      spotlight.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
