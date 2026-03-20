@@ -214,58 +214,44 @@ Identity data is minimal. The public system publishes:
 
 ### 6.1 The right target is rank stability
 
-The practical governance targets are:
+The governance targets are:
 
-1. **Pairwise rank agreement**
+1. **Pairwise rank agreement** (PRA)
 2. **Top-k overlap**
 3. **Cutoff-band stability**
 4. **Observed churn across rounds**
 
-These are measured directly.
-
-Let s^(a) and s^(b) be score vectors from two independent runs on the same snapshot. Define pairwise rank agreement as:
+Let s^(a) and s^(b) be score vectors from two independent runs on the same snapshot.
 
 PRA(a,b) = (2 / n(n-1)) Σ_{i<j} 𝟙[sign(s_i^(a) − s_j^(a)) = sign(s_i^(b) − s_j^(b))]
 
-Define top-k overlap as:
-
 TopK(a,b;k) = |Top_k(s^(a)) ∩ Top_k(s^(b))| / k
-
-And round-to-round churn as:
 
 Churn(t) = 1 − |U_t ∩ U_{t-1}| / |U_t|
 
-### 6.2 Low-temperature decoding is necessary but not sufficient
+### 6.2 Why temperature zero is necessary but not sufficient
 
-In autoregressive decoding, token selection under temperature τ is:
+In autoregressive decoding, token selection under temperature τ follows a softmax distribution. As τ → 0, sampling converges to greedy selection of the argmax token. But real inference systems introduce additional variance: API batching, kernel reduction order, precision modes, tensor-parallel configuration, and hardware differences can perturb logits enough to change downstream tokens.[Anthropic Docs, "Temperature"]
 
-P(x_t = i) = exp(z_i / τ) / Σ_j exp(z_j / τ)
+External APIs should not be treated as authoritative for governance-critical rounds. Post Fiat uses self-hosted inference to control the full stack.
 
-As τ → 0, sampling converges toward greedy selection of the argmax token. But real inference systems add implementation-level variance: API batching, kernel reduction order, precision modes, tensor-parallel configuration, and hardware differences can all perturb logits enough to change downstream tokens.
+### 6.3 Deterministic inference is now practical
 
-This is why external APIs should not be treated as authoritative for governance-critical rounds. Even at temperature 0, identical inputs may produce different outputs across API calls due to serving infrastructure variance.[Anthropic Docs, "Temperature"]
+Thinking Machines Lab identified batch-size variance as a major source of nondeterministic inference and described batch-invariant kernels as a practical fix.[He 2025] SGLang implements a deterministic inference mode built on batch-invariant operators supporting FlashInfer, FlashAttention 3, and Triton backends, with a throughput overhead of roughly 34%.[SGLang Docs, "Deterministic Inference"; LMSYS Blog, 2025]
 
-### 6.3 Recent serving work has narrowed the gap materially
+Numerical precision remains a real divergence source. Yuan et al. show that limited precision affects reproducibility, particularly for reasoning-style models, and propose mitigations such as LayerCast.[Yuan et al. 2025] This is why the execution manifest is a first-class artifact — a weight hash alone is not enough. Reproducibility depends on the whole stack.
 
-Thinking Machines Lab identified batch-size variance as a major source of nondeterministic inference and described batch-invariant kernels as a practical fix.[He 2025] SGLang has since documented a deterministic inference mode built on batch-invariant operators supporting FlashInfer, FlashAttention 3, and Triton backends.[SGLang Docs, "Deterministic Inference"] The SGLang team reports an average slowdown of roughly 34% relative to its nondeterministic baseline in tested configurations.[LMSYS Blog, 2025]
+### 6.4 Empirical validation on PFT Ledger
 
-For a protocol that standardizes model weights, prompt, tokenizer, inference engine, runtime flags, and hardware profile, exact reproducibility is increasingly achievable — and rank stability is already a realistic near-term target.
+Post Fiat's Phase 0 validation scored 42 validators on the PFT Ledger testnet using Qwen3-Next-80B-A3B-Instruct-FP8 — an 80-billion parameter mixture-of-experts model with 3 billion active parameters — running under SGLang v0.5.6 with deterministic inference enabled on a single NVIDIA H200 GPU.
 
-### 6.4 Precision matters
+Five independent runs on the same snapshot produced bit-identical output: identical scores, identical rationales, identical token sequences. Scores ranged from 5 to 97 (mean 85.3), with the model correctly differentiating validators with perfect consensus (scoring 95+) from validators with catastrophic 30-day agreement drops (scoring below 40) and effectively offline validators (scoring below 10).
 
-Numerical precision remains a real source of divergence. Yuan et al. show that limited precision can materially affect reproducibility, particularly for reasoning-style models, and propose mitigation strategies such as LayerCast to improve stability.[Yuan et al. 2025]
+This exceeds the rank-stability target. When the execution environment is fully pinned — model weights, quantization, inference engine, attention backend, CUDA version, and determinism flags — exact reproducibility is achievable, not merely a near-term target.
 
-This is one reason the **execution manifest** is a first-class artifact. A weight hash alone is not enough. Reproducibility depends on the whole stack.
+### 6.5 Statistical fingerprints
 
-### 6.5 Preliminary benchmark
-
-The paper's canonical determinism benchmark is the project's recorded Claude Sonnet 4.6 run: 35 current XRPL validator candidates scored in two independent 100-run batches under a fixed policy stack, producing identical mode scores for all 35 candidates. That benchmark is the proof-of-possibility result for the whitepaper's stability claim, and a compact excerpt appears in **Appendix A**. It is a research-stage benchmark, not the proposed authoritative deployment path. The paper's deployment position remains that authoritative rounds should run on a pinned local or tightly controlled stack rather than on a generic external API surface.
-
-Appendix A is a compressed reporting layer, not the benchmark package itself. The printed table shows only the final modal outputs for readability. The recorded benchmark package includes the normalized candidate snapshots, prompt version, per-run raw outputs, mode/distribution summaries, and the execution assumptions used to reproduce the run. In other words, the benchmark was not a bare domain-name toy prompt; it was a recorded validator-selection exercise aligned to the scoring architecture described in Sections 4 and 5. Appendix B serves a different purpose. It documents a separate asynchronous OpenRouter harness used to test portability, extraction, and repeated-run variance across additional model stacks. That appendix is useful stress-test evidence, but it is not the authoritative benchmark on which the paper's core determinism claim rests.
-
-### 6.6 Statistical fingerprints
-
-Repeated-run statistics — mode, mean, variance, selected rationales — provide evidence that a claimed model/process was actually run. Their strength depends on benchmark design, number of runs, number of candidates, output space structure, and adversary knowledge. Post Fiat treats these fingerprints as useful evidence for shadow verification, complemented by stronger cryptographic assurance layers as they mature (Section 9).
+Repeated-run statistics — mode, mean, variance, and selected rationales — provide evidence that a claimed model and process was actually run. Post Fiat treats these fingerprints as useful evidence for shadow verification in Phase 2, complemented by stronger cryptographic assurance layers as they mature (Section 9).
 
 ---
 
@@ -273,23 +259,23 @@ Repeated-run statistics — mode, mean, variance, selected rationales — provid
 
 ### 7.1 Full manifest pinning
 
-Each round publishes a full execution manifest, including at minimum:
+Each round publishes a full execution manifest. The Phase 0 validation manifest:
 
-- model identifier,
-- model snapshot revision,
-- hashes of all weight shards,
-- tokenizer files,
-- config files,
-- prompt version,
-- output schema version,
-- inference engine version/commit,
-- attention backend,
-- dtype / quantization mode,
-- container image digest,
-- CUDA / driver version,
-- determinism flags.
+| Field | Value |
+|---|---|
+| Model | Qwen/Qwen3-Next-80B-A3B-Instruct-FP8 |
+| Architecture | 80B total parameters, 3B active (MoE) |
+| Quantization | FP8 native |
+| GPU | NVIDIA H200, 141 GB VRAM, single GPU (TP=1) |
+| Inference engine | SGLang v0.5.6.post2 |
+| Container image | lmsysorg/sglang:v0.5.6.post2-cu129-amd64-runtime |
+| CUDA | 12.9 |
+| Attention backend | FlashInfer |
+| Sampling | PyTorch (deterministic mode) |
+| Temperature | 0 (greedy decoding) |
+| Determinism flags | `--enable-deterministic-inference` |
 
-This prevents silent drift.
+Any change to model weights, engine version, quantization mode, or runtime flags produces a different manifest hash and is therefore a visibly different round.
 
 ### 7.2 Domain-separated hashing
 
@@ -297,23 +283,11 @@ Any hash that influences governance is domain-separated and typed. A generic com
 
 c = SHA256(d ‖ v ‖ r ‖ h ‖ σ)
 
-where:
-- d is a domain tag,
-- v is a version byte,
-- r is the round identifier,
-- h is a content hash,
-- σ is a salt or auxiliary field.
-
-Governance systems fail in embarrassing ways when serialization rules are implicit.
+where d is a domain tag, v is a version byte, r is the round identifier, h is a content hash, and σ is a salt or auxiliary field.
 
 ### 7.3 Replay requirements
 
-The implementation supports:
-- `replay_round(round_id)`,
-- `rebuild_from_raw(round_id)`,
-- and `dry_run`.
-
-If a round cannot be replayed from its own artifacts, it is not auditable.
+The implementation supports `replay_round(round_id)`, `rebuild_from_raw(round_id)`, and `dry_run`. If a round cannot be replayed from its own artifacts, it is not auditable.
 
 ---
 
