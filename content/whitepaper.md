@@ -172,30 +172,31 @@ Artifact bundles are pinned to IPFS, with the root CID anchored on-chain via a m
 
 ## 5. Scoring Surfaces
 
-### 5.1 What the scorer evaluates
+### 5.1 Scoring dimensions
 
-The scoring policy is explicit about its decision surfaces:
+The scoring prompt defines six dimensions, each with explicit weighting guidance:
 
-- **Quality surfaces**: uptime, agreement, software diligence, historical reliability.
-- **Identity surfaces**: operator transparency, institutional credibility, domain attestation.
-- **Concentration surfaces**: country, ASN, cloud provider, datacenter, operator clustering.
-- **Low-confidence observational surfaces**: latency and topology from a single observer.
+1. **Consensus performance** (highest weight): Agreement scores across 1-hour, 24-hour, and 30-day windows, with a target above 99.9%. Missed validations and ledger index currency.
 
-The scorer gives the greatest weight to objective, long-horizon indicators and lower weight to single-observer signals.
+2. **Operational reliability** (high weight): Uptime consistency, domain verification status, and long-run operational track record.
 
-This does not turn the model into an unbounded governance oracle. The model sits downstream of a fixed published snapshot and upstream of a deterministic selector with explicit thresholds, churn controls, and concentration checks. It cannot invent uptime, rewrite attestation, or silently override hard operational evidence. The relevant comparison is therefore not "judgment versus no judgment" but "published, replayable judgment over a common record" versus the status quo of partially opaque publisher discretion.
+3. **Software diligence** (moderate weight): Server version currency, amendment voting participation, and fee vote configuration.
 
-`Institutional credibility` is intentionally narrower than prestige. It means durable public accountability, identifiable stewardship, real reputational cost for misconduct, and evidence that the operator is more than a disposable pseudonym. A recognizable logo or famous name is not positive evidence on its own. Operational reliability outranks reputation proxies, and weak identity evidence is treated as lower confidence rather than as a license to hallucinate.
+4. **Geographic and infrastructure diversity** (moderate weight): Country, ASN, and operator distribution across the validator set. Scored relatively — diversity bonuses reward underrepresented attributes rather than penalizing common ones.
+
+5. **Identity and reputation** (low-moderate weight): Verified domain, entity classification, and on-chain identity attestations. Neutral where unavailable — absence of identity data is lower confidence, not negative evidence.
+
+6. **Observer-dependent metrics** (low weight): Peer count, topology position, and latency. Informational only, heavily dependent on the observer's vantage point.
+
+A validator with perfect consensus, good uptime, current software, and a verified domain scores 85 or above regardless of location. Scores below 30 are reserved for serious operational failures — very low agreement, extended downtime, or dangerously outdated software.
+
+The model sits downstream of a fixed published snapshot and upstream of a deterministic selector. It cannot invent uptime or rewrite attestation data. The relevant comparison is published, replayable judgment over a common record versus partially opaque publisher discretion.
 
 ### 5.2 Concentration as a portfolio problem
 
-A validator list is not just a ranking of individually good nodes. It is also a portfolio problem. A set of individually strong validators can still be collectively fragile if many share the same cloud provider, jurisdiction, ASN, or operator.
+A validator list is not just a ranking of individually good nodes — it is also a portfolio problem. Individually strong validators can be collectively fragile if many share the same cloud provider, jurisdiction, ASN, or operator.
 
-List construction has both:
-- **per-candidate quality**, and
-- **set-level correlation risk**.
-
-The concentration surfaces are explicit, published, and reviewable.
+The scoring prompt handles this through diversity bonuses rather than concentration penalties: validators in underrepresented geographies or ASNs receive upward adjustments, while validators in common configurations score on their individual merits. Concentration surfaces — country, ASN, cloud provider, datacenter, operator — are explicit, published, and reviewable.
 
 ### 5.3 Identity without unnecessary PII
 
@@ -205,7 +206,7 @@ Identity data is minimal. The public system publishes:
 - `entity_type: institutional / individual / unknown`
 - `domain_attested: true/false`
 
-This improves auditability without turning validator governance into a doxxing exercise.
+`Institutional credibility` means durable public accountability, identifiable stewardship, and real reputational cost for misconduct — not prestige or brand recognition. Operational reliability outranks reputation proxies.
 
 ---
 
