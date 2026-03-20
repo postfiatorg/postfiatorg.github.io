@@ -291,48 +291,37 @@ The implementation supports `replay_round(round_id)`, `rebuild_from_raw(round_id
 
 ---
 
-## 8. Security Model and Anti-Gaming Analysis
+## 8. Security Model
 
 ### 8.1 Threat model
 
-The relevant adversaries include:
-- a manipulative list publisher,
-- a validator trying to cheaply imitate institutional credibility,
-- operators attempting to copy others' outputs without recomputation,
-- clusters of validators masquerading as independent entities,
-- and operational failures in list publication itself.
+The relevant adversaries:
+
+- A list publisher exercising hidden editorial discretion.
+- Validators cheaply imitating institutional credibility.
+- Operators copying others' outputs without recomputation.
+- Validator clusters masquerading as independent entities.
+- Operational failures in list publication.
 
 ### 8.2 Layered identity signals
 
-Sybil resistance uses layered signals:
+Sybil resistance uses layered signals: long-run performance history, domain attestation via `xrp-ledger.toml`, minimal public verification state, operator clustering analysis, concentration analysis, and model-based assessment of institutional credibility.
 
-- long-run performance history,
-- domain attestation via `xrp-ledger.toml`,
-- minimal public verification state,
-- operator clustering analysis,
-- concentration analysis,
-- and model-based assessment of public institutional credibility.
+XRPL's two-way domain verification binds a validator public key and a domain through reciprocal claims, creating strong evidence that the same operator controls both.[XRPL Docs, "xrp-ledger.toml File"]
 
-XRPL's two-way domain verification process binds a validator public key and a domain through reciprocal claims, creating strong evidence that the same operator controls both.[XRPL Docs, "xrp-ledger.toml File"]
+Public reproducibility is intentional, not a flaw. An attacker running the same scorer on the same snapshot is analogous to anyone verifying a certificate chain. The security question is whether underlying inputs can be forged cheaply enough to fool the network.
 
-Public reproducibility is intentional here, not a flaw. An attacker being able to run the same scorer on the same snapshot is analogous to anyone being able to verify a certificate chain or a signed validator list. The security question is not whether the scoring logic is secret; it is whether the underlying inputs can be forged cheaply enough to fool the network.
+### 8.3 Costly signaling
 
-### 8.3 Costly signaling and institutional credibility
+Spence's costly-signaling framework applies directly. Appearing credible to a model trained on large public corpora is not free — it is typically cheaper to operate a legitimate institution well than to manufacture years of convincing public evidence across independent sources. This raises the cost of Sybil identities relative to systems that treat every pseudonymous operator as equally credible.
 
-Spence's costly-signaling framework applies directly. Appearing credible to a model trained on large public corpora is not free. It is typically cheaper to operate a legitimate institution well than to manufacture years of convincing public evidence across independent sources. This raises the cost of cheap Sybil identities relative to systems that treat every pseudonymous operator as equally credible by default.
-
-### 8.4 Commit–reveal as anti-copying infrastructure
+### 8.4 Commit-reveal as anti-copying infrastructure
 
 In Phase 2 shadow mode, validators commit to output hashes before reveals open:
 
 c_i = SHA256(d ‖ v ‖ r ‖ H(S_i) ‖ σ_i)
 
-where:
-- S_i is validator i's scored output,
-- H(S_i) is its content hash,
-- σ_i is a random salt.
-
-This prevents simple after-the-fact copying once a canonical output is visible.
+where S_i is validator i's scored output, H(S_i) is its content hash, and σ_i is a random salt. This prevents after-the-fact copying once a canonical output is visible.
 
 ### 8.5 Attack summary
 
@@ -340,7 +329,7 @@ This prevents simple after-the-fact copying once a canonical output is visible.
 |---|---|---|
 | Fake domain / fake operator identity | Two-way domain attestation, public verification state, operator review | Stronger against casual spoofing than long-horizon social engineering |
 | Metric gaming | Long-horizon performance metrics, public evidence, low weight on short-term optics | Possible if attacker incurs real operating cost |
-| Output copying in shadow mode | Commit–reveal timing, public convergence reports | Does not prove local execution by itself |
+| Output copying in shadow mode | Commit-reveal timing, public convergence reports | Does not prove local execution by itself |
 | Hidden publisher discretion | Raw evidence + snapshot + manifest + deterministic selector | Snapshot assembly may remain centralized in early phases |
 | Concentration masquerading as diversity | Country/ASN/cloud/datacenter/operator clustering | Entity resolution is imperfect; conservative defaults apply |
 | Collusion among trusted validators | High-overlap requirements and public concentration analysis | Addressed by set-level correlation monitoring, not scoring alone |
@@ -349,31 +338,28 @@ This prevents simple after-the-fact copying once a canonical output is visible.
 
 ## 9. Assurance Roadmap
 
-### 9.1 Available immediately
+### 9.1 Available at launch
 
-The production assurance stack at launch:
+Phase 1 provides:
 
-1. Publish raw evidence and normalized snapshot.
-2. Pin the full execution manifest.
-3. Use local/self-hosted scoring for authoritative rounds.
-4. Use structured outputs.
-5. Use deterministic selection.
-6. Measure replay stability directly.
-7. In Phase 2, publish convergence reports.
-
-This is already a materially more inspectable system than a purely editorial list.
+1. Published raw evidence and normalized snapshot.
+2. Pinned execution manifest.
+3. Self-hosted scoring — no external API dependence.
+4. Deterministic selection with structured outputs.
+5. Direct replay stability measurement.
+6. Convergence reports beginning in Phase 2.
 
 ### 9.2 Strengthening assurance over time
 
 Additional assurance layers on a clear development path:
 
-- **TEE-backed scoring**: NVIDIA H100/Blackwell GPUs support hardware-level confidential computing with an on-die root of trust, AES-encrypted memory, secure boot, and remote attestation. Benchmarks from Phala Network show average throughput overhead below 7%. TEE attestation proves that specific code ran on genuine, untampered hardware.
+- **TEE-backed scoring**: NVIDIA H100/Blackwell GPUs support hardware-level confidential computing with on-die root of trust, AES-encrypted memory, secure boot, and remote attestation. Phala Network benchmarks show throughput overhead below 7%.[Phala Network 2025]
 
-- **Optimistic ML verification**: ORA Protocol deploys optimistic ML (opML) on Ethereum mainnet, supporting 7B+ models on standard PCs. Inference results are posted on-chain and assumed correct; during a challenge period, any validator can initiate a bisection-based dispute game verified via a Fraud Proof Virtual Machine. Security requires only one honest verifier.
+- **Optimistic ML verification**: ORA Protocol deploys optimistic ML (opML) on Ethereum mainnet, supporting 7B+ models. Inference results post on-chain and are assumed correct; during a challenge period, any validator can initiate a bisection-based dispute game. Security requires only one honest verifier.[ORA Protocol 2025]
 
-- **Zero-knowledge ML**: zkLLM (CCS 2024) demonstrated proofs for models up to 13 billion parameters in 1–15 minutes with proof sizes under 200KB. zkPyTorch proved Llama-3 inference at approximately 150 seconds per token. For Post Fiat's scoring task, ZK proofs of a 7B–13B scoring model are feasible today on a batch/async basis. Proving 70B models will follow as GPU-optimized provers mature.
+- **Zero-knowledge ML**: zkLLM (CCS 2024) demonstrated proofs for models up to 13B parameters in 1–15 minutes with proof sizes under 200KB. zkPyTorch proved Llama-3 inference at ~150 seconds per token. ZK proofs of a 7B–13B scoring model are feasible today on a batch basis; proving 70B+ models follows as GPU-optimized provers mature.[Sun et al. 2024; Polyhedra 2025]
 
-- **TLS Notary**: Provides cryptographic proof that a specific API call returned a specific response. Combined with deterministic temperature-0 inference, this creates a verifiable chain for API-based scoring rounds.
+- **TLS Notary**: Cryptographic proof that a specific API call returned a specific response. Useful for verifiable chains in API-based scoring rounds.[TLSNotary]
 
 - **Multi-publisher publication paths** to reduce dependence on any single signer or hosting path.
 
