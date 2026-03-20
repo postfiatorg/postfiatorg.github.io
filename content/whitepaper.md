@@ -472,13 +472,60 @@ Post Fiat replaces opaque editorial selection with a public, replayable, model-a
 
 Preliminary validation confirms that the approach works. Scoring 42 PFT Ledger validators with a self-hosted 80B-parameter model under deterministic inference produced bit-identical output across five independent runs — exact reproducibility, not merely rank stability.
 
-The broader `postfiatd` roadmap includes adjacent protocol work — validator-consensus account exclusion and Orchard/Halo2 privacy — documented in Appendix A. The publication mechanism remains the narrow core of this paper.
+The broader `postfiatd` roadmap includes adjacent protocol work — validator-consensus account exclusion and Orchard/Halo2 privacy — documented in Appendix B. The publication mechanism remains the narrow core of this paper.
 
 ---
 
-## Appendix A — Adjacent Protocol Extensions in `postfiatd`
+## Appendix A — Phase 0 Benchmark: PFT Ledger Testnet
 
-### A.1 Validator-consensus account exclusion
+### A.1 Model selection
+
+Phase 0 evaluated models across two benchmark rounds to find the best combination of scoring quality, determinism, and single-GPU feasibility:
+
+- **Round 1** tested large models via external API (Qwen3-235B-A22B variants, MiniMax-M1-80B) to establish quality baselines.
+- **Round 2** tested H200-compatible models via self-hosted inference (Qwen3-Next-80B-A3B, Qwen3-32B, GPT-OSS-120B) to find a model that fits on a single GPU with FP8 quantization.
+
+Qwen3-Next-80B-A3B-Instruct-FP8 was selected: comparable scoring quality to the 235B variant, 80B total parameters with only 3B active (mixture-of-experts), fits on a single H200 with headroom, and achieved 100% determinism under SGLang's deterministic inference mode.
+
+### A.2 Scoring results
+
+42 validators on the PFT Ledger testnet were scored using the execution manifest documented in Section 7.1. Representative results (anonymized, sorted by score):
+
+| Validator | Score | Summary |
+|---|---:|---|
+| v001 | 97 | Perfect 1h/24h, 99.93% 30d (451 missed). Most reliable in set. |
+| v002 | 96 | Perfect across all windows. 692 missed over 30d. |
+| v003 | 95 | Perfect 1h/24h/30d. Running current software, RPC role. |
+| v008 | 95 | Perfect agreement, current software, active UNL role. |
+| v015 | 94 | Perfect 1h/24h, 99.76% 30d. Consistent. |
+| v020 | 92 | Perfect 1h/24h, 99.42% 30d. Minor long-term misses. |
+| v030 | 90 | Perfect 1h/24h, minor 30d degradation. |
+| v033 | 88 | Strong consensus, slight 30d variance. |
+| v035 | 80 | Good short-term, moderate 30d performance. |
+| v037 | 75 | Strong 1h/24h, 30d drops to 95.56%. |
+| v038 | 70 | Adequate consensus, some degradation. |
+| v039 | 65 | Mixed performance across time windows. |
+| v040 | 40 | Perfect 1h/24h but 84.76% 30d — 130K+ missed ledgers. |
+| v041 | 10 | Zero 1h/24h, 0.8% 30d. Effectively offline. |
+| v042 | 5 | Zero 1h/24h, 0.14% 30d. Non-functional. |
+
+Full distribution: 42 validators, range 5–97, mean 85.3. Processing time: ~43 seconds (warm), ~15,000 input tokens, ~3,000 output tokens.
+
+### A.3 Determinism
+
+Five independent runs on the same snapshot produced bit-identical output:
+
+- Same scores for all 42 validators.
+- Same rationale text, token for token.
+- Same JSON structure and ordering.
+
+This exceeds the >99% rank-stability target established in the Phase 0 decision gate. Under a fully pinned execution environment, exact reproducibility — not merely statistical stability — is achievable.
+
+---
+
+## Appendix B — Adjacent Protocol Extensions in `postfiatd`
+
+### B.1 Validator-consensus account exclusion
 
 In addition to validator-list publication, `postfiatd` includes a PostFiat-specific account-exclusion mechanism. Two amendments, `PF_AccountExclusion` and `PF_ValidatorVoteTracking`, allow trusted validators to add or remove account exclusions through validation traffic, track those votes on-ledger, and maintain an exclusion view over the active validator set.[postfiatd branch research, 2026]
 
@@ -486,7 +533,7 @@ The relevant distinction from standard XRPL is that exclusion is not just an iss
 
 This is a governance primitive, not merely a token-control primitive. It allows the network to say: a specific account may not participate, regardless of whether the transaction involves an issuer-controlled IOU.
 
-### A.2 Why exclusion is materially different from standard XRPL freezes
+### B.2 Why exclusion is materially different from standard XRPL freezes
 
 Standard XRPL already supports trust-line freeze, deep freeze, global freeze, and clawback for issued assets. Those are real controls, but they are primarily issuer-side controls over IOUs and trust lines rather than validator-governed network-wide exclusion of native XRP accounts or transaction counterparties.[XRPL Docs, "Common Misunderstandings about Freezes"; XRPL Docs, "Deep Freeze"; postfiatd branch research, 2026]
 
@@ -494,7 +541,7 @@ For sanctions-style enforcement, that distinction matters. OFAC states that virt
 
 That advantage should not be overstated. The exclusion path only helps when the relevant amendments are enabled and enough validators actually reach the threshold. OFAC also states that listed digital-currency addresses are not exhaustive, and that blocking/reporting duties continue when a U.S. person actually holds blocked property.[OFAC FAQ 562; OFAC FAQ 646; OFAC Virtual Currency Guidance] So Post Fiat's exclusion mechanism is best understood as a stronger protocol-layer enforcement primitive inside a larger compliance program, not as a complete compliance solution by itself.
 
-### A.3 Orchard / Halo2 privacy as a parallel protocol extension
+### B.3 Orchard / Halo2 privacy as a parallel protocol extension
 
 Separately, the `halo2-devnet-integration` branch of `postfiatd` ports Zcash's Orchard privacy model into an XRPL-derived ledger rather than treating privacy as a mixer, sidecar, or external bridge. It adds the `OrchardPrivacy` amendment and a native `ttSHIELDED_PAYMENT` transaction type, introduces a Rust `orchard-postfiat` crate built around Zcash's `orchard` and `halo2_proofs` libraries, and carries over Orchard's core state model: serialized bundles, commitment-tree anchors, nullifiers for double-spend prevention, note commitments for new shielded outputs, viewing-key-based note discovery, and the Orchard `valueBalance` accounting model that represents net flow between transparent XRP balances and the shielded pool.[postfiatd branch research, 2026]
 
