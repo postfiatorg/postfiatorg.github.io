@@ -553,54 +553,33 @@ The significance is not merely that Post Fiat has "a privacy branch." It is that
 
 ## References
 
-### XRPL protocol, validator lists, and operations
+### XRPL protocol and validator lists
 
 - XRPL Docs. **Unique Node List (UNL)**. https://xrpl.org/docs/concepts/consensus-protocol/unl
 - XRPL Docs. **Consensus Protections Against Attacks and Failure Modes**. https://xrpl.org/docs/concepts/consensus-protocol/consensus-protections
 - XRPL Docs. **Configure Validator List Threshold**. https://xrpl.org/docs/infrastructure/configuration/configure-validator-list-threshold
 - XRPL Docs. **xrp-ledger.toml File**. https://xrpl.org/docs/references/xrp-ledger-toml
-- XRPL Docs. **Run rippled as a Validator**. https://xrpl.org/docs/infrastructure/configuration/server-modes/run-rippled-as-a-validator
-- XRPL Docs. **validator_list method**. https://xrpl.org/docs/references/http-websocket-apis/peer-port-methods/validator-list
 - XRPL Docs. **Common Misunderstandings about Freezes**. https://xrpl.org/docs/concepts/tokens/fungible-tokens/common-misconceptions-about-freezes
 - XRPL Docs. **Deep Freeze**. https://xrpl.org/docs/concepts/tokens/fungible-tokens/deep-freeze
-- XRPL Docs. **FAQ**. https://xrpl.org/about/faq
 - XRPL Blog. **Default UNL Migration** (2025). https://xrpl.org/blog/2025/default-unl-migration
-- XRPL Blog. **Move to the New XRPL Foundation Commences** (2025). https://xrpl.org/blog/2025/move-to-the-new-xrpl-foundation-commences
 
-### Post Fiat implementation and sanctions policy
-
-- `postfiatd` branch research, inspected March 16, 2026. Review of `halo2-devnet-integration` branch files including `include/xrpl/protocol/detail/features.macro`, `src/libxrpl/protocol/STValidation.cpp`, `src/xrpld/app/consensus/RCLConsensus.cpp`, `src/xrpld/app/consensus/RCLValidations.cpp`, `src/xrpld/app/misc/ExclusionManager.h`, `src/xrpld/app/tx/detail/Change.cpp`, `src/xrpld/app/tx/detail/Transactor.cpp`, `orchard-postfiat/src/lib.rs`, `orchard-postfiat/src/bundle_real.rs`, `orchard-postfiat/src/ffi/bridge.rs`, `src/xrpld/app/tx/detail/ShieldedPayment.cpp`, and `src/test/rpc/OrchardFullFlow_test.cpp`.
-- `agent-hub` devnet operations research, inspected March 16, 2026. Review of `products/blockchain/systems/massive_rippled_pr_system/validator_churn_test_playbook.md` and the documented `halo2-devnet-build.yml`, `halo2-devnet-deploy.yml`, `halo2-devnet-update.yml`, and `halo2-devnet-destroy.yml` workflows for isolated end-to-end validator testing.
-- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 560: Are my OFAC compliance obligations the same, regardless of whether a transaction is denominated in digital currency or traditional fiat currency?** https://ofac.treasury.gov/faqs/560
-- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 562: How will OFAC identify digital currency-related information on the SDN List?** https://ofac.treasury.gov/faqs/562
-- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 646: How do I block digital currency?** https://ofac.treasury.gov/faqs/646
-- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 1021: Do the prohibitions of Executive Order (E.O.) 14024 and other Russia-related sanctions extend to virtual currency?** https://ofac.treasury.gov/faqs/1021
-- U.S. Department of the Treasury, Office of Foreign Assets Control. **Sanctions Compliance Guidance for the Virtual Currency Industry**. https://ofac.treasury.gov/system/files/126/virtual_currency_guidance_brochure.pdf
-
-### Consensus and XRPL research
+### Consensus research
 
 - Chase, Brad, and Ethan MacBrough. **Analysis of the XRP Ledger Consensus Protocol**. arXiv:1802.07242, 2018.
 - Amores-Sesar, Ignacio, Christian Cachin, and Jovana Mićić. **Security Analysis of Ripple Consensus**. OPODIS 2020 / LIPIcs 184, 2021.
-- Tumas, Vytautas, Sean Rivera, Damien Magoni, and Radu State. **Topology Analysis of the XRP Ledger**. SAC 2023 / arXiv:2205.00869.
 
-### Mechanism design, information asymmetry, and signaling
+### Mechanism design and signaling
 
-- Hurwicz, Leonid. **Optimality and Informational Efficiency in Resource Allocation Processes**. 1960.
-- Akerlof, George. **The Market for "Lemons": Quality Uncertainty and the Market Mechanism**. *Quarterly Journal of Economics*, 1970.
-- Myerson, Roger. **Optimal Auction Design**. *Mathematics of Operations Research*, 1981.
 - Spence, Michael. **Job Market Signaling**. *Quarterly Journal of Economics*, 1973.
-- Douceur, John. **The Sybil Attack**. IPTPS, 2002.
 - Lewis-Pye, Andrew, and Tim Roughgarden. **Byzantine Generals in the Permissionless Setting**. arXiv:2101.07095 / 2023 revision.
 
 ### Inference stability and reproducibility
 
-- Holtzman, Ari, et al. **The Curious Case of Neural Text Degeneration**. ICLR, 2020.
 - Anthropic Docs. **Temperature**. https://docs.anthropic.com/en/docs/resources/glossary
 - He, Horace and Thinking Machines Lab. **Defeating Nondeterminism in LLM Inference**. Thinking Machines Lab: Connectionism, 2025.
 - SGLang Docs. **Deterministic Inference**. https://github.com/sgl-project/sgl-project.github.io/blob/main/_sources/advanced_features/deterministic_inference.md
 - LMSYS / SGLang Team. **Towards Deterministic Inference in SGLang and Reproducible RL Training**. 2025.
 - Yuan, Jiayi, et al. **Understanding and Mitigating Numerical Sources of Nondeterminism in LLM Inference**. arXiv:2506.09501, 2025.
-- Dong, Yixin, et al. **XGrammar: Flexible and Efficient Structured Generation Engine for Large Language Models**. arXiv:2411.15100 / MLSys 2025.
 
 ### Verification and cryptographic assurance
 
@@ -610,14 +589,19 @@ The significance is not merely that Post Fiat has "a privacy branch." It is that
 - Polyhedra Network. **zkPyTorch**. 2025.
 - TLSNotary Project. https://tlsnotary.org
 
-### Incentives and economics
+### Economics
 
-- Brünjes, Lars, Aggelos Kiayias, Elias Koutsoupias, and Aikaterini-Panagiota Stouka. **Reward Sharing Schemes for Stake Pools**. arXiv:1807.11218 / EuroS&P 2020.
 - Stanford HAI. **AI Index Report 2025**. https://hai.stanford.edu/ai-index/2025-ai-index-report
 - Epoch AI. **LLM inference price trends** (2025). https://epoch.ai/data-insights/llm-inference-price-trends
 
-### Representation convergence
+### Post Fiat implementation and sanctions policy
 
-- Jha, Minyoung, et al. **The Strong Platonic Representation Hypothesis**. 2025.
+- `postfiatd` branch research, inspected March 16, 2026. Review of `halo2-devnet-integration` branch files including `include/xrpl/protocol/detail/features.macro`, `src/libxrpl/protocol/STValidation.cpp`, `src/xrpld/app/consensus/RCLConsensus.cpp`, `src/xrpld/app/consensus/RCLValidations.cpp`, `src/xrpld/app/misc/ExclusionManager.h`, `src/xrpld/app/tx/detail/Change.cpp`, `src/xrpld/app/tx/detail/Transactor.cpp`, `orchard-postfiat/src/lib.rs`, `orchard-postfiat/src/bundle_real.rs`, `orchard-postfiat/src/ffi/bridge.rs`, `src/xrpld/app/tx/detail/ShieldedPayment.cpp`, and `src/test/rpc/OrchardFullFlow_test.cpp`.
+- `agent-hub` devnet operations research, inspected March 16, 2026. Review of `products/blockchain/systems/massive_rippled_pr_system/validator_churn_test_playbook.md` and the documented `halo2-devnet-build.yml`, `halo2-devnet-deploy.yml`, `halo2-devnet-update.yml`, and `halo2-devnet-destroy.yml` workflows for isolated end-to-end validator testing.
+- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 560**. https://ofac.treasury.gov/faqs/560
+- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 562**. https://ofac.treasury.gov/faqs/562
+- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 646**. https://ofac.treasury.gov/faqs/646
+- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 1021**. https://ofac.treasury.gov/faqs/1021
+- U.S. Department of the Treasury, Office of Foreign Assets Control. **Sanctions Compliance Guidance for the Virtual Currency Industry**. https://ofac.treasury.gov/system/files/126/virtual_currency_guidance_brochure.pdf
 
 ---
