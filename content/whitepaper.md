@@ -375,34 +375,28 @@ Additional assurance layers on a clear development path:
 
 ---
 
-## 10. Phased Deployment and Trust Model
+## 10. Phased Deployment
 
 ### 10.1 Phase 1: Foundation publication with full audit trail
 
-The foundation remains the authoritative publisher. It:
-- collects evidence,
-- normalizes the snapshot,
-- runs the scorer,
-- applies the deterministic selector,
-- signs the validator list,
-- and publishes the full round bundle.
+The foundation operates the scoring pipeline: collecting evidence from VHS and network crawl endpoints, normalizing it into a canonical snapshot, scoring validators via a self-hosted open-weight model on serverless GPU infrastructure, applying the deterministic selector, signing the validator list, and publishing the full round bundle to IPFS with an on-chain CID anchor.
 
 Operationally centralized, fully auditable.
 
 ### 10.2 Phase 2: Validator-side shadow verification
 
-Validators independently rerun the same round using the published snapshot and manifest. The foundation's list remains authoritative, but validators commit to and later reveal their own outputs so the network can measure:
+Validators independently rerun the same round using the published snapshot and manifest. Each validator runs a GPU sidecar with the pinned model and inference stack. The foundation's list remains authoritative, but validators commit to and reveal their own outputs so the network can measure:
 
 - exact artifact matches,
 - score-level agreement,
 - top-k overlap,
 - and list-level convergence.
 
-This phase answers the key empirical question: **can independent operators reproduce the process closely enough for governance?**
+This phase answers the key empirical question: can independent operators reproduce the process closely enough for governance?
 
 ### 10.3 Phase 3A: Content authority transfer
 
-If Phase 2 demonstrates sustained convergence (pairwise rank agreement > 95%, top-k overlap > 90%), the authoritative content of the published list shifts from the foundation's own output to the converged validator output. The foundation may still sign and distribute the list, but it no longer has sole editorial control over the content.
+If Phase 2 demonstrates sustained convergence (pairwise rank agreement > 95%, top-k overlap > 90%), authoritative list content shifts from the foundation's output to validator-converged output. The foundation may still sign and distribute the list, but no longer has sole editorial control.
 
 ### 10.4 Phase 3B: Publication decentralization
 
@@ -411,10 +405,10 @@ Publication authority includes snapshot assembly, round announcement, list signi
 ### 10.5 Fallback rules
 
 Every phase has a conservative fallback:
-- missed round → retain last known-good list,
-- participation drops below threshold → revert to foundation-only publication,
-- manifests diverge → treat round as diagnostic rather than authoritative,
-- publication fails → preserve continuity before novelty.
+- Missed round → retain last known-good list.
+- Participation drops below threshold → revert to foundation-only publication.
+- Manifests diverge → treat round as diagnostic, not authoritative.
+- Publication fails → preserve continuity before novelty.
 
 ### 10.6 Trust model summary
 
@@ -431,29 +425,27 @@ Every phase has a conservative fallback:
 
 ### 11.1 A workload built for local inference
 
-Validator-list scoring is periodic, structured, and batchable — not a high-frequency chatbot workload. This makes it a strong candidate for self-hosted or tightly controlled inference.
+Validator-list scoring is periodic, structured, and batchable. A scoring round processes approximately 15,000 input tokens and 3,000 output tokens in under a minute on a single GPU. This is not a high-frequency workload — it runs weekly or monthly.
 
-The exact model size, quantization mode, and hardware profile are governance parameters. What matters is that the model discriminates among candidates meaningfully, runs under a pinned manifest, and deploys at a cost affordable for the target validator class.
+Post Fiat's Phase 0 validation runs on serverless GPU infrastructure at approximately $0.38 per scoring round on an H200. Monthly cost for the full scoring service — two server instances for devnet and testnet, plus serverless GPU — is $38–69. These costs decline as inference hardware improves.
 
-### 11.2 The cost trend is decisive
+### 11.2 The cost trend favors decentralization
 
-Stanford's 2025 AI Index reports that GPT-3.5-equivalent inference costs fell by more than 280× between late 2022 and late 2024, and that the gap between top closed-weight and top open-weight models narrowed sharply over the same period.[Stanford HAI, AI Index 2025] Epoch AI reports rapid price declines for fixed-performance inference across task categories.[Epoch AI 2025]
+Stanford's 2025 AI Index reports that GPT-3.5-equivalent inference costs fell by more than 280× between late 2022 and late 2024, with the gap between closed-weight and open-weight models narrowing sharply.[Stanford HAI, AI Index 2025] Epoch AI reports rapid fixed-performance inference price declines across task categories.[Epoch AI 2025]
 
-A governance workload that runs weekly or monthly on a pinned local model is operationally plausible for serious validators today. Consumer-grade dual-GPU systems achieve 27 tokens/second on 70B quantized models, matching single-H100 datacenter performance at roughly one-quarter the cost. The 50× annual cost decline means the economic barrier drops by an order of magnitude each year.
+Consumer-grade dual-GPU systems already achieve 27 tokens/second on 70B quantized models, matching single-H100 datacenter performance at roughly one-quarter the cost. For Phase 2 shadow verification, this means validators can afford to rerun scoring locally without datacenter-grade infrastructure.
 
 ### 11.3 Validator incentives
 
-Post Fiat follows XRPL's principle that no direct validator reward is the best validator reward. Validators run because they use the network, not because they are paid to validate. This avoids the perverse dynamics of reward-driven validation — where the economic incentive to validate attracts participants whose primary interest is extraction rather than network health.
+Post Fiat follows XRPL's principle that no direct validator reward is the best validator reward. Validators run because they use the network, not because they are paid to validate.
 
-The foundation allocates resources specifically for incentivizing participation in UNL selection reproduction: the shadow verification process in Phase 2 where validators independently rerun the scoring pipeline and publish convergence data. This is a narrower, more defensible use of incentives — it pays for the specific work of proving that the scoring process is reproducible, not for the general act of running a node.
+The foundation allocates resources specifically for Phase 2 shadow verification — paying for the work of proving that the scoring process is reproducible, not for general node operation. Credibility signals in model-assisted scoring should reflect genuine institutional commitment to the network, not a subsidy relationship with the foundation.
 
-This design avoids the failure mode of bribing institutions to appear on a validator list. The credibility signal in model-assisted scoring should reflect genuine institutional commitment to the network, not a subsidy relationship with the foundation.
+### 11.4 Why a distinct network
 
-### 11.4 Why a distinct network and token can matter economically
+This whitepaper is not a token-distribution memorandum. Its purpose is to explain the infrastructure mechanism that justifies a distinct Post Fiat network. Validator-list publication is part of the trust surface that determines whether sophisticated users regard a ledger as credible and governable. If Post Fiat makes that surface materially more transparent than the status quo, that difference is itself an economic proposition.
 
-This whitepaper is not a token-distribution memorandum. Its purpose is to explain the infrastructure mechanism that would justify a distinct Post Fiat network in the first place. In XRPL-style systems, validator-list publication is part of the trust surface that determines whether sophisticated users regard the ledger as credible, governable, and institutionally usable. If Post Fiat can make that surface materially more transparent and more governable than the status quo, that difference is itself an economic proposition.
-
-A distinct Post Fiat network matters economically if the market values a chain whose validator-set construction, compliance posture, and privacy roadmap are governed differently from XRPL mainline. In that case, the token is not justified as a validator bribe. It is justified as ownership of, and settlement inside, a network with a different governance surface, different policy stack, and different credibility profile. The investment case therefore starts with governance legitimacy and network utility, not with subsidized validator extraction.
+The token is justified as ownership of, and settlement inside, a network with a different governance surface, compliance posture, and credibility profile. The investment case starts with governance legitimacy and network utility.
 
 ---
 
