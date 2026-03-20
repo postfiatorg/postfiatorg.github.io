@@ -561,35 +561,7 @@ A distinct Post Fiat network matters economically if the market values a chain w
 
 ---
 
-## 12. Adjacent Protocol Extensions in `postfiatd`
-
-### 12.1 Validator-consensus account exclusion
-
-In addition to validator-list publication, `postfiatd` includes a PostFiat-specific account-exclusion mechanism. Two amendments, `PF_AccountExclusion` and `PF_ValidatorVoteTracking`, allow trusted validators to add or remove account exclusions through validation traffic, track those votes on-ledger, and maintain an exclusion view over the active validator set.[postfiatd branch research, 2026]
-
-The relevant distinction from standard XRPL is that exclusion is not just an issuer-side freeze on an issued asset. In `postfiatd`, an account can become excluded by validator consensus once the exclusion threshold is met, and generic transaction processing rejects transactions when either the sender or destination account is excluded.[postfiatd branch research, 2026]
-
-This is a governance primitive, not merely a token-control primitive. It allows the network to say: a specific account may not participate, regardless of whether the transaction involves an issuer-controlled IOU.
-
-### 12.2 Why exclusion is materially different from standard XRPL freezes
-
-Standard XRPL already supports trust-line freeze, deep freeze, global freeze, and clawback for issued assets. Those are real controls, but they are primarily issuer-side controls over IOUs and trust lines rather than validator-governed network-wide exclusion of native XRP accounts or transaction counterparties.[XRPL Docs, "Common Misunderstandings about Freezes"; XRPL Docs, "Deep Freeze"; postfiatd branch research, 2026]
-
-For sanctions-style enforcement, that distinction matters. OFAC states that virtual-currency compliance obligations are the same as fiat-currency obligations, and that U.S.-subject persons are generally prohibited from engaging in or facilitating prohibited transactions involving blocked persons.[OFAC FAQ 560; OFAC FAQ 1021] A validator-consensus rule that rejects transactions to or from identified accounts is therefore materially closer to the policy target than a narrower IOU-freeze model.
-
-That advantage should not be overstated. The exclusion path only helps when the relevant amendments are enabled and enough validators actually reach the threshold. OFAC also states that listed digital-currency addresses are not exhaustive, and that blocking/reporting duties continue when a U.S. person actually holds blocked property.[OFAC FAQ 562; OFAC FAQ 646; OFAC Virtual Currency Guidance] So Post Fiat's exclusion mechanism is best understood as a stronger protocol-layer enforcement primitive inside a larger compliance program, not as a complete compliance solution by itself.
-
-### 12.3 Orchard / Halo2 privacy as a parallel protocol extension
-
-Separately, the `halo2-devnet-integration` branch of `postfiatd` ports Zcash's Orchard privacy model into an XRPL-derived ledger rather than treating privacy as a mixer, sidecar, or external bridge. It adds the `OrchardPrivacy` amendment and a native `ttSHIELDED_PAYMENT` transaction type, introduces a Rust `orchard-postfiat` crate built around Zcash's `orchard` and `halo2_proofs` libraries, and carries over Orchard's core state model: serialized bundles, commitment-tree anchors, nullifiers for double-spend prevention, note commitments for new shielded outputs, viewing-key-based note discovery, and the Orchard `valueBalance` accounting model that represents net flow between transparent XRP balances and the shielded pool.[postfiatd branch research, 2026]
-
-That design means the same transaction family can support transparent-to-shielded shielding, fully shielded transfers, and shielded-to-transparent unshielding while preserving native ledger accounting. In the branch, proof-bearing bundles are parsed and checked in `preflight`, Halo2 proofs and anchor/nullifier constraints are enforced in `preclaim`, and ledger effects are applied in `doApply` by debiting transparent balances when value enters the shielded pool, crediting transparent destinations when value exits, persisting nullifiers, and appending new note commitments and anchors for future spends.[postfiatd branch research, 2026] The companion wallet/RPC layer exposes full viewing-key registration, ledger scanning, and transaction preparation RPCs so the system can construct and observe t->z, z->z, and z->t flows end to end.[postfiatd branch research, 2026]
-
-The significance is not merely that Post Fiat has "a privacy branch." It is that the privacy layer is structurally based on Zcash's Orchard/Halo2 stack while remaining native to XRPL-style validated-ledger settlement. Because `ShieldedPayment` is processed as a first-class ledger transaction instead of an asynchronous external settlement step, finality should track the network's normal validated-ledger finality rather than waiting for a second protocol to reconcile state. Operationally this remains a devnet-track feature, and the intended end-to-end path is already reflected in the isolated Halo2 devnet workflows and the full-flow integration tests that exercise shielding, shielded transfer, unshielding, wallet scanning, and double-spend rejection.[postfiatd branch research, 2026; agent-hub devnet operations research, 2026]
-
----
-
-## 13. Boundaries
+## 12. Boundaries
 
 A successful Post Fiat deployment proves that:
 - validator-list publication can become a replayable public pipeline,
@@ -605,7 +577,7 @@ These boundaries define the engineering work ahead, not reasons to defer.
 
 ---
 
-## 14. Conclusion
+## 13. Conclusion
 
 Validator-list publication in XRPL-style networks is a real governance surface. It affects overlap, concentration, and therefore the security envelope in which consensus operates. XRPL already recognizes this by using signed validator lists, configurable thresholds, and explicit publisher keys. But widely used recommended lists remain only partially legible to the public.
 
@@ -620,94 +592,37 @@ Post Fiat replaces opaque editorial selection with a public, replayable, model-a
 
 The strongest version of this idea is also the narrowest. It requires measurable claims about artifact integrity, reproducibility, rank stability, set stability, and governance transparency.
 
-At the same time, the broader `postfiatd` line shows that this governance work can sit alongside adjacent protocol changes — including validator-consensus account exclusion and Orchard/Halo2 privacy — without reducing the validator-list proposal to marketing language. The publication mechanism remains the narrow core. The relevant comparison class throughout is today's signed-list publisher process, not an oracle-free ideal. The surrounding protocol experiments show where a more opinionated XRPL-derived stack may go next.
+The broader `postfiatd` roadmap includes adjacent protocol work — validator-consensus account exclusion and Orchard/Halo2 privacy — documented in Appendix A. The publication mechanism remains the narrow core of this paper. The relevant comparison class throughout is today's signed-list publisher process, not an oracle-free ideal.
 
 That is ambitious enough — and credible enough — to be worth building.
 
 ---
 
-## Appendix A — Preliminary Benchmark
+## Appendix A — Adjacent Protocol Extensions in `postfiatd`
 
-The following table reproduces the paper's canonical determinism benchmark: the project's two-batch Claude Sonnet 4.6 run on 35 current XRPL validator candidates. This table is the summary page of a recorded benchmark package, showing final modal outputs rather than the full scoring artifact set. The recorded benchmark package uses the validator-selection architecture described in Sections 4 and 5: normalized candidate evidence, published policy, fixed execution assumptions, and deterministic set construction. The prompt version, candidate snapshots, per-run raw outputs, and distribution summaries exist in the recorded package even though only the compact mode table is printed here. This is the benchmark that supports the whitepaper's proof-of-possibility claim that a pinned model-stack can produce fully stable repeated-run modal outputs on the validator-selection task. The repository release for authoritative deployment will publish the corresponding replay harness and production-path artifacts.
+### A.1 Validator-consensus account exclusion
 
-| Validator | Run 1 Mode | Run 2 Mode |
-|---|---:|---:|
-| shadow.haas.berkeley.edu | 85 | 85 |
-| ripple.ittc.ku.edu | 75 | 75 |
-| validator.poli.usp.br | 75 | 75 |
-| xrp-col.anu.edu.au | 75 | 75 |
-| xrp.unic.ac.cy | 75 | 75 |
-| students.cs.ucl.ac.uk | 75 | 75 |
-| xrp-validator.interledger.org | 72 | 72 |
-| validator.xrpl-labs.com | 65 | 65 |
-| ripplevalidator.uwaterloo.ca | 65 | 65 |
-| bitso.com | 65 | 65 |
-| ripple.kenan-flagler.unc.edu | 55 | 55 |
-| ripple.com | 55 | 55 |
-| bithomp.com | 45 | 45 |
-| www.bitrue.com | 45 | 45 |
-| xrpscan.com | 45 | 45 |
-| validator.gatehub.net | 45 | 45 |
-| arrington-xrp-capital.blockdaemon.com | 45 | 45 |
-| xrp.vet | 35 | 35 |
-| validator.aspired.nz | 35 | 35 |
-| v2.xrpl-commons.org | 35 | 35 |
-| anodos.finance | 25 | 25 |
-| xrpl.aesthetes.art | 25 | 25 |
-| xrpkuwait.com | 25 | 25 |
-| xrpgoat.com | 25 | 25 |
-| data443.com | 25 | 25 |
-| xpmarket.com | 25 | 25 |
-| validator.xrpl.robertswarthout.com | 25 | 25 |
-| cabbit.tech | 25 | 25 |
-| onxrp.com | 25 | 25 |
-| verum.eminence.im | 25 | 25 |
-| xspectar.com | 25 | 25 |
-| aureusox.com | 15 | 15 |
-| ekiserrepe.es | 15 | 15 |
-| jon-nilsen.no | 15 | 15 |
-| katczynski.net | 15 | 15 |
+In addition to validator-list publication, `postfiatd` includes a PostFiat-specific account-exclusion mechanism. Two amendments, `PF_AccountExclusion` and `PF_ValidatorVoteTracking`, allow trusted validators to add or remove account exclusions through validation traffic, track those votes on-ledger, and maintain an exclusion view over the active validator set.[postfiatd branch research, 2026]
 
-A separate phrase-to-integer benchmark showed zero or near-zero variance in most cases, with a small number of higher-variance prompts preserving identical modal outputs across repeated runs.
+The relevant distinction from standard XRPL is that exclusion is not just an issuer-side freeze on an issued asset. In `postfiatd`, an account can become excluded by validator consensus once the exclusion threshold is met, and generic transaction processing rejects transactions when either the sender or destination account is excluded.[postfiatd branch research, 2026]
 
----
+This is a governance primitive, not merely a token-control primitive. It allows the network to say: a specific account may not participate, regardless of whether the transaction involves an issuer-controlled IOU.
 
-## Appendix B — Async OpenRouter Harness For Current XRPL UNL Validators
+### A.2 Why exclusion is materially different from standard XRPL freezes
 
-The repository now includes `scripts/xrpl_validator_credibility_benchmark.py`, an async OpenRouter harness that fetches the current XRPL recommended validator set from XRPSCAN's validator registry API, filters the validators that currently appear on a recommended publisher list, and scores them repeatedly across `minimax/minimax-m2.5`, `deepseek/deepseek-v3.2`, and `moonshotai/kimi-k2.5`.[XRPSCAN API; OpenRouter Reasoning Tokens Docs] The script loads `OPENROUTER_API_KEY` using the same local `.env` / `pftasks/api/.env` / `pftasks/worker/.env` convention already used elsewhere in the stack, runs requests concurrently, extracts integer scores from JSON-only responses, writes raw JSON plus summary CSVs, and automatically retries length-truncated reasoning-heavy responses with a larger completion budget.
+Standard XRPL already supports trust-line freeze, deep freeze, global freeze, and clawback for issued assets. Those are real controls, but they are primarily issuer-side controls over IOUs and trust lines rather than validator-governed network-wide exclusion of native XRP accounts or transaction counterparties.[XRPL Docs, "Common Misunderstandings about Freezes"; XRPL Docs, "Deep Freeze"; postfiatd branch research, 2026]
 
-This appendix is intentionally secondary to Appendix A. Its role is to show that the benchmark harness is portable enough to probe other model stacks and to measure where variance appears across them. It should be read as portability and instrumentation evidence, not as the canonical determinism result on which the paper's main argument depends.
+For sanctions-style enforcement, that distinction matters. OFAC states that virtual-currency compliance obligations are the same as fiat-currency obligations, and that U.S.-subject persons are generally prohibited from engaging in or facilitating prohibited transactions involving blocked persons.[OFAC FAQ 560; OFAC FAQ 1021] A validator-consensus rule that rejects transactions to or from identified accounts is therefore materially closer to the policy target than a narrower IOU-freeze model.
 
-The full benchmark command is:
+That advantage should not be overstated. The exclusion path only helps when the relevant amendments are enabled and enough validators actually reach the threshold. OFAC also states that listed digital-currency addresses are not exhaustive, and that blocking/reporting duties continue when a U.S. person actually holds blocked property.[OFAC FAQ 562; OFAC FAQ 646; OFAC Virtual Currency Guidance] So Post Fiat's exclusion mechanism is best understood as a stronger protocol-layer enforcement primitive inside a larger compliance program, not as a complete compliance solution by itself.
 
-```bash
-python3 scripts/xrpl_validator_credibility_benchmark.py \
-  --repeats-per-batch 50 \
-  --batches 2
-```
+### A.3 Orchard / Halo2 privacy as a parallel protocol extension
 
-On the recorded March 17, 2026 XRPSCAN snapshot used for the full artifact, the filtered recommended-set capture yielded 29 validators, so that configuration produced `29 x 3 x 2 x 50 = 8,700` scored calls. The readable on-site summary page for the full run is published at [XRPL Validator Benchmark](/validator-benchmark/), with raw artifacts here: [full JSON](/benchmarks/full-xrpl-validator-credibility-20260317T000633Z.json), [rankings CSV](/benchmarks/full-xrpl-validator-credibility-20260317T000633Z-rankings.csv), and [rank changes CSV](/benchmarks/full-xrpl-validator-credibility-20260317T000633Z-rank-changes.csv).
+Separately, the `halo2-devnet-integration` branch of `postfiatd` ports Zcash's Orchard privacy model into an XRPL-derived ledger rather than treating privacy as a mixer, sidecar, or external bridge. It adds the `OrchardPrivacy` amendment and a native `ttSHIELDED_PAYMENT` transaction type, introduces a Rust `orchard-postfiat` crate built around Zcash's `orchard` and `halo2_proofs` libraries, and carries over Orchard's core state model: serialized bundles, commitment-tree anchors, nullifiers for double-spend prevention, note commitments for new shielded outputs, viewing-key-based note discovery, and the Orchard `valueBalance` accounting model that represents net flow between transparent XRP balances and the shielded pool.[postfiatd branch research, 2026]
 
-The scoring prompt below is intentionally narrow because this appendix is demonstrating the OpenRouter harness itself rather than the paper's full authoritative scoring policy:
+That design means the same transaction family can support transparent-to-shielded shielding, fully shielded transfers, and shielded-to-transparent unshielding while preserving native ledger accounting. In the branch, proof-bearing bundles are parsed and checked in `preflight`, Halo2 proofs and anchor/nullifier constraints are enforced in `preclaim`, and ledger effects are applied in `doApply` by debiting transparent balances when value enters the shielded pool, crediting transparent destinations when value exits, persisting nullifiers, and appending new note commitments and anchors for future spends.[postfiatd branch research, 2026] The companion wallet/RPC layer exposes full viewing-key registration, ledger scanning, and transaction preparation RPCs so the system can construct and observe t->z, z->z, and z->t flows end to end.[postfiatd branch research, 2026]
 
-```text
-score this validator's credibility on a scale from 0-100 where credibility is defined as useful institutional proof of a blockchain's legitimacy.
-
-validator: <domain>
-
-Return JSON only: {"score": <0-100 integer>}.
-```
-
-A verified subset sanity run on March 16, 2026 scored four current UNL validators (`ripple.com`, `ripple.ittc.ku.edu`, `xrpscan.com`, and `xrpgoat.com`) across all three models with 5 repeats in each of 2 batches, for 120 calls total. That run produced 120/120 parseable scores with total observed OpenRouter cost of approximately `$0.08794`.[XRPSCAN API; OpenRouter Reasoning Tokens Docs] Raw artifacts are published here: [subset JSON](/benchmarks/subset-xrpl-validator-credibility-20260316T232020Z.json), [overall CSV](/benchmarks/subset-xrpl-validator-credibility-20260316T232020Z-overall.csv), and [batch CSV](/benchmarks/subset-xrpl-validator-credibility-20260316T232020Z-by-batch.csv).
-
-| Validator | DeepSeek B1 | DeepSeek B2 | Minimax B1 | Minimax B2 | Kimi B1 | Kimi B2 |
-|---|---:|---:|---:|---:|---:|---:|
-| ripple.com | 90 | 95 | 85 | 80 | 95 | 95 |
-| ripple.ittc.ku.edu | 70 | 60 | 80 | 80 | 90 | 90 |
-| xrpscan.com | 85 | 85 | 45 | 15 | 75 | 80 |
-| xrpgoat.com | 20 | 20 | 25 | 25 | 10 | 10 |
-
-The subset run is not meant to be authoritative on its own. Its purpose is narrower: prove that the asynchronous three-model harness works against the current XRPL recommended validator set, that score extraction is automatable, and that repeated-run variance can be measured directly rather than asserted abstractly.
+The significance is not merely that Post Fiat has "a privacy branch." It is that the privacy layer is structurally based on Zcash's Orchard/Halo2 stack while remaining native to XRPL-style validated-ledger settlement. Because `ShieldedPayment` is processed as a first-class ledger transaction instead of an asynchronous external settlement step, finality should track the network's normal validated-ledger finality rather than waiting for a second protocol to reconcile state. Operationally this remains a devnet-track feature, and the intended end-to-end path is already reflected in the isolated Halo2 devnet workflows and the full-flow integration tests that exercise shielding, shielded transfer, unshielding, wallet scanning, and double-spend rejection.[postfiatd branch research, 2026; agent-hub devnet operations research, 2026]
 
 ---
 
@@ -731,8 +646,6 @@ The subset run is not meant to be authoritative on its own. Its purpose is narro
 
 - `postfiatd` branch research, inspected March 16, 2026. Review of `halo2-devnet-integration` branch files including `include/xrpl/protocol/detail/features.macro`, `src/libxrpl/protocol/STValidation.cpp`, `src/xrpld/app/consensus/RCLConsensus.cpp`, `src/xrpld/app/consensus/RCLValidations.cpp`, `src/xrpld/app/misc/ExclusionManager.h`, `src/xrpld/app/tx/detail/Change.cpp`, `src/xrpld/app/tx/detail/Transactor.cpp`, `orchard-postfiat/src/lib.rs`, `orchard-postfiat/src/bundle_real.rs`, `orchard-postfiat/src/ffi/bridge.rs`, `src/xrpld/app/tx/detail/ShieldedPayment.cpp`, and `src/test/rpc/OrchardFullFlow_test.cpp`.
 - `agent-hub` devnet operations research, inspected March 16, 2026. Review of `products/blockchain/systems/massive_rippled_pr_system/validator_churn_test_playbook.md` and the documented `halo2-devnet-build.yml`, `halo2-devnet-deploy.yml`, `halo2-devnet-update.yml`, and `halo2-devnet-destroy.yml` workflows for isolated end-to-end validator testing.
-- XRPSCAN API. **validatorregistry endpoint**. https://api.xrpscan.com/api/v1/validatorregistry?limit=500
-- OpenRouter Docs. **Reasoning Tokens**. https://openrouter.ai/docs/use-cases/reasoning-tokens
 - U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 560: Are my OFAC compliance obligations the same, regardless of whether a transaction is denominated in digital currency or traditional fiat currency?** https://ofac.treasury.gov/faqs/560
 - U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 562: How will OFAC identify digital currency-related information on the SDN List?** https://ofac.treasury.gov/faqs/562
 - U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 646: How do I block digital currency?** https://ofac.treasury.gov/faqs/646
