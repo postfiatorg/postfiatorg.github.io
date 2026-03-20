@@ -27,113 +27,67 @@ The system proceeds in phases. Phase 1 maintains foundation authority while publ
 
 ### 1.1 Validator-list publication is security-critical
 
-XRPL documentation defines a Unique Node List (UNL) as the set of validators a server trusts not to collude, and stresses that UNL entries should represent independent entities chosen to minimize correlated failure or malicious collusion.[XRPL Docs, "Unique Node List (UNL)"] Servers can consume one or more recommended validator lists from publishers, and can require that a validator appear on a threshold number of lists before it is trusted.[XRPL Docs, "Configure Validator List Threshold"]
+On XRPL-style networks, each server maintains a Unique Node List (UNL) — the set of validators it trusts not to collude. UNL entries should represent independent entities chosen to minimize correlated failure.[XRPL Docs, "Unique Node List (UNL)"] Servers can consume signed recommended lists from publishers and require validators to appear on multiple lists before trusting them.[XRPL Docs, "Configure Validator List Threshold"]
 
-XRPL's safety depends on the overlap and composition of trusted validators. XRPL's own "Consensus Protections" page states that less than roughly 90% overlap can cause participants to diverge in the worst case, and that signed recommended lists are used in practice to keep overlap high.[XRPL Docs, "Consensus Protections Against Attacks and Failure Modes"]
-
-Validator-list publication is a security-sensitive governance function.
+Safety depends directly on validator-set overlap. Less than roughly 90% overlap between participants' trusted sets can cause divergence in the worst case.[XRPL Docs, "Consensus Protections Against Attacks and Failure Modes"] Signed recommended lists keep overlap high in practice — making list publication a security-critical governance function.
 
 ### 1.2 Publication authority is real authority
 
-XRPL's validator-list mechanism acknowledges that list publication is a trust surface. Lists are signed, versioned, sequenced, and expire. The 2025 default-UNL migration required operators to update both the list URL and the publisher key, or risk falling out of sync.[XRPL Blog, "Default UNL Migration"] XRPL's documentation also notes that the default configuration uses published lists from recognized publishers and that servers configured in this way achieve full overlap with others using the same configuration.[XRPL Docs, "Consensus Protections Against Attacks and Failure Modes"]
-
-That migration was evidence that publication infrastructure itself is part of the governance model.
+Lists are signed, versioned, sequenced, and expire. The 2025 default-UNL migration required operators to update both list URL and publisher key or risk falling out of sync.[XRPL Blog, "Default UNL Migration"] That event demonstrated that publication infrastructure is part of the governance model, not merely a distribution mechanism.
 
 ### 1.3 Formal analyses confirm the stakes
 
-Formal analyses of RPCA have identified important constraints and failure cases. Chase and MacBrough showed that safety requires much tighter UNL-overlap conditions than early informal descriptions suggested.[Chase and MacBrough 2018] Amores-Sesar, Cachin, and Mićić later derived an abstract protocol from the source code and showed that safety and liveness may fail in simple executions under relatively benign assumptions.[Amores-Sesar, Cachin, and Mićić 2021]
+Chase and MacBrough showed that RPCA safety requires tighter UNL-overlap conditions than early informal descriptions suggested.[Chase and MacBrough 2018] Amores-Sesar, Cachin, and Mićić derived an abstract protocol from the source code and showed that safety and liveness can fail under relatively benign assumptions.[Amores-Sesar, Cachin, and Mićić 2021]
 
-If validator-list composition is a security-critical input to consensus, then making list construction auditable and eventually multi-party is a meaningful improvement — independent of whether the base protocol's formal properties change.
+If validator-list composition is a security-critical input to consensus, making list construction auditable and eventually multi-party is a meaningful improvement — independent of changes to the base protocol's formal properties.
 
 ---
 
-## 2. The Governance Problem: Validator Selection as a Principal–Agent Mechanism
+## 2. The Governance Problem
 
 ### 2.1 Opaque list construction creates information asymmetry
 
-A recommended validator list is a mechanism with two layers:
+A recommended validator list involves two decisions: which candidates to include, and how to sign and distribute the result. In a publisher-managed model, the publisher holds private information — internal criteria, subjective judgments, compliance pressures, reputational priors — that network participants cannot observe. Participants see the published set but not the decision rule that produced it.
 
-1. **Selection**: which candidates are included, retained, or removed.
-2. **Publication**: how that list is signed, distributed, and updated.
-
-In a publisher-managed model, the publisher P has private information Θ_P: internal criteria, soft constraints, subjective judgments, compliance pressures, reputational priors, and institutional incentives. Network participants observe only the resulting published set V_t at time t.
-
-This is a principal–agent problem with hidden information. The agent (publisher) chooses an outcome on behalf of the principals (network participants), but the principals cannot directly observe the full decision rule. The result is a persistent information asymmetry:
-
-V_t = G_t(X_t, Θ_P)
-
-where:
-- X_t is the observable candidate evidence at round t,
-- Θ_P is the publisher's hidden decision state,
-- G_t is the actual selection-and-publication function.
-
-Under an opaque regime, participants mostly observe V_t and fragments of X_t, but not Θ_P and not the full effective mechanism.
+This is a principal–agent problem. The publisher acts on behalf of the network but retains hidden discretion over selection criteria.
 
 ### 2.2 Transparent scoring narrows hidden discretion
 
-Under a transparent model-assisted regime, participants observe:
-- raw evidence R_t,
-- normalized scorer input X_t,
-- model/runtime manifest Φ_t,
-- prompt/policy specification P_t,
-- model scores S_t,
-- deterministic selector G,
-- published validator list V_t.
+Under a transparent model-assisted regime, participants can observe the raw evidence, the normalized scorer input, the model and runtime manifest, the scoring prompt, the model's output scores, and the deterministic selector that produces the final list. Governance choices still exist — what evidence to collect, how to normalize it, what prompt to use — but those choices become named, inspectable, reviewable artifacts rather than unobserved residuals.
 
-The effective uncertainty about how the list came to be drops materially:
+Lewis-Pye and Roughgarden's framework for permissionless consensus identifies the role of a **permitter oracle**: some mechanism determining who participates.[Lewis-Pye and Roughgarden 2023] In XRPL-style systems, validator-list publication already plays that role. Post Fiat turns it from an opaque oracle into a transparent one — inputs, policy, runtime, and outputs are all public, and in later phases, independently recomputable.
 
-H(Θ_P | V_t) > H(Θ_P | R_t, X_t, Φ_t, P_t, S_t, G)
+### 2.3 What remains
 
-Governance choices remain in what evidence is collected, how it is normalized, what prompt is used, and when the network updates policy — but those choices are moved into named, inspectable, reviewable artifacts instead of remaining an unobserved residual.
-
-### 2.3 The mechanism-design framing
-
-The Revelation Principle says that if a desirable social choice rule is implementable, it can be implemented by a direct mechanism with truthful revelation under appropriate assumptions. The operational lesson is direct:
-
-> If the network publishes the evidence, the policy, the execution environment, and the outcome, hidden discretion has less room to hide.
-
-The benefit is a reduction in unverifiable editorial power.
-
-### 2.4 A transparent permitter oracle
-
-Lewis-Pye and Roughgarden's framework for permissionless consensus emphasizes the role of a **permitter oracle**: some mechanism must determine who is effectively allowed to participate.[Lewis-Pye and Roughgarden 2023] In XRPL-style systems, validator-list publication already plays that role for the recommended trust set.
-
-Post Fiat turns this from an opaque publisher oracle into a **transparent, auditable permitter oracle**: the inputs are public, the policy is public, the runtime configuration is public, the outputs are public, and in later phases, the outputs can be independently recomputed and compared.
+Publishing the full pipeline does not eliminate all discretion. The foundation still chooses evidence sources, normalization rules, the scoring prompt, and the model. But those choices are now explicit, versioned artifacts. Changing them requires a visible policy update, not a silent editorial adjustment.
 
 ---
 
 ## 3. Design Goals
 
-Post Fiat is designed around six goals.
-
 ### 3.1 Auditability over mystique
 
-The value of the system comes from publishing the entire round pipeline. "The AI decided" is not a sufficient explanation. A good round explains itself in artifacts.
+Every scoring round publishes its entire pipeline. "The AI decided" is not a sufficient explanation — a good round explains itself in artifacts.
 
 ### 3.2 Stability over single-run purity
 
-Governance needs stable rankings and stable set membership more than it needs perfect word-for-word transcript identity in every environment. The operational target is the same practical validator set across runs, or explainable bounded differences.
+Governance needs stable rankings and stable set membership, not perfect token-level transcript identity across every environment. The target is the same practical validator set across runs, or explainable bounded differences.
 
 ### 3.3 Narrow authority transfer
 
-Authority moves only after it is measured. A foundation can remain authoritative in Phase 1 while publishing the evidence necessary for others to audit and later reproduce the process.
+Authority moves only after convergence is measured. The foundation remains authoritative in Phase 1 while publishing everything needed for others to audit and later reproduce the process.
 
 ### 3.4 Explicit concentration management
 
-Validator diversity requires naming the concentration surfaces that matter:
-- country,
-- ASN,
-- cloud provider,
-- datacenter,
-- operator/entity identity.
+Validator diversity requires naming the concentration surfaces that matter: country, ASN, cloud provider, datacenter, and operator identity.
 
 ### 3.5 Conservative failure behavior
 
-A missed round, failed publish, stale manifest, or convergence drop degrades to a last known-good list or foundation publication.
+Missed rounds, failed publishes, stale manifests, or convergence drops degrade to the last known-good list or foundation publication. The system preserves continuity before novelty.
 
 ### 3.6 Compatibility with existing validator-list mechanics
 
-Phase 1 fits XRPL-style list publication as it already exists: signed lists, explicit publisher keys, sequence numbers, expirations, and standard retrieval paths.
+Phase 1 uses XRPL-style list publication as it already exists: signed lists, explicit publisher keys, sequence numbers, expirations, and standard retrieval paths.
 
 ---
 
