@@ -13,15 +13,13 @@ summary: "Post Fiat Whitepaper"
 
 ## Abstract
 
-Post Fiat is an XRPL-derived Layer 1 design that turns validator-list publication from an opaque publisher function into a replayable public pipeline. On XRPL-style networks, consensus depends on the construction of the trusted validator set: which validators are included, why they were included, how concentration is managed, and how list updates are published. Today, XRPL provides signed validator lists, multiple publisher support, and configurable thresholds, but the rationale behind widely used recommended lists remains only partially visible.
+Post Fiat is an XRPL-derived Layer 1 that replaces opaque validator-list publication with an auditable, replayable pipeline. In XRPL-style networks, consensus security depends on the composition of the trusted validator set, but the rationale behind widely used recommended lists remains largely invisible to network participants.
 
-Post Fiat publishes: (i) raw evidence, (ii) a normalized scoring snapshot, (iii) a pinned execution manifest for the model/runtime stack, (iv) model-produced candidate scores and short rationales, and (v) a deterministic set-construction rule with explicit churn controls. The result is a material reduction in information asymmetry between list publisher and network participants.
+Post Fiat publishes every stage of each scoring round: raw evidence collected from network data sources, a canonically normalized snapshot, a pinned execution manifest for the model and runtime stack, per-validator scores with rationales produced by a self-hosted open-weight model, and a deterministic set-construction rule with explicit churn controls.
 
-The core technical requirement is **effective rank-driven consensus**: repeated executions of the same scoring process on the same inputs must produce stable pairwise rankings, stable top-k overlap, and stable inclusion/exclusion decisions near the validator-set cutoff. Exact token-level equality is desirable when available, but rank stability is the primary operational target.
+The core technical requirement is rank-driven consensus stability: repeated executions on the same inputs must produce the same pairwise rankings, top-k overlap, and inclusion decisions. Preliminary validation on PFT Ledger's testnet — 42 validators scored by Qwen3-Next-80B-A3B-Instruct-FP8 under SGLang's deterministic inference mode — achieved bit-identical output across five independent runs.
 
-Post Fiat proceeds in phases. In **Phase 1**, a foundation remains the authoritative list publisher but publishes a complete audit trail. In **Phase 2**, validators rerun the same scoring process in shadow mode and publicly measure convergence. In **Phase 3A**, if convergence is sustained, authoritative list content shifts from foundation-only output to validator-converged output. **Phase 3B** decentralizes snapshot assembly, round announcement, list signing, and delivery infrastructure.
-
-In parallel, current `postfiatd` work shows that this publication model can coexist with adjacent protocol extensions: a validator-consensus account-exclusion path and a native Orchard/Halo2 privacy path derived from Zcash's Orchard design. Those extensions are not the same thing as validator-list publication, but they matter because they show how governance, compliance controls, and privacy can evolve inside the same XRPL-derived stack.
+The system proceeds in phases. Phase 1 maintains foundation authority while publishing complete audit trails. Phase 2 enables validators to independently rerun scoring in shadow mode and measure convergence. Phase 3 transfers authoritative list content to validator-converged output and decentralizes publication infrastructure.
 
 ---
 
