@@ -7,7 +7,7 @@ summary: "Post Fiat Whitepaper"
 
 # Post Fiat: Auditable, Model-Assisted Validator-List Publication for XRPL-Derived Networks
 
-**Draft — March 2026**
+**March 2026**
 
 ---
 
@@ -21,23 +21,25 @@ The core technical requirement is rank-driven consensus stability: repeated exec
 
 The system proceeds in phases. Phase 1 maintains foundation authority while publishing complete audit trails. Phase 2 enables validators to independently rerun scoring in shadow mode and measure convergence. Phase 3 transfers authoritative list content to validator-converged output and decentralizes publication infrastructure.
 
+In parallel, `postfiatd` extends the XRPL-derived stack with validator-consensus account exclusion and native Orchard/Halo2 privacy — showing how governance, compliance, and privacy can evolve within the same network.
+
 ---
 
 ## 1. Scope and Background
 
 ### 1.1 Validator-list publication is security-critical
 
-On XRPL-style networks, each server maintains a Unique Node List (UNL) — the set of validators it trusts not to collude. UNL entries should represent independent entities chosen to minimize correlated failure.[XRPL Docs, "Unique Node List (UNL)"] Servers can consume signed recommended lists from publishers and require validators to appear on multiple lists before trusting them.[XRPL Docs, "Configure Validator List Threshold"]
+On XRPL-style networks, each server maintains a Unique Node List (UNL) — the set of validators it trusts not to collude. UNL entries should represent independent entities chosen to minimize correlated failure.[1] Servers can consume signed recommended lists from publishers and require validators to appear on multiple lists before trusting them.[2]
 
-Safety depends directly on validator-set overlap. Less than roughly 90% overlap between participants' trusted sets can cause divergence in the worst case.[XRPL Docs, "Consensus Protections Against Attacks and Failure Modes"] Signed recommended lists keep overlap high in practice — making list publication a security-critical governance function.
+Safety depends directly on validator-set overlap. Less than roughly 90% overlap between participants' trusted sets can cause divergence in the worst case.[3] Signed recommended lists keep overlap high in practice — making list publication a security-critical governance function.
 
 ### 1.2 Publication authority is real authority
 
-Lists are signed, versioned, sequenced, and expire. The 2025 default-UNL migration required operators to update both list URL and publisher key or risk falling out of sync.[XRPL Blog, "Default UNL Migration"] That event demonstrated that publication infrastructure is part of the governance model, not merely a distribution mechanism.
+Lists are signed, versioned, sequenced, and expire. The 2025 default-UNL migration required operators to update both list URL and publisher key or risk falling out of sync.[4] That event demonstrated that publication infrastructure is part of the governance model, not merely a distribution mechanism.
 
 ### 1.3 Formal analyses confirm the stakes
 
-Chase and MacBrough showed that RPCA safety requires tighter UNL-overlap conditions than early informal descriptions suggested.[Chase and MacBrough 2018] Amores-Sesar, Cachin, and Mićić derived an abstract protocol from the source code and showed that safety and liveness can fail under relatively benign assumptions.[Amores-Sesar, Cachin, and Mićić 2021]
+Chase and MacBrough showed that RPCA safety requires tighter UNL-overlap conditions than early informal descriptions suggested.[5] Amores-Sesar, Cachin, and Mićić derived an abstract protocol from the source code and showed that safety and liveness can fail under relatively benign assumptions.[6]
 
 If validator-list composition is a security-critical input to consensus, making list construction auditable and eventually multi-party is a meaningful improvement — independent of changes to the base protocol's formal properties.
 
@@ -55,7 +57,7 @@ This is a principal–agent problem. The publisher acts on behalf of the network
 
 Under a transparent model-assisted regime, participants can observe the raw evidence, the normalized scorer input, the model and runtime manifest, the scoring prompt, the model's output scores, and the deterministic selector that produces the final list. Governance choices still exist — what evidence to collect, how to normalize it, what prompt to use — but those choices become named, inspectable, reviewable artifacts rather than unobserved residuals.
 
-Lewis-Pye and Roughgarden's framework for permissionless consensus identifies the role of a **permitter oracle**: some mechanism determining who participates.[Lewis-Pye and Roughgarden 2023] In XRPL-style systems, validator-list publication already plays that role. Post Fiat turns it from an opaque oracle into a transparent one — inputs, policy, runtime, and outputs are all public, and in later phases, independently recomputable.
+Lewis-Pye and Roughgarden's framework for permissionless consensus identifies the role of a **permitter oracle**: some mechanism determining who participates.[7] In XRPL-style systems, validator-list publication already plays that role. Post Fiat turns it from an opaque oracle into a transparent one — inputs, policy, runtime, and outputs are all public, and in later phases, independently recomputable.
 
 ### 2.3 What remains
 
@@ -119,13 +121,7 @@ Each round publishes the raw evidence, the normalized snapshot, and the SHA-256 
 
 A pinned open-weight model processes the normalized snapshot under a published scoring prompt. The prompt defines explicit scoring dimensions with weighting guidance — consensus performance (highest weight), operational reliability, software diligence, geographic and infrastructure diversity, identity and reputation, and observer-dependent metrics (lowest weight). The model outputs an integer score (0–100) and a short rationale per validator.
 
-Formally:
-
-S_t = M_{Φ_t}(P_t, X_t)
-
-where X_t is the normalized snapshot, Φ_t is the execution manifest (model weights, inference engine, runtime configuration), P_t is the scoring prompt, and S_t ∈ {0,…,100}^n is the score vector for n validators.
-
-The model evaluates candidates. The final validator set is chosen by a deterministic selector operating on published scores.
+The final validator set is chosen by a deterministic selector operating on published scores.
 
 ### 4.4 Deterministic list construction
 
@@ -206,7 +202,7 @@ Identity data is minimal. The public system publishes:
 - `entity_type: institutional / individual / unknown`
 - `domain_attested: true/false`
 
-`Institutional credibility` means durable public accountability, identifiable stewardship, and real reputational cost for misconduct — not prestige or brand recognition. Operational reliability outranks reputation proxies.
+This improves auditability without turning validator governance into a doxxing exercise. `Institutional credibility` means durable public accountability, identifiable stewardship, and real reputational cost for misconduct — not prestige or brand recognition. Operational reliability outranks reputation proxies.
 
 ---
 
@@ -231,15 +227,17 @@ Churn(t) = 1 − |U_t ∩ U_{t-1}| / |U_t|
 
 ### 6.2 Why temperature zero is necessary but not sufficient
 
-In autoregressive decoding, token selection under temperature τ follows a softmax distribution. As τ → 0, sampling converges to greedy selection of the argmax token. But real inference systems introduce additional variance: API batching, kernel reduction order, precision modes, tensor-parallel configuration, and hardware differences can perturb logits enough to change downstream tokens.[Anthropic Docs, "Temperature"]
+In autoregressive decoding, token selection under temperature τ follows a softmax distribution. As τ → 0, sampling converges to greedy selection of the argmax token. But real inference systems introduce additional variance: API batching, kernel reduction order, precision modes, tensor-parallel configuration, and hardware differences can perturb logits enough to change downstream tokens.[8]
 
 External APIs should not be treated as authoritative for governance-critical rounds. Post Fiat uses self-hosted inference to control the full stack.
 
 ### 6.3 Deterministic inference is now practical
 
-Thinking Machines Lab identified batch-size variance as a major source of nondeterministic inference and described batch-invariant kernels as a practical fix.[He 2025] SGLang implements a deterministic inference mode built on batch-invariant operators supporting FlashInfer, FlashAttention 3, and Triton backends, with a throughput overhead of roughly 34%.[SGLang Docs, "Deterministic Inference"; LMSYS Blog, 2025]
+Thinking Machines Lab identified batch-size variance as a major source of nondeterministic inference and described batch-invariant kernels as a practical fix.[9] SGLang implements a deterministic inference mode built on batch-invariant operators supporting FlashInfer, FlashAttention 3, and Triton backends, with a throughput overhead of roughly 34%.[10][11]
 
-Numerical precision remains a real divergence source. Yuan et al. show that limited precision affects reproducibility, particularly for reasoning-style models, and propose mitigations such as LayerCast.[Yuan et al. 2025] This is why the execution manifest is a first-class artifact — a weight hash alone is not enough. Reproducibility depends on the whole stack.
+Tensor parallelism across multiple GPUs introduces a separate nondeterminism source: cross-GPU reduction operations do not guarantee a fixed summation order, producing different floating-point results across runs. This is why Post Fiat requires single-GPU inference (TP=1) and why model selection prioritized fitting on a single H200 — the 80B mixture-of-experts architecture with only 3B active parameters makes this feasible without sacrificing scoring quality.
+
+Numerical precision remains a real divergence source. Yuan et al. show that limited precision affects reproducibility, particularly for reasoning-style models, and propose mitigations such as LayerCast.[12] This is why the execution manifest is a first-class artifact — a weight hash alone is not enough. Reproducibility depends on the whole stack.
 
 ### 6.4 Empirical validation on PFT Ledger
 
@@ -248,10 +246,6 @@ Post Fiat's Phase 0 validation scored 42 validators on the PFT Ledger testnet us
 Five independent runs on the same snapshot produced bit-identical output: identical scores, identical rationales, identical token sequences. Scores ranged from 5 to 97 (mean 85.3), with the model correctly differentiating validators with perfect consensus (scoring 95+) from validators with catastrophic 30-day agreement drops (scoring below 40) and effectively offline validators (scoring below 10).
 
 This exceeds the rank-stability target. When the execution environment is fully pinned — model weights, quantization, inference engine, attention backend, CUDA version, and determinism flags — exact reproducibility is achievable, not merely a near-term target.
-
-### 6.5 Statistical fingerprints
-
-Repeated-run statistics — mode, mean, variance, and selected rationales — provide evidence that a claimed model and process was actually run. Post Fiat treats these fingerprints as useful evidence for shadow verification in Phase 2, complemented by stronger cryptographic assurance layers as they mature (Section 9).
 
 ---
 
@@ -307,7 +301,7 @@ The relevant adversaries:
 
 Sybil resistance uses layered signals: long-run performance history, domain attestation via `xrp-ledger.toml`, minimal public verification state, operator clustering analysis, concentration analysis, and model-based assessment of institutional credibility.
 
-XRPL's two-way domain verification binds a validator public key and a domain through reciprocal claims, creating strong evidence that the same operator controls both.[XRPL Docs, "xrp-ledger.toml File"]
+XRPL's two-way domain verification binds a validator public key and a domain through reciprocal claims, creating strong evidence that the same operator controls both.[13]
 
 Public reproducibility is intentional, not a flaw. An attacker running the same scorer on the same snapshot is analogous to anyone verifying a certificate chain. The security question is whether underlying inputs can be forged cheaply enough to fool the network.
 
@@ -336,42 +330,35 @@ where S_i is validator i's scored output, H(S_i) is its content hash, and σ_i i
 
 ---
 
-## 9. Assurance Roadmap
+## 9. Verification and Assurance
 
-### 9.1 Available at launch
+### 9.1 Phase 1: Audit trail as assurance
 
-Phase 1 provides:
+In Phase 1, the foundation is the sole scorer. Assurance comes from publishing the full pipeline: raw evidence, normalized snapshot, pinned execution manifest, scoring prompt, per-validator scores with rationales, deterministic selector output, and signed validator list. Anyone can inspect why a validator was included or excluded. The IPFS-pinned artifact bundle with an on-chain CID anchor makes equivocation — publishing different artifacts to different parties — detectable.
 
-1. Published raw evidence and normalized snapshot.
-2. Pinned execution manifest.
-3. Self-hosted scoring — no external API dependence.
-4. Deterministic selection with structured outputs.
-5. Direct replay stability measurement.
-6. Convergence reports beginning in Phase 2.
+This is already stronger than the status quo, where recommended list construction is not publicly explained.
 
-### 9.2 Strengthening assurance over time
+### 9.2 Phase 2: Verifying independent execution
 
-Additional assurance layers on a clear development path:
+When validators independently rerun scoring in Phase 2, a new problem emerges: how do you verify that a validator actually ran the model rather than copying the foundation's published output?
 
-- **TEE-backed scoring**: NVIDIA H100/Blackwell GPUs support hardware-level confidential computing with on-die root of trust, AES-encrypted memory, secure boot, and remote attestation. Phala Network benchmarks show throughput overhead below 7%.[Phala Network 2025]
+Post Fiat addresses this through two mechanisms:
 
-- **Optimistic ML verification**: ORA Protocol deploys optimistic ML (opML) on Ethereum mainnet, supporting 7B+ models. Inference results post on-chain and are assumed correct; during a challenge period, any validator can initiate a bisection-based dispute game. Security requires only one honest verifier.[ORA Protocol 2025]
+- **Commit-reveal protocol**: Validators commit to hashed outputs before the foundation publishes canonical scores (Section 8.4). This prevents after-the-fact copying.
+- **Convergence measurement**: The network measures pairwise rank agreement, top-k overlap, and list-level convergence across validator submissions. Persistent divergence from a specific validator — or suspiciously perfect agreement without commit-reveal compliance — is detectable.
 
-- **Zero-knowledge ML**: zkLLM (CCS 2024) demonstrated proofs for models up to 13B parameters in 1–15 minutes with proof sizes under 200KB. zkPyTorch proved Llama-3 inference at ~150 seconds per token. ZK proofs of a 7B–13B scoring model are feasible today on a batch basis; proving 70B+ models follows as GPU-optimized provers mature.[Sun et al. 2024; Polyhedra 2025]
+A harder problem is hardware heterogeneity. Not every validator will have an H200. Different GPU architectures may produce slightly different floating-point results even under deterministic inference mode. Phase 2 measures the extent of this divergence empirically and determines whether rank stability holds across hardware configurations.
 
-- **TLS Notary**: Cryptographic proof that a specific API call returned a specific response. Useful for verifiable chains in API-based scoring rounds.[TLSNotary]
+### 9.3 Future verification paths
 
-- **Multi-publisher publication paths** to reduce dependence on any single signer or hosting path.
+Several verification technologies are maturing that could strengthen Phase 2 assurance further. These are not in the current implementation plan but represent a clear strengthening path as the technologies reach production readiness for large models.
 
-### 9.3 Verification maturity summary
-
-| Approach | Model Scale | Overhead | Security Model | Status |
-|---|---|---|---|---|
-| Statistical fingerprinting | Any size | 100× inference runs | Probabilistic | Deployed |
-| TEE (H100/Blackwell) | Any size | <7% throughput | Hardware trust | Production-ready |
-| opML (ORA Protocol) | 7B+ | Low (optimistic) | Crypto-economic | On-chain today |
-| ZK-ML (zkLLM/zkPyTorch) | Up to 13B | 50–100× compute | Cryptographic | 12–24 months for LLM-scale |
-| TLSNotary | N/A (API proofs) | ~25MB bandwidth | Cryptographic (transport) | Available |
+| Approach | What it proves | Status |
+|---|---|---|
+| TEE attestation (H100/Blackwell) | Specific code ran on genuine, untampered hardware | Production-ready, <7% overhead |
+| Optimistic ML (opML) | Inference result is correct unless successfully challenged on-chain | On-chain today for 7B+ models |
+| Zero-knowledge ML (zkLLM, zkPyTorch) | Cryptographic proof that a specific model produced a specific output | Feasible for 13B today, 70B+ maturing |
+| TLSNotary | A specific API call returned a specific response | Available |
 
 ---
 
@@ -431,9 +418,9 @@ Post Fiat's Phase 0 validation runs on serverless GPU infrastructure at approxim
 
 ### 11.2 The cost trend favors decentralization
 
-Stanford's 2025 AI Index reports that GPT-3.5-equivalent inference costs fell by more than 280× between late 2022 and late 2024, with the gap between closed-weight and open-weight models narrowing sharply.[Stanford HAI, AI Index 2025] Epoch AI reports rapid fixed-performance inference price declines across task categories.[Epoch AI 2025]
+Stanford's 2025 AI Index reports that GPT-3.5-equivalent inference costs fell by more than 280× between late 2022 and late 2024, with the gap between closed-weight and open-weight models narrowing sharply.[14] Epoch AI reports rapid fixed-performance inference price declines across task categories.[15]
 
-Consumer-grade dual-GPU systems already achieve 27 tokens/second on 70B quantized models, matching single-H100 datacenter performance at roughly one-quarter the cost. For Phase 2 shadow verification, this means validators can afford to rerun scoring locally without datacenter-grade infrastructure.
+Validator-list scoring has a structural economic advantage over most AI workloads: it runs a few times per month, not continuously. This makes serverless GPU infrastructure — where costs accrue only during active inference and scale to zero between rounds — a natural fit. The foundation's Phase 0 validation costs approximately $0.38 per scoring round on a serverless H200. For Phase 2 shadow verification, falling inference costs mean validators will increasingly be able to rerun scoring locally without datacenter-grade infrastructure.
 
 ### 11.3 Validator incentives
 
@@ -473,6 +460,8 @@ Post Fiat replaces opaque editorial selection with a public, replayable, model-a
 Preliminary validation confirms that the approach works. Scoring 42 PFT Ledger validators with a self-hosted 80B-parameter model under deterministic inference produced bit-identical output across five independent runs — exact reproducibility, not merely rank stability.
 
 The broader `postfiatd` roadmap includes adjacent protocol work — validator-consensus account exclusion and Orchard/Halo2 privacy — documented in Appendix B. The publication mechanism remains the narrow core of this paper.
+
+That is ambitious enough — and credible enough — to be worth building.
 
 ---
 
@@ -527,81 +516,78 @@ This exceeds the >99% rank-stability target established in the Phase 0 decision 
 
 ### B.1 Validator-consensus account exclusion
 
-In addition to validator-list publication, `postfiatd` includes a PostFiat-specific account-exclusion mechanism. Two amendments, `PF_AccountExclusion` and `PF_ValidatorVoteTracking`, allow trusted validators to add or remove account exclusions through validation traffic, track those votes on-ledger, and maintain an exclusion view over the active validator set.[postfiatd branch research, 2026]
+In addition to validator-list publication, `postfiatd` includes a PostFiat-specific account-exclusion mechanism. Two amendments, `PF_AccountExclusion` and `PF_ValidatorVoteTracking`, allow trusted validators to add or remove account exclusions through validation traffic, track those votes on-ledger, and maintain an exclusion view over the active validator set.[16]
 
-The relevant distinction from standard XRPL is that exclusion is not just an issuer-side freeze on an issued asset. In `postfiatd`, an account can become excluded by validator consensus once the exclusion threshold is met, and generic transaction processing rejects transactions when either the sender or destination account is excluded.[postfiatd branch research, 2026]
+The relevant distinction from standard XRPL is that exclusion is not just an issuer-side freeze on an issued asset. In `postfiatd`, an account can become excluded by validator consensus once the exclusion threshold is met, and generic transaction processing rejects transactions when either the sender or destination account is excluded.[16]
 
 This is a governance primitive, not merely a token-control primitive. It allows the network to say: a specific account may not participate, regardless of whether the transaction involves an issuer-controlled IOU.
 
 ### B.2 Why exclusion is materially different from standard XRPL freezes
 
-Standard XRPL already supports trust-line freeze, deep freeze, global freeze, and clawback for issued assets. Those are real controls, but they are primarily issuer-side controls over IOUs and trust lines rather than validator-governed network-wide exclusion of native XRP accounts or transaction counterparties.[XRPL Docs, "Common Misunderstandings about Freezes"; XRPL Docs, "Deep Freeze"; postfiatd branch research, 2026]
+Standard XRPL already supports trust-line freeze, deep freeze, global freeze, and clawback for issued assets. Those are real controls, but they are primarily issuer-side controls over IOUs and trust lines rather than validator-governed network-wide exclusion of native XRP accounts or transaction counterparties.[17][18][16]
 
-For sanctions-style enforcement, that distinction matters. OFAC states that virtual-currency compliance obligations are the same as fiat-currency obligations, and that U.S.-subject persons are generally prohibited from engaging in or facilitating prohibited transactions involving blocked persons.[OFAC FAQ 560; OFAC FAQ 1021] A validator-consensus rule that rejects transactions to or from identified accounts is therefore materially closer to the policy target than a narrower IOU-freeze model.
+For sanctions-style enforcement, that distinction matters. OFAC states that virtual-currency compliance obligations are the same as fiat-currency obligations, and that U.S.-subject persons are generally prohibited from engaging in or facilitating prohibited transactions involving blocked persons.[19][20] A validator-consensus rule that rejects transactions to or from identified accounts is therefore materially closer to the policy target than a narrower IOU-freeze model.
 
-That advantage should not be overstated. The exclusion path only helps when the relevant amendments are enabled and enough validators actually reach the threshold. OFAC also states that listed digital-currency addresses are not exhaustive, and that blocking/reporting duties continue when a U.S. person actually holds blocked property.[OFAC FAQ 562; OFAC FAQ 646; OFAC Virtual Currency Guidance] So Post Fiat's exclusion mechanism is best understood as a stronger protocol-layer enforcement primitive inside a larger compliance program, not as a complete compliance solution by itself.
+That advantage should not be overstated. The exclusion path only helps when the relevant amendments are enabled and enough validators actually reach the threshold. OFAC also states that listed digital-currency addresses are not exhaustive, and that blocking/reporting duties continue when a U.S. person actually holds blocked property.[21][22][23] So Post Fiat's exclusion mechanism is best understood as a stronger protocol-layer enforcement primitive inside a larger compliance program, not as a complete compliance solution by itself.
 
 ### B.3 Orchard / Halo2 privacy as a parallel protocol extension
 
-Separately, the `halo2-devnet-integration` branch of `postfiatd` ports Zcash's Orchard privacy model into an XRPL-derived ledger rather than treating privacy as a mixer, sidecar, or external bridge. It adds the `OrchardPrivacy` amendment and a native `ttSHIELDED_PAYMENT` transaction type, introduces a Rust `orchard-postfiat` crate built around Zcash's `orchard` and `halo2_proofs` libraries, and carries over Orchard's core state model: serialized bundles, commitment-tree anchors, nullifiers for double-spend prevention, note commitments for new shielded outputs, viewing-key-based note discovery, and the Orchard `valueBalance` accounting model that represents net flow between transparent XRP balances and the shielded pool.[postfiatd branch research, 2026]
+Separately, the `halo2-devnet-integration` branch of `postfiatd` ports Zcash's Orchard privacy model into an XRPL-derived ledger rather than treating privacy as a mixer, sidecar, or external bridge. It adds the `OrchardPrivacy` amendment and a native `ttSHIELDED_PAYMENT` transaction type, introduces a Rust `orchard-postfiat` crate built around Zcash's `orchard` and `halo2_proofs` libraries, and carries over Orchard's core state model: serialized bundles, commitment-tree anchors, nullifiers for double-spend prevention, note commitments for new shielded outputs, viewing-key-based note discovery, and the Orchard `valueBalance` accounting model that represents net flow between transparent XRP balances and the shielded pool.[16]
 
-That design means the same transaction family can support transparent-to-shielded shielding, fully shielded transfers, and shielded-to-transparent unshielding while preserving native ledger accounting. In the branch, proof-bearing bundles are parsed and checked in `preflight`, Halo2 proofs and anchor/nullifier constraints are enforced in `preclaim`, and ledger effects are applied in `doApply` by debiting transparent balances when value enters the shielded pool, crediting transparent destinations when value exits, persisting nullifiers, and appending new note commitments and anchors for future spends.[postfiatd branch research, 2026] The companion wallet/RPC layer exposes full viewing-key registration, ledger scanning, and transaction preparation RPCs so the system can construct and observe t->z, z->z, and z->t flows end to end.[postfiatd branch research, 2026]
+That design means the same transaction family can support transparent-to-shielded shielding, fully shielded transfers, and shielded-to-transparent unshielding while preserving native ledger accounting. In the branch, proof-bearing bundles are parsed and checked in `preflight`, Halo2 proofs and anchor/nullifier constraints are enforced in `preclaim`, and ledger effects are applied in `doApply` by debiting transparent balances when value enters the shielded pool, crediting transparent destinations when value exits, persisting nullifiers, and appending new note commitments and anchors for future spends.[16] The companion wallet/RPC layer exposes full viewing-key registration, ledger scanning, and transaction preparation RPCs so the system can construct and observe t->z, z->z, and z->t flows end to end.[16]
 
-The significance is not merely that Post Fiat has "a privacy branch." It is that the privacy layer is structurally based on Zcash's Orchard/Halo2 stack while remaining native to XRPL-style validated-ledger settlement. Because `ShieldedPayment` is processed as a first-class ledger transaction instead of an asynchronous external settlement step, finality should track the network's normal validated-ledger finality rather than waiting for a second protocol to reconcile state. Operationally this remains a devnet-track feature, and the intended end-to-end path is already reflected in the isolated Halo2 devnet workflows and the full-flow integration tests that exercise shielding, shielded transfer, unshielding, wallet scanning, and double-spend rejection.[postfiatd branch research, 2026; agent-hub devnet operations research, 2026]
+The significance is not merely that Post Fiat has "a privacy branch." It is that the privacy layer is structurally based on Zcash's Orchard/Halo2 stack while remaining native to XRPL-style validated-ledger settlement. Because `ShieldedPayment` is processed as a first-class ledger transaction instead of an asynchronous external settlement step, finality should track the network's normal validated-ledger finality rather than waiting for a second protocol to reconcile state. Operationally this remains a devnet-track feature, and the intended end-to-end path is already reflected in the isolated Halo2 devnet workflows and the full-flow integration tests that exercise shielding, shielded transfer, unshielding, wallet scanning, and double-spend rejection.[16][24]
 
 ---
 
 ## References
 
-### XRPL protocol and validator lists
+[1] XRPL Docs. **Unique Node List (UNL)**. https://xrpl.org/docs/concepts/consensus-protocol/unl
 
-- XRPL Docs. **Unique Node List (UNL)**. https://xrpl.org/docs/concepts/consensus-protocol/unl
-- XRPL Docs. **Consensus Protections Against Attacks and Failure Modes**. https://xrpl.org/docs/concepts/consensus-protocol/consensus-protections
-- XRPL Docs. **Configure Validator List Threshold**. https://xrpl.org/docs/infrastructure/configuration/configure-validator-list-threshold
-- XRPL Docs. **xrp-ledger.toml File**. https://xrpl.org/docs/references/xrp-ledger-toml
-- XRPL Docs. **Common Misunderstandings about Freezes**. https://xrpl.org/docs/concepts/tokens/fungible-tokens/common-misconceptions-about-freezes
-- XRPL Docs. **Deep Freeze**. https://xrpl.org/docs/concepts/tokens/fungible-tokens/deep-freeze
-- XRPL Blog. **Default UNL Migration** (2025). https://xrpl.org/blog/2025/default-unl-migration
+[2] XRPL Docs. **Configure Validator List Threshold**. https://xrpl.org/docs/infrastructure/configuration/configure-validator-list-threshold
 
-### Consensus research
+[3] XRPL Docs. **Consensus Protections Against Attacks and Failure Modes**. https://xrpl.org/docs/concepts/consensus-protocol/consensus-protections
 
-- Chase, Brad, and Ethan MacBrough. **Analysis of the XRP Ledger Consensus Protocol**. arXiv:1802.07242, 2018.
-- Amores-Sesar, Ignacio, Christian Cachin, and Jovana Mićić. **Security Analysis of Ripple Consensus**. OPODIS 2020 / LIPIcs 184, 2021.
+[4] XRPL Blog. **Default UNL Migration** (2025). https://xrpl.org/blog/2025/default-unl-migration
 
-### Mechanism design and signaling
+[5] Chase, Brad, and Ethan MacBrough. **Analysis of the XRP Ledger Consensus Protocol**. arXiv:1802.07242, 2018.
 
-- Spence, Michael. **Job Market Signaling**. *Quarterly Journal of Economics*, 1973.
-- Lewis-Pye, Andrew, and Tim Roughgarden. **Byzantine Generals in the Permissionless Setting**. arXiv:2101.07095 / 2023 revision.
+[6] Amores-Sesar, Ignacio, Christian Cachin, and Jovana Mićić. **Security Analysis of Ripple Consensus**. OPODIS 2020 / LIPIcs 184, 2021.
 
-### Inference stability and reproducibility
+[7] Lewis-Pye, Andrew, and Tim Roughgarden. **Byzantine Generals in the Permissionless Setting**. arXiv:2101.07095 / 2023 revision.
 
-- Anthropic Docs. **Temperature**. https://docs.anthropic.com/en/docs/resources/glossary
-- He, Horace and Thinking Machines Lab. **Defeating Nondeterminism in LLM Inference**. Thinking Machines Lab: Connectionism, 2025.
-- SGLang Docs. **Deterministic Inference**. https://github.com/sgl-project/sgl-project.github.io/blob/main/_sources/advanced_features/deterministic_inference.md
-- LMSYS / SGLang Team. **Towards Deterministic Inference in SGLang and Reproducible RL Training**. 2025.
-- Yuan, Jiayi, et al. **Understanding and Mitigating Numerical Sources of Nondeterminism in LLM Inference**. arXiv:2506.09501, 2025.
+[8] Anthropic Docs. **Temperature**. https://docs.anthropic.com/en/docs/resources/glossary
 
-### Verification and cryptographic assurance
+[9] He, Horace and Thinking Machines Lab. **Defeating Nondeterminism in LLM Inference**. Thinking Machines Lab: Connectionism, 2025.
 
-- Phala Network. **TEE Benchmarks for GPU Inference**. 2025.
-- ORA Protocol. **Optimistic Machine Learning (opML)**. 2025.
-- Sun, Haochen, et al. **zkLLM: Zero Knowledge Proofs for Large Language Models**. ACM CCS, 2024.
-- Polyhedra Network. **zkPyTorch**. 2025.
-- TLSNotary Project. https://tlsnotary.org
+[10] SGLang Docs. **Deterministic Inference**. https://github.com/sgl-project/sgl-project.github.io/blob/main/_sources/advanced_features/deterministic_inference.md
 
-### Economics
+[11] LMSYS / SGLang Team. **Towards Deterministic Inference in SGLang and Reproducible RL Training**. 2025.
 
-- Stanford HAI. **AI Index Report 2025**. https://hai.stanford.edu/ai-index/2025-ai-index-report
-- Epoch AI. **LLM inference price trends** (2025). https://epoch.ai/data-insights/llm-inference-price-trends
+[12] Yuan, Jiayi, et al. **Understanding and Mitigating Numerical Sources of Nondeterminism in LLM Inference**. arXiv:2506.09501, 2025.
 
-### Post Fiat implementation and sanctions policy
+[13] XRPL Docs. **xrp-ledger.toml File**. https://xrpl.org/docs/references/xrp-ledger-toml
 
-- `postfiatd` branch research, inspected March 16, 2026. Review of `halo2-devnet-integration` branch files including `include/xrpl/protocol/detail/features.macro`, `src/libxrpl/protocol/STValidation.cpp`, `src/xrpld/app/consensus/RCLConsensus.cpp`, `src/xrpld/app/consensus/RCLValidations.cpp`, `src/xrpld/app/misc/ExclusionManager.h`, `src/xrpld/app/tx/detail/Change.cpp`, `src/xrpld/app/tx/detail/Transactor.cpp`, `orchard-postfiat/src/lib.rs`, `orchard-postfiat/src/bundle_real.rs`, `orchard-postfiat/src/ffi/bridge.rs`, `src/xrpld/app/tx/detail/ShieldedPayment.cpp`, and `src/test/rpc/OrchardFullFlow_test.cpp`.
-- `agent-hub` devnet operations research, inspected March 16, 2026. Review of `products/blockchain/systems/massive_rippled_pr_system/validator_churn_test_playbook.md` and the documented `halo2-devnet-build.yml`, `halo2-devnet-deploy.yml`, `halo2-devnet-update.yml`, and `halo2-devnet-destroy.yml` workflows for isolated end-to-end validator testing.
-- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 560**. https://ofac.treasury.gov/faqs/560
-- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 562**. https://ofac.treasury.gov/faqs/562
-- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 646**. https://ofac.treasury.gov/faqs/646
-- U.S. Department of the Treasury, Office of Foreign Assets Control. **FAQ 1021**. https://ofac.treasury.gov/faqs/1021
-- U.S. Department of the Treasury, Office of Foreign Assets Control. **Sanctions Compliance Guidance for the Virtual Currency Industry**. https://ofac.treasury.gov/system/files/126/virtual_currency_guidance_brochure.pdf
+[14] Stanford HAI. **AI Index Report 2025**. https://hai.stanford.edu/ai-index/2025-ai-index-report
+
+[15] Epoch AI. **LLM inference price trends** (2025). https://epoch.ai/data-insights/llm-inference-price-trends
+
+[16] `postfiatd` branch research, inspected March 16, 2026. Review of `halo2-devnet-integration` branch.
+
+[17] XRPL Docs. **Common Misunderstandings about Freezes**. https://xrpl.org/docs/concepts/tokens/fungible-tokens/common-misconceptions-about-freezes
+
+[18] XRPL Docs. **Deep Freeze**. https://xrpl.org/docs/concepts/tokens/fungible-tokens/deep-freeze
+
+[19] U.S. Department of the Treasury, OFAC. **FAQ 560**. https://ofac.treasury.gov/faqs/560
+
+[20] U.S. Department of the Treasury, OFAC. **FAQ 1021**. https://ofac.treasury.gov/faqs/1021
+
+[21] U.S. Department of the Treasury, OFAC. **FAQ 562**. https://ofac.treasury.gov/faqs/562
+
+[22] U.S. Department of the Treasury, OFAC. **FAQ 646**. https://ofac.treasury.gov/faqs/646
+
+[23] U.S. Department of the Treasury, OFAC. **Sanctions Compliance Guidance for the Virtual Currency Industry**. https://ofac.treasury.gov/system/files/126/virtual_currency_guidance_brochure.pdf
+
+[24] `agent-hub` devnet operations research, inspected March 16, 2026. Review of Halo2 devnet workflows.
 
 ---
