@@ -93,97 +93,80 @@ Phase 1 uses XRPL-style list publication as it already exists: signed lists, exp
 
 ## 4. Round Architecture
 
-Each scoring round is a pipeline. The round is reproducible from artifacts.
+Each scoring round is a pipeline reproducible from its published artifacts.
 
-### 4.1 Stage 1: Evidence collection
+### 4.1 Evidence collection
 
-A round collects candidate evidence from multiple sources:
+A round collects validator evidence from multiple sources:
 
-1. **Objective operational metrics**: agreement rates, uptime, software version and patch hygiene, amendment behavior, fee-vote behavior, missed validations, long-run operational consistency.
+1. **Consensus performance**: Agreement scores across multiple time windows (1-hour, 24-hour, 30-day), missed validations, and ledger index currency. Sourced from a Validator History Service (VHS) that tracks validator behavior continuously.
 
-2. **Identity and attestation signals**: verified / not verified, institutional / individual / unknown, domain-attested / not domain-attested, optional public operator metadata.
+2. **Infrastructure diversity**: Validator IP addresses resolved via the peer-to-peer `/crawl` endpoint, mapped to Autonomous System Numbers using local BGP routing tables, and geolocated via IP geolocation services. Geolocation informs scoring but is excluded from published artifacts due to licensing constraints — ASN data, derived from public BGP tables, is published.
 
-3. **Concentration and correlation signals**: country, ASN, cloud provider, datacenter region, operator clustering.
+3. **Software and governance signals**: Server version, amendment voting behavior, fee vote settings, and current UNL membership status.
 
-4. **Low-confidence observer-dependent metrics**: peer count, topology position, latency from a given observer. These are weighted cautiously because they reflect a specific vantage point rather than a universal property.
+4. **Identity and attestation**: Domain verification via `xrp-ledger.toml` two-way attestation, entity classification (institutional / individual / unknown), and on-chain identity memos where available.
 
-### 4.2 Stage 2: Deterministic normalization
+5. **Observer-dependent metrics**: Peer count, topology position, and latency as seen from the scoring service's vantage point. Weighted cautiously — these reflect a specific observer, not a universal property.
 
-Raw evidence is transformed into a canonical scoring snapshot — the exact scorer input. The normalization step exists because raw evidence alone is insufficient for reproducibility. If two operators consume the same source data but transform it differently, they are running different rounds.
+### 4.2 Deterministic normalization
 
-A round publishes:
-- the raw evidence,
-- the normalized snapshot,
-- and the hash of the normalized snapshot.
+Raw evidence is transformed into a canonical scoring snapshot — the exact input to the scorer. The normalization step exists because raw evidence alone is insufficient for reproducibility: two operators consuming the same source data but transforming it differently are running different rounds.
 
-### 4.3 Stage 3: Pinned model-assisted scoring
+Each round publishes the raw evidence, the normalized snapshot, and the SHA-256 hash of the snapshot's canonical JSON serialization.
 
-A pinned local model processes the normalized snapshot under a published prompt and outputs:
-- an integer score per candidate,
-- a short rationale per candidate,
-- and optionally additional structured fields useful for diagnostics.
+### 4.3 Model-assisted scoring
 
-Let:
-- X_t be the normalized snapshot at round t,
-- Φ_t be the execution manifest (model, weights, tokenizer, engine, runtime),
-- P_t be the scoring prompt/policy,
-- M_{Φ_t} be the scorer instantiated under that manifest.
+A pinned open-weight model processes the normalized snapshot under a published scoring prompt. The prompt defines explicit scoring dimensions with weighting guidance — consensus performance (highest weight), operational reliability, software diligence, geographic and infrastructure diversity, identity and reputation, and observer-dependent metrics (lowest weight). The model outputs an integer score (0–100) and a short rationale per validator.
 
-Then:
+Formally:
 
 S_t = M_{Φ_t}(P_t, X_t)
 
-where S_t ∈ {0,…,100}^n is the vector of candidate scores for n validators.
+where X_t is the normalized snapshot, Φ_t is the execution manifest (model weights, inference engine, runtime configuration), P_t is the scoring prompt, and S_t ∈ {0,…,100}^n is the score vector for n validators.
 
-The model evaluates candidates. The final validator set is chosen by a deterministic set constructor operating on published scores.
+The model evaluates candidates. The final validator set is chosen by a deterministic selector operating on published scores.
 
-### 4.4 Stage 4: Deterministic list construction
+### 4.4 Deterministic list construction
 
 The final recommended validator set is built by a deterministic selector:
 
 U_t = G(S_t, U_{t-1}; θ, K, δ)
 
-where:
-- U_t is the selected validator set at round t,
-- U_{t-1} is the prior round's set,
-- θ is a minimum score threshold,
-- K is the maximum list size,
-- δ is the churn-control margin.
+where U_t is the selected set at round t, U_{t-1} is the prior round's set, θ is a minimum score threshold, K is the maximum list size, and δ is the churn-control margin.
 
-A simple instance of G:
+The selector:
 
-1. Score all candidates.
-2. Discard scores below θ.
-3. Rank remaining candidates.
-4. Include at most K candidates.
-5. Apply churn control: a challenger displaces an incumbent only if it exceeds the incumbent by at least δ, unless a hard-failure condition applies.
+1. Discards scores below θ.
+2. Ranks remaining candidates.
+3. Includes at most K candidates.
+4. Applies churn control: a challenger displaces an incumbent only if it exceeds the incumbent's score by at least δ, unless a hard-failure condition (e.g., extended downtime, dangerously outdated software) applies.
 
-The model is used for **candidate evaluation**. **Set publication** is deterministic.
+The model provides candidate evaluation. Set construction is deterministic and auditable.
 
-### 4.5 Stage 5: Publication artifacts
+### 4.5 Publication artifacts
 
-Each round publishes at least the following bundle:
+Each round publishes a bundle with full chain-of-custody:
 
 ```text
 round_t/
 ├── raw/
-│   ├── source_a.json
-│   ├── source_b.json
-│   └── ...
-├── normalized_snapshot.json
+│   ├── vhs_validators.json
+│   ├── crawl_topology.json
+│   ├── asn_lookups.json
+│   └── identity_attestations.json
+├── snapshot.json
 ├── execution_manifest.json
-├── prompt_version.txt
+├── scoring_prompt.txt
 ├── scores.json
 ├── selection_result.json
 ├── vl.json
 └── metadata.json
 ```
 
-The critical property is chain-of-custody:
+The chain: raw evidence → normalized snapshot → scores → selected set → signed validator list.
 
-raw evidence → normalized snapshot → scores → selected set → signed published list
-
-A round can also anchor the root hash or CID of this artifact bundle on-chain, making later equivocation materially harder.
+Artifact bundles are pinned to IPFS, with the root CID anchored on-chain via a memo transaction. This makes equivocation — publishing different artifacts to different parties — materially harder.
 
 ---
 
