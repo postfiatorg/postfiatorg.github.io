@@ -451,38 +451,28 @@ The token is justified as ownership of, and settlement inside, a network with a 
 
 ## 12. Boundaries
 
-A successful Post Fiat deployment proves that:
-- validator-list publication can become a replayable public pipeline,
-- publisher policy choices can be inspected at the level of evidence, manifest, and output,
-- independent validators can reproduce the same scoring process with high agreement,
-- and authority can migrate gradually from publisher-only judgment toward validator-converged content.
+The claim is comparative, not magical. A published, replayable judgment layer is easier to audit, challenge, and correct than an unpublished rubric or informal committee process.
 
-The boundaries are also clear. Model scores are qualitative assessments, not mathematical proofs. Convergent outputs do not by themselves imply social independence among validators. Exact reproducibility across arbitrary GPU architectures requires policy constraints on the execution environment. And concentration monitoring is an ongoing operational discipline, not a one-time fix.
+The boundaries are clear:
 
-The claim is therefore comparative, not magical: a published and replayable judgment layer is easier to audit, challenge, and correct than an unpublished publisher rubric or informal committee process.
+- Model scores are qualitative assessments, not mathematical proofs.
+- Convergent outputs do not by themselves imply social independence among validators.
+- Exact reproducibility across arbitrary GPU architectures requires policy constraints on the execution environment.
+- Concentration monitoring is an ongoing operational discipline, not a one-time fix.
 
-These boundaries define the engineering work ahead, not reasons to defer.
+These boundaries define engineering work ahead, not reasons to defer.
 
 ---
 
 ## 13. Conclusion
 
-Validator-list publication in XRPL-style networks is a real governance surface. It affects overlap, concentration, and therefore the security envelope in which consensus operates. XRPL already recognizes this by using signed validator lists, configurable thresholds, and explicit publisher keys. But widely used recommended lists remain only partially legible to the public.
+Validator-list publication is a real governance surface. It determines overlap, concentration, and the security envelope in which consensus operates. Widely used recommended lists remain only partially legible to the public.
 
-Post Fiat replaces opaque editorial selection with a public, replayable, model-assisted pipeline:
-- collect evidence,
-- normalize it canonically,
-- pin the execution environment,
-- score candidates under a published policy,
-- select the set deterministically,
-- publish the artifacts,
-- and shift authority only after convergence is demonstrated.
+Post Fiat replaces opaque editorial selection with a public, replayable, model-assisted pipeline: collect evidence, normalize it canonically, pin the execution environment, score candidates under a published policy, select the set deterministically, publish the artifacts, and shift authority only after convergence is demonstrated.
 
-The strongest version of this idea is also the narrowest. It requires measurable claims about artifact integrity, reproducibility, rank stability, set stability, and governance transparency.
+Preliminary validation confirms that the approach works. Scoring 42 PFT Ledger validators with a self-hosted 80B-parameter model under deterministic inference produced bit-identical output across five independent runs — exact reproducibility, not merely rank stability.
 
-The broader `postfiatd` roadmap includes adjacent protocol work — validator-consensus account exclusion and Orchard/Halo2 privacy — documented in Appendix A. The publication mechanism remains the narrow core of this paper. The relevant comparison class throughout is today's signed-list publisher process, not an oracle-free ideal.
-
-That is ambitious enough — and credible enough — to be worth building.
+The broader `postfiatd` roadmap includes adjacent protocol work — validator-consensus account exclusion and Orchard/Halo2 privacy — documented in Appendix A. The publication mechanism remains the narrow core of this paper.
 
 ---
 
