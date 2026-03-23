@@ -1,6 +1,6 @@
 ---
 title: "Post Fiat Whitepaper"
-layout: "single"
+layout: "whitepaper_page"
 url: "/whitepaper/"
 summary: "Post Fiat Whitepaper"
 ---

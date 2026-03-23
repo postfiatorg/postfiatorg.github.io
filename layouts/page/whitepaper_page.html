@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ .Title }}</title>
+  <meta name="description" content="Auditable, model-assisted validator-list publication for XRPL-derived networks." />
+  <link rel="canonical" href="{{ .Permalink }}" />
+  <link rel="alternate" type="text/plain" title="LLM instructions" href="https://postfiat.org/llms.txt" />
+  <link rel="alternate" type="text/plain" title="Extended LLM overview" href="https://postfiat.org/llms-full.txt" />
+  <meta property="og:title" content="{{ .Title }}" />
+  <meta property="og:description" content="Auditable, model-assisted validator-list publication for XRPL-derived networks." />
+  <meta property="og:url" content="{{ .Permalink }}" />
+  <meta property="og:type" content="article" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#06070a;
+      --bg-2:#0c0f15;
+      --panel:rgba(255,255,255,.055);
+      --panel-2:rgba(255,255,255,.03);
+      --stroke:rgba(255,255,255,.12);
+      --stroke-strong:rgba(255,255,255,.22);
+      --text:#f4f6fb;
+      --muted:#a5aec0;
+      --soft:#d8deea;
+      --accent:#8db8ff;
+      --accent-2:#84efe6;
+      --accent-3:#7c5cff;
+      --shadow:0 24px 70px rgba(0,0,0,.38);
+      --radius:26px;
+      --max:1240px;
+      --reading:860px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 14% 18%, rgba(124,92,255,.18) 0%, rgba(124,92,255,0) 28%),
+        radial-gradient(circle at 84% 16%, rgba(132,239,230,.12) 0%, rgba(132,239,230,0) 24%),
+        radial-gradient(circle at 50% 120%, rgba(141,184,255,.14) 0%, rgba(141,184,255,0) 30%),
+        linear-gradient(180deg,#080a0f 0%,#050609 40%,#030405 100%);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size:72px 72px;
+      mask-image:radial-gradient(circle at center, black 35%, transparent 100%);
+      opacity:.24;
+      pointer-events:none;
+      z-index:-3;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+      opacity:.45;
+      mix-blend-mode:soft-light;
+      pointer-events:none;
+      z-index:-2;
+    }
+
+    a{color:inherit}
+
+    .aurora{
+      position:fixed;
+      width:42vw;
+      height:42vw;
+      border-radius:50%;
+      filter:blur(84px);
+      opacity:.15;
+      pointer-events:none;
+      z-index:-1;
+      animation:auroraFloat 16s ease-in-out infinite;
+    }
+
+    .aurora.a1{top:-14vw;left:-10vw;background:radial-gradient(circle,rgba(124,92,255,.9) 0%,rgba(124,92,255,0) 68%)}
+    .aurora.a2{top:18vh;right:-10vw;background:radial-gradient(circle,rgba(132,239,230,.85) 0%,rgba(132,239,230,0) 64%);animation-delay:-6s}
+    .aurora.a3{bottom:-18vw;left:26vw;background:radial-gradient(circle,rgba(141,184,255,.9) 0%,rgba(141,184,255,0) 66%);animation-delay:-10s}
+
+    @keyframes auroraFloat{
+      0%,100%{transform:translate3d(0,0,0) scale(1)}
+      50%{transform:translate3d(2vw,-1vw,0) scale(1.06)}
+    }
+
+    header{
+      position:sticky;
+      top:14px;
+      z-index:100;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      width:min(calc(100% - 24px),var(--max));
+      margin:14px auto 0;
+      padding:1rem 1.2rem;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px;
+      background:linear-gradient(180deg,rgba(10,12,18,.82) 0%,rgba(8,10,16,.68) 100%);
+      backdrop-filter:blur(24px) saturate(140%);
+      -webkit-backdrop-filter:blur(24px) saturate(140%);
+      box-shadow:0 12px 40px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.08);
+    }
+
+    .brand-name{
+      font-family:'Orbitron',sans-serif;
+      font-size:1.02rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.32em;
+      text-decoration:none;
+      color:var(--text);
+      white-space:nowrap;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:.6rem;
+      align-items:center;
+    }
+
+    .nav-link{
+      font-size:.74rem;
+      color:#c7d1e4;
+      text-decoration:none;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      padding:.82rem 1rem;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition:all .28s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active{
+      color:#fff;
+      border-color:rgba(255,255,255,.16);
+      background:rgba(255,255,255,.05);
+    }
+
+    .hamburger{
+      display:none;
+      width:48px;
+      height:48px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      flex-direction:column;
+      gap:5px;
+    }
+
+    .hamburger span{
+      display:block;
+      width:18px;
+      height:2px;
+      border-radius:999px;
+      background:#fff;
+    }
+
+    main{
+      width:min(calc(100% - 32px),var(--max));
+      margin:0 auto;
+      padding:38px 0 84px;
+    }
+
+    .paper-hero{
+      display:grid;
+      gap:18px;
+      padding:34px 34px 28px;
+      margin:20px auto 26px;
+      border:1px solid var(--stroke);
+      border-radius:32px;
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .paper-hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 18% 10%, rgba(124,92,255,.18), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(132,239,230,.12), transparent 24%);
+      pointer-events:none;
+    }
+
+    .eyebrow{
+      position:relative;
+      z-index:1;
+      display:inline-flex;
+      align-items:center;
+      gap:.65rem;
+      width:fit-content;
+      padding:.5rem .9rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.05);
+      font-size:.72rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#dfe7f7;
+    }
+
+    .paper-hero h1{
+      position:relative;
+      z-index:1;
+      margin:0;
+      max-width:980px;
+      font-size:clamp(2rem,4.8vw,4.35rem);
+      line-height:.97;
+      letter-spacing:-.05em;
+      font-weight:800;
+    }
+
+    .paper-hero p{
+      position:relative;
+      z-index:1;
+      margin:0;
+      max-width:900px;
+      font-size:1.04rem;
+      line-height:1.7;
+      color:var(--soft);
+    }
+
+    .hero-links{
+      position:relative;
+      z-index:1;
+      display:flex;
+      flex-wrap:wrap;
+      gap:.85rem;
+    }
+
+    .hero-link{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      padding:.92rem 1.1rem;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      color:#f5f8ff;
+      text-decoration:none;
+      transition:all .24s ease;
+      font-weight:600;
+    }
+
+    .hero-link:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.07);
+      border-color:rgba(255,255,255,.24);
+    }
+
+    .hero-link span:last-child{
+      color:var(--muted);
+      font-weight:500;
+    }
+
+    .paper-shell{
+      width:min(100%, var(--reading));
+      margin:0 auto;
+    }
+
+    article.paper{
+      padding:40px clamp(20px,4vw,46px);
+      border-radius:32px;
+      border:1px solid var(--stroke);
+      background:linear-gradient(180deg,rgba(10,13,20,.86) 0%,rgba(9,12,18,.74) 100%);
+      box-shadow:var(--shadow);
+    }
+
+    .paper-content{
+      font-size:1.04rem;
+      line-height:1.84;
+      color:#dbe2ef;
+    }
+
+    .paper-content > :first-child{
+      margin-top:0;
+    }
+
+    .paper-content h1{
+      margin:0 0 1rem;
+      font-size:clamp(2rem,4vw,3.25rem);
+      line-height:1.04;
+      letter-spacing:-.05em;
+      color:#fff;
+    }
+
+    .paper-content h2{
+      margin:3.4rem 0 1rem;
+      padding-top:1.3rem;
+      border-top:1px solid rgba(255,255,255,.09);
+      font-size:clamp(1.35rem,2vw,1.8rem);
+      line-height:1.25;
+      color:#fff;
+    }
+
+    .paper-content h3{
+      margin:2rem 0 .7rem;
+      font-size:1.1rem;
+      line-height:1.35;
+      color:#f7f9ff;
+    }
+
+    .paper-content h4{
+      margin:1.35rem 0 .5rem;
+      font-size:1rem;
+      color:#f4f7ff;
+    }
+
+    .paper-content p,
+    .paper-content ul,
+    .paper-content ol,
+    .paper-content table,
+    .paper-content blockquote{
+      margin:0 0 1.12rem;
+    }
+
+    .paper-content ul,
+    .paper-content ol{
+      padding-left:1.25rem;
+    }
+
+    .paper-content li{
+      margin:.3rem 0;
+    }
+
+    .paper-content strong{
+      color:#fff;
+    }
+
+    .paper-content a{
+      color:#b8d6ff;
+      text-decoration:none;
+      border-bottom:1px solid rgba(184,214,255,.24);
+    }
+
+    .paper-content a:hover{
+      color:#fff;
+      border-bottom-color:rgba(255,255,255,.48);
+    }
+
+    .paper-content hr{
+      margin:1.6rem 0;
+      border:none;
+      border-top:1px solid rgba(255,255,255,.1);
+    }
+
+    .paper-content blockquote{
+      padding:1rem 1.2rem;
+      border-left:3px solid rgba(141,184,255,.72);
+      border-radius:0 18px 18px 0;
+      background:rgba(141,184,255,.08);
+      color:#e7efff;
+    }
+
+    .paper-content code{
+      padding:.15rem .42rem;
+      border-radius:8px;
+      background:rgba(255,255,255,.08);
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+      font-size:.92em;
+      color:#fff;
+    }
+
+    .paper-content pre{
+      overflow:auto;
+      padding:1rem 1.1rem;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:#090c12;
+    }
+
+    .paper-content pre code{
+      padding:0;
+      background:transparent;
+    }
+
+    .paper-content table{
+      display:block;
+      width:100%;
+      overflow-x:auto;
+      border-collapse:collapse;
+      border-spacing:0;
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:18px;
+      background:rgba(255,255,255,.025);
+    }
+
+    .paper-content thead{
+      background:rgba(255,255,255,.06);
+    }
+
+    .paper-content th,
+    .paper-content td{
+      padding:.88rem .9rem;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      text-align:left;
+      vertical-align:top;
+      min-width:140px;
+    }
+
+    .paper-content tbody tr:last-child td{
+      border-bottom:none;
+    }
+
+    .paper-content img{
+      max-width:100%;
+      border-radius:18px;
+    }
+
+    .paper-content .footnotes{
+      margin-top:3rem;
+      padding-top:1.5rem;
+      border-top:1px solid rgba(255,255,255,.1);
+      color:var(--muted);
+      font-size:.96rem;
+    }
+
+    .paper-footer{
+      width:min(100%, var(--reading));
+      margin:26px auto 0;
+      padding:0 clamp(4px,1vw,10px);
+      display:flex;
+      flex-wrap:wrap;
+      gap:.8rem;
+      align-items:center;
+      justify-content:space-between;
+      color:var(--muted);
+      font-size:.88rem;
+    }
+
+    .paper-footer-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+
+    .paper-footer a{
+      color:#d4ddef;
+      text-decoration:none;
+    }
+
+    .paper-footer a:hover{
+      color:#fff;
+    }
+
+    @media (max-width: 900px){
+      header{
+        padding:.9rem 1rem;
+      }
+
+      .nav-links{
+        position:absolute;
+        top:calc(100% + 10px);
+        left:0;
+        right:0;
+        display:none;
+        flex-direction:column;
+        gap:.4rem;
+        padding:1rem;
+        border:1px solid rgba(255,255,255,.12);
+        border-radius:20px;
+        background:rgba(9,11,18,.96);
+        box-shadow:var(--shadow);
+      }
+
+      .nav-links.active{
+        display:flex;
+      }
+
+      .nav-link{
+        width:100%;
+        text-align:center;
+      }
+
+      .hamburger{
+        display:flex;
+      }
+
+      .paper-hero{
+        padding:26px 22px 22px;
+      }
+
+      article.paper{
+        padding:30px 20px;
+        border-radius:24px;
+      }
+
+      .paper-content{
+        font-size:1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora a1"></div>
+  <div class="aurora a2"></div>
+  <div class="aurora a3"></div>
+
+  <header>
+    <a href="/" class="brand-name">Post Fiat</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/whitepaper/" class="nav-link active">Whitepaper</a>
+      <a href="https://tasknode.postfiat.org" class="nav-link" target="_blank" rel="noopener">Task Node</a>
+      <a href="https://discord.gg/U6HjgDSmhR" class="nav-link" target="_blank" rel="noopener">Community</a>
+      <a href="/validator-benchmark/" class="nav-link">Validator Benchmark</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+    <section class="paper-hero">
+      <div class="eyebrow">Post Fiat Whitepaper</div>
+      <h1>A single-page technical paper on public validator-list publication</h1>
+      <p>This is the main Post Fiat whitepaper reading surface. It focuses on auditable, replayable validator-list publication for XRPL-derived networks, with direct links to the related benchmark and live network surfaces when you want to inspect the claims in context.</p>
+      <div class="hero-links">
+        <a class="hero-link" href="/validator-benchmark/">
+          <span>Validator Benchmark</span>
+          <span>See the public benchmark and artifacts</span>
+        </a>
+        <a class="hero-link" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">
+          <span>Live Explorer</span>
+          <span>Inspect the current testnet validator set</span>
+        </a>
+        <a class="hero-link" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">
+          <span>Task Node</span>
+          <span>Open the current contributor surface</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="paper-shell">
+      <article class="paper">
+        <div class="paper-content">
+          {{ .Content }}
+        </div>
+      </article>
+    </div>
+
+    <div class="paper-footer">
+      <div>Post Fiat whitepaper</div>
+      <div class="paper-footer-links">
+        <a href="/about/">About</a>
+        <a href="/validator-benchmark/">Validator Benchmark</a>
+        <a href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Task Node</a>
+        <a href="/community/">Community</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    if (hamburger && navLinks) {
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+          navLinks.classList.remove("active");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
