@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Fiat Reference Hub</title>
+  <link rel="alternate" type="text/plain" title="LLM instructions" href="https://postfiat.org/llms.txt" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#08111a;
+      --bg-soft:#0d1725;
+      --panel:#0f1928;
+      --panel-2:#111d2d;
+      --border:rgba(255,255,255,.10);
+      --border-strong:rgba(255,255,255,.18);
+      --text:#eef4ff;
+      --muted:#a7b4ca;
+      --dim:#76829a;
+      --accent:#a8c8ff;
+      --accent-2:#91f3d7;
+      --accent-3:#f6d584;
+      --max:1180px;
+      --radius:28px;
+      --shadow:0 24px 72px rgba(0,0,0,.34);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(168,200,255,.16), transparent 26%),
+        radial-gradient(circle at 88% 10%, rgba(145,243,215,.12), transparent 22%),
+        radial-gradient(circle at 50% 120%, rgba(246,213,132,.10), transparent 28%),
+        linear-gradient(180deg, #07101a 0%, #08111a 40%, #05090f 100%);
+      font-family:"Space Grotesk", sans-serif;
+      line-height:1.5;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size:40px 40px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.36), transparent 84%);
+      opacity:.32;
+    }
+
+    a{color:inherit}
+    .shell{padding:0 22px 90px}
+    .container{max-width:var(--max);margin:0 auto}
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:40;
+      backdrop-filter:blur(18px);
+      background:rgba(8,12,20,.78);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .site-header-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:18px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      text-decoration:none;
+      min-width:0;
+    }
+    .brand-mark{
+      width:48px;
+      height:48px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.14);
+      display:grid;
+      place-items:center;
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow:inset 0 0 22px rgba(255,255,255,.04), 0 0 36px rgba(168,200,255,.08);
+      flex-shrink:0;
+    }
+    .brand-mark svg{width:24px;height:24px}
+    .brand-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+    .brand-title{
+      font-size:1rem;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .brand-sub{
+      font-family:"IBM Plex Mono", monospace;
+      font-size:.72rem;
+      color:var(--dim);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      text-decoration:none;
+      color:var(--muted);
+      border:1px solid transparent;
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:.8rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      transition:.24s ease;
+    }
+    .nav a:hover{
+      color:#fff;
+      background:rgba(255,255,255,.05);
+      border-color:rgba(255,255,255,.10);
+    }
+
+    .hero{
+      padding:72px 0 34px;
+      display:grid;
+      grid-template-columns:minmax(0, 1.18fr) minmax(340px, .82fr);
+      gap:28px;
+      align-items:stretch;
+    }
+    .hero-copy{
+      padding:22px 0 0;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:18px;
+      padding:10px 14px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      color:var(--accent-2);
+      font-family:"IBM Plex Mono", monospace;
+      font-size:.74rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .hero h1{
+      margin:0 0 18px;
+      max-width:780px;
+      font-size:clamp(3rem, 6vw, 5.7rem);
+      line-height:1.02;
+      letter-spacing:-.05em;
+    }
+    .hero p{
+      margin:0;
+      max-width:760px;
+      font-size:1.08rem;
+      color:var(--muted);
+      line-height:1.78;
+    }
+    .hero-actions{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:28px;
+      max-width:720px;
+    }
+    .hero-card{
+      text-decoration:none;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      min-height:146px;
+      padding:20px;
+      border-radius:24px;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
+      transition:transform .28s ease, border-color .28s ease, background .28s ease;
+    }
+    .hero-card:hover{
+      transform:translateY(-4px);
+      border-color:var(--border-strong);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+    }
+    .hero-card .card-kicker{
+      color:var(--accent-2);
+      font-family:"IBM Plex Mono", monospace;
+      font-size:.72rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .hero-card h3{
+      margin:0;
+      font-size:1.04rem;
+      line-height:1.3;
+    }
+    .hero-card p{
+      margin:0;
+      font-size:.92rem;
+      line-height:1.6;
+      color:var(--muted);
+    }
+
+    .hero-panel{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      padding:22px;
+      border-radius:32px;
+      border:1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025)),
+        radial-gradient(circle at top right, rgba(168,200,255,.18), transparent 36%);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-panel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.12) 16%, transparent 32%);
+      transform:translateX(-140%);
+      animation:sweep 10s linear infinite;
+    }
+    @keyframes sweep{to{transform:translateX(170%)}}
+    .mini-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    .mini-head strong{
+      font-size:1rem;
+      letter-spacing:.02em;
+    }
+    .status-pill{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(145,243,215,.20);
+      background:rgba(145,243,215,.10);
+      color:var(--accent-2);
+      font-family:"IBM Plex Mono", monospace;
+      font-size:.7rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .metric-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    .metric{
+      padding:18px 16px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+    }
+    .metric-value{
+      display:block;
+      margin-bottom:8px;
+      font-size:1.9rem;
+      line-height:1;
+      font-weight:700;
+    }
+    .metric-label{
+      color:var(--muted);
+      font-size:.84rem;
+      line-height:1.5;
+    }
+    .meta-note{
+      margin:0;
+      color:var(--muted);
+      font-size:.86rem;
+      line-height:1.6;
+    }
+    .mini-links{
+      display:grid;
+      gap:10px;
+    }
+    .mini-link{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      padding:14px 16px;
+      text-decoration:none;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      color:#fff;
+    }
+    .mini-link span:last-child{
+      color:var(--dim);
+      font-family:"IBM Plex Mono", monospace;
+      font-size:.8rem;
+    }
+
+    section.block{
+      margin-top:18px;
+      padding:0 0 22px;
+    }
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:18px;
+      margin-bottom:18px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:2rem;
+      letter-spacing:-.03em;
+    }
+    .section-head p{
+      margin:0;
+      max-width:760px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .pillars,
+    .resource-grid,
+    .trust-grid,
+    .footer-grid{
+      display:grid;
+      gap:18px;
+    }
+    .pillars{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .resource-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .trust-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .footer-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .panel{
+      border:1px solid var(--border);
+      border-radius:26px;
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .panel-body{
+      padding:22px;
+    }
+    .panel-icon{
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      display:grid;
+      place-items:center;
+      margin-bottom:14px;
+    }
+    .panel-icon svg{
+      width:24px;
+      height:24px;
+      stroke:#fff;
+      fill:none;
+      stroke-width:1.8;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .panel h3{
+      margin:0 0 10px;
+      font-size:1.06rem;
+      line-height:1.35;
+    }
+    .panel p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:.95rem;
+    }
+    .tag-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+    .tag{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:#dbe6fb;
+      font-size:.76rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .stat-strip{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+    .strip-item{
+      padding:18px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.035);
+    }
+    .strip-item strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:2rem;
+      line-height:1;
+    }
+    .strip-item span{
+      color:var(--muted);
+      font-size:.84rem;
+      line-height:1.55;
+    }
+    .footer-cta{
+      margin-top:14px;
+      padding:26px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+    }
+    .footer-cta h2{
+      margin:0 0 12px;
+      font-size:2rem;
+      letter-spacing:-.03em;
+    }
+    .footer-cta p{
+      margin:0;
+      max-width:800px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    @media(max-width:1020px){
+      .hero{grid-template-columns:1fr}
+      .resource-grid,.trust-grid,.footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:860px){
+      .hero-actions,
+      .pillars,
+      .stat-strip{grid-template-columns:1fr}
+      .metric-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:640px){
+      .shell{padding:0 16px 70px}
+      .site-header-inner{padding:16px}
+      .nav{display:none}
+      .resource-grid,.trust-grid,.footer-grid,.metric-grid{grid-template-columns:1fr}
+      .section-head{flex-direction:column;align-items:flex-start}
+      .metric-value,.strip-item strong{font-size:1.7rem}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="/">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <path d="M25 25 L75 75 M75 25 L25 75" stroke="white" stroke-width="10" stroke-linecap="round"/>
+            <path d="M25 75 L75 75" stroke="white" stroke-width="10" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-copy">
+          <div class="brand-title">Post Fiat</div>
+          <div class="brand-sub">Reference Hub Redesign</div>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="/whitepaper/">Whitepaper</a>
+        <a href="/validator-benchmark/">Benchmark</a>
+        <a href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Task Node</a>
+        <a href="https://www.jollydinger.com/pftvalidatorsetup/setup/" target="_blank" rel="noopener">Validator Setup</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">Read the paper. Check the benchmark. Inspect the network.</div>
+          <h1>A fast XRPL-based network with public validator research, live stats, and a contributor app called the Task Node</h1>
+          <p>Post Fiat is built around three practical ideas: fast low-cost settlement, public validator scoring instead of opaque list management, and a contributor app where people can do useful work instead of only holding a token. If you want to know whether the project is real, start with the whitepaper, the validator benchmark, the live testnet, and the operator path.</p>
+
+          <div class="hero-actions">
+            <a class="hero-card" href="/whitepaper/">
+              <div class="card-kicker">Read</div>
+              <h3>Whitepaper</h3>
+              <p>Protocol design, validator logic, privacy path, and the network thesis.</p>
+            </a>
+            <a class="hero-card" href="/validator-benchmark/">
+              <div class="card-kicker">Inspect</div>
+              <h3>Validator Benchmark</h3>
+              <p>Public benchmark artifacts, rankings, and validator-selection research.</p>
+            </a>
+            <a class="hero-card" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">
+              <div class="card-kicker">Use</div>
+              <h3>Open the Task Node</h3>
+              <p>See the contributor app and the current participation surface directly.</p>
+            </a>
+            <a class="hero-card" href="https://www.jollydinger.com/pftvalidatorsetup/setup/" target="_blank" rel="noopener">
+              <div class="card-kicker">Operate</div>
+              <h3>Run a Validator</h3>
+              <p>Inspect the operator path and infrastructure setup guide.</p>
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <div class="mini-head">
+            <strong>What is live today</strong>
+            <div class="status-pill" id="statsBadge">Live VHS</div>
+          </div>
+
+          <div class="metric-grid">
+            <div class="metric">
+              <span class="metric-value" id="validatorCount">38</span>
+              <div class="metric-label">validators in the latest published snapshot</div>
+            </div>
+            <div class="metric">
+              <span class="metric-value" id="publishingDomains">24</span>
+              <div class="metric-label">publishing domains visible on the network</div>
+            </div>
+            <div class="metric">
+              <span class="metric-value" id="agreement24h">35 / 38</span>
+              <div class="metric-label">validators above 99.9% agreement over 24 hours</div>
+            </div>
+            <div class="metric">
+              <span class="metric-value" id="agreement30d">33 / 38</span>
+              <div class="metric-label">validators above 99% agreement over 30 days</div>
+            </div>
+          </div>
+
+          <p class="meta-note" id="statsNote">Current testnet snapshot pulled from the Post Fiat validator history service.</p>
+
+          <div class="mini-links">
+            <a class="mini-link" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">
+              <span>Open the live explorer</span>
+              <span>Live</span>
+            </a>
+            <a class="mini-link" href="/task-node/">
+              <span>Read the Task Node guide</span>
+              <span>Guide</span>
+            </a>
+            <a class="mini-link" href="/community/">
+              <span>Join the community</span>
+              <span>Discord</span>
+            </a>
+          </div>
+        </aside>
+      </section>
+
+      <section class="block">
+        <div class="section-head">
+          <div>
+            <h2>What Post Fiat is</h2>
+            <p>Post Fiat keeps fast settlement and low transaction costs from XRP Ledger architecture, then adds published validator research, a privacy path, and a contributor app called the Task Node. The goal is to make the network easier to inspect and more useful for real work.</p>
+          </div>
+        </div>
+        <div class="pillars">
+          <article class="panel">
+            <div class="panel-body">
+              <div class="panel-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 13l4-4 4 4 8-8"/><path d="M20 10V4h-6"/></svg>
+              </div>
+              <h3>Fast, low-cost settlement</h3>
+              <p>Post Fiat starts from XRPL because fast settlement and low transaction costs already work there. It does not rebuild the base layer around slower or inflationary mechanics.</p>
+            </div>
+          </article>
+          <article class="panel">
+            <div class="panel-body">
+              <div class="panel-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 5-3 8-7 9-4-1-7-4-7-9V7l7-4z"/><path d="M9 12l2 2 4-4"/></svg>
+              </div>
+              <h3>Public validator work</h3>
+              <p>The network is built around published validator benchmarking rather than treating validator-list publication as a black box. Serious users can inspect the artifacts directly.</p>
+            </div>
+          </article>
+          <article class="panel">
+            <div class="panel-body">
+              <div class="panel-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 10h8"/><path d="M8 14h5"/><path d="M6 20l2.5-2H18a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H6A2 2 0 0 0 4 8v10a2 2 0 0 0 2 2z"/></svg>
+              </div>
+              <h3>The Task Node</h3>
+              <p>The Task Node gives community members a way to do useful work instead of only posting and speculating. It is the live contributor app for the network.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="section-head">
+          <div>
+            <h2>Why serious users might care</h2>
+            <p>The strongest case for Post Fiat is not abstract philosophy. It is that a skeptical visitor can inspect real surfaces instead of only reading claims.</p>
+          </div>
+        </div>
+        <div class="stat-strip">
+          <div class="strip-item">
+            <strong>Inspectable</strong>
+            <span>Whitepaper, benchmark, explorer, operator guide, and a live contributor app.</span>
+          </div>
+          <div class="strip-item">
+            <strong>Legible</strong>
+            <span>Named founder, current stats, and multiple public ways to verify what exists.</span>
+          </div>
+          <div class="strip-item">
+            <strong>Useful</strong>
+            <span>Built around validators, private workflows, and contributor participation instead of pure meme positioning.</span>
+          </div>
+          <div class="strip-item">
+            <strong>Operable</strong>
+            <span>A visitor can go from homepage to running a validator or entering the network without hunting for hidden docs.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="section-head">
+          <div>
+            <h2>Public resources</h2>
+            <p>A serious homepage should help a new visitor find the right next page without getting lost in jargon.</p>
+          </div>
+        </div>
+        <div class="resource-grid">
+          <article class="panel"><div class="panel-body"><h3>Whitepaper</h3><p>The main protocol and network document.</p></div></article>
+          <article class="panel"><div class="panel-body"><h3>Validator Benchmark</h3><p>Public artifacts and rankings for validator research.</p></div></article>
+          <article class="panel"><div class="panel-body"><h3>Explorer</h3><p>Live validator and network view.</p></div></article>
+          <article class="panel"><div class="panel-body"><h3>Task Node</h3><p>The contributor app and participation surface.</p></div></article>
+          <article class="panel"><div class="panel-body"><h3>Validator Setup</h3><p>Operator guide for running network infrastructure.</p></div></article>
+          <article class="panel"><div class="panel-body"><h3>Docs</h3><p>Wallet guide and onboarding pages.</p></div></article>
+          <article class="panel"><div class="panel-body"><h3>GitHub</h3><p>Public code and implementation references.</p></div></article>
+          <article class="panel"><div class="panel-body"><h3>LLM Overview</h3><p>Machine-readable network overview through llms.txt.</p></div></article>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="section-head">
+          <div>
+            <h2>Who builds this</h2>
+            <p>The current trust signals on the site are simple: named founder, public artifacts, live stats, a whitepaper, a contributor app, and an operator path.</p>
+          </div>
+        </div>
+        <div class="trust-grid">
+          <article class="panel"><div class="panel-body"><h3>Founder</h3><p>Post Fiat is led by Alex Good.</p></div></article>
+          <article class="panel"><div class="panel-body"><h3>Background</h3><p>Citi FX, Palantir, Balyasny TMT, and Perpetua.</p></div></article>
+          <article class="panel"><div class="panel-body"><h3>Capital credibility</h3><p>Backed by portfolio managers at Brevan Howard, DE Shaw, and Citrini Research.</p></div></article>
+          <article class="panel"><div class="panel-body"><h3>Current trust signals</h3><p>Live stats, benchmark artifacts, the whitepaper, the Task Node, and the operator path.</p></div></article>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="footer-cta">
+          <h2>What PFT does</h2>
+          <p>PFT is the network asset used for fees, participation, and coordination inside Post Fiat. The basic token case is simple: if more people use the network and its tools, the asset at the center of that use should matter more.</p>
+          <div class="tag-row">
+            <span class="tag">Fees</span>
+            <span class="tag">Participation</span>
+            <span class="tag">Coordination</span>
+            <span class="tag">Private workflows</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const FALLBACK_STATS = {
+      validator_count: 38,
+      publishing_domain_count: 24,
+      agreement_24h: { count: 35, threshold_label: "99.9%+" },
+      agreement_30day: { count: 33, threshold_label: "99%+" },
+      source_name: "Published VHS snapshot",
+      generated_at: "2026-03-23T16:15:55Z"
+    };
+
+    function setStats(stats, label) {
+      const validatorCount = Number(stats.validator_count || FALLBACK_STATS.validator_count);
+      const publishingDomains = Number(stats.publishing_domain_count || FALLBACK_STATS.publishing_domain_count);
+      const agreement24Count = Number(stats.agreement_24h?.count || FALLBACK_STATS.agreement_24h.count);
+      const agreement30Count = Number(stats.agreement_30day?.count || FALLBACK_STATS.agreement_30day.count);
+      document.getElementById("validatorCount").textContent = String(validatorCount);
+      document.getElementById("publishingDomains").textContent = String(publishingDomains);
+      document.getElementById("agreement24h").textContent = `${agreement24Count} / ${validatorCount}`;
+      document.getElementById("agreement30d").textContent = `${agreement30Count} / ${validatorCount}`;
+      document.getElementById("statsBadge").textContent = label;
+      const sourceName = stats.source_name || FALLBACK_STATS.source_name;
+      document.getElementById("statsNote").textContent = `${sourceName}.`;
+    }
+
+    async function loadStats() {
+      const liveUrl = "https://vhs.testnet.postfiat.org/v1/network/validators/test";
+      const fallbackUrl = "/benchmarks/live-testnet-validator-stats.json";
+      try {
+        const response = await fetch(liveUrl, { headers: { "Accept": "application/json" } });
+        if (!response.ok) throw new Error(`live_http_${response.status}`);
+        const payload = await response.json();
+        const stats = {
+          validator_count: Array.isArray(payload.validators) ? payload.validators.length : FALLBACK_STATS.validator_count,
+          publishing_domain_count: Array.isArray(payload.domains) ? payload.domains.length : FALLBACK_STATS.publishing_domain_count,
+          agreement_24h: { count: Array.isArray(payload.validators) ? payload.validators.filter(v => Number(v.agreement_24h || 0) >= 0.999).length : FALLBACK_STATS.agreement_24h.count },
+          agreement_30day: { count: Array.isArray(payload.validators) ? payload.validators.filter(v => Number(v.agreement_30d || 0) >= 0.99).length : FALLBACK_STATS.agreement_30day.count },
+          source_name: "Live VHS validator history service"
+        };
+        setStats(stats, "Live VHS");
+        return;
+      } catch (_) {}
+      try {
+        const response = await fetch(fallbackUrl, { headers: { "Accept": "application/json" } });
+        if (!response.ok) throw new Error(`fallback_http_${response.status}`);
+        const payload = await response.json();
+        setStats(payload, "Snapshot");
+        return;
+      } catch (_) {}
+      setStats(FALLBACK_STATS, "Snapshot");
+    }
+
+    loadStats();
+  </script>
+</body>
+</html>
