@@ -177,103 +177,55 @@
       padding:38px 0 84px;
     }
 
-    .paper-hero{
-      display:grid;
-      gap:18px;
-      padding:34px 34px 28px;
-      margin:20px auto 26px;
-      border:1px solid var(--stroke);
-      border-radius:32px;
-      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-
-    .paper-hero::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 18% 10%, rgba(124,92,255,.18), transparent 28%),
-        radial-gradient(circle at 82% 18%, rgba(132,239,230,.12), transparent 24%);
-      pointer-events:none;
-    }
-
-    .eyebrow{
-      position:relative;
-      z-index:1;
-      display:inline-flex;
-      align-items:center;
-      gap:.65rem;
-      width:fit-content;
-      padding:.5rem .9rem;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.05);
-      font-size:.72rem;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:#dfe7f7;
-    }
-
-    .paper-hero h1{
-      position:relative;
-      z-index:1;
-      margin:0;
-      max-width:980px;
-      font-size:clamp(2rem,4.8vw,4.35rem);
-      line-height:.97;
-      letter-spacing:-.05em;
-      font-weight:800;
-    }
-
-    .paper-hero p{
-      position:relative;
-      z-index:1;
-      margin:0;
-      max-width:900px;
-      font-size:1.04rem;
-      line-height:1.7;
-      color:var(--soft);
-    }
-
-    .hero-links{
-      position:relative;
-      z-index:1;
-      display:flex;
-      flex-wrap:wrap;
-      gap:.85rem;
-    }
-
-    .hero-link{
-      display:inline-flex;
-      align-items:center;
-      gap:.6rem;
-      padding:.92rem 1.1rem;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);
-      color:#f5f8ff;
-      text-decoration:none;
-      transition:all .24s ease;
-      font-weight:600;
-    }
-
-    .hero-link:hover{
-      transform:translateY(-2px);
-      background:rgba(255,255,255,.07);
-      border-color:rgba(255,255,255,.24);
-    }
-
-    .hero-link span:last-child{
-      color:var(--muted);
-      font-weight:500;
-    }
-
     .paper-shell{
       width:min(100%, var(--reading));
       margin:0 auto;
+    }
+
+    .paper-toolbar{
+      width:min(100%, var(--reading));
+      margin:20px auto 18px;
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .copy-button{
+      display:inline-flex;
+      align-items:center;
+      gap:.65rem;
+      padding:.9rem 1.1rem;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.05);
+      color:#f5f8ff;
+      cursor:pointer;
+      font:inherit;
+      font-size:.76rem;
+      font-weight:700;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      transition:all .22s ease;
+      box-shadow:0 12px 28px rgba(0,0,0,.18);
+    }
+
+    .copy-button:hover{
+      background:rgba(255,255,255,.08);
+      border-color:rgba(255,255,255,.22);
+      transform:translateY(-1px);
+    }
+
+    .copy-button:active{
+      transform:translateY(0);
+    }
+
+    .copy-button svg{
+      width:16px;
+      height:16px;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
     }
 
     article.paper{
@@ -433,34 +385,6 @@
       font-size:.96rem;
     }
 
-    .paper-footer{
-      width:min(100%, var(--reading));
-      margin:26px auto 0;
-      padding:0 clamp(4px,1vw,10px);
-      display:flex;
-      flex-wrap:wrap;
-      gap:.8rem;
-      align-items:center;
-      justify-content:space-between;
-      color:var(--muted);
-      font-size:.88rem;
-    }
-
-    .paper-footer-links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:1rem;
-    }
-
-    .paper-footer a{
-      color:#d4ddef;
-      text-decoration:none;
-    }
-
-    .paper-footer a:hover{
-      color:#fff;
-    }
-
     @media (max-width: 900px){
       header{
         padding:.9rem 1rem;
@@ -494,10 +418,6 @@
         display:flex;
       }
 
-      .paper-hero{
-        padding:26px 22px 22px;
-      }
-
       article.paper{
         padding:30px 20px;
         border-radius:24px;
@@ -505,6 +425,15 @@
 
       .paper-content{
         font-size:1rem;
+      }
+
+      .paper-toolbar{
+        margin:18px auto 14px;
+      }
+
+      .copy-button{
+        width:100%;
+        justify-content:center;
       }
     }
   </style>
@@ -528,25 +457,15 @@
   </header>
 
   <main>
-    <section class="paper-hero">
-      <div class="eyebrow">Post Fiat Whitepaper</div>
-      <h1>A single-page technical paper on public validator-list publication</h1>
-      <p>This is the main Post Fiat whitepaper reading surface. It focuses on auditable, replayable validator-list publication for XRPL-derived networks, with direct links to the related benchmark and live network surfaces when you want to inspect the claims in context.</p>
-      <div class="hero-links">
-        <a class="hero-link" href="/validator-benchmark/">
-          <span>Validator Benchmark</span>
-          <span>See the public benchmark and artifacts</span>
-        </a>
-        <a class="hero-link" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">
-          <span>Live Explorer</span>
-          <span>Inspect the current testnet validator set</span>
-        </a>
-        <a class="hero-link" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">
-          <span>Task Node</span>
-          <span>Open the current contributor surface</span>
-        </a>
-      </div>
-    </section>
+    <div class="paper-toolbar">
+      <button class="copy-button" id="copyWhitepaperButton" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span id="copyWhitepaperLabel">Copy Whitepaper</span>
+      </button>
+    </div>
 
     <div class="paper-shell">
       <article class="paper">
@@ -555,21 +474,15 @@
         </div>
       </article>
     </div>
-
-    <div class="paper-footer">
-      <div>Post Fiat whitepaper</div>
-      <div class="paper-footer-links">
-        <a href="/about/">About</a>
-        <a href="/validator-benchmark/">Validator Benchmark</a>
-        <a href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Task Node</a>
-        <a href="/community/">Community</a>
-      </div>
-    </div>
   </main>
 
+  <script id="whitepaperSource" type="application/json">{{ .RawContent | jsonify }}</script>
   <script>
     const hamburger = document.getElementById("hamburger");
     const navLinks = document.getElementById("navLinks");
+    const copyButton = document.getElementById("copyWhitepaperButton");
+    const copyLabel = document.getElementById("copyWhitepaperLabel");
+    const whitepaperSource = document.getElementById("whitepaperSource");
 
     if (hamburger && navLinks) {
       hamburger.addEventListener("click", () => {
@@ -580,6 +493,24 @@
         if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
           navLinks.classList.remove("active");
         }
+      });
+    }
+
+    if (copyButton && copyLabel && whitepaperSource) {
+      copyButton.addEventListener("click", async () => {
+        const originalLabel = "Copy Whitepaper";
+
+        try {
+          const markdown = JSON.parse(whitepaperSource.textContent || "\"\"");
+          await navigator.clipboard.writeText(markdown);
+          copyLabel.textContent = "Copied";
+        } catch (error) {
+          copyLabel.textContent = "Copy Failed";
+        }
+
+        window.setTimeout(() => {
+          copyLabel.textContent = originalLabel;
+        }, 1800);
       });
     }
   </script>
