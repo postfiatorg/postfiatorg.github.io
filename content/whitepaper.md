@@ -9,6 +9,8 @@ summary: "Post Fiat Whitepaper"
 
 **March 2026**
 
+**Published to production:** 2026-03-23 02:07:45 UTC
+
 ---
 
 ## Abstract
