@@ -9,462 +9,695 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    /* ── Variables ── */
     :root{
-      --bg:#08111a;
-      --bg-soft:#0d1725;
-      --panel:#0f1928;
-      --panel-2:#111d2d;
+      --bg:#06070a;
+      --bg-2:#0b0d12;
+      --panel:rgba(255,255,255,.055);
+      --panel-2:rgba(255,255,255,.035);
       --border:rgba(255,255,255,.10);
-      --border-strong:rgba(255,255,255,.18);
-      --text:#eef4ff;
-      --muted:#a7b4ca;
+      --border-strong:rgba(255,255,255,.22);
+      --text:#f5f7fb;
+      --muted:#99a1b3;
+      --soft:#c8d0df;
       --dim:#76829a;
-      --accent:#a8c8ff;
-      --accent-2:#91f3d7;
-      --accent-3:#f6d584;
-      --max:1180px;
+      --accent:#8db8ff;
+      --accent-2:#7c5cff;
+      --accent-3:#90f3ff;
+      --accent-gold:#f6d584;
+      --accent-green:#91f3d7;
+      --shadow:0 20px 70px rgba(0,0,0,.45);
+      --glow:0 0 40px rgba(141,184,255,.18),0 0 80px rgba(124,92,255,.10);
       --radius:28px;
-      --shadow:0 24px 72px rgba(0,0,0,.34);
+      --radius-sm:18px;
+      --max:1180px;
     }
 
-    *{box-sizing:border-box}
+    /* ── Reset & Base ── */
+    *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{
-      margin:0;
       color:var(--text);
-      background:
-        radial-gradient(circle at 12% 0%, rgba(168,200,255,.16), transparent 26%),
-        radial-gradient(circle at 88% 10%, rgba(145,243,215,.12), transparent 22%),
-        radial-gradient(circle at 50% 120%, rgba(246,213,132,.10), transparent 28%),
-        linear-gradient(180deg, #07101a 0%, #08111a 40%, #05090f 100%);
-      font-family:"Space Grotesk", sans-serif;
+      background:var(--bg);
+      font-family:"Space Grotesk",sans-serif;
       line-height:1.5;
+      overflow-x:hidden;
     }
 
+    /* ── Ambient Background ── */
+    .ambient{
+      position:fixed;inset:0;pointer-events:none;z-index:0;
+      overflow:hidden;
+    }
+    .ambient-orb{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(120px);
+      will-change:transform;
+      animation:auroraFloat 18s ease-in-out infinite;
+    }
+    .ambient-orb.o1{
+      width:50vw;height:50vw;
+      top:-12%;left:-8%;
+      background:radial-gradient(circle,rgba(141,184,255,.18),transparent 70%);
+    }
+    .ambient-orb.o2{
+      width:40vw;height:40vw;
+      top:8%;right:-6%;
+      background:radial-gradient(circle,rgba(124,92,255,.14),transparent 70%);
+      animation-delay:-6s;
+    }
+    .ambient-orb.o3{
+      width:45vw;height:45vw;
+      bottom:-10%;left:30%;
+      background:radial-gradient(circle,rgba(144,243,255,.10),transparent 70%);
+      animation-delay:-12s;
+    }
+    @keyframes auroraFloat{
+      0%,100%{transform:translate3d(0,0,0) scale(1)}
+      33%{transform:translate3d(3vw,-2vw,0) scale(1.08)}
+      66%{transform:translate3d(-2vw,1.5vw,0) scale(.94)}
+    }
+
+    /* ── Grid Overlay ── */
     body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
+      content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
       background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size:40px 40px;
-      mask-image:linear-gradient(180deg, rgba(0,0,0,.36), transparent 84%);
-      opacity:.32;
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+      background-size:48px 48px;
+      mask-image:linear-gradient(180deg,rgba(0,0,0,.38),transparent 70%);
+      opacity:.28;
     }
 
+    /* ── Spotlight (mouse follower) ── */
+    #spotlight{
+      position:fixed;top:0;left:0;z-index:2;
+      width:420px;height:420px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(141,184,255,.07),transparent 70%);
+      pointer-events:none;
+      opacity:.45;
+      transform:translate(-50%,-50%);
+      transition:opacity .5s;
+    }
+
+    /* ── Particle field ── */
+    #particles{
+      position:fixed;inset:0;pointer-events:none;z-index:1;
+      overflow:hidden;
+    }
+    .particle{
+      position:absolute;
+      width:2px;height:2px;
+      border-radius:50%;
+      background:rgba(141,184,255,.6);
+      animation:particleFloat 8s ease-in-out infinite;
+    }
+    @keyframes particleFloat{
+      0%,100%{opacity:0;transform:translate(0,0)}
+      20%{opacity:.6}
+      50%{opacity:.9;transform:translate(var(--tx),var(--ty))}
+      80%{opacity:.5}
+    }
+
+    /* ── Shared Layout ── */
     a{color:inherit}
-    .shell{padding:0 22px 90px}
+    .shell{position:relative;z-index:5;padding:0 22px 100px}
     .container{max-width:var(--max);margin:0 auto}
 
+    /* ── Scroll-reveal ── */
+    .reveal{
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.in-view{
+      opacity:1;
+      transform:translateY(0);
+    }
+    .reveal-delay-1{transition-delay:.08s}
+    .reveal-delay-2{transition-delay:.16s}
+    .reveal-delay-3{transition-delay:.24s}
+    .reveal-delay-4{transition-delay:.32s}
+    .reveal-delay-5{transition-delay:.40s}
+    .reveal-delay-6{transition-delay:.48s}
+    .reveal-delay-7{transition-delay:.56s}
+    .reveal-delay-8{transition-delay:.64s}
+
+    /* ── Header ── */
     .site-header{
-      position:sticky;
-      top:0;
-      z-index:40;
-      backdrop-filter:blur(18px);
-      background:rgba(8,12,20,.78);
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(20px);
+      background:rgba(6,7,10,.82);
       border-bottom:1px solid rgba(255,255,255,.06);
     }
+    .site-header::after{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(120deg,transparent 0%,rgba(141,184,255,.06) 18%,transparent 36%);
+      transform:translateX(-140%);
+      animation:headerSweep 12s linear infinite;
+    }
+    @keyframes headerSweep{to{transform:translateX(220%)}}
     .site-header-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:18px 22px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
+      max-width:var(--max);margin:0 auto;padding:18px 22px;
+      display:flex;align-items:center;justify-content:space-between;gap:18px;
     }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      text-decoration:none;
-      min-width:0;
-    }
+    .brand{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:0}
+
+    /* ── Brand Mark (animated logo) ── */
     .brand-mark{
-      width:48px;
-      height:48px;
+      width:48px;height:48px;
       border-radius:18px;
       border:1px solid rgba(255,255,255,.14);
-      display:grid;
-      place-items:center;
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      box-shadow:inset 0 0 22px rgba(255,255,255,.04), 0 0 36px rgba(168,200,255,.08);
+      display:grid;place-items:center;
+      background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+      box-shadow:inset 0 0 22px rgba(255,255,255,.04),0 0 36px rgba(141,184,255,.12);
       flex-shrink:0;
+      position:relative;
+      overflow:hidden;
     }
-    .brand-mark svg{width:24px;height:24px}
+    .brand-mark::before{
+      content:"";position:absolute;inset:-2px;
+      border-radius:inherit;
+      background:conic-gradient(from 0deg,transparent,rgba(141,184,255,.3),transparent,rgba(124,92,255,.2),transparent);
+      animation:spinField 8s linear infinite;
+      opacity:.5;
+    }
+    @keyframes spinField{to{transform:rotate(360deg)}}
+    .brand-mark svg{width:24px;height:24px;position:relative;z-index:1;animation:coreBreath 4s ease-in-out infinite}
+    @keyframes coreBreath{
+      0%,100%{transform:scale(.96);opacity:.75}
+      50%{transform:scale(1.08);opacity:1}
+    }
     .brand-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
-    .brand-title{
-      font-size:1rem;
-      font-weight:700;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      white-space:nowrap;
-    }
-    .brand-sub{
-      font-family:"IBM Plex Mono", monospace;
-      font-size:.72rem;
-      color:var(--dim);
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-    .nav{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
+    .brand-title{font-size:1rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+    .brand-sub{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+
+    /* ── Nav ── */
+    .nav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
     .nav a{
-      text-decoration:none;
-      color:var(--muted);
-      border:1px solid transparent;
-      border-radius:999px;
-      padding:10px 14px;
-      font-size:.8rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      transition:.24s ease;
+      text-decoration:none;color:var(--muted);
+      border:1px solid transparent;border-radius:999px;
+      padding:10px 14px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+      transition:all .28s cubic-bezier(.4,0,.2,1);
+      position:relative;
     }
     .nav a:hover{
       color:#fff;
       background:rgba(255,255,255,.05);
-      border-color:rgba(255,255,255,.10);
+      border-color:rgba(255,255,255,.12);
+      transform:translateY(-1px);
+      box-shadow:0 8px 24px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.06);
     }
 
+    /* ── Hero ── */
     .hero{
-      padding:72px 0 34px;
+      padding:72px 0 40px;
       display:grid;
-      grid-template-columns:minmax(0, 1.18fr) minmax(340px, .82fr);
-      gap:28px;
-      align-items:stretch;
+      grid-template-columns:minmax(0,1.18fr) minmax(340px,.82fr);
+      gap:28px;align-items:stretch;
     }
-    .hero-copy{
-      padding:22px 0 0;
-    }
+    .hero-copy{padding:22px 0 0}
+
+    /* ── Eyebrow ── */
     .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:18px;
-      padding:10px 14px;
-      border:1px solid rgba(255,255,255,.10);
+      display:inline-flex;align-items:center;gap:10px;
+      margin-bottom:18px;padding:10px 16px;
+      border:1px solid rgba(144,243,255,.18);
       border-radius:999px;
-      background:rgba(255,255,255,.04);
-      color:var(--accent-2);
-      font-family:"IBM Plex Mono", monospace;
-      font-size:.74rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
+      background:rgba(144,243,255,.06);
+      color:var(--accent-3);
+      font-family:"IBM Plex Mono",monospace;font-size:.74rem;
+      letter-spacing:.12em;text-transform:uppercase;
+      position:relative;overflow:hidden;
     }
+    .eyebrow::before{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(90deg,transparent,rgba(144,243,255,.15),transparent);
+      transform:translateX(-100%);
+      animation:eyebrowShimmer 4s ease-in-out infinite;
+    }
+    @keyframes eyebrowShimmer{
+      0%,100%{transform:translateX(-100%)}
+      50%{transform:translateX(100%)}
+    }
+    .eyebrow-dot{
+      width:6px;height:6px;border-radius:50%;
+      background:var(--accent-3);
+      box-shadow:0 0 8px var(--accent-3);
+      animation:dotPulse 2s ease-in-out infinite;
+    }
+    @keyframes dotPulse{
+      0%,100%{opacity:.5;transform:scale(.8)}
+      50%{opacity:1;transform:scale(1.2)}
+    }
+
+    /* ── Hero Title ── */
     .hero h1{
-      margin:0 0 18px;
-      max-width:780px;
-      font-size:clamp(3rem, 6vw, 5.7rem);
-      line-height:1.02;
-      letter-spacing:-.05em;
+      margin:0 0 18px;max-width:780px;
+      font-size:clamp(2.6rem,5.2vw,5rem);
+      line-height:1.04;letter-spacing:-.04em;
+      background:linear-gradient(90deg,#fff 0%,#dbe5ff 45%,#94b8ff 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
     }
-    .hero p{
-      margin:0;
-      max-width:760px;
-      font-size:1.08rem;
-      color:var(--muted);
-      line-height:1.78;
+    .hero p.hero-desc{
+      margin:0;max-width:760px;
+      font-size:1.08rem;color:var(--muted);line-height:1.78;
     }
+
+    /* ── Hero Action Cards ── */
     .hero-actions{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:14px;
-      margin-top:28px;
-      max-width:720px;
+      display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;margin-top:28px;max-width:720px;
     }
     .hero-card{
-      text-decoration:none;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      min-height:146px;
-      padding:20px;
+      text-decoration:none;display:flex;flex-direction:column;gap:10px;
+      min-height:146px;padding:20px;
       border-radius:24px;
       border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.022));
       box-shadow:var(--shadow);
-      transition:transform .28s ease, border-color .28s ease, background .28s ease;
+      transition:all .38s cubic-bezier(.4,0,.2,1);
+      position:relative;overflow:hidden;
+    }
+    .hero-card::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(120deg,transparent 0%,rgba(141,184,255,.10) 20%,transparent 40%);
+      transform:translateX(-140%);
+      transition:transform .7s ease;
     }
     .hero-card:hover{
-      transform:translateY(-4px);
+      transform:translateY(-6px) scale(1.01);
       border-color:var(--border-strong);
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      box-shadow:var(--shadow),0 0 30px rgba(141,184,255,.08);
     }
+    .hero-card:hover::after{transform:translateX(180%)}
     .hero-card .card-kicker{
-      color:var(--accent-2);
-      font-family:"IBM Plex Mono", monospace;
-      font-size:.72rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
+      color:var(--accent-3);
+      font-family:"IBM Plex Mono",monospace;font-size:.72rem;
+      letter-spacing:.12em;text-transform:uppercase;
+      position:relative;z-index:1;
+      display:flex;align-items:center;gap:8px;
     }
-    .hero-card h3{
-      margin:0;
-      font-size:1.04rem;
-      line-height:1.3;
+    .card-kicker-icon{
+      width:20px;height:20px;
+      stroke:var(--accent-3);fill:none;
+      stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+      opacity:.8;
     }
-    .hero-card p{
-      margin:0;
-      font-size:.92rem;
-      line-height:1.6;
-      color:var(--muted);
+    .hero-card h3{margin:0;font-size:1.04rem;line-height:1.3;position:relative;z-index:1}
+    .hero-card p{margin:0;font-size:.92rem;line-height:1.6;color:var(--muted);position:relative;z-index:1}
+    .hero-card .cta-arrow{
+      margin-top:auto;
+      font-family:"IBM Plex Mono",monospace;font-size:.72rem;
+      color:var(--dim);letter-spacing:.2em;text-transform:uppercase;
+      transition:all .3s;position:relative;z-index:1;
     }
+    .hero-card:hover .cta-arrow{color:#fff;letter-spacing:.3em}
 
+    /* ── Hero Panel (live stats) ── */
     .hero-panel{
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-      padding:22px;
-      border-radius:32px;
+      display:flex;flex-direction:column;gap:16px;
+      padding:22px;border-radius:32px;
       border:1px solid var(--border);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025)),
-        radial-gradient(circle at top right, rgba(168,200,255,.18), transparent 36%);
+        linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025)),
+        radial-gradient(circle at top right,rgba(141,184,255,.14),transparent 40%);
       box-shadow:var(--shadow);
-      overflow:hidden;
-      position:relative;
+      overflow:hidden;position:relative;
     }
     .hero-panel::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.12) 16%, transparent 32%);
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.10) 16%,transparent 32%);
       transform:translateX(-140%);
-      animation:sweep 10s linear infinite;
+      animation:panelSweep 10s linear infinite;
     }
-    @keyframes sweep{to{transform:translateX(170%)}}
-    .mini-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-    }
-    .mini-head strong{
-      font-size:1rem;
-      letter-spacing:.02em;
-    }
+    @keyframes panelSweep{to{transform:translateX(180%)}}
+
+    .mini-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .mini-head strong{font-size:1rem;letter-spacing:.02em}
     .status-pill{
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(145,243,215,.20);
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(145,243,215,.22);
       background:rgba(145,243,215,.10);
-      color:var(--accent-2);
-      font-family:"IBM Plex Mono", monospace;
-      font-size:.7rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
+      color:var(--accent-green);
+      font-family:"IBM Plex Mono",monospace;font-size:.7rem;
+      letter-spacing:.12em;text-transform:uppercase;
+      position:relative;
     }
-    .metric-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
+    .status-pill::before{
+      content:"";position:absolute;left:12px;top:50%;
+      width:6px;height:6px;border-radius:50%;
+      background:var(--accent-green);
+      box-shadow:0 0 8px var(--accent-green);
+      transform:translateY(-50%);
+      animation:dotPulse 2s ease-in-out infinite;
     }
+    .status-pill{padding-left:26px}
+
+    .metric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
     .metric{
-      padding:18px 16px;
-      border-radius:20px;
+      padding:18px 16px;border-radius:20px;
       border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.02));
+      transition:all .3s ease;
+    }
+    .metric:hover{
+      border-color:rgba(141,184,255,.2);
+      box-shadow:0 0 20px rgba(141,184,255,.06);
     }
     .metric-value{
-      display:block;
-      margin-bottom:8px;
-      font-size:1.9rem;
-      line-height:1;
-      font-weight:700;
+      display:block;margin-bottom:8px;
+      font-size:1.9rem;line-height:1;font-weight:700;
+      font-variant-numeric:tabular-nums;
     }
-    .metric-label{
-      color:var(--muted);
-      font-size:.84rem;
-      line-height:1.5;
-    }
-    .meta-note{
-      margin:0;
-      color:var(--muted);
-      font-size:.86rem;
-      line-height:1.6;
-    }
-    .mini-links{
-      display:grid;
-      gap:10px;
-    }
+    .metric-value.glow-blue{color:var(--accent);text-shadow:0 0 18px rgba(141,184,255,.35)}
+    .metric-value.glow-cyan{color:var(--accent-3);text-shadow:0 0 18px rgba(144,243,255,.35)}
+    .metric-value.glow-green{color:var(--accent-green);text-shadow:0 0 18px rgba(145,243,215,.35)}
+    .metric-value.glow-gold{color:var(--accent-gold);text-shadow:0 0 18px rgba(246,213,132,.35)}
+    .metric-label{color:var(--muted);font-size:.84rem;line-height:1.5}
+
+    .meta-note{margin:0;color:var(--muted);font-size:.86rem;line-height:1.6}
+    .mini-links{display:grid;gap:10px}
     .mini-link{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      padding:14px 16px;
-      text-decoration:none;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.03);
-      color:#fff;
+      display:flex;justify-content:space-between;align-items:center;gap:10px;
+      padding:14px 16px;text-decoration:none;
+      border-radius:18px;border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);color:#fff;
+      transition:all .3s ease;
+    }
+    .mini-link:hover{
+      border-color:rgba(141,184,255,.22);
+      background:rgba(141,184,255,.06);
+      transform:translateX(4px);
     }
     .mini-link span:last-child{
-      color:var(--dim);
-      font-family:"IBM Plex Mono", monospace;
-      font-size:.8rem;
+      color:var(--dim);font-family:"IBM Plex Mono",monospace;font-size:.8rem;
+      transition:color .3s;
     }
+    .mini-link:hover span:last-child{color:var(--accent)}
 
-    section.block{
-      margin-top:18px;
-      padding:0 0 22px;
-    }
+    /* ── Section Blocks ── */
+    section.block{margin-top:22px;padding:0 0 22px}
     .section-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:18px;
-      margin-bottom:18px;
+      display:flex;justify-content:space-between;align-items:flex-end;gap:18px;
+      margin-bottom:22px;
     }
     .section-head h2{
-      margin:0;
-      font-size:2rem;
-      letter-spacing:-.03em;
+      margin:0;font-size:2rem;letter-spacing:-.03em;
+      background:linear-gradient(90deg,#fff,#c8d0df);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
     }
-    .section-head p{
-      margin:0;
-      max-width:760px;
-      color:var(--muted);
-      line-height:1.7;
+    .section-head p{margin:0;max-width:760px;color:var(--muted);line-height:1.7}
+    .section-label{
+      display:inline-flex;align-items:center;gap:8px;
+      margin-bottom:12px;
+      font-family:"IBM Plex Mono",monospace;font-size:.7rem;
+      color:var(--accent);letter-spacing:.14em;text-transform:uppercase;
     }
+    .section-label svg{width:14px;height:14px;stroke:var(--accent);fill:none;stroke-width:2}
 
-    .pillars,
-    .resource-grid,
-    .trust-grid,
-    .footer-grid{
-      display:grid;
-      gap:18px;
-    }
-    .pillars{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .resource-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-    .trust-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-    .footer-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    /* ── Pillar Cards (What Post Fiat is) ── */
+    .pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
     .panel{
-      border:1px solid var(--border);
-      border-radius:26px;
-      background:linear-gradient(180deg, var(--panel), var(--panel-2));
-      box-shadow:var(--shadow);
-      overflow:hidden;
+      border:1px solid var(--border);border-radius:26px;
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.022));
+      box-shadow:var(--shadow);overflow:hidden;
+      transition:all .4s cubic-bezier(.4,0,.2,1);
+      position:relative;
     }
-    .panel-body{
-      padding:22px;
+    .panel::before{
+      content:"";position:absolute;inset:0;
+      border-radius:inherit;
+      background:radial-gradient(ellipse at 50% 0%,rgba(141,184,255,.08),transparent 60%);
+      opacity:0;transition:opacity .4s;
     }
+    .panel:hover{
+      transform:translateY(-6px);
+      border-color:var(--border-strong);
+      box-shadow:var(--shadow),var(--glow);
+    }
+    .panel:hover::before{opacity:1}
+    .panel-body{padding:22px;position:relative;z-index:1}
+
+    /* ── Panel Icons (animated SVG containers) ── */
     .panel-icon{
-      width:54px;
-      height:54px;
-      border-radius:18px;
+      width:54px;height:54px;border-radius:18px;
       border:1px solid rgba(255,255,255,.12);
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      display:grid;
-      place-items:center;
-      margin-bottom:14px;
+      background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+      display:grid;place-items:center;margin-bottom:14px;
+      position:relative;overflow:hidden;
+      transition:all .4s ease;
+    }
+    .panel-icon::after{
+      content:"";position:absolute;inset:-1px;
+      border-radius:inherit;
+      background:conic-gradient(from 0deg,transparent 60%,rgba(141,184,255,.25),transparent 80%);
+      animation:spinField 6s linear infinite;
+      opacity:0;transition:opacity .4s;
+    }
+    .panel:hover .panel-icon::after{opacity:1}
+    .panel:hover .panel-icon{
+      border-color:rgba(141,184,255,.3);
+      box-shadow:0 0 20px rgba(141,184,255,.12);
     }
     .panel-icon svg{
-      width:24px;
-      height:24px;
-      stroke:#fff;
-      fill:none;
-      stroke-width:1.8;
-      stroke-linecap:round;
-      stroke-linejoin:round;
+      width:24px;height:24px;stroke:#fff;fill:none;
+      stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+      position:relative;z-index:1;
     }
-    .panel h3{
-      margin:0 0 10px;
-      font-size:1.06rem;
-      line-height:1.35;
-    }
-    .panel p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:.95rem;
-    }
-    .tag-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:16px;
-    }
-    .tag{
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      color:#dbe6fb;
-      font-size:.76rem;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-    .stat-strip{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:16px;
-      margin-top:18px;
-    }
+    .panel h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35}
+    .panel p{margin:0;color:var(--muted);line-height:1.7;font-size:.95rem}
+
+    /* ── Stat Strip (Why serious users) ── */
+    .stat-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:18px}
     .strip-item{
-      padding:18px;
-      border-radius:22px;
+      padding:20px;border-radius:22px;
       border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.035);
+      background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018));
+      transition:all .38s cubic-bezier(.4,0,.2,1);
+      position:relative;overflow:hidden;
     }
-    .strip-item strong{
-      display:block;
-      margin-bottom:8px;
-      font-size:2rem;
-      line-height:1;
+    .strip-item::before{
+      content:"";position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent,var(--accent),transparent);
+      opacity:0;transition:opacity .4s;
     }
-    .strip-item span{
-      color:var(--muted);
-      font-size:.84rem;
-      line-height:1.55;
+    .strip-item:hover{
+      transform:translateY(-4px);
+      border-color:rgba(141,184,255,.18);
+      box-shadow:0 12px 40px rgba(0,0,0,.3),0 0 20px rgba(141,184,255,.06);
     }
-    .footer-cta{
-      margin-top:14px;
-      padding:26px;
-      border-radius:28px;
-      border:1px solid rgba(255,255,255,.10);
-      background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
-    }
-    .footer-cta h2{
-      margin:0 0 12px;
-      font-size:2rem;
-      letter-spacing:-.03em;
-    }
-    .footer-cta p{
-      margin:0;
-      max-width:800px;
-      color:var(--muted);
-      line-height:1.7;
+    .strip-item:hover::before{opacity:1}
+    .strip-item strong{display:block;margin-bottom:8px;font-size:1.8rem;line-height:1}
+    .strip-item span{color:var(--muted);font-size:.84rem;line-height:1.55}
+    .strip-item .strip-icon{
+      display:block;margin-bottom:12px;
+      width:28px;height:28px;
+      stroke:var(--accent);fill:none;
+      stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+      opacity:.7;
     }
 
+    /* ── Resource Grid ── */
+    .resource-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+    .resource-card{
+      text-decoration:none;
+      border:1px solid var(--border);border-radius:22px;
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.022));
+      box-shadow:var(--shadow);overflow:hidden;
+      transition:all .38s cubic-bezier(.4,0,.2,1);
+      position:relative;
+    }
+    .resource-card::after{
+      content:"→";position:absolute;top:20px;right:20px;
+      font-size:1.1rem;color:var(--dim);
+      transition:all .3s;opacity:0;transform:translateX(-8px);
+    }
+    .resource-card:hover{
+      transform:translateY(-6px);
+      border-color:var(--border-strong);
+      box-shadow:var(--shadow),var(--glow);
+    }
+    .resource-card:hover::after{opacity:1;transform:translateX(0)}
+    .resource-card .panel-body{display:flex;flex-direction:column;gap:8px}
+    .resource-card .res-icon{
+      width:36px;height:36px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.04);
+      display:grid;place-items:center;
+      margin-bottom:4px;
+    }
+    .resource-card .res-icon svg{
+      width:18px;height:18px;stroke:var(--accent);fill:none;
+      stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+    }
+    .resource-card h3{margin:0;font-size:1rem;line-height:1.35}
+    .resource-card p{margin:0;color:var(--muted);line-height:1.6;font-size:.9rem}
+
+    /* ── Trust Grid ── */
+    .trust-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+
+    /* ── Trust Card Special Styling ── */
+    .trust-card{
+      border:1px solid var(--border);border-radius:22px;
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.022));
+      box-shadow:var(--shadow);overflow:hidden;
+      transition:all .38s cubic-bezier(.4,0,.2,1);
+      position:relative;
+    }
+    .trust-card:hover{
+      transform:translateY(-6px);
+      border-color:var(--border-strong);
+      box-shadow:var(--shadow),var(--glow);
+    }
+    .trust-card .panel-body{display:flex;flex-direction:column;gap:8px}
+    .trust-card .trust-icon{
+      width:36px;height:36px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.04);
+      display:grid;place-items:center;margin-bottom:4px;
+    }
+    .trust-card .trust-icon svg{
+      width:18px;height:18px;fill:none;
+      stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+    }
+    .trust-card:nth-child(1) .trust-icon svg{stroke:var(--accent-3)}
+    .trust-card:nth-child(2) .trust-icon svg{stroke:var(--accent)}
+    .trust-card:nth-child(3) .trust-icon svg{stroke:var(--accent-gold)}
+    .trust-card:nth-child(4) .trust-icon svg{stroke:var(--accent-green)}
+    .trust-card h3{margin:0;font-size:1rem;line-height:1.35}
+    .trust-card p{margin:0;color:var(--muted);line-height:1.6;font-size:.9rem}
+
+    /* ── Footer CTA (What PFT does) ── */
+    .footer-cta{
+      margin-top:18px;padding:28px;border-radius:28px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025)),
+        radial-gradient(ellipse at 30% 50%,rgba(124,92,255,.08),transparent 50%),
+        radial-gradient(ellipse at 70% 50%,rgba(141,184,255,.06),transparent 50%);
+      position:relative;overflow:hidden;
+    }
+    .footer-cta::before{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(120deg,transparent,rgba(255,255,255,.04),transparent);
+      transform:translateX(-100%);
+      animation:panelSweep 14s linear infinite;
+    }
+    .footer-cta h2{
+      margin:0 0 12px;font-size:2rem;letter-spacing:-.03em;
+      position:relative;z-index:1;
+    }
+    .footer-cta p{
+      margin:0;max-width:800px;color:var(--muted);line-height:1.7;
+      position:relative;z-index:1;
+    }
+    .tag-row{
+      display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;
+      position:relative;z-index:1;
+    }
+    .tag{
+      padding:8px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:#dbe6fb;font-size:.76rem;
+      letter-spacing:.08em;text-transform:uppercase;
+      transition:all .3s ease;
+      cursor:default;
+    }
+    .tag:hover{
+      border-color:rgba(141,184,255,.3);
+      background:rgba(141,184,255,.08);
+      box-shadow:0 0 16px rgba(141,184,255,.1);
+    }
+
+    /* ── Spoke Field (hero decoration) ── */
+    .spoke-field{
+      position:absolute;
+      width:300px;height:300px;
+      right:-80px;top:40%;
+      pointer-events:none;
+      z-index:0;
+    }
+    .spoke-field .spoke-core{
+      position:absolute;left:50%;top:50%;
+      width:8px;height:8px;border-radius:50%;
+      background:rgba(141,184,255,.6);
+      box-shadow:0 0 20px rgba(141,184,255,.4);
+      transform:translate(-50%,-50%);
+      animation:coreBreath 4s ease-in-out infinite;
+    }
+    .spoke{
+      position:absolute;left:50%;top:50%;
+      width:1px;height:var(--len,100px);
+      background:linear-gradient(180deg,rgba(141,184,255,.3),transparent);
+      transform-origin:top center;
+      transform:translate(-50%,-100%) rotate(var(--angle,0deg)) scaleY(.6);
+      opacity:.15;
+      animation:spokePulse var(--spd,5s) ease-in-out var(--delay,0s) infinite;
+    }
+    @keyframes spokePulse{
+      0%,100%{opacity:.1;transform:translate(-50%,-100%) rotate(var(--angle)) scaleY(.5)}
+      50%{opacity:.5;transform:translate(-50%,-100%) rotate(var(--angle)) scaleY(1.2)}
+    }
+
+    /* ── Divider ── */
+    .section-divider{
+      height:1px;margin:10px 0;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+    }
+
+    /* ── Responsive ── */
     @media(max-width:1020px){
       .hero{grid-template-columns:1fr}
-      .resource-grid,.trust-grid,.footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .resource-grid,.trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .spoke-field{display:none}
     }
     @media(max-width:860px){
-      .hero-actions,
-      .pillars,
-      .stat-strip{grid-template-columns:1fr}
+      .hero-actions,.pillars,.stat-strip{grid-template-columns:1fr}
       .metric-grid{grid-template-columns:1fr 1fr}
     }
     @media(max-width:640px){
       .shell{padding:0 16px 70px}
       .site-header-inner{padding:16px}
       .nav{display:none}
-      .resource-grid,.trust-grid,.footer-grid,.metric-grid{grid-template-columns:1fr}
+      .resource-grid,.trust-grid,.metric-grid{grid-template-columns:1fr}
       .section-head{flex-direction:column;align-items:flex-start}
       .metric-value,.strip-item strong{font-size:1.7rem}
+    }
+
+    /* ── Reduced Motion ── */
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+      }
+      .reveal{opacity:1;transform:none}
+      #spotlight,#particles,.ambient{display:none}
     }
   </style>
 </head>
 <body>
+  <!-- Ambient Background -->
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient-orb o1"></div>
+    <div class="ambient-orb o2"></div>
+    <div class="ambient-orb o3"></div>
+  </div>
+
+  <!-- Mouse Spotlight -->
+  <div id="spotlight" aria-hidden="true"></div>
+
+  <!-- Particle Field -->
+  <div id="particles" aria-hidden="true"></div>
+
+  <!-- Header -->
   <header class="site-header">
     <div class="site-header-inner">
       <a class="brand" href="/">
@@ -476,7 +709,7 @@
         </div>
         <div class="brand-copy">
           <div class="brand-title">Post Fiat</div>
-          <div class="brand-sub">Reference Hub Redesign</div>
+          <div class="brand-sub">Reference Hub</div>
         </div>
       </a>
       <nav class="nav">
@@ -490,37 +723,59 @@
 
   <main class="shell">
     <div class="container">
+
+      <!-- ════ HERO ════ -->
       <section class="hero">
         <div class="hero-copy">
-          <div class="eyebrow">Read the paper. Check the benchmark. Inspect the network.</div>
-          <h1>A fast XRPL-based network with public validator research, live stats, and a contributor app called the Task Node</h1>
-          <p>Post Fiat is built around three practical ideas: fast low-cost settlement, public validator scoring instead of opaque list management, and a contributor app where people can do useful work instead of only holding a token. If you want to know whether the project is real, start with the whitepaper, the validator benchmark, the live testnet, and the operator path.</p>
+          <div class="eyebrow reveal">
+            <span class="eyebrow-dot"></span>
+            Read the paper. Check the benchmark. Inspect the network.
+          </div>
+          <h1 class="reveal reveal-delay-1">A fast XRPL-based network with public validator research, live stats, and a contributor app called the Task Node</h1>
+          <p class="hero-desc reveal reveal-delay-2">Post Fiat is built around three practical ideas: fast low-cost settlement, public validator scoring instead of opaque list management, and a contributor app where people can do useful work instead of only holding a token. If you want to know whether the project is real, start with the whitepaper, the validator benchmark, the live testnet, and the operator path.</p>
 
           <div class="hero-actions">
-            <a class="hero-card" href="/whitepaper/">
-              <div class="card-kicker">Read</div>
+            <a class="hero-card reveal reveal-delay-1" href="/whitepaper/">
+              <div class="card-kicker">
+                <svg class="card-kicker-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                Read
+              </div>
               <h3>Whitepaper</h3>
               <p>Protocol design, validator logic, privacy path, and the network thesis.</p>
+              <span class="cta-arrow">→ →</span>
             </a>
-            <a class="hero-card" href="/validator-benchmark/">
-              <div class="card-kicker">Inspect</div>
+            <a class="hero-card reveal reveal-delay-2" href="/validator-benchmark/">
+              <div class="card-kicker">
+                <svg class="card-kicker-icon" viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                Inspect
+              </div>
               <h3>Validator Benchmark</h3>
               <p>Public benchmark artifacts, rankings, and validator-selection research.</p>
+              <span class="cta-arrow">→ →</span>
             </a>
-            <a class="hero-card" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">
-              <div class="card-kicker">Use</div>
+            <a class="hero-card reveal reveal-delay-3" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">
+              <div class="card-kicker">
+                <svg class="card-kicker-icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+                Use
+              </div>
               <h3>Open the Task Node</h3>
               <p>See the contributor app and the current participation surface directly.</p>
+              <span class="cta-arrow">→ →</span>
             </a>
-            <a class="hero-card" href="https://www.jollydinger.com/pftvalidatorsetup/setup/" target="_blank" rel="noopener">
-              <div class="card-kicker">Operate</div>
+            <a class="hero-card reveal reveal-delay-4" href="https://www.jollydinger.com/pftvalidatorsetup/setup/" target="_blank" rel="noopener">
+              <div class="card-kicker">
+                <svg class="card-kicker-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+                Operate
+              </div>
               <h3>Run a Validator</h3>
               <p>Inspect the operator path and infrastructure setup guide.</p>
+              <span class="cta-arrow">→ →</span>
             </a>
           </div>
         </div>
 
-        <aside class="hero-panel">
+        <!-- Live Stats Panel -->
+        <aside class="hero-panel reveal reveal-delay-2">
           <div class="mini-head">
             <strong>What is live today</strong>
             <div class="status-pill" id="statsBadge">Live VHS</div>
@@ -528,19 +783,19 @@
 
           <div class="metric-grid">
             <div class="metric">
-              <span class="metric-value" id="validatorCount">38</span>
+              <span class="metric-value glow-blue" id="validatorCount">38</span>
               <div class="metric-label">validators in the latest published snapshot</div>
             </div>
             <div class="metric">
-              <span class="metric-value" id="publishingDomains">24</span>
+              <span class="metric-value glow-cyan" id="publishingDomains">24</span>
               <div class="metric-label">publishing domains visible on the network</div>
             </div>
             <div class="metric">
-              <span class="metric-value" id="agreement24h">35 / 38</span>
+              <span class="metric-value glow-green" id="agreement24h">35 / 38</span>
               <div class="metric-label">validators above 99.9% agreement over 24 hours</div>
             </div>
             <div class="metric">
-              <span class="metric-value" id="agreement30d">33 / 38</span>
+              <span class="metric-value glow-gold" id="agreement30d">33 / 38</span>
               <div class="metric-label">validators above 99% agreement over 30 days</div>
             </div>
           </div>
@@ -550,29 +805,41 @@
           <div class="mini-links">
             <a class="mini-link" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">
               <span>Open the live explorer</span>
-              <span>Live</span>
+              <span>Live ↗</span>
             </a>
             <a class="mini-link" href="/task-node/">
               <span>Read the Task Node guide</span>
-              <span>Guide</span>
+              <span>Guide →</span>
             </a>
             <a class="mini-link" href="/community/">
               <span>Join the community</span>
-              <span>Discord</span>
+              <span>Discord ↗</span>
             </a>
+          </div>
+
+          <!-- Spoke decoration -->
+          <div class="spoke-field" aria-hidden="true">
+            <div class="spoke-core"></div>
           </div>
         </aside>
       </section>
 
+      <div class="section-divider"></div>
+
+      <!-- ════ WHAT POST FIAT IS ════ -->
       <section class="block">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div>
+            <div class="section-label">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              Protocol
+            </div>
             <h2>What Post Fiat is</h2>
             <p>Post Fiat keeps fast settlement and low transaction costs from XRP Ledger architecture, then adds published validator research, a privacy path, and a contributor app called the Task Node. The goal is to make the network easier to inspect and more useful for real work.</p>
           </div>
         </div>
         <div class="pillars">
-          <article class="panel">
+          <article class="panel reveal reveal-delay-1">
             <div class="panel-body">
               <div class="panel-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M4 13l4-4 4 4 8-8"/><path d="M20 10V4h-6"/></svg>
@@ -581,7 +848,7 @@
               <p>Post Fiat starts from XRPL because fast settlement and low transaction costs already work there. It does not rebuild the base layer around slower or inflationary mechanics.</p>
             </div>
           </article>
-          <article class="panel">
+          <article class="panel reveal reveal-delay-2">
             <div class="panel-body">
               <div class="panel-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 5-3 8-7 9-4-1-7-4-7-9V7l7-4z"/><path d="M9 12l2 2 4-4"/></svg>
@@ -590,7 +857,7 @@
               <p>The network is built around published validator benchmarking rather than treating validator-list publication as a black box. Serious users can inspect the artifacts directly.</p>
             </div>
           </article>
-          <article class="panel">
+          <article class="panel reveal reveal-delay-3">
             <div class="panel-body">
               <div class="panel-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M8 10h8"/><path d="M8 14h5"/><path d="M6 20l2.5-2H18a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H6A2 2 0 0 0 4 8v10a2 2 0 0 0 2 2z"/></svg>
@@ -602,68 +869,168 @@
         </div>
       </section>
 
+      <div class="section-divider"></div>
+
+      <!-- ════ WHY SERIOUS USERS MIGHT CARE ════ -->
       <section class="block">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div>
+            <div class="section-label">
+              <svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              Inspection
+            </div>
             <h2>Why serious users might care</h2>
             <p>The strongest case for Post Fiat is not abstract philosophy. It is that a skeptical visitor can inspect real surfaces instead of only reading claims.</p>
           </div>
         </div>
         <div class="stat-strip">
-          <div class="strip-item">
+          <div class="strip-item reveal reveal-delay-1">
+            <svg class="strip-icon" viewBox="0 0 24 24"><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/></svg>
             <strong>Inspectable</strong>
             <span>Whitepaper, benchmark, explorer, operator guide, and a live contributor app.</span>
           </div>
-          <div class="strip-item">
+          <div class="strip-item reveal reveal-delay-2">
+            <svg class="strip-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
             <strong>Legible</strong>
             <span>Named founder, current stats, and multiple public ways to verify what exists.</span>
           </div>
-          <div class="strip-item">
+          <div class="strip-item reveal reveal-delay-3">
+            <svg class="strip-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
             <strong>Useful</strong>
             <span>Built around validators, private workflows, and contributor participation instead of pure meme positioning.</span>
           </div>
-          <div class="strip-item">
+          <div class="strip-item reveal reveal-delay-4">
+            <svg class="strip-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
             <strong>Operable</strong>
             <span>A visitor can go from homepage to running a validator or entering the network without hunting for hidden docs.</span>
           </div>
         </div>
       </section>
 
+      <div class="section-divider"></div>
+
+      <!-- ════ PUBLIC RESOURCES ════ -->
       <section class="block">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div>
+            <div class="section-label">
+              <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              Resources
+            </div>
             <h2>Public resources</h2>
             <p>A serious homepage should help a new visitor find the right next page without getting lost in jargon.</p>
           </div>
         </div>
         <div class="resource-grid">
-          <article class="panel"><div class="panel-body"><h3>Whitepaper</h3><p>The main protocol and network document.</p></div></article>
-          <article class="panel"><div class="panel-body"><h3>Validator Benchmark</h3><p>Public artifacts and rankings for validator research.</p></div></article>
-          <article class="panel"><div class="panel-body"><h3>Explorer</h3><p>Live validator and network view.</p></div></article>
-          <article class="panel"><div class="panel-body"><h3>Task Node</h3><p>The contributor app and participation surface.</p></div></article>
-          <article class="panel"><div class="panel-body"><h3>Validator Setup</h3><p>Operator guide for running network infrastructure.</p></div></article>
-          <article class="panel"><div class="panel-body"><h3>Docs</h3><p>Wallet guide and onboarding pages.</p></div></article>
-          <article class="panel"><div class="panel-body"><h3>GitHub</h3><p>Public code and implementation references.</p></div></article>
-          <article class="panel"><div class="panel-body"><h3>LLM Overview</h3><p>Machine-readable network overview through llms.txt.</p></div></article>
+          <a class="resource-card reveal reveal-delay-1" href="/whitepaper/">
+            <div class="panel-body">
+              <div class="res-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+              <h3>Whitepaper</h3>
+              <p>The main protocol and network document.</p>
+            </div>
+          </a>
+          <a class="resource-card reveal reveal-delay-2" href="/validator-benchmark/">
+            <div class="panel-body">
+              <div class="res-icon"><svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
+              <h3>Validator Benchmark</h3>
+              <p>Public artifacts and rankings for validator research.</p>
+            </div>
+          </a>
+          <a class="resource-card reveal reveal-delay-3" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">
+            <div class="panel-body">
+              <div class="res-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <h3>Explorer</h3>
+              <p>Live validator and network view.</p>
+            </div>
+          </a>
+          <a class="resource-card reveal reveal-delay-4" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">
+            <div class="panel-body">
+              <div class="res-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div>
+              <h3>Task Node</h3>
+              <p>The contributor app and participation surface.</p>
+            </div>
+          </a>
+          <a class="resource-card reveal reveal-delay-5" href="https://www.jollydinger.com/pftvalidatorsetup/setup/" target="_blank" rel="noopener">
+            <div class="panel-body">
+              <div class="res-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg></div>
+              <h3>Validator Setup</h3>
+              <p>Operator guide for running network infrastructure.</p>
+            </div>
+          </a>
+          <a class="resource-card reveal reveal-delay-6" href="/docs/">
+            <div class="panel-body">
+              <div class="res-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div>
+              <h3>Docs</h3>
+              <p>Wallet guide and onboarding pages.</p>
+            </div>
+          </a>
+          <a class="resource-card reveal reveal-delay-7" href="https://github.com/postfiatorg" target="_blank" rel="noopener">
+            <div class="panel-body">
+              <div class="res-icon"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+              <h3>GitHub</h3>
+              <p>Public code and implementation references.</p>
+            </div>
+          </a>
+          <a class="resource-card reveal reveal-delay-8" href="/llms.txt">
+            <div class="panel-body">
+              <div class="res-icon"><svg viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.57-3.25 3.92L12 10v2"/><circle cx="12" cy="16" r="2"/><path d="M12 18v4"/><path d="M6 12a6 6 0 0 1 12 0"/><path d="M2 12a10 10 0 0 1 20 0"/></svg></div>
+              <h3>LLM Overview</h3>
+              <p>Machine-readable network overview through llms.txt.</p>
+            </div>
+          </a>
         </div>
       </section>
 
+      <div class="section-divider"></div>
+
+      <!-- ════ WHO BUILDS THIS ════ -->
       <section class="block">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div>
+            <div class="section-label">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Team
+            </div>
             <h2>Who builds this</h2>
             <p>The current trust signals on the site are simple: named founder, public artifacts, live stats, a whitepaper, a contributor app, and an operator path.</p>
           </div>
         </div>
         <div class="trust-grid">
-          <article class="panel"><div class="panel-body"><h3>Founder</h3><p>Post Fiat is led by Alex Good.</p></div></article>
-          <article class="panel"><div class="panel-body"><h3>Background</h3><p>Citi FX, Palantir, Balyasny TMT, and Perpetua.</p></div></article>
-          <article class="panel"><div class="panel-body"><h3>Capital credibility</h3><p>Backed by portfolio managers at Brevan Howard, DE Shaw, and Citrini Research.</p></div></article>
-          <article class="panel"><div class="panel-body"><h3>Current trust signals</h3><p>Live stats, benchmark artifacts, the whitepaper, the Task Node, and the operator path.</p></div></article>
+          <article class="trust-card reveal reveal-delay-1">
+            <div class="panel-body">
+              <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <h3>Founder</h3>
+              <p>Post Fiat is led by Alex Good.</p>
+            </div>
+          </article>
+          <article class="trust-card reveal reveal-delay-2">
+            <div class="panel-body">
+              <div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg></div>
+              <h3>Background</h3>
+              <p>Citi FX, Palantir, Balyasny TMT, and Perpetua.</p>
+            </div>
+          </article>
+          <article class="trust-card reveal reveal-delay-3">
+            <div class="panel-body">
+              <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+              <h3>Capital credibility</h3>
+              <p>Backed by portfolio managers at Brevan Howard, DE Shaw, and Citrini Research.</p>
+            </div>
+          </article>
+          <article class="trust-card reveal reveal-delay-4">
+            <div class="panel-body">
+              <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 5-3 8-7 9-4-1-7-4-7-9V7l7-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+              <h3>Current trust signals</h3>
+              <p>Live stats, benchmark artifacts, the whitepaper, the Task Node, and the operator path.</p>
+            </div>
+          </article>
         </div>
       </section>
 
-      <section class="block">
+      <div class="section-divider"></div>
+
+      <!-- ════ WHAT PFT DOES ════ -->
+      <section class="block reveal">
         <div class="footer-cta">
           <h2>What PFT does</h2>
           <p>PFT is the network asset used for fees, participation, and coordination inside Post Fiat. The basic token case is simple: if more people use the network and its tools, the asset at the center of that use should matter more.</p>
@@ -675,10 +1042,77 @@
           </div>
         </div>
       </section>
+
     </div>
   </main>
 
   <script>
+    /* ── Particle Generator ── */
+    (function(){
+      const c = document.getElementById('particles');
+      if(!c) return;
+      for(let i=0;i<24;i++){
+        const p = document.createElement('div');
+        p.className='particle';
+        p.style.left = Math.random()*100+'%';
+        p.style.top = Math.random()*100+'%';
+        p.style.setProperty('--tx',(Math.random()-.5)*220+'px');
+        p.style.setProperty('--ty',(Math.random()-.5)*220+'px');
+        p.style.animationDelay = Math.random()*6+'s';
+        p.style.animationDuration = (6+Math.random()*6)+'s';
+        c.appendChild(p);
+      }
+    })();
+
+    /* ── Spoke Field Generator ── */
+    (function(){
+      const field = document.querySelector('.spoke-field');
+      if(!field) return;
+      const SPOKES=48;
+      for(let i=0;i<SPOKES;i++){
+        const s = document.createElement('span');
+        s.className='spoke';
+        const angle = (360/SPOKES)*i;
+        const len = (Math.random()*80+60).toFixed(0);
+        const spd = (Math.random()*4+4).toFixed(2);
+        const delay = (-Math.random()*parseFloat(spd)).toFixed(2);
+        s.style.setProperty('--angle',angle+'deg');
+        s.style.setProperty('--len',len+'px');
+        s.style.setProperty('--spd',spd+'s');
+        s.style.setProperty('--delay',delay+'s');
+        field.appendChild(s);
+      }
+    })();
+
+    /* ── Mouse Spotlight ── */
+    (function(){
+      const spot = document.getElementById('spotlight');
+      if(!spot || !window.matchMedia('(pointer:fine)').matches){
+        if(spot) spot.style.display='none';
+        return;
+      }
+      document.addEventListener('pointermove',function(e){
+        spot.style.transform='translate('+e.clientX+'px,'+e.clientY+'px)';
+      });
+      document.addEventListener('pointerleave',function(){spot.style.opacity='.15'});
+      document.addEventListener('pointerenter',function(){spot.style.opacity='.45'});
+    })();
+
+    /* ── Scroll Reveal (IntersectionObserver) ── */
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if(!els.length) return;
+      const obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){
+            e.target.classList.add('in-view');
+          }
+        });
+      },{root:null,rootMargin:'0px 0px -10% 0px',threshold:.12});
+      els.forEach(function(el){obs.observe(el)});
+    })();
+
+    /* ── Live Stats (content preserved exactly) ── */
     const FALLBACK_STATS = {
       validator_count: 38,
       publishing_domain_count: 24,
@@ -695,35 +1129,35 @@
       const agreement30Count = Number(stats.agreement_30day?.count || FALLBACK_STATS.agreement_30day.count);
       document.getElementById("validatorCount").textContent = String(validatorCount);
       document.getElementById("publishingDomains").textContent = String(publishingDomains);
-      document.getElementById("agreement24h").textContent = `${agreement24Count} / ${validatorCount}`;
-      document.getElementById("agreement30d").textContent = `${agreement30Count} / ${validatorCount}`;
+      document.getElementById("agreement24h").textContent = agreement24Count+" / "+validatorCount;
+      document.getElementById("agreement30d").textContent = agreement30Count+" / "+validatorCount;
       document.getElementById("statsBadge").textContent = label;
-      const sourceName = stats.source_name || FALLBACK_STATS.source_name;
-      document.getElementById("statsNote").textContent = `${sourceName}.`;
+      var sourceName = stats.source_name || FALLBACK_STATS.source_name;
+      document.getElementById("statsNote").textContent = sourceName+".";
     }
 
     async function loadStats() {
-      const liveUrl = "https://vhs.testnet.postfiat.org/v1/network/validators/test";
-      const fallbackUrl = "/benchmarks/live-testnet-validator-stats.json";
+      var liveUrl = "https://vhs.testnet.postfiat.org/v1/network/validators/test";
+      var fallbackUrl = "/benchmarks/live-testnet-validator-stats.json";
       try {
-        const response = await fetch(liveUrl, { headers: { "Accept": "application/json" } });
-        if (!response.ok) throw new Error(`live_http_${response.status}`);
-        const payload = await response.json();
-        const stats = {
+        var response = await fetch(liveUrl, { headers: { "Accept": "application/json" } });
+        if (!response.ok) throw new Error("live_http_"+response.status);
+        var payload = await response.json();
+        var stats = {
           validator_count: Array.isArray(payload.validators) ? payload.validators.length : FALLBACK_STATS.validator_count,
           publishing_domain_count: Array.isArray(payload.domains) ? payload.domains.length : FALLBACK_STATS.publishing_domain_count,
-          agreement_24h: { count: Array.isArray(payload.validators) ? payload.validators.filter(v => Number(v.agreement_24h || 0) >= 0.999).length : FALLBACK_STATS.agreement_24h.count },
-          agreement_30day: { count: Array.isArray(payload.validators) ? payload.validators.filter(v => Number(v.agreement_30d || 0) >= 0.99).length : FALLBACK_STATS.agreement_30day.count },
+          agreement_24h: { count: Array.isArray(payload.validators) ? payload.validators.filter(function(v){return Number(v.agreement_24h||0)>=0.999}).length : FALLBACK_STATS.agreement_24h.count },
+          agreement_30day: { count: Array.isArray(payload.validators) ? payload.validators.filter(function(v){return Number(v.agreement_30d||0)>=0.99}).length : FALLBACK_STATS.agreement_30day.count },
           source_name: "Live VHS validator history service"
         };
         setStats(stats, "Live VHS");
         return;
       } catch (_) {}
       try {
-        const response = await fetch(fallbackUrl, { headers: { "Accept": "application/json" } });
-        if (!response.ok) throw new Error(`fallback_http_${response.status}`);
-        const payload = await response.json();
-        setStats(payload, "Snapshot");
+        var response2 = await fetch(fallbackUrl, { headers: { "Accept": "application/json" } });
+        if (!response2.ok) throw new Error("fallback_http_"+response2.status);
+        var payload2 = await response2.json();
+        setStats(payload2, "Snapshot");
         return;
       } catch (_) {}
       setStats(FALLBACK_STATS, "Snapshot");
