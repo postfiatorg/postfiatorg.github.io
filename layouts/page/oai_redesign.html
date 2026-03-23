@@ -486,6 +486,8 @@
     .cred-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;gap:12px}
     .cred-header h2{font-size:1.16rem;margin:0;font-weight:700;color:#fff;letter-spacing:.03em}
     .cred-badge{font-size:.66rem;color:#d1dcf4;letter-spacing:.18em;text-transform:uppercase;padding:7px 13px;border:1px solid rgba(255,255,255,.1);border-radius:999px;white-space:nowrap;background:rgba(255,255,255,.04)}
+    .cred-badge.is-fallback{color:#ffe7b3;border-color:rgba(255,231,179,.22);background:rgba(255,198,92,.08)}
+    .cred-badge.is-error{color:#ffd3d3;border-color:rgba(255,179,179,.22);background:rgba(255,92,92,.08)}
 
     .stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px}
     .stat-block{
@@ -510,6 +512,8 @@
     .metric-bar{width:100%;height:7px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
     .metric-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,rgba(124,92,255,.55),rgba(141,184,255,.95),rgba(144,243,255,.9));transition:width 1.5s cubic-bezier(.4,0,.2,1);position:relative;box-shadow:0 0 24px rgba(141,184,255,.3)}
     .metric-fill::after{content:"";position:absolute;right:0;top:50%;transform:translate(50%,-50%);width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 0 14px rgba(255,255,255,.75)}
+    .cred-live-note{margin:0 0 18px;color:#95a2bb;font-size:.76rem;line-height:1.5;letter-spacing:.03em}
+    .cred-live-note strong{color:#dce7ff}
 
     .cred-explorer-link{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;padding:12px 20px;border:1px solid rgba(255,255,255,.15);border-radius:999px;transition:all .3s;background:rgba(255,255,255,.04);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
     .cred-explorer-link:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.09);transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.28), 0 0 20px rgba(141,184,255,.12)}
@@ -1054,37 +1058,38 @@
   <!-- ===== LIVE PROOF / CREDIBILITY ===== -->
   <section class="credibility-band">
     <div class="credibility-grid">
-      <div class="credibility-card">
+      <div class="credibility-card" id="live-validator-card" data-live-url="https://vhs.testnet.postfiat.org/v1/network/validators/test" data-fallback-url="/benchmarks/live-testnet-validator-stats.json">
         <div class="cred-header">
           <h2>Live Testnet</h2>
-          <span class="cred-badge">March 18, 2026</span>
+          <span class="cred-badge" id="live-validator-badge">Loading</span>
         </div>
         <div class="stat-row">
           <div class="stat-block">
-            <div class="stat-number">42</div>
+            <div class="stat-number" id="live-validator-count">38</div>
             <div class="stat-label">Validators Live</div>
           </div>
           <div class="stat-block">
-            <div class="stat-number">20</div>
+            <div class="stat-number" id="live-domain-count">24</div>
             <div class="stat-label">Publishing Domains</div>
           </div>
         </div>
         <div class="metric-rows">
           <div class="metric-item">
             <div class="metric-top">
-              <span class="metric-label">24h agreement (41 of 42)</span>
-              <span class="metric-value">99.9%+</span>
+              <span class="metric-label" id="live-agreement-24-label">24h agreement at 99.9%+</span>
+              <span class="metric-value" id="live-agreement-24-value">35 / 38</span>
             </div>
-            <div class="metric-bar"><div class="metric-fill" style="width:97.6%"></div></div>
+            <div class="metric-bar"><div class="metric-fill" id="live-agreement-24-fill" style="width:92.1%"></div></div>
           </div>
           <div class="metric-item">
             <div class="metric-top">
-              <span class="metric-label">30d agreement (35 of 42)</span>
-              <span class="metric-value">99%+</span>
+              <span class="metric-label" id="live-agreement-30-label">30d agreement at 99%+</span>
+              <span class="metric-value" id="live-agreement-30-value">33 / 38</span>
             </div>
-            <div class="metric-bar"><div class="metric-fill" style="width:83.3%"></div></div>
+            <div class="metric-bar"><div class="metric-fill" id="live-agreement-30-fill" style="width:86.8%"></div></div>
           </div>
         </div>
+        <p class="cred-live-note" id="live-validator-note"><strong>Snapshot</strong> 38 validators, 24 publishing domains, 13 verified domains.</p>
         <a class="cred-explorer-link" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">
           View the Testnet Explorer
           <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -1877,6 +1882,170 @@
     } else if (spotlight) {
       spotlight.style.display = 'none';
     }
+
+    function formatUtcTimestamp(value) {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return 'unknown time';
+      return date.toLocaleString('en-US', {
+        timeZone: 'UTC',
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }) + ' UTC';
+    }
+
+    function formatPercentRatio(value) {
+      const numeric = Number(value);
+      return `${((Number.isFinite(numeric) ? numeric : 0) * 100).toFixed(1)}%`;
+    }
+
+    function countStrongAgreement(validators, key, threshold) {
+      return validators.filter((validator) => {
+        const score = Number(validator?.[key]?.score ?? 0);
+        return Number.isFinite(score) && score >= threshold;
+      }).length;
+    }
+
+    function meanAgreement(validators, key) {
+      const values = validators
+        .map((validator) => Number(validator?.[key]?.score ?? 0))
+        .filter((score) => Number.isFinite(score));
+      if (!values.length) return 0;
+      return values.reduce((sum, score) => sum + score, 0) / values.length;
+    }
+
+    function normalizeLiveValidatorStats(payload) {
+      if (Array.isArray(payload?.validators)) {
+        const validators = payload.validators.filter((validator) => !validator?.revoked);
+        const validatorCount = validators.length;
+        const publishingDomainCount = validators.filter((validator) => `${validator?.domain ?? ''}`.trim()).length;
+        const verifiedDomainCount = validators.filter((validator) => Boolean(validator?.domain_verified)).length;
+        const strong24Count = countStrongAgreement(validators, 'agreement_24h', 0.999);
+        const strong30Count = countStrongAgreement(validators, 'agreement_30day', 0.99);
+        const latestLedgerIndex = validators.reduce((max, validator) => {
+          const currentIndex = Number(validator?.current_index ?? 0);
+          return Number.isFinite(currentIndex) ? Math.max(max, currentIndex) : max;
+        }, 0);
+
+        return {
+          source_name: 'Live VHS',
+          generated_at: new Date().toISOString(),
+          validator_count: validatorCount,
+          publishing_domain_count: publishingDomainCount,
+          verified_domain_count: verifiedDomainCount,
+          latest_ledger_index: latestLedgerIndex,
+          agreement_24h: {
+            threshold_label: '99.9%+',
+            count: strong24Count,
+            ratio: validatorCount ? strong24Count / validatorCount : 0,
+            mean_score: meanAgreement(validators, 'agreement_24h')
+          },
+          agreement_30day: {
+            threshold_label: '99%+',
+            count: strong30Count,
+            ratio: validatorCount ? strong30Count / validatorCount : 0,
+            mean_score: meanAgreement(validators, 'agreement_30day')
+          }
+        };
+      }
+      return payload;
+    }
+
+    function renderLiveValidatorStats(stats, mode) {
+      const badge = document.getElementById('live-validator-badge');
+      const note = document.getElementById('live-validator-note');
+      const validatorCount = document.getElementById('live-validator-count');
+      const domainCount = document.getElementById('live-domain-count');
+      const agreement24Label = document.getElementById('live-agreement-24-label');
+      const agreement24Value = document.getElementById('live-agreement-24-value');
+      const agreement24Fill = document.getElementById('live-agreement-24-fill');
+      const agreement30Label = document.getElementById('live-agreement-30-label');
+      const agreement30Value = document.getElementById('live-agreement-30-value');
+      const agreement30Fill = document.getElementById('live-agreement-30-fill');
+
+      if (!stats || !badge || !note || !validatorCount || !domainCount) return;
+
+      badge.textContent = mode === 'live' ? 'Live VHS' : mode === 'fallback' ? 'Snapshot' : 'Unavailable';
+      badge.classList.toggle('is-fallback', mode === 'fallback');
+      badge.classList.toggle('is-error', mode === 'error');
+
+      validatorCount.textContent = Number(stats.validator_count ?? 0).toLocaleString('en-US');
+      domainCount.textContent = Number(stats.publishing_domain_count ?? 0).toLocaleString('en-US');
+
+      const agreement24 = stats.agreement_24h ?? {};
+      agreement24Label.textContent = `24h agreement at ${agreement24.threshold_label ?? '99.9%+'}`;
+      agreement24Value.textContent = `${agreement24.count ?? 0} / ${stats.validator_count ?? 0}`;
+      agreement24Fill.style.width = formatPercentRatio(Number(agreement24.ratio ?? 0));
+
+      const agreement30 = stats.agreement_30day ?? {};
+      agreement30Label.textContent = `30d agreement at ${agreement30.threshold_label ?? '99%+'}`;
+      agreement30Value.textContent = `${agreement30.count ?? 0} / ${stats.validator_count ?? 0}`;
+      agreement30Fill.style.width = formatPercentRatio(Number(agreement30.ratio ?? 0));
+
+      const notePrefix = mode === 'live'
+        ? '<strong>Live VHS snapshot</strong>'
+        : mode === 'fallback'
+          ? '<strong>Fallback snapshot</strong>'
+          : '<strong>Unavailable</strong>';
+      const ledgerText = stats.latest_ledger_index ? ` Ledger ${Number(stats.latest_ledger_index).toLocaleString('en-US')}.` : '';
+      const updatedText = stats.generated_at ? ` Updated ${formatUtcTimestamp(stats.generated_at)}.` : '';
+      note.innerHTML = `${notePrefix} ${stats.validator_count ?? 0} validators, ${stats.publishing_domain_count ?? 0} publishing domains, ${stats.verified_domain_count ?? 0} verified domains.${ledgerText}${updatedText}`;
+    }
+
+    async function fetchJsonWithTimeout(url, timeoutMs = 8000) {
+      const controller = new AbortController();
+      const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const response = await fetch(url, {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'no-store',
+          signal: controller.signal
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return await response.json();
+      } finally {
+        window.clearTimeout(timer);
+      }
+    }
+
+    async function hydrateLiveValidatorCard() {
+      const liveCard = document.getElementById('live-validator-card');
+      if (!liveCard) return;
+
+      const liveUrl = liveCard.dataset.liveUrl;
+      const fallbackUrl = liveCard.dataset.fallbackUrl;
+
+      try {
+        const livePayload = await fetchJsonWithTimeout(liveUrl);
+        renderLiveValidatorStats(normalizeLiveValidatorStats(livePayload), 'live');
+        return;
+      } catch (liveError) {
+        console.error('Live validator fetch failed', liveError);
+      }
+
+      try {
+        const fallbackPayload = await fetchJsonWithTimeout(fallbackUrl);
+        renderLiveValidatorStats(normalizeLiveValidatorStats(fallbackPayload), 'fallback');
+      } catch (fallbackError) {
+        console.error('Fallback validator fetch failed', fallbackError);
+        renderLiveValidatorStats({
+          validator_count: 0,
+          publishing_domain_count: 0,
+          verified_domain_count: 0,
+          agreement_24h: { threshold_label: '99.9%+', count: 0, ratio: 0 },
+          agreement_30day: { threshold_label: '99%+', count: 0, ratio: 0 }
+        }, 'error');
+      }
+    }
+
+    hydrateLiveValidatorCard();
   </script>
 </body>
 </html>
