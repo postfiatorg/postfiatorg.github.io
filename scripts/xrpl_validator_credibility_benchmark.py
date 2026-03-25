@@ -30,17 +30,20 @@ DEFAULT_MODELS = (
     "moonshotai/kimi-k2.5",
 )
 DEFAULT_PROMPT = (
-    "score this validator's credibility on a scale from 0-100 where credibility is "
-    "defined as useful institutional proof of a blockchain's legitimacy."
+    "You are scoring a validator hostname, not live validator performance. "
+    "Estimate how much institutional credibility or legitimacy signal this hostname "
+    "gives to a blockchain network on a 0-100 scale. "
+    "If evidence is sparse, still make your best guess."
 )
 SYSTEM_PROMPT = (
-    "You are scoring XRPL validators for a repeated-run benchmark.\n"
-    "Credibility means whether the validator's operator provides useful institutional "
-    "proof of a blockchain's legitimacy.\n"
+    "You are scoring XRPL validator hostnames for a repeated-run benchmark.\n"
+    "Task: infer the institutional credibility signal conveyed by the hostname or operator identity alone.\n"
+    "Do not score consensus performance, token price, ideology, or speculative claims.\n"
+    "If evidence is sparse, still make your best guess.\n"
     "Use a 0-100 integer scale.\n"
     "Return JSON only with a single key named score.\n"
     "score must be an integer from 0 to 100.\n"
-    "Do not include markdown, prose, or any other keys."
+    "Never return null, None, markdown, prose, or any other keys."
 )
 RETRYABLE_STATUS_CODES = {408, 409, 425, 429, 500, 502, 503, 504, 520, 521, 522, 524}
 DEFAULT_SUBSET_DOMAINS = (
@@ -255,7 +258,7 @@ def extract_score_and_rationale(raw_content: str) -> tuple[int | None, str | Non
 def build_messages(prompt: str, validator: ValidatorRecord) -> list[dict[str, str]]:
     user_prompt = (
         f"{prompt}\n\n"
-        f"validator: {validator.domain}\n\n"
+        f"validator_hostname: {validator.domain}\n\n"
         'Return JSON only: {"score": <0-100 integer>}.'
     )
     return [
