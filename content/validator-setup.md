@@ -36,7 +36,7 @@ keywords:
       body{overflow-x:hidden}
       .main,.post-single,.post-content{width:100vw !important;max-width:100vw !important;overflow-x:hidden}
       .post-single{padding-inline:14px !important}
-      .post-title,.post-description,.post-content h1,.post-content h2,.post-content p,.post-content blockquote,.validator-copy-tool{width:calc(100vw - 96px) !important;max-width:calc(100vw - 96px) !important;white-space:normal;overflow-wrap:anywhere}
+      .post-title,.post-description,.post-content h1,.post-content h2,.post-content p,.post-content blockquote,.validator-copy-tool{width:calc(100vw - 96px) !important;max-width:calc(100vw - 96px) !important;white-space:normal !important;overflow-wrap:anywhere !important;word-break:break-word !important}
       .post-title{font-size:1.65rem;line-height:1.16;overflow-wrap:break-word}
       .post-description{font-size:1rem;line-height:1.45;max-width:100%}
       .post-content h1{font-size:1.25rem;line-height:1.18;overflow-wrap:break-word}
