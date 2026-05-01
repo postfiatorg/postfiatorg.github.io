@@ -42,7 +42,7 @@ keywords:
       .post-content h1{font-size:1.25rem;line-height:1.18;overflow-wrap:break-word}
       .post-content h2{font-size:1.25rem;line-height:1.2;overflow-wrap:break-word}
       .post-content p,.post-content blockquote{overflow-wrap:break-word}
-      .post-content > h1,.post-content > p,.post-content > blockquote{width:calc(100vw - 150px) !important;max-width:calc(100vw - 150px) !important}
+      .post-content > h1,.post-content > p,.post-content > blockquote{width:calc(100vw - 190px) !important;max-width:calc(100vw - 190px) !important}
       .post-content blockquote{padding-inline-start:14px}
       .nav{overflow-x:auto;white-space:nowrap}
       .nav a{flex:0 0 auto}
