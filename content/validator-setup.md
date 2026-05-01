@@ -10,61 +10,16 @@ keywords:
   - Dynamic UNL
   - validator domain attestation
   - pft-ledger.toml
+copyMarkdownHref: "/agents/validator-setup.md"
+copyMarkdownButton: "Copy Full Markdown"
+copyMarkdownDescription: "Copy and paste into your favorite LLM."
+copyMarkdownStatus: "Full validator markdown copied."
+copyMarkdownId: "pftValidatorCopyTool"
 ---
 
 # Fresh Validator Setup
 
 > Install a fresh Post Fiat testnet validator, bind it to a domain, publish proof, and verify that the node is proposing.
-
-<div class="validator-copy-tool" id="pftValidatorCopyTool">
-  <style>
-    .post-content{overflow-wrap:break-word}
-    .validator-copy-tool{margin:28px 0 36px;padding:24px;border:1px solid rgba(148,184,255,.28);border-radius:14px;background:linear-gradient(180deg,rgba(148,184,255,.12),rgba(255,255,255,.035));box-shadow:0 18px 48px rgba(0,0,0,.18)}
-    .validator-copy-tool h2{margin:0 0 10px;font-size:1.35rem}
-    .validator-copy-tool p{margin:0 0 18px;color:var(--secondary);line-height:1.6}
-    .validator-copy-grid{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:16px}
-    .validator-copy-field label{display:block;margin-bottom:6px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--secondary)}
-    .validator-copy-field input{width:100%;border:1px solid var(--border);border-radius:10px;background:var(--entry);color:var(--primary);padding:12px 13px;font:inherit}
-    .validator-copy-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
-    .validator-copy-button{border:0;border-radius:10px;background:var(--primary);color:var(--theme);font-weight:800;padding:11px 14px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
-    .validator-copy-button.secondary{background:transparent;color:var(--primary);border:1px solid var(--border)}
-    .validator-copy-button:focus-visible,.validator-copy-field input:focus-visible{outline:2px solid #8db8ff;outline-offset:2px}
-    .validator-copy-status{min-height:1.3em;color:var(--secondary);font-size:.88rem}
-    .validator-copy-tool textarea{width:100%;min-height:360px;border:1px solid var(--border);border-radius:12px;background:#0b0f18;color:#e9eefc;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:14px;resize:vertical}
-    .validator-copy-note{font-size:.9rem;color:var(--secondary)}
-    @media(max-width:720px){
-      body{overflow-x:hidden}
-      .main,.post-single,.post-content{width:100vw !important;max-width:100vw !important;overflow-x:hidden}
-      .post-single{padding-inline:14px !important}
-      .post-title,.post-description,.post-content h1,.post-content h2,.post-content p,.post-content blockquote,.validator-copy-tool{width:calc(100vw - 96px) !important;max-width:calc(100vw - 96px) !important;white-space:normal !important;overflow-wrap:anywhere !important;word-break:break-word !important}
-      .post-title{font-size:1.65rem;line-height:1.16;overflow-wrap:break-word}
-      .post-description{font-size:1rem;line-height:1.45;max-width:100%}
-      .post-content h1{font-size:1.25rem;line-height:1.18;overflow-wrap:break-word}
-      .post-content h2{font-size:1.25rem;line-height:1.2;overflow-wrap:break-word}
-      .post-content p,.post-content blockquote{overflow-wrap:break-word}
-      .post-content > h1,.post-content > p,.post-content > blockquote{width:calc(100vw - 190px) !important;max-width:calc(100vw - 190px) !important}
-      .post-content blockquote{padding-inline-start:14px}
-      .nav{overflow-x:auto;white-space:nowrap}
-      .nav a{flex:0 0 auto}
-      .validator-copy-tool h2{font-size:1.2rem}
-      .validator-copy-grid{grid-template-columns:1fr}
-      .validator-copy-tool{padding:18px}
-      .validator-copy-actions{align-items:stretch}
-      .validator-copy-button{width:100%}
-      .validator-copy-tool textarea{min-height:420px;font-size:12px}
-    }
-  </style>
-  <h2>Copy Full Official Markdown</h2>
-  <p>Use this to copy the complete canonical validator setup markdown from `/agents/validator-setup.md`. This is the source file agents should read or paste into another tool.</p>
-  <div class="validator-copy-actions">
-    <button class="validator-copy-button" type="button" data-copy-validator-markdown>Copy full markdown</button>
-    <a class="validator-copy-button secondary" href="/agents/validator-setup.md">Open raw markdown</a>
-    <span class="validator-copy-status" id="pftValidatorCopyStatus" aria-live="polite"></span>
-  </div>
-  <textarea id="pftValidatorMarkdown" readonly spellcheck="false" aria-label="Full official Post Fiat validator setup markdown">Loading official validator markdown...</textarea>
-  <p class="validator-copy-note">Source: <a href="/agents/validator-setup.md">/agents/validator-setup.md</a></p>
-  <script src="/js/validator-copy.js" defer></script>
-</div>
 
 ## Scope
 

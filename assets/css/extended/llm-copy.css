@@ -1,0 +1,62 @@
+.llm-copy-widget {
+    padding: 0.9rem 1rem 0.65rem;
+    margin-bottom: 0.35rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.llm-copy-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--theme);
+    color: var(--primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.llm-copy-button:hover {
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.llm-copy-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.05rem;
+    height: 1.05rem;
+    line-height: 1;
+}
+
+.llm-copy-icon svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.llm-copy-text,
+.llm-copy-status {
+    margin: 0.65rem 0 0;
+    color: var(--secondary);
+    font-size: 0.92rem;
+}
+
+.llm-copy-status {
+    min-height: 1.2em;
+}
+
+@media (max-width: 768px) {
+    .llm-copy-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
