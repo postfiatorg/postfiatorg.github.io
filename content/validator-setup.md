@@ -25,12 +25,14 @@ copyMarkdownId: "pftValidatorCopyTool"
 
 If you want Codex to follow this guide on a server, start Codex from a terminal on the target host. Do not paste `validator-keys.json`, validator tokens, or private key material into Codex chat.
 
-For a full sudo-capable install, authenticate sudo first so Codex can run privileged setup commands when needed:
+For a full sudo-capable install, authenticate sudo first, then start Codex in one-shot mode so it can run the setup without per-command confirmation:
 
 ```bash
 sudo -v
-codex
+codex --yolo
 ```
+
+Only use `--yolo` on a fresh or isolated validator host where Codex is allowed to make package, Docker, firewall, and file changes.
 
 Then type this into Codex, replacing the placeholders:
 
@@ -46,7 +48,11 @@ POSTFIATD_DIR=/opt/postfiatd
 Preserve existing validator keys if any exist. Do not paste private keys or validator tokens into chat. Keep key and token material on disk only. Bind admin/API ports to 127.0.0.1, keep peer port 2559 public, and do not reset firewall rules unless this is confirmed to be a fresh server. If I use GitHub Pages for the validator domain, publish .well-known/pft-ledger.toml and include .well-known in Jekyll config. Verify server_info, validator_info, consensus_info, and the public domain proof before finishing.
 ```
 
-For a non-sudo Docker-only fallback, use this prompt instead:
+For a non-sudo Docker-only fallback, start Codex without sudo, then use this prompt instead:
+
+```bash
+codex --yolo
+```
 
 ```text
 Use https://postfiat.org/validator-setup/ to set up a Post Fiat testnet validator if possible.
