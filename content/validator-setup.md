@@ -16,6 +16,192 @@ keywords:
 
 > Purpose: end-to-end, agent-readable instructions for installing a fresh Post Fiat `postfiatd` validator on testnet, generating a validator identity, binding it to a domain, publishing domain proof, and verifying that the node is proposing.
 
+<div class="validator-copy-tool" id="pftValidatorCopyTool">
+  <style>
+    .validator-copy-tool{margin:28px 0 36px;padding:24px;border:1px solid rgba(148,184,255,.28);border-radius:14px;background:linear-gradient(180deg,rgba(148,184,255,.12),rgba(255,255,255,.035));box-shadow:0 18px 48px rgba(0,0,0,.18)}
+    .validator-copy-tool h2{margin:0 0 10px;font-size:1.35rem}
+    .validator-copy-tool p{margin:0 0 18px;color:var(--secondary);line-height:1.6}
+    .validator-copy-grid{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:16px}
+    .validator-copy-field label{display:block;margin-bottom:6px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--secondary)}
+    .validator-copy-field input{width:100%;border:1px solid var(--border);border-radius:10px;background:var(--entry);color:var(--primary);padding:12px 13px;font:inherit}
+    .validator-copy-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+    .validator-copy-button{border:0;border-radius:10px;background:var(--primary);color:var(--theme);font-weight:800;padding:11px 14px;cursor:pointer}
+    .validator-copy-button.secondary{background:transparent;color:var(--primary);border:1px solid var(--border)}
+    .validator-copy-button:focus-visible,.validator-copy-field input:focus-visible{outline:2px solid #8db8ff;outline-offset:2px}
+    .validator-copy-status{min-height:1.3em;color:var(--secondary);font-size:.88rem}
+    .validator-copy-tool textarea{width:100%;min-height:360px;border:1px solid var(--border);border-radius:12px;background:#0b0f18;color:#e9eefc;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:14px;resize:vertical}
+    .validator-copy-note{font-size:.9rem;color:var(--secondary)}
+    @media(max-width:720px){
+      .validator-copy-grid{grid-template-columns:1fr}
+      .validator-copy-tool{padding:18px}
+      .validator-copy-actions{align-items:stretch}
+      .validator-copy-button{width:100%}
+      .validator-copy-tool textarea{min-height:420px;font-size:12px}
+    }
+  </style>
+  <h2>Copy/Paste Fresh Validator Setup</h2>
+  <p>This helper builds a fresh-server command script with your domain and SSH port. Review it before running: it installs Docker, resets UFW, starts `postfiatd`, creates validator keys, sets the domain, injects the validator token, and prints the TOML you must publish.</p>
+  <div class="validator-copy-grid">
+    <div class="validator-copy-field">
+      <label for="pftValidatorDomain">Validator domain</label>
+      <input id="pftValidatorDomain" type="text" value="example.com" autocomplete="off" spellcheck="false" />
+    </div>
+    <div class="validator-copy-field">
+      <label for="pftValidatorSshPort">SSH port</label>
+      <input id="pftValidatorSshPort" type="text" value="22" inputmode="numeric" />
+    </div>
+  </div>
+  <div class="validator-copy-actions">
+    <button class="validator-copy-button" type="button" data-copy-validator-script>Copy setup script</button>
+    <button class="validator-copy-button secondary" type="button" data-copy-validator-verify>Copy health check</button>
+    <span class="validator-copy-status" id="pftValidatorCopyStatus" aria-live="polite"></span>
+  </div>
+  <textarea id="pftValidatorScript" readonly spellcheck="false" aria-label="Generated Post Fiat validator setup script"></textarea>
+  <p class="validator-copy-note">After the script runs, publish `/opt/postfiatd/pft-ledger.toml` at `https://your-domain/.well-known/pft-ledger.toml`, then run the copied health check.</p>
+  <script>
+    (function(){
+      const root = document.getElementById('pftValidatorCopyTool');
+      if (!root) return;
+
+      const domainInput = document.getElementById('pftValidatorDomain');
+      const sshInput = document.getElementById('pftValidatorSshPort');
+      const scriptBox = document.getElementById('pftValidatorScript');
+      const status = document.getElementById('pftValidatorCopyStatus');
+
+      function normalizeDomain(value) {
+        return (value || 'example.com')
+          .trim()
+          .replace(/^https?:\/\//, '')
+          .replace(/\/.*$/, '') || 'example.com';
+      }
+
+      function normalizePort(value) {
+        return (/^\d+$/.test((value || '').trim()) ? value.trim() : '22');
+      }
+
+      function healthCheckCommand() {
+        return `docker exec postfiatd curl -s http://localhost:5005/ -X POST \\
+  -H "Content-Type: application/json" \\
+  -d '{"method": "server_info", "params": [{}]}' \\
+  | python3 -m json.tool | grep -E '"server_state"|"build_version"'`;
+      }
+
+      function buildScript() {
+        const domain = normalizeDomain(domainInput.value);
+        const sshPort = normalizePort(sshInput.value);
+        return `#!/usr/bin/env bash
+set -euo pipefail
+
+VALIDATOR_DOMAIN="${domain}"
+SSH_PORT="${sshPort}"
+
+sudo apt update
+sudo apt install -y docker.io docker-compose-v2 curl wget jq python3
+sudo systemctl enable --now docker
+
+sudo ufw --force reset
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow "\${SSH_PORT}/tcp" comment 'SSH'
+sudo ufw allow 2559/tcp comment 'Post Fiat peer protocol'
+sudo ufw --force enable
+
+sudo mkdir -p /opt/postfiatd/logs
+sudo chown -R "$USER":"$USER" /opt/postfiatd
+cd /opt/postfiatd
+wget https://raw.githubusercontent.com/postfiatorg/postfiatd/main/scripts/docker-compose-external-validator.yml -O docker-compose.yml
+
+cat > .env <<EOF
+NETWORK=testnet
+HOSTNAME=$(hostname)
+EOF
+
+sed -i 's#agtipft/postfiatd:\${NETWORK:-devnet}-light-latest#agtipft/postfiatd:testnet-light-1.0.4#' docker-compose.yml
+
+docker compose pull
+docker compose up -d
+docker compose ps
+
+docker exec postfiatd mkdir -p /root/.ripple
+docker exec postfiatd validator-keys create_keys
+docker cp postfiatd:/root/.ripple/validator-keys.json ./validator-keys.json
+chmod 600 ./validator-keys.json
+
+docker exec postfiatd validator-keys set_domain "$VALIDATOR_DOMAIN" | tee ./set-domain-output.txt
+docker cp postfiatd:/root/.ripple/validator-keys.json ./validator-keys.domain.json
+chmod 600 ./validator-keys.domain.json
+
+PUBLIC_KEY="$(sed -n 's/^# validator public key: //p' ./set-domain-output.txt | head -n 1)"
+ATTESTATION="$(sed -n 's/^attestation="\\([0-9A-Fa-f]*\\)".*/\\1/p' ./set-domain-output.txt | head -n 1)"
+sed -n '/^\\[validator_token\\]/,$p' ./set-domain-output.txt | sed '/^$/d' > ./validator-token.block
+chmod 600 ./validator-token.block
+grep -q '^\\[validator_token\\]$' ./validator-token.block
+
+docker cp postfiatd:/etc/postfiatd/postfiatd.cfg ./postfiatd.cfg
+awk '
+  /^\\[validator_token\\]$/ {skip=1; next}
+  /^\\[[^]]+\\]$/ {skip=0}
+  !skip {print}
+' ./postfiatd.cfg > ./postfiatd.cfg.new
+
+printf '\\n' >> ./postfiatd.cfg.new
+cat ./validator-token.block >> ./postfiatd.cfg.new
+printf '\\n' >> ./postfiatd.cfg.new
+
+test "$(grep -c '^\\[validator_token\\]$' ./postfiatd.cfg.new)" -eq 1
+docker cp ./postfiatd.cfg.new postfiatd:/etc/postfiatd/postfiatd.cfg
+docker compose restart
+docker exec postfiatd rm -rf /root/.ripple
+
+cat > ./pft-ledger.toml <<EOF
+[[VALIDATORS]]
+public_key = "$PUBLIC_KEY"
+attestation = "$ATTESTATION"
+EOF
+
+echo
+echo "Publish this file at https://${domain}/.well-known/pft-ledger.toml:"
+cat ./pft-ledger.toml
+echo
+echo "Then verify with:"
+echo 'curl -fsS "https://\${VALIDATOR_DOMAIN}/.well-known/pft-ledger.toml"'
+echo
+echo "Node health check:"
+${healthCheckCommand()}
+`;
+      }
+
+      function refreshScript() {
+        scriptBox.value = buildScript();
+      }
+
+      async function copyText(text, label) {
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch (error) {
+          const scratch = document.createElement('textarea');
+          scratch.value = text;
+          scratch.setAttribute('readonly', '');
+          scratch.style.position = 'fixed';
+          scratch.style.opacity = '0';
+          document.body.appendChild(scratch);
+          scratch.select();
+          document.execCommand('copy');
+          document.body.removeChild(scratch);
+        }
+        status.textContent = `${label} copied`;
+        window.setTimeout(() => { status.textContent = ''; }, 2200);
+      }
+
+      domainInput.addEventListener('input', refreshScript);
+      sshInput.addEventListener('input', refreshScript);
+      root.querySelector('[data-copy-validator-script]').addEventListener('click', () => copyText(scriptBox.value, 'Setup script'));
+      root.querySelector('[data-copy-validator-verify]').addEventListener('click', () => copyText(healthCheckCommand(), 'Health check'));
+      refreshScript();
+    })();
+  </script>
+</div>
+
 ## Scope
 
 Use this guide when a user asks an LLM or automation agent to set up a new Post Fiat validator from a fresh server.
