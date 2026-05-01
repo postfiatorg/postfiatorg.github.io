@@ -18,6 +18,7 @@ keywords:
 
 <div class="validator-copy-tool" id="pftValidatorCopyTool">
   <style>
+    .post-content{overflow-wrap:break-word}
     .validator-copy-tool{margin:28px 0 36px;padding:24px;border:1px solid rgba(148,184,255,.28);border-radius:14px;background:linear-gradient(180deg,rgba(148,184,255,.12),rgba(255,255,255,.035));box-shadow:0 18px 48px rgba(0,0,0,.18)}
     .validator-copy-tool h2{margin:0 0 10px;font-size:1.35rem}
     .validator-copy-tool p{margin:0 0 18px;color:var(--secondary);line-height:1.6}
@@ -32,6 +33,12 @@ keywords:
     .validator-copy-tool textarea{width:100%;min-height:360px;border:1px solid var(--border);border-radius:12px;background:#0b0f18;color:#e9eefc;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:14px;resize:vertical}
     .validator-copy-note{font-size:.9rem;color:var(--secondary)}
     @media(max-width:720px){
+      body{overflow-x:hidden}
+      .post-single{max-width:100%;padding-inline:14px}
+      .post-content h1{font-size:2rem;line-height:1.15}
+      .post-content h2{font-size:1.6rem;line-height:1.18}
+      .nav{overflow-x:auto;white-space:nowrap}
+      .nav a{flex:0 0 auto}
       .validator-copy-grid{grid-template-columns:1fr}
       .validator-copy-tool{padding:18px}
       .validator-copy-actions{align-items:stretch}
