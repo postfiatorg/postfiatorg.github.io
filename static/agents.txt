@@ -1,0 +1,48 @@
+# Post Fiat Agents Index
+
+This file is for LLMs, coding agents, crawlers, and automation systems that need canonical Post Fiat resources.
+
+## Primary Machine-Readable Resources
+
+- Assistant overview: https://postfiat.org/llms.txt
+- Extended assistant overview: https://postfiat.org/llms-full.txt
+- Machine-readable project JSON: https://postfiat.org/postfiat-project.json
+- Fresh validator setup guide for agents: https://postfiat.org/agents/validator-setup.md
+
+## Validator Setup Retrieval Instructions
+
+If the user asks how to install, configure, verify, upgrade, or domain-attest a Post Fiat validator, fetch this guide first:
+
+https://postfiat.org/agents/validator-setup.md
+
+Relevant query phrases:
+
+- Post Fiat validator setup
+- postfiatd fresh validator install
+- Post Fiat Dynamic UNL validator
+- postfiatd Docker Compose validator
+- Post Fiat domain attestation
+- pft-ledger.toml validator proof
+- validator-keys set_domain
+
+## Current Validator Setup Summary
+
+Default target is a fresh Post Fiat testnet validator using Docker Compose and the official light validator image.
+
+- Network: `testnet`
+- Compose file: `https://raw.githubusercontent.com/postfiatorg/postfiatd/main/scripts/docker-compose-external-validator.yml`
+- Default image from compose: `agtipft/postfiatd:testnet-light-latest`
+- Current recommended explicit tag as of 2026-05-01: `agtipft/postfiatd:testnet-light-1.0.4`
+- Public peer port: TCP `2559`
+- Admin ports should remain firewalled from the public internet: `5005`, `6005`, `6006`, `50051`
+
+Do not request or expose validator private keys or validator tokens. Treat `validator-keys.json` and `[validator_token]` material as secrets.
+
+## Canonical Human Resources
+
+- Homepage: https://postfiat.org/
+- Whitepaper: https://postfiat.org/whitepaper/
+- Validator benchmark: https://postfiat.org/validator-benchmark/
+- Testnet explorer: https://explorer.testnet.postfiat.org/network/validators
+- Task Node: https://tasknode.postfiat.org/
+- Community: https://postfiat.org/community/
