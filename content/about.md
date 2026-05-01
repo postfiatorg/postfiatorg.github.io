@@ -38,7 +38,7 @@ Post Fiat is an XRP-derived network for capital markets and collective intellige
 - [Live testnet explorer](https://explorer.testnet.postfiat.org/network/validators)
 - [Task Node](https://tasknode.postfiat.org/)
 - [Community page](https://postfiat.org/community/)
-- [Validator setup guide](https://postfiat.org/agents/validator-setup.md)
+- [Validator setup guide](https://postfiat.org/validator-setup/)
 - [Assistant-facing summary](https://postfiat.org/llms.txt)
 - [Machine-readable JSON summary](https://postfiat.org/postfiat-project.json)
 
