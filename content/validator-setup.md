@@ -26,7 +26,7 @@ keywords:
     .validator-copy-field label{display:block;margin-bottom:6px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--secondary)}
     .validator-copy-field input{width:100%;border:1px solid var(--border);border-radius:10px;background:var(--entry);color:var(--primary);padding:12px 13px;font:inherit}
     .validator-copy-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
-    .validator-copy-button{border:0;border-radius:10px;background:var(--primary);color:var(--theme);font-weight:800;padding:11px 14px;cursor:pointer}
+    .validator-copy-button{border:0;border-radius:10px;background:var(--primary);color:var(--theme);font-weight:800;padding:11px 14px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
     .validator-copy-button.secondary{background:transparent;color:var(--primary);border:1px solid var(--border)}
     .validator-copy-button:focus-visible,.validator-copy-field input:focus-visible{outline:2px solid #8db8ff;outline-offset:2px}
     .validator-copy-status{min-height:1.3em;color:var(--secondary);font-size:.88rem}
@@ -54,25 +54,15 @@ keywords:
       .validator-copy-tool textarea{min-height:420px;font-size:12px}
     }
   </style>
-  <h2>Copy/Paste Fresh Validator Setup</h2>
-  <p>This helper builds a fresh-server command script with your domain and SSH port. Review it before running: it installs Docker, resets UFW, starts `postfiatd`, creates validator keys, sets the domain, injects the validator token, and prints the TOML you must publish.</p>
-  <div class="validator-copy-grid">
-    <div class="validator-copy-field">
-      <label for="pftValidatorDomain">Validator domain</label>
-      <input id="pftValidatorDomain" type="text" value="example.com" autocomplete="off" spellcheck="false" />
-    </div>
-    <div class="validator-copy-field">
-      <label for="pftValidatorSshPort">SSH port</label>
-      <input id="pftValidatorSshPort" type="text" value="22" inputmode="numeric" />
-    </div>
-  </div>
+  <h2>Copy Full Official Markdown</h2>
+  <p>Use this to copy the complete canonical validator setup markdown from `/agents/validator-setup.md`. This is the source file agents should read or paste into another tool.</p>
   <div class="validator-copy-actions">
-    <button class="validator-copy-button" type="button" data-copy-validator-script>Copy setup script</button>
-    <button class="validator-copy-button secondary" type="button" data-copy-validator-verify>Copy health check</button>
+    <button class="validator-copy-button" type="button" data-copy-validator-markdown>Copy full markdown</button>
+    <a class="validator-copy-button secondary" href="/agents/validator-setup.md">Open raw markdown</a>
     <span class="validator-copy-status" id="pftValidatorCopyStatus" aria-live="polite"></span>
   </div>
-  <textarea id="pftValidatorScript" readonly spellcheck="false" aria-label="Generated Post Fiat validator setup script"></textarea>
-  <p class="validator-copy-note">After the script runs, publish `/opt/postfiatd/pft-ledger.toml` at `https://your-domain/.well-known/pft-ledger.toml`, then run the copied health check.</p>
+  <textarea id="pftValidatorMarkdown" readonly spellcheck="false" aria-label="Full official Post Fiat validator setup markdown">Loading official validator markdown...</textarea>
+  <p class="validator-copy-note">Source: <a href="/agents/validator-setup.md">/agents/validator-setup.md</a></p>
   <script src="/js/validator-copy.js" defer></script>
 </div>
 
