@@ -1,0 +1,18 @@
+User-agent: *
+{{- if hugo.IsProduction | or (eq site.Params.env "production") }}
+Disallow:
+{{- else }}
+Disallow: /
+{{- end }}
+
+Sitemap: {{ "sitemap.xml" | absURL }}
+
+# Canonical assistant-facing overview:
+# {{ "llms.txt" | absURL }}
+# Extended assistant-facing overview:
+# {{ "llms-full.txt" | absURL }}
+# Machine-readable project summary:
+# {{ "postfiat-project.json" | absURL }}
+# Agents index and fresh validator setup:
+# {{ "agents.txt" | absURL }}
+# {{ "agents/validator-setup.md" | absURL }}
