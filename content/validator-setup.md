@@ -12,9 +12,9 @@ keywords:
   - pft-ledger.toml
 ---
 
-# Post Fiat Fresh Validator Setup Guide for Agents
+# Fresh Validator Setup
 
-> Purpose: end-to-end, agent-readable instructions for installing a fresh Post Fiat `postfiatd` validator on testnet, generating a validator identity, binding it to a domain, publishing domain proof, and verifying that the node is proposing.
+> Install a fresh Post Fiat testnet validator, bind it to a domain, publish proof, and verify that the node is proposing.
 
 <div class="validator-copy-tool" id="pftValidatorCopyTool">
   <style>
