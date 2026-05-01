@@ -35,8 +35,10 @@ keywords:
     @media(max-width:720px){
       body{overflow-x:hidden}
       .post-single{max-width:100%;padding-inline:14px}
-      .post-content h1{font-size:2rem;line-height:1.15}
-      .post-content h2{font-size:1.6rem;line-height:1.18}
+      .post-title{font-size:2rem;line-height:1.15}
+      .post-description{font-size:1rem;line-height:1.45;max-width:100%}
+      .post-content h1{font-size:1.75rem;line-height:1.16}
+      .post-content h2{font-size:1.45rem;line-height:1.18}
       .nav{overflow-x:auto;white-space:nowrap}
       .nav a{flex:0 0 auto}
       .validator-copy-grid{grid-template-columns:1fr}
