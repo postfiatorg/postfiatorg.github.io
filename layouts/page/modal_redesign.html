@@ -209,8 +209,8 @@
       z-index:1;
       pointer-events:none;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.74) 26%, rgba(0,0,0,.25) 54%, rgba(0,0,0,.86) 88%, #000 100%),
-        radial-gradient(circle at 50% 8%, rgba(127,238,100,.16), transparent 30%);
+        linear-gradient(180deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.58) 26%, rgba(0,0,0,.16) 54%, rgba(0,0,0,.82) 88%, #000 100%),
+        radial-gradient(circle at 50% 8%, rgba(127,238,100,.18), transparent 30%);
     }
 
     .hero-inner{
@@ -760,14 +760,58 @@
       opacity:.65;
       animation:visualSweep 2.8s ease-out infinite;
     }
+    .brand-cube-field{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      overflow:hidden;
+    }
+    .brand-cube-field span{
+      position:absolute;
+      left:var(--x);
+      top:var(--y);
+      width:var(--size);
+      height:var(--size);
+      transform:rotate(45deg) translate3d(0,0,0);
+      border:1px solid rgba(221,255,220,.38);
+      background:
+        linear-gradient(135deg, rgba(221,255,220,.22), transparent 45%),
+        linear-gradient(315deg, rgba(9,175,88,.5), rgba(0,0,0,.16));
+      box-shadow:0 0 24px rgba(127,238,100,.18);
+      opacity:.18;
+      animation:brandCubeDrift var(--speed) cubic-bezier(.2,.8,.2,1) infinite;
+      animation-delay:var(--delay);
+    }
+    .brand-cube-field span::before,
+    .brand-cube-field span::after{
+      content:"";
+      position:absolute;
+      inset:18%;
+      border-top:2px solid rgba(221,255,220,.6);
+      transform:rotate(var(--mark-rotation, 0deg));
+    }
+    .brand-cube-field span::after{
+      border-top:0;
+      border-bottom:2px solid rgba(127,238,100,.62);
+      transform:translateY(28%) rotate(var(--mark-counter-rotation, 0deg));
+    }
+    .system-row.is-active .brand-cube-field span{opacity:.58}
     @keyframes visualSweep{
       0%{transform:translateX(-110%)}
       48%,100%{transform:translateX(110%)}
+    }
+    @keyframes brandCubeDrift{
+      0%{transform:rotate(45deg) translate3d(-18px,18px,0) scale(.78);opacity:.08}
+      38%{opacity:.68}
+      66%{transform:rotate(45deg) translate3d(24px,-28px,0) scale(1)}
+      100%{transform:rotate(45deg) translate3d(58px,-70px,0) scale(.72);opacity:.06}
     }
     .window{
       position:absolute;
       left:50%;
       top:50%;
+      z-index:1;
       width:min(420px, 82%);
       min-height:172px;
       transform:translate(-50%,-50%) scale(.94);
@@ -1269,7 +1313,7 @@
       .brand img{width:26px;height:26px}
       .brand span{font-size:.94rem}
       .hero{min-height:760px;padding-top:138px}
-      .hero h1{font-size:clamp(2.55rem, 14vw, 4.1rem)}
+      .hero h1{font-size:clamp(2.25rem, 11.6vw, 3.5rem)}
       .hero-copy{font-size:1rem}
       .hero-actions{gap:10px}
       .btn{width:100%;max-width:290px}
@@ -2250,9 +2294,38 @@
     refreshTaskFeed();
     window.setInterval(refreshTaskFeed, 30000);
 
+    function injectBrandCubeFields(){
+      const positions = [
+        [9,18,34,6.8,-.4,-28],[28,12,18,5.4,-1.1,18],[74,16,26,6.1,-.8,-18],
+        [88,34,15,4.8,-1.7,24],[14,72,20,5.7,-2.2,12],[38,74,28,6.4,-1.4,-34],
+        [70,66,17,5.2,-2.8,28],[84,78,31,6.9,-.6,-12],[50,36,22,5.8,-2.5,0]
+      ];
+
+      document.querySelectorAll('.system-visual').forEach((visual, visualIndex) => {
+        if(visual.querySelector('.brand-cube-field')) return;
+        const field = document.createElement('div');
+        field.className = 'brand-cube-field';
+        positions.forEach(([x,y,size,speed,delay,rotation], index) => {
+          const cube = document.createElement('span');
+          cube.style.setProperty('--x', `${Math.max(4, Math.min(92, x + ((visualIndex % 2) ? -3 : 3)))}%`);
+          cube.style.setProperty('--y', `${Math.max(6, Math.min(86, y + ((index % 3) - 1) * visualIndex * 2))}%`);
+          cube.style.setProperty('--size', `${size}px`);
+          cube.style.setProperty('--speed', `${speed}s`);
+          cube.style.setProperty('--delay', `${delay - visualIndex * .24}s`);
+          cube.style.setProperty('--mark-rotation', `${rotation}deg`);
+          cube.style.setProperty('--mark-counter-rotation', `${rotation * -1}deg`);
+          field.appendChild(cube);
+        });
+        visual.prepend(field);
+      });
+    }
+
+    injectBrandCubeFields();
+
     const canvas = document.getElementById('heroCanvas');
     const ctx = canvas.getContext('2d');
     const reducedMotion = reducedMotionQuery.matches;
+    const heroTiles = [];
     let width = 0;
     let height = 0;
     let dpr = 1;
@@ -2265,40 +2338,163 @@
       canvas.width = Math.max(1, Math.floor(width * dpr));
       canvas.height = Math.max(1, Math.floor(height * dpr));
       ctx.setTransform(dpr,0,0,dpr,0,0);
+      rebuildHeroTiles();
     }
 
-    function drawCube(cx, cy, size, phase){
-      const lift = Math.sin(phase) * 5;
-      const topY = cy - size * .45 + lift;
-      const left = cx - size * .48;
-      const right = cx + size * .48;
-      const mid = cy + size * .08 + lift;
-      const bottom = cy + size * .58 + lift;
+    function seededNoise(index){
+      const x = Math.sin(index * 127.1 + 311.7) * 43758.5453123;
+      return x - Math.floor(x);
+    }
+
+    function rebuildHeroTiles(){
+      const count = width < 720 ? 34 : 76;
+      heroTiles.length = 0;
+      for(let i=0;i<count;i++){
+        const seed = seededNoise(i);
+        heroTiles.push({
+          offset:seededNoise(i + 8),
+          speed:.018 + seededNoise(i + 16) * .035,
+          size:(width < 720 ? 9 : 13) + seededNoise(i + 24) * (width < 720 ? 24 : 46),
+          depth:.22 + seededNoise(i + 32) * .58,
+          family:i % 4,
+          lane:seed,
+          phase:seededNoise(i + 40) * Math.PI * 2,
+          branded:i % 5 === 0 || seededNoise(i + 48) > .82,
+          alpha:.18 + seededNoise(i + 56) * .54
+        });
+      }
+    }
+
+    function lerp(a, b, t){
+      return a + (b - a) * t;
+    }
+
+    function drawPostFiatMark(cx, cy, size, alpha, rotation = 0){
       ctx.save();
-      ctx.globalAlpha = .75;
-      ctx.strokeStyle = 'rgba(127,238,100,.62)';
-      ctx.lineWidth = 1.4;
-      ctx.fillStyle = 'rgba(9,175,88,.20)';
+      ctx.translate(cx, cy);
+      ctx.rotate(rotation);
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = Math.max(1.2, size * .105);
+      ctx.strokeStyle = `rgba(221,255,220,${alpha})`;
+      ctx.shadowColor = 'rgba(127,238,100,.7)';
+      ctx.shadowBlur = size * .18;
       ctx.beginPath();
-      ctx.moveTo(cx, topY);
-      ctx.lineTo(right, mid);
-      ctx.lineTo(cx, bottom);
-      ctx.lineTo(left, mid);
+      ctx.moveTo(-size*.42, -size*.38);
+      ctx.lineTo(size*.42, size*.34);
+      ctx.moveTo(size*.42, -size*.38);
+      ctx.lineTo(-size*.42, size*.34);
+      ctx.moveTo(-size*.42, size*.34);
+      ctx.lineTo(size*.42, size*.34);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawIsoBox(cx, cy, size, depthScale, phase, alpha, branded = false){
+      const lift = Math.sin(phase) * Math.min(10, size * .18);
+      const depth = size * depthScale;
+      const h = size * .52;
+      const w = size;
+      const top = [cx, cy - h + lift];
+      const right = [cx + w, cy + lift];
+      const bottom = [cx, cy + h + lift];
+      const left = [cx - w, cy + lift];
+      const bottomDrop = [bottom[0], bottom[1] + depth];
+      const leftDrop = [left[0], left[1] + depth];
+      const rightDrop = [right[0], right[1] + depth];
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.shadowColor = 'rgba(127,238,100,.38)';
+      ctx.shadowBlur = Math.max(8, size * .36);
+
+      ctx.fillStyle = 'rgba(127,238,100,.22)';
+      ctx.strokeStyle = 'rgba(221,255,220,.58)';
+      ctx.lineWidth = Math.max(.8, size * .025);
+      ctx.beginPath();
+      ctx.moveTo(top[0], top[1]);
+      ctx.lineTo(right[0], right[1]);
+      ctx.lineTo(bottom[0], bottom[1]);
+      ctx.lineTo(left[0], left[1]);
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
+
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = 'rgba(9,175,88,.24)';
       ctx.beginPath();
-      ctx.moveTo(cx, topY);
-      ctx.lineTo(cx, bottom);
-      ctx.moveTo(left, mid);
-      ctx.lineTo(right, mid);
-      ctx.stroke();
-      ctx.shadowColor = 'rgba(127,238,100,.45)';
-      ctx.shadowBlur = 18;
-      ctx.beginPath();
-      ctx.arc(cx, topY, 2.5, 0, Math.PI*2);
-      ctx.fillStyle = '#7fee64';
+      ctx.moveTo(left[0], left[1]);
+      ctx.lineTo(bottom[0], bottom[1]);
+      ctx.lineTo(bottomDrop[0], bottomDrop[1]);
+      ctx.lineTo(leftDrop[0], leftDrop[1]);
+      ctx.closePath();
       ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = 'rgba(221,255,220,.12)';
+      ctx.beginPath();
+      ctx.moveTo(right[0], right[1]);
+      ctx.lineTo(bottom[0], bottom[1]);
+      ctx.lineTo(bottomDrop[0], bottomDrop[1]);
+      ctx.lineTo(rightDrop[0], rightDrop[1]);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      if(branded){
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(top[0], top[1]);
+        ctx.lineTo(right[0], right[1]);
+        ctx.lineTo(bottom[0], bottom[1]);
+        ctx.lineTo(left[0], left[1]);
+        ctx.closePath();
+        ctx.clip();
+        drawPostFiatMark(cx, cy + lift, size * .48, .72, 0);
+        ctx.restore();
+      }
+
+      ctx.restore();
+    }
+
+    function drawHeroGlyph(){
+      const scale = Math.min(width, height) * (width < 720 ? .38 : .46);
+      const cx = width * .5;
+      const cy = height * (width < 720 ? .36 : .42);
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      drawPostFiatMark(cx, cy, scale, .045 + Math.sin(frame * 1.8) * .012, Math.sin(frame * .18) * .03);
+      drawPostFiatMark(cx, cy, scale * .72, .032, -Math.sin(frame * .2) * .04);
+      ctx.restore();
+    }
+
+    function drawMovingHeroTiles(){
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      heroTiles.forEach((tile, index) => {
+        const p = (tile.offset + frame * tile.speed) % 1;
+        const wave = Math.sin((p * Math.PI * 2) + tile.phase);
+        let x;
+        let y;
+        if(tile.family === 0){
+          x = lerp(-width*.14, width*1.14, p);
+          y = lerp(height*(.84 + tile.lane*.16), height*(.18 + tile.lane*.1), p);
+        }else if(tile.family === 1){
+          x = lerp(width*1.12, -width*.12, p);
+          y = lerp(height*(.76 + tile.lane*.18), height*(.24 + tile.lane*.12), p);
+        }else if(tile.family === 2){
+          x = width*(.08 + tile.lane*.84) + wave * width * .04;
+          y = lerp(height*1.02, height*.14, p);
+        }else{
+          x = lerp(width*(.18 + tile.lane*.24), width*(.82 - tile.lane*.18), p);
+          y = height*(.24 + tile.lane*.56) + wave * height * .05;
+        }
+
+        const perspective = .62 + Math.sin(Math.PI * p) * .62;
+        const size = tile.size * perspective;
+        const alpha = tile.alpha * (.18 + Math.sin(Math.PI * p) * .82);
+        drawIsoBox(x, y, size, tile.depth, frame * 2.2 + tile.phase + index, alpha, tile.branded);
+      });
       ctx.restore();
     }
 
@@ -2333,6 +2529,8 @@
       }
       ctx.restore();
 
+      drawHeroGlyph();
+
       const gradient = ctx.createLinearGradient(0, height*.28, 0, height);
       gradient.addColorStop(0, 'rgba(0,0,0,0)');
       gradient.addColorStop(.62, 'rgba(9,175,88,.13)');
@@ -2346,12 +2544,14 @@
       ctx.closePath();
       ctx.fill();
 
+      drawMovingHeroTiles();
+
       const nodes = [
-        [0.18,0.36,20],[0.31,0.52,10],[0.72,0.44,16],[0.84,0.28,8],
-        [0.58,0.68,26],[0.42,0.76,12],[0.12,0.70,18],[0.88,0.72,11]
+        [0.18,0.36,28],[0.31,0.52,16],[0.72,0.44,24],[0.84,0.28,18],
+        [0.58,0.68,38],[0.42,0.76,22],[0.12,0.70,30],[0.88,0.72,24]
       ];
       nodes.forEach(([nx,ny,s], i) => {
-        drawCube(width*nx, height*ny, s + Math.sin(frame*1.8+i)*2, frame*2+i);
+        drawIsoBox(width*nx, height*ny, s + Math.sin(frame*1.8+i)*2, .46, frame*2+i, .68, i % 2 === 0);
       });
 
       ctx.save();

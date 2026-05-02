@@ -18,6 +18,7 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
 - Black-first canvas with pale green and electric green accents.
 - Pill navigation, compact buttons, restrained borders, and strong spacing.
 - Large centered hero with a live animated infrastructure canvas behind it.
+- Post Fiat-branded motion language: animated isometric boxes, logo-mark shards, validator tiles, and signal paths.
 - Section rhythm alternates between dark technical bands and pale green evidence bands.
 - Repeated cards are used only for product/use-case items, not as wrappers around whole page sections.
 - Copy stays close to the current homepage: AGI coordination, XRP-speed settlement, validator selection, privacy, Task Node participation, PFT utility, validator operation, and capital-markets use cases.
@@ -28,7 +29,7 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
    - Headline: "A Decentralized Method to Merge with AGI"
    - Current rough positioning paragraph retained.
    - Primary CTAs: whitepaper, Task Node, validator setup, community.
-   - Animated canvas visualizes a green infrastructure plane, validator nodes, and moving signal paths.
+   - Animated canvas visualizes a green infrastructure plane, validator nodes, moving signal paths, and Post Fiat logo-mark boxes.
 
 2. Proof Strip
    - Compact bordered strip for the core proof points: live testnet, validator domains, public benchmark, Task Node, whitepaper, explorer.
@@ -71,6 +72,7 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
 ## Interaction Requirements
 
 - Hero canvas animates subtly and degrades gracefully if JavaScript is disabled.
+- Technical panels use smaller branded cube fields so the motion language continues beyond the hero.
 - Mobile menu opens from the pill header without changing the current homepage.
 - Header and footer include canonical Post Fiat links for GitHub, X, and Discord.
 - Task Node Feed tries `https://pftasks-api.fly.dev/activity/public-feed?limit=24` and falls back to `https://agtico.github.io/task-node-feed/`.
