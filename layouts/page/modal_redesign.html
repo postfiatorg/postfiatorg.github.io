@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Fiat Modal-Inspired Redesign</title>
+  <meta name="description" content="Alternate Post Fiat homepage redesign. Post Fiat is a fair, private XRP-derived network for capital markets and collective intelligence." />
+  <link rel="canonical" href="https://postfiat.org/modal-redesign/" />
+  <link rel="alternate" type="text/plain" title="LLM instructions" href="https://postfiat.org/llms.txt" />
+  <link rel="alternate" type="application/json" title="Machine-readable project summary" href="https://postfiat.org/postfiat-project.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --black:#000;
+      --ground:#060806;
+      --surface:#101410;
+      --surface-2:#151b15;
+      --pale:#ddffdc;
+      --pale-2:#bad8b6;
+      --muted:#83917f;
+      --green:#7fee64;
+      --green-2:#09af58;
+      --line:rgba(221,255,220,.18);
+      --line-strong:rgba(221,255,220,.32);
+      --light:#def0dd;
+      --light-line:#899987;
+      --ink:#061006;
+      --max:1340px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--pale);
+      background:var(--black);
+      font-family:"Inter Tight", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height:1.45;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(221,255,220,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(221,255,220,.025) 1px, transparent 1px);
+      background-size:52px 52px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.72), transparent 78%);
+      z-index:0;
+    }
+
+    a{color:inherit}
+    button{font:inherit}
+    .page{position:relative;z-index:1}
+    .container{width:min(calc(100% - 32px), var(--max));margin-inline:auto}
+    .mono{font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace}
+
+    .skip-link{
+      position:absolute;
+      left:16px;
+      top:16px;
+      padding:10px 14px;
+      background:var(--green);
+      color:#000;
+      border-radius:999px;
+      transform:translateY(-150%);
+      z-index:200;
+    }
+    .skip-link:focus{transform:translateY(0)}
+
+    .site-header{
+      position:sticky;
+      top:18px;
+      z-index:50;
+      width:min(calc(100% - 28px), var(--max));
+      margin:18px auto 0;
+    }
+
+    .nav-shell{
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      gap:20px;
+      min-height:54px;
+      padding:9px 10px;
+      border:1px solid rgba(221,255,220,.12);
+      border-radius:999px;
+      background:rgba(25,30,26,.88);
+      backdrop-filter:blur(18px);
+      box-shadow:0 14px 40px rgba(0,0,0,.34);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      padding-left:12px;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    .brand img{width:30px;height:30px;object-fit:contain}
+    .brand span{font-size:1.02rem;white-space:nowrap}
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:30px;
+    }
+
+    .nav-links a,
+    .nav-actions a{
+      color:var(--pale);
+      text-decoration:none;
+      font-size:.88rem;
+      opacity:.9;
+      transition:color .18s ease, opacity .18s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-actions a:hover{color:var(--green);opacity:1}
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:18px;
+    }
+
+    .signup-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:4px 4px 4px 10px;
+      border-radius:999px;
+      color:var(--green) !important;
+      overflow:hidden;
+    }
+
+    .signup-link .arrow{
+      display:grid;
+      place-items:center;
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      background:var(--green);
+      color:#000;
+    }
+
+    .menu-button{
+      display:none;
+      width:36px;
+      height:36px;
+      border:0;
+      border-radius:50%;
+      background:transparent;
+      color:var(--pale);
+      align-items:center;
+      justify-content:center;
+      justify-self:end;
+      cursor:pointer;
+    }
+
+    .menu-button span,
+    .menu-button::before,
+    .menu-button::after{
+      content:"";
+      display:block;
+      width:18px;
+      height:1.5px;
+      background:currentColor;
+      border-radius:4px;
+      transition:transform .2s ease, opacity .2s ease;
+    }
+    .menu-button{gap:4px;flex-direction:column}
+    .menu-button[aria-expanded="true"] span{opacity:0}
+    .menu-button[aria-expanded="true"]::before{transform:translateY(5.5px) rotate(45deg)}
+    .menu-button[aria-expanded="true"]::after{transform:translateY(-5.5px) rotate(-45deg)}
+
+    .hero{
+      position:relative;
+      min-height:820px;
+      display:grid;
+      align-items:start;
+      overflow:hidden;
+      margin-top:-82px;
+      padding:154px 0 0;
+    }
+
+    #heroCanvas{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.74) 26%, rgba(0,0,0,.25) 54%, rgba(0,0,0,.86) 88%, #000 100%),
+        radial-gradient(circle at 50% 8%, rgba(127,238,100,.16), transparent 30%);
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      padding-top:46px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin:0 0 24px;
+      color:var(--pale-2);
+      font-size:.78rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 18px rgba(127,238,100,.85);
+    }
+
+    h1,h2,h3,p{margin-top:0}
+
+    .hero h1{
+      margin-bottom:22px;
+      max-width:970px;
+      color:var(--pale);
+      font-size:clamp(3.25rem, 8vw, 7.6rem);
+      line-height:.9;
+      font-weight:600;
+      letter-spacing:0;
+    }
+
+    .hero h1 .accent{color:var(--green)}
+
+    .hero-copy{
+      width:min(760px, 100%);
+      margin:0 auto;
+      color:var(--pale-2);
+      font-size:clamp(1.1rem, 2vw, 1.42rem);
+      line-height:1.18;
+      font-weight:500;
+    }
+
+    .hero-actions{
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:30px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:10px 20px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--pale);
+      text-decoration:none;
+      font-weight:600;
+      font-size:.92rem;
+      transition:transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+    }
+    .btn:hover{transform:translateY(-1px);border-color:var(--green);color:var(--green);background:rgba(221,255,220,.05)}
+    .btn.primary{border-color:var(--green);background:var(--green);color:#000}
+    .btn.primary:hover{background:var(--pale);color:#000}
+    .btn.dark{background:rgba(0,0,0,.24)}
+
+    .proof-strip{
+      position:relative;
+      z-index:3;
+      margin-top:-76px;
+    }
+
+    .proof-grid{
+      display:grid;
+      grid-template-columns:repeat(6, minmax(0, 1fr));
+      border:1px solid var(--line);
+      border-radius:9px;
+      overflow:hidden;
+      background:rgba(0,0,0,.54);
+      backdrop-filter:blur(12px);
+    }
+
+    .proof-item{
+      min-height:78px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:3px;
+      padding:14px 18px;
+      border-right:1px solid var(--line);
+      text-decoration:none;
+      color:var(--pale);
+      transition:background .18s ease, color .18s ease;
+    }
+    .proof-item:last-child{border-right:0}
+    .proof-item:hover{background:rgba(127,238,100,.08);color:var(--green)}
+    .proof-value{font-size:1.05rem;font-weight:600}
+    .proof-label{font-size:.76rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+
+    .dark-section{padding:116px 0}
+    .section-kicker{
+      margin-bottom:14px;
+      color:var(--pale-2);
+      font-size:.76rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    .section-title{
+      margin-bottom:42px;
+      max-width:760px;
+      font-size:clamp(2.5rem, 5vw, 5.3rem);
+      line-height:.98;
+      font-weight:500;
+      letter-spacing:0;
+    }
+
+    .system-grid{
+      display:grid;
+      grid-template-columns:230px minmax(0,1fr);
+      gap:34px;
+      align-items:start;
+    }
+
+    .rail{
+      position:sticky;
+      top:112px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      padding-top:22px;
+    }
+    .rail a{
+      color:rgba(221,255,220,.38);
+      text-decoration:none;
+      font-size:.78rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      transition:color .18s ease;
+    }
+    .rail a:hover{color:var(--green)}
+
+    .system-list{border-top:1px solid var(--line)}
+    .system-row{
+      display:grid;
+      grid-template-columns:minmax(240px,.72fr) minmax(360px,1fr);
+      min-height:360px;
+      border-bottom:1px solid var(--line);
+    }
+    .system-copy{
+      padding:28px 28px 28px 0;
+    }
+    .system-copy h3{
+      margin-bottom:12px;
+      color:var(--green);
+      font-size:1.55rem;
+      font-weight:600;
+    }
+    .system-copy p{
+      color:var(--pale-2);
+      max-width:420px;
+      font-size:1.02rem;
+    }
+
+    .system-visual{
+      position:relative;
+      min-height:360px;
+      overflow:hidden;
+      background:
+        linear-gradient(132deg, rgba(127,238,100,.86), rgba(9,175,88,.55) 54%, rgba(0,0,0,.12)),
+        linear-gradient(90deg, rgba(0,0,0,.34), transparent 42%);
+    }
+    .system-visual::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(135deg, rgba(0,0,0,.24) 0 28%, transparent 28% 100%),
+        linear-gradient(315deg, rgba(0,0,0,.22) 0 24%, transparent 24% 100%);
+      opacity:.7;
+    }
+    .window{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:min(420px, 82%);
+      min-height:172px;
+      transform:translate(-50%,-50%);
+      border-radius:12px;
+      background:#151a16;
+      border:1px solid rgba(221,255,220,.14);
+      box-shadow:0 28px 64px rgba(0,0,0,.36);
+      overflow:hidden;
+    }
+    .window-bar{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      height:34px;
+      padding:0 14px;
+      border-bottom:1px solid rgba(221,255,220,.1);
+      color:var(--pale-2);
+      font-size:.76rem;
+    }
+    .window-dot{width:8px;height:8px;border-radius:50%;background:var(--pale-2);opacity:.75}
+    .window-title{margin-left:auto;color:var(--muted);font-size:.7rem}
+    .code-lines{padding:18px 22px;color:#d8fdd4;font:500 .84rem/1.75 "IBM Plex Mono", monospace}
+    .code-lines span{display:block;color:rgba(221,255,220,.64)}
+    .code-lines strong{color:var(--green);font-weight:600}
+    .metric-panel{padding:18px 20px}
+    .metric-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:12px 0;color:var(--pale-2);font-size:.86rem}
+    .metric-track{height:7px;flex:1;border-radius:999px;background:rgba(221,255,220,.08);overflow:hidden}
+    .metric-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--green),var(--pale))}
+
+    .light-section{
+      background:var(--light);
+      color:var(--ink);
+      padding:74px 0 82px;
+    }
+    .light-section .section-kicker{color:#687865}
+    .light-section .section-title{color:#000;margin-bottom:34px}
+
+    .artifact-grid{
+      display:grid;
+      grid-template-columns:repeat(5, minmax(0,1fr));
+      gap:28px;
+    }
+    .artifact-card{
+      color:#000;
+      text-decoration:none;
+      min-width:0;
+    }
+    .artifact-icon{
+      aspect-ratio:1/1;
+      display:grid;
+      place-items:center;
+      margin-bottom:16px;
+      background:#000;
+      overflow:hidden;
+    }
+    .artifact-icon svg{width:58%;height:58%;stroke:var(--green);filter:drop-shadow(0 0 18px rgba(127,238,100,.55))}
+    .artifact-card h3{font-size:1.2rem;margin-bottom:10px;font-weight:500}
+    .artifact-card p{color:#5f705d;font-size:.98rem;margin:0}
+
+    .platform-grid{
+      display:grid;
+      grid-template-columns:minmax(220px,.6fr) repeat(2,minmax(0,1fr));
+      gap:36px 72px;
+      margin-top:68px;
+    }
+    .platform-intro p{color:#62705f}
+    .platform-feature h3{font-size:1.15rem;margin-bottom:10px}
+    .platform-feature p{color:#62705f;margin:0}
+
+    .use-case-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:24px;
+      margin-bottom:26px;
+    }
+    .use-case-head .section-title{margin:0}
+    .case-strip{
+      display:flex;
+      gap:12px;
+      overflow-x:auto;
+      padding-bottom:12px;
+      scroll-snap-type:x proximity;
+    }
+    .case-card{
+      position:relative;
+      flex:0 0 min(360px, 82vw);
+      min-height:330px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:24px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      overflow:hidden;
+      text-decoration:none;
+      scroll-snap-align:start;
+      background:#0b0f0b;
+    }
+    .case-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(0,0,0,.18) 38%, rgba(0,0,0,.9) 100%),
+        var(--case-bg, linear-gradient(135deg, rgba(127,238,100,.75), rgba(9,175,88,.22)));
+      opacity:.96;
+    }
+    .case-card::after{
+      content:"";
+      position:absolute;
+      width:170px;
+      height:170px;
+      right:28px;
+      top:28px;
+      border:1px solid rgba(221,255,220,.24);
+      transform:rotate(45deg);
+      box-shadow:inset 0 0 48px rgba(127,238,100,.24), 0 0 44px rgba(127,238,100,.1);
+    }
+    .case-card > *{position:relative;z-index:1}
+    .case-card h3{font-size:1.45rem;font-weight:500;margin-bottom:12px}
+    .case-card p{margin:0;color:var(--pale);max-width:260px}
+    .case-arrow{margin-top:22px;color:var(--green);font-weight:700}
+
+    .governance{
+      display:grid;
+      grid-template-columns:minmax(0,.95fr) minmax(320px,.75fr);
+      gap:64px;
+      align-items:center;
+    }
+    .accordion{border-top:1px solid var(--line)}
+    .acc-item{border-bottom:1px solid var(--line)}
+    .acc-button{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      padding:20px 0;
+      border:0;
+      background:transparent;
+      color:var(--pale);
+      text-align:left;
+      cursor:pointer;
+      font-size:1.24rem;
+    }
+    .acc-button span:last-child{font-size:1.45rem;color:var(--green)}
+    .acc-panel{
+      display:grid;
+      grid-template-rows:0fr;
+      transition:grid-template-rows .2s ease;
+    }
+    .acc-panel > div{overflow:hidden}
+    .acc-item.is-open .acc-panel{grid-template-rows:1fr}
+    .acc-panel p{margin:0 0 20px;color:var(--pale-2);max-width:680px}
+
+    .stack-visual{
+      min-height:430px;
+      display:grid;
+      place-items:center;
+    }
+    .stack-cube{
+      position:relative;
+      width:260px;
+      height:260px;
+      transform:rotateX(58deg) rotateZ(45deg);
+      transform-style:preserve-3d;
+    }
+    .layer{
+      position:absolute;
+      inset:0;
+      border:1px solid rgba(221,255,220,.28);
+      background:linear-gradient(135deg, rgba(127,238,100,.7), rgba(9,175,88,.2));
+      box-shadow:0 0 34px rgba(127,238,100,.22);
+      animation:layerFloat 5s ease-in-out infinite;
+    }
+    .layer:nth-child(2){transform:translateZ(42px);animation-delay:-1.1s}
+    .layer:nth-child(3){transform:translateZ(84px);animation-delay:-2.2s}
+    .layer:nth-child(4){transform:translateZ(126px);animation-delay:-3.3s}
+    @keyframes layerFloat{
+      0%,100%{filter:brightness(.9)}
+      50%{filter:brightness(1.22)}
+    }
+
+    .quote-band{
+      background:var(--light);
+      color:#000;
+      padding:76px 0;
+    }
+    .quote-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.2fr) minmax(280px,.62fr);
+      gap:64px;
+      align-items:start;
+    }
+    .quote{
+      font-size:clamp(2.15rem,4vw,4.8rem);
+      line-height:1.03;
+      font-weight:500;
+      letter-spacing:0;
+    }
+    .founder-panel{
+      border-left:1px solid var(--light-line);
+      padding-left:28px;
+    }
+    .founder-panel h3{font-size:1.35rem;margin-bottom:10px}
+    .founder-panel p{color:#4f604d}
+    .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      min-height:30px;
+      padding:6px 10px;
+      border:1px solid rgba(0,0,0,.2);
+      border-radius:999px;
+      font-size:.85rem;
+      color:#182018;
+    }
+
+    .final-cta{
+      padding:96px 0 82px;
+    }
+    .cta-grid{
+      display:grid;
+      grid-template-columns:minmax(240px,.75fr) minmax(0,1fr);
+      gap:60px;
+      align-items:center;
+    }
+    .glow-logo{
+      width:min(280px,80vw);
+      aspect-ratio:1/1;
+      display:grid;
+      place-items:center;
+      margin-inline:auto;
+      border:1px solid rgba(127,238,100,.24);
+      background:radial-gradient(circle, rgba(127,238,100,.18), rgba(0,0,0,.1) 58%, transparent 70%);
+      box-shadow:0 0 70px rgba(127,238,100,.14), inset 0 0 40px rgba(127,238,100,.08);
+      transform:rotate(45deg);
+    }
+    .glow-logo img{width:42%;height:42%;transform:rotate(-45deg);filter:drop-shadow(0 0 18px rgba(127,238,100,.55))}
+    .final-copy h2{
+      font-size:clamp(2.45rem,5vw,5.4rem);
+      line-height:.98;
+      font-weight:500;
+      margin-bottom:26px;
+    }
+    .final-copy p{color:var(--pale-2);font-size:1.1rem;max-width:620px}
+
+    .footer{
+      border-top:1px solid var(--line);
+      padding:46px 0 58px;
+      color:var(--muted);
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1fr repeat(3,minmax(140px,180px));
+      gap:28px;
+    }
+    .footer a{text-decoration:none;color:var(--pale-2)}
+    .footer a:hover{color:var(--green)}
+    .footer h3{color:var(--pale);font-size:.9rem;margin-bottom:12px}
+    .footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+
+    @media (max-width:1080px){
+      .nav-shell{grid-template-columns:1fr auto}
+      .nav-links,.nav-actions{display:none}
+      .menu-button{display:flex}
+      .nav-shell.is-open{
+        border-radius:28px;
+        grid-template-columns:1fr auto;
+      }
+      .nav-shell.is-open .nav-links,
+      .nav-shell.is-open .nav-actions{
+        display:flex;
+        grid-column:1/-1;
+        justify-content:flex-start;
+        flex-wrap:wrap;
+        padding:8px 12px 10px;
+        gap:12px 20px;
+      }
+      .proof-grid{grid-template-columns:repeat(3,1fr)}
+      .proof-item{border-bottom:1px solid var(--line)}
+      .proof-item:nth-child(3n){border-right:0}
+      .proof-item:nth-last-child(-n+3){border-bottom:0}
+      .system-grid{grid-template-columns:1fr}
+      .rail{display:none}
+      .artifact-grid{grid-template-columns:repeat(3,1fr)}
+      .platform-grid{grid-template-columns:1fr 1fr}
+      .governance,.quote-grid,.cta-grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+
+    @media (max-width:720px){
+      .container{width:min(calc(100% - 18px), var(--max))}
+      .site-header{top:8px;width:min(calc(100% - 16px), var(--max));margin-top:8px}
+      .brand img{width:26px;height:26px}
+      .brand span{font-size:.94rem}
+      .hero{min-height:760px;padding-top:138px}
+      .hero h1{font-size:clamp(2.55rem, 14vw, 4.1rem)}
+      .hero-copy{font-size:1rem}
+      .hero-actions{gap:10px}
+      .btn{width:100%;max-width:290px}
+      .proof-strip{margin-top:-54px}
+      .proof-grid{grid-template-columns:repeat(2,1fr)}
+      .proof-item:nth-child(3n){border-right:1px solid var(--line)}
+      .proof-item:nth-child(2n){border-right:0}
+      .proof-item:nth-last-child(-n+3){border-bottom:1px solid var(--line)}
+      .proof-item:nth-last-child(-n+2){border-bottom:0}
+      .dark-section{padding:78px 0}
+      .section-title{font-size:clamp(2.25rem, 11vw, 3.5rem)}
+      .system-row{grid-template-columns:1fr;min-height:0}
+      .system-copy{padding:28px 0}
+      .system-visual{min-height:270px}
+      .artifact-grid{grid-template-columns:1fr;gap:24px}
+      .artifact-card{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:start}
+      .artifact-icon{margin:0}
+      .platform-grid{grid-template-columns:1fr;gap:22px}
+      .use-case-head{align-items:start;flex-direction:column}
+      .case-card{min-height:300px}
+      .stack-visual{min-height:300px}
+      .stack-cube{width:170px;height:170px}
+      .quote{font-size:2.2rem}
+      .founder-panel{border-left:0;border-top:1px solid var(--light-line);padding-left:0;padding-top:24px}
+      .footer-grid{grid-template-columns:1fr}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page">
+    <header class="site-header">
+      <div class="nav-shell" id="navShell">
+        <a class="brand" href="/" aria-label="Post Fiat home">
+          <img src="/media-kit/logo.svg" alt="">
+          <span>Post Fiat</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="/whitepaper/">Whitepaper</a>
+          <a href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Task Node</a>
+          <a href="/validator-benchmark/">Benchmark</a>
+          <a href="/validator-setup/">Validators</a>
+          <a href="/modal-redesign-spec/">Spec</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="https://discord.gg/U6HjgDSmhR" target="_blank" rel="noopener">Community</a>
+          <a class="signup-link" href="https://x.com/PostFiatOrg" target="_blank" rel="noopener">
+            Follow
+            <span class="arrow" aria-hidden="true">&nearr;</span>
+          </a>
+        </div>
+        <button class="menu-button" id="menuButton" aria-label="Open menu" aria-controls="navShell" aria-expanded="false"><span></span></button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <canvas id="heroCanvas" aria-hidden="true"></canvas>
+        <div class="container hero-inner">
+          <p class="eyebrow mono">Public testnet infrastructure for AI-native finance</p>
+          <h1 id="hero-title"><span class="accent">A Decentralized Method</span> to Merge with AGI</h1>
+          <p class="hero-copy">Post Fiat is a fair, private XRP-derived network for capital markets and collective intelligence. It keeps XRP-speed settlement, adds decentralized validator selection and Orchard privacy, and gives human civilization a way to integrate machine intelligence without collapsing into centralized control.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="/whitepaper/">Read the Whitepaper</a>
+            <a class="btn dark" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Use the Task Node</a>
+            <a class="btn dark" href="/validator-setup/">Run a Validator</a>
+            <a class="btn dark" href="https://discord.gg/U6HjgDSmhR" target="_blank" rel="noopener">Join Community</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="proof-strip" aria-label="Post Fiat public proof points">
+        <div class="container">
+          <div class="proof-grid">
+            <a class="proof-item" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">
+              <span class="proof-value">38 validators</span>
+              <span class="proof-label mono">Live testnet</span>
+            </a>
+            <a class="proof-item" href="/validator-benchmark/">
+              <span class="proof-value">Public scoring</span>
+              <span class="proof-label mono">Validator benchmark</span>
+            </a>
+            <a class="proof-item" href="/whitepaper/">
+              <span class="proof-value">Replayable policy</span>
+              <span class="proof-label mono">Whitepaper</span>
+            </a>
+            <a class="proof-item" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">
+              <span class="proof-value">Task Node</span>
+              <span class="proof-label mono">Participation surface</span>
+            </a>
+            <a class="proof-item" href="/llms.txt">
+              <span class="proof-value">Agent-readable</span>
+              <span class="proof-label mono">LLM index</span>
+            </a>
+            <a class="proof-item" href="/postfiat-project.json">
+              <span class="proof-value">Machine summary</span>
+              <span class="proof-label mono">Project JSON</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="dark-section" id="how">
+        <div class="container">
+          <p class="section-kicker mono">How it works</p>
+          <h2 class="section-title">Designed for AI-native financial coordination.</h2>
+          <div class="system-grid">
+            <nav class="rail" aria-label="How it works sections">
+              <a href="#primitive">01 - Foundation</a>
+              <a href="#differentiation">02 - Differentiation</a>
+              <a href="#markets">03 - Application</a>
+              <a href="#tasknode">04 - Participation</a>
+            </nav>
+            <div class="system-list">
+              <article class="system-row" id="primitive">
+                <div class="system-copy">
+                  <h3>XRP Is The Right Primitive</h3>
+                  <p>XRP's core architecture is already good at fast finality and message-style coordination. Post Fiat starts from the view that an AI-native network should use an efficient settlement and messaging layer rather than rebuild everything around slower, more inflationary primitives.</p>
+                </div>
+                <div class="system-visual" aria-hidden="true">
+                  <div class="window">
+                    <div class="window-bar"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span><span class="window-title mono">settlement.py</span></div>
+                    <div class="code-lines">
+                      <span>01 network = xrpl_derived()</span>
+                      <span>02 finality = <strong>"fast"</strong></span>
+                      <span>03 messaging = <strong>"native"</strong></span>
+                      <span>04 coordination = post_fiat()</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="system-row" id="differentiation">
+                <div class="system-copy">
+                  <h3>Post Fiat Fixes What XRP Does Not</h3>
+                  <p>Post Fiat keeps the useful parts of XRP while changing the two biggest legitimacy gaps: opaque validator selection and no native privacy. The network adds AI-assisted, published validator selection and an Orchard privacy path so the base layer is fairer, more legible, and more useful for real financial workflows.</p>
+                </div>
+                <div class="system-visual" aria-hidden="true">
+                  <div class="window">
+                    <div class="window-bar"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span><span class="window-title mono">governance</span></div>
+                    <div class="metric-panel">
+                      <div class="metric-row"><span>Published evidence</span><div class="metric-track"><div class="metric-fill" style="width:92%"></div></div></div>
+                      <div class="metric-row"><span>Replayable scoring</span><div class="metric-track"><div class="metric-fill" style="width:86%"></div></div></div>
+                      <div class="metric-row"><span>Privacy path</span><div class="metric-track"><div class="metric-fill" style="width:74%"></div></div></div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="system-row" id="markets">
+                <div class="system-copy">
+                  <h3>Built For Capital Markets, Not Generic Payment Theater</h3>
+                  <p>The primary use case is not replacing SWIFT. Post Fiat is aimed at buy-side workflows, research coordination, expert networks, indexing, compliance, and AI-assisted capital deployment.</p>
+                </div>
+                <div class="system-visual" aria-hidden="true">
+                  <div class="window">
+                    <div class="window-bar"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span><span class="window-title mono">capital markets</span></div>
+                    <div class="code-lines">
+                      <span>index.assets()</span>
+                      <span>route.research()</span>
+                      <span>score.validators()</span>
+                      <span><strong>deploy.ai_workflow()</strong></span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="system-row" id="tasknode">
+                <div class="system-copy">
+                  <h3>The Task Node Turns Community Into Collective Intelligence</h3>
+                  <p>Task Node gives the community a way to do something economically useful together. Instead of a retail crowd that can only post, hold, and hope, participants can contribute observations, research, and workflow outputs into an AI-routed network that internalizes its own edge instead of donating it to outside firms.</p>
+                </div>
+                <div class="system-visual" aria-hidden="true">
+                  <div class="window">
+                    <div class="window-bar"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span><span class="window-title mono">task node</span></div>
+                    <div class="metric-panel">
+                      <div class="metric-row"><span>Contribute</span><div class="metric-track"><div class="metric-fill" style="width:68%"></div></div></div>
+                      <div class="metric-row"><span>Validate</span><div class="metric-track"><div class="metric-fill" style="width:80%"></div></div></div>
+                      <div class="metric-row"><span>Earn PFT</span><div class="metric-track"><div class="metric-fill" style="width:58%"></div></div></div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="light-section" id="artifacts">
+        <div class="container">
+          <p class="section-kicker mono">Public artifacts</p>
+          <h2 class="section-title">Not just narrative. Inspectable surfaces.</h2>
+          <div class="artifact-grid">
+            <a class="artifact-card" href="/whitepaper/">
+              <div class="artifact-icon"><svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M18 8h20l10 10v38H18z"/><path d="M38 8v12h10"/><path d="M24 32h18M24 41h14"/></svg></div>
+              <div><h3>Whitepaper</h3><p>Protocol design, validator logic, privacy path, and network thesis.</p></div>
+            </a>
+            <a class="artifact-card" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">
+              <div class="artifact-icon"><svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M32 8 10 20l22 12 22-12z"/><path d="M10 32l22 12 22-12"/><path d="M10 44l22 12 22-12"/></svg></div>
+              <div><h3>Task Node</h3><p>Working participation surface for contributors and AI-routed workflows.</p></div>
+            </a>
+            <a class="artifact-card" href="/validator-benchmark/">
+              <div class="artifact-icon"><svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M14 50V30M32 50V14M50 50V24"/><path d="M8 50h48"/></svg></div>
+              <div><h3>Validator Benchmark</h3><p>Public benchmark artifacts and validator selection evidence.</p></div>
+            </a>
+            <a class="artifact-card" href="/validator-setup/">
+              <div class="artifact-icon"><svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M32 8 52 20v24L32 56 12 44V20z"/><path d="M32 20v24M20 26l12 7 12-7"/></svg></div>
+              <div><h3>Validator Setup</h3><p>Operator path for running a Post Fiat testnet validator.</p></div>
+            </a>
+            <a class="artifact-card" href="/community/">
+              <div class="artifact-icon"><svg viewBox="0 0 64 64" fill="none" stroke-width="3"><circle cx="22" cy="26" r="9"/><circle cx="44" cy="24" r="7"/><path d="M8 52c2-10 9-16 18-16s16 6 18 16"/><path d="M36 38c8 1 14 6 16 14"/></svg></div>
+              <div><h3>Community</h3><p>Discord, operator coordination, Task Node support, and research discussion.</p></div>
+            </a>
+          </div>
+
+          <div class="platform-grid">
+            <div class="platform-intro">
+              <p class="section-kicker mono">Platform</p>
+              <h2 class="section-title">Build around a powerful coordination layer.</h2>
+              <p>From settlement to validator publication, every layer is framed around auditable financial workflows and human-machine collaboration.</p>
+            </div>
+            <div class="platform-feature">
+              <h3>AI-assisted validator publication</h3>
+              <p>Evidence, model/runtime manifest, scoring outputs, and deterministic list construction become visible artifacts.</p>
+            </div>
+            <div class="platform-feature">
+              <h3>Privacy-enabled workflows</h3>
+              <p>Orchard privacy and encrypted coordination make the network more credible for institutional finance than plain public transfer rails.</p>
+            </div>
+            <div class="platform-feature">
+              <h3>Task Node participation</h3>
+              <p>Community members can contribute observations, research, and workflow output rather than only speculating on a token.</p>
+            </div>
+            <div class="platform-feature">
+              <h3>Capital markets focus</h3>
+              <p>Post Fiat is aimed at indexing, buy-side research, expert networks, compliance, and AI-assisted capital deployment.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dark-section" id="use-cases">
+        <div class="container">
+          <div class="use-case-head">
+            <div>
+              <p class="section-kicker mono">Use cases</p>
+              <h2 class="section-title">Built with Post Fiat.</h2>
+            </div>
+            <a class="btn" href="/whitepaper/">Read thesis</a>
+          </div>
+          <div class="case-strip" aria-label="Use cases">
+            <a class="case-card" style="--case-bg:linear-gradient(135deg, rgba(127,238,100,.76), rgba(226,190,40,.18));" href="/whitepaper/">
+              <h3>ETFs and Indexing</h3>
+              <p>Machine-readable ontology for assets, portfolios, market structures, screening systems, and new financial products.</p>
+              <span class="case-arrow">&nearr;</span>
+            </a>
+            <a class="case-card" style="--case-bg:linear-gradient(135deg, rgba(9,175,88,.72), rgba(54,160,130,.28));" href="/whitepaper/">
+              <h3>Compliance and Private Coordination</h3>
+              <p>Encrypted memos, privacy tooling, and stronger policy controls for institutional workflows.</p>
+              <span class="case-arrow">&nearr;</span>
+            </a>
+            <a class="case-card" style="--case-bg:linear-gradient(135deg, rgba(127,238,100,.58), rgba(54,105,85,.3));" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">
+              <h3>Buy-Side Expert Networks</h3>
+              <p>Contributors provide proprietary observations and research to paying AI agents and portfolio managers.</p>
+              <span class="case-arrow">&nearr;</span>
+            </a>
+            <a class="case-card" style="--case-bg:linear-gradient(135deg, rgba(127,238,100,.68), rgba(0,0,0,.18));" href="/validator-benchmark/">
+              <h3>Validator Governance</h3>
+              <p>Validator-list publication should be auditable, replayable, and eventually multi-party.</p>
+              <span class="case-arrow">&nearr;</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="dark-section" id="governance">
+        <div class="container governance">
+          <div>
+            <p class="section-kicker mono">Security and governance</p>
+            <h2 class="section-title">Legibility before authority transfer.</h2>
+            <div class="accordion">
+              <div class="acc-item is-open">
+                <button class="acc-button" type="button" aria-expanded="true"><span>Live testnet evidence</span><span aria-hidden="true">+</span></button>
+                <div class="acc-panel"><div><p>Post Fiat is live on public testnet, with public validator history, an explorer, and benchmark artifacts. It is not represented as a production mainnet.</p></div></div>
+              </div>
+              <div class="acc-item">
+                <button class="acc-button" type="button" aria-expanded="false"><span>Published validator scoring</span><span aria-hidden="true">+</span></button>
+                <div class="acc-panel"><div><p>The whitepaper frames validator-list publication as a visible evidence-to-list pipeline rather than opaque publisher discretion.</p></div></div>
+              </div>
+              <div class="acc-item">
+                <button class="acc-button" type="button" aria-expanded="false"><span>Privacy-enabled workflows</span><span aria-hidden="true">+</span></button>
+                <div class="acc-panel"><div><p>The network adds an Orchard privacy path so capital-markets coordination can move beyond plain public transfers.</p></div></div>
+              </div>
+              <div class="acc-item">
+                <button class="acc-button" type="button" aria-expanded="false"><span>How you get PFT</span><span aria-hidden="true">+</span></button>
+                <div class="acc-panel"><div><p>PFT is not only something to buy. The primary participation path is Task Node contribution, with validator operation as another direct infrastructure path.</p></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="stack-visual" aria-hidden="true">
+            <div class="stack-cube">
+              <div class="layer"></div>
+              <div class="layer"></div>
+              <div class="layer"></div>
+              <div class="layer"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="quote-band">
+        <div class="container quote-grid">
+          <div>
+            <p class="section-kicker mono">Who builds this</p>
+            <div class="quote">Post Fiat gives a serious visitor more than a narrative: public artifacts, live network evidence, a working Task Node, and a validator setup path.</div>
+          </div>
+          <div class="founder-panel">
+            <h3>Alex Good <span class="mono" style="font-size:.8rem;color:#647260;">goodalexander</span></h3>
+            <p>Founder behind Post Fiat. The current homepage cites Citi FX, Palantir, Balyasny TMT, and co-founding Perpetua as relevant background.</p>
+            <p>It also cites capital and market credibility from portfolio managers at Brevan Howard, DE Shaw, and Citrini Research, plus venture backing by Hypersphere Capital Management.</p>
+            <div class="tag-row">
+              <span class="tag">Citi FX</span>
+              <span class="tag">Palantir</span>
+              <span class="tag">Balyasny TMT</span>
+              <span class="tag">Perpetua</span>
+              <span class="tag">Hypersphere</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta">
+        <div class="container cta-grid">
+          <div class="glow-logo" aria-hidden="true"><img src="/media-kit/logo.svg" alt=""></div>
+          <div class="final-copy">
+            <h2>Join before the coordination layer hardens.</h2>
+            <p>If AGI restructures markets, governance, and labor, the winning networks will be the ones that let human participants coordinate with machine intelligence without handing the future to one center of control.</p>
+            <div class="hero-actions" style="justify-content:flex-start">
+              <a class="btn primary" href="/whitepaper/">Read the Whitepaper</a>
+              <a class="btn dark" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Use the Task Node</a>
+              <a class="btn dark" href="/validator-setup/">Run a Validator</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand" href="/" style="padding-left:0"><img src="/media-kit/logo.svg" alt=""><span>Post Fiat</span></a>
+          <p style="max-width:420px">Fair, private XRP-derived infrastructure for capital markets and collective intelligence.</p>
+        </div>
+        <div>
+          <h3>Products</h3>
+          <ul>
+            <li><a href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Task Node</a></li>
+            <li><a href="/validator-setup/">Validator Setup</a></li>
+            <li><a href="/validator-benchmark/">Validator Benchmark</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="/whitepaper/">Whitepaper</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/modal-redesign-spec/">Redesign Spec</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Machine-readable</h3>
+          <ul>
+            <li><a href="/llms.txt">llms.txt</a></li>
+            <li><a href="/agent.txt">agent.txt</a></li>
+            <li><a href="/postfiat-project.json">postfiat-project.json</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const navShell = document.getElementById('navShell');
+    const menuButton = document.getElementById('menuButton');
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+      navShell.classList.toggle('is-open', !isOpen);
+    });
+
+    document.querySelectorAll('.acc-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.acc-item');
+        const isOpen = item.classList.toggle('is-open');
+        button.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+
+    const canvas = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let frame = 0;
+
+    function resizeCanvas(){
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = canvas.clientWidth;
+      height = canvas.clientHeight;
+      canvas.width = Math.max(1, Math.floor(width * dpr));
+      canvas.height = Math.max(1, Math.floor(height * dpr));
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+
+    function drawCube(cx, cy, size, phase){
+      const lift = Math.sin(phase) * 5;
+      const topY = cy - size * .45 + lift;
+      const left = cx - size * .48;
+      const right = cx + size * .48;
+      const mid = cy + size * .08 + lift;
+      const bottom = cy + size * .58 + lift;
+      ctx.save();
+      ctx.globalAlpha = .75;
+      ctx.strokeStyle = 'rgba(127,238,100,.62)';
+      ctx.lineWidth = 1.4;
+      ctx.fillStyle = 'rgba(9,175,88,.20)';
+      ctx.beginPath();
+      ctx.moveTo(cx, topY);
+      ctx.lineTo(right, mid);
+      ctx.lineTo(cx, bottom);
+      ctx.lineTo(left, mid);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(cx, topY);
+      ctx.lineTo(cx, bottom);
+      ctx.moveTo(left, mid);
+      ctx.lineTo(right, mid);
+      ctx.stroke();
+      ctx.shadowColor = 'rgba(127,238,100,.45)';
+      ctx.shadowBlur = 18;
+      ctx.beginPath();
+      ctx.arc(cx, topY, 2.5, 0, Math.PI*2);
+      ctx.fillStyle = '#7fee64';
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function draw(){
+      frame += reducedMotion ? .002 : .012;
+      ctx.clearRect(0,0,width,height);
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0,0,width,height);
+
+      const horizon = height * .58;
+      const vanishingX = width * .5;
+      const vanishingY = height * .28;
+
+      ctx.save();
+      ctx.lineWidth = 1;
+      for(let i=0;i<34;i++){
+        const t = i / 33;
+        const x = width * (t - .12);
+        ctx.strokeStyle = `rgba(127,238,100,${0.03 + t * .04})`;
+        ctx.beginPath();
+        ctx.moveTo(x, height);
+        ctx.lineTo(vanishingX + (x - width/2) * .05, vanishingY);
+        ctx.stroke();
+      }
+      for(let i=0;i<22;i++){
+        const y = horizon + Math.pow(i/21, 1.7) * (height - horizon + 40);
+        ctx.strokeStyle = `rgba(127,238,100,${0.04 + i/21 * .13})`;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.quadraticCurveTo(width/2, y - (height-y)*.08, width, y);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      const gradient = ctx.createLinearGradient(0, height*.28, 0, height);
+      gradient.addColorStop(0, 'rgba(0,0,0,0)');
+      gradient.addColorStop(.62, 'rgba(9,175,88,.13)');
+      gradient.addColorStop(1, 'rgba(127,238,100,.42)');
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.moveTo(width*.12, height);
+      ctx.lineTo(width*.36, horizon + Math.sin(frame)*18);
+      ctx.lineTo(width*.88, height*.84);
+      ctx.lineTo(width, height);
+      ctx.closePath();
+      ctx.fill();
+
+      const nodes = [
+        [0.18,0.36,20],[0.31,0.52,10],[0.72,0.44,16],[0.84,0.28,8],
+        [0.58,0.68,26],[0.42,0.76,12],[0.12,0.70,18],[0.88,0.72,11]
+      ];
+      nodes.forEach(([nx,ny,s], i) => {
+        drawCube(width*nx, height*ny, s + Math.sin(frame*1.8+i)*2, frame*2+i);
+      });
+
+      ctx.save();
+      ctx.strokeStyle = 'rgba(127,238,100,.22)';
+      ctx.lineWidth = 1;
+      for(let i=0;i<nodes.length-1;i++){
+        const a = nodes[i];
+        const b = nodes[(i+2) % nodes.length];
+        ctx.beginPath();
+        ctx.moveTo(width*a[0], height*a[1]);
+        ctx.lineTo(width*b[0], height*b[1]);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      if(!reducedMotion) requestAnimationFrame(draw);
+    }
+
+    resizeCanvas();
+    draw();
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      if(reducedMotion) draw();
+    });
+  </script>
+</body>
+</html>
