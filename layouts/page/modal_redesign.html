@@ -328,21 +328,33 @@
     .proof-label{font-size:.76rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
 
     .task-feed-section{
-      padding:66px 0 46px;
+      padding:116px 0;
       scroll-margin-top:96px;
+      border-top:1px solid rgba(221,255,220,.08);
       border-bottom:1px solid rgba(221,255,220,.08);
+    }
+    .task-feed-shell{
+      border:1px solid var(--line);
+      border-radius:8px;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 74% 14%, rgba(127,238,100,.1), transparent 34%),
+        linear-gradient(135deg, rgba(127,238,100,.05), rgba(0,0,0,.12) 42%),
+        rgba(8,11,8,.78);
+      box-shadow:0 40px 120px rgba(0,0,0,.34), inset 0 0 0 1px rgba(127,238,100,.03);
     }
     .task-feed-header{
       display:grid;
       grid-template-columns:minmax(0,1fr) auto;
       gap:24px;
       align-items:end;
-      margin-bottom:22px;
+      padding:30px;
+      border-bottom:1px solid var(--line);
     }
     .task-feed-header .section-title{
       margin-bottom:18px;
-      max-width:650px;
-      font-size:clamp(2.45rem,4.6vw,5rem);
+      max-width:780px;
+      font-size:clamp(3.2rem,6vw,6.8rem);
     }
     .task-feed-copy{
       max-width:640px;
@@ -358,7 +370,7 @@
       justify-content:flex-end;
     }
     .feed-status{
-      min-width:170px;
+      min-width:240px;
       padding:16px 18px;
       border:1px solid var(--line);
       background:linear-gradient(135deg, rgba(127,238,100,.08), rgba(0,0,0,.18));
@@ -372,23 +384,30 @@
       letter-spacing:.13em;
       text-transform:uppercase;
     }
-    .feed-status strong{
-      display:block;
-      margin:3px 0 6px;
-      color:var(--green);
-      font-size:2rem;
-      line-height:1;
-      font-weight:600;
-    }
     .feed-status p{margin:0;color:var(--pale-2);font-size:.88rem}
     .task-feed-preview{
       display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
+      grid-template-columns:repeat(2,minmax(0,1fr));
       gap:14px;
+      max-height:min(760px, calc(100vh - 168px));
+      min-height:580px;
+      padding:18px;
+      overflow-y:auto;
+      overscroll-behavior:contain;
+      scrollbar-gutter:stable;
+      scrollbar-color:rgba(127,238,100,.5) rgba(221,255,220,.08);
+      scrollbar-width:thin;
+      mask-image:linear-gradient(180deg, transparent 0, #000 18px, #000 calc(100% - 32px), transparent 100%);
+    }
+    .task-feed-preview::-webkit-scrollbar{width:10px}
+    .task-feed-preview::-webkit-scrollbar-track{background:rgba(221,255,220,.06)}
+    .task-feed-preview::-webkit-scrollbar-thumb{
+      background:rgba(127,238,100,.5);
+      border:2px solid rgba(8,11,8,.9);
     }
     .feed-preview-item{
       position:relative;
-      min-height:250px;
+      min-height:238px;
       display:flex;
       flex-direction:column;
       padding:22px;
@@ -435,7 +454,7 @@
     .feed-preview-item h3{
       margin:16px 0 10px;
       color:var(--pale);
-      font-size:1.35rem;
+      font-size:1.28rem;
       line-height:1.14;
       font-weight:500;
     }
@@ -474,6 +493,7 @@
       text-transform:uppercase;
     }
     .feed-preview-link:hover{color:var(--pale)}
+    .task-feed-preview:focus{outline:1px solid rgba(127,238,100,.5);outline-offset:-1px}
 
     .dark-section{padding:116px 0}
     .section-kicker{
@@ -1106,7 +1126,7 @@
       .rail{display:none}
       .task-feed-header{grid-template-columns:1fr}
       .task-feed-actions{justify-content:flex-start}
-      .task-feed-preview{grid-template-columns:1fr}
+      .task-feed-preview{grid-template-columns:1fr;max-height:720px}
       .artifact-grid{grid-template-columns:repeat(3,1fr)}
       .platform-panel{grid-template-columns:1fr;gap:34px}
       .platform-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -1130,24 +1150,30 @@
       .proof-item:nth-child(2n){border-right:0}
       .proof-item:nth-last-child(-n+3){border-bottom:1px solid var(--line)}
       .proof-item:nth-last-child(-n+2){border-bottom:0}
-      .task-feed-section{padding:54px 0 34px;overflow:hidden}
+      .task-feed-section{padding:78px 0}
+      .task-feed-shell{border-radius:0;margin-inline:-5px}
+      .task-feed-header{padding:24px 18px}
       .task-feed-header .section-title{font-size:clamp(2.25rem,11vw,3.5rem)}
       .task-feed-actions{display:grid;grid-template-columns:1fr;width:100%}
       .feed-status{width:100%}
       .task-feed-preview{
-        display:flex;
-        gap:12px;
-        overflow-x:auto;
-        padding-bottom:12px;
-        scroll-snap-type:x proximity;
-        scrollbar-width:none;
+        display:grid;
+        grid-template-columns:1fr;
+        max-height:640px;
+        min-height:520px;
+        padding:12px;
+        overflow-y:auto;
+        scroll-snap-type:y proximity;
+        -webkit-overflow-scrolling:touch;
       }
-      .task-feed-preview::-webkit-scrollbar{display:none}
       .feed-preview-item{
-        flex:0 0 min(330px,86vw);
-        min-height:285px;
+        min-height:205px;
+        padding:18px;
         scroll-snap-align:start;
       }
+      .feed-preview-item h3{font-size:1.12rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+      .feed-preview-item p{font-size:.95rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+      .feed-preview-links{padding-top:12px}
       .dark-section{padding:78px 0}
       .section-title{font-size:clamp(2.25rem, 11vw, 3.5rem)}
       .system-row{grid-template-columns:1fr;min-height:0}
@@ -1247,66 +1273,6 @@
               <span class="proof-value">Machine summary</span>
               <span class="proof-label mono">Project JSON</span>
             </a>
-          </div>
-        </div>
-      </section>
-
-      <section class="task-feed-section" id="task-feed" aria-labelledby="task-feed-title">
-        <div class="container">
-          <div class="task-feed-header">
-            <div>
-              <p class="section-kicker mono">Task Node Feed</p>
-              <h2 class="section-title" id="task-feed-title">Semi-anonymous network updates.</h2>
-              <p class="task-feed-copy">Recent public Task Node activity shows contributors accepting work, publishing evidence, receiving verification, and tying useful output back to PFTL proof links.</p>
-            </div>
-            <div class="task-feed-actions">
-              <div class="feed-status" aria-label="Task Node feed status">
-                <span class="mono">Published Items</span>
-                <strong>24</strong>
-                <p>Refreshing from the public activity channel.</p>
-              </div>
-              <a class="btn dark" href="https://agtico.github.io/task-node-feed/" target="_blank" rel="noopener">View full feed</a>
-            </div>
-          </div>
-          <div class="task-feed-preview" aria-label="Recent Task Node updates">
-            <article class="feed-preview-item">
-              <div class="feed-preview-meta mono">trading</div>
-              <time class="mono" datetime="2026-05-02T19:06:12.834Z">May 2, 19:06 UTC</time>
-              <h3>Passed on building a 13F tracker MVP after the offer expired with no response.</h3>
-              <p>Passed on building a 13F tracker MVP after the offer expired with no response.</p>
-              <span class="feed-actor mono">node:d438f686</span>
-              <div class="feed-preview-tags">
-                <span>$BRK</span>
-              </div>
-            </article>
-            <article class="feed-preview-item">
-              <div class="feed-preview-meta mono">network</div>
-              <time class="mono" datetime="2026-05-02T18:59:14.156Z">May 2, 18:59 UTC</time>
-              <h3>Delivered a Python QA validator for Alpha Registry submissions and earned a reward.</h3>
-              <p>Delivered a Python QA validator for Alpha Registry submissions and earned a reward.</p>
-              <span class="feed-actor mono">node:d53de16f</span>
-              <div class="feed-preview-tags">
-                <span>$PFT</span>
-              </div>
-              <div class="feed-preview-links">
-                <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/F66F51EE7569FBA0DEB2DD0032E59E39509036790CC38905B2217E65F3C9C5BA/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
-                <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/0AD9FC76888FD9127E6726CED8CD46F4BBEC240E77280C32D1C9DD37C6233712/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
-              </div>
-            </article>
-            <article class="feed-preview-item">
-              <div class="feed-preview-meta mono">network</div>
-              <time class="mono" datetime="2026-05-02T18:58:42.197Z">May 2, 18:58 UTC</time>
-              <h3>Recorded a verification response for a Python QA pack validating Alpha Registry submissions on PFTL.</h3>
-              <p>Recorded a verification response for a Python QA pack validating Alpha Registry submissions on PFTL.</p>
-              <span class="feed-actor mono">node:d53de16f</span>
-              <div class="feed-preview-tags">
-                <span>$PFT</span>
-              </div>
-              <div class="feed-preview-links">
-                <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/3F92503ECAD2F140A95A564261A562D94FBB45A249EC7131DFBE9080975CFFD8/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
-                <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/0AD9FC76888FD9127E6726CED8CD46F4BBEC240E77280C32D1C9DD37C6233712/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
-              </div>
-            </article>
           </div>
         </div>
       </section>
@@ -1579,6 +1545,101 @@
         </div>
       </section>
 
+      <section class="task-feed-section" id="task-feed" aria-labelledby="task-feed-title">
+        <div class="container">
+          <div class="task-feed-shell">
+            <div class="task-feed-header">
+              <div>
+                <p class="section-kicker mono">Task Node Feed</p>
+                <h2 class="section-title" id="task-feed-title">The Hive Mind in Action</h2>
+                <p class="task-feed-copy">Recent public Task Node activity shows contributors accepting work, publishing evidence, receiving verification, and tying useful output back to PFTL proof links.</p>
+              </div>
+              <div class="task-feed-actions">
+                <div class="feed-status" aria-label="Task Node feed status" aria-live="polite">
+                  <span class="mono">Operating stream</span>
+                  <p>Refreshing from public Task Node activity.</p>
+                </div>
+                <a class="btn dark" href="https://agtico.github.io/task-node-feed/" target="_blank" rel="noopener">View full feed</a>
+              </div>
+            </div>
+            <div class="task-feed-preview" role="region" aria-label="Recent Task Node updates" tabindex="0">
+              <article class="feed-preview-item">
+                <div class="feed-preview-meta mono">trading</div>
+                <time class="mono" datetime="2026-05-02T19:06:12.834Z">May 2, 19:06 UTC</time>
+                <h3>Passed on building a 13F tracker MVP after the offer expired with no response.</h3>
+                <p>Passed on building a 13F tracker MVP after the offer expired with no response.</p>
+                <span class="feed-actor mono">node:d438f686</span>
+                <div class="feed-preview-tags">
+                  <span>$BRK</span>
+                </div>
+              </article>
+              <article class="feed-preview-item">
+                <div class="feed-preview-meta mono">network</div>
+                <time class="mono" datetime="2026-05-02T18:59:14.156Z">May 2, 18:59 UTC</time>
+                <h3>Delivered a Python QA validator for Alpha Registry submissions and earned a reward.</h3>
+                <p>Delivered a Python QA validator for Alpha Registry submissions and earned a reward.</p>
+                <span class="feed-actor mono">node:d53de16f</span>
+                <div class="feed-preview-tags">
+                  <span>$PFT</span>
+                </div>
+                <div class="feed-preview-links">
+                  <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/F66F51EE7569FBA0DEB2DD0032E59E39509036790CC38905B2217E65F3C9C5BA/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
+                  <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/0AD9FC76888FD9127E6726CED8CD46F4BBEC240E77280C32D1C9DD37C6233712/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
+                </div>
+              </article>
+              <article class="feed-preview-item">
+                <div class="feed-preview-meta mono">network</div>
+                <time class="mono" datetime="2026-05-02T18:58:42.197Z">May 2, 18:58 UTC</time>
+                <h3>Recorded a verification response for a Python QA pack validating Alpha Registry submissions on PFTL.</h3>
+                <p>Recorded a verification response for a Python QA pack validating Alpha Registry submissions on PFTL.</p>
+                <span class="feed-actor mono">node:d53de16f</span>
+                <div class="feed-preview-tags">
+                  <span>$PFT</span>
+                </div>
+                <div class="feed-preview-links">
+                  <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/3F92503ECAD2F140A95A564261A562D94FBB45A249EC7131DFBE9080975CFFD8/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
+                  <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/0AD9FC76888FD9127E6726CED8CD46F4BBEC240E77280C32D1C9DD37C6233712/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
+                </div>
+              </article>
+              <article class="feed-preview-item">
+                <div class="feed-preview-meta mono">network</div>
+                <time class="mono" datetime="2026-05-02T18:57:42.234Z">May 2, 18:57 UTC</time>
+                <h3>Uploaded follow-up evidence for a Python QA pack validating Alpha Registry submissions.</h3>
+                <p>Uploaded follow-up evidence for a Python QA pack validating Alpha Registry submissions.</p>
+                <span class="feed-actor mono">node:d53de16f</span>
+                <div class="feed-preview-tags">
+                  <span>$PFT</span>
+                </div>
+              </article>
+              <article class="feed-preview-item">
+                <div class="feed-preview-meta mono">network</div>
+                <time class="mono" datetime="2026-05-02T18:48:14.795Z">May 2, 18:48 UTC</time>
+                <h3>Planning a privacy-safe adoption metrics snapshot for Post Fiat network participation.</h3>
+                <p>Planning a privacy-safe adoption metrics snapshot for Post Fiat network participation.</p>
+                <span class="feed-actor mono">node:c8ff8d57</span>
+                <div class="feed-preview-tags">
+                  <span>$PFT</span>
+                </div>
+              </article>
+              <article class="feed-preview-item">
+                <div class="feed-preview-meta mono">network</div>
+                <time class="mono" datetime="2026-05-02T18:44:12.005Z">May 2, 18:44 UTC</time>
+                <h3>Delivered a reusable Post Fiat evidence manifest guide and earned a reward.</h3>
+                <p>Delivered a reusable Post Fiat evidence manifest guide and earned a reward.</p>
+                <span class="feed-actor mono">node:5f58cdc7</span>
+                <div class="feed-preview-tags">
+                  <span>$PFT</span>
+                </div>
+                <div class="feed-preview-links">
+                  <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/53875E11482E6DEC493B2F1D7D2A6F2B767A660F59E5B78691553F37B75AB91E/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
+                  <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/FE02FB44AF093674C074EB9080FC4BCF524700F0DE536FB631D0FB2225085B7B/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="quote-band">
         <div class="container quote-grid">
           <div>
@@ -1842,18 +1903,16 @@
       return article;
     }
 
-    function updateFeedStatus(feed, count){
+    function updateFeedStatus(feed){
       if(!feedStatus) return;
-      const strong = feedStatus.querySelector('strong');
       const detail = feedStatus.querySelector('p');
-      if(strong) strong.textContent = String(count);
       if(detail){
         if(feed.statusText){
           detail.textContent = feed.statusText;
           return;
         }
         const generated = feed.generated_at ? formatFeedDate(feed.generated_at) : 'UTC';
-        detail.textContent = `Updated ${generated} from ${cleanText(feed.model, 'activity-channel')}.`;
+        detail.textContent = `Live from ${cleanText(feed.model, 'activity-channel')}; refreshed ${generated}.`;
       }
     }
 
@@ -1861,8 +1920,8 @@
       if(!taskFeedRoot) return;
       const items = Array.isArray(feed.items) ? feed.items : [];
       if(!items.length) return;
-      taskFeedRoot.replaceChildren(...items.slice(0, 3).map(renderFeedCard));
-      updateFeedStatus(feed, feed.total || items.length);
+      taskFeedRoot.replaceChildren(...items.slice(0, 10).map(renderFeedCard));
+      updateFeedStatus(feed);
     }
 
     async function refreshTaskFeed(){

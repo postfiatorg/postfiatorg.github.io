@@ -34,8 +34,9 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
    - Compact bordered strip for the core proof points: live testnet, validator domains, public benchmark, Task Node, whitepaper, explorer.
 
 3. Task Node Feed
-   - Live-feeling feed section modeled after AGTI's "Semi-anonymous network updates" block.
+   - Lower-page operating evidence section titled "The Hive Mind in Action."
    - Shows recent Task Node activity with category, timestamp, semi-anonymous node id, ticker tags, and PFTL proof links.
+   - Uses a large internal scroll panel so visitors can inspect more than three items without making the page excessively long.
    - Ships with static fallback cards, tries the public activity endpoint, and falls back to the public AGTI feed page if browser CORS blocks the API.
 
 4. How It Works
