@@ -385,39 +385,73 @@
       text-transform:uppercase;
     }
     .feed-status p{margin:0;color:var(--pale-2);font-size:.88rem}
-    .task-feed-preview{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:14px;
-      max-height:min(760px, calc(100vh - 168px));
-      min-height:580px;
-      padding:18px;
-      overflow-y:auto;
-      overscroll-behavior:contain;
-      scrollbar-gutter:stable;
-      scrollbar-color:rgba(127,238,100,.5) rgba(221,255,220,.08);
-      scrollbar-width:thin;
-      mask-image:linear-gradient(180deg, transparent 0, #000 18px, #000 calc(100% - 32px), transparent 100%);
+    .task-feed-carousel{
+      position:relative;
+      overflow:hidden;
+      padding:18px 0 24px;
     }
-    .task-feed-preview::-webkit-scrollbar{width:10px}
-    .task-feed-preview::-webkit-scrollbar-track{background:rgba(221,255,220,.06)}
-    .task-feed-preview::-webkit-scrollbar-thumb{
-      background:rgba(127,238,100,.5);
-      border:2px solid rgba(8,11,8,.9);
+    .task-feed-carousel::before,
+    .task-feed-carousel::after{
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:54px;
+      z-index:3;
+      width:min(15vw, 180px);
+      pointer-events:none;
+    }
+    .task-feed-carousel::before{
+      left:0;
+      background:linear-gradient(90deg, rgba(8,11,8,.96), rgba(8,11,8,0));
+    }
+    .task-feed-carousel::after{
+      right:0;
+      background:linear-gradient(270deg, rgba(8,11,8,.96), rgba(8,11,8,0));
+    }
+    .task-feed-preview{
+      position:relative;
+      min-height:500px;
+      padding:18px clamp(58px, 9vw, 126px);
+      overflow-x:auto;
+      overflow-y:hidden;
+      overscroll-behavior-x:contain;
+      scroll-behavior:smooth;
+      scroll-snap-type:x mandatory;
+      scrollbar-width:none;
+      mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+    }
+    .task-feed-preview::-webkit-scrollbar{display:none}
+    .feed-carousel-track{
+      display:flex;
+      align-items:stretch;
+      gap:18px;
+      width:max-content;
+      min-width:100%;
     }
     .feed-preview-item{
       position:relative;
-      min-height:238px;
+      flex:0 0 clamp(390px, 42vw, 540px);
+      min-height:398px;
       display:flex;
       flex-direction:column;
       padding:22px;
       border:1px solid var(--line);
       border-radius:8px;
       overflow:hidden;
+      scroll-snap-align:center;
       background:
         linear-gradient(135deg, rgba(127,238,100,.08), transparent 38%),
         rgba(14,18,14,.74);
-      transition:border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+      opacity:.42;
+      transform:scale(.92);
+      filter:saturate(.66) brightness(.72);
+      transition:
+        opacity .46s ease,
+        filter .46s ease,
+        border-color .22s ease,
+        transform .46s cubic-bezier(.2,.8,.2,1),
+        box-shadow .22s ease;
+      will-change:transform, opacity, filter;
     }
     .feed-preview-item::before{
       content:"";
@@ -429,13 +463,30 @@
       pointer-events:none;
     }
     .feed-preview-item:hover{
-      transform:translateY(-3px);
       border-color:rgba(127,238,100,.42);
       box-shadow:0 24px 60px rgba(0,0,0,.24), 0 0 42px rgba(127,238,100,.08);
     }
+    .feed-preview-item:not(.is-active):hover{transform:scale(.94) translateY(-3px)}
+    .feed-preview-item.is-neighbor{
+      opacity:.72;
+      transform:scale(.96);
+      filter:saturate(.85) brightness(.84);
+    }
+    .feed-preview-item.is-active{
+      opacity:1;
+      transform:scale(1);
+      filter:saturate(1.08) brightness(1);
+      border-color:rgba(127,238,100,.48);
+      box-shadow:0 34px 90px rgba(0,0,0,.36), 0 0 54px rgba(127,238,100,.1);
+    }
+    .feed-preview-item.is-active:hover{transform:scale(1.01) translateY(-3px)}
     .feed-preview-item:hover::before{
       opacity:.7;
       animation:visualSweep 1.8s ease-out;
+    }
+    .feed-preview-item.is-active::before{
+      opacity:.55;
+      animation:visualSweep 2.8s ease-out infinite;
     }
     .feed-preview-meta{
       display:flex;
@@ -494,6 +545,83 @@
     }
     .feed-preview-link:hover{color:var(--pale)}
     .task-feed-preview:focus{outline:1px solid rgba(127,238,100,.5);outline-offset:-1px}
+    .feed-nav{
+      position:absolute;
+      top:50%;
+      z-index:5;
+      width:48px;
+      height:48px;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--line-strong);
+      border-radius:50%;
+      background:rgba(8,11,8,.78);
+      color:var(--pale);
+      cursor:pointer;
+      backdrop-filter:blur(12px);
+      transition:transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+    }
+    .feed-nav:hover,
+    .feed-nav:focus-visible{
+      transform:translateY(-1px);
+      border-color:var(--green);
+      background:rgba(127,238,100,.16);
+      color:var(--green);
+      outline:0;
+    }
+    .feed-nav span{
+      font-size:2.15rem;
+      line-height:1;
+      transform:translateY(-2px);
+    }
+    .feed-nav-prev{left:18px}
+    .feed-nav-next{right:18px}
+    .feed-carousel-ui{
+      display:grid;
+      grid-template-columns:minmax(120px,1fr) auto;
+      gap:18px;
+      align-items:center;
+      padding:0 30px 8px;
+    }
+    .feed-progress{
+      height:2px;
+      overflow:hidden;
+      background:rgba(221,255,220,.12);
+    }
+    .feed-progress span{
+      display:block;
+      width:100%;
+      height:100%;
+      transform:scaleX(.1);
+      transform-origin:left;
+      background:linear-gradient(90deg, var(--green), var(--pale));
+      transition:transform .46s ease;
+    }
+    .feed-dots{
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+    }
+    .feed-dot{
+      width:8px;
+      height:8px;
+      padding:0;
+      border:0;
+      border-radius:50%;
+      background:rgba(221,255,220,.28);
+      cursor:pointer;
+      transition:background .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+    .feed-dot:hover,
+    .feed-dot:focus-visible{
+      background:var(--pale);
+      outline:0;
+    }
+    .feed-dot.is-active{
+      background:var(--green);
+      box-shadow:0 0 16px rgba(127,238,100,.8);
+      transform:scale(1.35);
+    }
 
     .dark-section{padding:116px 0}
     .section-kicker{
@@ -1126,7 +1254,8 @@
       .rail{display:none}
       .task-feed-header{grid-template-columns:1fr}
       .task-feed-actions{justify-content:flex-start}
-      .task-feed-preview{grid-template-columns:1fr;max-height:720px}
+      .task-feed-preview{padding-inline:clamp(42px, 7vw, 90px)}
+      .feed-preview-item{flex-basis:clamp(360px, 64vw, 520px)}
       .artifact-grid{grid-template-columns:repeat(3,1fr)}
       .platform-panel{grid-template-columns:1fr;gap:34px}
       .platform-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -1156,21 +1285,36 @@
       .task-feed-header .section-title{font-size:clamp(2.25rem,11vw,3.5rem)}
       .task-feed-actions{display:grid;grid-template-columns:1fr;width:100%}
       .feed-status{width:100%}
+      .task-feed-carousel{padding:12px 0 22px}
+      .task-feed-carousel::before,
+      .task-feed-carousel::after{display:none}
       .task-feed-preview{
-        display:grid;
-        grid-template-columns:1fr;
-        max-height:640px;
-        min-height:520px;
-        padding:12px;
-        overflow-y:auto;
-        scroll-snap-type:y proximity;
+        min-height:430px;
+        padding:12px 44px 18px;
+        mask-image:none;
         -webkit-overflow-scrolling:touch;
       }
+      .feed-carousel-track{gap:12px}
       .feed-preview-item{
-        min-height:205px;
+        flex-basis:calc(100vw - 84px);
+        min-height:390px;
         padding:18px;
-        scroll-snap-align:start;
       }
+      .feed-nav{
+        width:38px;
+        height:38px;
+        background:rgba(8,11,8,.9);
+      }
+      .feed-nav span{font-size:1.72rem}
+      .feed-nav-prev{left:7px}
+      .feed-nav-next{right:7px}
+      .feed-carousel-ui{
+        grid-template-columns:1fr;
+        gap:12px;
+        padding:0 44px;
+      }
+      .feed-dots{justify-content:center}
+      .feed-dot{width:7px;height:7px}
       .feed-preview-item h3{font-size:1.12rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
       .feed-preview-item p{font-size:.95rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
       .feed-preview-links{padding-top:12px}
@@ -1562,7 +1706,10 @@
                 <a class="btn dark" href="https://agtico.github.io/task-node-feed/" target="_blank" rel="noopener">View full feed</a>
               </div>
             </div>
-            <div class="task-feed-preview" role="region" aria-label="Recent Task Node updates" tabindex="0">
+            <div class="task-feed-carousel" data-feed-carousel>
+              <button class="feed-nav feed-nav-prev" type="button" data-feed-prev aria-label="Previous Task Node update" title="Previous update"><span aria-hidden="true">&lsaquo;</span></button>
+              <div class="task-feed-preview" role="region" aria-label="Recent Task Node updates carousel" tabindex="0">
+                <div class="feed-carousel-track">
               <article class="feed-preview-item">
                 <div class="feed-preview-meta mono">trading</div>
                 <time class="mono" datetime="2026-05-02T19:06:12.834Z">May 2, 19:06 UTC</time>
@@ -1635,6 +1782,13 @@
                   <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/FE02FB44AF093674C074EB9080FC4BCF524700F0DE536FB631D0FB2225085B7B/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
                 </div>
               </article>
+                </div>
+              </div>
+              <button class="feed-nav feed-nav-next" type="button" data-feed-next aria-label="Next Task Node update" title="Next update"><span aria-hidden="true">&rsaquo;</span></button>
+              <div class="feed-carousel-ui">
+                <div class="feed-progress" aria-hidden="true"><span></span></div>
+                <div class="feed-dots" aria-label="Task Node update slides"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1778,8 +1932,19 @@
 
     const taskFeedUrl = 'https://pftasks-api.fly.dev/activity/public-feed?limit=24';
     const taskFeedSnapshotUrl = 'https://agtico.github.io/task-node-feed/';
+    const taskFeedCarousel = document.querySelector('[data-feed-carousel]');
     const taskFeedRoot = document.querySelector('.task-feed-preview');
+    let taskFeedTrack = taskFeedRoot?.querySelector('.feed-carousel-track') || null;
     const feedStatus = document.querySelector('.feed-status');
+    const feedPrevButton = document.querySelector('[data-feed-prev]');
+    const feedNextButton = document.querySelector('[data-feed-next]');
+    const feedDots = document.querySelector('.feed-dots');
+    const feedProgress = document.querySelector('.feed-progress span');
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const feedRotationMs = 4300;
+    let feedActiveIndex = 0;
+    let feedAutoplay = null;
+    let feedScrollRaf = null;
 
     function cleanText(value, fallback = ''){
       const text = String(value || '').replace(/\s+/g, ' ').trim();
@@ -1823,6 +1988,119 @@
           return false;
         }
       });
+    }
+
+    function ensureFeedTrack(){
+      if(!taskFeedRoot) return null;
+      if(!taskFeedTrack) taskFeedTrack = taskFeedRoot.querySelector('.feed-carousel-track');
+      if(!taskFeedTrack){
+        taskFeedTrack = document.createElement('div');
+        taskFeedTrack.className = 'feed-carousel-track';
+        while(taskFeedRoot.firstChild) taskFeedTrack.appendChild(taskFeedRoot.firstChild);
+        taskFeedRoot.appendChild(taskFeedTrack);
+      }
+      return taskFeedTrack;
+    }
+
+    function getFeedCards(){
+      const track = ensureFeedTrack();
+      return track ? Array.from(track.querySelectorAll('.feed-preview-item')) : [];
+    }
+
+    function updateFeedCarouselState(){
+      const cards = getFeedCards();
+      const count = cards.length;
+      if(!count) return;
+      feedActiveIndex = Math.max(0, Math.min(feedActiveIndex, count - 1));
+      cards.forEach((card, index) => {
+        const linearDistance = Math.abs(index - feedActiveIndex);
+        const distance = Math.min(linearDistance, count - linearDistance);
+        card.classList.toggle('is-active', index === feedActiveIndex);
+        card.classList.toggle('is-neighbor', distance === 1);
+        card.tabIndex = index === feedActiveIndex ? 0 : -1;
+      });
+      if(feedDots){
+        Array.from(feedDots.children).forEach((dot, index) => {
+          dot.classList.toggle('is-active', index === feedActiveIndex);
+          dot.setAttribute('aria-current', index === feedActiveIndex ? 'true' : 'false');
+        });
+      }
+      if(feedProgress) feedProgress.style.transform = `scaleX(${(feedActiveIndex + 1) / count})`;
+    }
+
+    function scrollFeedTo(index, behavior = 'smooth'){
+      const cards = getFeedCards();
+      const count = cards.length;
+      if(!taskFeedRoot || !count) return;
+      feedActiveIndex = ((index % count) + count) % count;
+      updateFeedCarouselState();
+      const card = cards[feedActiveIndex];
+      const left = card.offsetLeft - ((taskFeedRoot.clientWidth - card.clientWidth) / 2);
+      taskFeedRoot.scrollTo({left:Math.max(0, left), behavior});
+    }
+
+    function renderFeedDots(count){
+      if(!feedDots) return;
+      feedDots.replaceChildren(...Array.from({length:count}, (_, index) => {
+        const dot = document.createElement('button');
+        dot.className = 'feed-dot';
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `Show Task Node update ${index + 1}`);
+        dot.addEventListener('click', () => {
+          scrollFeedTo(index);
+          restartFeedAutoplay();
+        });
+        return dot;
+      }));
+    }
+
+    function syncFeedIndexFromScroll(){
+      feedScrollRaf = null;
+      const cards = getFeedCards();
+      if(!taskFeedRoot || !cards.length) return;
+      const center = taskFeedRoot.scrollLeft + (taskFeedRoot.clientWidth / 2);
+      let nearestIndex = 0;
+      let nearestDistance = Infinity;
+      cards.forEach((card, index) => {
+        const cardCenter = card.offsetLeft + (card.clientWidth / 2);
+        const distance = Math.abs(cardCenter - center);
+        if(distance < nearestDistance){
+          nearestDistance = distance;
+          nearestIndex = index;
+        }
+      });
+      if(nearestIndex !== feedActiveIndex){
+        feedActiveIndex = nearestIndex;
+        updateFeedCarouselState();
+      }
+    }
+
+    function stopFeedAutoplay(){
+      if(feedAutoplay){
+        window.clearInterval(feedAutoplay);
+        feedAutoplay = null;
+      }
+    }
+
+    function startFeedAutoplay(){
+      stopFeedAutoplay();
+      if(reducedMotionQuery.matches || getFeedCards().length < 2) return;
+      feedAutoplay = window.setInterval(() => scrollFeedTo(feedActiveIndex + 1), feedRotationMs);
+    }
+
+    function restartFeedAutoplay(){
+      stopFeedAutoplay();
+      window.setTimeout(startFeedAutoplay, 350);
+    }
+
+    function setupTaskCarousel(preserveIndex = false){
+      const cards = getFeedCards();
+      if(!cards.length) return;
+      feedActiveIndex = preserveIndex ? Math.min(feedActiveIndex, cards.length - 1) : 0;
+      renderFeedDots(cards.length);
+      updateFeedCarouselState();
+      window.requestAnimationFrame(() => scrollFeedTo(feedActiveIndex, 'auto'));
+      startFeedAutoplay();
     }
 
     function readSnapshotItem(element){
@@ -1920,7 +2198,10 @@
       if(!taskFeedRoot) return;
       const items = Array.isArray(feed.items) ? feed.items : [];
       if(!items.length) return;
-      taskFeedRoot.replaceChildren(...items.slice(0, 10).map(renderFeedCard));
+      const track = ensureFeedTrack();
+      if(!track) return;
+      track.replaceChildren(...items.slice(0, 10).map(renderFeedCard));
+      setupTaskCarousel(true);
       updateFeedStatus(feed);
     }
 
@@ -1941,12 +2222,37 @@
       }
     }
 
+    taskFeedRoot?.addEventListener('scroll', () => {
+      if(feedScrollRaf) return;
+      feedScrollRaf = window.requestAnimationFrame(syncFeedIndexFromScroll);
+    }, {passive:true});
+    feedPrevButton?.addEventListener('click', () => {
+      scrollFeedTo(feedActiveIndex - 1);
+      restartFeedAutoplay();
+    });
+    feedNextButton?.addEventListener('click', () => {
+      scrollFeedTo(feedActiveIndex + 1);
+      restartFeedAutoplay();
+    });
+    taskFeedCarousel?.addEventListener('pointerenter', stopFeedAutoplay);
+    taskFeedCarousel?.addEventListener('pointerleave', startFeedAutoplay);
+    taskFeedCarousel?.addEventListener('focusin', stopFeedAutoplay);
+    taskFeedCarousel?.addEventListener('focusout', () => {
+      window.setTimeout(() => {
+        if(!taskFeedCarousel.contains(document.activeElement)) startFeedAutoplay();
+      }, 0);
+    });
+    taskFeedRoot?.addEventListener('pointerdown', stopFeedAutoplay, {passive:true});
+    taskFeedRoot?.addEventListener('pointerup', restartFeedAutoplay, {passive:true});
+    reducedMotionQuery.addEventListener?.('change', restartFeedAutoplay);
+
+    setupTaskCarousel();
     refreshTaskFeed();
     window.setInterval(refreshTaskFeed, 30000);
 
     const canvas = document.getElementById('heroCanvas');
     const ctx = canvas.getContext('2d');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reducedMotion = reducedMotionQuery.matches;
     let width = 0;
     let height = 0;
     let dpr = 1;

@@ -36,7 +36,7 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
 3. Task Node Feed
    - Lower-page operating evidence section titled "The Hive Mind in Action."
    - Shows recent Task Node activity with category, timestamp, semi-anonymous node id, ticker tags, and PFTL proof links.
-   - Uses a large internal scroll panel so visitors can inspect more than three items without making the page excessively long.
+   - Uses a smooth horizontal carousel: centered active card, visible adjacent cards, arrow controls, progress dots, and automatic rotation.
    - Ships with static fallback cards, tries the public activity endpoint, and falls back to the public AGTI feed page if browser CORS blocks the API.
 
 4. How It Works
@@ -74,6 +74,7 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
 - Mobile menu opens from the pill header without changing the current homepage.
 - Header and footer include canonical Post Fiat links for GitHub, X, and Discord.
 - Task Node Feed tries `https://pftasks-api.fly.dev/activity/public-feed?limit=24` and falls back to `https://agtico.github.io/task-node-feed/`.
+- Task Node Feed automatically rotates cards, pauses on hover/focus/touch interaction, and respects `prefers-reduced-motion`.
 - How It Works keeps the sticky rail, copy, and side art synchronized while scrolling.
 - Governance section uses accessible buttons with `aria-expanded`.
 - Use-case strip can be horizontally scrolled on mobile and desktop.
