@@ -297,7 +297,7 @@
     .proof-strip{
       position:relative;
       z-index:3;
-      margin-top:-76px;
+      margin-top:-48px;
     }
 
     .proof-grid{
@@ -359,31 +359,68 @@
       gap:14px;
       padding-top:22px;
     }
+    .rail::before{
+      content:"";
+      position:absolute;
+      left:3px;
+      top:0;
+      bottom:0;
+      width:1px;
+      background:linear-gradient(180deg, rgba(221,255,220,.06), rgba(127,238,100,.32), rgba(221,255,220,.05));
+    }
     .rail a{
-      color:rgba(221,255,220,.38);
+      position:relative;
+      color:rgba(221,255,220,.34);
       text-decoration:none;
       font-size:.78rem;
       letter-spacing:.12em;
       text-transform:uppercase;
-      transition:color .18s ease;
+      padding-left:24px;
+      transition:color .18s ease, transform .18s ease;
     }
-    .rail a:hover{color:var(--green)}
+    .rail a::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:.42em;
+      width:7px;
+      height:7px;
+      background:rgba(221,255,220,.24);
+      box-shadow:0 0 0 rgba(127,238,100,0);
+      transition:background .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+    .rail a:hover,
+    .rail a.is-active{color:var(--green);transform:translateX(3px)}
+    .rail a.is-active::before{
+      background:var(--green);
+      box-shadow:0 0 18px rgba(127,238,100,.85);
+      transform:scale(1.12);
+    }
 
     .system-list{border-top:1px solid var(--line)}
     .system-row{
       display:grid;
       grid-template-columns:minmax(240px,.72fr) minmax(360px,1fr);
       min-height:360px;
+      scroll-margin-top:112px;
       border-bottom:1px solid var(--line);
+      opacity:.44;
+      transition:opacity .42s ease, filter .42s ease;
     }
+    .system-row.is-active{opacity:1}
     .system-copy{
       padding:28px 28px 28px 0;
     }
     .system-copy h3{
       margin-bottom:12px;
-      color:var(--green);
+      color:var(--pale);
       font-size:1.55rem;
       font-weight:600;
+      transition:color .24s ease, text-shadow .24s ease;
+    }
+    .system-row.is-active .system-copy h3{
+      color:var(--green);
+      text-shadow:0 0 18px rgba(127,238,100,.22);
     }
     .system-copy p{
       color:var(--pale-2);
@@ -398,6 +435,12 @@
       background:
         linear-gradient(132deg, rgba(127,238,100,.86), rgba(9,175,88,.55) 54%, rgba(0,0,0,.12)),
         linear-gradient(90deg, rgba(0,0,0,.34), transparent 42%);
+      filter:saturate(.65) brightness(.66);
+      transition:filter .42s ease, box-shadow .42s ease;
+    }
+    .system-row.is-active .system-visual{
+      filter:saturate(1.05) brightness(1);
+      box-shadow:inset 0 0 0 1px rgba(127,238,100,.16), 0 0 70px rgba(127,238,100,.08);
     }
     .system-visual::before{
       content:"";
@@ -408,18 +451,40 @@
         linear-gradient(315deg, rgba(0,0,0,.22) 0 24%, transparent 24% 100%);
       opacity:.7;
     }
+    .system-visual::after{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background:linear-gradient(105deg, transparent 20%, rgba(221,255,220,.18) 47%, transparent 62%);
+      transform:translateX(-110%);
+      opacity:0;
+      pointer-events:none;
+    }
+    .system-row.is-active .system-visual::after{
+      opacity:.65;
+      animation:visualSweep 2.8s ease-out infinite;
+    }
+    @keyframes visualSweep{
+      0%{transform:translateX(-110%)}
+      48%,100%{transform:translateX(110%)}
+    }
     .window{
       position:absolute;
       left:50%;
       top:50%;
       width:min(420px, 82%);
       min-height:172px;
-      transform:translate(-50%,-50%);
+      transform:translate(-50%,-50%) scale(.94);
       border-radius:12px;
       background:#151a16;
       border:1px solid rgba(221,255,220,.14);
       box-shadow:0 28px 64px rgba(0,0,0,.36);
       overflow:hidden;
+      transition:transform .42s cubic-bezier(.2,.8,.2,1), box-shadow .42s ease;
+    }
+    .system-row.is-active .window{
+      transform:translate(-50%,-50%) scale(1);
+      box-shadow:0 32px 80px rgba(0,0,0,.44), 0 0 44px rgba(127,238,100,.18);
     }
     .window-bar{
       display:flex;
@@ -436,10 +501,53 @@
     .code-lines{padding:18px 22px;color:#d8fdd4;font:500 .84rem/1.75 "IBM Plex Mono", monospace}
     .code-lines span{display:block;color:rgba(221,255,220,.64)}
     .code-lines strong{color:var(--green);font-weight:600}
+    .system-row.is-active .code-lines span{
+      animation:codeBlink 1.7s ease-in-out infinite;
+      animation-delay:var(--line-delay, 0s);
+    }
+    @keyframes codeBlink{
+      0%,100%{color:rgba(221,255,220,.56)}
+      50%{color:rgba(221,255,220,.92)}
+    }
     .metric-panel{padding:18px 20px}
     .metric-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:12px 0;color:var(--pale-2);font-size:.86rem}
     .metric-track{height:7px;flex:1;border-radius:999px;background:rgba(221,255,220,.08);overflow:hidden}
-    .metric-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--green),var(--pale))}
+    .metric-fill{
+      height:100%;
+      border-radius:inherit;
+      background:linear-gradient(90deg,var(--green),var(--pale));
+      transform:scaleX(.18);
+      transform-origin:left;
+      transition:transform .72s cubic-bezier(.2,.8,.2,1);
+    }
+    .system-row.is-active .metric-fill{transform:scaleX(1)}
+
+    .signal-map{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:.24;
+      transition:opacity .42s ease;
+    }
+    .system-row.is-active .signal-map{opacity:.8}
+    .signal-map span{
+      position:absolute;
+      width:8px;
+      height:8px;
+      border-radius:2px;
+      background:var(--green);
+      box-shadow:0 0 18px rgba(127,238,100,.72);
+      animation:nodePulse 2.8s ease-in-out infinite;
+      animation-delay:var(--delay,0s);
+    }
+    .signal-map span:nth-child(1){left:16%;top:22%}
+    .signal-map span:nth-child(2){left:78%;top:18%}
+    .signal-map span:nth-child(3){left:20%;top:78%}
+    .signal-map span:nth-child(4){left:82%;top:72%}
+    @keyframes nodePulse{
+      0%,100%{transform:scale(.72);opacity:.42}
+      50%{transform:scale(1.22);opacity:1}
+    }
 
     .light-section{
       background:var(--light);
@@ -471,15 +579,43 @@
     .artifact-card h3{font-size:1.2rem;margin-bottom:10px;font-weight:500}
     .artifact-card p{color:#5f705d;font-size:.98rem;margin:0}
 
-    .platform-grid{
+    .platform-panel{
       display:grid;
-      grid-template-columns:minmax(220px,.6fr) repeat(2,minmax(0,1fr));
-      gap:36px 72px;
+      grid-template-columns:minmax(360px,.76fr) minmax(0,1.24fr);
+      gap:58px;
+      align-items:start;
       margin-top:68px;
+      padding-top:58px;
+      border-top:1px solid rgba(0,0,0,.16);
     }
-    .platform-intro p{color:#62705f}
-    .platform-feature h3{font-size:1.15rem;margin-bottom:10px}
+    .platform-intro .section-title{
+      max-width:520px;
+      margin-bottom:22px;
+      font-size:clamp(2.45rem, 4.2vw, 4.75rem);
+      line-height:1;
+    }
+    .platform-intro p{max-width:430px;color:#62705f;font-size:1.02rem}
+    .platform-feature-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:1px;
+      border:1px solid rgba(0,0,0,.16);
+      background:rgba(0,0,0,.16);
+    }
+    .platform-feature{
+      min-height:190px;
+      padding:26px;
+      background:var(--light);
+    }
+    .platform-feature h3{font-size:1.25rem;margin-bottom:10px}
     .platform-feature p{color:#62705f;margin:0}
+    .platform-icon{
+      width:34px;
+      height:34px;
+      margin-bottom:22px;
+      color:#344633;
+    }
+    .platform-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8}
 
     .use-case-head{
       display:flex;
@@ -499,7 +635,7 @@
     .case-card{
       position:relative;
       flex:0 0 min(360px, 82vw);
-      min-height:330px;
+      min-height:390px;
       display:flex;
       flex-direction:column;
       justify-content:flex-end;
@@ -510,6 +646,11 @@
       text-decoration:none;
       scroll-snap-align:start;
       background:#0b0f0b;
+      transition:transform .22s ease, border-color .22s ease;
+    }
+    .case-card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(127,238,100,.42);
     }
     .case-card::before{
       content:"";
@@ -523,18 +664,119 @@
     .case-card::after{
       content:"";
       position:absolute;
-      width:170px;
-      height:170px;
-      right:28px;
-      top:28px;
-      border:1px solid rgba(221,255,220,.24);
-      transform:rotate(45deg);
-      box-shadow:inset 0 0 48px rgba(127,238,100,.24), 0 0 44px rgba(127,238,100,.1);
+      inset:0;
+      background:radial-gradient(circle at 70% 18%, rgba(221,255,220,.14), transparent 35%);
+      opacity:.8;
+      pointer-events:none;
     }
     .case-card > *{position:relative;z-index:1}
     .case-card h3{font-size:1.45rem;font-weight:500;margin-bottom:12px}
     .case-card p{margin:0;color:var(--pale);max-width:260px}
     .case-arrow{margin-top:22px;color:var(--green);font-weight:700}
+    .case-visual{
+      position:absolute;
+      inset:24px 24px auto;
+      height:170px;
+      z-index:1;
+      border:1px solid rgba(221,255,220,.14);
+      background:rgba(0,0,0,.18);
+      overflow:hidden;
+      transition:border-color .22s ease, box-shadow .22s ease;
+    }
+    .case-card:hover .case-visual{
+      border-color:rgba(221,255,220,.3);
+      box-shadow:0 0 36px rgba(127,238,100,.14);
+    }
+    .index-matrix{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      padding:18px;
+    }
+    .index-matrix span{
+      height:28px;
+      border:1px solid rgba(221,255,220,.2);
+      background:linear-gradient(90deg, rgba(127,238,100,.68), rgba(127,238,100,.08));
+      transform-origin:left;
+      animation:indexPulse 3.2s ease-in-out infinite;
+      animation-delay:var(--delay, 0s);
+    }
+    @keyframes indexPulse{
+      0%,100%{transform:scaleX(.45);opacity:.55}
+      50%{transform:scaleX(1);opacity:1}
+    }
+    .privacy-visual{
+      display:grid;
+      place-items:center;
+    }
+    .privacy-ring{
+      position:absolute;
+      width:118px;
+      height:118px;
+      border:1px dashed rgba(221,255,220,.38);
+      border-radius:50%;
+      animation:spin 9s linear infinite;
+    }
+    .privacy-lock{
+      width:62px;
+      height:62px;
+      border:2px solid var(--green);
+      border-radius:8px;
+      position:relative;
+      box-shadow:0 0 28px rgba(127,238,100,.22);
+    }
+    .privacy-lock::before{
+      content:"";
+      position:absolute;
+      left:13px;
+      top:-28px;
+      width:32px;
+      height:34px;
+      border:2px solid var(--green);
+      border-bottom:0;
+      border-radius:22px 22px 0 0;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .expert-net i,
+    .validator-nodes i{
+      position:absolute;
+      width:13px;
+      height:13px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 18px rgba(127,238,100,.76);
+      animation:nodePulse 2.6s ease-in-out infinite;
+    }
+    .expert-net::before,
+    .validator-nodes::before{
+      content:"";
+      position:absolute;
+      inset:28px;
+      background:
+        linear-gradient(32deg, transparent 48%, rgba(221,255,220,.34) 49% 51%, transparent 52%),
+        linear-gradient(148deg, transparent 48%, rgba(221,255,220,.24) 49% 51%, transparent 52%),
+        linear-gradient(90deg, transparent 48%, rgba(221,255,220,.2) 49% 51%, transparent 52%);
+    }
+    .expert-net i:nth-child(1){left:48%;top:46%}
+    .expert-net i:nth-child(2){left:18%;top:24%;animation-delay:.2s}
+    .expert-net i:nth-child(3){right:18%;top:26%;animation-delay:.4s}
+    .expert-net i:nth-child(4){left:24%;bottom:22%;animation-delay:.6s}
+    .expert-net i:nth-child(5){right:24%;bottom:20%;animation-delay:.8s}
+    .validator-nodes i:nth-child(1){left:20%;top:24%}
+    .validator-nodes i:nth-child(2){left:50%;top:16%;animation-delay:.25s}
+    .validator-nodes i:nth-child(3){right:20%;top:24%;animation-delay:.5s}
+    .validator-nodes i:nth-child(4){left:34%;bottom:22%;animation-delay:.75s}
+    .validator-nodes i:nth-child(5){right:34%;bottom:22%;animation-delay:1s}
+    .validator-stack-mini{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:94px;
+      height:94px;
+      transform:translate(-50%,-50%) rotate(45deg);
+      border:1px solid rgba(221,255,220,.4);
+      box-shadow:inset 0 0 28px rgba(127,238,100,.28), 0 0 28px rgba(127,238,100,.16);
+    }
 
     .governance{
       display:grid;
@@ -699,7 +941,8 @@
       .system-grid{grid-template-columns:1fr}
       .rail{display:none}
       .artifact-grid{grid-template-columns:repeat(3,1fr)}
-      .platform-grid{grid-template-columns:1fr 1fr}
+      .platform-panel{grid-template-columns:1fr;gap:34px}
+      .platform-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .governance,.quote-grid,.cta-grid{grid-template-columns:1fr}
       .footer-grid{grid-template-columns:1fr 1fr}
     }
@@ -728,9 +971,12 @@
       .artifact-grid{grid-template-columns:1fr;gap:24px}
       .artifact-card{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:start}
       .artifact-icon{margin:0}
-      .platform-grid{grid-template-columns:1fr;gap:22px}
+      .platform-panel{gap:28px;margin-top:42px;padding-top:38px}
+      .platform-feature-grid{grid-template-columns:1fr}
+      .platform-feature{min-height:0;padding:22px}
       .use-case-head{align-items:start;flex-direction:column}
-      .case-card{min-height:300px}
+      .case-card{min-height:360px}
+      .case-visual{inset:18px 18px auto;height:150px}
       .stack-visual{min-height:300px}
       .stack-cube{width:170px;height:170px}
       .quote{font-size:2.2rem}
@@ -824,25 +1070,31 @@
           <h2 class="section-title">Designed for AI-native financial coordination.</h2>
           <div class="system-grid">
             <nav class="rail" aria-label="How it works sections">
-              <a href="#primitive">01 - Foundation</a>
-              <a href="#differentiation">02 - Differentiation</a>
-              <a href="#markets">03 - Application</a>
-              <a href="#tasknode">04 - Participation</a>
+              <a class="is-active" href="#primitive" data-target="primitive">01 - Foundation</a>
+              <a href="#differentiation" data-target="differentiation">02 - Differentiation</a>
+              <a href="#markets" data-target="markets">03 - Application</a>
+              <a href="#tasknode" data-target="tasknode">04 - Participation</a>
             </nav>
             <div class="system-list">
-              <article class="system-row" id="primitive">
+              <article class="system-row is-active" id="primitive">
                 <div class="system-copy">
                   <h3>XRP Is The Right Primitive</h3>
                   <p>XRP's core architecture is already good at fast finality and message-style coordination. Post Fiat starts from the view that an AI-native network should use an efficient settlement and messaging layer rather than rebuild everything around slower, more inflationary primitives.</p>
                 </div>
                 <div class="system-visual" aria-hidden="true">
+                  <div class="signal-map">
+                    <span style="--delay:0s"></span>
+                    <span style="--delay:.35s"></span>
+                    <span style="--delay:.7s"></span>
+                    <span style="--delay:1.05s"></span>
+                  </div>
                   <div class="window">
                     <div class="window-bar"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span><span class="window-title mono">settlement.py</span></div>
                     <div class="code-lines">
-                      <span>01 network = xrpl_derived()</span>
-                      <span>02 finality = <strong>"fast"</strong></span>
-                      <span>03 messaging = <strong>"native"</strong></span>
-                      <span>04 coordination = post_fiat()</span>
+                      <span style="--line-delay:0s">01 network = xrpl_derived()</span>
+                      <span style="--line-delay:.12s">02 finality = <strong>"fast"</strong></span>
+                      <span style="--line-delay:.24s">03 messaging = <strong>"native"</strong></span>
+                      <span style="--line-delay:.36s">04 coordination = post_fiat()</span>
                     </div>
                   </div>
                 </div>
@@ -853,6 +1105,12 @@
                   <p>Post Fiat keeps the useful parts of XRP while changing the two biggest legitimacy gaps: opaque validator selection and no native privacy. The network adds AI-assisted, published validator selection and an Orchard privacy path so the base layer is fairer, more legible, and more useful for real financial workflows.</p>
                 </div>
                 <div class="system-visual" aria-hidden="true">
+                  <div class="signal-map">
+                    <span style="--delay:.1s"></span>
+                    <span style="--delay:.45s"></span>
+                    <span style="--delay:.8s"></span>
+                    <span style="--delay:1.15s"></span>
+                  </div>
                   <div class="window">
                     <div class="window-bar"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span><span class="window-title mono">governance</span></div>
                     <div class="metric-panel">
@@ -869,13 +1127,19 @@
                   <p>The primary use case is not replacing SWIFT. Post Fiat is aimed at buy-side workflows, research coordination, expert networks, indexing, compliance, and AI-assisted capital deployment.</p>
                 </div>
                 <div class="system-visual" aria-hidden="true">
+                  <div class="signal-map">
+                    <span style="--delay:.2s"></span>
+                    <span style="--delay:.55s"></span>
+                    <span style="--delay:.9s"></span>
+                    <span style="--delay:1.25s"></span>
+                  </div>
                   <div class="window">
                     <div class="window-bar"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span><span class="window-title mono">capital markets</span></div>
                     <div class="code-lines">
-                      <span>index.assets()</span>
-                      <span>route.research()</span>
-                      <span>score.validators()</span>
-                      <span><strong>deploy.ai_workflow()</strong></span>
+                      <span style="--line-delay:0s">index.assets()</span>
+                      <span style="--line-delay:.12s">route.research()</span>
+                      <span style="--line-delay:.24s">score.validators()</span>
+                      <span style="--line-delay:.36s"><strong>deploy.ai_workflow()</strong></span>
                     </div>
                   </div>
                 </div>
@@ -886,6 +1150,12 @@
                   <p>Task Node gives the community a way to do something economically useful together. Instead of a retail crowd that can only post, hold, and hope, participants can contribute observations, research, and workflow outputs into an AI-routed network that internalizes its own edge instead of donating it to outside firms.</p>
                 </div>
                 <div class="system-visual" aria-hidden="true">
+                  <div class="signal-map">
+                    <span style="--delay:.3s"></span>
+                    <span style="--delay:.65s"></span>
+                    <span style="--delay:1s"></span>
+                    <span style="--delay:1.35s"></span>
+                  </div>
                   <div class="window">
                     <div class="window-bar"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span><span class="window-title mono">task node</span></div>
                     <div class="metric-panel">
@@ -928,27 +1198,33 @@
             </a>
           </div>
 
-          <div class="platform-grid">
+          <div class="platform-panel">
             <div class="platform-intro">
               <p class="section-kicker mono">Platform</p>
               <h2 class="section-title">Build around a powerful coordination layer.</h2>
               <p>From settlement to validator publication, every layer is framed around auditable financial workflows and human-machine collaboration.</p>
             </div>
-            <div class="platform-feature">
-              <h3>AI-assisted validator publication</h3>
-              <p>Evidence, model/runtime manifest, scoring outputs, and deterministic list construction become visible artifacts.</p>
-            </div>
-            <div class="platform-feature">
-              <h3>Privacy-enabled workflows</h3>
-              <p>Orchard privacy and encrypted coordination make the network more credible for institutional finance than plain public transfer rails.</p>
-            </div>
-            <div class="platform-feature">
-              <h3>Task Node participation</h3>
-              <p>Community members can contribute observations, research, and workflow output rather than only speculating on a token.</p>
-            </div>
-            <div class="platform-feature">
-              <h3>Capital markets focus</h3>
-              <p>Post Fiat is aimed at indexing, buy-side research, expert networks, compliance, and AI-assisted capital deployment.</p>
+            <div class="platform-feature-grid">
+              <div class="platform-feature">
+                <div class="platform-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 36h32"/><path d="M14 30V16h20v14"/><path d="M18 20h12M18 25h8"/><path d="M12 36l4-6h16l4 6"/></svg></div>
+                <h3>AI-assisted validator publication</h3>
+                <p>Evidence, model/runtime manifest, scoring outputs, and deterministic list construction become visible artifacts.</p>
+              </div>
+              <div class="platform-feature">
+                <div class="platform-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 22v-5a10 10 0 0 1 20 0v5"/><path d="M12 22h24v18H12z"/><path d="M24 29v5"/></svg></div>
+                <h3>Privacy-enabled workflows</h3>
+                <p>Orchard privacy and encrypted coordination make the network more credible for institutional finance than plain public transfer rails.</p>
+              </div>
+              <div class="platform-feature">
+                <div class="platform-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 9v30"/><path d="M10 17h14l14 14"/><path d="M10 31h14l14-14"/><circle cx="10" cy="17" r="3"/><circle cx="10" cy="31" r="3"/><circle cx="38" cy="17" r="3"/><circle cx="38" cy="31" r="3"/></svg></div>
+                <h3>Task Node participation</h3>
+                <p>Community members can contribute observations, research, and workflow output rather than only speculating on a token.</p>
+              </div>
+              <div class="platform-feature">
+                <div class="platform-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 38h32"/><path d="M14 34V22"/><path d="M24 34V12"/><path d="M34 34V18"/><path d="M11 17l13-7 13 4"/></svg></div>
+                <h3>Capital markets focus</h3>
+                <p>Post Fiat is aimed at indexing, buy-side research, expert networks, compliance, and AI-assisted capital deployment.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -965,21 +1241,54 @@
           </div>
           <div class="case-strip" aria-label="Use cases">
             <a class="case-card" style="--case-bg:linear-gradient(135deg, rgba(127,238,100,.76), rgba(226,190,40,.18));" href="/whitepaper/">
+              <div class="case-visual index-matrix" aria-hidden="true">
+                <span style="--delay:0s"></span>
+                <span style="--delay:.12s"></span>
+                <span style="--delay:.24s"></span>
+                <span style="--delay:.36s"></span>
+                <span style="--delay:.48s"></span>
+                <span style="--delay:.6s"></span>
+                <span style="--delay:.72s"></span>
+                <span style="--delay:.84s"></span>
+                <span style="--delay:.96s"></span>
+                <span style="--delay:1.08s"></span>
+                <span style="--delay:1.2s"></span>
+                <span style="--delay:1.32s"></span>
+              </div>
               <h3>ETFs and Indexing</h3>
               <p>Machine-readable ontology for assets, portfolios, market structures, screening systems, and new financial products.</p>
               <span class="case-arrow">&nearr;</span>
             </a>
             <a class="case-card" style="--case-bg:linear-gradient(135deg, rgba(9,175,88,.72), rgba(54,160,130,.28));" href="/whitepaper/">
+              <div class="case-visual privacy-visual" aria-hidden="true">
+                <div class="privacy-ring"></div>
+                <div class="privacy-lock"></div>
+              </div>
               <h3>Compliance and Private Coordination</h3>
               <p>Encrypted memos, privacy tooling, and stronger policy controls for institutional workflows.</p>
               <span class="case-arrow">&nearr;</span>
             </a>
             <a class="case-card" style="--case-bg:linear-gradient(135deg, rgba(127,238,100,.58), rgba(54,105,85,.3));" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">
+              <div class="case-visual expert-net" aria-hidden="true">
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+              </div>
               <h3>Buy-Side Expert Networks</h3>
               <p>Contributors provide proprietary observations and research to paying AI agents and portfolio managers.</p>
               <span class="case-arrow">&nearr;</span>
             </a>
             <a class="case-card" style="--case-bg:linear-gradient(135deg, rgba(127,238,100,.68), rgba(0,0,0,.18));" href="/validator-benchmark/">
+              <div class="case-visual validator-nodes" aria-hidden="true">
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <div class="validator-stack-mini"></div>
+              </div>
               <h3>Validator Governance</h3>
               <p>Validator-list publication should be auditable, replayable, and eventually multi-party.</p>
               <span class="case-arrow">&nearr;</span>
@@ -1111,6 +1420,47 @@
         button.setAttribute('aria-expanded', String(isOpen));
       });
     });
+
+    const systemRows = Array.from(document.querySelectorAll('.system-row'));
+    const railLinks = Array.from(document.querySelectorAll('.rail a'));
+    let systemTicking = false;
+
+    function setActiveSystem(id){
+      systemRows.forEach((row) => row.classList.toggle('is-active', row.id === id));
+      railLinks.forEach((link) => link.classList.toggle('is-active', link.dataset.target === id));
+    }
+
+    function syncActiveSystem(){
+      if(!systemRows.length) return;
+
+      const marker = window.innerHeight * .32;
+      let active = systemRows[0];
+
+      systemRows.forEach((row) => {
+        const rect = row.getBoundingClientRect();
+        if(rect.top <= marker && rect.bottom >= marker) active = row;
+        if(rect.bottom < marker) active = row;
+      });
+
+      setActiveSystem(active.id);
+      systemTicking = false;
+    }
+
+    function requestSystemSync(){
+      if(systemTicking) return;
+      systemTicking = true;
+      requestAnimationFrame(syncActiveSystem);
+    }
+
+    railLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        setActiveSystem(link.dataset.target);
+        window.setTimeout(requestSystemSync, 260);
+      });
+    });
+    window.addEventListener('scroll', requestSystemSync, {passive:true});
+    window.addEventListener('resize', requestSystemSync);
+    requestSystemSync();
 
     const canvas = document.getElementById('heroCanvas');
     const ctx = canvas.getContext('2d');

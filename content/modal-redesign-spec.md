@@ -39,6 +39,8 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
    - Post Fiat fixes what XRP does not.
    - Built for capital markets, not generic payment theater.
    - Task Node turns community into collective intelligence.
+   - Sticky side rail highlights the active row during scroll.
+   - Active rows brighten, animate code/metric panels, and run a signal sweep across the visual.
 
 4. Public Artifacts
    - Pale green band with five repeated artifact cards:
@@ -47,6 +49,7 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
 5. Use Cases
    - Horizontal scroller/card row:
    - ETFs and indexing, compliance and private coordination, buy-side expert networks, validator governance.
+   - Cards use distinct animated art instead of generic illustration: index matrix, privacy lock, expert network, and validator topology.
 
 6. Security and Governance
    - Accordion-style list for live testnet, validator scoring, privacy, and PFT coordination.
@@ -63,6 +66,7 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
 
 - Hero canvas animates subtly and degrades gracefully if JavaScript is disabled.
 - Mobile menu opens from the pill header without changing the current homepage.
+- How It Works keeps the sticky rail, copy, and side art synchronized while scrolling.
 - Governance section uses accessible buttons with `aria-expanded`.
 - Use-case strip can be horizontally scrolled on mobile and desktop.
 - Respect `prefers-reduced-motion` by lowering canvas frame rate and disabling large transforms.
@@ -74,4 +78,3 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
 - This spec is published through `content/modal-redesign-spec.md`.
 - No current homepage file is deleted or replaced.
 - The current homepage still uses `layouts/index.html` and `layouts/page/oai_redesign.html`.
-
