@@ -33,7 +33,12 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
 2. Proof Strip
    - Compact bordered strip for the core proof points: live testnet, validator domains, public benchmark, Task Node, whitepaper, explorer.
 
-3. How It Works
+3. Task Node Feed
+   - Live-feeling feed section modeled after AGTI's "Semi-anonymous network updates" block.
+   - Shows recent Task Node activity with category, timestamp, semi-anonymous node id, ticker tags, and PFTL proof links.
+   - Ships with static fallback cards, tries the public activity endpoint, and falls back to the public AGTI feed page if browser CORS blocks the API.
+
+4. How It Works
    - Four technical rows:
    - XRP is the right primitive.
    - Post Fiat fixes what XRP does not.
@@ -42,23 +47,23 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
    - Sticky side rail highlights the active row during scroll.
    - Active rows brighten, animate code/metric panels, and run a signal sweep across the visual.
 
-4. Public Artifacts
+5. Public Artifacts
    - Pale green band with five repeated artifact cards:
    - Whitepaper, Task Node, Validator Benchmark, Validator Setup, Community.
 
-5. Use Cases
+6. Use Cases
    - Horizontal scroller/card row:
    - ETFs and indexing, compliance and private coordination, buy-side expert networks, validator governance.
    - Cards use distinct animated art instead of generic illustration: index matrix, privacy lock, expert network, and validator topology.
 
-6. Security and Governance
+7. Security and Governance
    - Accordion-style list for live testnet, validator scoring, privacy, and PFT coordination.
    - Visual system stack beside the accordion.
 
-7. Founder and Market Credibility
+8. Founder and Market Credibility
    - Keeps existing rough proof points around Alex Good, background, and capital/market credibility.
 
-8. Final CTA
+9. Final CTA
    - "Join before the coordination layer hardens."
    - CTAs repeat the practical next steps.
 
@@ -66,6 +71,8 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
 
 - Hero canvas animates subtly and degrades gracefully if JavaScript is disabled.
 - Mobile menu opens from the pill header without changing the current homepage.
+- Header and footer include canonical Post Fiat links for GitHub, X, and Discord.
+- Task Node Feed tries `https://pftasks-api.fly.dev/activity/public-feed?limit=24` and falls back to `https://agtico.github.io/task-node-feed/`.
 - How It Works keeps the sticky rail, copy, and side art synchronized while scrolling.
 - Governance section uses accessible buttons with `aria-expanded`.
 - Use-case strip can be horizontally scrolled on mobile and desktop.
