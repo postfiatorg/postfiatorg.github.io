@@ -778,9 +778,9 @@
       background:
         linear-gradient(135deg, rgba(221,255,220,.22), transparent 45%),
         linear-gradient(315deg, rgba(9,175,88,.5), rgba(0,0,0,.16));
-      box-shadow:0 0 24px rgba(127,238,100,.18);
-      opacity:.18;
-      animation:brandCubeDrift var(--speed) cubic-bezier(.2,.8,.2,1) infinite;
+      box-shadow:0 0 10px rgba(127,238,100,.12);
+      opacity:.14;
+      animation:none;
       animation-delay:var(--delay);
     }
     .brand-cube-field span::before,
@@ -796,7 +796,11 @@
       border-bottom:2px solid rgba(127,238,100,.62);
       transform:translateY(28%) rotate(var(--mark-counter-rotation, 0deg));
     }
-    .system-row.is-active .brand-cube-field span{opacity:.58}
+    .system-row.is-active .brand-cube-field span{
+      opacity:.5;
+      animation:brandCubeDrift var(--speed) cubic-bezier(.2,.8,.2,1) infinite;
+      animation-delay:var(--delay);
+    }
     @keyframes visualSweep{
       0%{transform:translateX(-110%)}
       48%,100%{transform:translateX(110%)}
@@ -1367,6 +1371,11 @@
       .system-row{grid-template-columns:1fr;min-height:0}
       .system-copy{padding:28px 0}
       .system-visual{min-height:270px}
+      .brand-cube-field span{
+        animation:none !important;
+        box-shadow:none;
+        opacity:.16;
+      }
       .artifact-grid{grid-template-columns:1fr;gap:24px}
       .artifact-card{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:start}
       .artifact-icon{margin:0}
@@ -2326,15 +2335,23 @@
     const ctx = canvas.getContext('2d');
     const reducedMotion = reducedMotionQuery.matches;
     const heroTiles = [];
+    const lowCoreDevice = (navigator.hardwareConcurrency || 8) <= 4;
+    const isTouchDevice = window.matchMedia('(pointer:coarse)').matches;
     let width = 0;
     let height = 0;
     let dpr = 1;
     let frame = 0;
+    let heroAnimationId = 0;
+    let heroVisible = true;
+    let lastHeroFrame = 0;
+    let heroFrameMs = 1000 / 24;
 
     function resizeCanvas(){
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = canvas.clientWidth;
       height = canvas.clientHeight;
+      const liteMotion = width < 720 || lowCoreDevice || isTouchDevice;
+      dpr = Math.min(window.devicePixelRatio || 1, liteMotion ? 1 : 1.25);
+      heroFrameMs = reducedMotion ? Infinity : (liteMotion ? 1000 / 16 : 1000 / 24);
       canvas.width = Math.max(1, Math.floor(width * dpr));
       canvas.height = Math.max(1, Math.floor(height * dpr));
       ctx.setTransform(dpr,0,0,dpr,0,0);
@@ -2347,20 +2364,20 @@
     }
 
     function rebuildHeroTiles(){
-      const count = width < 720 ? 34 : 76;
+      const count = reducedMotion ? 0 : (width < 720 ? 12 : (lowCoreDevice ? 18 : 28));
       heroTiles.length = 0;
       for(let i=0;i<count;i++){
         const seed = seededNoise(i);
         heroTiles.push({
           offset:seededNoise(i + 8),
-          speed:.018 + seededNoise(i + 16) * .035,
-          size:(width < 720 ? 9 : 13) + seededNoise(i + 24) * (width < 720 ? 24 : 46),
+          speed:.012 + seededNoise(i + 16) * .022,
+          size:(width < 720 ? 11 : 15) + seededNoise(i + 24) * (width < 720 ? 24 : 38),
           depth:.22 + seededNoise(i + 32) * .58,
           family:i % 4,
           lane:seed,
           phase:seededNoise(i + 40) * Math.PI * 2,
-          branded:i % 5 === 0 || seededNoise(i + 48) > .82,
-          alpha:.18 + seededNoise(i + 56) * .54
+          branded:i % 6 === 0 || seededNoise(i + 48) > .9,
+          alpha:.16 + seededNoise(i + 56) * .42
         });
       }
     }
@@ -2369,7 +2386,7 @@
       return a + (b - a) * t;
     }
 
-    function drawPostFiatMark(cx, cy, size, alpha, rotation = 0){
+    function drawPostFiatMark(cx, cy, size, alpha, rotation = 0, glow = false){
       ctx.save();
       ctx.translate(cx, cy);
       ctx.rotate(rotation);
@@ -2377,8 +2394,10 @@
       ctx.lineJoin = 'round';
       ctx.lineWidth = Math.max(1.2, size * .105);
       ctx.strokeStyle = `rgba(221,255,220,${alpha})`;
-      ctx.shadowColor = 'rgba(127,238,100,.7)';
-      ctx.shadowBlur = size * .18;
+      if(glow){
+        ctx.shadowColor = 'rgba(127,238,100,.45)';
+        ctx.shadowBlur = Math.min(24, size * .08);
+      }
       ctx.beginPath();
       ctx.moveTo(-size*.42, -size*.38);
       ctx.lineTo(size*.42, size*.34);
@@ -2405,8 +2424,6 @@
 
       ctx.save();
       ctx.globalAlpha = alpha;
-      ctx.shadowColor = 'rgba(127,238,100,.38)';
-      ctx.shadowBlur = Math.max(8, size * .36);
 
       ctx.fillStyle = 'rgba(127,238,100,.22)';
       ctx.strokeStyle = 'rgba(221,255,220,.58)';
@@ -2420,7 +2437,6 @@
       ctx.fill();
       ctx.stroke();
 
-      ctx.shadowBlur = 0;
       ctx.fillStyle = 'rgba(9,175,88,.24)';
       ctx.beginPath();
       ctx.moveTo(left[0], left[1]);
@@ -2450,7 +2466,7 @@
         ctx.lineTo(left[0], left[1]);
         ctx.closePath();
         ctx.clip();
-        drawPostFiatMark(cx, cy + lift, size * .48, .72, 0);
+        drawPostFiatMark(cx, cy + lift, size * .48, .72, 0, false);
         ctx.restore();
       }
 
@@ -2463,8 +2479,8 @@
       const cy = height * (width < 720 ? .36 : .42);
       ctx.save();
       ctx.globalCompositeOperation = 'lighter';
-      drawPostFiatMark(cx, cy, scale, .045 + Math.sin(frame * 1.8) * .012, Math.sin(frame * .18) * .03);
-      drawPostFiatMark(cx, cy, scale * .72, .032, -Math.sin(frame * .2) * .04);
+      drawPostFiatMark(cx, cy, scale, .04 + Math.sin(frame * 1.8) * .008, Math.sin(frame * .18) * .03, width >= 900);
+      drawPostFiatMark(cx, cy, scale * .72, .028, -Math.sin(frame * .2) * .04, false);
       ctx.restore();
     }
 
@@ -2499,7 +2515,7 @@
     }
 
     function draw(){
-      frame += reducedMotion ? .002 : .012;
+      frame += reducedMotion ? .002 : .018;
       ctx.clearRect(0,0,width,height);
       ctx.fillStyle = '#000';
       ctx.fillRect(0,0,width,height);
@@ -2507,11 +2523,13 @@
       const horizon = height * .58;
       const vanishingX = width * .5;
       const vanishingY = height * .28;
+      const verticalLines = width < 720 ? 18 : 24;
+      const horizontalLines = width < 720 ? 10 : 15;
 
       ctx.save();
       ctx.lineWidth = 1;
-      for(let i=0;i<34;i++){
-        const t = i / 33;
+      for(let i=0;i<verticalLines;i++){
+        const t = i / Math.max(1, verticalLines - 1);
         const x = width * (t - .12);
         ctx.strokeStyle = `rgba(127,238,100,${0.03 + t * .04})`;
         ctx.beginPath();
@@ -2519,9 +2537,10 @@
         ctx.lineTo(vanishingX + (x - width/2) * .05, vanishingY);
         ctx.stroke();
       }
-      for(let i=0;i<22;i++){
-        const y = horizon + Math.pow(i/21, 1.7) * (height - horizon + 40);
-        ctx.strokeStyle = `rgba(127,238,100,${0.04 + i/21 * .13})`;
+      for(let i=0;i<horizontalLines;i++){
+        const t = i / Math.max(1, horizontalLines - 1);
+        const y = horizon + Math.pow(t, 1.7) * (height - horizon + 40);
+        ctx.strokeStyle = `rgba(127,238,100,${0.04 + t * .13})`;
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.quadraticCurveTo(width/2, y - (height-y)*.08, width, y);
@@ -2550,31 +2569,74 @@
         [0.18,0.36,28],[0.31,0.52,16],[0.72,0.44,24],[0.84,0.28,18],
         [0.58,0.68,38],[0.42,0.76,22],[0.12,0.70,30],[0.88,0.72,24]
       ];
-      nodes.forEach(([nx,ny,s], i) => {
+      const visibleNodes = width < 720 ? nodes.slice(0, 5) : nodes;
+      visibleNodes.forEach(([nx,ny,s], i) => {
         drawIsoBox(width*nx, height*ny, s + Math.sin(frame*1.8+i)*2, .46, frame*2+i, .68, i % 2 === 0);
       });
 
       ctx.save();
       ctx.strokeStyle = 'rgba(127,238,100,.22)';
       ctx.lineWidth = 1;
-      for(let i=0;i<nodes.length-1;i++){
-        const a = nodes[i];
-        const b = nodes[(i+2) % nodes.length];
+      for(let i=0;i<visibleNodes.length-1;i++){
+        const a = visibleNodes[i];
+        const b = visibleNodes[(i+2) % visibleNodes.length];
         ctx.beginPath();
         ctx.moveTo(width*a[0], height*a[1]);
         ctx.lineTo(width*b[0], height*b[1]);
         ctx.stroke();
       }
       ctx.restore();
+    }
 
-      if(!reducedMotion) requestAnimationFrame(draw);
+    function runHeroFrame(timestamp){
+      if(reducedMotion || !heroVisible || document.hidden){
+        heroAnimationId = 0;
+        return;
+      }
+      if(!lastHeroFrame || timestamp - lastHeroFrame >= heroFrameMs){
+        draw();
+        lastHeroFrame = timestamp;
+      }
+      heroAnimationId = window.requestAnimationFrame(runHeroFrame);
+    }
+
+    function startHeroAnimation(){
+      if(reducedMotion || heroAnimationId || !heroVisible || document.hidden) return;
+      heroAnimationId = window.requestAnimationFrame(runHeroFrame);
+    }
+
+    function stopHeroAnimation(){
+      if(heroAnimationId) window.cancelAnimationFrame(heroAnimationId);
+      heroAnimationId = 0;
+      lastHeroFrame = 0;
     }
 
     resizeCanvas();
     draw();
+    if('IntersectionObserver' in window){
+      const heroObserver = new IntersectionObserver((entries) => {
+        heroVisible = entries.some((entry) => entry.isIntersecting);
+        if(heroVisible){
+          startHeroAnimation();
+        }else{
+          stopHeroAnimation();
+        }
+      }, {threshold:.05});
+      heroObserver.observe(canvas);
+    }else{
+      startHeroAnimation();
+    }
+    document.addEventListener('visibilitychange', () => {
+      if(document.hidden){
+        stopHeroAnimation();
+      }else{
+        startHeroAnimation();
+      }
+    });
     window.addEventListener('resize', () => {
       resizeCanvas();
-      if(reducedMotion) draw();
+      draw();
+      startHeroAnimation();
     });
   </script>
 </body>

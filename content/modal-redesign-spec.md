@@ -72,6 +72,7 @@ The current homepage remains unchanged. The redesign lives at `/modal-redesign/`
 ## Interaction Requirements
 
 - Hero canvas animates subtly and degrades gracefully if JavaScript is disabled.
+- Hero motion has a strict performance budget: capped canvas resolution, capped frame rate, fewer mobile objects, no per-tile shadow blur, and automatic pause when the hero leaves the viewport or the tab is hidden.
 - Technical panels use smaller branded cube fields so the motion language continues beyond the hero.
 - Mobile menu opens from the pill header without changing the current homepage.
 - Header and footer include canonical Post Fiat links for GitHub, X, and Discord.
