@@ -294,38 +294,206 @@
     .btn.primary:hover{background:var(--pale);color:#000}
     .btn.dark{background:rgba(0,0,0,.24)}
 
-    .proof-strip{
+    .validator-section{
       position:relative;
       z-index:3;
-      margin-top:-48px;
+      margin-top:-34px;
+      padding:36px 0 98px;
+      border-bottom:1px solid rgba(221,255,220,.08);
+      background:
+        radial-gradient(circle at 82% 18%, rgba(127,238,100,.12), transparent 34%),
+        linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,0) 44%);
     }
 
-    .proof-grid{
+    .validator-shell{
       display:grid;
-      grid-template-columns:repeat(6, minmax(0, 1fr));
+      grid-template-columns:minmax(320px,.82fr) minmax(460px,1.18fr);
+      gap:38px;
+      align-items:stretch;
       border:1px solid var(--line);
-      border-radius:9px;
+      border-radius:8px;
       overflow:hidden;
-      background:rgba(0,0,0,.54);
-      backdrop-filter:blur(12px);
+      background:
+        linear-gradient(135deg, rgba(127,238,100,.06), rgba(0,0,0,.18) 46%),
+        rgba(8,11,8,.78);
+      box-shadow:0 44px 120px rgba(0,0,0,.34), inset 0 0 0 1px rgba(127,238,100,.03);
     }
 
-    .proof-item{
-      min-height:78px;
+    .validator-copy{
+      min-height:420px;
       display:flex;
       flex-direction:column;
-      justify-content:center;
-      gap:3px;
-      padding:14px 18px;
+      justify-content:space-between;
+      padding:34px;
       border-right:1px solid var(--line);
-      text-decoration:none;
-      color:var(--pale);
-      transition:background .18s ease, color .18s ease;
     }
-    .proof-item:last-child{border-right:0}
-    .proof-item:hover{background:rgba(127,238,100,.08);color:var(--green)}
-    .proof-value{font-size:1.05rem;font-weight:600}
-    .proof-label{font-size:.76rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+
+    .validator-copy .section-title{
+      margin-bottom:20px;
+      max-width:620px;
+      font-size:clamp(2.55rem,5vw,5.8rem);
+    }
+
+    .validator-copy p:not(.section-kicker){
+      max-width:520px;
+      color:var(--pale-2);
+      font-size:1.04rem;
+      margin-bottom:0;
+    }
+
+    .validator-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:32px;
+    }
+
+    .validator-card{
+      padding:30px;
+      background:
+        radial-gradient(circle at 20% 14%, rgba(221,255,220,.08), transparent 28%),
+        linear-gradient(180deg, rgba(221,255,220,.035), rgba(221,255,220,.012));
+    }
+
+    .validator-card-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      margin-bottom:24px;
+    }
+
+    .validator-card-head h3{
+      margin:0;
+      color:var(--pale);
+      font-size:1.12rem;
+      font-weight:600;
+    }
+
+    .validator-badge{
+      display:inline-flex;
+      align-items:center;
+      min-height:30px;
+      padding:7px 12px;
+      border:1px solid rgba(127,238,100,.32);
+      border-radius:999px;
+      color:var(--green);
+      background:rgba(127,238,100,.08);
+      font-size:.7rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    .validator-badge.is-fallback{
+      color:#ffe7b3;
+      border-color:rgba(255,231,179,.25);
+      background:rgba(255,198,92,.08);
+    }
+
+    .validator-badge.is-error{
+      color:#ffd3d3;
+      border-color:rgba(255,179,179,.24);
+      background:rgba(255,92,92,.08);
+    }
+
+    .validator-stat-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-bottom:24px;
+    }
+
+    .validator-stat{
+      position:relative;
+      min-height:124px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:18px;
+      border:1px solid rgba(221,255,220,.14);
+      background:linear-gradient(135deg, rgba(127,238,100,.1), rgba(0,0,0,.18));
+      overflow:hidden;
+    }
+
+    .validator-stat::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:2px;
+      background:linear-gradient(90deg, transparent, rgba(127,238,100,.62), transparent);
+    }
+
+    .validator-number{
+      color:var(--pale);
+      font-size:clamp(2.65rem,5vw,4.6rem);
+      line-height:.88;
+      font-weight:600;
+      letter-spacing:0;
+      text-shadow:0 0 28px rgba(127,238,100,.18);
+    }
+
+    .validator-label{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:.74rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .validator-metrics{
+      display:grid;
+      gap:16px;
+      margin-bottom:20px;
+    }
+
+    .validator-metric{
+      display:grid;
+      gap:8px;
+    }
+
+    .validator-metric-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap:16px;
+      color:var(--pale-2);
+      font-size:.88rem;
+    }
+
+    .validator-metric-value{
+      color:var(--pale);
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .validator-bar{
+      height:8px;
+      overflow:hidden;
+      border-radius:999px;
+      background:rgba(221,255,220,.1);
+    }
+
+    .validator-fill{
+      display:block;
+      height:100%;
+      width:0;
+      border-radius:inherit;
+      background:linear-gradient(90deg, var(--green), var(--pale));
+      box-shadow:0 0 18px rgba(127,238,100,.34);
+      transition:width .55s ease;
+    }
+
+    .validator-note{
+      margin:0;
+      color:var(--muted);
+      font-size:.82rem;
+      line-height:1.55;
+    }
+
+    .validator-note strong{color:var(--pale)}
 
     .task-feed-section{
       padding:116px 0;
@@ -1294,10 +1462,12 @@
         padding:8px 12px 10px;
         gap:12px 20px;
       }
-      .proof-grid{grid-template-columns:repeat(3,1fr)}
-      .proof-item{border-bottom:1px solid var(--line)}
-      .proof-item:nth-child(3n){border-right:0}
-      .proof-item:nth-last-child(-n+3){border-bottom:0}
+      .validator-shell{grid-template-columns:1fr;gap:0}
+      .validator-copy{
+        min-height:0;
+        border-right:0;
+        border-bottom:1px solid var(--line);
+      }
       .system-grid{grid-template-columns:1fr}
       .rail{display:none}
       .task-feed-header{grid-template-columns:1fr}
@@ -1321,12 +1491,28 @@
       .hero-copy{font-size:1rem}
       .hero-actions{gap:10px}
       .btn{width:100%;max-width:290px}
-      .proof-strip{margin-top:-54px}
-      .proof-grid{grid-template-columns:repeat(2,1fr)}
-      .proof-item:nth-child(3n){border-right:1px solid var(--line)}
-      .proof-item:nth-child(2n){border-right:0}
-      .proof-item:nth-last-child(-n+3){border-bottom:1px solid var(--line)}
-      .proof-item:nth-last-child(-n+2){border-bottom:0}
+      .validator-section{
+        margin-top:-44px;
+        padding:24px 0 72px;
+      }
+      .validator-shell{
+        border-radius:0;
+        margin-inline:-5px;
+      }
+      .validator-copy,
+      .validator-card{padding:24px 18px}
+      .validator-copy .section-title{font-size:clamp(2.25rem,11vw,3.55rem)}
+      .validator-copy p:not(.section-kicker){font-size:.98rem}
+      .validator-actions{display:grid;grid-template-columns:1fr;margin-top:24px}
+      .validator-stat-grid{gap:10px}
+      .validator-stat{min-height:112px;padding:14px}
+      .validator-number{font-size:clamp(2.35rem,13vw,3.75rem)}
+      .validator-metric-top{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:4px;
+      }
+      .validator-card-head{align-items:flex-start;flex-direction:column}
       .task-feed-section{padding:78px 0}
       .task-feed-shell{border-radius:0;margin-inline:-5px}
       .task-feed-header{padding:24px 18px}
@@ -1443,33 +1629,54 @@
         </div>
       </section>
 
-      <section class="proof-strip" aria-label="Post Fiat public proof points">
+      <section class="validator-section" id="live-testnet" aria-labelledby="validator-title">
         <div class="container">
-          <div class="proof-grid">
-            <a class="proof-item" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">
-              <span class="proof-value">38 validators</span>
-              <span class="proof-label mono">Live testnet</span>
-            </a>
-            <a class="proof-item" href="/validator-benchmark/">
-              <span class="proof-value">Public scoring</span>
-              <span class="proof-label mono">Validator benchmark</span>
-            </a>
-            <a class="proof-item" href="/whitepaper/">
-              <span class="proof-value">Replayable policy</span>
-              <span class="proof-label mono">Whitepaper</span>
-            </a>
-            <a class="proof-item" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">
-              <span class="proof-value">Task Node</span>
-              <span class="proof-label mono">Participation surface</span>
-            </a>
-            <a class="proof-item" href="/llms.txt">
-              <span class="proof-value">Agent-readable</span>
-              <span class="proof-label mono">LLM index</span>
-            </a>
-            <a class="proof-item" href="/postfiat-project.json">
-              <span class="proof-value">Machine summary</span>
-              <span class="proof-label mono">Project JSON</span>
-            </a>
+          <div class="validator-shell" id="live-validator-card" data-live-url="https://vhs.testnet.postfiat.org/v1/network/validators/test" data-fallback-url="/benchmarks/live-testnet-validator-stats.json">
+            <div class="validator-copy">
+              <div>
+                <p class="section-kicker mono">Live Testnet</p>
+                <h2 class="section-title" id="validator-title">Current network proof in public.</h2>
+                <p>The validator set is visible through the Post Fiat validator history service and the public testnet explorer. This section updates from Live VHS and falls back to the latest published snapshot if the live endpoint is unavailable.</p>
+              </div>
+              <div class="validator-actions">
+                <a class="btn primary" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">View the Testnet Explorer</a>
+                <a class="btn dark" href="/validator-benchmark/">Validator Benchmark</a>
+              </div>
+            </div>
+
+            <div class="validator-card">
+              <div class="validator-card-head">
+                <h3>Live VHS</h3>
+                <span class="validator-badge mono" id="live-validator-badge">Loading</span>
+              </div>
+              <div class="validator-stat-grid">
+                <div class="validator-stat">
+                  <div class="validator-number" id="live-validator-count">45</div>
+                  <div class="validator-label mono">Validators Live</div>
+                </div>
+                <div class="validator-stat">
+                  <div class="validator-number" id="live-domain-count">29</div>
+                  <div class="validator-label mono">Publishing Domains</div>
+                </div>
+              </div>
+              <div class="validator-metrics">
+                <div class="validator-metric">
+                  <div class="validator-metric-top">
+                    <span id="live-agreement-24-label">24h agreement at 99.9%+</span>
+                    <span class="validator-metric-value" id="live-agreement-24-value">41 / 45</span>
+                  </div>
+                  <div class="validator-bar"><span class="validator-fill" id="live-agreement-24-fill" style="width:91.1%"></span></div>
+                </div>
+                <div class="validator-metric">
+                  <div class="validator-metric-top">
+                    <span id="live-agreement-30-label">30d agreement at 99%+</span>
+                    <span class="validator-metric-value" id="live-agreement-30-value">39 / 45</span>
+                  </div>
+                  <div class="validator-bar"><span class="validator-fill" id="live-agreement-30-fill" style="width:86.7%"></span></div>
+                </div>
+              </div>
+              <p class="validator-note" id="live-validator-note"><strong>Live VHS snapshot</strong> 45 validators, 29 publishing domains, 26 verified domains. Ledger 2,472,489.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -2024,6 +2231,141 @@
       }).format(date);
     }
 
+    function formatPercentRatio(value){
+      const ratio = Number(value);
+      const percent = Math.max(0, Math.min(100, (Number.isFinite(ratio) ? ratio : 0) * 100));
+      return `${percent.toFixed(1)}%`;
+    }
+
+    function validatorAgreementScore(validator, key){
+      const score = Number(validator?.[key]?.score ?? 0);
+      return Number.isFinite(score) ? score : 0;
+    }
+
+    function countStrongValidatorAgreement(validators, key, threshold){
+      return validators.filter((validator) => validatorAgreementScore(validator, key) >= threshold).length;
+    }
+
+    function meanValidatorAgreement(validators, key){
+      const scores = validators.map((validator) => validatorAgreementScore(validator, key)).filter(Number.isFinite);
+      if(!scores.length) return 0;
+      return scores.reduce((sum, score) => sum + score, 0) / scores.length;
+    }
+
+    function normalizeLiveValidatorStats(payload){
+      if(Array.isArray(payload?.validators)){
+        const validators = payload.validators.filter((validator) => !validator?.revoked);
+        const validatorCount = validators.length;
+        const strong24Count = countStrongValidatorAgreement(validators, 'agreement_24h', .999);
+        const strong30Count = countStrongValidatorAgreement(validators, 'agreement_30day', .99);
+        const latestLedgerIndex = validators.reduce((max, validator) => {
+          const currentIndex = Number(validator?.current_index ?? 0);
+          return Number.isFinite(currentIndex) ? Math.max(max, currentIndex) : max;
+        }, 0);
+
+        return {
+          source_name:'Live VHS',
+          generated_at:new Date().toISOString(),
+          validator_count:validatorCount,
+          publishing_domain_count:validators.filter((validator) => cleanText(validator?.domain)).length,
+          verified_domain_count:validators.filter((validator) => Boolean(validator?.domain_verified)).length,
+          latest_ledger_index:latestLedgerIndex,
+          agreement_24h:{
+            threshold_label:'99.9%+',
+            count:strong24Count,
+            ratio:validatorCount ? strong24Count / validatorCount : 0,
+            mean_score:meanValidatorAgreement(validators, 'agreement_24h')
+          },
+          agreement_30day:{
+            threshold_label:'99%+',
+            count:strong30Count,
+            ratio:validatorCount ? strong30Count / validatorCount : 0,
+            mean_score:meanValidatorAgreement(validators, 'agreement_30day')
+          }
+        };
+      }
+      return payload;
+    }
+
+    function renderLiveValidatorStats(stats, mode){
+      const badge = document.getElementById('live-validator-badge');
+      const note = document.getElementById('live-validator-note');
+      const validatorCount = document.getElementById('live-validator-count');
+      const domainCount = document.getElementById('live-domain-count');
+      const agreement24Label = document.getElementById('live-agreement-24-label');
+      const agreement24Value = document.getElementById('live-agreement-24-value');
+      const agreement24Fill = document.getElementById('live-agreement-24-fill');
+      const agreement30Label = document.getElementById('live-agreement-30-label');
+      const agreement30Value = document.getElementById('live-agreement-30-value');
+      const agreement30Fill = document.getElementById('live-agreement-30-fill');
+      if(!stats || !badge || !note || !validatorCount || !domainCount) return;
+
+      badge.textContent = mode === 'live' ? 'Live VHS' : mode === 'fallback' ? 'Snapshot' : 'Unavailable';
+      badge.classList.toggle('is-fallback', mode === 'fallback');
+      badge.classList.toggle('is-error', mode === 'error');
+
+      const total = Number(stats.validator_count ?? 0);
+      validatorCount.textContent = total.toLocaleString('en-US');
+      domainCount.textContent = Number(stats.publishing_domain_count ?? 0).toLocaleString('en-US');
+
+      const agreement24 = stats.agreement_24h ?? {};
+      agreement24Label.textContent = `24h agreement at ${agreement24.threshold_label ?? '99.9%+'}`;
+      agreement24Value.textContent = `${agreement24.count ?? 0} / ${total}`;
+      agreement24Fill.style.width = formatPercentRatio(Number(agreement24.ratio ?? 0));
+
+      const agreement30 = stats.agreement_30day ?? {};
+      agreement30Label.textContent = `30d agreement at ${agreement30.threshold_label ?? '99%+'}`;
+      agreement30Value.textContent = `${agreement30.count ?? 0} / ${total}`;
+      agreement30Fill.style.width = formatPercentRatio(Number(agreement30.ratio ?? 0));
+
+      const prefix = mode === 'live' ? '<strong>Live VHS snapshot</strong>' : mode === 'fallback' ? '<strong>Fallback snapshot</strong>' : '<strong>Unavailable</strong>';
+      const ledger = stats.latest_ledger_index ? ` Ledger ${Number(stats.latest_ledger_index).toLocaleString('en-US')}.` : '';
+      const updated = stats.generated_at ? ` Updated ${formatFeedDate(stats.generated_at)}.` : '';
+      note.innerHTML = `${prefix} ${stats.validator_count ?? 0} validators, ${stats.publishing_domain_count ?? 0} publishing domains, ${stats.verified_domain_count ?? 0} verified domains.${ledger}${updated}`;
+    }
+
+    async function fetchJsonWithTimeout(url, timeoutMs = 8000){
+      const controller = new AbortController();
+      const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+      try{
+        const response = await fetch(url, {
+          method:'GET',
+          mode:'cors',
+          cache:'no-store',
+          signal:controller.signal
+        });
+        if(!response.ok) throw new Error(`HTTP ${response.status}`);
+        return await response.json();
+      }finally{
+        window.clearTimeout(timer);
+      }
+    }
+
+    async function refreshLiveValidatorStats(){
+      const card = document.getElementById('live-validator-card');
+      if(!card) return;
+      try{
+        const livePayload = await fetchJsonWithTimeout(card.dataset.liveUrl);
+        renderLiveValidatorStats(normalizeLiveValidatorStats(livePayload), 'live');
+        return;
+      }catch{
+        try{
+          const fallbackPayload = await fetchJsonWithTimeout(card.dataset.fallbackUrl);
+          renderLiveValidatorStats(normalizeLiveValidatorStats(fallbackPayload), 'fallback');
+          return;
+        }catch{
+          renderLiveValidatorStats({
+            validator_count:45,
+            publishing_domain_count:29,
+            verified_domain_count:26,
+            latest_ledger_index:2472489,
+            agreement_24h:{threshold_label:'99.9%+', count:41, ratio:41 / 45},
+            agreement_30day:{threshold_label:'99%+', count:39, ratio:39 / 45}
+          }, 'error');
+        }
+      }
+    }
+
     function textElement(tagName, className, text){
       const element = document.createElement(tagName);
       if(className) element.className = className;
@@ -2299,6 +2641,7 @@
     taskFeedRoot?.addEventListener('pointerup', restartFeedAutoplay, {passive:true});
     reducedMotionQuery.addEventListener?.('change', restartFeedAutoplay);
 
+    refreshLiveValidatorStats();
     setupTaskCarousel();
     refreshTaskFeed();
     window.setInterval(refreshTaskFeed, 30000);
