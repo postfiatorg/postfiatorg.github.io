@@ -1159,29 +1159,60 @@
     }
     .platform-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8}
 
-    .use-case-head{
+    .app-explorer-head{
       display:flex;
       align-items:end;
       justify-content:space-between;
       gap:24px;
-      margin-bottom:26px;
+      margin-bottom:28px;
     }
-    .use-case-head .section-title{margin:0}
-    .case-strip{
+    .app-explorer-copy{
+      max-width:570px;
+      margin:14px 0 0;
+      color:var(--pale-2);
+      font-size:1.04rem;
+    }
+    .app-explorer-controls{
       display:flex;
-      gap:12px;
-      overflow-x:auto;
-      padding-bottom:12px;
-      scroll-snap-type:x proximity;
+      align-items:center;
+      gap:10px;
     }
-    .case-card{
+    .app-explorer-button{
+      width:44px;
+      height:44px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(221,255,220,.2);
+      border-radius:50%;
+      background:rgba(221,255,220,.04);
+      color:var(--pale);
+      cursor:pointer;
+      transition:transform .18s ease, border-color .18s ease, color .18s ease, background .18s ease;
+    }
+    .app-explorer-button:hover{
+      transform:translateY(-1px);
+      border-color:var(--green);
+      color:var(--green);
+      background:rgba(127,238,100,.07);
+    }
+    .app-explorer-button span{font-size:1.8rem;line-height:1}
+    .app-explorer-viewport{
+      overflow-x:auto;
+      padding:0 0 18px;
+      scroll-snap-type:x proximity;
+      scrollbar-color:rgba(127,238,100,.45) rgba(221,255,220,.08);
+    }
+    .app-explorer-track{
+      display:flex;
+      gap:18px;
+      width:max-content;
+    }
+    .app-card{
       position:relative;
-      flex:0 0 min(360px, 82vw);
-      min-height:390px;
+      flex:0 0 clamp(420px,42vw,560px);
+      min-height:610px;
       display:flex;
       flex-direction:column;
-      justify-content:flex-end;
-      padding:24px;
       border:1px solid var(--line);
       border-radius:8px;
       overflow:hidden;
@@ -1190,134 +1221,125 @@
       background:#0b0f0b;
       transition:transform .22s ease, border-color .22s ease;
     }
-    .case-card:hover{
+    .app-card:hover{
       transform:translateY(-4px);
       border-color:rgba(127,238,100,.42);
     }
-    .case-card::before{
+    .app-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(180deg, transparent 0%, transparent 45%, rgba(0,0,0,.16) 100%);
+    }
+    .app-media{
+      position:relative;
+      aspect-ratio:16/10;
+      overflow:hidden;
+      border-bottom:1px solid rgba(221,255,220,.15);
+      background:#050805;
+    }
+    .app-media::after{
       content:"";
       position:absolute;
       inset:0;
       background:
-        linear-gradient(180deg, transparent 0%, rgba(0,0,0,.18) 38%, rgba(0,0,0,.9) 100%),
-        var(--case-bg, linear-gradient(135deg, rgba(127,238,100,.75), rgba(9,175,88,.22)));
-      opacity:.96;
-    }
-    .case-card::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:radial-gradient(circle at 70% 18%, rgba(221,255,220,.14), transparent 35%);
-      opacity:.8;
+        linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.26)),
+        radial-gradient(circle at 80% 12%, rgba(127,238,100,.12), transparent 32%);
       pointer-events:none;
     }
-    .case-card > *{position:relative;z-index:1}
-    .case-card h3{font-size:1.45rem;font-weight:500;margin-bottom:12px}
-    .case-card p{margin:0;color:var(--pale);max-width:260px}
-    .case-arrow{margin-top:22px;color:var(--green);font-weight:700}
-    .case-visual{
+    .app-media img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      transition:transform .55s cubic-bezier(.2,.8,.2,1), filter .55s ease;
+    }
+    .app-card:hover .app-media img{
+      transform:scale(1.035);
+      filter:saturate(1.05) contrast(1.02);
+    }
+    .app-media-tags{
       position:absolute;
-      inset:24px 24px auto;
-      height:170px;
-      z-index:1;
-      border:1px solid rgba(221,255,220,.14);
-      background:rgba(0,0,0,.18);
-      overflow:hidden;
-      transition:border-color .22s ease, box-shadow .22s ease;
-    }
-    .case-card:hover .case-visual{
-      border-color:rgba(221,255,220,.3);
-      box-shadow:0 0 36px rgba(127,238,100,.14);
-    }
-    .index-matrix{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
+      left:16px;
+      right:16px;
+      bottom:16px;
+      z-index:2;
+      display:flex;
+      flex-wrap:wrap;
       gap:8px;
-      padding:18px;
     }
-    .index-matrix span{
-      height:28px;
-      border:1px solid rgba(221,255,220,.2);
-      background:linear-gradient(90deg, rgba(127,238,100,.68), rgba(127,238,100,.08));
-      transform-origin:left;
-      animation:indexPulse 3.2s ease-in-out infinite;
-      animation-delay:var(--delay, 0s);
+    .app-media-tag{
+      display:inline-flex;
+      align-items:center;
+      min-height:28px;
+      padding:5px 9px;
+      border:1px solid rgba(221,255,220,.22);
+      border-radius:999px;
+      background:rgba(0,0,0,.46);
+      color:var(--pale);
+      backdrop-filter:blur(10px);
+      font-size:.72rem;
+      letter-spacing:.04em;
     }
-    @keyframes indexPulse{
-      0%,100%{transform:scaleX(.45);opacity:.55}
-      50%{transform:scaleX(1);opacity:1}
-    }
-    .privacy-visual{
-      display:grid;
-      place-items:center;
-    }
-    .privacy-ring{
-      position:absolute;
-      width:118px;
-      height:118px;
-      border:1px dashed rgba(221,255,220,.38);
-      border-radius:50%;
-      animation:spin 9s linear infinite;
-    }
-    .privacy-lock{
-      width:62px;
-      height:62px;
-      border:2px solid var(--green);
-      border-radius:8px;
+    .app-card-body{
       position:relative;
-      box-shadow:0 0 28px rgba(127,238,100,.22);
+      z-index:1;
+      display:flex;
+      flex:1;
+      flex-direction:column;
+      padding:24px;
     }
-    .privacy-lock::before{
-      content:"";
-      position:absolute;
-      left:13px;
-      top:-28px;
-      width:32px;
-      height:34px;
-      border:2px solid var(--green);
-      border-bottom:0;
-      border-radius:22px 22px 0 0;
+    .app-card-kicker{
+      margin-bottom:12px;
+      color:var(--green);
+      font-size:.75rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
     }
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .expert-net i,
-    .validator-nodes i{
-      position:absolute;
-      width:13px;
-      height:13px;
-      border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 18px rgba(127,238,100,.76);
-      animation:nodePulse 2.6s ease-in-out infinite;
+    .app-card h3{
+      margin:0 0 12px;
+      font-size:clamp(1.8rem,2.8vw,2.65rem);
+      line-height:1;
+      font-weight:540;
+      letter-spacing:0;
     }
-    .expert-net::before,
-    .validator-nodes::before{
-      content:"";
-      position:absolute;
-      inset:28px;
-      background:
-        linear-gradient(32deg, transparent 48%, rgba(221,255,220,.34) 49% 51%, transparent 52%),
-        linear-gradient(148deg, transparent 48%, rgba(221,255,220,.24) 49% 51%, transparent 52%),
-        linear-gradient(90deg, transparent 48%, rgba(221,255,220,.2) 49% 51%, transparent 52%);
+    .app-card p{
+      max-width:430px;
+      margin:0;
+      color:var(--pale-2);
+      font-size:1.02rem;
     }
-    .expert-net i:nth-child(1){left:48%;top:46%}
-    .expert-net i:nth-child(2){left:18%;top:24%;animation-delay:.2s}
-    .expert-net i:nth-child(3){right:18%;top:26%;animation-delay:.4s}
-    .expert-net i:nth-child(4){left:24%;bottom:22%;animation-delay:.6s}
-    .expert-net i:nth-child(5){right:24%;bottom:20%;animation-delay:.8s}
-    .validator-nodes i:nth-child(1){left:20%;top:24%}
-    .validator-nodes i:nth-child(2){left:50%;top:16%;animation-delay:.25s}
-    .validator-nodes i:nth-child(3){right:20%;top:24%;animation-delay:.5s}
-    .validator-nodes i:nth-child(4){left:34%;bottom:22%;animation-delay:.75s}
-    .validator-nodes i:nth-child(5){right:34%;bottom:22%;animation-delay:1s}
-    .validator-stack-mini{
-      position:absolute;
-      left:50%;
-      top:50%;
-      width:94px;
-      height:94px;
-      transform:translate(-50%,-50%) rotate(45deg);
-      border:1px solid rgba(221,255,220,.4);
-      box-shadow:inset 0 0 28px rgba(127,238,100,.28), 0 0 28px rgba(127,238,100,.16);
+    .app-card-footer{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      margin-top:auto;
+      padding-top:24px;
+    }
+    .app-card-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:38px;
+      padding:8px 12px;
+      border:1px solid rgba(221,255,220,.18);
+      border-radius:999px;
+      color:var(--pale);
+      text-decoration:none;
+      font-size:.84rem;
+      font-weight:650;
+      transition:border-color .18s ease, color .18s ease, background .18s ease;
+    }
+    .app-card-link:hover{
+      border-color:var(--green);
+      color:var(--green);
+      background:rgba(127,238,100,.06);
+    }
+    .app-card-count{
+      color:var(--muted);
+      font-size:.82rem;
     }
 
     .governance{
@@ -1814,9 +1836,16 @@
       .platform-panel{gap:28px;margin-top:42px;padding-top:38px}
       .platform-feature-grid{grid-template-columns:1fr}
       .platform-feature{min-height:0;padding:22px}
-      .use-case-head{align-items:start;flex-direction:column}
-      .case-card{min-height:360px}
-      .case-visual{inset:18px 18px auto;height:150px}
+      .app-explorer-head{align-items:start;flex-direction:column}
+      .app-explorer-controls{width:100%;justify-content:flex-end}
+      .app-explorer-track{gap:12px}
+      .app-card{
+        flex-basis:calc(100vw - 36px);
+        min-height:560px;
+      }
+      .app-card-body{padding:18px}
+      .app-card h3{font-size:2rem}
+      .app-card-footer{align-items:flex-start;flex-direction:column}
       .stack-visual{min-height:300px}
       .stack-cube{width:170px;height:170px}
       .community-band{padding-top:66px}
@@ -2063,67 +2092,159 @@
 
       <section class="dark-section" id="use-cases">
         <div class="container">
-          <div class="use-case-head">
+          <div class="app-explorer-head">
             <div>
-              <p class="section-kicker mono">Use cases</p>
+              <p class="section-kicker mono">Application surface</p>
               <h2 class="section-title">Built with Post Fiat.</h2>
+              <p class="app-explorer-copy">A public explorer of AGTI and Post Fiat apps, each with generated product artwork, clean tags, and a direct path into the live surface or source repository.</p>
             </div>
-            <a class="btn" href="/whitepaper/">Read thesis</a>
+            <div class="app-explorer-controls" aria-label="Application explorer controls">
+              <button class="app-explorer-button" type="button" data-app-prev aria-label="Previous application"><span aria-hidden="true">&lsaquo;</span></button>
+              <button class="app-explorer-button" type="button" data-app-next aria-label="Next application"><span aria-hidden="true">&rsaquo;</span></button>
+            </div>
           </div>
-          <div class="case-strip" aria-label="Use cases">
-            <a class="case-card" style="--case-bg:linear-gradient(135deg, rgba(127,238,100,.76), rgba(226,190,40,.18));" href="/whitepaper/">
-              <div class="case-visual index-matrix" aria-hidden="true">
-                <span style="--delay:0s"></span>
-                <span style="--delay:.12s"></span>
-                <span style="--delay:.24s"></span>
-                <span style="--delay:.36s"></span>
-                <span style="--delay:.48s"></span>
-                <span style="--delay:.6s"></span>
-                <span style="--delay:.72s"></span>
-                <span style="--delay:.84s"></span>
-                <span style="--delay:.96s"></span>
-                <span style="--delay:1.08s"></span>
-                <span style="--delay:1.2s"></span>
-                <span style="--delay:1.32s"></span>
-              </div>
-              <h3>ETFs and Indexing</h3>
-              <p>Machine-readable ontology for assets, portfolios, market structures, screening systems, and new financial products.</p>
-              <span class="case-arrow">&nearr;</span>
-            </a>
-            <a class="case-card" style="--case-bg:linear-gradient(135deg, rgba(9,175,88,.72), rgba(54,160,130,.28));" href="/whitepaper/">
-              <div class="case-visual privacy-visual" aria-hidden="true">
-                <div class="privacy-ring"></div>
-                <div class="privacy-lock"></div>
-              </div>
-              <h3>Compliance and Private Coordination</h3>
-              <p>Encrypted memos, privacy tooling, and stronger policy controls for institutional workflows.</p>
-              <span class="case-arrow">&nearr;</span>
-            </a>
-            <a class="case-card" style="--case-bg:linear-gradient(135deg, rgba(127,238,100,.58), rgba(54,105,85,.3));" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">
-              <div class="case-visual expert-net" aria-hidden="true">
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-              </div>
-              <h3>Buy-Side Expert Networks</h3>
-              <p>Contributors provide proprietary observations and research to paying AI agents and portfolio managers.</p>
-              <span class="case-arrow">&nearr;</span>
-            </a>
-            <a class="case-card" style="--case-bg:linear-gradient(135deg, rgba(127,238,100,.68), rgba(0,0,0,.18));" href="/validator-benchmark/">
-              <div class="case-visual validator-nodes" aria-hidden="true">
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <div class="validator-stack-mini"></div>
-              </div>
-              <h3>Validator Governance</h3>
-              <p>Validator-list publication should be auditable, replayable, and eventually multi-party.</p>
-              <span class="case-arrow">&nearr;</span>
-            </a>
+          <div class="app-explorer-viewport" data-app-explorer aria-label="Post Fiat application explorer" tabindex="0">
+            <div class="app-explorer-track">
+              <article class="app-card">
+                <div class="app-media">
+                  <img src="/apps/explorer/indexing-methodology.webp" alt="Generated artwork for Post Fiat indexing methodology" loading="lazy" decoding="async">
+                  <div class="app-media-tags mono" aria-label="Tags">
+                    <span class="app-media-tag">INDEX</span>
+                    <span class="app-media-tag">IPFS</span>
+                    <span class="app-media-tag">PFTL MEMO</span>
+                  </div>
+                </div>
+                <div class="app-card-body">
+                  <div class="app-card-kicker mono">Methodology</div>
+                  <h3>PFT Indexing</h3>
+                  <p>Canonical index snapshots for holdings, prices, weights, provenance, delayed access, and PFTL-native publication.</p>
+                  <div class="app-card-footer">
+                    <a class="app-card-link" href="https://github.com/agtico/pft_indexing" target="_blank" rel="noopener">Open repo <span aria-hidden="true">&rsaquo;</span></a>
+                    <span class="app-card-count mono">01 / 07</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="app-card">
+                <div class="app-media">
+                  <img src="/apps/explorer/pft-docs.webp" alt="Generated artwork for PFT Docs encrypted document workflows" loading="lazy" decoding="async">
+                  <div class="app-media-tags mono" aria-label="Tags">
+                    <span class="app-media-tag">DOCS</span>
+                    <span class="app-media-tag">PRIVATE INFERENCE</span>
+                    <span class="app-media-tag">COMPLIANCE</span>
+                  </div>
+                </div>
+                <div class="app-card-body">
+                  <div class="app-card-kicker mono">Documents</div>
+                  <h3>PFT Docs</h3>
+                  <p>A Post Fiat-native CryptPad fork for encrypted collaboration, wallet-native identity, private sharing, and compliance-sensitive workflows.</p>
+                  <div class="app-card-footer">
+                    <a class="app-card-link" href="https://github.com/agtico/pftdocs" target="_blank" rel="noopener">Open repo <span aria-hidden="true">&rsaquo;</span></a>
+                    <span class="app-card-count mono">02 / 07</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="app-card">
+                <div class="app-media">
+                  <img src="/apps/explorer/task-node.webp" alt="Generated artwork for the Post Fiat Task Node" loading="lazy" decoding="async">
+                  <div class="app-media-tags mono" aria-label="Tags">
+                    <span class="app-media-tag">TASKS</span>
+                    <span class="app-media-tag">REWARDS</span>
+                    <span class="app-media-tag">PROFILES</span>
+                  </div>
+                </div>
+                <div class="app-card-body">
+                  <div class="app-card-kicker mono">Coordination</div>
+                  <h3>Task Node</h3>
+                  <p>The live contributor surface where users accept work, publish evidence, build public profiles, and route useful output back into Post Fiat.</p>
+                  <div class="app-card-footer">
+                    <a class="app-card-link" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Open app <span aria-hidden="true">&rsaquo;</span></a>
+                    <span class="app-card-count mono">03 / 07</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="app-card">
+                <div class="app-media">
+                  <img src="/apps/explorer/agti-intelligence-reports.webp" alt="Generated artwork for AGTI Intelligence Reports with PFT Auth" loading="lazy" decoding="async">
+                  <div class="app-media-tags mono" aria-label="Tags">
+                    <span class="app-media-tag">REPORTS</span>
+                    <span class="app-media-tag">PFT AUTH</span>
+                    <span class="app-media-tag">ENCRYPTED ARCHIVE</span>
+                  </div>
+                </div>
+                <div class="app-card-body">
+                  <div class="app-card-kicker mono">Research</div>
+                  <h3>AGTI Reports</h3>
+                  <p>A market-intelligence archive with stable report URLs, gated encrypted payloads, access manifests, RSS, and crawler-ready publication.</p>
+                  <div class="app-card-footer">
+                    <a class="app-card-link" href="https://agtico.github.io/intelligence-reports/" target="_blank" rel="noopener">Open reports <span aria-hidden="true">&rsaquo;</span></a>
+                    <span class="app-card-count mono">04 / 07</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="app-card">
+                <div class="app-media">
+                  <img src="/apps/explorer/jollydinger-validator.webp" alt="Generated artwork for the JollyDinger validator setup tutorial" loading="lazy" decoding="async">
+                  <div class="app-media-tags mono" aria-label="Tags">
+                    <span class="app-media-tag">VALIDATOR</span>
+                    <span class="app-media-tag">DOMAIN PROOF</span>
+                    <span class="app-media-tag">SETUP WIZARD</span>
+                  </div>
+                </div>
+                <div class="app-card-body">
+                  <div class="app-card-kicker mono">Operator path</div>
+                  <h3>JollyDinger Validator</h3>
+                  <p>An interactive setup tutorial for running a Post Fiat validator, publishing domain proof, and reaching a monitored active node.</p>
+                  <div class="app-card-footer">
+                    <a class="app-card-link" href="https://jollydinger.com/pftvalidatorsetup/setup/" target="_blank" rel="noopener">Open tutorial <span aria-hidden="true">&rsaquo;</span></a>
+                    <span class="app-card-count mono">05 / 07</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="app-card">
+                <div class="app-media">
+                  <img src="/apps/explorer/permanent-upper-class-lens.webp" alt="Generated artwork for Permanent Upper Class Lens" loading="lazy" decoding="async">
+                  <div class="app-media-tags mono" aria-label="Tags">
+                    <span class="app-media-tag">WALLET GRAPH</span>
+                    <span class="app-media-tag">SYBIL</span>
+                    <span class="app-media-tag">CHAIN INTEL</span>
+                  </div>
+                </div>
+                <div class="app-card-body">
+                  <div class="app-card-kicker mono">On-chain intelligence</div>
+                  <h3>PUC Lens</h3>
+                  <p>Interactive Post Fiat graph intelligence for wallets, relationships, clusters, and chain-verified network analysis.</p>
+                  <div class="app-card-footer">
+                    <a class="app-card-link" href="https://pft.permanentupperclass.com/lens/" target="_blank" rel="noopener">Open lens <span aria-hidden="true">&rsaquo;</span></a>
+                    <span class="app-card-count mono">06 / 07</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="app-card">
+                <div class="app-media">
+                  <img src="/apps/explorer/pft-telegram-chatbot.webp" alt="Generated artwork for the PFT Telegram Chatbot" loading="lazy" decoding="async">
+                  <div class="app-media-tags mono" aria-label="Tags">
+                    <span class="app-media-tag">TELEGRAM</span>
+                    <span class="app-media-tag">WALLET VERIFY</span>
+                    <span class="app-media-tag">TRADING COACH</span>
+                  </div>
+                </div>
+                <div class="app-card-body">
+                  <div class="app-card-kicker mono">Chat interface</div>
+                  <h3>PFT Chatbot</h3>
+                  <p>A Telegram trading coach and Post Fiat bot interface with verified wallet context, Task Node history, and private message rails.</p>
+                  <div class="app-card-footer">
+                    <a class="app-card-link" href="https://t.me/pftchatbot" target="_blank" rel="noopener">Open bot <span aria-hidden="true">&rsaquo;</span></a>
+                    <span class="app-card-count mono">07 / 07</span>
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -2448,6 +2569,9 @@
     const taskFeedRoot = document.querySelector('.task-feed-preview');
     const communityTrack = document.querySelector('[data-community-track]');
     const communitySlugs = document.querySelector('[data-community-slugs]');
+    const appExplorer = document.querySelector('[data-app-explorer]');
+    const appPrevButton = document.querySelector('[data-app-prev]');
+    const appNextButton = document.querySelector('[data-app-next]');
     let taskFeedTrack = taskFeedRoot?.querySelector('.feed-carousel-track') || null;
     const feedStatus = document.querySelector('.feed-status');
     const feedPrevButton = document.querySelector('[data-feed-prev]');
@@ -2627,6 +2751,13 @@
       if(className) element.className = className;
       element.textContent = text;
       return element;
+    }
+
+    function scrollAppExplorer(direction){
+      if(!appExplorer) return;
+      const card = appExplorer.querySelector('.app-card');
+      const amount = card ? card.getBoundingClientRect().width + 18 : appExplorer.clientWidth * .82;
+      appExplorer.scrollBy({left:direction * amount, behavior:'smooth'});
     }
 
     function safeHttpUrl(value){
@@ -3028,6 +3159,8 @@
       scrollFeedTo(feedActiveIndex + 1);
       restartFeedAutoplay();
     });
+    appPrevButton?.addEventListener('click', () => scrollAppExplorer(-1));
+    appNextButton?.addEventListener('click', () => scrollAppExplorer(1));
     taskFeedCarousel?.addEventListener('pointerenter', stopFeedAutoplay);
     taskFeedCarousel?.addEventListener('pointerleave', startFeedAutoplay);
     taskFeedCarousel?.addEventListener('focusin', stopFeedAutoplay);
