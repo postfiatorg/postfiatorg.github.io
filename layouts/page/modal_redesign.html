@@ -294,80 +294,81 @@
     .btn.primary:hover{background:var(--pale);color:#000}
     .btn.dark{background:rgba(0,0,0,.24)}
 
-    .validator-section{
+    .validator-proof-card{
       position:relative;
-      z-index:3;
-      margin-top:-34px;
-      padding:36px 0 98px;
-      border-bottom:1px solid rgba(221,255,220,.08);
-      background:
-        radial-gradient(circle at 82% 18%, rgba(127,238,100,.12), transparent 34%),
-        linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,0) 44%);
-    }
-
-    .validator-shell{
-      display:grid;
-      grid-template-columns:minmax(320px,.82fr) minmax(460px,1.18fr);
-      gap:38px;
-      align-items:stretch;
+      min-height:520px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:26px;
+      padding:30px;
       border:1px solid var(--line);
       border-radius:8px;
       overflow:hidden;
       background:
-        linear-gradient(135deg, rgba(127,238,100,.06), rgba(0,0,0,.18) 46%),
-        rgba(8,11,8,.78);
-      box-shadow:0 44px 120px rgba(0,0,0,.34), inset 0 0 0 1px rgba(127,238,100,.03);
+        radial-gradient(circle at 78% 18%, rgba(127,238,100,.22), transparent 32%),
+        linear-gradient(145deg, rgba(127,238,100,.08), rgba(0,0,0,.16) 42%),
+        #070a07;
+      box-shadow:0 44px 120px rgba(0,0,0,.38), inset 0 0 0 1px rgba(127,238,100,.04);
     }
 
-    .validator-copy{
-      min-height:420px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      padding:34px;
-      border-right:1px solid var(--line);
+    .validator-proof-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(221,255,220,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(221,255,220,.05) 1px, transparent 1px);
+      background-size:52px 52px;
+      mask-image:radial-gradient(circle at 78% 18%, rgba(0,0,0,.9), transparent 56%);
     }
 
-    .validator-copy .section-title{
-      margin-bottom:20px;
-      max-width:620px;
-      font-size:clamp(2.55rem,5vw,5.8rem);
+    .validator-proof-card::after{
+      content:"";
+      position:absolute;
+      right:32px;
+      top:84px;
+      width:96px;
+      height:96px;
+      border:1px solid rgba(221,255,220,.28);
+      background:linear-gradient(135deg, rgba(127,238,100,.72), rgba(9,175,88,.18));
+      box-shadow:0 0 54px rgba(127,238,100,.18), inset 0 0 34px rgba(0,0,0,.22);
+      transform:rotateX(58deg) rotateZ(45deg);
+      opacity:.42;
     }
 
-    .validator-copy p:not(.section-kicker){
-      max-width:520px;
-      color:var(--pale-2);
-      font-size:1.04rem;
-      margin-bottom:0;
+    .validator-proof-card > *{
+      position:relative;
+      z-index:1;
     }
 
-    .validator-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:32px;
-    }
-
-    .validator-card{
-      padding:30px;
-      background:
-        radial-gradient(circle at 20% 14%, rgba(221,255,220,.08), transparent 28%),
-        linear-gradient(180deg, rgba(221,255,220,.035), rgba(221,255,220,.012));
-    }
-
-    .validator-card-head{
+    .validator-proof-topbar{
       display:flex;
       justify-content:space-between;
       align-items:center;
       gap:16px;
-      margin-bottom:24px;
+      color:var(--pale-2);
+      font-size:.72rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
     }
 
-    .validator-card-head h3{
-      margin:0;
-      color:var(--pale);
-      font-size:1.12rem;
-      font-weight:600;
+    .validator-proof-source{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+
+    .validator-proof-source::before{
+      content:"";
+      width:9px;
+      height:9px;
+      flex:0 0 auto;
+      border-radius:999px;
+      background:var(--green);
+      box-shadow:0 0 16px rgba(127,238,100,.82);
     }
 
     .validator-badge{
@@ -397,26 +398,43 @@
       background:rgba(255,92,92,.08);
     }
 
-    .validator-stat-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:14px;
-      margin-bottom:24px;
+    .validator-proof-quote{
+      max-width:520px;
+      margin:0;
+      color:var(--pale);
+      font-size:clamp(2.15rem,4vw,4.6rem);
+      line-height:.96;
+      font-weight:500;
+      letter-spacing:0;
     }
 
-    .validator-stat{
+    .validator-proof-quote span{
+      color:var(--green);
+      text-shadow:0 0 32px rgba(127,238,100,.24);
+    }
+
+    .validator-proof-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1px;
+      border:1px solid rgba(221,255,220,.14);
+      background:rgba(221,255,220,.14);
+    }
+
+    .validator-proof-stat{
       position:relative;
-      min-height:124px;
+      min-height:126px;
       display:flex;
       flex-direction:column;
       justify-content:flex-end;
-      padding:18px;
-      border:1px solid rgba(221,255,220,.14);
-      background:linear-gradient(135deg, rgba(127,238,100,.1), rgba(0,0,0,.18));
+      padding:16px;
+      background:
+        linear-gradient(145deg, rgba(127,238,100,.1), rgba(0,0,0,.24)),
+        #070a07;
       overflow:hidden;
     }
 
-    .validator-stat::after{
+    .validator-proof-stat::after{
       content:"";
       position:absolute;
       left:0;
@@ -446,7 +464,6 @@
     .validator-metrics{
       display:grid;
       gap:16px;
-      margin-bottom:20px;
     }
 
     .validator-metric{
@@ -494,6 +511,19 @@
     }
 
     .validator-note strong{color:var(--pale)}
+
+    .validator-proof-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+    }
+
+    .validator-proof-actions .btn{
+      min-height:38px;
+      padding:8px 16px;
+      max-width:none;
+    }
 
     .task-feed-section{
       padding:116px 0;
@@ -1462,12 +1492,7 @@
         padding:8px 12px 10px;
         gap:12px 20px;
       }
-      .validator-shell{grid-template-columns:1fr;gap:0}
-      .validator-copy{
-        min-height:0;
-        border-right:0;
-        border-bottom:1px solid var(--line);
-      }
+      .validator-proof-card{min-height:0}
       .system-grid{grid-template-columns:1fr}
       .rail{display:none}
       .task-feed-header{grid-template-columns:1fr}
@@ -1491,28 +1516,29 @@
       .hero-copy{font-size:1rem}
       .hero-actions{gap:10px}
       .btn{width:100%;max-width:290px}
-      .validator-section{
-        margin-top:-44px;
-        padding:24px 0 72px;
-      }
-      .validator-shell{
+      .validator-proof-card{
+        min-height:0;
+        padding:24px 18px;
         border-radius:0;
         margin-inline:-5px;
       }
-      .validator-copy,
-      .validator-card{padding:24px 18px}
-      .validator-copy .section-title{font-size:clamp(2.25rem,11vw,3.55rem)}
-      .validator-copy p:not(.section-kicker){font-size:.98rem}
-      .validator-actions{display:grid;grid-template-columns:1fr;margin-top:24px}
-      .validator-stat-grid{gap:10px}
-      .validator-stat{min-height:112px;padding:14px}
+      .validator-proof-card::after{
+        width:72px;
+        height:72px;
+        right:18px;
+        top:84px;
+      }
+      .validator-proof-topbar{gap:10px}
+      .validator-proof-quote{font-size:clamp(2.1rem,10vw,3.15rem)}
+      .validator-proof-grid{grid-template-columns:1fr;gap:1px}
+      .validator-proof-stat{min-height:104px;padding:14px}
       .validator-number{font-size:clamp(2.35rem,13vw,3.75rem)}
       .validator-metric-top{
         align-items:flex-start;
         flex-direction:column;
         gap:4px;
       }
-      .validator-card-head{align-items:flex-start;flex-direction:column}
+      .validator-proof-actions{display:grid;grid-template-columns:1fr}
       .task-feed-section{padding:78px 0}
       .task-feed-shell{border-radius:0;margin-inline:-5px}
       .task-feed-header{padding:24px 18px}
@@ -1625,58 +1651,6 @@
             <a class="btn dark" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Use the Task Node</a>
             <a class="btn dark" href="/validator-setup/">Run a Validator</a>
             <a class="btn dark" href="https://discord.gg/U6HjgDSmhR" target="_blank" rel="noopener">Join Community</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="validator-section" id="live-testnet" aria-labelledby="validator-title">
-        <div class="container">
-          <div class="validator-shell" id="live-validator-card" data-live-url="https://vhs.testnet.postfiat.org/v1/network/validators/test" data-fallback-url="/benchmarks/live-testnet-validator-stats.json">
-            <div class="validator-copy">
-              <div>
-                <p class="section-kicker mono">Live Testnet</p>
-                <h2 class="section-title" id="validator-title">Current network proof in public.</h2>
-                <p>The validator set is visible through the Post Fiat validator history service and the public testnet explorer. This section updates from Live VHS and falls back to the latest published snapshot if the live endpoint is unavailable.</p>
-              </div>
-              <div class="validator-actions">
-                <a class="btn primary" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">View the Testnet Explorer</a>
-                <a class="btn dark" href="/validator-benchmark/">Validator Benchmark</a>
-              </div>
-            </div>
-
-            <div class="validator-card">
-              <div class="validator-card-head">
-                <h3>Live VHS</h3>
-                <span class="validator-badge mono" id="live-validator-badge">Loading</span>
-              </div>
-              <div class="validator-stat-grid">
-                <div class="validator-stat">
-                  <div class="validator-number" id="live-validator-count">45</div>
-                  <div class="validator-label mono">Validators Live</div>
-                </div>
-                <div class="validator-stat">
-                  <div class="validator-number" id="live-domain-count">29</div>
-                  <div class="validator-label mono">Publishing Domains</div>
-                </div>
-              </div>
-              <div class="validator-metrics">
-                <div class="validator-metric">
-                  <div class="validator-metric-top">
-                    <span id="live-agreement-24-label">24h agreement at 99.9%+</span>
-                    <span class="validator-metric-value" id="live-agreement-24-value">41 / 45</span>
-                  </div>
-                  <div class="validator-bar"><span class="validator-fill" id="live-agreement-24-fill" style="width:91.1%"></span></div>
-                </div>
-                <div class="validator-metric">
-                  <div class="validator-metric-top">
-                    <span id="live-agreement-30-label">30d agreement at 99%+</span>
-                    <span class="validator-metric-value" id="live-agreement-30-value">39 / 45</span>
-                  </div>
-                  <div class="validator-bar"><span class="validator-fill" id="live-agreement-30-fill" style="width:86.7%"></span></div>
-                </div>
-              </div>
-              <p class="validator-note" id="live-validator-note"><strong>Live VHS snapshot</strong> 45 validators, 29 publishing domains, 26 verified domains. Ledger 2,472,489.</p>
-            </div>
           </div>
         </div>
       </section>
@@ -1938,14 +1912,48 @@
               </div>
             </div>
           </div>
-          <div class="stack-visual" aria-hidden="true">
-            <div class="stack-cube">
-              <div class="layer"></div>
-              <div class="layer"></div>
-              <div class="layer"></div>
-              <div class="layer"></div>
+          <aside class="validator-proof-card" id="live-validator-card" data-live-url="https://vhs.testnet.postfiat.org/v1/network/validators/test" data-fallback-url="/benchmarks/live-testnet-validator-stats.json" aria-labelledby="validator-proof-title">
+            <div class="validator-proof-topbar mono">
+              <span class="validator-proof-source">Live VHS</span>
+              <span class="validator-badge mono" id="live-validator-badge">Loading</span>
             </div>
-          </div>
+            <h3 class="validator-proof-quote" id="validator-proof-title"><span>Live testnet</span> evidence without mainnet claims.</h3>
+            <div class="validator-proof-grid" aria-label="Live validator summary">
+              <div class="validator-proof-stat">
+                <div class="validator-number" id="live-validator-count">45</div>
+                <div class="validator-label mono">Validators Live</div>
+              </div>
+              <div class="validator-proof-stat">
+                <div class="validator-number" id="live-domain-count">29</div>
+                <div class="validator-label mono">Publishing Domains</div>
+              </div>
+              <div class="validator-proof-stat">
+                <div class="validator-number" id="live-verified-domain-count">26</div>
+                <div class="validator-label mono">Verified Domains</div>
+              </div>
+            </div>
+            <div class="validator-metrics">
+              <div class="validator-metric">
+                <div class="validator-metric-top">
+                  <span id="live-agreement-24-label">24h agreement at 99.9%+</span>
+                  <span class="validator-metric-value" id="live-agreement-24-value">41 / 45</span>
+                </div>
+                <div class="validator-bar"><span class="validator-fill" id="live-agreement-24-fill" style="width:91.1%"></span></div>
+              </div>
+              <div class="validator-metric">
+                <div class="validator-metric-top">
+                  <span id="live-agreement-30-label">30d agreement at 99%+</span>
+                  <span class="validator-metric-value" id="live-agreement-30-value">39 / 45</span>
+                </div>
+                <div class="validator-bar"><span class="validator-fill" id="live-agreement-30-fill" style="width:86.7%"></span></div>
+              </div>
+            </div>
+            <p class="validator-note" id="live-validator-note"><strong>Live VHS snapshot</strong> 45 validators, 29 publishing domains, 26 verified domains. Ledger 2,472,489.</p>
+            <div class="validator-proof-actions">
+              <a class="btn primary" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">View the Testnet Explorer</a>
+              <a class="btn dark" href="/validator-benchmark/">Validator Benchmark</a>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -2292,6 +2300,7 @@
       const note = document.getElementById('live-validator-note');
       const validatorCount = document.getElementById('live-validator-count');
       const domainCount = document.getElementById('live-domain-count');
+      const verifiedDomainCount = document.getElementById('live-verified-domain-count');
       const agreement24Label = document.getElementById('live-agreement-24-label');
       const agreement24Value = document.getElementById('live-agreement-24-value');
       const agreement24Fill = document.getElementById('live-agreement-24-fill');
@@ -2307,6 +2316,7 @@
       const total = Number(stats.validator_count ?? 0);
       validatorCount.textContent = total.toLocaleString('en-US');
       domainCount.textContent = Number(stats.publishing_domain_count ?? 0).toLocaleString('en-US');
+      if(verifiedDomainCount) verifiedDomainCount.textContent = Number(stats.verified_domain_count ?? 0).toLocaleString('en-US');
 
       const agreement24 = stats.agreement_24h ?? {};
       agreement24Label.textContent = `24h agreement at ${agreement24.threshold_label ?? '99.9%+'}`;
