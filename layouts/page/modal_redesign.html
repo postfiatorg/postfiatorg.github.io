@@ -1822,6 +1822,22 @@
       .feed-preview-links{padding-top:12px}
       .dark-section{padding:78px 0}
       .section-title{font-size:clamp(2.25rem, 11vw, 3.5rem)}
+      .nav-shell.is-open .nav-links,
+      .nav-shell.is-open .nav-actions{
+        align-items:stretch;
+        flex-direction:column;
+        gap:2px;
+        padding:8px 14px 14px;
+      }
+      .nav-shell.is-open .nav-links a,
+      .nav-shell.is-open .nav-actions a{
+        border-top:1px solid rgba(221,255,220,.08);
+        padding:9px 0;
+      }
+      .nav-shell.is-open .signup-link{
+        justify-content:space-between;
+        max-width:190px;
+      }
       .system-row{grid-template-columns:1fr;min-height:0}
       .system-copy{padding:28px 0}
       .system-visual{min-height:270px}
@@ -1872,6 +1888,34 @@
       .footer-grid{grid-template-columns:1fr}
     }
 
+    @media (max-width:380px){
+      .hero h1{font-size:clamp(2.05rem, 10.7vw, 3rem)}
+      .hero-copy{font-size:.96rem}
+      .task-feed-header{padding:22px 18px}
+      .task-feed-header .section-title{font-size:clamp(2.05rem, 10.5vw, 3rem)}
+      .task-feed-copy{font-size:1rem}
+      .task-feed-preview{
+        min-height:410px;
+        padding-inline:34px;
+      }
+      .feed-preview-item{
+        flex-basis:calc(100vw - 88px);
+        min-height:370px;
+        padding:16px;
+      }
+      .feed-nav{
+        width:34px;
+        height:34px;
+      }
+      .feed-nav-prev{left:5px}
+      .feed-nav-next{right:5px}
+      .feed-preview-item h3{font-size:1.04rem}
+      .feed-preview-item p{font-size:.92rem}
+      .feed-preview-link{font-size:.78rem}
+      .app-card{flex-basis:calc(100vw - 28px)}
+      .app-card h3{font-size:1.82rem}
+    }
+
     @media (prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
       *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
@@ -1894,7 +1938,6 @@
           <a href="#task-feed">Task Feed</a>
           <a href="/validator-benchmark/">Benchmark</a>
           <a href="/validator-setup/">Validators</a>
-          <a href="/modal-redesign-spec/">Spec</a>
         </nav>
         <div class="nav-actions">
           <a href="https://github.com/postfiatorg" target="_blank" rel="noopener">GitHub</a>
@@ -2488,7 +2531,6 @@
           <ul>
             <li><a href="/whitepaper/">Whitepaper</a></li>
             <li><a href="/about/">About</a></li>
-            <li><a href="/modal-redesign-spec/">Redesign Spec</a></li>
           </ul>
         </div>
         <div>
