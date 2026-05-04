@@ -1684,6 +1684,7 @@
       margin-bottom:26px;
     }
     .final-copy p{color:var(--pale-2);font-size:1.1rem;max-width:620px}
+    .final-actions{justify-content:flex-start}
 
     .footer{
       border-top:1px solid var(--line);
@@ -1885,6 +1886,32 @@
       }
       .community-card-body{padding:17px}
       .community-knowledge-list strong{white-space:normal}
+      .final-cta{
+        padding:72px 0 58px;
+        overflow:hidden;
+      }
+      .cta-grid{
+        gap:34px;
+        text-align:center;
+      }
+      .glow-logo{width:min(190px,58vw)}
+      .final-copy h2{
+        max-width:12ch;
+        margin-inline:auto;
+        margin-bottom:18px;
+        font-size:clamp(2.2rem,10.4vw,3rem);
+        line-height:1;
+        text-wrap:balance;
+      }
+      .final-copy p{
+        max-width:31rem;
+        margin-inline:auto;
+        font-size:1rem;
+      }
+      .final-actions{
+        justify-content:center;
+        margin-top:24px;
+      }
       .footer-grid{grid-template-columns:1fr}
     }
 
@@ -1914,6 +1941,9 @@
       .feed-preview-link{font-size:.78rem}
       .app-card{flex-basis:calc(100vw - 28px)}
       .app-card h3{font-size:1.82rem}
+      .final-cta{padding-top:60px}
+      .glow-logo{width:min(160px,54vw)}
+      .final-copy h2{font-size:clamp(2rem,10.8vw,2.55rem)}
     }
 
     @media (prefers-reduced-motion:reduce){
@@ -2490,13 +2520,13 @@
         </div>
       </section>
 
-      <section class="final-cta">
+      <section class="final-cta" id="final-cta">
         <div class="container cta-grid">
           <div class="glow-logo" aria-hidden="true"><img src="/media-kit/logo.svg" alt=""></div>
           <div class="final-copy">
             <h2>Join before the coordination layer hardens.</h2>
             <p>If AGI restructures markets, governance, and labor, the winning networks will be the ones that let human participants coordinate with machine intelligence without handing the future to one center of control.</p>
-            <div class="hero-actions" style="justify-content:flex-start">
+            <div class="hero-actions final-actions">
               <a class="btn primary" href="/whitepaper/">Read the Whitepaper</a>
               <a class="btn dark" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Use the Task Node</a>
               <a class="btn dark" href="/validator-setup/">Run a Validator</a>
