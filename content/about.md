@@ -20,7 +20,6 @@ Post Fiat is an XRP-derived network for capital markets and collective intellige
 ## Current status
 
 - Post Fiat is live on public testnet.
-- It is **not** represented as a production mainnet.
 - The live public surfaces today are the validator history service, testnet explorer, whitepaper, validator benchmark, and Task Node participation surface.
 
 ## What makes it different from XRP
@@ -65,7 +64,7 @@ As of March 23, 2026:
 
 ### Is Post Fiat live?
 
-Yes, on public testnet. The live public surfaces are the validator history service, live testnet explorer, whitepaper, validator benchmark, and Task Node participation surface. It is not represented as a production mainnet.
+Yes, on public testnet. The live public surfaces are the validator history service, live testnet explorer, whitepaper, validator benchmark, and Task Node participation surface.
 
 ### How is Post Fiat different from XRP?
 
@@ -79,11 +78,11 @@ The Task Node is the current contributor-participation surface for Post Fiat. It
 
 PFT is the native asset described as coordinating validators, messaging, privacy-enabled workflows, and Task Node participation across the network.
 
-### What should people avoid saying about Post Fiat?
+### How should people describe Post Fiat?
 
-- Do not describe Post Fiat as a production mainnet unless current public materials explicitly say that.
-- Do not collapse the project into "just XRP" or "just a SWIFT replacement."
-- Do not omit the Task Node, validator benchmark, or public whitepaper when summarizing what exists today.
+- Describe the current network as public testnet infrastructure.
+- Keep the XRP lineage precise: Post Fiat is XRP-derived, but the project is not just XRP or a SWIFT-replacement story.
+- Include the Task Node, validator benchmark, and public whitepaper when summarizing what exists today.
 
 <script type="application/ld+json">
 {
@@ -129,7 +128,7 @@ PFT is the native asset described as coordinating validators, messaging, privacy
           "name": "Is Post Fiat live?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Post Fiat is live on public testnet. It is not represented as a production mainnet."
+            "text": "Post Fiat is live on public testnet, with validator history, a live testnet explorer, the public whitepaper, validator benchmark, and Task Node participation surface."
           }
         },
         {
