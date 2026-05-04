@@ -35,6 +35,9 @@ jobs:
         
       - name: Install Node.js deps
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+
+      - name: Validate public profile snapshot
+        run: node scripts/validate_market_symbols.mjs
         
       - name: Build Site
         env:
