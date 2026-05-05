@@ -25,7 +25,7 @@ The core technical requirement is rank-driven consensus stability: repeated exec
 
 The system proceeds in phases. Phase 1 maintains foundation authority while publishing complete audit trails. Phase 2 enables validators to independently rerun scoring in shadow mode and measure convergence. Phase 3 transfers authoritative list content to validator-converged output and decentralizes publication infrastructure.
 
-This paper makes a narrow claim: validator-list publication can be made materially more auditable and more contestable than today's opaque publisher process. It does not claim that model-assisted scoring has already been shown superior to simpler deterministic heuristics, nor that the current benchmark package is enough to justify production deployment. Adjacent account-exclusion and privacy work exists in the broader `postfiatd` codebase, but it is not part of the core claim of this paper and is isolated in Appendix B.
+This paper makes a narrow claim: validator-list publication can be made materially more auditable and more contestable than today's opaque publisher process. It does not claim that model-assisted scoring has already been shown superior to simpler deterministic heuristics, nor that the current benchmark package is enough to justify production deployment. Adjacent account-exclusion and Orchard/Halo2 privacy research is part of the broader `postfiatd` roadmap, but it is not part of the core claim of this paper and is now treated separately in AGTI's [Orchard Privacy Research](https://agtico.github.io/intelligence-reports/2026/05/05/orchard-privacy-research/) note.
 
 ---
 
@@ -279,7 +279,7 @@ Five independent runs on the same snapshot produced bit-identical output: identi
 
 This exceeds the rank-stability target. When the execution environment is fully pinned — model weights, quantization, inference engine, attention backend, CUDA version, and determinism flags — exact reproducibility is achievable, not merely a near-term target.
 
-As of May 5, 2026, the active Qwen3.6 public Modal/SGLang endpoint also provides a simple live reproducibility check against strange, non-scoring prompts. Repeated calls to `https://agti--dynamic-unl-scoring-qwen36-scoringendpoint-serve.modal.run/v1` with `temperature=0`, `max_tokens=96`, `chat_template_kwargs.enable_thinking=false`, and the served model `Qwen/Qwen3.6-27B-FP8` produced identical content hashes across three repeated calls for each tested prompt. For example, the prompt `Strange input: {validator: "teapot", score: NaN}. Respond with exactly one compact JSON object with keys verdict and note.` produced the same SHA-256 hash on all three runs: `41ab2787288a3000c3bf00d89304d276af2688f366349d877cec64a4bbafa661`. The prompt `If blue had a checksum and Tuesday was a validator, write one sentence explaining whether the output should still be deterministic.` likewise produced the same SHA-256 hash on all three runs: `6d2d888b5f4000bf6e7b82d4f967af04db995f3bc8427d652c9f6686cda30cef`.[29]
+As of May 5, 2026, the active Qwen3.6 public Modal/SGLang endpoint also provides a simple live reproducibility check against strange, non-scoring prompts. Repeated calls to `https://agti--dynamic-unl-scoring-qwen36-scoringendpoint-serve.modal.run/v1` with `temperature=0`, `max_tokens=96`, `chat_template_kwargs.enable_thinking=false`, and the served model `Qwen/Qwen3.6-27B-FP8` produced identical content hashes across three repeated calls for each tested prompt. For example, the prompt `Strange input: {validator: "teapot", score: NaN}. Respond with exactly one compact JSON object with keys verdict and note.` produced the same SHA-256 hash on all three runs: `41ab2787288a3000c3bf00d89304d276af2688f366349d877cec64a4bbafa661`. The prompt `If blue had a checksum and Tuesday was a validator, write one sentence explaining whether the output should still be deterministic.` likewise produced the same SHA-256 hash on all three runs: `6d2d888b5f4000bf6e7b82d4f967af04db995f3bc8427d652c9f6686cda30cef`.[20]
 
 This live smoke test is deliberately smaller than a full validator-scoring replay. Its purpose is operational: it gives outside verifiers a quick endpoint-level check that the deployed SGLang path is returning exact repeated outputs before they spend time rerunning full scoring rounds.
 
@@ -307,7 +307,7 @@ Each round publishes a full execution manifest. The Phase 0 validation manifest:
 
 Any change to model weights, engine version, quantization mode, or runtime flags produces a different manifest hash and is therefore a visibly different round.
 
-The active Qwen3.6 scoring profile is separately pinned in the Dynamic UNL repository and published in round metadata. Its current deployment profile uses `Qwen/Qwen3.6-27B-FP8`, a single H100 (`TP=1`), the pinned image `lmsysorg/sglang:nightly-dev-cu13-20260430-e60c60ef@sha256:5d9ec71597ade6b8237d61ae6f01b976cb3d5ad2c1e3cf4e0acaf27a9ff49a65`, `--enable-deterministic-inference`, `--chunked-prefill-size 4096`, `--mem-fraction-static 0.75`, and `--max-running-requests 1`.[29] Devnet round artifacts publish the model, prompt version, temperature, max-token budget, and Qwen thinking override in `scoring_config.json`, while `prompt.json` publishes the exact OpenAI-compatible messages sent to the scorer.[29]
+The active Qwen3.6 scoring profile is separately pinned in the Dynamic UNL repository and published in round metadata. Its current deployment profile uses `Qwen/Qwen3.6-27B-FP8`, a single H100 (`TP=1`), the pinned image `lmsysorg/sglang:nightly-dev-cu13-20260430-e60c60ef@sha256:5d9ec71597ade6b8237d61ae6f01b976cb3d5ad2c1e3cf4e0acaf27a9ff49a65`, `--enable-deterministic-inference`, `--chunked-prefill-size 4096`, `--mem-fraction-static 0.75`, and `--max-running-requests 1`.[20] Devnet round artifacts publish the model, prompt version, temperature, max-token budget, and Qwen thinking override in `scoring_config.json`, while `prompt.json` publishes the exact OpenAI-compatible messages sent to the scorer.[20]
 
 ### 7.2 Domain-separated hashing
 
@@ -507,9 +507,9 @@ Validator-list publication is a real governance surface. It determines overlap, 
 
 Post Fiat replaces opaque editorial selection with a public, replayable, model-assisted pipeline: collect evidence, normalize it canonically, pin the execution environment, score candidates under a published policy, select the set deterministically, publish the artifacts, and shift authority only after convergence is demonstrated.
 
-Preliminary validation now has three layers. First, historical Phase 0 scoring of 42 PFT Ledger validators with a self-hosted 80B-parameter model under deterministic inference produced bit-identical output across five independent runs — exact reproducibility, not merely rank stability. Second, a broader hostname-only benchmark across 29 XRPL validators, eight distinct model configurations, and two independent 15-repeat batches showed that intra-model rank stability remains very high even when the execution path spans multiple hosted providers rather than one pinned local deployment.[27][28] Third, the active Qwen3.6 27B Modal/SGLang endpoint now exposes a small live smoke-test path that outside verifiers can call repeatedly before rerunning full validator-scoring rounds.[29]
+Preliminary validation now has three layers. First, historical Phase 0 scoring of 42 PFT Ledger validators with a self-hosted 80B-parameter model under deterministic inference produced bit-identical output across five independent runs — exact reproducibility, not merely rank stability. Second, a broader hostname-only benchmark across 29 XRPL validators, eight distinct model configurations, and two independent 15-repeat batches showed that intra-model rank stability remains very high even when the execution path spans multiple hosted providers rather than one pinned local deployment.[18][19] Third, the active Qwen3.6 27B Modal/SGLang endpoint now exposes a small live smoke-test path that outside verifiers can call repeatedly before rerunning full validator-scoring rounds.[20]
 
-The broader `postfiatd` roadmap includes adjacent protocol work — validator-consensus account exclusion and Orchard/Halo2 privacy — documented in Appendix B. The publication mechanism remains the narrow core of this paper.
+The broader `postfiatd` roadmap includes adjacent protocol work, including validator-consensus account exclusion and Orchard/Halo2 privacy, but those topics are outside the validator-publication proof and are treated separately in AGTI's [Orchard Privacy Research](https://agtico.github.io/intelligence-reports/2026/05/05/orchard-privacy-research/) note. The publication mechanism remains the narrow core of this paper.
 
 That is ambitious enough to justify continued benchmarking, tighter validation, and staged implementation. It is not yet enough to claim that the governance problem is solved.
 
@@ -526,7 +526,7 @@ Phase 0 evaluated models across two benchmark rounds to find the best combinatio
 
 Qwen3-Next-80B-A3B-Instruct-FP8 was selected: comparable scoring quality to the 235B variant, 80B total parameters with only 3B active (mixture-of-experts), fits on a single H200 with headroom, and achieved 100% determinism under SGLang's deterministic inference mode.
 
-Platform selection was also empirical. RunPod serverless was tested first and rejected after repeated SGLang deployment failures, including stale runtime support and inability to run the required model/runtime combination reproducibly. Modal was selected only after the same workload ran under a pinned SGLang v0.5.6.post2 deployment script on a single H200 and completed the full 42-validator prompt successfully.[25][26]
+Platform selection was also empirical. RunPod serverless was tested first and rejected after repeated SGLang deployment failures, including stale runtime support and inability to run the required model/runtime combination reproducibly. Modal was selected only after the same workload ran under a pinned SGLang v0.5.6.post2 deployment script on a single H200 and completed the full 42-validator prompt successfully.[16][17]
 
 ### A.2 Scoring results
 
@@ -562,22 +562,22 @@ Five independent local runs on the same frozen snapshot produced bit-identical o
 
 This remains the strongest result in the paper. Under a fully pinned execution environment, exact reproducibility — not merely statistical stability — is achievable.
 
-The selected model also showed stable decision boundaries, not just repeatable text. In the chosen Round 2 benchmark, all 35 recommended UNL slots were identical across complete runs, the borderline pool was zero, and pairwise UNL overlap was 35.0/35. Competing H200-feasible models produced larger score spreads and 2-4 borderline validators under the same benchmark setup.[25][26]
+The selected model also showed stable decision boundaries, not just repeatable text. In the chosen Round 2 benchmark, all 35 recommended UNL slots were identical across complete runs, the borderline pool was zero, and pairwise UNL overlap was 35.0/35. Competing H200-feasible models produced larger score spreads and 2-4 borderline validators under the same benchmark setup.[16][17]
 
-We then broadened the test beyond the original single-model proof. A separate validator-hostname determinism suite scored the captured 29-validator XRPL cohort with eight hosted model configurations across two independent batches (Run A and Run B), each with 15 repeats per validator, for 6,960 total requests.[27][28] The suite included pinned provider/model combinations for GPT-OSS 120B, GPT-OSS 20B, Qwen3-Next 80B A3B, Qwen3 235B A22B, Qwen3.5 9B, GLM-5 Turbo, MiMo v2 Pro, and Claude Sonnet 4.6.[27][28]
+We then broadened the test beyond the original single-model proof. A separate validator-hostname determinism suite scored the captured 29-validator XRPL cohort with eight hosted model configurations across two independent batches (Run A and Run B), each with 15 repeats per validator, for 6,960 total requests.[18][19] The suite included pinned provider/model combinations for GPT-OSS 120B, GPT-OSS 20B, Qwen3-Next 80B A3B, Qwen3 235B A22B, Qwen3.5 9B, GLM-5 Turbo, MiMo v2 Pro, and Claude Sonnet 4.6.[18][19]
 
 That broader suite shows that robust intra-model determinism is not confined to the local H200 proof of concept:
 
-- Qwen3.5-9B, GPT-OSS-20B, GLM-5 Turbo, and Claude Sonnet 4.6 all achieved Run A vs Run B mode R² = 1.0 and rank R² = 1.0 on the 29-validator cohort.[28]
-- Qwen3-Next-80B-A3B remained near-perfect at mode R² = 0.9987 and rank R² = 0.9912.[28]
-- Even the noisier pinned configurations remained strongly self-correlated: GPT-OSS-120B produced mode R² = 0.9686 and rank R² = 0.9517, while MiMo v2 Pro produced mode R² = 0.9728 and rank R² = 0.9936.[28]
-- Domain-level exact-repeat rates also remained high for the stronger open models: Qwen3.5-9B scored 96.6% of domain/batch cells as fully deterministic, Qwen3-Next-80B-A3B scored 93.1%, and GLM-5 Turbo scored 89.7%.[28]
+- Qwen3.5-9B, GPT-OSS-20B, GLM-5 Turbo, and Claude Sonnet 4.6 all achieved Run A vs Run B mode R² = 1.0 and rank R² = 1.0 on the 29-validator cohort.[19]
+- Qwen3-Next-80B-A3B remained near-perfect at mode R² = 0.9987 and rank R² = 0.9912.[19]
+- Even the noisier pinned configurations remained strongly self-correlated: GPT-OSS-120B produced mode R² = 0.9686 and rank R² = 0.9517, while MiMo v2 Pro produced mode R² = 0.9728 and rank R² = 0.9936.[19]
+- Domain-level exact-repeat rates also remained high for the stronger open models: Qwen3.5-9B scored 96.6% of domain/batch cells as fully deterministic, Qwen3-Next-80B-A3B scored 93.1%, and GLM-5 Turbo scored 89.7%.[19]
 
-The same suite also shows that noise itself is stable rather than arbitrary. Across all 232 model-domain pairs with batch-level variance measurements, the standard deviation observed in Run A versus Run B had pooled R² = 0.8380. In other words, models that were noisier on specific hostnames in the first batch were usually noisy on those same hostnames in the second batch as well.[28]
+The same suite also shows that noise itself is stable rather than arbitrary. Across all 232 model-domain pairs with batch-level variance measurements, the standard deviation observed in Run A versus Run B had pooled R² = 0.8380. In other words, models that were noisier on specific hostnames in the first batch were usually noisy on those same hostnames in the second batch as well.[19]
 
-Cross-model agreement was materially weaker than within-model repeatability. Averaged across all model pairs, cross-model rank R² was 0.6985.[28] That is still meaningful overlap, but it supports a narrower claim: the benchmark demonstrates strong reproducibility within a fixed model/provider/configuration, not universal convergence of all models to the same ranking.
+Cross-model agreement was materially weaker than within-model repeatability. Averaged across all model pairs, cross-model rank R² was 0.6985.[19] That is still meaningful overlap, but it supports a narrower claim: the benchmark demonstrates strong reproducibility within a fixed model/provider/configuration, not universal convergence of all models to the same ranking.
 
-The recorded Phase 0 package is therefore not just one exact local benchmark. It now includes both the original self-hosted deterministic deployment evidence and a broader multi-model reproducibility suite. The practical recipe still mattered on the local path: SGLang deterministic mode alone was not enough without explicit runtime settings for FlashInfer workspace size, reduced static memory reservation, chunked prefill, and precompiled kernels.[25][26] The broader hosted-model suite complements that result by showing that high rank stability can still be observed when the benchmark is widened across multiple model families and hosted inference providers, provided the model/provider pairing and request settings are pinned.[27][28]
+The recorded Phase 0 package is therefore not just one exact local benchmark. It now includes both the original self-hosted deterministic deployment evidence and a broader multi-model reproducibility suite. The practical recipe still mattered on the local path: SGLang deterministic mode alone was not enough without explicit runtime settings for FlashInfer workspace size, reduced static memory reservation, chunked prefill, and precompiled kernels.[16][17] The broader hosted-model suite complements that result by showing that high rank stability can still be observed when the benchmark is widened across multiple model families and hosted inference providers, provided the model/provider pairing and request settings are pinned.[18][19]
 
 ### A.4 Public endpoint smoke test
 
@@ -587,10 +587,10 @@ Reference sources for this appendix:
 
 - SGLang deterministic inference documentation: `https://docs.sglang.io/docs/advanced_features/deterministic_inference`.[10]
 - LMSYS / SGLang deterministic inference implementation note: `https://www.lmsys.org/blog/2025-09-22-sglang-deterministic/`.[11]
-- Dynamic UNL endpoint deployment source: `dynamic-unl-scoring/infra/deploy_endpoint.py`, `dynamic-unl-scoring/infra/deploy_qwen36_endpoint.py`, and `dynamic-unl-scoring/phase0/docs/DeployQwen36_27B.md`.[29]
-- Dynamic UNL query script used for the smoke test: `dynamic-unl-scoring/scripts/query.py`.[29]
-- Public Dynamic UNL CI/deploy history: `https://github.com/postfiatorg/dynamic-unl-scoring/actions`.[30]
-- Devnet scoring explorer and audit surface: `https://explorer.devnet.postfiat.org/unl-scoring`.[30]
+- Dynamic UNL endpoint deployment source: `dynamic-unl-scoring/infra/deploy_endpoint.py`, `dynamic-unl-scoring/infra/deploy_qwen36_endpoint.py`, and `dynamic-unl-scoring/phase0/docs/DeployQwen36_27B.md`.[20]
+- Dynamic UNL query script used for the smoke test: `dynamic-unl-scoring/scripts/query.py`.[20]
+- Public Dynamic UNL CI/deploy history: `https://github.com/postfiatorg/dynamic-unl-scoring/actions`.[21]
+- Devnet scoring explorer and audit surface: `https://explorer.devnet.postfiat.org/unl-scoring`.[21]
 
 ```text
 https://agti--dynamic-unl-scoring-qwen36-scoringendpoint-serve.modal.run/v1
@@ -658,45 +658,7 @@ https://agti--dynamic-unl-scoring-scoringendpoint-serve.modal.run/v1
 Qwen/Qwen3-Next-80B-A3B-Instruct-FP8
 ```
 
-Full scoring-round audit lives on the devnet explorer and the Dynamic UNL GitHub Actions history. A verifier should use the smoke test only as a quick endpoint check, then replay the published `prompt.json`, `snapshot.json`, `scoring_config.json`, `scores.json`, and selected validator-list artifacts for the round under review.[29][30]
-
----
-
-## Appendix B — Adjacent Protocol Extensions in `postfiatd`
-
-### B.1 Validator-consensus account exclusion
-
-In addition to validator-list publication, `postfiatd` includes a PostFiat-specific account-exclusion mechanism. Two amendments, `PF_AccountExclusion` and `PF_ValidatorVoteTracking`, allow trusted validators to add or remove account exclusions through validation traffic, track those votes on-ledger, and maintain an exclusion view over the active validator set.[16]
-
-The relevant distinction from standard XRPL is that exclusion is not just an issuer-side freeze on an issued asset. In `postfiatd`, an account can become excluded by validator consensus once the exclusion threshold is met, and generic transaction processing rejects transactions when either the sender or destination account is excluded.[16]
-
-This is a governance primitive, not merely a token-control primitive. It allows the network to say: a specific account may not participate, regardless of whether the transaction involves an issuer-controlled IOU.
-
-### B.2 Why exclusion is materially different from standard XRPL freezes
-
-Standard XRPL already supports trust-line freeze, deep freeze, global freeze, and clawback for issued assets. Those are real controls, but they are primarily issuer-side controls over IOUs and trust lines rather than validator-governed network-wide exclusion of native XRP accounts or transaction counterparties.[17][18][16]
-
-For sanctions-style enforcement, that distinction matters. OFAC states that virtual-currency compliance obligations are the same as fiat-currency obligations, and that U.S.-subject persons are generally prohibited from engaging in or facilitating prohibited transactions involving blocked persons.[19][20] A validator-consensus rule that rejects transactions to or from identified accounts is therefore materially closer to the policy target than a narrower IOU-freeze model.
-
-That advantage should not be overstated. The exclusion path only helps when the relevant amendments are enabled and enough validators actually reach the threshold. OFAC also states that listed digital-currency addresses are not exhaustive, and that blocking/reporting duties continue when a U.S. person actually holds blocked property.[21][22][23] So Post Fiat's exclusion mechanism is best understood as a stronger protocol-layer enforcement primitive inside a larger compliance program, not as a complete compliance solution by itself.
-
-### B.3 Orchard / Halo2 privacy as a parallel protocol extension
-
-Separately, the `halo2-devnet-integration` branch of `postfiatd` ports Zcash's Orchard privacy model into an XRPL-derived ledger rather than treating privacy as a mixer, sidecar, or external bridge. It adds the `OrchardPrivacy` amendment and a native `ttSHIELDED_PAYMENT` transaction type, introduces a Rust `orchard-postfiat` crate built around Zcash's `orchard` and `halo2_proofs` libraries, and carries over Orchard's core state model: serialized bundles, commitment-tree anchors, nullifiers for double-spend prevention, note commitments for new shielded outputs, viewing-key-based note discovery, and the Orchard `valueBalance` accounting model that represents net flow between transparent XRP balances and the shielded pool.[16]
-
-That design means the same transaction family can support transparent-to-shielded shielding, fully shielded transfers, and shielded-to-transparent unshielding while preserving native ledger accounting. In the branch, proof-bearing bundles are parsed and checked in `preflight`, Halo2 proofs and anchor/nullifier constraints are enforced in `preclaim`, and ledger effects are applied in `doApply` by debiting transparent balances when value enters the shielded pool, crediting transparent destinations when value exits, persisting nullifiers, and appending new note commitments and anchors for future spends.[16] The companion wallet/RPC layer exposes full viewing-key registration, ledger scanning, and transaction preparation RPCs so the system can construct and observe t->z, z->z, and z->t flows end to end.[16]
-
-The current devnet implementation has moved beyond a simple proof plumbing exercise. It now covers t->z, z->z, and z->t flows; duplicate-nullifier rejection; wallet rescans from validated ledger history; checkpointed anchors and witnesses; and fail-closed wallet behavior that refuses to build shielded spends from provisional open-ledger state. Production validators are also expected to keep wallet/prover RPCs disabled by default, with unsafe local wallet RPCs gated behind explicit configuration.[31]
-
-The newer compliance direction is a Railgun-style assurance layer on top of Orchard, rather than a foundation freeze key, a global viewing backdoor, or a separate privacy token. Assurance providers publish signed roots over accepted deposits or policy datasets. Wallets can mark decrypted notes as assured, require assured-only shielded inputs, and produce Halo2 artifacts showing that value descends from provider-accepted sources without revealing the user's Orchard address, balance, transfer graph, or original deposit in later private transfers.[31][32]
-
-Provider identity is handled at the provider layer, not the user layer. A provider can be represented by a DID whose document resolves the assertion key used to sign assurance roots. The DID identifies the compliance provider, issuer, or policy authority; Orchard users, deposits, notes, recipients, nullifiers, and private assurance credentials do not receive public DIDs. This lets a wallet, exchange, or counterparty ask whether an assurance root was signed by a trusted provider without turning shielded privacy into public identity.[31]
-
-The branch includes first-cut Halo2 V1 assurance proofs. Initial admission proves provider-root membership and emits the first assurance credential without publishing the deposit id, accepted set, amount, note commitment, credential secret, or private credential. The z->z transition proof then carries assurance forward and binds to the provider id, policy hash, provider root, validity ledger, transaction digest, Orchard bundle commitment, input nullifier, fee, assurance nullifier, assurance anchor, and output assurance commitments. The implemented V1 transition supports one assured input and up to two Orchard outputs, and the public proof artifact no longer exposes the original deposit id, source account, input note commitment, input assurance commitment, or private output credential payloads.[31]
-
-The significance is not merely that Post Fiat has "a privacy branch." It is that the privacy layer is structurally based on Zcash's Orchard/Halo2 stack while remaining native to XRPL-style validated-ledger settlement. Because `ShieldedPayment` is processed as a first-class ledger transaction instead of an asynchronous external settlement step, finality should track the network's normal validated-ledger finality rather than waiting for a second protocol to reconcile state. Local performance tests on the branch measured successful private transaction flows in seconds rather than minutes, with observed mean send-to-close times around 8.1 seconds for t->z, 10.8 seconds for z->z, and 9.0 seconds for z->t on the tested development configuration.[31]
-
-Operationally this remains a devnet-track feature. The working path is reflected in isolated Halo2 devnet workflows, C++/Rust/Python tests, and assurance smoke tests that exercise shielding, assured private transfer, proof verification, recipient credential import, unshielding, wallet scanning, and double-spend rejection.[16][24][31] The remaining release boundary is also explicit: production wallet/prover separation, longer multi-validator devnet soaks, restart and reorg hardening, resource controls, third-party provider operations, production recursive PPOI artifacts, deposit-private z->t exchange verification, and external cryptographic/security review.[31]
+Full scoring-round audit lives on the devnet explorer and the Dynamic UNL GitHub Actions history. A verifier should use the smoke test only as a quick endpoint check, then replay the published `prompt.json`, `snapshot.json`, `scoring_config.json`, `scores.json`, and selected validator-list artifacts for the round under review.[20][21]
 
 ---
 
@@ -732,38 +694,16 @@ Operationally this remains a devnet-track feature. The working path is reflected
 
 [15] Epoch AI. **LLM inference price trends** (2025). https://epoch.ai/data-insights/llm-inference-price-trends
 
-[16] `postfiatd` branch research, inspected March 16, 2026. Review of `halo2-devnet-integration` branch.
+[16] `dynamic-unl-scoring` Phase 0 research, inspected March 22, 2026. Review of `docs/phase0/README.md`, `docs/phase0/WhyNotRunPodServerless.md`, and `docs/phase0/DeployQwen80B.md`.
 
-[17] XRPL Docs. **Common Misunderstandings about Freezes**. https://xrpl.org/docs/concepts/tokens/fungible-tokens/common-misconceptions-about-freezes
+[17] `dynamic-unl-scoring` implementation artifacts, inspected March 22, 2026. Review of `infra/deploy_endpoint.py` and `results/modal/qwen3-next-80b-instruct/2026-03-13_12-35-32/run_1.json` through `run_5.json`.
 
-[18] XRPL Docs. **Deep Freeze**. https://xrpl.org/docs/concepts/tokens/fungible-tokens/deep-freeze
+[18] `postfiatorg.github.io` benchmark script, inspected March 23, 2026. Review of `scripts/open_model_validator_determinism_suite.py`.
 
-[19] U.S. Department of the Treasury, OFAC. **FAQ 560**. https://ofac.treasury.gov/faqs/560
+[19] `postfiatorg.github.io` multi-model determinism artifacts, inspected March 23, 2026. Review of `static/benchmarks/open-model-validator-determinism-full-20260323T004756Z.json` and companion CSV summaries.
 
-[20] U.S. Department of the Treasury, OFAC. **FAQ 1021**. https://ofac.treasury.gov/faqs/1021
+[20] `dynamic-unl-scoring` Modal/SGLang deployment and smoke-test evidence, inspected May 5, 2026. Review of `infra/deploy_endpoint.py`, `infra/deploy_qwen36_endpoint.py`, `phase0/docs/DeployQwen36_27B.md`, `scripts/query.py`, and repeated calls to `https://agti--dynamic-unl-scoring-scoringendpoint-serve.modal.run/v1`.
 
-[21] U.S. Department of the Treasury, OFAC. **FAQ 562**. https://ofac.treasury.gov/faqs/562
-
-[22] U.S. Department of the Treasury, OFAC. **FAQ 646**. https://ofac.treasury.gov/faqs/646
-
-[23] U.S. Department of the Treasury, OFAC. **Sanctions Compliance Guidance for the Virtual Currency Industry**. https://ofac.treasury.gov/system/files/126/virtual_currency_guidance_brochure.pdf
-
-[24] `agent-hub` devnet operations research, inspected March 16, 2026. Review of Halo2 devnet workflows.
-
-[25] `dynamic-unl-scoring` Phase 0 research, inspected March 22, 2026. Review of `docs/phase0/README.md`, `docs/phase0/WhyNotRunPodServerless.md`, and `docs/phase0/DeployQwen80B.md`.
-
-[26] `dynamic-unl-scoring` implementation artifacts, inspected March 22, 2026. Review of `infra/deploy_endpoint.py` and `results/modal/qwen3-next-80b-instruct/2026-03-13_12-35-32/run_1.json` through `run_5.json`.
-
-[27] `postfiatorg.github.io` benchmark script, inspected March 23, 2026. Review of `scripts/open_model_validator_determinism_suite.py`.
-
-[28] `postfiatorg.github.io` multi-model determinism artifacts, inspected March 23, 2026. Review of `static/benchmarks/open-model-validator-determinism-full-20260323T004756Z.json` and companion CSV summaries.
-
-[29] `dynamic-unl-scoring` Modal/SGLang deployment and smoke-test evidence, inspected May 5, 2026. Review of `infra/deploy_endpoint.py`, `infra/deploy_qwen36_endpoint.py`, `phase0/docs/DeployQwen36_27B.md`, `scripts/query.py`, and repeated calls to `https://agti--dynamic-unl-scoring-scoringendpoint-serve.modal.run/v1`.
-
-[30] Dynamic UNL public audit surfaces, inspected May 5, 2026. GitHub Actions: https://github.com/postfiatorg/dynamic-unl-scoring/actions. Devnet scoring explorer: https://explorer.devnet.postfiat.org/unl-scoring.
-
-[31] `postfiatd` Orchard privacy implementation docs, inspected May 5, 2026. Review of `docs/orchard/README.md`, `docs/orchard/railgun_on_pft_spec.md`, `docs/orchard/recursive_assurance_credentials_spec.md`, `scripts/orchard_assurance_devnet.py`, and `src/test/rpc/OrchardPerf_test.cpp` on `halo2-devnet-integration`.
-
-[32] Railgun documentation. **Private Proofs of Innocence** and **Railgun Assurance Suite**. https://docs.railgun.org/wiki/assurance/private-proofs-of-innocence and https://docs.railgun.org/wiki/assurance/railgun-assurance-suite
+[21] Dynamic UNL public audit surfaces, inspected May 5, 2026. GitHub Actions: https://github.com/postfiatorg/dynamic-unl-scoring/actions. Devnet scoring explorer: https://explorer.devnet.postfiat.org/unl-scoring.
 
 ---
