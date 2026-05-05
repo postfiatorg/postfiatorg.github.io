@@ -7,9 +7,11 @@ summary: "Post Fiat Whitepaper"
 
 # Post Fiat: Auditable, Model-Assisted Validator-List Publication for XRPL-Derived Networks
 
-**March 2026**
+**March 2026; updated May 5, 2026**
 
 **Published to production:** 2026-03-23 02:07:45 UTC
+
+**Last updated:** 2026-05-05 UTC
 
 ---
 
@@ -19,7 +21,7 @@ Post Fiat is an XRPL-derived Layer 1 that replaces opaque validator-list publica
 
 Post Fiat publishes every stage of each scoring round: raw evidence collected from network data sources, a canonically normalized snapshot, a pinned execution manifest for the model and runtime stack, per-validator scores with rationales produced by a self-hosted open-weight model, and a deterministic set-construction rule with explicit churn controls.
 
-The core technical requirement is rank-driven consensus stability: repeated executions on the same inputs must produce the same pairwise rankings, top-k overlap, and inclusion decisions. Preliminary validation on PFT Ledger's testnet — 42 validators scored by Qwen3-Next-80B-A3B-Instruct-FP8 under SGLang's deterministic inference mode — achieved bit-identical output across five independent runs. Later SGLang deterministic-inference work strengthens the practical basis for exact same-stack transcript reproducibility by addressing batch-size variance directly with batch-invariant operators, while still requiring a pinned model, runtime, hardware profile, and request contract. This benchmark is a proof-of-possibility result under one tightly pinned stack, not sufficient evidence for production authority transfer on its own.
+The core technical requirement is rank-driven consensus stability: repeated executions on the same inputs must produce the same pairwise rankings, top-k overlap, and inclusion decisions. The current Dynamic UNL scoring deployment uses Qwen/Qwen3.6-27B-FP8 under a pinned Modal/SGLang deterministic profile. Earlier Phase 0 validation on PFT Ledger's testnet — 42 validators scored by Qwen3-Next-80B-A3B-Instruct-FP8 under SGLang's deterministic inference mode — achieved bit-identical output across five independent runs. Later SGLang deterministic-inference work strengthens the practical basis for exact same-stack transcript reproducibility by addressing batch-size variance directly with batch-invariant operators, while still requiring a pinned model, runtime, hardware profile, and request contract. This benchmark is a proof-of-possibility result under one tightly pinned stack, not sufficient evidence for production authority transfer on its own.
 
 The system proceeds in phases. Phase 1 maintains foundation authority while publishing complete audit trails. Phase 2 enables validators to independently rerun scoring in shadow mode and measure convergence. Phase 3 transfers authoritative list content to validator-converged output and decentralizes publication infrastructure.
 
@@ -269,13 +271,15 @@ Numerical precision remains a real divergence source. Yuan et al. show that limi
 
 ### 6.4 Empirical validation on PFT Ledger
 
-Post Fiat's Phase 0 validation scored 42 validators on the PFT Ledger testnet using Qwen3-Next-80B-A3B-Instruct-FP8 — an 80-billion parameter mixture-of-experts model with 3 billion active parameters — running under SGLang v0.5.6 with deterministic inference enabled on a single NVIDIA H200 GPU.
+The active devnet scorer is Qwen/Qwen3.6-27B-FP8 running on the pinned Modal/SGLang profile described in Section 7.1. It replaced the earlier Qwen3-Next Phase 0 baseline because the Qwen3.6 profile better matched the current scoring rubric while preserving a single-GPU deterministic deployment path.
+
+Post Fiat's earlier Phase 0 validation scored 42 validators on the PFT Ledger testnet using Qwen3-Next-80B-A3B-Instruct-FP8 — an 80-billion parameter mixture-of-experts model with 3 billion active parameters — running under SGLang v0.5.6 with deterministic inference enabled on a single NVIDIA H200 GPU.
 
 Five independent runs on the same snapshot produced bit-identical output: identical scores, identical rationales, identical token sequences. Scores ranged from 5 to 97 (mean 85.3), with the model correctly differentiating validators with perfect consensus (scoring 95+) from validators with catastrophic 30-day agreement drops (scoring below 40) and effectively offline validators (scoring below 10).
 
 This exceeds the rank-stability target. When the execution environment is fully pinned — model weights, quantization, inference engine, attention backend, CUDA version, and determinism flags — exact reproducibility is achievable, not merely a near-term target.
 
-As of May 5, 2026, a public Modal/SGLang endpoint also provides a simple live reproducibility check against strange, non-scoring prompts. Repeated calls to `https://agti--dynamic-unl-scoring-scoringendpoint-serve.modal.run/v1` with `temperature=0`, `max_tokens=96`, and the served model `Qwen/Qwen3-Next-80B-A3B-Instruct-FP8` produced identical content hashes across three repeated calls for each tested prompt. For example, the prompt `Strange input: {validator: "teapot", score: NaN}. Respond with exactly one compact JSON object with keys verdict and note.` produced the same SHA-256 hash on all three runs: `90ef821fd7d3aaf03fda021094cad34d813cf3af8c8e1d6b7359554e591d4e55`. The prompt `If blue had a checksum and Tuesday was a validator, write one sentence explaining whether the output should still be deterministic.` likewise produced the same SHA-256 hash on all three runs: `a7233ca7a839a5c3cebd7e41db3a70d11b16d99207e710bcf83606961936ff19`.[29]
+As of May 5, 2026, the active Qwen3.6 public Modal/SGLang endpoint also provides a simple live reproducibility check against strange, non-scoring prompts. Repeated calls to `https://agti--dynamic-unl-scoring-qwen36-scoringendpoint-serve.modal.run/v1` with `temperature=0`, `max_tokens=96`, `chat_template_kwargs.enable_thinking=false`, and the served model `Qwen/Qwen3.6-27B-FP8` produced identical content hashes across three repeated calls for each tested prompt. For example, the prompt `Strange input: {validator: "teapot", score: NaN}. Respond with exactly one compact JSON object with keys verdict and note.` produced the same SHA-256 hash on all three runs: `41ab2787288a3000c3bf00d89304d276af2688f366349d877cec64a4bbafa661`. The prompt `If blue had a checksum and Tuesday was a validator, write one sentence explaining whether the output should still be deterministic.` likewise produced the same SHA-256 hash on all three runs: `6d2d888b5f4000bf6e7b82d4f967af04db995f3bc8427d652c9f6686cda30cef`.[29]
 
 This live smoke test is deliberately smaller than a full validator-scoring replay. Its purpose is operational: it gives outside verifiers a quick endpoint-level check that the deployed SGLang path is returning exact repeated outputs before they spend time rerunning full scoring rounds.
 
@@ -503,7 +507,7 @@ Validator-list publication is a real governance surface. It determines overlap, 
 
 Post Fiat replaces opaque editorial selection with a public, replayable, model-assisted pipeline: collect evidence, normalize it canonically, pin the execution environment, score candidates under a published policy, select the set deterministically, publish the artifacts, and shift authority only after convergence is demonstrated.
 
-Preliminary validation now has three layers. First, scoring 42 PFT Ledger validators with a self-hosted 80B-parameter model under deterministic inference produced bit-identical output across five independent runs — exact reproducibility, not merely rank stability. Second, a broader hostname-only benchmark across 29 XRPL validators, eight distinct model configurations, and two independent 15-repeat batches showed that intra-model rank stability remains very high even when the execution path spans multiple hosted providers rather than one pinned local deployment.[27][28] Third, the public Modal/SGLang endpoint now exposes a small live smoke-test path that outside verifiers can call repeatedly before rerunning full validator-scoring rounds.[29]
+Preliminary validation now has three layers. First, historical Phase 0 scoring of 42 PFT Ledger validators with a self-hosted 80B-parameter model under deterministic inference produced bit-identical output across five independent runs — exact reproducibility, not merely rank stability. Second, a broader hostname-only benchmark across 29 XRPL validators, eight distinct model configurations, and two independent 15-repeat batches showed that intra-model rank stability remains very high even when the execution path spans multiple hosted providers rather than one pinned local deployment.[27][28] Third, the active Qwen3.6 27B Modal/SGLang endpoint now exposes a small live smoke-test path that outside verifiers can call repeatedly before rerunning full validator-scoring rounds.[29]
 
 The broader `postfiatd` roadmap includes adjacent protocol work — validator-consensus account exclusion and Orchard/Halo2 privacy — documented in Appendix B. The publication mechanism remains the narrow core of this paper.
 
@@ -577,7 +581,7 @@ The recorded Phase 0 package is therefore not just one exact local benchmark. It
 
 ### A.4 Public endpoint smoke test
 
-The smallest reproducibility check is a repeated endpoint call against a known served model. The model name must match the target endpoint's `/v1/models` response. The historical Qwen3-Next endpoint is:
+The smallest reproducibility check is a repeated endpoint call against a known served model. The model name must match the target endpoint's `/v1/models` response. The active Qwen3.6 endpoint is:
 
 Reference sources for this appendix:
 
@@ -589,7 +593,7 @@ Reference sources for this appendix:
 - Devnet scoring explorer and audit surface: `https://explorer.devnet.postfiat.org/unl-scoring`.[30]
 
 ```text
-https://agti--dynamic-unl-scoring-scoringendpoint-serve.modal.run/v1
+https://agti--dynamic-unl-scoring-qwen36-scoringendpoint-serve.modal.run/v1
 ```
 
 Run a single manual query from the `dynamic-unl-scoring` repository:
@@ -598,8 +602,8 @@ Run a single manual query from the `dynamic-unl-scoring` repository:
 python -m pip install -r requirements.txt
 
 python scripts/query.py \
-  --url https://agti--dynamic-unl-scoring-scoringendpoint-serve.modal.run/v1 \
-  --model Qwen/Qwen3-Next-80B-A3B-Instruct-FP8 \
+  --url https://agti--dynamic-unl-scoring-qwen36-scoringendpoint-serve.modal.run/v1 \
+  --model Qwen/Qwen3.6-27B-FP8 \
   --prompt 'Strange input: {validator: "teapot", score: NaN}. Respond with exactly one compact JSON object with keys verdict and note.' \
   --temperature 0 \
   --max-tokens 96 \
@@ -614,8 +618,8 @@ import hashlib
 import json
 import urllib.request
 
-base = "https://agti--dynamic-unl-scoring-scoringendpoint-serve.modal.run/v1"
-model = "Qwen/Qwen3-Next-80B-A3B-Instruct-FP8"
+base = "https://agti--dynamic-unl-scoring-qwen36-scoringendpoint-serve.modal.run/v1"
+model = "Qwen/Qwen3.6-27B-FP8"
 prompt = 'Strange input: {validator: "teapot", score: NaN}. Respond with exactly one compact JSON object with keys verdict and note.'
 
 payload = json.dumps({
@@ -645,13 +649,13 @@ assert len(set(hashes)) == 1, hashes
 PY
 ```
 
-On May 5, 2026, that prompt returned the same content hash on all three runs: `90ef821fd7d3aaf03fda021094cad34d813cf3af8c8e1d6b7359554e591d4e55`. A second odd prompt — `If blue had a checksum and Tuesday was a validator, write one sentence explaining whether the output should still be deterministic.` — also returned one hash across three runs: `a7233ca7a839a5c3cebd7e41db3a70d11b16d99207e710bcf83606961936ff19`.
+On May 5, 2026, that prompt returned the same content hash on all three Qwen3.6 runs: `41ab2787288a3000c3bf00d89304d276af2688f366349d877cec64a4bbafa661`. A second odd prompt — `If blue had a checksum and Tuesday was a validator, write one sentence explaining whether the output should still be deterministic.` — also returned one hash across three Qwen3.6 runs: `6d2d888b5f4000bf6e7b82d4f967af04db995f3bc8427d652c9f6686cda30cef`.
 
-The active Qwen3.6 endpoint uses a different app name and model:
+The historical Qwen3-Next Phase 0 endpoint uses a different app name and model:
 
 ```text
-https://agti--dynamic-unl-scoring-qwen36-scoringendpoint-serve.modal.run/v1
-Qwen/Qwen3.6-27B-FP8
+https://agti--dynamic-unl-scoring-scoringendpoint-serve.modal.run/v1
+Qwen/Qwen3-Next-80B-A3B-Instruct-FP8
 ```
 
 Full scoring-round audit lives on the devnet explorer and the Dynamic UNL GitHub Actions history. A verifier should use the smoke test only as a quick endpoint check, then replay the published `prompt.json`, `snapshot.json`, `scoring_config.json`, `scores.json`, and selected validator-list artifacts for the round under review.[29][30]
