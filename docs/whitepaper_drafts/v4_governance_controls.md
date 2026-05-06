@@ -86,9 +86,11 @@ Lewis-Pye and Roughgarden's framework for permissionless consensus identifies th
 
 Publishing the full pipeline does not eliminate all discretion. The foundation still chooses evidence sources, normalization rules, the scoring prompt, and the model. But those choices are now explicit, versioned artifacts. Changing them requires a visible policy update, not a silent editorial adjustment.
 
-The strongest objection is that Post Fiat could simply replace one black box with another: private publisher discretion becomes private choices over evidence, prompt, model, and normalization. The answer is procedural, not mystical. Post Fiat does not claim the model is unbiased. It claims that the decision procedure becomes decomposable. Evidence can be challenged, prompts can be diffed, model changes can be rerun, score rationales can be inspected, and selector rules can be compared against alternatives. Bias, error, and capture do not disappear; they become easier to locate.
+### 2.4 Governance controls
 
-### 2.4 What this paper does and does not claim
+A model-assisted process should not be treated as a single model run with ceremonial authority. The control points are the governance product: evidence challenge, prompt review, model-version review, replay against alternate models, public disagreement reports, validator correction requests, and deterministic churn limits. The model produces a first-pass public reasoning record; the network decides whether the record, policy, and evidence deserve authority.
+
+### 2.5 What this paper does and does not claim
 
 This paper claims:
 
@@ -104,7 +106,7 @@ This paper does **not** claim:
 - that decentralization is already achieved in Phase 1 or Phase 2;
 - that adjacent privacy or exclusion features are part of the validator-publication proof.
 
-### 2.5 Why use model judgment at all?
+### 2.6 Why use model judgment at all?
 
 Validator-list publication already contains qualitative judgment. Publishers implicitly weigh reputation, operational quality, independence, and legitimacy even when the rubric is unpublished. The narrow argument for model assistance is not that a model is magically objective or inherently superior. The argument is that if qualitative judgment is already happening, a published machine-assisted judgment layer can be easier to audit, replay, contest, and compare than a largely opaque editorial process.
 

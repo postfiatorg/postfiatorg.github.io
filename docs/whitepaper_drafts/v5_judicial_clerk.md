@@ -35,7 +35,7 @@ Post Fiat's immediate claim is narrow but practical: the network turns validator
 
 The reason this is newly plausible is structural. Historically, model-assisted governance would have been difficult to defend because repeated model calls could drift for reasons unrelated to policy. SGLang deterministic inference changes the execution layer: under a pinned single-GPU stack, the same snapshot and prompt can produce the same score map across repeated runs. That does not make the score correct, but it does make the scoring round a replayable object rather than a private opinion.
 
-The model layer earns its place only if it improves over a rigid rubric. Its intended role is to synthesize borderline cases where raw metrics are similar but governance meaning differs: operator independence, entity continuity, concentration risk, public accountability, and whether claimed diversity is real or cosmetic. A deterministic rules engine remains the baseline to beat. Post Fiat's claim is that the model-assisted layer should be kept only where it produces more contestable and more useful judgments than a published rule table or informal committee.
+The model is not the sovereign. Its role is closer to a published judicial clerk operating over a public record: it organizes evidence, applies stated criteria, explains a first-pass recommendation, and leaves a reviewable trail. It earns its place only in borderline cases where raw metrics are similar but governance meaning differs: operator independence, entity continuity, concentration risk, public accountability, and whether claimed diversity is real or cosmetic. A deterministic rules engine remains the baseline to beat. Post Fiat's claim is that the model-assisted layer should be kept only where it produces more contestable and more useful judgments than a published rule table or informal committee.
 
 This belongs in a distinct Post Fiat network because the validator-list process is part of the network's trust product, not an external analytics feed. A standalone XRPL-side tool can advise a publisher; it cannot make artifact publication, shadow verification, on-chain anchoring, and validator convergence part of the default governance surface of the ledger. The economic thesis is therefore tied to adoption of a ledger whose validator-selection process is visibly more legible than the status quo, not to the mere existence of a scoring script.
 
@@ -85,8 +85,6 @@ Lewis-Pye and Roughgarden's framework for permissionless consensus identifies th
 ### 2.3 What remains
 
 Publishing the full pipeline does not eliminate all discretion. The foundation still chooses evidence sources, normalization rules, the scoring prompt, and the model. But those choices are now explicit, versioned artifacts. Changing them requires a visible policy update, not a silent editorial adjustment.
-
-The strongest objection is that Post Fiat could simply replace one black box with another: private publisher discretion becomes private choices over evidence, prompt, model, and normalization. The answer is procedural, not mystical. Post Fiat does not claim the model is unbiased. It claims that the decision procedure becomes decomposable. Evidence can be challenged, prompts can be diffed, model changes can be rerun, score rationales can be inspected, and selector rules can be compared against alternatives. Bias, error, and capture do not disappear; they become easier to locate.
 
 ### 2.4 What this paper does and does not claim
 

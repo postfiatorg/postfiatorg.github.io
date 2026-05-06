@@ -31,7 +31,7 @@ This paper makes a narrow claim: validator-list publication can be made material
 
 ## Executive Summary
 
-Post Fiat's immediate claim is narrow but practical: the network turns validator-list publication from an opaque trust recommendation into a public evidence pipeline that can be inspected, replayed, challenged, and eventually recomputed by validators themselves. The user-visible difference is not that "AI governs the chain." The difference is that every inclusion decision has named inputs, a pinned scorer, a deterministic selector, signed artifacts, and an escalation path when reviewers disagree.
+Post Fiat's immediate claim is narrow but practical: the network turns validator-list publication from an opaque trust recommendation into a public evidence pipeline that can be inspected, replayed, challenged, and eventually recomputed by validators themselves. In an XRPL-derived system, this is not a cosmetic transparency feature; the recommended validator list helps define the practical trust boundary of a major public ledger. The user-visible difference is not that "AI governs the chain." The difference is that every inclusion decision has named inputs, a pinned scorer, a deterministic selector, signed artifacts, and an escalation path when reviewers disagree.
 
 The reason this is newly plausible is structural. Historically, model-assisted governance would have been difficult to defend because repeated model calls could drift for reasons unrelated to policy. SGLang deterministic inference changes the execution layer: under a pinned single-GPU stack, the same snapshot and prompt can produce the same score map across repeated runs. That does not make the score correct, but it does make the scoring round a replayable object rather than a private opinion.
 
@@ -85,8 +85,6 @@ Lewis-Pye and Roughgarden's framework for permissionless consensus identifies th
 ### 2.3 What remains
 
 Publishing the full pipeline does not eliminate all discretion. The foundation still chooses evidence sources, normalization rules, the scoring prompt, and the model. But those choices are now explicit, versioned artifacts. Changing them requires a visible policy update, not a silent editorial adjustment.
-
-The strongest objection is that Post Fiat could simply replace one black box with another: private publisher discretion becomes private choices over evidence, prompt, model, and normalization. The answer is procedural, not mystical. Post Fiat does not claim the model is unbiased. It claims that the decision procedure becomes decomposable. Evidence can be challenged, prompts can be diffed, model changes can be rerun, score rationales can be inspected, and selector rules can be compared against alternatives. Bias, error, and capture do not disappear; they become easier to locate.
 
 ### 2.4 What this paper does and does not claim
 

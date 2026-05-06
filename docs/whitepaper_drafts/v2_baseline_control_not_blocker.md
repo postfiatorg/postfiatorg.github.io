@@ -86,8 +86,6 @@ Lewis-Pye and Roughgarden's framework for permissionless consensus identifies th
 
 Publishing the full pipeline does not eliminate all discretion. The foundation still chooses evidence sources, normalization rules, the scoring prompt, and the model. But those choices are now explicit, versioned artifacts. Changing them requires a visible policy update, not a silent editorial adjustment.
 
-The strongest objection is that Post Fiat could simply replace one black box with another: private publisher discretion becomes private choices over evidence, prompt, model, and normalization. The answer is procedural, not mystical. Post Fiat does not claim the model is unbiased. It claims that the decision procedure becomes decomposable. Evidence can be challenged, prompts can be diffed, model changes can be rerun, score rationales can be inspected, and selector rules can be compared against alternatives. Bias, error, and capture do not disappear; they become easier to locate.
-
 ### 2.4 What this paper does and does not claim
 
 This paper claims:
@@ -112,7 +110,7 @@ That claim is intentionally modest. The relevant test is not whether the model l
 
 One concrete class of cases is operator independence. Two candidates can look similar on uptime, version freshness, and other raw metrics while differing materially in governance value: one may be a second validator behind an already represented operator, ASN, or hosting cluster, while another may be independently run, publicly accountable, and more valuable for set diversity despite slightly weaker headline numbers. A rigid rubric can count some of these fields, but it still needs a judgment layer to synthesize whether apparent diversity is real, whether identity evidence is substantive, and whether a borderline inclusion improves or worsens concentration risk. In XRPL-style publication today, those calls are still made implicitly. Post Fiat's claim is that they should be made explicitly on a published record.
 
-The stronger comparison classes should still be concrete. A deterministic baseline would rank the same frozen snapshot using only published rules over agreement history, uptime, version freshness, identity continuity, and concentration caps. A human baseline would ask a small review committee to rank that same snapshot under the same evidence record. If model-assisted scoring cannot at least match those baselines on cutoff stability, contestability, and operational clarity, then the model layer has not earned authority. If a deterministic rules engine later proves equally effective on the same evidence packages, the deterministic path should be preferred.
+The stronger comparison classes should still be concrete. A deterministic baseline would rank the same frozen snapshot using only published rules over agreement history, uptime, version freshness, identity continuity, and concentration caps. A human baseline would ask a small review committee to rank that same snapshot under the same evidence record. Those baselines are the right controls for future rounds; they do not weaken the immediate claim that closed publisher judgment should become public procedure. The model layer earns authority only where it makes borderline judgments more inspectable, contestable, and useful than either an unpublished committee process or a rigid score table.
 
 ---
 
