@@ -11,7 +11,7 @@ summary: "Post Fiat Whitepaper"
 
 **Originally published to production:** 2026-03-23 02:07:45 UTC
 
-**Current revision:** 2026-05-05, incorporating the Qwen3.6/SGLang deterministic replay artifacts generated on 2026-05-05.
+**Current revision:** 2026-05-31, incorporating live Phase 1 testnet validator-list publication evidence and the Qwen3.6/SGLang deterministic replay artifacts.
 
 ---
 
@@ -19,25 +19,25 @@ summary: "Post Fiat Whitepaper"
 
 Post Fiat is an XRPL-derived Layer 1 that replaces opaque validator-list publication with an auditable, replayable pipeline. In XRPL-style networks, consensus security depends on the composition of the trusted validator set, but the rationale behind widely used recommended lists remains largely invisible to network participants.
 
-Post Fiat publishes every stage of each scoring round: raw evidence collected from network data sources, a canonically normalized snapshot, a pinned execution manifest for the model and runtime stack, per-validator scores with rationales produced by a self-hosted open-weight model, and a deterministic set-construction rule with explicit churn controls.
+Post Fiat publishes every stage of each scoring round: raw evidence, a canonical snapshot, a pinned model/runtime manifest, per-validator scores with rationales from a self-hosted open-weight model, and a deterministic set-construction rule with explicit churn controls.
 
-The core technical requirement is rank-driven consensus stability: repeated executions on the same inputs must produce the same pairwise rankings, top-k overlap, and inclusion decisions. The current deterministic-inference validation uses Qwen/Qwen3.6-27B-FP8 served through a pinned Modal/SGLang stack. On the saved 29-validator XRPL UNL credibility benchmark, 2,900 repeated calls — 100 complete score maps across two batches — produced 2,900 valid JSON responses, one unique score-map hash, zero score variance, and zero raw-output variance. On the 42-validator PFT Ledger scoring task, the same Qwen3.6/SGLang deployment also produced complete, zero-variance repeated scoring runs. These benchmarks are proof-of-possibility results under tightly pinned stacks, not sufficient evidence for production authority transfer on their own.
+The core technical requirement is rank-driven consensus stability: repeated executions on the same inputs must preserve pairwise rankings, top-k overlap, and inclusion decisions. The current validation uses Qwen/Qwen3.6-27B-FP8 through a pinned Modal/SGLang single-GPU stack; Appendix A reports exact replay on the saved XRPL UNL credibility benchmark and the 42-validator PFT Ledger task. These are single-stack proof-of-possibility results, not authority-transfer evidence.
 
-The system proceeds in phases. Phase 1 maintains foundation authority while publishing complete audit trails. Phase 2 enables validators to independently rerun scoring in shadow mode and measure convergence. Phase 3 transfers authoritative list content to validator-converged output and decentralizes publication infrastructure.
+Deployment proceeds in phases. Phase 1 keeps foundation authority while publishing complete audit trails and is live on the public testnet, where rounds 4 through 7 completed with audit bundle CIDs, publication commits, and PFTL memo anchors. Phase 2 lets validators rerun scoring in shadow mode and measure convergence. Phase 3 transfers authoritative list content to validator-converged output and decentralizes publication infrastructure.
 
-This paper makes a narrow claim: validator-list publication can be made materially more auditable and more contestable than today's opaque publisher process. It does not claim that model-assisted scoring has already been shown superior to simpler deterministic heuristics, nor that the current benchmark package is enough to justify production deployment. Adjacent account-exclusion and Orchard/Halo2 privacy work exists in the broader `postfiatd` codebase, but it is covered in a [separate research note](/posts/orchard-privacy-research/) and is outside this paper's proof surface.
+The claim is narrow: validator-list publication can be made more auditable and contestable than today's opaque publisher process. It does not claim that model-assisted scoring has beaten simpler deterministic heuristics or that the current benchmark package justifies production authority transfer. Adjacent account-exclusion and Orchard/Halo2 privacy work exists in the broader `postfiatd` codebase, but it is covered in a [separate research note](/posts/orchard-privacy-research/) and is outside this paper's proof surface.
 
 ---
 
 ## Executive Summary
 
-Post Fiat's immediate claim is narrow but practical: the network turns validator-list publication from an opaque trust recommendation into a public evidence pipeline that can be inspected, replayed, challenged, and eventually recomputed by validators themselves. The user-visible difference is not that "AI governs the chain." The difference is that every inclusion decision has named inputs, a pinned scorer, a deterministic selector, signed artifacts, and an escalation path when reviewers disagree.
+Post Fiat turns validator-list publication from an opaque trust recommendation into a public evidence pipeline that validators can inspect, replay, challenge, and eventually recompute. Every inclusion decision has named inputs, a pinned scorer, a deterministic selector, signed artifacts, and an escalation path when reviewers disagree.
 
-The reason this is newly plausible is structural. Historically, model-assisted governance would have been difficult to defend because repeated model calls could drift for reasons unrelated to policy. SGLang deterministic inference changes the execution layer: under a pinned single-GPU stack, the same snapshot and prompt can produce the same score map across repeated runs. That does not make the score correct, but it does make the scoring round a replayable object rather than a private opinion.
+Under a pinned SGLang single-GPU stack, the same snapshot and prompt can produce the same score map across repeated runs. The score still has to be judged; the gain is that the round becomes a replayable object rather than a private opinion.
 
-The model layer earns its place only if it improves over a rigid rubric. Its intended role is to synthesize borderline cases where raw metrics are similar but governance meaning differs: operator independence, entity continuity, concentration risk, public accountability, and whether claimed diversity is real or cosmetic. A deterministic rules engine remains the baseline to beat. Post Fiat's claim is that the model-assisted layer should be kept only where it produces more contestable and more useful judgments than a published rule table or informal committee.
+The model layer earns its place only if it improves over a rigid rubric. Its intended role is to synthesize borderline cases where raw metrics are similar but governance meaning differs: operator independence, entity continuity, concentration risk, public accountability, and whether claimed diversity is real or cosmetic. A deterministic rules engine remains the baseline to beat.
 
-This belongs in a distinct Post Fiat network because the validator-list process is part of the network's trust product, not an external analytics feed. A standalone XRPL-side tool can advise a publisher; it cannot make artifact publication, shadow verification, on-chain anchoring, and validator convergence part of the default governance surface of the ledger. The economic thesis is therefore tied to adoption of a ledger whose validator-selection process is visibly more legible than the status quo, not to the mere existence of a scoring script.
+This belongs in a distinct Post Fiat network because validator-list publication is part of the network's trust product, not an external analytics feed. A standalone XRPL-side tool can advise a publisher; it cannot make artifact publication, shadow verification, on-chain anchoring, and validator convergence part of the ledger's default governance surface. The economic thesis is tied to adoption of a ledger with a visibly more legible validator-selection process, not to the mere existence of a scoring script.
 
 What changes for each audience:
 
@@ -84,9 +84,9 @@ Lewis-Pye and Roughgarden's framework for permissionless consensus identifies th
 
 ### 2.3 What remains
 
-Publishing the full pipeline does not eliminate all discretion. The foundation still chooses evidence sources, normalization rules, the scoring prompt, and the model. But those choices are now explicit, versioned artifacts. Changing them requires a visible policy update, not a silent editorial adjustment.
+Publishing the full pipeline reduces discretion; it does not remove it. The foundation still chooses evidence sources, normalization rules, the scoring prompt, and the model. Those choices become explicit, versioned artifacts. Changing them requires a visible policy update, not a silent editorial adjustment.
 
-The strongest objection is that Post Fiat could simply replace one black box with another: private publisher discretion becomes private choices over evidence, prompt, model, and normalization. The answer is procedural, not mystical. Post Fiat does not claim the model is unbiased. It claims that the decision procedure becomes decomposable. Evidence can be challenged, prompts can be diffed, model changes can be rerun, score rationales can be inspected, and selector rules can be compared against alternatives. Bias, error, and capture do not disappear; they become easier to locate.
+The mitigation is decomposition: evidence can be challenged, prompts can be diffed, model changes can be rerun, score rationales can be inspected, and selector rules can be compared against alternatives. Bias, error, and capture remain possible, but they become easier to locate.
 
 ### 2.4 What this paper does and does not claim
 
@@ -100,19 +100,17 @@ This paper claims:
 This paper does **not** claim:
 
 - that model-assisted scoring is already superior to simpler deterministic or committee-based approaches;
-- that the current Phase 0 benchmark is sufficient to justify production authority transfer;
+- that the current benchmark package is sufficient to justify production authority transfer;
 - that decentralization is already achieved in Phase 1 or Phase 2;
 - that adjacent privacy or exclusion features are part of the validator-publication proof.
 
 ### 2.5 Why use model judgment at all?
 
-Validator-list publication already contains qualitative judgment. Publishers implicitly weigh reputation, operational quality, independence, and legitimacy even when the rubric is unpublished. The narrow argument for model assistance is not that a model is magically objective or inherently superior. The argument is that if qualitative judgment is already happening, a published machine-assisted judgment layer can be easier to audit, replay, contest, and compare than a largely opaque editorial process.
+Validator-list publication already contains qualitative judgment: reputation, operational quality, independence, and legitimacy are weighed even when the rubric is unpublished. A published machine-assisted layer is justified only if it makes that judgment easier to audit, replay, contest, and compare.
 
-That claim is intentionally modest. The relevant test is not whether the model looks intelligent in isolation. The relevant test is whether the full pipeline produces reviewable artifacts, stable rankings, and a governance process that is easier to challenge than the status quo.
+Operator independence illustrates the need. Two candidates can look similar on uptime, version freshness, and other raw metrics while differing materially in governance value: one may be a second validator behind an already represented operator, ASN, or hosting cluster, while another may be independently run, publicly accountable, and more valuable for set diversity despite slightly weaker headline numbers. A rigid rubric can count some of these fields, but it still needs a judgment layer to decide whether apparent diversity is real, whether identity evidence is substantive, and whether a borderline inclusion improves or worsens concentration risk. In XRPL-style publication today, those calls are implicit. Post Fiat makes them explicit on a published record.
 
-One concrete class of cases is operator independence. Two candidates can look similar on uptime, version freshness, and other raw metrics while differing materially in governance value: one may be a second validator behind an already represented operator, ASN, or hosting cluster, while another may be independently run, publicly accountable, and more valuable for set diversity despite slightly weaker headline numbers. A rigid rubric can count some of these fields, but it still needs a judgment layer to synthesize whether apparent diversity is real, whether identity evidence is substantive, and whether a borderline inclusion improves or worsens concentration risk. In XRPL-style publication today, those calls are still made implicitly. Post Fiat's claim is that they should be made explicitly on a published record.
-
-The stronger comparison classes should still be concrete. A deterministic baseline would rank the same frozen snapshot using only published rules over agreement history, uptime, version freshness, identity continuity, and concentration caps. A human baseline would ask a small review committee to rank that same snapshot under the same evidence record. If model-assisted scoring cannot at least match those baselines on cutoff stability, contestability, and operational clarity, then the model layer has not earned authority. If a deterministic rules engine later proves equally effective on the same evidence packages, the deterministic path should be preferred.
+The comparison classes must be concrete. A deterministic baseline would rank the same frozen snapshot using only published rules over agreement history, uptime, version freshness, identity continuity, and concentration caps. A human baseline would ask a small review committee to rank that same snapshot under the same evidence record. If model-assisted scoring cannot at least match those baselines on cutoff stability, contestability, and operational clarity, then the model layer has not earned authority. If a deterministic rules engine later proves equally effective on the same evidence packages, the deterministic path should be preferred.
 
 ---
 
@@ -284,25 +282,21 @@ External APIs should not be treated as authoritative for governance-critical rou
 
 ### 6.3 Why deterministic inference works
 
-Thinking Machines Lab identified batch-size variance as a major source of nondeterministic inference and described batch-invariant kernels as a practical fix.[9] SGLang implements that structural fix in production-serving form: deterministic inference mode uses batch-invariant operators and supported attention backends so that the same prompt is not pushed through a different floating-point reduction plan merely because other requests were batched beside it.[10][11]
+Thinking Machines Lab identified batch-size variance as a major source of nondeterministic inference and described batch-invariant kernels as a practical fix.[9] SGLang implements that fix in production-serving form: deterministic inference mode uses batch-invariant operators and supported attention backends so the same prompt is not pushed through a different floating-point reduction plan merely because other requests were batched beside it.[10][11]
 
-The causal chain matters. Standard LLM serving can vary even at temperature zero because dynamic batching changes how GPU kernels split reductions; floating-point addition is not associative, so changing the reduction order can perturb logits enough to change later tokens. SGLang's deterministic mode attacks that root cause by making the relevant kernels batch-invariant. It also supports deterministic operation with chunked prefill and common attention backends, which matters because the validator prompt is large enough that naive all-at-once prefill is not the production shape.[10][11]
-
-Tensor parallelism across multiple GPUs introduces a separate nondeterminism source: cross-GPU reduction operations do not guarantee a fixed summation order, producing different floating-point results across runs. This is why Post Fiat requires single-GPU inference (TP=1). The active scoring profile uses Qwen/Qwen3.6-27B-FP8 on a single H100, avoiding tensor-parallel reduction variance while keeping enough memory headroom for the full scoring prompt.
+Tensor parallelism across multiple GPUs introduces a separate nondeterminism source because cross-GPU reductions do not guarantee a fixed summation order. Post Fiat therefore requires single-GPU inference (TP=1). The active scoring profile uses Qwen/Qwen3.6-27B-FP8 on a single H100, avoiding tensor-parallel reduction variance while keeping enough memory headroom for the full scoring prompt.
 
 Numerical precision remains a real divergence source. Yuan et al. show that limited precision affects reproducibility, particularly for reasoning-style models, and propose mitigations such as LayerCast.[12] This is why the execution manifest is a first-class artifact — a weight hash alone is not enough. Reproducibility depends on the whole stack.
 
-Determinism does not make the model objectively correct. It makes the execution replayable. If the snapshot, prompt, or model policy is wrong, deterministic inference will reproduce the same wrong answer. That is why Post Fiat separates execution determinism from policy legitimacy: deterministic inference proves that a published scoring round can be rerun exactly, while governance decides whether the scoring policy and input record deserve authority.
+Determinism makes execution replayable, not correct. If the snapshot, prompt, or model policy is wrong, deterministic inference will reproduce the same wrong answer. Governance still decides whether the scoring policy and input record deserve authority.
 
 ### 6.4 Empirical validation on XRPL UNL and PFT Ledger
 
-Post Fiat replicated the earlier XRPL UNL validator credibility benchmark using the saved 29-validator XRPL UNL cohort and the same domain-level scoring prompt: "score this validator's credibility on a scale from 0-100 where credibility is defined as useful institutional proof of a blockchain's legitimacy." The new run used Qwen/Qwen3.6-27B-FP8 served through Modal/SGLang deterministic inference, temperature 0, JSON response mode, and non-thinking output mode.[18][19]
+Post Fiat replicated the earlier XRPL UNL validator credibility benchmark using the saved 29-validator XRPL UNL cohort and the same domain-level scoring prompt. Appendix A.2 gives the full table; in short, 2,900 calls produced one unique score-map hash with zero score variance and zero raw-output variance under the pinned Modal/SGLang deterministic profile.[18][19]
 
-The run made 2,900 calls: 29 validator domains, two batches, 50 repeats per batch. All 2,900 calls succeeded; all returned parseable JSON; all 100 complete score maps had the same SHA-256 hash (`9f7f95a7be238e2b6bb1cc081986f8b5dffc07b9397578d723c6f6d7c77c81c8`). There were zero domains with score variance and zero domains with raw-output variance.[19]
+Appendix A.3 reports the 42-validator PFT Ledger replay. Five runs under the same Qwen3.6/SGLang profile produced complete JSON-valid result sets, one score-map hash, zero validator score spread, and a 35/35 top-35 intersection.[16][17]
 
-The same active Qwen3.6/SGLang profile has also been run on the 42-validator PFT Ledger scoring task. Five independent runs on the active `scoring_v2` contract produced 5/5 JSON-valid complete result sets, one extracted-answer hash, one score-map hash, one top-35 hash, zero validators with score spread, and a 35/35 top-35 intersection.[16][17]
-
-These results exceed the rank-stability target. Under a fully pinned execution environment — model weights, quantization, inference engine, container image, GPU class, tensor-parallel setting, memory profile, prompt, decoding parameters, and determinism flags — exact reproducibility is achievable, not merely statistical stability.
+These results exceed the rank-stability target under a fully pinned execution environment: model weights, quantization, inference engine, container image, GPU class, tensor-parallel setting, memory profile, prompt, decoding parameters, and determinism flags. They show exact same-stack replayability, not cross-hardware reproducibility or policy correctness.
 
 ---
 
@@ -396,11 +390,15 @@ where S_i is validator i's scored output, H(S_i) is its content hash, and σ_i i
 
 In Phase 1, the foundation is the sole scorer. Assurance comes from publishing the full pipeline: raw evidence, normalized snapshot, pinned execution manifest, scoring prompt, per-validator scores with rationales, deterministic selector output, and signed validator list. Anyone can inspect why a validator was included or excluded. The IPFS-pinned artifact bundle with an on-chain CID anchor makes equivocation — publishing different artifacts to different parties — detectable.
 
-This is already stronger than the status quo, where recommended list construction is not publicly explained.
+This phase is live on the public testnet. The canonical signed testnet validator list is published at `https://postfiat.org/testnet_vl.json`; the decoded signed blob is sequence `5`, contains `20` validators, and is effective from `2026-05-26T17:50:23Z`. The public scoring configuration reports a `168` hour cadence, score cutoff `40`, max list size `20`, and minimum score gap `5`.
+
+The public rounds API shows repeated operation rather than a one-off demo. Rounds 4, 5, 6, and 7 completed successfully, producing validator-list sequences 2, 3, 4, and 5. Each round has a final audit bundle CID, a GitHub Pages publication commit, and a PFTL memo transaction hash.
+
+That is stronger than the status quo, where recommended list construction is not publicly explained. It proves live Phase 1 publication and audit anchoring; validator-side sidecars, commit-reveal, independent shadow scoring, convergence monitoring, validator-enforced scoring verification, and authority transfer remain later-phase gates.
 
 ### 9.2 Phase 2: Verifying independent execution
 
-When validators independently rerun scoring in Phase 2, a new problem emerges: how do you verify that a validator actually ran the model rather than copying the foundation's published output?
+Phase 2 must distinguish independent execution from copying the foundation's published output.
 
 Post Fiat addresses this through two mechanisms:
 
@@ -411,7 +409,7 @@ A harder problem is hardware heterogeneity. The active profile is pinned to H100
 
 ### 9.3 Future verification paths
 
-Several verification technologies are maturing that could strengthen Phase 2 assurance further. These are not in the current implementation plan but represent a clear strengthening path as the technologies reach production readiness for large models.
+Several maturing verification technologies could strengthen Phase 2 assurance as they become production-ready for large models.
 
 | Approach | What it proves | Status |
 |---|---|---|
@@ -424,13 +422,13 @@ Several verification technologies are maturing that could strengthen Phase 2 ass
 
 Phase 3 should not be justified by a single same-stack benchmark. Before authority transfer, the project should be able to show all of the following:
 
-- repeated replay on many more rounds and snapshots than the current Phase 0 package;
+- repeated replay on many more rounds and snapshots than the current benchmark package;
 - comparison against explicit deterministic and human-review baselines on the same frozen snapshots, with reported top-k overlap, cutoff stability, and disagreement cases;
 - adversarial testing around data curation, identity inflation, and social-gaming attempts;
 - independent reruns by external operators, not only foundation-controlled infrastructure;
 - measured behavior across hardware or runtime variation sufficient to show that rank stability survives realistic decentralized operation.
 
-Until that evidence exists, the strongest interpretation of the current work is: early benchmark success plus a credible audit architecture, not production-readiness proof.
+Until that evidence exists, the current work is early benchmark success plus a credible audit architecture, not production-readiness proof.
 
 ---
 
@@ -440,7 +438,7 @@ Until that evidence exists, the strongest interpretation of the current work is:
 
 The foundation operates the scoring pipeline: collecting evidence from VHS and network crawl endpoints, normalizing it into a canonical snapshot, scoring validators via a self-hosted open-weight model on serverless GPU infrastructure, applying the deterministic selector, signing the validator list, and publishing the full round bundle to IPFS with an on-chain CID anchor.
 
-Operationally centralized, fully auditable.
+The phase remains operationally centralized and auditable.
 
 ### 10.2 Phase 2: Validator-side shadow verification
 
@@ -484,7 +482,7 @@ Every phase has a conservative fallback:
 
 ### 11.1 A workload built for local inference
 
-Validator-list scoring is periodic, structured, and batchable. The active Qwen3.6 `scoring_v2` testnet run processes roughly 7,654 prompt tokens and 4,774 completion tokens in about 88 seconds on the pinned H100 profile. This is not a high-frequency workload — it runs weekly or monthly.
+Validator-list scoring is periodic, structured, and batchable. The current testnet scoring service uses `prompts/scoring_v5.txt` with `Qwen/Qwen3.6-27B-FP8` through Modal/SGLang H100 inference. The earlier Qwen3.6 `scoring_v2` replay processed roughly 7,654 prompt tokens and 4,774 completion tokens in about 88 seconds on the pinned H100 profile; that remains benchmark context, not the current prompt contract. This is not a high-frequency workload — the public configuration currently targets a 168-hour cadence.
 
 Post Fiat's validation runs on serverless GPU infrastructure, so costs accrue during scoring windows rather than continuously. The 2,900-call XRPL UNL determinism replay completed in 217.1 seconds once the endpoint was warm, consumed 468,600 total tokens, and required no closed-model API calls.[19] These costs decline as inference hardware improves.
 
@@ -502,38 +500,23 @@ The foundation allocates resources specifically for Phase 2 shadow verification 
 
 ### 11.4 Why a distinct network
 
-The distinct-network claim is not that a better validator-list paper, by itself, creates economic value. The claim is that validator-list publication is part of the base-layer trust product. If a network's validator set is selected through opaque publisher discretion, sophisticated users inherit a hidden governance dependency. If the same function is performed through published evidence, replayable scoring, signed artifacts, and validator shadow verification, the ledger has a different trust surface.
+Validator-list publication is part of the base-layer trust product. Opaque publisher discretion leaves sophisticated users with a hidden governance dependency; published evidence, replayable scoring, signed artifacts, and validator shadow verification create a different trust surface.
 
 That is difficult to retrofit as a neutral add-on. An XRPL-side tool can recommend a better list, but the tool remains advisory unless the network's own operators, artifacts, and fallback rules treat it as the default publication process. Post Fiat can make the evidence bundle, scorer manifest, selected list, and publication record native to its operating model from the start.
 
-The token thesis follows only if that governance surface affects adoption. PFT is not justified by model scoring in isolation. It is justified, if at all, by settlement inside a network whose validator-selection process is materially more legible, more contestable, and easier for institutions, validators, and builders to audit than the status quo. That adoption case still has to be proven in market, but the infrastructure mechanism is the reason a distinct network can be more than an XRPL publisher plugin.
+The token thesis depends on that governance surface affecting adoption. PFT is not justified by model scoring in isolation; it depends on settlement inside a network whose validator-selection process is materially more legible, more contestable, and easier for institutions, validators, and builders to audit than the status quo.
 
 ---
 
-## 12. Boundaries
+## 12. Conclusion
 
-The claim is comparative, not magical. A published, replayable judgment layer is easier to audit, challenge, and correct than an unpublished rubric or informal committee process.
-
-The boundaries are clear:
-
-- Model scores are qualitative assessments, not mathematical proofs.
-- Convergent outputs do not by themselves imply social independence among validators.
-- Exact reproducibility across arbitrary GPU architectures requires policy constraints on the execution environment.
-- Concentration monitoring is an ongoing operational discipline, not a one-time fix.
-
-These boundaries are reasons to keep the claim surface narrow until more evidence exists.
-
----
-
-## 13. Conclusion
-
-Validator-list publication is a real governance surface. It determines overlap, concentration, and the security envelope in which consensus operates. Widely used recommended lists remain only partially legible to the public.
+Validator-list publication is a real governance surface. It determines overlap, concentration, and the security envelope in which consensus operates. Widely used recommended lists remain only partially legible.
 
 Post Fiat replaces opaque editorial selection with a public, replayable, model-assisted pipeline: collect evidence, normalize it canonically, pin the execution environment, score candidates under a published policy, select the set deterministically, publish the artifacts, and shift authority only after convergence is demonstrated.
 
-Preliminary validation now has two layers. First, the active Qwen3.6/SGLang deployment scored the saved 29-validator XRPL UNL credibility cohort 2,900 times and produced one identical score map with zero score variance and zero raw-output variance.[18][19] Second, the same Qwen3.6/SGLang profile produced zero-variance repeated runs on the 42-validator PFT Ledger scoring task under the active `scoring_v2` contract.[16][17] The important claim is no longer statistical stability alone: under a pinned SGLang deterministic-inference stack, exact replayability is operationally achievable.
+Current evidence supports that narrow claim. Appendix A reports exact replay under the pinned Qwen3.6/SGLang profile on both the saved XRPL UNL credibility cohort and the 42-validator PFT Ledger scoring task.[16][17][18][19] Section 9.1 documents live Phase 1 testnet publication through sequence 5, including completed public rounds 4 through 7 with audit bundle CIDs, publication commits, and PFTL memo transaction hashes. Together, this shows same-stack replayability and a functioning audit-publication loop, not production authority transfer.
 
-That is ambitious enough to justify continued benchmarking, tighter validation, and staged implementation. It is not yet enough to claim that the governance problem is solved.
+The next gates are comparative baselines, adversarial testing, external reruns, and cross-hardware evidence. Until those pass, Post Fiat has an auditable publication architecture, not a solved governance problem.
 
 ---
 
@@ -595,9 +578,9 @@ Representative scores from the replay:
 
 This benchmark is deliberately simple: it tests whether a qualitative validator-credibility prompt can be replayed exactly across repeated calls. Under the pinned SGLang deterministic profile, it can.
 
-### A.3 PFT Ledger `scoring_v2` replay
+### A.3 PFT Ledger scoring replay
 
-The active PFT Ledger scoring task is larger than the domain-only XRPL credibility prompt. It scores all 42 testnet validators with the `scoring_v2` contract, including dimension fields and a network summary.[16][17]
+The PFT Ledger scoring task is larger than the domain-only XRPL credibility prompt. The replay below used the earlier `scoring_v2` contract, including dimension fields and a network summary.[16][17] The current live scoring service has moved to `prompts/scoring_v5.txt`; the replay remains evidence for deterministic execution under the pinned Qwen3.6/SGLang profile, not a claim that `scoring_v2` is the active production prompt.
 
 The Qwen3.6 Modal/SGLang capture showed:
 
