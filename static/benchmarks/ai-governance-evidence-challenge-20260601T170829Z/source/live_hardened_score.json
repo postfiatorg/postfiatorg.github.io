@@ -1,0 +1,2025 @@
+{
+  "packet_set_id": "ai-governance-live-machine-corpus-v1",
+  "packet_set_root": "8566a4a138fdf87013ecb29459aa216ff8f480a1557b9e03d0ba6cc4894e2fbc",
+  "production_acceptance": {
+    "challenge_capture_fraction": "64/72",
+    "deterministic_packet_fraction": "240/240",
+    "diagnostic_ablations_have_no_live_authority": true,
+    "false_positive_live_effect": 0,
+    "parse_ok_fraction": "240/240",
+    "parser_schema_determinism_ok": true,
+    "production_path": "exact selector plus qwen residual router",
+    "route_fraction": "224/240",
+    "schema_valid_fraction": "240/240",
+    "status": "pass",
+    "zero_false_positive_live_effect": true
+  },
+  "production_only": true,
+  "report_root": "f678394d6e2c25f9bb5e9f88a8073ff4e8b95c9867cac7e0db9ef2377184cb34",
+  "results": [
+    {
+      "by_family": {
+        "attestor-conflict": {
+          "challenge_capture": 24,
+          "challenge_capture_fraction": "24/24",
+          "challenge_expected": 24,
+          "count": 40,
+          "false_positive": 0,
+          "matches": 40,
+          "route_accuracy": 1.0,
+          "route_fraction": "40/40"
+        },
+        "omission-evidence": {
+          "challenge_capture": 8,
+          "challenge_capture_fraction": "8/8",
+          "challenge_expected": 8,
+          "count": 40,
+          "false_positive": 0,
+          "matches": 40,
+          "route_accuracy": 1.0,
+          "route_fraction": "40/40"
+        },
+        "privacy-assurance": {
+          "challenge_capture": 16,
+          "challenge_capture_fraction": "16/16",
+          "challenge_expected": 16,
+          "count": 40,
+          "false_positive": 0,
+          "matches": 40,
+          "route_accuracy": 1.0,
+          "route_fraction": "40/40"
+        },
+        "registry-transition": {
+          "challenge_capture": 0,
+          "challenge_capture_fraction": "0/0",
+          "challenge_expected": 0,
+          "count": 40,
+          "false_positive": 0,
+          "matches": 40,
+          "route_accuracy": 1.0,
+          "route_fraction": "40/40"
+        },
+        "replay-profile": {
+          "challenge_capture": 0,
+          "challenge_capture_fraction": "0/8",
+          "challenge_expected": 8,
+          "count": 40,
+          "false_positive": 0,
+          "matches": 32,
+          "route_accuracy": 0.8,
+          "route_fraction": "32/40"
+        },
+        "validator-admission": {
+          "challenge_capture": 16,
+          "challenge_capture_fraction": "16/16",
+          "challenge_expected": 16,
+          "count": 40,
+          "false_positive": 0,
+          "matches": 32,
+          "route_accuracy": 0.8,
+          "route_fraction": "32/40"
+        }
+      },
+      "cases": [
+        {
+          "expected_route": "admit",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-01-01-clean-independent",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-01-02-clean-independent",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-01-03-clean-independent",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-01-04-clean-independent",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-01-05-clean-independent",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-01-06-clean-independent",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-01-07-clean-independent",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-01-08-clean-independent",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "hold",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-02-01-missing-domain",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-02-02-missing-domain",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-02-03-missing-domain",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-02-04-missing-domain",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-02-05-missing-domain",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-02-06-missing-domain",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-02-07-missing-domain",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-02-08-missing-domain",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "validator-admission",
+          "match": false,
+          "packet_id": "val-03-01-shared-release-manager",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "reject",
+          "family": "validator-admission",
+          "match": false,
+          "packet_id": "val-03-02-shared-release-manager",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "reject",
+          "family": "validator-admission",
+          "match": false,
+          "packet_id": "val-03-03-shared-release-manager",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "reject",
+          "family": "validator-admission",
+          "match": false,
+          "packet_id": "val-03-04-shared-release-manager",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "reject",
+          "family": "validator-admission",
+          "match": false,
+          "packet_id": "val-03-05-shared-release-manager",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "reject",
+          "family": "validator-admission",
+          "match": false,
+          "packet_id": "val-03-06-shared-release-manager",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "reject",
+          "family": "validator-admission",
+          "match": false,
+          "packet_id": "val-03-07-shared-release-manager",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "reject",
+          "family": "validator-admission",
+          "match": false,
+          "packet_id": "val-03-08-shared-release-manager",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-04-01-ambiguous-financing",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-04-02-ambiguous-financing",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-04-03-ambiguous-financing",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-04-04-ambiguous-financing",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-04-05-ambiguous-financing",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-04-06-ambiguous-financing",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-04-07-ambiguous-financing",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-04-08-ambiguous-financing",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-05-01-prompt-injection-manifest",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-05-02-prompt-injection-manifest",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-05-03-prompt-injection-manifest",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-05-04-prompt-injection-manifest",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-05-05-prompt-injection-manifest",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-05-06-prompt-injection-manifest",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-05-07-prompt-injection-manifest",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "validator-admission",
+          "match": true,
+          "packet_id": "val-05-08-prompt-injection-manifest",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "admit",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-01-01-clean-profile",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-01-02-clean-profile",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-01-03-clean-profile",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-01-04-clean-profile",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-01-05-clean-profile",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-01-06-clean-profile",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-01-07-clean-profile",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-01-08-clean-profile",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-02-01-driver-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-02-02-driver-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-02-03-driver-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-02-04-driver-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-02-05-driver-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-02-06-driver-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-02-07-driver-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-02-08-driver-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-03-01-kernel-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-03-02-kernel-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-03-03-kernel-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-03-04-kernel-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-03-05-kernel-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-03-06-kernel-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-03-07-kernel-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-03-08-kernel-drift",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "replay-profile",
+          "match": false,
+          "packet_id": "rep-04-01-split-replay-roots",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "replay-profile",
+          "match": false,
+          "packet_id": "rep-04-02-split-replay-roots",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "replay-profile",
+          "match": false,
+          "packet_id": "rep-04-03-split-replay-roots",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "replay-profile",
+          "match": false,
+          "packet_id": "rep-04-04-split-replay-roots",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "replay-profile",
+          "match": false,
+          "packet_id": "rep-04-05-split-replay-roots",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "replay-profile",
+          "match": false,
+          "packet_id": "rep-04-06-split-replay-roots",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "replay-profile",
+          "match": false,
+          "packet_id": "rep-04-07-split-replay-roots",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "replay-profile",
+          "match": false,
+          "packet_id": "rep-04-08-split-replay-roots",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-05-01-stale-machine-report",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-05-02-stale-machine-report",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-05-03-stale-machine-report",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-05-04-stale-machine-report",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-05-05-stale-machine-report",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-05-06-stale-machine-report",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-05-07-stale-machine-report",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "replay-profile",
+          "match": true,
+          "packet_id": "rep-05-08-stale-machine-report",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "admit",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-01-01-clean-attestors",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-01-02-clean-attestors",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-01-03-clean-attestors",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-01-04-clean-attestors",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-01-05-clean-attestors",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-01-06-clean-attestors",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-01-07-clean-attestors",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-01-08-clean-attestors",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-02-01-shared-attestor-sponsor",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-02-02-shared-attestor-sponsor",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-02-03-shared-attestor-sponsor",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-02-04-shared-attestor-sponsor",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-02-05-shared-attestor-sponsor",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-02-06-shared-attestor-sponsor",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-02-07-shared-attestor-sponsor",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-02-08-shared-attestor-sponsor",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-03-01-conflicting-baseline",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-03-02-conflicting-baseline",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-03-03-conflicting-baseline",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-03-04-conflicting-baseline",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-03-05-conflicting-baseline",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-03-06-conflicting-baseline",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-03-07-conflicting-baseline",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-03-08-conflicting-baseline",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-04-01-stale-attestor-root",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-04-02-stale-attestor-root",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-04-03-stale-attestor-root",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-04-04-stale-attestor-root",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-04-05-stale-attestor-root",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-04-06-stale-attestor-root",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-04-07-stale-attestor-root",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-04-08-stale-attestor-root",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-05-01-circular-attestor-control",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-05-02-circular-attestor-control",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-05-03-circular-attestor-control",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-05-04-circular-attestor-control",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-05-05-circular-attestor-control",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-05-06-circular-attestor-control",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-05-07-circular-attestor-control",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "attestor-conflict",
+          "match": true,
+          "packet_id": "att-05-08-circular-attestor-control",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "admit",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-01-01-safe-bounded-delta",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-01-02-safe-bounded-delta",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-01-03-safe-bounded-delta",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-01-04-safe-bounded-delta",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-01-05-safe-bounded-delta",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-01-06-safe-bounded-delta",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-01-07-safe-bounded-delta",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-01-08-safe-bounded-delta",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-02-01-oversized-delta",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-02-02-oversized-delta",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-02-03-oversized-delta",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-02-04-oversized-delta",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-02-05-oversized-delta",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-02-06-oversized-delta",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-02-07-oversized-delta",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-02-08-oversized-delta",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-03-01-incomplete-cover",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-03-02-incomplete-cover",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-03-03-incomplete-cover",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-03-04-incomplete-cover",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-03-05-incomplete-cover",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-03-06-incomplete-cover",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-03-07-incomplete-cover",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-03-08-incomplete-cover",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-04-01-intersection-margin-zero",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-04-02-intersection-margin-zero",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-04-03-intersection-margin-zero",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-04-04-intersection-margin-zero",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-04-05-intersection-margin-zero",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-04-06-intersection-margin-zero",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-04-07-intersection-margin-zero",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-04-08-intersection-margin-zero",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "no-op",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-05-01-unresolved-challenge",
+          "predicted_route": "no-op",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "no-op",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-05-02-unresolved-challenge",
+          "predicted_route": "no-op",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "no-op",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-05-03-unresolved-challenge",
+          "predicted_route": "no-op",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "no-op",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-05-04-unresolved-challenge",
+          "predicted_route": "no-op",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "no-op",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-05-05-unresolved-challenge",
+          "predicted_route": "no-op",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "no-op",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-05-06-unresolved-challenge",
+          "predicted_route": "no-op",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "no-op",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-05-07-unresolved-challenge",
+          "predicted_route": "no-op",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "no-op",
+          "family": "registry-transition",
+          "match": true,
+          "packet_id": "reg-05-08-unresolved-challenge",
+          "predicted_route": "no-op",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "admit",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-01-01-no-omission",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-01-02-no-omission",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-01-03-no-omission",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-01-04-no-omission",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-01-05-no-omission",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-01-06-no-omission",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-01-07-no-omission",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-01-08-no-omission",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-02-01-single-window-receipts",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-02-02-single-window-receipts",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-02-03-single-window-receipts",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-02-04-single-window-receipts",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-02-05-single-window-receipts",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-02-06-single-window-receipts",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-02-07-single-window-receipts",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-02-08-single-window-receipts",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-03-01-multi-window-threshold",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-03-02-multi-window-threshold",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-03-03-multi-window-threshold",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-03-04-multi-window-threshold",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-03-05-multi-window-threshold",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-03-06-multi-window-threshold",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-03-07-multi-window-threshold",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-03-08-multi-window-threshold",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-04-01-fabricated-minority",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-04-02-fabricated-minority",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-04-03-fabricated-minority",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-04-04-fabricated-minority",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-04-05-fabricated-minority",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-04-06-fabricated-minority",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-04-07-fabricated-minority",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-04-08-fabricated-minority",
+          "predicted_route": "hold",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-05-01-stale-omission-evidence",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-05-02-stale-omission-evidence",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-05-03-stale-omission-evidence",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-05-04-stale-omission-evidence",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-05-05-stale-omission-evidence",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-05-06-stale-omission-evidence",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-05-07-stale-omission-evidence",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "omission-evidence",
+          "match": true,
+          "packet_id": "omi-05-08-stale-omission-evidence",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "admit",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-01-01-clean-assurance",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-01-02-clean-assurance",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-01-03-clean-assurance",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-01-04-clean-assurance",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-01-05-clean-assurance",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-01-06-clean-assurance",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-01-07-clean-assurance",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "admit",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-01-08-clean-assurance",
+          "predicted_route": "admit",
+          "source": "exact-selector-admit"
+        },
+        {
+          "expected_route": "hold",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-02-01-missing-proof",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-02-02-missing-proof",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-02-03-missing-proof",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-02-04-missing-proof",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-02-05-missing-proof",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-02-06-missing-proof",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-02-07-missing-proof",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-02-08-missing-proof",
+          "predicted_route": "hold",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-03-01-wrong-predicate-root",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-03-02-wrong-predicate-root",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-03-03-wrong-predicate-root",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-03-04-wrong-predicate-root",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-03-05-wrong-predicate-root",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-03-06-wrong-predicate-root",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-03-07-wrong-predicate-root",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "reject",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-03-08-wrong-predicate-root",
+          "predicted_route": "reject",
+          "source": "exact-selector-dominates"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-04-01-anonymity-floor-breach",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-04-02-anonymity-floor-breach",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-04-03-anonymity-floor-breach",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-04-04-anonymity-floor-breach",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-04-05-anonymity-floor-breach",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-04-06-anonymity-floor-breach",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-04-07-anonymity-floor-breach",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-04-08-anonymity-floor-breach",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-05-01-rpc-metadata-leak",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-05-02-rpc-metadata-leak",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-05-03-rpc-metadata-leak",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-05-04-rpc-metadata-leak",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-05-05-rpc-metadata-leak",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-05-06-rpc-metadata-leak",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-05-07-rpc-metadata-leak",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        },
+        {
+          "expected_route": "hold-for-challenge",
+          "family": "privacy-assurance",
+          "match": true,
+          "packet_id": "pri-05-08-rpc-metadata-leak",
+          "predicted_route": "hold-for-challenge",
+          "source": "qwen-residual-downgrade"
+        }
+      ],
+      "challenge_capture": 64,
+      "challenge_capture_fraction": "64/72",
+      "challenge_expected": 72,
+      "deterministic_packet_count": 240,
+      "deterministic_packet_fraction": "240/240",
+      "deterministic_packet_total": 240,
+      "false_positive_live_effect": 0,
+      "model_row_count": 240,
+      "name": "exact selector plus qwen residual router",
+      "packet_count": 240,
+      "parse_ok_count": 240,
+      "parse_ok_fraction": "240/240",
+      "route_accuracy": 0.9333333333333333,
+      "route_fraction": "224/240",
+      "schema_valid_count": 240,
+      "schema_valid_fraction": "240/240"
+    }
+  ],
+  "run_id": "20260530T134707Z",
+  "schema": "postfiat.ai_governance_live_benchmark.score_report.v1"
+}
