@@ -1,0 +1,242 @@
+{
+  "all_model_score_objects_identical_across_runs": true,
+  "baseline_only_selected_count": 5,
+  "claim_boundary": "Comparator audit only. No ground-truth labels are invented and no accuracy claim is made.",
+  "cutoff": 40,
+  "deterministic_baseline_boundary": "The deterministic baseline is an operator-authored heuristic comparator derived from the scoring_v2 dimensions. The prompt explicitly leaves the overall score to model judgment, so these numeric weights are disclosed comparison rules, not protocol truth or hidden labels.",
+  "deterministic_baseline_weights": {
+    "consensus": 0.42,
+    "diversity": 0.13,
+    "identity": 0.1,
+    "reliability": 0.2,
+    "software": 0.15
+  },
+  "generated_at": "2026-06-01T15:51:58.720110+00:00",
+  "largest_score_deltas": [
+    {
+      "baseline_score": 37,
+      "delta": -32,
+      "domain": "",
+      "master_key": "nHBPbEgW1GFg93ijPqZDF7sh8vkQT7NwBzrEVTh7m8BRHcDEP8i5",
+      "model_reasoning": "Validator is effectively offline or failing consensus (0% agreement in recent windows). Severe penalty applied.",
+      "model_score": 5,
+      "validator_id": "v006"
+    },
+    {
+      "baseline_score": 37,
+      "delta": -32,
+      "domain": "",
+      "master_key": "nHBmsxgMirNQxdtDRWobruct8FuMYc1wEXTRukSrCNg1KEdE4TmE",
+      "model_reasoning": "Validator is effectively offline or failing consensus (0% agreement in recent windows). Severe penalty applied.",
+      "model_score": 5,
+      "validator_id": "v010"
+    },
+    {
+      "baseline_score": 62,
+      "delta": 13,
+      "domain": "",
+      "master_key": "nHUTrfCrgXE2g6EH62ZaVxuSncfPFJ1xb3hjstpb1ZZZjzSL2JtJ",
+      "model_reasoning": "Consensus is acceptable (99.3% 30d) but 24h score is lower (97.7%). No domain or identity. Diversity penalized due to missing geolocation data.",
+      "model_score": 75,
+      "validator_id": "v025"
+    },
+    {
+      "baseline_score": 71,
+      "delta": 12,
+      "domain": "",
+      "master_key": "nHBveTxA1NaBj5AayRAU91f6YopuFWt9rmxfGaEh77a32Q6ZzzHc",
+      "model_reasoning": "Excellent consensus (99.8% 30d). No domain or identity. Diversity penalized due to missing geolocation data.",
+      "model_score": 83,
+      "validator_id": "v012"
+    },
+    {
+      "baseline_score": 71,
+      "delta": 12,
+      "domain": "",
+      "master_key": "nHUEYz4TtTv7yebjhY3aDib5KYPHnKjnY5mPYK5y4QuKdocwS5tD",
+      "model_reasoning": "Excellent consensus (99.8% 30d). No domain or identity. Diversity penalized due to missing geolocation data.",
+      "model_score": 83,
+      "validator_id": "v022"
+    },
+    {
+      "baseline_score": 71,
+      "delta": 12,
+      "domain": "",
+      "master_key": "nHUN5n2S3nQ8bzKm7bqeFMiQeDijh1LMgEocyNyQbb4mREazVdZ5",
+      "model_reasoning": "Excellent consensus (99.8% 30d). No domain or identity. Diversity penalized due to missing geolocation data.",
+      "model_score": 83,
+      "validator_id": "v023"
+    },
+    {
+      "baseline_score": 71,
+      "delta": 11,
+      "domain": "",
+      "master_key": "nHBPPh2sRYnJVRLud9mTp4292VNiFWYRkGTaE4AsqVUFLxZxMtxN",
+      "model_reasoning": "Strong consensus (99.6% 30d). No domain or identity verification. Diversity penalized due to missing geolocation data.",
+      "model_score": 82,
+      "validator_id": "v005"
+    },
+    {
+      "baseline_score": 71,
+      "delta": 11,
+      "domain": "",
+      "master_key": "nHBcLEB4S6moQGrhMjJo1jbp58WL5psHY9EMDWNAtdqykUYiA1rF",
+      "model_reasoning": "Excellent consensus (99.7% 30d). No domain or identity. Diversity penalized due to missing geolocation data.",
+      "model_score": 82,
+      "validator_id": "v008"
+    },
+    {
+      "baseline_score": 71,
+      "delta": 11,
+      "domain": "",
+      "master_key": "nHDUqGoM7KR1pgbdYBRgKpGKdFLhpnMzVbECs8RE73RGZm3Va6MJ",
+      "model_reasoning": "Excellent consensus (99.8% 30d). No domain or identity. Diversity penalized due to missing geolocation data.",
+      "model_score": 82,
+      "validator_id": "v017"
+    },
+    {
+      "baseline_score": 71,
+      "delta": 11,
+      "domain": "",
+      "master_key": "nHUVxTi8XfXjaaJppw7mLSrYDRpkDpf8H9ypzgVKxfSXShcWwAoK",
+      "model_reasoning": "Good consensus (99.6% 30d). No domain or identity. Diversity penalized due to missing geolocation data.",
+      "model_score": 82,
+      "validator_id": "v029"
+    }
+  ],
+  "max_absolute_score_delta": 32.0,
+  "max_size": 20,
+  "mean_absolute_score_delta": 9.48,
+  "model_only_selected_count": 5,
+  "model_run_count": 5,
+  "pearson_score_correlation": 0.9362,
+  "selection_disagreements": [
+    {
+      "baseline_rank": 8,
+      "baseline_score": 75,
+      "domain": "pft.g.money",
+      "master_key": "nHBcnQZ9a9UjZ7hbj9zWVXZ9kTcqheUkui32YdBTpQeAsE6BxWNG",
+      "model_rank": 23,
+      "model_reasoning": "Good consensus (99.4% 30d). Domain unverified. Diversity penalized due to missing geolocation data.",
+      "model_score": 81,
+      "selected_by_baseline": true,
+      "selected_by_model": false,
+      "validator_id": "v009"
+    },
+    {
+      "baseline_rank": 22,
+      "baseline_score": 71,
+      "domain": "",
+      "master_key": "nHBveTxA1NaBj5AayRAU91f6YopuFWt9rmxfGaEh77a32Q6ZzzHc",
+      "model_rank": 7,
+      "model_reasoning": "Excellent consensus (99.8% 30d). No domain or identity. Diversity penalized due to missing geolocation data.",
+      "model_score": 83,
+      "selected_by_baseline": false,
+      "selected_by_model": true,
+      "validator_id": "v012"
+    },
+    {
+      "baseline_rank": 6,
+      "baseline_score": 78,
+      "domain": "pft.xbtseal.com",
+      "master_key": "nHDHCvsJi8UwHMAbkinuJhPYsG5ZR9rtmGAjJZwo8uibf8N1tz3e",
+      "model_rank": 27,
+      "model_reasoning": "Good consensus (99.4% 30d). Verified domain adds trust. Diversity penalized due to missing geolocation data.",
+      "model_score": 81,
+      "selected_by_baseline": true,
+      "selected_by_model": false,
+      "validator_id": "v015"
+    },
+    {
+      "baseline_rank": 25,
+      "baseline_score": 71,
+      "domain": "",
+      "master_key": "nHDUqGoM7KR1pgbdYBRgKpGKdFLhpnMzVbECs8RE73RGZm3Va6MJ",
+      "model_rank": 17,
+      "model_reasoning": "Excellent consensus (99.8% 30d). No domain or identity. Diversity penalized due to missing geolocation data.",
+      "model_score": 82,
+      "selected_by_baseline": false,
+      "selected_by_model": true,
+      "validator_id": "v017"
+    },
+    {
+      "baseline_rank": 26,
+      "baseline_score": 71,
+      "domain": "",
+      "master_key": "nHUEYz4TtTv7yebjhY3aDib5KYPHnKjnY5mPYK5y4QuKdocwS5tD",
+      "model_rank": 10,
+      "model_reasoning": "Excellent consensus (99.8% 30d). No domain or identity. Diversity penalized due to missing geolocation data.",
+      "model_score": 83,
+      "selected_by_baseline": false,
+      "selected_by_model": true,
+      "validator_id": "v022"
+    },
+    {
+      "baseline_rank": 27,
+      "baseline_score": 71,
+      "domain": "",
+      "master_key": "nHUN5n2S3nQ8bzKm7bqeFMiQeDijh1LMgEocyNyQbb4mREazVdZ5",
+      "model_rank": 11,
+      "model_reasoning": "Excellent consensus (99.8% 30d). No domain or identity. Diversity penalized due to missing geolocation data.",
+      "model_score": 83,
+      "selected_by_baseline": false,
+      "selected_by_model": true,
+      "validator_id": "v023"
+    },
+    {
+      "baseline_rank": 10,
+      "baseline_score": 75,
+      "domain": "pft.akirax.xyz",
+      "master_key": "nHUUXMXfPEdnKAT8u2AB89LxTWT1tWsTecDPQURoMw2XJ2WP85MK",
+      "model_rank": 28,
+      "model_reasoning": "Good consensus (99.4% 30d). Domain unverified. Diversity penalized due to missing geolocation data.",
+      "model_score": 81,
+      "selected_by_baseline": true,
+      "selected_by_model": false,
+      "validator_id": "v026"
+    },
+    {
+      "baseline_rank": 18,
+      "baseline_score": 74,
+      "domain": "postfiat.nlh.xyz",
+      "master_key": "nHUVtfC7ciU6ZdgN6hqhTMZGa6VPg5bketAtRhjA9qVo1n9HZRYk",
+      "model_rank": 29,
+      "model_reasoning": "Good consensus (99.2% 30d). Verified domain adds trust. Diversity penalized due to missing geolocation data.",
+      "model_score": 81,
+      "selected_by_baseline": true,
+      "selected_by_model": false,
+      "validator_id": "v028"
+    },
+    {
+      "baseline_rank": 28,
+      "baseline_score": 71,
+      "domain": "",
+      "master_key": "nHUVxTi8XfXjaaJppw7mLSrYDRpkDpf8H9ypzgVKxfSXShcWwAoK",
+      "model_rank": 19,
+      "model_reasoning": "Good consensus (99.6% 30d). No domain or identity. Diversity penalized due to missing geolocation data.",
+      "model_score": 82,
+      "selected_by_baseline": false,
+      "selected_by_model": true,
+      "validator_id": "v029"
+    },
+    {
+      "baseline_rank": 13,
+      "baseline_score": 75,
+      "domain": "pfthaploid.com",
+      "master_key": "nHUif4sukXu9pJGyyBaeVMwmE8L1fJ5KJj4X4ksgTKhgjG6k96s2",
+      "model_rank": 22,
+      "model_reasoning": "Good consensus (99.6% 30d). Domain unverified. Diversity penalized due to missing geolocation data.",
+      "model_score": 82,
+      "selected_by_baseline": true,
+      "selected_by_model": false,
+      "validator_id": "v037"
+    }
+  ],
+  "source_model_run_dir": "/home/postfiat/repos/dynamic-unl-scoring/phase0/results/modal/qwen36-27b-fp8/2026-04-30_qwen36-27b-fp8_scoring-v2",
+  "source_prompt": "/home/postfiat/repos/dynamic-unl-scoring/prompts/scoring_v2.txt",
+  "source_snapshot": "/home/postfiat/repos/dynamic-unl-scoring/data/testnet_snapshot.json",
+  "spearman_rank_correlation": 0.8002,
+  "top_k_jaccard": 0.6,
+  "top_k_overlap": 15,
+  "validator_count": 42
+}
