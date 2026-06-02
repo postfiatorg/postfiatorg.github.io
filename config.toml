@@ -71,6 +71,11 @@ disableXML = true
   ShowToc = true
   # comments = false
   images = ["papermod-cover.png"]
+  [markup.goldmark.extensions.passthrough]
+    enable = true
+    [markup.goldmark.extensions.passthrough.delimiters]
+      block = [['\[', '\]'], ['$$', '$$']]
+      inline = [['\(', '\)']]
   [markup.goldmark.renderer]
     unsafe = true
 

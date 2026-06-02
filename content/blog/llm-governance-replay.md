@@ -2,6 +2,9 @@
 title: "LLM Governance Replay"
 date: 2026-06-01T00:00:00Z
 summary: "A replay experiment on XRPL amendment history: public, reproducible governance triage without pretending a model governs the chain."
+aliases:
+  - /llm-governance-replay/
+  - /posts/llm-governance-replay/
 categories:
   - PostFiat Research
 tags:
@@ -162,10 +165,8 @@ X \sim \mathrm{Bin}(41,d).
 The unsafe amendment slips through when eight or fewer validators catch it:
 
 \[
-P_{\text{miss}}^{\text{replay}}
-=
-P(X\le 8)
-=
+P_{\text{miss}}^{\text{replay}} =
+P(X\le 8) =
 \sum_{k=0}^{8}\binom{41}{k}d^k(1-d)^{41-k}.
 \]
 
