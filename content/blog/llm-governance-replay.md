@@ -328,15 +328,16 @@ crossed it with public reasons.
 ## 6. Vast H200 Qwen/SGLang Replay
 
 The replay target is an open-weight Qwen profile served through SGLang with
-deterministic inference enabled. For this post, the run was executed on a Vast
-H200 NVL instance and the machine receipt is included in the packet:
+deterministic inference enabled. For this post, the lifecycle runs were executed
+on a Vast H200 instance, with sanitized machine receipts included in the public
+artifacts:
 
-[machine receipt](/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z/vast_lifecycle/machine_receipt.json)
+[selected receipt](/benchmarks/xrpl-amendment-lifecycle-replay-20260602T142703Z/vast_lifecycle/machine_receipt.json) | [held-out receipt](/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/vast_lifecycle/machine_receipt.json)
 
 | Field | Value |
 |---|---|
-| Provider run | `vast-39002186` |
-| GPU profile | H200 NVL, 143771 MiB VRAM |
+| Provider run | Vast contract `39137704`, public endpoint redacted |
+| GPU profile | H200, 143771 MiB VRAM |
 | Model | `Qwen/Qwen3.6-27B-FP8` |
 | Runtime | SGLang OpenAI-compatible server |
 | SGLang image | `lmsysorg/sglang:nightly-dev-cu13-20260523-c112f762` |
@@ -344,17 +345,18 @@ H200 NVL instance and the machine receipt is included in the packet:
 | Max running requests | `1` |
 | Thinking mode | disabled via chat template kwargs |
 
-The public packet contains:
+The public evidence artifacts use source-backed XRPL amendment lifecycle
+examples rather than a hand-sized demo corpus. The current lifecycle packet has
+119 examples: 72 in the selected evidence set and 47 held out. Those examples
+are expanded into lane-specific packets because terminal vote outcome, dated
+vote state, source default vote, and conservative triage are different claims.
 
-- 13 amendment packets;
-- three Qwen/SGLang runs per packet;
-- 41 simulated commit/reveal validators per run.
-
-That produces 39 model outputs and 1,599 validator commit/reveal records, all
-bound to the same model profile hash:
+The selected and held-out lifecycle artifacts together contain 458 lane packets
+and 644 Qwen/SGLang outputs. Their model profile hashes are:
 
 ```text
-a5b80f51a9cd02d11db357a115f0f22374319b8709787cc4a5b83694eef73c8f
+selected: 43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755
+held-out: ee303628f0a8b5cbc26df62a0b154d893c7cc19807f0ae611b0961c8e6bb2b7a
 ```
 
 The model profile hash includes the machine receipt hash, launch profile, packet
@@ -373,41 +375,37 @@ SGLang documents deterministic inference support and the
 `--enable-deterministic-inference` flag. The claim is therefore that the
 governance artifact is replay-addressed.
 
-## 7. Corpus Selection: 13 Controversial XRPL Amendments
+## 7. Lifecycle Corpus
 
-The selection rule assigns points for public vote reversal, known bugs,
-follow-up fixes, asset-control or compliance semantics, new financial primitives,
-obsolete/disabled status, public debate, security/liveness implications, and
-user-fund/accounting risk.
+The claim-bearing corpus is the XRPL amendment lifecycle corpus:
 
-The resulting packet is here:
+[expanded lifecycle replay](/benchmarks/xrpl-amendment-lifecycle-replay-20260602T142703Z/)
 
-[benchmark packet](/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z/)
+It starts from a 114-amendment universe snapshot and builds 119 source-backed
+lifecycle examples. The split is deliberately explicit:
 
-The corpus stress-tests the replay route on governance-sensitive packets:
-AMM-related fixes and reversals, obsolete bug-disabled amendments, issuer control
-semantics, permissioned market access, vaults, lending, escrow, and new
-token/accounting surfaces.
+| Split | Lifecycle examples | Purpose |
+|---|---:|---|
+| selected evidence set | 72 | build the public evidence packet and claim gate |
+| held-out set | 47 | test whether the claim survives cases not selected into the evidence set |
 
-| amendment_or_event | why it is governance-sensitive | historical_route | deterministic_route | qwen_replay_route | replay_default_vote |
-|---|---|---:|---:|---:|---:|
-| AMM post-launch pool discrepancy | known bug; follow-up fix; user-fund/accounting risk | `DELAY_FOR_FIX` | `DELAY_FOR_FIX` | `DELAY_FOR_FIX` | `NO` |
-| AMM / XLS-30 activation vote reversal | public vote reversal; known bug; user-fund/accounting risk | `DELAY_FOR_FIX` | `DELAY_FOR_FIX` | `DELAY_FOR_FIX` | `NO` |
-| AMMClawback | asset-control semantics inside AMM pools | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD` |
-| Batch | obsolete after bug discovery | `REJECT` | `REJECT` | `REJECT` | `NO` |
-| Clawback | issuer asset-control primitive | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD` |
-| fixAMMOverflowOffer | narrow AMM fix after known issue | `PROCEED` | `PROCEED` | `PROCEED` | `YES` |
-| LendingProtocol | new financial primitive; off-chain underwriting surface | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD` |
-| MPTokensV1 | new token accounting surface | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD` |
-| PermissionDelegation | obsolete after bug discovery; delegated authority | `REJECT` | `REJECT` | `REJECT` | `NO` |
-| PermissionedDEX | compliance-gated market access | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD` |
-| PermissionedDomains | compliance infrastructure for permissioned finance | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD` |
-| SingleAssetVault | pooled custody/accounting primitive | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD` |
-| TokenEscrow | issued-asset custody/timing primitive | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD_FOR_CHALLENGE` | `HOLD` |
+Each lifecycle example is converted into whichever lane packets are meaningful
+for that example. An enabled amendment can support both a terminal outcome
+question and a dated state question. A still-open or ambiguous item may support a
+state or triage question without supporting a terminal historical outcome claim.
+This is why the article reports lane counts rather than pretending every example
+has the same label type.
+
+The important separation is:
+
+- `vote_outcome`: XRP-native historical yes/no outcome;
+- `vote_state`: dated amendment state;
+- `triage`: conservative operator-routing policy;
+- `default_vote`: source/default diagnostic, not validator-history replay.
 
 ## 8. Scoring The Replay
 
-The replay is scored as a governance triage system rather than as an oracle.
+The replay is scored lane by lane rather than as a single oracle score.
 
 For each packet \(i\), define:
 
@@ -419,11 +417,10 @@ where:
 
 - \(s_i=1\) if the output is schema-valid;
 - \(h_i=1\) if repeated runs converge to the same output hash for the packet;
-- \(r_i\) is the parsed replay route;
-- \(D_i\) is route deviation from the research label;
-- \(u_i=1\) if the replay recommends `PROCEED` where the packet's hard-stop
-  evidence or research label calls for `HOLD_FOR_CHALLENGE`, `DELAY_FOR_FIX`, or
-  `REJECT`.
+- \(r_i\) is the parsed replay label for the lane;
+- \(D_i\) is label deviation from the lane label;
+- \(u_i=1\) only in the triage lane, when the replay recommends `PROCEED` where
+  the packet's hard-stop evidence or research label calls for a blocking route.
 
 The unsafe-proceed metric is intentionally asymmetric:
 
@@ -463,64 +460,23 @@ means it was less conservative.
 
 ## 9. Results: Conservative, Reproducible, And Bounded
 
-The H200/SGLang result is conservative:
+The result is narrower and stronger than "the model governed correctly":
 
-- 13 packets;
-- 39 Qwen outputs;
-- 100% schema-valid output rate;
-- 13/13 exact output-hash convergence across the three runs for each packet;
-- 13/13 parsed-route convergence;
-- 13/13 historical route alignment under the research labels;
-- 0 unsafe proceed recommendations;
-- 0 Qwen-vs-rule route disagreements.
+> Under this packet construction, the replay profile produced schema-valid
+> lane-specific outputs, matched dated state across the selected and held-out
+> historical state lanes, and mostly matched terminal historical outcomes with
+> legible conservative false negatives.
 
-Under the metric definitions above:
-
-\[
-\bar{s}=39/39=1.00
-\]
-
-\[
-\bar{h}=13/13=1.00
-\]
-
-\[
-R_U=0/13=0
-\]
-
-\[
-\frac{1}{13}\sum_i |D_i|=0.
-\]
-
-So the result is narrower and stronger than "the model governed correctly":
-
-> Under this packet construction and these research labels, the replay profile
-> produced schema-valid, hash-convergent, route-convergent conservative triage
-> with no observed unsafe proceed recommendations.
-
-That last number matters, but it should be read with statistical humility. A
-zero count in a small sample is evidence short of proof of a zero underlying
-rate.
-
-Using the rule-of-three heuristic, zero unsafe-proceed events in 13 unique packet
-scenarios gives an approximate 95% upper bound of:
-
-\[
-3/13\approx 23.1\%.
-\]
-
-The exact one-sided binomial upper bound is about 20.6%. If one instead counts
-the 39 repeated model outputs as separate output-level trials, the rule-of-three
-bound is \(3/39\approx 7.7\%\), but those outputs share packet-level clustering
-because repeated runs per packet were intentionally convergent.
+The repeated-run evidence is used as a determinism check, not as a way to inflate
+the sample size. Repeated outputs on the same packet share packet-level
+clustering because the run is intentionally convergent.
 
 This is why broader testing matters. To push a zero-failure 95% upper bound
-below 1%, the relevant unit needs roughly 300 clean independent trials.
+below 1%, the relevant unit needs roughly 300 clean independent examples.
 
 ## 10. Expanded Lifecycle Replay
 
-After the seed run, we expanded the packet into a lane-separated XRPL amendment
-lifecycle replay:
+The claim-bearing packet is a lane-separated XRPL amendment lifecycle replay:
 
 [expanded lifecycle replay](/benchmarks/xrpl-amendment-lifecycle-replay-20260602T142703Z/)
 
@@ -592,8 +548,8 @@ held-out cases.
 
 ## 11. Why Use Qwen If The Rule Engine Tied It?
 
-In the original 13-packet route run, Qwen tied the deterministic rule engine on
-route choice.
+When the route is already obvious, Qwen should tie the deterministic rule engine
+on route choice.
 
 That is the design.
 
@@ -675,19 +631,18 @@ The cost model is deliberately plain:
 
 - 41 validators;
 - two hours of review per validator for a full private-committee style pass;
-- $250/hour fully loaded professional time;
-- 13 governance events.
+- $250/hour fully loaded professional time.
 
 That yields:
 
 \[
-41\cdot 2\cdot 13=1066
+41\cdot 2=82
 \]
 
-validator-hours, or:
+validator-hours per governance item, or:
 
 \[
-1066\cdot 250=\$266{,}500.
+82\cdot 250=\$20{,}500.
 \]
 
 The benchmark replay-default model is cheaper because it asks fewer people to do
@@ -698,16 +653,16 @@ deep work by default:
 - three deep reviewers per event;
 - public override when an operator disagrees.
 
-| Process | Hours | Cost |
+| Process | Hours per item | Cost per item |
 |---|---:|---:|
-| Standing committee review | 1,066.00 | $266,500.00 |
-| Deterministic alert review | 399.75 | $99,937.50 |
-| Qwen replay-default triage | 75.83 | $18,958.33 |
+| Standing committee review | 82.00 | $20,500.00 |
+| Deterministic alert review | 30.75 | $7,687.50 |
+| Qwen replay-default triage | 5.83 | $1,458.33 |
 
 Under the declared model, replay-default triage reduces attention by:
 
 \[
-1-\frac{75.83}{1066}=92.89\%.
+1-\frac{5.83}{82}=92.89\%.
 \]
 
 Those are cost-model numbers, short of proof of safety. Change validator count,
@@ -717,9 +672,9 @@ should update.
 The exact 92.89% figure is the base case. The claim is directional. If ordinary
 review would only take 45 minutes per validator, and replay overhead rises to a
 10-minute skim plus five deep reviewers and a 20-minute packet check, replay
-still uses 158.17 hours versus 399.75 hours, a 60.44% reduction. If ordinary
-review takes three hours per validator under the same replay overhead, the
-reduction is 90.11%.
+still uses materially fewer public validator-hours. If ordinary review takes
+three hours per validator under the same replay overhead, the reduction is
+larger.
 
 The point is the direction of the trade: less private coordination, less unpaid
 expert labor, and a public override trail when validators disagree.
@@ -835,44 +790,6 @@ to avoid that trade.
 
 ## 13. Reproduction Scripts
 
-The packet can be rebuilt and checked with:
-
-```bash
-python3 scripts/build_xrpl_amendment_replay_corpus.py \
-  --output static/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z
-
-python3 scripts/run_qwen_amendment_replay.py \
-  --corpus static/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z/amendment_packets \
-  --endpoint <OPENAI_COMPATIBLE_SGLANG_ENDPOINT> \
-  --model Qwen/Qwen3.6-27B-FP8 \
-  --machine-receipt static/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z/vast_lifecycle/machine_receipt.json \
-  --runs 3 \
-  --validators 41
-
-python3 scripts/summarize_xrpl_amendment_replay.py \
-  --packet static/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z
-
-cd static/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z
-sha256sum -c SHA256SUMS.txt
-```
-
-The actual post run used a local SSH tunnel into the Vast container:
-
-```bash
-ssh -N \
-  -L 18000:127.0.0.1:8000 \
-  -p <vast_ssh_port> root@<vast_ssh_host>
-```
-
-The packet records the sanitized Vast machine receipt, served model response,
-and SGLang log tail under `vast_lifecycle/`.
-
-Packet root:
-
-```text
-b809a6b2b35d5dfccd8fbc3b5880ad14f8707886f88f84e11efe4e574b74f894
-```
-
 The expanded lifecycle packet can be rebuilt and checked with:
 
 ```bash
@@ -949,13 +866,10 @@ public trail of whether they followed or overrode the default. The process
 directly attacks two costs that ordinary governance hand-waves away: attention
 cost and private coordination cost.
 
-It also shows that positive model authority is unnecessary. In the seed triage
-replay, the useful outputs were conservative routes: delay for known-bug AMM
-packets, reject obsolete bug-disabled packets, hold governance-sensitive
-financial primitives for challenge, and proceed on a narrow AMM fix. In the
-held-out lifecycle replay, the strongest result was historical: exact dated-state
-replay and high terminal-outcome alignment, with conservative objections where
-the model disagreed.
+It also shows that positive model authority is unnecessary. The strongest
+held-out lifecycle result was historical: exact dated-state replay and high
+terminal-outcome alignment, with conservative objections where the model
+disagreed.
 
 The strongest claim is institutional rather than magical:
 
@@ -965,16 +879,14 @@ The strongest claim is institutional rather than magical:
 ## 15. Boundaries
 
 These results establish operational coherence rather than model superiority over
-the rule engine. Qwen tied route choice in the original 13-packet run. In the
-expanded lifecycle run, the rule engine remained the safety floor, while the
-claim gate separated historical vote/outcome replay, dated state replay, and
-triage-policy experiments.
+the rule engine. In the expanded lifecycle run, the rule engine remained the
+safety floor, while the claim gate separated historical vote/outcome replay,
+dated state replay, and triage-policy experiments.
 
-The 13 seed labels and the expanded triage labels remain research labels for
-these events. The held-out triage result shows that this policy lane is not yet
-ready to carry the main claim. The historical outcome and state lanes are
-source-backed replay labels, but they are still only as good as the cited packet
-construction.
+The expanded triage labels remain research labels for these events. The held-out
+triage result shows that this policy lane is not yet ready to carry the main
+claim. The historical outcome and state lanes are source-backed replay labels,
+but they are still only as good as the cited packet construction.
 
 Future `PROCEED` outputs still require normal validator review.
 
