@@ -1,0 +1,77 @@
+{
+  "amendment_id": "8CC0774A3BF66D1D22E76BBDA8E8A232E6B6313834301B3B23E8601196AE6455",
+  "amendment_name": "AMM post-launch pool discrepancy",
+  "controversy_score": 12,
+  "controversy_signals": [
+    "known_bug",
+    "follow_up_fix",
+    "user_fund_or_accounting_risk"
+  ],
+  "event_type": "fix",
+  "event_window": {
+    "end": "2024-03-26",
+    "start": "2024-03-22"
+  },
+  "historical_facts": [
+    {
+      "claim": "AMM went live on 2024-03-22.",
+      "fact_id": "F1",
+      "quote_or_summary": "The official AMM status update states the amendment went live on 2024-03-22.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_amm_status_update_2024"
+    },
+    {
+      "claim": "A pool discrepancy indicated some transactions were not executing as intended.",
+      "fact_id": "F2",
+      "quote_or_summary": "The official status update says a community member identified discrepancies in a few AMM pools.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_amm_status_update_2024"
+    },
+    {
+      "claim": "The fix required another amendment and validators were advised to avoid new AMM deposits until the fix.",
+      "fact_id": "F3",
+      "quote_or_summary": "The update says the fix required an amendment and advised users to redeem LP tokens and avoid new deposits.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_amm_status_update_2024"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "xrpl_amm_status_update_2024",
+    "outcome_summary": "A follow-up fix path was required after launch.",
+    "route": "DELAY_FOR_FIX"
+  },
+  "packet_hash": "003ea2248ff295a12985bf5c0c47a444e24d17d8fbc1145d054bd2bb248e1648",
+  "packet_id": "amm-post-launch-pool-discrepancy-2024",
+  "packet_version": 1,
+  "risk_class": [
+    "known_bug",
+    "follow_up_fix",
+    "user_fund_or_accounting_risk"
+  ],
+  "safe_route_label": {
+    "label": "DELAY_FOR_FIX",
+    "label_basis": "later_bug",
+    "labeler": "researcher",
+    "notes": "Official status update advised redeeming LP tokens and avoiding new deposits until a fix."
+  },
+  "short_description": "A discrepancy in AMM pools appeared soon after AMM went live.",
+  "sources": [
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_amm_status_update_2024",
+      "source_type": "official_blog",
+      "summary": "After AMM activation on 2024-03-22, the XRPL community identified AMM pool discrepancies; the post advised users to redeem LP tokens and avoid new deposits until a fix amendment activated.",
+      "url": "https://xrpl.org/blog/2024/amm-status-update"
+    }
+  ],
+  "technical_change": "AMM routing through DEX payment paths required a follow-up protocol fix.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}

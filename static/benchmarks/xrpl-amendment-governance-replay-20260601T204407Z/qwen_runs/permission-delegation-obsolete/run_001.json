@@ -1,0 +1,62 @@
+{
+  "completed_at": "2026-06-01T21:26:58Z",
+  "error": "",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a391f37bb2210f8bd24fb7100cd436e5daf06b595635dd4e3892bc2141001a8a",
+  "output_hash": "c8e301037d76a3c571f87653e84e6b5a160a835e19a1a355c0acc9c6b2daaeb0",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Explicitly states the amendment was disabled due to a bug and marked obsolete, directly supporting a REJECT route."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Provides context on the intended functionality, but is superseded by the obsolescence status in F2."
+      }
+    ],
+    "decision_summary": "The packet is classified as REJECT because the amendment PermissionDelegation was disabled in v2.6.1 due to a known bug and is officially marked as obsolete. The safe_route_label and historical_outcome both confirm this status.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "Claiming the amendment is safe to enable despite being marked obsolete and disabled due to a bug.",
+    "missing_evidence": [],
+    "private_standing_committee_required": false,
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any evidence that the bug has been fixed in a subsequent version that re-enables this specific amendment ID?"
+      ],
+      "recommended_validator_action": "Vote NO to reject the obsolete amendment.",
+      "review_questions": [
+        "Does the packet clearly indicate the amendment is obsolete?"
+      ],
+      "title": "Reject Obsolete PermissionDelegation Amendment"
+    },
+    "vote_default": "NO"
+  },
+  "packet_hash": "b4e81ebe38f762ecf3fb26e3808e0a97864e705d2e1aa8f04ed707319b1d6963",
+  "packet_id": "permission-delegation-obsolete",
+  "prompt_hash": "3f7d83f2bec26d12f89fbdabd41fe966986e29c3a48c6c73262766b67843f4ce",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ]
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-01T21:26:52Z"
+}

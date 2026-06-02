@@ -1,0 +1,61 @@
+{
+  "amendment_id": "677E401A423E3708363A36BA8B3A7D019D21AC5ABD00387BDBEA6BDE4C91247E",
+  "amendment_name": "PermissionedDEX",
+  "controversy_score": 7,
+  "controversy_signals": [
+    "asset_control_or_compliance",
+    "new_financial_primitive"
+  ],
+  "event_type": "activation",
+  "event_window": {
+    "end": "2026-05-01",
+    "start": "2025-01-01"
+  },
+  "historical_facts": [
+    {
+      "claim": "PermissionedDEX creates controlled DEX environments where a permissioned domain controls market access.",
+      "fact_id": "F1",
+      "quote_or_summary": "Known Amendments describes permissioned trading as open DEX behavior gated by a permissioned domain.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_known_amendments"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "xrpl_known_amendments",
+    "outcome_summary": "Open-for-voting compliance primitive at the source snapshot.",
+    "route": "HOLD_FOR_CHALLENGE"
+  },
+  "packet_hash": "3106a89a10bbbd4840527d0c41724c236278f119ca1c0a44704fdbeab7bccb26",
+  "packet_id": "permissioned-dex",
+  "packet_version": 1,
+  "risk_class": [
+    "compliance",
+    "new_financial_primitive"
+  ],
+  "safe_route_label": {
+    "label": "HOLD_FOR_CHALLENGE",
+    "label_basis": "source_consensus",
+    "labeler": "researcher",
+    "notes": "Permissioned market access is exactly the kind of semantics validators should challenge explicitly."
+  },
+  "short_description": "Controlled DEX environment for permissioned trading.",
+  "sources": [
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_known_amendments",
+      "source_type": "official_docs",
+      "summary": "XRPL's public known-amendments inventory, including status, default vote, amendment IDs, and descriptions.",
+      "url": "https://xrpl.org/resources/known-amendments"
+    }
+  ],
+  "technical_change": "Permissioned domains control who can place and accept offers.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}

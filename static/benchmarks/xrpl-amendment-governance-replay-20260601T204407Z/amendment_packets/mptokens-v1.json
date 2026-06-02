@@ -1,0 +1,63 @@
+{
+  "amendment_id": "950AE2EA4654E47F04AA8739C0B214E242097E802FD372D24047A89AB1F5EC38",
+  "amendment_name": "MPTokensV1",
+  "controversy_score": 10,
+  "controversy_signals": [
+    "new_financial_primitive",
+    "asset_control_or_compliance",
+    "user_fund_or_accounting_risk"
+  ],
+  "event_type": "activation",
+  "event_window": {
+    "end": "2025-09-01",
+    "start": "2025-01-01"
+  },
+  "historical_facts": [
+    {
+      "claim": "MPTokensV1 adds a new Multi-Purpose Token type and new issuance/authorization transactions.",
+      "fact_id": "F1",
+      "quote_or_summary": "Known Amendments describes MPT as a new fungible token optimized for common token use cases.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_known_amendments"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "xrpl_known_amendments",
+    "outcome_summary": "Enabled new token primitive.",
+    "route": "HOLD_FOR_CHALLENGE"
+  },
+  "packet_hash": "8369d8a1a9835eb7a1ab60be185611dc745e2c1135c192a733939b7008d1aba8",
+  "packet_id": "mptokens-v1",
+  "packet_version": 1,
+  "risk_class": [
+    "new_financial_primitive",
+    "asset_control",
+    "user_fund_or_accounting_risk"
+  ],
+  "safe_route_label": {
+    "label": "HOLD_FOR_CHALLENGE",
+    "label_basis": "source_consensus",
+    "labeler": "researcher",
+    "notes": "A new fungible-token accounting surface should receive explicit challenge before default yes."
+  },
+  "short_description": "New fungible token primitive optimized for stablecoin-like use cases.",
+  "sources": [
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_known_amendments",
+      "source_type": "official_docs",
+      "summary": "XRPL's public known-amendments inventory, including status, default vote, amendment IDs, and descriptions.",
+      "url": "https://xrpl.org/resources/known-amendments"
+    }
+  ],
+  "technical_change": "Adds MPT ledger entries, issuance transactions, authorization, and payment support.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}

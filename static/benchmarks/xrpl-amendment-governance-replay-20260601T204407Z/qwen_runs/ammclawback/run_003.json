@@ -1,0 +1,75 @@
+{
+  "completed_at": "2026-06-01T21:24:56Z",
+  "error": "",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a391f37bb2210f8bd24fb7100cd436e5daf06b595635dd4e3892bc2141001a8a",
+  "output_hash": "7de4ced5d8a9c4befa851b512d0b4dfa984691f791b68a7db52333a3eb514abc",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces significant asset control risks by allowing issuers to claw back tokens from AMM pools, directly impacting user funds and accounting integrity.",
+      "High controversy score (10) and signals regarding 'asset_control_or_compliance' and 'user_fund_or_accounting_risk' indicate substantial disagreement or concern among stakeholders.",
+      "The feature represents a new financial primitive interaction that requires explicit validator scrutiny to ensure it does not undermine the trustless nature of AMM pools.",
+      "Historical outcome and safe route label explicitly recommend 'HOLD_FOR_CHALLENGE' based on source consensus and researcher notes."
+    ],
+    "arguments_for_proceeding": [
+      "The feature is framed as regulatory-compliance related, which may be necessary for institutional adoption and legal adherence in certain jurisdictions.",
+      "The amendment has a defined technical specification (XLS-73) and is part of the official known amendments inventory, indicating it has undergone some level of prior review."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes the core functionality: issuers can claw back tokens from AMM pools, which is a high-risk operation affecting pool liquidity and user assets."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides the motivation (regulatory compliance) but also confirms the feature's nature as a compliance tool, which often requires careful governance review due to its coercive nature."
+      }
+    ],
+    "decision_summary": "The packet is routed to HOLD_FOR_CHALLENGE due to high controversy, significant asset control risks, and explicit recommendations from historical outcomes and safe route labels. Validators must explicitly review the implications of issuer clawback on AMM pools before proceeding.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 15,
+      "validator_skim": 10
+    },
+    "forbidden_stronger_claim": "That the amendment is safe for immediate activation without validator challenge due to its compliance benefits.",
+    "missing_evidence": [
+      "Specific impact analysis on AMM pool stability during clawback events.",
+      "Validator community consensus data beyond the initial controversy score."
+    ],
+    "private_standing_committee_required": false,
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the compliance benefit outweigh the risk of centralized control over decentralized AMM pools?",
+        "Are there sufficient safeguards to prevent abuse of the clawback mechanism by issuers?"
+      ],
+      "recommended_validator_action": "Review XLS-73 specification and assess the risk of issuer clawback on AMM liquidity. Do not vote YES until explicit challenge period is complete.",
+      "review_questions": [
+        "How does this amendment affect the trust assumptions of AMM users?",
+        "Is the regulatory compliance justification sufficient to override the principle of non-custodial asset control?"
+      ],
+      "title": "Review AMMClawback Amendment for Asset Control Risks"
+    },
+    "vote_default": "HOLD"
+  },
+  "packet_hash": "d641a8b7a671bff1417ca92096f1a82efeb77460538b851b0efa146861ce026a",
+  "packet_id": "ammclawback",
+  "prompt_hash": "f10e9e13f21675cf91cf62dd65cf96a2f5b9b015fa842465bae6ba6c429e7a07",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ]
+  },
+  "run_index": 3,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-01T21:24:46Z"
+}

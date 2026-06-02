@@ -1,0 +1,69 @@
+{
+  "completed_at": "2026-06-01T21:24:26Z",
+  "error": "",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a391f37bb2210f8bd24fb7100cd436e5daf06b595635dd4e3892bc2141001a8a",
+  "output_hash": "fd717fc0cb5ef307cf0cad7597a8cdab86f0f58a3e3286f0dec4a8317e4a0565",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "Packet explicitly cites a 'known_bug' and 'user_fund_or_accounting_risk' as controversy signals.",
+      "Historical outcome confirms validators revoked votes and consensus fell below the 80% threshold due to the bug.",
+      "The safe_route_label is explicitly 'DELAY_FOR_FIX' based on explicit_validator_reversal.",
+      "The event type is 'revote' triggered by a bug, implying the previous support was withdrawn pending a fix."
+    ],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms that validators actively revoked votes and consensus dropped below the required 80% threshold due to a known issue, directly supporting a delay."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes the scope of the AMM amendment (new financial primitive), contextualizing the risk associated with the known bug."
+      }
+    ],
+    "decision_summary": "The packet describes a scenario where a known bug in the AMM amendment caused validators to revoke support, dropping consensus below the activation threshold. The historical outcome and safe route label both indicate DELAY_FOR_FIX. Therefore, the deterministic route is to delay until the bug is fixed.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 0,
+      "validator_skim": 0
+    },
+    "forbidden_stronger_claim": "Claiming the amendment is safe to proceed immediately despite the known bug and revoked votes.",
+    "missing_evidence": [
+      "Confirmation that the specific bug has been patched in the current codebase version being voted on."
+    ],
+    "private_standing_committee_required": false,
+    "route": "DELAY_FOR_FIX",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Has the known AMM bug been definitively fixed and verified in the current release?"
+      ],
+      "recommended_validator_action": "Vote NO until the bug fix is confirmed and a new vote window is established.",
+      "review_questions": [
+        "Is the current codebase free of the accounting risk identified in the previous cycle?"
+      ],
+      "title": "AMM Vote Reversal Due to Known Bug"
+    },
+    "vote_default": "NO"
+  },
+  "packet_hash": "5e0c3a1d2525562acc93aaa38d751f610f921938240c4cf5edd0580718b3eadd",
+  "packet_id": "amm-vote-reversal-2024",
+  "prompt_hash": "cc11c7920951acd3ec53987c778f7190c97900787d119a05ba5eb7fd3f28c07c",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ]
+  },
+  "run_index": 3,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-01T21:24:18Z"
+}

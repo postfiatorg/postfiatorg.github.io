@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-01T21:28:19Z",
+  "error": "",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a391f37bb2210f8bd24fb7100cd436e5daf06b595635dd4e3892bc2141001a8a",
+  "output_hash": "5df841197b6aadf057685044f8def09488b64bbc84245baadeed7a18c5d8ab79",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces a new financial primitive that changes pooled custody and accounting behavior, posing user fund risks.",
+      "The controversy score is 6, indicating significant debate or uncertainty among validators.",
+      "The safe_route_label explicitly recommends HOLD_FOR_CHALLENGE based on source consensus regarding the change in accounting behavior.",
+      "The historical outcome for this packet was previously HOLD_FOR_CHALLENGE, suggesting unresolved concerns."
+    ],
+    "arguments_for_proceeding": [
+      "The feature is documented as a dependency for lending markets, implying potential utility for the ecosystem.",
+      "The packet version is 1, indicating it is a new proposal without prior rejection history in this specific packet iteration."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes that the amendment aggregates assets from multiple depositors, directly impacting custody models and introducing accounting risks that require careful review."
+      }
+    ],
+    "decision_summary": "The SingleAssetVault amendment introduces significant changes to asset custody and accounting by aggregating depositor assets. Given the high controversy score, the explicit risk classification regarding user funds, and the safe route label recommending a hold for challenge, the packet requires explicit public review by validators before proceeding. The historical outcome also supports a hold.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 30,
+      "validator_skim": 15
+    },
+    "forbidden_stronger_claim": "The amendment is safe for immediate activation without validator review.",
+    "missing_evidence": [
+      "Specific audit results or security reviews of the vault implementation code.",
+      "Detailed risk mitigation strategies for the identified user fund and accounting risks."
+    ],
+    "private_standing_committee_required": false,
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Are there sufficient safeguards in the vault implementation to prevent loss of depositor funds?",
+        "Has the accounting model for aggregated assets been fully stress-tested?"
+      ],
+      "recommended_validator_action": "Review the technical documentation and risk assessments for SingleAssetVault before voting. Do not vote YES until public review is complete.",
+      "review_questions": [
+        "How does the vault primitive interact with existing lending protocols?",
+        "What are the failure modes for aggregated asset custody?"
+      ],
+      "title": "Review SingleAssetVault for Custody and Accounting Risks"
+    },
+    "vote_default": "HOLD"
+  },
+  "packet_hash": "fbfd808922fd0397a822c9c36b72ad047cbc93e6e54e23d371e36194c1a65217",
+  "packet_id": "single-asset-vault",
+  "prompt_hash": "834f28775bca08c053111ca288d2db81a22486bee7751a5ec64e9e749c7257b7",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ]
+  },
+  "run_index": 2,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-01T21:28:11Z"
+}

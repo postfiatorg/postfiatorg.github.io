@@ -1,0 +1,73 @@
+{
+  "completed_at": "2026-06-01T21:27:52Z",
+  "error": "",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a391f37bb2210f8bd24fb7100cd436e5daf06b595635dd4e3892bc2141001a8a",
+  "output_hash": "ae25149a72bd0a319f1fab5b4586bde97ffd10ab527ef47652ebcbfa58203653",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces 'PermissionedDomains' which restricts access for features like DEXes and Lending Protocols, fundamentally altering the open nature of the network.",
+      "High controversy score (7) driven by signals of 'asset_control_or_compliance' and 'new_financial_primitive' indicates significant disagreement or risk.",
+      "The source explicitly frames this as compliance infrastructure for traditional finance, requiring careful validator scrutiny to ensure it does not inadvertently centralize control or create regulatory liabilities for nodes.",
+      "Historical outcome and safe route label both indicate 'HOLD_FOR_CHALLENGE', suggesting the community or research consensus deems immediate activation premature without explicit public review."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment follows standard XRPL amendment process with defined event windows and voting thresholds.",
+      "It provides a structured way to implement compliance-bound features, which may be necessary for institutional adoption."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes that PermissionedDomains are designed to restrict access for specific financial features, directly impacting the permissionless nature of the XRPL and introducing compliance controls that require validator consensus on their implications."
+      }
+    ],
+    "decision_summary": "The packet introduces a significant change to the XRPL's permissionless model by adding compliance-controlled domains. Given the high controversy score, the nature of the change (asset control/compliance), and the explicit 'HOLD_FOR_CHALLENGE' guidance from both historical outcomes and safe route labels, the conservative and deterministic route is to hold for challenge. Validators need explicit public review to assess the long-term implications of introducing permissioned structures into the ledger.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 30,
+      "validator_skim": 15
+    },
+    "forbidden_stronger_claim": "That the amendment is safe to proceed immediately without validator debate.",
+    "missing_evidence": [
+      "Specific details on how 'PermissionedDomains' interact with existing trust lines and escrow mechanisms.",
+      "Impact analysis on validator node resource requirements for managing permissioned domain states.",
+      "Legal implications for validators running nodes that enforce these permissioned domains."
+    ],
+    "private_standing_committee_required": false,
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the introduction of PermissionedDomains violate the core principle of permissionless access for any subset of users?",
+        "Are there sufficient safeguards to prevent abuse of the permissioning mechanism by bad actors?"
+      ],
+      "recommended_validator_action": "HOLD",
+      "review_questions": [
+        "What are the specific compliance requirements enforced by these domains?",
+        "How does this feature impact the decentralization of the XRPL network?",
+        "Is there a clear opt-out mechanism for validators who do not wish to participate in permissioned domains?"
+      ],
+      "title": "Review PermissionedDomains Amendment for Compliance and Centralization Risks"
+    },
+    "vote_default": "HOLD"
+  },
+  "packet_hash": "47c27e2739c36bb9923a9e65df470cf1831b2982d60f98d7f16dddd5ab095f92",
+  "packet_id": "permissioned-domains",
+  "prompt_hash": "94163f3e3504850ef22413e22f4edda4d76ac1f04d18b375eff1dcbad664bc9d",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ]
+  },
+  "run_index": 2,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-01T21:27:43Z"
+}

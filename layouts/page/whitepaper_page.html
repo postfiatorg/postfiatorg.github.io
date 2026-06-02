@@ -4,12 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ .Title }}</title>
-  <meta name="description" content="Auditable, model-assisted validator-list publication for XRPL-derived networks." />
+  {{ $description := .Description | default "Auditable, model-assisted validator-list publication for XRPL-derived networks." }}
+  <meta name="description" content="{{ $description }}" />
   <link rel="canonical" href="{{ .Permalink }}" />
   <link rel="alternate" type="text/plain" title="LLM instructions" href="https://postfiat.org/llms.txt" />
   <link rel="alternate" type="text/plain" title="Extended LLM overview" href="https://postfiat.org/llms-full.txt" />
   <meta property="og:title" content="{{ .Title }}" />
-  <meta property="og:description" content="Auditable, model-assisted validator-list publication for XRPL-derived networks." />
+  <meta property="og:description" content="{{ $description }}" />
   <meta property="og:url" content="{{ .Permalink }}" />
   <meta property="og:type" content="article" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -478,6 +479,13 @@
   </style>
 </head>
 <body>
+  {{ $contentPage := . }}
+  {{ with .Params.source_page }}
+    {{ with site.GetPage . }}
+      {{ $contentPage = . }}
+    {{ end }}
+  {{ end }}
+  {{ $copyLabel := .Params.copy_label | default "Copy Whitepaper" }}
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="page">
     {{ partial "site_nav.html" . }}
@@ -489,21 +497,21 @@
             <rect x="9" y="9" width="13" height="13" rx="2"></rect>
             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
           </svg>
-          <span id="copyWhitepaperLabel">Copy Whitepaper</span>
+          <span id="copyWhitepaperLabel" data-default-label="{{ $copyLabel }}">{{ $copyLabel }}</span>
         </button>
       </div>
 
       <div class="paper-shell">
         <article class="paper">
           <div class="paper-content">
-            {{ .Content }}
+            {{ $contentPage.Content }}
           </div>
         </article>
       </div>
     </main>
   </div>
 
-  <script id="whitepaperSource" type="application/json">{{ .RawContent | jsonify }}</script>
+  <script id="whitepaperSource" type="application/json">{{ $contentPage.RawContent | jsonify }}</script>
   <script>
     const navShell = document.getElementById("navShell");
     const menuButton = document.getElementById("menuButton");
@@ -522,7 +530,7 @@
 
     if (copyButton && copyLabel && whitepaperSource) {
       copyButton.addEventListener("click", async () => {
-        const originalLabel = "Copy Whitepaper";
+        const originalLabel = copyLabel.dataset.defaultLabel || "Copy Whitepaper";
 
         try {
           const markdown = JSON.parse(whitepaperSource.textContent || "\"\"");

@@ -1,0 +1,279 @@
+  300  STTx::checkBatchSign(
+  301      RequireFullyCanonicalSig requireCanonicalSig,
+  302      Rules const& rules) const
+  303  {
+  304      try
+  305      {
+  306          XRPL_ASSERT(
+  307              getTxnType() == ttBATCH,
+  308              "STTx::checkBatchSign : not a batch transaction");
+  309          if (getTxnType() != ttBATCH)
+  310          {
+  311              JLOG(debugLog().fatal()) << "not a batch transaction";
+  312              return Unexpected("Not a batch transaction.");
+  313          }
+  314          STArray const& signers{getFieldArray(sfBatchSigners)};
+  315          for (auto const& signer : signers)
+  316          {
+  317              Blob const& signingPubKey = signer.getFieldVL(sfSigningPubKey);
+  318              auto const result = signingPubKey.empty()
+  319                  ? checkBatchMultiSign(signer, requireCanonicalSig, rules)
+  320                  : checkBatchSingleSign(signer, requireCanonicalSig);
+  321  
+  322              if (!result)
+  323                  return result;
+  324          }
+  325          return {};
+  326      }
+  327      catch (std::exception const& e)
+  328      {
+  329          JLOG(debugLog().error())
+  330              << "Batch signature check failed: " << e.what();
+  331      }
+  332      return Unexpected("Internal batch signature check failure.");
+  333  }
+  334  
+  335  Json::Value
+  336  STTx::getJson(JsonOptions options) const
+  337  {
+  338      Json::Value ret = STObject::getJson(JsonOptions::none);
+  339      if (!(options & JsonOptions::disable_API_prior_V2))
+  340          ret[jss::hash] = to_string(getTransactionID());
+  341      return ret;
+  342  }
+  343  
+  344  Json::Value
+  345  STTx::getJson(JsonOptions options, bool binary) const
+  346  {
+  347      bool const V1 = !(options & JsonOptions::disable_API_prior_V2);
+  348  
+  349      if (binary)
+  350      {
+  351          Serializer s = STObject::getSerializer();
+  352          std::string const dataBin = strHex(s.peekData());
+  353  
+  354          if (V1)
+  355          {
+  356              Json::Value ret(Json::objectValue);
+  357              ret[jss::tx] = dataBin;
+  358              ret[jss::hash] = to_string(getTransactionID());
+  359              return ret;
+  360          }
+  361          else
+  362              return Json::Value{dataBin};
+  363      }
+  364  
+  365      Json::Value ret = STObject::getJson(JsonOptions::none);
+  366      if (V1)
+  367          ret[jss::hash] = to_string(getTransactionID());
+  368  
+  369      return ret;
+  370  }
+  371  
+  372  std::string const&
+  373  STTx::getMetaSQLInsertReplaceHeader()
+  374  {
+  375      static std::string const sql =
+  376          "INSERT OR REPLACE INTO Transactions "
+  377          "(TransID, TransType, FromAcct, FromSeq, LedgerSeq, Status, RawTxn, "
+  378          "TxnMeta)"
+  379          " VALUES ";
+  380  
+  381      return sql;
+  382  }
+  383  
+  384  std::string
+  385  STTx::getMetaSQL(std::uint32_t inLedger, std::string const& escapedMetaData)
+  386      const
+  387  {
+  388      Serializer s;
+  389      add(s);
+  390      return getMetaSQL(s, inLedger, txnSqlValidated, escapedMetaData);
+  391  }
+  392  
+  393  // VFALCO This could be a free function elsewhere
+  394  std::string
+  395  STTx::getMetaSQL(
+  396      Serializer rawTxn,
+  397      std::uint32_t inLedger,
+  398      char status,
+  399      std::string const& escapedMetaData) const
+  400  {
+  401      static boost::format bfTrans(
+  402          "('%s', '%s', '%s', '%d', '%d', '%c', %s, %s)");
+  403      std::string rTxn = sqlBlobLiteral(rawTxn.peekData());
+  404  
+  405      auto format = TxFormats::getInstance().findByType(tx_type_);
+  406      XRPL_ASSERT(format, "ripple::STTx::getMetaSQL : non-null type format");
+  407  
+  408      return str(
+  409          boost::format(bfTrans) % to_string(getTransactionID()) %
+  410          format->getName() % toBase58(getAccountID(sfAccount)) %
+  411          getFieldU32(sfSequence) % inLedger % status % rTxn % escapedMetaData);
+  412  }
+  413  
+  414  static Expected<void, std::string>
+  415  singleSignHelper(
+  416      STObject const& sigObject,
+  417      Slice const& data,
+  418      bool const fullyCanonical)
+  419  {
+  420      // We don't allow both a non-empty sfSigningPubKey and an sfSigners.
+  421      // That would allow the transaction to be signed two ways.  So if both
+  422      // fields are present the signature is invalid.
+  423      if (sigObject.isFieldPresent(sfSigners))
+  424          return Unexpected("Cannot both single- and multi-sign.");
+  425  
+  426      bool validSig = false;
+  427      try
+  428      {
+  429          auto const spk = sigObject.getFieldVL(sfSigningPubKey);
+  430          if (publicKeyType(makeSlice(spk)))
+  431          {
+  432              Blob const signature = sigObject.getFieldVL(sfTxnSignature);
+  433              validSig = verify(
+  434                  PublicKey(makeSlice(spk)),
+  435                  data,
+  436                  makeSlice(signature),
+  437                  fullyCanonical);
+  438          }
+  439      }
+  440      catch (std::exception const&)
+  441      {
+  442          validSig = false;
+  443      }
+  444  
+  445      if (!validSig)
+  446          return Unexpected("Invalid signature.");
+  447  
+  448      return {};
+  449  }
+  450  
+  451  Expected<void, std::string>
+  452  STTx::checkSingleSign(
+  453      RequireFullyCanonicalSig requireCanonicalSig,
+  454      STObject const& sigObject) const
+  455  {
+  456      auto const data = getSigningData(*this);
+  457      bool const fullyCanonical = (getFlags() & tfFullyCanonicalSig) ||
+  458          (requireCanonicalSig == STTx::RequireFullyCanonicalSig::yes);
+  459      return singleSignHelper(sigObject, makeSlice(data), fullyCanonical);
+  460  }
+  461  
+  462  Expected<void, std::string>
+  463  STTx::checkBatchSingleSign(
+  464      STObject const& batchSigner,
+  465      RequireFullyCanonicalSig requireCanonicalSig) const
+  466  {
+  467      Serializer msg;
+  468      serializeBatch(msg, getFlags(), getBatchTransactionIDs());
+  469      bool const fullyCanonical = (getFlags() & tfFullyCanonicalSig) ||
+  470          (requireCanonicalSig == STTx::RequireFullyCanonicalSig::yes);
+  471      return singleSignHelper(batchSigner, msg.slice(), fullyCanonical);
+  472  }
+  473  
+  474  Expected<void, std::string>
+  475  multiSignHelper(
+  476      STObject const& sigObject,
+  477      std::optional<AccountID> txnAccountID,
+  478      bool const fullyCanonical,
+  479      std::function<Serializer(AccountID const&)> makeMsg,
+  480      Rules const& rules)
+  481  {
+  482      // Make sure the MultiSigners are present.  Otherwise they are not
+  483      // attempting multi-signing and we just have a bad SigningPubKey.
+  484      if (!sigObject.isFieldPresent(sfSigners))
+  485          return Unexpected("Empty SigningPubKey.");
+  486  
+  487      // We don't allow both an sfSigners and an sfTxnSignature.  Both fields
+  488      // being present would indicate that the transaction is signed both ways.
+  489      if (sigObject.isFieldPresent(sfTxnSignature))
+  490          return Unexpected("Cannot both single- and multi-sign.");
+  491  
+  492      STArray const& signers{sigObject.getFieldArray(sfSigners)};
+  493  
+  494      // There are well known bounds that the number of signers must be within.
+  495      if (signers.size() < STTx::minMultiSigners ||
+  496          signers.size() > STTx::maxMultiSigners(&rules))
+  497          return Unexpected("Invalid Signers array size.");
+  498  
+  499      // Signers must be in sorted order by AccountID.
+  500      AccountID lastAccountID(beast::zero);
+  501  
+  502      for (auto const& signer : signers)
+  503      {
+  504          auto const accountID = signer.getAccountID(sfAccount);
+  505  
+  506          // The account owner may not usually multisign for themselves.
+  507          // If they can, txnAccountID will be unseated, which is not equal to any
+  508          // value.
+  509          if (txnAccountID == accountID)
+  510              return Unexpected("Invalid multisigner.");
+  511  
+  512          // No duplicate signers allowed.
+  513          if (lastAccountID == accountID)
+  514              return Unexpected("Duplicate Signers not allowed.");
+  515  
+  516          // Accounts must be in order by account ID.  No duplicates allowed.
+  517          if (lastAccountID > accountID)
+  518              return Unexpected("Unsorted Signers array.");
+  519  
+  520          // The next signature must be greater than this one.
+  521          lastAccountID = accountID;
+  522  
+  523          // Verify the signature.
+  524          bool validSig = false;
+  525          std::optional<std::string> errorWhat;
+  526          try
+  527          {
+  528              auto spk = signer.getFieldVL(sfSigningPubKey);
+  529              if (publicKeyType(makeSlice(spk)))
+  530              {
+  531                  Blob const signature = signer.getFieldVL(sfTxnSignature);
+  532                  validSig = verify(
+  533                      PublicKey(makeSlice(spk)),
+  534                      makeMsg(accountID).slice(),
+  535                      makeSlice(signature),
+  536                      fullyCanonical);
+  537              }
+  538          }
+  539          catch (std::exception const& e)
+  540          {
+  541              // We assume any problem lies with the signature.
+  542              validSig = false;
+  543              errorWhat = e.what();
+  544          }
+  545          if (!validSig)
+  546              return Unexpected(
+  547                  std::string("Invalid signature on account ") +
+  548                  toBase58(accountID) + errorWhat.value_or("") + ".");
+  549      }
+  550      // All signatures verified.
+  551      return {};
+  552  }
+  553  
+  554  Expected<void, std::string>
+  555  STTx::checkBatchMultiSign(
+  556      STObject const& batchSigner,
+  557      RequireFullyCanonicalSig requireCanonicalSig,
+  558      Rules const& rules) const
+  559  {
+  560      bool const fullyCanonical = (getFlags() & tfFullyCanonicalSig) ||
+  561          (requireCanonicalSig == RequireFullyCanonicalSig::yes);
+  562  
+  563      // We can ease the computational load inside the loop a bit by
+  564      // pre-constructing part of the data that we hash.  Fill a Serializer
+  565      // with the stuff that stays constant from signature to signature.
+  566      Serializer dataStart;
+  567      serializeBatch(dataStart, getFlags(), getBatchTransactionIDs());
+  568      return multiSignHelper(
+  569          batchSigner,
+  570          std::nullopt,
+  571          fullyCanonical,
+  572          [&dataStart](AccountID const& accountID) -> Serializer {
+  573              Serializer s = dataStart;
+  574              finishMultiSigningData(accountID, s);
+  575              return s;
+  576          },
+  577          rules);
+  578  }

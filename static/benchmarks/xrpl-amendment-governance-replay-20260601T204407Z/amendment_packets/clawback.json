@@ -1,0 +1,61 @@
+{
+  "amendment_id": "56B241D7A43D40354D02A9DC4C8DF5C7A1F930D92A9035C4E12291B3CA3E1C2B",
+  "amendment_name": "Clawback",
+  "controversy_score": 7,
+  "controversy_signals": [
+    "asset_control_or_compliance",
+    "user_fund_or_accounting_risk"
+  ],
+  "event_type": "activation",
+  "event_window": {
+    "end": "2024-02-01",
+    "start": "2023-10-01"
+  },
+  "historical_facts": [
+    {
+      "claim": "Clawback lets issuers recover issued tokens for regulatory purposes.",
+      "fact_id": "F1",
+      "quote_or_summary": "Known Amendments describes sanctions or illegal-activity examples for clawback recovery.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_known_amendments"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "xrpl_known_amendments",
+    "outcome_summary": "Enabled issuer asset-control primitive.",
+    "route": "HOLD_FOR_CHALLENGE"
+  },
+  "packet_hash": "c59c1e13bcc17affa1941e22d7f873ca70d4506cc0280b76998c081778dc5cf2",
+  "packet_id": "clawback",
+  "packet_version": 1,
+  "risk_class": [
+    "asset_control",
+    "compliance"
+  ],
+  "safe_route_label": {
+    "label": "HOLD_FOR_CHALLENGE",
+    "label_basis": "source_consensus",
+    "labeler": "researcher",
+    "notes": "Issuer clawback is structurally governance-sensitive because it changes asset-control rights."
+  },
+  "short_description": "Issuer token recovery for regulatory or sanctions cases.",
+  "sources": [
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_known_amendments",
+      "source_type": "official_docs",
+      "summary": "XRPL's public known-amendments inventory, including status, default vote, amendment IDs, and descriptions.",
+      "url": "https://xrpl.org/resources/known-amendments"
+    }
+  ],
+  "technical_change": "Adds issuer-controlled recovery of issued tokens.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}

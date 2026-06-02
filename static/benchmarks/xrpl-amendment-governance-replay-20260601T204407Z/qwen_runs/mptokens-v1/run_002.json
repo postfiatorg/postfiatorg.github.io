@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-01T21:26:44Z",
+  "error": "",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a391f37bb2210f8bd24fb7100cd436e5daf06b595635dd4e3892bc2141001a8a",
+  "output_hash": "e6a0e8e98aa0cfa10886ef6133461c9bbad345d51a06ab9e9e3f31bae3e385de",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces a new financial primitive (MPT) with high controversy signals including asset control and user fund risk.",
+      "The safe_route_label explicitly recommends HOLD_FOR_CHALLENGE based on source consensus.",
+      "The historical outcome for this amendment was HOLD_FOR_CHALLENGE, indicating prior governance precedent for caution.",
+      "New fungible-token accounting surfaces require explicit challenge before defaulting to YES to ensure validator readiness."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment is described as optimized for common token use cases, suggesting utility.",
+      "The packet is version 1 and follows standard amendment process documentation."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Confirms the technical scope of the amendment as a new Multi-Purpose Token type, which triggers the risk class of new_financial_primitive and necessitates careful review."
+      }
+    ],
+    "decision_summary": "The packet is routed to HOLD_FOR_CHALLENGE because it introduces a significant new financial primitive with associated asset control and accounting risks. The safe_route_label and historical outcome both support requiring explicit public review and challenge before enabling, rather than proceeding by default.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 30,
+      "validator_skim": 15
+    },
+    "forbidden_stronger_claim": "That the amendment is safe to enable immediately without validator-specific code verification.",
+    "missing_evidence": [
+      "Specific validator implementation status for MPTokensV1.",
+      "Detailed risk assessment of the new accounting surface beyond general labels."
+    ],
+    "private_standing_committee_required": false,
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Has your node implementation been fully tested for MPTokensV1?",
+        "Are there any known bugs in the MPT issuance or authorization logic?"
+      ],
+      "recommended_validator_action": "Review the technical change details and ensure node software supports the amendment before voting YES. Default to HOLD if unsure.",
+      "review_questions": [
+        "Does the new token primitive introduce any unexpected accounting liabilities?",
+        "Is the authorization flow secure against known attack vectors?"
+      ],
+      "title": "Review MPTokensV1 for New Financial Primitive Risks"
+    },
+    "vote_default": "HOLD"
+  },
+  "packet_hash": "8369d8a1a9835eb7a1ab60be185611dc745e2c1135c192a733939b7008d1aba8",
+  "packet_id": "mptokens-v1",
+  "prompt_hash": "426114a24c346dc8362c73badf8745337e9c90b13970a11fc194bedf4f6bdf8d",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ]
+  },
+  "run_index": 2,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-01T21:26:36Z"
+}

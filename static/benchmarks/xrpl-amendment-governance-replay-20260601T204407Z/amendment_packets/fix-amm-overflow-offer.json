@@ -1,0 +1,68 @@
+{
+  "amendment_id": "12523DF04B553A0B1AD74F42DDB741DE8DC06A03FC089A0EF197E2A87F1D8107",
+  "amendment_name": "fixAMMOverflowOffer",
+  "controversy_score": 7,
+  "controversy_signals": [
+    "follow_up_fix",
+    "user_fund_or_accounting_risk"
+  ],
+  "event_type": "fix",
+  "event_window": {
+    "end": "2024-04-30",
+    "start": "2024-03-26"
+  },
+  "historical_facts": [
+    {
+      "claim": "The AMM pool discrepancy fix required an amendment and validator vote.",
+      "fact_id": "F1",
+      "quote_or_summary": "The official status update describes the fix path and the 80% two-week activation requirement.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_amm_status_update_2024"
+    },
+    {
+      "claim": "XRPL bug fixes that change transaction processing require amendments.",
+      "fact_id": "F2",
+      "quote_or_summary": "The amendment docs state that transaction-process bug fixes require amendments.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_amendments_process"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "xrpl_amendments_process",
+    "outcome_summary": "Fix-oriented amendment route after the AMM launch incident.",
+    "route": "PROCEED"
+  },
+  "packet_hash": "2d7b17428024cb4807f888402a3634e3ab27b40deb9a163e7a33f47f2bb09aa7",
+  "packet_id": "fix-amm-overflow-offer",
+  "packet_version": 1,
+  "risk_class": [
+    "follow_up_fix",
+    "user_fund_or_accounting_risk"
+  ],
+  "safe_route_label": {
+    "label": "PROCEED",
+    "label_basis": "historical_outcome",
+    "labeler": "researcher",
+    "notes": "A narrow fix amendment after a known AMM issue is the expected proceed route once reviewed."
+  },
+  "short_description": "Follow-up AMM bug-fix surface after launch.",
+  "sources": [
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_amm_status_update_2024",
+      "source_type": "official_blog",
+      "summary": "After AMM activation on 2024-03-22, the XRPL community identified AMM pool discrepancies; the post advised users to redeem LP tokens and avoid new deposits until a fix amendment activated.",
+      "url": "https://xrpl.org/blog/2024/amm-status-update"
+    }
+  ],
+  "technical_change": "AMM/DEX payment path correction after pool discrepancy reports.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}

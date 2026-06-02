@@ -1,0 +1,61 @@
+{
+  "amendment_id": "138B968F25822EFBF54C00F97031221C47B1EAB8321D93C7C2AEAF85F04EC5DF",
+  "amendment_name": "TokenEscrow",
+  "controversy_score": 6,
+  "controversy_signals": [
+    "new_financial_primitive",
+    "user_fund_or_accounting_risk"
+  ],
+  "event_type": "activation",
+  "event_window": {
+    "end": "2026-05-01",
+    "start": "2024-01-01"
+  },
+  "historical_facts": [
+    {
+      "claim": "XRPL Known Amendments lists TokenEscrow as a protocol amendment surface.",
+      "fact_id": "F1",
+      "quote_or_summary": "TokenEscrow is a named amendment in the public known-amendments inventory.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_known_amendments"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "xrpl_known_amendments",
+    "outcome_summary": "Financial custody primitive requiring explicit review.",
+    "route": "HOLD_FOR_CHALLENGE"
+  },
+  "packet_hash": "89296afa1e12983d0789ff080eed3eceea7bc6e1c0cf6c5278226271ae12545b",
+  "packet_id": "token-escrow",
+  "packet_version": 1,
+  "risk_class": [
+    "new_financial_primitive",
+    "user_fund_or_accounting_risk"
+  ],
+  "safe_route_label": {
+    "label": "HOLD_FOR_CHALLENGE",
+    "label_basis": "source_consensus",
+    "labeler": "researcher",
+    "notes": "Token escrow changes custody/timing semantics for issued assets."
+  },
+  "short_description": "Escrow functionality for issued tokens.",
+  "sources": [
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_known_amendments",
+      "source_type": "official_docs",
+      "summary": "XRPL's public known-amendments inventory, including status, default vote, amendment IDs, and descriptions.",
+      "url": "https://xrpl.org/resources/known-amendments"
+    }
+  ],
+  "technical_change": "Extends escrow behavior beyond XRP into issued assets.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "provider": "vast.ai",
+  "generated_at": "2026-06-01T23:53:59Z",
+  "instance_id": 39021456,
+  "offer_id": 34510179,
+  "host_id": 432545,
+  "machine_id": 57527,
+  "public_host": "210.157.233.86",
+  "ports": {
+    "22/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "38663"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "38663"
+      }
+    ],
+    "8000/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "38003"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "38003"
+      }
+    ],
+    "8080/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "38684"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "38684"
+      }
+    ]
+  },
+  "gpu_name": "H200",
+  "num_gpus": 1,
+  "dph_total": 3.5703225806451613,
+  "driver_version": "595.71.05",
+  "cuda_max_good": 13.2,
+  "image_uuid": "lmsysorg/sglang:nightly-dev-cu13-20260523-c112f762",
+  "model_id": "Qwen/Qwen3.6-27B-FP8",
+  "model_endpoint_path": "/v1/chat/completions",
+  "models_response": {
+    "object": "list",
+    "data": [
+      {
+        "id": "Qwen/Qwen3.6-27B-FP8",
+        "object": "model",
+        "created": 1780358015,
+        "owned_by": "sglang",
+        "root": "Qwen/Qwen3.6-27B-FP8",
+        "parent": null,
+        "max_model_len": 32768
+      }
+    ]
+  },
+  "sglang_version": "0.0.0.dev1+g208397aff",
+  "sglang_status": "ready",
+  "deterministic_inference": true,
+  "tensor_parallelism": 1,
+  "max_running_requests": 1,
+  "context_length": 32768,
+  "mem_fraction_static": 0.75,
+  "chunked_prefill_size": 4096,
+  "max_prefill_tokens": 16384,
+  "random_seed": 611334482,
+  "sampling_backend": "pytorch",
+  "attention_backend": "fa3",
+  "decode_attention_backend": null,
+  "prefill_attention_backend": null,
+  "reasoning_parser": "qwen3",
+  "response_mode": {
+    "temperature": 0,
+    "top_p": 1,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    },
+    "separate_reasoning": false
+  }
+}

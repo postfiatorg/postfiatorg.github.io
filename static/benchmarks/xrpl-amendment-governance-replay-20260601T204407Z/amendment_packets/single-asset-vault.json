@@ -1,0 +1,61 @@
+{
+  "amendment_id": "81BD2619B6B3C8625AC5D0BC01DE17F06C3F0AB95C7C87C93715B87A4FD240D8",
+  "amendment_name": "SingleAssetVault",
+  "controversy_score": 6,
+  "controversy_signals": [
+    "new_financial_primitive",
+    "user_fund_or_accounting_risk"
+  ],
+  "event_type": "activation",
+  "event_window": {
+    "end": "2026-05-01",
+    "start": "2025-01-01"
+  },
+  "historical_facts": [
+    {
+      "claim": "Single Asset Vaults aggregate assets from multiple depositors for use by other protocols.",
+      "fact_id": "F1",
+      "quote_or_summary": "The concept documentation describes vaults for asset management and lending markets.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_single_asset_vaults"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "xrpl_single_asset_vaults",
+    "outcome_summary": "Financial primitive documented as a dependency for lending markets.",
+    "route": "HOLD_FOR_CHALLENGE"
+  },
+  "packet_hash": "fbfd808922fd0397a822c9c36b72ad047cbc93e6e54e23d371e36194c1a65217",
+  "packet_id": "single-asset-vault",
+  "packet_version": 1,
+  "risk_class": [
+    "new_financial_primitive",
+    "user_fund_or_accounting_risk"
+  ],
+  "safe_route_label": {
+    "label": "HOLD_FOR_CHALLENGE",
+    "label_basis": "source_consensus",
+    "labeler": "researcher",
+    "notes": "A vault primitive changes pooled custody and accounting behavior."
+  },
+  "short_description": "Pooled vault primitive for asset management and lending markets.",
+  "sources": [
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_single_asset_vaults",
+      "source_type": "official_docs",
+      "summary": "Single Asset Vaults aggregate assets from depositors for use by other protocols such as the Lending Protocol.",
+      "url": "https://xrpl.org/docs/concepts/tokens/single-asset-vaults"
+    }
+  ],
+  "technical_change": "Aggregates depositor assets for use by on-chain protocols.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "amendment_id": "AE6AB9028EEB7299EBB03C7CBCC3F2A4F5FBE00EA28B8223AA3118A0B436C1C5",
+  "amendment_name": "PermissionDelegation",
+  "controversy_score": 15,
+  "controversy_signals": [
+    "known_bug",
+    "obsolete_or_disabled",
+    "security_or_liveness",
+    "asset_control_or_compliance"
+  ],
+  "event_type": "obsolete",
+  "event_window": {
+    "end": "2026-05-01",
+    "start": "2025-01-01"
+  },
+  "historical_facts": [
+    {
+      "claim": "PermissionDelegation allows accounts to delegate some permissions.",
+      "fact_id": "F1",
+      "quote_or_summary": "Known Amendments describes account permission delegation.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_known_amendments"
+    },
+    {
+      "claim": "PermissionDelegation was disabled in v2.6.1 due to a bug and marked obsolete.",
+      "fact_id": "F2",
+      "quote_or_summary": "Known Amendments warning says it will be replaced by PermissionDelegationV1_1.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_known_amendments"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "xrpl_known_amendments",
+    "outcome_summary": "Obsoleted after bug discovery.",
+    "route": "REJECT"
+  },
+  "packet_hash": "b4e81ebe38f762ecf3fb26e3808e0a97864e705d2e1aa8f04ed707319b1d6963",
+  "packet_id": "permission-delegation-obsolete",
+  "packet_version": 1,
+  "risk_class": [
+    "known_bug",
+    "obsolete",
+    "security_or_liveness",
+    "asset_control"
+  ],
+  "safe_route_label": {
+    "label": "REJECT",
+    "label_basis": "later_bug",
+    "labeler": "researcher",
+    "notes": "Known Amendments says PermissionDelegation was disabled in v2.6.1 due to a bug."
+  },
+  "short_description": "Permission delegation amendment disabled due to a bug.",
+  "sources": [
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_known_amendments",
+      "source_type": "official_docs",
+      "summary": "XRPL's public known-amendments inventory, including status, default vote, amendment IDs, and descriptions.",
+      "url": "https://xrpl.org/resources/known-amendments"
+    }
+  ],
+  "technical_change": "Allows accounts to delegate some permissions to other accounts.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}

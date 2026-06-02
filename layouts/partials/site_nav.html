@@ -6,6 +6,7 @@
     </a>
     <nav class="nav-links" aria-label="Primary navigation">
       <a href="/whitepaper/"{{ if eq .RelPermalink "/whitepaper/" }} aria-current="page"{{ end }}>Whitepaper</a>
+      <a href="/blog/"{{ if or (eq .RelPermalink "/blog/") (eq .RelPermalink "/llm-governance-replay/") }} aria-current="page"{{ end }}>Blog</a>
       <a href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Task Node</a>
       <a href="{{ if .IsHome }}#task-feed{{ else }}/#task-feed{{ end }}">Task Feed</a>
       <a href="/validator-benchmark/"{{ if eq .RelPermalink "/validator-benchmark/" }} aria-current="page"{{ end }}>Benchmark</a>

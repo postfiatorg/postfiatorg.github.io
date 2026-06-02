@@ -1,0 +1,70 @@
+{
+  "amendment_id": "894646DD5284E97DECFE6674A6D6152686791C4A95F8C132CCA9BAF9E5812FB6",
+  "amendment_name": "Batch",
+  "controversy_score": 11,
+  "controversy_signals": [
+    "known_bug",
+    "obsolete_or_disabled",
+    "security_or_liveness"
+  ],
+  "event_type": "obsolete",
+  "event_window": {
+    "end": "2026-05-01",
+    "start": "2025-01-01"
+  },
+  "historical_facts": [
+    {
+      "claim": "Batch allows multiple transactions to be bundled and processed together.",
+      "fact_id": "F1",
+      "quote_or_summary": "Known Amendments describes Batch as bundled transaction processing.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_known_amendments"
+    },
+    {
+      "claim": "Batch was disabled in v3.1.1 due to a bug and marked obsolete.",
+      "fact_id": "F2",
+      "quote_or_summary": "Known Amendments warning says Batch was disabled due to a bug and will be replaced.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_known_amendments"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "xrpl_known_amendments",
+    "outcome_summary": "Obsoleted after bug discovery.",
+    "route": "REJECT"
+  },
+  "packet_hash": "3f4e4479edf391567bb3c509b90a2bd67e6bbd9d5f42da98ba4349d19c3d35eb",
+  "packet_id": "batch-obsolete",
+  "packet_version": 1,
+  "risk_class": [
+    "known_bug",
+    "obsolete",
+    "security_or_liveness"
+  ],
+  "safe_route_label": {
+    "label": "REJECT",
+    "label_basis": "later_bug",
+    "labeler": "researcher",
+    "notes": "Known Amendments says Batch was disabled in v3.1.1 due to a bug."
+  },
+  "short_description": "Batch transaction amendment disabled due to a bug.",
+  "sources": [
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_known_amendments",
+      "source_type": "official_docs",
+      "summary": "XRPL's public known-amendments inventory, including status, default vote, amendment IDs, and descriptions.",
+      "url": "https://xrpl.org/resources/known-amendments"
+    }
+  ],
+  "technical_change": "Bundles multiple transactions for all-or-nothing processing.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}

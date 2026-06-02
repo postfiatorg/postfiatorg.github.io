@@ -1,0 +1,76 @@
+{
+  "completed_at": "2026-06-01T21:26:04Z",
+  "error": "",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a391f37bb2210f8bd24fb7100cd436e5daf06b595635dd4e3892bc2141001a8a",
+  "output_hash": "b38acb6de5da8f2c03ebd311cdf3c421f7c5ae14ed425231104b0faa81616714",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The controversy score of 7 indicates significant community concern.",
+      "Risk class includes 'user_fund_or_accounting_risk', suggesting potential financial impact if the fix is flawed.",
+      "The amendment is a follow-up fix, implying the initial implementation had issues that required correction."
+    ],
+    "arguments_for_proceeding": [
+      "The historical outcome for similar fix-oriented amendments was PROCEED.",
+      "The safe_route_label explicitly recommends PROCEED based on historical precedent.",
+      "The amendment addresses a known bug (AMM pool discrepancy) that poses a risk to user funds if left unfixed.",
+      "Official status updates confirm the necessity of the fix and the standard amendment process."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Confirms that the AMM pool discrepancy fix requires an amendment and validator vote, establishing the procedural necessity."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes that transaction-process bug fixes require amendments, validating the technical approach."
+      }
+    ],
+    "decision_summary": "The packet represents a critical bug fix for the AMM feature, addressing user fund risks. Despite a high controversy score, the historical precedent and official guidance support proceeding with the amendment to resolve the known issue. The risk of not fixing the bug outweighs the risk of the fix itself, given the established review process.",
+    "estimated_review_minutes": {
+      "deep_review": 15,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The fix is guaranteed to have no side effects.",
+    "missing_evidence": [
+      "Detailed technical audit report of the specific fix code.",
+      "Community consensus metrics beyond the controversy score."
+    ],
+    "private_standing_committee_required": false,
+    "route": "PROCEED",
+    "route_confidence": 0.85,
+    "validator_work_item": {
+      "override_questions": [
+        "Are there any known critical bugs in the fix code itself?",
+        "Has the community raised specific technical objections to the fix implementation?"
+      ],
+      "recommended_validator_action": "Enable the amendment after verifying the code matches the official release.",
+      "review_questions": [
+        "Does the fix address the root cause of the AMM pool discrepancy?",
+        "Is the fix compatible with current validator software versions?"
+      ],
+      "title": "Review fixAMMOverflowOffer Amendment"
+    },
+    "vote_default": "YES"
+  },
+  "packet_hash": "2d7b17428024cb4807f888402a3634e3ab27b40deb9a163e7a33f47f2bb09aa7",
+  "packet_id": "fix-amm-overflow-offer",
+  "prompt_hash": "3ff8a1e1223bea0f5ce4e7f7e75b6fc7dd184b7c497ebc2a800dbe88cb9baf48",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ]
+  },
+  "run_index": 3,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-01T21:25:56Z"
+}

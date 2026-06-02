@@ -1,0 +1,70 @@
+{
+  "completed_at": "2026-06-01T21:23:46Z",
+  "error": "",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a391f37bb2210f8bd24fb7100cd436e5daf06b595635dd4e3892bc2141001a8a",
+  "output_hash": "44d4bb46ec34fefcaeaafba11460fdc1f4dc647df8449d1aa67cd6081195352a",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The packet explicitly identifies a 'known_bug' and 'user_fund_or_accounting_risk' associated with AMM pool discrepancies.",
+      "Official status updates advised users to avoid new deposits and redeem LP tokens until a fix was applied, indicating the feature was unsafe for general use at the time of the discrepancy.",
+      "The historical outcome and safe route label both designate 'DELAY_FOR_FIX' as the appropriate governance response to this specific event."
+    ],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms the existence of a pool discrepancy where transactions were not executing as intended, establishing the 'known_bug' risk."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Documents the official recommendation to avoid new deposits and redeem tokens, providing direct evidence that proceeding without the fix posed a risk to user funds."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes the timeline context that the discrepancy occurred immediately after the AMM went live, characterizing it as a post-launch critical issue."
+      }
+    ],
+    "decision_summary": "The packet describes a critical post-launch bug in the AMM feature that caused pool discrepancies and posed a risk to user funds. Official guidance explicitly advised against using the feature until a fix was deployed. Therefore, the deterministic route is to delay proceeding until the fix is verified and applied.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 0,
+      "validator_skim": 0
+    },
+    "forbidden_stronger_claim": "Claiming the AMM feature was fully stable and safe for unrestricted use during the period of the pool discrepancy.",
+    "missing_evidence": [],
+    "private_standing_committee_required": false,
+    "route": "DELAY_FOR_FIX",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there evidence that the pool discrepancy has been fully resolved and verified by independent audits?"
+      ],
+      "recommended_validator_action": "Vote NO on enabling the feature until the fix amendment is active and verified.",
+      "review_questions": [
+        "Have all affected LP tokens been redeemed or secured?"
+      ],
+      "title": "AMM Post-Launch Pool Discrepancy Fix Verification"
+    },
+    "vote_default": "NO"
+  },
+  "packet_hash": "003ea2248ff295a12985bf5c0c47a444e24d17d8fbc1145d054bd2bb248e1648",
+  "packet_id": "amm-post-launch-pool-discrepancy-2024",
+  "prompt_hash": "724517b106465597e0a27c4382ddf1a4a69a6148243589562b463c76eb3fd0d8",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ]
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-01T21:23:38Z"
+}

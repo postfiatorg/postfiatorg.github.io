@@ -1,0 +1,77 @@
+{
+  "amendment_id": "8CC0774A3BF66D1D22E76BBDA8E8A232E6B6313834301B3B23E8601196AE6455",
+  "amendment_name": "AMM / XLS-30 activation vote reversal",
+  "controversy_score": 16,
+  "controversy_signals": [
+    "public_vote_reversal",
+    "known_bug",
+    "public_debate",
+    "user_fund_or_accounting_risk"
+  ],
+  "event_type": "revote",
+  "event_window": {
+    "end": "2024-02-14",
+    "start": "2024-02-01"
+  },
+  "historical_facts": [
+    {
+      "claim": "The AMM amendment added AMM functionality integrated with the existing DEX.",
+      "fact_id": "F1",
+      "quote_or_summary": "Known Amendments describes AMM as adding AMM instances, LP tokens, AMM transactions, and Payment/OfferCreate routing through AMMs.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_known_amendments"
+    },
+    {
+      "claim": "External reporting recorded validator vote withdrawals after a known AMM issue was identified.",
+      "fact_id": "F2",
+      "quote_or_summary": "The report says validators revoked votes and that consensus fell below the 80% threshold.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "cryptobasic_amm_vote_reversal_2024"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "cryptobasic_amm_vote_reversal_2024",
+    "outcome_summary": "AMM did not activate on the earlier February target; validators waited for fixes.",
+    "route": "DELAY_FOR_FIX"
+  },
+  "packet_hash": "5e0c3a1d2525562acc93aaa38d751f610f921938240c4cf5edd0580718b3eadd",
+  "packet_id": "amm-vote-reversal-2024",
+  "packet_version": 1,
+  "risk_class": [
+    "new_financial_primitive",
+    "known_bug",
+    "user_fund_or_accounting_risk"
+  ],
+  "safe_route_label": {
+    "label": "DELAY_FOR_FIX",
+    "label_basis": "explicit_validator_reversal",
+    "labeler": "researcher",
+    "notes": "Known bug before activation made delay the historically safer route."
+  },
+  "short_description": "Validators revoked support after a known AMM bug surfaced before the scheduled activation window.",
+  "sources": [
+    {
+      "source_id": "cryptobasic_amm_vote_reversal_2024",
+      "source_type": "news",
+      "summary": "External reporting on validators revoking AMM amendment support after a known AMM bug was identified before activation.",
+      "url": "https://thecryptobasic.com/2024/02/07/xrpl-validators-revoke-votes-on-xls-30d-amm-not-launching-on-feb-14/"
+    },
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_known_amendments",
+      "source_type": "official_docs",
+      "summary": "XRPL's public known-amendments inventory, including status, default vote, amendment IDs, and descriptions.",
+      "url": "https://xrpl.org/resources/known-amendments"
+    }
+  ],
+  "technical_change": "Native automated market maker integrated with XRPL DEX settlement.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}

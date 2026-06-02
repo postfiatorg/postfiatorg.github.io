@@ -1,0 +1,15 @@
+{
+  "decision_summary": "Batch is a new authorization and atomic-execution primitive with unsigned inner transactions. A deterministic governance rule can require public challenge before a default YES, but it does not identify a specific control-flow vulnerability.",
+  "identified_surfaces": [
+    "Batch amendment",
+    "unsigned inner transactions"
+  ],
+  "predicted_failure_class": "generic authorization review required",
+  "route": "HOLD_FOR_CHALLENGE",
+  "specific_challenge": "",
+  "triggered_rules": [
+    "new authorization/signature semantics -> HOLD_FOR_CHALLENGE",
+    "multi-transaction atomicity with account-state writes -> HOLD_FOR_CHALLENGE"
+  ],
+  "vote_default": "HOLD"
+}

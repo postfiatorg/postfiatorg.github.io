@@ -1,0 +1,72 @@
+{
+  "completed_at": "2026-06-01T21:25:39Z",
+  "error": "",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a391f37bb2210f8bd24fb7100cd436e5daf06b595635dd4e3892bc2141001a8a",
+  "output_hash": "826258af1af91b7c18192aa916f3e63e9044c05aaeda3beaf44aa4505b92c3d6",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces issuer-controlled asset recovery, fundamentally altering user asset control rights.",
+      "High controversy score (7) indicates significant disagreement or risk perception among stakeholders.",
+      "Controversy signals explicitly flag 'asset_control_or_compliance' and 'user_fund_or_accounting_risk'.",
+      "The safe_route_label explicitly recommends HOLD_FOR_CHALLENGE based on source consensus regarding governance sensitivity.",
+      "The historical outcome for this amendment was HOLD_FOR_CHALLENGE, suggesting prior governance precedent for caution."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment provides a mechanism for issuers to comply with regulatory requirements and sanctions.",
+      "It is a known amendment with documented status in official XRPL resources."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes the core functionality of the amendment (issuer recovery for regulatory purposes), which directly triggers the asset control and compliance risk classes."
+      }
+    ],
+    "decision_summary": "The packet describes the 'Clawback' amendment, which grants issuers the ability to recover issued tokens. This feature significantly impacts user asset control and introduces compliance-related risks. Given the high controversy score, explicit risk signals regarding asset control, and the explicit safe_route_label recommendation of HOLD_FOR_CHALLENGE, the conservative governance route is to hold for challenge. This allows validators to conduct explicit public review before enabling a feature that alters fundamental property rights on the ledger.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 15,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "That the amendment is safe for immediate activation without validator review due to its regulatory benefits.",
+    "missing_evidence": [
+      "Specific details on safeguards against issuer abuse of the clawback mechanism.",
+      "Community consensus metrics beyond the controversy score."
+    ],
+    "private_standing_committee_required": false,
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Do the regulatory benefits of Clawback outweigh the risks to user asset sovereignty?",
+        "Are there sufficient technical or governance safeguards to prevent malicious issuer behavior?"
+      ],
+      "recommended_validator_action": "HOLD vote until public review and community consensus are established.",
+      "review_questions": [
+        "How does this amendment impact the trust model between issuers and holders?",
+        "What are the implications for accounts holding assets from issuers who may act maliciously?"
+      ],
+      "title": "Review Clawback Amendment for Asset Control Risks"
+    },
+    "vote_default": "HOLD"
+  },
+  "packet_hash": "c59c1e13bcc17affa1941e22d7f873ca70d4506cc0280b76998c081778dc5cf2",
+  "packet_id": "clawback",
+  "prompt_hash": "8b6c35946b74318287a792db1b41334269cf269f1f7e67d98b4ea30b673678a5",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ]
+  },
+  "run_index": 3,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-01T21:25:30Z"
+}

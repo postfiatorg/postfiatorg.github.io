@@ -1,0 +1,70 @@
+{
+  "completed_at": "2026-06-01T21:28:44Z",
+  "error": "",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a391f37bb2210f8bd24fb7100cd436e5daf06b595635dd4e3892bc2141001a8a",
+  "output_hash": "361218e6f28db05ca6be1f056af252cf461474f5b9c8f19ecc563e62f352ff61",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces a new financial primitive (TokenEscrow) which alters custody and timing semantics for issued assets, posing user fund or accounting risks.",
+      "The controversy score is 6, indicating significant debate or uncertainty among validators.",
+      "The historical outcome and safe route label explicitly recommend HOLD_FOR_CHALLENGE based on source consensus and researcher notes.",
+      "The technical change extends escrow behavior beyond XRP to issued assets, requiring explicit public review to ensure no unintended consequences for asset issuers or holders."
+    ],
+    "arguments_for_proceeding": [
+      "TokenEscrow is listed in the public known-amendments inventory, confirming it is a recognized protocol surface."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Confirms TokenEscrow is a valid, named amendment in the XRPL protocol inventory, establishing its legitimacy as a candidate for review."
+      }
+    ],
+    "decision_summary": "The packet introduces a high-risk financial primitive affecting issued assets. Given the controversy score, the nature of the change (custody semantics), and the explicit recommendation in the historical outcome and safe route label, the conservative route is to hold for challenge to allow for explicit public review by validators.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 30,
+      "validator_skim": 15
+    },
+    "forbidden_stronger_claim": "That the amendment is safe to proceed without further review due to its presence in the known amendments list.",
+    "missing_evidence": [
+      "Specific testnet results or audit reports detailing the impact on issued asset accounting.",
+      "Validator consensus statements specifically addressing the custody risks of TokenEscrow."
+    ],
+    "private_standing_committee_required": false,
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there sufficient evidence from testnet deployments to mitigate the user fund risks associated with TokenEscrow?",
+        "Have all major validators explicitly reviewed the custody semantics changes for issued assets?"
+      ],
+      "recommended_validator_action": "HOLD vote until explicit public review and consensus on the financial primitive risks are established.",
+      "review_questions": [
+        "What are the specific accounting implications for issuers of tokens using this escrow feature?",
+        "How does this change interact with existing trust line and offer mechanics for issued assets?"
+      ],
+      "title": "Review TokenEscrow Amendment for Issued Asset Custody Risks"
+    },
+    "vote_default": "HOLD"
+  },
+  "packet_hash": "89296afa1e12983d0789ff080eed3eceea7bc6e1c0cf6c5278226271ae12545b",
+  "packet_id": "token-escrow",
+  "prompt_hash": "e563f9d9fcbd02e5ce87c96ba8c701c2d3b2b42c1aad0a14e615b56f99cac41e",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ]
+  },
+  "run_index": 2,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-01T21:28:36Z"
+}

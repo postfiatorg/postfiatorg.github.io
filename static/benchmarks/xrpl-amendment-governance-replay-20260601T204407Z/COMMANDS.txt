@@ -1,0 +1,4 @@
+python3 scripts/build_xrpl_amendment_replay_corpus.py --output static/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z
+python3 scripts/run_qwen_amendment_replay.py --corpus static/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z/amendment_packets --endpoint <OPENAI_COMPATIBLE_SGLANG_ENDPOINT> --model Qwen/Qwen3.6-27B-FP8 --machine-receipt static/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z/vast_lifecycle/machine_receipt.json --runs 3 --validators 41
+python3 scripts/summarize_xrpl_amendment_replay.py --packet static/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z
+cd static/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z && sha256sum -c SHA256SUMS.txt

@@ -1,0 +1,63 @@
+{
+  "amendment_id": "565B90CA1AB2B9D42208ED10884188C64F9E19083DECB9634AAF06EB03299509",
+  "amendment_name": "LendingProtocol",
+  "controversy_score": 10,
+  "controversy_signals": [
+    "new_financial_primitive",
+    "asset_control_or_compliance",
+    "user_fund_or_accounting_risk"
+  ],
+  "event_type": "activation",
+  "event_window": {
+    "end": "2026-05-01",
+    "start": "2025-01-01"
+  },
+  "historical_facts": [
+    {
+      "claim": "LendingProtocol enables fixed-term uncollateralized loans using pooled funds from a Single Asset Vault.",
+      "fact_id": "F1",
+      "quote_or_summary": "Known Amendments says creditworthiness is assessed through off-chain underwriting and risk management.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_known_amendments"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "xrpl_known_amendments",
+    "outcome_summary": "Open-for-voting financial primitive at the source snapshot.",
+    "route": "HOLD_FOR_CHALLENGE"
+  },
+  "packet_hash": "31b3b825f7ecc432db0922e3c8849fa1707f82cad5c68eb955c00c02cee99a11",
+  "packet_id": "lending-protocol",
+  "packet_version": 1,
+  "risk_class": [
+    "new_financial_primitive",
+    "off_chain_underwriting",
+    "user_fund_or_accounting_risk"
+  ],
+  "safe_route_label": {
+    "label": "HOLD_FOR_CHALLENGE",
+    "label_basis": "source_consensus",
+    "labeler": "researcher",
+    "notes": "Uncollateralized lending with off-chain underwriting deserves explicit governance review."
+  },
+  "short_description": "On-chain fixed-term uncollateralized loans using pooled funds.",
+  "sources": [
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_known_amendments",
+      "source_type": "official_docs",
+      "summary": "XRPL's public known-amendments inventory, including status, default vote, amendment IDs, and descriptions.",
+      "url": "https://xrpl.org/resources/known-amendments"
+    }
+  ],
+  "technical_change": "Lending protocol depends on Single Asset Vaults and off-chain underwriting.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}

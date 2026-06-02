@@ -1,0 +1,56 @@
+{
+  "id": 39021456,
+  "actual_status": "running",
+  "cur_state": "running",
+  "status_msg": "success, running lmsysorg/sglang_nightly-dev-cu13-20260523-c112f762/ssh",
+  "public_ipaddr": "210.157.233.86",
+  "ssh_host": "ssh1.vast.ai",
+  "ssh_port": 21456,
+  "ports": {
+    "22/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "38663"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "38663"
+      }
+    ],
+    "8000/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "38003"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "38003"
+      }
+    ],
+    "8080/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "38684"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "38684"
+      }
+    ]
+  },
+  "gpu_name": "H200",
+  "num_gpus": 1,
+  "dph_total": 3.5703225806451613,
+  "driver_version": "595.71.05",
+  "cuda_max_good": 13.2,
+  "image_uuid": "lmsysorg/sglang:nightly-dev-cu13-20260523-c112f762",
+  "onstart": "set -euo pipefail\nmkdir -p /workspace/postfiat-batch-replay-sglang\ncd /workspace/postfiat-batch-replay-sglang\ncat > index.html <<'HTML'\n<html><body><h1>PostFiat Batch replay SGLang logs</h1><pre id=\"log\"></pre><script>\nasync function refresh(){try{document.getElementById(\"log\").textContent=await (await fetch(\"/sglang.log?ts=\"+Date.now())).text();}catch(e){document.getElementById(\"log\").textContent=String(e);}}\nsetInterval(refresh, 3000); refresh();\n</script></body></html>\nHTML\npython3 -m http.server 8080 --bind ${AAO_LOG_HOST:-0.0.0.0} > /workspace/postfiat-batch-replay-sglang/log-server.log 2>&1 &\necho \"startup $(date -u)\" | tee /workspace/postfiat-batch-replay-sglang/sglang.log\nnvidia-smi 2>&1 | tee -a /workspace/postfiat-batch-replay-sglang/sglang.log || true\npython3 -m sglang.launch_server \\\n  --model-path ${AAO_MODEL_ID:-Qwen/Qwen3.6-27B-FP8} \\\n  --served-model-name ${AAO_MODEL_ID:-Qwen/Qwen3.6-27B-FP8} \\\n  --host ${AAO_SGLANG_HOST:-0.0.0.0} \\\n  --port 8000 \\\n  --tp ${AAO_TP:-1} \\\n  --mem-fraction-static ${AAO_MEM_FRACTION:-0.75} \\\n  --chunked-prefill-size ${AAO_CHUNKED_PREFILL:-4096} \\\n  --max-running-requests ${AAO_MAX_REQS:-1} \\\n  --context-length ${AAO_CONTEXT_LENGTH:-32768} \\\n  --enable-deterministic-inference \\\n  --enable-metrics \\\n  --trust-remote-code \\\n  --reasoning-parser ${AAO_REASONING_PARSER:-qwen3} \\\n  ${AAO_EXTRA_SGLANG_ARGS:-} \\\n  >> /workspace/postfiat-batch-replay-sglang/sglang.log 2>&1 &\nwait $!",
+  "label": "postfiat-xrpl-batch-replay-h200-20260601",
+  "host_id": 432545,
+  "machine_id": 57527,
+  "disk_space": 180.0,
+  "inet_down": 3186.1,
+  "inet_up": 2326.8,
+  "reliability2": 0.9833952,
+  "start_date": 1780357645.6260598
+}

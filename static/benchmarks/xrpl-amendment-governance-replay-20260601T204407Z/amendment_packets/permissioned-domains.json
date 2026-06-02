@@ -1,0 +1,61 @@
+{
+  "amendment_id": "A730EB18A9D4BB52502C898589558B4CCEB4BE10044500EE5581137A2E80E849",
+  "amendment_name": "PermissionedDomains",
+  "controversy_score": 7,
+  "controversy_signals": [
+    "asset_control_or_compliance",
+    "new_financial_primitive"
+  ],
+  "event_type": "activation",
+  "event_window": {
+    "end": "2026-05-01",
+    "start": "2025-01-01"
+  },
+  "historical_facts": [
+    {
+      "claim": "PermissionedDomains restrict access for features such as Permissioned DEXes and Lending Protocols.",
+      "fact_id": "F1",
+      "quote_or_summary": "Known Amendments describes domains as compliance-controlled environments.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_known_amendments"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "xrpl_known_amendments",
+    "outcome_summary": "Open-for-voting compliance primitive at the source snapshot.",
+    "route": "HOLD_FOR_CHALLENGE"
+  },
+  "packet_hash": "47c27e2739c36bb9923a9e65df470cf1831b2982d60f98d7f16dddd5ab095f92",
+  "packet_id": "permissioned-domains",
+  "packet_version": 1,
+  "risk_class": [
+    "compliance",
+    "asset_control"
+  ],
+  "safe_route_label": {
+    "label": "HOLD_FOR_CHALLENGE",
+    "label_basis": "source_consensus",
+    "labeler": "researcher",
+    "notes": "The source itself frames domains as compliance infrastructure for traditional finance."
+  },
+  "short_description": "Controlled access domains for compliance-bound XRPL features.",
+  "sources": [
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_known_amendments",
+      "source_type": "official_docs",
+      "summary": "XRPL's public known-amendments inventory, including status, default vote, amendment IDs, and descriptions.",
+      "url": "https://xrpl.org/resources/known-amendments"
+    }
+  ],
+  "technical_change": "Adds PermissionedDomain ledger entry and set/delete transactions.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}

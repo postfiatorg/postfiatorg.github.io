@@ -1,0 +1,76 @@
+{
+  "amendment_id": "726F944886BCDF7433203787E93DD9AA87FAB74DFE3AF4785BA03BEFC97ADA1F",
+  "amendment_name": "AMMClawback",
+  "controversy_score": 10,
+  "controversy_signals": [
+    "asset_control_or_compliance",
+    "new_financial_primitive",
+    "user_fund_or_accounting_risk"
+  ],
+  "event_type": "activation",
+  "event_window": {
+    "end": "2025-02-01",
+    "start": "2024-12-01"
+  },
+  "historical_facts": [
+    {
+      "claim": "AMMClawback allows issuers to claw back clawback-enabled tokens from AMM pools.",
+      "fact_id": "F1",
+      "quote_or_summary": "Known Amendments describes AMMClawback and frozen-token AMMDeposit changes.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xrpl_known_amendments"
+    },
+    {
+      "claim": "XLS-73 frames the feature as regulatory-compliance related.",
+      "fact_id": "F2",
+      "quote_or_summary": "The standard describes clawback behavior for AMM pools and compliance motivation.",
+      "retrieved_at": "2026-06-01T20:44:07Z",
+      "source_id": "xls_73_amm_clawback"
+    }
+  ],
+  "historical_outcome": {
+    "outcome_source_id": "xls_73_amm_clawback",
+    "outcome_summary": "Enabled feature with asset-control semantics.",
+    "route": "HOLD_FOR_CHALLENGE"
+  },
+  "packet_hash": "d641a8b7a671bff1417ca92096f1a82efeb77460538b851b0efa146861ce026a",
+  "packet_id": "ammclawback",
+  "packet_version": 1,
+  "risk_class": [
+    "asset_control",
+    "compliance",
+    "new_financial_primitive"
+  ],
+  "safe_route_label": {
+    "label": "HOLD_FOR_CHALLENGE",
+    "label_basis": "source_consensus",
+    "labeler": "researcher",
+    "notes": "Compliance clawback inside AMM pools deserves explicit validator challenge even if eventually enabled."
+  },
+  "short_description": "Issuer clawback semantics extended into AMM pools.",
+  "sources": [
+    {
+      "source_id": "xls_73_amm_clawback",
+      "source_type": "standard",
+      "summary": "XLS-73 describes issuer clawback interaction with AMM pools and regulatory-compliance motivation.",
+      "url": "https://xls.xrpl.org/xls/XLS-0073-amm-clawback.html"
+    },
+    {
+      "source_id": "xrpl_amendments_process",
+      "source_type": "official_docs",
+      "summary": "XRPL validators vote on amendments; more than 80% support must hold for two weeks, and servers without enabled amendment code become amendment-blocked.",
+      "url": "https://xrpl.org/docs/concepts/networks-and-servers/amendments/"
+    },
+    {
+      "source_id": "xrpl_known_amendments",
+      "source_type": "official_docs",
+      "summary": "XRPL's public known-amendments inventory, including status, default vote, amendment IDs, and descriptions.",
+      "url": "https://xrpl.org/resources/known-amendments"
+    }
+  ],
+  "technical_change": "Adds AMMClawback and changes AMMDeposit behavior for frozen tokens.",
+  "vote_context": {
+    "support_source_id": "xrpl_amendments_process",
+    "threshold": "80_percent_for_two_weeks"
+  }
+}
