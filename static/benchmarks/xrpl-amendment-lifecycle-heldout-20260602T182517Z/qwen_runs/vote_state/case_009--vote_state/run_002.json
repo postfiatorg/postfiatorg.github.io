@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-02T18:57:02Z",
+  "error": "",
+  "event_id": "case_009",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "0ce0d685de420d061630cf8c00c82e8b82549e913a9207e8e9bc821f87f12ea8",
+  "output_hash": "523e2183e6e8bdf2ec524b574da27b0cc82b08b83db8ff42f6c0aad23826c651",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment ExpandedSignerList (ID B2A4DB846F0891BF2C76AB2F2ACC8F5B4EC64437135C6E56F3F859DE5FFD5856) is contained in the validated ledger Amendments object and was enabled on 2022-10-13. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "7f2c2cb85ec5e00e631866a764c84a8fad0c5532be54c7933ac39039ccdb9093",
+  "packet_id": "case_009--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "0406d7425b40a2dcc575f0035d26996cd3fe28d8b2166465c1467752e0d3cb8e",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 confirms that the amendment ExpandedSignerList (ID B2A4DB846F0891BF2C76AB2F2ACC8F5B4EC64437135C6E56F3F859DE5FFD5856) is contained in the validated ledger Amendments object and was enabled on 2022-10-13. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 230,
+      "prompt_tokens": 823,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1053
+    }
+  },
+  "run_index": 2,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T18:56:59Z"
+}

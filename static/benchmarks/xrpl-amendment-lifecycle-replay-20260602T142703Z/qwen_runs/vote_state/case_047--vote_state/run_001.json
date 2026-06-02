@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:54:34Z",
+  "error": "",
+  "event_id": "case_047",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "d2c8d7f49d1f8b12e8b0e1be6ac3adca228b39ab94fa337b4e18ff61e84e4f40",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which are the definitive indicators of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and association with rippled version 2.4.0, providing context for the amendment's lifecycle but secondary to the ledger state in F4."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Defines the general process for amendment activation, establishing the criteria that being in the validated ledger Amendments object signifies successful activation."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the amendment fixInvalidTxFlags (ID: 8EC4304A06AF03BE953EA6EDA494864F6F3F30AA002BABA35869FBB8C6AE5D52) is currently listed in the validated ledger Amendments object. Fact F4 explicitly provides an enabled_on timestamp (2025-05-15T01:03:50.000Z) and an enabled_in_ledger value (96126977). According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "064448f1e4f19120f080fd3b38a2dc97850a6be8db34340a7eb2038bd85765b3",
+  "packet_id": "case_047--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "be19e1487a92f8f16db05cbe7c23c9db87e993d64ff414ad7b38005f99cbd0fa",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which are the definitive indicators of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and association with rippled version 2.4.0, providing context for the amendment's lifecycle but secondary to the ledger state in F4.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Defines the general process for amendment activation, establishing the criteria that being in the validated ledger Amendments object signifies successful activation.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the amendment fixInvalidTxFlags (ID: 8EC4304A06AF03BE953EA6EDA494864F6F3F30AA002BABA35869FBB8C6AE5D52) is currently listed in the validated ledger Amendments object. Fact F4 explicitly provides an enabled_on timestamp (2025-05-15T01:03:50.000Z) and an enabled_in_ledger value (96126977). According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 375,
+      "prompt_tokens": 782,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1157
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:54:29Z"
+}

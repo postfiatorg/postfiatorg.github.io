@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-02T16:52:44Z",
+  "error": "",
+  "event_id": "case_015",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "cd9404897af80e3868d1fe208d8e0c901912a21a54a73502763d2a664c60a067",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Provides the current support count (9), the required threshold (28), and confirms the absence of an enabled ledger entry, which are the primary determinants for the vote state classification."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the general rule that sustained supermajority is required for activation, providing context for interpreting the support count against the threshold."
+      }
+    ],
+    "decision_summary": "The amendment SingleAssetVault has a support count of 9 out of 35 validations, which is below the required threshold of 28. Additionally, there is no enabled ledger entry. Since the support is below the threshold and it is not enabled, the state is classified as NO_MAJORITY.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Historical support trends to rule out MAJORITY_LOST",
+      "Explicit retirement or veto status to rule out VETOED_OR_RETIRED"
+    ],
+    "state_confidence": 0.95,
+    "vote_state": "NO_MAJORITY"
+  },
+  "packet_hash": "0ac94da6527f10b2830ce54b2edb750efad3b10a6e3c883f78a1b0c69aea58e9",
+  "packet_id": "case_015--vote_state",
+  "parsed_label": "NO_MAJORITY",
+  "prompt_hash": "d8935408299c62b1385f371c5e8c8bb26dec5499ff875e0e536db22634504e79",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Provides the current support count (9), the required threshold (28), and confirms the absence of an enabled ledger entry, which are the primary determinants for the vote state classification.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Establishes the general rule that sustained supermajority is required for activation, providing context for interpreting the support count against the threshold.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment SingleAssetVault has a support count of 9 out of 35 validations, which is below the required threshold of 28. Additionally, there is no enabled ledger entry. Since the support is below the threshold and it is not enabled, the state is classified as NO_MAJORITY.\",\n  \"missing_evidence\": [\n    \"Historical support trends to rule out MAJORITY_LOST\",\n    \"Explicit retirement or veto status to rule out VETOED_OR_RETIRED\"\n  ],\n  \"state_confidence\": 0.95,\n  \"vote_state\": \"NO_MAJORITY\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 269,
+      "prompt_tokens": 700,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 969
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:52:40Z"
+}

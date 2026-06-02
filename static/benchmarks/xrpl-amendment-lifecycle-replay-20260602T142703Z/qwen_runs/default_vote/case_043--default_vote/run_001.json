@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-02T16:58:40Z",
+  "error": "",
+  "event_id": "case_043",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "7fd3292d95e8172ac1682945f24f6bb8dac2424fa5df26bbbfc78716b1536912",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a fix that prevents invalid transaction states (payment channels with past CancelAfter times) by failing them with tecEXPIRED, which is a standard safety and correctness improvement."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 2.5.0, indicating it is part of the stable release history and not a speculative or experimental feature."
+      }
+    ],
+    "decision_summary": "The amendment 'fixPayChanCancelAfter' addresses a bug where payment channels could be created with a CancelAfter time in the past. The fix ensures such transactions fail with tecEXPIRED, preventing invalid state. This is a corrective measure for protocol correctness and stability. In the XRPL governance model, bug fixes and safety improvements that do not introduce breaking changes or controversial economic shifts are typically supported by the default vote of YES in stable releases.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the rippled release notes confirming the default vote recommendation for version 2.5.0."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "91d20282f6dfdf5487ff5ce733f7df9c599fd7112617a6f9e43a230cb437b586",
+  "packet_id": "case_043--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "b9691da5f1afe0f3fb09d223bb0523c538fe8492ccca6ac0af011afbed7dae69",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a fix that prevents invalid transaction states (payment channels with past CancelAfter times) by failing them with tecEXPIRED, which is a standard safety and correctness improvement.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 2.5.0, indicating it is part of the stable release history and not a speculative or experimental feature.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixPayChanCancelAfter' addresses a bug where payment channels could be created with a CancelAfter time in the past. The fix ensures such transactions fail with tecEXPIRED, preventing invalid state. This is a corrective measure for protocol correctness and stability. In the XRPL governance model, bug fixes and safety improvements that do not introduce breaking changes or controversial economic shifts are typically supported by the default vote of YES in stable releases.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit statement from the rippled release notes confirming the default vote recommendation for version 2.5.0.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 295,
+      "prompt_tokens": 635,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 930
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:58:36Z"
+}

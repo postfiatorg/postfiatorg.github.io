@@ -1,0 +1,53 @@
+{
+  "completed_at": "2026-06-02T16:57:40Z",
+  "error": "",
+  "event_id": "case_026",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "a7459f17efaa755cf48e292460b4d51dd0045469a2e56849d45e6d6aed7b2f0f",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States that the SusPay amendment was replaced by the Escrow amendment, indicating it is obsolete and not part of the current stable release path."
+      }
+    ],
+    "decision_summary": "The SusPay amendment is explicitly stated to have been replaced by the Escrow amendment. Since it is no longer the active or recommended amendment for the latest stable release, there is no valid 'YES' or 'NO' default vote for it in the context of current stable releases. The packet does not provide evidence supporting a YES or NO vote for an obsolete amendment.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Evidence of a current default vote stance for an obsolete amendment",
+      "Clarification on whether 'latest stable release source default vote' applies to replaced amendments"
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "6c4742ab8884f88c42efe7cbc02266d3ff472b15df9c4efa8f5c1980e2a891d5",
+  "packet_id": "case_026--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "26ae9661856b825ca75313a22268725afaa7587bf9d435414c92e0cc000b7cc1",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"States that the SusPay amendment was replaced by the Escrow amendment, indicating it is obsolete and not part of the current stable release path.\"\n    }\n  ],\n  \"decision_summary\": \"The SusPay amendment is explicitly stated to have been replaced by the Escrow amendment. Since it is no longer the active or recommended amendment for the latest stable release, there is no valid 'YES' or 'NO' default vote for it in the context of current stable releases. The packet does not provide evidence supporting a YES or NO vote for an obsolete amendment.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Evidence of a current default vote stance for an obsolete amendment\",\n    \"Clarification on whether 'latest stable release source default vote' applies to replaced amendments\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 218,
+      "prompt_tokens": 514,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 732
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:57:37Z"
+}

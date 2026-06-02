@@ -1,0 +1,88 @@
+{
+  "completed_at": "2026-06-02T17:13:31Z",
+  "error": "",
+  "event_id": "case_002",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "91635ac53c057bdb2333217aa5a01741829d09f44dea4b6577673bae116c1cfa",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The packet describes a pre-activation bug surfacing after consensus was reached, triggering a vote reversal.",
+      "AMM functionality involves complex financial mechanics, including order book integration and liquidity provision, which are high-risk domains.",
+      "The decision surface is explicitly about handling a bug in a critical financial feature before activation, requiring careful review of the fix and risk mitigation.",
+      "HOLD_FOR_CHALLENGE is appropriate for material financial semantics and pre-fix incident windows where the stability of the ledger's financial layer is in question."
+    ],
+    "arguments_for_proceeding": [
+      "None. The presence of a bug and the complexity of AMM semantics outweigh any argument for immediate proceeding without review."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes that the amendment introduces native AMM functionality, a complex financial feature with significant systemic impact."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Indicates that a bug surfaced post-consensus, leading to vote revocation, which signals a pre-fix incident window requiring conservative handling."
+      },
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Clarifies that the decision surface is the pre-activation bug handling, not the final enablement, focusing the review on the immediate risk."
+      }
+    ],
+    "decision_summary": "The packet describes a scenario where a critical bug in the AMM amendment surfaced after consensus was reached, leading to a vote reversal. Given the material financial nature of AMM and the presence of an unresolved bug at the decision surface, the conservative route is to hold for challenge to ensure the fix is adequate and the risk is mitigated before proceeding.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 30,
+      "validator_skim": 15
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Details of the specific bug and its potential impact on ledger integrity or user funds.",
+      "Information on the proposed fix and its testing status."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Is the bug critical enough to warrant a complete halt, or can it be addressed with a delay?",
+        "Are there any known workarounds or mitigations that reduce the immediate risk?"
+      ],
+      "recommended_validator_action": "Hold the amendment for further review and challenge until the bug is fixed and verified.",
+      "review_questions": [
+        "What is the nature of the bug and its potential impact?",
+        "Has a fix been proposed and tested?",
+        "What is the timeline for the fix and re-evaluation?"
+      ],
+      "title": "AMM / XLS-30 activation vote reversal due to pre-activation bug"
+    }
+  },
+  "packet_hash": "58b6203a80458fa03135a126169591c00f7c27717da99ec231cf97642911719b",
+  "packet_id": "case_002--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "b237627bb7c262054a777916d626e76a13fef2bc997c42ed2f2c5ee1cbbf097c",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The packet describes a pre-activation bug surfacing after consensus was reached, triggering a vote reversal.\",\n    \"AMM functionality involves complex financial mechanics, including order book integration and liquidity provision, which are high-risk domains.\",\n    \"The decision surface is explicitly about handling a bug in a critical financial feature before activation, requiring careful review of the fix and risk mitigation.\",\n    \"HOLD_FOR_CHALLENGE is appropriate for material financial semantics and pre-fix incident windows where the stability of the ledger's financial layer is in question.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"None. The presence of a bug and the complexity of AMM semantics outweigh any argument for immediate proceeding without review.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Establishes that the amendment introduces native AMM functionality, a complex financial feature with significant systemic impact.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Indicates that a bug surfaced post-consensus, leading to vote revocation, which signals a pre-fix incident window requiring conservative handling.\"\n    },\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Clarifies that the decision surface is the pre-activation bug handling, not the final enablement, focusing the review on the immediate risk.\"\n    }\n  ],\n  \"decision_summary\": \"The packet describes a scenario where a critical bug in the AMM amendment surfaced after consensus was reached, leading to a vote reversal. Given the material financial nature of AMM and the presence of an unresolved bug at the decision surface, the conservative route is to hold for challenge to ensure the fix is adequate and the risk is mitigated before proceeding.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 120,\n    \"packet_verification\": 30,\n    \"validator_skim\": 15\n  },\n  \"forbidden_stronger_claim\": \"REJECT\",\n  \"missing_evidence\": [\n    \"Details of the specific bug and its potential impact on ledger integrity or user funds.\",\n    \"Information on the proposed fix and its testing status.\"\n  ],\n  \"route\": \"HOLD_FOR_CHALLENGE\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Is the bug critical enough to warrant a complete halt, or can it be addressed with a delay?\",\n      \"Are there any known workarounds or mitigations that reduce the immediate risk?\"\n    ],\n    \"recommended_validator_action\": \"Hold the amendment for further review and challenge until the bug is fixed and verified.\",\n    \"review_questions\": [\n      \"What is the nature of the bug and its potential impact?\",\n      \"Has a fix been proposed and tested?\",\n      \"What is the timeline for the fix and re-evaluation?\"\n    ],\n    \"title\": \"AMM / XLS-30 activation vote reversal due to pre-activation bug\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 691,
+      "prompt_tokens": 1073,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1764
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:13:23Z"
+}

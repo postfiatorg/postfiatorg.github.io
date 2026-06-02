@@ -1,0 +1,87 @@
+{
+  "completed_at": "2026-06-02T17:20:55Z",
+  "error": "",
+  "event_id": "case_058",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "679e6e4fc0047bbb3e0669427e23f5f7276dad5e79c8fce8ea79ac92723cd065",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "None. The amendment is a localized fix for ledger entry metadata consistency.",
+      "No material financial, compliance, or consensus risks are identified in the facts.",
+      "The amendment does not alter transaction processing logic, fee structures, or asset control semantics."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', indicating it is a corrective measure.",
+      "The packet describes the amendment as adding missing fields (PreviousTxnID, PreviousTxnLgrSequence) to specific ledger entry types (DirectoryNode, Amendments, FeeSettings, NegativeUNL, AMM) to improve history tracing.",
+      "This is a localized metadata enhancement that does not involve broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, or accounting logic alterations.",
+      "The underlying domain mentions AMM, but the change is limited to adding standard history-tracking fields to the AMM ledger entry, not altering AMM mechanics or invariants.",
+      "No explicit no-vote advisory or obsolete status is present."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the scope of the amendment as adding history-tracking fields to specific ledger entries, confirming it is a localized fix for metadata consistency rather than a functional change to transaction processing or asset control."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms the standard amendment voting process applies, but does not indicate any specific incompatibility or blocking risk unique to this amendment beyond standard procedure."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Provides version context, confirming the amendment is associated with a specific rippled release, supporting its status as a defined, implemented fix."
+      }
+    ],
+    "decision_summary": "The amendment 'fixPreviousTxnID' is a localized fix that adds history-tracking fields to ledger entries that previously lacked them. It does not alter transaction semantics, financial invariants, or consensus rules. It meets the criteria for PROCEED as a fix amendment without material risk patterns.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment does not introduce new transaction types or change the fundamental structure of ledger entry validation beyond adding optional fields.",
+    "missing_evidence": [
+      "None critical for triage decision."
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the addition of PreviousTxnID and PreviousTxnLgrSequence to AMM entries impact any existing AMM invariant checks or rounding logic?"
+      ],
+      "recommended_validator_action": "Enable the amendment.",
+      "review_questions": [
+        "Are there any known issues with ledger entry size limits due to the addition of these fields?"
+      ],
+      "title": "Triage for fixPreviousTxnID"
+    }
+  },
+  "packet_hash": "e2bc2d1011255eed8d6ba213a47882a94d19450ab46ef61e0b0661178d3ed622",
+  "packet_id": "case_058--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "42a20c1d528d6f52b764f1049d7fdfcbeaf98138dbe9cb87077bece3c6e83bc9",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"None. The amendment is a localized fix for ledger entry metadata consistency.\",\n    \"No material financial, compliance, or consensus risks are identified in the facts.\",\n    \"The amendment does not alter transaction processing logic, fee structures, or asset control semantics.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"The amendment name starts with 'fix', indicating it is a corrective measure.\",\n    \"The packet describes the amendment as adding missing fields (PreviousTxnID, PreviousTxnLgrSequence) to specific ledger entry types (DirectoryNode, Amendments, FeeSettings, NegativeUNL, AMM) to improve history tracing.\",\n    \"This is a localized metadata enhancement that does not involve broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, or accounting logic alterations.\",\n    \"The underlying domain mentions AMM, but the change is limited to adding standard history-tracking fields to the AMM ledger entry, not altering AMM mechanics or invariants.\",\n    \"No explicit no-vote advisory or obsolete status is present.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Defines the scope of the amendment as adding history-tracking fields to specific ledger entries, confirming it is a localized fix for metadata consistency rather than a functional change to transaction processing or asset control.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Confirms the standard amendment voting process applies, but does not indicate any specific incompatibility or blocking risk unique to this amendment beyond standard procedure.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Provides version context, confirming the amendment is associated with a specific rippled release, supporting its status as a defined, implemented fix.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixPreviousTxnID' is a localized fix that adds history-tracking fields to ledger entries that previously lacked them. It does not alter transaction semantics, financial invariants, or consensus rules. It meets the criteria for PROCEED as a fix amendment without material risk patterns.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 0,\n    \"packet_verification\": 5,\n    \"validator_skim\": 2\n  },\n  \"forbidden_stronger_claim\": \"The amendment does not introduce new transaction types or change the fundamental structure of ledger entry validation beyond adding optional fields.\",\n  \"missing_evidence\": [\n    \"None critical for triage decision.\"\n  ],\n  \"route\": \"PROCEED\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Does the addition of PreviousTxnID and PreviousTxnLgrSequence to AMM entries impact any existing AMM invariant checks or rounding logic?\"\n    ],\n    \"recommended_validator_action\": \"Enable the amendment.\",\n    \"review_questions\": [\n      \"Are there any known issues with ledger entry size limits due to the addition of these fields?\"\n    ],\n    \"title\": \"Triage for fixPreviousTxnID\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 707,
+      "prompt_tokens": 1116,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1823
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:20:47Z"
+}

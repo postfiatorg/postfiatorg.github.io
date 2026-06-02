@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:52:22Z",
+  "error": "",
+  "event_id": "case_009",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "5d53109e362bb780930441881c6e134796fa569840ec49ce47d5742155b6cfb2",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and association with rippled version 2.1.1, supporting the context that it is a valid, processed amendment."
+      }
+    ],
+    "decision_summary": "Fact F4 provides direct evidence that the amendment fixAMMOverflowOffer has been enabled, citing a specific ledger number (87232257) and timestamp (2024-04-11T07:41:50.000Z) for its activation. This satisfies the condition for the ENABLED label.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "a08c6cc090c7ef6fc16178883922a3ca0d80877317067ed81e5e9733191c8f74",
+  "packet_id": "case_009--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "7b816aec519b8c6a54cd90585dcccee4016ec7c055455f9c6c4c43f8d549f7e1",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and association with rippled version 2.1.1, supporting the context that it is a valid, processed amendment.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 provides direct evidence that the amendment fixAMMOverflowOffer has been enabled, citing a specific ledger number (87232257) and timestamp (2024-04-11T07:41:50.000Z) for its activation. This satisfies the condition for the ENABLED label.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 247,
+      "prompt_tokens": 794,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1041
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:52:18Z"
+}

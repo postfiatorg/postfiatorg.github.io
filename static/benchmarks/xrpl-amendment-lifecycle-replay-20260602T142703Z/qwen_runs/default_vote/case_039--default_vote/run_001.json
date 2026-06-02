@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-02T16:58:24Z",
+  "error": "",
+  "event_id": "case_039",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "b9dfa00ab81fa76b62c5ed430f28181f116bee9e614b2c90c61fd0764c3980aa",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical changes of the amendment (adding fields to ledger entries) but does not specify the default vote stance of the source code or release notes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the version (3.0.0) where the amendment was introduced, but does not provide the default vote configuration for that release."
+      }
+    ],
+    "decision_summary": "The provided packet contains technical descriptions of the amendment and its introduction version, but lacks explicit information regarding the default vote setting in the source code or release notes for the latest stable release. Without explicit evidence of a YES or NO default, the vote cannot be inferred.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote in the source code or release notes for rippled version 3.0.0 or later.",
+      "Documentation indicating whether the amendment is enabled by default in the latest stable release."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "aea915c9a2b994b797a874e61b669b4b6c230e5bb02dbe613abd626409379fbf",
+  "packet_id": "case_039--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "42bdd5bfc7c4932ae0925a205b1fb12d31f65b6f87e4a82313404389c05f8523",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical changes of the amendment (adding fields to ledger entries) but does not specify the default vote stance of the source code or release notes.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Identifies the version (3.0.0) where the amendment was introduced, but does not provide the default vote configuration for that release.\"\n    }\n  ],\n  \"decision_summary\": \"The provided packet contains technical descriptions of the amendment and its introduction version, but lacks explicit information regarding the default vote setting in the source code or release notes for the latest stable release. Without explicit evidence of a YES or NO default, the vote cannot be inferred.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote in the source code or release notes for rippled version 3.0.0 or later.\",\n    \"Documentation indicating whether the amendment is enabled by default in the latest stable release.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 266,
+      "prompt_tokens": 733,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 999
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:58:20Z"
+}

@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:56:05Z",
+  "error": "",
+  "event_id": "case_071",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "27b77649e26607e31ccf415fcaf0453f25703da5145e369148c9197bdd12278d",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's introduction in rippled version 1.10.0, providing context for its availability but not its current state."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general process requiring supermajority for activation, which F4 confirms has been completed."
+      }
+    ],
+    "decision_summary": "Fact F4 provides direct evidence that the amendment 'ImmediateOfferKilled' is included in the validated ledger Amendments object with a recorded enablement date of 2023-08-21. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "b568e8ad2636c62e9241bdbf6700625158fa44e8670cb9247f31890c5377994a",
+  "packet_id": "case_071--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "fb7d15df2f9477db70f105091c0da5a7c1b4fa210641b95c27b66dd82e759deb",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's introduction in rippled version 1.10.0, providing context for its availability but not its current state.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Describes the general process requiring supermajority for activation, which F4 confirms has been completed.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 provides direct evidence that the amendment 'ImmediateOfferKilled' is included in the validated ledger Amendments object with a recorded enablement date of 2023-08-21. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 276,
+      "prompt_tokens": 794,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1070
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:56:01Z"
+}

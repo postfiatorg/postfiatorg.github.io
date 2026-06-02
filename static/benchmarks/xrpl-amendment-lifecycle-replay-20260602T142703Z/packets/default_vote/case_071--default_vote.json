@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_071",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "75A7E01C505DD5A179DFE3E000A9B6F1EDDEB55A12F95579A23E15B15DC8BE5A",
+    "amendment_name": "ImmediateOfferKilled",
+    "decision_surface": "XRPL validator amendment decision surface for ImmediateOfferKilled.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "ImmediateOfferKilled: Changes OfferCreate transactions so that if an Offer uses tfImmediateOrCancel and transaction processing kills the Offer without moving any funds, the transaction uses the result code tecKILLED instead of tesSUCCESS. If the Offer exchanges any amount of funds, even a small amount, the transaction still uses tesSUCCESS. There are no other changes to the processing of the transaction (for example, in terms of whether it cleans up expired and unfunded Offers that were encountered in the ledger during transaction processing). Without this amendment, \"Immediate or Cancel\" Offers that failed to move any funds returned a tesSUCCESS result code, which could be confusing because the transaction effectively did nothing.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "ImmediateOfferKilled appears in XRPSCAN with introduced rippled version 1.10.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "cabaccb31ae4b7e1276ae74b599f0f8d15fc85bb421947303df490ac2edaa3cd",
+  "packet_id": "case_071--default_vote",
+  "packet_version": 1
+}

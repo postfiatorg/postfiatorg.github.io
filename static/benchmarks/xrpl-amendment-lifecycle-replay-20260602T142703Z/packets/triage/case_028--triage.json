@@ -1,0 +1,47 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_028",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "C98D98EE9616ACD36E81FDEB8D41D349BF5F1B41DD64A0ABC1FE9AA5EA267E9C",
+    "amendment_name": "XChainBridge",
+    "decision_surface": "XRPL validator amendment decision surface for XChainBridge.",
+    "source_facts": [
+      {
+        "claim": "XChainBridge: Adds cross-chain bridges, enabling the transfer of digital assets between networks (for example, between Mainnet and a sidechain). Standards draft: XLS-0038 Cross-Chain Bridge. Adds new transactions: - XChainAccountCreateCommit - Create a new account for a witness server to submit transactions on an issuing chain.. - XChainAddAccountCreateAttestation - Provide an attestation that an account was created for a witness server to use. - XChainAddClaimAttestation - Provide an attestation that assets were locked on a locking chain. - XChainClaim - Claim assets on the destination chain. - XChainCommit - Locks assets on the locking chain. - XChainCreateBridge - Create a bridge ledger object. - XChainCreateClaimID - Create a new cross-chain claim ID that is used for a cross-chain transfer. - XChainModifyBridge - Modify the parameters of a bridge. Adds new ledger entry types: - Bridge - A single cross-chain bridge that connects the XRP Ledger with another blockchain. - XChainOwnedClaimID - A cross-chain transfer of value that includes information of the account on the source chain that locks or burns the funds on the source chain. - XChainOwnedCreateAccountClaimID - Collects at",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "XChainBridge appears in XRPSCAN with introduced rippled version 2.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "XRPSCAN currently reports support count 5 of 35 validations, threshold 28, and no enabled ledger entry for XChainBridge.",
+        "fact_id": "F4",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "66d23e9ebbc200259a09f57a8ee5c72c5c5eb216bdeb7c95c9a68bfc4732e4a1",
+  "packet_id": "case_028--triage",
+  "packet_version": 1
+}

@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-02T16:58:16Z",
+  "error": "",
+  "event_id": "case_037",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "4958a474c2494d757a596182218143428090c5107fbbe5db1bb591c25a1f87bf",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a bug fix ensuring canonical order for asset pairs, which is a stability and correctness improvement rather than a controversial feature change."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 3.0.0, indicating it is part of the standard release cycle and not an experimental or deprecated proposal."
+      }
+    ],
+    "decision_summary": "The amendment 'fixPriceOracleOrder' is described as a fix for data ordering consistency in price oracles. In XRPL governance, bug fixes and stability improvements that do not introduce breaking changes or controversial economic mechanics are typically enabled by default in the source code to ensure network consistency and predictability. The description supports a positive default stance.",
+    "default_vote_confidence": 0.85,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the rippled release notes confirming the default vote setting for this specific amendment."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "899ef4e36b0c61196b2a473a011b01d262da34bc83eb55a09e1a598100305e66",
+  "packet_id": "case_037--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "c9f8f9488d769db8ca5ef847997a9f81794d8094a6cdc4c425d814c9d222262a",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a bug fix ensuring canonical order for asset pairs, which is a stability and correctness improvement rather than a controversial feature change.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 3.0.0, indicating it is part of the standard release cycle and not an experimental or deprecated proposal.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixPriceOracleOrder' is described as a fix for data ordering consistency in price oracles. In XRPL governance, bug fixes and stability improvements that do not introduce breaking changes or controversial economic mechanics are typically enabled by default in the source code to ensure network consistency and predictability. The description supports a positive default stance.\",\n  \"default_vote_confidence\": 0.85,\n  \"missing_evidence\": [\n    \"Explicit statement from the rippled release notes confirming the default vote setting for this specific amendment.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 259,
+      "prompt_tokens": 607,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 866
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:58:13Z"
+}

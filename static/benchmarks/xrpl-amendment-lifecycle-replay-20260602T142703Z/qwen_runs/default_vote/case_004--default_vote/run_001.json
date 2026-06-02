@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:56:16Z",
+  "error": "",
+  "event_id": "case_004",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "5d6e9c776dc61a21d8a19618af256d67c973fc0a66b30997a9c6465c657dbce6",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Explicitly states that validators began voting No as advised due to the vulnerability, indicating the recommended default stance."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms that the software release (rippled 2.6.1) disabled the feature, aligning the source code default with the 'No' vote."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Provides the context for the vulnerability (fee-drain) that necessitated the negative default vote."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the PermissionDelegation amendment contained a critical vulnerability allowing fee draining. Consequently, validators were advised to vote No, and the software release disabled the feature. Therefore, the latest stable release source default vote is NO.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "35f87349337a6c405e0f416643eb1217a21dd878dced4647dfcfc48a3cdf5b1f",
+  "packet_id": "case_004--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "0dec4d7c64dcd80591e4fb821054463ac9059569d8a7542ad0d2aea9ad50e717",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Explicitly states that validators began voting No as advised due to the vulnerability, indicating the recommended default stance.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms that the software release (rippled 2.6.1) disabled the feature, aligning the source code default with the 'No' vote.\"\n    },\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Provides the context for the vulnerability (fee-drain) that necessitated the negative default vote.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the PermissionDelegation amendment contained a critical vulnerability allowing fee draining. Consequently, validators were advised to vote No, and the software release disabled the feature. Therefore, the latest stable release source default vote is NO.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 250,
+      "prompt_tokens": 588,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 838
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:56:12Z"
+}

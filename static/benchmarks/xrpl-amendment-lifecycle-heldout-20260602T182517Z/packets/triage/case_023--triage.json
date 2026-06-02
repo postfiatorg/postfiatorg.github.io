@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_023",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "25BA44241B3BD880770BFA4DA21C7180576831855368CBEC6A3154FDE4A7676E",
+    "amendment_name": "fix1781",
+    "decision_surface": "XRPL validator amendment decision surface for fix1781.",
+    "source_facts": [
+      {
+        "claim": "fix1781: Fixes a bug where certain XRP endpoints were not checked when detecting circular paths. Without this amendment, it is possible to have a payment path where the input to the path is XRP, and an intermediate path step also outputs XRP. This is a \"loop\" payment, and the payment engine disallows such paths because they can have different results when executed forward compared to backwards. With this amendment, those payments fail with the temBAD_PATH_LOOP result code instead.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1781 appears in XRPSCAN with introduced rippled version 1.6.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "6361b01cbf1e0d7b2685b452e7a9c33a03814281ba43d87c4af737cedab3c34a",
+  "packet_id": "case_023--triage",
+  "packet_version": 1
+}

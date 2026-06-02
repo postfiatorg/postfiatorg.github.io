@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_039",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "B4E4F5D2D6FB84DF7399960A732309C9FD530EAE5941838160042833625A6076",
+    "amendment_name": "NegativeUNL",
+    "decision_surface": "XRPL validator amendment decision surface for NegativeUNL.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "NegativeUNL: Implements a \"Negative UNL\" system, where the network can track which validators are temporarily offline and disregard those validators for quorum calculations. This can improve the ability of the network to make progress during periods of network instability.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "NegativeUNL appears in XRPSCAN with introduced rippled version 1.7.3.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "c7f49fba51008d4115c97fa415530de55544dd3d73bacdac3f95d6be90d8e782",
+  "packet_id": "case_039--default_vote",
+  "packet_version": 1
+}

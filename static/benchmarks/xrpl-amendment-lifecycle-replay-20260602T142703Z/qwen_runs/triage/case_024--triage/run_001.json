@@ -1,0 +1,67 @@
+{
+  "completed_at": "2026-06-02T17:16:10Z",
+  "error": "",
+  "event_id": "case_024",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "f50d25178d121cad81db32310be6f353f451813d2d7ffcbb3b37e844aac1899d",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "The packet explicitly states that the status of OwnerPaysFee is 'obsolete/removed' and that an incomplete version was removed in v0.80.0 and never enabled."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Confirms the amendment was removed and never enabled, supporting the classification as retired/obsolete."
+      }
+    ],
+    "decision_summary": "The amendment OwnerPaysFee is explicitly marked as obsolete and removed in the provided facts. According to the task rule, REJECT must be used for retired/obsolete proposals. Therefore, the route is REJECT.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment is active or pending.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [],
+      "recommended_validator_action": "Reject the amendment as it is obsolete and removed.",
+      "review_questions": [],
+      "title": "Reject Obsolete Amendment OwnerPaysFee"
+    }
+  },
+  "packet_hash": "5656a749f257ba72dc9a34935edfb90bf3970fd75c8db9563cf7e6b78d32ecad",
+  "packet_id": "case_024--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "5403b0021da791852ffde97d344813e85c7d0069c715cf7af7145850bef7ef26",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"The packet explicitly states that the status of OwnerPaysFee is 'obsolete/removed' and that an incomplete version was removed in v0.80.0 and never enabled.\"\n},\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Confirms the amendment was removed and never enabled, supporting the classification as retired/obsolete.\"\n}\n],\n\"decision_summary\": \"The amendment OwnerPaysFee is explicitly marked as obsolete and removed in the provided facts. According to the task rule, REJECT must be used for retired/obsolete proposals. Therefore, the route is REJECT.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"The amendment is active or pending.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [],\n\"recommended_validator_action\": \"Reject the amendment as it is obsolete and removed.\",\n\"review_questions\": [],\n\"title\": \"Reject Obsolete Amendment OwnerPaysFee\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 303,
+      "prompt_tokens": 1160,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1463
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:16:06Z"
+}

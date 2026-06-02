@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:55:33Z",
+  "error": "",
+  "event_id": "case_062",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "0ddab7d3c31072176ebdc5de0d61b3ea2e9754887cc8e4177db41fa4e48fac0c",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment identity and its introduction version, supporting the context that it is a valid, trackable amendment."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides the general rule that amendments require supermajority before activation, establishing the baseline process that F4 confirms has been completed."
+      }
+    ],
+    "decision_summary": "Fact F4 provides definitive evidence that the amendment 'fixFillOrKill' (ID 3318EA0CF0755AF15DAC19F2B5C5BCBFF4B78BDD57609ACCAABE2C41309B051A) is present in the validated ledger Amendments object with a recorded enabled_on date of 2024-04-11 and enabled_in_ledger 87236609. This satisfies the condition for the ENABLED state, as the amendment has successfully passed the voting threshold and been activated in the ledger.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "7104a08a05f6de58268664bc7f112b92b5bf982cd87e6154e661da258cfc5a18",
+  "packet_id": "case_062--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "04cce89308a9006c47d155f35e6ee65a1ff5af7cd108cd413579fffb97c20dd2",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment identity and its introduction version, supporting the context that it is a valid, trackable amendment.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides the general rule that amendments require supermajority before activation, establishing the baseline process that F4 confirms has been completed.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 provides definitive evidence that the amendment 'fixFillOrKill' (ID 3318EA0CF0755AF15DAC19F2B5C5BCBFF4B78BDD57609ACCAABE2C41309B051A) is present in the validated ledger Amendments object with a recorded enabled_on date of 2024-04-11 and enabled_in_ledger 87236609. This satisfies the condition for the ENABLED state, as the amendment has successfully passed the voting threshold and been activated in the ledger.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 350,
+      "prompt_tokens": 782,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1132
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:55:28Z"
+}

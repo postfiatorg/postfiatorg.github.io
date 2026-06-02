@@ -1,0 +1,61 @@
+{
+  "completed_at": "2026-06-02T16:59:08Z",
+  "error": "",
+  "event_id": "case_050",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "6d487429a08b612aeacf92805ef370d8b69ea7fb5efe2158f94a6dfafae74ca4",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the functional change (adding optional fields to NFTokenMint) but does not specify the source code default vote or enablement status."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general voting mechanism but does not provide the specific default vote for this amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the version (2.3.0) but does not state the default vote configuration."
+      }
+    ],
+    "decision_summary": "The provided packet facts describe the functionality, voting process, and version introduction of the NFTokenMintOffer amendment. However, none of the facts explicitly state the 'source default vote' (i.e., whether the amendment is enabled by default in the source code or requires explicit enablement). Without explicit evidence of the default configuration, the vote cannot be inferred as YES or NO.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote (YES/NO) in the source code or release notes.",
+      "Documentation indicating whether the amendment is enabled by default in rippled 2.3.0."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "25dea47f44fed323583d78e6cd8ea127006e8f7990859c24ff10bca2c1f76b6f",
+  "packet_id": "case_050--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "0ba10acf457e4ebfc7201ad41db22eac413447e1992f9289496eb5f41344044f",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the functional change (adding optional fields to NFTokenMint) but does not specify the source code default vote or enablement status.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Describes the general voting mechanism but does not provide the specific default vote for this amendment.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Identifies the version (2.3.0) but does not state the default vote configuration.\"\n    }\n  ],\n  \"decision_summary\": \"The provided packet facts describe the functionality, voting process, and version introduction of the NFTokenMintOffer amendment. However, none of the facts explicitly state the 'source default vote' (i.e., whether the amendment is enabled by default in the source code or requires explicit enablement). Without explicit evidence of the default configuration, the vote cannot be inferred as YES or NO.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote (YES/NO) in the source code or release notes.\",\n    \"Documentation indicating whether the amendment is enabled by default in rippled 2.3.0.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 319,
+      "prompt_tokens": 691,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1010
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:59:04Z"
+}

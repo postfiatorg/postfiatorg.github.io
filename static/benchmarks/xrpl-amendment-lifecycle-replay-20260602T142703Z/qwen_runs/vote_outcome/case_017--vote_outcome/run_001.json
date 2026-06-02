@@ -1,0 +1,70 @@
+{
+  "completed_at": "2026-06-02T16:46:49Z",
+  "error": "",
+  "event_id": "case_017",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "e6c5aacba5b8619bf5ee0ff71a6a7baf436069ef092669347255e876f39c54bd",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment is officially marked as OBSOLETE in the XRPL Known Amendments documentation.",
+      "The code associated with this amendment ID is incomplete and non-functional, providing no utility to the network.",
+      "Activating an obsolete amendment wastes validator resources and network consensus capacity without adding features.",
+      "The intended functionality was abandoned in favor of future amendments with new IDs to avoid conflicts."
+    ],
+    "arguments_for_yes": [
+      "There are no arguments for voting YES, as the amendment provides no value and is deprecated."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly states the status of CryptoConditionsSuite is OBSOLETE, indicating it should not be enabled."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Explains that the amendment contains incomplete code that does almost nothing and that future support requires a new ID, rendering this specific ID useless."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Highlights the risk of amendment-blocking; enabling obsolete or broken code increases the risk of network fragmentation or server incompatibility."
+      }
+    ],
+    "decision_summary": "The CryptoConditionsSuite amendment is obsolete and contains incomplete, non-functional code. It has been superseded by the decision to use new amendment IDs for future crypto-condition support. Voting YES would enable dead code with no benefit, while voting NO aligns with the official status of the amendment and best practices for network hygiene.",
+    "forbidden_stronger_claim": "The amendment is malicious or intentionally harmful.",
+    "missing_evidence": [
+      "Current validator set's specific voting configuration for this amendment.",
+      "Real-time network activation threshold status."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "1593d18cf2379f611b904c22c0a319dc7a432f239d9d82a80e9f459fc2a9146f",
+  "packet_id": "case_017--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "a0e6106941f26e8f68307111bf4173a851e0b678b046e0e3710da0c0388e8742",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment is officially marked as OBSOLETE in the XRPL Known Amendments documentation.\",\n    \"The code associated with this amendment ID is incomplete and non-functional, providing no utility to the network.\",\n    \"Activating an obsolete amendment wastes validator resources and network consensus capacity without adding features.\",\n    \"The intended functionality was abandoned in favor of future amendments with new IDs to avoid conflicts.\"\n  ],\n  \"arguments_for_yes\": [\n    \"There are no arguments for voting YES, as the amendment provides no value and is deprecated.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly states the status of CryptoConditionsSuite is OBSOLETE, indicating it should not be enabled.\"\n    },\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Explains that the amendment contains incomplete code that does almost nothing and that future support requires a new ID, rendering this specific ID useless.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Highlights the risk of amendment-blocking; enabling obsolete or broken code increases the risk of network fragmentation or server incompatibility.\"\n    }\n  ],\n  \"decision_summary\": \"The CryptoConditionsSuite amendment is obsolete and contains incomplete, non-functional code. It has been superseded by the decision to use new amendment IDs for future crypto-condition support. Voting YES would enable dead code with no benefit, while voting NO aligns with the official status of the amendment and best practices for network hygiene.\",\n  \"forbidden_stronger_claim\": \"The amendment is malicious or intentionally harmful.\",\n  \"missing_evidence\": [\n    \"Current validator set's specific voting configuration for this amendment.\",\n    \"Real-time network activation threshold status.\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 435,
+      "prompt_tokens": 756,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1191
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:46:44Z"
+}

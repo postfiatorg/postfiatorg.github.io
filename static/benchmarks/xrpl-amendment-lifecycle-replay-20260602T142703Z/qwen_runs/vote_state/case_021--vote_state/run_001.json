@@ -1,0 +1,61 @@
+{
+  "completed_at": "2026-06-02T16:53:05Z",
+  "error": "",
+  "event_id": "case_021",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "52ab3da064481cfe1b837cfa1af03c2945328916abe96ef0cb7c9ee44565b493",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Provides the current support count (17/35) which is below the required threshold (28), and explicitly states there is no enabled ledger entry, ruling out ENABLED and MAJORITY_ACTIVE states."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in version 2.2.0, establishing it as a valid, non-retired amendment subject to voting, rather than VETOED_OR_RETIRED."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Defines the general voting mechanics requiring a supermajority for activation, providing context for interpreting the support counts in F4."
+      }
+    ],
+    "decision_summary": "The amendment fixXChainRewardRounding has 17 out of 35 validations, which is below the required threshold of 28. Furthermore, there is no enabled ledger entry. Since the threshold is not met and it is not enabled, the state is NO_MAJORITY.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Historical support data to determine if MAJORITY_LOST applies (though current state is definitively not majority active)",
+      "Explicit confirmation of retirement status from official XRPL documentation to fully rule out VETOED_OR_RETIRED, though XRPSCAN presence suggests otherwise"
+    ],
+    "state_confidence": 0.95,
+    "vote_state": "NO_MAJORITY"
+  },
+  "packet_hash": "f7b9533f66267cac6cecc620ea33fd71f9a40fe4abde874a6b6d39b7a9a9ef34",
+  "packet_id": "case_021--vote_state",
+  "parsed_label": "NO_MAJORITY",
+  "prompt_hash": "301f9ac72181aec2353f40c9e8474dd6bac8b671abd971b0756afd9d8cd9f61e",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Provides the current support count (17/35) which is below the required threshold (28), and explicitly states there is no enabled ledger entry, ruling out ENABLED and MAJORITY_ACTIVE states.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in version 2.2.0, establishing it as a valid, non-retired amendment subject to voting, rather than VETOED_OR_RETIRED.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Defines the general voting mechanics requiring a supermajority for activation, providing context for interpreting the support counts in F4.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixXChainRewardRounding has 17 out of 35 validations, which is below the required threshold of 28. Furthermore, there is no enabled ledger entry. Since the threshold is not met and it is not enabled, the state is NO_MAJORITY.\",\n  \"missing_evidence\": [\n    \"Historical support data to determine if MAJORITY_LOST applies (though current state is definitively not majority active)\",\n    \"Explicit confirmation of retirement status from official XRPL documentation to fully rule out VETOED_OR_RETIRED, though XRPSCAN presence suggests otherwise\"\n  ],\n  \"state_confidence\": 0.95,\n  \"vote_state\": \"NO_MAJORITY\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 359,
+      "prompt_tokens": 710,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1069
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:53:01Z"
+}

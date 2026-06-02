@@ -1,0 +1,52 @@
+{
+  "completed_at": "2026-06-02T18:35:59Z",
+  "error": "",
+  "event_id": "case_028",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ee303628f0a8b5cbc26df62a0b154d893c7cc19807f0ae611b0961c8e6bb2b7a",
+  "output_hash": "401c0cd0e896ecd8904c474e4a5be6fc5ead7eb686ced290ebf4e3c08b1c0fbb",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The claim states the amendment fixes a bug in unused code and has no known impact on transaction processing. This lack of negative impact and the nature of the fix (unused code) strongly implies a default vote of YES, as there is no reason to reject a harmless bug fix."
+      }
+    ],
+    "decision_summary": "Fact F1 describes the amendment 'fixQualityUpperBound' as fixing a bug in unused code with no known impact on transaction processing. In the context of XRPL governance, amendments that are harmless bug fixes, especially in unused code, are typically supported by default to maintain software health without risk. There is no evidence suggesting a reason to vote NO. Therefore, the inferred default vote is YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the source regarding the default vote recommendation."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "1e12a0f7a5559e5efa4fdd585d0436cf36430040bc9d33b9b5e512132d1427ba",
+  "packet_id": "case_028--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "f1d20cc24f3c64ba7df488e6d73c3de47ff15cd71e6a67aa8b8896b7e20208c6",
+  "raw_message_content": "{\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"The claim states the amendment fixes a bug in unused code and has no known impact on transaction processing. This lack of negative impact and the nature of the fix (unused code) strongly implies a default vote of YES, as there is no reason to reject a harmless bug fix.\"\n}\n],\n\"decision_summary\": \"Fact F1 describes the amendment 'fixQualityUpperBound' as fixing a bug in unused code with no known impact on transaction processing. In the context of XRPL governance, amendments that are harmless bug fixes, especially in unused code, are typically supported by default to maintain software health without risk. There is no evidence suggesting a reason to vote NO. Therefore, the inferred default vote is YES.\",\n\"default_vote_confidence\": 0.95,\n\"missing_evidence\": [\n\"Explicit statement from the source regarding the default vote recommendation.\"\n],\n\"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 217,
+      "prompt_tokens": 632,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 849
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T18:35:56Z"
+}

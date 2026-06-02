@@ -1,0 +1,84 @@
+{
+  "completed_at": "2026-06-02T17:13:23Z",
+  "error": "",
+  "event_id": "case_001",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "02b83db57e910d1ff8bf0c5ac236d20d73ba75fdcc9938c7a3c2f0f7080f439c",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The packet describes an active, unresolved bug in AMM pools where transactions are not executing as intended.",
+      "Official guidance explicitly advises users to avoid new deposits and redeem LP tokens, indicating a pre-fix incident window.",
+      "The decision surface concerns the period before the fix amendment is enabled, requiring a conservative approach to prevent further discrepancies."
+    ],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Identifies the core issue: discrepancies in AMM pools indicating incorrect transaction execution, which constitutes an unresolved bug."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the existence of a pending fix amendment and provides explicit risk mitigation advice (avoid deposits), defining the current state as a pre-fix incident window."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes the timeline context that the AMM feature is live, making the discrepancy an active production issue rather than a theoretical one."
+      }
+    ],
+    "decision_summary": "The packet describes an active vulnerability in the AMM feature where transactions are failing to execute correctly. The official stance is to wait for a fix amendment and avoid usage. This fits the definition of a pre-fix incident window with an unresolved bug. Therefore, the conservative route is to delay action until the fix is available.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 0,
+      "validator_skim": 0
+    },
+    "forbidden_stronger_claim": "Do not claim the amendment should be rejected as obsolete or that the fix is already deployed.",
+    "missing_evidence": [
+      "Specific technical details of the discrepancy mechanism.",
+      "Timeline for the fix amendment's expected enablement."
+    ],
+    "route": "DELAY_FOR_FIX",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any evidence that the discrepancy is not a bug but intended behavior?",
+        "Has the fix amendment already been enabled in the network?"
+      ],
+      "recommended_validator_action": "Delay validation of new AMM interactions until the fix amendment is enabled and the bug is resolved.",
+      "review_questions": [
+        "Are there any other active AMM pools affected by this discrepancy?",
+        "What is the current status of the fix amendment in the voting process?"
+      ],
+      "title": "Triage: AMM Post-Launch Pool Discrepancy"
+    }
+  },
+  "packet_hash": "c209f9e57c1da69f1d16396c5a13a8ead51ff9474e3265db5a5f8ec394533679",
+  "packet_id": "case_001--triage",
+  "parsed_label": "DELAY_FOR_FIX",
+  "prompt_hash": "cdffbf2ae641ac04457941347e8772387321bdef705acd980e1d6cd4bf74fa21",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The packet describes an active, unresolved bug in AMM pools where transactions are not executing as intended.\",\n    \"Official guidance explicitly advises users to avoid new deposits and redeem LP tokens, indicating a pre-fix incident window.\",\n    \"The decision surface concerns the period before the fix amendment is enabled, requiring a conservative approach to prevent further discrepancies.\"\n  ],\n  \"arguments_for_proceeding\": [],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Identifies the core issue: discrepancies in AMM pools indicating incorrect transaction execution, which constitutes an unresolved bug.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the existence of a pending fix amendment and provides explicit risk mitigation advice (avoid deposits), defining the current state as a pre-fix incident window.\"\n    },\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Establishes the timeline context that the AMM feature is live, making the discrepancy an active production issue rather than a theoretical one.\"\n    }\n  ],\n  \"decision_summary\": \"The packet describes an active vulnerability in the AMM feature where transactions are failing to execute correctly. The official stance is to wait for a fix amendment and avoid usage. This fits the definition of a pre-fix incident window with an unresolved bug. Therefore, the conservative route is to delay action until the fix is available.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 0,\n    \"packet_verification\": 0,\n    \"validator_skim\": 0\n  },\n  \"forbidden_stronger_claim\": \"Do not claim the amendment should be rejected as obsolete or that the fix is already deployed.\",\n  \"missing_evidence\": [\n    \"Specific technical details of the discrepancy mechanism.\",\n    \"Timeline for the fix amendment's expected enablement.\"\n  ],\n  \"route\": \"DELAY_FOR_FIX\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Is there any evidence that the discrepancy is not a bug but intended behavior?\",\n      \"Has the fix amendment already been enabled in the network?\"\n    ],\n    \"recommended_validator_action\": \"Delay validation of new AMM interactions until the fix amendment is enabled and the bug is resolved.\",\n    \"review_questions\": [\n      \"Are there any other active AMM pools affected by this discrepancy?\",\n      \"What is the current status of the fix amendment in the voting process?\"\n    ],\n    \"title\": \"Triage: AMM Post-Launch Pool Discrepancy\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 601,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1664
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:13:15Z"
+}

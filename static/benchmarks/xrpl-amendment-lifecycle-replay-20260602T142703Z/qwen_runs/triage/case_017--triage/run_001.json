@@ -1,0 +1,67 @@
+{
+  "completed_at": "2026-06-02T17:15:35Z",
+  "error": "",
+  "event_id": "case_017",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "8a91e2e67461cd56bed17acdd8aecba108aa5132e40d5e285688534b15f0be0d",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States the amendment was added before implementation was complete and refers to incomplete code which does almost nothing."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly classifies the amendment status as obsolete/removed."
+      }
+    ],
+    "decision_summary": "The packet explicitly identifies the amendment as obsolete and containing incomplete code that does almost nothing. According to the task rule, REJECT is the required route for retired/obsolete proposals.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment is safe to enable for production use.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [],
+      "recommended_validator_action": "Vote NO or ignore; do not enable.",
+      "review_questions": [],
+      "title": "Reject Obsolete CryptoConditionsSuite Amendment"
+    }
+  },
+  "packet_hash": "4425ecbef47f13fe62a63afe25ab310fefa87e2be394b8e2b5ba5aa6699094a4",
+  "packet_id": "case_017--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "c8cf625319280b0e3848ce0520807963e5fcb301b7be609dc74254dfc3b2e6f6",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [],\n  \"arguments_for_proceeding\": [],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"States the amendment was added before implementation was complete and refers to incomplete code which does almost nothing.\"\n    },\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly classifies the amendment status as obsolete/removed.\"\n    }\n  ],\n  \"decision_summary\": \"The packet explicitly identifies the amendment as obsolete and containing incomplete code that does almost nothing. According to the task rule, REJECT is the required route for retired/obsolete proposals.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 0,\n    \"packet_verification\": 5,\n    \"validator_skim\": 2\n  },\n  \"forbidden_stronger_claim\": \"The amendment is safe to enable for production use.\",\n  \"missing_evidence\": [],\n  \"route\": \"REJECT\",\n  \"route_confidence\": 1.0,\n  \"validator_work_item\": {\n    \"override_questions\": [],\n    \"recommended_validator_action\": \"Vote NO or ignore; do not enable.\",\n    \"review_questions\": [],\n    \"title\": \"Reject Obsolete CryptoConditionsSuite Amendment\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 302,
+      "prompt_tokens": 1223,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1525
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:15:30Z"
+}

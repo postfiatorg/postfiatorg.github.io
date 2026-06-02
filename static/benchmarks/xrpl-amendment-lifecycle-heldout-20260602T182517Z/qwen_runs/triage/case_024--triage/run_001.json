@@ -1,0 +1,87 @@
+{
+  "completed_at": "2026-06-02T18:40:44Z",
+  "error": "",
+  "event_id": "case_024",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ee303628f0a8b5cbc26df62a0b154d893c7cc19807f0ae611b0961c8e6bb2b7a",
+  "output_hash": "f20368269d6e1b64df14794f76b21e8806b94f990472bc7fe33fdb7969f9520a",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment name starts with 'fix' and the packet describes it as fixing a bug in rounding semantics.",
+      "The fix ensures the minimum threshold for amendment activation is never less than 80% of trusted validators, correcting a scenario where it could activate with ~77.8%.",
+      "The packet does not describe broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, freeze/authorization bypasses, or other material risk patterns that would require HOLD_FOR_CHALLENGE.",
+      "The packet does not describe an unresolved bug or vulnerability requiring DELAY_FOR_FIX; rather, it presents the fix itself.",
+      "There is no explicit no-vote advisory or indication that the fix is obsolete."
+    ],
+    "arguments_for_proceeding": [
+      "Fact F1 explicitly states the amendment fixes a bug causing incorrect majority calculation due to rounding.",
+      "The amendment name 'fixAmendmentMajorityCalc' starts with 'fix'.",
+      "The packet describes the amendment as the fix itself.",
+      "The risk is localized to the amendment voting threshold calculation, not broader asset control or systemic consensus liveness.",
+      "Per the task rule, a localized fix amendment should PROCEED unless it contains specific material risk patterns, which are absent here."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies the amendment as a fix for a rounding bug in majority calculation, ensuring the 80% threshold is strictly met. This confirms it is a 'fix' amendment addressing a specific, localized logic error."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the importance of amendment voting thresholds, reinforcing why the fix in F1 is necessary to maintain the intended supermajority requirement."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version introduction, supporting its status as a valid, introduced fix."
+      }
+    ],
+    "decision_summary": "The amendment 'fixAmendmentMajorityCalc' is a localized fix for a rounding bug in the amendment majority calculation. It ensures the 80% threshold is strictly enforced. It does not exhibit material risk patterns such as consensus liveness threats, asset control changes, or broad canonicalization issues. Therefore, it proceeds under the rule for fix amendments.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 0,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the rounding fix introduce any new edge cases in validator set changes?"
+      ],
+      "recommended_validator_action": "Enable the amendment to correct the majority calculation threshold.",
+      "review_questions": [
+        "Is the fix strictly limited to the majority calculation logic?"
+      ],
+      "title": "Review fixAmendmentMajorityCalc"
+    }
+  },
+  "packet_hash": "90fe066d06fad961a208c03dfb430bebbaedee1005155a850436f7533fd59d5f",
+  "packet_id": "case_024--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "a59a0266c6e09d163bba98aaa168f70533a8b6acc46fd8ed87251a8d8bb17a7a",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment name starts with 'fix' and the packet describes it as fixing a bug in rounding semantics.\",\n\"The fix ensures the minimum threshold for amendment activation is never less than 80% of trusted validators, correcting a scenario where it could activate with ~77.8%.\",\n\"The packet does not describe broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, freeze/authorization bypasses, or other material risk patterns that would require HOLD_FOR_CHALLENGE.\",\n\"The packet does not describe an unresolved bug or vulnerability requiring DELAY_FOR_FIX; rather, it presents the fix itself.\",\n\"There is no explicit no-vote advisory or indication that the fix is obsolete.\"\n],\n\"arguments_for_proceeding\": [\n\"Fact F1 explicitly states the amendment fixes a bug causing incorrect majority calculation due to rounding.\",\n\"The amendment name 'fixAmendmentMajorityCalc' starts with 'fix'.\",\n\"The packet describes the amendment as the fix itself.\",\n\"The risk is localized to the amendment voting threshold calculation, not broader asset control or systemic consensus liveness.\",\n\"Per the task rule, a localized fix amendment should PROCEED unless it contains specific material risk patterns, which are absent here.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Identifies the amendment as a fix for a rounding bug in majority calculation, ensuring the 80% threshold is strictly met. This confirms it is a 'fix' amendment addressing a specific, localized logic error.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Provides context on the importance of amendment voting thresholds, reinforcing why the fix in F1 is necessary to maintain the intended supermajority requirement.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment's existence and version introduction, supporting its status as a valid, introduced fix.\"\n}\n],\n\"decision_summary\": \"The amendment 'fixAmendmentMajorityCalc' is a localized fix for a rounding bug in the amendment majority calculation. It ensures the 80% threshold is strictly enforced. It does not exhibit material risk patterns such as consensus liveness threats, asset control changes, or broad canonicalization issues. Therefore, it proceeds under the rule for fix amendments.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 0,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n\"missing_evidence\": [],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the rounding fix introduce any new edge cases in validator set changes?\"\n],\n\"recommended_validator_action\": \"Enable the amendment to correct the majority calculation threshold.\",\n\"review_questions\": [\n\"Is the fix strictly limited to the majority calculation logic?\"\n],\n\"title\": \"Review fixAmendmentMajorityCalc\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 666,
+      "prompt_tokens": 1184,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1850
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T18:40:35Z"
+}

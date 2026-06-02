@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-02T18:59:31Z",
+  "error": "",
+  "event_id": "case_036",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "0ce0d685de420d061630cf8c00c82e8b82549e913a9207e8e9bc821f87f12ea8",
+  "output_hash": "524ac63e96f1ca19d4768f03e051cce73d017aeebd6d2467fb188f9f4805d402",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment 'HardenedValidations' is included in the validated ledger Amendments object and provides a historical enabled timestamp (2021-04-08). According to the task rule, the presence of the amendment in the enabled ledger membership constitutes the ENABLED state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "ee81caae307ee196308d325ab363f0d2f2b4bd739f2d2d68c3ef04eec8a5eb84",
+  "packet_id": "case_036--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "9d44e2e749ac9b85012d412bee2ed8bf9b945762e44f1e53203d4cff58ead044",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 confirms that the amendment 'HardenedValidations' is included in the validated ledger Amendments object and provides a historical enabled timestamp (2021-04-08). According to the task rule, the presence of the amendment in the enabled ledger membership constitutes the ENABLED state.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 178,
+      "prompt_tokens": 822,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1000
+    }
+  },
+  "run_index": 3,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T18:59:29Z"
+}

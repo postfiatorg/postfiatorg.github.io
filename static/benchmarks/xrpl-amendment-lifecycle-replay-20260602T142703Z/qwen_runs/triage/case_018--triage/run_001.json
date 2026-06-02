@@ -1,0 +1,67 @@
+{
+  "completed_at": "2026-06-02T17:15:39Z",
+  "error": "",
+  "event_id": "case_018",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "70b6389eb389e2f72e9a03d0cf0ba83ac5d0bfdd9679fe47974bda26d4f9d814",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "The amendment is explicitly marked as OBSOLETE/removed in the Known Amendments status, indicating it is no longer a valid candidate for activation."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The amendment was disabled in v3.1.1 due to a bug and is superseded by BatchV1_1, confirming its retired status."
+      }
+    ],
+    "decision_summary": "The amendment fixBatchInnerSigs is explicitly identified as obsolete and removed in the source facts. It was disabled due to a bug and replaced by a future release (BatchV1_1). According to the task rule, REJECT is the correct route for retired/obsolete proposals.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "This amendment is active and requires immediate voting.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [],
+      "recommended_validator_action": "Ignore this amendment as it is obsolete and has been replaced.",
+      "review_questions": [],
+      "title": "Reject obsolete amendment fixBatchInnerSigs"
+    }
+  },
+  "packet_hash": "3084a5c938015a03251dfdbc6592c0fa9aeac2588993def78670b7e18a4cc92a",
+  "packet_id": "case_018--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "affa0576381f787c68bb34f9661d7dab6e857ac4f65f5b045fd26fb21b2a7c21",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"The amendment is explicitly marked as OBSOLETE/removed in the Known Amendments status, indicating it is no longer a valid candidate for activation.\"\n},\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"The amendment was disabled in v3.1.1 due to a bug and is superseded by BatchV1_1, confirming its retired status.\"\n}\n],\n\"decision_summary\": \"The amendment fixBatchInnerSigs is explicitly identified as obsolete and removed in the source facts. It was disabled due to a bug and replaced by a future release (BatchV1_1). According to the task rule, REJECT is the correct route for retired/obsolete proposals.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"This amendment is active and requires immediate voting.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [],\n\"recommended_validator_action\": \"Ignore this amendment as it is obsolete and has been replaced.\",\n\"review_questions\": [],\n\"title\": \"Reject obsolete amendment fixBatchInnerSigs\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 325,
+      "prompt_tokens": 1190,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1515
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:15:35Z"
+}

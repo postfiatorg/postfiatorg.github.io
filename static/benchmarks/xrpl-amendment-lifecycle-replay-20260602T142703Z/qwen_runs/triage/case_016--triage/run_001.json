@@ -1,0 +1,89 @@
+{
+  "completed_at": "2026-06-02T17:15:30Z",
+  "error": "",
+  "event_id": "case_016",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "7e82c39adbd3c58a053d17f2aee1479ef67f4366f7201feef2d394faef98d267",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment modifies core escrow transaction semantics (EscrowCreate, EscrowFinish, EscrowCancel) to support fungible tokens, introducing new ledger fields (TransferRate, IssuerNode) and accounting logic (LockedAmount).",
+      "It introduces issuer-level permissioning controls (Allow TrustLine Locking flag) that affect asset control semantics for Trust Line Tokens and MPTs.",
+      "The change involves material financial semantics regarding the locking and release of non-XRP assets, which carries risk for token issuers and holders if implementation details regarding rounding, transfer rates, or state consistency are flawed."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name 'TokenEscrow' does not start with 'fix', so the localized fix exception does not apply.",
+      "The functionality is an extension of existing escrow mechanics rather than a new consensus mechanism or liveness-critical change.",
+      "Issuer controls provide a degree of opt-in safety for token issuers regarding whether their tokens can be escrowed."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core functionality: extending escrow to fungible tokens, modifying transaction types, adding ledger fields, and introducing issuer permissioning flags. This constitutes material asset-control and financial semantics."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms the standard amendment voting process and the risk of amendment-blocking, reinforcing the need for conservative review of material changes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Provides context on the amendment's introduction version, confirming it is a known, implemented feature, but does not mitigate the need for review of its semantic implications at the decision surface."
+      }
+    ],
+    "decision_summary": "TokenEscrow introduces material changes to asset-control semantics by allowing fungible tokens to be held in escrow, with issuer-level permissioning. This involves new ledger fields and transaction logic for non-XRP assets. Per the rules, material financial and asset-control semantics require explicit review via HOLD_FOR_CHALLENGE.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on how TransferRate is applied during escrow finish to ensure no value loss or gain due to rounding.",
+      "Interaction details between escrowed tokens and freeze/authorization states."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the implementation correctly handle TransferRate application for MPTs during EscrowFinish?",
+        "Are there any edge cases where the LockedAmount field could become inconsistent with the actual escrow state?"
+      ],
+      "recommended_validator_action": "Review the specification XLS-85 and implementation details for TokenEscrow, focusing on asset-control semantics and issuer permissioning flags.",
+      "review_questions": [
+        "How does the Allow TrustLine Locking flag interact with existing freeze and authorization mechanisms?",
+        "What are the implications for token issuers who do not enable the Allow TrustLine Locking flag?",
+        "Are there any risks of double-spending or loss of tokens during the escrow lifecycle for fungible assets?"
+      ],
+      "title": "Review TokenEscrow Asset-Control Semantics"
+    }
+  },
+  "packet_hash": "65e7edc5e15a3443e4fd09b50ffbc3836daf09a8600c2da55dcc4bcb6b01f18d",
+  "packet_id": "case_016--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "2b4ae3ca7cdac982559bf723c9b6120ef9c0578fc2925fbdc70dc2fcc24919f1",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The amendment modifies core escrow transaction semantics (EscrowCreate, EscrowFinish, EscrowCancel) to support fungible tokens, introducing new ledger fields (TransferRate, IssuerNode) and accounting logic (LockedAmount).\",\n    \"It introduces issuer-level permissioning controls (Allow TrustLine Locking flag) that affect asset control semantics for Trust Line Tokens and MPTs.\",\n    \"The change involves material financial semantics regarding the locking and release of non-XRP assets, which carries risk for token issuers and holders if implementation details regarding rounding, transfer rates, or state consistency are flawed.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"The amendment name 'TokenEscrow' does not start with 'fix', so the localized fix exception does not apply.\",\n    \"The functionality is an extension of existing escrow mechanics rather than a new consensus mechanism or liveness-critical change.\",\n    \"Issuer controls provide a degree of opt-in safety for token issuers regarding whether their tokens can be escrowed.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the core functionality: extending escrow to fungible tokens, modifying transaction types, adding ledger fields, and introducing issuer permissioning flags. This constitutes material asset-control and financial semantics.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Confirms the standard amendment voting process and the risk of amendment-blocking, reinforcing the need for conservative review of material changes.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Provides context on the amendment's introduction version, confirming it is a known, implemented feature, but does not mitigate the need for review of its semantic implications at the decision surface.\"\n    }\n  ],\n  \"decision_summary\": \"TokenEscrow introduces material changes to asset-control semantics by allowing fungible tokens to be held in escrow, with issuer-level permissioning. This involves new ledger fields and transaction logic for non-XRP assets. Per the rules, material financial and asset-control semantics require explicit review via HOLD_FOR_CHALLENGE.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 45,\n    \"packet_verification\": 10,\n    \"validator_skim\": 5\n  },\n  \"forbidden_stronger_claim\": \"REJECT\",\n  \"missing_evidence\": [\n    \"Specific details on how TransferRate is applied during escrow finish to ensure no value loss or gain due to rounding.\",\n    \"Interaction details between escrowed tokens and freeze/authorization states.\"\n  ],\n  \"route\": \"HOLD_FOR_CHALLENGE\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Does the implementation correctly handle TransferRate application for MPTs during EscrowFinish?\",\n      \"Are there any edge cases where the LockedAmount field could become inconsistent with the actual escrow state?\"\n    ],\n    \"recommended_validator_action\": \"Review the specification XLS-85 and implementation details for TokenEscrow, focusing on asset-control semantics and issuer permissioning flags.\",\n    \"review_questions\": [\n      \"How does the Allow TrustLine Locking flag interact with existing freeze and authorization mechanisms?\",\n      \"What are the implications for token issuers who do not enable the Allow TrustLine Locking flag?\",\n      \"Are there any risks of double-spending or loss of tokens during the escrow lifecycle for fungible assets?\"\n    ],\n    \"title\": \"Review TokenEscrow Asset-Control Semantics\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 812,
+      "prompt_tokens": 1267,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 2079
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:15:20Z"
+}

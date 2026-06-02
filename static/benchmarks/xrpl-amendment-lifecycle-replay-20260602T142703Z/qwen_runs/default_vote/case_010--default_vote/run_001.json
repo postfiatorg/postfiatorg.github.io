@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-02T16:56:42Z",
+  "error": "",
+  "event_id": "case_010",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "9247749f8c20ea4d474256f0b830cd8758952c57a6a89c66545b2ff84bb8dd5b",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the LendingProtocol as enabling uncollateralized loans relying on off-chain underwriting, which introduces significant counterparty and systemic risk, typically leading to a conservative default stance in stable releases."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with rippled version 3.1.0, establishing the context of the 'latest stable release' for the inference."
+      }
+    ],
+    "decision_summary": "The LendingProtocol introduces uncollateralized lending via off-chain underwriting (F1). In the context of XRPL governance, features introducing high-risk financial instruments or relying on external trust assumptions often default to NO or require explicit opt-in to protect the network's stability and validator consensus. Without explicit evidence of a YES default in the source description, and given the risk profile, the safe inference for a stable release default is NO.",
+    "default_vote_confidence": 0.65,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement in the source description regarding the default vote value.",
+      "Historical voting patterns for similar high-risk financial protocol amendments."
+    ],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "854ea641b64e260c0429a7567818a349c7cc7598217ef4733c86a3cd2d97b187",
+  "packet_id": "case_010--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "330472ee412034a9065de51280d12e0180d4bc358e6ac3cad1570a6c8063bab2",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the LendingProtocol as enabling uncollateralized loans relying on off-chain underwriting, which introduces significant counterparty and systemic risk, typically leading to a conservative default stance in stable releases.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is associated with rippled version 3.1.0, establishing the context of the 'latest stable release' for the inference.\"\n    }\n  ],\n  \"decision_summary\": \"The LendingProtocol introduces uncollateralized lending via off-chain underwriting (F1). In the context of XRPL governance, features introducing high-risk financial instruments or relying on external trust assumptions often default to NO or require explicit opt-in to protect the network's stability and validator consensus. Without explicit evidence of a YES default in the source description, and given the risk profile, the safe inference for a stable release default is NO.\",\n  \"default_vote_confidence\": 0.65,\n  \"missing_evidence\": [\n    \"Explicit statement in the source description regarding the default vote value.\",\n    \"Historical voting patterns for similar high-risk financial protocol amendments.\"\n  ],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 296,
+      "prompt_tokens": 617,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 913
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:56:38Z"
+}

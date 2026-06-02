@@ -1,0 +1,67 @@
+{
+  "completed_at": "2026-06-02T17:16:19Z",
+  "error": "",
+  "event_id": "case_026",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "61317a8ef2279c0c9d4f2a010b1851e8a2c11d5bf1967b27242ffc310bdd4769",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States that the SusPay amendment was replaced by the Escrow amendment, indicating it is no longer the active proposal."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly marks the status of SusPay as 'obsolete/removed', which triggers the REJECT rule for retired/obsolete proposals."
+      }
+    ],
+    "decision_summary": "The packet explicitly identifies the SusPay amendment as obsolete and replaced by the Escrow amendment. According to the task rules, REJECT must be used for retired or obsolete proposals. Therefore, the amendment is rejected.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "Claiming the amendment is active or requires security review for implementation details.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [],
+      "recommended_validator_action": "Reject the amendment as it is obsolete and replaced.",
+      "review_questions": [],
+      "title": "Reject Obsolete SusPay Amendment"
+    }
+  },
+  "packet_hash": "2340020e089adc5163e41e6dc11e74e897f7d114ce870db46ae38448c9220392",
+  "packet_id": "case_026--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "0b67886691dc91cf3ed7bf406af0e4170579f147dc7ce934f26ebf12093b784a",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [],\n  \"arguments_for_proceeding\": [],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"States that the SusPay amendment was replaced by the Escrow amendment, indicating it is no longer the active proposal.\"\n    },\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly marks the status of SusPay as 'obsolete/removed', which triggers the REJECT rule for retired/obsolete proposals.\"\n    }\n  ],\n  \"decision_summary\": \"The packet explicitly identifies the SusPay amendment as obsolete and replaced by the Escrow amendment. According to the task rules, REJECT must be used for retired or obsolete proposals. Therefore, the amendment is rejected.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 0,\n    \"packet_verification\": 5,\n    \"validator_skim\": 2\n  },\n  \"forbidden_stronger_claim\": \"Claiming the amendment is active or requires security review for implementation details.\",\n  \"missing_evidence\": [],\n  \"route\": \"REJECT\",\n  \"route_confidence\": 1.0,\n  \"validator_work_item\": {\n    \"override_questions\": [],\n    \"recommended_validator_action\": \"Reject the amendment as it is obsolete and replaced.\",\n    \"review_questions\": [],\n    \"title\": \"Reject Obsolete SusPay Amendment\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 331,
+      "prompt_tokens": 1019,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1350
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:16:15Z"
+}

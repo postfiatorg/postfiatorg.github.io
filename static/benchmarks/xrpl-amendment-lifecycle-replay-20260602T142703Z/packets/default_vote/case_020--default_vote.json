@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_020",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "36799EA497B1369B170805C078AEFE6188345F9B3E324C21E9CA3FF574E3C3D6",
+    "amendment_name": "fixNFTokenNegOffer",
+    "decision_surface": "XRPL validator amendment decision surface for fixNFTokenNegOffer.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixNFTokenNegOffer: This amendment fixes a bug in the NonFungibleTokensV1 amendment code where NFTs could be traded for negative amounts of money. Without this fix, users could place and accept an offer to buy or sell a NFToken for a negative amount of money, which resulted in the person \"buying\" the NFT also receiving money from the \"seller\". With this amendment, NFT offers for negative amounts are considered invalid. This amendment has no effect unless the NonFungibleTokensV1 amendment is enabled. This amendment is obsolete because its effects are included as part of NonFungibleTokensV1_1.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixNFTokenNegOffer appears in XRPSCAN with introduced rippled version 1.9.2.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "09139d4810ae00c01deea5cae1b4177047a4f25f7bfad5824ad736bb73078f5a",
+  "packet_id": "case_020--default_vote",
+  "packet_version": 1
+}

@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_025",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "8F81B066ED20DAECA20DF57187767685EEF3980B228E0667A650BAF24426D3B4",
+    "amendment_name": "fixCheckThreading",
+    "decision_surface": "XRPL validator amendment decision surface for fixCheckThreading.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixCheckThreading: Changes the way Checks transactions affect account metadata, so that Checks are properly added to the account history of the receiving account. (Specifically, they update the PreviousTxnID and PreviousTxnLedgerSeq fields of the receiving account's AccountRoot object, which can be used to trace the \"thread\" of transactions that affected the account and the objects it owns.) Without this amendment, Checks transactions (CheckCreate, CheckCash, and CheckCancel) only update the account history of the sender. With this amendment, those transactions affect both the sending and receiving accounts. This amendment has no effect unless the Checks amendment is also enabled.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixCheckThreading appears in XRPSCAN with introduced rippled version 1.4.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "edd13fad9347e8c47a5117e19c21d54a46cdd5c9aed09f74fc3bbbef80e16a3f",
+  "packet_id": "case_025--vote_outcome",
+  "packet_version": 1
+}

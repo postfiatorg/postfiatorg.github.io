@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_062",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "3318EA0CF0755AF15DAC19F2B5C5BCBFF4B78BDD57609ACCAABE2C41309B051A",
+    "amendment_name": "fixFillOrKill",
+    "decision_surface": "XRPL validator amendment decision surface for fixFillOrKill.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixFillOrKill: This amendment fixes an issue introduced in the FlowCross amendment. Offers with the tfFillOrKill flag set and tfSell not set will fail if the exchange rate on the offer is better than, but doesn't exactly match, the order book rate. This amendment enables the payment engine to properly handle this scenario and allow offers to cross. This amendment has no effect unless the FlowCross amendment is enabled.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixFillOrKill appears in XRPSCAN with introduced rippled version 2.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "106b6cefac2897f0619becaeee1e0bb08682c9cef19ba4926ed79545bef43b08",
+  "packet_id": "case_062--default_vote",
+  "packet_version": 1
+}

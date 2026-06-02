@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:54:02Z",
+  "error": "",
+  "event_id": "case_039",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "0a1cb64a02ca7aa9b0bf9e1e3458e3c5b3c1d6b30454e560d1ecf437a90ee339",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which are the definitive indicators of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and association with rippled version 3.0.0, providing context for its lifecycle but secondary to the ledger state evidence in F4."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Defines the general process for amendment activation, establishing the criteria that F4 satisfies (sustained supermajority leading to activation)."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the amendment fixIncludeKeyletFields has been enabled. Fact F4 explicitly reports that the amendment ID is contained in the validated ledger Amendments object and provides a specific enabled_on timestamp (2026-01-27) and enabled_in_ledger (101852417). According to the task rules, 'ENABLED means the source facts show enabled ledger membership.' The presence in the validated ledger and the enabled metadata confirm this state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "3bb41ad88f93b245f0ef56392f7dfb7b4d5f8106b8c78fb6cf90a08740802ce4",
+  "packet_id": "case_039--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "fe35681505eaa4f281cef49dba14cffeceee6e93a9054422cad07c44dcb5a2f0",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which are the definitive indicators of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and association with rippled version 3.0.0, providing context for its lifecycle but secondary to the ledger state evidence in F4.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Defines the general process for amendment activation, establishing the criteria that F4 satisfies (sustained supermajority leading to activation).\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the amendment fixIncludeKeyletFields has been enabled. Fact F4 explicitly reports that the amendment ID is contained in the validated ledger Amendments object and provides a specific enabled_on timestamp (2026-01-27) and enabled_in_ledger (101852417). According to the task rules, 'ENABLED means the source facts show enabled ledger membership.' The presence in the validated ledger and the enabled metadata confirm this state.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 328,
+      "prompt_tokens": 792,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1120
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:53:58Z"
+}

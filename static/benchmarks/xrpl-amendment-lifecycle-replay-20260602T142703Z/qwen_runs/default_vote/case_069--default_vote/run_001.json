@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T17:00:23Z",
+  "error": "",
+  "event_id": "case_069",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "f5e491b9f22e00668c4936c26c4820c9ff31c3f9ae7bb8ea1f5d0a16d8bc1e92",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a cleanup of legacy bug artifacts (trust lines to self) with no functional change to protocol logic, implying it is safe and beneficial to enable."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 1.10.0, establishing it as a mature, long-standing amendment in the XRPL ecosystem."
+      }
+    ],
+    "decision_summary": "The amendment 'fixTrustLinesToSelf' is a maintenance update designed to remove obsolete trust lines created by a bug in 2013. It has no negative side effects and cleans up the ledger. Such maintenance amendments are standardly supported by the community and validators to ensure ledger hygiene. Therefore, the default vote is YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "1b3c8f585fa86e2f41ecf1a741aec0ba79785fb7a1e1886c07a5b52555b91265",
+  "packet_id": "case_069--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "659fe4fa83462bf156a8ff5bbe197ffc6d88fdf066e545dd9331a9b83716e9e0",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a cleanup of legacy bug artifacts (trust lines to self) with no functional change to protocol logic, implying it is safe and beneficial to enable.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 1.10.0, establishing it as a mature, long-standing amendment in the XRPL ecosystem.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixTrustLinesToSelf' is a maintenance update designed to remove obsolete trust lines created by a bug in 2013. It has no negative side effects and cleans up the ledger. Such maintenance amendments are standardly supported by the community and validators to ensure ledger hygiene. Therefore, the default vote is YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 239,
+      "prompt_tokens": 762,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1001
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:00:19Z"
+}

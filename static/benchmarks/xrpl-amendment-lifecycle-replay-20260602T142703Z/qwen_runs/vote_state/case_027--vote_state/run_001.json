@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:53:24Z",
+  "error": "",
+  "event_id": "case_027",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "0f47c1f36ccb97dac53a537682eb741126c9bc548941b4d964dcec21730e62d3",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly states the status of the 'Tickets' amendment is 'OBSOLETE', which maps directly to the VETOED_OR_RETIRED classification rule for obsolete or retired amendments."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the general amendment process, confirming that amendments have distinct states, but does not override the specific status provided in F5."
+      }
+    ],
+    "decision_summary": "The source fact F5 explicitly identifies the 'Tickets' amendment status as 'OBSOLETE'. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED label.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "232cdc570bb4fbf1dd65b3e57345af63d36c8a210c6572bdad84ba1749164923",
+  "packet_id": "case_027--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "cfe0db51301b918509679010ff20abe9c2dcdd01352be05b86868064a08a33af",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly states the status of the 'Tickets' amendment is 'OBSOLETE', which maps directly to the VETOED_OR_RETIRED classification rule for obsolete or retired amendments.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides context on the general amendment process, confirming that amendments have distinct states, but does not override the specific status provided in F5.\"\n    }\n  ],\n  \"decision_summary\": \"The source fact F5 explicitly identifies the 'Tickets' amendment status as 'OBSOLETE'. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED label.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 218,
+      "prompt_tokens": 635,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 853
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:53:21Z"
+}

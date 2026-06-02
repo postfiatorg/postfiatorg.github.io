@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:52:32Z",
+  "error": "",
+  "event_id": "case_012",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "d5da71e62f19cf6b73a4904845459c0037010406cba2ebbf9431ba1942375dd3",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly states the amendment status is OBSOLETE, which maps directly to the VETOED_OR_RETIRED classification rule for obsolete or retired amendments."
+      },
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Confirms the amendment is not enabled (no enabled ledger entry) and has low support, consistent with a retired or obsolete state rather than an active voting process."
+      }
+    ],
+    "decision_summary": "The amendment PermissionDelegation is classified as VETOED_OR_RETIRED because Fact F5 explicitly identifies its status as OBSOLETE. Fact F4 supports this by showing no enabled ledger entry and minimal validation support, indicating it is no longer an active candidate for enablement.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "4f2b934f55217ebdbac0d6e214f46cf9b4f10f382706b818f1df69fb742d58e7",
+  "packet_id": "case_012--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "9727fd06cf264a9ea25c96448039cbbf6a69f191baf059cd974fa44301d1636c",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly states the amendment status is OBSOLETE, which maps directly to the VETOED_OR_RETIRED classification rule for obsolete or retired amendments.\"\n    },\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Confirms the amendment is not enabled (no enabled ledger entry) and has low support, consistent with a retired or obsolete state rather than an active voting process.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment PermissionDelegation is classified as VETOED_OR_RETIRED because Fact F5 explicitly identifies its status as OBSOLETE. Fact F4 supports this by showing no enabled ledger entry and minimal validation support, indicating it is no longer an active candidate for enablement.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 227,
+      "prompt_tokens": 741,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 968
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:52:29Z"
+}

@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:55:48Z",
+  "error": "",
+  "event_id": "case_066",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "38321cbf7c4434d725f52f988b55f8d807c295dd6566341b58b3dd77f44a6904",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly confirms the amendment is enabled."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "This fact confirms the amendment's existence and association with rippled version 1.11.0, providing context for its lifecycle but is secondary to the ledger state evidence in F4."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "This fact describes the general process for amendment activation, establishing the criteria for what constitutes an 'enabled' state (sustained supermajority leading to activation), which F4 satisfies."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the amendment 'fixNFTokenRemint' (ID: AE35ABDEFBDE520372B31C957020B34A7A4A9DC3115A69803A44016477C84D6E) is present in the validated ledger Amendments object. Fact F4 specifically reports an enabled_on timestamp of 2023-11-27T14:44:30.000Z and an enabled_in_ledger of 84206081. According to the task rules, 'ENABLED' means the source facts show enabled ledger membership. Since the amendment is recorded as enabled in the ledger, the state is ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "4553699b50d305116491e1a0133eb1ce3286e3b9d8463d3003047ad62b5b430a",
+  "packet_id": "case_066--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "b2d140e0dd8aa285e70c41ae521f3a975d97ae9a33853b032ae950593634a797",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly confirms the amendment is enabled.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"This fact confirms the amendment's existence and association with rippled version 1.11.0, providing context for its lifecycle but is secondary to the ledger state evidence in F4.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"This fact describes the general process for amendment activation, establishing the criteria for what constitutes an 'enabled' state (sustained supermajority leading to activation), which F4 satisfies.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the amendment 'fixNFTokenRemint' (ID: AE35ABDEFBDE520372B31C957020B34A7A4A9DC3115A69803A44016477C84D6E) is present in the validated ledger Amendments object. Fact F4 specifically reports an enabled_on timestamp of 2023-11-27T14:44:30.000Z and an enabled_in_ledger of 84206081. According to the task rules, 'ENABLED' means the source facts show enabled ledger membership. Since the amendment is recorded as enabled in the ledger, the state is ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 414,
+      "prompt_tokens": 798,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1212
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:55:42Z"
+}

@@ -1,0 +1,78 @@
+{
+  "completed_at": "2026-06-02T17:22:31Z",
+  "error": "",
+  "event_id": "case_069",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "a01c9dd7358535f7cc22ee34913866f5851dce79ff34aa17cbd413267d8de196",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix' and the packet describes it as a targeted fix for a specific historical bug.",
+      "The scope is extremely narrow: deleting two specific trust line IDs created by a bug in 2013.",
+      "The packet explicitly states the amendment does nothing else after deleting these specific objects.",
+      "There is no evidence of broad cross-feature canonicalization, consensus risk, AMM invariant changes, or material token supply accounting changes.",
+      "The fix is localized to specific ledger objects and does not introduce new semantics or systemic risks.",
+      "On test networks lacking these specific trust lines, the amendment has no effect, indicating low blast radius."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the amendment as a localized fix that deletes two specific trust lines created by an old bug and does nothing else, satisfying the criteria for PROCEED under the 'fix' rule."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with a specific rippled version, supporting its status as a defined code change rather than an ambiguous proposal."
+      }
+    ],
+    "decision_summary": "The amendment 'fixTrustLinesToSelf' is a localized fix targeting two specific trust lines created by a historical bug. It does not introduce new semantics, affect consensus, or alter broad accounting rules. Per the task rule, localized fix amendments should PROCEED unless they exhibit material risk patterns, which this packet does not describe.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Are there any known side effects of deleting these specific trust line IDs on accounts that hold them?"
+      ],
+      "recommended_validator_action": "Vote YES to enable the amendment.",
+      "review_questions": [
+        "Does the amendment code strictly limit deletion to the two specified IDs?"
+      ],
+      "title": "Review fixTrustLinesToSelf for localized bug fix"
+    }
+  },
+  "packet_hash": "e3fe4c736bdaa0b18a2d7950c8a72404947676b6fc3fbfddbc56da70fff3b8fb",
+  "packet_id": "case_069--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "d034ac5793f2cca5674603b5b805ad471ee73b2869959ff54eb4cff83c24fba4",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [],\n  \"arguments_for_proceeding\": [\n    \"The amendment name starts with 'fix' and the packet describes it as a targeted fix for a specific historical bug.\",\n    \"The scope is extremely narrow: deleting two specific trust line IDs created by a bug in 2013.\",\n    \"The packet explicitly states the amendment does nothing else after deleting these specific objects.\",\n    \"There is no evidence of broad cross-feature canonicalization, consensus risk, AMM invariant changes, or material token supply accounting changes.\",\n    \"The fix is localized to specific ledger objects and does not introduce new semantics or systemic risks.\",\n    \"On test networks lacking these specific trust lines, the amendment has no effect, indicating low blast radius.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Defines the amendment as a localized fix that deletes two specific trust lines created by an old bug and does nothing else, satisfying the criteria for PROCEED under the 'fix' rule.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is associated with a specific rippled version, supporting its status as a defined code change rather than an ambiguous proposal.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixTrustLinesToSelf' is a localized fix targeting two specific trust lines created by a historical bug. It does not introduce new semantics, affect consensus, or alter broad accounting rules. Per the task rule, localized fix amendments should PROCEED unless they exhibit material risk patterns, which this packet does not describe.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 0,\n    \"packet_verification\": 5,\n    \"validator_skim\": 2\n  },\n  \"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n  \"missing_evidence\": [],\n  \"route\": \"PROCEED\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Are there any known side effects of deleting these specific trust line IDs on accounts that hold them?\"\n    ],\n    \"recommended_validator_action\": \"Vote YES to enable the amendment.\",\n    \"review_questions\": [\n      \"Does the amendment code strictly limit deletion to the two specified IDs?\"\n    ],\n    \"title\": \"Review fixTrustLinesToSelf for localized bug fix\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 553,
+      "prompt_tokens": 1220,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1773
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:22:24Z"
+}

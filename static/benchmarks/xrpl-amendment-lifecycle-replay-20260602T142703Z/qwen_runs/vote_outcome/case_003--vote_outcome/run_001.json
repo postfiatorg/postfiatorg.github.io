@@ -1,0 +1,68 @@
+{
+  "completed_at": "2026-06-02T16:45:32Z",
+  "error": "",
+  "event_id": "case_003",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "22cd9c3c00416ba0acf6d131f53ce17dc1310547913412c6d66d0870e019454b",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment contains a critical security vulnerability allowing unauthorized inner transaction execution.",
+      "Enabling the amendment would expose arbitrary victim accounts to exploitation.",
+      "The rippled client version 3.1.1 explicitly disabled the feature due to the severity of the bug.",
+      "UNL validators were advised to vote No to prevent network compromise."
+    ],
+    "arguments_for_yes": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes the existence of a severe security flaw that compromises account integrity, making the amendment unsafe to enable."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Indicates consensus among trusted validators that the risk outweighs any potential benefit, guiding the correct governance action."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms that the core software maintainers recognized the severity by disabling the feature in the latest release, validating the decision to reject the amendment."
+      }
+    ],
+    "decision_summary": "The Batch amendment must be rejected because it introduces a critical vulnerability allowing unauthorized transactions. Both the technical evidence of the bug and the advisory from UNL validators support a NO vote to protect the network.",
+    "forbidden_stronger_claim": "The amendment is completely harmless and should be enabled immediately.",
+    "missing_evidence": [
+      "Details on whether a patched version of the amendment is available for future voting.",
+      "Specific metrics on the number of accounts potentially affected by the vulnerability."
+    ],
+    "vote_confidence": 0.99,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "91c1b038437e2508229f05b765f57a74139654897cbd4df3b8218f91302f7d6a",
+  "packet_id": "case_003--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "2a2b3b77117205a6ee43d0328b37c0c5f7b0f8179b50298ba2f9ea0e3b620999",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment contains a critical security vulnerability allowing unauthorized inner transaction execution.\",\n    \"Enabling the amendment would expose arbitrary victim accounts to exploitation.\",\n    \"The rippled client version 3.1.1 explicitly disabled the feature due to the severity of the bug.\",\n    \"UNL validators were advised to vote No to prevent network compromise.\"\n  ],\n  \"arguments_for_yes\": [],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Establishes the existence of a severe security flaw that compromises account integrity, making the amendment unsafe to enable.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Indicates consensus among trusted validators that the risk outweighs any potential benefit, guiding the correct governance action.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms that the core software maintainers recognized the severity by disabling the feature in the latest release, validating the decision to reject the amendment.\"\n    }\n  ],\n  \"decision_summary\": \"The Batch amendment must be rejected because it introduces a critical vulnerability allowing unauthorized transactions. Both the technical evidence of the bug and the advisory from UNL validators support a NO vote to protect the network.\",\n  \"forbidden_stronger_claim\": \"The amendment is completely harmless and should be enabled immediately.\",\n  \"missing_evidence\": [\n    \"Details on whether a patched version of the amendment is available for future voting.\",\n    \"Specific metrics on the number of accounts potentially affected by the vulnerability.\"\n  ],\n  \"vote_confidence\": 0.99,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 390,
+      "prompt_tokens": 620,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1010
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:45:27Z"
+}

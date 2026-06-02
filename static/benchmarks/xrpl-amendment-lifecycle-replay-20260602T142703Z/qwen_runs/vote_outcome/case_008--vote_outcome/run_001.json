@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-02T16:46:04Z",
+  "error": "",
+  "event_id": "case_008",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "c7318d5fcd5b579d86f15f12652c8e9219d104c1740e763cba380e5b21fb5f2d",
+  "output_json": {
+    "arguments_for_no": [
+      "Clawback introduces a centralization vector by allowing issuers to reverse transactions, which contradicts the immutable nature of trustless ledgers.",
+      "The feature enables potential censorship or regulatory overreach where funds can be seized without recipient consent, posing risks to user sovereignty.",
+      "While disabled by default, the mere existence of the capability in the protocol may deter adoption by privacy-focused or anti-censorship communities."
+    ],
+    "arguments_for_yes": [
+      "Clawback is disabled by default, requiring explicit opt-in via the lsfAllowTrustLineClawback flag, preserving the default trustless behavior for most users.",
+      "It provides a necessary compliance mechanism for regulated issuers to recover tokens sent to sanctioned accounts, facilitating legal adoption of the XRPL.",
+      "The amendment is well-documented and introduced in a stable rippled version (1.12.0), indicating technical maturity and community review."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes that Clawback is disabled by default and requires explicit opt-in, mitigating immediate risk to non-participating accounts while enabling regulatory compliance for issuers."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms the standard amendment process requiring supermajority, ensuring that the change reflects broad validator consensus and network stability."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Verifies the technical implementation status and versioning, confirming the amendment is ready for deployment and has been integrated into the rippled software."
+      }
+    ],
+    "decision_summary": "The Clawback amendment enables regulatory compliance for issuers by allowing token recovery from sanctioned accounts. Since it is disabled by default and requires explicit opt-in, it balances the need for legal adherence with the preservation of the ledger's default trustless properties. The technical implementation is mature and follows standard governance processes.",
+    "forbidden_stronger_claim": "Clawback will inevitably lead to widespread censorship and the collapse of XRPL's trustless model.",
+    "missing_evidence": [
+      "Data on the actual usage rate of the lsfAllowTrustLineClawback flag by issuers post-activation.",
+      "Specific legal precedents or regulatory requirements mandating such clawback capabilities for digital assets."
+    ],
+    "vote_confidence": 0.85,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "6be794ad2398472d1c9a4137b782e435db4e04a6ff592da2914fb3a07b70f4d6",
+  "packet_id": "case_008--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "12a0396b03108114f245f21436cdca0378e0275aaea13735a8faca5430123f3c",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"Clawback introduces a centralization vector by allowing issuers to reverse transactions, which contradicts the immutable nature of trustless ledgers.\",\n    \"The feature enables potential censorship or regulatory overreach where funds can be seized without recipient consent, posing risks to user sovereignty.\",\n    \"While disabled by default, the mere existence of the capability in the protocol may deter adoption by privacy-focused or anti-censorship communities.\"\n  ],\n  \"arguments_for_yes\": [\n    \"Clawback is disabled by default, requiring explicit opt-in via the lsfAllowTrustLineClawback flag, preserving the default trustless behavior for most users.\",\n    \"It provides a necessary compliance mechanism for regulated issuers to recover tokens sent to sanctioned accounts, facilitating legal adoption of the XRPL.\",\n    \"The amendment is well-documented and introduced in a stable rippled version (1.12.0), indicating technical maturity and community review.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Establishes that Clawback is disabled by default and requires explicit opt-in, mitigating immediate risk to non-participating accounts while enabling regulatory compliance for issuers.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Confirms the standard amendment process requiring supermajority, ensuring that the change reflects broad validator consensus and network stability.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Verifies the technical implementation status and versioning, confirming the amendment is ready for deployment and has been integrated into the rippled software.\"\n    }\n  ],\n  \"decision_summary\": \"The Clawback amendment enables regulatory compliance for issuers by allowing token recovery from sanctioned accounts. Since it is disabled by default and requires explicit opt-in, it balances the need for legal adherence with the preservation of the ledger's default trustless properties. The technical implementation is mature and follows standard governance processes.\",\n  \"forbidden_stronger_claim\": \"Clawback will inevitably lead to widespread censorship and the collapse of XRPL's trustless model.\",\n  \"missing_evidence\": [\n    \"Data on the actual usage rate of the lsfAllowTrustLineClawback flag by issuers post-activation.\",\n    \"Specific legal precedents or regulatory requirements mandating such clawback capabilities for digital assets.\"\n  ],\n  \"vote_confidence\": 0.85,\n  \"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 562,
+      "prompt_tokens": 693,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1255
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:45:57Z"
+}

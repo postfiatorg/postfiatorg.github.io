@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:52:48Z",
+  "error": "",
+  "event_id": "case_016",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "a9c08075ef022c880716fdd815c9eeab69a6b7542007d548cc7598e999091b89",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and association with rippled version 2.5.0, supporting the context that it is a valid, introduced amendment."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides the general rule that amendments require supermajority before activation, establishing the context for interpreting the enabled status in F4."
+      }
+    ],
+    "decision_summary": "Fact F4 provides direct evidence that the amendment TokenEscrow (ID 138B968F...) is included in the validated ledger Amendments object with a recorded enabled_on date of 2026-02-12 and enabled_in_ledger 102204929. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "9f0fa83bfbd1967ac4a0f181f6f8df7f36caf94fe6324f66d1c22b081ca772ca",
+  "packet_id": "case_016--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "193fbc2be30941e95dd24a9fdd2c81908d87852c1fce0f0898968eea0235255a",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and association with rippled version 2.5.0, supporting the context that it is a valid, introduced amendment.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides the general rule that amendments require supermajority before activation, establishing the context for interpreting the enabled status in F4.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 provides direct evidence that the amendment TokenEscrow (ID 138B968F...) is included in the validated ledger Amendments object with a recorded enabled_on date of 2026-02-12 and enabled_in_ledger 102204929. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 307,
+      "prompt_tokens": 784,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1091
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:52:44Z"
+}

@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-02T16:59:56Z",
+  "error": "",
+  "event_id": "case_063",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "db4461691d6e9b71d366008b802be2559fc4229a191a077a5f6250e39b799e4d",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a bug fix for a specific edge case involving trustline authorization, which implies it is a necessary correction to protocol behavior rather than an optional feature."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 2.0.0, establishing it as part of the standard stable release history."
+      }
+    ],
+    "decision_summary": "The amendment 'fixDisallowIncomingV1' is explicitly described as a fix for a functional issue where issuers were unable to authorize trustlines under specific flag configurations. In XRPL governance, bug fixes that restore intended functionality or correct errors are standardly enabled by default in stable releases to ensure network consistency and correctness. There is no indication that this is an opt-in feature or a controversial change requiring manual enablement.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit documentation stating the default vote value in the rippled source code or release notes."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "8280fe7f9fb89e62d7620d70788bfe4102a74cafdf0bb8f965b174c5a4fa4ba4",
+  "packet_id": "case_063--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "f29a3ee2ff15f8738cf4576d43337d25b48797b170089f5a078926789404de45",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a bug fix for a specific edge case involving trustline authorization, which implies it is a necessary correction to protocol behavior rather than an optional feature.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 2.0.0, establishing it as part of the standard stable release history.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixDisallowIncomingV1' is explicitly described as a fix for a functional issue where issuers were unable to authorize trustlines under specific flag configurations. In XRPL governance, bug fixes that restore intended functionality or correct errors are standardly enabled by default in stable releases to ensure network consistency and correctness. There is no indication that this is an opt-in feature or a controversial change requiring manual enablement.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit documentation stating the default vote value in the rippled source code or release notes.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 273,
+      "prompt_tokens": 674,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 947
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:59:52Z"
+}

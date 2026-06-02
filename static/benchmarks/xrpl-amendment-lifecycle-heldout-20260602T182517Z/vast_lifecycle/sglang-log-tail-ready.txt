@@ -1,0 +1,160 @@
+DeepGEMM warmup:  97%|█████████▋| 15887/16384 [00:15<00:00, 538.46it/s][A
+DeepGEMM warmup:  97%|█████████▋| 15941/16384 [00:15<00:00, 537.27it/s][A
+DeepGEMM warmup:  98%|█████████▊| 15995/16384 [00:15<00:00, 536.43it/s][A
+DeepGEMM warmup:  98%|█████████▊| 16049/16384 [00:15<00:00, 535.84it/s][A
+DeepGEMM warmup:  98%|█████████▊| 16103/16384 [00:15<00:00, 535.44it/s][A
+DeepGEMM warmup:  99%|█████████▊| 16157/16384 [00:15<00:00, 534.74it/s][A
+DeepGEMM warmup:  99%|█████████▉| 16211/16384 [00:15<00:00, 532.89it/s][A
+DeepGEMM warmup:  99%|█████████▉| 16265/16384 [00:16<00:00, 531.60it/s][A
+DeepGEMM warmup: 100%|█████████▉| 16319/16384 [00:16<00:00, 530.85it/s][A
+DeepGEMM warmup: 100%|█████████▉| 16373/16384 [00:16<00:00, 530.31it/s][ADeepGEMM warmup: 100%|██████████| 16384/16384 [00:16<00:00, 1009.38it/s]
+[2026-06-02 14:32:00] Entering DeepGEMM JIT Pre-Compile session. It may take a long time (typically 10-20 mins) if you have not run `sglang.compile_deep_gemm`. It is recommended to run `sglang.compile_deep_gemm` with same args as `sglang.launch_server` for pre-compilation to reduce the overhead if you have not run it before. For example: `python3 -m sglang.compile_deep_gemm --model deepseek-ai/DeepSeek-V3 --tp 8 --trust-remote-code`
+[2026-06-02 14:32:00] Try DeepGEMM JIT Compiling for <GEMM_NT_F8F8BF16> N=14336, K=5120, num_groups=1 with all Ms. It only takes a little time (typically 1 sec) if you have run `python3 -m sglang.compile_deep_gemm`.
+[2026-06-02 14:32:00] Required memory for warmup: 0.583984375GB, Available memory: 34.61553955078125GB
+
+DeepGEMM warmup:   0%|          | 0/16384 [00:00<?, ?it/s][A
+DeepGEMM warmup:   0%|          | 1/16384 [00:02<9:15:02,  2.03s/it][A
+DeepGEMM warmup:   0%|          | 17/16384 [00:04<56:35,  4.82it/s] [A
+DeepGEMM warmup:   0%|          | 33/16384 [00:06<44:15,  6.16it/s][A
+DeepGEMM warmup:   0%|          | 65/16384 [00:08<27:38,  9.84it/s][A
+DeepGEMM warmup:  10%|█         | 1697/16384 [00:08<00:33, 444.22it/s][A
+DeepGEMM warmup:  14%|█▍        | 2287/16384 [00:08<00:21, 643.23it/s][A
+DeepGEMM warmup:  18%|█▊        | 2869/16384 [00:08<00:15, 885.53it/s][A
+DeepGEMM warmup:  21%|██        | 3403/16384 [00:08<00:11, 1136.95it/s][A
+DeepGEMM warmup:  24%|██▎       | 3878/16384 [00:08<00:09, 1366.21it/s][A
+DeepGEMM warmup:  26%|██▌       | 4297/16384 [00:09<00:07, 1558.69it/s][A
+DeepGEMM warmup:  28%|██▊       | 4668/16384 [00:09<00:06, 1700.27it/s][A
+DeepGEMM warmup:  31%|███       | 4998/16384 [00:09<00:06, 1791.10it/s][A
+DeepGEMM warmup:  32%|███▏      | 5294/16384 [00:09<00:06, 1843.71it/s][A
+DeepGEMM warmup:  34%|███▍      | 5562/16384 [00:09<00:05, 1870.75it/s][A
+DeepGEMM warmup:  35%|███▌      | 5809/16384 [00:09<00:05, 1864.14it/s][A
+DeepGEMM warmup:  37%|███▋      | 6037/16384 [00:09<00:05, 1838.16it/s][A
+DeepGEMM warmup:  38%|███▊      | 6249/16384 [00:10<00:05, 1801.59it/s][A
+DeepGEMM warmup:  39%|███▉      | 6449/16384 [00:10<00:05, 1759.06it/s][A
+DeepGEMM warmup:  41%|████      | 6638/16384 [00:10<00:05, 1712.24it/s][A
+DeepGEMM warmup:  42%|████▏     | 6818/16384 [00:10<00:05, 1661.95it/s][A
+DeepGEMM warmup:  43%|████▎     | 6990/16384 [00:10<00:05, 1615.97it/s][A
+DeepGEMM warmup:  44%|████▎     | 7155/16384 [00:10<00:05, 1572.97it/s][A
+DeepGEMM warmup:  45%|████▍     | 7315/16384 [00:10<00:05, 1536.47it/s][A
+DeepGEMM warmup:  46%|████▌     | 7470/16384 [00:10<00:05, 1501.55it/s][A
+DeepGEMM warmup:  47%|████▋     | 7621/16384 [00:10<00:05, 1464.62it/s][A
+DeepGEMM warmup:  47%|████▋     | 7768/16384 [00:11<00:06, 1428.41it/s][A
+DeepGEMM warmup:  48%|████▊     | 7911/16384 [00:11<00:06, 1399.16it/s][A
+DeepGEMM warmup:  49%|████▉     | 8051/16384 [00:11<00:06, 1367.04it/s][A
+DeepGEMM warmup:  50%|████▉     | 8188/16384 [00:11<00:06, 1341.87it/s][A
+DeepGEMM warmup:  51%|█████     | 8323/16384 [00:11<00:06, 1310.38it/s][A
+DeepGEMM warmup:  52%|█████▏    | 8454/16384 [00:11<00:06, 1287.43it/s][A
+DeepGEMM warmup:  52%|█████▏    | 8583/16384 [00:11<00:06, 1260.16it/s][A
+DeepGEMM warmup:  53%|█████▎    | 8709/16384 [00:11<00:06, 1243.18it/s][A
+DeepGEMM warmup:  54%|█████▍    | 8834/16384 [00:11<00:06, 1225.17it/s][A
+DeepGEMM warmup:  55%|█████▍    | 8957/16384 [00:11<00:06, 1208.74it/s][A
+DeepGEMM warmup:  55%|█████▌    | 9078/16384 [00:12<00:06, 1185.92it/s][A
+DeepGEMM warmup:  56%|█████▌    | 9197/16384 [00:12<00:06, 1169.91it/s][A
+DeepGEMM warmup:  57%|█████▋    | 9314/16384 [00:12<00:06, 1149.79it/s][A
+DeepGEMM warmup:  58%|█████▊    | 9429/16384 [00:12<00:06, 1136.66it/s][A
+DeepGEMM warmup:  58%|█████▊    | 9543/16384 [00:12<00:06, 1120.51it/s][A
+DeepGEMM warmup:  59%|█████▉    | 9656/16384 [00:12<00:06, 1105.22it/s][A
+DeepGEMM warmup:  60%|█████▉    | 9767/16384 [00:12<00:06, 1091.17it/s][A
+DeepGEMM warmup:  60%|██████    | 9877/16384 [00:12<00:06, 1077.51it/s][A
+DeepGEMM warmup:  61%|██████    | 9985/16384 [00:12<00:05, 1068.16it/s][A
+DeepGEMM warmup:  62%|██████▏   | 10092/16384 [00:13<00:05, 1052.46it/s][A
+DeepGEMM warmup:  62%|██████▏   | 10198/16384 [00:13<00:05, 1041.50it/s][A
+DeepGEMM warmup:  63%|██████▎   | 10303/16384 [00:13<00:05, 1028.36it/s][A
+DeepGEMM warmup:  64%|██████▎   | 10406/16384 [00:13<00:05, 1015.90it/s][A
+DeepGEMM warmup:  64%|██████▍   | 10508/16384 [00:13<00:05, 1007.24it/s][A
+DeepGEMM warmup:  65%|██████▍   | 10609/16384 [00:13<00:05, 997.65it/s] [A
+DeepGEMM warmup:  65%|██████▌   | 10709/16384 [00:13<00:05, 988.72it/s][A
+DeepGEMM warmup:  66%|██████▌   | 10808/16384 [00:13<00:05, 978.04it/s][A
+DeepGEMM warmup:  67%|██████▋   | 10906/16384 [00:13<00:05, 967.20it/s][A
+DeepGEMM warmup:  67%|██████▋   | 11003/16384 [00:13<00:05, 959.63it/s][A
+DeepGEMM warmup:  68%|██████▊   | 11099/16384 [00:14<00:05, 946.76it/s][A
+DeepGEMM warmup:  68%|██████▊   | 11194/16384 [00:14<00:05, 937.49it/s][A
+DeepGEMM warmup:  69%|██████▉   | 11288/16384 [00:14<00:05, 929.65it/s][A
+DeepGEMM warmup:  69%|██████▉   | 11381/16384 [00:14<00:05, 921.07it/s][A
+DeepGEMM warmup:  70%|███████   | 11474/16384 [00:14<00:05, 914.92it/s][A
+DeepGEMM warmup:  71%|███████   | 11566/16384 [00:14<00:05, 906.86it/s][A
+DeepGEMM warmup:  71%|███████   | 11657/16384 [00:14<00:05, 897.87it/s][A
+DeepGEMM warmup:  72%|███████▏  | 11747/16384 [00:14<00:05, 891.62it/s][A
+DeepGEMM warmup:  72%|███████▏  | 11837/16384 [00:14<00:05, 882.66it/s][A
+DeepGEMM warmup:  73%|███████▎  | 11926/16384 [00:15<00:05, 874.50it/s][A
+DeepGEMM warmup:  73%|███████▎  | 12014/16384 [00:15<00:05, 868.59it/s][A
+DeepGEMM warmup:  74%|███████▍  | 12101/16384 [00:15<00:04, 859.67it/s][A
+DeepGEMM warmup:  74%|███████▍  | 12187/16384 [00:15<00:04, 853.89it/s][A
+DeepGEMM warmup:  75%|███████▍  | 12273/16384 [00:15<00:04, 850.11it/s][A
+DeepGEMM warmup:  75%|███████▌  | 12359/16384 [00:15<00:04, 844.87it/s][A
+DeepGEMM warmup:  76%|███████▌  | 12444/16384 [00:15<00:04, 839.06it/s][A
+DeepGEMM warmup:  76%|███████▋  | 12528/16384 [00:15<00:04, 834.94it/s][A
+DeepGEMM warmup:  77%|███████▋  | 12612/16384 [00:15<00:04, 827.14it/s][A
+DeepGEMM warmup:  77%|███████▋  | 12695/16384 [00:15<00:04, 820.75it/s][A
+DeepGEMM warmup:  78%|███████▊  | 12778/16384 [00:16<00:04, 816.17it/s][A
+DeepGEMM warmup:  78%|███████▊  | 12860/16384 [00:16<00:04, 808.69it/s][A
+DeepGEMM warmup:  79%|███████▉  | 12941/16384 [00:16<00:04, 802.09it/s][A
+DeepGEMM warmup:  79%|███████▉  | 13022/16384 [00:16<00:04, 797.50it/s][A
+DeepGEMM warmup:  80%|███████▉  | 13102/16384 [00:16<00:04, 791.10it/s][A
+DeepGEMM warmup:  80%|████████  | 13182/16384 [00:16<00:04, 784.29it/s][A
+DeepGEMM warmup:  81%|████████  | 13261/16384 [00:16<00:04, 779.51it/s][A
+DeepGEMM warmup:  81%|████████▏ | 13339/16384 [00:16<00:03, 776.24it/s][A
+DeepGEMM warmup:  82%|████████▏ | 13417/16384 [00:16<00:03, 771.11it/s][A
+DeepGEMM warmup:  82%|████████▏ | 13495/16384 [00:16<00:03, 767.53it/s][A
+DeepGEMM warmup:  83%|████████▎ | 13572/16384 [00:17<00:03, 764.69it/s][A
+DeepGEMM warmup:  83%|████████▎ | 13649/16384 [00:17<00:03, 758.17it/s][A
+DeepGEMM warmup:  84%|████████▍ | 13725/16384 [00:17<00:03, 753.65it/s][A
+DeepGEMM warmup:  84%|████████▍ | 13801/16384 [00:17<00:03, 750.48it/s][A
+DeepGEMM warmup:  85%|████████▍ | 13877/16384 [00:17<00:03, 746.86it/s][A
+DeepGEMM warmup:  85%|████████▌ | 13952/16384 [00:17<00:03, 742.33it/s][A
+DeepGEMM warmup:  86%|████████▌ | 14027/16384 [00:17<00:03, 739.99it/s][A
+DeepGEMM warmup:  86%|████████▌ | 14101/16384 [00:17<00:03, 737.13it/s][A
+DeepGEMM warmup:  87%|████████▋ | 14175/16384 [00:17<00:03, 731.86it/s][A
+DeepGEMM warmup:  87%|████████▋ | 14249/16384 [00:18<00:02, 728.15it/s][A
+DeepGEMM warmup:  87%|████████▋ | 14322/16384 [00:18<00:02, 725.55it/s][A
+DeepGEMM warmup:  88%|████████▊ | 14395/16384 [00:18<00:02, 720.04it/s][A
+DeepGEMM warmup:  88%|████████▊ | 14468/16384 [00:18<00:02, 715.32it/s][A
+DeepGEMM warmup:  89%|████████▊ | 14540/16384 [00:18<00:02, 712.06it/s][A
+DeepGEMM warmup:  89%|████████▉ | 14612/16384 [00:18<00:02, 708.41it/s][A
+DeepGEMM warmup:  90%|████████▉ | 14683/16384 [00:18<00:02, 702.86it/s][A
+DeepGEMM warmup:  90%|█████████ | 14754/16384 [00:18<00:02, 698.99it/s][A
+DeepGEMM warmup:  90%|█████████ | 14824/16384 [00:18<00:02, 696.24it/s][A
+DeepGEMM warmup:  91%|█████████ | 14894/16384 [00:18<00:02, 691.55it/s][A
+DeepGEMM warmup:  91%|█████████▏| 14964/16384 [00:19<00:02, 686.93it/s][A
+DeepGEMM warmup:  92%|█████████▏| 15033/16384 [00:19<00:01, 683.68it/s][A
+DeepGEMM warmup:  92%|█████████▏| 15102/16384 [00:19<00:01, 681.38it/s][A
+DeepGEMM warmup:  93%|█████████▎| 15171/16384 [00:19<00:01, 675.71it/s][A
+DeepGEMM warmup:  93%|█████████▎| 15239/16384 [00:19<00:01, 671.72it/s][A
+DeepGEMM warmup:  93%|█████████▎| 15307/16384 [00:19<00:01, 669.84it/s][A
+DeepGEMM warmup:  94%|█████████▍| 15374/16384 [00:19<00:01, 668.70it/s][A
+DeepGEMM warmup:  94%|█████████▍| 15441/16384 [00:19<00:01, 665.00it/s][A
+DeepGEMM warmup:  95%|█████████▍| 15508/16384 [00:19<00:01, 662.39it/s][A
+DeepGEMM warmup:  95%|█████████▌| 15575/16384 [00:19<00:01, 660.51it/s][A
+DeepGEMM warmup:  95%|█████████▌| 15642/16384 [00:20<00:01, 658.81it/s][A
+DeepGEMM warmup:  96%|█████████▌| 15708/16384 [00:20<00:01, 655.79it/s][A
+DeepGEMM warmup:  96%|█████████▋| 15774/16384 [00:20<00:00, 653.91it/s][A
+DeepGEMM warmup:  97%|█████████▋| 15840/16384 [00:20<00:00, 652.61it/s][A
+DeepGEMM warmup:  97%|█████████▋| 15906/16384 [00:20<00:00, 649.74it/s][A
+DeepGEMM warmup:  97%|█████████▋| 15971/16384 [00:20<00:00, 646.01it/s][A
+DeepGEMM warmup:  98%|█████████▊| 16036/16384 [00:20<00:00, 643.41it/s][A
+DeepGEMM warmup:  98%|█████████▊| 16101/16384 [00:20<00:00, 641.57it/s][A
+DeepGEMM warmup:  99%|█████████▊| 16166/16384 [00:20<00:00, 638.09it/s][A
+DeepGEMM warmup:  99%|█████████▉| 16230/16384 [00:20<00:00, 634.24it/s][A
+DeepGEMM warmup:  99%|█████████▉| 16294/16384 [00:21<00:00, 631.56it/s][A
+DeepGEMM warmup: 100%|█████████▉| 16358/16384 [00:21<00:00, 629.63it/s][ADeepGEMM warmup: 100%|██████████| 16384/16384 [00:21<00:00, 772.18it/s]
+Capturing batches (bs=1 avail_mem=34.65 GB): 100%|██████████| 1/1 [02:53<00:00, 173.72s/it]Capturing batches (bs=1 avail_mem=34.65 GB): 100%|██████████| 1/1 [02:53<00:00, 173.72s/it]
+[2026-06-02 14:32:31] Capture cuda graph end. Time elapsed: 174.53 s. mem usage=0.01 GB. avail mem=34.64 GB.
+[2026-06-02 14:32:31] Disable piecewise CUDA graph because --disable-piecewise-cuda-graph is set
+[2026-06-02 14:32:34] max_total_num_tokens=655321, chunked_prefill_size=4096, max_prefill_tokens=16384, max_running_requests=1, context_len=32768, available_gpu_mem=34.64 GB
+[2026-06-02 14:32:34] Tree cache initialized: source=default impl=MambaRadixCache hybrid_swa=False hybrid_ssm=True hierarchical=False streaming_wrapped=False
+[2026-06-02 14:32:35] INFO:     Started server process [663]
+[2026-06-02 14:32:35] INFO:     Waiting for application startup.
+[2026-06-02 14:32:35] Using default chat sampling params from model generation config: {'temperature': 1.0, 'top_k': 20, 'top_p': 0.95}
+[2026-06-02 14:32:35] INFO:     Application startup complete.
+[2026-06-02 14:32:35] INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+[2026-06-02 14:32:36] INFO:     127.0.0.1:44578 - "GET /model_info HTTP/1.1" 200 OK
+/usr/local/lib/python3.12/dist-packages/fastapi/routing.py:120: FastAPIDeprecationWarning: ORJSONResponse is deprecated, FastAPI now serializes data directly to JSON bytes via Pydantic when a return type or response model is set, which is faster and doesn't need a custom response class. Read more in the FastAPI docs: https://fastapi.tiangolo.com/advanced/custom-response/#orjson-or-response-model and https://fastapi.tiangolo.com/tutorial/response-model/
+  response = await f(request)
+[2026-06-02 14:32:44] INFO:     5.223.45.94:57942 - "GET /v1/models HTTP/1.1" 200 OK
+[2026-06-02 14:32:56] Prefill batch, #new-seq: 1, #new-token: 80, #cached-token: 0, full token usage: 0.00, mamba usage: 0.01, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 3.57
+[2026-06-02 14:33:01] Endpoint '/get_server_info' is deprecated and will be removed in a future version. Please use '/server_info' instead.
+[2026-06-02 14:33:01] INFO:     5.223.45.94:37340 - "GET /v1/models HTTP/1.1" 200 OK
+[2026-06-02 14:33:02] INFO:     5.223.45.94:37334 - "GET /get_server_info HTTP/1.1" 200 OK
+[2026-06-02 14:33:02] INFO:     127.0.0.1:44594 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[2026-06-02 14:33:02] The server is fired up and ready to roll!
+[2026-06-02 14:33:28] INFO:     5.223.45.94:44448 - "GET /v1/models HTTP/1.1" 200 OK

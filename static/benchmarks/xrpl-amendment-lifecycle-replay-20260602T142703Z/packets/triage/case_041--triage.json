@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_041",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "41765F664A8D67FF03DDB1C1A893DE6273690BA340A6C2B07C8D29D0DD013D3A",
+    "amendment_name": "fixDirectoryLimit",
+    "decision_surface": "XRPL validator amendment decision surface for fixDirectoryLimit.",
+    "source_facts": [
+      {
+        "claim": "fixDirectoryLimit: This amendment removes the directory page limit. Object reserve requirements provide enough incentive to avoid creating unnecessary objects on the XRP Ledger.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixDirectoryLimit appears in XRPSCAN with introduced rippled version 2.6.2.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "3ee60038f71345dfd3c3f79c33465519e1361d7c812b97b4acf569cbd15000e4",
+  "packet_id": "case_041--triage",
+  "packet_version": 1
+}

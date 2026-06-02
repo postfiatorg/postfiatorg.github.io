@@ -1,0 +1,67 @@
+{
+  "completed_at": "2026-06-02T17:14:53Z",
+  "error": "",
+  "event_id": "case_012",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "4ae49bb6d516dda3b80eaa861289744abfaf0614c0e31aaf7acbc5213f8142e0",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Explicitly states the amendment was disabled due to a bug and will be replaced, indicating it is no longer a valid candidate for activation."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly labels the amendment status as 'obsolete/removed', which triggers the REJECT rule for retired/obsolete proposals."
+      }
+    ],
+    "decision_summary": "The packet explicitly identifies the amendment 'PermissionDelegation' as obsolete and removed (F5) and notes it was disabled due to a bug with a replacement planned (F1). According to the task rule, REJECT must be used for retired/obsolete proposals. This takes precedence over other considerations.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment is safe to proceed with.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [],
+      "recommended_validator_action": "Reject the amendment as it is obsolete and disabled.",
+      "review_questions": [],
+      "title": "Reject Obsolete Amendment: PermissionDelegation"
+    }
+  },
+  "packet_hash": "379c8738c52af1d6bdb1aaf283129a88cf8e88d77a2b2570e2ca8866b184650a",
+  "packet_id": "case_012--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "c7b8a77fa33a3dd6f7253fbf83cd9f6da25ce6f3bed724d5914ace3b5f7ff83e",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Explicitly states the amendment was disabled due to a bug and will be replaced, indicating it is no longer a valid candidate for activation.\"\n},\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"Explicitly labels the amendment status as 'obsolete/removed', which triggers the REJECT rule for retired/obsolete proposals.\"\n}\n],\n\"decision_summary\": \"The packet explicitly identifies the amendment 'PermissionDelegation' as obsolete and removed (F5) and notes it was disabled due to a bug with a replacement planned (F1). According to the task rule, REJECT must be used for retired/obsolete proposals. This takes precedence over other considerations.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"The amendment is safe to proceed with.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [],\n\"recommended_validator_action\": \"Reject the amendment as it is obsolete and disabled.\",\n\"review_questions\": [],\n\"title\": \"Reject Obsolete Amendment: PermissionDelegation\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 317,
+      "prompt_tokens": 1163,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1480
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:14:49Z"
+}

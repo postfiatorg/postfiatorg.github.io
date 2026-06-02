@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-02T16:53:54Z",
+  "error": "",
+  "event_id": "case_037",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "5c28a8bbd299839619e2fcd1a733edab01bdb5f6fcedef4af2d93baea27017d0",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which confirms the amendment has been activated."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment fixPriceOracleOrder is included in the validated ledger's Amendments object and provides a definitive enabled timestamp (2026-01-27) and ledger index (101852417). According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "0f202a43acbfbaf7b6a58098adf7713240208e904f2bdd92e283f89599e4bfac",
+  "packet_id": "case_037--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "c7202e1ffe96c83a9ee2ce7ae01e97dde67b226acc23871c08fea6d53c38d109",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which confirms the amendment has been activated.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 confirms that the amendment fixPriceOracleOrder is included in the validated ledger's Amendments object and provides a definitive enabled timestamp (2026-01-27) and ledger index (101852417). According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 184,
+      "prompt_tokens": 784,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 968
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:53:51Z"
+}

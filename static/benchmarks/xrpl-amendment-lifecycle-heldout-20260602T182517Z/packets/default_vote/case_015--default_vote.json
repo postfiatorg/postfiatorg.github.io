@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_015",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "67A34F2CF55BFC0F93AACD5B281413176FEE195269FA6D95219A2DF738671172",
+    "amendment_name": "fix1513",
+    "decision_surface": "XRPL validator amendment decision surface for fix1513.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fix1513: Fixes a bug that resulted in transaction processing not using new STAmountCalcSwitchovers code when the FeeEscalation amendment is enabled. With this amendment, the new STAmountCalcSwitchovers code applies, which may cause slight changes to transaction processing due to calculation differences. Amounts may be rounded differently and offers may be executed in a different order as a result.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1513 appears in XRPSCAN with introduced rippled version 0.90.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "d1a0b6d4431b457a6f3e6cae8714c42cdcce2b30c2f66be4f12a2974871e7604",
+  "packet_id": "case_015--default_vote",
+  "packet_version": 1
+}

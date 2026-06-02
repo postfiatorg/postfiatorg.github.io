@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-02T18:58:57Z",
+  "error": "",
+  "event_id": "case_030",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "0ce0d685de420d061630cf8c00c82e8b82549e913a9207e8e9bc821f87f12ea8",
+  "output_hash": "ecbbf8c673c0e032090a717c46019c2d180a3b12eaa4aa877f76d74dde4ef1e2",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment 'fixRmSmallIncreasedQOffers' is included in the validated ledger Amendments object with a recorded enablement date and ledger index. According to the task rules, the presence of enabled ledger membership corresponds to the ENABLED state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "4aade285e312f2e119bbd13ce9deeae80a1c44694e1c2960ff142347cf1cca44",
+  "packet_id": "case_030--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "030027bd3d9f2eef4fe2b26326a390fa89d04f5f8d86fe98f7d8e5be162300ed",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 confirms that the amendment 'fixRmSmallIncreasedQOffers' is included in the validated ledger Amendments object with a recorded enablement date and ledger index. According to the task rules, the presence of enabled ledger membership corresponds to the ENABLED state.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 170,
+      "prompt_tokens": 819,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 989
+    }
+  },
+  "run_index": 3,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T18:58:55Z"
+}

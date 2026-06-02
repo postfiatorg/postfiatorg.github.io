@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:52:14Z",
+  "error": "",
+  "event_id": "case_007",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "fab85a37672388039cf6d46da7e5a404b9ddf844378e5adccd5308770530bb9b",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly states the amendment status is OBSOLETE, which maps directly to the VETOED_OR_RETIRED label definition."
+      },
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Confirms the amendment is not enabled and lacks majority support, consistent with a retired or obsolete state."
+      }
+    ],
+    "decision_summary": "Fact F5 explicitly identifies the Batch amendment as OBSOLETE. According to the task rules, obsolete status maps to VETOED_OR_RETIRED. Fact F4 supports this by showing no enabled ledger entry and insufficient support.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "5c12b2e30a5ae7b8646f65167d3e29acb65bd98edb20137cd0345f5477292ab3",
+  "packet_id": "case_007--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "7554d163a8b64ae2903746695a0076f40a842fb940b648ef102476595f46e1e7",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly states the amendment status is OBSOLETE, which maps directly to the VETOED_OR_RETIRED label definition.\"\n    },\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Confirms the amendment is not enabled and lacks majority support, consistent with a retired or obsolete state.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F5 explicitly identifies the Batch amendment as OBSOLETE. According to the task rules, obsolete status maps to VETOED_OR_RETIRED. Fact F4 supports this by showing no enabled ledger entry and insufficient support.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 200,
+      "prompt_tokens": 732,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 932
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:52:12Z"
+}

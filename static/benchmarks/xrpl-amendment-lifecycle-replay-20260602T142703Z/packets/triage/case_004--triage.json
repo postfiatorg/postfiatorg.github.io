@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_004",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "AE6AB9028EEB7299EBB03C7CBCC3F2A4F5FBE00EA28B8223AA3118A0B436C1C5",
+    "amendment_name": "PermissionDelegation vulnerability",
+    "decision_surface": "Whether validators should support the affected PermissionDelegation amendment after the fee-drain vulnerability was found.",
+    "source_facts": [
+      {
+        "claim": "A PermissionDelegation bug could have let an account charge transaction fees to any other account and drain XRP balance.",
+        "fact_id": "F1",
+        "source_id": "xrpl_permission_delegation_vulnerability_2025"
+      },
+      {
+        "claim": "The feature was not enabled on mainnet, and validators began voting No as advised.",
+        "fact_id": "F2",
+        "source_id": "xrpl_permission_delegation_vulnerability_2025"
+      },
+      {
+        "claim": "rippled 2.6.1 disabled PermissionDelegation and planned a replacement amendment.",
+        "fact_id": "F3",
+        "source_id": "xrpl_rippled_2_6_1"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "baacb4f246d06d951eb4e742c7d8d08338d25bf454b748bd740442457d2c6920",
+  "packet_id": "case_004--triage",
+  "packet_version": 1
+}

@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-02T16:57:23Z",
+  "error": "",
+  "event_id": "case_021",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "4f79e6f69ed244824e0e4d8204b6dd5cd8d637bf5c791c90e06ef0f0003f4184",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The amendment description explicitly states that it 'preserves the original intended behavior' and 'restores the intended rounding behavior' by fixing an incompatibility. In XRPL governance, amendments that restore intended behavior or fix bugs without introducing new features or risks are standard candidates for a default YES vote in stable releases, as they ensure protocol correctness and compat"
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 2.2.0, establishing it as a known, versioned part of the software history, which supports the inference that it is a standard, tested fix included in stable releases."
+      }
+    ],
+    "decision_summary": "The amendment 'fixXChainRewardRounding' is described as a fix that restores intended behavior and resolves an incompatibility between XChainBridge and fixUniversalNumber. It does not introduce new functionality but corrects a deviation from the original design. Such corrective amendments are typically enabled by default in stable releases to ensure network consistency and correctness. Therefore, the source default vote is inferred to be YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the rippled release notes or source code commit message confirming the default vote setting for this specific amendment in version 2.2.0."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "a8779abb19f2196879bb4c6f7856f5d78731f97fe9abb74a2ce9047da6a71db8",
+  "packet_id": "case_021--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "99fa71c7747d30a65b29c331c666954d182bce662c2a1de9520b270685c7c131",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The amendment description explicitly states that it 'preserves the original intended behavior' and 'restores the intended rounding behavior' by fixing an incompatibility. In XRPL governance, amendments that restore intended behavior or fix bugs without introducing new features or risks are standard candidates for a default YES vote in stable releases, as they ensure protocol correctness and compatibility.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 2.2.0, establishing it as a known, versioned part of the software history, which supports the inference that it is a standard, tested fix included in stable releases.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixXChainRewardRounding' is described as a fix that restores intended behavior and resolves an incompatibility between XChainBridge and fixUniversalNumber. It does not introduce new functionality but corrects a deviation from the original design. Such corrective amendments are typically enabled by default in stable releases to ensure network consistency and correctness. Therefore, the source default vote is inferred to be YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit statement from the rippled release notes or source code commit message confirming the default vote setting for this specific amendment in version 2.2.0.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 338,
+      "prompt_tokens": 683,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1021
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:57:19Z"
+}

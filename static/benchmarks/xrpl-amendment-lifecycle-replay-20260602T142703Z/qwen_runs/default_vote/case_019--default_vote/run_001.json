@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-02T16:57:15Z",
+  "error": "",
+  "event_id": "case_019",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "349e76e713621339f58c0cd2eff1d2ed32016513c9f5384b29e37ccc8a13a781",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The claim states the amendment is obsolete because its effects are included in NonFungibleTokensV1_1, but does not explicitly state the default vote (YES/NO) for the source release."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Indicates the amendment was introduced in rippled version 1.9.1, but does not specify the default voting stance of that release."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical nature of the fixNFTokenDirV1 amendment and its obsolescence, but do not contain explicit information regarding the default vote (YES or NO) assigned to it in the latest stable release source. Without explicit source-backed evidence of the default vote, the label cannot be inferred as YES or NO.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote (YES/NO) for fixNFTokenDirV1 in the source release documentation."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "27e01a7d3e32e97c538cfaf3d71e869362baca3032fad6fb2dbfd2935fa5eddf",
+  "packet_id": "case_019--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "416b03b5b79722328bf946fb62576593ccf45da21a3efffb16d9ab3aec754c10",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The claim states the amendment is obsolete because its effects are included in NonFungibleTokensV1_1, but does not explicitly state the default vote (YES/NO) for the source release.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Indicates the amendment was introduced in rippled version 1.9.1, but does not specify the default voting stance of that release.\"\n    }\n  ],\n  \"decision_summary\": \"The provided facts describe the technical nature of the fixNFTokenDirV1 amendment and its obsolescence, but do not contain explicit information regarding the default vote (YES or NO) assigned to it in the latest stable release source. Without explicit source-backed evidence of the default vote, the label cannot be inferred as YES or NO.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote (YES/NO) for fixNFTokenDirV1 in the source release documentation.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 271,
+      "prompt_tokens": 673,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 944
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:57:11Z"
+}

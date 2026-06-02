@@ -1,0 +1,70 @@
+{
+  "completed_at": "2026-06-02T16:46:10Z",
+  "error": "",
+  "event_id": "case_009",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "0ab855218637b4fa222e4b8328fdd1665605576cbd55d8757e447fb02c597cd9",
+  "output_json": {
+    "arguments_for_no": [
+      "No evidence of security vulnerabilities or negative impacts associated with the amendment.",
+      "No indication of incompatibility with existing validator software beyond standard upgrade requirements."
+    ],
+    "arguments_for_yes": [
+      "The amendment fixes improper handling of large synthetic AMM offers, addressing a potential bug in the payment engine.",
+      "The source code default vote is explicitly set to YES, indicating developer consensus on the necessity and safety of the fix.",
+      "The fix is included in rippled version 2.1.1, suggesting it has undergone standard release processes."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes the technical purpose of the amendment (fixing AMM offer handling) and confirms the developer-recommended default vote is YES."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the voting mechanism and risks of non-upgrade, reinforcing the need to follow the recommended default for critical fixes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and association with a specific software release version."
+      }
+    ],
+    "decision_summary": "The amendment fixAMMOverflowOffer addresses a specific bug in the payment engine regarding large synthetic AMM offers. Given that the source code default vote is YES and the fix is deemed important by the developers, the recommendation is to vote YES to ensure network consistency and correct functionality.",
+    "forbidden_stronger_claim": "This amendment will completely eliminate all AMM-related bugs.",
+    "missing_evidence": [
+      "Detailed technical analysis of the overflow scenario.",
+      "Third-party security audit results specific to this amendment."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "ceb42095ffb8e0acde4ddc09fe4d0a40c0545f4eabfb9378c28e49f4522b2aa6",
+  "packet_id": "case_009--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "eb66f6ef6334494830e7c9be393d88f33ac7c0a06b57b4db8fba9a5f9d6650a6",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"No evidence of security vulnerabilities or negative impacts associated with the amendment.\",\n    \"No indication of incompatibility with existing validator software beyond standard upgrade requirements.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment fixes improper handling of large synthetic AMM offers, addressing a potential bug in the payment engine.\",\n    \"The source code default vote is explicitly set to YES, indicating developer consensus on the necessity and safety of the fix.\",\n    \"The fix is included in rippled version 2.1.1, suggesting it has undergone standard release processes.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Establishes the technical purpose of the amendment (fixing AMM offer handling) and confirms the developer-recommended default vote is YES.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides context on the voting mechanism and risks of non-upgrade, reinforcing the need to follow the recommended default for critical fixes.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and association with a specific software release version.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixAMMOverflowOffer addresses a specific bug in the payment engine regarding large synthetic AMM offers. Given that the source code default vote is YES and the fix is deemed important by the developers, the recommendation is to vote YES to ensure network consistency and correct functionality.\",\n  \"forbidden_stronger_claim\": \"This amendment will completely eliminate all AMM-related bugs.\",\n  \"missing_evidence\": [\n    \"Detailed technical analysis of the overflow scenario.\",\n    \"Third-party security audit results specific to this amendment.\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 432,
+      "prompt_tokens": 636,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1068
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:46:04Z"
+}

@@ -1,0 +1,61 @@
+{
+  "completed_at": "2026-06-02T18:35:14Z",
+  "error": "",
+  "event_id": "case_016",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ee303628f0a8b5cbc26df62a0b154d893c7cc19807f0ae611b0961c8e6bb2b7a",
+  "output_hash": "9a23bbdc66ff8dd5f485f15d579a7b3374860e745f27b786b26250edc33437b7",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical behavior of fix1515 regarding offer consumption limits but does not specify the default vote configuration in the source code."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general voting process and consequences of incompatibility but does not specify the default vote for this specific amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the version where fix1515 was introduced but does not contain information about the default vote setting."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical changes of fix1515, the general amendment voting process, and the version introduction. None of the facts explicitly state or imply the default vote (YES or NO) configured in the source code for this amendment. Therefore, the default vote cannot be inferred from the given evidence.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote value in the source code or documentation",
+      "Information linking the amendment to a specific default vote policy"
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "4e87ef21dc7b88fb6ec21635cb657a7fce6eee2b4b5a371ca0489b22d6a28b94",
+  "packet_id": "case_016--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "fb5d88775a3ac3bc6e0d35d5f5bac749ca27f5fb2114f8c59bf29a52079d99ea",
+  "raw_message_content": "{\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the technical behavior of fix1515 regarding offer consumption limits but does not specify the default vote configuration in the source code.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Describes the general voting process and consequences of incompatibility but does not specify the default vote for this specific amendment.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Identifies the version where fix1515 was introduced but does not contain information about the default vote setting.\"\n}\n],\n\"decision_summary\": \"The provided facts describe the technical changes of fix1515, the general amendment voting process, and the version introduction. None of the facts explicitly state or imply the default vote (YES or NO) configured in the source code for this amendment. Therefore, the default vote cannot be inferred from the given evidence.\",\n\"default_vote_confidence\": 0.0,\n\"missing_evidence\": [\n\"Explicit statement of the default vote value in the source code or documentation\",\n\"Information linking the amendment to a specific default vote policy\"\n],\n\"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 277,
+      "prompt_tokens": 763,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1040
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T18:35:10Z"
+}

@@ -1,0 +1,87 @@
+{
+  "completed_at": "2026-06-02T17:22:42Z",
+  "error": "",
+  "event_id": "case_070",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "1f3feb5d552116d7b4a6091cbb7d1586986d4201ace98bda5869e71a325594ec",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment addresses 'NFT offer-settlement semantics' by fixing issues around offer acceptance, transfer fees, and brokerage rules.",
+      "Fact F1 describes changes to how offers are handled during burning (deleting 500 offers) and restrictions on brokered sales, which touches on transaction-processing logic for NFTs.",
+      "Although these are bug fixes, the domain involves NFT settlement and offer mechanics, which are listed as material risk patterns for HOLD_FOR_CHALLENGE if they imply broader semantic changes."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', and Fact F1 explicitly states it is a 'combination of bug fixes'.",
+      "The fixes are localized: removing an arbitrary 500-offer limit for burning, fixing insufficient funds errors in brokerage, allowing issuers to use their own currency, and preventing self-sales via brokers.",
+      "Fact F1 does not describe broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, freeze/authorization bypasses, ledger repair, material token supply changes, or numeric precision issues.",
+      "The rule states: 'Do not hold a localized fix amendment merely because the underlying domain name mentions... NFT... hold only when the supplied facts identify one of those material risk patterns.' The facts here identify specific bug fixes, not a fundamental change to NFT sell-offer semantics or asset control that would warrant a challenge.",
+      "Precedence rule: If the amendment name starts with 'fix' and describes the fix itself, use PROCEED unless specific high-risk patterns are present. None of the excluded high-risk patterns (consensus, liveness, invariant, etc.) are present in the facts."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies the amendment as a collection of specific bug fixes for NFT burning limits, offer acceptance errors, and brokerage restrictions, without indicating broad semantic or invariant changes."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the voting process but does not introduce specific risks for this amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version but does not impact the risk assessment of the fix content."
+      }
+    ],
+    "decision_summary": "The amendment 'fixNonFungibleTokensV1_2' is a set of localized bug fixes for NFT offer handling and burning. While it touches on NFT settlement, the facts describe specific error corrections (insufficient funds, self-sale prevention, offer limit removal) rather than broad changes to NFT sell-offer semantics, asset control, or invariants. Per the rule, localized fix amendments should PROCEED unless they exhibit specific material risk patterns like consensus risk or broad semantic changes, which are not present here.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 0,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "The amendment changes fundamental NFT ownership or settlement invariants.",
+    "missing_evidence": [
+      "Details on whether the 'deleting 500 offers' logic could lead to unexpected state inconsistencies in edge cases, though this is likely covered by the 'bug fix' classification."
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.9,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the fix for burning NFTs with >500 offers introduce any new race conditions?"
+      ],
+      "recommended_validator_action": "Vote YES to enable the fix.",
+      "review_questions": [
+        "Are the described fixes strictly limited to the bugs mentioned in PRs 4346, 4380, 4374, and 4373?"
+      ],
+      "title": "Review fixNonFungibleTokensV1_2 bug fixes"
+    }
+  },
+  "packet_hash": "fc29db8cfed4be2f26f2e70e5f22706816d2b0702bcecdb6a1d3d374ae4e354b",
+  "packet_id": "case_070--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "db16543b8e8cefc30dc9fcff081e02140b09b67d156c4088887c478ba18ecb26",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment addresses 'NFT offer-settlement semantics' by fixing issues around offer acceptance, transfer fees, and brokerage rules.\",\n\"Fact F1 describes changes to how offers are handled during burning (deleting 500 offers) and restrictions on brokered sales, which touches on transaction-processing logic for NFTs.\",\n\"Although these are bug fixes, the domain involves NFT settlement and offer mechanics, which are listed as material risk patterns for HOLD_FOR_CHALLENGE if they imply broader semantic changes.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix', and Fact F1 explicitly states it is a 'combination of bug fixes'.\",\n\"The fixes are localized: removing an arbitrary 500-offer limit for burning, fixing insufficient funds errors in brokerage, allowing issuers to use their own currency, and preventing self-sales via brokers.\",\n\"Fact F1 does not describe broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, freeze/authorization bypasses, ledger repair, material token supply changes, or numeric precision issues.\",\n\"The rule states: 'Do not hold a localized fix amendment merely because the underlying domain name mentions... NFT... hold only when the supplied facts identify one of those material risk patterns.' The facts here identify specific bug fixes, not a fundamental change to NFT sell-offer semantics or asset control that would warrant a challenge.\",\n\"Precedence rule: If the amendment name starts with 'fix' and describes the fix itself, use PROCEED unless specific high-risk patterns are present. None of the excluded high-risk patterns (consensus, liveness, invariant, etc.) are present in the facts.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Identifies the amendment as a collection of specific bug fixes for NFT burning limits, offer acceptance errors, and brokerage restrictions, without indicating broad semantic or invariant changes.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Provides context on the voting process but does not introduce specific risks for this amendment.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment's existence and version but does not impact the risk assessment of the fix content.\"\n}\n],\n\"decision_summary\": \"The amendment 'fixNonFungibleTokensV1_2' is a set of localized bug fixes for NFT offer handling and burning. While it touches on NFT settlement, the facts describe specific error corrections (insufficient funds, self-sale prevention, offer limit removal) rather than broad changes to NFT sell-offer semantics, asset control, or invariants. Per the rule, localized fix amendments should PROCEED unless they exhibit specific material risk patterns like consensus risk or broad semantic changes, which are not present here.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 0,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"The amendment changes fundamental NFT ownership or settlement invariants.\",\n\"missing_evidence\": [\n\"Details on whether the 'deleting 500 offers' logic could lead to unexpected state inconsistencies in edge cases, though this is likely covered by the 'bug fix' classification.\"\n],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.9,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the fix for burning NFTs with >500 offers introduce any new race conditions?\"\n],\n\"recommended_validator_action\": \"Vote YES to enable the fix.\",\n\"review_questions\": [\n\"Are the described fixes strictly limited to the bugs mentioned in PRs 4346, 4380, 4374, and 4373?\"\n],\n\"title\": \"Review fixNonFungibleTokensV1_2 bug fixes\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 847,
+      "prompt_tokens": 1319,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 2166
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:22:31Z"
+}

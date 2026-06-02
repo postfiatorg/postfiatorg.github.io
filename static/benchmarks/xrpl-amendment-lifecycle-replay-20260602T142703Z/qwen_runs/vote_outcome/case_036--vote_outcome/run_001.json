@@ -1,0 +1,66 @@
+{
+  "completed_at": "2026-06-02T16:47:46Z",
+  "error": "",
+  "event_id": "case_036",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "6dab7324a2886c374f452c892eda3f0c308a3a3143936f46017b16bf1ce2eb40",
+  "output_json": {
+    "arguments_for_no": [
+      "No evidence of security vulnerabilities or critical bugs that would necessitate a NO vote.",
+      "No indication of malicious intent or negative impact on network stability."
+    ],
+    "arguments_for_yes": [
+      "The amendment fixes a specific accounting error in MPT escrows, ensuring correct token supply accounting.",
+      "Correcting the discrepancy between gross and net amounts for transfer fees improves the integrity of the MPT system.",
+      "The fix is targeted and addresses a known bug introduced in rippled version 3.0.0."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the specific bug fix: correcting the accounting error in MPT escrows where the issuer's locked balance was incorrectly reduced by the gross amount instead of the net amount."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with rippled version 3.0.0, indicating it is a recent and relevant fix for current network participants."
+      }
+    ],
+    "decision_summary": "The fixTokenEscrowV1 amendment addresses a clear accounting bug in the Multi-Purpose Token (MPT) escrow system. By correcting the calculation of locked token balances during escrow unlocks, it ensures accurate total supply accounting. There are no negative implications presented, making a YES vote the logical choice to maintain system integrity.",
+    "forbidden_stronger_claim": "This amendment will completely eliminate all accounting errors in the XRPL network.",
+    "missing_evidence": [
+      "Detailed impact analysis on existing MPT escrows.",
+      "Validator community consensus metrics."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "d590f3f9ec920cc5ab02188cd49f41a2359495bc0193433fb891c608b4487dd7",
+  "packet_id": "case_036--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "202f3f9e575e2c212d2b63c1725ef932efd4a3d330a9ccc44dfaccea16d3fedd",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"No evidence of security vulnerabilities or critical bugs that would necessitate a NO vote.\",\n    \"No indication of malicious intent or negative impact on network stability.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment fixes a specific accounting error in MPT escrows, ensuring correct token supply accounting.\",\n    \"Correcting the discrepancy between gross and net amounts for transfer fees improves the integrity of the MPT system.\",\n    \"The fix is targeted and addresses a known bug introduced in rippled version 3.0.0.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the specific bug fix: correcting the accounting error in MPT escrows where the issuer's locked balance was incorrectly reduced by the gross amount instead of the net amount.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is associated with rippled version 3.0.0, indicating it is a recent and relevant fix for current network participants.\"\n    }\n  ],\n  \"decision_summary\": \"The fixTokenEscrowV1 amendment addresses a clear accounting bug in the Multi-Purpose Token (MPT) escrow system. By correcting the calculation of locked token balances during escrow unlocks, it ensures accurate total supply accounting. There are no negative implications presented, making a YES vote the logical choice to maintain system integrity.\",\n  \"forbidden_stronger_claim\": \"This amendment will completely eliminate all accounting errors in the XRPL network.\",\n  \"missing_evidence\": [\n    \"Detailed impact analysis on existing MPT escrows.\",\n    \"Validator community consensus metrics.\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 411,
+      "prompt_tokens": 712,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1123
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:47:41Z"
+}

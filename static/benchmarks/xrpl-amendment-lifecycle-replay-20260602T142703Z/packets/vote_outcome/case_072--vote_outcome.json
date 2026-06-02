@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_072",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "47C3002ABA31628447E8E9A8B315FAA935CE30183F9A9B86845E469CA2CDC3DF",
+    "amendment_name": "DisallowIncoming",
+    "decision_surface": "XRPL validator amendment decision surface for DisallowIncoming.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "DisallowIncoming: Provides options to categorically block incoming Checks, Payment Channels, NFTokenOffers, and trust lines from reaching your account. When an account has these options enabled, other accounts cannot create those types of objects with the account as the destination. Adds 4 new AccountSet Flags and modifies the AccountSet transaction to allow enabling and disabling them: - asfDisallowIncomingCheck - asfDisallowIncomingPayChan - asfDisallowIncomingNFTOffer - asfDisallowIncomingTrustline Changes transaction processing to check the status of those flags before creating the corresponding type of object. If the destination account has the flag enabled, the transaction fails with the error code tecNO_PERMISSION. Without this amendment, any account can create these objects with any object as the destination; while this is usually harmless, it can block an account from later being deleted, and may also be used as part of scams.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "DisallowIncoming appears in XRPSCAN with introduced rippled version 1.10.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "f3d25184387a2aad64fa8d7fdc8f3d40f966093865ca5d5991c27ae62d049bd7",
+  "packet_id": "case_072--vote_outcome",
+  "packet_version": 1
+}

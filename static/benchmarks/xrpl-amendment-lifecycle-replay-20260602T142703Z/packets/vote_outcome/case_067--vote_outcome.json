@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_067",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "27CD95EE8E1E5A537FF2F89B6CEB7C622E78E9374EBD7DCBEDFAE21CD6F16E0A",
+    "amendment_name": "fixReducedOffersV1",
+    "decision_surface": "XRPL validator amendment decision surface for fixReducedOffersV1.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixReducedOffersV1: Adjusts rounding to prevent order books from being blocked by reduced offers whose exchange rate is affected by rounding of the remaining amounts. In general, offers can be reduced in 3 ways: - The offer can be partially consumed when it is placed. - The offer can be partially consumed after being placed into an order book. - The offer can be under-funded, meaning its owner has less funds than it specifies. With this amendment, the exchange rate of a reduced offer is rounded such that it is as good or better than the original offer (from the taker's perspective). This allows the reduced offer to be consumed by offers that would have matched the original, full amounts. The rounded amount is no more than 1 drop of XRP or 1e-81 of a token. Without this amendment, an offer with very small amounts remaining can have a a much worse exchange rate after rounding than it had initially. This can cause an offer for very small amounts to \"block\" better offers in the same order book from being taken.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixReducedOffersV1 appears in XRPSCAN with introduced rippled version 1.12.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "62c1d1aae175666bf7effc0c336e28ba672595e88ff6db18b66f74b3015a3c00",
+  "packet_id": "case_067--vote_outcome",
+  "packet_version": 1
+}

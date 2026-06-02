@@ -1,0 +1,36 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_032",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "D8ED3BE0B2673496CB49DE8B5588C8805DF7B1DE203F38FE0367ACE703D36C0F",
+    "amendment_name": "InvariantsV1_1",
+    "decision_surface": "XRPL validator amendment decision surface for InvariantsV1_1.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "InvariantsV1_1: This amendment adds several new invariants to protect the ledger against bugs in transaction processing. The developers intend to set it as open for voting after a set of several invariants are implemented. The invariants included are as follows: - When deleting an account, ensure that certain types of ledger entries are also deleted, including that account's DirectoryNode, SignerList, NFTokenPage, and AMM directories, if any, are deleted with it.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "bfd6f5b7777354b8d23014b46e7c254dea4898457fcdda2ef8bdeaae1db739cc",
+  "packet_id": "case_032--default_vote",
+  "packet_version": 1
+}

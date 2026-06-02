@@ -1,0 +1,37 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_029",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "",
+    "amendment_name": "Transaction set handling liveness vulnerabilities",
+    "decision_surface": "How validators should triage liveness vulnerabilities fixed in rippled 3.0.0.",
+    "source_facts": [
+      {
+        "claim": "Two transaction-set handling vulnerabilities affected XRPL liveness and could have prevented forward progress.",
+        "fact_id": "F1",
+        "source_id": "xrpl_transaction_set_liveness_2026"
+      },
+      {
+        "claim": "The fixes were released as part of rippled 3.0.0.",
+        "fact_id": "F2",
+        "source_id": "xrpl_transaction_set_liveness_2026"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "38cad7811da70547f8ea4988918f994bfe9b65259c23c7366062794d70ee221a",
+  "packet_id": "case_029--triage",
+  "packet_version": 1
+}

@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_014",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "A730EB18A9D4BB52502C898589558B4CCEB4BE10044500EE5581137A2E80E849",
+    "amendment_name": "PermissionedDomains",
+    "decision_surface": "XRPL validator amendment decision surface for PermissionedDomains.",
+    "source_facts": [
+      {
+        "claim": "PermissionedDomains: Permissioned domains are controlled environments within the broader ecosystem of the XRP Ledger blockchain. Domains do nothing on their own, but features such as Permissioned DEXes and Lending Protocols can use domains to restrict access, so that traditional financial institutions can offer services on chain while complying with various compliance rules. This amendment creates a new ledger entry type, PermissionedDomain, and new transactions, PermissionedDomainSet (creates or modifies permissioned domains) and PermissionedDomainDelete (deletes permissioned domains).",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "PermissionedDomains appears in XRPSCAN with introduced rippled version 2.4.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "abfc7ca74c3c73bc87eac1a0942630c899450f13708383c5ad77e037738c4ad9",
+  "packet_id": "case_014--triage",
+  "packet_version": 1
+}

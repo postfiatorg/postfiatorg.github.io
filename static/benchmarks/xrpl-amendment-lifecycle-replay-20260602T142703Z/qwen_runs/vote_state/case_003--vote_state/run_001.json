@@ -1,0 +1,61 @@
+{
+  "completed_at": "2026-06-02T16:52:00Z",
+  "error": "",
+  "event_id": "case_003",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "4bfc6dcd748f7094fbb545ab1583a4ffc520c963aafa5d465748d23691b630b1",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes the existence of a severe security vulnerability (unauthorized inner transaction execution) that necessitates a negative governance response."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Indicates that the network's trusted validators were explicitly advised to vote No, leading to a lack of majority support for enablement."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms that the software implementation (rippled 3.1.1) actively disabled the amendment, preventing it from being enabled even if votes were cast."
+      }
+    ],
+    "decision_summary": "The amendment 'Batch vulnerability' is classified as VETOED_OR_RETIRED. The source facts indicate a severe security bug (F1) led to explicit advice against support (F2) and technical disabling in the client software (F3). This combination of advisory rejection and technical retirement fits the definition of VETOED_OR_RETIRED, as it is an obsolete amendment that should not be enabled.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Specific vote counts or ledger sequence numbers confirming the final vote tally.",
+      "Official retirement transaction hash or ledger entry status confirming the amendment was formally removed from the amendment map."
+    ],
+    "state_confidence": 0.95,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "cc2ce98cd76e97b0ded0d02e212c7c724ccbdb42990ba51fd7212459f11b5c18",
+  "packet_id": "case_003--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "5209a297bfb3d35b81d27312d14682fedfc20062996e688eb9577e821bafdfba",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Establishes the existence of a severe security vulnerability (unauthorized inner transaction execution) that necessitates a negative governance response.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Indicates that the network's trusted validators were explicitly advised to vote No, leading to a lack of majority support for enablement.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms that the software implementation (rippled 3.1.1) actively disabled the amendment, preventing it from being enabled even if votes were cast.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'Batch vulnerability' is classified as VETOED_OR_RETIRED. The source facts indicate a severe security bug (F1) led to explicit advice against support (F2) and technical disabling in the client software (F3). This combination of advisory rejection and technical retirement fits the definition of VETOED_OR_RETIRED, as it is an obsolete amendment that should not be enabled.\",\n  \"missing_evidence\": [\n    \"Specific vote counts or ledger sequence numbers confirming the final vote tally.\",\n    \"Official retirement transaction hash or ledger entry status confirming the amendment was formally removed from the amendment map.\"\n  ],\n  \"state_confidence\": 0.95,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 339,
+      "prompt_tokens": 694,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1033
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:51:56Z"
+}

@@ -1,0 +1,114 @@
+{
+  "actual_status": "running",
+  "artifact_files": {
+    "create_instance_raw": "create-instance-raw.json",
+    "instances_poll": "instances-poll.json",
+    "instances_ready": "instances-ready.json",
+    "log_tail_live": "sglang-log-tail-live.txt",
+    "log_tail_ready": "sglang-log-tail-ready.txt",
+    "log_tail_while_loading": "sglang-log-tail-while-loading.txt",
+    "models_initial": "sglang-models.json",
+    "models_ready": "sglang-models-ready.json",
+    "onstart_script": "onstart_sglang.sh",
+    "selected_offer": "selected-offer.json",
+    "server_info": "sglang-server-info.json",
+    "smoke_chat": "sglang-smoke-chat.json"
+  },
+  "cur_state": "running",
+  "generated_at": "2026-06-02T14:35:49Z",
+  "host_id": 492744,
+  "intended_status": "running",
+  "label": "postfiat-xrpl-amendment-lifecycle-h200-20260602T142703Z",
+  "lifecycle_artifact_sha256": {
+    "create-instance-raw.json": "902d9b2cf3601742624ca34e7c8e2a72e9173c1e7c49ad86e4ade73e09bcba77",
+    "h200-offers-raw.json": "bb66688c35164b7e266b63d2a344df91aee5cb52ab9f14c137f5e0f7427192f8",
+    "instances-poll.json": "cd39a947a96d7fd09dae6334a623654eb63528f8fcca851d2ca28811494de437",
+    "instances-ready.json": "69e2315ddc697dcb6f38e420df7b5e579b8f87163afaadd960ec26624f4b2eb1",
+    "onstart_sglang.sh": "42828606a47dce222b64bd3ede53cb6cc0e301b6eb7f6f2523311d353bb5ef21",
+    "selected-offer.json": "1e060cd39082b33117942b54cbeccff832b6d86fb311a813c01b05f5d4635d3f",
+    "sglang-log-tail-live.txt": "55b833af413cf890ae3dfef1b164cca3e2a0b38cde423d84bf2554052eebaf74",
+    "sglang-log-tail-ready.txt": "c5ef68253c4ecb70b57d46a7ed7906ce813af74586f2ec4ee64ba0b68503d91f",
+    "sglang-log-tail-while-loading.txt": "365f4ac59beea445c7804cc067226059ba3b5d7b04273a284d2a9fa570e8c0d9",
+    "sglang-models-ready.json": "b9e5ca72a0c7b0588305fa2670601a26accae8c078e8b42f9ef50bc38bbd50d2",
+    "sglang-models.json": "31aff78262affafd75c85fa759c1b1db79b9cef49c0ad121a22c4112408cb225",
+    "sglang-server-info.json": "a1b7cedf9ca1927619e142f33dcecd6604c915bcb01fcd4f14d9e0175b7b1011",
+    "sglang-smoke-chat.json": "15558199ef4dd347f4135466ed7be267147c4aed39a639cbef1d87d2787116d0"
+  },
+  "machine_id": 68473,
+  "model_runtime": {
+    "attention_backend": "fa3",
+    "chunked_prefill_size": 4096,
+    "context_length": 32768,
+    "enable_deterministic_inference": true,
+    "max_running_requests": 1,
+    "mem_fraction_static": 0.75,
+    "model_id": "Qwen/Qwen3.6-27B-FP8",
+    "model_path": "Qwen/Qwen3.6-27B-FP8",
+    "reasoning_parser": "qwen3",
+    "server_status": "ready",
+    "sglang_version": "0.0.0.dev1+g208397aff",
+    "temperature": 0,
+    "top_p": 1
+  },
+  "network": {
+    "api_port": "[redacted-public-endpoint]",
+    "endpoint_url": "[redacted-public-endpoint]",
+    "log_port": "[redacted-public-endpoint]",
+    "log_url": "[redacted-public-endpoint]",
+    "models_url": "[redacted-public-endpoint]",
+    "public_endpoint_redacted": true,
+    "public_host": "[redacted-public-endpoint]",
+    "server_info_url": "[redacted-public-endpoint]",
+    "ssh_host": "[redacted-public-endpoint]",
+    "ssh_port": "[redacted-public-endpoint]"
+  },
+  "not_destroyed": true,
+  "offer_id": 36227088,
+  "provider": "vastai",
+  "provider_run_id": 39137704,
+  "provider_selection": {
+    "cpu_cores": 192,
+    "current_instance_dph_total": 4.228801169590643,
+    "driver_version": "580.126.16",
+    "gpu_name": "H200",
+    "gpu_ram_mb": 143771,
+    "image_uuid": "lmsysorg/sglang:nightly-dev-cu13-20260523-c112f762",
+    "num_gpus": 1,
+    "reliability2": 0.9953079,
+    "selected_offer_dph_total": 4.211440058479532,
+    "verification": "verified"
+  },
+  "readiness_checks": {
+    "models_response_ready": true,
+    "server_info_ready": true,
+    "smoke_chat_completed": true,
+    "smoke_chat_content": "READY",
+    "smoke_chat_reasoning_len": 592
+  },
+  "retain_until_done": true,
+  "sanitization": {
+    "create_instance_raw_removed_fields": [
+      "instance_api_key"
+    ],
+    "instance_snapshots_removed_fields": [
+      "jupyter_token"
+    ],
+    "public_endpoint_redacted_fields": [
+      "HostPort",
+      "api_port",
+      "direct_port_start",
+      "endpoint_url",
+      "log_port",
+      "log_url",
+      "models_url",
+      "public_host",
+      "public_ipaddr",
+      "server_info_url",
+      "ssh_host",
+      "ssh_port"
+    ],
+    "public_endpoint_redacted_for_public_artifact": true,
+    "secrets_intentionally_not_recorded": true
+  },
+  "shutdown_condition": "corpus built; corpus validator passed; baseline generated; selected H200 replay lanes completed without fallback; summaries generated; disagreements inspected; checksums verified; operator accepted run or explicitly directed shutdown"
+}

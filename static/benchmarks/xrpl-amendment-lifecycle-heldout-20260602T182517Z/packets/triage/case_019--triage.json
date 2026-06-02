@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_019",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "CA7C02118BA27599528543DFE77BA6838D1B0F43B447D4D7F53523CE6A0E9AC2",
+    "amendment_name": "fix1543",
+    "decision_surface": "XRPL validator amendment decision surface for fix1543.",
+    "source_facts": [
+      {
+        "claim": "fix1543: Enforces reserved flag ranges on some transaction types that did not correctly enforce them already. Transactions of the affected types are now considered invalid if they enable undefined or unknown flags, or flags from the reserved range. (Transactions unaffected by this change already correctly enforce the same rules.) Without this amendment, transactions of certain types are considered valid even when they have undefined or reserved flags enabled. The affected transaction types are: - Escrow transactions: EscrowCancel, EscrowCreate, and EscrowFinish - Payment Channel transactions: PaymentChannelClaim, PaymentChannelCreate, and PaymentChannelFund",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1543 appears in XRPSCAN with introduced rippled version 1.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "60d005d2063a4115528501dd951ef0c6de5a5ef16ba351c065ab936be838b795",
+  "packet_id": "case_019--triage",
+  "packet_version": 1
+}

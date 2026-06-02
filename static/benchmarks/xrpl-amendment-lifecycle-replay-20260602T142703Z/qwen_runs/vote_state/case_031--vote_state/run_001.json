@@ -1,0 +1,55 @@
+{
+  "completed_at": "2026-06-02T16:53:34Z",
+  "error": "",
+  "event_id": "case_031",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "e9a57bd9da2d3ca6058a115eda23c691cf75d5c3cf4d0ab3a8e3c6b77c9b1908",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general process for XRPL amendment voting and the consequences of incompatibility, but does not provide specific status data for the DynamicMPT amendment."
+      }
+    ],
+    "decision_summary": "The provided source facts only describe the general mechanism of XRPL amendment voting and do not contain specific evidence regarding the current vote count, majority status, or enabled state of the 'DynamicMPT' amendment. Therefore, the specific state cannot be determined from the given information.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Current validator vote count for DynamicMPT",
+      "Whether the supermajority threshold has been met",
+      "Whether the amendment has been enabled in the ledger",
+      "Whether the amendment has been vetoed or retired"
+    ],
+    "state_confidence": 0.0,
+    "vote_state": "UNKNOWN"
+  },
+  "packet_hash": "104aa417f8c9c8c857bcc932010706dfb23849ce48319254f8ee9d4f0b8f293e",
+  "packet_id": "case_031--vote_state",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "7a1c93e3e13c43fb08bf22232a326b9c56dda2a156ea66531afa34eec91a508a",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Describes the general process for XRPL amendment voting and the consequences of incompatibility, but does not provide specific status data for the DynamicMPT amendment.\"\n    }\n  ],\n  \"decision_summary\": \"The provided source facts only describe the general mechanism of XRPL amendment voting and do not contain specific evidence regarding the current vote count, majority status, or enabled state of the 'DynamicMPT' amendment. Therefore, the specific state cannot be determined from the given information.\",\n  \"missing_evidence\": [\n    \"Current validator vote count for DynamicMPT\",\n    \"Whether the supermajority threshold has been met\",\n    \"Whether the amendment has been enabled in the ledger\",\n    \"Whether the amendment has been vetoed or retired\"\n  ],\n  \"state_confidence\": 0.0,\n  \"vote_state\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 216,
+      "prompt_tokens": 602,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 818
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:53:31Z"
+}

@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_034",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "3012E8230864E95A58C60FD61430D7E1B4D3353195F2981DC12B0C7C0950FFAC",
+    "amendment_name": "FlowCross",
+    "decision_surface": "XRPL validator amendment decision surface for FlowCross.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "FlowCross: Streamlines the offer crossing logic in the XRP Ledger's decentralized exchange. Uses the updated code from the Flow amendment to power offer crossing, so OfferCreate transactions and Payment transactions share more code. This has subtle differences in how offers are processed: - Rounding is slightly different in some cases. - Due to differences in rounding, some combinations of offers may be ranked higher or lower than by the old logic, and taken preferentially. - The new logic may delete more or fewer offers than the old logic. (This includes cases caused by differences in rounding and offers that were incorrectly removed as unfunded by the old logic.)",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "FlowCross appears in XRPSCAN with introduced rippled version 0.70.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "454e3a7bb3c417c762f23bec246e084db05599a957bd0900e1e921c851810843",
+  "packet_id": "case_034--default_vote",
+  "packet_version": 1
+}

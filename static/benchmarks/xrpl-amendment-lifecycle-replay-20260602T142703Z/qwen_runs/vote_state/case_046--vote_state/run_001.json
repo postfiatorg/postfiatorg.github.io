@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:54:29Z",
+  "error": "",
+  "event_id": "case_046",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "69299833b5a02f5b6611d53bd6dd861dd96bc7b9d7c1c03dc194c7f8aedff2cf",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly satisfies the condition for the ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's association with rippled version 2.4.0, providing context for its implementation but secondary to the ledger state evidence in F4."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the amendment DynamicNFT (ID C1CE18F2A268E6A849C27B3DE485006771B4C01B2FCEC4F18356FE92ECD6BB74) is currently contained in the validated ledger Amendments object. Fact F4 explicitly reports an enabled_on timestamp of 2025-06-11T00:13:50.000Z and an enabled_in_ledger value of 96724737. According to the task rules, the presence of enabled ledger membership evidence classifies the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "65ff4d4ff62edaa11be9b87f5196be0734eb22f84cf25fef43bde2f142caf681",
+  "packet_id": "case_046--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "50d150e9ac1a3cf358ae325458ee6c86f9ef7800a588631b0caacfba17eca9e8",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly satisfies the condition for the ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's association with rippled version 2.4.0, providing context for its implementation but secondary to the ledger state evidence in F4.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the amendment DynamicNFT (ID C1CE18F2A268E6A849C27B3DE485006771B4C01B2FCEC4F18356FE92ECD6BB74) is currently contained in the validated ledger Amendments object. Fact F4 explicitly reports an enabled_on timestamp of 2025-06-11T00:13:50.000Z and an enabled_in_ledger value of 96724737. According to the task rules, the presence of enabled ledger membership evidence classifies the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 328,
+      "prompt_tokens": 779,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1107
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:54:25Z"
+}

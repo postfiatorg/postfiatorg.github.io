@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_047",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "8EC4304A06AF03BE953EA6EDA494864F6F3F30AA002BABA35869FBB8C6AE5D52",
+    "amendment_name": "fixInvalidTxFlags",
+    "decision_surface": "XRPL validator amendment decision surface for fixInvalidTxFlags.",
+    "source_facts": [
+      {
+        "claim": "fixInvalidTxFlags: Adds flag checks for CredentialCreate, CredentialAccept, CredentialDelete, and SignerListSet transactions. With this amendment enabled, these transactions will return a temINVALID_FLAG error if they include a flag that doesn't exist, or a contradictory combination of flags.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixInvalidTxFlags appears in XRPSCAN with introduced rippled version 2.4.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "63a61f3c2eb7368218723373bae9967d7add0d2668feb9a70a1a8361e279f917",
+  "packet_id": "case_047--triage",
+  "packet_version": 1
+}

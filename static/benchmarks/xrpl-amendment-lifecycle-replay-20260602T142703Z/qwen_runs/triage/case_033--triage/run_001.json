@@ -1,0 +1,84 @@
+{
+  "completed_at": "2026-06-02T17:17:12Z",
+  "error": "",
+  "event_id": "case_033",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "66bc2c68e97e899fb861b0a86c31acec851add35bd9073a8ea8da38c4eae674d",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces a new asset class (MPTs) with broad integration into the DEX, AMM, and payment systems, representing material financial and asset-control semantics.",
+      "Integration with AMM and Checks introduces complex interaction risks and potential invariant or rounding issues that require explicit review.",
+      "The scope is not a localized fix but a significant feature expansion affecting core ledger accounting and trading mechanics."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name does not start with 'fix', so the PROCEED exception for fixes does not apply.",
+      "There is no explicit no-vote advisory or evidence of critical unsafe evidence in the packet."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the introduction of MPTs as a tradeable asset class integrated with DEX, AMM, and Payments, which constitutes material financial and asset-control semantics requiring review."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Highlights the risk of amendment-blocking for incompatible servers, reinforcing the need for conservative review of major feature additions."
+      }
+    ],
+    "decision_summary": "MPTokensV2 introduces a new asset class with deep integration into the DEX and AMM. This represents material financial and asset-control semantics. It is not a localized fix. Therefore, it requires HOLD_FOR_CHALLENGE for explicit validator review of the new asset model and its interactions with existing financial primitives.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 15,
+      "validator_skim": 30
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Detailed specification of MPT accounting rules and invariant checks.",
+      "Analysis of potential rounding errors in AMM interactions with MPTs."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the MPT implementation introduce any new consensus risks or ledger bloat concerns?",
+        "Are there any known vulnerabilities in the interaction between MPTs and existing AMM logic?"
+      ],
+      "recommended_validator_action": "Review the XLS-82 specification and testnet performance data for MPTs before voting.",
+      "review_questions": [
+        "How does MPT accounting differ from standard trustline accounting?",
+        "What are the failure modes for MPT-AMM interactions?",
+        "Is there a clear migration path for existing assets if MPTs are adopted?"
+      ],
+      "title": "Review MPTokensV2 Asset Class Integration"
+    }
+  },
+  "packet_hash": "ebf266ead8afd82728bd3e5bb52bd6c1c5bf44a43ebef511dd402b29ab6a6d98",
+  "packet_id": "case_033--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "fb31ccd748b605017843b5af56e9033c4fb660c9c4b15997da13f50bb6ef4d67",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The amendment introduces a new asset class (MPTs) with broad integration into the DEX, AMM, and payment systems, representing material financial and asset-control semantics.\",\n    \"Integration with AMM and Checks introduces complex interaction risks and potential invariant or rounding issues that require explicit review.\",\n    \"The scope is not a localized fix but a significant feature expansion affecting core ledger accounting and trading mechanics.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"The amendment name does not start with 'fix', so the PROCEED exception for fixes does not apply.\",\n    \"There is no explicit no-vote advisory or evidence of critical unsafe evidence in the packet.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the introduction of MPTs as a tradeable asset class integrated with DEX, AMM, and Payments, which constitutes material financial and asset-control semantics requiring review.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Highlights the risk of amendment-blocking for incompatible servers, reinforcing the need for conservative review of major feature additions.\"\n    }\n  ],\n  \"decision_summary\": \"MPTokensV2 introduces a new asset class with deep integration into the DEX and AMM. This represents material financial and asset-control semantics. It is not a localized fix. Therefore, it requires HOLD_FOR_CHALLENGE for explicit validator review of the new asset model and its interactions with existing financial primitives.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 120,\n    \"packet_verification\": 15,\n    \"validator_skim\": 30\n  },\n  \"forbidden_stronger_claim\": \"REJECT\",\n  \"missing_evidence\": [\n    \"Detailed specification of MPT accounting rules and invariant checks.\",\n    \"Analysis of potential rounding errors in AMM interactions with MPTs.\"\n  ],\n  \"route\": \"HOLD_FOR_CHALLENGE\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Does the MPT implementation introduce any new consensus risks or ledger bloat concerns?\",\n      \"Are there any known vulnerabilities in the interaction between MPTs and existing AMM logic?\"\n    ],\n    \"recommended_validator_action\": \"Review the XLS-82 specification and testnet performance data for MPTs before voting.\",\n    \"review_questions\": [\n      \"How does MPT accounting differ from standard trustline accounting?\",\n      \"What are the failure modes for MPT-AMM interactions?\",\n      \"Is there a clear migration path for existing assets if MPTs are adopted?\"\n    ],\n    \"title\": \"Review MPTokensV2 Asset Class Integration\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 637,
+      "prompt_tokens": 1050,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1687
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:17:04Z"
+}

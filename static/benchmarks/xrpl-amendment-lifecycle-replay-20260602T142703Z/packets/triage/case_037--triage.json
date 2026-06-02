@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_037",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "FF2D1E13CF6D22427111B967BD504917F63A900CECD320D6FD3AC9FA90344631",
+    "amendment_name": "fixPriceOracleOrder",
+    "decision_surface": "XRPL validator amendment decision surface for fixPriceOracleOrder.",
+    "source_facts": [
+      {
+        "claim": "fixPriceOracleOrder: Fixes an issue where the order of asset pair data is different from when a price oracle is created versus when it is updated. This amendment ensures asset pairs follow a canonical order at all times, so you can predictably look up asset prices.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixPriceOracleOrder appears in XRPSCAN with introduced rippled version 3.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "c4458300fb2f310d09a6f18fa91bacd610ba219d63fe2f61fdb89e20aada3434",
+  "packet_id": "case_037--triage",
+  "packet_version": 1
+}

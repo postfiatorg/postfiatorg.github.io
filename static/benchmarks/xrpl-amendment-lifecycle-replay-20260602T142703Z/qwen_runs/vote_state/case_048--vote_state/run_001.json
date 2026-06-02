@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:54:38Z",
+  "error": "",
+  "event_id": "case_048",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "3840e150cd731ff97c79b5516ef99a46e7e8d6e9ad17cc0260ba59a412bda0cc",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and association with rippled version 2.4.0, providing context for the amendment's lifecycle but secondary to the ledger state in F4."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Defines the general process for amendment activation, establishing the criteria that being in the validated ledger Amendments object signifies successful activation."
+      }
+    ],
+    "decision_summary": "The amendment fixFrozenLPTokenTransfer is classified as ENABLED because Fact F4 confirms its presence in the validated ledger Amendments object and provides a specific ledger sequence (96126977) and timestamp (2025-05-15T01:03:50.000Z) for its enablement. This directly satisfies the condition for the ENABLED label.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "921a6952b66268ccb8393014d87bf982cc410fdf84504e9800f94dea8de7757f",
+  "packet_id": "case_048--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "a3ea9ff7a3206f7ce456bf8794ee0115c1cd252a2a506da07eb26fb2133734ce",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and association with rippled version 2.4.0, providing context for the amendment's lifecycle but secondary to the ledger state in F4.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Defines the general process for amendment activation, establishing the criteria that being in the validated ledger Amendments object signifies successful activation.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixFrozenLPTokenTransfer is classified as ENABLED because Fact F4 confirms its presence in the validated ledger Amendments object and provides a specific ledger sequence (96126977) and timestamp (2025-05-15T01:03:50.000Z) for its enablement. This directly satisfies the condition for the ENABLED label.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 311,
+      "prompt_tokens": 791,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1102
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:54:34Z"
+}

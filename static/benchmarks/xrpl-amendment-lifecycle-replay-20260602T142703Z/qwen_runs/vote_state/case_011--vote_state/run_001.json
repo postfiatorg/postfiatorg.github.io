@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:52:29Z",
+  "error": "",
+  "event_id": "case_011",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "86a6d7bed9c11ee7f4fe050fc695bfc9282ee26f5c060d1b48feecda44f708e1",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the existence and introduction version of the amendment, providing context for its lifecycle but secondary to the ledger state evidence."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Defines the general process for amendment activation, establishing the criteria that being in the validated Amendments object signifies successful activation."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the amendment MPTokensV1 (ID: 950AE2EA...) is present in the validated ledger Amendments object with a recorded enabled timestamp. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "b28f5df162b8d6874e3223b4f59acb54791753bd6cb2aae82a7b9f4bdaa5ac8a",
+  "packet_id": "case_011--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "cd9433e0095749a4b8498fcdf1f255f00b5bf4b17d44ca51b595871a4038d480",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the existence and introduction version of the amendment, providing context for its lifecycle but secondary to the ledger state evidence.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Defines the general process for amendment activation, establishing the criteria that being in the validated Amendments object signifies successful activation.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the amendment MPTokensV1 (ID: 950AE2EA...) is present in the validated ledger Amendments object with a recorded enabled timestamp. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 270,
+      "prompt_tokens": 793,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1063
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:52:25Z"
+}

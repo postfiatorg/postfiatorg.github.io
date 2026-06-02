@@ -1,0 +1,70 @@
+{
+  "completed_at": "2026-06-02T16:49:28Z",
+  "error": "",
+  "event_id": "case_051",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "ce117561944ef60284510fda690d9f0ce2f56a08f516233b50d5eeb1512895ef",
+  "output_json": {
+    "arguments_for_no": [
+      "No evidence of security vulnerabilities or critical bugs requiring immediate intervention.",
+      "Amendment introduces changes to rounding logic which carries inherent risk of unintended side effects if not thoroughly tested."
+    ],
+    "arguments_for_yes": [
+      "The amendment addresses a specific case where order books can become blocked by 'reduced' offers, improving system reliability.",
+      "It is a follow-up to fixReducedOffersV1, suggesting a proven and necessary fix for a known class of issues.",
+      "Prevents potential liquidity fragmentation or trading halts caused by blocked order books."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the technical purpose of the amendment: fixing order book blocking issues caused by rounding errors, which is a positive reliability improvement."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the high stakes of amendment voting; validators must ensure compatibility to avoid being amendment-blocked, favoring adoption of necessary fixes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is part of the official rippled release cycle (v2.3.0), indicating it has undergone standard development and review processes."
+      }
+    ],
+    "decision_summary": "The fixReducedOffersV2 amendment is a targeted reliability fix for order book blocking issues. Given that it addresses a known problem class (similar to V1) and is part of the standard release cycle, the benefits of preventing order book blockages outweigh the risks of the change. Validators should vote YES to maintain network health and compatibility.",
+    "forbidden_stronger_claim": "This amendment guarantees zero future order book issues.",
+    "missing_evidence": [
+      "Specific test coverage metrics for the new rounding case.",
+      "Community consensus or validator voting trends prior to this decision."
+    ],
+    "vote_confidence": 0.85,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "a9ee64de4e18e7f5168fb46d788c21e23f6dd0be78485b14a67089e6bc21edd3",
+  "packet_id": "case_051--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "33c910aeac42704b1169d0f11e86636122992f3b1291ac7989bea7980116ed4f",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"No evidence of security vulnerabilities or critical bugs requiring immediate intervention.\",\n    \"Amendment introduces changes to rounding logic which carries inherent risk of unintended side effects if not thoroughly tested.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment addresses a specific case where order books can become blocked by 'reduced' offers, improving system reliability.\",\n    \"It is a follow-up to fixReducedOffersV1, suggesting a proven and necessary fix for a known class of issues.\",\n    \"Prevents potential liquidity fragmentation or trading halts caused by blocked order books.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Defines the technical purpose of the amendment: fixing order book blocking issues caused by rounding errors, which is a positive reliability improvement.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Establishes the high stakes of amendment voting; validators must ensure compatibility to avoid being amendment-blocked, favoring adoption of necessary fixes.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is part of the official rippled release cycle (v2.3.0), indicating it has undergone standard development and review processes.\"\n    }\n  ],\n  \"decision_summary\": \"The fixReducedOffersV2 amendment is a targeted reliability fix for order book blocking issues. Given that it addresses a known problem class (similar to V1) and is part of the standard release cycle, the benefits of preventing order book blockages outweigh the risks of the change. Validators should vote YES to maintain network health and compatibility.\",\n  \"forbidden_stronger_claim\": \"This amendment guarantees zero future order book issues.\",\n  \"missing_evidence\": [\n    \"Specific test coverage metrics for the new rounding case.\",\n    \"Community consensus or validator voting trends prior to this decision.\"\n  ],\n  \"vote_confidence\": 0.85,\n  \"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 464,
+      "prompt_tokens": 654,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1118
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:49:22Z"
+}

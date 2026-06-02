@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-02T16:57:51Z",
+  "error": "",
+  "event_id": "case_030",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "c51f9e6c7eaebe54867b9a7ffd068fc245420468a583969f7a0e8bef512c6e1e",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical functionality and compliance features of the ConfidentialTransfer amendment, but does not specify the default vote configuration in the source code or release notes."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Explains the general voting mechanism and consequences of incompatibility, but does not provide the specific default vote setting for this amendment."
+      }
+    ],
+    "decision_summary": "The provided packet contains a description of the ConfidentialTransfer amendment's features and general information about the XRPL amendment voting process. However, it lacks specific evidence regarding the 'source default vote' (i.e., whether the code defaults to YES or NO for this amendment in the latest stable release). Without explicit source-backed information on the default vote setting, the label cannot be inferred as YES or NO.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote (YES/NO) for the ConfidentialTransfer amendment in the latest stable release source code or documentation.",
+      "Release notes or commit history indicating the default voting behavior for this specific amendment."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "6ff350279f6cd5d29019f3b8f1093d2ae78de92adf1c9df6acd1ff2d2221c5ca",
+  "packet_id": "case_030--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "83b767469e97f1b37a4aa6537af4d06f06dffb3872049920ddcae5bbc5db9aac",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical functionality and compliance features of the ConfidentialTransfer amendment, but does not specify the default vote configuration in the source code or release notes.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Explains the general voting mechanism and consequences of incompatibility, but does not provide the specific default vote setting for this amendment.\"\n    }\n  ],\n  \"decision_summary\": \"The provided packet contains a description of the ConfidentialTransfer amendment's features and general information about the XRPL amendment voting process. However, it lacks specific evidence regarding the 'source default vote' (i.e., whether the code defaults to YES or NO for this amendment in the latest stable release). Without explicit source-backed information on the default vote setting, the label cannot be inferred as YES or NO.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote (YES/NO) for the ConfidentialTransfer amendment in the latest stable release source code or documentation.\",\n    \"Release notes or commit history indicating the default voting behavior for this specific amendment.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 288,
+      "prompt_tokens": 588,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 876
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:57:47Z"
+}

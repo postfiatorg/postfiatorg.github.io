@@ -1,0 +1,79 @@
+{
+  "completed_at": "2026-06-02T17:13:37Z",
+  "error": "",
+  "event_id": "case_003",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "3d9800aa8401eb6eed9867ea8f24f9e9ae055c6d9761e1ee10503f5859fae01d",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The packet describes a critical security vulnerability allowing unauthorized inner transaction execution.",
+      "Validators were explicitly advised to vote No on the amendment due to the severity of the bug.",
+      "The software release (rippled 3.1.1) disabled the feature due to the severe bug, indicating it is unsafe to proceed."
+    ],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies the core risk: unauthorized inner transaction execution on behalf of arbitrary victims, which constitutes critical unsafe evidence."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides an explicit no-vote advisory from UNL validators, triggering the REJECT rule for explicit no-vote advisories."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the feature was disabled in the software due to the severe bug, reinforcing the decision to reject."
+      }
+    ],
+    "decision_summary": "The amendment is rejected because the packet contains explicit no-vote advisory from validators and describes critical unsafe evidence (unauthorized transaction execution). According to the precedence rules, REJECT is used for explicit no-vote advisories or critical unsafe evidence.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment is safe to enable.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any evidence that the vulnerability has been patched in a subsequent version that would change the advisory?"
+      ],
+      "recommended_validator_action": "Vote No on the Batch amendment.",
+      "review_questions": [
+        "Does the current software version still have the vulnerability active?"
+      ],
+      "title": "Reject Batch Amendment due to Critical Vulnerability"
+    }
+  },
+  "packet_hash": "1e87321fa3db5c3ce5dd7c53bbf35fb935b7610edee8a970435c3b6a0c341f84",
+  "packet_id": "case_003--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "ad5e9a4eb60223c2a38e6b8b9c8bbaf908a131149771ca896bc3eefe52e71fdc",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The packet describes a critical security vulnerability allowing unauthorized inner transaction execution.\",\n    \"Validators were explicitly advised to vote No on the amendment due to the severity of the bug.\",\n    \"The software release (rippled 3.1.1) disabled the feature due to the severe bug, indicating it is unsafe to proceed.\"\n  ],\n  \"arguments_for_proceeding\": [],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Identifies the core risk: unauthorized inner transaction execution on behalf of arbitrary victims, which constitutes critical unsafe evidence.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides an explicit no-vote advisory from UNL validators, triggering the REJECT rule for explicit no-vote advisories.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the feature was disabled in the software due to the severe bug, reinforcing the decision to reject.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment is rejected because the packet contains explicit no-vote advisory from validators and describes critical unsafe evidence (unauthorized transaction execution). According to the precedence rules, REJECT is used for explicit no-vote advisories or critical unsafe evidence.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 0,\n    \"packet_verification\": 5,\n    \"validator_skim\": 2\n  },\n  \"forbidden_stronger_claim\": \"The amendment is safe to enable.\",\n  \"missing_evidence\": [],\n  \"route\": \"REJECT\",\n  \"route_confidence\": 1.0,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Is there any evidence that the vulnerability has been patched in a subsequent version that would change the advisory?\"\n    ],\n    \"recommended_validator_action\": \"Vote No on the Batch amendment.\",\n    \"review_questions\": [\n      \"Does the current software version still have the vulnerability active?\"\n    ],\n    \"title\": \"Reject Batch Amendment due to Critical Vulnerability\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 488,
+      "prompt_tokens": 1036,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1524
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:13:31Z"
+}

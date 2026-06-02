@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-02T16:59:34Z",
+  "error": "",
+  "event_id": "case_057",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "5303e194cba9ac6292a3063e7f236f579b01d42ee2019047cbadb4671f0d1cd6",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the DID amendment as adding standard-compliant Decentralized Identifier functionality, which is a feature addition rather than a breaking change or security fix, typically implying a default YES vote for stable releases."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 2.0.0, establishing the context of the 'latest stable release' mentioned in the task rule."
+      }
+    ],
+    "decision_summary": "The DID amendment adds new functionality (DID transactions and ledger entries) conforming to W3C standards. In XRPL governance, feature additions that do not break existing functionality or require immediate security patches are generally supported by default in stable releases to encourage network evolution. There is no evidence of controversy or breaking changes that would suggest a default NO vote.",
+    "default_vote_confidence": 0.85,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the rippled release notes or core developers regarding the default vote recommendation for DID in version 2.0.0.",
+      "Historical voting data for the DID amendment to confirm the actual default stance taken by validators."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "dab1cb6cf0b6eaa280ff867523544f1151451ad292f8ccbba766ba2162328451",
+  "packet_id": "case_057--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "bdcb154e111d9a5236c00034f7040c051850a0cf2af25cd74dccadad50eb96cf",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the DID amendment as adding standard-compliant Decentralized Identifier functionality, which is a feature addition rather than a breaking change or security fix, typically implying a default YES vote for stable releases.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 2.0.0, establishing the context of the 'latest stable release' mentioned in the task rule.\"\n    }\n  ],\n  \"decision_summary\": \"The DID amendment adds new functionality (DID transactions and ledger entries) conforming to W3C standards. In XRPL governance, feature additions that do not break existing functionality or require immediate security patches are generally supported by default in stable releases to encourage network evolution. There is no evidence of controversy or breaking changes that would suggest a default NO vote.\",\n  \"default_vote_confidence\": 0.85,\n  \"missing_evidence\": [\n    \"Explicit statement from the rippled release notes or core developers regarding the default vote recommendation for DID in version 2.0.0.\",\n    \"Historical voting data for the DID amendment to confirm the actual default stance taken by validators.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 302,
+      "prompt_tokens": 634,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 936
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:59:30Z"
+}

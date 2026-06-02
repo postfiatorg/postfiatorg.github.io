@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_054",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "9196110C23EA879B4229E51C286180C7D02166DA712559F634372F5264D0EC59",
+    "amendment_name": "fixInnerObjTemplate2",
+    "decision_surface": "XRPL validator amendment decision surface for fixInnerObjTemplate2.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixInnerObjTemplate2: This amendment standardizes the way inner objects (Object-type fields in the canonical binary format) have their formats and default values enforced. This is the same type of check that the fixInnerObjTemplate applies to AMM-related fields, but this amendment applies to all other types of inner objects, namely: - DisabledValidator field of the NegativeUNL entry. - Members of the Majorities array in the Amendments entry. - Members of the Signers array of multi-signed transactions. - Members of the SignerEntries array of SignerList ledger entries. - Several parts of the XChainBridge amendment : - Members of the XChainClaimAttestations array in XChainOwnedClaimID ledger entries - Members of the XChainCreateAccountAttestations array in XChainOwnedCreateAccountClaimID ledger entries - Members of the XChainClaimAttestationBatch array in XChainAddClaimAttestation transactions - Members of the XChainCreateAccountAttestationBatch array in XChainAddClaimAttestation transactions It is believed that this change does not affect transaction processing, but it is possible that there are edge cases where it could cause an improperly formatted transaction to receive a differen",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixInnerObjTemplate2 appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "bee0d99e7405d7901f4c4899f07cd0413ffc6976cb7adaab2a21bba4dd7fb0a8",
+  "packet_id": "case_054--default_vote",
+  "packet_version": 1
+}

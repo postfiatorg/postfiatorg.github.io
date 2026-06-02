@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-02T16:58:59Z",
+  "error": "",
+  "event_id": "case_048",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "c09a5d912da42a32ec027e2261c34e223cdc5c5543c9ff995944af213fd0c005",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a security fix for a loophole allowing blacklisted accounts to bypass frozen status, which strongly implies a positive default vote in stable releases."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 2.4.0, establishing it as part of the stable release history."
+      }
+    ],
+    "decision_summary": "The amendment 'fixFrozenLPTokenTransfer' addresses a critical security vulnerability where blacklisted accounts could transfer frozen LP tokens. Security fixes that close loopholes and enforce intended frozen states are standardly enabled by default in stable releases to ensure network integrity and compliance. The inclusion in version 2.4.0 supports its status as a stable release feature.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit documentation stating the default vote value in the rippled 2.4.0 release notes."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "c2cfc30e3f94f92e9896139f6cb54fe1938b6c41374f8d548e5c85da9a17451e",
+  "packet_id": "case_048--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "d68538176023d9acc8edfbe97b93bf1c83d0322b2c4e16ace9dbd0d430cafe57",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a security fix for a loophole allowing blacklisted accounts to bypass frozen status, which strongly implies a positive default vote in stable releases.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 2.4.0, establishing it as part of the stable release history.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixFrozenLPTokenTransfer' addresses a critical security vulnerability where blacklisted accounts could transfer frozen LP tokens. Security fixes that close loopholes and enforce intended frozen states are standardly enabled by default in stable releases to ensure network integrity and compliance. The inclusion in version 2.4.0 supports its status as a stable release feature.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit documentation stating the default vote value in the rippled 2.4.0 release notes.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 260,
+      "prompt_tokens": 674,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 934
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:58:56Z"
+}

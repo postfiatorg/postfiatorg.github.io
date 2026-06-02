@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:53:08Z",
+  "error": "",
+  "event_id": "case_022",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "cde721b943c79377df6a50f61360bf4ba75ef0eba80cfc1fd5f7c7ec3434db70",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly states that the status of the FlowV2 amendment is obsolete/removed, which directly maps to the VETOED_OR_RETIRED classification rule."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the general amendment process, confirming that amendments have distinct states, but F5 provides the specific terminal state for this amendment."
+      }
+    ],
+    "decision_summary": "The source fact F5 explicitly identifies the FlowV2 amendment status as 'obsolete/removed'. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED label.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "8931bcccf6b2bce6d8d129bcfc0e0bc7e633339a96a65969ffd7a4492fc04cdf",
+  "packet_id": "case_022--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "8dcff52a3234de8dbc196191a4456d6f61c67ee28f613c8f8295f58b80dce5f7",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly states that the status of the FlowV2 amendment is obsolete/removed, which directly maps to the VETOED_OR_RETIRED classification rule.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides context on the general amendment process, confirming that amendments have distinct states, but F5 provides the specific terminal state for this amendment.\"\n    }\n  ],\n  \"decision_summary\": \"The source fact F5 explicitly identifies the FlowV2 amendment status as 'obsolete/removed'. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED label.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 211,
+      "prompt_tokens": 638,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 849
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:53:06Z"
+}

@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-02T16:57:29Z",
+  "error": "",
+  "event_id": "case_023",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "2625fd335cf2a6b88a36cb36040f0e2405a1792572672fae0b7f21407e365ee5",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The source explicitly states that NonFungibleTokensV1 has known issues, including one that can cause tecINVARIANT_FAILED errors, and that it has been replaced by the NonFungibleTokensV1_1 amendment. This indicates that the stable release source does not recommend or default to enabling this specific version due to its instability and obsolescence."
+      }
+    ],
+    "decision_summary": "The source description for NonFungibleTokensV1 highlights critical known issues and notes that it has been superseded by NonFungibleTokensV1_1. In the context of XRPL amendment voting, stable releases typically default to 'NO' for amendments that are known to be buggy or have been replaced by a fixed successor, to prevent network instability. Therefore, the inferred default vote is NO.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "1d3952c2340ce45b8429b39368747808c456b5bca09da6501fa62bfbd37adad7",
+  "packet_id": "case_023--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "ba10151163c2615dbcd932f5b9ab1871f9a1d4ab39ec5ab41ccb919a6f5cfcf4",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The source explicitly states that NonFungibleTokensV1 has known issues, including one that can cause tecINVARIANT_FAILED errors, and that it has been replaced by the NonFungibleTokensV1_1 amendment. This indicates that the stable release source does not recommend or default to enabling this specific version due to its instability and obsolescence.\"\n    }\n  ],\n  \"decision_summary\": \"The source description for NonFungibleTokensV1 highlights critical known issues and notes that it has been superseded by NonFungibleTokensV1_1. In the context of XRPL amendment voting, stable releases typically default to 'NO' for amendments that are known to be buggy or have been replaced by a fixed successor, to prevent network instability. Therefore, the inferred default vote is NO.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 234,
+      "prompt_tokens": 734,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 968
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:57:26Z"
+}

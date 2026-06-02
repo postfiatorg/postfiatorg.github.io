@@ -1,0 +1,60 @@
+{
+  "completed_at": "2026-06-02T16:52:04Z",
+  "error": "",
+  "event_id": "case_004",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "524f505186c31d38ace90dab68e93973c310e6936dcf09295d93170dd7079826",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Explicitly states the feature was not enabled on mainnet and validators voted No, ruling out ENABLED and MAJORITY_ACTIVE states."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Indicates the software version disabled the feature and planned a replacement, supporting the classification of the amendment as retired or obsolete."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Provides the context of a critical vulnerability, explaining why the amendment was rejected and subsequently retired rather than just lacking majority."
+      }
+    ],
+    "decision_summary": "The amendment was never enabled on mainnet. Due to a critical vulnerability, validators voted against it, and the software update disabled the feature while planning a replacement. This trajectory of rejection followed by software-level disablement and replacement aligns with the VETOED_OR_RETIRED state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit confirmation that the amendment was formally retired from the amendment queue, though implied by the replacement plan."
+    ],
+    "state_confidence": 0.95,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "55700a8a82145ab0e992667c1e6991fbf29222b7d9c9f6b18e9b45f62366ce8c",
+  "packet_id": "case_004--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "0721ab0896d02f3e537d6ff10f3d3264536092930a9ff1faf1d5fa89792f3ee7",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Explicitly states the feature was not enabled on mainnet and validators voted No, ruling out ENABLED and MAJORITY_ACTIVE states.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Indicates the software version disabled the feature and planned a replacement, supporting the classification of the amendment as retired or obsolete.\"\n    },\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Provides the context of a critical vulnerability, explaining why the amendment was rejected and subsequently retired rather than just lacking majority.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment was never enabled on mainnet. Due to a critical vulnerability, validators voted against it, and the software update disabled the feature while planning a replacement. This trajectory of rejection followed by software-level disablement and replacement aligns with the VETOED_OR_RETIRED state.\",\n  \"missing_evidence\": [\n    \"Explicit confirmation that the amendment was formally retired from the amendment queue, though implied by the replacement plan.\"\n  ],\n  \"state_confidence\": 0.95,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 291,
+      "prompt_tokens": 715,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1006
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:52:00Z"
+}

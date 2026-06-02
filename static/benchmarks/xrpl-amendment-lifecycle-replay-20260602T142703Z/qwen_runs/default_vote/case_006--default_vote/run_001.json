@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-02T16:56:24Z",
+  "error": "",
+  "event_id": "case_006",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "f90a2fda56bdfa7a907646da3779a08a810e669f9a53a9055f143b79d4028959",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the functional changes of the AMMClawback amendment, specifically allowing clawback-enabled tokens in AMMs and preventing frozen token deposits. This is a feature addition and security enhancement, not a breaking change or a reversal of existing functionality."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with rippled version 2.3.0, indicating it is a recent, stable release feature intended for network adoption."
+      }
+    ],
+    "decision_summary": "The AMMClawback amendment introduces a new transaction type and modifies existing behavior to enhance security and functionality for Automated Market Makers. It allows issuers to claw back tokens deposited in AMMs if the token has clawback enabled, and prevents depositing frozen tokens. These are additive and protective features that align with the network's goal of expanding utility and security. There is no evidence of breaking changes, performance degradation, or controversial governance implications that would warrant a default NO vote. Therefore, the default vote is inferred as YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the rippled release notes or XLS-73 specification regarding the recommended default vote for validators."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "3b4a01565cc606e3f03f8aaa4640702753c225da0972103bc8a64cb550030390",
+  "packet_id": "case_006--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "d2e24caf9a818f1e2a0b04377fef88de03569f1911c7553e1fccec44468f8f78",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the functional changes of the AMMClawback amendment, specifically allowing clawback-enabled tokens in AMMs and preventing frozen token deposits. This is a feature addition and security enhancement, not a breaking change or a reversal of existing functionality.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is associated with rippled version 2.3.0, indicating it is a recent, stable release feature intended for network adoption.\"\n    }\n  ],\n  \"decision_summary\": \"The AMMClawback amendment introduces a new transaction type and modifies existing behavior to enhance security and functionality for Automated Market Makers. It allows issuers to claw back tokens deposited in AMMs if the token has clawback enabled, and prevents depositing frozen tokens. These are additive and protective features that align with the network's goal of expanding utility and security. There is no evidence of breaking changes, performance degradation, or controversial governance implications that would warrant a default NO vote. Therefore, the default vote is inferred as YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit statement from the rippled release notes or XLS-73 specification regarding the recommended default vote for validators.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 320,
+      "prompt_tokens": 649,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 969
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:56:20Z"
+}

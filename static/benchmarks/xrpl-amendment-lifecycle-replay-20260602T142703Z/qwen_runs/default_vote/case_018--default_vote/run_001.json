@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-02T16:57:11Z",
+  "error": "",
+  "event_id": "case_018",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "e7a5114b7d12b4d673ff3e6fd6cda3f028855d38015d1d1174404b4a41e551f7",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The source description explicitly states that the amendment was disabled in v3.1.1 due to a bug and will be replaced by BatchV1_1. This indicates the amendment is deprecated and should not be enabled, implying a default vote of NO."
+      }
+    ],
+    "decision_summary": "The amendment fixBatchInnerSigs is described as having a bug that caused it to be disabled in v3.1.1 and is slated for replacement. Therefore, the stable source default vote is NO.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "e345208b97e3bc78241e19050063633d83749786c1cc324ffda7cf05cdb31985",
+  "packet_id": "case_018--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "4f44d53a4500efd4e1afd485e495d741fd6ced1216b020161777c066a3c23ebb",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The source description explicitly states that the amendment was disabled in v3.1.1 due to a bug and will be replaced by BatchV1_1. This indicates the amendment is deprecated and should not be enabled, implying a default vote of NO.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixBatchInnerSigs is described as having a bug that caused it to be disabled in v3.1.1 and is slated for replacement. Therefore, the stable source default vote is NO.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 173,
+      "prompt_tokens": 629,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 802
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:57:08Z"
+}

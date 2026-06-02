@@ -1,0 +1,63 @@
+{
+  "completed_at": "2026-06-02T16:45:57Z",
+  "error": "",
+  "event_id": "case_007",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "c46d5289b4139e1ea591e667e996d4e63bfa11f47f0979ece48130ccbd292b69",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment 'Batch' was explicitly disabled in rippled v3.1.1 due to a critical bug.",
+      "The official status of the amendment is marked as OBSOLETE/removed in the Known Amendments documentation.",
+      "The functionality is superseded by a future replacement, BatchV1_1, making the current implementation deprecated.",
+      "Activating a known-buggy and obsolete amendment poses unnecessary risk to network stability and validator compatibility."
+    ],
+    "arguments_for_yes": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Explicitly states the amendment was disabled due to a bug and is replaced by a future version, indicating it should not be enabled."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Confirms the official status of the amendment is OBSOLETE, meaning it is no longer supported or intended for activation."
+      }
+    ],
+    "decision_summary": "The 'Batch' amendment is obsolete and was disabled due to a bug. It is superseded by BatchV1_1. Validators should not enable this amendment.",
+    "forbidden_stronger_claim": "The amendment has already been activated on the mainnet.",
+    "missing_evidence": [
+      "Current mainnet activation status (though implied obsolete, explicit current state is held out)."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "307cab756abb6a27b26fac7e92a64d4dab83e2fae563a9dd59953369d1ef576f",
+  "packet_id": "case_007--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "091c06e5c53e416796bb2c57b9de5d18b56489a40717895a3393411a2528aab3",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment 'Batch' was explicitly disabled in rippled v3.1.1 due to a critical bug.\",\n    \"The official status of the amendment is marked as OBSOLETE/removed in the Known Amendments documentation.\",\n    \"The functionality is superseded by a future replacement, BatchV1_1, making the current implementation deprecated.\",\n    \"Activating a known-buggy and obsolete amendment poses unnecessary risk to network stability and validator compatibility.\"\n  ],\n  \"arguments_for_yes\": [],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Explicitly states the amendment was disabled due to a bug and is replaced by a future version, indicating it should not be enabled.\"\n    },\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Confirms the official status of the amendment is OBSOLETE, meaning it is no longer supported or intended for activation.\"\n    }\n  ],\n  \"decision_summary\": \"The 'Batch' amendment is obsolete and was disabled due to a bug. It is superseded by BatchV1_1. Validators should not enable this amendment.\",\n  \"forbidden_stronger_claim\": \"The amendment has already been activated on the mainnet.\",\n  \"missing_evidence\": [\n    \"Current mainnet activation status (though implied obsolete, explicit current state is held out).\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 348,
+      "prompt_tokens": 677,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1025
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:45:53Z"
+}

@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:55:42Z",
+  "error": "",
+  "event_id": "case_065",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "0889b3ae4d9e6babfb5783b862ad839bc9d37b345923a185d713dd3032ffdcd8",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states that the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and introduction version, providing context for its lifecycle but secondary to the activation evidence in F4."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general process for amendment activation, establishing the criteria that F4 satisfies."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the amendment XRPFees has been enabled. Fact F4 explicitly reports an enabled_on timestamp and an enabled_in_ledger value, confirming that the amendment has passed the voting threshold and been activated in the ledger. This satisfies the definition of the ENABLED state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "0cc209c05c916f6047fab55669898e3528f42cd164f3f7d0c4a611ce2c19ea96",
+  "packet_id": "case_065--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "538811808dc4d0bf696a6ba396f705fc1cccd8599a60356813e39f4739021174",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states that the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and introduction version, providing context for its lifecycle but secondary to the activation evidence in F4.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Describes the general process for amendment activation, establishing the criteria that F4 satisfies.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the amendment XRPFees has been enabled. Fact F4 explicitly reports an enabled_on timestamp and an enabled_in_ledger value, confirming that the amendment has passed the voting threshold and been activated in the ledger. This satisfies the definition of the ENABLED state.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 266,
+      "prompt_tokens": 794,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1060
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:55:39Z"
+}

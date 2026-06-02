@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_039",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "6143A27B71F7DAF9330ECA7C5EC3D54C8083A4FDEF7016737EEC06AB61E82EE0",
+    "amendment_name": "fixIncludeKeyletFields",
+    "decision_surface": "XRPL validator amendment decision surface for fixIncludeKeyletFields.",
+    "source_facts": [
+      {
+        "claim": "fixIncludeKeyletFields: This amendment adds fields to ledger entries in cases where those fields are part of the identifying information that forms their ledger entry ID: - Add a Sequence field to Escrow and PayChannel entries. - Add an Owner field to SignerList entries. - Add an OracleDocumentID field to Oracle entries. Without this amendment, some ledger entries do not store all the data that was used to create their ledger entry ID. After this amendment is enabled, ledger entries of those types have those fields added when the ledger entry is created or modified. Ledger entries that were created before the amendment are not changed until a transaction modifies them. The presence of a Sequence field on Escrow ledger entries is especially useful since you need that value to finish or cancel the escrow, and you otherwise might have to look up the sequence number of the transaction that created the escrow.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixIncludeKeyletFields appears in XRPSCAN with introduced rippled version 3.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "ca2afb7a18a170ddcfc00590f865f073149e236fa8a746b8769e1eb4acc13e49",
+  "packet_id": "case_039--triage",
+  "packet_version": 1
+}

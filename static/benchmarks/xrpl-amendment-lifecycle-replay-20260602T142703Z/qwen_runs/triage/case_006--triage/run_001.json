@@ -1,0 +1,90 @@
+{
+  "completed_at": "2026-06-02T17:14:03Z",
+  "error": "",
+  "event_id": "case_006",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "44cbc3f1ea15a8895e9e0c4237d47643d7c59433df0628680d08526d54b08a8e",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces a new transaction type (AMMClawback) that allows issuers to seize assets from Automated Market Makers, representing a significant change to asset-control semantics.",
+      "Clawback is a high-risk feature involving compliance and permissioning; extending it to AMMs introduces complex interactions with liquidity pools and potential systemic risk if not carefully implemented.",
+      "The modification to AMMDeposit to prevent frozen token deposits adds logic that affects AMM liveness and user ability to provide liquidity, requiring careful review for edge cases.",
+      "The combination of AMM mechanics and issuer clawback rights creates a novel risk profile that warrants explicit validator review rather than automatic proceeding."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name does not start with 'fix', so the localized fix exception does not apply.",
+      "The feature is well-specified via XLS-73, providing a clear reference for implementation.",
+      "The change is scoped to tokens with clawback already enabled, limiting the blast radius to specific asset issuers."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the core functionality: allowing clawback on AMM deposits and adding a new transaction type. This directly triggers the 'asset-control semantics' and 'material financial' risk criteria for HOLD_FOR_CHALLENGE."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for conservative review of high-impact changes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and versioning, but does not mitigate the semantic risks identified in F1."
+      }
+    ],
+    "decision_summary": "The AMMClawback amendment introduces material changes to asset-control semantics by allowing issuers to claw back tokens from AMMs. This involves complex interactions between compliance features (clawback) and financial infrastructure (AMMs). According to the task rules, material asset-control semantics and compliance-related changes require HOLD_FOR_CHALLENGE for explicit validator review. It is not a simple fix, nor does it fall under the exceptions for account-local opt-outs.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on how partial clawbacks from AMM pools are handled mathematically.",
+      "Impact analysis on AMM liquidity incentives if tokens are clawed back."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the implementation correctly handle the state of the AMM pool when a clawback occurs?",
+        "Are there any edge cases where frozen token prevention in AMMDeposit could cause liveness issues?"
+      ],
+      "recommended_validator_action": "Review the XLS-73 specification and implementation details for AMMClawback, focusing on asset-control semantics and interaction with AMM invariants.",
+      "review_questions": [
+        "How does the clawback transaction interact with existing AMM orders and liquidity?",
+        "Is the prevention of frozen token deposits in AMMDeposit robust against race conditions?",
+        "What are the implications for users who deposit tokens that are later clawed back?"
+      ],
+      "title": "Review AMMClawback Asset-Control Semantics"
+    }
+  },
+  "packet_hash": "b5e39cef4f524a3fb0f8ce68c0b5cf8122d5fdd8ff3e0616282a6703c132f028",
+  "packet_id": "case_006--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "ec08a11b0d24ac26c5e1d61dfe91a696adf816bde60730984ad25d65b5f560fe",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The amendment introduces a new transaction type (AMMClawback) that allows issuers to seize assets from Automated Market Makers, representing a significant change to asset-control semantics.\",\n    \"Clawback is a high-risk feature involving compliance and permissioning; extending it to AMMs introduces complex interactions with liquidity pools and potential systemic risk if not carefully implemented.\",\n    \"The modification to AMMDeposit to prevent frozen token deposits adds logic that affects AMM liveness and user ability to provide liquidity, requiring careful review for edge cases.\",\n    \"The combination of AMM mechanics and issuer clawback rights creates a novel risk profile that warrants explicit validator review rather than automatic proceeding.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"The amendment name does not start with 'fix', so the localized fix exception does not apply.\",\n    \"The feature is well-specified via XLS-73, providing a clear reference for implementation.\",\n    \"The change is scoped to tokens with clawback already enabled, limiting the blast radius to specific asset issuers.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Defines the core functionality: allowing clawback on AMM deposits and adding a new transaction type. This directly triggers the 'asset-control semantics' and 'material financial' risk criteria for HOLD_FOR_CHALLENGE.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for conservative review of high-impact changes.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and versioning, but does not mitigate the semantic risks identified in F1.\"\n    }\n  ],\n  \"decision_summary\": \"The AMMClawback amendment introduces material changes to asset-control semantics by allowing issuers to claw back tokens from AMMs. This involves complex interactions between compliance features (clawback) and financial infrastructure (AMMs). According to the task rules, material asset-control semantics and compliance-related changes require HOLD_FOR_CHALLENGE for explicit validator review. It is not a simple fix, nor does it fall under the exceptions for account-local opt-outs.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 45,\n    \"packet_verification\": 10,\n    \"validator_skim\": 5\n  },\n  \"forbidden_stronger_claim\": \"REJECT\",\n  \"missing_evidence\": [\n    \"Specific details on how partial clawbacks from AMM pools are handled mathematically.\",\n    \"Impact analysis on AMM liquidity incentives if tokens are clawed back.\"\n  ],\n  \"route\": \"HOLD_FOR_CHALLENGE\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Does the implementation correctly handle the state of the AMM pool when a clawback occurs?\",\n      \"Are there any edge cases where frozen token prevention in AMMDeposit could cause liveness issues?\"\n    ],\n    \"recommended_validator_action\": \"Review the XLS-73 specification and implementation details for AMMClawback, focusing on asset-control semantics and interaction with AMM invariants.\",\n    \"review_questions\": [\n      \"How does the clawback transaction interact with existing AMM orders and liquidity?\",\n      \"Is the prevention of frozen token deposits in AMMDeposit robust against race conditions?\",\n      \"What are the implications for users who deposit tokens that are later clawed back?\"\n    ],\n    \"title\": \"Review AMMClawback Asset-Control Semantics\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 831,
+      "prompt_tokens": 1110,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1941
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:13:53Z"
+}

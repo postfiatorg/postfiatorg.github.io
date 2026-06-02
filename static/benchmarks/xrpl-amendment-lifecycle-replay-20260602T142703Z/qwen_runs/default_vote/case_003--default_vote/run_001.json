@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:56:12Z",
+  "error": "",
+  "event_id": "case_003",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "eb2fd562dee63ff47f52d0f923e5e90f1f32e0ad8fd00f4fb96697384ad1b0ef",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes the existence of a severe security vulnerability (unauthorized inner transaction execution) in the Batch amendment, providing the primary justification for rejecting it."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Indicates that the core network validators (UNL) were explicitly advised to vote No, reflecting the consensus recommendation from the ecosystem's authoritative nodes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms that the latest stable release (rippled 3.1.1) actively disabled the Batch amendment due to the bug, demonstrating that the software's default behavior is to reject the amendment."
+      }
+    ],
+    "decision_summary": "The source facts indicate a critical security flaw in the Batch amendment (F1). Consequently, UNL validators were advised to vote No (F2), and the latest stable release of the rippled software (3.1.1) disabled the amendment by default (F3). Therefore, the source-backed default vote is NO.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "1fd8af11f7731b2c79b3802e1cabdec7fc9c99e9449fe1bf9b5b23791f4133fd",
+  "packet_id": "case_003--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "09e32a2f4c3a9c705303bac9a50e94f0df9f2b1d5f40475aed8929c2824c3f02",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Establishes the existence of a severe security vulnerability (unauthorized inner transaction execution) in the Batch amendment, providing the primary justification for rejecting it.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Indicates that the core network validators (UNL) were explicitly advised to vote No, reflecting the consensus recommendation from the ecosystem's authoritative nodes.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms that the latest stable release (rippled 3.1.1) actively disabled the Batch amendment due to the bug, demonstrating that the software's default behavior is to reject the amendment.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate a critical security flaw in the Batch amendment (F1). Consequently, UNL validators were advised to vote No (F2), and the latest stable release of the rippled software (3.1.1) disabled the amendment by default (F3). Therefore, the source-backed default vote is NO.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 294,
+      "prompt_tokens": 572,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 866
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:56:08Z"
+}

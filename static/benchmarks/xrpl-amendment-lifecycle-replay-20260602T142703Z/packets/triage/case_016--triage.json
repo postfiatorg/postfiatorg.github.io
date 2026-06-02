@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_016",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "138B968F25822EFBF54C00F97031221C47B1EAB8321D93C7C2AEAF85F04EC5DF",
+    "amendment_name": "TokenEscrow",
+    "decision_surface": "XRPL validator amendment decision surface for TokenEscrow.",
+    "source_facts": [
+      {
+        "claim": "TokenEscrow: Extends escrow functionality to fungible tokens, enabling Trust Line Tokens and Multi-Purpose Tokens (MPTs) to be held in escrow. Issuers can control whether their tokens can be escrowed through flags. To issue Trust Line Tokens, issuers must enable the Allow TrustLine Locking flag on their account, or the Can Escrow and Can Transfer flags for an MPT issuance. Modifies existing transactions: - EscrowCreate - Can now escrow fungible tokens in addition to XRP. - EscrowFinish - Can now deliver escrowed fungible tokens to recipients. - EscrowCancel - Can now return escrowed fungible tokens to senders. - AccountSet - Can now enable the Allow Trust Line Locking flag to allow Trust Line Tokens issued by an account to be escrowed. Updates existing ledger entry types: - Escrow - Adds support for fungible token amounts and two new fields; TransferRate and IssuerNode. - MPToken - Adds optional LockedAmount field to track tokens in escrow. - MPTokenIssuance - Adds optional LockedAmount field to track tokens in escrow. - AccountRoot - Adds Allow Trust Line Locking flag. Specification: XLS-85",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "TokenEscrow appears in XRPSCAN with introduced rippled version 2.5.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "65e7edc5e15a3443e4fd09b50ffbc3836daf09a8600c2da55dcc4bcb6b01f18d",
+  "packet_id": "case_016--triage",
+  "packet_version": 1
+}

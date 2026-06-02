@@ -1,0 +1,67 @@
+{
+  "completed_at": "2026-06-02T17:16:01Z",
+  "error": "",
+  "event_id": "case_022",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "11fd332435c4c0135bd0896276500f8085b129a8c4daabf04b223db49be29377",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Explicitly states the amendment was rejected due to a bug and removed in version 0.33.0, classifying it as a previous, obsolete version."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Confirms the status of FlowV2 is OBSOLETE/removed, triggering the REJECT rule for retired/obsolete proposals."
+      }
+    ],
+    "decision_summary": "The packet identifies FlowV2 as an obsolete amendment that was previously rejected due to a bug and removed from the codebase. According to the task rules, REJECT is the required route for retired or obsolete proposals.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "Do not claim the amendment is safe to proceed or requires technical review for activation, as it is no longer part of the active codebase.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [],
+      "recommended_validator_action": "Reject the amendment as it is obsolete and removed.",
+      "review_questions": [],
+      "title": "Reject Obsolete Amendment FlowV2"
+    }
+  },
+  "packet_hash": "7c876d890f465953c5f96635647c34c07c73f70ec5b8502c0f2eaab4cd52bf09",
+  "packet_id": "case_022--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "7975d1b168bc500449ae834dc4cc5b255b26c61bab11cb2da770bb8c4132dbf4",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Explicitly states the amendment was rejected due to a bug and removed in version 0.33.0, classifying it as a previous, obsolete version.\"\n},\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"Confirms the status of FlowV2 is OBSOLETE/removed, triggering the REJECT rule for retired/obsolete proposals.\"\n}\n],\n\"decision_summary\": \"The packet identifies FlowV2 as an obsolete amendment that was previously rejected due to a bug and removed from the codebase. According to the task rules, REJECT is the required route for retired or obsolete proposals.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"Do not claim the amendment is safe to proceed or requires technical review for activation, as it is no longer part of the active codebase.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [],\n\"recommended_validator_action\": \"Reject the amendment as it is obsolete and removed.\",\n\"review_questions\": [],\n\"title\": \"Reject Obsolete Amendment FlowV2\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 327,
+      "prompt_tokens": 1043,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1370
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:15:56Z"
+}

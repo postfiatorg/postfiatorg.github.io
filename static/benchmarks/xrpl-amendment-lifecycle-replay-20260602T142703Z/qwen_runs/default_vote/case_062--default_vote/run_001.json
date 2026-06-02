@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:59:52Z",
+  "error": "",
+  "event_id": "case_062",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "fc23d827810171c9fa5b514c0ab14c61747fb844e56293cdb7b64f71abc23d8a",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The claim explicitly states that the amendment 'fixes an issue' and 'enables the payment engine to properly handle this scenario', indicating it is a bug fix required for correct protocol operation rather than an optional feature."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is part of the standard release cycle (version 2.0.0), supporting the inference that it is intended for general adoption."
+      }
+    ],
+    "decision_summary": "The amendment 'fixFillOrKill' is described as a fix for a specific bug introduced by a previous amendment ('FlowCross') where offers with the tfFillOrKill flag would fail incorrectly. Since the amendment corrects erroneous behavior and ensures the payment engine functions as intended, the default vote for a stable release is YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "106b6cefac2897f0619becaeee1e0bb08682c9cef19ba4926ed79545bef43b08",
+  "packet_id": "case_062--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "55b50bba5576b213b05dc906de70dc19d4a5a66ffa43a4c1f78a16fa32a1d3cf",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The claim explicitly states that the amendment 'fixes an issue' and 'enables the payment engine to properly handle this scenario', indicating it is a bug fix required for correct protocol operation rather than an optional feature.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is part of the standard release cycle (version 2.0.0), supporting the inference that it is intended for general adoption.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixFillOrKill' is described as a fix for a specific bug introduced by a previous amendment ('FlowCross') where offers with the tfFillOrKill flag would fail incorrectly. Since the amendment corrects erroneous behavior and ensures the payment engine functions as intended, the default vote for a stable release is YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 244,
+      "prompt_tokens": 626,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 870
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:59:49Z"
+}

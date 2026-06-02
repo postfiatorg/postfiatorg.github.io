@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-02T16:59:38Z",
+  "error": "",
+  "event_id": "case_058",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "7a8b05c240ca835c38cd32f987f0d4ba629fea63e8b9ab75940512e8dbafe645",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a non-breaking enhancement that adds fields to ledger entries to improve history tracing, which is a standard positive feature addition with no indicated negative side effects or breaking changes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 2.2.0, indicating it has been part of the stable release cycle and is not an experimental or rejected proposal."
+      }
+    ],
+    "decision_summary": "The amendment 'fixPreviousTxnID' is a functional improvement that adds missing fields to specific ledger entry types to facilitate better history tracing. It does not introduce breaking changes, security risks, or controversial protocol alterations. In the XRPL governance model, such non-breaking, utility-enhancing amendments are typically enabled by default in stable releases to ensure network consistency and improved observability. Therefore, the source default vote is inferred to be YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit documentation stating the default vote flag in the rippled source code for this specific amendment.",
+      "Validator community discussion logs explicitly voting on the default stance."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "d65514e3ac77f5605b17245ec34fb435f6c484d703aa51ae592fee22fecd5370",
+  "packet_id": "case_058--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "b88a59757396a9069d89af46240b73d8f98f3a1d3717c63f69db822740d4afea",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a non-breaking enhancement that adds fields to ledger entries to improve history tracing, which is a standard positive feature addition with no indicated negative side effects or breaking changes.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 2.2.0, indicating it has been part of the stable release cycle and is not an experimental or rejected proposal.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixPreviousTxnID' is a functional improvement that adds missing fields to specific ledger entry types to facilitate better history tracing. It does not introduce breaking changes, security risks, or controversial protocol alterations. In the XRPL governance model, such non-breaking, utility-enhancing amendments are typically enabled by default in stable releases to ensure network consistency and improved observability. Therefore, the source default vote is inferred to be YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit documentation stating the default vote flag in the rippled source code for this specific amendment.\",\n    \"Validator community discussion logs explicitly voting on the default stance.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 303,
+      "prompt_tokens": 652,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 955
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:59:34Z"
+}

@@ -1,0 +1,66 @@
+{
+  "completed_at": "2026-06-02T16:47:00Z",
+  "error": "",
+  "event_id": "case_019",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "6b3e804009cc27d9c72a471375fe0ad42ff5213cbfc1591aaa08ef10274f69e9",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment is explicitly marked as OBSOLETE in the source facts.",
+      "Its effects are already included in the NonFungibleTokensV1_1 amendment, making this specific amendment redundant.",
+      "Voting for an obsolete amendment provides no functional benefit and may indicate a lack of awareness of the current protocol state."
+    ],
+    "arguments_for_yes": [
+      "The amendment fixes a specific off-by-one error in NFTokenPage determination.",
+      "It improves error handling by returning tecNO_SUITABLE_TOKEN_PAGE instead of tecINVARIANT_FAILED."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly states the amendment status is OBSOLETE, which is the primary determinant for the vote recommendation."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Confirms that the amendment's effects are included in NonFungibleTokensV1_1, reinforcing its obsolete status."
+      }
+    ],
+    "decision_summary": "The amendment fixNFTokenDirV1 is obsolete because its functionality is subsumed by NonFungibleTokensV1_1. Therefore, it should not be voted for.",
+    "forbidden_stronger_claim": "The amendment is harmful to the network.",
+    "missing_evidence": [
+      "Current network activation status of NonFungibleTokensV1_1.",
+      "Validator-specific policy on voting for obsolete amendments."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "6529ca291c31775d10ab7f03082ffbc3116ca5ccc0ca07ae046ae83f1854fcb0",
+  "packet_id": "case_019--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "9100d3602c5ede1ed3d2db3cc9632cfbb9c40e6be89541b41b8cd7f78484f8a3",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment is explicitly marked as OBSOLETE in the source facts.\",\n    \"Its effects are already included in the NonFungibleTokensV1_1 amendment, making this specific amendment redundant.\",\n    \"Voting for an obsolete amendment provides no functional benefit and may indicate a lack of awareness of the current protocol state.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment fixes a specific off-by-one error in NFTokenPage determination.\",\n    \"It improves error handling by returning tecNO_SUITABLE_TOKEN_PAGE instead of tecINVARIANT_FAILED.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly states the amendment status is OBSOLETE, which is the primary determinant for the vote recommendation.\"\n    },\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Confirms that the amendment's effects are included in NonFungibleTokensV1_1, reinforcing its obsolete status.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixNFTokenDirV1 is obsolete because its functionality is subsumed by NonFungibleTokensV1_1. Therefore, it should not be voted for.\",\n  \"forbidden_stronger_claim\": \"The amendment is harmful to the network.\",\n  \"missing_evidence\": [\n    \"Current network activation status of NonFungibleTokensV1_1.\",\n    \"Validator-specific policy on voting for obsolete amendments.\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 373,
+      "prompt_tokens": 759,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1132
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:46:55Z"
+}

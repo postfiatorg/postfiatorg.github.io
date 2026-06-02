@@ -1,0 +1,83 @@
+{
+  "completed_at": "2026-06-02T18:43:32Z",
+  "error": "",
+  "event_id": "case_043",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ee303628f0a8b5cbc26df62a0b154d893c7cc19807f0ae611b0961c8e6bb2b7a",
+  "output_hash": "323e74dba5dacc9a0582c2c36d6efa15b5e07a59e325a51f3037dd1820f25d27",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment sorts DirectoryNode ledger objects, which changes the canonicalization and serialization of a core ledger structure.",
+      "Older versions of rippled may crash when encountering the new sorted format, indicating a risk of consensus/liveness disruption for non-upgraded nodes.",
+      "The change involves broad cross-feature canonicalization/serialization enforcement, which is explicitly listed as a condition to withhold PROCEED even for fix amendments."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name does not start with 'fix', so the specific exception for localized fixes does not apply.",
+      "It addresses a bug where owner directory pages were not deleted, which is a correctness issue."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core change: sorting DirectoryNode entries. This constitutes broad canonicalization/serialization enforcement. It also notes that older versions may crash, indicating a liveness/consensus risk for non-upgraded nodes."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the context of validator supermajority and the risk of amendment-blocking for incompatible servers, reinforcing the need for conservative review of changes that cause crashes in older versions."
+      }
+    ],
+    "decision_summary": "The amendment SortedDirectories involves broad cross-feature canonicalization and serialization changes to DirectoryNode ledger objects. Although it fixes a deletion bug, the rule states that PROCEED should not be used if the packet describes broad cross-feature canonicalization/serialization/template enforcement. Additionally, the fact that older versions may crash indicates a consensus/liveness risk. Therefore, the conservative route is to hold for challenge to ensure validators review the compatibility and canonicalization implications.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Details on the specific sorting algorithm and its impact on ledger state size or performance.",
+      "Confirmation of whether the crash in older versions is a hard fork risk or a recoverable error."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the sorting change introduce any ambiguity in ledger state representation that could lead to forks?",
+        "Is the crash in older versions a critical liveness issue that requires immediate network-wide upgrade coordination?"
+      ],
+      "recommended_validator_action": "Review the canonicalization changes and assess the risk of amendment-blocking for nodes running versions prior to 0.80.0.",
+      "review_questions": [
+        "How does the new sorting order affect the integrity of existing DirectoryNode structures?",
+        "What is the migration path for validators running older versions to avoid crashes?"
+      ],
+      "title": "Review SortedDirectories Canonicalization and Compatibility Risks"
+    }
+  },
+  "packet_hash": "5a6488d910f105f551037664d0314156b15384fec3dd23c876ce111f7db724dc",
+  "packet_id": "case_043--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "f3144ff511710e248dd642d3717fa796c86958763a8d6bdfd3aefb0388406690",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment sorts DirectoryNode ledger objects, which changes the canonicalization and serialization of a core ledger structure.\",\n\"Older versions of rippled may crash when encountering the new sorted format, indicating a risk of consensus/liveness disruption for non-upgraded nodes.\",\n\"The change involves broad cross-feature canonicalization/serialization enforcement, which is explicitly listed as a condition to withhold PROCEED even for fix amendments.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name does not start with 'fix', so the specific exception for localized fixes does not apply.\",\n\"It addresses a bug where owner directory pages were not deleted, which is a correctness issue.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the core change: sorting DirectoryNode entries. This constitutes broad canonicalization/serialization enforcement. It also notes that older versions may crash, indicating a liveness/consensus risk for non-upgraded nodes.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Establishes the context of validator supermajority and the risk of amendment-blocking for incompatible servers, reinforcing the need for conservative review of changes that cause crashes in older versions.\"\n}\n],\n\"decision_summary\": \"The amendment SortedDirectories involves broad cross-feature canonicalization and serialization changes to DirectoryNode ledger objects. Although it fixes a deletion bug, the rule states that PROCEED should not be used if the packet describes broad cross-feature canonicalization/serialization/template enforcement. Additionally, the fact that older versions may crash indicates a consensus/liveness risk. Therefore, the conservative route is to hold for challenge to ensure validators review the compatibility and canonicalization implications.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 45,\n\"packet_verification\": 10,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Details on the specific sorting algorithm and its impact on ledger state size or performance.\",\n\"Confirmation of whether the crash in older versions is a hard fork risk or a recoverable error.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the sorting change introduce any ambiguity in ledger state representation that could lead to forks?\",\n\"Is the crash in older versions a critical liveness issue that requires immediate network-wide upgrade coordination?\"\n],\n\"recommended_validator_action\": \"Review the canonicalization changes and assess the risk of amendment-blocking for nodes running versions prior to 0.80.0.\",\n\"review_questions\": [\n\"How does the new sorting order affect the integrity of existing DirectoryNode structures?\",\n\"What is the migration path for validators running older versions to avoid crashes?\"\n],\n\"title\": \"Review SortedDirectories Canonicalization and Compatibility Risks\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 632,
+      "prompt_tokens": 1126,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1758
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T18:43:24Z"
+}

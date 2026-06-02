@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_063",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "15D61F0C6DB6A2F86BCF96F1E2444FEC54E705923339EC175BD3E517C8B3FF91",
+    "amendment_name": "fixDisallowIncomingV1",
+    "decision_surface": "XRPL validator amendment decision surface for fixDisallowIncomingV1.",
+    "source_facts": [
+      {
+        "claim": "fixDisallowIncomingV1: This amendment fixes an issue with approving trustlines after a user enables the lsfDisallowIncomingTrustline flag on their account. To recreate this issue: 1. An issuer sets asfRequireAuth on their account. 2. The user sets asfDisallowIncomingTrustline on their account. 3. The user submits a SetTrust transaction to the issuer. 4. The issuer is unable to authorize the trustline. With this amendment, the issuer can now authorize the trustline. This amendment has no effect unless the DisallowIncoming amendment is enabled.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixDisallowIncomingV1 appears in XRPSCAN with introduced rippled version 2.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "cc3e9c86215e91a03e0413d3f7773e109f732cc03e41927037b4e8b4b08b850a",
+  "packet_id": "case_063--triage",
+  "packet_version": 1
+}

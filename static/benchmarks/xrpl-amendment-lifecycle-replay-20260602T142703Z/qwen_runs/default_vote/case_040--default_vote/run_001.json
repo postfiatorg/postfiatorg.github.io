@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-02T16:58:28Z",
+  "error": "",
+  "event_id": "case_040",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "37e26598acfe00dc6d7820fa432fa4bf358746a5ff43561d89b3ce40fcb59fd7",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The amendment fixes an accounting error and rounding issue in AMMClawback transactions, ensuring invariant checks pass. This is a bug fix that maintains system integrity and correctness, which is a strong indicator for a default YES vote in XRPL governance."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 3.0.0, establishing its presence in the stable release history."
+      }
+    ],
+    "decision_summary": "The amendment 'fixAMMClawbackRounding' addresses a specific accounting bug where rounding errors could cause invariant check failures during AMMClawback transactions. In XRPL governance, bug fixes that correct accounting errors and ensure protocol invariants are typically enabled by default in stable releases to maintain network health and correctness. There is no evidence suggesting this is a controversial feature or a breaking change that would warrant a default NO.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the rippled release notes confirming the default vote status.",
+      "Validator community discussion logs explicitly stating the default vote."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "81a81140ee0d9d97a2e52d00be284f0b2c41db7dd0048d3f0b28e6985f759eb2",
+  "packet_id": "case_040--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "e823e41271f02bf5484fded43dadcec585bc74a56397aa2875f46e0c9f2a667b",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The amendment fixes an accounting error and rounding issue in AMMClawback transactions, ensuring invariant checks pass. This is a bug fix that maintains system integrity and correctness, which is a strong indicator for a default YES vote in XRPL governance.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 3.0.0, establishing its presence in the stable release history.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixAMMClawbackRounding' addresses a specific accounting bug where rounding errors could cause invariant check failures during AMMClawback transactions. In XRPL governance, bug fixes that correct accounting errors and ensure protocol invariants are typically enabled by default in stable releases to maintain network health and correctness. There is no evidence suggesting this is a controversial feature or a breaking change that would warrant a default NO.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit statement from the rippled release notes confirming the default vote status.\",\n    \"Validator community discussion logs explicitly stating the default vote.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 298,
+      "prompt_tokens": 651,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 949
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:58:24Z"
+}

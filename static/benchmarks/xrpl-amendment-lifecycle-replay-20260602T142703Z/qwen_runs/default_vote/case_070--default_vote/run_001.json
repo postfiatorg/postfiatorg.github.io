@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-02T17:00:27Z",
+  "error": "",
+  "event_id": "case_070",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "7a02f77e45cabc1ca71f63160bd2ea6a09b4a883947f6a935eb1fa068c469b09",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a combination of bug fixes (Fix Unburnable NFT, Fix 3 Issues Around NFToken Offer Acceptance, Prevent Brokered Sale, Only allow destination to settle) merged via pull requests, indicating it is a corrective update rather than a new feature or breaking change."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 1.10.0, establishing the context of the stable release source."
+      }
+    ],
+    "decision_summary": "The amendment fixNonFungibleTokensV1_2 consists entirely of bug fixes and corrections to existing NFT functionality (burning, offer acceptance, brokerage). In XRPL governance, bug fixes that correct erroneous behavior or remove unintended restrictions are generally considered safe and beneficial, leading to a default vote of YES. There is no evidence of breaking changes or controversial new features that would warrant a NO vote.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the rippled release notes or core team regarding the recommended default vote for this specific amendment."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "279b2f1406640c09829a2107b741589bbb16947783426683c68d3a440b8b7a9c",
+  "packet_id": "case_070--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "bc999cbe34dcbfc173c239c5cda6b55afb5a959f63d106c53bd1a53595c85faa",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a combination of bug fixes (Fix Unburnable NFT, Fix 3 Issues Around NFToken Offer Acceptance, Prevent Brokered Sale, Only allow destination to settle) merged via pull requests, indicating it is a corrective update rather than a new feature or breaking change.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 1.10.0, establishing the context of the stable release source.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixNonFungibleTokensV1_2 consists entirely of bug fixes and corrections to existing NFT functionality (burning, offer acceptance, brokerage). In XRPL governance, bug fixes that correct erroneous behavior or remove unintended restrictions are generally considered safe and beneficial, leading to a default vote of YES. There is no evidence of breaking changes or controversial new features that would warrant a NO vote.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit statement from the rippled release notes or core team regarding the recommended default vote for this specific amendment.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 298,
+      "prompt_tokens": 864,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1162
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:00:23Z"
+}

@@ -517,9 +517,83 @@ because repeated runs per packet were intentionally convergent.
 This is why broader testing matters. To push a zero-failure 95% upper bound
 below 1%, the relevant unit needs roughly 300 clean independent trials.
 
-## 10. Why Use Qwen If The Rule Engine Tied It?
+## 10. Expanded Lifecycle Replay
 
-In this run, Qwen tied the deterministic rule engine on route choice.
+After the seed run, we expanded the packet into a lane-separated XRPL amendment
+lifecycle replay:
+
+[expanded lifecycle replay](/benchmarks/xrpl-amendment-lifecycle-replay-20260602T142703Z/)
+
+The important change is that the replay no longer mixes unlike labels.
+`HOLD_FOR_CHALLENGE` is a triage work route, not an XRP validator vote.
+`default_vote` is a diagnostic source-code field, not validator-history replay.
+The claim gate therefore separates terminal outcomes, dated vote state, and
+conservative triage policy.
+
+On the selected evidence set, the historical lanes matched completely:
+
+| Lane | Packets | Qwen runs | Claim status | Result |
+|---|---:|---:|---|---:|
+| terminal XRP-native vote/outcome | 60 | 60 | historical replay | 60/60 |
+| dated vote state | 70 | 70 | historical replay | 70/70 |
+| conservative governance triage | 72 | 72 | policy conformance | 72/72 |
+| source default vote | 69 | 69 | diagnostic only | 15/69 |
+
+The report's claim gate is explicit:
+
+> `default_vote` is diagnostic only; it is not a historical replay claim because
+> source defaults are not validator outcomes.
+
+The expanded run produced 271 schema-valid Qwen outputs across all lanes. The
+selected-run disagreement files for `vote_outcome`, `vote_state`, and `triage`
+are empty. The diagnostic `default_vote` disagreement file is kept precisely
+because it shows why source defaults should not be smuggled into a replay claim;
+the held-out run below is the test that separates historical replay from the
+experimental triage-policy lane.
+
+A second run used the 47 cases that were present in the corpus but not selected
+for that evidence set:
+
+[held-out lifecycle replay](/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/)
+
+| Lane | Packets | Qwen runs | Claim status | Result |
+|---|---:|---:|---|---:|
+| terminal XRP-native vote/outcome | 46 | 138 | held-out historical replay | 44/46 |
+| dated vote state | 47 | 141 | held-out historical replay | 47/47 |
+| conservative governance triage | 47 | 47 | experimental policy lane | 31/47 |
+| source default vote | 47 | 47 | diagnostic only | 16/47 |
+
+The held-out result is the better stress test. Qwen matched dated amendment state
+on every held-out case. It matched terminal XRP-native vote/outcome on 44 of 46
+held-out cases, with three deterministic runs per packet on the historical
+claim lanes and exact output-hash convergence for every packet in those lanes.
+
+The two terminal-outcome misses were conservative false negatives:
+
+| Case | Historical outcome | Qwen outcome | What changed the model's mind |
+|---|---:|---:|---|
+| `CryptoConditions` | `YES` | `NO` | the packet said the amendment has no effect because `SusPay` was replaced by `Escrow` |
+| `FlowCross` | `YES` | `NO` | the packet described DEX offer-crossing changes involving rounding, ranking, and offer deletion |
+
+Those disagreements are not random failures. They are cases where the model read
+the packet and objected more conservatively than the validator history. The
+right statement is therefore not that Qwen perfectly rediscovered XRPL history.
+It is that the replay mostly matched history, and the held-out disagreements
+were legible, conservative objections to amendments that later enabled.
+
+The triage lane should be read differently. It is a workflow-policy lane, not
+validator-history replay. The held-out triage result showed that the written
+policy and the research labels were not yet the same object: most misses were
+Qwen holding a `PROCEED`-labeled packet for challenge, and one miss was an unsafe
+`PROCEED` on `DepositPreauth`. For that reason, the public historical replay
+claim uses the vote/outcome and vote-state lanes. Triage remains an experimental
+operator-routing harness until the policy is frozen and relabeled against
+held-out cases.
+
+## 11. Why Use Qwen If The Rule Engine Tied It?
+
+In the original 13-packet route run, Qwen tied the deterministic rule engine on
+route choice.
 
 That is the design.
 
@@ -595,7 +669,7 @@ If the model only repeats a mature rule, the rule should win. If it surfaces the
 facts, questions, and override burden before a rule exists, it reduces the need
 to assemble a private committee just to decide what everyone should read.
 
-## 11. Attention Cost Model
+## 12. Attention Cost Model
 
 The cost model is deliberately plain:
 
@@ -759,7 +833,7 @@ same safety target with less total attention. If validators merely copy the
 default, the cost model wins and the safety model loses. The whole design exists
 to avoid that trade.
 
-## 12. Reproduction Scripts
+## 13. Reproduction Scripts
 
 The packet can be rebuilt and checked with:
 
@@ -799,7 +873,72 @@ Packet root:
 b809a6b2b35d5dfccd8fbc3b5880ad14f8707886f88f84e11efe4e574b74f894
 ```
 
-## 13. What This Proves
+The expanded lifecycle packet can be rebuilt and checked with:
+
+```bash
+python3 scripts/build_xrpl_amendment_lifecycle_corpus.py \
+  --artifact static/benchmarks/xrpl-amendment-lifecycle-replay-20260602T142703Z \
+  --target-count 72
+
+python3 scripts/validate_xrpl_amendment_lifecycle_corpus.py \
+  --artifact static/benchmarks/xrpl-amendment-lifecycle-replay-20260602T142703Z
+
+python3 scripts/run_qwen_xrpl_amendment_lifecycle_replay.py \
+  --artifact static/benchmarks/xrpl-amendment-lifecycle-replay-20260602T142703Z \
+  --lane all \
+  --endpoint <OPENAI_COMPATIBLE_SGLANG_ENDPOINT> \
+  --model Qwen/Qwen3.6-27B-FP8 \
+  --machine-receipt static/benchmarks/xrpl-amendment-lifecycle-replay-20260602T142703Z/vast_lifecycle/machine_receipt.json \
+  --runs 1 \
+  --validators 41
+
+python3 scripts/summarize_xrpl_amendment_lifecycle_replay.py \
+  --artifact static/benchmarks/xrpl-amendment-lifecycle-replay-20260602T142703Z
+```
+
+The held-out lifecycle packet is derived from the same corpus split:
+
+```bash
+python3 scripts/build_xrpl_amendment_lifecycle_heldout.py \
+  --source-artifact static/benchmarks/xrpl-amendment-lifecycle-replay-20260602T142703Z \
+  --artifact static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z
+
+python3 scripts/validate_xrpl_amendment_lifecycle_corpus.py \
+  --artifact static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z \
+  --min-selected 47 \
+  --min-terminal-yes 46 \
+  --min-nonterminal-state 1 \
+  --min-sensitive-triage 11
+
+python3 scripts/run_qwen_xrpl_amendment_lifecycle_replay.py \
+  --artifact static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z \
+  --lane all \
+  --endpoint <OPENAI_COMPATIBLE_SGLANG_ENDPOINT> \
+  --model Qwen/Qwen3.6-27B-FP8 \
+  --machine-receipt static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/vast_lifecycle/machine_receipt.json \
+  --runs 1
+
+python3 scripts/run_qwen_xrpl_amendment_lifecycle_replay.py \
+  --artifact static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z \
+  --lane vote_outcome \
+  --endpoint <OPENAI_COMPATIBLE_SGLANG_ENDPOINT> \
+  --model Qwen/Qwen3.6-27B-FP8 \
+  --machine-receipt static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/vast_lifecycle/machine_receipt.json \
+  --runs 3
+
+python3 scripts/run_qwen_xrpl_amendment_lifecycle_replay.py \
+  --artifact static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z \
+  --lane vote_state \
+  --endpoint <OPENAI_COMPATIBLE_SGLANG_ENDPOINT> \
+  --model Qwen/Qwen3.6-27B-FP8 \
+  --machine-receipt static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/vast_lifecycle/machine_receipt.json \
+  --runs 3
+
+python3 scripts/summarize_xrpl_amendment_lifecycle_replay.py \
+  --artifact static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z
+```
+
+## 14. What This Proves
 
 This proves that the replay-default pattern is operationally coherent on a
 production-like H200/SGLang path.
@@ -810,28 +949,38 @@ public trail of whether they followed or overrode the default. The process
 directly attacks two costs that ordinary governance hand-waves away: attention
 cost and private coordination cost.
 
-It also shows that positive model authority is unnecessary. In this replay, the
-useful outputs are conservative routes: delay for known-bug AMM packets, reject
-obsolete bug-disabled packets, hold governance-sensitive financial primitives for
-challenge, and proceed on a narrow AMM fix.
+It also shows that positive model authority is unnecessary. In the seed triage
+replay, the useful outputs were conservative routes: delay for known-bug AMM
+packets, reject obsolete bug-disabled packets, hold governance-sensitive
+financial primitives for challenge, and proceed on a narrow AMM fix. In the
+held-out lifecycle replay, the strongest result was historical: exact dated-state
+replay and high terminal-outcome alignment, with conservative objections where
+the model disagreed.
 
 The strongest claim is institutional rather than magical:
 
 > A public replay primitive can make the cheapest governance path also the most
 > inspectable path.
 
-## 14. Boundaries
+## 15. Boundaries
 
 These results establish operational coherence rather than model superiority over
-the rule engine. Qwen tied route choice in this run.
+the rule engine. Qwen tied route choice in the original 13-packet run. In the
+expanded lifecycle run, the rule engine remained the safety floor, while the
+claim gate separated historical vote/outcome replay, dated state replay, and
+triage-policy experiments.
 
-The 13 labels remain research labels for these events.
+The 13 seed labels and the expanded triage labels remain research labels for
+these events. The held-out triage result shows that this policy lane is not yet
+ready to carry the main claim. The historical outcome and state lanes are
+source-backed replay labels, but they are still only as good as the cited packet
+construction.
 
 Future `PROCEED` outputs still require normal validator review.
 
-The true unsafe-proceed rate remains unknown. The sample is too small to settle
-that value. The zero-event result is a useful negative finding and a reason to
-run broader tests rather than a safety theorem.
+The true unsafe-proceed rate remains unknown. The sample is still too small to
+settle that value. The zero-event result is a useful negative finding and a
+reason to run broader held-out tests rather than a safety theorem.
 
 Committees remain available. Some packets will earn one. The claim is that
 committee formation should be the second move. Start with a public replay object.

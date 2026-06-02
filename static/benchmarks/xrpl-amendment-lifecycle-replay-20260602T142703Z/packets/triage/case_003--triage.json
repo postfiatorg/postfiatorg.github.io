@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_003",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "894646DD5284E97DECFE6674A6D6152686791C4A95F8C132CCA9BAF9E5812FB6",
+    "amendment_name": "Batch vulnerability",
+    "decision_surface": "Whether validators should support the affected Batch amendment after the unauthorized inner transaction bug was found.",
+    "source_facts": [
+      {
+        "claim": "The Batch bug allowed unauthorized inner transaction execution on behalf of arbitrary victim accounts.",
+        "fact_id": "F1",
+        "source_id": "xrpl_batch_vulnerability_2026"
+      },
+      {
+        "claim": "UNL validators were contacted and advised to vote No on Batch.",
+        "fact_id": "F2",
+        "source_id": "xrpl_batch_vulnerability_2026"
+      },
+      {
+        "claim": "rippled 3.1.1 disabled Batch and fixBatchInnerSigs due to a severe bug.",
+        "fact_id": "F3",
+        "source_id": "xrpl_rippled_3_1_1"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "1e87321fa3db5c3ce5dd7c53bbf35fb935b7610edee8a970435c3b6a0c341f84",
+  "packet_id": "case_003--triage",
+  "packet_version": 1
+}

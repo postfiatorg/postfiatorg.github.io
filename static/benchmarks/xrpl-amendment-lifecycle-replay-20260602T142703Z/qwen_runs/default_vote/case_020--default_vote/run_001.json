@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-02T16:57:19Z",
+  "error": "",
+  "event_id": "case_020",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "4a5cf861f3b929d8bbd26d65e0f150b5d7221c8a1c1470b81067543f7206d481",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The claim explicitly states that the amendment is obsolete because its effects are included as part of NonFungibleTokensV1_1. In XRPL governance, obsolete amendments that are superseded by newer, active amendments are typically not enabled by default in the latest stable release source, as the functionality is already covered or the amendment is deprecated."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Indicates the amendment was introduced in version 1.9.2, which is a historical version. Combined with the obsolescence noted in F1, this supports the inference that it is not the active default for the latest stable release."
+      }
+    ],
+    "decision_summary": "The amendment fixNFTokenNegOffer is described as obsolete because its effects are included in NonFungibleTokensV1_1. Since the functionality is superseded and the amendment is obsolete, the latest stable release source does not default to enabling this specific obsolete amendment. Therefore, the default vote is NO.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit confirmation of the current latest stable rippled version's default amendment list."
+    ],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "09139d4810ae00c01deea5cae1b4177047a4f25f7bfad5824ad736bb73078f5a",
+  "packet_id": "case_020--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "9f766228a9a069c3a519c7894e5fc7703e280d32e03d81d4ed0ea082cc90ffd4",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The claim explicitly states that the amendment is obsolete because its effects are included as part of NonFungibleTokensV1_1. In XRPL governance, obsolete amendments that are superseded by newer, active amendments are typically not enabled by default in the latest stable release source, as the functionality is already covered or the amendment is deprecated.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Indicates the amendment was introduced in version 1.9.2, which is a historical version. Combined with the obsolescence noted in F1, this supports the inference that it is not the active default for the latest stable release.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixNFTokenNegOffer is described as obsolete because its effects are included in NonFungibleTokensV1_1. Since the functionality is superseded and the amendment is obsolete, the latest stable release source does not default to enabling this specific obsolete amendment. Therefore, the default vote is NO.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit confirmation of the current latest stable rippled version's default amendment list.\"\n  ],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 305,
+      "prompt_tokens": 687,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 992
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:57:15Z"
+}

@@ -1,0 +1,60 @@
+{
+  "completed_at": "2026-06-02T16:58:36Z",
+  "error": "",
+  "event_id": "case_042",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "cba253951eeced594d578659d4fd2a1759319f7e35a842dd30dc572ce1f4a248",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical changes introduced by the Credentials amendment but does not contain any explicit statement regarding the default vote recommendation from the source."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Explains the general voting mechanism and risks of amendment blocking, but does not specify the default vote for this specific amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the version where the amendment was introduced, but does not provide voting guidance or default vote status."
+      }
+    ],
+    "decision_summary": "The provided packet facts describe the technical functionality of the Credentials amendment, the general voting process, and the version introduction. None of the facts explicitly state the default vote recommendation (YES or NO) from the source. Without explicit source-backed evidence indicating a default vote, the task rule requires outputting UNKNOWN.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the source indicating the default vote for the Credentials amendment."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "e4065283afd17b813ab5f1ccc02021dc5f5601f9cc0712d5df2a1c4bc6758711",
+  "packet_id": "case_042--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "899d07e618000b8f4960ec8cb9ced5b3b1058f74154b6124b09be56aee1ad7a8",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical changes introduced by the Credentials amendment but does not contain any explicit statement regarding the default vote recommendation from the source.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Explains the general voting mechanism and risks of amendment blocking, but does not specify the default vote for this specific amendment.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Identifies the version where the amendment was introduced, but does not provide voting guidance or default vote status.\"\n    }\n  ],\n  \"decision_summary\": \"The provided packet facts describe the technical functionality of the Credentials amendment, the general voting process, and the version introduction. None of the facts explicitly state the default vote recommendation (YES or NO) from the source. Without explicit source-backed evidence indicating a default vote, the task rule requires outputting UNKNOWN.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement from the source indicating the default vote for the Credentials amendment.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 280,
+      "prompt_tokens": 758,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1038
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:58:33Z"
+}

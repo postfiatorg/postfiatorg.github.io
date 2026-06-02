@@ -1,0 +1,89 @@
+{
+  "completed_at": "2026-06-02T17:15:01Z",
+  "error": "",
+  "event_id": "case_013",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "18086dd3716935126145d3f5e7b7ec8bd0af725805c7ef0c19e97212975ff37f",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces 'Permissioned DEXes', which fundamentally alters permissioning and access control semantics for trading on the ledger.",
+      "It creates 'controlled environments' where a domain controls who can place and accept offers, introducing new asset-control and compliance semantics.",
+      "Changes to offer placement and acceptance logic involve material financial and permissioning risks that require explicit validator review.",
+      "The introduction of new domain-level controls for trading represents a significant change to the decentralized nature of the DEX, fitting the criteria for HOLD_FOR_CHALLENGE regarding permissioning and asset-control semantics."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment is not a simple bug fix; it is a new feature set.",
+      "It does not appear to be a retired or obsolete proposal based on the provided facts."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the core functionality: creating permissioned DEXes with controlled access to offer placement and acceptance, which directly impacts permissioning and asset-control semantics."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the high stakes of amendment voting, reinforcing the need for a conservative review route for material changes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version context, but does not mitigate the semantic risks identified in F1."
+      }
+    ],
+    "decision_summary": "The PermissionedDEX amendment introduces significant changes to permissioning and asset-control semantics by allowing controlled environments for trading. This falls squarely under the criteria for HOLD_FOR_CHALLENGE due to material permissioning and asset-control risks.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 30,
+      "validator_skim": 15
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Detailed specification of how permissioned domains interact with existing trustlines and balances.",
+      "Analysis of potential centralization risks or single points of failure in permissioned domains."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the permissioned DEX model introduce unacceptable centralization risks?",
+        "Are the access control mechanisms robust against abuse or bypass?"
+      ],
+      "recommended_validator_action": "HOLD_FOR_CHALLENGE",
+      "review_questions": [
+        "How do permissioned DEXes interact with the global order book?",
+        "What are the implications for liquidity fragmentation?",
+        "How are disputes or errors in permissioned domains resolved?"
+      ],
+      "title": "Review PermissionedDEX Permissioning and Asset-Control Semantics"
+    }
+  },
+  "packet_hash": "89ff908c45d12b4b392641cfbb12663b65b2f09e11f398aaa11a316da75ab23b",
+  "packet_id": "case_013--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "d268ac56186178b109a3dadce4ddaa492b20060574579c3705cd4901bbfb5bee",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The amendment introduces 'Permissioned DEXes', which fundamentally alters permissioning and access control semantics for trading on the ledger.\",\n    \"It creates 'controlled environments' where a domain controls who can place and accept offers, introducing new asset-control and compliance semantics.\",\n    \"Changes to offer placement and acceptance logic involve material financial and permissioning risks that require explicit validator review.\",\n    \"The introduction of new domain-level controls for trading represents a significant change to the decentralized nature of the DEX, fitting the criteria for HOLD_FOR_CHALLENGE regarding permissioning and asset-control semantics.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"The amendment is not a simple bug fix; it is a new feature set.\",\n    \"It does not appear to be a retired or obsolete proposal based on the provided facts.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Defines the core functionality: creating permissioned DEXes with controlled access to offer placement and acceptance, which directly impacts permissioning and asset-control semantics.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Establishes the high stakes of amendment voting, reinforcing the need for a conservative review route for material changes.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and version context, but does not mitigate the semantic risks identified in F1.\"\n    }\n  ],\n  \"decision_summary\": \"The PermissionedDEX amendment introduces significant changes to permissioning and asset-control semantics by allowing controlled environments for trading. This falls squarely under the criteria for HOLD_FOR_CHALLENGE due to material permissioning and asset-control risks.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 120,\n    \"packet_verification\": 30,\n    \"validator_skim\": 15\n  },\n  \"forbidden_stronger_claim\": \"REJECT\",\n  \"missing_evidence\": [\n    \"Detailed specification of how permissioned domains interact with existing trustlines and balances.\",\n    \"Analysis of potential centralization risks or single points of failure in permissioned domains.\"\n  ],\n  \"route\": \"HOLD_FOR_CHALLENGE\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Does the permissioned DEX model introduce unacceptable centralization risks?\",\n      \"Are the access control mechanisms robust against abuse or bypass?\"\n    ],\n    \"recommended_validator_action\": \"HOLD_FOR_CHALLENGE\",\n    \"review_questions\": [\n      \"How do permissioned DEXes interact with the global order book?\",\n      \"What are the implications for liquidity fragmentation?\",\n      \"How are disputes or errors in permissioned domains resolved?\"\n    ],\n    \"title\": \"Review PermissionedDEX Permissioning and Asset-Control Semantics\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 666,
+      "prompt_tokens": 1076,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1742
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:14:53Z"
+}

@@ -1,0 +1,85 @@
+{
+  "completed_at": "2026-06-02T17:16:47Z",
+  "error": "",
+  "event_id": "case_030",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "849c7464adaa2a204f41737efde1298fd55f58c8344e1e1abc940ec77bf9fb9c",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces advanced cryptography (EC-ElGamal and ZKPs) for privacy, which represents a significant change to ledger semantics and data visibility.",
+      "It involves compliance mechanisms for authorized parties (issuers, auditors), introducing complex permissioning and identity verification logic.",
+      "Privacy features inherently carry high risk regarding regulatory compliance, auditability, and potential misuse, requiring explicit validator review.",
+      "The amendment affects Multi-Purpose Tokens (MPTs), impacting asset-control semantics and token accounting visibility."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment is not a simple bug fix; it is a major feature addition.",
+      "There is no explicit no-vote advisory or indication that the proposal is obsolete or retired."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core functionality: institutional-grade privacy using advanced cryptography and compliance mechanisms for MPTs. This triggers the 'privacy', 'compliance', 'permissioning', and 'asset-control semantics' risk categories requiring HOLD_FOR_CHALLENGE."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms the standard amendment voting process and the risk of amendment-blocking, reinforcing the need for conservative review for major semantic changes."
+      }
+    ],
+    "decision_summary": "The ConfidentialTransfer amendment introduces significant privacy, compliance, and permissioning changes using advanced cryptography. According to the task rules, material privacy, compliance, permissioning, and asset-control semantics require explicit review via HOLD_FOR_CHALLENGE. It is not a localized fix and carries substantial systemic and regulatory risk.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 15,
+      "validator_skim": 10
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on the cryptographic implementation security audit status.",
+      "Details on the specific compliance mechanisms and how they interact with existing ledger structures."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the privacy mechanism compromise the ability to audit total supply effectively?",
+        "Are the compliance mechanisms for authorized parties sufficiently robust against abuse?"
+      ],
+      "recommended_validator_action": "HOLD_FOR_CHALLENGE",
+      "review_questions": [
+        "What are the specific cryptographic primitives used and have they been peer-reviewed?",
+        "How does the amendment handle key management and recovery for confidential assets?",
+        "What are the implications for regulatory compliance in different jurisdictions?"
+      ],
+      "title": "Review ConfidentialTransfer Privacy and Compliance Semantics"
+    }
+  },
+  "packet_hash": "749891673d727bf45d8e679bcf6b0d154885178b992a157207a73288ff778967",
+  "packet_id": "case_030--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "2fe17ffd96194dbf8dfbb71272489231cdd11daef93a6949b697578fe8c39b8a",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces advanced cryptography (EC-ElGamal and ZKPs) for privacy, which represents a significant change to ledger semantics and data visibility.\",\n\"It involves compliance mechanisms for authorized parties (issuers, auditors), introducing complex permissioning and identity verification logic.\",\n\"Privacy features inherently carry high risk regarding regulatory compliance, auditability, and potential misuse, requiring explicit validator review.\",\n\"The amendment affects Multi-Purpose Tokens (MPTs), impacting asset-control semantics and token accounting visibility.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment is not a simple bug fix; it is a major feature addition.\",\n\"There is no explicit no-vote advisory or indication that the proposal is obsolete or retired.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the core functionality: institutional-grade privacy using advanced cryptography and compliance mechanisms for MPTs. This triggers the 'privacy', 'compliance', 'permissioning', and 'asset-control semantics' risk categories requiring HOLD_FOR_CHALLENGE.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Confirms the standard amendment voting process and the risk of amendment-blocking, reinforcing the need for conservative review for major semantic changes.\"\n}\n],\n\"decision_summary\": \"The ConfidentialTransfer amendment introduces significant privacy, compliance, and permissioning changes using advanced cryptography. According to the task rules, material privacy, compliance, permissioning, and asset-control semantics require explicit review via HOLD_FOR_CHALLENGE. It is not a localized fix and carries substantial systemic and regulatory risk.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 120,\n\"packet_verification\": 15,\n\"validator_skim\": 10\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Specific details on the cryptographic implementation security audit status.\",\n\"Details on the specific compliance mechanisms and how they interact with existing ledger structures.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the privacy mechanism compromise the ability to audit total supply effectively?\",\n\"Are the compliance mechanisms for authorized parties sufficiently robust against abuse?\"\n],\n\"recommended_validator_action\": \"HOLD_FOR_CHALLENGE\",\n\"review_questions\": [\n\"What are the specific cryptographic primitives used and have they been peer-reviewed?\",\n\"How does the amendment handle key management and recovery for confidential assets?\",\n\"What are the implications for regulatory compliance in different jurisdictions?\"\n],\n\"title\": \"Review ConfidentialTransfer Privacy and Compliance Semantics\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 588,
+      "prompt_tokens": 1058,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1646
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:16:40Z"
+}

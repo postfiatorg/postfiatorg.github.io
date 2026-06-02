@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-02T16:53:18Z",
+  "error": "",
+  "event_id": "case_025",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "14938f0ee6b16464e4fe0dcb68fd09d1092daedc85e2049f9c4b068166d4164b",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly states the status of SHAMapV2 is 'obsolete/removed: OBSOLETE', which directly maps to the VETOED_OR_RETIRED classification rule for obsolete or retired amendments."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the general amendment voting process, confirming that amendments require supermajority for activation, but does not override the specific obsolete status found in F5."
+      }
+    ],
+    "decision_summary": "The amendment SHAMapV2 is classified as VETOED_OR_RETIRED because source fact F5 explicitly identifies its status as obsolete/removed. This aligns with the rule that obsolete or retired amendments fall under this state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Current validator vote counts (not needed due to obsolete status)",
+      "Ledger sequence of final retirement (not needed for classification)"
+    ],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "20252415983e1bb6445065fa508709c201e7761d6e518f1809096023b2978378",
+  "packet_id": "case_025--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "d86826380de9cc7c9cd02bb3ebdaa88c613960e90120d82d5ae4d9462b6c09f0",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly states the status of SHAMapV2 is 'obsolete/removed: OBSOLETE', which directly maps to the VETOED_OR_RETIRED classification rule for obsolete or retired amendments.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides context on the general amendment voting process, confirming that amendments require supermajority for activation, but does not override the specific obsolete status found in F5.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment SHAMapV2 is classified as VETOED_OR_RETIRED because source fact F5 explicitly identifies its status as obsolete/removed. This aligns with the rule that obsolete or retired amendments fall under this state.\",\n  \"missing_evidence\": [\n    \"Current validator vote counts (not needed due to obsolete status)\",\n    \"Ledger sequence of final retirement (not needed for classification)\"\n  ],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 261,
+      "prompt_tokens": 654,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 915
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:53:14Z"
+}

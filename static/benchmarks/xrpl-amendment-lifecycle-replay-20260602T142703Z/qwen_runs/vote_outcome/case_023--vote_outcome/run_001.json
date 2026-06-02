@@ -1,0 +1,65 @@
+{
+  "completed_at": "2026-06-02T16:47:14Z",
+  "error": "",
+  "event_id": "case_023",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "917113f8fb0127dea8a1a8650556564210f6d903884a313cef720530eb4e15e3",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment is explicitly marked as OBSOLETE and has been replaced by NonFungibleTokensV1_1.",
+      "There are known issues with this amendment, including one that can cause tecINVARIANT_FAILED errors in the ledger.",
+      "Voting for an obsolete amendment that has been superseded by a fixed version is contrary to network stability and best practices."
+    ],
+    "arguments_for_yes": [
+      "None. The amendment is obsolete and contains known bugs."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies known issues causing ledger errors and states that the amendment has been replaced by NonFungibleTokensV1_1."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Confirms the status of the amendment is OBSOLETE, meaning it should not be enabled."
+      }
+    ],
+    "decision_summary": "The NonFungibleTokensV1 amendment is obsolete and has been replaced by NonFungibleTokensV1_1 due to known issues, including ledger errors. Validators should not enable obsolete amendments.",
+    "forbidden_stronger_claim": "The amendment is malicious or intentionally harmful.",
+    "missing_evidence": [
+      "Current network activation status (though irrelevant for an obsolete amendment)",
+      "Specific details of the tecINVARIANT_FAILED error trigger conditions"
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "108a9d97ee172f4e189e48d569acd5dadaf93911873149a564199f8b130d8404",
+  "packet_id": "case_023--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "798d8ee52d212b1b7185e212018f044cc898a28b5b93e45ea4bc5ac465bb71b3",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment is explicitly marked as OBSOLETE and has been replaced by NonFungibleTokensV1_1.\",\n    \"There are known issues with this amendment, including one that can cause tecINVARIANT_FAILED errors in the ledger.\",\n    \"Voting for an obsolete amendment that has been superseded by a fixed version is contrary to network stability and best practices.\"\n  ],\n  \"arguments_for_yes\": [\n    \"None. The amendment is obsolete and contains known bugs.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Identifies known issues causing ledger errors and states that the amendment has been replaced by NonFungibleTokensV1_1.\"\n    },\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Confirms the status of the amendment is OBSOLETE, meaning it should not be enabled.\"\n    }\n  ],\n  \"decision_summary\": \"The NonFungibleTokensV1 amendment is obsolete and has been replaced by NonFungibleTokensV1_1 due to known issues, including ledger errors. Validators should not enable obsolete amendments.\",\n  \"forbidden_stronger_claim\": \"The amendment is malicious or intentionally harmful.\",\n  \"missing_evidence\": [\n    \"Current network activation status (though irrelevant for an obsolete amendment)\",\n    \"Specific details of the tecINVARIANT_FAILED error trigger conditions\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 358,
+      "prompt_tokens": 822,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1180
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:47:09Z"
+}

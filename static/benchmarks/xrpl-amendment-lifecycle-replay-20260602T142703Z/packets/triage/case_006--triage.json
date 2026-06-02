@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_006",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "726F944886BCDF7433203787E93DD9AA87FAB74DFE3AF4785BA03BEFC97ADA1F",
+    "amendment_name": "AMMClawback",
+    "decision_surface": "XRPL validator amendment decision surface for AMMClawback.",
+    "source_facts": [
+      {
+        "claim": "AMMClawback: Allows tokens with clawback enabled to be used in Automated Market Makers (AMMs). Adds a new transaction: - AMMClawback - allows an issuer to claw back tokens that have been deposited in an AMM, if the token has clawback enabled. Also modifies the AMMDeposit transaction type to prevent depositing frozen tokens into the AMM. For details, see the XLS-73: AMMClawback specification.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "AMMClawback appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "b5e39cef4f524a3fb0f8ce68c0b5cf8122d5fdd8ff3e0616282a6703c132f028",
+  "packet_id": "case_006--triage",
+  "packet_version": 1
+}

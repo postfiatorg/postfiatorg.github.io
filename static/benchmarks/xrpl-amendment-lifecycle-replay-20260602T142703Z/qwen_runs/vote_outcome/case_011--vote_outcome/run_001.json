@@ -1,0 +1,75 @@
+{
+  "completed_at": "2026-06-02T16:46:18Z",
+  "error": "",
+  "event_id": "case_011",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "d8b96bb8a277ac3e1d2c517a24b8739c3d4ee53653d8a1701cc724b3b784a225",
+  "output_json": {
+    "arguments_for_no": [
+      "Introducing a new token standard (MPT) adds significant complexity to the ledger state and transaction processing logic.",
+      "New ledger entry types (MPToken, MPTokenIssuance) increase storage requirements and potential for edge-case bugs.",
+      "Modifying core transactions like Payment and Clawback to support MPTs increases the attack surface for the consensus engine.",
+      "The risk of 'amendment-blocked' servers (Fact F2) is non-trivial if the implementation has subtle incompatibilities with older versions."
+    ],
+    "arguments_for_yes": [
+      "MPTokensV1 addresses a critical need for optimized fungible tokens (e.g., stablecoins) by avoiding the complexity of bidirectional trust lines (Fact F1).",
+      "The amendment provides a cleaner, more scalable model for token issuance and holding compared to the existing IOU system.",
+      "It includes necessary administrative controls like MPTokenIssuanceSet and MPTokenAuthorize, allowing issuers to manage token lifecycles effectively.",
+      "Integration with existing Payment and Clawback transactions ensures interoperability with current XRPL infrastructure.",
+      "The amendment is associated with rippled version 2.3.0 (Fact F3), indicating it has undergone development and testing cycles."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the technical scope and benefits of MPTokensV1, specifically its optimization for stablecoins and reduction of trust line complexity."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Highlights the operational risk of amendment voting, where incompatible servers can become blocked, necessitating a high confidence in the implementation's stability."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's association with a specific software release (2.3.0), providing context for its maturity and availability."
+      }
+    ],
+    "decision_summary": "MPTokensV1 represents a significant architectural improvement for fungible tokens on the XRPL, addressing limitations of the current trust line model. While it introduces complexity, the benefits for stablecoin use cases and the structured approach to issuance and authorization justify its adoption. The risk of amendment blocking is managed by the standard supermajority requirement, and the feature set is comprehensive.",
+    "forbidden_stronger_claim": "MPTokensV1 is bug-free and will have zero negative impact on validator performance.",
+    "missing_evidence": [
+      "Performance benchmarks comparing MPT transactions to standard IOU transactions.",
+      "Security audit results specifically for the new MPTokenIssuanceCreate and MPTokenAuthorize transaction types.",
+      "Migration path details for existing trust line users wishing to adopt MPTs."
+    ],
+    "vote_confidence": 0.85,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "8b0d20ce56b182c4ec0aecb044996ad159c3de26414e60e7af42373f2439ea4b",
+  "packet_id": "case_011--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "a0a29984487dfd107e3ab1d3b731bbd2677c95f5b0e38ac7d94a8dcfcdaf93f2",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"Introducing a new token standard (MPT) adds significant complexity to the ledger state and transaction processing logic.\",\n    \"New ledger entry types (MPToken, MPTokenIssuance) increase storage requirements and potential for edge-case bugs.\",\n    \"Modifying core transactions like Payment and Clawback to support MPTs increases the attack surface for the consensus engine.\",\n    \"The risk of 'amendment-blocked' servers (Fact F2) is non-trivial if the implementation has subtle incompatibilities with older versions.\"\n  ],\n  \"arguments_for_yes\": [\n    \"MPTokensV1 addresses a critical need for optimized fungible tokens (e.g., stablecoins) by avoiding the complexity of bidirectional trust lines (Fact F1).\",\n    \"The amendment provides a cleaner, more scalable model for token issuance and holding compared to the existing IOU system.\",\n    \"It includes necessary administrative controls like MPTokenIssuanceSet and MPTokenAuthorize, allowing issuers to manage token lifecycles effectively.\",\n    \"Integration with existing Payment and Clawback transactions ensures interoperability with current XRPL infrastructure.\",\n    \"The amendment is associated with rippled version 2.3.0 (Fact F3), indicating it has undergone development and testing cycles.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Defines the technical scope and benefits of MPTokensV1, specifically its optimization for stablecoins and reduction of trust line complexity.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Highlights the operational risk of amendment voting, where incompatible servers can become blocked, necessitating a high confidence in the implementation's stability.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's association with a specific software release (2.3.0), providing context for its maturity and availability.\"\n    }\n  ],\n  \"decision_summary\": \"MPTokensV1 represents a significant architectural improvement for fungible tokens on the XRPL, addressing limitations of the current trust line model. While it introduces complexity, the benefits for stablecoin use cases and the structured approach to issuance and authorization justify its adoption. The risk of amendment blocking is managed by the standard supermajority requirement, and the feature set is comprehensive.\",\n  \"forbidden_stronger_claim\": \"MPTokensV1 is bug-free and will have zero negative impact on validator performance.\",\n  \"missing_evidence\": [\n    \"Performance benchmarks comparing MPT transactions to standard IOU transactions.\",\n    \"Security audit results specifically for the new MPTokenIssuanceCreate and MPTokenAuthorize transaction types.\",\n    \"Migration path details for existing trust line users wishing to adopt MPTs.\"\n  ],\n  \"vote_confidence\": 0.85,\n  \"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 655,
+      "prompt_tokens": 878,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1533
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:46:10Z"
+}

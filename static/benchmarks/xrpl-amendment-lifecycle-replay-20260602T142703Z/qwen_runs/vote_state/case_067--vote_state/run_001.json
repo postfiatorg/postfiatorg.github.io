@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:55:51Z",
+  "error": "",
+  "event_id": "case_067",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "f8ef31121b8b2ef6e009de26da77966e61ff1727e28955eb045116268f626eed",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and introduction version, providing context for the lifecycle stage, though F4 is the primary determinant for the current state."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the amendment fixReducedOffersV1 is present in the validated ledger Amendments object and has a recorded enabled_on timestamp. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "362ad42f64a2e12b48b30a4d01d37850bcd9126b6c1fc206426471b1e48d0cc5",
+  "packet_id": "case_067--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "a258a3bf53a974fccfca596d78007cb94a4df4decc7a525157cef745351f900f",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and introduction version, providing context for the lifecycle stage, though F4 is the primary determinant for the current state.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the amendment fixReducedOffersV1 is present in the validated ledger Amendments object and has a recorded enabled_on timestamp. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 218,
+      "prompt_tokens": 792,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1010
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:55:48Z"
+}

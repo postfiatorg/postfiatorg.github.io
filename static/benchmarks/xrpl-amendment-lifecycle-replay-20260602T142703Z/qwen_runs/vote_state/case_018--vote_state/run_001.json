@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:52:54Z",
+  "error": "",
+  "event_id": "case_018",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "cdc8784c2a98d1bde2e4d856e995d9252392187919662c963d6cf5623a50494f",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly classifies the amendment status as OBSOLETE, which maps directly to the VETOED_OR_RETIRED label definition."
+      },
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Confirms the amendment is not enabled and lacks majority support, consistent with a retired or obsolete state rather than an active voting process."
+      }
+    ],
+    "decision_summary": "The amendment fixBatchInnerSigs is classified as VETOED_OR_RETIRED because source fact F5 explicitly marks its status as OBSOLETE. This overrides the low support count in F4, indicating the amendment is no longer under active consideration for enablement.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "63847b77fa0a9dae18b21ea9cd6a0341204c85ba03a6c36eb769bc975767e2af",
+  "packet_id": "case_018--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "2d2316f8c209f9e20a86b400d4ce9dfacb9781c386691d740a35a9a09826c142",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly classifies the amendment status as OBSOLETE, which maps directly to the VETOED_OR_RETIRED label definition.\"\n    },\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Confirms the amendment is not enabled and lacks majority support, consistent with a retired or obsolete state rather than an active voting process.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixBatchInnerSigs is classified as VETOED_OR_RETIRED because source fact F5 explicitly marks its status as OBSOLETE. This overrides the low support count in F4, indicating the amendment is no longer under active consideration for enablement.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 215,
+      "prompt_tokens": 751,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 966
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:52:51Z"
+}

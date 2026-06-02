@@ -1,0 +1,61 @@
+{
+  "completed_at": "2026-06-02T16:51:55Z",
+  "error": "",
+  "event_id": "case_002",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "5972108ce0f779c46485e707da5d6a36bb2d09a3e9bf93fa43fe47dcbeef9fe0",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F3",
+        "why_it_matters": "States that the amendment reached required validator consensus (majority) but validators subsequently revoked their Yes votes after a bug surfaced, indicating a loss of active majority support."
+      },
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Clarifies that the decision surface is pre-activation bug handling, confirming the state is not yet ENABLED and focusing on the vote dynamics rather than final ledger enablement."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Provides context on the amendment's function (AMM), establishing what is being voted on, though it does not determine the vote state itself."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the amendment initially achieved the required validator consensus (MAJORITY_ACTIVE) but this support was withdrawn ('revoked Yes votes') due to a bug. Since the majority was present and then lost, and the amendment was not enabled, the state is classified as MAJORITY_LOST.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Current ledger status to confirm it was never enabled",
+      "Timestamp of the revocation to precisely date the loss of majority"
+    ],
+    "state_confidence": 0.95,
+    "vote_state": "MAJORITY_LOST"
+  },
+  "packet_hash": "3f264c638741707c0ecf761d409f74ea3243d2721147e230ab06a7c15d9dcb8a",
+  "packet_id": "case_002--vote_state",
+  "parsed_label": "MAJORITY_LOST",
+  "prompt_hash": "0bbb69e996cfdd83b0d9e3d07156437dd06370c5d2b462b8b4e113a24eee7665",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"States that the amendment reached required validator consensus (majority) but validators subsequently revoked their Yes votes after a bug surfaced, indicating a loss of active majority support.\"\n    },\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Clarifies that the decision surface is pre-activation bug handling, confirming the state is not yet ENABLED and focusing on the vote dynamics rather than final ledger enablement.\"\n    },\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Provides context on the amendment's function (AMM), establishing what is being voted on, though it does not determine the vote state itself.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the amendment initially achieved the required validator consensus (MAJORITY_ACTIVE) but this support was withdrawn ('revoked Yes votes') due to a bug. Since the majority was present and then lost, and the amendment was not enabled, the state is classified as MAJORITY_LOST.\",\n  \"missing_evidence\": [\n    \"Current ledger status to confirm it was never enabled\",\n    \"Timestamp of the revocation to precisely date the loss of majority\"\n  ],\n  \"state_confidence\": 0.95,\n  \"vote_state\": \"MAJORITY_LOST\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 320,
+      "prompt_tokens": 733,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1053
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:51:51Z"
+}

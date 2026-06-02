@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_065",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "93E516234E35E08CA689FA33A6D38E103881F8DCB53023F728C307AA89D515A7",
+    "amendment_name": "XRPFees",
+    "decision_surface": "XRPL validator amendment decision surface for XRPFees.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "XRPFees: Simplifies transaction cost calculations to use XRP directly rather than calculating indirectly in \"fee units\" and translating the results to XRP. Updates all instances of \"fee units\" in the protocol and ledger data to be drops of XRP instead, including: - Updates the Fee Voting protocol to use drops of XRP - Updates the FeeSettings ledger entry type. Replaces BaseFee, ReferenceFeeUnits, ReserveBase, and ReserveIncrement fields with BaseFeeDrops, ReserveBaseDrops, and ReserveIncrementDrops. - Updates the SetFee transaction type. Replaces BaseFee, ReferenceFeeUnits, ReserveBase, ReserveIncrement fields with BaseFeeDrops, ReserveBaseDrops, ReserveIncrementDrops. Without this amendment, the format of the transaction and ledger entry are the same.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "XRPFees appears in XRPSCAN with introduced rippled version 1.10.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "b9fc2f76446a52f8b53cce40c8135eb849ea5c215d134d00f86cda40ed5dbb23",
+  "packet_id": "case_065--default_vote",
+  "packet_version": 1
+}

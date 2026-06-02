@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_038",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "586480873651E106F1D6339B0C4A8945BA705A777F3F4524626FF1FC07EFE41D",
+    "amendment_name": "MultiSignReserve",
+    "decision_surface": "XRPL validator amendment decision surface for MultiSignReserve.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "MultiSignReserve: Reduces the owner reserve counted against your XRP Ledger account when it owns a multi-signing SignerList. Without this amendment, the owner reserve for a SignerList ranges from 15 to 50 XRP, depending on the number of signers in the list. With this amendment enabled, the owner reserve for a new SignerList is 5 XRP, regardless of the number of signers. The reserve requirement for previously-created SignerList objects remains unchanged. To reduce the reserve requirement of SignerList objects created before this amendment was enabled, use a SignerListSet transaction to replace the SignerList after this amendment has been enabled. (The replacement can be the same as the previous version.)",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "MultiSignReserve appears in XRPSCAN with introduced rippled version 1.2.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "e2625f40bb94f26709c4e48dd2d1dbb0bce4cd0539b971945babbc4bd504967e",
+  "packet_id": "case_038--vote_outcome",
+  "packet_version": 1
+}

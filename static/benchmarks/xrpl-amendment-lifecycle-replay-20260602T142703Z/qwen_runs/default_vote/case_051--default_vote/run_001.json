@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-02T16:59:11Z",
+  "error": "",
+  "event_id": "case_051",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "672c410c0de58064a8e79481037986f8a0573fe5b32aa73e947adf1e94e94ee7",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a bug fix for order book blocking, which is a critical stability issue that validators are expected to support to maintain network health."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 2.3.0, establishing it as part of the stable release history."
+      }
+    ],
+    "decision_summary": "The amendment fixReducedOffersV2 is a bug fix addressing order book blocking issues. In the XRPL governance model, bug fixes that improve network stability and prevent blocking are standardly enabled by default in stable releases. Therefore, the source default vote is inferred to be YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit documentation stating the default vote flag in the rippled 2.3.0 release notes."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "671815c50c449bfbbf0c2f06ebbbc5ab4e722cb50ce3b872cd6f4e9d13b4805d",
+  "packet_id": "case_051--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "deef46f6a9d345d5edd28ca541fbcc70abfa5ee2724c32a019b2bc33848ccd1d",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a bug fix for order book blocking, which is a critical stability issue that validators are expected to support to maintain network health.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 2.3.0, establishing it as part of the stable release history.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixReducedOffersV2 is a bug fix addressing order book blocking issues. In the XRPL governance model, bug fixes that improve network stability and prevent blocking are standardly enabled by default in stable releases. Therefore, the source default vote is inferred to be YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit documentation stating the default vote flag in the rippled 2.3.0 release notes.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 244,
+      "prompt_tokens": 612,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 856
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:59:08Z"
+}

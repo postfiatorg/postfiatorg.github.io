@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-02T16:59:49Z",
+  "error": "",
+  "event_id": "case_061",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "1b72267182a61ea9ce454eab585a907fcdcbf82a1614c35578d5d764c922646b",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical function of the amendment (adding a reserve check to NFTokenAcceptOffer) but does not specify the default voting stance of the source release."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the introduction version (2.1.0) but does not provide the default vote configuration associated with that release."
+      }
+    ],
+    "decision_summary": "The provided packet facts describe the technical behavior of the 'fixNFTokenReserve' amendment and its introduction version. However, none of the facts explicitly state the default vote (YES or NO) configured in the latest stable release source code. Without explicit source-backed evidence of the default vote setting, the value cannot be inferred.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote (YES/NO) in the source code or release notes for the latest stable version.",
+      "Documentation linking the amendment ID to a specific default voting policy in the rippled source tree."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "db28f7e8477431167c0c15822cd227de7f20897d2b5e8c0cf2c5dac0be2096b5",
+  "packet_id": "case_061--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "fe2e44ae4f95131b20726b41c08beb1ae69d268831fceccd24c715b8c0ab8803",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical function of the amendment (adding a reserve check to NFTokenAcceptOffer) but does not specify the default voting stance of the source release.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Identifies the introduction version (2.1.0) but does not provide the default vote configuration associated with that release.\"\n    }\n  ],\n  \"decision_summary\": \"The provided packet facts describe the technical behavior of the 'fixNFTokenReserve' amendment and its introduction version. However, none of the facts explicitly state the default vote (YES or NO) configured in the latest stable release source code. Without explicit source-backed evidence of the default vote setting, the value cannot be inferred.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote (YES/NO) in the source code or release notes for the latest stable version.\",\n    \"Documentation linking the amendment ID to a specific default voting policy in the rippled source tree.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 277,
+      "prompt_tokens": 604,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 881
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:59:45Z"
+}

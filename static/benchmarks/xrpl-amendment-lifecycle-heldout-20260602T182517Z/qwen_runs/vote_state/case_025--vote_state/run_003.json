@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-02T18:58:31Z",
+  "error": "",
+  "event_id": "case_025",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "0ce0d685de420d061630cf8c00c82e8b82549e913a9207e8e9bc821f87f12ea8",
+  "output_hash": "14612e8bdedfbe74358bae0d141b38390974a2ccf7eae8fadc00f7d530c9a2fd",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment 'fixCheckThreading' is included in the validated ledger Amendments object and provides a historical enabled timestamp (2020-05-01). According to the task rules, the presence of enabled ledger membership evidence classifies the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "352dabac8a144648680cdda880c47d661f6210c0a264464b9aa820e6dae82587",
+  "packet_id": "case_025--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "f4232675826a8802249ed59f2aec3b658e1baf2285fb0e24ab30d11f6512ae12",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 confirms that the amendment 'fixCheckThreading' is included in the validated ledger Amendments object and provides a historical enabled timestamp (2020-05-01). According to the task rules, the presence of enabled ledger membership evidence classifies the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 176,
+      "prompt_tokens": 827,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1003
+    }
+  },
+  "run_index": 3,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T18:58:28Z"
+}

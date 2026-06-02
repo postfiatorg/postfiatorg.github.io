@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-02T16:57:26Z",
+  "error": "",
+  "event_id": "case_022",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "a5571ba2f2b3d8d07fa4b44f8b0e4abfda6746999e6c9e93d6ef70ac2a8f57ad",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States that FlowV2 was rejected due to a bug and removed in version 0.33.0, indicating it is not a supported or recommended amendment in the latest stable release."
+      }
+    ],
+    "decision_summary": "The source fact explicitly states that FlowV2 was rejected due to a bug and removed in version 0.33.0. Since the amendment was removed from the codebase due to defects, the latest stable release does not support it, nor does it have a 'YES' default vote for activation. It is effectively deprecated/removed.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "dfd9a3fe28f81f1b1ecd9365b3accff9c12b2c42d665ecde127f9b7fbd50a1fd",
+  "packet_id": "case_022--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "70c60f844e06f550dbe2574c2bfa1a24f036b9dc27b0100abd4aa38627cdcb6c",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"States that FlowV2 was rejected due to a bug and removed in version 0.33.0, indicating it is not a supported or recommended amendment in the latest stable release.\"\n    }\n  ],\n  \"decision_summary\": \"The source fact explicitly states that FlowV2 was rejected due to a bug and removed in version 0.33.0. Since the amendment was removed from the codebase due to defects, the latest stable release does not support it, nor does it have a 'YES' default vote for activation. It is effectively deprecated/removed.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 187,
+      "prompt_tokens": 533,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 720
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:57:23Z"
+}

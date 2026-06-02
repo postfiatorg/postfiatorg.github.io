@@ -1,0 +1,87 @@
+{
+  "completed_at": "2026-06-02T17:19:16Z",
+  "error": "",
+  "event_id": "case_047",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "d491403a883df01aa9176e38576406309c09a9c5ba7d67424e2b8702ef5fad1f",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment name starts with 'fix', indicating it is a corrective measure.",
+      "The change introduces stricter validation (temINVALID_FLAG) for specific transaction types, which is a localized fix for invalid inputs rather than a broad semantic change.",
+      "There is no evidence of material financial risk, consensus liveness risk, or asset-control semantics changes that would require a HOLD_FOR_CHALLENGE.",
+      "The fix is not described as obsolete or unsafe, so REJECT is not applicable.",
+      "There is no unresolved bug or vulnerability described that requires a DELAY_FOR_FIX; the amendment itself is the fix."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name 'fixInvalidTxFlags' starts with 'fix'.",
+      "The packet describes the amendment as the fix itself (adding flag checks to return temINVALID_FLAG for invalid/contradictory flags).",
+      "The scope is limited to CredentialCreate, CredentialAccept, CredentialDelete, and SignerListSet transactions.",
+      "The change does not involve broad cross-feature canonicalization, consensus/liveness risk, AMM invariants, freeze/authorization bypasses, ledger repair, NFT offer-settlement semantics, material token supply changes, escrow math, or numeric precision issues.",
+      "The underlying domain mentions Credentials and SignerListSet, but the fix is a localized input validation improvement, not a material risk pattern requiring a hold."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the amendment as a fix that adds flag checks for specific transactions, returning temINVALID_FLAG for invalid flags. This confirms it is a localized fix amendment."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the amendment voting process, confirming the decision surface is for validator review."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 2.4.0, establishing its existence and versioning context."
+      }
+    ],
+    "decision_summary": "The amendment 'fixInvalidTxFlags' is a localized fix that adds input validation for specific transaction types. It does not exhibit material risk patterns such as consensus liveness issues, asset control changes, or broad semantic shifts. Therefore, it proceeds under the rule for fix amendments.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the addition of temINVALID_FLAG checks for Credential and SignerListSet transactions introduce any unexpected rejection of valid historical transactions?"
+      ],
+      "recommended_validator_action": "Enable the amendment.",
+      "review_questions": [
+        "Are there any known edge cases where valid transactions might be incorrectly flagged as invalid by this amendment?"
+      ],
+      "title": "Review fixInvalidTxFlags Amendment"
+    }
+  },
+  "packet_hash": "63a61f3c2eb7368218723373bae9967d7add0d2668feb9a70a1a8361e279f917",
+  "packet_id": "case_047--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "c06a0c82e04b1dde8511e93d95b2433fface20a30af63a75b25456f23c48b158",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment name starts with 'fix', indicating it is a corrective measure.\",\n\"The change introduces stricter validation (temINVALID_FLAG) for specific transaction types, which is a localized fix for invalid inputs rather than a broad semantic change.\",\n\"There is no evidence of material financial risk, consensus liveness risk, or asset-control semantics changes that would require a HOLD_FOR_CHALLENGE.\",\n\"The fix is not described as obsolete or unsafe, so REJECT is not applicable.\",\n\"There is no unresolved bug or vulnerability described that requires a DELAY_FOR_FIX; the amendment itself is the fix.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name 'fixInvalidTxFlags' starts with 'fix'.\",\n\"The packet describes the amendment as the fix itself (adding flag checks to return temINVALID_FLAG for invalid/contradictory flags).\",\n\"The scope is limited to CredentialCreate, CredentialAccept, CredentialDelete, and SignerListSet transactions.\",\n\"The change does not involve broad cross-feature canonicalization, consensus/liveness risk, AMM invariants, freeze/authorization bypasses, ledger repair, NFT offer-settlement semantics, material token supply changes, escrow math, or numeric precision issues.\",\n\"The underlying domain mentions Credentials and SignerListSet, but the fix is a localized input validation improvement, not a material risk pattern requiring a hold.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Defines the amendment as a fix that adds flag checks for specific transactions, returning temINVALID_FLAG for invalid flags. This confirms it is a localized fix amendment.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Provides context on the amendment voting process, confirming the decision surface is for validator review.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment was introduced in rippled version 2.4.0, establishing its existence and versioning context.\"\n}\n],\n\"decision_summary\": \"The amendment 'fixInvalidTxFlags' is a localized fix that adds input validation for specific transaction types. It does not exhibit material risk patterns such as consensus liveness issues, asset control changes, or broad semantic shifts. Therefore, it proceeds under the rule for fix amendments.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n\"missing_evidence\": [],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the addition of temINVALID_FLAG checks for Credential and SignerListSet transactions introduce any unexpected rejection of valid historical transactions?\"\n],\n\"recommended_validator_action\": \"Enable the amendment.\",\n\"review_questions\": [\n\"Are there any known edge cases where valid transactions might be incorrectly flagged as invalid by this amendment?\"\n],\n\"title\": \"Review fixInvalidTxFlags Amendment\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 670,
+      "prompt_tokens": 1067,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1737
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:19:07Z"
+}

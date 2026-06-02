@@ -1,0 +1,37 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_033",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "BE2D87DF21B690ED1497B593FDC013CC04276302380B1BD50A033DCF8DEFB2EB",
+    "amendment_name": "MPTokensV2",
+    "decision_surface": "XRPL validator amendment decision surface for MPTokensV2.",
+    "source_facts": [
+      {
+        "claim": "MPTokensV2: Extends the XRPL's Decentralized Exchange to natively support Multi-Purpose Tokens (MPTs) as a tradeable asset class. MPTs can be paired with XRP, Trust Line tokens, or other MPTs across existing DEX transactions such as OfferCreate, Payment, AMM, and Checks. For more details, see XLS-82: MPT DEX Integration.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "ebf266ead8afd82728bd3e5bb52bd6c1c5bf44a43ebef511dd402b29ab6a6d98",
+  "packet_id": "case_033--triage",
+  "packet_version": 1
+}

@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_042",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "1CB67D082CF7D9102412D34258CEDB400E659352D3B207348889297A6D90F5EF",
+    "amendment_name": "Credentials",
+    "decision_surface": "XRPL validator amendment decision surface for Credentials.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "Credentials: Introduces Credentials, a set of tools for managing authorization and compliance requirements using the XRP Ledger. Adds three new transaction types for managing credentials: - CredentialCreate transaction - Create a credential in the ledger. - CredentialAccept transaction - Accept a credential issued to you. - CredentialDelete transaction - Delete a credential from the ledger. Modifies an existing transaction type: - DepositPreauth transaction - Authorizes deposits to your account. Modified to allow credential-based authorization. Adds a new field to several existing transaction types: - CredentialIDs field - Credentials to prove authorization to deposit money. Added to Payment, EscrowFinish, PaymentChannelClaim, and AccountDelete transaction types. Adds a new type of ledger entry: - Credential ledger entry - Stores a credential in the ledger. Modifies an existing type of ledger entry: - DepositPreauth ledger entry - Records authorization for depositing to a specific account; modified to allow for credential-based authorization. Also extends the deposit_authorized API method to check for credential-based auth and extends the ledger_entry method to allow lookup of Cred",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "Credentials appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "dc091f336dda9a92e07b6174acb02e8c6fb5736012b491935d6dc2acb9571957",
+  "packet_id": "case_042--vote_outcome",
+  "packet_version": 1
+}

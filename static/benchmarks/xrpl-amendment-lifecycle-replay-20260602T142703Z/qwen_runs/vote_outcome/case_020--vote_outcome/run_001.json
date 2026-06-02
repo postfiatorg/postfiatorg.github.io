@@ -1,0 +1,65 @@
+{
+  "completed_at": "2026-06-02T16:47:05Z",
+  "error": "",
+  "event_id": "case_020",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "e6aee87d43cd094022656f29fe6d29e3fde2e197445c8039b0eef0ec80ad4b0b",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment is explicitly marked as OBSOLETE in the source facts.",
+      "Its effects are already included in the NonFungibleTokensV1_1 amendment, making this specific amendment redundant.",
+      "Voting YES on an obsolete amendment provides no functional benefit and may clutter the amendment queue."
+    ],
+    "arguments_for_yes": [
+      "The amendment fixes a critical bug allowing negative NFT offers, which is a security and economic integrity issue.",
+      "If NonFungibleTokensV1 is enabled but NonFungibleTokensV1_1 is not, this fix is necessary to prevent exploitation."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies the bug fix (negative NFT offers) but crucially states the amendment is obsolete because its effects are included in NonFungibleTokensV1_1."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly confirms the status of fixNFTokenNegOffer is OBSOLETE, which is the primary determinant for the vote recommendation."
+      }
+    ],
+    "decision_summary": "The amendment fixNFTokenNegOffer is obsolete. Its functionality is superseded by NonFungibleTokensV1_1. Therefore, it should not be enabled as it is redundant.",
+    "forbidden_stronger_claim": "The amendment is harmful and must be rejected to prevent network instability.",
+    "missing_evidence": [
+      "Current network status of NonFungibleTokensV1 and NonFungibleTokensV1_1 amendments."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "486e8f5dc04576c40d4f86034b64f4ee9f0e8793d15cc7860189e1dfb802f4f1",
+  "packet_id": "case_020--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "8cc5770d84a0bfde9358e63e899bd881530285671f82244b14f0411dc4317da8",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment is explicitly marked as OBSOLETE in the source facts.\",\n    \"Its effects are already included in the NonFungibleTokensV1_1 amendment, making this specific amendment redundant.\",\n    \"Voting YES on an obsolete amendment provides no functional benefit and may clutter the amendment queue.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment fixes a critical bug allowing negative NFT offers, which is a security and economic integrity issue.\",\n    \"If NonFungibleTokensV1 is enabled but NonFungibleTokensV1_1 is not, this fix is necessary to prevent exploitation.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Identifies the bug fix (negative NFT offers) but crucially states the amendment is obsolete because its effects are included in NonFungibleTokensV1_1.\"\n    },\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly confirms the status of fixNFTokenNegOffer is OBSOLETE, which is the primary determinant for the vote recommendation.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixNFTokenNegOffer is obsolete. Its functionality is superseded by NonFungibleTokensV1_1. Therefore, it should not be enabled as it is redundant.\",\n  \"forbidden_stronger_claim\": \"The amendment is harmful and must be rejected to prevent network instability.\",\n  \"missing_evidence\": [\n    \"Current network status of NonFungibleTokensV1 and NonFungibleTokensV1_1 amendments.\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 400,
+      "prompt_tokens": 776,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1176
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:47:00Z"
+}

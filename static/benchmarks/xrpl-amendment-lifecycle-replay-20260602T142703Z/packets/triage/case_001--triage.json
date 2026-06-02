@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_001",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "8CC0774A3BF66D1D22E76BBDA8E8A232E6B6313834301B3B23E8601196AE6455",
+    "amendment_name": "AMM post-launch pool discrepancy",
+    "decision_surface": "How validators and operators should treat AMM pool discrepancies after AMM activation but before the fix amendment.",
+    "source_facts": [
+      {
+        "claim": "The AMM amendment went live on 2024-03-22.",
+        "fact_id": "F1",
+        "source_id": "xrpl_amm_status_update_2024"
+      },
+      {
+        "claim": "A community member identified discrepancies in a few AMM pools indicating transactions were not executing as intended.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amm_status_update_2024"
+      },
+      {
+        "claim": "The official update said the fix required an amendment and advised users to redeem LP tokens and avoid new AMM deposits until the fix was enabled.",
+        "fact_id": "F3",
+        "source_id": "xrpl_amm_status_update_2024"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "c209f9e57c1da69f1d16396c5a13a8ead51ff9474e3265db5a5f8ec394533679",
+  "packet_id": "case_001--triage",
+  "packet_version": 1
+}

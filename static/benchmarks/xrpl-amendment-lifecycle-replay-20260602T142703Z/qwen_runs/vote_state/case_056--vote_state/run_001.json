@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:55:08Z",
+  "error": "",
+  "event_id": "case_056",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "dfb774536d358272c81bf2332665d6bd2eec204c51c45666a23bb112d49e5b16",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states that the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and association with rippled version 2.2.0, supporting the context that it is a valid, introduced amendment."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides the general rule that amendments require supermajority before activation, establishing the baseline process that F4 indicates has been completed."
+      }
+    ],
+    "decision_summary": "Fact F4 provides direct evidence that the amendment 96FD2F293A519AE1DB6F8BED23E4AD9119342DA7CB6BAFD00953D16C54205D8B (PriceOracle) is included in the validated ledger Amendments object with a recorded enablement date of 2024-11-02. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "7f33fd5f41080fabe9992b31efcced54fccd7784c3c147b695bb39e4f06bc916",
+  "packet_id": "case_056--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "6e7e6286b9917f7b57e6f9b2def242fd68e72ff56d17b68c2f418d37248c866b",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states that the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and association with rippled version 2.2.0, supporting the context that it is a valid, introduced amendment.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides the general rule that amendments require supermajority before activation, establishing the baseline process that F4 indicates has been completed.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 provides direct evidence that the amendment 96FD2F293A519AE1DB6F8BED23E4AD9119342DA7CB6BAFD00953D16C54205D8B (PriceOracle) is included in the validated ledger Amendments object with a recorded enablement date of 2024-11-02. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 337,
+      "prompt_tokens": 774,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1111
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:55:03Z"
+}

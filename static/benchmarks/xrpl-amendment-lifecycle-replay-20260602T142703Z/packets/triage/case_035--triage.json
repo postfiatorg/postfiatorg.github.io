@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_035",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "303ACB16CF8DBD3B5C34F131A9D19A7DE01AE05F480A8A682B869D1B4AAC8CFC",
+    "amendment_name": "fixCleanup3_1_3",
+    "decision_surface": "XRPL validator amendment decision surface for fixCleanup3_1_3.",
+    "source_facts": [
+      {
+        "claim": "fixCleanup3_1_3: This amendment is a collection of fixes for NFTs, Permissioned Domains, Vaults, and the Lending Protocol: - Fixes an issue with expired NFTokenOffer entries remaining on the ledger. With this amendment enabled, using the NFTokenAcceptOffer transaction on an expired NFTokenOffer now deletes it as part of transaction processing. - Adds an invariant check to ensure Permissioned Domains aren't modified by failed transactions. - Fixes a trust line token limit check that was skipped when withdrawing vault assets. With this amendment enabled, VaultWithdraw transactions that specify either vault shares or vault assets will respect the trust line token limit of the destination address. - Fixes loan accounting information not updating in its associated Loan, LoanBroker, and Vault entries if the loan was defaulted, impaired, or unimpaired. - Changes a LoanPay error to return tecNO_PERMISSION instead of temINVALID_FLAG when attempting to overpay on a loan that doesn't permit overpayments. - Adds an additional check for LoanBroker invariants to ensure the listed CoverAvailable exactly matches the assets held in the associated pseudo-account.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixCleanup3_1_3 appears in XRPSCAN with introduced rippled version 3.1.3.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "ce837cf03a487658ba0f3ae1c616242dc6179b345a26d0026e6fd662726ede1e",
+  "packet_id": "case_035--triage",
+  "packet_version": 1
+}

@@ -1,0 +1,53 @@
+{
+  "completed_at": "2026-06-02T16:57:43Z",
+  "error": "",
+  "event_id": "case_027",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "8524417d843f7098e810cb0176fd90220a3ece3d94f3ced6a4818cfaaa5b8cb8",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The amendment 'Tickets' was replaced by 'TicketBatch', indicating it is obsolete and not part of the current active stable release feature set, which typically results in a default vote of NO for deprecated or replaced amendments to prevent activation of outdated code."
+      }
+    ],
+    "decision_summary": "The 'Tickets' amendment has been superseded by the 'TicketBatch' amendment. In XRPL governance, amendments that are replaced or deprecated are generally not intended for activation in the latest stable release. Therefore, the source-backed default vote is inferred as NO, as activating a replaced amendment is unnecessary and potentially conflicting with the newer implementation.",
+    "default_vote_confidence": 0.9,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit documentation stating the default vote for replaced amendments is NO",
+      "Confirmation that 'TicketBatch' is fully active and 'Tickets' is strictly disabled in the latest stable release"
+    ],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "e6d89042fe2aecd8b936aef13dda93e994f6eb0170501e0a2f10b9b5ad38e6cd",
+  "packet_id": "case_027--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "f3e9bfbf90292e5485ea5023f83472a04305428a9093018a7e9639dbec13f7e0",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The amendment 'Tickets' was replaced by 'TicketBatch', indicating it is obsolete and not part of the current active stable release feature set, which typically results in a default vote of NO for deprecated or replaced amendments to prevent activation of outdated code.\"\n    }\n  ],\n  \"decision_summary\": \"The 'Tickets' amendment has been superseded by the 'TicketBatch' amendment. In XRPL governance, amendments that are replaced or deprecated are generally not intended for activation in the latest stable release. Therefore, the source-backed default vote is inferred as NO, as activating a replaced amendment is unnecessary and potentially conflicting with the newer implementation.\",\n  \"default_vote_confidence\": 0.9,\n  \"missing_evidence\": [\n    \"Explicit documentation stating the default vote for replaced amendments is NO\",\n    \"Confirmation that 'TicketBatch' is fully active and 'Tickets' is strictly disabled in the latest stable release\"\n  ],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 238,
+      "prompt_tokens": 511,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 749
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:57:40Z"
+}

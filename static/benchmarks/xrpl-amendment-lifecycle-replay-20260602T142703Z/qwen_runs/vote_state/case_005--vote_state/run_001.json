@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:52:08Z",
+  "error": "",
+  "event_id": "case_005",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "a0673f05ad729d7219922beef2c4a1b6d4f4e18161c42ff8dea2d22efacbea2d",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's introduction version, providing context for its lifecycle but secondary to the ledger state evidence in F4."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Defines the general process for amendment activation, establishing the criteria that F4 satisfies."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the AMM amendment (ID 8CC0774A3BF66D1D22E76BBDA8E8A232E6B6313834301B3B23E8601196AE6455) is present in the validated ledger Amendments object. Fact F4 explicitly reports an enabled_on timestamp and an enabled_in_ledger value, confirming that the amendment has been activated and is part of the ledger membership. This satisfies the definition of the ENABLED state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "b963b7bafb9474931b0f30efc9ff51d0168de27ce4308ee1ef05d76057c39a46",
+  "packet_id": "case_005--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "dc20134ab1b06b998f0459662bdd20a11f3c10aae4a6597695304f47053f3ec7",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's introduction version, providing context for its lifecycle but secondary to the ledger state evidence in F4.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Defines the general process for amendment activation, establishing the criteria that F4 satisfies.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the AMM amendment (ID 8CC0774A3BF66D1D22E76BBDA8E8A232E6B6313834301B3B23E8601196AE6455) is present in the validated ledger Amendments object. Fact F4 explicitly reports an enabled_on timestamp and an enabled_in_ledger value, confirming that the amendment has been activated and is part of the ledger membership. This satisfies the definition of the ENABLED state.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 331,
+      "prompt_tokens": 787,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1118
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:52:04Z"
+}

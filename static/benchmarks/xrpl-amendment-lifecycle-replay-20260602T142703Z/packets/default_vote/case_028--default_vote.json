@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_028",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "C98D98EE9616ACD36E81FDEB8D41D349BF5F1B41DD64A0ABC1FE9AA5EA267E9C",
+    "amendment_name": "XChainBridge",
+    "decision_surface": "XRPL validator amendment decision surface for XChainBridge.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "XChainBridge: Adds cross-chain bridges, enabling the transfer of digital assets between networks (for example, between Mainnet and a sidechain). Standards draft: XLS-0038 Cross-Chain Bridge. Adds new transactions: - XChainAccountCreateCommit - Create a new account for a witness server to submit transactions on an issuing chain.. - XChainAddAccountCreateAttestation - Provide an attestation that an account was created for a witness server to use. - XChainAddClaimAttestation - Provide an attestation that assets were locked on a locking chain. - XChainClaim - Claim assets on the destination chain. - XChainCommit - Locks assets on the locking chain. - XChainCreateBridge - Create a bridge ledger object. - XChainCreateClaimID - Create a new cross-chain claim ID that is used for a cross-chain transfer. - XChainModifyBridge - Modify the parameters of a bridge. Adds new ledger entry types: - Bridge - A single cross-chain bridge that connects the XRP Ledger with another blockchain. - XChainOwnedClaimID - A cross-chain transfer of value that includes information of the account on the source chain that locks or burns the funds on the source chain. - XChainOwnedCreateAccountClaimID - Collects at",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "XChainBridge appears in XRPSCAN with introduced rippled version 2.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "33f8f19da817fa5ff505e42a5238b7dc6f1339c76cd5b5cd3216fba4aea9caa4",
+  "packet_id": "case_028--default_vote",
+  "packet_version": 1
+}

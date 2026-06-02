@@ -1,0 +1,87 @@
+{
+  "completed_at": "2026-06-02T17:17:39Z",
+  "error": "",
+  "event_id": "case_036",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "238cfdca78129b2dffeefc7666f5b212f064c4d5e66bafda266dfa8790fbb689",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment addresses 'material token supply or issuer-balance accounting' by correcting discrepancies in MPT total supply and issuer locked balances.",
+      "The fix involves 'escrow math' and the handling of transfer fees within MPT escrows, which are explicitly listed as material risk patterns requiring review.",
+      "Although the name starts with 'fix', the packet describes changes to accounting semantics that affect token supply integrity, triggering the exception to the PROCEED rule for fix amendments."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', indicating it is a corrective measure.",
+      "The issue is localized to MPT escrow unlocking logic rather than a broad cross-feature canonicalization change."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Explicitly describes the amendment as fixing an accounting error in MPT escrows involving issuer locked balances and total supply, which falls under the 'material token supply or issuer-balance accounting' and 'escrow math' risk categories."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the voting process but does not alter the risk assessment of the amendment's content."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version but does not mitigate the accounting risk described in F1."
+      }
+    ],
+    "decision_summary": "The amendment fixTokenEscrowV1 corrects an accounting error in MPT escrows where transfer fees were not properly deducted from the issuer's locked balance and total supply. While the name suggests a simple fix, the content involves material token supply accounting and escrow math. According to the task rules, fix amendments must be held for challenge if they involve material token supply or issuer-balance accounting. Therefore, the conservative route is HOLD_FOR_CHALLENGE.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 15,
+      "validator_skim": 10
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Details on whether this accounting error has caused any actual on-chain discrepancies or exploits.",
+      "Confirmation that the fix does not introduce new edge cases in fee calculation for other MPT operations."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the fix introduce any risk of double-spending or supply inflation during the transition?",
+        "Is the correction backward compatible with existing escrow states?"
+      ],
+      "recommended_validator_action": "Review the implementation details of the MPT escrow fee deduction logic to ensure no unintended side effects on token supply.",
+      "review_questions": [
+        "How does the fix handle escrows that were created before the amendment but unlocked after?",
+        "Are there any other MPT operations affected by this accounting change?"
+      ],
+      "title": "Review MPT Escrow Accounting Fix"
+    }
+  },
+  "packet_hash": "4cfc80ddefb6ac0795fa7ef1e6d6be4e351234fc49c868f4e095746dfa000b6e",
+  "packet_id": "case_036--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "30aacfe8021c1b38e4bfe17be81c854677f8c6dd5064951f4d618e1872b447f4",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The amendment addresses 'material token supply or issuer-balance accounting' by correcting discrepancies in MPT total supply and issuer locked balances.\",\n    \"The fix involves 'escrow math' and the handling of transfer fees within MPT escrows, which are explicitly listed as material risk patterns requiring review.\",\n    \"Although the name starts with 'fix', the packet describes changes to accounting semantics that affect token supply integrity, triggering the exception to the PROCEED rule for fix amendments.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"The amendment name starts with 'fix', indicating it is a corrective measure.\",\n    \"The issue is localized to MPT escrow unlocking logic rather than a broad cross-feature canonicalization change.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Explicitly describes the amendment as fixing an accounting error in MPT escrows involving issuer locked balances and total supply, which falls under the 'material token supply or issuer-balance accounting' and 'escrow math' risk categories.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides context on the voting process but does not alter the risk assessment of the amendment's content.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and version but does not mitigate the accounting risk described in F1.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixTokenEscrowV1 corrects an accounting error in MPT escrows where transfer fees were not properly deducted from the issuer's locked balance and total supply. While the name suggests a simple fix, the content involves material token supply accounting and escrow math. According to the task rules, fix amendments must be held for challenge if they involve material token supply or issuer-balance accounting. Therefore, the conservative route is HOLD_FOR_CHALLENGE.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 45,\n    \"packet_verification\": 15,\n    \"validator_skim\": 10\n  },\n  \"forbidden_stronger_claim\": \"REJECT\",\n  \"missing_evidence\": [\n    \"Details on whether this accounting error has caused any actual on-chain discrepancies or exploits.\",\n    \"Confirmation that the fix does not introduce new edge cases in fee calculation for other MPT operations.\"\n  ],\n  \"route\": \"HOLD_FOR_CHALLENGE\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Does the fix introduce any risk of double-spending or supply inflation during the transition?\",\n      \"Is the correction backward compatible with existing escrow states?\"\n    ],\n    \"recommended_validator_action\": \"Review the implementation details of the MPT escrow fee deduction logic to ensure no unintended side effects on token supply.\",\n    \"review_questions\": [\n      \"How does the fix handle escrows that were created before the amendment but unlocked after?\",\n      \"Are there any other MPT operations affected by this accounting change?\"\n    ],\n    \"title\": \"Review MPT Escrow Accounting Fix\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 720,
+      "prompt_tokens": 1130,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1850
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:17:30Z"
+}

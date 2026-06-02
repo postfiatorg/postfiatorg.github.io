@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:55:54Z",
+  "error": "",
+  "event_id": "case_068",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "06334f104a6bcd319a95af48d3bed9b2443eac7a1e3a3f219af6048f5f56cdf6",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's introduction version, providing context for its lifecycle but secondary to the enabled status."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Defines the general process for amendment activation, establishing the criteria that F4 satisfies."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the amendment fixUniversalNumber is present in the validated ledger Amendments object with a recorded enabled_on timestamp of 2023-08-21T05:59:11.000Z and enabled_in_ledger 81986305. This confirms the amendment has achieved supermajority and been activated on the ledger.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "bbe66fa7861d59496d822420169ebd50642610e4fcc4e5d056d6b2647d9135cd",
+  "packet_id": "case_068--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "67e9409a5ffc984fc3248ad87d255f6e5305f9f52910813aadaf3479c0c64f26",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's introduction version, providing context for its lifecycle but secondary to the enabled status.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Defines the general process for amendment activation, establishing the criteria that F4 satisfies.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the amendment fixUniversalNumber is present in the validated ledger Amendments object with a recorded enabled_on timestamp of 2023-08-21T05:59:11.000Z and enabled_in_ledger 81986305. This confirms the amendment has achieved supermajority and been activated on the ledger.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 283,
+      "prompt_tokens": 785,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1068
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:55:51Z"
+}

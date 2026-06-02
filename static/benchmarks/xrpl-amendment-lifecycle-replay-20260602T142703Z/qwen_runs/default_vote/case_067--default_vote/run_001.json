@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T17:00:11Z",
+  "error": "",
+  "event_id": "case_067",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "c07334e177aabd9d37b5383579d74b1696bb9ef814356170dbf788341311d631",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical fix for order book blocking caused by rounding errors, which is a bug fix improving system reliability and fairness."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 1.12.0, indicating it is a mature, tested change."
+      }
+    ],
+    "decision_summary": "The amendment fixReducedOffersV1 addresses a specific bug where rounding errors could block order books. As a bug fix that improves the correctness and liquidity of the order book without introducing new features or breaking changes, the standard default vote for such stability improvements in XRPL stable releases is YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "bdd700d00d025c85e8078b3f3a2e5024a08fc41b31ced07fb2155f7be4310245",
+  "packet_id": "case_067--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "5cbff1280fc0e2089462d4ef3db6b0828bbf41845b7b7cf64e9206e52d0c3e73",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical fix for order book blocking caused by rounding errors, which is a bug fix improving system reliability and fairness.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 1.12.0, indicating it is a mature, tested change.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixReducedOffersV1 addresses a specific bug where rounding errors could block order books. As a bug fix that improves the correctness and liquidity of the order book without introducing new features or breaking changes, the standard default vote for such stability improvements in XRPL stable releases is YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 215,
+      "prompt_tokens": 772,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 987
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:00:08Z"
+}

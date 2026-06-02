@@ -1,0 +1,85 @@
+{
+  "completed_at": "2026-06-02T17:17:57Z",
+  "error": "",
+  "event_id": "case_038",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "a3defc1c94ba6658367abe45a43593ee5dae60469cf765cc2e697602e8fd98b7",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment name starts with 'fix', but it addresses MPT (Multi-Pass Token) payments, which involve complex accounting and token semantics.",
+      "Missing metadata fields (DeliveredAmount) could lead to discrepancies in how payment amounts are recorded and verified by clients, potentially affecting audit trails or client-side accounting logic."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment is explicitly named 'fixMPTDeliveredAmount', indicating it is a corrective measure for a missing feature rather than a new semantic change.",
+      "The packet states the fix adds 'missing' metadata fields, implying the underlying transaction processing (delivering the full amount) is already correct and safe.",
+      "The issue is localized to metadata completeness for direct MPT payments, not a change to the core AMM invariant, rounding logic, or consensus rules.",
+      "There is no evidence of broad cross-feature canonicalization, freeze bypasses, or material token supply changes; it is a data visibility fix.",
+      "Account-local or client-side visibility improvements generally do not pose systemic liveness or safety risks if the underlying ledger state is consistent."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the scope of the fix as adding missing metadata fields for direct MPT payments, confirming the underlying delivery logic is already correct and the change is informational/corrective."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with rippled version 3.0.0, providing context for its introduction timeline and stability expectations."
+      }
+    ],
+    "decision_summary": "The amendment 'fixMPTDeliveredAmount' is a localized fix to add missing metadata fields to direct MPT payment transactions. While it touches the MPT domain, the packet explicitly describes it as adding missing information rather than changing accounting rules, invariants, or consensus behavior. The underlying payment delivery is already correct. Therefore, it qualifies as a safe 'fix' under the PROCEED rule, as it does not exhibit the material risk patterns (e.g., invariant changes, rounding errors, liveness risks) that would require HOLD_FOR_CHALLENGE or DELAY_FOR_FIX.",
+    "estimated_review_minutes": {
+      "deep_review": 15,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "This amendment changes the fundamental accounting or rounding logic of MPT transactions.",
+    "missing_evidence": [
+      "Details on whether any existing clients rely on the absence of these fields for critical logic (unlikely but possible).",
+      "Confirmation that no other metadata fields are affected."
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.9,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the addition of DeliveredAmount metadata affect any existing client-side validation or audit processes negatively?",
+        "Is there any risk that the 'missing' fields were intentionally omitted for a reason that is now being reversed?"
+      ],
+      "recommended_validator_action": "Vote YES to enable the fix, ensuring metadata completeness for MPT payments.",
+      "review_questions": [
+        "Does the fix introduce any new transaction types or change the ledger state structure beyond metadata?",
+        "Are there any known issues with MPT payment delivery that this metadata fix might mask?"
+      ],
+      "title": "Review fixMPTDeliveredAmount for metadata completeness"
+    }
+  },
+  "packet_hash": "e4fb743ec3cc0c070a245c52e369302e6854921e899fb1c8392671cddcb86488",
+  "packet_id": "case_038--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "2ebc00b85d7fbe21685791c6330e8efbb619766284a7544757be493ff096a326",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment name starts with 'fix', but it addresses MPT (Multi-Pass Token) payments, which involve complex accounting and token semantics.\",\n\"Missing metadata fields (DeliveredAmount) could lead to discrepancies in how payment amounts are recorded and verified by clients, potentially affecting audit trails or client-side accounting logic.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment is explicitly named 'fixMPTDeliveredAmount', indicating it is a corrective measure for a missing feature rather than a new semantic change.\",\n\"The packet states the fix adds 'missing' metadata fields, implying the underlying transaction processing (delivering the full amount) is already correct and safe.\",\n\"The issue is localized to metadata completeness for direct MPT payments, not a change to the core AMM invariant, rounding logic, or consensus rules.\",\n\"There is no evidence of broad cross-feature canonicalization, freeze bypasses, or material token supply changes; it is a data visibility fix.\",\n\"Account-local or client-side visibility improvements generally do not pose systemic liveness or safety risks if the underlying ledger state is consistent.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Defines the scope of the fix as adding missing metadata fields for direct MPT payments, confirming the underlying delivery logic is already correct and the change is informational/corrective.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment is associated with rippled version 3.0.0, providing context for its introduction timeline and stability expectations.\"\n}\n],\n\"decision_summary\": \"The amendment 'fixMPTDeliveredAmount' is a localized fix to add missing metadata fields to direct MPT payment transactions. While it touches the MPT domain, the packet explicitly describes it as adding missing information rather than changing accounting rules, invariants, or consensus behavior. The underlying payment delivery is already correct. Therefore, it qualifies as a safe 'fix' under the PROCEED rule, as it does not exhibit the material risk patterns (e.g., invariant changes, rounding errors, liveness risks) that would require HOLD_FOR_CHALLENGE or DELAY_FOR_FIX.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 15,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"This amendment changes the fundamental accounting or rounding logic of MPT transactions.\",\n\"missing_evidence\": [\n\"Details on whether any existing clients rely on the absence of these fields for critical logic (unlikely but possible).\",\n\"Confirmation that no other metadata fields are affected.\"\n],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.9,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the addition of DeliveredAmount metadata affect any existing client-side validation or audit processes negatively?\",\n\"Is there any risk that the 'missing' fields were intentionally omitted for a reason that is now being reversed?\"\n],\n\"recommended_validator_action\": \"Vote YES to enable the fix, ensuring metadata completeness for MPT payments.\",\n\"review_questions\": [\n\"Does the fix introduce any new transaction types or change the ledger state structure beyond metadata?\",\n\"Are there any known issues with MPT payment delivery that this metadata fix might mask?\"\n],\n\"title\": \"Review fixMPTDeliveredAmount for metadata completeness\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 740,
+      "prompt_tokens": 1067,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1807
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:17:48Z"
+}

@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_070",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "73761231F7F3D94EC3D8C63D91BDD0D89045C6F71B917D1925C01253515A6669",
+    "amendment_name": "fixNonFungibleTokensV1_2",
+    "decision_surface": "XRPL validator amendment decision surface for fixNonFungibleTokensV1_2.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixNonFungibleTokensV1_2: Amendment fixNonFungibleTokensV1_2 is a combination of bug fixes that have been individually merged into feature/nft-fixes through the pull request process. Fix Unburnable NFT Currently, an NFT cannot be burned when it has over 500 offers. To remove this restriction, this change deletes exactly 500 offers upon burning the NFT, leaving any remaining offers untouched. This addresses a concern where the issuer account cannot burn an NFT that has enabled the lsfBurnable flag, due to the exceeding number of offers. See PR 4346. Fix 3 Issues Around NFToken Offer Acceptance Issue 1: Resolve situation where an account is unable to broker a deal due to an erroneous insufficient funds condition. Issue 2: Resolve situation where a buyer has insufficient funds to cover a transfer fee on the account. Issue 3: Enable currency issuers to buy and sell NFTs using their own currency. See PR 4380. Prevent Brokered Sale of NFToken to Owner (fix #4374) This fix prevents a broker from selling an NFT to the account that already owns the token. See Issue 4374. Only allow the destination to settle an NFT offer through brokerage (fix #4373) If you set a destination on an NFT offer,",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixNonFungibleTokensV1_2 appears in XRPSCAN with introduced rippled version 1.10.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "f3d3f8d9186edd8d7925e752f5873913320c8785cdba4c2bc34b30ff368d6794",
+  "packet_id": "case_070--vote_outcome",
+  "packet_version": 1
+}

@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:58:13Z",
+  "error": "",
+  "event_id": "case_036",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "3a42bc7d8b6938fdb49add17aa5b9d819a3d38397ebf5ac9172f418c6a0fa4b6",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes a critical accounting error in MPT escrows where the issuer's locked balance is incorrectly reduced by the gross amount instead of the net amount, leading to discrepancies in total supply. This is a bug fix that corrects incorrect system behavior."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with rippled version 3.0.0, indicating it is part of a stable release cycle."
+      }
+    ],
+    "decision_summary": "The amendment fixTokenEscrowV1 addresses a specific accounting bug in Multi-Pass Token (MPT) escrows. The bug causes incorrect reduction of the issuer's locked token balance, leading to supply discrepancies. Since this is a bug fix that corrects erroneous accounting logic and ensures data integrity, the default vote for a stable release is YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "afb872117bd95843c081329aece9f74f315b76fd09185e9507cacb5e9cc3a748",
+  "packet_id": "case_036--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "81752dfe0ec8539e7e91ad90b312f64a7a630d4a5e904da12ccfd588ba30a6bf",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes a critical accounting error in MPT escrows where the issuer's locked balance is incorrectly reduced by the gross amount instead of the net amount, leading to discrepancies in total supply. This is a bug fix that corrects incorrect system behavior.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is associated with rippled version 3.0.0, indicating it is part of a stable release cycle.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixTokenEscrowV1 addresses a specific accounting bug in Multi-Pass Token (MPT) escrows. The bug causes incorrect reduction of the issuer's locked token balance, leading to supply discrepancies. Since this is a bug fix that corrects erroneous accounting logic and ensures data integrity, the default vote for a stable release is YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 251,
+      "prompt_tokens": 669,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 920
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:58:09Z"
+}

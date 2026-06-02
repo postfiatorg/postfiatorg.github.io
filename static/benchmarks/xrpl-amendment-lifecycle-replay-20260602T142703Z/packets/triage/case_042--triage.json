@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_042",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "1CB67D082CF7D9102412D34258CEDB400E659352D3B207348889297A6D90F5EF",
+    "amendment_name": "Credentials",
+    "decision_surface": "XRPL validator amendment decision surface for Credentials.",
+    "source_facts": [
+      {
+        "claim": "Credentials: Introduces Credentials, a set of tools for managing authorization and compliance requirements using the XRP Ledger. Adds three new transaction types for managing credentials: - CredentialCreate transaction - Create a credential in the ledger. - CredentialAccept transaction - Accept a credential issued to you. - CredentialDelete transaction - Delete a credential from the ledger. Modifies an existing transaction type: - DepositPreauth transaction - Authorizes deposits to your account. Modified to allow credential-based authorization. Adds a new field to several existing transaction types: - CredentialIDs field - Credentials to prove authorization to deposit money. Added to Payment, EscrowFinish, PaymentChannelClaim, and AccountDelete transaction types. Adds a new type of ledger entry: - Credential ledger entry - Stores a credential in the ledger. Modifies an existing type of ledger entry: - DepositPreauth ledger entry - Records authorization for depositing to a specific account; modified to allow for credential-based authorization. Also extends the deposit_authorized API method to check for credential-based auth and extends the ledger_entry method to allow lookup of Cred",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "Credentials appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "46b8885fef02e9dd7264a5d8ff53572a964f0787e7039bccfcfffd6d998fd780",
+  "packet_id": "case_042--triage",
+  "packet_version": 1
+}

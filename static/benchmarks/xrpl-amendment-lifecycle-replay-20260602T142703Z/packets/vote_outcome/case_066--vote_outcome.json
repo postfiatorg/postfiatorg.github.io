@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_066",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "AE35ABDEFBDE520372B31C957020B34A7A4A9DC3115A69803A44016477C84D6E",
+    "amendment_name": "fixNFTokenRemint",
+    "decision_surface": "XRPL validator amendment decision surface for fixNFTokenRemint.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixNFTokenRemint: Amendment fixNFTokenRemint would change the way NFT sequence numbers are constructed to prevent a situation where the same NFT could be minted more than once with the same sequence number, creating a possible collision scenario. This amendment would change the construction of NFT sequence numbers to: - Create a new AccountRoot field, FirstNFTSequence, that stays constant over time. This field is set to the current account sequence when the account issues its first NFT. Otherwise, it is not set. - Compute the sequence of a newly minted NFT as FirstNFTSequence + MintedNFTokens (after which, MintedNFTokens increments by 1). The amendment also introduces a new account deletion restriction. An account can only be deleted if FirstNFTSequence + MintedNFTokens + 256 is less than the current ledger sequence (256 was chosen as a heuristic restriction for account deletion and already exists in the account deletion constraint). Without this restriction, an NFT could still be re-minted under certain conditions. This is a breaking change for projects & tools relying on their own locally computed NFTokenID for minted tokens. If you have code to calculate NFTokenIDs, you must upd",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixNFTokenRemint appears in XRPSCAN with introduced rippled version 1.11.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "3790c1a863f64868391e99398f9a7927e45ddc336391d1dffed9552b8011cb87",
+  "packet_id": "case_066--vote_outcome",
+  "packet_version": 1
+}

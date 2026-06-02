@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:53:47Z",
+  "error": "",
+  "event_id": "case_035",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "bd060797c972a921978bba83d88eca27566899db0dcd695b60198c04ca33aae6",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which are the definitive indicators of an ENABLED state."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the voting mechanism, confirming that activation follows a supermajority process, but F4 supersedes this by showing the final activated state."
+      }
+    ],
+    "decision_summary": "The amendment fixCleanup3_1_3 is classified as ENABLED because Fact F4 confirms its presence in the validated ledger Amendments object and provides a specific ledger sequence (104507137) and timestamp (2026-05-27) for its enablement. This indicates the amendment has successfully passed the voting threshold and been integrated into the ledger.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "38bf210ba3dc868afd3e87721d76da5c6bb0260ea563dd0f3077a6289261607e",
+  "packet_id": "case_035--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "e8c4852aae44c199e45b3d5b5fb483e3f969b9703fb39537a4ffeac1007f3991",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which are the definitive indicators of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides context on the voting mechanism, confirming that activation follows a supermajority process, but F4 supersedes this by showing the final activated state.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixCleanup3_1_3 is classified as ENABLED because Fact F4 confirms its presence in the validated ledger Amendments object and provides a specific ledger sequence (104507137) and timestamp (2026-05-27) for its enablement. This indicates the amendment has successfully passed the voting threshold and been integrated into the ledger.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 252,
+      "prompt_tokens": 795,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1047
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:53:44Z"
+}

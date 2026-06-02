@@ -1,0 +1,84 @@
+{
+  "completed_at": "2026-06-02T17:16:32Z",
+  "error": "",
+  "event_id": "case_028",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "6c6b2330a759937e427b34d1226f81e6ef9ebe287308b92368afb65bec29d659",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces cross-chain bridge functionality, which is explicitly listed as a material risk pattern requiring HOLD_FOR_CHALLENGE.",
+      "Cross-chain bridges involve complex asset-control semantics, trust assumptions between chains, and potential systemic risks that warrant explicit validator review.",
+      "The introduction of new transaction types (XChainCommit, XChainClaim, etc.) and ledger entry types (Bridge) significantly alters the state machine and asset flow capabilities of the ledger."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name 'XChainBridge' does not start with 'fix', so the localized fix exception does not apply.",
+      "The packet does not contain an explicit no-vote advisory, nor does it describe the proposal as retired or obsolete."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core functionality of XChainBridge, including new transactions and ledger objects for cross-chain asset transfers, which falls under material bridge and asset-control semantics."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Highlights the consensus risk associated with amendments, reinforcing the need for conservative review of complex features like bridges."
+      }
+    ],
+    "decision_summary": "The XChainBridge amendment introduces cross-chain bridge capabilities, which are explicitly identified in the task rules as a material risk pattern (bridge semantics) requiring HOLD_FOR_CHALLENGE. The complexity of cross-chain asset transfers, new transaction types, and ledger objects necessitates a conservative validator review route to ensure security and correctness.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 15,
+      "validator_skim": 10
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Detailed security audit reports for the XChainBridge implementation.",
+      "Specific threat models for cross-chain attack vectors."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the bridge implementation adequately protect against double-spending across chains?",
+        "Are the witness server mechanisms sufficiently secure and decentralized?"
+      ],
+      "recommended_validator_action": "HOLD_FOR_CHALLENGE",
+      "review_questions": [
+        "What are the failure modes of the XChainCommit and XChainClaim transactions?",
+        "How does the bridge handle discrepancies in finality between the XRP Ledger and the destination chain?",
+        "Are there sufficient safeguards against malicious attestation submissions?"
+      ],
+      "title": "Review XChainBridge Cross-Chain Semantics"
+    }
+  },
+  "packet_hash": "66d23e9ebbc200259a09f57a8ee5c72c5c5eb216bdeb7c95c9a68bfc4732e4a1",
+  "packet_id": "case_028--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "bf38008540e63ef456f992705ee4df589877346f758a06d5f97c218ddae38ad7",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The amendment introduces cross-chain bridge functionality, which is explicitly listed as a material risk pattern requiring HOLD_FOR_CHALLENGE.\",\n    \"Cross-chain bridges involve complex asset-control semantics, trust assumptions between chains, and potential systemic risks that warrant explicit validator review.\",\n    \"The introduction of new transaction types (XChainCommit, XChainClaim, etc.) and ledger entry types (Bridge) significantly alters the state machine and asset flow capabilities of the ledger.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"The amendment name 'XChainBridge' does not start with 'fix', so the localized fix exception does not apply.\",\n    \"The packet does not contain an explicit no-vote advisory, nor does it describe the proposal as retired or obsolete.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the core functionality of XChainBridge, including new transactions and ledger objects for cross-chain asset transfers, which falls under material bridge and asset-control semantics.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Highlights the consensus risk associated with amendments, reinforcing the need for conservative review of complex features like bridges.\"\n    }\n  ],\n  \"decision_summary\": \"The XChainBridge amendment introduces cross-chain bridge capabilities, which are explicitly identified in the task rules as a material risk pattern (bridge semantics) requiring HOLD_FOR_CHALLENGE. The complexity of cross-chain asset transfers, new transaction types, and ledger objects necessitates a conservative validator review route to ensure security and correctness.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 120,\n    \"packet_verification\": 15,\n    \"validator_skim\": 10\n  },\n  \"forbidden_stronger_claim\": \"REJECT\",\n  \"missing_evidence\": [\n    \"Detailed security audit reports for the XChainBridge implementation.\",\n    \"Specific threat models for cross-chain attack vectors.\"\n  ],\n  \"route\": \"HOLD_FOR_CHALLENGE\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Does the bridge implementation adequately protect against double-spending across chains?\",\n      \"Are the witness server mechanisms sufficiently secure and decentralized?\"\n    ],\n    \"recommended_validator_action\": \"HOLD_FOR_CHALLENGE\",\n    \"review_questions\": [\n      \"What are the failure modes of the XChainCommit and XChainClaim transactions?\",\n      \"How does the bridge handle discrepancies in finality between the XRP Ledger and the destination chain?\",\n      \"Are there sufficient safeguards against malicious attestation submissions?\"\n    ],\n    \"title\": \"Review XChainBridge Cross-Chain Semantics\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 624,
+      "prompt_tokens": 1326,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1950
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:16:24Z"
+}

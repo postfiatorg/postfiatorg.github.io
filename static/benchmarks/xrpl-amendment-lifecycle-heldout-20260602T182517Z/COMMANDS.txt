@@ -1,0 +1,5 @@
+scripts/build_xrpl_amendment_lifecycle_heldout.py --source-artifact static/benchmarks/xrpl-amendment-lifecycle-replay-20260602T142703Z --artifact static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z
+scripts/validate_xrpl_amendment_lifecycle_corpus.py --artifact static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z --min-selected 47 --min-terminal-yes 46 --min-nonterminal-state 1 --min-sensitive-triage 11
+scripts/run_xrpl_amendment_lifecycle_baseline.py --artifact static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z
+scripts/run_qwen_xrpl_amendment_lifecycle_replay.py --artifact static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z --lane all --endpoint <OPENAI_COMPATIBLE_SGLANG_ENDPOINT> --machine-receipt static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/vast_lifecycle/machine_receipt.json --runs 1 --fail-on-error
+scripts/summarize_xrpl_amendment_lifecycle_replay.py --artifact static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z

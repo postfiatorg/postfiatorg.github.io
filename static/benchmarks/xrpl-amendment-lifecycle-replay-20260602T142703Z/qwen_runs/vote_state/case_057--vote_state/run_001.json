@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:55:12Z",
+  "error": "",
+  "event_id": "case_057",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "de4eae17661735f2607be3c4dcd52679310fe54b2e3b8cc070a9feb36891b5da",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and introduction version, supporting the context that it is a valid, trackable amendment."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides the general rule that amendments require supermajority before activation, establishing the baseline process that F4 confirms has been completed."
+      }
+    ],
+    "decision_summary": "Fact F4 provides direct evidence that the amendment DB432C3A09D9D5DFC7859F39AE5FF767ABC59AED0A9FB441E83B814D8946C109 (DID) is included in the validated ledger Amendments object with a recorded enablement date of 2024-10-30. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "264609225a80d87ed446964ac6de27e6d3b857391dee6e736ad63c0b3006543c",
+  "packet_id": "case_057--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "d8557b0e4ecb01ca99ebce03b5e8cd96cbc5e916f0868ffa290142a7c2813c31",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and introduction version, supporting the context that it is a valid, trackable amendment.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides the general rule that amendments require supermajority before activation, establishing the baseline process that F4 confirms has been completed.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 provides direct evidence that the amendment DB432C3A09D9D5DFC7859F39AE5FF767ABC59AED0A9FB441E83B814D8946C109 (DID) is included in the validated ledger Amendments object with a recorded enablement date of 2024-10-30. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 329,
+      "prompt_tokens": 780,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1109
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:55:08Z"
+}

@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:59:41Z",
+  "error": "",
+  "event_id": "case_059",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "826fdfbef89075a3904337152bcad158b415180817b94147e88bb288263f8173",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a bug fix that prevents the creation of useless empty DID entries, which is a positive stability and efficiency improvement for the ledger."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 2.2.0, indicating it is part of the official stable release history."
+      }
+    ],
+    "decision_summary": "The amendment 'fixEmptyDID' is a corrective measure that prevents the creation of empty DID ledger entries, which consume owner reserve without utility. As a bug fix that improves ledger efficiency and prevents resource waste, it aligns with the standard practice of defaulting to YES for beneficial, non-controversial stability improvements in XRPL stable releases.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "30b17b1bf5d276c9b19086a509bb758238dfcf36d3f188b2d279588c5d400ccb",
+  "packet_id": "case_059--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "c77ab187321d3b2b809a3a7df20b525907ff08830c98cc4f4851b8b4219ceb54",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a bug fix that prevents the creation of useless empty DID entries, which is a positive stability and efficiency improvement for the ledger.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 2.2.0, indicating it is part of the official stable release history.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixEmptyDID' is a corrective measure that prevents the creation of empty DID ledger entries, which consume owner reserve without utility. As a bug fix that improves ledger efficiency and prevents resource waste, it aligns with the standard practice of defaulting to YES for beneficial, non-controversial stability improvements in XRPL stable releases.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 232,
+      "prompt_tokens": 637,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 869
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:59:38Z"
+}

@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:56:08Z",
+  "error": "",
+  "event_id": "case_072",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "8d396a37eefc90fac9290bba9fe74e2e5abcb719e043f67261096dae9c081236",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the voting mechanism, confirming that activation requires supermajority, which F4 indicates has been achieved and finalized."
+      }
+    ],
+    "decision_summary": "The amendment DisallowIncoming is classified as ENABLED because Fact F4 confirms its presence in the validated ledger Amendments object with a recorded enablement date and ledger index. This indicates the amendment has passed the voting threshold and been successfully activated on the network.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "f1b0d2493017cb97bc13beceed09fec837bf3cec7d46c205f30f6afdda3c0ec1",
+  "packet_id": "case_072--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "60bff32830017fb40bea8eba4bb1e6a6f4d40279589d726be0b9229422743a94",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides context on the voting mechanism, confirming that activation requires supermajority, which F4 indicates has been achieved and finalized.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment DisallowIncoming is classified as ENABLED because Fact F4 confirms its presence in the validated ledger Amendments object with a recorded enablement date and ledger index. This indicates the amendment has passed the voting threshold and been successfully activated on the network.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 216,
+      "prompt_tokens": 775,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 991
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:56:05Z"
+}

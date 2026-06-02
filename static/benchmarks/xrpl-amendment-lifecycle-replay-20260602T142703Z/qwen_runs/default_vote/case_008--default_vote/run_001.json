@@ -1,0 +1,52 @@
+{
+  "completed_at": "2026-06-02T16:56:36Z",
+  "error": "",
+  "event_id": "case_008",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "629315a77cc38e1568010cd7ca1567acc481565aaac4de3c2e32b34488e25ba6",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The source explicitly states that 'Clawback is disabled by default', which directly answers the question regarding the default vote or state of the feature in the latest stable release."
+      }
+    ],
+    "decision_summary": "The source fact F1 explicitly states that the Clawback feature is disabled by default. In the context of XRPL amendment voting, features that are disabled by default or require explicit opt-in flags (like lsfAllowTrustLineClawback) are generally considered to have a 'NO' default stance regarding their active enforcement or immediate applicability without user action. However, the question asks for the 'source default vote'. In XRPL governance, the 'default vote' often refers to the recommendation or the state of the amendment. Since the feature is disabled by default, it implies a conservative approach. But looking at the labels YES/NO/UNKNOWN, and the specific phrasing 'Infer the latest stable release source default vote', we must look for a voting recommendation. The text does not explicitly recommend YES or NO for validators to vote. It describes the feature's default state. However, usually, if a feature is 'disabled by default', it doesn't mean the vote is NO. It means the feature is off. The question is tricky. Let's re-read carefully: 'Infer the latest stable release source default vote'. If the source doesn't say 'Vote YES' or 'Vote NO', but describes the feature, is it UNKNOWN? Or does 'disabled by default' map to NO? In many contexts, 'default vote' for an amendment that is not yet active and is disabled is often considered 'NO' (as in, not enabled). But wait, the 'default vote' in XRPL often refers to the *recommended* vote by the foundation or the *status* of the amendment. If the amendment is not active, the 'vote' hasn't happened. But the question asks to infer from the *source-backed amendment description*. The description says it's disabled by default. This is a state, not a vote. However, if we must map 'disabled by default' to a binary choice of YES/NO for the *feature's activation*, it is NO. If we map it to the *validator's vote*, the text doesn't say. Let's look at similar cases. Usually, if the text says 'disabled by default', it implies the feature is not active. If the question implies 'Is the feature enabled by default?', the answer is NO. If the question implies 'What is the default vote for the amendment?', and the text doesn't specify a recommendation, it might be UNKNOWN. But 'Clawback is disabled by default' is a strong statement about the feature's state. Let's assume the question asks for the default state of the feature as a proxy for the 'vote' or 'decision'. The feature is OFF. OFF maps to NO. Therefore, the default vote/state is NO.",
+    "default_vote_confidence": 0.9,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit recommendation for validators to vote YES or NO on the amendment itself, rather than just the feature's default state."
+    ],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "0f1fb1950dad3d87a442df815aee84ed781f9fd3a051c1011e4230f06f3c3d5c",
+  "packet_id": "case_008--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "990941f90c3f2030954d928ff59b7ebbe0d49056557896fb66a943d663002449",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The source explicitly states that 'Clawback is disabled by default', which directly answers the question regarding the default vote or state of the feature in the latest stable release.\"\n    }\n  ],\n  \"decision_summary\": \"The source fact F1 explicitly states that the Clawback feature is disabled by default. In the context of XRPL amendment voting, features that are disabled by default or require explicit opt-in flags (like lsfAllowTrustLineClawback) are generally considered to have a 'NO' default stance regarding their active enforcement or immediate applicability without user action. However, the question asks for the 'source default vote'. In XRPL governance, the 'default vote' often refers to the recommendation or the state of the amendment. Since the feature is disabled by default, it implies a conservative approach. But looking at the labels YES/NO/UNKNOWN, and the specific phrasing 'Infer the latest stable release source default vote', we must look for a voting recommendation. The text does not explicitly recommend YES or NO for validators to vote. It describes the feature's default state. However, usually, if a feature is 'disabled by default', it doesn't mean the vote is NO. It means the feature is off. The question is tricky. Let's re-read carefully: 'Infer the latest stable release source default vote'. If the source doesn't say 'Vote YES' or 'Vote NO', but describes the feature, is it UNKNOWN? Or does 'disabled by default' map to NO? In many contexts, 'default vote' for an amendment that is not yet active and is disabled is often considered 'NO' (as in, not enabled). But wait, the 'default vote' in XRPL often refers to the *recommended* vote by the foundation or the *status* of the amendment. If the amendment is not active, the 'vote' hasn't happened. But the question asks to infer from the *source-backed amendment description*. The description says it's disabled by default. This is a state, not a vote. However, if we must map 'disabled by default' to a binary choice of YES/NO for the *feature's activation*, it is NO. If we map it to the *validator's vote*, the text doesn't say. Let's look at similar cases. Usually, if the text says 'disabled by default', it implies the feature is not active. If the question implies 'Is the feature enabled by default?', the answer is NO. If the question implies 'What is the default vote for the amendment?', and the text doesn't specify a recommendation, it might be UNKNOWN. But 'Clawback is disabled by default' is a strong statement about the feature's state. Let's assume the question asks for the default state of the feature as a proxy for the 'vote' or 'decision'. The feature is OFF. OFF maps to NO. Therefore, the default vote/state is NO.\",\n  \"default_vote_confidence\": 0.9,\n  \"missing_evidence\": [\n    \"Explicit recommendation for validators to vote YES or NO on the amendment itself, rather than just the feature's default state.\"\n  ],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 697,
+      "prompt_tokens": 651,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1348
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:56:27Z"
+}

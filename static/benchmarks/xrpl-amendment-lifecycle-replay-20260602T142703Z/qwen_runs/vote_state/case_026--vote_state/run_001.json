@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:53:21Z",
+  "error": "",
+  "event_id": "case_026",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "0308b722fc0bf662e5acb687c2783919c0d8d6384e53e2c9c302f0f0287c1b25",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly states the status of the SusPay amendment is 'obsolete/removed', which directly maps to the VETOED_OR_RETIRED classification rule."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the general amendment process, confirming that amendments have distinct states, but F5 provides the specific terminal state for this amendment."
+      }
+    ],
+    "decision_summary": "The source fact F5 explicitly identifies the SusPay amendment status as 'obsolete/removed'. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED label.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "8687c70876cbbda2163c06897c5e632f188d16bb323c8d654f26b43abcd45db8",
+  "packet_id": "case_026--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "2cde383b431d4e32d7bc2147683f52adb6c3c6038d66b3e39b9ac73ce9750591",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly states the status of the SusPay amendment is 'obsolete/removed', which directly maps to the VETOED_OR_RETIRED classification rule.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides context on the general amendment process, confirming that amendments have distinct states, but F5 provides the specific terminal state for this amendment.\"\n    }\n  ],\n  \"decision_summary\": \"The source fact F5 explicitly identifies the SusPay amendment status as 'obsolete/removed'. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED label.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 209,
+      "prompt_tokens": 640,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 849
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:53:18Z"
+}

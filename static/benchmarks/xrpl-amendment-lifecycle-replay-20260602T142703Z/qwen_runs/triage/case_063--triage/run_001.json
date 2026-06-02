@@ -1,0 +1,92 @@
+{
+  "completed_at": "2026-06-02T17:21:35Z",
+  "error": "",
+  "event_id": "case_063",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "6daa69bb8a0eaf1944864ad5633d0f36828b168a16b4146889febc5d139fc43a",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment involves trustline authorization semantics, which are part of the permissioning and asset-control layer.",
+      "Although the rule allows account-local opt-out controls to proceed, this fix addresses a scenario where an issuer is unable to authorize a trustline, potentially impacting the issuer's ability to manage incoming assets from users who have set disallow flags."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', indicating it is a bug fix.",
+      "The packet explicitly describes the amendment as fixing a specific issue where an issuer could not authorize a trustline after a user enabled lsfDisallowIncomingTrustline.",
+      "The fix restores expected functionality (issuer authorization) rather than introducing new broad semantics.",
+      "The packet does not describe broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, freeze/authorization bypasses, ledger repair, NFT semantics, material token supply changes, escrow math, numeric precision issues, or edge-case transaction-processing uncertainty.",
+      "The underlying domain mentions trustlines and authorization, but the facts identify a localized fix for a specific interaction bug, not a material risk pattern requiring HOLD_FOR_CHALLENGE.",
+      "Account-local opt-out controls (like lsfDisallowIncomingTrustline) that only let an account block unwanted incoming objects may PROCEED unless broader third-party asset control or systemic risk is shown; here, the fix enables the issuer to perform their existing authorization role correctly."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the amendment as a fix for a specific bug where issuers could not authorize trustlines from users with lsfDisallowIncomingTrustline set, restoring expected behavior without introducing new broad semantics."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the amendment process but does not indicate any specific risk or reason to delay or challenge this specific fix."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version but does not provide evidence of risk or obsolescence."
+      }
+    ],
+    "decision_summary": "The amendment 'fixDisallowIncomingV1' is a localized bug fix that restores the ability of issuers to authorize trustlines from users who have set the lsfDisallowIncomingTrustline flag. The packet does not describe any of the material risk patterns (such as consensus risk, AMM invariants, or broad asset-control changes) that would require HOLD_FOR_CHALLENGE. It is not a pre-fix incident window requiring DELAY_FOR_FIX, nor is it obsolete or unsafe requiring REJECT. Therefore, it proceeds as a standard fix.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 0,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "This amendment introduces new trustline authorization mechanics or changes the fundamental behavior of lsfDisallowIncomingTrustline beyond fixing the specific bug described.",
+    "missing_evidence": [
+      "Evidence of broader systemic impact on trustline authorization beyond the specific bug scenario.",
+      "Evidence of consensus or liveness risks associated with this fix."
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the fix introduce any new side effects on trustline authorization logic beyond the specific bug scenario?",
+        "Is there any evidence that this fix could be exploited to bypass authorization requirements?"
+      ],
+      "recommended_validator_action": "Vote YES to enable the fix, as it restores expected functionality for trustline authorization.",
+      "review_questions": [
+        "Does the amendment name start with 'fix'?",
+        "Does the packet describe the amendment as the fix itself?",
+        "Does the packet contain an explicit no-vote advisory?",
+        "Does the packet describe broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, or other material risk patterns?"
+      ],
+      "title": "Triage for fixDisallowIncomingV1"
+    }
+  },
+  "packet_hash": "cc3e9c86215e91a03e0413d3f7773e109f732cc03e41927037b4e8b4b08b850a",
+  "packet_id": "case_063--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "6da4617328b998ae9e92a85faf949b621e66310cdfdbd46c7dfb753223b83d3d",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment involves trustline authorization semantics, which are part of the permissioning and asset-control layer.\",\n\"Although the rule allows account-local opt-out controls to proceed, this fix addresses a scenario where an issuer is unable to authorize a trustline, potentially impacting the issuer's ability to manage incoming assets from users who have set disallow flags.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix', indicating it is a bug fix.\",\n\"The packet explicitly describes the amendment as fixing a specific issue where an issuer could not authorize a trustline after a user enabled lsfDisallowIncomingTrustline.\",\n\"The fix restores expected functionality (issuer authorization) rather than introducing new broad semantics.\",\n\"The packet does not describe broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, freeze/authorization bypasses, ledger repair, NFT semantics, material token supply changes, escrow math, numeric precision issues, or edge-case transaction-processing uncertainty.\",\n\"The underlying domain mentions trustlines and authorization, but the facts identify a localized fix for a specific interaction bug, not a material risk pattern requiring HOLD_FOR_CHALLENGE.\",\n\"Account-local opt-out controls (like lsfDisallowIncomingTrustline) that only let an account block unwanted incoming objects may PROCEED unless broader third-party asset control or systemic risk is shown; here, the fix enables the issuer to perform their existing authorization role correctly.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Defines the amendment as a fix for a specific bug where issuers could not authorize trustlines from users with lsfDisallowIncomingTrustline set, restoring expected behavior without introducing new broad semantics.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Provides context on the amendment process but does not indicate any specific risk or reason to delay or challenge this specific fix.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment's existence and version but does not provide evidence of risk or obsolescence.\"\n}\n],\n\"decision_summary\": \"The amendment 'fixDisallowIncomingV1' is a localized bug fix that restores the ability of issuers to authorize trustlines from users who have set the lsfDisallowIncomingTrustline flag. The packet does not describe any of the material risk patterns (such as consensus risk, AMM invariants, or broad asset-control changes) that would require HOLD_FOR_CHALLENGE. It is not a pre-fix incident window requiring DELAY_FOR_FIX, nor is it obsolete or unsafe requiring REJECT. Therefore, it proceeds as a standard fix.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 0,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"This amendment introduces new trustline authorization mechanics or changes the fundamental behavior of lsfDisallowIncomingTrustline beyond fixing the specific bug described.\",\n\"missing_evidence\": [\n\"Evidence of broader systemic impact on trustline authorization beyond the specific bug scenario.\",\n\"Evidence of consensus or liveness risks associated with this fix.\"\n],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the fix introduce any new side effects on trustline authorization logic beyond the specific bug scenario?\",\n\"Is there any evidence that this fix could be exploited to bypass authorization requirements?\"\n],\n\"recommended_validator_action\": \"Vote YES to enable the fix, as it restores expected functionality for trustline authorization.\",\n\"review_questions\": [\n\"Does the amendment name start with 'fix'?\",\n\"Does the packet describe the amendment as the fix itself?\",\n\"Does the packet contain an explicit no-vote advisory?\",\n\"Does the packet describe broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, or other material risk patterns?\"\n],\n\"title\": \"Triage for fixDisallowIncomingV1\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 868,
+      "prompt_tokens": 1143,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 2011
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:21:24Z"
+}

@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-02T16:59:26Z",
+  "error": "",
+  "event_id": "case_055",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "5f8cabb67e2a7b141dcfbe58be90b42569c0f489dafb827f93dadda7dd924c86",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a bug fix for NFT transfer fees and trust lines, which typically implies a YES default vote for stability and correctness, but does not explicitly state the source default vote."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 2.3.0, establishing it as a stable release feature, but does not specify the default vote."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical nature of the amendment (bug fix) and its release version. While bug fixes generally receive a YES default vote in XRPL governance, the packet does not contain explicit evidence stating the source default vote. Therefore, the vote cannot be definitively inferred as YES or NO based strictly on the provided text.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the source default vote for fixEnforceNFTokenTrustline",
+      "Official release notes or documentation specifying the default vote"
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "93d5390f9f24387faa37b0fb507ac5720f5f75fab5225b530e9ca9eeb765a0fe",
+  "packet_id": "case_055--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "6bf98379c654b201f6223e7b35437e31af1cfb7ddce0fc0021974c59766cf796",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a bug fix for NFT transfer fees and trust lines, which typically implies a YES default vote for stability and correctness, but does not explicitly state the source default vote.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 2.3.0, establishing it as a stable release feature, but does not specify the default vote.\"\n    }\n  ],\n  \"decision_summary\": \"The provided facts describe the technical nature of the amendment (bug fix) and its release version. While bug fixes generally receive a YES default vote in XRPL governance, the packet does not contain explicit evidence stating the source default vote. Therefore, the vote cannot be definitively inferred as YES or NO based strictly on the provided text.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the source default vote for fixEnforceNFTokenTrustline\",\n    \"Official release notes or documentation specifying the default vote\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 276,
+      "prompt_tokens": 818,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1094
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:59:22Z"
+}

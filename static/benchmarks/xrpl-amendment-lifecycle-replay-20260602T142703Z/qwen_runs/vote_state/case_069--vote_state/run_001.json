@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-02T16:55:58Z",
+  "error": "",
+  "event_id": "case_069",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "fdc9552a0acb5e4ed5b2955d4913ad2ff40924760f3e4c48adbfb1f7993975d8",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states the amendment is in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment identity and introduction version, supporting the context that this is a valid, trackable amendment."
+      }
+    ],
+    "decision_summary": "Fact F4 provides definitive evidence that the amendment fixTrustLinesToSelf is present in the validated ledger Amendments object with a recorded enabled_on date of 2023-08-21. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "079ffd9123defe4afd69b1fab756883b03afc47b4a88234da4878bc4d0b3e059",
+  "packet_id": "case_069--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "5969b5edf75e2a28182f7cc149e85dd2b82c9ac8e8b70f3b2f8e68c4f705f313",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states the amendment is in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment identity and introduction version, supporting the context that this is a valid, trackable amendment.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 provides definitive evidence that the amendment fixTrustLinesToSelf is present in the validated ledger Amendments object with a recorded enabled_on date of 2023-08-21. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 220,
+      "prompt_tokens": 795,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1015
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:55:54Z"
+}

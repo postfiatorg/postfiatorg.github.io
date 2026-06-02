@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_064",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "C393B3AEEBF575E475F0C60D5E4241B2070CC4D0EB6C4846B1A07508FAEFC485",
+    "amendment_name": "fixInnerObjTemplate",
+    "decision_surface": "XRPL validator amendment decision surface for fixInnerObjTemplate.",
+    "source_facts": [
+      {
+        "claim": "fixInnerObjTemplate: This amendment fixes an issue with accessing the AMM sfTradingFee and sfDiscountedFee fields in the inner objects of sfVoteEntry and sfAuctionSlot. Currently, the inner object template isn't set upon object creation. If the object contains an soeDEFAULT field and is initially set to the default value, accessing the field results in a tefEXCEPTION error in some circumstances. This amendment adds an STObject constructor overload that includes an additional boolean argument to set the inner object template.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixInnerObjTemplate appears in XRPSCAN with introduced rippled version 2.1.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "626ed5f0998ea1d10c12d1f97f70032393c93a47f8024e2dc37d68f94e1936aa",
+  "packet_id": "case_064--triage",
+  "packet_version": 1
+}

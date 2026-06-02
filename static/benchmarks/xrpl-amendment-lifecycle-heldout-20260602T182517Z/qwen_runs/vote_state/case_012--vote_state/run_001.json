@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-02T18:32:35Z",
+  "error": "",
+  "event_id": "case_012",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ee303628f0a8b5cbc26df62a0b154d893c7cc19807f0ae611b0961c8e6bb2b7a",
+  "output_hash": "da77ae8797b7d60985e386434c6b8dc296474de9caadd3ae973f656ad08f868a",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment 'fix1368' is included in the validated ledger Amendments object and provides historical data showing it was enabled on 2017-03-31. The presence in the enabled set of the ledger Amendments object signifies that the amendment has achieved the necessary supermajority and has been activated. Therefore, the state is ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "e0ec9fd8afa13cc11faaa7af978554ce16a2356499e5130476c8d90147e79bd4",
+  "packet_id": "case_012--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "e5b41c1a8ddb2319b64be2f210064923f231bc9fd1e938015c01e918e412042c",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 confirms that the amendment 'fix1368' is included in the validated ledger Amendments object and provides historical data showing it was enabled on 2017-03-31. The presence in the enabled set of the ledger Amendments object signifies that the amendment has achieved the necessary supermajority and has been activated. Therefore, the state is ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 195,
+      "prompt_tokens": 831,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1026
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T18:32:32Z"
+}

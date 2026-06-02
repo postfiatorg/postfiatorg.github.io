@@ -1,0 +1,55 @@
+{
+  "completed_at": "2026-06-02T16:53:44Z",
+  "error": "",
+  "event_id": "case_034",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "478dc0f8c0d4bea68862bdc67916d6e044d5180f198f5feb6036da063a1bb7de",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general process for XRPL amendment voting (requiring sustained supermajority) but does not provide specific data on the current vote count, ledger status, or majority state for the SmartEscrow amendment."
+      }
+    ],
+    "decision_summary": "The provided source facts only contain general procedural information about XRPL amendments. There is no specific evidence regarding the current vote count, majority status, or enabled state of the SmartEscrow amendment. Therefore, the state cannot be determined from the given input.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Current validator vote count for SmartEscrow",
+      "Whether the supermajority threshold has been met",
+      "Whether the amendment is currently enabled in the ledger",
+      "Historical vote data to determine if majority was lost"
+    ],
+    "state_confidence": 0.0,
+    "vote_state": "UNKNOWN"
+  },
+  "packet_hash": "e5264377cc337ffa8a91a3bd974b0890badcbb47a9124893def77f72cdc7baf5",
+  "packet_id": "case_034--vote_state",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "cbe88e48b38a0e5bd3e50a65ef050942d8f8fec6001dc9555075f164d937336d",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Describes the general process for XRPL amendment voting (requiring sustained supermajority) but does not provide specific data on the current vote count, ledger status, or majority state for the SmartEscrow amendment.\"\n    }\n  ],\n  \"decision_summary\": \"The provided source facts only contain general procedural information about XRPL amendments. There is no specific evidence regarding the current vote count, majority status, or enabled state of the SmartEscrow amendment. Therefore, the state cannot be determined from the given input.\",\n  \"missing_evidence\": [\n    \"Current validator vote count for SmartEscrow\",\n    \"Whether the supermajority threshold has been met\",\n    \"Whether the amendment is currently enabled in the ledger\",\n    \"Historical vote data to determine if majority was lost\"\n  ],\n  \"state_confidence\": 0.0,\n  \"vote_state\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 225,
+      "prompt_tokens": 595,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 820
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:53:41Z"
+}

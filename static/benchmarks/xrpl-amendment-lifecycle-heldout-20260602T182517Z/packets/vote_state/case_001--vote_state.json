@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_001",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "98DECF327BF79997AEC178323AD51A830E457BFC6D454DAF3E46E5EC42DC619F",
+    "amendment_name": "CheckCashMakesTrustLine",
+    "decision_surface": "XRPL validator amendment decision surface for CheckCashMakesTrustLine.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "CheckCashMakesTrustLine appears in XRPSCAN with introduced rippled version 1.8.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 98DECF327BF79997AEC178323AD51A830E457BFC6D454DAF3E46E5EC42DC619F; XRPSCAN reports enabled_on=2023-01-23T13:09:40.000Z and enabled_in_ledger=77310209.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "7abf1dad491eed53d670a8cecce81691b8b0aabfea75f4e10b4ccddd47079ca9",
+  "packet_id": "case_001--vote_state",
+  "packet_version": 1
+}

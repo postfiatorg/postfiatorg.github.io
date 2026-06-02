@@ -1,0 +1,89 @@
+{
+  "completed_at": "2026-06-02T17:14:27Z",
+  "error": "",
+  "event_id": "case_009",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "0817e0da6e659694c8a3117dbecb778e071c4266fbb4a5f60514b346b0a740eb",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment addresses AMM (Automated Market Maker) offer handling, which involves complex financial logic.",
+      "The fix targets 'large synthetic AMM offers', implying potential edge cases in numeric precision or overflow handling that could affect ledger consistency or asset accounting."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', identifying it as a bug fix.",
+      "Fact F1 explicitly states the amendment fixes 'improper handling' and sets the default vote to YES, indicating it is a necessary correction rather than a new feature.",
+      "The issue is described as 'improper handling' of specific offers, which suggests a localized bug fix rather than a broad cross-feature canonicalization or systemic invariant change.",
+      "The packet does not describe critical unsafe evidence, retired status, or explicit no-vote advisory.",
+      "The packet does not describe an unresolved vulnerability requiring a pre-fix delay; it describes the fix itself."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies the amendment as a fix for improper handling of large synthetic AMM offers and confirms the source code default vote is YES, supporting the PROCEED route for a localized fix."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the voting process but does not introduce material risk requiring HOLD or REJECT."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version introduction, validating it is not obsolete or retired."
+      }
+    ],
+    "decision_summary": "The amendment 'fixAMMOverflowOffer' is a targeted fix for improper handling of large synthetic AMM offers. While it touches the AMM domain, the packet describes it as a specific bug fix with a YES default vote, not a broad semantic change, invariant alteration, or critical unsafe pattern. Per the rules, localized fix amendments should PROCEED unless they exhibit material risk patterns like broad canonicalization or consensus risk, which are not present here.",
+    "estimated_review_minutes": {
+      "deep_review": 15,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE is not required because the packet does not describe broad cross-feature canonicalization, consensus/liveness risk, or material token supply/accounting changes beyond the specific overflow bug fix.",
+    "missing_evidence": [
+      "Detailed technical specification of the overflow bug to confirm it is strictly localized.",
+      "Evidence of any broader impact on AMM invariants or other features."
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.85,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the fix introduce any changes to AMM invariants or rounding logic beyond the specific overflow case?",
+        "Is there any evidence that this fix affects consensus or liveness?"
+      ],
+      "recommended_validator_action": "Vote YES to enable the fix, as it addresses a known improper handling issue with a default YES recommendation.",
+      "review_questions": [
+        "Is the scope of the fix limited to large synthetic offers?",
+        "Are there any known side effects on other AMM operations?"
+      ],
+      "title": "Review fixAMMOverflowOffer for localized AMM bug fix"
+    }
+  },
+  "packet_hash": "d97044064d78c754d23f0a61b8f76cb7e78f25ef110dfc3b4ab521e4fb3ed452",
+  "packet_id": "case_009--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "312e2a438fa657d52a4f832f826820afe5ed3019902820097ecbe60e675b3235",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The amendment addresses AMM (Automated Market Maker) offer handling, which involves complex financial logic.\",\n    \"The fix targets 'large synthetic AMM offers', implying potential edge cases in numeric precision or overflow handling that could affect ledger consistency or asset accounting.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"The amendment name starts with 'fix', identifying it as a bug fix.\",\n    \"Fact F1 explicitly states the amendment fixes 'improper handling' and sets the default vote to YES, indicating it is a necessary correction rather than a new feature.\",\n    \"The issue is described as 'improper handling' of specific offers, which suggests a localized bug fix rather than a broad cross-feature canonicalization or systemic invariant change.\",\n    \"The packet does not describe critical unsafe evidence, retired status, or explicit no-vote advisory.\",\n    \"The packet does not describe an unresolved vulnerability requiring a pre-fix delay; it describes the fix itself.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Identifies the amendment as a fix for improper handling of large synthetic AMM offers and confirms the source code default vote is YES, supporting the PROCEED route for a localized fix.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides context on the voting process but does not introduce material risk requiring HOLD or REJECT.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and version introduction, validating it is not obsolete or retired.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixAMMOverflowOffer' is a targeted fix for improper handling of large synthetic AMM offers. While it touches the AMM domain, the packet describes it as a specific bug fix with a YES default vote, not a broad semantic change, invariant alteration, or critical unsafe pattern. Per the rules, localized fix amendments should PROCEED unless they exhibit material risk patterns like broad canonicalization or consensus risk, which are not present here.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 15,\n    \"packet_verification\": 5,\n    \"validator_skim\": 2\n  },\n  \"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE is not required because the packet does not describe broad cross-feature canonicalization, consensus/liveness risk, or material token supply/accounting changes beyond the specific overflow bug fix.\",\n  \"missing_evidence\": [\n    \"Detailed technical specification of the overflow bug to confirm it is strictly localized.\",\n    \"Evidence of any broader impact on AMM invariants or other features.\"\n  ],\n  \"route\": \"PROCEED\",\n  \"route_confidence\": 0.85,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Does the fix introduce any changes to AMM invariants or rounding logic beyond the specific overflow case?\",\n      \"Is there any evidence that this fix affects consensus or liveness?\"\n    ],\n    \"recommended_validator_action\": \"Vote YES to enable the fix, as it addresses a known improper handling issue with a default YES recommendation.\",\n    \"review_questions\": [\n      \"Is the scope of the fix limited to large synthetic offers?\",\n      \"Are there any known side effects on other AMM operations?\"\n    ],\n    \"title\": \"Review fixAMMOverflowOffer for localized AMM bug fix\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 780,
+      "prompt_tokens": 1062,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1842
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:14:17Z"
+}

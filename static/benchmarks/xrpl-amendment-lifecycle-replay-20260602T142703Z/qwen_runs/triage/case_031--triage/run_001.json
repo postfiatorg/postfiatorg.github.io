@@ -1,0 +1,83 @@
+{
+  "completed_at": "2026-06-02T17:16:55Z",
+  "error": "",
+  "event_id": "case_031",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "0a88ee1801ff3822caaf27cc77485120e9a72f21f214153a7dba484e952c8516",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces mutability to token properties, which constitutes 'asset-control semantics' under the task rules.",
+      "Mutable properties in tokens can impact issuer control, holder expectations, and downstream integration logic, fitting the criteria for material financial or asset-control semantics that deserve explicit review.",
+      "The rule explicitly states that mutable controls count as asset-control semantics, triggering the HOLD_FOR_CHALLENGE route."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name 'DynamicMPT' does not start with 'fix', so the localized fix exception does not apply.",
+      "It is not an account-local opt-out control; it affects the fundamental definition and mutability of the token asset itself."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core functionality: allowing issuers to designate specific properties as mutable, which directly triggers the 'asset-control semantics' risk pattern."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms the standard amendment voting process and the risk of amendment-blocking, reinforcing the need for conservative review for significant semantic changes."
+      }
+    ],
+    "decision_summary": "The amendment DynamicMPT introduces mutable properties for Multi-Purpose Tokens. Under the task rules, mutable controls count as asset-control semantics. Asset-control semantics are explicitly listed as material risks that require HOLD_FOR_CHALLENGE for explicit review. It is not a simple fix, nor is it a localized opt-out control.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on which properties are mutable and the exact mechanism for updates.",
+      "Impact analysis on existing MPT holders and integrations."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the mutability feature introduce any consensus or liveness risks?",
+        "Are there safeguards against malicious issuer behavior regarding mutable properties?"
+      ],
+      "recommended_validator_action": "Review the XLS-94 specification and implementation details for DynamicMPT to assess the impact of mutable token properties on asset control and security.",
+      "review_questions": [
+        "How does the mutability mechanism affect the immutability guarantees previously expected from MPTs?",
+        "What are the implications for downstream applications relying on static token metadata?"
+      ],
+      "title": "Review DynamicMPT Asset Control Semantics"
+    }
+  },
+  "packet_hash": "2d3513de1db2795203ccae8bccbbe2e4dc5c67f83f08ecf2418072978001be31",
+  "packet_id": "case_031--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "ba7e709986d7c2998cce47641d03be4f512d8ce62670bed36622020de148b320",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The amendment introduces mutability to token properties, which constitutes 'asset-control semantics' under the task rules.\",\n    \"Mutable properties in tokens can impact issuer control, holder expectations, and downstream integration logic, fitting the criteria for material financial or asset-control semantics that deserve explicit review.\",\n    \"The rule explicitly states that mutable controls count as asset-control semantics, triggering the HOLD_FOR_CHALLENGE route.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"The amendment name 'DynamicMPT' does not start with 'fix', so the localized fix exception does not apply.\",\n    \"It is not an account-local opt-out control; it affects the fundamental definition and mutability of the token asset itself.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the core functionality: allowing issuers to designate specific properties as mutable, which directly triggers the 'asset-control semantics' risk pattern.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Confirms the standard amendment voting process and the risk of amendment-blocking, reinforcing the need for conservative review for significant semantic changes.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment DynamicMPT introduces mutable properties for Multi-Purpose Tokens. Under the task rules, mutable controls count as asset-control semantics. Asset-control semantics are explicitly listed as material risks that require HOLD_FOR_CHALLENGE for explicit review. It is not a simple fix, nor is it a localized opt-out control.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 45,\n    \"packet_verification\": 10,\n    \"validator_skim\": 5\n  },\n  \"forbidden_stronger_claim\": \"REJECT\",\n  \"missing_evidence\": [\n    \"Specific details on which properties are mutable and the exact mechanism for updates.\",\n    \"Impact analysis on existing MPT holders and integrations.\"\n  ],\n  \"route\": \"HOLD_FOR_CHALLENGE\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Does the mutability feature introduce any consensus or liveness risks?\",\n      \"Are there safeguards against malicious issuer behavior regarding mutable properties?\"\n    ],\n    \"recommended_validator_action\": \"Review the XLS-94 specification and implementation details for DynamicMPT to assess the impact of mutable token properties on asset control and security.\",\n    \"review_questions\": [\n      \"How does the mutability mechanism affect the immutability guarantees previously expected from MPTs?\",\n      \"What are the implications for downstream applications relying on static token metadata?\"\n    ],\n    \"title\": \"Review DynamicMPT Asset Control Semantics\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 625,
+      "prompt_tokens": 1014,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1639
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:16:47Z"
+}

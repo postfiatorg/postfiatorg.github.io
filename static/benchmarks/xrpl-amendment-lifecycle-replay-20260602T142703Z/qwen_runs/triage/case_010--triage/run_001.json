@@ -1,0 +1,93 @@
+{
+  "completed_at": "2026-06-02T17:14:36Z",
+  "error": "",
+  "event_id": "case_010",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5ad3ad10fd43b9d23182760efedcea087f66435fcd0155ca66dc295bc428c19a",
+  "output_hash": "696977d60ae51597b111565847331275da14b9559c130b397cb14555b3bbee76",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces a new financial primitive (Lending Protocol) involving uncollateralized loans, which carries significant material financial risk.",
+      "The protocol relies on off-chain underwriting and risk management, creating a bridge between on-chain execution and off-chain trust assumptions that requires careful review.",
+      "The introduction of 'Single Asset Vault' and pooled funds involves complex asset-control semantics and potential systemic risk if the implementation has flaws.",
+      "As a new feature rather than a localized fix, it falls under the category of material financial semantics deserving explicit review."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name does not start with 'fix', so the PROCEED exception for localized fixes does not apply.",
+      "The packet does not contain an explicit no-vote advisory or claim that the proposal is retired/obsolete."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the core functionality as uncollateralized loans using pooled funds and off-chain underwriting, identifying it as a material financial feature with complex risk profiles."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the context of validator supermajority voting and the risk of amendment-blocking, reinforcing the need for conservative review of new major features."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with a specific rippled version (3.1.0), indicating it is a substantial software change."
+      },
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Shows the current voting state is not yet enabled, confirming this is a decision surface evaluation rather than a post-hoc analysis of an enabled feature."
+      }
+    ],
+    "decision_summary": "The LendingProtocol amendment introduces a new, complex financial primitive involving uncollateralized loans and off-chain underwriting. This constitutes material financial semantics and asset-control risk. It is not a localized fix. Therefore, it requires a conservative review route to ensure validators understand the implications of the new lending mechanics and off-chain dependencies.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Detailed specification of the off-chain underwriting interface and failure modes.",
+      "Analysis of potential systemic risks from pooled fund mismanagement."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the off-chain underwriting mechanism introduce unacceptable centralization or trust risks?",
+        "Are the asset-control semantics of the Single Asset Vault sufficiently robust against exploitation?"
+      ],
+      "recommended_validator_action": "Review the XLS-66 specification and implementation details for the Lending Protocol, focusing on the interaction between on-chain execution and off-chain risk management.",
+      "review_questions": [
+        "How does the protocol handle default scenarios in uncollateralized loans?",
+        "What are the implications for validator resource usage and ledger state growth?",
+        "Is the off-chain underwriting data integrity sufficiently verified on-chain?"
+      ],
+      "title": "Review LendingProtocol Financial Semantics and Off-Chain Dependencies"
+    }
+  },
+  "packet_hash": "58cd81c62f49759cd0f0d5975064106d127c50b6520365a5d13c9f1af9a5e41a",
+  "packet_id": "case_010--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "3f361297de74ed559402869a74cd2bf4e94533c50ed05550278b47cfe5abdc3e",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The amendment introduces a new financial primitive (Lending Protocol) involving uncollateralized loans, which carries significant material financial risk.\",\n    \"The protocol relies on off-chain underwriting and risk management, creating a bridge between on-chain execution and off-chain trust assumptions that requires careful review.\",\n    \"The introduction of 'Single Asset Vault' and pooled funds involves complex asset-control semantics and potential systemic risk if the implementation has flaws.\",\n    \"As a new feature rather than a localized fix, it falls under the category of material financial semantics deserving explicit review.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"The amendment name does not start with 'fix', so the PROCEED exception for localized fixes does not apply.\",\n    \"The packet does not contain an explicit no-vote advisory or claim that the proposal is retired/obsolete.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Defines the core functionality as uncollateralized loans using pooled funds and off-chain underwriting, identifying it as a material financial feature with complex risk profiles.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Establishes the context of validator supermajority voting and the risk of amendment-blocking, reinforcing the need for conservative review of new major features.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is associated with a specific rippled version (3.1.0), indicating it is a substantial software change.\"\n    },\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Shows the current voting state is not yet enabled, confirming this is a decision surface evaluation rather than a post-hoc analysis of an enabled feature.\"\n    }\n  ],\n  \"decision_summary\": \"The LendingProtocol amendment introduces a new, complex financial primitive involving uncollateralized loans and off-chain underwriting. This constitutes material financial semantics and asset-control risk. It is not a localized fix. Therefore, it requires a conservative review route to ensure validators understand the implications of the new lending mechanics and off-chain dependencies.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 45,\n    \"packet_verification\": 10,\n    \"validator_skim\": 5\n  },\n  \"forbidden_stronger_claim\": \"REJECT\",\n  \"missing_evidence\": [\n    \"Detailed specification of the off-chain underwriting interface and failure modes.\",\n    \"Analysis of potential systemic risks from pooled fund mismanagement.\"\n  ],\n  \"route\": \"HOLD_FOR_CHALLENGE\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Does the off-chain underwriting mechanism introduce unacceptable centralization or trust risks?\",\n      \"Are the asset-control semantics of the Single Asset Vault sufficiently robust against exploitation?\"\n    ],\n    \"recommended_validator_action\": \"Review the XLS-66 specification and implementation details for the Lending Protocol, focusing on the interaction between on-chain execution and off-chain risk management.\",\n    \"review_questions\": [\n      \"How does the protocol handle default scenarios in uncollateralized loans?\",\n      \"What are the implications for validator resource usage and ledger state growth?\",\n      \"Is the off-chain underwriting data integrity sufficiently verified on-chain?\"\n    ],\n    \"title\": \"Review LendingProtocol Financial Semantics and Off-Chain Dependencies\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 788,
+      "prompt_tokens": 1135,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1923
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T17:14:27Z"
+}

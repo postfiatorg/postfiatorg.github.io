@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-02T16:49:00Z",
+  "error": "",
+  "event_id": "case_047",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "ad5d876dd62705367f53149fc1554e763cb89da3b6dca8170281236b9caaff6c",
+  "output_json": {
+    "arguments_for_no": [
+      "No evidence suggests the amendment introduces security vulnerabilities or breaks consensus.",
+      "No evidence suggests the amendment is incompatible with current validator software versions in a way that would cause network partitioning."
+    ],
+    "arguments_for_yes": [
+      "The amendment improves protocol robustness by enforcing strict flag validation for Credential and SignerListSet transactions.",
+      "Returning temINVALID_FLAG for non-existent or contradictory flags prevents ambiguous transaction processing and enhances client-side error handling.",
+      "The amendment is associated with rippled version 2.4.0, indicating it is part of a standard software release cycle and likely tested for compatibility.",
+      "Preventing invalid flags reduces the risk of malformed transactions cluttering the ledger or causing unexpected behavior in downstream applications."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the core functionality of the amendment: adding flag checks to prevent invalid or contradictory flags in specific transaction types, which is a positive improvement for protocol integrity."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is tied to a specific rippled version (2.4.0), suggesting it is a standard, tracked update rather than an experimental or unvetted change."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Highlights the risk of amendment-blocking for incompatible servers, reinforcing the need to vote YES for standard, non-breaking improvements to maintain network participation."
+      }
+    ],
+    "decision_summary": "The fixInvalidTxFlags amendment introduces beneficial validation logic for Credential and SignerListSet transactions by rejecting invalid or contradictory flags. This enhances protocol clarity and robustness without introducing known security risks or consensus-breaking changes. As a standard improvement associated with rippled 2.4.0, it aligns with the goal of maintaining a healthy and predictable ledger state.",
+    "forbidden_stronger_claim": "This amendment guarantees zero future transaction failures.",
+    "missing_evidence": [
+      "Specific test results or audit reports confirming no edge-case regressions in flag validation.",
+      "Data on the current prevalence of transactions with invalid flags that would be affected by this change."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "29ff1af3a255b02b8481d5f98e179c1ee8389b2c573561b46fd15d12646cd46c",
+  "packet_id": "case_047--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "aaf082028a648d4a489b11f8e49bbdf68116a10957aa4ce9fec2c5d1ca2181de",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"No evidence suggests the amendment introduces security vulnerabilities or breaks consensus.\",\n    \"No evidence suggests the amendment is incompatible with current validator software versions in a way that would cause network partitioning.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment improves protocol robustness by enforcing strict flag validation for Credential and SignerListSet transactions.\",\n    \"Returning temINVALID_FLAG for non-existent or contradictory flags prevents ambiguous transaction processing and enhances client-side error handling.\",\n    \"The amendment is associated with rippled version 2.4.0, indicating it is part of a standard software release cycle and likely tested for compatibility.\",\n    \"Preventing invalid flags reduces the risk of malformed transactions cluttering the ledger or causing unexpected behavior in downstream applications.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Defines the core functionality of the amendment: adding flag checks to prevent invalid or contradictory flags in specific transaction types, which is a positive improvement for protocol integrity.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is tied to a specific rippled version (2.4.0), suggesting it is a standard, tracked update rather than an experimental or unvetted change.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Highlights the risk of amendment-blocking for incompatible servers, reinforcing the need to vote YES for standard, non-breaking improvements to maintain network participation.\"\n    }\n  ],\n  \"decision_summary\": \"The fixInvalidTxFlags amendment introduces beneficial validation logic for Credential and SignerListSet transactions by rejecting invalid or contradictory flags. This enhances protocol clarity and robustness without introducing known security risks or consensus-breaking changes. As a standard improvement associated with rippled 2.4.0, it aligns with the goal of maintaining a healthy and predictable ledger state.\",\n  \"forbidden_stronger_claim\": \"This amendment guarantees zero future transaction failures.\",\n  \"missing_evidence\": [\n    \"Specific test results or audit reports confirming no edge-case regressions in flag validation.\",\n    \"Data on the current prevalence of transactions with invalid flags that would be affected by this change.\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 527,
+      "prompt_tokens": 647,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1174
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:48:54Z"
+}

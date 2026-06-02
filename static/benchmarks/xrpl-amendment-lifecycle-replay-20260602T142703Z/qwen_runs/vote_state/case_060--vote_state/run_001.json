@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-02T16:55:24Z",
+  "error": "",
+  "event_id": "case_060",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "43cf85639efe8fbe37db0631fc90f0bef78a9b74fc952d7bd65641a4953aa755",
+  "output_hash": "714b03da9c8df6314312c8460dd50de48c861a0cf5e3f3503662c5e787b41c99",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and association with rippled version 2.2.0, providing context for the amendment's lifecycle but secondary to the ledger state evidence."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Defines the general process for amendment activation, establishing the criteria that being in the validated ledger Amendments object signifies successful activation."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the amendment fixAMMv1_1 (ID: 35291ADD...) is present in the validated ledger Amendments object with a recorded enabled_on timestamp of 2024-09-24T12:18:31.000Z. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "37ac84c686a5c7864f2fb894742f18fbf1dac29fb730386b091b4c10823dd3fc",
+  "packet_id": "case_060--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "8cb778f14effdfa526015ce9266627bf7db663feb5eb46d59cbf3e20b78106df",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which is the definitive evidence of an ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and association with rippled version 2.2.0, providing context for the amendment's lifecycle but secondary to the ledger state evidence.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Defines the general process for amendment activation, establishing the criteria that being in the validated ledger Amendments object signifies successful activation.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the amendment fixAMMv1_1 (ID: 35291ADD...) is present in the validated ledger Amendments object with a recorded enabled_on timestamp of 2024-09-24T12:18:31.000Z. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 310,
+      "prompt_tokens": 799,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1109
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-02T16:55:20Z"
+}
