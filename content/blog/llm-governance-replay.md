@@ -18,50 +18,49 @@ tags:
 
 A private governance committee is expensive before it makes a single decision.
 
-The cost is not only professional time. It is the coordination surface: the room,
-the agenda keeper, the lawyers, the recurring reviewers, the implicit hierarchy
-of who reads first, and the new place where validator pressure can accumulate
-before validators vote.
+The cost includes professional time and the coordination surface: the room, the
+agenda keeper, the lawyers, the recurring reviewers, the implicit hierarchy of
+who reads first, and the new place where validator pressure can accumulate before
+validators vote.
 
 Post Fiat's claim is narrower and more testable:
 
-> Do not create a private committee unless the packet earns one. Make the first
-> pass public, typed, cited, replayable, and overrideable.
+> Start with a public, typed, cited, replayable, and overrideable first pass.
+> Escalate to a private committee only when the packet earns one.
 
 That is the governance primitive tested here.
 
-The experiment does **not** show that a language model should govern XRPL. It
-shows that a public replay route can turn validator attention into an auditable
-governance artifact: same packet, same model profile, same parser, same route
-schema, same commit/reveal trail, and public override when humans disagree.
+The experiment shows how a public replay route can turn validator attention into
+an auditable governance artifact: same packet, same model profile, same parser,
+same route schema, same commit/reveal trail, and public override when humans
+disagree.
 
-Replay-first governance does not eliminate expert judgment. It changes where
-expert judgment enters the process: after a public work item exists, not before a
-private committee has framed the agenda.
+Replay-first governance preserves expert judgment while changing where it enters
+the process: after a public work item exists, rather than after a private
+committee has framed the agenda.
 
-## 1. Accountable Triage, Not Automated Governance
+## 1. Accountable Triage Before Automated Governance
 
 This post is about accountable triage.
 
-A validator vote is not just a preference. It is the end product of attention,
+A validator vote is more than a preference. It is the end product of attention,
 verification, and willingness to be publicly responsible for a position. That
 puts replay governance closer to three older literatures than to ordinary
 "AI governance" rhetoric.
 
 First, collective-action theory treats participation and information acquisition
-as costly. Second, group-decision research shows that committees do not
-automatically pool distributed information well: private deliberation can
-overweight already-shared facts, suppress minority information, and polarize a
-group before the broader network sees the work product. Third, accountable-
-algorithm work argues that transparency by itself is too weak. The better target
-is procedural regularity: announce the procedure, bind inputs and outputs, and
-make deviations visible afterward.
+as costly. Second, group-decision research shows that committees often fail to
+pool distributed information well: private deliberation can overweight already-
+shared facts, suppress minority information, and polarize a group before the
+broader network sees the work product. Third, accountable-algorithm work argues
+that transparency by itself is too weak. The better target is procedural
+regularity: announce the procedure, bind inputs and outputs, and make deviations
+visible afterward.
 
 Replay governance is a concrete implementation of that idea. The model route is
-not authority. It is a signed, inspectable work product. Operators still decide.
-The difference is that agreement or disagreement attaches to the same packet,
-the same model profile, the same parser, the same route schema, and the same
-override record.
+a signed, inspectable work product. Operators still decide. The difference is
+that agreement or disagreement attaches to the same packet, the same model
+profile, the same parser, the same route schema, and the same override record.
 
 ## 2. Why XRPL Is A Good Testbed
 
@@ -69,10 +68,10 @@ XRPL amendment voting is explicit, high-stakes, and observable.
 
 The public rule is that an amendment must maintain more than 80% support from
 trusted validators for the normal two-week period before activation. Servers
-that do not understand newly enabled amendment code can become amendment-blocked
-rather than silently interpreting ledger data under the wrong rules. That is the
-right kind of seriousness for a settlement network, but it means every
-contentious amendment creates a validator attention bill.
+that lack newly enabled amendment code can become amendment-blocked rather than
+silently interpreting ledger data under the wrong rules. That is the right kind
+of seriousness for a settlement network, but it means every contentious amendment
+creates a validator attention bill.
 
 The testbed is therefore useful for exactly this question:
 
@@ -82,8 +81,7 @@ The testbed is therefore useful for exactly this question:
 The source universe starts with XRPL's Known Amendments inventory, amendment
 process documentation, official XRPL blog posts, standards documents, and
 external reporting where public vote reversal is part of the event record. The
-labels are not model-generated. They are research labels anchored to public
-evidence.
+labels are research labels anchored to public evidence.
 
 For example, XRPL's Known Amendments inventory lists `Batch` as obsolete and
 warns that it was disabled in v3.1.1 due to a bug. It also lists
@@ -99,22 +97,21 @@ validator sees a route.
 
 The easy answer to "AI governance is risky" is "just make a committee."
 
-For a validator network, that answer is not neutral. A standing committee is not
-only a review process. It is an institutional concentration device. It decides
-who reads first, which facts become salient, which objections are treated as
-serious, and which validators inherit a recommendation rather than doing primary
-review.
+For a validator network, that answer has a cost. A standing committee is both a
+review process and an institutional concentration device. It decides who reads
+first, which facts become salient, which objections are treated as serious, and
+which validators inherit a recommendation rather than doing primary review.
 
 That can be useful when expert deliberation is necessary. It is dangerous as the
 default.
 
-The problem is not that every committee is corrupt. The problem is that private
-repeat review creates an agenda-setting surface before the wider validator set
-sees a typed work product. Hidden-profile research warns that groups can fail to
-surface information that is distributed across members. Informational-cascade
-models explain how later actors can rationally copy early visible actions rather
-than reveal their own private signals. Group-polarization work explains why
-private deliberation can harden a position rather than merely average evidence.
+The problem is private repeat review: it creates an agenda-setting surface before
+the wider validator set sees a typed work product. Hidden-profile research warns
+that groups can fail to surface information that is distributed across members.
+Informational-cascade models explain how later actors can rationally copy early
+visible actions rather than reveal their own private signals. Group-polarization
+work explains why private deliberation can harden a position rather than merely
+average evidence.
 
 Replay governance changes the order of operations:
 
@@ -126,10 +123,9 @@ Replay first:
   public packet -> pinned route function -> public default -> public override
 ```
 
-The model is not the governor. It is a reproducible work product. Validators
-remain responsible for their votes. The governance improvement is that the first
-object of coordination is not a private room. It is a packet, a route, a hash,
-and an override trail.
+The model is a reproducible work product. Validators remain responsible for their
+votes. The governance improvement is that the first object of coordination is a
+packet, a route, a hash, and an override trail.
 
 ## 4. The Missing Math: Independent Detection Versus Correlated Summaries
 
@@ -204,15 +200,15 @@ At \(d=0.4\), \(D(\theta\|d)\approx 0.07354\), so the bound is:
 \]
 
 The exact number is smaller than the bound, but the lesson is the same:
-independent detection has a tail. Correlated summaries do not.
+independent detection has a tail. Correlated summaries collapse it.
 
 This is the mathematical reason replay can be cheaper without simply doing less
 governance. If per-validator detection clears the blocking fraction, independent
-review compounds. Committee concentration does not.
+review compounds. Committee concentration flattens it.
 
-### The Load-Bearing Caveat
+### The Independence Requirement
 
-The independence is not free.
+The independence has a cost.
 
 If every validator runs the same Qwen profile and blindly follows
 `vote_replay_hash=1`, a model error becomes common-mode risk. The replay has
@@ -225,8 +221,8 @@ So the design has to protect the independence assumption:
 - commit/reveal reduces ex-post copying from early visible votes;
 - manual override remains public and easy to perform when the operator disagrees.
 
-Replay governance is not "let the model vote." It is "make the public work item
-cheap enough that independent validators can still do their job."
+Replay governance means making the public work item cheap enough that independent
+validators can still do their job.
 
 ## 5. The `vote_replay_hash=1` Default
 
@@ -282,7 +278,7 @@ Manual overrides:
 That split is the point. It separates outcome disagreement from process
 disagreement.
 
-The accountability object is not the model answer by itself. It is the tuple:
+The accountability object is the tuple:
 
 \[
 A_i = (P_i, M, H_o, R_i, V_i, O_i)
@@ -293,7 +289,7 @@ where \(P_i\) is the amendment packet, \(M\) is the model/runtime profile,
 validator's vote, and \(O_i\) is either null or a public override reason.
 
 Ordinary transparency is too weak. Publishing source code, a meeting note, or a
-committee summary does not prove that the same procedure was applied to the same
+committee summary lacks proof that the same procedure was applied to the same
 packet. A replay tuple is closer to procedural regularity: the input was fixed,
 the machine profile was pinned, the parser was known, the output was hashed, and
 deviations were recorded.
@@ -325,9 +321,9 @@ override:
 H(M)\approx 1.000 \text{ bit}.
 \]
 
-Entropy does not decide governance. It tells the public what kind of
-disagreement exists. A raw vote says who won. A replay dashboard says whether the
-winning side followed the reproducible route or crossed it with public reasons.
+Entropy characterizes governance disagreement. A raw vote says who won. A replay
+dashboard says whether the winning side followed the reproducible route or
+crossed it with public reasons.
 
 ## 6. Vast H200 Qwen/SGLang Replay
 
@@ -362,20 +358,20 @@ a5b80f51a9cd02d11db357a115f0f22374319b8709787cc4a5b83694eef73c8f
 ```
 
 The model profile hash includes the machine receipt hash, launch profile, packet
-prompt settings, and replay parameters. The point is not that a remote GPU is
-magic. The point is that a replay signer can show exactly which pinned
-machine/runtime/model profile produced the governance work item.
+prompt settings, and replay parameters. The point is replay addressability: a
+signer can show exactly which pinned machine/runtime/model profile produced the
+governance work item.
 
-Runtime details matter because "the model" is not a sufficient description of a
+Runtime details matter because "the model" is an incomplete description of a
 governance replay. The replay profile must bind weights, quantization format,
 inference server, launch flags, prompt settings, packet hash, parser, and output
-hash. Otherwise a later validator cannot tell whether a different output came
-from a governance disagreement or a changed runtime.
+hash. Otherwise a later validator loses the ability to distinguish governance
+disagreement from runtime drift.
 
 The Qwen FP8 repository publishes quantized weights and configuration files, and
 SGLang documents deterministic inference support and the
-`--enable-deterministic-inference` flag. The claim is therefore not "this GPU is
-trusted." The claim is "this governance artifact is replay-addressed."
+`--enable-deterministic-inference` flag. The claim is therefore that the
+governance artifact is replay-addressed.
 
 ## 7. Corpus Selection: 13 Controversial XRPL Amendments
 
@@ -388,10 +384,9 @@ The resulting packet is here:
 
 [benchmark packet](/benchmarks/xrpl-amendment-governance-replay-20260601T204407Z/)
 
-The point of the corpus is not to create a popularity contest over historical
-labels. It is to stress the replay route on governance-sensitive packets:
-AMM-related fixes and reversals, obsolete bug-disabled amendments, issuer
-control semantics, permissioned market access, vaults, lending, escrow, and new
+The corpus stress-tests the replay route on governance-sensitive packets:
+AMM-related fixes and reversals, obsolete bug-disabled amendments, issuer control
+semantics, permissioned market access, vaults, lending, escrow, and new
 token/accounting surfaces.
 
 | amendment_or_event | why it is governance-sensitive | historical_route | deterministic_route | qwen_replay_route | replay_default_vote |
@@ -412,7 +407,7 @@ token/accounting surfaces.
 
 ## 8. Scoring The Replay
 
-The replay is scored as a governance triage system, not as an oracle.
+The replay is scored as a governance triage system rather than as an oracle.
 
 For each packet \(i\), define:
 
@@ -466,7 +461,7 @@ A value of \(D_i=0\) means the replay route matched the historical research
 label. A positive value means the replay was more conservative. A negative value
 means it was less conservative.
 
-## 9. Results: Conservative, Reproducible, And Not Overclaimed
+## 9. Results: Conservative, Reproducible, And Bounded
 
 The H200/SGLang result is conservative:
 
@@ -497,15 +492,15 @@ R_U=0/13=0
 \frac{1}{13}\sum_i |D_i|=0.
 \]
 
-So the result is not "the model governed correctly." The result is narrower and
-stronger:
+So the result is narrower and stronger than "the model governed correctly":
 
 > Under this packet construction and these research labels, the replay profile
 > produced schema-valid, hash-convergent, route-convergent conservative triage
 > with no observed unsafe proceed recommendations.
 
 That last number matters, but it should be read with statistical humility. A
-zero count in a small sample is evidence, not proof of a zero underlying rate.
+zero count in a small sample is evidence short of proof of a zero underlying
+rate.
 
 Using the rule-of-three heuristic, zero unsafe-proceed events in 13 unique packet
 scenarios gives an approximate 95% upper bound of:
@@ -516,19 +511,17 @@ scenarios gives an approximate 95% upper bound of:
 
 The exact one-sided binomial upper bound is about 20.6%. If one instead counts
 the 39 repeated model outputs as separate output-level trials, the rule-of-three
-bound is \(3/39\approx 7.7\%\), but those outputs are not 39 independent
-governance scenarios because repeated runs per packet were intentionally
-convergent.
+bound is \(3/39\approx 7.7\%\), but those outputs share packet-level clustering
+because repeated runs per packet were intentionally convergent.
 
 This is why broader testing matters. To push a zero-failure 95% upper bound
 below 1%, the relevant unit needs roughly 300 clean independent trials.
 
 ## 10. Why Use Qwen If The Rule Engine Tied It?
 
-In this run, Qwen did not beat the deterministic rule engine on route choice. It
-tied it.
+In this run, Qwen tied the deterministic rule engine on route choice.
 
-That is not an embarrassment. It is the design.
+That is the design.
 
 The deterministic rule engine is the safety floor. It is good at refusing
 obvious mistakes:
@@ -551,7 +544,7 @@ The Batch pre-disclosure replay isolates that layer. With the February 19, 2026
 disclosure withheld, the deterministic rule floor could only hold for generic
 authorization risk; the H200/SGLang Qwen profile returned the same hold but in
 5/5 runs named the signer-validation control-flow risk later disclosed publicly.
-That is challenge lift, not vote authority: a concrete work item before a
+That is challenge lift rather than vote authority: a concrete work item before a
 validator defaults to yes. The packet is published at
 [Batch pre-disclosure replay](/benchmarks/xrpl-batch-predisclosure-h200-replay-20260601T234631Z/).
 
@@ -643,12 +636,12 @@ Under the declared model, replay-default triage reduces attention by:
 1-\frac{75.83}{1066}=92.89\%.
 \]
 
-Those are cost-model numbers, not proof of safety. Change validator count,
+Those are cost-model numbers, short of proof of safety. Change validator count,
 hourly rate, skim minutes, deep reviewers, or review minutes and the conclusion
 should update.
 
-The exact 92.89% figure is the base case, not the claim. If ordinary review
-would only take 45 minutes per validator, and replay overhead rises to a
+The exact 92.89% figure is the base case. The claim is directional. If ordinary
+review would only take 45 minutes per validator, and replay overhead rises to a
 10-minute skim plus five deep reviewers and a 20-minute packet check, replay
 still uses 158.17 hours versus 399.75 hours, a 60.44% reduction. If ordinary
 review takes three hours per validator under the same replay overhead, the
@@ -669,8 +662,8 @@ work product, the potential pairwise private coordination surface is:
 E_{\text{private}}(r)=\binom{r}{2}=\frac{r(r-1)}{2}.
 \]
 
-This is not a claim that every pair colludes. It is an exposure model: private
-coordination opportunities scale quadratically with repeat reviewers.
+This is an exposure model: private coordination opportunities scale quadratically
+with repeat reviewers.
 
 Replay governance changes the scaling. Each validator can inspect the same
 public packet and either follow or override the default. A simple public-process
@@ -699,14 +692,14 @@ E_{\text{replay}}(41,5)=46.
 1-\frac{46}{820}=94.39\%.
 \]
 
-This is a coordination-surface proxy, not a safety proof. The real claim is the
-scaling law: private deliberation creates \(O(r^2)\) potential coordination
-edges; replay-first triage creates \(O(n+k)\) public inspection and override
-records.
+This is a coordination-surface proxy rather than a safety proof. The real claim
+is the scaling law: private deliberation creates \(O(r^2)\) potential
+coordination edges; replay-first triage creates \(O(n+k)\) public inspection and
+override records.
 
 ### Override Burden
 
-The system does not ban override. It makes override burden visible.
+The system keeps override available and makes its burden visible.
 
 Define:
 
@@ -817,44 +810,40 @@ public trail of whether they followed or overrode the default. The process
 directly attacks two costs that ordinary governance hand-waves away: attention
 cost and private coordination cost.
 
-It also shows that the model does not need positive authority. In this replay,
-the useful outputs are conservative routes: delay for known-bug AMM packets,
-reject obsolete bug-disabled packets, hold governance-sensitive financial
-primitives for challenge, and proceed on a narrow AMM fix.
+It also shows that positive model authority is unnecessary. In this replay, the
+useful outputs are conservative routes: delay for known-bug AMM packets, reject
+obsolete bug-disabled packets, hold governance-sensitive financial primitives for
+challenge, and proceed on a narrow AMM fix.
 
-The strongest claim is institutional, not magical:
+The strongest claim is institutional rather than magical:
 
 > A public replay primitive can make the cheapest governance path also the most
 > inspectable path.
 
-## 14. What This Does Not Prove
+## 14. Boundaries
 
-This does not prove that Qwen is smarter than the rule engine on route choice.
-It tied the rule engine in this run.
+These results establish operational coherence rather than model superiority over
+the rule engine. Qwen tied route choice in this run.
 
-It does not prove that the 13 research labels are the only valid labels for
-these events.
+The 13 labels remain research labels for these events.
 
-It does not prove that any future amendment should be accepted because a model
-says `PROCEED`.
+Future `PROCEED` outputs still require normal validator review.
 
-It does not prove the true unsafe-proceed rate is zero. The sample is too small
-for that. The zero-event result is a useful negative finding and a reason to run
-broader tests, not a safety theorem.
+The true unsafe-proceed rate remains unknown. The sample is too small to settle
+that value. The zero-event result is a useful negative finding and a reason to
+run broader tests rather than a safety theorem.
 
-It also does not remove the committee option. Some packets will earn a committee.
-The claim is only that committee formation should be the second move, not the
-first. Start with a public replay object. Escalate when the packet actually
-requires concentrated expert deliberation.
+Committees remain available. Some packets will earn one. The claim is that
+committee formation should be the second move. Start with a public replay object.
+Escalate when the packet actually requires concentrated expert deliberation.
 
 The stronger claim still requires broader profile evidence: H100/H200 repeated
 checks under the same corpus, cross-profile drift reporting, Apple/MLX or other
 non-NVIDIA controls where practical, packet hashes, prompt hashes,
 parsed-output hashes, and public replay scripts.
 
-That is the right end state: not AI as governor, and not a private committee as
-governor. Public replay primitive first; human override second; private committee
-only when the packet earns one.
+That is the right end state: public replay primitive first; human override
+second; private committee only when the packet earns one.
 
 ## Appendix: Toy Capture-Threshold Model
 
@@ -893,11 +882,11 @@ At \(p=0.15\), this is approximately:
 6.18\times 10^{-8}.
 \]
 
-This appendix is illustrative, not empirical. The independence assumption is
-strong, \(p\) is not estimated here, and real influence is correlated. The useful
-point is the threshold structure: replay-first governance moves disagreement
-from a small private recommendation threshold to a public mass-override
-threshold.
+This appendix is illustrative rather than empirical. The independence assumption
+is strong, \(p\) remains unestimated here, and real influence is correlated. The
+useful point is the threshold structure: replay-first governance moves
+disagreement from a small private recommendation threshold to a public
+mass-override threshold.
 
 ## References
 
