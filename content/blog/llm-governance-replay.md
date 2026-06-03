@@ -59,7 +59,7 @@ The claims are deliberately split:
 | Claim type | What is claimed | What is not claimed |
 |---|---|---|
 | Replay-addressability | A pinned packet/profile/parser/output tuple can be checked and disputed as a public object. | That deterministic output is independent judgment. |
-| Historical replay | The selected and held-out `vote_state` and `vote_outcome` lanes mostly reproduce source-backed XRPL amendment history under the packet construction. | That this proves future safety or live validator independence. |
+| Historical replay | The selected and held-out `vote_state` and `vote_outcome` lanes mostly reproduce source-backed XRPL amendment history under the packet construction. | That this is a blind prediction benchmark, or that the model inferred hidden outcomes from packets stripped of historical status facts. |
 | Triage | The triage route is an operator-routing harness and work-item generator. | That held-out triage is ready to drive automatic `PROCEED` votes. |
 | Cost | Replay can reduce duplicate attention and private coordination because the first-pass claim becomes public and hard to fake. | That any reduction in review time is automatically safe. |
 | Probability math | The binomial model illustrates residual human detection after one common replay signal. | That the parameters are measured production safety rates. |
@@ -178,6 +178,10 @@ The lanes are separate because they make different claims:
 
 This separation prevents the easy mistake of using a weak or experimental triage lane to inflate a historical replay claim, or using a strong historical state lane to pretend triage is solved.
 
+It also prevents a second mistake: treating historical replay as blind prediction. The `vote_state` and `vote_outcome` packets are source-backed replay packets. They intentionally bind public facts about amendment status, activation, disablement, vote reversal, and bug history where those facts are part of the public record. That makes the historical lanes useful for testing replay addressability, parser stability, lane separation, and source-grounded label reproduction. It discounts any reading of `47/47` as a model discovering hidden history.
+
+The `default_vote` lane is included as a canary for this exact problem. Source-code defaults are not validator-history outcomes. The low `default_vote` scores are why this post does not use source defaults as historical replay labels.
+
 ## Scoring: The Metric Penalizes Unsafe `PROCEED`
 
 The replay is scored lane by lane rather than as one oracle score.
@@ -252,6 +256,10 @@ A second run used the 47 cases present in the corpus but not selected for that e
 | source default vote | 47 | 47 | diagnostic only | 16/47 |
 
 Qwen matched dated amendment state on every held-out case. It matched terminal XRP-native vote/outcome on 44 of 46 held-out cases, with three deterministic runs per packet on the historical claim lanes and exact output-hash convergence for every packet in those lanes.
+
+Those historical numbers should be read as replay-from-source-packet results, not as a leak-free prediction task. In particular, the dated state lane is close to source-state extraction when the packet includes facts such as activation, obsolete status, disablement, or open voting state. The claim is not “Qwen independently discovered the historical outcome.” The claim is “under a public packet/profile/parser tuple, the replay produced the same source-backed lane label and the same output hash across deterministic runs.”
+
+That is why the `default_vote` diagnostic remains visible despite scoring poorly. It shows that the harness is not allowed to smuggle source defaults into validator-history claims. The useful governance question is what happens after the public packet exists: whether validators can inspect, challenge, fork, or override a reproducible work item.
 
 The two terminal-outcome misses were conservative false negatives:
 
@@ -353,6 +361,8 @@ manual_override                -> public reason required
 That receipt does not prove the validator is right. It changes the default from private deference to public accountability. A validator who follows every replay route unchecked becomes legibly different from a validator who follows after sampling sources, checking the risk surface, and reviewing open challenges.
 
 With 41 validators and a more-than-80% enable rule, an amendment needs at least 33 YES votes to pass. Equivalently, 9 NO votes block it. If a common replay signal misses a subtle issue, the independent events are not 41 Qwen runs. The independent events are the residual human checks after the common signal.
+
+{{< replay-risk-console >}}
 
 For illustration only, if each validator performing the bounded check has a 0.4 chance of catching the issue, the chance that eight or fewer of 41 catch it is about 0.45%. That number is not a measured safety rate. It is a reminder that the tail benefit comes from residual human detection, not from pretending identical model outputs are independent witnesses.
 

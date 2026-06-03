@@ -82,7 +82,9 @@
       </article>
     </main>
   </div>
-  {{ $articleMarkdown := printf "# %s\n\nDate: %s\nURL: %s\nSummary: %s\n\n%s" .Title (.Date.Format "January 2, 2006") .Permalink (.Summary | plainify) .RawContent }}
+  {{ $diagramDescription := "[Interactive diagram: Common Signal / Human Checks]\nThe page includes a simulator showing the replay pipeline as packet -> rule floor -> replay hash -> residual validator checks -> vote. Sliders let the reader vary validator count, verification rate, human catch probability, unchecked-follow rate, replay miss rate, and rotating deep-review seats. The intended lesson is that Qwen is one common signal; the safety tail comes from validators who still verify, challenge, fork, or override after the replay output is public." }}
+  {{ $copyRawContent := replace .RawContent "{{< replay-risk-console >}}" $diagramDescription }}
+  {{ $articleMarkdown := printf "# %s\n\nDate: %s\nURL: %s\nSummary: %s\n\n%s" .Title (.Date.Format "January 2, 2006") .Permalink (.Summary | plainify) $copyRawContent }}
   <script id="articleMarkdownSource" type="application/json">{{ $articleMarkdown | jsonify }}</script>
   <script>
     const navShell=document.getElementById("navShell"),menuButton=document.getElementById("menuButton");
