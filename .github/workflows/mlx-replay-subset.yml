@@ -1,0 +1,189 @@
+name: MLX Replay Subset
+
+on:
+  workflow_dispatch:
+    inputs:
+      runner_label:
+        description: "macOS runner label to test"
+        required: true
+        default: "macos-15-xlarge"
+        type: choice
+        options:
+          - macos-15
+          - macos-15-xlarge
+          - macos-latest
+          - macos-latest-xlarge
+      model_id:
+        description: "MLX model id"
+        required: true
+        default: "mlx-community/Qwen3-0.6B-4bit"
+      max_tokens:
+        description: "Max generated tokens per packet"
+        required: true
+        default: "700"
+
+permissions:
+  contents: read
+
+jobs:
+  mlx-replay-subset:
+    runs-on: ${{ inputs.runner_label }}
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Host profile
+        run: |
+          mkdir -p mlx_replay_subset
+          {
+            uname -a
+            sw_vers
+            sysctl -n machdep.cpu.brand_string || true
+            python3 - <<'PY'
+          import json
+          import platform
+          print(json.dumps({
+              "platform_machine": platform.machine(),
+              "platform_platform": platform.platform(),
+          }, sort_keys=True))
+          PY
+          } | tee mlx_replay_subset/host_profile.txt
+
+      - name: Install MLX
+        run: |
+          python3 -m venv .venv
+          . .venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install mlx mlx-lm
+
+      - name: Run replay subset
+        env:
+          MLX_MODEL_ID: ${{ inputs.model_id }}
+          MAX_TOKENS: ${{ inputs.max_tokens }}
+        run: |
+          . .venv/bin/activate
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import platform
+          import sys
+          from pathlib import Path
+
+          sys.path.insert(0, "scripts")
+          from run_qwen_xrpl_amendment_lifecycle_replay import build_prompt, extract_json, normalize_output, parsed_label
+          from xrpl_lifecycle_common import LANE_LABEL_FIELD, sha_json, utc_now
+
+          from mlx_lm import generate, load
+
+          out_dir = Path("mlx_replay_subset")
+          out_dir.mkdir(parents=True, exist_ok=True)
+          model_id = os.environ["MLX_MODEL_ID"]
+          max_tokens = int(os.environ["MAX_TOKENS"])
+          packet_paths = [
+              Path("static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/packets/vote_outcome/case_001--vote_outcome.json"),
+              Path("static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/packets/vote_state/case_001--vote_state.json"),
+              Path("static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/packets/default_vote/case_001--default_vote.json"),
+              Path("static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/packets/triage/case_001--triage.json"),
+          ]
+
+          machine_receipt = {
+              "generated_at": utc_now(),
+              "runtime_kind": "mlx-lm",
+              "model": model_id,
+              "platform_machine": platform.machine(),
+              "platform_platform": platform.platform(),
+              "max_tokens": max_tokens,
+              "runs_per_packet": 2,
+              "temperature": 0.0,
+              "claim_boundary": "independent-profile MLX subset control; not Qwen/Qwen3.6-27B-FP8 SGLang equivalence",
+          }
+          (out_dir / "machine_receipt.json").write_text(json.dumps(machine_receipt, indent=2, sort_keys=True) + "\n")
+
+          model, tokenizer = load(model_id)
+
+          rows = []
+          for packet_path in packet_paths:
+              packet = json.loads(packet_path.read_text())
+              prompt = build_prompt(packet)
+              messages = [
+                  {"role": "system", "content": "Return only valid JSON. No markdown. No commentary."},
+                  {"role": "user", "content": prompt},
+              ]
+              if tokenizer.chat_template is not None:
+                  model_prompt = tokenizer.apply_chat_template(messages, add_generation_prompt=True)
+              else:
+                  model_prompt = messages[0]["content"] + "\n\n" + messages[1]["content"]
+
+              for run_idx in (1, 2):
+                  raw = generate(
+                      model,
+                      tokenizer,
+                      prompt=model_prompt,
+                      max_tokens=max_tokens,
+                      temp=0.0,
+                      verbose=False,
+                  )
+                  schema_valid = True
+                  error = ""
+                  output_json = {}
+                  try:
+                      output_json = normalize_output(packet["lane"], extract_json(raw), packet)
+                  except Exception as exc:
+                      schema_valid = False
+                      error = f"{type(exc).__name__}: {exc}"
+                  label = parsed_label(packet["lane"], output_json) if schema_valid else ""
+                  rows.append({
+                      "packet_path": packet_path.as_posix(),
+                      "packet_id": packet["packet_id"],
+                      "lane": packet["lane"],
+                      "run_index": run_idx,
+                      "model": model_id,
+                      "packet_hash": hashlib.sha256(packet_path.read_bytes()).hexdigest(),
+                      "prompt_hash": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
+                      "raw_output_hash": hashlib.sha256(str(raw).encode("utf-8")).hexdigest(),
+                      "parsed_output_hash": sha_json(output_json) if schema_valid else "",
+                      "schema_valid": schema_valid,
+                      "error": error,
+                      "label": label,
+                      "raw_preview": str(raw)[:500],
+                      "label_field": LANE_LABEL_FIELD[packet["lane"]],
+                  })
+
+          summary = {
+              "generated_at": utc_now(),
+              "model": model_id,
+              "packet_count": len(packet_paths),
+              "run_count": len(rows),
+              "schema_valid_count": sum(1 for row in rows if row["schema_valid"]),
+              "same_packet_repeat_raw_matches": 0,
+              "same_packet_repeat_parsed_matches": 0,
+              "label_matches": 0,
+              "claim_boundary": machine_receipt["claim_boundary"],
+          }
+          by_packet = {}
+          for row in rows:
+              by_packet.setdefault(row["packet_id"], []).append(row)
+          for packet_id, packet_rows in by_packet.items():
+              if len(packet_rows) == 2:
+                  a, b = packet_rows
+                  summary["same_packet_repeat_raw_matches"] += int(a["raw_output_hash"] == b["raw_output_hash"])
+                  summary["same_packet_repeat_parsed_matches"] += int(a["parsed_output_hash"] == b["parsed_output_hash"] and bool(a["parsed_output_hash"]))
+                  summary["label_matches"] += int(a["label"] == b["label"] and bool(a["label"]))
+
+          (out_dir / "results.json").write_text(json.dumps(rows, indent=2, sort_keys=True) + "\n")
+          (out_dir / "summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")
+          print(json.dumps(summary, indent=2, sort_keys=True))
+          PY
+
+      - name: Checksums
+        run: |
+          find mlx_replay_subset -type f ! -name SHA256SUMS.txt -print0 | sort -z | xargs -0 shasum -a 256 > mlx_replay_subset/SHA256SUMS.txt
+          cat mlx_replay_subset/SHA256SUMS.txt
+
+      - name: Upload replay subset artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mlx-replay-subset
+          path: mlx_replay_subset/
