@@ -1,0 +1,80 @@
+name: MLX Smoke Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      runner_label:
+        description: "macOS runner label to test"
+        required: true
+        default: "macos-15-xlarge"
+        type: choice
+        options:
+          - macos-15
+          - macos-15-xlarge
+          - macos-latest
+          - macos-latest-xlarge
+      install_mlx_lm:
+        description: "Also install mlx-lm"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  mlx-smoke:
+    runs-on: ${{ inputs.runner_label }}
+    timeout-minutes: 20
+    steps:
+      - name: Host profile
+        run: |
+          uname -a
+          sw_vers
+          sysctl -n machdep.cpu.brand_string || true
+          python3 - <<'PY'
+          import platform
+          print("platform.machine=", platform.machine())
+          print("platform.platform=", platform.platform())
+          PY
+
+      - name: Install MLX
+        run: |
+          python3 -m venv .venv
+          . .venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install mlx
+          if [ "${{ inputs.install_mlx_lm }}" = "true" ]; then
+            python -m pip install mlx-lm
+          fi
+
+      - name: MLX import and compute smoke
+        run: |
+          . .venv/bin/activate
+          python - <<'PY'
+          import json
+          import platform
+          import mlx.core as mx
+
+          x = mx.arange(8, dtype=mx.float32)
+          y = (x * x).sum()
+          mx.eval(y)
+
+          result = {
+              "platform_machine": platform.machine(),
+              "mlx_available": True,
+              "mlx_sum_squares": float(y),
+          }
+          try:
+              import mlx_lm
+              result["mlx_lm_available"] = True
+              result["mlx_lm_version"] = getattr(mlx_lm, "__version__", "unknown")
+          except Exception as exc:
+              result["mlx_lm_available"] = False
+              result["mlx_lm_error"] = f"{type(exc).__name__}: {exc}"
+
+          print(json.dumps(result, indent=2, sort_keys=True))
+          assert result["platform_machine"] == "arm64", result
+          assert result["mlx_available"] is True
+          assert result["mlx_sum_squares"] == 140.0
+          PY
