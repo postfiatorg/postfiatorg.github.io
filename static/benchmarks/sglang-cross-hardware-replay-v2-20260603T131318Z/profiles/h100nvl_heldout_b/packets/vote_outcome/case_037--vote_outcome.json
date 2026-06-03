@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_037",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "4C97EBA926031A7CF7D7B36FDE3ED66DDA5421192D63DE53FFB46E43B9DC8373",
+    "amendment_name": "MultiSign",
+    "decision_surface": "XRPL validator amendment decision surface for MultiSign.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "MultiSign: Introduces multi-signing as a way to authorize transactions. Creates the SignerList ledger object type and the SignerListSet transaction type. Adds the optional Signers field to all transaction types. Modifies some transaction result codes. This amendment allows addresses to have a list of signers who can authorize transactions from that address in a multi-signature. The list has a quorum and 1 to 8 weighted signers. This allows various configurations, such as \"any 3-of-5\" or \"signature from A plus any other two signatures.\" Signers can be funded or unfunded addresses. Funded addresses in a signer list can sign using a regular key (if defined) or master key (unless disabled). Unfunded addresses can sign with a master key. Multi-signed transactions have the same permissions as transactions signed with a regular key. An address with a SignerList can disable the master key even if a regular key is not defined. An address with a SignerList can also remove a regular key even if the master key is disabled. The tecMASTER_DISABLED transaction result code is renamed tecNO_ALTERNATIVE_KEY. The tecNO_REGULAR_KEY transaction result is retired and replaced with tecNO_ALTERNATIVE_KEY.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "MultiSign appears in XRPSCAN with introduced rippled version 0.31.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "6412f0849b3789229606c858538a21678fd8833fbdf8b23ebdfecb1617d88395",
+  "packet_id": "case_037--vote_outcome",
+  "packet_version": 1
+}

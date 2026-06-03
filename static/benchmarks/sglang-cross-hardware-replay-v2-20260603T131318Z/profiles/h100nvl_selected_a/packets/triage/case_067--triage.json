@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_067",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "27CD95EE8E1E5A537FF2F89B6CEB7C622E78E9374EBD7DCBEDFAE21CD6F16E0A",
+    "amendment_name": "fixReducedOffersV1",
+    "decision_surface": "XRPL validator amendment decision surface for fixReducedOffersV1.",
+    "source_facts": [
+      {
+        "claim": "fixReducedOffersV1: Adjusts rounding to prevent order books from being blocked by reduced offers whose exchange rate is affected by rounding of the remaining amounts. In general, offers can be reduced in 3 ways: - The offer can be partially consumed when it is placed. - The offer can be partially consumed after being placed into an order book. - The offer can be under-funded, meaning its owner has less funds than it specifies. With this amendment, the exchange rate of a reduced offer is rounded such that it is as good or better than the original offer (from the taker's perspective). This allows the reduced offer to be consumed by offers that would have matched the original, full amounts. The rounded amount is no more than 1 drop of XRP or 1e-81 of a token. Without this amendment, an offer with very small amounts remaining can have a a much worse exchange rate after rounding than it had initially. This can cause an offer for very small amounts to \"block\" better offers in the same order book from being taken.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixReducedOffersV1 appears in XRPSCAN with introduced rippled version 1.12.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "da9009b23d635eb22aed04924839ca80aa1224191ae524f49bcfc8f5d1ecd474",
+  "packet_id": "case_067--triage",
+  "packet_version": 1
+}

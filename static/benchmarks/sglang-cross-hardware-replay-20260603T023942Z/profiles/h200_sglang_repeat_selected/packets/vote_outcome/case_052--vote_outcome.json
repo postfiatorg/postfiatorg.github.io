@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_052",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "1E7ED950F2F13C4F8E2A54103B74D57D5D298FFDBD005936164EE9E6484C438C",
+    "amendment_name": "fixAMMv1_2",
+    "decision_surface": "XRPL validator amendment decision surface for fixAMMv1_2.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixAMMv1_2: Fixes two bugs in Automated Market Maker (AMM) transaction processing: - Fixes a bug that causes AMMWithdraw to not properly apply a reserve check before creating trust lines in some cases. - Fixes a bug in payment processing that causes cross-currency payments not to use the full amount of liquidity available from the combination of AMM and order books in some cases.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixAMMv1_2 appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "a5b5abbdd2526f8e9f0a57735c26ee30023a287f4b0f5c69052168536f41ea07",
+  "packet_id": "case_052--vote_outcome",
+  "packet_version": 1
+}

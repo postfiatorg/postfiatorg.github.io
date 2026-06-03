@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_023",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "3C43D9A973AA4443EF3FC38E42DD306160FBFFDAB901CD8BAA15D09F2597EB87",
+    "amendment_name": "NonFungibleTokensV1",
+    "decision_surface": "XRPL validator amendment decision surface for NonFungibleTokensV1.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "NonFungibleTokensV1: Adds native support for non-fungible tokens. Standards Draft: XLS-20d. There are several known issues with this amendment including one that can cause tecINVARIANT_FAILED errors to appear in the ledger. It has been replaced by the NonFungibleTokensV1_1 amendment. This amendment adds 5 new transaction types: - NFTokenAcceptOffer - NFTokenBurn - NFTokenCancelOffer - NFTokenCreateOffer - NFTokenMint It also adds 2 new ledger object types: - NFTokenOffer object - NFTokenPage object Additionally, it modifies the AccountRoot object type to add 3 new optional fields: MintedNFTokens, BurnedNFTokens, and NFTokenMinter. It also modifies the AccountSet transaction type to allow you to set the NFTokenMinter field.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "NonFungibleTokensV1 appears in XRPSCAN with introduced rippled version 1.9.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "1d3952c2340ce45b8429b39368747808c456b5bca09da6501fa62bfbd37adad7",
+  "packet_id": "case_023--default_vote",
+  "packet_version": 1
+}

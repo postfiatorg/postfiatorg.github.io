@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_047",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "6781F8368C4771B83E8B821D88F580202BCB4228075297B19E4FDC5233F1EFDC",
+    "amendment_name": "TrustSetAuth",
+    "decision_surface": "XRPL validator amendment decision surface for TrustSetAuth.",
+    "source_facts": [
+      {
+        "claim": "TrustSetAuth: Allows pre-authorization of accounting relationships (zero-balance trust lines) when using Authorized Trust Lines. With this amendment enabled, a TrustSet transaction with tfSetfAuth enabled can create a new RippleState ledger object even if it keeps all the other values of the RippleState node in their default state. The new RippleState node has the lsfLowAuth or lsfHighAuth flag enabled, depending on whether the sender of the transaction is considered the low node or the high node. The sender of the transaction must have already enabled lsfRequireAuth by sending an AccountSet transaction with the asfRequireAuth flag enabled.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "TrustSetAuth appears in XRPSCAN with introduced rippled version 0.30.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "ba8f5383bbd4dd69f83c8146d36cce681a4eab2581adad4d9602060f2a5ea774",
+  "packet_id": "case_047--triage",
+  "packet_version": 1
+}

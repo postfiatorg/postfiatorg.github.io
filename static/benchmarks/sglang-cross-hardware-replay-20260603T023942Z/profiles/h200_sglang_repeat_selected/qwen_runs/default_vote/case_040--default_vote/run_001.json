@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-03T03:03:53Z",
+  "error": "",
+  "event_id": "case_040",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "fbb60b122988fb554f82f403d4b1c2e97f4ddc111016adf29e5081228861d7cc",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a fix for an accounting error and rounding issue in AMMClawback transactions, ensuring invariant checks pass. This indicates a corrective maintenance patch rather than a controversial feature change, which typically defaults to YES in stable releases to ensure system integrity."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 3.0.0, establishing the context of the 'latest stable release' mentioned in the task rule."
+      }
+    ],
+    "decision_summary": "The amendment 'fixAMMClawbackRounding' addresses a specific accounting bug where LPTokenBalance might not match trust line balances due to rounding errors. In XRPL governance, bug fixes that correct invariant violations or accounting errors are standardly enabled by default in stable releases to maintain ledger consistency and prevent errors. There is no evidence suggesting this is a risky or optional feature that would default to NO. Therefore, the source default vote is inferred to be YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit documentation stating the default vote value for this specific amendment in the release notes."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "81a81140ee0d9d97a2e52d00be284f0b2c41db7dd0048d3f0b28e6985f759eb2",
+  "packet_id": "case_040--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "58665918c04ffaea43da89c1be40e606d9f148783e363f4ea54690434d9c03f9",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a fix for an accounting error and rounding issue in AMMClawback transactions, ensuring invariant checks pass. This indicates a corrective maintenance patch rather than a controversial feature change, which typically defaults to YES in stable releases to ensure system integrity.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 3.0.0, establishing the context of the 'latest stable release' mentioned in the task rule.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixAMMClawbackRounding' addresses a specific accounting bug where LPTokenBalance might not match trust line balances due to rounding errors. In XRPL governance, bug fixes that correct invariant violations or accounting errors are standardly enabled by default in stable releases to maintain ledger consistency and prevent errors. There is no evidence suggesting this is a risky or optional feature that would default to NO. Therefore, the source default vote is inferred to be YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit documentation stating the default vote value for this specific amendment in the release notes.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 307,
+      "prompt_tokens": 689,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 996
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:03:40Z"
+}

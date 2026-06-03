@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_010",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "42426C4D4F1009EE67080A9B7965B44656D7714D104A72F9B4369F97ABF044EE",
+    "amendment_name": "FeeEscalation",
+    "decision_surface": "XRPL validator amendment decision surface for FeeEscalation.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "FeeEscalation appears in XRPSCAN with introduced rippled version 0.31.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 42426C4D4F1009EE67080A9B7965B44656D7714D104A72F9B4369F97ABF044EE; XRPSCAN reports enabled_on=2016-05-19T16:44:51.000Z and enabled_in_ledger=21225473.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "d520986ceb536425dbe823217c3b8cbe0c542b739fb252a0c027cb2aa900aeb1",
+  "packet_id": "case_010--vote_state",
+  "packet_version": 1
+}

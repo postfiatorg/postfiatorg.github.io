@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T14:01:57Z",
+  "error": "",
+  "event_id": "case_062",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "6eb430b435eb84e433a70bc1237ed33ca7e82d0d0d4fc9b12f017c81f7db82e1",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The claim describes fixFillOrKill as a fix for a bug introduced in FlowCross where offers with tfFillOrKill would fail incorrectly. It states the amendment enables the payment engine to properly handle the scenario and allow offers to cross. This indicates the amendment restores correct, intended functionality and fixes a defect, which supports a YES vote for inclusion in the stable release."
+      }
+    ],
+    "decision_summary": "The amendment fixFillOrKill is described as a bug fix for an issue introduced by the FlowCross amendment. It corrects the behavior of offers with the tfFillOrKill flag, allowing them to cross the order book as intended. Since it fixes a defect and restores proper functionality without introducing new features or breaking changes, the source-backed description supports a YES default vote.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "106b6cefac2897f0619becaeee1e0bb08682c9cef19ba4926ed79545bef43b08",
+  "packet_id": "case_062--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "469e3e61df21b4c792c85e68b0bdb765ce0f331a7662fca3f2d2040f867710be",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The claim describes fixFillOrKill as a fix for a bug introduced in FlowCross where offers with tfFillOrKill would fail incorrectly. It states the amendment enables the payment engine to properly handle the scenario and allow offers to cross. This indicates the amendment restores correct, intended functionality and fixes a defect, which supports a YES vote for inclusion in the stable release.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixFillOrKill is described as a bug fix for an issue introduced by the FlowCross amendment. It corrects the behavior of offers with the tfFillOrKill flag, allowing them to cross the order book as intended. Since it fixes a defect and restores proper functionality without introducing new features or breaking changes, the source-backed description supports a YES default vote.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 227,
+      "prompt_tokens": 664,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 891
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:01:53Z"
+}

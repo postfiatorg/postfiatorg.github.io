@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_003",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "894646DD5284E97DECFE6674A6D6152686791C4A95F8C132CCA9BAF9E5812FB6",
+    "amendment_name": "Batch vulnerability",
+    "decision_surface": "Whether validators should support the affected Batch amendment after the unauthorized inner transaction bug was found.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "The Batch bug allowed unauthorized inner transaction execution on behalf of arbitrary victim accounts.",
+        "fact_id": "F1",
+        "source_id": "xrpl_batch_vulnerability_2026"
+      },
+      {
+        "claim": "UNL validators were contacted and advised to vote No on Batch.",
+        "fact_id": "F2",
+        "source_id": "xrpl_batch_vulnerability_2026"
+      },
+      {
+        "claim": "rippled 3.1.1 disabled Batch and fixBatchInnerSigs due to a severe bug.",
+        "fact_id": "F3",
+        "source_id": "xrpl_rippled_3_1_1"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "91c1b038437e2508229f05b765f57a74139654897cbd4df3b8218f91302f7d6a",
+  "packet_id": "case_003--vote_outcome",
+  "packet_version": 1
+}

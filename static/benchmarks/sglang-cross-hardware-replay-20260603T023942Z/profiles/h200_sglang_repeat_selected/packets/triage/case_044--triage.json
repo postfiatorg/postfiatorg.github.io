@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_044",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "B32752F7DCC41FB86534118FC4EEC8F56E7BD0A7DB60FD73F93F257233C08E3A",
+    "amendment_name": "fixEnforceNFTokenTrustlineV2",
+    "decision_surface": "XRPL validator amendment decision surface for fixEnforceNFTokenTrustlineV2.",
+    "source_facts": [
+      {
+        "claim": "fixEnforceNFTokenTrustlineV2: Fix a bug where NFT transfer fees could bypass certain limitations on receiving tokens, specifically: - Prevent an NFT issuer from receiving fungible tokens as transfer fees if the fungible tokens' issuer uses authorized trust lines and the NFT issuer's trust line is not authorized. - Prevent an NFT issuer from receiving fungible tokens as transfer fees on a deep-frozen trust line. Without this amendment, NFT transfer fees could be paid to an NFT issuer circumventing these restrictions.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixEnforceNFTokenTrustlineV2 appears in XRPSCAN with introduced rippled version 2.5.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "eb18b4aaa85bfd4b618f9b43b1bbfd688f3a1cfc4cec86fb735c4b63076c90b4",
+  "packet_id": "case_044--triage",
+  "packet_version": 1
+}

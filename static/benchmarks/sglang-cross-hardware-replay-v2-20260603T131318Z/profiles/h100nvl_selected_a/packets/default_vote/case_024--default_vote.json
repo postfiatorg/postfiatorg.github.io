@@ -1,0 +1,36 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_024",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "9178256A980A86CF3D70D0260A7DA6402AAFE43632FDBCB88037978404188871",
+    "amendment_name": "OwnerPaysFee",
+    "decision_surface": "XRPL validator amendment decision surface for OwnerPaysFee.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "OwnerPaysFee: Fixes an inconsistency in the way transfer fees are calculated between OfferCreate and Payment transaction types. Without this amendment, the holder of the token pays the transfer fee if an offer is executed in offer placement, but the initial sender of a transaction pays the transfer fees for offers that are executed as part of payment processing. With this amendment, the holder of the token always pays the transfer fee, regardless of whether the offer is executed as part of a Payment or an OfferCreate transaction. Offer processing outside of payments is unaffected. This Amendment requires the Flow Amendment to be enabled. An incomplete version of this amendment was introduced in v0.33.0 and removed in v0.80.0. (It was never enabled.)",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "f8d08d1840a799681f41972e97974195f8b1e89895c7b28053dfec10dc348483",
+  "packet_id": "case_024--default_vote",
+  "packet_version": 1
+}

@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_009",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "B2A4DB846F0891BF2C76AB2F2ACC8F5B4EC64437135C6E56F3F859DE5FFD5856",
+    "amendment_name": "ExpandedSignerList",
+    "decision_surface": "XRPL validator amendment decision surface for ExpandedSignerList.",
+    "source_facts": [
+      {
+        "claim": "ExpandedSignerList: This amendment expands the maximum signer list size and allows each signer to have optional data associated with it. The additional data can be used to identify the signer, which may be useful for smart contracts, or for identifying who controls a key in a large organization: for example, you could store an IPv6 address or the identifier of a Hardware Security Module (HSM). Without this amendment, the maximum signer list size is 8 entries, and each entry has exactly two fields, Account and SignerWeight. With this amendment, the maximum SignerList object size is 32 entries. Additionally, each SignerEntry object can contain an optional 256-bit (32-byte) WalletLocator field containing arbitrary data. This amendment changes the SignerListSet transaction accordingly.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "ExpandedSignerList appears in XRPSCAN with introduced rippled version 1.9.1.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "7ecf617e71d2682155ba988de3d30d7d0978c27ac13d71301fbab03401e7ff37",
+  "packet_id": "case_009--triage",
+  "packet_version": 1
+}

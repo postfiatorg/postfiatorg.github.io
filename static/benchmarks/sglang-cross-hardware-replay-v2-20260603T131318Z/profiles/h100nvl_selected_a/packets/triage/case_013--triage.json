@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_013",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "677E401A423E3708363A36BA8B3A7D019D21AC5ABD00387BDBEA6BDE4C91247E",
+    "amendment_name": "PermissionedDEX",
+    "decision_surface": "XRPL validator amendment decision surface for PermissionedDEX.",
+    "source_facts": [
+      {
+        "claim": "PermissionedDEX: Creates Permissioned DEXes, controlled environments for trading within the XRP Ledger's decentralized exchange (DEX). Trading in a permissioned DEX works like trading in the open DEX, except that a permissioned domain controls who can place and accept offers. Specification: XLS-81",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "PermissionedDEX appears in XRPSCAN with introduced rippled version 2.5.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "89ff908c45d12b4b392641cfbb12663b65b2f09e11f398aaa11a316da75ab23b",
+  "packet_id": "case_013--triage",
+  "packet_version": 1
+}

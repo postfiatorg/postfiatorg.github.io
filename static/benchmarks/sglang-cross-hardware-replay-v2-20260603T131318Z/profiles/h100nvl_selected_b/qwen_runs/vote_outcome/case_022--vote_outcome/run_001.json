@@ -1,0 +1,68 @@
+{
+  "completed_at": "2026-06-03T14:16:34Z",
+  "error": "",
+  "event_id": "case_022",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "d1b3399294d3c73b1ca40ac787bc3d8a6773aec2e7707686bcab3d93ad636ab7",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment FlowV2 is explicitly identified as a previous version that was rejected due to a bug.",
+      "The amendment was removed in version 0.33.0, indicating it is no longer part of the active protocol development path.",
+      "The known status of FlowV2 is marked as OBSOLETE, meaning it should not be enabled or voted for.",
+      "Activating an obsolete and previously rejected amendment could lead to server incompatibility or amendment-blocking issues."
+    ],
+    "arguments_for_yes": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes that FlowV2 is a previous version rejected due to a bug and removed in version 0.33.0, providing the primary reason to vote NO."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Confirms the status of FlowV2 is OBSOLETE, reinforcing that it is not a valid or recommended amendment to enable."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Highlights the risk of amendment-blocking for incompatible servers, which is a significant concern when dealing with obsolete or buggy amendments."
+      }
+    ],
+    "decision_summary": "FlowV2 is an obsolete amendment that was previously rejected due to a bug and removed from the protocol. Voting YES would be incorrect as the amendment is no longer valid or supported. Therefore, the recommendation is NO.",
+    "forbidden_stronger_claim": "The amendment is currently active and requires immediate voting.",
+    "missing_evidence": [
+      "Current network status of FlowV2 (though implied obsolete by facts)",
+      "Specific details of the bug that caused rejection (not necessary for decision)"
+    ],
+    "vote_confidence": 1.0,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "e946cd6d4e0a831c91317a09f6e32ba702e633a358b2d66ba33b0aed4e7c5c42",
+  "packet_id": "case_022--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "08e7143cff4e19f1f27fe5781bbe895399db81756a24b33d4049a0a317184a1d",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment FlowV2 is explicitly identified as a previous version that was rejected due to a bug.\",\n    \"The amendment was removed in version 0.33.0, indicating it is no longer part of the active protocol development path.\",\n    \"The known status of FlowV2 is marked as OBSOLETE, meaning it should not be enabled or voted for.\",\n    \"Activating an obsolete and previously rejected amendment could lead to server incompatibility or amendment-blocking issues.\"\n  ],\n  \"arguments_for_yes\": [],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Establishes that FlowV2 is a previous version rejected due to a bug and removed in version 0.33.0, providing the primary reason to vote NO.\"\n    },\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Confirms the status of FlowV2 is OBSOLETE, reinforcing that it is not a valid or recommended amendment to enable.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Highlights the risk of amendment-blocking for incompatible servers, which is a significant concern when dealing with obsolete or buggy amendments.\"\n    }\n  ],\n  \"decision_summary\": \"FlowV2 is an obsolete amendment that was previously rejected due to a bug and removed from the protocol. Voting YES would be incorrect as the amendment is no longer valid or supported. Therefore, the recommendation is NO.\",\n  \"forbidden_stronger_claim\": \"The amendment is currently active and requires immediate voting.\",\n  \"missing_evidence\": [\n    \"Current network status of FlowV2 (though implied obsolete by facts)\",\n    \"Specific details of the bug that caused rejection (not necessary for decision)\"\n  ],\n  \"vote_confidence\": 1.0,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 435,
+      "prompt_tokens": 660,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1095
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:16:27Z"
+}

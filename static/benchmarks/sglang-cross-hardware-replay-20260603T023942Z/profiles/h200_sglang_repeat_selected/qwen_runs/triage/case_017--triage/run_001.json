@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-03T03:10:48Z",
+  "error": "",
+  "event_id": "case_017",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "4d50a969d3b6159487fa84efb258c1766a6e0dace4576504408599c678197068",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States the amendment refers to incomplete code that does almost nothing and cannot be modified without conflict, indicating it is functionally inert and obsolete."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly labels the amendment status as 'obsolete/removed', which triggers the REJECT rule for retired/obsolete proposals."
+      }
+    ],
+    "decision_summary": "The packet explicitly identifies the CryptoConditionsSuite amendment as obsolete and containing incomplete code that does almost nothing. According to the task rules, REJECT is the required route for retired or obsolete proposals. There is no risk in rejecting this amendment as it is already marked obsolete and provides no functional value.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment is safe to enable because it is obsolete.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any evidence that this obsolete amendment is required for network liveness or compatibility with active nodes?"
+      ],
+      "recommended_validator_action": "Vote NO or ignore the amendment as it is obsolete and incomplete.",
+      "review_questions": [
+        "Does the packet confirm the amendment is obsolete?"
+      ],
+      "title": "Reject Obsolete CryptoConditionsSuite Amendment"
+    }
+  },
+  "packet_hash": "4425ecbef47f13fe62a63afe25ab310fefa87e2be394b8e2b5ba5aa6699094a4",
+  "packet_id": "case_017--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "23fed10b829129cf790d0314b118a8284fcfed75c59dc0c9e678184a17f5c0ba",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"States the amendment refers to incomplete code that does almost nothing and cannot be modified without conflict, indicating it is functionally inert and obsolete.\"\n},\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"Explicitly labels the amendment status as 'obsolete/removed', which triggers the REJECT rule for retired/obsolete proposals.\"\n}\n],\n\"decision_summary\": \"The packet explicitly identifies the CryptoConditionsSuite amendment as obsolete and containing incomplete code that does almost nothing. According to the task rules, REJECT is the required route for retired or obsolete proposals. There is no risk in rejecting this amendment as it is already marked obsolete and provides no functional value.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"The amendment is safe to enable because it is obsolete.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Is there any evidence that this obsolete amendment is required for network liveness or compatibility with active nodes?\"\n],\n\"recommended_validator_action\": \"Vote NO or ignore the amendment as it is obsolete and incomplete.\",\n\"review_questions\": [\n\"Does the packet confirm the amendment is obsolete?\"\n],\n\"title\": \"Reject Obsolete CryptoConditionsSuite Amendment\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 357,
+      "prompt_tokens": 1261,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1618
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:10:43Z"
+}

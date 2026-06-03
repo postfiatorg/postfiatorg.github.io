@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_043",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "CC5ABAE4F3EC92E94A59B1908C2BE82D2228B6485C00AFF8F22DF930D89C194E",
+    "amendment_name": "SortedDirectories",
+    "decision_surface": "XRPL validator amendment decision surface for SortedDirectories.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "SortedDirectories: Sorts the entries in DirectoryNode ledger objects and fixes a bug that occasionally caused pages of owner directories not to be deleted when they should have been. Older versions of rippled that do not know about this amendment may crash when they find a DirectoryNode sorted by the new rules. To avoid this problem, upgrade to rippled version 0.80.0 or later.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "SortedDirectories appears in XRPSCAN with introduced rippled version 0.80.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "c4494cb24a14fb5cdb2cceb65eeec70404b85feac17937a269fc751c5f48de0b",
+  "packet_id": "case_043--vote_outcome",
+  "packet_version": 1
+}

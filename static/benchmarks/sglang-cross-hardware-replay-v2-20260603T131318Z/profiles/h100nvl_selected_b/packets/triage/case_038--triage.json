@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_038",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "AB8D932A5F338903FE5BCBD80B611FFED70839ABA3170E9CE01D947C0EDEDCF2",
+    "amendment_name": "fixMPTDeliveredAmount",
+    "decision_surface": "XRPL validator amendment decision surface for fixMPTDeliveredAmount.",
+    "source_facts": [
+      {
+        "claim": "fixMPTDeliveredAmount: This amendment adds missing DeliveredAmount and delivered_amount metadata fields from direct MPT Payment transactions. Without this amendment, direct MPT payments deliver the full amount but do not have the metadata fields to summarize how much was delivered.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixMPTDeliveredAmount appears in XRPSCAN with introduced rippled version 3.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "e4fb743ec3cc0c070a245c52e369302e6854921e899fb1c8392671cddcb86488",
+  "packet_id": "case_038--triage",
+  "packet_version": 1
+}

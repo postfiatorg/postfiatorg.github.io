@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_022",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "58BE9B5968C4DA7C59BA900961828B113E5490699B21877DEF9A31E9D0FE5D5F",
+    "amendment_name": "fix1623",
+    "decision_surface": "XRPL validator amendment decision surface for fix1623.",
+    "source_facts": [
+      {
+        "claim": "fix1623: Adds delivered amount to metadata for CheckCash transactions cashed for a flexible amount. (Has no effect unless the Checks amendment is enabled.) With this amendment enabled, transaction processing adds a DeliveredAmount field to the metadata of CheckCash transactions for a variable amount (using the DeliverMin field). This change is written to the ledger data, resulting in a different ledger hash than would result from processing the transaction without this amendment. It does not affect the actual amounts delivered. Additionally, with this amendment enabled, the tx method and account_tx method return a delivered_amount field for CheckCash transactions. (The delivered_amount field is calculated when you look up a transaction, and is not part of the data that is written to the ledger.) The fix1623 amendment has no effect on CheckCash transactions for a fixed amount (using the Amount field) or any other transaction types.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1623 appears in XRPSCAN with introduced rippled version 1.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "cb6a915156722c0736b08ce33048bcc93df32173c325a3d7e7127ace37066d4b",
+  "packet_id": "case_022--triage",
+  "packet_version": 1
+}

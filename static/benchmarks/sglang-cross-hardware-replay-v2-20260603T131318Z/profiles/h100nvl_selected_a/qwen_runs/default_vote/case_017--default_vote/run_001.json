@@ -1,0 +1,52 @@
+{
+  "completed_at": "2026-06-03T13:58:37Z",
+  "error": "",
+  "event_id": "case_017",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "12a180b7fa834f06f1f60e3df672f5e81c6812c27b5f887c4264406bd2f36660",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The source explicitly states that the amendment was added to rippled v0.60.0 before implementation was complete and refers to incomplete code which does almost nothing. This indicates the feature was not ready for production use, implying a default stance against enabling it."
+      }
+    ],
+    "decision_summary": "The amendment CryptoConditionsSuite was released in rippled v0.60.0 with incomplete implementation. The source notes it 'does almost nothing' and was added before implementation was complete. In XRPL governance, amendments that are incomplete or broken are typically defaulted to NO to prevent network instability or unintended behavior, as enabling them would activate non-functional or potentially harmful code. Therefore, the source-backed inference for the default vote is NO.",
+    "default_vote_confidence": 0.9,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote value in the source text."
+    ],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "fb9a56f575790195a886cd7cc6a21e67aa3842fe931c571c72489a3057a54be6",
+  "packet_id": "case_017--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "857d35e8f3b4d743481103a800d3021326e3a0f7c9c6181006b76caa57fdfbef",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The source explicitly states that the amendment was added to rippled v0.60.0 before implementation was complete and refers to incomplete code which does almost nothing. This indicates the feature was not ready for production use, implying a default stance against enabling it.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment CryptoConditionsSuite was released in rippled v0.60.0 with incomplete implementation. The source notes it 'does almost nothing' and was added before implementation was complete. In XRPL governance, amendments that are incomplete or broken are typically defaulted to NO to prevent network instability or unintended behavior, as enabling them would activate non-functional or potentially harmful code. Therefore, the source-backed inference for the default vote is NO.\",\n  \"default_vote_confidence\": 0.9,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote value in the source text.\"\n  ],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 236,
+      "prompt_tokens": 709,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 945
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:58:33Z"
+}

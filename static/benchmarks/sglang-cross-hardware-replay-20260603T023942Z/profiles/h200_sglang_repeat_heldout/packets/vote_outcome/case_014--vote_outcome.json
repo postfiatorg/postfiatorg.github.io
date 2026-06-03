@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_014",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "6C92211186613F9647A89DFFBAB8F94C99D4C7E956D495270789128569177DA1",
+    "amendment_name": "fix1512",
+    "decision_surface": "XRPL validator amendment decision surface for fix1512.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fix1512: Fixes a bug in transaction processing that causes some invalid PaymentChannelClaim transactions to fail with the wrong error code. Without this amendment, the transactions have a tec-class result code despite not being included in a ledger. With this amendment, the transactions fail with a more appropriate result code, temBAD_AMOUNT, instead.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1512 appears in XRPSCAN with introduced rippled version 0.80.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "a0948437cb4450c27fabc4dfba7bbdef9c5ff65093856c7e1779d1310d7644e4",
+  "packet_id": "case_014--vote_outcome",
+  "packet_version": 1
+}

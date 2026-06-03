@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_012",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "E2E6F2866106419B88C50045ACE96368558C345566AC8F2BDF5A5B5587F0E6FA",
+    "amendment_name": "fix1368",
+    "decision_surface": "XRPL validator amendment decision surface for fix1368.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fix1368: Fixes a minor bug in transaction processing that causes some payments to fail when they should be valid. Specifically, during payment processing, some payment steps that are expected to produce a certain amount of currency may produce a microscopically different amount, due to a loss of precision related to floating-point number representation. When this occurs, those payments fail because they cannot deliver the exact amount intended. The fix1368 amendment corrects transaction processing so payments can no longer fail in this manner.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1368 appears in XRPSCAN with introduced rippled version 0.60.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "e46550fa3f9bd4701f3125f7e3aba2e71248c86fa405732ee994b633da612317",
+  "packet_id": "case_012--default_vote",
+  "packet_version": 1
+}

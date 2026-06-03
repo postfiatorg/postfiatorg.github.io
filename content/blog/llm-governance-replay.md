@@ -69,6 +69,8 @@ The boundary that matters most is this:
 
 > The LLM is one common signal. Validators are the accountable actors.
 
+Replay fidelity and decision quality are independent. A profile can reproduce the same output perfectly and still reproduce a bad recommendation perfectly. The held-out triage result, 31/47 policy alignment with one unsafe `PROCEED`, is therefore a blocker for autonomous decision use; it is not a blocker for using replay as a public, hash-bound work item that humans can inspect, challenge, fork, or override.
+
 Safety lives in the human verification, challenge, override, packet-forking, random-audit, and escalation layer. The scorecard below should be read through that boundary: the historical lanes are replay evidence; the triage lane is a policy-development lane.
 
 ## What Replay Means
@@ -353,8 +355,8 @@ window with no unresolved blockers.
 The dashboard should distinguish three modes:
 
 ```text
-replay_default_unchecked       -> visible weak signal
-replay_default_verified        -> bounded verification receipt attached
+replay_seen_unverified         -> no automatic support
+verified_replay_support        -> bounded verification receipt attached
 manual_override                -> public reason required
 ```
 
@@ -442,17 +444,20 @@ This directly answers the “subtle unsafe packet that looks clean” problem. T
 
 The committee is therefore not abolished. It is moved to the second step, behind a public packet and public trigger logic.
 
-## What A Validator Default Could Look Like
+## What A Replay-Assisted Validator Receipt Could Look Like
 
-A validator configuration could look like this:
+A validator configuration should make automatic `PROCEED` impossible. The replay route can be a default work item, but support still requires a validator review receipt or a public override.
 
 ```toml
 [governance]
 vote_replay_hash = true
 model_profile = "qwen3.6-27b-fp8-sglang-v1"
-manual_override = false
+auto_support_proceed = false
+operator_review_required = true
 verification_receipts = true
 challenge_window_required = true
+structural_risk_escalation = true
+manual_override_public_reason = true
 ```
 
 For each amendment packet, the validator computes:
@@ -463,11 +468,11 @@ model_profile_hash
 parser_hash
 output_hash
 parsed_route
-default_vote
+operator_vote
 verification_receipt_hash
 ```
 
-Then it commits and reveals:
+If the operator supports the route after review, the commit/reveal object records that review path:
 
 ```json
 {
@@ -478,12 +483,12 @@ Then it commits and reveals:
   "output_hash": "...",
   "route": "DELAY_FOR_FIX",
   "vote": "NO",
-  "mode": "replay_default_verified",
+  "mode": "verified_replay_support",
   "verification_receipt_hash": "..."
 }
 ```
 
-If the operator disagrees, the vote becomes a manual override with a public reason:
+If the operator disagrees with the route, the vote becomes a manual override with a public reason:
 
 ```json
 {
@@ -509,8 +514,8 @@ Replay route:
   HOLD/DELAY/REJECT 38
 
 Mode:
-  replay_default_verified 16
-  replay_default_unchecked 4
+  verified_replay_support 16
+  challenge_hold 4
   manual_override 21
 
 Packet-hash split:

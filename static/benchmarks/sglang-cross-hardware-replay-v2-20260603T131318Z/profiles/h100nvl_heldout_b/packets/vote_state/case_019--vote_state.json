@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_019",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "CA7C02118BA27599528543DFE77BA6838D1B0F43B447D4D7F53523CE6A0E9AC2",
+    "amendment_name": "fix1543",
+    "decision_surface": "XRPL validator amendment decision surface for fix1543.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1543 appears in XRPSCAN with introduced rippled version 1.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID CA7C02118BA27599528543DFE77BA6838D1B0F43B447D4D7F53523CE6A0E9AC2; XRPSCAN reports enabled_on=2018-06-21T17:37:11.000Z and enabled_in_ledger=39544065.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "4a46f6188343669d141d7f1b39ee1db210740ff47c96f1e612770cb23668f62e",
+  "packet_id": "case_019--vote_state",
+  "packet_version": 1
+}

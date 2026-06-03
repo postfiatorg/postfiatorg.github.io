@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-03T14:06:25Z",
+  "error": "",
+  "event_id": "case_027",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "6a4f05e0b8d8c86115517fea926d8a796c56d8e53e18f87dd72724ffdfe77358",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States that the Tickets amendment was replaced by the TicketBatch amendment, indicating it is no longer the active proposal path."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly labels the status of the Tickets amendment as 'obsolete/removed', which triggers the REJECT condition for retired/obsolete proposals."
+      }
+    ],
+    "decision_summary": "The packet facts explicitly state that the 'Tickets' amendment is obsolete and has been replaced by 'TicketBatch'. According to the task rule, REJECT is the correct route for retired or obsolete proposals. Therefore, the amendment should be rejected.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment is safe to proceed with.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any evidence contradicting the obsolete status of the Tickets amendment?"
+      ],
+      "recommended_validator_action": "Reject the amendment as it is obsolete and replaced.",
+      "review_questions": [
+        "Does the packet confirm the amendment is obsolete?"
+      ],
+      "title": "Reject Obsolete Tickets Amendment"
+    }
+  },
+  "packet_hash": "4cb5885f496e596f7046052226340fc812409dc9ae0226872bacd1caf6ac346d",
+  "packet_id": "case_027--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "96d87b9598bcceb13c290ec1ce4998bb28d9671d395c9aa170644309a82dc65a",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"States that the Tickets amendment was replaced by the TicketBatch amendment, indicating it is no longer the active proposal path.\"\n},\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"Explicitly labels the status of the Tickets amendment as 'obsolete/removed', which triggers the REJECT condition for retired/obsolete proposals.\"\n}\n],\n\"decision_summary\": \"The packet facts explicitly state that the 'Tickets' amendment is obsolete and has been replaced by 'TicketBatch'. According to the task rule, REJECT is the correct route for retired or obsolete proposals. Therefore, the amendment should be rejected.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"The amendment is safe to proceed with.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Is there any evidence contradicting the obsolete status of the Tickets amendment?\"\n],\n\"recommended_validator_action\": \"Reject the amendment as it is obsolete and replaced.\",\n\"review_questions\": [\n\"Does the packet confirm the amendment is obsolete?\"\n],\n\"title\": \"Reject Obsolete Tickets Amendment\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 332,
+      "prompt_tokens": 1050,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1382
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:06:20Z"
+}

@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_027",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "621A0B264970359869E3C0363A899909AAB7A887C8B73519E4ECF952D33258A8",
+    "amendment_name": "fixPayChanRecipientOwnerDir",
+    "decision_surface": "XRPL validator amendment decision surface for fixPayChanRecipientOwnerDir.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixPayChanRecipientOwnerDir appears in XRPSCAN with introduced rippled version 1.4.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 621A0B264970359869E3C0363A899909AAB7A887C8B73519E4ECF952D33258A8; XRPSCAN reports enabled_on=2020-05-01T08:51:01.000Z and enabled_in_ledger=55161089.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "dceb86faf2cf2f758bb7f2dfcb359996797705636a5a0f331328fcad0f5787af",
+  "packet_id": "case_027--vote_state",
+  "packet_version": 1
+}

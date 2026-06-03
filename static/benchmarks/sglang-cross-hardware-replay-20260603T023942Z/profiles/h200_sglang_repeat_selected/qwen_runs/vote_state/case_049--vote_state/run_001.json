@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T02:55:36Z",
+  "error": "",
+  "event_id": "case_049",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "aded80242183b1516758c6ae396a244f0886b0212d433118a9636c4698a74322",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific 'enabled_on' timestamp and 'enabled_in_ledger' number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment DeepFreeze is included in the validated ledger Amendments object and provides an explicit enabled timestamp (2025-05-04T12:09:01.000Z) and ledger index (95893505). According to the task rule, the presence of enabled ledger membership corresponds to the ENABLED state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "e20a7015f8eea33be16c272616840bac841ca9e03610856d48810b179c76668a",
+  "packet_id": "case_049--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "111eb48878dc7f6adb4a9e1117ab0e4c677c868b001f5ffc3082031b3576fc0d",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific 'enabled_on' timestamp and 'enabled_in_ledger' number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 confirms that the amendment DeepFreeze is included in the validated ledger Amendments object and provides an explicit enabled timestamp (2025-05-04T12:09:01.000Z) and ledger index (95893505). According to the task rule, the presence of enabled ledger membership corresponds to the ENABLED state.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 203,
+      "prompt_tokens": 828,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1031
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:55:31Z"
+}

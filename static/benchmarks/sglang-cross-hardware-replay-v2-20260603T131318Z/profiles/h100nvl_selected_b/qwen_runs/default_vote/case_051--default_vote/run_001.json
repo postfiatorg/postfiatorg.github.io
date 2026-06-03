@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-03T14:30:20Z",
+  "error": "",
+  "event_id": "case_051",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "ffe66b16d7c57d79d82bc7c6bc5d3d025a5fef44c3fd33d3603f1ab707ddab28",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a bug fix for order book blocking issues, which typically implies a YES default vote for stability, but does not explicitly state the source default vote."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the version (2.3.0) where the amendment was introduced, but does not specify the default vote configuration in the source code."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical purpose of the amendment (fixing order book blocking) and its introduction version. While bug fixes generally have a YES default vote in XRPL practice, the packet facts do not explicitly contain the source code default vote value or a statement confirming it. Therefore, the specific source default vote cannot be inferred strictly from the provided text.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote in the source code or documentation",
+      "Confirmation of whether the amendment is enabled by default in rippled 2.3.0"
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "671815c50c449bfbbf0c2f06ebbbc5ab4e722cb50ce3b872cd6f4e9d13b4805d",
+  "packet_id": "case_051--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "bfbce4332b6300cf028155554292649f0f68fd8e13c097ea754d8c0c2546156a",
+  "raw_message_content": "{\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the amendment as a bug fix for order book blocking issues, which typically implies a YES default vote for stability, but does not explicitly state the source default vote.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Identifies the version (2.3.0) where the amendment was introduced, but does not specify the default vote configuration in the source code.\"\n}\n],\n\"decision_summary\": \"The provided facts describe the technical purpose of the amendment (fixing order book blocking) and its introduction version. While bug fixes generally have a YES default vote in XRPL practice, the packet facts do not explicitly contain the source code default vote value or a statement confirming it. Therefore, the specific source default vote cannot be inferred strictly from the provided text.\",\n\"default_vote_confidence\": 0.0,\n\"missing_evidence\": [\n\"Explicit statement of the default vote in the source code or documentation\",\n\"Confirmation of whether the amendment is enabled by default in rippled 2.3.0\"\n],\n\"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 261,
+      "prompt_tokens": 650,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 911
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:30:16Z"
+}

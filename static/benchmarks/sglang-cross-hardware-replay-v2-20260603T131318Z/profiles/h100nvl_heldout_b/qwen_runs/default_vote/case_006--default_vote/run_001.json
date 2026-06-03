@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-03T15:14:41Z",
+  "error": "",
+  "event_id": "case_006",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a1a4b78aae204842a6c01e32f84514ea12c5af17b7a6928cd26052300e110764",
+  "output_hash": "6a042e22f55ea9f909daa34ea7bd863426d6bc4b4edcd1d107f5c53651c16d74",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the functional changes of DepositPreauth, including fixing a behavior where cross-currency payments to self failed with tecNO_PERMISSION. This indicates a bug fix and feature addition that improves usability and correctness, which typically aligns with a default YES vote in XRPL governance for stable releases."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms that DepositPreauth was introduced in rippled version 1.1.0, establishing it as a feature present in a stable release, supporting the inference of a default YES vote for that release."
+      }
+    ],
+    "decision_summary": "The amendment DepositPreauth introduces a new transaction type and fixes a bug where payments to self failed unnecessarily. These are positive changes that enhance functionality and fix errors. In the context of XRPL stable releases, such improvements are generally supported by default. Therefore, the source default vote is inferred as YES.",
+    "default_vote_confidence": 0.9,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote in the source text"
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "621ef5fb688c79937ed6cc55f64f825ef80e69980388b7044b6340aa7551318f",
+  "packet_id": "case_006--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "bb346893d05a2576b04b3bf3d4889db6d95479461cc3745b2fcc0b2b8ca712c3",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the functional changes of DepositPreauth, including fixing a behavior where cross-currency payments to self failed with tecNO_PERMISSION. This indicates a bug fix and feature addition that improves usability and correctness, which typically aligns with a default YES vote in XRPL governance for stable releases.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms that DepositPreauth was introduced in rippled version 1.1.0, establishing it as a feature present in a stable release, supporting the inference of a default YES vote for that release.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment DepositPreauth introduces a new transaction type and fixes a bug where payments to self failed unnecessarily. These are positive changes that enhance functionality and fix errors. In the context of XRPL stable releases, such improvements are generally supported by default. Therefore, the source default vote is inferred as YES.\",\n  \"default_vote_confidence\": 0.9,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote in the source text\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 281,
+      "prompt_tokens": 780,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1061
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T15:14:36Z"
+}

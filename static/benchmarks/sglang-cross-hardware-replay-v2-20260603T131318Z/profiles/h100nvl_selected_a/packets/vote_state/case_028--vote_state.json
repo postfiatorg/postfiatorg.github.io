@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_028",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "C98D98EE9616ACD36E81FDEB8D41D349BF5F1B41DD64A0ABC1FE9AA5EA267E9C",
+    "amendment_name": "XChainBridge",
+    "decision_surface": "XRPL validator amendment decision surface for XChainBridge.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "XChainBridge appears in XRPSCAN with introduced rippled version 2.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "XRPSCAN currently reports support count 5 of 35 validations, threshold 28, and no enabled ledger entry for XChainBridge.",
+        "fact_id": "F4",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "22f05ced8aaeb9391e8a2c32eb5205a75960bfc50c6165fbab62c5fdad62bf8b",
+  "packet_id": "case_028--vote_state",
+  "packet_version": 1
+}

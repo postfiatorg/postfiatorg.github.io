@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-03T14:32:53Z",
+  "error": "",
+  "event_id": "case_007",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "9cb4b4622a1e22a46d2947fa1b3328f8d74bf1653c7e87d4015aaa0ca6d4c87b",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States the amendment was disabled due to a bug and will be replaced, indicating it is no longer a viable candidate for activation."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly labels the amendment status as 'obsolete/removed: OBSOLETE', which triggers the REJECT rule for retired/obsolete proposals."
+      }
+    ],
+    "decision_summary": "The packet explicitly identifies the 'Batch' amendment as obsolete and removed (F5) and notes it was disabled due to a bug with a replacement planned (F1). According to the task rules, REJECT is the required route for retired or obsolete proposals. This takes precedence over other considerations.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment is safe to enable.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any evidence that the obsolete status is incorrect or that the amendment has been revived?"
+      ],
+      "recommended_validator_action": "Reject the amendment as it is obsolete and disabled.",
+      "review_questions": [
+        "Does the packet confirm the amendment is obsolete?"
+      ],
+      "title": "Reject Obsolete Batch Amendment"
+    }
+  },
+  "packet_hash": "ab7864d7ef5b922b86777f2f31384b8b659af2f13e7ca000efe2140a7abb0aba",
+  "packet_id": "case_007--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "c2331f49c29072152067f984c748d4dacfe785456d578dcac82496db146451ef",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"States the amendment was disabled due to a bug and will be replaced, indicating it is no longer a viable candidate for activation.\"\n},\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"Explicitly labels the amendment status as 'obsolete/removed: OBSOLETE', which triggers the REJECT rule for retired/obsolete proposals.\"\n}\n],\n\"decision_summary\": \"The packet explicitly identifies the 'Batch' amendment as obsolete and removed (F5) and notes it was disabled due to a bug with a replacement planned (F1). According to the task rules, REJECT is the required route for retired or obsolete proposals. This takes precedence over other considerations.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"The amendment is safe to enable.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Is there any evidence that the obsolete status is incorrect or that the amendment has been revived?\"\n],\n\"recommended_validator_action\": \"Reject the amendment as it is obsolete and disabled.\",\n\"review_questions\": [\n\"Does the packet confirm the amendment is obsolete?\"\n],\n\"title\": \"Reject Obsolete Batch Amendment\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 349,
+      "prompt_tokens": 1190,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1539
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:32:47Z"
+}

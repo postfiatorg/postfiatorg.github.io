@@ -1,0 +1,86 @@
+{
+  "completed_at": "2026-06-03T14:36:43Z",
+  "error": "",
+  "event_id": "case_034",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "e5695f4fb63eb3b9437d08526a74ce13378c5cec2402187e93bb44589288111d",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces a WebAssembly (WASM) engine, representing a significant expansion of on-chain programmability.",
+      "Custom functions controlling escrow completion introduce complex execution semantics and potential for logic errors or infinite loops.",
+      "New execution environments pose consensus and liveness risks if not perfectly deterministic across all validator implementations.",
+      "The scope involves asset-control semantics (escrow release conditions) which are high-stakes financial operations."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name 'SmartEscrow' does not start with 'fix', so the localized fix exception does not apply.",
+      "The packet describes the feature as a new programmability layer, which inherently requires deep review rather than simple proceeding."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies the core change: introduction of a WASM engine for custom escrow logic, which triggers the 'consensus/liveness' and 'asset-control semantics' risk categories requiring challenge."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms the high stakes of amendment voting, where incompatible servers can become blocked, reinforcing the need for a conservative review route for complex new features."
+      }
+    ],
+    "decision_summary": "The SmartEscrow amendment introduces a WebAssembly engine for programmable escrows. This constitutes a major change to execution semantics and asset control. It is not a simple fix. The introduction of WASM and custom logic for financial instruments (escrows) presents material risks to consensus, liveness, and asset control. Therefore, it requires explicit review via HOLD_FOR_CHALLENGE.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 15,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on WASM sandboxing and resource limits.",
+      "Formal verification status of the WASM engine implementation.",
+      "Impact analysis on validator performance and consensus timing."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the WASM engine guarantee deterministic execution across all supported validator environments?",
+        "Are there sufficient gas or step limits to prevent liveness attacks via infinite loops in custom escrow functions?"
+      ],
+      "recommended_validator_action": "HOLD_FOR_CHALLENGE",
+      "review_questions": [
+        "What are the security implications of allowing arbitrary WASM code to control escrow release?",
+        "How does this amendment interact with existing escrow and payment semantics?",
+        "Is the WASM engine implementation audited and formally verified?"
+      ],
+      "title": "Review SmartEscrow WASM Engine and Escrow Logic Semantics"
+    }
+  },
+  "packet_hash": "d27be7a356e0f1fb59363289dbe005a2fa2b95d3aa96dff9fa7b29a715d31f79",
+  "packet_id": "case_034--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "be389aa770ffa0c390c3ce657fb09250e96e3db711761107f8e5818714880554",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The amendment introduces a WebAssembly (WASM) engine, representing a significant expansion of on-chain programmability.\",\n    \"Custom functions controlling escrow completion introduce complex execution semantics and potential for logic errors or infinite loops.\",\n    \"New execution environments pose consensus and liveness risks if not perfectly deterministic across all validator implementations.\",\n    \"The scope involves asset-control semantics (escrow release conditions) which are high-stakes financial operations.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"The amendment name 'SmartEscrow' does not start with 'fix', so the localized fix exception does not apply.\",\n    \"The packet describes the feature as a new programmability layer, which inherently requires deep review rather than simple proceeding.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Identifies the core change: introduction of a WASM engine for custom escrow logic, which triggers the 'consensus/liveness' and 'asset-control semantics' risk categories requiring challenge.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Confirms the high stakes of amendment voting, where incompatible servers can become blocked, reinforcing the need for a conservative review route for complex new features.\"\n    }\n  ],\n  \"decision_summary\": \"The SmartEscrow amendment introduces a WebAssembly engine for programmable escrows. This constitutes a major change to execution semantics and asset control. It is not a simple fix. The introduction of WASM and custom logic for financial instruments (escrows) presents material risks to consensus, liveness, and asset control. Therefore, it requires explicit review via HOLD_FOR_CHALLENGE.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 120,\n    \"packet_verification\": 15,\n    \"validator_skim\": 5\n  },\n  \"forbidden_stronger_claim\": \"REJECT\",\n  \"missing_evidence\": [\n    \"Specific details on WASM sandboxing and resource limits.\",\n    \"Formal verification status of the WASM engine implementation.\",\n    \"Impact analysis on validator performance and consensus timing.\"\n  ],\n  \"route\": \"HOLD_FOR_CHALLENGE\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Does the WASM engine guarantee deterministic execution across all supported validator environments?\",\n      \"Are there sufficient gas or step limits to prevent liveness attacks via infinite loops in custom escrow functions?\"\n    ],\n    \"recommended_validator_action\": \"HOLD_FOR_CHALLENGE\",\n    \"review_questions\": [\n      \"What are the security implications of allowing arbitrary WASM code to control escrow release?\",\n      \"How does this amendment interact with existing escrow and payment semantics?\",\n      \"Is the WASM engine implementation audited and formally verified?\"\n    ],\n    \"title\": \"Review SmartEscrow WASM Engine and Escrow Logic Semantics\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 674,
+      "prompt_tokens": 1063,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1737
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:36:33Z"
+}

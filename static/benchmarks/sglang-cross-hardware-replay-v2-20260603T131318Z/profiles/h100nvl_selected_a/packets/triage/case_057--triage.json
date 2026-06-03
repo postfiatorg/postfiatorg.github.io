@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_057",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "DB432C3A09D9D5DFC7859F39AE5FF767ABC59AED0A9FB441E83B814D8946C109",
+    "amendment_name": "DID",
+    "decision_surface": "XRPL validator amendment decision surface for DID.",
+    "source_facts": [
+      {
+        "claim": "DID: Adds to the ledger Decentralized Identifier (DID) functionality that conforms to the World Wide Web Consortium standard. DIDs provide a digital identity, not dependent on a centralized authority and controlled by the DID subject. Adds new transactions: - DIDDelete - Delete the DID associated with your XRPL account. - DIDSet - Create a new DID or update an existing one. Adds a new DID ledger entry type. Adds several new transaction result codes.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "DID appears in XRPSCAN with introduced rippled version 2.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "d34360b3158a22803b028801ef34d63486a9bbdacbaaf9764d29c08a94b04f57",
+  "packet_id": "case_057--triage",
+  "packet_version": 1
+}

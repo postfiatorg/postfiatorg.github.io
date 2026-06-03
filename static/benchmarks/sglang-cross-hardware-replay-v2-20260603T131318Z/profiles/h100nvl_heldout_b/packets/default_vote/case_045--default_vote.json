@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_045",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "955DF3FA5891195A9DAEFA1DDC6BB244B545DDE1BAA84CBB25D5F12A8DA68A0C",
+    "amendment_name": "TicketBatch",
+    "decision_surface": "XRPL validator amendment decision surface for TicketBatch.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "TicketBatch: This amendment adds Tickets as a way of sending transactions out of the typical sequence number order. Standards Draft: XLS-13d.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "TicketBatch appears in XRPSCAN with introduced rippled version 1.7.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "1baf795fdd481def6eed20dba0746362ff3effaad009aeb7a65063e9a51fed54",
+  "packet_id": "case_045--default_vote",
+  "packet_version": 1
+}

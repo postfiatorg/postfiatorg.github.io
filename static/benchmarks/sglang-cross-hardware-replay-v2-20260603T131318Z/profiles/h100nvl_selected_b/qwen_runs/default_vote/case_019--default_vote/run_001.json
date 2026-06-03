@@ -1,0 +1,61 @@
+{
+  "completed_at": "2026-06-03T14:27:59Z",
+  "error": "",
+  "event_id": "case_019",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "75e90a9ea268c9b4a8a14c3c05a0bc1e55f2c1dac279fbed44bdc219bd50cf4b",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical fix for an off-by-one error and invariant check adjustments, but explicitly states the amendment is obsolete because its effects are included in NonFungibleTokensV1_1. It does not specify the source default vote."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general voting process requiring a supermajority, but does not specify the default vote for this specific amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the rippled version (1.9.1) where the amendment was introduced, but does not specify the source default vote."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical nature of the fixNFTokenDirV1 amendment, its obsolescence, the general voting process, and its introduction version. None of the facts explicitly state or imply the source default vote (YES or NO) for this amendment. Therefore, the default vote cannot be inferred from the given information.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the source default vote for fixNFTokenDirV1",
+      "Documentation linking the amendment to a specific default vote policy"
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "27e01a7d3e32e97c538cfaf3d71e869362baca3032fad6fb2dbfd2935fa5eddf",
+  "packet_id": "case_019--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "ddc8f33dce3c6430309a464300c44dfdc89451f8a44d10f4326fe4e592de125c",
+  "raw_message_content": "{\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the technical fix for an off-by-one error and invariant check adjustments, but explicitly states the amendment is obsolete because its effects are included in NonFungibleTokensV1_1. It does not specify the source default vote.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Describes the general voting process requiring a supermajority, but does not specify the default vote for this specific amendment.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Identifies the rippled version (1.9.1) where the amendment was introduced, but does not specify the source default vote.\"\n}\n],\n\"decision_summary\": \"The provided facts describe the technical nature of the fixNFTokenDirV1 amendment, its obsolescence, the general voting process, and its introduction version. None of the facts explicitly state or imply the source default vote (YES or NO) for this amendment. Therefore, the default vote cannot be inferred from the given information.\",\n\"default_vote_confidence\": 0.0,\n\"missing_evidence\": [\n\"Explicit statement of the source default vote for fixNFTokenDirV1\",\n\"Documentation linking the amendment to a specific default vote policy\"\n],\n\"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 307,
+      "prompt_tokens": 711,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1018
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:27:54Z"
+}

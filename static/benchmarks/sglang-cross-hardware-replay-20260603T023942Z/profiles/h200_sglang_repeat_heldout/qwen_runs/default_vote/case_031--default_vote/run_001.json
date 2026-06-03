@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-03T02:57:10Z",
+  "error": "",
+  "event_id": "case_031",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "749986800a38d4ab5a9cbccd0436fb0f4099280a7d45602f64f56bfddf0fecc7",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a bug fix for deserialization edge cases that prevents overflow errors, indicating it is a necessary stability and correctness improvement."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 1.7.0, establishing it as part of the stable release history."
+      }
+    ],
+    "decision_summary": "The amendment fixSTAmountCanonicalize addresses a specific bug where valid serialized amounts could overflow during deserialization. As a bug fix that improves error detection and eliminates problematic corner cases without introducing new features or breaking changes, it is a standard stability improvement. In the context of XRPL governance, bug fixes and stability improvements in stable releases are universally supported to ensure ledger integrity. Therefore, the source default vote is YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "36821feb0ed63bd79d068b2804dd9239a29aeac404057af5276aeeb3bfd139c1",
+  "packet_id": "case_031--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "542c4263ea6cff6934a4be96a8c990f2146c8a6f6473c9b6801ab676b3006517",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a bug fix for deserialization edge cases that prevents overflow errors, indicating it is a necessary stability and correctness improvement.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 1.7.0, establishing it as part of the stable release history.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixSTAmountCanonicalize addresses a specific bug where valid serialized amounts could overflow during deserialization. As a bug fix that improves error detection and eliminates problematic corner cases without introducing new features or breaking changes, it is a standard stability improvement. In the context of XRPL governance, bug fixes and stability improvements in stable releases are universally supported to ensure ledger integrity. Therefore, the source default vote is YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 242,
+      "prompt_tokens": 650,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 892
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:57:05Z"
+}

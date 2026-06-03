@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_035",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "303ACB16CF8DBD3B5C34F131A9D19A7DE01AE05F480A8A682B869D1B4AAC8CFC",
+    "amendment_name": "fixCleanup3_1_3",
+    "decision_surface": "XRPL validator amendment decision surface for fixCleanup3_1_3.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixCleanup3_1_3 appears in XRPSCAN with introduced rippled version 3.1.3.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 303ACB16CF8DBD3B5C34F131A9D19A7DE01AE05F480A8A682B869D1B4AAC8CFC; XRPSCAN reports enabled_on=2026-05-27T03:51:20.000Z and enabled_in_ledger=104507137.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "38bf210ba3dc868afd3e87721d76da5c6bb0260ea563dd0f3077a6289261607e",
+  "packet_id": "case_035--vote_state",
+  "packet_version": 1
+}

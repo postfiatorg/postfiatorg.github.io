@@ -1,0 +1,31 @@
+# vote_state Report
+
+{
+  "deterministic_baseline_alignment_count": 70,
+  "deterministic_baseline_alignment_rate": 1.0,
+  "enabled_state_accuracy": 1.0,
+  "endpoint_error_count": 0,
+  "exact_output_hash_converged_packets": 70,
+  "fallback_used": false,
+  "generated_at": "2026-06-03T03:19:04Z",
+  "label_counts": {
+    "ENABLED": 46,
+    "MAJORITY_LOST": 1,
+    "NO_MAJORITY": 4,
+    "UNKNOWN": 5,
+    "VETOED_OR_RETIRED": 14
+  },
+  "lane": "vote_state",
+  "not_run_count": 0,
+  "packet_count": 70,
+  "parsed_label_converged_packets": 70,
+  "qwen_alignment_count": 70,
+  "qwen_alignment_rate": 1.0,
+  "qwen_vs_rule_disagreement_count": 0,
+  "schema_valid_output_rate": 1.0,
+  "total_qwen_runs": 70,
+  "vote_state_accuracy": 1.0
+}
+
+## Disagreements
+

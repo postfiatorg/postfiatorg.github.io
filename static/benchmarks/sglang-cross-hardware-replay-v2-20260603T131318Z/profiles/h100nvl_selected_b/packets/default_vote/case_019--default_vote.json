@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_019",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "0285B7E5E08E1A8E4C15636F0591D87F73CB6A7B6452A932AD72BBC8E5D1CBE3",
+    "amendment_name": "fixNFTokenDirV1",
+    "decision_surface": "XRPL validator amendment decision surface for fixNFTokenDirV1.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixNFTokenDirV1: This amendment fixes an off-by-one error that occurred in some corner cases when determining which NFTokenPage a NFToken object belongs on. It also adjusts the constraints of NFTokenPage invariant checks, so that certain error cases fail with a suitable error code such as tecNO_SUITABLE_TOKEN_PAGE instead of failing with a tecINVARIANT_FAILED error code. This amendment has no effect unless the NonFungibleTokensV1 amendment is enabled. This amendment is obsolete because its effects are included as part of NonFungibleTokensV1_1.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixNFTokenDirV1 appears in XRPSCAN with introduced rippled version 1.9.1.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "27e01a7d3e32e97c538cfaf3d71e869362baca3032fad6fb2dbfd2935fa5eddf",
+  "packet_id": "case_019--default_vote",
+  "packet_version": 1
+}

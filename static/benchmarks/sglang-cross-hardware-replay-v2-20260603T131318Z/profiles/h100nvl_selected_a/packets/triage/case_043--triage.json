@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_043",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "D3456A862DC07E382827981CA02E21946E641877F19B8889031CC57FDCAC83E2",
+    "amendment_name": "fixPayChanCancelAfter",
+    "decision_surface": "XRPL validator amendment decision surface for fixPayChanCancelAfter.",
+    "source_facts": [
+      {
+        "claim": "fixPayChanCancelAfter: Prevents new payment channels from being created with a CancelAfter time that is before the current ledger. Instead, the PaymentChannelCreate transaction fails with the result code tecEXPIRED. Without this amendment, transactions can create a payment channel whose CancelAfter time is in the past. This payment channel is automatically removed as expired by the next transaction to affect it.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixPayChanCancelAfter appears in XRPSCAN with introduced rippled version 2.5.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "dade883951619102af2b3f4fdc52019265c4e931c73c015b605304e55bb98b50",
+  "packet_id": "case_043--triage",
+  "packet_version": 1
+}

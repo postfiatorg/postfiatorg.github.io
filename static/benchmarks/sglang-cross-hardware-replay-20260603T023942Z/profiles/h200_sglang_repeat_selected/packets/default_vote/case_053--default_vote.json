@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_053",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "C7981B764EC4439123A86CC7CCBA436E9B3FF73B3F10A0AE51882E404522FC41",
+    "amendment_name": "fixNFTokenPageLinks",
+    "decision_surface": "XRPL validator amendment decision surface for fixNFTokenPageLinks.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixNFTokenPageLinks: This amendment fixes a bug that can cause NFT directories to have missing links in the middle of the directory chain. It also introduces invariant checks that can prevent similar types of corruption from occurring in the future, and introduces a new transaction type: - LedgerStateFix transactions can be used to repair corruptions in ledger data. With this amendment enabled, you can use a LedgerStateFix transaction to repair a broken link in NFT directories. In the case that future bugs cause new types of ledger corruption, this transaction type can be extended to repair the other types of corruption as well. Without this amendment, it is possible in specific circumstances to delete the last page of an NFT directory, then later create a new last page that is missing a link to the previous page. For a detailed description of the scenario that can cause this problem, see PR #4945. With this amendment, the bug that caused that corruption is fixed; additionally, a new invariant check ensures that other bugs cannot remove the last page inappropriately.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixNFTokenPageLinks appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "aa2a11f9aed1df343bacfdbf9061624a5f815e22fdb6481c005903f0b4a6121a",
+  "packet_id": "case_053--default_vote",
+  "packet_version": 1
+}

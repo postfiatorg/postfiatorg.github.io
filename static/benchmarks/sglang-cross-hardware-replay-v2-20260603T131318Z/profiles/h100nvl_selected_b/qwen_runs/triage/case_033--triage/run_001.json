@@ -1,0 +1,86 @@
+{
+  "completed_at": "2026-06-03T14:36:33Z",
+  "error": "",
+  "event_id": "case_033",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "7210112b0a764ae7c2cbbed682337c2c2ffe22f2a90e2a761eb853ec37a04f7a",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces a new asset class (MPTs) into the core DEX, which constitutes a material change to asset-control semantics and financial infrastructure.",
+      "Integration with AMM, OfferCreate, Payment, and Checks implies complex interaction logic that requires explicit review for invariant preservation and rounding correctness.",
+      "The scope involves broad cross-feature canonicalization and serialization changes to support MPTs alongside existing assets, triggering the HOLD_FOR_CHALLENGE criteria for material financial and asset-control semantics."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name 'MPTokensV2' does not start with 'fix', so the PROCEED exception for localized fixes does not apply.",
+      "There is no explicit no-vote advisory or indication that the proposal is retired/obsolete in the provided facts."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core functionality: extending the DEX to support MPTs as a tradeable asset class paired with XRP, Trust Lines, and other MPTs across multiple transaction types (OfferCreate, Payment, AMM, Checks). This represents a material expansion of asset-control and financial semantics."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the high stakes of the decision surface: incompatible servers become amendment-blocked, necessitating a conservative review route for material changes."
+      }
+    ],
+    "decision_summary": "The amendment MPTokensV2 introduces a new asset class (MPTs) into the XRPL DEX, integrating with core financial transactions like AMM, Payments, and Offers. This constitutes a material change to asset-control semantics and financial infrastructure. According to the task rules, material financial and asset-control semantics require HOLD_FOR_CHALLENGE for explicit review. It is not a localized fix, nor does it contain a no-vote advisory.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 15,
+      "validator_skim": 10
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on MPT issuance and burning mechanics relative to ledger state.",
+      "Details on how MPTs interact with existing freeze/authorization flags.",
+      "Specific rounding rules for MPT-to-XRP or MPT-to-TrustLine conversions."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the MPT integration introduce any new consensus or liveness risks?",
+        "Are there any edge cases in MPT-AMM interactions that could lead to invariant violations?",
+        "Is the serialization of MPT identifiers robust against canonicalization attacks?"
+      ],
+      "recommended_validator_action": "HOLD_FOR_CHALLENGE",
+      "review_questions": [
+        "How does MPT integration affect the existing DEX order book logic?",
+        "What are the implications for account balances and trust line limits when holding MPTs?",
+        "Are there any new transaction types or fields that require specific validation logic?"
+      ],
+      "title": "Review MPTokensV2 for Material Asset-Control and DEX Integration Risks"
+    }
+  },
+  "packet_hash": "ebf266ead8afd82728bd3e5bb52bd6c1c5bf44a43ebef511dd402b29ab6a6d98",
+  "packet_id": "case_033--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "4d1c2117aef4b1b620055549b063665c3c582142a071f664a7194b29db619123",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces a new asset class (MPTs) into the core DEX, which constitutes a material change to asset-control semantics and financial infrastructure.\",\n\"Integration with AMM, OfferCreate, Payment, and Checks implies complex interaction logic that requires explicit review for invariant preservation and rounding correctness.\",\n\"The scope involves broad cross-feature canonicalization and serialization changes to support MPTs alongside existing assets, triggering the HOLD_FOR_CHALLENGE criteria for material financial and asset-control semantics.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name 'MPTokensV2' does not start with 'fix', so the PROCEED exception for localized fixes does not apply.\",\n\"There is no explicit no-vote advisory or indication that the proposal is retired/obsolete in the provided facts.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the core functionality: extending the DEX to support MPTs as a tradeable asset class paired with XRP, Trust Lines, and other MPTs across multiple transaction types (OfferCreate, Payment, AMM, Checks). This represents a material expansion of asset-control and financial semantics.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Establishes the high stakes of the decision surface: incompatible servers become amendment-blocked, necessitating a conservative review route for material changes.\"\n}\n],\n\"decision_summary\": \"The amendment MPTokensV2 introduces a new asset class (MPTs) into the XRPL DEX, integrating with core financial transactions like AMM, Payments, and Offers. This constitutes a material change to asset-control semantics and financial infrastructure. According to the task rules, material financial and asset-control semantics require HOLD_FOR_CHALLENGE for explicit review. It is not a localized fix, nor does it contain a no-vote advisory.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 120,\n\"packet_verification\": 15,\n\"validator_skim\": 10\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Specific details on MPT issuance and burning mechanics relative to ledger state.\",\n\"Details on how MPTs interact with existing freeze/authorization flags.\",\n\"Specific rounding rules for MPT-to-XRP or MPT-to-TrustLine conversions.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the MPT integration introduce any new consensus or liveness risks?\",\n\"Are there any edge cases in MPT-AMM interactions that could lead to invariant violations?\",\n\"Is the serialization of MPT identifiers robust against canonicalization attacks?\"\n],\n\"recommended_validator_action\": \"HOLD_FOR_CHALLENGE\",\n\"review_questions\": [\n\"How does MPT integration affect the existing DEX order book logic?\",\n\"What are the implications for account balances and trust line limits when holding MPTs?\",\n\"Are there any new transaction types or fields that require specific validation logic?\"\n],\n\"title\": \"Review MPTokensV2 for Material Asset-Control and DEX Integration Risks\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 707,
+      "prompt_tokens": 1088,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1795
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:36:23Z"
+}

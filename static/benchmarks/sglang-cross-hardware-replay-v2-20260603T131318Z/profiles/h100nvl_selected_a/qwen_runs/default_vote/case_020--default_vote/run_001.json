@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-03T13:58:50Z",
+  "error": "",
+  "event_id": "case_020",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "bbad5f88cb5469a61b6f422a68cd543871775f337e8c2cc2c0fa37ed9e1ea6dd",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The claim describes the amendment as a bug fix for negative NFT offers and states it is obsolete because its effects are included in NonFungibleTokensV1_1. However, it does not explicitly state the default vote (YES or NO) for the latest stable release source."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Indicates the amendment was introduced in rippled version 1.9.2, but does not specify the default vote associated with this version or the amendment itself."
+      }
+    ],
+    "decision_summary": "The provided facts describe the functionality and history of the fixNFTokenNegOffer amendment but do not contain explicit information regarding the default vote (YES or NO) in the latest stable release source. Fact F1 notes the amendment is obsolete, but does not define the voting default. Without explicit evidence of the default vote, the task rule requires outputting UNKNOWN.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote (YES or NO) for fixNFTokenNegOffer in the latest stable release source."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "09139d4810ae00c01deea5cae1b4177047a4f25f7bfad5824ad736bb73078f5a",
+  "packet_id": "case_020--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "d62970c7e4f9bfce86d255fc2ca1bb713b6f693abd65928d632a2e647e6d6d1b",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The claim describes the amendment as a bug fix for negative NFT offers and states it is obsolete because its effects are included in NonFungibleTokensV1_1. However, it does not explicitly state the default vote (YES or NO) for the latest stable release source.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Indicates the amendment was introduced in rippled version 1.9.2, but does not specify the default vote associated with this version or the amendment itself.\"\n    }\n  ],\n  \"decision_summary\": \"The provided facts describe the functionality and history of the fixNFTokenNegOffer amendment but do not contain explicit information regarding the default vote (YES or NO) in the latest stable release source. Fact F1 notes the amendment is obsolete, but does not define the voting default. Without explicit evidence of the default vote, the task rule requires outputting UNKNOWN.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote (YES or NO) for fixNFTokenNegOffer in the latest stable release source.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 294,
+      "prompt_tokens": 725,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1019
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:58:46Z"
+}

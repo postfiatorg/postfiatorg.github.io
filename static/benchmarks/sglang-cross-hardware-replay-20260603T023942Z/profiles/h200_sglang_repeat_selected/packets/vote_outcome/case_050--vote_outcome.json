@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_050",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "EE3CF852F0506782D05E65D49E5DCC3D16D50898CD1B646BAE274863401CC3CE",
+    "amendment_name": "NFTokenMintOffer",
+    "decision_surface": "XRPL validator amendment decision surface for NFTokenMintOffer.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "NFTokenMintOffer: Modifies the process of minting NFTs so that you can also create a sell offer for the token at the same time. With this amendment, an NFTokenMint transaction can simultaneously place a sell offer for the minted token. This adds three optional fields to the transaction, which define the NFT sell offer if you provide them: - Amount - The sell price of the NFT - Destination - Limit the sale so that it can only be accepted by this account - Expiration - The time after which this sell offer expires. Without this amendment, you must separately send an NFTokenCreateOffer transaction after minting an NFT to place a sell offer.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "NFTokenMintOffer appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "669e24679fbf4b0223690a0aa4130d5a3c3c73f463c169344f8bad85b5e80d4c",
+  "packet_id": "case_050--vote_outcome",
+  "packet_version": 1
+}

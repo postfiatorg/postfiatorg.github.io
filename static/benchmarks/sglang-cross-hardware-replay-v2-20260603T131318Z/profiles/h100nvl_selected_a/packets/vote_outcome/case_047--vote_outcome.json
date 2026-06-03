@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_047",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "8EC4304A06AF03BE953EA6EDA494864F6F3F30AA002BABA35869FBB8C6AE5D52",
+    "amendment_name": "fixInvalidTxFlags",
+    "decision_surface": "XRPL validator amendment decision surface for fixInvalidTxFlags.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixInvalidTxFlags: Adds flag checks for CredentialCreate, CredentialAccept, CredentialDelete, and SignerListSet transactions. With this amendment enabled, these transactions will return a temINVALID_FLAG error if they include a flag that doesn't exist, or a contradictory combination of flags.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixInvalidTxFlags appears in XRPSCAN with introduced rippled version 2.4.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "29ff1af3a255b02b8481d5f98e179c1ee8389b2c573561b46fd15d12646cd46c",
+  "packet_id": "case_047--vote_outcome",
+  "packet_version": 1
+}

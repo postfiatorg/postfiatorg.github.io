@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_038",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "AB8D932A5F338903FE5BCBD80B611FFED70839ABA3170E9CE01D947C0EDEDCF2",
+    "amendment_name": "fixMPTDeliveredAmount",
+    "decision_surface": "XRPL validator amendment decision surface for fixMPTDeliveredAmount.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixMPTDeliveredAmount: This amendment adds missing DeliveredAmount and delivered_amount metadata fields from direct MPT Payment transactions. Without this amendment, direct MPT payments deliver the full amount but do not have the metadata fields to summarize how much was delivered.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixMPTDeliveredAmount appears in XRPSCAN with introduced rippled version 3.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "43298591ad1a87e9a0296d1c219500514e210483d76a331105fa2f8cf5ae7150",
+  "packet_id": "case_038--vote_outcome",
+  "packet_version": 1
+}

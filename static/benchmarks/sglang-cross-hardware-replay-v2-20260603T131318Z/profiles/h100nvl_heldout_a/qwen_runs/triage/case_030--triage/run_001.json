@@ -1,0 +1,82 @@
+{
+  "completed_at": "2026-06-03T15:01:52Z",
+  "error": "",
+  "event_id": "case_030",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a4413e43312a9d665bcaa356648bcc89aa32490a4420217384b9b0f42206b54f",
+  "output_hash": "1537dd91859566eef495d6622a5e1f4ac2cbbab7a9d4dbdf42f42366d6d59d36",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment addresses a scenario involving 'small amounts' and rounding, which touches on numeric precision.",
+      "The amendment affects Offer removal logic, which is part of the order book mechanics."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', indicating it is a bug fix.",
+      "The packet describes the amendment as fixing a specific issue where Offers with small remaining amounts block better rates and cause failures, rather than introducing new financial semantics or changing invariants.",
+      "The fix allows payments and trades to remove these Offers normally, restoring expected behavior rather than altering asset control or accounting rules.",
+      "The issue is localized to edge-case Offer consumption and does not involve broad cross-feature canonicalization, AMM invariants, NFT semantics, or material token supply changes.",
+      "There is no explicit no-vote advisory or indication that the fix is obsolete."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a fix for a specific bug where small remaining amounts in Offers cause blocking and failures, clarifying that it restores normal removal behavior without introducing new risk patterns."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with a specific rippled version, supporting its status as a standard software update/fix."
+      }
+    ],
+    "decision_summary": "The amendment 'fixRmSmallIncreasedQOffers' is a localized fix for a bug where Offers with negligible remaining amounts block the order book. It does not introduce new financial semantics, change invariants, or affect asset control. It falls under the PROCEED category for fix amendments unless specific high-risk patterns are present, which are not identified in the facts.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 0,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [
+      "None required for PROCEED decision based on provided facts."
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the fix introduce any new rounding rules that could affect other parts of the ledger beyond Offer removal?"
+      ],
+      "recommended_validator_action": "Vote YES to enable the fix.",
+      "review_questions": [
+        "Is the description of the bug consistent with known order book edge cases?"
+      ],
+      "title": "Review fixRmSmallIncreasedQOffers"
+    }
+  },
+  "packet_hash": "622de2f592fae69b389bf5fcbef7716f68d71ce1010984e5520d51861d5754ab",
+  "packet_id": "case_030--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "0ec0747e0907f5eea0805876f65e6a4e20565e624a7fbbfc8a2eff9511140f3f",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment addresses a scenario involving 'small amounts' and rounding, which touches on numeric precision.\",\n\"The amendment affects Offer removal logic, which is part of the order book mechanics.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix', indicating it is a bug fix.\",\n\"The packet describes the amendment as fixing a specific issue where Offers with small remaining amounts block better rates and cause failures, rather than introducing new financial semantics or changing invariants.\",\n\"The fix allows payments and trades to remove these Offers normally, restoring expected behavior rather than altering asset control or accounting rules.\",\n\"The issue is localized to edge-case Offer consumption and does not involve broad cross-feature canonicalization, AMM invariants, NFT semantics, or material token supply changes.\",\n\"There is no explicit no-vote advisory or indication that the fix is obsolete.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the amendment as a fix for a specific bug where small remaining amounts in Offers cause blocking and failures, clarifying that it restores normal removal behavior without introducing new risk patterns.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment is associated with a specific rippled version, supporting its status as a standard software update/fix.\"\n}\n],\n\"decision_summary\": \"The amendment 'fixRmSmallIncreasedQOffers' is a localized fix for a bug where Offers with negligible remaining amounts block the order book. It does not introduce new financial semantics, change invariants, or affect asset control. It falls under the PROCEED category for fix amendments unless specific high-risk patterns are present, which are not identified in the facts.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 0,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n\"missing_evidence\": [\n\"None required for PROCEED decision based on provided facts.\"\n],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the fix introduce any new rounding rules that could affect other parts of the ledger beyond Offer removal?\"\n],\n\"recommended_validator_action\": \"Vote YES to enable the fix.\",\n\"review_questions\": [\n\"Is the description of the bug consistent with known order book edge cases?\"\n],\n\"title\": \"Review fixRmSmallIncreasedQOffers\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 560,
+      "prompt_tokens": 1180,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1740
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T15:01:43Z"
+}

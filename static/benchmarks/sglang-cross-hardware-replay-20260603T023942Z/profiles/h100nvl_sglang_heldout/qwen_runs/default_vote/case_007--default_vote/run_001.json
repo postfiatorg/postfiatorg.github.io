@@ -1,0 +1,60 @@
+{
+  "completed_at": "2026-06-03T03:28:54Z",
+  "error": "",
+  "event_id": "case_007",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "afe963d0dd7a44565c221ac065c4691b24c958e29a4652e1263c752a4ab935b9",
+  "output_hash": "c10c7ef3ca7565cb604bd732ad6cd4667419ea7bf7b688bc0e3d829164460008",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical function of the amendment (adding sanity checks) but does not specify the default vote configuration in the source code or release notes."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general voting mechanism (supermajority) but does not specify the default vote for this specific amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the version where the amendment was introduced but does not state the default vote."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical purpose, voting process, and version introduction of the EnforceInvariants amendment. However, none of the facts explicitly state the default vote (YES or NO) configured in the latest stable release source. Without explicit evidence of the default vote setting, the value cannot be inferred.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote (YES/NO) in the source code or release notes for the latest stable version."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "6a20842cf4fe5c92aaccb0fc3ebd405759b95dccf11c8dc03b06339b0e8b511a",
+  "packet_id": "case_007--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "915f18c6b9ea54b8ed70884d53ab6b738f1d269315e02c47beacc1f060a7eb1c",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical function of the amendment (adding sanity checks) but does not specify the default vote configuration in the source code or release notes.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Describes the general voting mechanism (supermajority) but does not specify the default vote for this specific amendment.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Identifies the version where the amendment was introduced but does not state the default vote.\"\n    }\n  ],\n  \"decision_summary\": \"The provided facts describe the technical purpose, voting process, and version introduction of the EnforceInvariants amendment. However, none of the facts explicitly state the default vote (YES or NO) configured in the latest stable release source. Without explicit evidence of the default vote setting, the value cannot be inferred.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote (YES/NO) in the source code or release notes for the latest stable version.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 289,
+      "prompt_tokens": 758,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1047
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:28:49Z"
+}

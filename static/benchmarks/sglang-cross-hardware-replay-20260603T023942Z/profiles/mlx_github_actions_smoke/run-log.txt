@@ -1,0 +1,229 @@
+mlx-smoke	Set up job	﻿2026-06-03T02:34:30.7857040Z Current runner version: '2.334.0'
+mlx-smoke	Set up job	2026-06-03T02:34:30.7868960Z ##[group]Runner Image Provisioner
+mlx-smoke	Set up job	2026-06-03T02:34:30.7869400Z Hosted Compute Agent
+mlx-smoke	Set up job	2026-06-03T02:34:30.7869730Z Version: 20260520.533
+mlx-smoke	Set up job	2026-06-03T02:34:30.7870070Z Commit: 189110e25284a9812c124fd27b339e2fb4f2f9db
+mlx-smoke	Set up job	2026-06-03T02:34:30.7870470Z Build Date: 2026-05-20T17:44:04Z
+mlx-smoke	Set up job	2026-06-03T02:34:30.7870890Z Worker ID: {a92065ba-5950-490a-a373-6632092c4ab1}
+mlx-smoke	Set up job	2026-06-03T02:34:30.7871280Z Azure Region: westus
+mlx-smoke	Set up job	2026-06-03T02:34:30.7871600Z ##[endgroup]
+mlx-smoke	Set up job	2026-06-03T02:34:30.7872260Z ##[group]Operating System
+mlx-smoke	Set up job	2026-06-03T02:34:30.7872590Z macOS
+mlx-smoke	Set up job	2026-06-03T02:34:30.7872860Z 15.7.7
+mlx-smoke	Set up job	2026-06-03T02:34:30.7873140Z 24G720
+mlx-smoke	Set up job	2026-06-03T02:34:30.7873420Z ##[endgroup]
+mlx-smoke	Set up job	2026-06-03T02:34:30.7873720Z ##[group]Runner Image
+mlx-smoke	Set up job	2026-06-03T02:34:30.7874040Z Image: macos-15-arm64
+mlx-smoke	Set up job	2026-06-03T02:34:30.7874350Z Version: 20260527.0100.1
+mlx-smoke	Set up job	2026-06-03T02:34:30.7874990Z Included Software: https://github.com/actions/runner-images/blob/macos-15-arm64/20260527.0100/images/macos/macos-15-arm64-Readme.md
+mlx-smoke	Set up job	2026-06-03T02:34:30.7875950Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-15-arm64%2F20260527.0100
+mlx-smoke	Set up job	2026-06-03T02:34:30.7876510Z ##[endgroup]
+mlx-smoke	Set up job	2026-06-03T02:34:30.7877090Z ##[group]GITHUB_TOKEN Permissions
+mlx-smoke	Set up job	2026-06-03T02:34:30.7877880Z Contents: read
+mlx-smoke	Set up job	2026-06-03T02:34:30.7878260Z Metadata: read
+mlx-smoke	Set up job	2026-06-03T02:34:30.7878570Z ##[endgroup]
+mlx-smoke	Set up job	2026-06-03T02:34:30.7879590Z Secret source: Actions
+mlx-smoke	Set up job	2026-06-03T02:34:30.7879970Z Prepare workflow directory
+mlx-smoke	Set up job	2026-06-03T02:34:30.8095120Z Prepare all required actions
+mlx-smoke	Set up job	2026-06-03T02:34:30.8150920Z Complete job name: mlx-smoke
+mlx-smoke	Host profile	﻿2026-06-03T02:34:30.8497520Z ##[group]Run uname -a
+mlx-smoke	Host profile	2026-06-03T02:34:30.8497950Z [36;1muname -a[0m
+mlx-smoke	Host profile	2026-06-03T02:34:30.8498280Z [36;1msw_vers[0m
+mlx-smoke	Host profile	2026-06-03T02:34:30.8498640Z [36;1msysctl -n machdep.cpu.brand_string || true[0m
+mlx-smoke	Host profile	2026-06-03T02:34:30.8499060Z [36;1mpython3 - <<'PY'[0m
+mlx-smoke	Host profile	2026-06-03T02:34:30.8499460Z [36;1mimport platform[0m
+mlx-smoke	Host profile	2026-06-03T02:34:30.8499860Z [36;1mprint("platform.machine=", platform.machine())[0m
+mlx-smoke	Host profile	2026-06-03T02:34:30.8500380Z [36;1mprint("platform.platform=", platform.platform())[0m
+mlx-smoke	Host profile	2026-06-03T02:34:30.8500800Z [36;1mPY[0m
+mlx-smoke	Host profile	2026-06-03T02:34:30.9360210Z shell: /bin/bash -e {0}
+mlx-smoke	Host profile	2026-06-03T02:34:30.9360870Z ##[endgroup]
+mlx-smoke	Host profile	2026-06-03T02:34:30.9715230Z Darwin lvl04-dm353-b18d58f1-d69e-47c9-9157-7e0c394d1e83-FA1EC323B85F.local 24.6.0 Darwin Kernel Version 24.6.0: Tue Apr 21 20:18:00 PDT 2026; root:xnu-11417.140.69.710.16~1/RELEASE_ARM64_VMAPPLE arm64
+mlx-smoke	Host profile	2026-06-03T02:34:30.9773690Z ProductName:		macOS
+mlx-smoke	Host profile	2026-06-03T02:34:30.9775060Z ProductVersion:		15.7.7
+mlx-smoke	Host profile	2026-06-03T02:34:30.9775450Z BuildVersion:		24G720
+mlx-smoke	Host profile	2026-06-03T02:34:30.9801190Z Apple M2 Pro (Virtual)
+mlx-smoke	Host profile	2026-06-03T02:34:31.1233910Z platform.machine= arm64
+mlx-smoke	Host profile	2026-06-03T02:34:31.1234580Z platform.platform= macOS-15.7.7-arm64-arm-64bit-Mach-O
+mlx-smoke	Install MLX	﻿2026-06-03T02:34:31.1362110Z ##[group]Run python3 -m venv .venv
+mlx-smoke	Install MLX	2026-06-03T02:34:31.1362590Z [36;1mpython3 -m venv .venv[0m
+mlx-smoke	Install MLX	2026-06-03T02:34:31.1363020Z [36;1m. .venv/bin/activate[0m
+mlx-smoke	Install MLX	2026-06-03T02:34:31.1363430Z [36;1mpython -m pip install --upgrade pip[0m
+mlx-smoke	Install MLX	2026-06-03T02:34:31.1363900Z [36;1mpython -m pip install mlx[0m
+mlx-smoke	Install MLX	2026-06-03T02:34:31.1364330Z [36;1mif [ "true" = "true" ]; then[0m
+mlx-smoke	Install MLX	2026-06-03T02:34:31.1364730Z [36;1m  python -m pip install mlx-lm[0m
+mlx-smoke	Install MLX	2026-06-03T02:34:31.1365120Z [36;1mfi[0m
+mlx-smoke	Install MLX	2026-06-03T02:34:31.1400120Z shell: /bin/bash -e {0}
+mlx-smoke	Install MLX	2026-06-03T02:34:31.1400500Z ##[endgroup]
+mlx-smoke	Install MLX	2026-06-03T02:34:33.1173850Z Requirement already satisfied: pip in ./.venv/lib/python3.14/site-packages (26.1.1)
+mlx-smoke	Install MLX	2026-06-03T02:34:33.2098310Z Collecting pip
+mlx-smoke	Install MLX	2026-06-03T02:34:33.2533630Z   Downloading pip-26.1.2-py3-none-any.whl.metadata (4.6 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:33.2650180Z Downloading pip-26.1.2-py3-none-any.whl (1.8 MB)
+mlx-smoke	Install MLX	2026-06-03T02:34:33.3030610Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 84.9 MB/s  0:00:00
+mlx-smoke	Install MLX	2026-06-03T02:34:33.3057260Z Installing collected packages: pip
+mlx-smoke	Install MLX	2026-06-03T02:34:33.3057730Z   Attempting uninstall: pip
+mlx-smoke	Install MLX	2026-06-03T02:34:33.3071060Z     Found existing installation: pip 26.1.1
+mlx-smoke	Install MLX	2026-06-03T02:34:33.3229230Z     Uninstalling pip-26.1.1:
+mlx-smoke	Install MLX	2026-06-03T02:34:33.3276370Z       Successfully uninstalled pip-26.1.1
+mlx-smoke	Install MLX	2026-06-03T02:34:33.9467700Z Successfully installed pip-26.1.2
+mlx-smoke	Install MLX	2026-06-03T02:34:34.1624760Z WARNING: Cache entry deserialization failed, entry ignored
+mlx-smoke	Install MLX	2026-06-03T02:34:34.2748400Z Collecting mlx
+mlx-smoke	Install MLX	2026-06-03T02:34:34.3271810Z   Downloading mlx-0.31.2-cp314-cp314-macosx_15_0_arm64.whl.metadata (5.9 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:34.3441730Z Collecting mlx-metal==0.31.2 (from mlx)
+mlx-smoke	Install MLX	2026-06-03T02:34:34.3695440Z   Downloading mlx_metal-0.31.2-py3-none-macosx_15_0_arm64.whl.metadata (5.1 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:34.3866850Z Downloading mlx-0.31.2-cp314-cp314-macosx_15_0_arm64.whl (588 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:34.4106370Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 588.4/588.4 kB 40.6 MB/s  0:00:00
+mlx-smoke	Install MLX	2026-06-03T02:34:34.4211440Z Downloading mlx_metal-0.31.2-py3-none-macosx_15_0_arm64.whl (40.1 MB)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.0416300Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.1/40.1 MB 65.2 MB/s  0:00:00
+mlx-smoke	Install MLX	2026-06-03T02:34:35.0842140Z Installing collected packages: mlx-metal, mlx
+mlx-smoke	Install MLX	2026-06-03T02:34:35.3445880Z 
+mlx-smoke	Install MLX	2026-06-03T02:34:35.3451380Z Successfully installed mlx-0.31.2 mlx-metal-0.31.2
+mlx-smoke	Install MLX	2026-06-03T02:34:35.6001930Z Collecting mlx-lm
+mlx-smoke	Install MLX	2026-06-03T02:34:35.6308500Z   Downloading mlx_lm-0.31.3-py3-none-any.whl.metadata (9.5 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.6454590Z Requirement already satisfied: mlx>=0.31.2 in ./.venv/lib/python3.14/site-packages (from mlx-lm) (0.31.2)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.7517030Z Collecting numpy (from mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.7626220Z   Downloading numpy-2.4.6-cp314-cp314-macosx_14_0_arm64.whl.metadata (6.6 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.7849930Z Collecting transformers>=5.0.0 (from mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.7918700Z   Downloading transformers-5.9.0-py3-none-any.whl.metadata (33 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.8451990Z Collecting sentencepiece (from mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.8547140Z   Downloading sentencepiece-0.2.1-cp314-cp314-macosx_11_0_arm64.whl.metadata (10 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.9323820Z Collecting protobuf (from mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.9428780Z   Downloading protobuf-7.35.0-cp310-abi3-macosx_10_9_universal2.whl.metadata (595 bytes)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.9663190Z Collecting pyyaml (from mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.9746920Z   Downloading pyyaml-6.0.3-cp314-cp314-macosx_11_0_arm64.whl.metadata (2.4 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.9886830Z Collecting jinja2 (from mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:35.9963650Z   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.0002470Z Requirement already satisfied: mlx-metal==0.31.2 in ./.venv/lib/python3.14/site-packages (from mlx>=0.31.2->mlx-lm) (0.31.2)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.0238290Z Collecting huggingface-hub<2.0,>=1.5.0 (from transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.0323470Z   Downloading huggingface_hub-1.17.0-py3-none-any.whl.metadata (14 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.0537160Z Collecting packaging>=20.0 (from transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.0613620Z   Downloading packaging-26.2-py3-none-any.whl.metadata (3.5 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.2256610Z Collecting regex>=2025.10.22 (from transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.2383300Z   Downloading regex-2026.5.9-cp314-cp314-macosx_11_0_arm64.whl.metadata (40 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.3185350Z Collecting tokenizers<=0.23.0,>=0.22.0 (from transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.3322160Z   Downloading tokenizers-0.22.2-cp39-abi3-macosx_11_0_arm64.whl.metadata (7.3 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.3505490Z Collecting typer (from transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.3590960Z   Downloading typer-0.26.6-py3-none-any.whl.metadata (16 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.4224800Z Collecting safetensors>=0.4.3 (from transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.4338580Z   Downloading safetensors-0.7.0-cp38-abi3-macosx_11_0_arm64.whl.metadata (4.1 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.4559270Z Collecting tqdm>=4.27 (from transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.4684350Z   Downloading tqdm-4.67.3-py3-none-any.whl.metadata (57 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.4893470Z Collecting click>=8.4.0 (from huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.5124210Z   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.5295160Z Collecting filelock>=3.10.0 (from huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.5699530Z   Downloading filelock-3.29.0-py3-none-any.whl.metadata (2.0 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.5868890Z Collecting fsspec>=2023.5.0 (from huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.6088030Z   Downloading fsspec-2026.4.0-py3-none-any.whl.metadata (10 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.6398860Z Collecting hf-xet<2.0.0,>=1.4.3 (from huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.6507530Z   Downloading hf_xet-1.5.0-cp37-abi3-macosx_11_0_arm64.whl.metadata (4.9 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.6657710Z Collecting httpx<1,>=0.23.0 (from huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.6750910Z   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.6815050Z Collecting typer (from transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.6893100Z   Downloading typer-0.25.1-py3-none-any.whl.metadata (15 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.7051410Z Collecting typing-extensions>=4.1.0 (from huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.7134980Z   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.7317580Z Collecting anyio (from httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.7385830Z   Downloading anyio-4.13.0-py3-none-any.whl.metadata (4.5 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.7425400Z WARNING: Cache entry deserialization failed, entry ignored
+mlx-smoke	Install MLX	2026-06-03T02:34:36.7547340Z Collecting certifi (from httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.7557750Z   Using cached certifi-2026.5.20-py3-none-any.whl.metadata (2.5 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.7733870Z Collecting httpcore==1.* (from httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.7808550Z   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.7955340Z Collecting idna (from httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.8033350Z   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.8171450Z Collecting h11>=0.16 (from httpcore==1.*->httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.8241610Z   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.8398720Z Collecting shellingham>=1.3.0 (from typer->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.8476420Z   Downloading shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.8817670Z Collecting rich>=13.8.0 (from typer->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.8908810Z   Downloading rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.9042540Z Collecting annotated-doc>=0.0.2 (from typer->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.9158190Z   Downloading annotated_doc-0.0.4-py3-none-any.whl.metadata (6.6 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.9328990Z Collecting markdown-it-py>=2.2.0 (from rich>=13.8.0->typer->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.9396040Z   Downloading markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.9559170Z Collecting pygments<3.0.0,>=2.13.0 (from rich>=13.8.0->typer->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.9626110Z   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.9747150Z Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.8.0->typer->transformers>=5.0.0->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:36.9840170Z   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.0170830Z Collecting MarkupSafe>=2.0 (from jinja2->mlx-lm)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.0282320Z   Downloading markupsafe-3.0.3-cp314-cp314-macosx_11_0_arm64.whl.metadata (2.7 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.0496880Z Downloading mlx_lm-0.31.3-py3-none-any.whl (408 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.0710360Z Downloading transformers-5.9.0-py3-none-any.whl (10.8 MB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.1328550Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.8/10.8 MB 174.9 MB/s  0:00:00
+mlx-smoke	Install MLX	2026-06-03T02:34:37.1401370Z Downloading huggingface_hub-1.17.0-py3-none-any.whl (671 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.1450930Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 671.5/671.5 kB 107.0 MB/s  0:00:00
+mlx-smoke	Install MLX	2026-06-03T02:34:37.1557040Z Downloading hf_xet-1.5.0-cp37-abi3-macosx_11_0_arm64.whl (3.8 MB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.1916710Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.8/3.8 MB 102.6 MB/s  0:00:00
+mlx-smoke	Install MLX	2026-06-03T02:34:37.1990550Z Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.2085830Z Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.2250970Z Downloading tokenizers-0.22.2-cp39-abi3-macosx_11_0_arm64.whl (3.0 MB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.2437400Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.0/3.0 MB 154.9 MB/s  0:00:00
+mlx-smoke	Install MLX	2026-06-03T02:34:37.2508100Z Downloading typer-0.25.1-py3-none-any.whl (58 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.2610920Z Downloading annotated_doc-0.0.4-py3-none-any.whl (5.3 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.2697850Z Downloading click-8.4.1-py3-none-any.whl (116 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.2781800Z Downloading filelock-3.29.0-py3-none-any.whl (39 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.2875440Z Downloading fsspec-2026.4.0-py3-none-any.whl (203 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.2970990Z Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.3106750Z Downloading numpy-2.4.6-cp314-cp314-macosx_14_0_arm64.whl (5.2 MB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.3578280Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 107.9 MB/s  0:00:00
+mlx-smoke	Install MLX	2026-06-03T02:34:37.3810090Z Downloading packaging-26.2-py3-none-any.whl (100 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.3982070Z Downloading pyyaml-6.0.3-cp314-cp314-macosx_11_0_arm64.whl (173 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.4163470Z Downloading regex-2026.5.9-cp314-cp314-macosx_11_0_arm64.whl (289 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.4302000Z Downloading rich-15.0.0-py3-none-any.whl (310 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.4434180Z Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.4531940Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 136.4 MB/s  0:00:00
+mlx-smoke	Install MLX	2026-06-03T02:34:37.4587420Z Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.4712650Z Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.4833730Z Downloading safetensors-0.7.0-cp38-abi3-macosx_11_0_arm64.whl (447 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.4964370Z Downloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.5072670Z Downloading tqdm-4.67.3-py3-none-any.whl (78 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.5170960Z Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.5290040Z Downloading anyio-4.13.0-py3-none-any.whl (114 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.5427830Z Downloading idna-3.18-py3-none-any.whl (65 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.5483780Z Using cached certifi-2026.5.20-py3-none-any.whl (134 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.5574860Z Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.5683390Z Downloading markupsafe-3.0.3-cp314-cp314-macosx_11_0_arm64.whl (12 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.5800550Z Downloading protobuf-7.35.0-cp310-abi3-macosx_10_9_universal2.whl (433 kB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.5909710Z Downloading sentencepiece-0.2.1-cp314-cp314-macosx_11_0_arm64.whl (1.3 MB)
+mlx-smoke	Install MLX	2026-06-03T02:34:37.6133410Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 50.0 MB/s  0:00:00
+mlx-smoke	Install MLX	2026-06-03T02:34:37.6924300Z Installing collected packages: typing-extensions, tqdm, shellingham, sentencepiece, safetensors, regex, pyyaml, pygments, protobuf, packaging, numpy, mdurl, MarkupSafe, idna, hf-xet, h11, fsspec, filelock, click, certifi, annotated-doc, markdown-it-py, jinja2, httpcore, anyio, rich, httpx, typer, huggingface-hub, tokenizers, transformers, mlx-lm
+mlx-smoke	Install MLX	2026-06-03T02:34:44.5982340Z 
+mlx-smoke	Install MLX	2026-06-03T02:34:44.6002310Z Successfully installed MarkupSafe-3.0.3 annotated-doc-0.0.4 anyio-4.13.0 certifi-2026.5.20 click-8.4.1 filelock-3.29.0 fsspec-2026.4.0 h11-0.16.0 hf-xet-1.5.0 httpcore-1.0.9 httpx-0.28.1 huggingface-hub-1.17.0 idna-3.18 jinja2-3.1.6 markdown-it-py-4.2.0 mdurl-0.1.2 mlx-lm-0.31.3 numpy-2.4.6 packaging-26.2 protobuf-7.35.0 pygments-2.20.0 pyyaml-6.0.3 regex-2026.5.9 rich-15.0.0 safetensors-0.7.0 sentencepiece-0.2.1 shellingham-1.5.4 tokenizers-0.22.2 tqdm-4.67.3 transformers-5.9.0 typer-0.25.1 typing-extensions-4.15.0
+mlx-smoke	MLX import and compute smoke	﻿2026-06-03T02:34:44.6745100Z ##[group]Run . .venv/bin/activate
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6745350Z [36;1m. .venv/bin/activate[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6745510Z [36;1mpython - <<'PY'[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6745640Z [36;1mimport json[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6745760Z [36;1mimport platform[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6745900Z [36;1mimport mlx.core as mx[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6746040Z [36;1m[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6746160Z [36;1mx = mx.arange(8, dtype=mx.float32)[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6746340Z [36;1my = (x * x).sum()[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6746470Z [36;1mmx.eval(y)[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6746590Z [36;1m[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6746690Z [36;1mresult = {[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6746850Z [36;1m    "platform_machine": platform.machine(),[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6747050Z [36;1m    "mlx_available": True,[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6747210Z [36;1m    "mlx_sum_squares": float(y),[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6747370Z [36;1m}[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6747470Z [36;1mtry:[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6747580Z [36;1m    import mlx_lm[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6747760Z [36;1m    result["mlx_lm_available"] = True[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6748010Z [36;1m    result["mlx_lm_version"] = getattr(mlx_lm, "__version__", "unknown")[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6753690Z [36;1mexcept Exception as exc:[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6753890Z [36;1m    result["mlx_lm_available"] = False[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6754120Z [36;1m    result["mlx_lm_error"] = f"{type(exc).__name__}: {exc}"[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6754320Z [36;1m[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6754470Z [36;1mprint(json.dumps(result, indent=2, sort_keys=True))[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6754730Z [36;1massert result["platform_machine"] == "arm64", result[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6754950Z [36;1massert result["mlx_available"] is True[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6755160Z [36;1massert result["mlx_sum_squares"] == 140.0[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6755330Z [36;1mPY[0m
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6788740Z shell: /bin/bash -e {0}
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:44.6788890Z ##[endgroup]
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:45.8050970Z {
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:45.8051320Z   "mlx_available": true,
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:45.8051570Z   "mlx_lm_available": true,
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:45.8051770Z   "mlx_lm_version": "0.31.3",
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:45.8051950Z   "mlx_sum_squares": 140.0,
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:45.8052180Z   "platform_machine": "arm64"
+mlx-smoke	MLX import and compute smoke	2026-06-03T02:34:45.8052360Z }
+mlx-smoke	Complete job	﻿2026-06-03T02:34:45.8734340Z Cleaning up orphan processes

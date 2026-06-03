@@ -1,0 +1,85 @@
+{
+  "completed_at": "2026-06-03T14:35:44Z",
+  "error": "",
+  "event_id": "case_028",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "67ed7b731a6b5e734d80275a4c905d1b017d8cf3e410aae30b2331c40897e982",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces cross-chain bridge functionality, which is explicitly listed as a material risk pattern requiring HOLD_FOR_CHALLENGE.",
+      "Cross-chain bridges involve complex asset-control semantics, including locking assets on a source chain and claiming them on a destination chain, creating significant financial and security risks.",
+      "The introduction of new transaction types (XChainCommit, XChainClaim, etc.) and ledger entry types (Bridge, XChainOwnedClaimID) represents a major expansion of the protocol's trust model and attack surface.",
+      "Bridge mechanisms often involve oracle-like attestations (XChainAddAccountCreateAttestation, XChainAddClaimAttestation), which are explicitly cited as requiring explicit review under the HOLD_FOR_CHALLENGE criteria."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment is not a simple localized fix; it is a new feature set.",
+      "There is no explicit no-vote advisory or indication that the proposal is retired/obsolete in the provided facts."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core functionality of XChainBridge, including new transactions for locking/claiming assets and new ledger objects for bridges, confirming it is a cross-chain bridge feature with material financial and asset-control semantics."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for conservative review of major protocol changes."
+      }
+    ],
+    "decision_summary": "The XChainBridge amendment introduces cross-chain bridge capabilities, which are explicitly identified as a material risk pattern (bridge, asset-control semantics, oracle-like attestations) requiring HOLD_FOR_CHALLENGE. The complexity of locking assets on one chain and releasing them on another, along with the new trust models involved, necessitates explicit validator review rather than proceeding or delaying for a simple fix.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 15,
+      "validator_skim": 30
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on the security model of the witness servers and attestation mechanisms.",
+      "Analysis of potential cross-chain replay attacks or double-spend scenarios."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the bridge implementation adequately protect against cross-chain double-spending?",
+        "Are the attestation mechanisms sufficiently secure against witness server compromise?"
+      ],
+      "recommended_validator_action": "HOLD_FOR_CHALLENGE",
+      "review_questions": [
+        "What are the specific risks associated with the new XChainCommit and XChainClaim transactions?",
+        "How does the bridge handle finality and reversibility on the connected chains?",
+        "Are there sufficient safeguards against malicious bridge operators?"
+      ],
+      "title": "Review XChainBridge Cross-Chain Bridge Amendment"
+    }
+  },
+  "packet_hash": "66d23e9ebbc200259a09f57a8ee5c72c5c5eb216bdeb7c95c9a68bfc4732e4a1",
+  "packet_id": "case_028--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "7d2e14acbb2033aa4981937c587c1aa95c74cc949f03f2cfddc9f889b5e377a2",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces cross-chain bridge functionality, which is explicitly listed as a material risk pattern requiring HOLD_FOR_CHALLENGE.\",\n\"Cross-chain bridges involve complex asset-control semantics, including locking assets on a source chain and claiming them on a destination chain, creating significant financial and security risks.\",\n\"The introduction of new transaction types (XChainCommit, XChainClaim, etc.) and ledger entry types (Bridge, XChainOwnedClaimID) represents a major expansion of the protocol's trust model and attack surface.\",\n\"Bridge mechanisms often involve oracle-like attestations (XChainAddAccountCreateAttestation, XChainAddClaimAttestation), which are explicitly cited as requiring explicit review under the HOLD_FOR_CHALLENGE criteria.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment is not a simple localized fix; it is a new feature set.\",\n\"There is no explicit no-vote advisory or indication that the proposal is retired/obsolete in the provided facts.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the core functionality of XChainBridge, including new transactions for locking/claiming assets and new ledger objects for bridges, confirming it is a cross-chain bridge feature with material financial and asset-control semantics.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for conservative review of major protocol changes.\"\n}\n],\n\"decision_summary\": \"The XChainBridge amendment introduces cross-chain bridge capabilities, which are explicitly identified as a material risk pattern (bridge, asset-control semantics, oracle-like attestations) requiring HOLD_FOR_CHALLENGE. The complexity of locking assets on one chain and releasing them on another, along with the new trust models involved, necessitates explicit validator review rather than proceeding or delaying for a simple fix.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 120,\n\"packet_verification\": 15,\n\"validator_skim\": 30\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Specific details on the security model of the witness servers and attestation mechanisms.\",\n\"Analysis of potential cross-chain replay attacks or double-spend scenarios.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the bridge implementation adequately protect against cross-chain double-spending?\",\n\"Are the attestation mechanisms sufficiently secure against witness server compromise?\"\n],\n\"recommended_validator_action\": \"HOLD_FOR_CHALLENGE\",\n\"review_questions\": [\n\"What are the specific risks associated with the new XChainCommit and XChainClaim transactions?\",\n\"How does the bridge handle finality and reversibility on the connected chains?\",\n\"Are there sufficient safeguards against malicious bridge operators?\"\n],\n\"title\": \"Review XChainBridge Cross-Chain Bridge Amendment\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 656,
+      "prompt_tokens": 1364,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 2020
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:35:35Z"
+}

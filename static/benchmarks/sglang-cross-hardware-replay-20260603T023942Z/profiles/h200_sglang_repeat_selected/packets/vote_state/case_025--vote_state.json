@@ -1,0 +1,39 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_025",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "C6970A8B603D8778783B61C0D445C23D1633CCFAEF0D43E7DBCD1521D34BD7C3",
+    "amendment_name": "SHAMapV2",
+    "decision_surface": "XRPL validator amendment decision surface for SHAMapV2.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "Known Amendments status for SHAMapV2 is obsolete/removed: OBSOLETE.",
+        "fact_id": "F5",
+        "source_id": "xrpl_known_amendments_md"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "20252415983e1bb6445065fa508709c201e7761d6e518f1809096023b2978378",
+  "packet_id": "case_025--vote_state",
+  "packet_version": 1
+}

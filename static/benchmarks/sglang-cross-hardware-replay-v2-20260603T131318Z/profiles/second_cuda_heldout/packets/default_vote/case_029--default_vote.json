@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_029",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "DF8B4536989BDACE3F934F29423848B9F1D76D09BE6A1FCFE7E7F06AA26ABEAD",
+    "amendment_name": "fixRemoveNFTokenAutoTrustLine",
+    "decision_surface": "XRPL validator amendment decision surface for fixRemoveNFTokenAutoTrustLine.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixRemoveNFTokenAutoTrustLine: Removes the tfTrustLine setting on non-fungible tokens, to protect against a denial of service attack on issuers using this flag. With this amendment enabled, a NFTokenMint transaction with the tfTrustLine flag enabled is considered invalid and cannot be confirmed by consensus; new NFToken objects cannot be minted with the flag. Without this amendment, an attacker could create new, meaningless fungible tokens and sell a NFToken back and forth for those tokens, creating many useless trust lines tied to the issuer and increasing the issuer's reserve requirement. This amendment does not change the code for NFToken objects that have already been minted. On test networks that enabled NFT support before this amendment, issuers who have already minted NFTokens with the tfTrustLine flag enabled are still vulnerable to the exploit even after the fixRemoveNFTokenAutoTrustLine amendment. This amendment has no effect unless either NonFungibleTokensV1 or NonFungibleTokensV1_1 is enabled. To protect issuers, this amendment should be enabled before NonFungibleTokensV1 or NonFungibleTokensV1_1.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixRemoveNFTokenAutoTrustLine appears in XRPSCAN with introduced rippled version 1.9.4.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "6e3ce8217279f91495d98420fe09b3ea898bab088d8d5442ae8acfc629e66dd0",
+  "packet_id": "case_029--default_vote",
+  "packet_version": 1
+}

@@ -1,0 +1,92 @@
+{
+  "completed_at": "2026-06-03T14:04:27Z",
+  "error": "",
+  "event_id": "case_011",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "7f1c2a41c3d32b21c72c24ca51eaefeca29e5a56b9e03831141cebb8adabdfe3",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces a new fungible token type (MPT) with distinct ledger entry types (MPToken, MPTokenIssuance) and transaction types, representing a significant change to asset-control semantics.",
+      "New transaction types (MPTokenIssuanceCreate, MPTokenIssuanceDestroy, MPTokenIssuanceSet, MPTokenAuthorize) and updates to Payment and Clawback transactions introduce material financial and accounting complexity.",
+      "The introduction of a new token standard optimized for stablecoins implies potential systemic risk and requires explicit review of invariant and accounting semantics.",
+      "Clawback capabilities for MPTs introduce permissioning and asset-control risks that warrant conservative review."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment is not described as a 'fix' amendment, so the PROCEED path for localized fixes does not apply.",
+      "There is no explicit no-vote advisory, retired status, or critical unsafe evidence in the packet to trigger REJECT.",
+      "There is no description of an unresolved bug or vulnerability requiring DELAY_FOR_FIX."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the introduction of MPTokensV1, including new ledger entries, transaction types, and API methods, which constitutes a material change to asset-control and financial semantics."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for a conservative review route for significant changes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version association, but does not mitigate the material risk of the new token type."
+      }
+    ],
+    "decision_summary": "MPTokensV1 introduces a new fungible token type with significant changes to ledger structure, transaction processing, and asset control (including clawback). This falls under material financial and asset-control semantics, requiring explicit review rather than proceeding or delaying for a fix.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 15,
+      "validator_skim": 30
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on MPT accounting invariants and rounding behavior.",
+      "Details on cross-feature canonicalization or serialization impacts.",
+      "Specifics on consensus/liveness risks associated with the new transaction types."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the MPT accounting model introduce any invariant risks compared to existing trustline-based tokens?",
+        "Are there any consensus or liveness risks associated with the new MPT transaction types?",
+        "Does the clawback mechanism for MPTs introduce any permissioning or privacy concerns?"
+      ],
+      "recommended_validator_action": "Review the MPTokensV1 specification for material financial, accounting, and asset-control risks before voting.",
+      "review_questions": [
+        "What are the specific accounting invariants for MPT balances?",
+        "How does MPT issuance and destruction affect ledger state consistency?",
+        "Are there any edge cases in MPT authorization or clawback that could lead to asset loss?"
+      ],
+      "title": "Review MPTokensV1 for Material Asset-Control and Financial Risks"
+    }
+  },
+  "packet_hash": "31ead32e9f4b36d4014f8264a4ce0ede637969d80982073d3743d472e15f2e5b",
+  "packet_id": "case_011--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "dd14e18f0112adcf863aad424ca1df2e7f857a6fcdd3ca3165be59b558cdf041",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces a new fungible token type (MPT) with distinct ledger entry types (MPToken, MPTokenIssuance) and transaction types, representing a significant change to asset-control semantics.\",\n\"New transaction types (MPTokenIssuanceCreate, MPTokenIssuanceDestroy, MPTokenIssuanceSet, MPTokenAuthorize) and updates to Payment and Clawback transactions introduce material financial and accounting complexity.\",\n\"The introduction of a new token standard optimized for stablecoins implies potential systemic risk and requires explicit review of invariant and accounting semantics.\",\n\"Clawback capabilities for MPTs introduce permissioning and asset-control risks that warrant conservative review.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment is not described as a 'fix' amendment, so the PROCEED path for localized fixes does not apply.\",\n\"There is no explicit no-vote advisory, retired status, or critical unsafe evidence in the packet to trigger REJECT.\",\n\"There is no description of an unresolved bug or vulnerability requiring DELAY_FOR_FIX.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the introduction of MPTokensV1, including new ledger entries, transaction types, and API methods, which constitutes a material change to asset-control and financial semantics.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for a conservative review route for significant changes.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment's existence and version association, but does not mitigate the material risk of the new token type.\"\n}\n],\n\"decision_summary\": \"MPTokensV1 introduces a new fungible token type with significant changes to ledger structure, transaction processing, and asset control (including clawback). This falls under material financial and asset-control semantics, requiring explicit review rather than proceeding or delaying for a fix.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 120,\n\"packet_verification\": 15,\n\"validator_skim\": 30\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Specific details on MPT accounting invariants and rounding behavior.\",\n\"Details on cross-feature canonicalization or serialization impacts.\",\n\"Specifics on consensus/liveness risks associated with the new transaction types.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the MPT accounting model introduce any invariant risks compared to existing trustline-based tokens?\",\n\"Are there any consensus or liveness risks associated with the new MPT transaction types?\",\n\"Does the clawback mechanism for MPTs introduce any permissioning or privacy concerns?\"\n],\n\"recommended_validator_action\": \"Review the MPTokensV1 specification for material financial, accounting, and asset-control risks before voting.\",\n\"review_questions\": [\n\"What are the specific accounting invariants for MPT balances?\",\n\"How does MPT issuance and destruction affect ledger state consistency?\",\n\"Are there any edge cases in MPT authorization or clawback that could lead to asset loss?\"\n],\n\"title\": \"Review MPTokensV1 for Material Asset-Control and Financial Risks\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 750,
+      "prompt_tokens": 1340,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 2090
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:04:16Z"
+}

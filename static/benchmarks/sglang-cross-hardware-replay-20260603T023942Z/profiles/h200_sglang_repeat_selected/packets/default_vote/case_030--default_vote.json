@@ -1,0 +1,36 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_030",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "2110E4A19966E2EF517C0A8C56A5F35099D7665B0BB89D7B126B30D50B86AAD5",
+    "amendment_name": "ConfidentialTransfer",
+    "decision_surface": "XRPL validator amendment decision surface for ConfidentialTransfer.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "ConfidentialTransfer: Provides institutional-grade privacy for Multi-Purpose Tokens (MPTs) using advanced cryptography (EC-ElGamal and ZKPs). Individual balances and transfer amounts remain shielded from the public ledger while maintaining compliance mechanisms for authorized parties (issuers, auditors, or designated entities) to verify total supply and meet regulatory obligations. For more details, see XLS-96: Confidential Transfers.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "6ff350279f6cd5d29019f3b8f1093d2ae78de92adf1c9df6acd1ff2d2221c5ca",
+  "packet_id": "case_030--default_vote",
+  "packet_version": 1
+}

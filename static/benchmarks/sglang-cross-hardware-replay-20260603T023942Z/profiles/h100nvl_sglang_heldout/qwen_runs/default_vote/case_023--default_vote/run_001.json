@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-03T03:30:07Z",
+  "error": "",
+  "event_id": "case_023",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "afe963d0dd7a44565c221ac065c4691b24c958e29a4652e1263c752a4ab935b9",
+  "output_hash": "dec135cf2f93d6a120914ff4215dff3078ae39487612282ed3ce97fa84fc426c",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes fix1781 as a bug fix that prevents invalid circular payment paths by enforcing the temBAD_PATH_LOOP result code, which is a safety and correctness improvement."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Indicates the amendment was introduced in rippled version 1.6.0, suggesting it is part of the standard release cycle and not an experimental or deprecated feature."
+      }
+    ],
+    "decision_summary": "The amendment fix1781 addresses a specific bug related to circular payment paths involving XRP. By preventing these loops, it enhances the integrity and predictability of the payment engine. Bug fixes that improve correctness and prevent invalid states are typically enabled by default in stable releases to ensure network consistency and security. There is no evidence suggesting this is a breaking change or a feature that requires opt-in.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit documentation stating the default vote status for fix1781 in the rippled 1.6.0 release notes."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "b8b30988000424d49f62c59bc2a02fde7eeb1fb32dc9df7ebea6efcb0cb35654",
+  "packet_id": "case_023--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "a80b75cd7a38b75ce21ae115a8adbe3f385eaf8470f768cc92738fda3b658ab7",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes fix1781 as a bug fix that prevents invalid circular payment paths by enforcing the temBAD_PATH_LOOP result code, which is a safety and correctness improvement.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Indicates the amendment was introduced in rippled version 1.6.0, suggesting it is part of the standard release cycle and not an experimental or deprecated feature.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fix1781 addresses a specific bug related to circular payment paths involving XRP. By preventing these loops, it enhances the integrity and predictability of the payment engine. Bug fixes that improve correctness and prevent invalid states are typically enabled by default in stable releases to ensure network consistency and security. There is no evidence suggesting this is a breaking change or a feature that requires opt-in.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit documentation stating the default vote status for fix1781 in the rippled 1.6.0 release notes.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 285,
+      "prompt_tokens": 689,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 974
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:30:02Z"
+}

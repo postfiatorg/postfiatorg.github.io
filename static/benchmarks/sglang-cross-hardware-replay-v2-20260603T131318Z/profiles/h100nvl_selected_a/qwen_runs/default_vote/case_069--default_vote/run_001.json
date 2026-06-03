@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-03T14:02:28Z",
+  "error": "",
+  "event_id": "case_069",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "d2257c2828224ba890913c689ae70561446c6c6f8c5b50ced51109add55f0b4a",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a bug fix that removes legacy trust lines created by an old bug, which is a corrective maintenance action rather than a controversial feature change."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 1.10.0, establishing it as a historical amendment that has already been processed by the network."
+      }
+    ],
+    "decision_summary": "The amendment 'fixTrustLinesToSelf' is a targeted bug fix designed to clean up legacy data (trust lines to self) resulting from an old bug. It has no effect on test networks lacking these specific trust lines and performs no other actions. In the context of XRPL governance, bug fixes and cleanup operations that do not alter core protocol mechanics or introduce new risks are typically enabled by default in stable releases to ensure network consistency and hygiene. Therefore, the source default vote is inferred to be YES.",
+    "default_vote_confidence": 0.85,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit documentation stating the default vote configuration in the rippled 1.10.0 release notes."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "1b3c8f585fa86e2f41ecf1a741aec0ba79785fb7a1e1886c07a5b52555b91265",
+  "packet_id": "case_069--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "5e74384c991944123c96dbfd975128313bd583d51cc6f36f607f175515eec399",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a bug fix that removes legacy trust lines created by an old bug, which is a corrective maintenance action rather than a controversial feature change.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 1.10.0, establishing it as a historical amendment that has already been processed by the network.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixTrustLinesToSelf' is a targeted bug fix designed to clean up legacy data (trust lines to self) resulting from an old bug. It has no effect on test networks lacking these specific trust lines and performs no other actions. In the context of XRPL governance, bug fixes and cleanup operations that do not alter core protocol mechanics or introduce new risks are typically enabled by default in stable releases to ensure network consistency and hygiene. Therefore, the source default vote is inferred to be YES.\",\n  \"default_vote_confidence\": 0.85,\n  \"missing_evidence\": [\n    \"Explicit documentation stating the default vote configuration in the rippled 1.10.0 release notes.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 298,
+      "prompt_tokens": 800,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1098
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:02:23Z"
+}

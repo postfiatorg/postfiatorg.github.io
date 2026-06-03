@@ -1,0 +1,87 @@
+{
+  "completed_at": "2026-06-03T14:36:04Z",
+  "error": "",
+  "event_id": "case_030",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "45130e25f3b77212fb5d6aa4fff243e23e0ce5aa6032909371e7f2c15e3fcf38",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces 'institutional-grade privacy' using advanced cryptography (EC-Gamal and ZKPs), which fundamentally alters the transparency model of the ledger.",
+      "Privacy features involve complex cryptographic primitives that pose significant risks to consensus liveness and validator performance if not implemented with extreme precision.",
+      "The amendment affects 'Multi-Purpose Tokens (MPTs)', introducing new asset-control semantics and compliance mechanisms that require rigorous review to prevent systemic risks or regulatory bypasses.",
+      "Privacy amendments are high-risk due to the potential for hidden state inconsistencies, auditability challenges, and the complexity of zero-knowledge proof verification on-chain."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment includes compliance mechanisms for authorized parties, suggesting a design that attempts to balance privacy with regulatory requirements.",
+      "The amendment is a well-defined feature (XLS-96) rather than a simple bug fix, indicating a mature design process."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core functionality: privacy for MPTs using EC-ElGamal and ZKPs. This triggers the 'privacy' and 'asset-control semantics' risk categories, requiring HOLD_FOR_CHALLENGE."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Highlights the risk of amendment-blocking for incompatible servers, emphasizing the need for conservative review given the complexity of the cryptographic changes."
+      }
+    ],
+    "decision_summary": "The ConfidentialTransfer amendment introduces significant privacy features using advanced cryptography (ZKPs, EC-ElGamal) for MPTs. This falls under the 'privacy' and 'asset-control semantics' risk categories defined in the task rules. Such changes require explicit review to ensure they do not introduce consensus risks, liveness issues, or systemic vulnerabilities. Therefore, the conservative route is to hold for challenge.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 30,
+      "validator_skim": 15
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on the computational overhead of ZKP verification for validators.",
+      "Details on how privacy conflicts with existing auditability requirements for other asset types.",
+      "Potential for privacy features to be used for illicit activities despite compliance mechanisms."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the implementation of ZKPs introduce any known consensus liveness risks?",
+        "Are the compliance mechanisms sufficient to prevent regulatory non-compliance?",
+        "Is the cryptographic implementation audited and verified by independent experts?"
+      ],
+      "recommended_validator_action": "HOLD_FOR_CHALLENGE",
+      "review_questions": [
+        "What are the performance implications of verifying ZKPs on every transaction?",
+        "How does the amendment handle edge cases in privacy-preserving transfers?",
+        "Are there any known vulnerabilities in the EC-ElGamal implementation?"
+      ],
+      "title": "Review ConfidentialTransfer Amendment for Privacy and Consensus Risks"
+    }
+  },
+  "packet_hash": "749891673d727bf45d8e679bcf6b0d154885178b992a157207a73288ff778967",
+  "packet_id": "case_030--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "ebfe089a924c1a376a445fd59385b58720e7d7542ad2c5acc53ade716d5d6d05",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces 'institutional-grade privacy' using advanced cryptography (EC-Gamal and ZKPs), which fundamentally alters the transparency model of the ledger.\",\n\"Privacy features involve complex cryptographic primitives that pose significant risks to consensus liveness and validator performance if not implemented with extreme precision.\",\n\"The amendment affects 'Multi-Purpose Tokens (MPTs)', introducing new asset-control semantics and compliance mechanisms that require rigorous review to prevent systemic risks or regulatory bypasses.\",\n\"Privacy amendments are high-risk due to the potential for hidden state inconsistencies, auditability challenges, and the complexity of zero-knowledge proof verification on-chain.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment includes compliance mechanisms for authorized parties, suggesting a design that attempts to balance privacy with regulatory requirements.\",\n\"The amendment is a well-defined feature (XLS-96) rather than a simple bug fix, indicating a mature design process.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the core functionality: privacy for MPTs using EC-ElGamal and ZKPs. This triggers the 'privacy' and 'asset-control semantics' risk categories, requiring HOLD_FOR_CHALLENGE.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Highlights the risk of amendment-blocking for incompatible servers, emphasizing the need for conservative review given the complexity of the cryptographic changes.\"\n}\n],\n\"decision_summary\": \"The ConfidentialTransfer amendment introduces significant privacy features using advanced cryptography (ZKPs, EC-ElGamal) for MPTs. This falls under the 'privacy' and 'asset-control semantics' risk categories defined in the task rules. Such changes require explicit review to ensure they do not introduce consensus risks, liveness issues, or systemic vulnerabilities. Therefore, the conservative route is to hold for challenge.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 120,\n\"packet_verification\": 30,\n\"validator_skim\": 15\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Specific details on the computational overhead of ZKP verification for validators.\",\n\"Details on how privacy conflicts with existing auditability requirements for other asset types.\",\n\"Potential for privacy features to be used for illicit activities despite compliance mechanisms.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the implementation of ZKPs introduce any known consensus liveness risks?\",\n\"Are the compliance mechanisms sufficient to prevent regulatory non-compliance?\",\n\"Is the cryptographic implementation audited and verified by independent experts?\"\n],\n\"recommended_validator_action\": \"HOLD_FOR_CHALLENGE\",\n\"review_questions\": [\n\"What are the performance implications of verifying ZKPs on every transaction?\",\n\"How does the amendment handle edge cases in privacy-preserving transfers?\",\n\"Are there any known vulnerabilities in the EC-ElGamal implementation?\"\n],\n\"title\": \"Review ConfidentialTransfer Amendment for Privacy and Consensus Risks\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 683,
+      "prompt_tokens": 1096,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1779
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:35:54Z"
+}

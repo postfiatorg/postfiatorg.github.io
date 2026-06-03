@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_024",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "9178256A980A86CF3D70D0260A7DA6402AAFE43632FDBCB88037978404188871",
+    "amendment_name": "OwnerPaysFee",
+    "decision_surface": "XRPL validator amendment decision surface for OwnerPaysFee.",
+    "source_facts": [
+      {
+        "claim": "OwnerPaysFee: Fixes an inconsistency in the way transfer fees are calculated between OfferCreate and Payment transaction types. Without this amendment, the holder of the token pays the transfer fee if an offer is executed in offer placement, but the initial sender of a transaction pays the transfer fees for offers that are executed as part of payment processing. With this amendment, the holder of the token always pays the transfer fee, regardless of whether the offer is executed as part of a Payment or an OfferCreate transaction. Offer processing outside of payments is unaffected. This Amendment requires the Flow Amendment to be enabled. An incomplete version of this amendment was introduced in v0.33.0 and removed in v0.80.0. (It was never enabled.)",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "Known Amendments status for OwnerPaysFee is obsolete/removed: OBSOLETE.",
+        "fact_id": "F5",
+        "source_id": "xrpl_known_amendments_md"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "5656a749f257ba72dc9a34935edfb90bf3970fd75c8db9563cf7e6b78d32ecad",
+  "packet_id": "case_024--triage",
+  "packet_version": 1
+}

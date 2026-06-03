@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_060",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "35291ADD2D79EB6991343BDA0912269C817D0F094B02226C1C14AD2858962ED4",
+    "amendment_name": "fixAMMv1_1",
+    "decision_surface": "XRPL validator amendment decision surface for fixAMMv1_1.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixAMMv1_1: Fixes AMM offer rounding and low quality order book offers from blocking the AMM.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixAMMv1_1 appears in XRPSCAN with introduced rippled version 2.2.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "743c24e6cd2f4804c38b33fdc2da122f86c12e69d615df805ecf0aa928ea81f1",
+  "packet_id": "case_060--vote_outcome",
+  "packet_version": 1
+}

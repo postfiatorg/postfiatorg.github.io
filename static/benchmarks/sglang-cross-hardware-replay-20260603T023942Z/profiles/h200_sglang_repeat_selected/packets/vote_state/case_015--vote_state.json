@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_015",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "81BD2619B6B3C8625AC5D0BC01DE17F06C3F0AB95C7C87C93715B87A4FD240D8",
+    "amendment_name": "SingleAssetVault",
+    "decision_surface": "XRPL validator amendment decision surface for SingleAssetVault.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "SingleAssetVault appears in XRPSCAN with introduced rippled version 3.1.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "XRPSCAN currently reports support count 9 of 35 validations, threshold 28, and no enabled ledger entry for SingleAssetVault.",
+        "fact_id": "F4",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "0ac94da6527f10b2830ce54b2edb750efad3b10a6e3c883f78a1b0c69aea58e9",
+  "packet_id": "case_015--vote_state",
+  "packet_version": 1
+}

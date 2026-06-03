@@ -1,0 +1,86 @@
+{
+  "completed_at": "2026-06-03T14:37:53Z",
+  "error": "",
+  "event_id": "case_041",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "321ca560cae57bbe4f25f843460baf50dfcd21372472cb7ed500691dc2cecd46",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment removes a directory page limit, which could theoretically impact ledger size or performance if not properly constrained by object reserves.",
+      "Removing limits requires verification that the stated incentive (object reserves) is sufficient to prevent abuse."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', indicating it is a corrective measure.",
+      "Fact F1 explicitly states that object reserve requirements provide enough incentive to avoid creating unnecessary objects, addressing the primary risk of removing the limit.",
+      "The change is localized to directory limits and does not involve AMM invariants, NFT settlement semantics, token supply accounting, freeze/authorization bypasses, or consensus/liveness risks.",
+      "There is no explicit no-vote advisory, nor is the fix described as obsolete.",
+      "The risk is contained within the existing economic security model (reserves) rather than introducing new systemic vulnerabilities."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the scope of the fix (removing directory page limit) and provides the safety justification (object reserves are sufficient incentive), which supports proceeding under the 'fix' rule."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms the standard amendment voting process applies, but does not introduce specific risks requiring a hold or reject for this specific amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is a known, introduced feature, not a retired or obsolete proposal."
+      }
+    ],
+    "decision_summary": "The amendment 'fixDirectoryLimit' is a localized fix that removes a directory page limit. Fact F1 asserts that object reserves provide sufficient incentive to prevent abuse, mitigating the risk of ledger bloat. The change does not touch high-risk domains like AMM, NFTs, token accounting, or consensus. Therefore, it qualifies for PROCEED under the rule for fix amendments without material risk patterns.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [
+      "Specific quantitative analysis of reserve sufficiency (though F1 asserts it is sufficient)."
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the removal of the directory page limit expose any edge cases in ledger growth not covered by object reserves?"
+      ],
+      "recommended_validator_action": "Vote YES to enable the fix, relying on the object reserve mechanism for safety.",
+      "review_questions": [
+        "Is the object reserve mechanism currently active and sufficient to deter spam?"
+      ],
+      "title": "Review fixDirectoryLimit amendment"
+    }
+  },
+  "packet_hash": "3ee60038f71345dfd3c3f79c33465519e1361d7c812b97b4acf569cbd15000e4",
+  "packet_id": "case_041--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "e0a6b5eeb91dede13334d397a32c4f2c21385b4452725793ca1cb1a3d5e03dd3",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment removes a directory page limit, which could theoretically impact ledger size or performance if not properly constrained by object reserves.\",\n\"Removing limits requires verification that the stated incentive (object reserves) is sufficient to prevent abuse.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix', indicating it is a corrective measure.\",\n\"Fact F1 explicitly states that object reserve requirements provide enough incentive to avoid creating unnecessary objects, addressing the primary risk of removing the limit.\",\n\"The change is localized to directory limits and does not involve AMM invariants, NFT settlement semantics, token supply accounting, freeze/authorization bypasses, or consensus/liveness risks.\",\n\"There is no explicit no-vote advisory, nor is the fix described as obsolete.\",\n\"The risk is contained within the existing economic security model (reserves) rather than introducing new systemic vulnerabilities.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Defines the scope of the fix (removing directory page limit) and provides the safety justification (object reserves are sufficient incentive), which supports proceeding under the 'fix' rule.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Confirms the standard amendment voting process applies, but does not introduce specific risks requiring a hold or reject for this specific amendment.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment is a known, introduced feature, not a retired or obsolete proposal.\"\n}\n],\n\"decision_summary\": \"The amendment 'fixDirectoryLimit' is a localized fix that removes a directory page limit. Fact F1 asserts that object reserves provide sufficient incentive to prevent abuse, mitigating the risk of ledger bloat. The change does not touch high-risk domains like AMM, NFTs, token accounting, or consensus. Therefore, it qualifies for PROCEED under the rule for fix amendments without material risk patterns.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n\"missing_evidence\": [\n\"Specific quantitative analysis of reserve sufficiency (though F1 asserts it is sufficient).\"\n],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the removal of the directory page limit expose any edge cases in ledger growth not covered by object reserves?\"\n],\n\"recommended_validator_action\": \"Vote YES to enable the fix, relying on the object reserve mechanism for safety.\",\n\"review_questions\": [\n\"Is the object reserve mechanism currently active and sufficient to deter spam?\"\n],\n\"title\": \"Review fixDirectoryLimit amendment\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 621,
+      "prompt_tokens": 1080,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1701
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:37:44Z"
+}

@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-03T02:52:20Z",
+  "error": "",
+  "event_id": "case_010",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "d368eb5474d3496ca04d5a53d2ef5d1bd925c1745ab0adfa2a69b3c618109956",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Provides the current quantitative voting state: 8 out of 35 validations support the amendment, which is below the required threshold of 28. It also explicitly states there is no enabled ledger entry, ruling out ENABLED status."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the general rule that sustained supermajority is required for activation, providing context for interpreting the threshold data in F4."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the LendingProtocol amendment has 8 validations out of 35, falling short of the 28 required for a majority. Furthermore, there is no enabled ledger entry. Since the support is below the threshold and the amendment is not enabled, the state is classified as NO_MAJORITY.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Historical voting data to determine if a majority was previously achieved and lost (MAJORITY_LOST).",
+      "Explicit status indicators for VETOED_OR_RETIRED, though the lack of enablement and low support makes this less likely than NO_MAJORITY given the available data."
+    ],
+    "state_confidence": 0.95,
+    "vote_state": "NO_MAJORITY"
+  },
+  "packet_hash": "63d8784a34fb72a3b1d0a130d02b42a3fbec83718c385dfd553df98b8323dcb0",
+  "packet_id": "case_010--vote_state",
+  "parsed_label": "NO_MAJORITY",
+  "prompt_hash": "ab3109f4b200383be2067d795144b22bbfb66b1ff57e55190e0473b4976851fb",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Provides the current quantitative voting state: 8 out of 35 validations support the amendment, which is below the required threshold of 28. It also explicitly states there is no enabled ledger entry, ruling out ENABLED status.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Establishes the general rule that sustained supermajority is required for activation, providing context for interpreting the threshold data in F4.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the LendingProtocol amendment has 8 validations out of 35, falling short of the 28 required for a majority. Furthermore, there is no enabled ledger entry. Since the support is below the threshold and the amendment is not enabled, the state is classified as NO_MAJORITY.\",\n  \"missing_evidence\": [\n    \"Historical voting data to determine if a majority was previously achieved and lost (MAJORITY_LOST).\",\n    \"Explicit status indicators for VETOED_OR_RETIRED, though the lack of enablement and low support makes this less likely than NO_MAJORITY given the available data.\"\n  ],\n  \"state_confidence\": 0.95,\n  \"vote_state\": \"NO_MAJORITY\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 310,
+      "prompt_tokens": 738,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1048
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:52:14Z"
+}

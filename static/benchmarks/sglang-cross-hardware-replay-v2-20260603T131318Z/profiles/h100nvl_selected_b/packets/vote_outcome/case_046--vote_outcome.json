@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_046",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "C1CE18F2A268E6A849C27B3DE485006771B4C01B2FCEC4F18356FE92ECD6BB74",
+    "amendment_name": "DynamicNFT",
+    "decision_surface": "XRPL validator amendment decision surface for DynamicNFT.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "DynamicNFT: Adds functionality to update the URI field of an NFToken ledger entry. This amendment introduces a new transaction type and NFTokenMint flag: 1. NFTokenModify: New transaction type that updates the URI field of an NFT. 2. tfMutable: New flag that enables authorized accounts to modify the URI of an NFT. This flag must be enabled when the NFT is initially minted.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "DynamicNFT appears in XRPSCAN with introduced rippled version 2.4.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "9be5ac72543a69ed9186aeb31d33cbd075ed06094486c695864617f893ff791c",
+  "packet_id": "case_046--vote_outcome",
+  "packet_version": 1
+}

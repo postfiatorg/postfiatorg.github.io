@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_036",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "1F4AFA8FA1BC8827AD4C0F682C03A8B671DCDF6B5C4DE36D44243A684103EF88",
+    "amendment_name": "HardenedValidations",
+    "decision_surface": "XRPL validator amendment decision surface for HardenedValidations.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "HardenedValidations: Allows validators to include a new optional field in their validations to attest to the hash of the latest ledger that the validator considers to be fully validated. The consensus process can use this information to increase the robustness of consensus.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "HardenedValidations appears in XRPSCAN with introduced rippled version 1.6.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "ab343410670c6b33c2af8acb825e091cdfc59fef48d6730dcc16216d1c828e54",
+  "packet_id": "case_036--default_vote",
+  "packet_version": 1
+}

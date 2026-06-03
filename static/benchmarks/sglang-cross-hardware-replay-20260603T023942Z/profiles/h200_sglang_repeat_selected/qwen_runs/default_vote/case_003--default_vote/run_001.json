@@ -1,0 +1,58 @@
+{
+  "completed_at": "2026-06-03T02:57:46Z",
+  "error": "",
+  "event_id": "case_003",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "808873d7cc9c4625e07c9ed968562b0e09012cfac8cc9b6ba8cad520ff1b3302",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Fact F3 explicitly states that the latest stable release (rippled 3.1.1) disabled the Batch amendment due to a severe bug. Disabling an amendment in the software source code is the definitive technical implementation of a 'No' default vote."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Fact F1 describes the severe security vulnerability (unauthorized inner transaction execution) that necessitated the disabling of the amendment, providing the causal context for the source code change."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Fact F2 confirms that validators were advised to vote No, which aligns with the technical decision to disable the amendment in the source code, reinforcing the 'No' stance."
+      }
+    ],
+    "decision_summary": "The source-backed amendment description indicates that the latest stable release (rippled 3.1.1) disabled the Batch amendment because of a severe bug allowing unauthorized transactions. Since the software source code explicitly disables the amendment, the source default vote is NO.",
+    "default_vote_confidence": 1.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "1fd8af11f7731b2c79b3802e1cabdec7fc9c99e9449fe1bf9b5b23791f4133fd",
+  "packet_id": "case_003--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "86bd7629b659bc66a25d55b6db05ccdcbacf74e7c4301e13bf797194807a48b4",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Fact F3 explicitly states that the latest stable release (rippled 3.1.1) disabled the Batch amendment due to a severe bug. Disabling an amendment in the software source code is the definitive technical implementation of a 'No' default vote.\"\n    },\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Fact F1 describes the severe security vulnerability (unauthorized inner transaction execution) that necessitated the disabling of the amendment, providing the causal context for the source code change.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Fact F2 confirms that validators were advised to vote No, which aligns with the technical decision to disable the amendment in the source code, reinforcing the 'No' stance.\"\n    }\n  ],\n  \"decision_summary\": \"The source-backed amendment description indicates that the latest stable release (rippled 3.1.1) disabled the Batch amendment because of a severe bug allowing unauthorized transactions. Since the software source code explicitly disables the amendment, the source default vote is NO.\",\n  \"default_vote_confidence\": 1.0,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 301,
+      "prompt_tokens": 610,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 911
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:57:39Z"
+}

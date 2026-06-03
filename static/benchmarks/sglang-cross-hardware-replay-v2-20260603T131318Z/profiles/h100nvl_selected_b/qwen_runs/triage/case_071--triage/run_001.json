@@ -1,0 +1,84 @@
+{
+  "completed_at": "2026-06-03T14:43:02Z",
+  "error": "",
+  "event_id": "case_071",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "800851a8e7843d4139d4b0a929a78ff0a86d32365d05daa0f1d2069c386587a7",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment changes transaction result codes (tecKILLED vs tesSUCCESS) for OfferCreate with tfImmediateOrCancel.",
+      "Result code changes can affect client-side transaction monitoring and error handling logic."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name 'ImmediateOfferKilled' starts with 'Immediate' but the task rule specifies 'fix'. However, the change is a localized correction to result codes for a specific edge case (no funds moved).",
+      "The packet explicitly states: 'There are no other changes to the processing of the transaction'.",
+      "The change does not involve AMM invariants, rounding changes, freeze/authorization bypasses, ledger repair, NFT semantics, token supply, escrow math, or consensus/liveness risk.",
+      "The change is purely informational/corrective for client interpretation, reducing confusion where tesSUCCESS was returned for effectively no-op transactions.",
+      "Under the rule 'Do not hold a localized fix amendment merely because the underlying domain name mentions... accounting...', this is a localized fix to transaction result semantics."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the scope of the change as limited to result codes for a specific OfferCreate scenario, explicitly stating no other processing changes occur."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the amendment process but does not indicate specific risks for this amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with a specific rippled version, indicating it is a defined software change."
+      }
+    ],
+    "decision_summary": "The amendment 'ImmediateOfferKilled' is a localized fix to transaction result codes for OfferCreate transactions with tfImmediateOrCancel that fail to move funds. It changes the result from tesSUCCESS to tecKILLED to reduce confusion. The packet explicitly states there are no other changes to transaction processing. It does not involve material financial risks, consensus/liveness issues, or broad canonicalization changes. Therefore, it qualifies for PROCEED under the rule for localized fixes.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the change to result codes break any existing client-side assumptions that rely on tesSUCCESS for this specific edge case?"
+      ],
+      "recommended_validator_action": "Enable the amendment.",
+      "review_questions": [
+        "Is the change strictly limited to result codes as described?"
+      ],
+      "title": "Review ImmediateOfferKilled Amendment"
+    }
+  },
+  "packet_hash": "6bddd728b4d6b253642610389e1455ef7a1bbcbc8c467ef5878b095e672baa51",
+  "packet_id": "case_071--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "d90f26cf9027ca687892acdec1cea56cfc53027ced4b42a006b0d377dabdcc62",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment changes transaction result codes (tecKILLED vs tesSUCCESS) for OfferCreate with tfImmediateOrCancel.\",\n\"Result code changes can affect client-side transaction monitoring and error handling logic.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name 'ImmediateOfferKilled' starts with 'Immediate' but the task rule specifies 'fix'. However, the change is a localized correction to result codes for a specific edge case (no funds moved).\",\n\"The packet explicitly states: 'There are no other changes to the processing of the transaction'.\",\n\"The change does not involve AMM invariants, rounding changes, freeze/authorization bypasses, ledger repair, NFT semantics, token supply, escrow math, or consensus/liveness risk.\",\n\"The change is purely informational/corrective for client interpretation, reducing confusion where tesSUCCESS was returned for effectively no-op transactions.\",\n\"Under the rule 'Do not hold a localized fix amendment merely because the underlying domain name mentions... accounting...', this is a localized fix to transaction result semantics.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Defines the scope of the change as limited to result codes for a specific OfferCreate scenario, explicitly stating no other processing changes occur.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Provides context on the amendment process but does not indicate specific risks for this amendment.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment is associated with a specific rippled version, indicating it is a defined software change.\"\n}\n],\n\"decision_summary\": \"The amendment 'ImmediateOfferKilled' is a localized fix to transaction result codes for OfferCreate transactions with tfImmediateOrCancel that fail to move funds. It changes the result from tesSUCCESS to tecKILLED to reduce confusion. The packet explicitly states there are no other changes to transaction processing. It does not involve material financial risks, consensus/liveness issues, or broad canonicalization changes. Therefore, it qualifies for PROCEED under the rule for localized fixes.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n\"missing_evidence\": [],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the change to result codes break any existing client-side assumptions that rely on tesSUCCESS for this specific edge case?\"\n],\n\"recommended_validator_action\": \"Enable the amendment.\",\n\"review_questions\": [\n\"Is the change strictly limited to result codes as described?\"\n],\n\"title\": \"Review ImmediateOfferKilled Amendment\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 623,
+      "prompt_tokens": 1189,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1812
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:42:52Z"
+}

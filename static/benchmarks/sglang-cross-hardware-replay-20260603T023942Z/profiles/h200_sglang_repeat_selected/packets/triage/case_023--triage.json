@@ -1,0 +1,52 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_023",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "3C43D9A973AA4443EF3FC38E42DD306160FBFFDAB901CD8BAA15D09F2597EB87",
+    "amendment_name": "NonFungibleTokensV1",
+    "decision_surface": "XRPL validator amendment decision surface for NonFungibleTokensV1.",
+    "source_facts": [
+      {
+        "claim": "NonFungibleTokensV1: Adds native support for non-fungible tokens. Standards Draft: XLS-20d. There are several known issues with this amendment including one that can cause tecINVARIANT_FAILED errors to appear in the ledger. It has been replaced by the NonFungibleTokensV1_1 amendment. This amendment adds 5 new transaction types: - NFTokenAcceptOffer - NFTokenBurn - NFTokenCancelOffer - NFTokenCreateOffer - NFTokenMint It also adds 2 new ledger object types: - NFTokenOffer object - NFTokenPage object Additionally, it modifies the AccountRoot object type to add 3 new optional fields: MintedNFTokens, BurnedNFTokens, and NFTokenMinter. It also modifies the AccountSet transaction type to allow you to set the NFTokenMinter field.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "NonFungibleTokensV1 appears in XRPSCAN with introduced rippled version 1.9.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "XRPSCAN currently reports support count 0 of 35 validations, threshold 28, and no enabled ledger entry for NonFungibleTokensV1.",
+        "fact_id": "F4",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "Known Amendments status for NonFungibleTokensV1 is obsolete/removed: OBSOLETE.",
+        "fact_id": "F5",
+        "source_id": "xrpl_known_amendments_md"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "9c261779b59cd82e329bd934eb30c36d40e8a6676cf791d39c346e197f33ecb6",
+  "packet_id": "case_023--triage",
+  "packet_version": 1
+}

@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_004",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "30CD365592B8EE40489BA01AE2F7555CAC9C983145871DC82A42A31CF5BAE7D9",
+    "amendment_name": "DeletableAccounts",
+    "decision_surface": "XRPL validator amendment decision surface for DeletableAccounts.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "DeletableAccounts: Makes it possible to delete accounts. Without this amendment, new accounts always start with their Sequence numbers at 1, and there is no way to remove accounts from the state data of the ledger. With this amendment, new accounts start with their Sequence numbers equal to the Sequence number matching the index of the ledger in which the account is created. This change protects accounts that are deleted and later re-created from having their old transactions executed again. Adds a new AccountDelete transaction type, which deletes an account and certain objects that the account owns in the ledger. Certain types of objects cannot be deleted this way, so an account that is linked to any such objects cannot be deleted. Additionally, an account cannot be deleted if the current ledger index minus 256 is less than the account's current Sequence number. See XRP Community Standards Draft 7 for a detailed discussion of this amendment.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "DeletableAccounts appears in XRPSCAN with introduced rippled version 1.4.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "a92b49c292146d326bf54822e45f08be37bf968f33bb20626175afc39c9c4a2d",
+  "packet_id": "case_004--vote_outcome",
+  "packet_version": 1
+}

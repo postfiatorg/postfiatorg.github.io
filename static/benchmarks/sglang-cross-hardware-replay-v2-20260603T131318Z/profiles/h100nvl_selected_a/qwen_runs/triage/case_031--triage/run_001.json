@@ -1,0 +1,85 @@
+{
+  "completed_at": "2026-06-03T14:07:06Z",
+  "error": "",
+  "event_id": "case_031",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "d473247c80a84eca34df0464cb7425aa26f8ad6d68e5d6ff45b6b61c2e1b76d4",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces mutable properties for Multi-Purpose Tokens (MPTs), allowing issuers to update selected attributes after creation.",
+      "Mutable attributes in token standards constitute asset-control semantics, as they can alter the terms, metadata, or behavior of held assets.",
+      "Changes to token mutability affect the fundamental trust model and compliance posture for holders of these tokens.",
+      "Material changes to token semantics require explicit review to assess risks related to issuer power, holder protection, and potential for abuse."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment extends existing MPT functionality rather than introducing a completely new asset class.",
+      "The mutability is designated by the issuer at creation, implying a level of explicit consent or configuration by the issuer."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the core functionality of the amendment: enabling mutable properties for MPTs, which directly impacts asset-control semantics and token holder rights."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the high-stakes context of validator voting, where incompatible servers can become amendment-blocked, necessitating a conservative review for material semantic changes."
+      }
+    ],
+    "decision_summary": "The DynamicMPT amendment introduces the ability for issuers to designate specific token properties as mutable. This capability fundamentally alters the static nature of token attributes, falling under the category of asset-control semantics. According to the task rules, mutable controls that affect asset semantics deserve explicit review via HOLD_FOR_CHALLENGE to evaluate potential risks to token holders and the integrity of the token standard.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on which properties are mutable and the constraints on their modification.",
+      "Mechanisms for holder opt-out or protection against malicious issuer changes."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the mutability feature include sufficient safeguards to prevent issuer abuse?",
+        "Are there clear notifications or ledger records for when mutable properties are changed?"
+      ],
+      "recommended_validator_action": "HOLD_FOR_CHALLENGE",
+      "review_questions": [
+        "What are the specific risks associated with allowing issuers to change token properties post-creation?",
+        "How does this change impact the compliance and auditability of MPTs?",
+        "Is there a mechanism for holders to reject tokens with mutable properties?"
+      ],
+      "title": "Review DynamicMPT Mutable Property Semantics"
+    }
+  },
+  "packet_hash": "2d3513de1db2795203ccae8bccbbe2e4dc5c67f83f08ecf2418072978001be31",
+  "packet_id": "case_031--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "26ba34757110ca89db6a1c79a3809aaf8efc2f37c233ef3a148a5e1054e04121",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces mutable properties for Multi-Purpose Tokens (MPTs), allowing issuers to update selected attributes after creation.\",\n\"Mutable attributes in token standards constitute asset-control semantics, as they can alter the terms, metadata, or behavior of held assets.\",\n\"Changes to token mutability affect the fundamental trust model and compliance posture for holders of these tokens.\",\n\"Material changes to token semantics require explicit review to assess risks related to issuer power, holder protection, and potential for abuse.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment extends existing MPT functionality rather than introducing a completely new asset class.\",\n\"The mutability is designated by the issuer at creation, implying a level of explicit consent or configuration by the issuer.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Defines the core functionality of the amendment: enabling mutable properties for MPTs, which directly impacts asset-control semantics and token holder rights.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Establishes the high-stakes context of validator voting, where incompatible servers can become amendment-blocked, necessitating a conservative review for material semantic changes.\"\n}\n],\n\"decision_summary\": \"The DynamicMPT amendment introduces the ability for issuers to designate specific token properties as mutable. This capability fundamentally alters the static nature of token attributes, falling under the category of asset-control semantics. According to the task rules, mutable controls that affect asset semantics deserve explicit review via HOLD_FOR_CHALLENGE to evaluate potential risks to token holders and the integrity of the token standard.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 45,\n\"packet_verification\": 10,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Specific details on which properties are mutable and the constraints on their modification.\",\n\"Mechanisms for holder opt-out or protection against malicious issuer changes.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the mutability feature include sufficient safeguards to prevent issuer abuse?\",\n\"Are there clear notifications or ledger records for when mutable properties are changed?\"\n],\n\"recommended_validator_action\": \"HOLD_FOR_CHALLENGE\",\n\"review_questions\": [\n\"What are the specific risks associated with allowing issuers to change token properties post-creation?\",\n\"How does this change impact the compliance and auditability of MPTs?\",\n\"Is there a mechanism for holders to reject tokens with mutable properties?\"\n],\n\"title\": \"Review DynamicMPT Mutable Property Semantics\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 601,
+      "prompt_tokens": 1052,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1653
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:06:56Z"
+}

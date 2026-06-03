@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_041",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "41765F664A8D67FF03DDB1C1A893DE6273690BA340A6C2B07C8D29D0DD013D3A",
+    "amendment_name": "fixDirectoryLimit",
+    "decision_surface": "XRPL validator amendment decision surface for fixDirectoryLimit.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixDirectoryLimit appears in XRPSCAN with introduced rippled version 2.6.2.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 41765F664A8D67FF03DDB1C1A893DE6273690BA340A6C2B07C8D29D0DD013D3A; XRPSCAN reports enabled_on=2025-12-18T15:08:32.000Z and enabled_in_ledger=100961281.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "93466c8224646394983dc7b4e3b8fdc1f2c209bc2deb19826bc25e66fa13d351",
+  "packet_id": "case_041--vote_state",
+  "packet_version": 1
+}

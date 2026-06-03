@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_027",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "621A0B264970359869E3C0363A899909AAB7A887C8B73519E4ECF952D33258A8",
+    "amendment_name": "fixPayChanRecipientOwnerDir",
+    "decision_surface": "XRPL validator amendment decision surface for fixPayChanRecipientOwnerDir.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixPayChanRecipientOwnerDir: Changes the PaymentChannelCreate transaction type so that it adds new payment channels to the recipient's owner directory. Without this amendment, new payment channels are added only to the sender's owner directory; with this amendment enabled, newly-created payment channels are added to both owner directories. Existing payment channels are unchanged. This change prevents accounts from being deleted if they are the recipient for open payment channels, except for channels created before this amendment.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixPayChanRecipientOwnerDir appears in XRPSCAN with introduced rippled version 1.4.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "f0a304d1de2b4a9df3254fa2cad2203b6723d08825b9b5b5c503736e7a00ca26",
+  "packet_id": "case_027--vote_outcome",
+  "packet_version": 1
+}

@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_036",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "32B8614321F7E070419115ABEAB1742EA20F3E3AF34432B5E2F474F8083260DC",
+    "amendment_name": "fixTokenEscrowV1",
+    "decision_surface": "XRPL validator amendment decision surface for fixTokenEscrowV1.",
+    "source_facts": [
+      {
+        "claim": "fixTokenEscrowV1: Fixes an accounting error in MPT escrows. Specifically, when an escrow unlocks MPTs that have a transfer fee, the system incorrectly reduces the MPT issuer's locked token balance by the gross amount (without fees) rather than the net amount (with fees). This leads to discrepancies in the token's total supply accounting. This amendment ensures that when escrowed MPTs are unlocked, the issuer's locked amount is reduced by the net amount, and the total supply is reduced by the transfer fees.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixTokenEscrowV1 appears in XRPSCAN with introduced rippled version 3.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "4cfc80ddefb6ac0795fa7ef1e6d6be4e351234fc49c868f4e095746dfa000b6e",
+  "packet_id": "case_036--triage",
+  "packet_version": 1
+}

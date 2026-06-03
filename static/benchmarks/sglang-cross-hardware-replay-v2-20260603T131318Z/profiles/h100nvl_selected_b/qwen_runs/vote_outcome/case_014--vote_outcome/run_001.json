@@ -1,0 +1,72 @@
+{
+  "completed_at": "2026-06-03T14:15:53Z",
+  "error": "",
+  "event_id": "case_014",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "c8705b9b079fe99e001d6ffe7070fb83501d79a12dc6dafe5b7f901ce660dbcb",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment introduces permissioned domains which restrict access to specific entities, potentially conflicting with the open and permissionless nature of the XRP Ledger.",
+      "There is a risk that introducing complex compliance mechanisms could increase the attack surface or introduce bugs in the ledger state, as indicated by the creation of new ledger entry types and transactions.",
+      "Without explicit evidence of widespread validator support or successful testing in a production-like environment, proceeding with such a significant structural change carries operational risk."
+    ],
+    "arguments_for_yes": [
+      "The amendment enables traditional financial institutions to participate in the XRP Ledger ecosystem by providing a mechanism for compliance, which could drive adoption and utility.",
+      "The feature is designed to be opt-in and controlled, meaning it does not force permissioned behavior on the entire network but allows specific domains to enforce rules.",
+      "The amendment has been introduced in rippled version 2.4.0, suggesting it has undergone development and initial integration steps."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core functionality of PermissionedDomains, highlighting its purpose for compliance and access restriction, which is central to the decision of whether to enable such features on the ledger."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Explains the voting mechanism and the risk of amendment-blocking, emphasizing the need for careful consideration before voting YES to avoid network fragmentation or server incompatibility."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Indicates the amendment's presence in a specific rippled version, providing context on its development stage but not confirming its readiness or validator consensus."
+      }
+    ],
+    "decision_summary": "The PermissionedDomains amendment introduces significant changes to the ledger by enabling permissioned environments for compliance. While this could enhance adoption by traditional finance, it also introduces complexity and potential risks to the open nature of the network. Given the lack of explicit evidence of validator supermajority support or successful production testing in the provided facts, a cautious approach is warranted.",
+    "forbidden_stronger_claim": "The amendment is definitely safe and will not cause any network issues.",
+    "missing_evidence": [
+      "Current validator voting status or supermajority threshold progress.",
+      "Results from testnet or mainnet trials of the PermissionedDomains feature.",
+      "Community or validator consensus on the trade-offs between compliance features and decentralization."
+    ],
+    "vote_confidence": 0.4,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "d6ac057b3e0ca0456340598af20fe71d17d5e1cce38f8abe0789315a9eed6fa1",
+  "packet_id": "case_014--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "05fa7387cfea260c1840f299789bde08955f8b5fb85c7a223c798e5170b121cc",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment introduces permissioned domains which restrict access to specific entities, potentially conflicting with the open and permissionless nature of the XRP Ledger.\",\n    \"There is a risk that introducing complex compliance mechanisms could increase the attack surface or introduce bugs in the ledger state, as indicated by the creation of new ledger entry types and transactions.\",\n    \"Without explicit evidence of widespread validator support or successful testing in a production-like environment, proceeding with such a significant structural change carries operational risk.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment enables traditional financial institutions to participate in the XRP Ledger ecosystem by providing a mechanism for compliance, which could drive adoption and utility.\",\n    \"The feature is designed to be opt-in and controlled, meaning it does not force permissioned behavior on the entire network but allows specific domains to enforce rules.\",\n    \"The amendment has been introduced in rippled version 2.4.0, suggesting it has undergone development and initial integration steps.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the core functionality of PermissionedDomains, highlighting its purpose for compliance and access restriction, which is central to the decision of whether to enable such features on the ledger.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Explains the voting mechanism and the risk of amendment-blocking, emphasizing the need for careful consideration before voting YES to avoid network fragmentation or server incompatibility.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Indicates the amendment's presence in a specific rippled version, providing context on its development stage but not confirming its readiness or validator consensus.\"\n    }\n  ],\n  \"decision_summary\": \"The PermissionedDomains amendment introduces significant changes to the ledger by enabling permissioned environments for compliance. While this could enhance adoption by traditional finance, it also introduces complexity and potential risks to the open nature of the network. Given the lack of explicit evidence of validator supermajority support or successful production testing in the provided facts, a cautious approach is warranted.\",\n  \"forbidden_stronger_claim\": \"The amendment is definitely safe and will not cause any network issues.\",\n  \"missing_evidence\": [\n    \"Current validator voting status or supermajority threshold progress.\",\n    \"Results from testnet or mainnet trials of the PermissionedDomains feature.\",\n    \"Community or validator consensus on the trade-offs between compliance features and decentralization.\"\n  ],\n  \"vote_confidence\": 0.4,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 584,
+      "prompt_tokens": 735,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1319
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:15:45Z"
+}

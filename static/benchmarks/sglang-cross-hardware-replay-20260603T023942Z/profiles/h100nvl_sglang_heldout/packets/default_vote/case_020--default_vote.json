@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_020",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "7117E2EC2DBF119CA55181D69819F1999ECEE1A0225A7FD2B9ED47940968479C",
+    "amendment_name": "fix1571",
+    "decision_surface": "XRPL validator amendment decision surface for fix1571.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fix1571: Changes Escrow to fix the following issues: - Changes the EscrowCreate transaction to require the Condition or FinishAfter field (or both). Escrows with neither Condition nor FinishAfter that were created before this amendment can be finished by anyone at any time before their CancelAfter time. - Fixes a flaw that incorrectly prevents time-based Escrows from being finished in some circumstances.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1571 appears in XRPSCAN with introduced rippled version 1.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "b232cab6e03290fd89ed70e18909f35d39af4731767ad1b5211296464d7889e6",
+  "packet_id": "case_020--default_vote",
+  "packet_version": 1
+}

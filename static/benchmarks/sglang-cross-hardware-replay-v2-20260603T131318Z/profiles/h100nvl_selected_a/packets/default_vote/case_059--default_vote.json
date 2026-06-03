@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_059",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "755C971C29971C9F20C6F080F2ED96F87884E40AD19554A5EBECDCEC8A1F77FE",
+    "amendment_name": "fixEmptyDID",
+    "decision_surface": "XRPL validator amendment decision surface for fixEmptyDID.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixEmptyDID: This amendment adds an additional check to prevent empty DID ledger entries from being created. With this amendment, if a transaction would create an empty DID, it returns the new error code tecEMPTY_DID instead. Without this amendment, an empty DID can be created, which takes up space and counts towards the owner reserve but does nothing useful. This amendment has no effect unless the DID amendment is enabled.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixEmptyDID appears in XRPSCAN with introduced rippled version 2.2.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "30b17b1bf5d276c9b19086a509bb758238dfcf36d3f188b2d279588c5d400ccb",
+  "packet_id": "case_059--default_vote",
+  "packet_version": 1
+}

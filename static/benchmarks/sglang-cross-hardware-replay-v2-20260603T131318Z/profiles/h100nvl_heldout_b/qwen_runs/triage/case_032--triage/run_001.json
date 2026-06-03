@@ -1,0 +1,87 @@
+{
+  "completed_at": "2026-06-03T15:23:17Z",
+  "error": "",
+  "event_id": "case_032",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a1a4b78aae204842a6c01e32f84514ea12c5af17b7a6928cd26052300e110764",
+  "output_hash": "a7b8d768c426c8cd47655836fd6558ef02650271257be9e576f566a0659415d9",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment involves AMM auto-bridging logic, which is a complex domain.",
+      "Dry offers relate to offer book state and reserve requirements."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', indicating it is a bug fix.",
+      "The packet explicitly describes the amendment as fixing a bug where dry offers remain on the ledger unnecessarily.",
+      "The fix is localized to removing specific invalid offers (dry offers) that provide no benefit and consume reserves.",
+      "The packet does not describe broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, rounding changes, freeze/authorization bypasses, ledger repair, NFT semantics, material token supply changes, escrow math, numeric precision issues, or edge-case transaction-processing uncertainty.",
+      "The risk is limited to correcting an inefficient state (dry offers) rather than altering fundamental financial or asset-control semantics.",
+      "Account-local or offer-specific cleanup does not constitute broad third-party asset control or systemic risk."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the amendment as a fix for a specific bug in auto-bridging that leaves dry offers on the ledger, clarifying the scope is limited to removing these offers when matched."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment name is 'fixTakerDryOfferRemoval', triggering the 'fix' precedence rule."
+      }
+    ],
+    "decision_summary": "The amendment 'fixTakerDryOfferRemoval' is a localized bug fix for auto-bridging that removes dry offers from the ledger. While it touches the AMM domain, the packet does not identify material risks such as invariant changes, consensus issues, or broad asset-control semantics. It is a corrective measure for an inefficient state, fitting the PROCEED criteria for fix amendments without explicit no-vote advisories or high-risk patterns.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 0,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [
+      "Explicit no-vote advisory",
+      "Description of obsolete status",
+      "Description of broad cross-feature canonicalization or systemic risk"
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the fix introduce any new consensus rules or change how valid offers are processed beyond removing dry ones?",
+        "Is there any risk that removing dry offers could impact legitimate pending transactions?"
+      ],
+      "recommended_validator_action": "Vote YES to enable the fix, as it resolves a known inefficiency in the offer book without introducing material risk.",
+      "review_questions": [
+        "Is the scope of the fix limited to dry offers in auto-bridging?",
+        "Are there any known side effects on reserve calculations for valid offers?"
+      ],
+      "title": "Review fixTakerDryOfferRemoval for localized bug fix status"
+    }
+  },
+  "packet_hash": "e1f2aa9729a0ce86ff53447a814583fe710b7ba82c232155bfe67b842188ece8",
+  "packet_id": "case_032--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "d953f9dd322a13198201e151d5e05e848d2fc24816007f8ea7c2ddc88e8565af",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment involves AMM auto-bridging logic, which is a complex domain.\",\n\"Dry offers relate to offer book state and reserve requirements.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix', indicating it is a bug fix.\",\n\"The packet explicitly describes the amendment as fixing a bug where dry offers remain on the ledger unnecessarily.\",\n\"The fix is localized to removing specific invalid offers (dry offers) that provide no benefit and consume reserves.\",\n\"The packet does not describe broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, rounding changes, freeze/authorization bypasses, ledger repair, NFT semantics, material token supply changes, escrow math, numeric precision issues, or edge-case transaction-processing uncertainty.\",\n\"The risk is limited to correcting an inefficient state (dry offers) rather than altering fundamental financial or asset-control semantics.\",\n\"Account-local or offer-specific cleanup does not constitute broad third-party asset control or systemic risk.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Defines the amendment as a fix for a specific bug in auto-bridging that leaves dry offers on the ledger, clarifying the scope is limited to removing these offers when matched.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment name is 'fixTakerDryOfferRemoval', triggering the 'fix' precedence rule.\"\n}\n],\n\"decision_summary\": \"The amendment 'fixTakerDryOfferRemoval' is a localized bug fix for auto-bridging that removes dry offers from the ledger. While it touches the AMM domain, the packet does not identify material risks such as invariant changes, consensus issues, or broad asset-control semantics. It is a corrective measure for an inefficient state, fitting the PROCEED criteria for fix amendments without explicit no-vote advisories or high-risk patterns.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 0,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n\"missing_evidence\": [\n\"Explicit no-vote advisory\",\n\"Description of obsolete status\",\n\"Description of broad cross-feature canonicalization or systemic risk\"\n],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the fix introduce any new consensus rules or change how valid offers are processed beyond removing dry ones?\",\n\"Is there any risk that removing dry offers could impact legitimate pending transactions?\"\n],\n\"recommended_validator_action\": \"Vote YES to enable the fix, as it resolves a known inefficiency in the offer book without introducing material risk.\",\n\"review_questions\": [\n\"Is the scope of the fix limited to dry offers in auto-bridging?\",\n\"Are there any known side effects on reserve calculations for valid offers?\"\n],\n\"title\": \"Review fixTakerDryOfferRemoval for localized bug fix status\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 670,
+      "prompt_tokens": 1194,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1864
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T15:23:07Z"
+}

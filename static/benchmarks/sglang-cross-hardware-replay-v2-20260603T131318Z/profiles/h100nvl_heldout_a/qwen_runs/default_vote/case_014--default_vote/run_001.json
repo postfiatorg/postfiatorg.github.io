@@ -1,0 +1,52 @@
+{
+  "completed_at": "2026-06-03T14:54:07Z",
+  "error": "",
+  "event_id": "case_014",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a4413e43312a9d665bcaa356648bcc89aa32490a4420217384b9b0f42206b54f",
+  "output_hash": "65ac3b78aa4cc749c03025cbb75cfbcf1f16d65abc0922df2bbb4a8a9f4ba09e",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes fix1512 as a bug fix for incorrect error codes in transaction processing, which is a corrective maintenance change rather than a feature that would typically default to NO."
+      }
+    ],
+    "decision_summary": "The amendment fix1512 is a bug fix that corrects error codes for invalid PaymentChannelClaim transactions. In XRPL governance, bug fixes and maintenance updates are generally safe and beneficial, leading to a default vote of YES in stable releases unless there is evidence of risk or incompatibility. No evidence suggests this fix is risky or should be disabled by default.",
+    "default_vote_confidence": 0.9,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the source regarding the default vote configuration in the rippled source code."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "42bf3d3c8dd17da39cb7e594ee00d55609b776ac9884890d5b3df79651f98ad6",
+  "packet_id": "case_014--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "ce9845a596e3d04a35f92637c6f0d58aa4e29188c5a678e6ae6591c686379bb2",
+  "raw_message_content": "{\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes fix1512 as a bug fix for incorrect error codes in transaction processing, which is a corrective maintenance change rather than a feature that would typically default to NO.\"\n}\n],\n\"decision_summary\": \"The amendment fix1512 is a bug fix that corrects error codes for invalid PaymentChannelClaim transactions. In XRPL governance, bug fixes and maintenance updates are generally safe and beneficial, leading to a default vote of YES in stable releases unless there is evidence of risk or incompatibility. No evidence suggests this fix is risky or should be disabled by default.\",\n\"default_vote_confidence\": 0.9,\n\"missing_evidence\": [\n\"Explicit statement from the source regarding the default vote configuration in the rippled source code.\"\n],\n\"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 197,
+      "prompt_tokens": 664,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 861
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:54:03Z"
+}

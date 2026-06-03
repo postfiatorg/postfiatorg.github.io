@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_017",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "B9E739B8296B4A1BB29BE990B17D66E21B62A300A909F25AC55C22D6C72E1F9D",
+    "amendment_name": "fix1523",
+    "decision_surface": "XRPL validator amendment decision surface for fix1523.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fix1523: Adds tracking by destination account to escrows. Without this amendment, pending escrows are only tracked by sender. This amendment makes it possible to look up pending escrows by the destination address using the account_objects method, excluding any pending escrows that were created before this amendment became enabled. This amendment also makes EscrowCreate transactions appear in the destination's transaction history, as viewed with the account_tx method. With this amendment, new escrows are added to the owner directories of both the sender and receiver. This amendment also adds a new DestinationNode field to Escrow ledger objects, indicating which page of the destination's owner directory contains the escrow.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1523 appears in XRPSCAN with introduced rippled version 0.80.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "f5652f82fb20eb337148689851cfaf1dc8923980ea83fc390125cf92e691f718",
+  "packet_id": "case_017--vote_outcome",
+  "packet_version": 1
+}

@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_069",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "F1ED6B4A411D8B872E65B9DCB4C8B100375B0DD3D62D07192E011D6D7F339013",
+    "amendment_name": "fixTrustLinesToSelf",
+    "decision_surface": "XRPL validator amendment decision surface for fixTrustLinesToSelf.",
+    "source_facts": [
+      {
+        "claim": "fixTrustLinesToSelf: This amendment removes two trust lines from an account to itself that were created due to an old bug (both on 2013-05-07). When the amendment becomes enabled, it deletes trust lines with the IDs 2F8F21EFCAFD7ACFB07D5BB04F0D2E18587820C7611305BB674A64EAB0FA71E1 and 326035D5C0560A9DA8636545DD5A1B0DFCFF63E68D491B5522B767BB00564B1A if they exist. After doing so, the amendment does nothing else. On test networks that do not have these trust lines, the amendment has no effect.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixTrustLinesToSelf appears in XRPSCAN with introduced rippled version 1.10.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "e3fe4c736bdaa0b18a2d7950c8a72404947676b6fc3fbfddbc56da70fff3b8fb",
+  "packet_id": "case_069--triage",
+  "packet_version": 1
+}

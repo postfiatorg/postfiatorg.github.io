@@ -1,0 +1,90 @@
+{
+  "completed_at": "2026-06-03T14:59:39Z",
+  "error": "",
+  "event_id": "case_017",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a4413e43312a9d665bcaa356648bcc89aa32490a4420217384b9b0f42206b54f",
+  "output_hash": "649ff1c39c6c5f1bd21e55c4470b6c1dbca6538065962472189bb30ac98f8d67",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment modifies escrow ledger objects by adding a DestinationNode field and updating owner directories for both sender and receiver.",
+      "Escrow math and accounting are explicitly listed as material risk patterns that warrant HOLD_FOR_CHALLENGE if identified in the facts.",
+      "Changes to how escrows are tracked and stored could impact escrow settlement semantics or ledger consistency if not carefully reviewed."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', indicating it is a fix amendment.",
+      "The packet describes the amendment as adding tracking capabilities (lookup by destination, transaction history inclusion) rather than changing core escrow math, rounding, or invariant logic.",
+      "The change is localized to escrow indexing and visibility, not broad cross-feature canonicalization or consensus/liveness risk.",
+      "Account-local opt-out controls or visibility enhancements generally proceed unless broader third-party asset control or systemic risk is shown.",
+      "No explicit no-vote advisory, obsolete status, or critical unsafe evidence is present."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the specific changes: adding destination tracking, updating owner directories, and adding DestinationNode field. This allows assessment of whether the change is a localized fix or a material risk to escrow semantics."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the amendment voting process and risks of incompatibility, reinforcing the need for conservative review but not dictating a specific route on its own."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version introduction, supporting the 'fix' classification and lack of obsolete status."
+      }
+    ],
+    "decision_summary": "The amendment 'fix1523' is a fix amendment that enhances escrow tracking by adding destination-side indexing and transaction history visibility. While it touches escrow objects, the described changes are additive and localized to indexing/visibility, not altering core escrow math, rounding, invariants, or settlement semantics. The packet does not describe broad cross-feature risks, consensus issues, or material accounting changes. Therefore, it qualifies for PROCEED under the rule for localized fix amendments, despite the general caution around escrow-related changes.",
+    "estimated_review_minutes": {
+      "deep_review": 15,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE is not required because the facts do not identify material risk patterns such as escrow math changes, invariant violations, or broad systemic risks.",
+    "missing_evidence": [
+      "Explicit confirmation that no escrow settlement logic or balance accounting is altered beyond indexing.",
+      "Details on potential edge cases in owner directory updates for both sender and receiver."
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.85,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the addition of DestinationNode and dual owner directory entries introduce any risk of ledger bloat or consistency issues during high-throughput escrow creation?",
+        "Are there any known edge cases where the new tracking might conflict with existing escrow states created before the amendment?"
+      ],
+      "recommended_validator_action": "Proceed with enabling the amendment after standard verification, as it is a localized fix with no identified material risks.",
+      "review_questions": [
+        "Does the amendment change any escrow settlement conditions or balance calculations?",
+        "Is the change purely additive to indexing and visibility, or does it alter core escrow behavior?"
+      ],
+      "title": "Triage for fix1523: Escrow Destination Tracking"
+    }
+  },
+  "packet_hash": "e1b82b8d7f5a8ce240c58aa9d98956db3189afb2c05b8a36d971df01fd552d07",
+  "packet_id": "case_017--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "03d98e94a3524eed06c9f14baf8e6bf956326c337e19209291a96712fa84a5d4",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment modifies escrow ledger objects by adding a DestinationNode field and updating owner directories for both sender and receiver.\",\n\"Escrow math and accounting are explicitly listed as material risk patterns that warrant HOLD_FOR_CHALLENGE if identified in the facts.\",\n\"Changes to how escrows are tracked and stored could impact escrow settlement semantics or ledger consistency if not carefully reviewed.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix', indicating it is a fix amendment.\",\n\"The packet describes the amendment as adding tracking capabilities (lookup by destination, transaction history inclusion) rather than changing core escrow math, rounding, or invariant logic.\",\n\"The change is localized to escrow indexing and visibility, not broad cross-feature canonicalization or consensus/liveness risk.\",\n\"Account-local opt-out controls or visibility enhancements generally proceed unless broader third-party asset control or systemic risk is shown.\",\n\"No explicit no-vote advisory, obsolete status, or critical unsafe evidence is present.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the specific changes: adding destination tracking, updating owner directories, and adding DestinationNode field. This allows assessment of whether the change is a localized fix or a material risk to escrow semantics.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Provides context on the amendment voting process and risks of incompatibility, reinforcing the need for conservative review but not dictating a specific route on its own.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment's existence and version introduction, supporting the 'fix' classification and lack of obsolete status.\"\n}\n],\n\"decision_summary\": \"The amendment 'fix1523' is a fix amendment that enhances escrow tracking by adding destination-side indexing and transaction history visibility. While it touches escrow objects, the described changes are additive and localized to indexing/visibility, not altering core escrow math, rounding, invariants, or settlement semantics. The packet does not describe broad cross-feature risks, consensus issues, or material accounting changes. Therefore, it qualifies for PROCEED under the rule for localized fix amendments, despite the general caution around escrow-related changes.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 15,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE is not required because the facts do not identify material risk patterns such as escrow math changes, invariant violations, or broad systemic risks.\",\n\"missing_evidence\": [\n\"Explicit confirmation that no escrow settlement logic or balance accounting is altered beyond indexing.\",\n\"Details on potential edge cases in owner directory updates for both sender and receiver.\"\n],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.85,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the addition of DestinationNode and dual owner directory entries introduce any risk of ledger bloat or consistency issues during high-throughput escrow creation?\",\n\"Are there any known edge cases where the new tracking might conflict with existing escrow states created before the amendment?\"\n],\n\"recommended_validator_action\": \"Proceed with enabling the amendment after standard verification, as it is a localized fix with no identified material risks.\",\n\"review_questions\": [\n\"Does the amendment change any escrow settlement conditions or balance calculations?\",\n\"Is the change purely additive to indexing and visibility, or does it alter core escrow behavior?\"\n],\n\"title\": \"Triage for fix1523: Escrow Destination Tracking\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 795,
+      "prompt_tokens": 1196,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1991
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:59:27Z"
+}

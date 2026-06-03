@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-03T13:49:27Z",
+  "error": "",
+  "event_id": "case_047",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "0fcc4972ce667f1ee2c761e70a9f2cdb92a3bf55b550e22aebff24c8e5ef1095",
+  "output_json": {
+    "arguments_for_no": [
+      "No evidence of security vulnerabilities or critical bugs necessitating immediate activation.",
+      "No evidence of network instability or consensus failures caused by the current lack of these flag checks."
+    ],
+    "arguments_for_yes": [
+      "The amendment improves protocol robustness by enforcing strict validation of transaction flags, preventing ambiguous or contradictory states.",
+      "Returning temINVALID_FLAG for non-existent or contradictory flags enhances clarity for developers and users, reducing confusion and potential errors in transaction construction.",
+      "The amendment is associated with rippled version 2.4.0, indicating it has undergone standard development and testing cycles.",
+      "Standard XRPL governance practice favors enabling amendments that improve protocol correctness and security unless there is a specific reason to reject them."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the functional improvement: adding flag checks for specific transaction types to return temINVALID_FLAG for invalid or contradictory flags, which enhances protocol correctness."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is part of a specific rippled version (2.4.0), implying it is a mature, tested feature ready for network adoption."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Contextualizes the voting process, highlighting the importance of validator consensus and the risk of amendment-blocking for incompatible servers, reinforcing the need for careful but standard evaluation."
+      }
+    ],
+    "decision_summary": "The fixInvalidTxFlags amendment introduces beneficial validation checks for Credential and SignerListSet transactions, improving protocol clarity and robustness by rejecting invalid or contradictory flags. There is no evidence of harm or incompatibility, and it aligns with standard protocol improvement practices. Therefore, a YES vote is recommended.",
+    "forbidden_stronger_claim": "This amendment guarantees zero future transaction errors.",
+    "missing_evidence": [
+      "Specific metrics on the frequency of invalid flag usage prior to this amendment.",
+      "Detailed impact analysis on existing applications relying on lenient flag handling."
+    ],
+    "vote_confidence": 0.85,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "29ff1af3a255b02b8481d5f98e179c1ee8389b2c573561b46fd15d12646cd46c",
+  "packet_id": "case_047--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "0ee2e7f695872ce12b14ee2df48d75cfa0f52859bb66b2dea2474f84e2d65aa9",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"No evidence of security vulnerabilities or critical bugs necessitating immediate activation.\",\n    \"No evidence of network instability or consensus failures caused by the current lack of these flag checks.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment improves protocol robustness by enforcing strict validation of transaction flags, preventing ambiguous or contradictory states.\",\n    \"Returning temINVALID_FLAG for non-existent or contradictory flags enhances clarity for developers and users, reducing confusion and potential errors in transaction construction.\",\n    \"The amendment is associated with rippled version 2.4.0, indicating it has undergone standard development and testing cycles.\",\n    \"Standard XRPL governance practice favors enabling amendments that improve protocol correctness and security unless there is a specific reason to reject them.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Defines the functional improvement: adding flag checks for specific transaction types to return temINVALID_FLAG for invalid or contradictory flags, which enhances protocol correctness.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is part of a specific rippled version (2.4.0), implying it is a mature, tested feature ready for network adoption.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Contextualizes the voting process, highlighting the importance of validator consensus and the risk of amendment-blocking for incompatible servers, reinforcing the need for careful but standard evaluation.\"\n    }\n  ],\n  \"decision_summary\": \"The fixInvalidTxFlags amendment introduces beneficial validation checks for Credential and SignerListSet transactions, improving protocol clarity and robustness by rejecting invalid or contradictory flags. There is no evidence of harm or incompatibility, and it aligns with standard protocol improvement practices. Therefore, a YES vote is recommended.\",\n  \"forbidden_stronger_claim\": \"This amendment guarantees zero future transaction errors.\",\n  \"missing_evidence\": [\n    \"Specific metrics on the frequency of invalid flag usage prior to this amendment.\",\n    \"Detailed impact analysis on existing applications relying on lenient flag handling.\"\n  ],\n  \"vote_confidence\": 0.85,\n  \"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 503,
+      "prompt_tokens": 685,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1188
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:49:19Z"
+}

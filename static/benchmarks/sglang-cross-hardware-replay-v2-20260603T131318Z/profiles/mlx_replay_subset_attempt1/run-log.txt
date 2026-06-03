@@ -1,0 +1,417 @@
+mlx-replay-subset	Set up job	﻿2026-06-03T13:17:06.9410900Z Current runner version: '2.334.0'
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9424290Z ##[group]Runner Image Provisioner
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9424770Z Hosted Compute Agent
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9425150Z Version: 20260520.533
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9425530Z Commit: 189110e25284a9812c124fd27b339e2fb4f2f9db
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9425980Z Build Date: 2026-05-20T17:44:04Z
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9426380Z Worker ID: {9611ea4f-a2d4-4398-85ca-5d3a90ad2ba1}
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9426850Z Azure Region: westus
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9427210Z ##[endgroup]
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9427960Z ##[group]Operating System
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9428340Z macOS
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9428630Z 15.7.7
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9428930Z 24G720
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9429240Z ##[endgroup]
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9429580Z ##[group]Runner Image
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9429920Z Image: macos-15-arm64
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9430280Z Version: 20260527.0100.1
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9430980Z Included Software: https://github.com/actions/runner-images/blob/macos-15-arm64/20260527.0100/images/macos/macos-15-arm64-Readme.md
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9432030Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-15-arm64%2F20260527.0100
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9432650Z ##[endgroup]
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9433310Z ##[group]GITHUB_TOKEN Permissions
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9434150Z Contents: read
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9434490Z Metadata: read
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9469330Z ##[endgroup]
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9470660Z Secret source: Actions
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9471070Z Prepare workflow directory
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9650770Z Prepare all required actions
+mlx-replay-subset	Set up job	2026-06-03T13:17:06.9673970Z Getting action download info
+mlx-replay-subset	Set up job	2026-06-03T13:17:07.5192580Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+mlx-replay-subset	Set up job	2026-06-03T13:17:07.7311190Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+mlx-replay-subset	Set up job	2026-06-03T13:17:07.8623550Z Complete job name: mlx-replay-subset
+mlx-replay-subset	Checkout	﻿2026-06-03T13:17:07.8947640Z ##[group]Run actions/checkout@v4
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8948130Z with:
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8948480Z   repository: postfiatorg/postfiatorg.github.io
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8951240Z   token: ***
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8951530Z   ssh-strict: true
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8951820Z   ssh-user: git
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8952140Z   persist-credentials: true
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8952460Z   clean: true
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8952790Z   sparse-checkout-cone-mode: true
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8953140Z   fetch-depth: 1
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8953460Z   fetch-tags: false
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8953750Z   show-progress: true
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8954080Z   lfs: false
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8954350Z   submodules: false
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8954660Z   set-safe-directory: true
+mlx-replay-subset	Checkout	2026-06-03T13:17:07.8955070Z ##[endgroup]
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0093830Z Syncing repository: postfiatorg/postfiatorg.github.io
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0094960Z ##[group]Getting Git version info
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0095500Z Working directory is '/Users/runner/work/postfiatorg.github.io/postfiatorg.github.io'
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0096380Z [command]/opt/homebrew/bin/git version
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0279340Z git version 2.54.0
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0294500Z ##[endgroup]
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0299820Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/f2aba1a8-4a33-4539-b81d-30f933248105/.gitconfig'
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0306120Z Temporarily overriding HOME='/Users/runner/work/_temp/f2aba1a8-4a33-4539-b81d-30f933248105' before making global git config changes
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0306990Z Adding repository directory to the temporary git global config as a safe directory
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0313650Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/postfiatorg.github.io/postfiatorg.github.io
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0394900Z Deleting the contents of '/Users/runner/work/postfiatorg.github.io/postfiatorg.github.io'
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0396880Z ##[group]Initializing the repository
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0400360Z [command]/opt/homebrew/bin/git init /Users/runner/work/postfiatorg.github.io/postfiatorg.github.io
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0555300Z hint: Using 'master' as the name for the initial branch. This default branch name
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0556540Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0557210Z hint: to use in all of your new repositories, which will suppress this warning,
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0557780Z hint: call:
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0558060Z hint:
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0558400Z hint: 	git config --global init.defaultBranch <name>
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0558790Z hint:
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0559160Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0559730Z hint: 'development'. The just-created branch can be renamed via this command:
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0560220Z hint:
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0560480Z hint: 	git branch -m <name>
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0560780Z hint:
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0561190Z hint: Disable this message with "git config set advice.defaultBranchName false"
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0561910Z Initialized empty Git repository in /Users/runner/work/postfiatorg.github.io/postfiatorg.github.io/.git/
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0563210Z [command]/opt/homebrew/bin/git remote add origin https://github.com/postfiatorg/postfiatorg.github.io
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0611120Z ##[endgroup]
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0611690Z ##[group]Disabling automatic garbage collection
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0612630Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0650330Z ##[endgroup]
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0650840Z ##[group]Setting up auth
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0654470Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.0693810Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.1281980Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.1324960Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.1857980Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.1902190Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.2488100Z [command]/opt/homebrew/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.2490260Z ##[endgroup]
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.2490860Z ##[group]Fetching the repository
+mlx-replay-subset	Checkout	2026-06-03T13:17:08.2491830Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2f4494fc04d3ddb4fe70fc1635265ee6febe69f2:refs/remotes/origin/main
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.0030930Z From https://github.com/postfiatorg/postfiatorg.github.io
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.0032030Z  * [new ref]         2f4494fc04d3ddb4fe70fc1635265ee6febe69f2 -> origin/main
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.0094970Z ##[endgroup]
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.0095540Z ##[group]Determining the checkout info
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.0096140Z ##[endgroup]
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.0099650Z [command]/opt/homebrew/bin/git sparse-checkout disable
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.0155820Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.0207480Z ##[group]Checking out the ref
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.0209630Z [command]/opt/homebrew/bin/git checkout --progress --force -B main refs/remotes/origin/main
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.2774630Z Switched to a new branch 'main'
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.2781210Z branch 'main' set up to track 'origin/main'.
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.2851390Z ##[endgroup]
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.2853640Z [command]/opt/homebrew/bin/git log -1 --format=%H
+mlx-replay-subset	Checkout	2026-06-03T13:17:10.2906020Z 2f4494fc04d3ddb4fe70fc1635265ee6febe69f2
+mlx-replay-subset	Host profile	﻿2026-06-03T13:17:10.3037550Z ##[group]Run mkdir -p mlx_replay_subset
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3038320Z [36;1mmkdir -p mlx_replay_subset[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3038790Z [36;1m{[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3039100Z [36;1m  uname -a[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3039520Z [36;1m  sw_vers[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3039970Z [36;1m  sysctl -n machdep.cpu.brand_string || true[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3040560Z [36;1m  python3 - <<'PY'[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3040980Z [36;1mimport json[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3041390Z [36;1mimport platform[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3041830Z [36;1mprint(json.dumps({[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3042340Z [36;1m    "platform_machine": platform.machine(),[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3043020Z [36;1m    "platform_platform": platform.platform(),[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3043630Z [36;1m}, sort_keys=True))[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3044040Z [36;1mPY[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3044420Z [36;1m} | tee mlx_replay_subset/host_profile.txt[0m
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3089440Z shell: /bin/bash -e {0}
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3089980Z ##[endgroup]
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3378340Z Darwin lvl10-bj362-324bdf27-c2bf-430b-9a5a-3531eb4179a0-C6744B73E9B1.local 24.6.0 Darwin Kernel Version 24.6.0: Tue Apr 21 20:18:00 PDT 2026; root:xnu-11417.140.69.710.16~1/RELEASE_ARM64_VMAPPLE arm64
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3455570Z ProductName:		macOS
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3456700Z ProductVersion:		15.7.7
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3457210Z BuildVersion:		24G720
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.3484150Z Apple M2 Pro (Virtual)
+mlx-replay-subset	Host profile	2026-06-03T13:17:10.4915080Z {"platform_machine": "arm64", "platform_platform": "macOS-15.7.7-arm64-arm-64bit-Mach-O"}
+mlx-replay-subset	Install MLX	﻿2026-06-03T13:17:10.5210110Z ##[group]Run python3 -m venv .venv
+mlx-replay-subset	Install MLX	2026-06-03T13:17:10.5211030Z [36;1mpython3 -m venv .venv[0m
+mlx-replay-subset	Install MLX	2026-06-03T13:17:10.5211810Z [36;1m. .venv/bin/activate[0m
+mlx-replay-subset	Install MLX	2026-06-03T13:17:10.5212630Z [36;1mpython -m pip install --upgrade pip[0m
+mlx-replay-subset	Install MLX	2026-06-03T13:17:10.5213460Z [36;1mpython -m pip install mlx mlx-lm[0m
+mlx-replay-subset	Install MLX	2026-06-03T13:17:10.5247620Z shell: /bin/bash -e {0}
+mlx-replay-subset	Install MLX	2026-06-03T13:17:10.5248360Z ##[endgroup]
+mlx-replay-subset	Install MLX	2026-06-03T13:17:12.6107050Z Requirement already satisfied: pip in ./.venv/lib/python3.14/site-packages (26.1.1)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:13.0801790Z Collecting pip
+mlx-replay-subset	Install MLX	2026-06-03T13:17:13.2228750Z   Downloading pip-26.1.2-py3-none-any.whl.metadata (4.6 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:13.2472020Z Downloading pip-26.1.2-py3-none-any.whl (1.8 MB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:13.3510590Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 20.5 MB/s  0:00:00
+mlx-replay-subset	Install MLX	2026-06-03T13:17:13.3599880Z Installing collected packages: pip
+mlx-replay-subset	Install MLX	2026-06-03T13:17:13.3600330Z   Attempting uninstall: pip
+mlx-replay-subset	Install MLX	2026-06-03T13:17:13.3614870Z     Found existing installation: pip 26.1.1
+mlx-replay-subset	Install MLX	2026-06-03T13:17:13.3777470Z     Uninstalling pip-26.1.1:
+mlx-replay-subset	Install MLX	2026-06-03T13:17:13.3826100Z       Successfully uninstalled pip-26.1.1
+mlx-replay-subset	Install MLX	2026-06-03T13:17:13.9919990Z Successfully installed pip-26.1.2
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.2174870Z WARNING: Cache entry deserialization failed, entry ignored
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.3284400Z Collecting mlx
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.3600260Z   Downloading mlx-0.31.2-cp314-cp314-macosx_15_0_arm64.whl.metadata (5.9 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.3799010Z Collecting mlx-lm
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.3879240Z   Downloading mlx_lm-0.31.3-py3-none-any.whl.metadata (9.5 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.4025420Z Collecting mlx-metal==0.31.2 (from mlx)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.4101060Z   Downloading mlx_metal-0.31.2-py3-none-macosx_15_0_arm64.whl.metadata (5.1 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.5085720Z Collecting numpy (from mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.5164630Z   Downloading numpy-2.4.6-cp314-cp314-macosx_14_0_arm64.whl.metadata (6.6 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.5380170Z Collecting transformers>=5.0.0 (from mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.5446650Z   Downloading transformers-5.9.0-py3-none-any.whl.metadata (33 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.5963620Z Collecting sentencepiece (from mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.6044430Z   Downloading sentencepiece-0.2.1-cp314-cp314-macosx_11_0_arm64.whl.metadata (10 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.6776230Z Collecting protobuf (from mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.6850950Z   Downloading protobuf-7.35.0-cp310-abi3-macosx_10_9_universal2.whl.metadata (595 bytes)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.7082970Z Collecting pyyaml (from mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.7161550Z   Downloading pyyaml-6.0.3-cp314-cp314-macosx_11_0_arm64.whl.metadata (2.4 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.7302900Z Collecting jinja2 (from mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.7372500Z   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.7624690Z Collecting huggingface-hub<2.0,>=1.5.0 (from transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.7697250Z   Downloading huggingface_hub-1.17.0-py3-none-any.whl.metadata (14 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.7899050Z Collecting packaging>=20.0 (from transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.7971930Z   Downloading packaging-26.2-py3-none-any.whl.metadata (3.5 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.9622960Z Collecting regex>=2025.10.22 (from transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:14.9705760Z   Downloading regex-2026.5.9-cp314-cp314-macosx_11_0_arm64.whl.metadata (40 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.0367870Z Collecting tokenizers<=0.23.0,>=0.22.0 (from transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.0443800Z   Downloading tokenizers-0.22.2-cp39-abi3-macosx_11_0_arm64.whl.metadata (7.3 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.0611270Z Collecting typer (from transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.0678610Z   Downloading typer-0.26.7-py3-none-any.whl.metadata (16 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.1231900Z Collecting safetensors>=0.4.3 (from transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.1308050Z   Downloading safetensors-0.7.0-cp38-abi3-macosx_11_0_arm64.whl.metadata (4.1 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.1514310Z Collecting tqdm>=4.27 (from transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.1586460Z   Downloading tqdm-4.67.3-py3-none-any.whl.metadata (57 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.1767950Z Collecting click>=8.4.0 (from huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.1836250Z   Downloading click-8.4.1-py3-none-any.whl.metadata (2.6 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.1987640Z Collecting filelock>=3.10.0 (from huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.2055120Z   Downloading filelock-3.29.0-py3-none-any.whl.metadata (2.0 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.2207820Z Collecting fsspec>=2023.5.0 (from huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.2274370Z   Downloading fsspec-2026.4.0-py3-none-any.whl.metadata (10 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.2550680Z Collecting hf-xet<2.0.0,>=1.4.3 (from huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.2631370Z   Downloading hf_xet-1.5.0-cp37-abi3-macosx_11_0_arm64.whl.metadata (4.9 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.2771670Z Collecting httpx<1,>=0.23.0 (from huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.2839720Z   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.2899390Z Collecting typer (from transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.2974380Z   Downloading typer-0.25.1-py3-none-any.whl.metadata (15 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.3118350Z Collecting typing-extensions>=4.1.0 (from huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.3184630Z   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.3348390Z Collecting anyio (from httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.3415320Z   Downloading anyio-4.13.0-py3-none-any.whl.metadata (4.5 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.3456310Z WARNING: Cache entry deserialization failed, entry ignored
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.3704180Z Collecting certifi (from httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.3720020Z   Using cached certifi-2026.5.20-py3-none-any.whl.metadata (2.5 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.3844980Z Collecting httpcore==1.* (from httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.3912470Z   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.4062090Z Collecting idna (from httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.4130540Z   Downloading idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.4254880Z Collecting h11>=0.16 (from httpcore==1.*->httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.4321210Z   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.4476910Z Collecting shellingham>=1.3.0 (from typer->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.4546130Z   Downloading shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.4747690Z Collecting rich>=13.8.0 (from typer->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.4818830Z   Downloading rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.4940290Z Collecting annotated-doc>=0.0.2 (from typer->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.5007630Z   Downloading annotated_doc-0.0.4-py3-none-any.whl.metadata (6.6 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.5167730Z Collecting markdown-it-py>=2.2.0 (from rich>=13.8.0->typer->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.5236510Z   Downloading markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.5399490Z Collecting pygments<3.0.0,>=2.13.0 (from rich>=13.8.0->typer->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.5466580Z   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.5591780Z Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.8.0->typer->transformers>=5.0.0->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.5663390Z   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.5977780Z Collecting MarkupSafe>=2.0 (from jinja2->mlx-lm)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.6054870Z   Downloading markupsafe-3.0.3-cp314-cp314-macosx_11_0_arm64.whl.metadata (2.7 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.6166970Z Downloading mlx-0.31.2-cp314-cp314-macosx_15_0_arm64.whl (588 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.6328660Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 588.4/588.4 kB 59.0 MB/s  0:00:00
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.6408590Z Downloading mlx_metal-0.31.2-py3-none-macosx_15_0_arm64.whl (40.1 MB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.8819120Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.1/40.1 MB 166.9 MB/s  0:00:00
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.8925380Z Downloading mlx_lm-0.31.3-py3-none-any.whl (408 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.9048730Z Downloading transformers-5.9.0-py3-none-any.whl (10.8 MB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.9394920Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.8/10.8 MB 314.7 MB/s  0:00:00
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.9477360Z Downloading huggingface_hub-1.17.0-py3-none-any.whl (671 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.9530760Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 671.5/671.5 kB 94.2 MB/s  0:00:00
+mlx-replay-subset	Install MLX	2026-06-03T13:17:15.9681830Z Downloading hf_xet-1.5.0-cp37-abi3-macosx_11_0_arm64.whl (3.8 MB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.0033710Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.8/3.8 MB 104.9 MB/s  0:00:00
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.0115340Z Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.0210340Z Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.0322280Z Downloading tokenizers-0.22.2-cp39-abi3-macosx_11_0_arm64.whl (3.0 MB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.0478020Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.0/3.0 MB 188.5 MB/s  0:00:00
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.0550440Z Downloading typer-0.25.1-py3-none-any.whl (58 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.0647760Z Downloading annotated_doc-0.0.4-py3-none-any.whl (5.3 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.0738940Z Downloading click-8.4.1-py3-none-any.whl (116 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.0839360Z Downloading filelock-3.29.0-py3-none-any.whl (39 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.0924910Z Downloading fsspec-2026.4.0-py3-none-any.whl (203 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.1012500Z Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.1139240Z Downloading numpy-2.4.6-cp314-cp314-macosx_14_0_arm64.whl (5.2 MB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.1367830Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 229.0 MB/s  0:00:00
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.1439340Z Downloading packaging-26.2-py3-none-any.whl (100 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.1535930Z Downloading pyyaml-6.0.3-cp314-cp314-macosx_11_0_arm64.whl (173 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.1671440Z Downloading regex-2026.5.9-cp314-cp314-macosx_11_0_arm64.whl (289 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.1769300Z Downloading rich-15.0.0-py3-none-any.whl (310 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.1857990Z Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.1908060Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 250.5 MB/s  0:00:00
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.1977710Z Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.2062750Z Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.2160840Z Downloading safetensors-0.7.0-cp38-abi3-macosx_11_0_arm64.whl (447 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.2260600Z Downloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.2349110Z Downloading tqdm-4.67.3-py3-none-any.whl (78 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.2435940Z Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.2533330Z Downloading anyio-4.13.0-py3-none-any.whl (114 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.2622420Z Downloading idna-3.18-py3-none-any.whl (65 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.2649670Z Using cached certifi-2026.5.20-py3-none-any.whl (134 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.2758260Z Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.2866710Z Downloading markupsafe-3.0.3-cp314-cp314-macosx_11_0_arm64.whl (12 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.2985530Z Downloading protobuf-7.35.0-cp310-abi3-macosx_10_9_universal2.whl (433 kB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.3096040Z Downloading sentencepiece-0.2.1-cp314-cp314-macosx_11_0_arm64.whl (1.3 MB)
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.3195110Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 131.9 MB/s  0:00:00
+mlx-replay-subset	Install MLX	2026-06-03T13:17:16.4223220Z Installing collected packages: typing-extensions, tqdm, shellingham, sentencepiece, safetensors, regex, pyyaml, pygments, protobuf, packaging, numpy, mlx-metal, mdurl, MarkupSafe, idna, hf-xet, h11, fsspec, filelock, click, certifi, annotated-doc, mlx, markdown-it-py, jinja2, httpcore, anyio, rich, httpx, typer, huggingface-hub, tokenizers, transformers, mlx-lm
+mlx-replay-subset	Install MLX	2026-06-03T13:17:23.6283190Z 
+mlx-replay-subset	Install MLX	2026-06-03T13:17:23.6303310Z Successfully installed MarkupSafe-3.0.3 annotated-doc-0.0.4 anyio-4.13.0 certifi-2026.5.20 click-8.4.1 filelock-3.29.0 fsspec-2026.4.0 h11-0.16.0 hf-xet-1.5.0 httpcore-1.0.9 httpx-0.28.1 huggingface-hub-1.17.0 idna-3.18 jinja2-3.1.6 markdown-it-py-4.2.0 mdurl-0.1.2 mlx-0.31.2 mlx-lm-0.31.3 mlx-metal-0.31.2 numpy-2.4.6 packaging-26.2 protobuf-7.35.0 pygments-2.20.0 pyyaml-6.0.3 regex-2026.5.9 rich-15.0.0 safetensors-0.7.0 sentencepiece-0.2.1 shellingham-1.5.4 tokenizers-0.22.2 tqdm-4.67.3 transformers-5.9.0 typer-0.25.1 typing-extensions-4.15.0
+mlx-replay-subset	Run replay subset	﻿2026-06-03T13:17:23.7069180Z ##[group]Run . .venv/bin/activate
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7069440Z [36;1m. .venv/bin/activate[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7069590Z [36;1mpython - <<'PY'[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7069720Z [36;1mimport hashlib[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7069850Z [36;1mimport json[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7069970Z [36;1mimport os[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7070090Z [36;1mimport platform[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7070210Z [36;1mimport sys[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7070340Z [36;1mfrom pathlib import Path[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7070480Z [36;1m[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7070600Z [36;1msys.path.insert(0, "scripts")[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7070970Z [36;1mfrom run_qwen_xrpl_amendment_lifecycle_replay import build_prompt, extract_json, normalize_output, parsed_label[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7071410Z [36;1mfrom xrpl_lifecycle_common import LANE_LABEL_FIELD, sha_json, utc_now[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7071650Z [36;1m[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7071770Z [36;1mfrom mlx_lm import generate, load[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7071930Z [36;1m[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7072070Z [36;1mout_dir = Path("mlx_replay_subset")[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7072260Z [36;1mout_dir.mkdir(parents=True, exist_ok=True)[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7072460Z [36;1mmodel_id = os.environ["MLX_MODEL_ID"][0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7072660Z [36;1mmax_tokens = int(os.environ["MAX_TOKENS"])[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7072840Z [36;1mpacket_paths = [[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7073220Z [36;1m    Path("static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/packets/vote_outcome/case_001--vote_outcome.json"),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7073880Z [36;1m    Path("static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/packets/vote_state/case_001--vote_state.json"),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7074760Z [36;1m    Path("static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/packets/default_vote/case_001--default_vote.json"),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7075380Z [36;1m    Path("static/benchmarks/xrpl-amendment-lifecycle-heldout-20260602T182517Z/packets/triage/case_001--triage.json"),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7075750Z [36;1m][0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7075850Z [36;1m[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7075990Z [36;1mmachine_receipt = {[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7076140Z [36;1m    "generated_at": utc_now(),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7076310Z [36;1m    "runtime_kind": "mlx-lm",[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7076460Z [36;1m    "model": model_id,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7076630Z [36;1m    "platform_machine": platform.machine(),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7076840Z [36;1m    "platform_platform": platform.platform(),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7077030Z [36;1m    "max_tokens": max_tokens,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7077190Z [36;1m    "runs_per_packet": 2,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7077330Z [36;1m    "temperature": 0.0,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7077650Z [36;1m    "claim_boundary": "independent-profile MLX subset control; not Qwen/Qwen3.6-27B-FP8 SGLang equivalence",[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7077980Z [36;1m}[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7078240Z [36;1m(out_dir / "machine_receipt.json").write_text(json.dumps(machine_receipt, indent=2, sort_keys=True) + "\n")[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7078570Z [36;1m[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7078680Z [36;1mmodel, tokenizer = load(model_id)[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7078830Z [36;1m[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7078930Z [36;1mrows = [][0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7079050Z [36;1mfor packet_path in packet_paths:[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7079250Z [36;1m    packet = json.loads(packet_path.read_text())[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7079450Z [36;1m    prompt = build_prompt(packet)[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7079620Z [36;1m    messages = [[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7079860Z [36;1m        {"role": "system", "content": "Return only valid JSON. No markdown. No commentary."},[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7080160Z [36;1m        {"role": "user", "content": prompt},[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7080320Z [36;1m    ][0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7080460Z [36;1m    if tokenizer.chat_template is not None:[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7080760Z [36;1m        model_prompt = tokenizer.apply_chat_template(messages, add_generation_prompt=True)[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7081250Z [36;1m    else:[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7081450Z [36;1m        model_prompt = messages[0]["content"] + "\n\n" + messages[1]["content"][0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7081690Z [36;1m[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7081800Z [36;1m    for run_idx in (1, 2):[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7081940Z [36;1m        raw = generate([0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7082080Z [36;1m            model,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7082210Z [36;1m            tokenizer,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7082360Z [36;1m            prompt=model_prompt,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7082530Z [36;1m            max_tokens=max_tokens,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7082700Z [36;1m            temp=0.0,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7082830Z [36;1m            verbose=False,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7082970Z [36;1m        )[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7083090Z [36;1m        schema_valid = True[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7083250Z [36;1m        error = ""[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7083400Z [36;1m        output_json = {}[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7083540Z [36;1m        try:[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7083760Z [36;1m            output_json = normalize_output(packet["lane"], extract_json(raw), packet)[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7084030Z [36;1m        except Exception as exc:[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7084200Z [36;1m            schema_valid = False[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7084380Z [36;1m            error = f"{type(exc).__name__}: {exc}"[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7084650Z [36;1m        label = parsed_label(packet["lane"], output_json) if schema_valid else ""[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7084930Z [36;1m        rows.append({[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7085120Z [36;1m            "packet_path": packet_path.as_posix(),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7085460Z [36;1m            "packet_id": packet["packet_id"],[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7085650Z [36;1m            "lane": packet["lane"],[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7085850Z [36;1m            "run_index": run_idx,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7086030Z [36;1m            "model": model_id,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7086290Z [36;1m            "packet_hash": hashlib.sha256(packet_path.read_bytes()).hexdigest(),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7086640Z [36;1m            "prompt_hash": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7087000Z [36;1m            "raw_output_hash": hashlib.sha256(str(raw).encode("utf-8")).hexdigest(),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7087350Z [36;1m            "parsed_output_hash": sha_json(output_json) if schema_valid else "",[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7087640Z [36;1m            "schema_valid": schema_valid,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7087840Z [36;1m            "error": error,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7088010Z [36;1m            "label": label,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7088250Z [36;1m            "raw_preview": str(raw)[:500],[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7088480Z [36;1m            "label_field": LANE_LABEL_FIELD[packet["lane"]],[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7088740Z [36;1m        })[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7088870Z [36;1m[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7089000Z [36;1msummary = {[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7089140Z [36;1m    "generated_at": utc_now(),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7089340Z [36;1m    "model": model_id,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7089510Z [36;1m    "packet_count": len(packet_paths),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7089720Z [36;1m    "run_count": len(rows),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7093680Z [36;1m    "schema_valid_count": sum(1 for row in rows if row["schema_valid"]),[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7093940Z [36;1m    "same_packet_repeat_raw_matches": 0,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7094130Z [36;1m    "same_packet_repeat_parsed_matches": 0,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7094320Z [36;1m    "label_matches": 0,[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7094510Z [36;1m    "claim_boundary": machine_receipt["claim_boundary"],[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7094710Z [36;1m}[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7094810Z [36;1mby_packet = {}[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7094940Z [36;1mfor row in rows:[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7095130Z [36;1m    by_packet.setdefault(row["packet_id"], []).append(row)[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7095370Z [36;1mfor packet_id, packet_rows in by_packet.items():[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7095570Z [36;1m    if len(packet_rows) == 2:[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7095850Z [36;1m        a, b = packet_rows[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7096140Z [36;1m        summary["same_packet_repeat_raw_matches"] += int(a["raw_output_hash"] == b["raw_output_hash"])[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7096660Z [36;1m        summary["same_packet_repeat_parsed_matches"] += int(a["parsed_output_hash"] == b["parsed_output_hash"] and bool(a["parsed_output_hash"]))[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7097140Z [36;1m        summary["label_matches"] += int(a["label"] == b["label"] and bool(a["label"]))[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7097390Z [36;1m[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7097610Z [36;1m(out_dir / "results.json").write_text(json.dumps(rows, indent=2, sort_keys=True) + "\n")[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7098000Z [36;1m(out_dir / "summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7098330Z [36;1mprint(json.dumps(summary, indent=2, sort_keys=True))[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7098520Z [36;1mPY[0m
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7130290Z shell: /bin/bash -e {0}
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7130420Z env:
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7130550Z   MLX_MODEL_ID: mlx-community/Qwen3-0.6B-4bit
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7130720Z   MAX_TOKENS: 700
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:23.7130830Z ##[endgroup]
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:24.8759980Z 
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:25.1502550Z Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:25.1824030Z 
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:25.3306400Z Fetching 9 files:  11%|█         | 1/9 [00:00<00:02,  3.27it/s]
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:25.6277130Z Fetching 9 files:  22%|██▏       | 2/9 [00:00<00:01,  4.69it/s]
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:28.9479540Z Fetching 9 files:  33%|███▎      | 3/9 [00:00<00:01,  3.98it/s]
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:28.9480000Z Fetching 9 files:  44%|████▍     | 4/9 [00:04<00:07,  1.46s/it]
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:28.9480450Z Fetching 9 files: 100%|██████████| 9/9 [00:04<00:00,  2.21it/s]
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:29.4343110Z Traceback (most recent call last):
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:29.4345100Z   File "<stdin>", line 54, in <module>
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:29.4345940Z   File "/Users/runner/work/postfiatorg.github.io/postfiatorg.github.io/.venv/lib/python3.14/site-packages/mlx_lm/generate.py", line 779, in generate
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:29.4346550Z     for response in stream_generate(model, tokenizer, prompt, **kwargs):
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:29.4346880Z                     ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:29.4347530Z   File "/Users/runner/work/postfiatorg.github.io/postfiatorg.github.io/.venv/lib/python3.14/site-packages/mlx_lm/generate.py", line 703, in stream_generate
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:29.4348080Z     token_generator = generate_step(prompt, model, **kwargs)
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:29.4348410Z TypeError: generate_step() got an unexpected keyword argument 'temp'
+mlx-replay-subset	Run replay subset	2026-06-03T13:17:29.5371020Z ##[error]Process completed with exit code 1.
+mlx-replay-subset	Post Checkout	﻿2026-06-03T13:17:29.5627390Z Post job cleanup.
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.6358470Z [command]/opt/homebrew/bin/git version
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.6403820Z git version 2.54.0
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.6420920Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/133867de-756b-42fc-a710-98517bd9cc44/.gitconfig'
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.6427340Z Temporarily overriding HOME='/Users/runner/work/_temp/133867de-756b-42fc-a710-98517bd9cc44' before making global git config changes
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.6427880Z Adding repository directory to the temporary git global config as a safe directory
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.6430360Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/postfiatorg.github.io/postfiatorg.github.io
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.6474320Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.6513600Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.7027210Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.7055030Z http.https://github.com/.extraheader
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.7062870Z [command]/opt/homebrew/bin/git config --local --unset-all http.https://github.com/.extraheader
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.7103900Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.7599260Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+mlx-replay-subset	Post Checkout	2026-06-03T13:17:29.7639000Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+mlx-replay-subset	Complete job	﻿2026-06-03T13:17:29.8192590Z Cleaning up orphan processes
+mlx-replay-subset	Complete job	2026-06-03T13:17:30.0765040Z ##[warning]Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4. Actions will be forced to run with Node.js 24 by default starting June 16th, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-03T02:59:26Z",
+  "error": "",
+  "event_id": "case_016",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "8007dce009e51f2908770e05b305aa87ff2f0aaa5c1f423807cd25b9bc6110d1",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Provides the technical specification and description of the TokenEscrow amendment, detailing its functionality and changes to transactions and ledger entries."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the specific software version (2.5.0) where the amendment was introduced, which is relevant for determining the release context."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical functionality of the TokenEscrow amendment (F1) and its introduction in rippled version 2.5.0 (F3). However, none of the facts explicitly state the default vote recommendation (YES or NO) from the source of the stable release. The task requires inferring the default vote from the source-backed description, but the description itself is neutral and technical, lacking an explicit endorsement or rejection directive. Without an explicit statement of the default vote in the provided text, the vote cannot be determined as YES or NO.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote (YES or NO) in the amendment description or release notes.",
+      "Validator consensus recommendation or official stance on the amendment."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "537547ec6daf77be16fdfe44156048a31debfc4232f3a976ffefa529706c3fd0",
+  "packet_id": "case_016--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "6b716653b053fa91c3bc0bb89b029cb89ca355e21d6535c455a8334574c065ef",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Provides the technical specification and description of the TokenEscrow amendment, detailing its functionality and changes to transactions and ledger entries.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Identifies the specific software version (2.5.0) where the amendment was introduced, which is relevant for determining the release context.\"\n    }\n  ],\n  \"decision_summary\": \"The provided facts describe the technical functionality of the TokenEscrow amendment (F1) and its introduction in rippled version 2.5.0 (F3). However, none of the facts explicitly state the default vote recommendation (YES or NO) from the source of the stable release. The task requires inferring the default vote from the source-backed description, but the description itself is neutral and technical, lacking an explicit endorsement or rejection directive. Without an explicit statement of the default vote in the provided text, the vote cannot be determined as YES or NO.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote (YES or NO) in the amendment description or release notes.\",\n    \"Validator consensus recommendation or official stance on the amendment.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 307,
+      "prompt_tokens": 840,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1147
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:59:18Z"
+}

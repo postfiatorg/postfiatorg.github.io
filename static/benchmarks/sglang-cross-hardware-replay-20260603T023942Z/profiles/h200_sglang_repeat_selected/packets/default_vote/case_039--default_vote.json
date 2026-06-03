@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_039",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "6143A27B71F7DAF9330ECA7C5EC3D54C8083A4FDEF7016737EEC06AB61E82EE0",
+    "amendment_name": "fixIncludeKeyletFields",
+    "decision_surface": "XRPL validator amendment decision surface for fixIncludeKeyletFields.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixIncludeKeyletFields: This amendment adds fields to ledger entries in cases where those fields are part of the identifying information that forms their ledger entry ID: - Add a Sequence field to Escrow and PayChannel entries. - Add an Owner field to SignerList entries. - Add an OracleDocumentID field to Oracle entries. Without this amendment, some ledger entries do not store all the data that was used to create their ledger entry ID. After this amendment is enabled, ledger entries of those types have those fields added when the ledger entry is created or modified. Ledger entries that were created before the amendment are not changed until a transaction modifies them. The presence of a Sequence field on Escrow ledger entries is especially useful since you need that value to finish or cancel the escrow, and you otherwise might have to look up the sequence number of the transaction that created the escrow.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixIncludeKeyletFields appears in XRPSCAN with introduced rippled version 3.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "aea915c9a2b994b797a874e61b669b4b6c230e5bb02dbe613abd626409379fbf",
+  "packet_id": "case_039--default_vote",
+  "packet_version": 1
+}

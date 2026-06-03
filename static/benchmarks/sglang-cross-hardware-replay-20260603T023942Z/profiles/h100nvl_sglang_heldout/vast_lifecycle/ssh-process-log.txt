@@ -1,0 +1,106 @@
+root         462     460  0 03:07 ?        00:00:00 python3 -m http.server 8080 --directory /root
+root         463     460 10 03:07 ?        00:00:33 python3 -m sglang.launch_server --model-path Qwen/Qwen3.6-27B-FP8 --host 0.0.0.0 --port 8000 --trust-remote-code --tp 1 --context-length 32768 --mem-fraction-static 0.75 --enable-deterministic-inference --max-running-requests 1 --chunked-prefill-size 4096 --attention-backend fa3 --reasoning-parser qwen3
+root         585     463 86 03:07 ?        00:04:22 sglang::scheduler
+root         586     463  4 03:07 ?        00:00:12 sglang::detokenizer
+LOG
+DeepGEMM warmup:  77%|███████▋  | 12617/16384 [00:16<00:05, 657.16it/s][A
+DeepGEMM warmup:  77%|███████▋  | 12683/16384 [00:16<00:05, 653.47it/s][A
+DeepGEMM warmup:  78%|███████▊  | 12749/16384 [00:16<00:05, 650.89it/s][A
+DeepGEMM warmup:  78%|███████▊  | 12815/16384 [00:16<00:05, 647.90it/s][A
+DeepGEMM warmup:  79%|███████▊  | 12880/16384 [00:16<00:05, 642.28it/s][A
+DeepGEMM warmup:  79%|███████▉  | 12945/16384 [00:16<00:05, 638.32it/s][A
+DeepGEMM warmup:  79%|███████▉  | 13009/16384 [00:16<00:05, 635.54it/s][A
+DeepGEMM warmup:  80%|███████▉  | 13073/16384 [00:17<00:05, 632.44it/s][A
+DeepGEMM warmup:  80%|████████  | 13137/16384 [00:17<00:05, 626.99it/s][A
+DeepGEMM warmup:  81%|████████  | 13200/16384 [00:17<00:05, 623.29it/s][A
+DeepGEMM warmup:  81%|████████  | 13263/16384 [00:17<00:05, 620.66it/s][A
+DeepGEMM warmup:  81%|████████▏ | 13326/16384 [00:17<00:04, 617.81it/s][A
+DeepGEMM warmup:  82%|████████▏ | 13388/16384 [00:17<00:04, 612.59it/s][A
+DeepGEMM warmup:  82%|████████▏ | 13450/16384 [00:17<00:04, 608.91it/s][A
+DeepGEMM warmup:  82%|████████▏ | 13511/16384 [00:17<00:04, 606.38it/s][A
+DeepGEMM warmup:  83%|████████▎ | 13572/16384 [00:17<00:04, 604.33it/s][A
+DeepGEMM warmup:  83%|████████▎ | 13633/16384 [00:17<00:04, 599.07it/s][A
+DeepGEMM warmup:  84%|████████▎ | 13693/16384 [00:18<00:04, 595.54it/s][A
+DeepGEMM warmup:  84%|████████▍ | 13753/16384 [00:18<00:04, 593.07it/s][A
+DeepGEMM warmup:  84%|████████▍ | 13813/16384 [00:18<00:04, 591.29it/s][A
+DeepGEMM warmup:  85%|████████▍ | 13873/16384 [00:18<00:04, 590.27it/s][A
+DeepGEMM warmup:  85%|████████▌ | 13933/16384 [00:18<00:04, 589.53it/s][A
+DeepGEMM warmup:  85%|████████▌ | 13992/16384 [00:18<00:04, 589.07it/s][A
+DeepGEMM warmup:  86%|████████▌ | 14051/16384 [00:18<00:03, 588.76it/s][A
+DeepGEMM warmup:  86%|████████▌ | 14110/16384 [00:18<00:03, 586.46it/s][A
+DeepGEMM warmup:  86%|████████▋ | 14169/16384 [00:18<00:03, 583.03it/s][A
+DeepGEMM warmup:  87%|████████▋ | 14228/16384 [00:18<00:03, 580.61it/s][A
+DeepGEMM warmup:  87%|████████▋ | 14287/16384 [00:19<00:03, 579.00it/s][A
+DeepGEMM warmup:  88%|████████▊ | 14345/16384 [00:19<00:03, 577.27it/s][A
+DeepGEMM warmup:  88%|████████▊ | 14403/16384 [00:19<00:03, 573.01it/s][A
+DeepGEMM warmup:  88%|████████▊ | 14461/16384 [00:19<00:03, 569.91it/s][A
+DeepGEMM warmup:  89%|████████▊ | 14518/16384 [00:19<00:03, 567.88it/s][A
+DeepGEMM warmup:  89%|████████▉ | 14575/16384 [00:19<00:03, 566.49it/s][A
+DeepGEMM warmup:  89%|████████▉ | 14632/16384 [00:19<00:03, 562.86it/s][A
+DeepGEMM warmup:  90%|████████▉ | 14689/16384 [00:19<00:03, 559.28it/s][A
+DeepGEMM warmup:  90%|████████▉ | 14745/16384 [00:19<00:02, 556.86it/s][A
+DeepGEMM warmup:  90%|█████████ | 14801/16384 [00:19<00:02, 555.12it/s][A
+DeepGEMM warmup:  91%|█████████ | 14857/16384 [00:20<00:02, 553.32it/s][A
+DeepGEMM warmup:  91%|█████████ | 14913/16384 [00:20<00:02, 549.20it/s][A
+DeepGEMM warmup:  91%|█████████▏| 14968/16384 [00:20<00:02, 546.41it/s][A
+DeepGEMM warmup:  92%|█████████▏| 15023/16384 [00:20<00:02, 544.55it/s][A
+DeepGEMM warmup:  92%|█████████▏| 15078/16384 [00:20<00:02, 543.24it/s][A
+DeepGEMM warmup:  92%|█████████▏| 15133/16384 [00:20<00:02, 540.56it/s][A
+DeepGEMM warmup:  93%|█████████▎| 15188/16384 [00:20<00:02, 537.26it/s][A
+DeepGEMM warmup:  93%|█████████▎| 15242/16384 [00:20<00:02, 534.99it/s][A
+DeepGEMM warmup:  93%|█████████▎| 15296/16384 [00:20<00:02, 533.35it/s][A
+DeepGEMM warmup:  94%|█████████▎| 15350/16384 [00:21<00:01, 532.17it/s][A
+DeepGEMM warmup:  94%|█████████▍| 15404/16384 [00:21<00:01, 530.08it/s][A
+DeepGEMM warmup:  94%|█████████▍| 15458/16384 [00:21<00:01, 528.35it/s][A
+DeepGEMM warmup:  95%|█████████▍| 15511/16384 [00:21<00:01, 527.03it/s][A
+DeepGEMM warmup:  95%|█████████▍| 15564/16384 [00:21<00:01, 526.23it/s][A
+DeepGEMM warmup:  95%|█████████▌| 15617/16384 [00:21<00:01, 525.55it/s][A
+DeepGEMM warmup:  96%|█████████▌| 15670/16384 [00:21<00:01, 523.64it/s][A
+DeepGEMM warmup:  96%|█████████▌| 15723/16384 [00:21<00:01, 522.34it/s][A
+DeepGEMM warmup:  96%|█████████▋| 15776/16384 [00:21<00:01, 521.42it/s][A
+DeepGEMM warmup:  97%|█████████▋| 15829/16384 [00:21<00:01, 520.82it/s][A
+DeepGEMM warmup:  97%|█████████▋| 15882/16384 [00:22<00:00, 519.71it/s][A
+DeepGEMM warmup:  97%|█████████▋| 15934/16384 [00:22<00:00, 516.65it/s][A
+DeepGEMM warmup:  98%|█████████▊| 15986/16384 [00:22<00:00, 514.48it/s][A
+DeepGEMM warmup:  98%|█████████▊| 16038/16384 [00:22<00:00, 512.99it/s][A
+DeepGEMM warmup:  98%|█████████▊| 16090/16384 [00:22<00:00, 511.98it/s][A
+DeepGEMM warmup:  99%|█████████▊| 16142/16384 [00:22<00:00, 510.47it/s][A
+DeepGEMM warmup:  99%|█████████▉| 16194/16384 [00:22<00:00, 507.21it/s][A
+DeepGEMM warmup:  99%|█████████▉| 16245/16384 [00:22<00:00, 505.00it/s][A
+DeepGEMM warmup:  99%|█████████▉| 16296/16384 [00:22<00:00, 503.45it/s][A
+DeepGEMM warmup: 100%|█████████▉| 16347/16384 [00:22<00:00, 502.40it/s][ADeepGEMM warmup: 100%|██████████| 16384/16384 [00:23<00:00, 711.82it/s]
+Capturing batches (bs=1 avail_mem=22.74 GB): 100%|██████████| 1/1 [03:09<00:00, 189.63s/it]Capturing batches (bs=1 avail_mem=22.74 GB): 100%|██████████| 1/1 [03:09<00:00, 189.63s/it]
+[2026-06-03 03:11:40] Capture cuda graph end. Time elapsed: 190.32 s. mem usage=0.01 GB. avail mem=22.73 GB.
+[2026-06-03 03:11:40] Disable piecewise CUDA graph because --disable-piecewise-cuda-graph is set
+[2026-06-03 03:11:42] max_total_num_tokens=347302, chunked_prefill_size=4096, max_prefill_tokens=16384, max_running_requests=1, context_len=32768, available_gpu_mem=22.73 GB
+[2026-06-03 03:11:42] Tree cache initialized: source=default impl=MambaRadixCache hybrid_swa=False hybrid_ssm=True hierarchical=False streaming_wrapped=False
+[2026-06-03 03:11:43] INFO:     Started server process [463]
+[2026-06-03 03:11:43] INFO:     Waiting for application startup.
+[2026-06-03 03:11:43] Using default chat sampling params from model generation config: {'temperature': 1.0, 'top_k': 20, 'top_p': 0.95}
+[2026-06-03 03:11:43] INFO:     Application startup complete.
+[2026-06-03 03:11:43] INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+[2026-06-03 03:11:44] INFO:     127.0.0.1:39590 - "GET /model_info HTTP/1.1" 200 OK
+[2026-06-03 03:12:02] Prefill batch, #new-seq: 1, #new-token: 80, #cached-token: 0, full token usage: 0.00, mamba usage: 0.02, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 3.97
+[2026-06-03 03:12:07] INFO:     127.0.0.1:39596 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[2026-06-03 03:12:07] The server is fired up and ready to roll!
+ROOT
+total 164
+drwx------ 1 root root   4096 Jun  3 03:07 .
+dr-xr-xr-x 1 root root    109 Jun  3 03:07 ..
+-rw-r--r-- 1 root root   3866 Jun  3 03:07 .bashrc
+drwxr-xr-x 1 root root    128 Jun  3 03:12 .cache
+drwxr-xr-x 1 root root    116 May 23 01:29 .cargo
+drwxr-xr-x 1 root root     17 May 23 01:18 .config
+-rw-r--r-- 1 root root      0 Jun  3 03:07 hasbooted
+-rw-r--r-- 1 root root    204 Jun  3 03:09 http.log
+drwx------ 3 root root     26 Jun  3 03:07 .nv
+drwxr-xr-x 1 root root   4096 May 23 01:20 .oh-my-zsh
+-rw-r--r-- 1 root root    596 Jun  3 03:07 onstart.sh
+-rw-r--r-- 1 root root    161 Apr 22  2024 .profile
+drwxr-xr-x 1 root root     94 May 23 01:20 .rustup
+-rw-r--r-- 1 root root 113544 Jun  3 03:12 sglang.log
+drwx------ 1 root root     29 Jun  3 03:07 .ssh
+drwxr-xr-x 3 root root     19 Jun  3 03:07 .triton
+-rw-r--r-- 1 root root     65 Jun  3 03:07 .vast_api_key
+-rw-r--r-- 1 root root     11 Jun  3 03:07 .vast_containerlabel
+-rw-r--r-- 1 root root    387 May 23 00:44 .zshrc

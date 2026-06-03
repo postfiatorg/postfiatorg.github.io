@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_031",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "452F5906C46D46F407883344BFDD90E672B672C5E9943DB4891E3A34FEEEB9DB",
+    "amendment_name": "fixSTAmountCanonicalize",
+    "decision_surface": "XRPL validator amendment decision surface for fixSTAmountCanonicalize.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixSTAmountCanonicalize: Fixes an edge case in deserializing Amount-type fields. Without this amendment, in some rare cases the operation could result in otherwise valid serialized amounts overflowing during deserialization. With this amendment, the XRP Ledger detects error conditions more quickly and eliminates the problematic corner cases.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixSTAmountCanonicalize appears in XRPSCAN with introduced rippled version 1.7.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "937f52c4fecb6d2c971ce771288dca0a26e71104d8f3d77671b76383f1cf681a",
+  "packet_id": "case_031--vote_outcome",
+  "packet_version": 1
+}

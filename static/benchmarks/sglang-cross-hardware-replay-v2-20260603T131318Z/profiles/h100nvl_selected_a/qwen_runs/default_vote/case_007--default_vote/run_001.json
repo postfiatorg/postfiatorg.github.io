@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T13:57:51Z",
+  "error": "",
+  "event_id": "case_007",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "7e437f0dbda0a0116fc677cbf73b4e420f8c6899e0eae02754d41d81df6bda57",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The source explicitly states that the 'Batch' amendment was disabled in v3.1.1 due to a bug and will be replaced by BatchV1_1. This indicates that the current stable release source does not support or enable this specific amendment, implying a default vote of NO for this specific amendment ID in the context of the latest stable release."
+      }
+    ],
+    "decision_summary": "Fact F1 states that the 'Batch' amendment was disabled in v3.1.1 due to a bug and is being replaced. Since the amendment is disabled in the latest stable release mentioned (v3.1.1), the source default vote for this specific amendment is effectively NO, as it is not active or recommended for activation in the current stable state.",
+    "default_vote_confidence": 0.9,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "5409762196dd3e3cde95640a005060b1095c3a554090f3e061a4e9ad50eee5e3",
+  "packet_id": "case_007--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "6df9b7b83d88157b658d03d2a384e3c03b079a883a795d79c7c11aa1b556f6d2",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The source explicitly states that the 'Batch' amendment was disabled in v3.1.1 due to a bug and will be replaced by BatchV1_1. This indicates that the current stable release source does not support or enable this specific amendment, implying a default vote of NO for this specific amendment ID in the context of the latest stable release.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F1 states that the 'Batch' amendment was disabled in v3.1.1 due to a bug and is being replaced. Since the amendment is disabled in the latest stable release mentioned (v3.1.1), the source default vote for this specific amendment is effectively NO, as it is not active or recommended for activation in the current stable state.\",\n  \"default_vote_confidence\": 0.9,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 224,
+      "prompt_tokens": 640,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 864
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:57:47Z"
+}

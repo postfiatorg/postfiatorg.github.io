@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_058",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "7BB62DC13EC72B775091E9C71BF8CF97E122647693B50C5E87A80DFD6FCFAC50",
+    "amendment_name": "fixPreviousTxnID",
+    "decision_surface": "XRPL validator amendment decision surface for fixPreviousTxnID.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixPreviousTxnID: This amendment adds PreviousTxnID and PreviousTxnLgrSequence fields to ledger entries that did not already have them, namely DirectoryNode, Amendments, FeeSettings, NegativeUNL, and AMM. Ledger entries that were created before this amendment was enabled will get the new fields whenever a transaction modifies those entries. Without this amendment, some types of ledger entries don't have those fields, which makes it harder to trace the history of modifications to those ledger entries.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixPreviousTxnID appears in XRPSCAN with introduced rippled version 2.2.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "f221c903e7ec7e751a66a6758294879a340d0cea52e2cd0ced4a967e31aa6775",
+  "packet_id": "case_058--vote_outcome",
+  "packet_version": 1
+}

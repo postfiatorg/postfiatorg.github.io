@@ -1,0 +1,70 @@
+{
+  "completed_at": "2026-06-03T13:44:07Z",
+  "error": "",
+  "event_id": "case_022",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5100f4027d28302eb91a79adc9118aa142a68b824b6dac6104b23bc4a757e8f4",
+  "output_hash": "4b4a4a6cd02db87ffe8d185c328e6f7e3c1b3f7da992ce3b02eb465808177920",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment changes ledger data by adding a DeliveredAmount field to metadata, which results in a different ledger hash. This introduces a risk of network partition if validators are not updated simultaneously, as incompatible servers can become amendment-blocked.",
+      "The change is conditional on the Checks amendment being enabled, limiting its immediate utility and increasing complexity for validators that may not have Checks enabled."
+    ],
+    "arguments_for_yes": [
+      "The amendment provides useful metadata (DeliveredAmount) for CheckCash transactions with flexible amounts, improving transparency and queryability via tx and account_tx methods.",
+      "The change does not affect the actual amounts delivered, ensuring financial consistency and backward compatibility for transaction outcomes.",
+      "The amendment is associated with rippled version 1.0.0, suggesting it is a mature, well-tested feature integrated into a major release."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the functional change: adding DeliveredAmount to metadata for flexible CheckCash transactions, which improves data availability without altering financial outcomes."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Highlights the risk of network partition due to ledger hash changes, which is a critical consideration for any amendment that modifies ledger data."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Indicates the amendment is part of rippled version 1.0.0, suggesting it has undergone significant testing and is considered stable."
+      }
+    ],
+    "decision_summary": "The fix1623 amendment enhances metadata for CheckCash transactions without altering financial outcomes, providing greater transparency. While it introduces a risk of network partition due to ledger hash changes, this risk is mitigated by the amendment's inclusion in a major rippled release (1.0.0) and its limited scope. The benefits of improved data availability outweigh the risks, especially given the mature nature of the implementation.",
+    "forbidden_stronger_claim": "The amendment guarantees no risk of network partition.",
+    "missing_evidence": [
+      "Current validator adoption rate for rippled version 1.0.0.",
+      "Specific impact on network performance or storage due to metadata changes."
+    ],
+    "vote_confidence": 0.85,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "6abea179972a67c75eb62d444fa9d2123783a8d097a11a86dcb390b02a3b93a0",
+  "packet_id": "case_022--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "d93883b81a62fb9c7cd378c6fc0100dd68b0bdf53b486ce69b5186e052c0c4f9",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment changes ledger data by adding a DeliveredAmount field to metadata, which results in a different ledger hash. This introduces a risk of network partition if validators are not updated simultaneously, as incompatible servers can become amendment-blocked.\",\n    \"The change is conditional on the Checks amendment being enabled, limiting its immediate utility and increasing complexity for validators that may not have Checks enabled.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment provides useful metadata (DeliveredAmount) for CheckCash transactions with flexible amounts, improving transparency and queryability via tx and account_tx methods.\",\n    \"The change does not affect the actual amounts delivered, ensuring financial consistency and backward compatibility for transaction outcomes.\",\n    \"The amendment is associated with rippled version 1.0.0, suggesting it is a mature, well-tested feature integrated into a major release.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the functional change: adding DeliveredAmount to metadata for flexible CheckCash transactions, which improves data availability without altering financial outcomes.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Highlights the risk of network partition due to ledger hash changes, which is a critical consideration for any amendment that modifies ledger data.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Indicates the amendment is part of rippled version 1.0.0, suggesting it has undergone significant testing and is considered stable.\"\n    }\n  ],\n  \"decision_summary\": \"The fix1623 amendment enhances metadata for CheckCash transactions without altering financial outcomes, providing greater transparency. While it introduces a risk of network partition due to ledger hash changes, this risk is mitigated by the amendment's inclusion in a major rippled release (1.0.0) and its limited scope. The benefits of improved data availability outweigh the risks, especially given the mature nature of the implementation.\",\n  \"forbidden_stronger_claim\": \"The amendment guarantees no risk of network partition.\",\n  \"missing_evidence\": [\n    \"Current validator adoption rate for rippled version 1.0.0.\",\n    \"Specific impact on network performance or storage due to metadata changes.\"\n  ],\n  \"vote_confidence\": 0.85,\n  \"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 539,
+      "prompt_tokens": 818,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1357
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:43:59Z"
+}

@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_005",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "8CC0774A3BF66D1D22E76BBDA8E8A232E6B6313834301B3B23E8601196AE6455",
+    "amendment_name": "AMM",
+    "decision_surface": "XRPL validator amendment decision surface for AMM.",
+    "source_facts": [
+      {
+        "claim": "AMM: Adds XLS-30 Automated Market Maker (AMM) functionality to the ledger in a way that is integrated with the existing decentralized exchange. Each pair of assets (tokens or XRP) can have up to one AMM in the ledger, which anyone can contribute liquidity to for a proportional share in the earnings and exchange risk. Each AMM instance has a special account to hold its assets and issue \"LP Tokens\" to liquidity providers in proportion to their deposits. Liquidity providers can vote on the AMM's trading fee based on their share of LP Tokens. Users can bid LP Tokens on the right to trade with a discounted trading fee for a limited period of time. Adds new transactions: - AMMBid - Bid on the AMM's auction slot, which offers discounted fees. - AMMCreate - Create a new AMM instance and provide initial funding. - AMMDelete - Remove an empty AMM instance from the ledger. - AMMDeposit - Add funds to an existing AMM and receive LP Tokens. - AMMWithdraw - Return LP Tokens to an AMM to remove funds. - AMMVote - Vote on the AMM's trading fee. Updates existing transactions with new functionality: - Payment and OfferCreate transactions that trade currency automatically use any combination of Offer",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "AMM appears in XRPSCAN with introduced rippled version 1.12.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "16534e4da8890dcc1b652581b053d9c3e7d4be70a8e3c55a2f59f8264d2be10f",
+  "packet_id": "case_005--triage",
+  "packet_version": 1
+}

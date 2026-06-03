@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_003",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "894646DD5284E97DECFE6674A6D6152686791C4A95F8C132CCA9BAF9E5812FB6",
+    "amendment_name": "Batch vulnerability",
+    "decision_surface": "Whether validators should support the affected Batch amendment after the unauthorized inner transaction bug was found.",
+    "source_facts": [
+      {
+        "claim": "The Batch bug allowed unauthorized inner transaction execution on behalf of arbitrary victim accounts.",
+        "fact_id": "F1",
+        "source_id": "xrpl_batch_vulnerability_2026"
+      },
+      {
+        "claim": "UNL validators were contacted and advised to vote No on Batch.",
+        "fact_id": "F2",
+        "source_id": "xrpl_batch_vulnerability_2026"
+      },
+      {
+        "claim": "rippled 3.1.1 disabled Batch and fixBatchInnerSigs due to a severe bug.",
+        "fact_id": "F3",
+        "source_id": "xrpl_rippled_3_1_1"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "cc2ce98cd76e97b0ded0d02e212c7c724ccbdb42990ba51fd7212459f11b5c18",
+  "packet_id": "case_003--vote_state",
+  "packet_version": 1
+}

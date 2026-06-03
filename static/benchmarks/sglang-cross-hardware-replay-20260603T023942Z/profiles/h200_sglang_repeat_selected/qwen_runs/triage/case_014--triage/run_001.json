@@ -1,0 +1,90 @@
+{
+  "completed_at": "2026-06-03T03:10:22Z",
+  "error": "",
+  "event_id": "case_014",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "22fb7045107112a1cb6518d50b3544eaf0a0094ea72e2d69dfe1175d36b789f5",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces 'PermissionedDomains' which are explicitly described as tools for traditional financial institutions to comply with compliance rules.",
+      "The feature enables restricting access to services, which constitutes permissioning semantics.",
+      "Permissioning and compliance controls are listed as material risk patterns requiring explicit review under HOLD_FOR_CHALLENGE.",
+      "The amendment creates new ledger entry types and transactions that alter access control mechanisms on the ledger."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment does not start with 'fix'.",
+      "There is no explicit no-vote advisory or indication that the proposal is retired/obsolete.",
+      "The packet does not describe an unresolved bug or vulnerability requiring DELAY_FOR_FIX."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the core functionality as creating permissioned domains for compliance and access restriction, which falls under permissioning and compliance semantics."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms the standard amendment voting process and risk of amendment-blocking, establishing the context for validator review."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Provides version context but does not alter the risk assessment of the permissioning semantics."
+      }
+    ],
+    "decision_summary": "The PermissionedDomains amendment introduces permissioning and compliance controls, allowing entities to restrict access to ledger services. According to the task rules, material permissioning and compliance semantics require a HOLD_FOR_CHALLENGE route for explicit validator review. It is not a fix, nor is it rejected.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on how permissioned domains interact with existing trustline or account authorization mechanisms.",
+      "Potential for centralization risks or censorship vectors inherent in the permissioning model."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the permissioning mechanism introduce unacceptable centralization risks?",
+        "Are there sufficient safeguards against abuse of the permissioned domain controls?"
+      ],
+      "recommended_validator_action": "Review the permissioning semantics and compliance implications of PermissionedDomains before voting.",
+      "review_questions": [
+        "How do PermissionedDomains interact with existing account authorization?",
+        "What are the implications for network decentralization if permissioned domains become widespread?",
+        "Are there any edge cases where permissioned domains could be used to bypass other security controls?"
+      ],
+      "title": "Review Permissioning Semantics of PermissionedDomains Amendment"
+    }
+  },
+  "packet_hash": "abfc7ca74c3c73bc87eac1a0942630c899450f13708383c5ad77e037738c4ad9",
+  "packet_id": "case_014--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "f659e48f0a51a480787562532e93ed37523718f66ff81d046b316ada0588c194",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces 'PermissionedDomains' which are explicitly described as tools for traditional financial institutions to comply with compliance rules.\",\n\"The feature enables restricting access to services, which constitutes permissioning semantics.\",\n\"Permissioning and compliance controls are listed as material risk patterns requiring explicit review under HOLD_FOR_CHALLENGE.\",\n\"The amendment creates new ledger entry types and transactions that alter access control mechanisms on the ledger.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment does not start with 'fix'.\",\n\"There is no explicit no-vote advisory or indication that the proposal is retired/obsolete.\",\n\"The packet does not describe an unresolved bug or vulnerability requiring DELAY_FOR_FIX.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Defines the core functionality as creating permissioned domains for compliance and access restriction, which falls under permissioning and compliance semantics.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Confirms the standard amendment voting process and risk of amendment-blocking, establishing the context for validator review.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Provides version context but does not alter the risk assessment of the permissioning semantics.\"\n}\n],\n\"decision_summary\": \"The PermissionedDomains amendment introduces permissioning and compliance controls, allowing entities to restrict access to ledger services. According to the task rules, material permissioning and compliance semantics require a HOLD_FOR_CHALLENGE route for explicit validator review. It is not a fix, nor is it rejected.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 45,\n\"packet_verification\": 10,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Specific details on how permissioned domains interact with existing trustline or account authorization mechanisms.\",\n\"Potential for centralization risks or censorship vectors inherent in the permissioning model.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the permissioning mechanism introduce unacceptable centralization risks?\",\n\"Are there sufficient safeguards against abuse of the permissioned domain controls?\"\n],\n\"recommended_validator_action\": \"Review the permissioning semantics and compliance implications of PermissionedDomains before voting.\",\n\"review_questions\": [\n\"How do PermissionedDomains interact with existing account authorization?\",\n\"What are the implications for network decentralization if permissioned domains become widespread?\",\n\"Are there any edge cases where permissioned domains could be used to bypass other security controls?\"\n],\n\"title\": \"Review Permissioning Semantics of PermissionedDomains Amendment\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 604,
+      "prompt_tokens": 1160,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1764
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:10:15Z"
+}

@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T14:27:27Z",
+  "error": "",
+  "event_id": "case_012",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "b30aa506155b13613c2e2e2624a7cb2f428d22aeb9ce3aba49a26521722a62a9",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The claim explicitly states that the amendment was disabled in v2.6.1 due to a bug and will be replaced, indicating that the source default vote for the stable release is not to enable it (NO)."
+      }
+    ],
+    "decision_summary": "Fact F1 indicates that the PermissionDelegation amendment was disabled in version 2.6.1 due to a bug and is scheduled to be replaced. This implies that the latest stable release source does not support enabling this amendment by default, leading to a NO vote.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "c9c63a7a6d63a192e96c60aae4f27000cf91bef4dc2586bdea0c88e3a845c65c",
+  "packet_id": "case_012--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "a64b4720ff7ce16fe624ca7a9666a828959db96dcef88cbcc637f1d21dfd76f2",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The claim explicitly states that the amendment was disabled in v2.6.1 due to a bug and will be replaced, indicating that the source default vote for the stable release is not to enable it (NO).\"\n    }\n  ],\n  \"decision_summary\": \"Fact F1 indicates that the PermissionDelegation amendment was disabled in version 2.6.1 due to a bug and is scheduled to be replaced. This implies that the latest stable release source does not support enabling this amendment by default, leading to a NO vote.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 177,
+      "prompt_tokens": 642,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 819
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:27:24Z"
+}

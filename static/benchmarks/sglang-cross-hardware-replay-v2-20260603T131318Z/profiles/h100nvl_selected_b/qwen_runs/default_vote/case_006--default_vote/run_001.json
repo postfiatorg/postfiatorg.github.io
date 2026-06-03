@@ -1,0 +1,61 @@
+{
+  "completed_at": "2026-06-03T14:27:04Z",
+  "error": "",
+  "event_id": "case_006",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "482f262b9c617c2bde55d6ea640dc69a62b8da18bac905bd440ca17b6cf7ffa2",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical functionality of the AMMClawback amendment, specifically enabling clawback for tokens in AMMs and preventing frozen token deposits, but does not contain any information regarding the default voting stance or recommendation."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Explains the general XRPL amendment voting process and consequences of incompatibility, but does not specify the default vote for this specific amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the rippled version (2.3.0) where the amendment was introduced, but provides no evidence regarding the default vote source."
+      }
+    ],
+    "decision_summary": "The provided packet facts describe the technical specifications, voting process, and version history of the AMMClawback amendment. However, none of the facts explicitly state or imply the 'latest stable release source default vote'. Without a source-backed statement indicating whether the default vote is YES or NO, the task rule requires outputting UNKNOWN.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote (YES or NO) from the latest stable release source.",
+      "Documentation linking the amendment to a specific default voting recommendation."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "3b4a01565cc606e3f03f8aaa4640702753c225da0972103bc8a64cb550030390",
+  "packet_id": "case_006--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "8150f3df61f76c68f2d96c324c7e612a03c50f0569db387275a90e17ff747a23",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical functionality of the AMMClawback amendment, specifically enabling clawback for tokens in AMMs and preventing frozen token deposits, but does not contain any information regarding the default voting stance or recommendation.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Explains the general XRPL amendment voting process and consequences of incompatibility, but does not specify the default vote for this specific amendment.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Identifies the rippled version (2.3.0) where the amendment was introduced, but provides no evidence regarding the default vote source.\"\n    }\n  ],\n  \"decision_summary\": \"The provided packet facts describe the technical specifications, voting process, and version history of the AMMClawback amendment. However, none of the facts explicitly state or imply the 'latest stable release source default vote'. Without a source-backed statement indicating whether the default vote is YES or NO, the task rule requires outputting UNKNOWN.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote (YES or NO) from the latest stable release source.\",\n    \"Documentation linking the amendment to a specific default voting recommendation.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 332,
+      "prompt_tokens": 687,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1019
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:26:58Z"
+}

@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-03T14:06:15Z",
+  "error": "",
+  "event_id": "case_025",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "504e82599e13b7761e3b2f66df2c108d81f289418fcdbcbb6c5cbf6ec5149939",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "The packet explicitly states that the status of SHAMapV2 is 'obsolete/removed'. According to the task rule, REJECT is the required route for 'retired/obsolete proposals'."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical nature of the amendment (hash tree structure change) and notes a brief scheduled unavailability, but this is superseded by the obsolete status in F5."
+      }
+    ],
+    "decision_summary": "The amendment SHAMapV2 is explicitly marked as obsolete/removed in the provided facts (F5). The task rules mandate using REJECT for retired or obsolete proposals. Therefore, the conservative route is to reject the proposal for review/activation.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "That the amendment should proceed because it is efficient or has no user-facing consequences, ignoring its obsolete status.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any evidence contradicting the obsolete status of SHAMapV2?"
+      ],
+      "recommended_validator_action": "Reject the amendment as it is obsolete.",
+      "review_questions": [
+        "Confirm that F5 accurately reflects the current status of the amendment."
+      ],
+      "title": "Reject Obsolete Amendment SHAMapV2"
+    }
+  },
+  "packet_hash": "0e783413bddfdb89f3429c67ae174068e8152b7b3fe87434438bce4e90c142be",
+  "packet_id": "case_025--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "01ac57821776b99e20779fe4e0b368f43566b04057053986079effeb4401c514",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"The packet explicitly states that the status of SHAMapV2 is 'obsolete/removed'. According to the task rule, REJECT is the required route for 'retired/obsolete proposals'.\"\n},\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the technical nature of the amendment (hash tree structure change) and notes a brief scheduled unavailability, but this is superseded by the obsolete status in F5.\"\n}\n],\n\"decision_summary\": \"The amendment SHAMapV2 is explicitly marked as obsolete/removed in the provided facts (F5). The task rules mandate using REJECT for retired or obsolete proposals. Therefore, the conservative route is to reject the proposal for review/activation.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"That the amendment should proceed because it is efficient or has no user-facing consequences, ignoring its obsolete status.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Is there any evidence contradicting the obsolete status of SHAMapV2?\"\n],\n\"recommended_validator_action\": \"Reject the amendment as it is obsolete.\",\n\"review_questions\": [\n\"Confirm that F5 accurately reflects the current status of the amendment.\"\n],\n\"title\": \"Reject Obsolete Amendment SHAMapV2\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 380,
+      "prompt_tokens": 1129,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1509
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:06:09Z"
+}

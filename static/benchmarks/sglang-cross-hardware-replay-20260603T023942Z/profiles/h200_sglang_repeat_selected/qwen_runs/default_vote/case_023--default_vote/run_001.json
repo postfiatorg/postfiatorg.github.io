@@ -1,0 +1,53 @@
+{
+  "completed_at": "2026-06-03T03:00:49Z",
+  "error": "",
+  "event_id": "case_023",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "47abece596ca9c7ab45e42c58e7b680627f3c6bfe7ad610134ed7e16c7667589",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The fact states that NonFungibleTokensV1 has known issues, including one that can cause tecINVARIANT_FAILED errors, and explicitly notes that it has been replaced by the NonFungibleTokensV1_1 amendment. This indicates that the source considers the original amendment flawed and superseded, implying a default stance against enabling the problematic version in favor of the corrected replacement."
+      }
+    ],
+    "decision_summary": "The source description for NonFungibleTokensV1 highlights critical known issues, specifically ledger errors (tecINVARIANT_FAILED), and states that the amendment has been replaced by NonFungibleTokensV1_1. In the context of XRPL governance, an amendment that is known to cause ledger errors and has been superseded by a fixed version is not the recommended stable release choice. Therefore, the default vote for the specific 'NonFungibleTokensV1' amendment, given its known defects and replacement status, is inferred as NO.",
+    "default_vote_confidence": 0.85,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote value in the source text",
+      "Confirmation that 'replaced by' implies a default NO vote for the predecessor in this specific schema"
+    ],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "1d3952c2340ce45b8429b39368747808c456b5bca09da6501fa62bfbd37adad7",
+  "packet_id": "case_023--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "f8e7e550d60a6cf22c4eed4d7eeec1f4698b62efaee8753904be717424c40d08",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The fact states that NonFungibleTokensV1 has known issues, including one that can cause tecINVARIANT_FAILED errors, and explicitly notes that it has been replaced by the NonFungibleTokensV1_1 amendment. This indicates that the source considers the original amendment flawed and superseded, implying a default stance against enabling the problematic version in favor of the corrected replacement.\"\n    }\n  ],\n  \"decision_summary\": \"The source description for NonFungibleTokensV1 highlights critical known issues, specifically ledger errors (tecINVARIANT_FAILED), and states that the amendment has been replaced by NonFungibleTokensV1_1. In the context of XRPL governance, an amendment that is known to cause ledger errors and has been superseded by a fixed version is not the recommended stable release choice. Therefore, the default vote for the specific 'NonFungibleTokensV1' amendment, given its known defects and replacement status, is inferred as NO.\",\n  \"default_vote_confidence\": 0.85,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote value in the source text\",\n    \"Confirmation that 'replaced by' implies a default NO vote for the predecessor in this specific schema\"\n  ],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 308,
+      "prompt_tokens": 772,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1080
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:00:38Z"
+}

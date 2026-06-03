@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_061",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "03BDC0099C4E14163ADA272C1B6F6FABB448CC3E51F522F978041E4B57D9158C",
+    "amendment_name": "fixNFTokenReserve",
+    "decision_surface": "XRPL validator amendment decision surface for fixNFTokenReserve.",
+    "source_facts": [
+      {
+        "claim": "fixNFTokenReserve: This amendment adds a check to the NFTokenAcceptOffer transactor to see if the OwnerCount changes. If it does, it makes an additional check that the reserve requirement is met for the updated owner count.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixNFTokenReserve appears in XRPSCAN with introduced rippled version 2.1.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "1f28719d4e951169dcc569588be3891f20dde0acbc91e66c6f2b049dbba83286",
+  "packet_id": "case_061--triage",
+  "packet_version": 1
+}

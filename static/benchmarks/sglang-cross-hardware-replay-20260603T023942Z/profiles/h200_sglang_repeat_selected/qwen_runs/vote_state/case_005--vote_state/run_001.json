@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T02:51:55Z",
+  "error": "",
+  "event_id": "case_005",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "127612ce4ac5285ec9d8c88d90e60e77fdab396d740a546ee6b8fb3df4d78d93",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment 8CC0774A3BF66D1D22E76BBDA8E8A232E6B6313834301B3B23E8601196AE6455 (AMM) is contained in the validated ledger Amendments object and was enabled on 2024-03-22. This satisfies the condition for the ENABLED state, which requires source facts showing enabled ledger membership.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "b963b7bafb9474931b0f30efc9ff51d0168de27ce4308ee1ef05d76057c39a46",
+  "packet_id": "case_005--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "b06c944840192f641495627be49e1f906e3441914490037bb73c6a222abbdccb",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 confirms that the amendment 8CC0774A3BF66D1D22E76BBDA8E8A232E6B6313834301B3B23E8601196AE6455 (AMM) is contained in the validated ledger Amendments object and was enabled on 2024-03-22. This satisfies the condition for the ENABLED state, which requires source facts showing enabled ledger membership.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 231,
+      "prompt_tokens": 825,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1056
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:51:50Z"
+}

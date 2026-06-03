@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-03T15:16:09Z",
+  "error": "",
+  "event_id": "case_026",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a1a4b78aae204842a6c01e32f84514ea12c5af17b7a6928cd26052300e110764",
+  "output_hash": "51ee6602d93d6a1e8525070dc1272d00641fc72de0cdd7a73d980c7d654d5d42",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a bug fix that prevents account blackholing and fixes transaction rejection for existing accounts, which strongly implies a default vote of YES for stability and safety."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 1.3.1, establishing the context of the 'latest stable release' mentioned in the task rule."
+      }
+    ],
+    "decision_summary": "The amendment 'fixMasterKeyAsRegularKey' is a critical bug fix that prevents users from unintentionally locking their accounts and resolves transaction signing issues for existing accounts. In XRPL governance, bug fixes that enhance security and usability without introducing breaking changes or new features are typically enabled by default in the source code to ensure network stability and user safety. Therefore, the source default vote is inferred to be YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement in the source code or release notes confirming the default vote flag is set to YES."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "be95b70c52479f4b3785b91fd0922f00525dd1e5434ac983c941e26b4c932972",
+  "packet_id": "case_026--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "eb0c3af57014d302a98d115c959633683701c11fe5b712253f25110c0e76cda8",
+  "raw_message_content": "{\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the amendment as a bug fix that prevents account blackholing and fixes transaction rejection for existing accounts, which strongly implies a default vote of YES for stability and safety.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment was introduced in rippled version 1.3.1, establishing the context of the 'latest stable release' mentioned in the task rule.\"\n}\n],\n\"decision_summary\": \"The amendment 'fixMasterKeyAsRegularKey' is a critical bug fix that prevents users from unintentionally locking their accounts and resolves transaction signing issues for existing accounts. In XRPL governance, bug fixes that enhance security and usability without introducing breaking changes or new features are typically enabled by default in the source code to ensure network stability and user safety. Therefore, the source default vote is inferred to be YES.\",\n\"default_vote_confidence\": 0.95,\n\"missing_evidence\": [\n\"Explicit statement in the source code or release notes confirming the default vote flag is set to YES.\"\n],\n\"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 261,
+      "prompt_tokens": 778,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1039
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T15:16:05Z"
+}

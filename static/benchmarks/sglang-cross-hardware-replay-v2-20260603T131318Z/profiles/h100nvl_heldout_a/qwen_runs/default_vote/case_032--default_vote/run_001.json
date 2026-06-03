@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-03T14:55:28Z",
+  "error": "",
+  "event_id": "case_032",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a4413e43312a9d665bcaa356648bcc89aa32490a4420217384b9b0f42206b54f",
+  "output_hash": "a537266af3036719dd861affd171e7b40a3720719123af8aea54250aa3d46e9e",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a bug fix for auto-bridging that removes dry offers, which is a corrective maintenance action rather than a controversial feature change, implying a default YES vote in stable releases."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 1.2.0, establishing the context of the stable release source."
+      }
+    ],
+    "decision_summary": "The amendment fixTakerDryOfferRemoval is a bug fix that corrects an issue where dry offers remain on the ledger, counting toward reserve requirements without benefit. Bug fixes that improve ledger efficiency and correctness are typically enabled by default in stable releases to ensure network health. There is no evidence suggesting this fix is controversial or disabled by default.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the source code or release notes confirming the default vote value."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "3a610a1c7cc52c44e8918ad9ad3873114e7cf47bcd493f85d4d93cc0109b2405",
+  "packet_id": "case_032--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "6e0ee124bc47df8226bd806928d20f2f953f6d7777ae2efd169c8c99bfdfe1fc",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a bug fix for auto-bridging that removes dry offers, which is a corrective maintenance action rather than a controversial feature change, implying a default YES vote in stable releases.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 1.2.0, establishing the context of the stable release source.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixTakerDryOfferRemoval is a bug fix that corrects an issue where dry offers remain on the ledger, counting toward reserve requirements without benefit. Bug fixes that improve ledger efficiency and correctness are typically enabled by default in stable releases to ensure network health. There is no evidence suggesting this fix is controversial or disabled by default.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit statement from the source code or release notes confirming the default vote value.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 260,
+      "prompt_tokens": 733,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 993
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:55:24Z"
+}

@@ -1,0 +1,37 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_030",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "2110E4A19966E2EF517C0A8C56A5F35099D7665B0BB89D7B126B30D50B86AAD5",
+    "amendment_name": "ConfidentialTransfer",
+    "decision_surface": "XRPL validator amendment decision surface for ConfidentialTransfer.",
+    "source_facts": [
+      {
+        "claim": "ConfidentialTransfer: Provides institutional-grade privacy for Multi-Purpose Tokens (MPTs) using advanced cryptography (EC-ElGamal and ZKPs). Individual balances and transfer amounts remain shielded from the public ledger while maintaining compliance mechanisms for authorized parties (issuers, auditors, or designated entities) to verify total supply and meet regulatory obligations. For more details, see XLS-96: Confidential Transfers.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "749891673d727bf45d8e679bcf6b0d154885178b992a157207a73288ff778967",
+  "packet_id": "case_030--triage",
+  "packet_version": 1
+}

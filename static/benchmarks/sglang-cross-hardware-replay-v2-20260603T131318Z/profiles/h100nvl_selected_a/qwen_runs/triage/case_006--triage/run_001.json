@@ -1,0 +1,89 @@
+{
+  "completed_at": "2026-06-03T14:03:37Z",
+  "error": "",
+  "event_id": "case_006",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "af69a18ca5ca836ce46b549d7ab051cbc5b4e7dcf63bc4d3975fbc15f148a929",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces a new transaction type 'AMMClawback' that allows issuers to claw back tokens deposited in AMMs, which constitutes a material change to asset-control semantics.",
+      "Clawback functionality inherently involves compliance and permissioning risks, as it allows an issuer to reverse transactions or seize assets under specific conditions.",
+      "The modification to AMMDeposit to prevent depositing frozen tokens interacts with existing freeze/authorization semantics, requiring careful review to ensure no unintended bypasses or systemic risks are introduced.",
+      "The combination of AMM liquidity mechanics with issuer clawback rights creates complex financial and invariant risks that warrant explicit validator review rather than automatic proceeding."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name does not start with 'fix', so the localized fix exception does not apply.",
+      "The packet describes the feature clearly without indicating it is a pre-fix incident window or an obsolete proposal."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the core functionality: allowing clawback of tokens in AMMs and modifying deposit rules for frozen tokens. This directly triggers the 'asset-control semantics' and 'compliance' review criteria."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for a conservative review route for material changes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is a real, introduced feature (version 2.3.0), validating the need to evaluate its current decision surface rather than treating it as hypothetical or obsolete."
+      }
+    ],
+    "decision_summary": "The AMMClawback amendment introduces significant asset-control semantics by enabling issuers to claw back tokens within AMMs. This falls under the category of material financial, compliance, and asset-control semantics that require explicit review. It is not a simple localized fix, nor does it lack material risk. Therefore, the conservative route is to hold for challenge to ensure validators explicitly review the implications of issuer clawback on AMM liquidity and invariants.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on how the clawback transaction interacts with existing AMM invariant checks during the clawback process.",
+      "Clarification on whether the clawback can be executed while the AMM is actively trading or if it requires a quiescent state."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the clawback mechanism preserve AMM invariants during the withdrawal of clawed-back tokens?",
+        "Are there any edge cases where the freeze check in AMMDeposit could be bypassed or cause unintended liquidity locks?"
+      ],
+      "recommended_validator_action": "Review the XLS-73 specification details regarding the interaction between clawback rights and AMM liquidity pools. Verify that the new transaction type does not introduce consensus risks or allow for unauthorized asset seizure beyond the defined clawback scope.",
+      "review_questions": [
+        "How does the AMMClawback transaction handle partial fills or insufficient liquidity in the pool?",
+        "Does the modification to AMMDeposit correctly reject all frozen token deposits without impacting non-frozen tokens?",
+        "What are the compliance implications for validators enabling this amendment in jurisdictions with strict asset seizure laws?"
+      ],
+      "title": "Review AMMClawback Asset Control and Compliance Semantics"
+    }
+  },
+  "packet_hash": "b5e39cef4f524a3fb0f8ce68c0b5cf8122d5fdd8ff3e0616282a6703c132f028",
+  "packet_id": "case_006--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "539cd0f91c60e1f2ebe99334d61502d7aef62dbc26dfabaefdae0d1640c9b418",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces a new transaction type 'AMMClawback' that allows issuers to claw back tokens deposited in AMMs, which constitutes a material change to asset-control semantics.\",\n\"Clawback functionality inherently involves compliance and permissioning risks, as it allows an issuer to reverse transactions or seize assets under specific conditions.\",\n\"The modification to AMMDeposit to prevent depositing frozen tokens interacts with existing freeze/authorization semantics, requiring careful review to ensure no unintended bypasses or systemic risks are introduced.\",\n\"The combination of AMM liquidity mechanics with issuer clawback rights creates complex financial and invariant risks that warrant explicit validator review rather than automatic proceeding.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name does not start with 'fix', so the localized fix exception does not apply.\",\n\"The packet describes the feature clearly without indicating it is a pre-fix incident window or an obsolete proposal.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Defines the core functionality: allowing clawback of tokens in AMMs and modifying deposit rules for frozen tokens. This directly triggers the 'asset-control semantics' and 'compliance' review criteria.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for a conservative review route for material changes.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment is a real, introduced feature (version 2.3.0), validating the need to evaluate its current decision surface rather than treating it as hypothetical or obsolete.\"\n}\n],\n\"decision_summary\": \"The AMMClawback amendment introduces significant asset-control semantics by enabling issuers to claw back tokens within AMMs. This falls under the category of material financial, compliance, and asset-control semantics that require explicit review. It is not a simple localized fix, nor does it lack material risk. Therefore, the conservative route is to hold for challenge to ensure validators explicitly review the implications of issuer clawback on AMM liquidity and invariants.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 45,\n\"packet_verification\": 10,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Specific details on how the clawback transaction interacts with existing AMM invariant checks during the clawback process.\",\n\"Clarification on whether the clawback can be executed while the AMM is actively trading or if it requires a quiescent state.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the clawback mechanism preserve AMM invariants during the withdrawal of clawed-back tokens?\",\n\"Are there any edge cases where the freeze check in AMMDeposit could be bypassed or cause unintended liquidity locks?\"\n],\n\"recommended_validator_action\": \"Review the XLS-73 specification details regarding the interaction between clawback rights and AMM liquidity pools. Verify that the new transaction type does not introduce consensus risks or allow for unauthorized asset seizure beyond the defined clawback scope.\",\n\"review_questions\": [\n\"How does the AMMClawback transaction handle partial fills or insufficient liquidity in the pool?\",\n\"Does the modification to AMMDeposit correctly reject all frozen token deposits without impacting non-frozen tokens?\",\n\"What are the compliance implications for validators enabling this amendment in jurisdictions with strict asset seizure laws?\"\n],\n\"title\": \"Review AMMClawback Asset Control and Compliance Semantics\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 803,
+      "prompt_tokens": 1148,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1951
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:03:25Z"
+}

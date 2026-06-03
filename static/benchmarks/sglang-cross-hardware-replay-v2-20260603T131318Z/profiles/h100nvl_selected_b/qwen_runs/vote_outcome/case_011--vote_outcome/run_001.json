@@ -1,0 +1,73 @@
+{
+  "completed_at": "2026-06-03T14:15:31Z",
+  "error": "",
+  "event_id": "case_011",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "0f8a06b8aac2d9b424eaac07c5cdb5eb7c6b77854850beeaa36fa0d8fd12ce91",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment introduces significant new ledger entry types (MPToken, MPTokenIssuance) and transaction types, increasing the complexity of the ledger state and validator logic.",
+      "As a new token standard, it carries inherent risks of implementation bugs or edge cases that could affect network stability or user funds before widespread testing.",
+      "The decision surface requires a sustained supermajority, implying that if there is any doubt about the readiness or safety of the feature, the conservative choice is to withhold support."
+    ],
+    "arguments_for_yes": [
+      "The amendment addresses a clear need for optimized fungible tokens (like stablecoins) by avoiding the complexity of bidirectional trust lines, which is a significant improvement for the ecosystem.",
+      "The feature set is well-defined with specific new transaction types (MPTokenIssuanceCreate, etc.) and API methods, suggesting a mature design.",
+      "It appears in XRPSCAN with rippled version 2.3.0, indicating it has progressed through development and is ready for validator consideration.",
+      "The inclusion of Clawback support and authorization mechanisms provides necessary controls for issuers, aligning with regulatory and operational needs for stablecoins."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the scope and technical implementation of MPTokensV1, highlighting its benefits (optimized for stablecoins, avoids trust line complexity) and new components (ledger entries, transactions, APIs)."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the high stakes of the vote: validators must reach a sustained supermajority, and incompatible servers risk being amendment-blocked, necessitating a careful assessment of readiness."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's association with rippled version 2.3.0, providing a reference point for its development stage and availability."
+      }
+    ],
+    "decision_summary": "MPTokensV1 represents a substantial enhancement to the XRPL's tokenization capabilities, specifically targeting stablecoins and reducing complexity compared to existing trust lines. While the introduction of new ledger structures carries inherent risk, the detailed specification and clear utility suggest it is a valuable addition. Given the goal of improving the ecosystem's functionality for common use cases, and assuming the implementation in rippled 2.3.0 is stable, the recommendation is to support the amendment.",
+    "forbidden_stronger_claim": "This amendment will definitely increase the market value of XRP.",
+    "missing_evidence": [
+      "Results of independent security audits for the MPTokensV1 implementation.",
+      "Data on validator adoption rates or testing feedback from the rippled 2.3.0 release.",
+      "Specific details on potential migration paths or compatibility issues with existing token holders."
+    ],
+    "vote_confidence": 0.75,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "8b0d20ce56b182c4ec0aecb044996ad159c3de26414e60e7af42373f2439ea4b",
+  "packet_id": "case_011--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "d97c335e23a17332677ad87a9364bb83fb6e991b2f39731a55206b09c849a700",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment introduces significant new ledger entry types (MPToken, MPTokenIssuance) and transaction types, increasing the complexity of the ledger state and validator logic.\",\n    \"As a new token standard, it carries inherent risks of implementation bugs or edge cases that could affect network stability or user funds before widespread testing.\",\n    \"The decision surface requires a sustained supermajority, implying that if there is any doubt about the readiness or safety of the feature, the conservative choice is to withhold support.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment addresses a clear need for optimized fungible tokens (like stablecoins) by avoiding the complexity of bidirectional trust lines, which is a significant improvement for the ecosystem.\",\n    \"The feature set is well-defined with specific new transaction types (MPTokenIssuanceCreate, etc.) and API methods, suggesting a mature design.\",\n    \"It appears in XRPSCAN with rippled version 2.3.0, indicating it has progressed through development and is ready for validator consideration.\",\n    \"The inclusion of Clawback support and authorization mechanisms provides necessary controls for issuers, aligning with regulatory and operational needs for stablecoins.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Defines the scope and technical implementation of MPTokensV1, highlighting its benefits (optimized for stablecoins, avoids trust line complexity) and new components (ledger entries, transactions, APIs).\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Establishes the high stakes of the vote: validators must reach a sustained supermajority, and incompatible servers risk being amendment-blocked, necessitating a careful assessment of readiness.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's association with rippled version 2.3.0, providing a reference point for its development stage and availability.\"\n    }\n  ],\n  \"decision_summary\": \"MPTokensV1 represents a substantial enhancement to the XRPL's tokenization capabilities, specifically targeting stablecoins and reducing complexity compared to existing trust lines. While the introduction of new ledger structures carries inherent risk, the detailed specification and clear utility suggest it is a valuable addition. Given the goal of improving the ecosystem's functionality for common use cases, and assuming the implementation in rippled 2.3.0 is stable, the recommendation is to support the amendment.\",\n  \"forbidden_stronger_claim\": \"This amendment will definitely increase the market value of XRP.\",\n  \"missing_evidence\": [\n    \"Results of independent security audits for the MPTokensV1 implementation.\",\n    \"Data on validator adoption rates or testing feedback from the rippled 2.3.0 release.\",\n    \"Specific details on potential migration paths or compatibility issues with existing token holders.\"\n  ],\n  \"vote_confidence\": 0.75,\n  \"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 670,
+      "prompt_tokens": 916,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1586
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:15:20Z"
+}

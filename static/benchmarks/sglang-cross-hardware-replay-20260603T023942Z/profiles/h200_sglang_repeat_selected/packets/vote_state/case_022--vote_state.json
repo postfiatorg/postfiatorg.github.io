@@ -1,0 +1,39 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_022",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "5CC22CFF2864B020BD79E0E1F048F63EF3594F95E650E43B3F837EF1DF5F4B26",
+    "amendment_name": "FlowV2",
+    "decision_surface": "XRPL validator amendment decision surface for FlowV2.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "Known Amendments status for FlowV2 is obsolete/removed: OBSOLETE.",
+        "fact_id": "F5",
+        "source_id": "xrpl_known_amendments_md"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "8931bcccf6b2bce6d8d129bcfc0e0bc7e633339a96a65969ffd7a4492fc04cdf",
+  "packet_id": "case_022--vote_state",
+  "packet_version": 1
+}

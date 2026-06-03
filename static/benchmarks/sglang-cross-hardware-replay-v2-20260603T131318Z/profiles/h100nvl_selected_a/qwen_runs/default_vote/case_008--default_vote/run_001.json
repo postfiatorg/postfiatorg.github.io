@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T13:57:54Z",
+  "error": "",
+  "event_id": "case_008",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "9db6b4145791eb59b2b0d760fee84764054da2fec0a391d37145afe081e39724",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The fact explicitly states that 'Clawback is disabled by default', which directly answers the question regarding the source default vote."
+      }
+    ],
+    "decision_summary": "Fact F1 from the source-backed amendment description clearly indicates that the Clawback feature is disabled by default. In the context of XRPL amendment voting, a feature being disabled by default implies that the default vote for validators is to reject or not enable the feature unless explicitly opted in, corresponding to a 'NO' default vote.",
+    "default_vote_confidence": 1.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "0f1fb1950dad3d87a442df815aee84ed781f9fd3a051c1011e4230f06f3c3d5c",
+  "packet_id": "case_008--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "58dadc670aa3b0f18323082e404e005962ae172146b7f664f49e72ad06a2d52f",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The fact explicitly states that 'Clawback is disabled by default', which directly answers the question regarding the source default vote.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F1 from the source-backed amendment description clearly indicates that the Clawback feature is disabled by default. In the context of XRPL amendment voting, a feature being disabled by default implies that the default vote for validators is to reject or not enable the feature unless explicitly opted in, corresponding to a 'NO' default vote.\",\n  \"default_vote_confidence\": 1.0,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 169,
+      "prompt_tokens": 689,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 858
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:57:51Z"
+}

@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_013",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "42EEA5E28A97824821D4EF97081FE36A54E9593C6E4F20CBAE098C69D2E072DC",
+    "amendment_name": "fix1373",
+    "decision_surface": "XRPL validator amendment decision surface for fix1373.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fix1373: Fixes a minor bug in transaction processing that causes failures when trying to prepare certain payment paths for processing. As a result, payments could not use certain paths that should have been valid but were invalidly prepared. Without this amendment, those payments are forced to use less-preferable paths or may even fail. The fix1373 amendment corrects the issue so that the paths are properly prepared and payments can use them. It also disables some inappropriate paths that are currently allowed, including paths whose steps include conflicting fields and paths that loop through the same object more than once.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1373 appears in XRPSCAN with introduced rippled version 0.70.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "5777829ab07c64dba954f67919e40766ab696fd388b5072ee0ed8ebd52e966ce",
+  "packet_id": "case_013--default_vote",
+  "packet_version": 1
+}

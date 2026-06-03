@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_040",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "5E9586DB3D765B4C5794658FB6BB385071E9838DF4016027E6E26820C8526724",
+    "amendment_name": "fixAMMClawbackRounding",
+    "decision_surface": "XRPL validator amendment decision surface for fixAMMClawbackRounding.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixAMMClawbackRounding appears in XRPSCAN with introduced rippled version 3.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 5E9586DB3D765B4C5794658FB6BB385071E9838DF4016027E6E26820C8526724; XRPSCAN reports enabled_on=2026-01-27T22:20:10.000Z and enabled_in_ledger=101852417.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "a40baa9f6542a8bb94a26223fb272e43e00a0f340fcb18da797ee4cd2b9a75ca",
+  "packet_id": "case_040--vote_state",
+  "packet_version": 1
+}

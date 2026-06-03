@@ -1,0 +1,67 @@
+{
+  "completed_at": "2026-06-03T15:18:15Z",
+  "error": "",
+  "event_id": "case_003",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a1a4b78aae204842a6c01e32f84514ea12c5af17b7a6928cd26052300e110764",
+  "output_hash": "57c6dd2a6912bffe035223b0a2ed653b9cc24c4a236ce7363e62ca855dcd9f86",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The packet explicitly states that the CryptoConditions amendment has no effect because its dependency (SusPay) was replaced by the Escrow amendment. This renders the proposal obsolete and functionally inert."
+      }
+    ],
+    "decision_summary": "The packet identifies the CryptoConditions amendment as having no effect due to the replacement of its required dependency (SusPay) by the Escrow amendment. According to the task rules, REJECT is the correct route for retired or obsolete proposals. Since the amendment provides no functional change and is effectively dead code, it should be rejected rather than proceeded with or held for review.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment is safe to enable because it is already enabled in the network.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any evidence that the Escrow amendment does not fully replace the functionality of SusPay, thereby reactivating CryptoConditions?"
+      ],
+      "recommended_validator_action": "Reject the amendment as it is obsolete and has no effect.",
+      "review_questions": [
+        "Does the packet contain any contradictory evidence suggesting CryptoConditions has independent utility?"
+      ],
+      "title": "Reject Obsolete CryptoConditions Amendment"
+    }
+  },
+  "packet_hash": "f3009d271e9c4113432a697e92149e3e07b207a196360853d4dcc9228ffef025",
+  "packet_id": "case_003--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "2a68f06314fbbbe0163e057044cca6ec26da71088244415a77a11264e06a9f4f",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"The packet explicitly states that the CryptoConditions amendment has no effect because its dependency (SusPay) was replaced by the Escrow amendment. This renders the proposal obsolete and functionally inert.\"\n}\n],\n\"decision_summary\": \"The packet identifies the CryptoConditions amendment as having no effect due to the replacement of its required dependency (SusPay) by the Escrow amendment. According to the task rules, REJECT is the correct route for retired or obsolete proposals. Since the amendment provides no functional change and is effectively dead code, it should be rejected rather than proceeded with or held for review.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"The amendment is safe to enable because it is already enabled in the network.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Is there any evidence that the Escrow amendment does not fully replace the functionality of SusPay, thereby reactivating CryptoConditions?\"\n],\n\"recommended_validator_action\": \"Reject the amendment as it is obsolete and has no effect.\",\n\"review_questions\": [\n\"Does the packet contain any contradictory evidence suggesting CryptoConditions has independent utility?\"\n],\n\"title\": \"Reject Obsolete CryptoConditions Amendment\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 350,
+      "prompt_tokens": 1097,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1447
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T15:18:09Z"
+}

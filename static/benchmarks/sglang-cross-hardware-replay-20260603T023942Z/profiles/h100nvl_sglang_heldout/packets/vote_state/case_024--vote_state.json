@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_024",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "4F46DF03559967AC60F2EB272FEFE3928A7594A45FF774B87A7E540DB0F8F068",
+    "amendment_name": "fixAmendmentMajorityCalc",
+    "decision_surface": "XRPL validator amendment decision surface for fixAmendmentMajorityCalc.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixAmendmentMajorityCalc appears in XRPSCAN with introduced rippled version 1.6.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 4F46DF03559967AC60F2EB272FEFE3928A7594A45FF774B87A7E540DB0F8F068; XRPSCAN reports enabled_on=2021-04-08T12:46:31.000Z and enabled_in_ledger=62759681.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "05ad7bda98f89cba1973e77a2fe9331f33a29d11252531e79f338ba227772f0b",
+  "packet_id": "case_024--vote_state",
+  "packet_version": 1
+}

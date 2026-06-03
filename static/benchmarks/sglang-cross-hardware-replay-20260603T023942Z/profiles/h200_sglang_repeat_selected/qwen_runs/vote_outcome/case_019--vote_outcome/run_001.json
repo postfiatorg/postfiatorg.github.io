@@ -1,0 +1,66 @@
+{
+  "completed_at": "2026-06-03T02:42:58Z",
+  "error": "",
+  "event_id": "case_019",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "a06df59b868d5c95e397c847e5e15ed8cff3403065cda5aa87557008b0c266d8",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment is explicitly marked as obsolete because its effects are included in NonFungibleTokensV1_1.",
+      "Voting for an obsolete amendment provides no functional benefit and may cause unnecessary network churn or confusion.",
+      "Since the fix is already part of a newer, active amendment (NonFungibleTokensV1_1), enabling this specific obsolete amendment is redundant."
+    ],
+    "arguments_for_yes": [
+      "The amendment fixes an off-by-one error in NFTokenPage determination, which is a bug fix.",
+      "It adjusts error codes to be more descriptive (tecNO_SUITABLE_TOKEN_PAGE instead of tecINVARIANT_FAILED)."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States that the amendment is obsolete because its effects are included in NonFungibleTokensV1_1, making it redundant."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Confirms the status of fixNFTokenDirV1 is OBSOLETE/removed, indicating it should not be actively voted for or enabled."
+      }
+    ],
+    "decision_summary": "The amendment fixNFTokenDirV1 is obsolete and its functionality is subsumed by NonFungibleTokensV1_1. Therefore, the recommendation is NO, as voting for it is unnecessary and potentially disruptive given its obsolete status.",
+    "forbidden_stronger_claim": "The amendment is harmful to the network.",
+    "missing_evidence": [
+      "Current network status of NonFungibleTokensV1_1 activation.",
+      "Specific validator set voting history for this amendment."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "6529ca291c31775d10ab7f03082ffbc3116ca5ccc0ca07ae046ae83f1854fcb0",
+  "packet_id": "case_019--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "f402bf916c7b91257929a33f9985f331b7adb24741bbe9edfb1fd7e178a717be",
+  "raw_message_content": "{\n\"arguments_for_no\": [\n\"The amendment is explicitly marked as obsolete because its effects are included in NonFungibleTokensV1_1.\",\n\"Voting for an obsolete amendment provides no functional benefit and may cause unnecessary network churn or confusion.\",\n\"Since the fix is already part of a newer, active amendment (NonFungibleTokensV1_1), enabling this specific obsolete amendment is redundant.\"\n],\n\"arguments_for_yes\": [\n\"The amendment fixes an off-by-one error in NFTokenPage determination, which is a bug fix.\",\n\"It adjusts error codes to be more descriptive (tecNO_SUITABLE_TOKEN_PAGE instead of tecINVARIANT_FAILED).\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"States that the amendment is obsolete because its effects are included in NonFungibleTokensV1_1, making it redundant.\"\n},\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"Confirms the status of fixNFTokenDirV1 is OBSOLETE/removed, indicating it should not be actively voted for or enabled.\"\n}\n],\n\"decision_summary\": \"The amendment fixNFTokenDirV1 is obsolete and its functionality is subsumed by NonFungibleTokensV1_1. Therefore, the recommendation is NO, as voting for it is unnecessary and potentially disruptive given its obsolete status.\",\n\"forbidden_stronger_claim\": \"The amendment is harmful to the network.\",\n\"missing_evidence\": [\n\"Current network status of NonFungibleTokensV1_1 activation.\",\n\"Specific validator set voting history for this amendment.\"\n],\n\"vote_confidence\": 0.95,\n\"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 383,
+      "prompt_tokens": 797,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1180
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:42:46Z"
+}

@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_044",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "B32752F7DCC41FB86534118FC4EEC8F56E7BD0A7DB60FD73F93F257233C08E3A",
+    "amendment_name": "fixEnforceNFTokenTrustlineV2",
+    "decision_surface": "XRPL validator amendment decision surface for fixEnforceNFTokenTrustlineV2.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixEnforceNFTokenTrustlineV2: Fix a bug where NFT transfer fees could bypass certain limitations on receiving tokens, specifically: - Prevent an NFT issuer from receiving fungible tokens as transfer fees if the fungible tokens' issuer uses authorized trust lines and the NFT issuer's trust line is not authorized. - Prevent an NFT issuer from receiving fungible tokens as transfer fees on a deep-frozen trust line. Without this amendment, NFT transfer fees could be paid to an NFT issuer circumventing these restrictions.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixEnforceNFTokenTrustlineV2 appears in XRPSCAN with introduced rippled version 2.5.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "73c41651c814a677577447572aff030c0f41d65043a96293be278a4b407808bb",
+  "packet_id": "case_044--default_vote",
+  "packet_version": 1
+}

@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-03T14:01:12Z",
+  "error": "",
+  "event_id": "case_052",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "87cb2968213777b3cbf813ad2968b05657861c17225bf780ef9279df5600ecd5",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical content of the amendment as fixing two specific bugs in AMM transaction processing, which indicates a corrective maintenance update rather than a controversial feature change."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with rippled version 2.3.0, establishing it as a standard release component."
+      }
+    ],
+    "decision_summary": "The amendment fixAMMv1_2 addresses specific bugs in AMM transaction processing, specifically regarding reserve checks and liquidity usage. In the context of XRPL governance, bug fixes and stability improvements in stable releases are standard operational updates that do not introduce new risks or controversial features. Therefore, the source default vote for such a corrective amendment is inferred to be YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "ec97cacb05976af2f5bcdea53a62874387f65feb0c54d2a7f9c2b0e57a8a21d8",
+  "packet_id": "case_052--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "7876f163bede5f10e75b76fbcc2307f43ed0b0ce7b06cafd0b62483afc534451",
+  "raw_message_content": "{\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the technical content of the amendment as fixing two specific bugs in AMM transaction processing, which indicates a corrective maintenance update rather than a controversial feature change.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment is associated with rippled version 2.3.0, establishing it as a standard release component.\"\n}\n],\n\"decision_summary\": \"The amendment fixAMMv1_2 addresses specific bugs in AMM transaction processing, specifically regarding reserve checks and liquidity usage. In the context of XRPL governance, bug fixes and stability improvements in stable releases are standard operational updates that do not introduce new risks or controversial features. Therefore, the source default vote for such a corrective amendment is inferred to be YES.\",\n\"default_vote_confidence\": 0.95,\n\"missing_evidence\": [],\n\"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 219,
+      "prompt_tokens": 681,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 900
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:01:08Z"
+}

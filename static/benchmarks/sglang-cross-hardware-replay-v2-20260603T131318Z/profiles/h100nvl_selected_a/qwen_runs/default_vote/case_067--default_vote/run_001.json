@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-03T14:02:19Z",
+  "error": "",
+  "event_id": "case_067",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "e51ac2026225a5458391686c748dc5802f07e5cf1ba4003a9d6475ece3cde970",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical fix for order book blocking caused by rounding errors, which is a bug fix improving system reliability and fairness."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 1.12.0, establishing it as a stable release feature."
+      }
+    ],
+    "decision_summary": "The amendment fixReducedOffersV1 addresses a specific bug where rounding errors could block order books, negatively impacting market functionality. As a bug fix that improves system stability and prevents negative outcomes for users (blocking of better offers), and given it was included in a stable release (1.12.0), the source default vote is inferred to be YES. There is no evidence suggesting it is a controversial feature or a regression that would warrant a default NO.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote in the source documentation"
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "bdd700d00d025c85e8078b3f3a2e5024a08fc41b31ced07fb2155f7be4310245",
+  "packet_id": "case_067--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "0a663937c4bc513c0db54eb1eb7587405b1062231f493173b903d315b2ed8a67",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical fix for order book blocking caused by rounding errors, which is a bug fix improving system reliability and fairness.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 1.12.0, establishing it as a stable release feature.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixReducedOffersV1 addresses a specific bug where rounding errors could block order books, negatively impacting market functionality. As a bug fix that improves system stability and prevents negative outcomes for users (blocking of better offers), and given it was included in a stable release (1.12.0), the source default vote is inferred to be YES. There is no evidence suggesting it is a controversial feature or a regression that would warrant a default NO.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote in the source documentation\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 265,
+      "prompt_tokens": 810,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1075
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:02:14Z"
+}

@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_010",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "565B90CA1AB2B9D42208ED10884188C64F9E19083DECB9634AAF06EB03299509",
+    "amendment_name": "LendingProtocol",
+    "decision_surface": "XRPL validator amendment decision surface for LendingProtocol.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "LendingProtocol appears in XRPSCAN with introduced rippled version 3.1.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "XRPSCAN currently reports support count 8 of 35 validations, threshold 28, and no enabled ledger entry for LendingProtocol.",
+        "fact_id": "F4",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "63d8784a34fb72a3b1d0a130d02b42a3fbec83718c385dfd553df98b8323dcb0",
+  "packet_id": "case_010--vote_state",
+  "packet_version": 1
+}

@@ -1,0 +1,52 @@
+{
+  "completed_at": "2026-06-03T14:28:11Z",
+  "error": "",
+  "event_id": "case_022",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "65500abb73e416345394d1bf329859499ff6efd62949639eaf87abe9ec948f52",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The fact states that FlowV2 was rejected due to a bug and removed in version 0.33.0. This indicates that the amendment is not part of the latest stable release and was explicitly excluded, implying a default stance against its inclusion or activation in the current stable context."
+      }
+    ],
+    "decision_summary": "The source fact F1 explicitly states that FlowV2 was rejected due to a bug and removed in version 0.33.0. Since the amendment was removed from the codebase due to rejection, it is not present in the latest stable release. In the context of XRPL amendments, if an amendment is removed or rejected, the default vote for its activation in the current stable release is effectively NO, as it is not a candidate for activation and was previously deemed unfit.",
+    "default_vote_confidence": 0.9,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote value in the source code or documentation for the latest stable release."
+    ],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "dfd9a3fe28f81f1b1ecd9365b3accff9c12b2c42d665ecde127f9b7fbd50a1fd",
+  "packet_id": "case_022--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "b12e89c97e2c262b7d3631d08ac9118d8a0682375b4fbb125b224d1b690ebb85",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The fact states that FlowV2 was rejected due to a bug and removed in version 0.33.0. This indicates that the amendment is not part of the latest stable release and was explicitly excluded, implying a default stance against its inclusion or activation in the current stable context.\"\n    }\n  ],\n  \"decision_summary\": \"The source fact F1 explicitly states that FlowV2 was rejected due to a bug and removed in version 0.33.0. Since the amendment was removed from the codebase due to rejection, it is not present in the latest stable release. In the context of XRPL amendments, if an amendment is removed or rejected, the default vote for its activation in the current stable release is effectively NO, as it is not a candidate for activation and was previously deemed unfit.\",\n  \"default_vote_confidence\": 0.9,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote value in the source code or documentation for the latest stable release.\"\n  ],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 259,
+      "prompt_tokens": 571,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 830
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:28:07Z"
+}

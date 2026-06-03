@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_049",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "DAF3A6EB04FA5DC51E8E4F23E9B7022B693EFA636F23F22664746C77B5786B23",
+    "amendment_name": "DeepFreeze",
+    "decision_surface": "XRPL validator amendment decision surface for DeepFreeze.",
+    "source_facts": [
+      {
+        "claim": "DeepFreeze: This amendment enables issuers to deep freeze trustlines from interacting with payments, offers, AMMs, and the DEX. This prevents deep frozen accounts from sending and receiving frozen assets. With this amendment, four new flags are introduced: - RippleState flags: - lsfLowDeepFreeze - lsfHighDeepFreeze - TrustSet flags: - tfSetDeepFreeze - tfClearDeepFreeze",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "DeepFreeze appears in XRPSCAN with introduced rippled version 2.4.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "7d7dc738b86393bbef5a02256bac07217cd3ec8b8b12fa035da2ebecb3dc6ce3",
+  "packet_id": "case_049--triage",
+  "packet_version": 1
+}

@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_045",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "7CA70A7674A26FA517412858659EBC7EDEEF7D2D608824464E6FDEFD06854E14",
+    "amendment_name": "fixAMMv1_3",
+    "decision_surface": "XRPL validator amendment decision surface for fixAMMv1_3.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixAMMv1_3: Adds several fixes to Automated Market Maker code, specifically: - Add several invariant checks to ensure that AMMs function as designed. - Add rounding to AMM deposit and withdraw to ensure that the AMM's balance meets the invariant: - On deposit, tokens out are rounded downward and deposit amount is rounded upward. - On withdrawal, tokens in are rounded upward and withdrawal amount is rounded downward. - Fix validation of AMMBid transactions to ensure that AuthAccounts cannot contain duplicates or the transaction sender.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixAMMv1_3 appears in XRPSCAN with introduced rippled version 2.5.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "48660b5cfde26fb1907b05f803d483576555c977ab0e4723ff0b7e4535b1a65c",
+  "packet_id": "case_045--default_vote",
+  "packet_version": 1
+}

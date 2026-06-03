@@ -1,0 +1,36 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_022",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "5CC22CFF2864B020BD79E0E1F048F63EF3594F95E650E43B3F837EF1DF5F4B26",
+    "amendment_name": "FlowV2",
+    "decision_surface": "XRPL validator amendment decision surface for FlowV2.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "FlowV2: This is a previous version of the Flow amendment. It was rejected due to a bug and removed in version 0.33.0.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "dfd9a3fe28f81f1b1ecd9365b3accff9c12b2c42d665ecde127f9b7fbd50a1fd",
+  "packet_id": "case_022--default_vote",
+  "packet_version": 1
+}

@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_038",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "586480873651E106F1D6339B0C4A8945BA705A777F3F4524626FF1FC07EFE41D",
+    "amendment_name": "MultiSignReserve",
+    "decision_surface": "XRPL validator amendment decision surface for MultiSignReserve.",
+    "source_facts": [
+      {
+        "claim": "MultiSignReserve: Reduces the owner reserve counted against your XRP Ledger account when it owns a multi-signing SignerList. Without this amendment, the owner reserve for a SignerList ranges from 15 to 50 XRP, depending on the number of signers in the list. With this amendment enabled, the owner reserve for a new SignerList is 5 XRP, regardless of the number of signers. The reserve requirement for previously-created SignerList objects remains unchanged. To reduce the reserve requirement of SignerList objects created before this amendment was enabled, use a SignerListSet transaction to replace the SignerList after this amendment has been enabled. (The replacement can be the same as the previous version.)",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "MultiSignReserve appears in XRPSCAN with introduced rippled version 1.2.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "329276e8c7df6cb496874cb89969997484138b0ebf424066a1b4a38c58afc76b",
+  "packet_id": "case_038--triage",
+  "packet_version": 1
+}

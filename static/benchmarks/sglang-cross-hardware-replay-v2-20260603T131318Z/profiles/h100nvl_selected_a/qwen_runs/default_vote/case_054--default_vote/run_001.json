@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-03T14:01:20Z",
+  "error": "",
+  "event_id": "case_054",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "5da2ef88bee4a7d338cf959ae492587302a43af9aea845b4d8aed08e65344557",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The claim describes the amendment as standardizing format enforcement and explicitly states it is 'believed that this change does not affect transaction processing', which implies it is a non-breaking, safe change suitable for a default YES vote."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with a specific stable release version (2.3.0), grounding the context in a released software state."
+      }
+    ],
+    "decision_summary": "The amendment fixInnerObjTemplate2 standardizes inner object format enforcement. The source description explicitly notes that the change is believed not to affect transaction processing, suggesting it is a safe, non-disruptive update. In XRPL governance, amendments that are non-breaking and improve consistency or safety are typically supported by default. There is no evidence of breaking changes or negative impacts that would warrant a default NO.",
+    "default_vote_confidence": 0.85,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the source regarding the recommended default vote position.",
+      "Confirmation of whether any edge cases mentioned in F1 were resolved or deemed negligible by the release team."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "bee0d99e7405d7901f4c4899f07cd0413ffc6976cb7adaab2a21bba4dd7fb0a8",
+  "packet_id": "case_054--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "8d7e6dea81eb14a50a456fad5e923eb1afde9e3ed299459aa91434aa19d66806",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The claim describes the amendment as standardizing format enforcement and explicitly states it is 'believed that this change does not affect transaction processing', which implies it is a non-breaking, safe change suitable for a default YES vote.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is associated with a specific stable release version (2.3.0), grounding the context in a released software state.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixInnerObjTemplate2 standardizes inner object format enforcement. The source description explicitly notes that the change is believed not to affect transaction processing, suggesting it is a safe, non-disruptive update. In XRPL governance, amendments that are non-breaking and improve consistency or safety are typically supported by default. There is no evidence of breaking changes or negative impacts that would warrant a default NO.\",\n  \"default_vote_confidence\": 0.85,\n  \"missing_evidence\": [\n    \"Explicit statement from the source regarding the recommended default vote position.\",\n    \"Confirmation of whether any edge cases mentioned in F1 were resolved or deemed negligible by the release team.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 298,
+      "prompt_tokens": 836,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1134
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:01:16Z"
+}

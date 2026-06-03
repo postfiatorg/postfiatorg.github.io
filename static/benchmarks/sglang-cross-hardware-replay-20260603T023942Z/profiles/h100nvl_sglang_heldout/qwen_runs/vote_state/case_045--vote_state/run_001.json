@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T03:28:13Z",
+  "error": "",
+  "event_id": "case_045",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "afe963d0dd7a44565c221ac065c4691b24c958e29a4652e1263c752a4ab935b9",
+  "output_hash": "24cf9aca345c6f49c41fb5cfe1a0a367436679484e301aa4f3960e6fedbf8a5f",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific 'enabled_on' timestamp and 'enabled_in_ledger' number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment 'TicketBatch' (ID 955DF3FA...) is included in the validated ledger Amendments object and provides a historical enabled timestamp (2021-11-18) and ledger index (67785985). According to the task rule, 'ENABLED' means the source facts show enabled ledger membership. The presence of the amendment in the validated ledger with an enabled timestamp satisfies this condition.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "2de72c5740dc2d1aa476d60fd9fd541260bc8079daba9185f049ac65147b55e3",
+  "packet_id": "case_045--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "67956ce7ff04940fe897fd66dc96efc6e96c90dc68eb6696f5133dbda5ce3ae2",
+  "raw_message_content": "{\n\"cited_facts\": [\n{\n\"fact_id\": \"F4\",\n\"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific 'enabled_on' timestamp and 'enabled_in_ledger' number, which directly indicates the amendment has been enabled.\"\n}\n],\n\"decision_summary\": \"Fact F4 confirms that the amendment 'TicketBatch' (ID 955DF3FA...) is included in the validated ledger Amendments object and provides a historical enabled timestamp (2021-11-18) and ledger index (67785985). According to the task rule, 'ENABLED' means the source facts show enabled ledger membership. The presence of the amendment in the validated ledger with an enabled timestamp satisfies this condition.\",\n\"missing_evidence\": [],\n\"state_confidence\": 1.0,\n\"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 206,
+      "prompt_tokens": 813,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1019
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:28:09Z"
+}

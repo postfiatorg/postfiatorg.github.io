@@ -1,0 +1,63 @@
+{
+  "completed_at": "2026-06-03T13:46:53Z",
+  "error": "",
+  "event_id": "case_018",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "839b173ebe513f6c93004a0a885a1cee6f221be71d0c4eb7a64737c88e8ee746",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment is explicitly marked as OBSOLETE in the Known Amendments status.",
+      "The amendment was disabled in rippled v3.1.1 due to a bug.",
+      "The amendment is superseded by BatchV1_1, making it unnecessary to vote for its activation."
+    ],
+    "arguments_for_yes": [],
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Confirms the amendment status is OBSOLETE, indicating it should not be activated."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States the amendment was disabled due to a bug and will be replaced, providing a direct reason to reject it."
+      }
+    ],
+    "decision_summary": "The amendment fixBatchInnerSigs is obsolete and was disabled due to a bug. It is superseded by a future release (BatchV1_1). Therefore, the correct vote is NO.",
+    "forbidden_stronger_claim": "The amendment is malicious or causes immediate network failure.",
+    "missing_evidence": [
+      "Current network adoption rate of the amendment.",
+      "Specific details of the bug in v3.1.1."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "88146fd070f291735dc34af9cd88ac7b59e15c450d65ff923398a5c4a3eaa063",
+  "packet_id": "case_018--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "efa320c504e5eedc828635e203c05bb19bcdb291f5e493752ffe19cc632f17de",
+  "raw_message_content": "{\n\"arguments_for_no\": [\n\"The amendment is explicitly marked as OBSOLETE in the Known Amendments status.\",\n\"The amendment was disabled in rippled v3.1.1 due to a bug.\",\n\"The amendment is superseded by BatchV1_1, making it unnecessary to vote for its activation.\"\n],\n\"arguments_for_yes\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"Confirms the amendment status is OBSOLETE, indicating it should not be activated.\"\n},\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"States the amendment was disabled due to a bug and will be replaced, providing a direct reason to reject it.\"\n}\n],\n\"decision_summary\": \"The amendment fixBatchInnerSigs is obsolete and was disabled due to a bug. It is superseded by a future release (BatchV1_1). Therefore, the correct vote is NO.\",\n\"forbidden_stronger_claim\": \"The amendment is malicious or causes immediate network failure.\",\n\"missing_evidence\": [\n\"Current network adoption rate of the amendment.\",\n\"Specific details of the bug in v3.1.1.\"\n],\n\"vote_confidence\": 0.95,\n\"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 289,
+      "prompt_tokens": 751,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1040
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:46:48Z"
+}

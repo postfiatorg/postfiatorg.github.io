@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_010",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "42426C4D4F1009EE67080A9B7965B44656D7714D104A72F9B4369F97ABF044EE",
+    "amendment_name": "FeeEscalation",
+    "decision_surface": "XRPL validator amendment decision surface for FeeEscalation.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "FeeEscalation: Changes the way the transaction cost applies to proposed transactions. Modifies the consensus process to prioritize transactions that pay a higher transaction cost. This amendment introduces a fixed-size transaction queue for transactions that were not able to be included in the previous consensus round. If the rippled servers in the consensus network are under heavy load, they queue the transactions with the lowest transaction cost for later ledgers. Each consensus round prioritizes transactions from the queue with the largest transaction cost (Fee value), and includes as many transactions as the consensus network can process. If the transaction queue is full, transactions drop from the queue entirely, starting with the ones that have the lowest transaction cost. While the consensus network is under heavy load, legitimate users can pay a higher transaction cost to make sure their transactions get processed. The situation persists until the entire backlog of cheap transactions is processed or discarded. A transaction remains in the queue until one of the following happens: It gets applied to a validated ledger (regardless of success or failure) It becomes invalid (fo",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "FeeEscalation appears in XRPSCAN with introduced rippled version 0.31.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "53c6b85e81b727e5102592cb0bd6c5a537c49dd8819af4637a26d79aa6866963",
+  "packet_id": "case_010--vote_outcome",
+  "packet_version": 1
+}

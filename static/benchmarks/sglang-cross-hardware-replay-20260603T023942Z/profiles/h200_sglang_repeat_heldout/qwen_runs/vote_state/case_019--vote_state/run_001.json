@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T02:52:02Z",
+  "error": "",
+  "event_id": "case_019",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "4da44e3d982e1c38091b32e6a8280042c5715ba87fdeb9746355f54c6950d107",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment fix1543 is included in the validated ledger Amendments object with a recorded enablement date and ledger index. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "4a46f6188343669d141d7f1b39ee1db210740ff47c96f1e612770cb23668f62e",
+  "packet_id": "case_019--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "0239d0580f17355f36f45eca89db513146030be7c2f416ed3c90c9e01aac1678",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 confirms that the amendment fix1543 is included in the validated ledger Amendments object with a recorded enablement date and ledger index. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 166,
+      "prompt_tokens": 834,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1000
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:51:57Z"
+}

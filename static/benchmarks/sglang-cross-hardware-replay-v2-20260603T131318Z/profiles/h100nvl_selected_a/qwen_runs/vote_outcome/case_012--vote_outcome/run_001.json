@@ -1,0 +1,63 @@
+{
+  "completed_at": "2026-06-03T13:46:16Z",
+  "error": "",
+  "event_id": "case_012",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "e995859b5d95469004f6890cdc5feae6fdd846313db0be3ffac30f7455a08fa4",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment was explicitly disabled in rippled v2.6.1 due to a bug, indicating it is unsafe for production use.",
+      "The official status of the amendment is marked as OBSOLETE/removed, meaning it is no longer intended for activation.",
+      "The amendment is scheduled to be replaced by PermissionDelegationV1_1, rendering the current version superseded."
+    ],
+    "arguments_for_yes": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States that the amendment was disabled due to a bug and will be replaced, providing direct evidence against enabling it."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Confirms the official status is OBSOLETE, indicating the amendment should not be voted for or activated."
+      }
+    ],
+    "decision_summary": "The PermissionDelegation amendment is obsolete and was disabled due to a bug. It is superseded by a future version. Therefore, the recommendation is to vote NO.",
+    "forbidden_stronger_claim": "The amendment has already been permanently removed from the ledger.",
+    "missing_evidence": [
+      "Specific details of the bug mentioned in F1.",
+      "Timeline for the release of PermissionDelegationV1_1."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "97fdc94d374bcd3be2431276f1f14ccaf2795bee45cbb1a0aae4a96bf9f154df",
+  "packet_id": "case_012--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "f34db32a669412998eeaaee86b5eb276082c2d2438d532022b3785b02f920920",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment was explicitly disabled in rippled v2.6.1 due to a bug, indicating it is unsafe for production use.\",\n    \"The official status of the amendment is marked as OBSOLETE/removed, meaning it is no longer intended for activation.\",\n    \"The amendment is scheduled to be replaced by PermissionDelegationV1_1, rendering the current version superseded.\"\n  ],\n  \"arguments_for_yes\": [],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"States that the amendment was disabled due to a bug and will be replaced, providing direct evidence against enabling it.\"\n    },\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Confirms the official status is OBSOLETE, indicating the amendment should not be voted for or activated.\"\n    }\n  ],\n  \"decision_summary\": \"The PermissionDelegation amendment is obsolete and was disabled due to a bug. It is superseded by a future version. Therefore, the recommendation is to vote NO.\",\n  \"forbidden_stronger_claim\": \"The amendment has already been permanently removed from the ledger.\",\n  \"missing_evidence\": [\n    \"Specific details of the bug mentioned in F1.\",\n    \"Timeline for the release of PermissionDelegationV1_1.\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 337,
+      "prompt_tokens": 718,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1055
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:46:10Z"
+}

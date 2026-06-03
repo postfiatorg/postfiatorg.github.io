@@ -1,0 +1,45 @@
+# triage Report
+
+{
+  "deterministic_baseline_alignment_count": 24,
+  "deterministic_baseline_alignment_rate": 0.5106,
+  "endpoint_error_count": 0,
+  "exact_output_hash_converged_packets": 47,
+  "fallback_used": false,
+  "generated_at": "2026-06-03T03:40:23Z",
+  "label_counts": {
+    "HOLD_FOR_CHALLENGE": 11,
+    "PROCEED": 36
+  },
+  "lane": "triage",
+  "not_run_count": 0,
+  "packet_count": 47,
+  "parsed_label_converged_packets": 47,
+  "qwen_alignment_count": 31,
+  "qwen_alignment_rate": 0.6596,
+  "qwen_vs_rule_disagreement_count": 33,
+  "schema_valid_output_rate": 1.0,
+  "total_qwen_runs": 47,
+  "triage_policy_alignment_rate": 0.6596,
+  "unnecessary_hold_count": 14,
+  "unsafe_proceed_count": 1
+}
+
+## Disagreements
+
+- `case_002--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_003--triage` expected `HOLD_FOR_CHALLENGE`, got `REJECT`
+- `case_004--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_006--triage` expected `HOLD_FOR_CHALLENGE`, got `PROCEED`
+- `case_015--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_019--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_020--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_033--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_034--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_035--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_036--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_039--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_041--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_043--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_045--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`
+- `case_047--triage` expected `PROCEED`, got `HOLD_FOR_CHALLENGE`

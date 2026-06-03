@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_046",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "532651B4FD58DF8922A49BA101AB3E996E5BFBF95A913B3E392504863E63B164",
+    "amendment_name": "TickSize",
+    "decision_surface": "XRPL validator amendment decision surface for TickSize.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "TickSize appears in XRPSCAN with introduced rippled version 0.50.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 532651B4FD58DF8922A49BA101AB3E996E5BFBF95A913B3E392504863E63B164; XRPSCAN reports enabled_on=2017-02-21T23:02:52.000Z and enabled_in_ledger=27841793.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "f4a39131868e2c7bffa82da64b2aea385639376d8aca08100defec15cbde93cb",
+  "packet_id": "case_046--vote_state",
+  "packet_version": 1
+}

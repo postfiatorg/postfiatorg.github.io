@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_042",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "1CB67D082CF7D9102412D34258CEDB400E659352D3B207348889297A6D90F5EF",
+    "amendment_name": "Credentials",
+    "decision_surface": "XRPL validator amendment decision surface for Credentials.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "Credentials appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 1CB67D082CF7D9102412D34258CEDB400E659352D3B207348889297A6D90F5EF; XRPSCAN reports enabled_on=2025-09-04T03:55:30.000Z and enabled_in_ledger=98615297.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "45d8f1b2ff27ffc376d2012c49a003245ef3a616717de08cee89f0f184d60f79",
+  "packet_id": "case_042--vote_state",
+  "packet_version": 1
+}

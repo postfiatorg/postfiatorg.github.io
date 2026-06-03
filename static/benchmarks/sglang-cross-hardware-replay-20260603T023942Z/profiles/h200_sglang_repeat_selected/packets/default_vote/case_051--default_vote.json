@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_051",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "31E0DA76FB8FB527CADCDF0E61CB9C94120966328EFA9DCA202135BAF319C0BA",
+    "amendment_name": "fixReducedOffersV2",
+    "decision_surface": "XRPL validator amendment decision surface for fixReducedOffersV2.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixReducedOffersV2: This amendment adjusts rounding in an additional case that can cause an order book to become blocked by a \"reduced\" offer. This addresses the same symptoms as the fixReducedOffersV1 amendment, but in an additional case that was not covered by that amendment.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixReducedOffersV2 appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "671815c50c449bfbbf0c2f06ebbbc5ab4e722cb50ce3b872cd6f4e9d13b4805d",
+  "packet_id": "case_051--default_vote",
+  "packet_version": 1
+}

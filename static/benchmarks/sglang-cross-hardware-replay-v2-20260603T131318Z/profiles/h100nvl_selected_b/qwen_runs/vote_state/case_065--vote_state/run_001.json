@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T14:26:22Z",
+  "error": "",
+  "event_id": "case_065",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "58cedbe7d853e9d416a613818b88b46cba1f7c569c4f62d4a0de44cac1112635",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "The source facts confirm that the amendment XRPFees (ID 93E516234E35E08CA689FA33A6D38E103881F8DCB53023F728C307AA89D515A7) is included in the validated ledger Amendments object with a recorded enablement date of 2024-03-25. This satisfies the condition for the ENABLED state, as the amendment has achieved ledger membership.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "0cc209c05c916f6047fab55669898e3528f42cd164f3f7d0c4a611ce2c19ea96",
+  "packet_id": "case_065--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "7fe2317c042680371da085175d1c4e72524dd78d0887b4f45e62e1e5a873acbf",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts confirm that the amendment XRPFees (ID 93E516234E35E08CA689FA33A6D38E103881F8DCB53023F728C307AA89D515A7) is included in the validated ledger Amendments object with a recorded enablement date of 2024-03-25. This satisfies the condition for the ENABLED state, as the amendment has achieved ledger membership.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 236,
+      "prompt_tokens": 832,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1068
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:26:18Z"
+}

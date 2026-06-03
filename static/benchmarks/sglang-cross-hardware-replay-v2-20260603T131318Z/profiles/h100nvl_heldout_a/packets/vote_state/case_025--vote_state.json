@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_025",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "8F81B066ED20DAECA20DF57187767685EEF3980B228E0667A650BAF24426D3B4",
+    "amendment_name": "fixCheckThreading",
+    "decision_surface": "XRPL validator amendment decision surface for fixCheckThreading.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixCheckThreading appears in XRPSCAN with introduced rippled version 1.4.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 8F81B066ED20DAECA20DF57187767685EEF3980B228E0667A650BAF24426D3B4; XRPSCAN reports enabled_on=2020-05-01T08:51:01.000Z and enabled_in_ledger=55161089.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "352dabac8a144648680cdda880c47d661f6210c0a264464b9aa820e6dae82587",
+  "packet_id": "case_025--vote_state",
+  "packet_version": 1
+}

@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_040",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "5E9586DB3D765B4C5794658FB6BB385071E9838DF4016027E6E26820C8526724",
+    "amendment_name": "fixAMMClawbackRounding",
+    "decision_surface": "XRPL validator amendment decision surface for fixAMMClawbackRounding.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixAMMClawbackRounding: Fixes an accounting error that can occur when performing an AMMClawback transaction on the last LP token holder. Due to rounding errors, the LPTokenBalance of the AMM may not match the holder's trust line balance. This amendment adjusts the LPTokenBalance to match the trust line balance before the clawback, so invariant checks pass without errors.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixAMMClawbackRounding appears in XRPSCAN with introduced rippled version 3.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "93ace8eaa9f7b0fb3e258593416be2e4b5138eb3b987dcb028a42c00d67ad03c",
+  "packet_id": "case_040--vote_outcome",
+  "packet_version": 1
+}

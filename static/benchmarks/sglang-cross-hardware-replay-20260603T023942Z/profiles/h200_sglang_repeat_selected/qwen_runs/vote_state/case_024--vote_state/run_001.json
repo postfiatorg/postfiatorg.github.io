@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T02:53:28Z",
+  "error": "",
+  "event_id": "case_024",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "398c118b67d74739ba66fe152952feb10394eec8ec8d9203964e9e808b18af7f",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "The fact explicitly states that the status of the OwnerPaysFee amendment is 'obsolete/removed: OBSOLETE', which directly maps to the VETOED_OR_RETIRED classification criteria."
+      }
+    ],
+    "decision_summary": "The source fact F5 identifies the amendment OwnerPaysFee as obsolete/removed. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "63b1385e8005288e433fab29feb502b9b4fb44ff715795abdcf25f943f8bc3d2",
+  "packet_id": "case_024--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "7db6ba6c85ae722f2aadb1b5a3f7fd875abb618b243d7d0bd6c65facb1916425",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"The fact explicitly states that the status of the OwnerPaysFee amendment is 'obsolete/removed: OBSOLETE', which directly maps to the VETOED_OR_RETIRED classification criteria.\"\n    }\n  ],\n  \"decision_summary\": \"The source fact F5 identifies the amendment OwnerPaysFee as obsolete/removed. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED state.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 164,
+      "prompt_tokens": 682,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 846
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:53:24Z"
+}

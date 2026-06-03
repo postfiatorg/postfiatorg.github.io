@@ -1,0 +1,70 @@
+{
+  "completed_at": "2026-06-03T14:17:35Z",
+  "error": "",
+  "event_id": "case_038",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "4edb4dcbdff635c55b6a1a8b07c970cd36ffba9d2f2e53539b567418334666c1",
+  "output_json": {
+    "arguments_for_no": [
+      "No evidence of security vulnerabilities, consensus risks, or negative economic impacts is provided in the facts.",
+      "The amendment addresses a metadata completeness issue rather than introducing a risky new feature."
+    ],
+    "arguments_for_yes": [
+      "The amendment fixes a data integrity issue by adding missing DeliveredAmount metadata fields for direct MPT Payment transactions.",
+      "Without this amendment, direct MPT payments lack metadata summarizing the delivered amount, which hinders accurate transaction analysis and accounting.",
+      "The fix is introduced in rippled version 3.0.0, indicating it is part of a standard release cycle and likely tested."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes that the amendment corrects a deficiency in transaction metadata (missing DeliveredAmount fields) for MPT payments, improving data accuracy without altering core payment logic."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with rippled version 3.0.0, suggesting it is a recognized and versioned update within the ecosystem."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the voting mechanism, implying that validators should vote based on the stability and correctness of the network, which this metadata fix supports."
+      }
+    ],
+    "decision_summary": "The fixMPTDeliveredAmount amendment is a corrective update that adds missing metadata fields to direct MPT Payment transactions. This enhances the completeness and accuracy of transaction records without introducing security risks or consensus changes. Therefore, a YES vote is recommended to ensure proper metadata availability for MPT transactions.",
+    "forbidden_stronger_claim": "The amendment guarantees zero bugs in all future MPT transactions.",
+    "missing_evidence": [
+      "Specific test results or audit reports confirming the absence of side effects.",
+      "Community discussion sentiment or validator adoption rates prior to this decision."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "43298591ad1a87e9a0296d1c219500514e210483d76a331105fa2f8cf5ae7150",
+  "packet_id": "case_038--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "8751354134c15ff1a090e76727594a59123131bb3be76b13cf13df265ba5e5bb",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"No evidence of security vulnerabilities, consensus risks, or negative economic impacts is provided in the facts.\",\n    \"The amendment addresses a metadata completeness issue rather than introducing a risky new feature.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment fixes a data integrity issue by adding missing DeliveredAmount metadata fields for direct MPT Payment transactions.\",\n    \"Without this amendment, direct MPT payments lack metadata summarizing the delivered amount, which hinders accurate transaction analysis and accounting.\",\n    \"The fix is introduced in rippled version 3.0.0, indicating it is part of a standard release cycle and likely tested.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Establishes that the amendment corrects a deficiency in transaction metadata (missing DeliveredAmount fields) for MPT payments, improving data accuracy without altering core payment logic.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is associated with rippled version 3.0.0, suggesting it is a recognized and versioned update within the ecosystem.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides context on the voting mechanism, implying that validators should vote based on the stability and correctness of the network, which this metadata fix supports.\"\n    }\n  ],\n  \"decision_summary\": \"The fixMPTDeliveredAmount amendment is a corrective update that adds missing metadata fields to direct MPT Payment transactions. This enhances the completeness and accuracy of transaction records without introducing security risks or consensus changes. Therefore, a YES vote is recommended to ensure proper metadata availability for MPT transactions.\",\n  \"forbidden_stronger_claim\": \"The amendment guarantees zero bugs in all future MPT transactions.\",\n  \"missing_evidence\": [\n    \"Specific test results or audit reports confirming the absence of side effects.\",\n    \"Community discussion sentiment or validator adoption rates prior to this decision.\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 482,
+      "prompt_tokens": 686,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1168
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:17:28Z"
+}

@@ -1,0 +1,53 @@
+{
+  "completed_at": "2026-06-03T13:59:21Z",
+  "error": "",
+  "event_id": "case_027",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "c1bf2781370c93c3e53bd879cd07f8819897b4280f58c73d2c9a253ebff12a15",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States that the Tickets amendment was replaced by the TicketBatch amendment, implying it is obsolete and not part of the current stable release path."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the 'Tickets' amendment has been replaced by 'TicketBatch'. Since the amendment is superseded and not active in the latest stable release context, there is no affirmative default vote for it. However, the facts do not explicitly define a 'NO' default vote mechanism for replaced amendments, nor do they provide a clear binary stance required for YES or NO. Therefore, the default vote cannot be definitively inferred as YES or NO based strictly on the provided text.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote (YES/NO) for replaced or obsolete amendments in the source documentation.",
+      "Clarification on whether 'replaced' implies a default NO vote or simply removal from consideration."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "e6d89042fe2aecd8b936aef13dda93e994f6eb0170501e0a2f10b9b5ad38e6cd",
+  "packet_id": "case_027--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "4b810c6d61336e1075f243d7a396b066399bc3eee00c90a2148e33c4da3bf3ab",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"States that the Tickets amendment was replaced by the TicketBatch amendment, implying it is obsolete and not part of the current stable release path.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the 'Tickets' amendment has been replaced by 'TicketBatch'. Since the amendment is superseded and not active in the latest stable release context, there is no affirmative default vote for it. However, the facts do not explicitly define a 'NO' default vote mechanism for replaced amendments, nor do they provide a clear binary stance required for YES or NO. Therefore, the default vote cannot be definitively inferred as YES or NO based strictly on the provided text.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote (YES/NO) for replaced or obsolete amendments in the source documentation.\",\n    \"Clarification on whether 'replaced' implies a default NO vote or simply removal from consideration.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 252,
+      "prompt_tokens": 549,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 801
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:59:17Z"
+}

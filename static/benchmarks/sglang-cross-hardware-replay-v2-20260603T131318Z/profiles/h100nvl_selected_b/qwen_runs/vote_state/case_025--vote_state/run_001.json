@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T14:24:09Z",
+  "error": "",
+  "event_id": "case_025",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "b2653f30fc910689ae6782e93fe857b80cf52a5014c71ae54e13587d489187b6",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "The fact explicitly states that the status of the SHAMapV2 amendment is 'obsolete/removed: OBSOLETE'. This directly maps to the definition of VETOED_OR_RETIRED, which covers amendments that are obsolete or retired."
+      }
+    ],
+    "decision_summary": "The source fact F5 identifies the SHAMapV2 amendment as obsolete/removed. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED state. Fact F2 provides general context about the voting process but does not contradict the specific status provided in F5.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "20252415983e1bb6445065fa508709c201e7761d6e518f1809096023b2978378",
+  "packet_id": "case_025--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "1f39eae13619adca6fb70c3672a2ed87c2993c87e1c7c4f5998bdd9504fbf70b",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"The fact explicitly states that the status of the SHAMapV2 amendment is 'obsolete/removed: OBSOLETE'. This directly maps to the definition of VETOED_OR_RETIRED, which covers amendments that are obsolete or retired.\"\n    }\n  ],\n  \"decision_summary\": \"The source fact F5 identifies the SHAMapV2 amendment as obsolete/removed. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED state. Fact F2 provides general context about the voting process but does not contradict the specific status provided in F5.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 197,
+      "prompt_tokens": 692,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 889
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:24:05Z"
+}

@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-03T14:00:33Z",
+  "error": "",
+  "event_id": "case_044",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "a22a71bdeb79ca9c57e8eca83c2f449bd827cb2289792d2da082c050ddad9534",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The claim describes the amendment as a bug fix that prevents NFT transfer fees from bypassing trust line restrictions. In XRPL governance, bug fixes that correct unintended behavior or security vulnerabilities are standardly enabled by default in stable releases to ensure protocol integrity."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 2.5.0, establishing the context of the 'latest stable release' mentioned in the task rule."
+      }
+    ],
+    "decision_summary": "The amendment 'fixEnforceNFTokenTrustlineV2' is explicitly described as a bug fix preventing the circumvention of trust line restrictions. Standard XRPL release policy dictates that bug fixes, especially those addressing security or logical inconsistencies like this one, are enabled by default in the source code of stable releases. Therefore, the source default vote is YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "73c41651c814a677577447572aff030c0f41d65043a96293be278a4b407808bb",
+  "packet_id": "case_044--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "4d7656d7f162b1b878f6089fe6455a3b75545f5f328dddbc5a4fe1cfd077f78a",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The claim describes the amendment as a bug fix that prevents NFT transfer fees from bypassing trust line restrictions. In XRPL governance, bug fixes that correct unintended behavior or security vulnerabilities are standardly enabled by default in stable releases to ensure protocol integrity.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 2.5.0, establishing the context of the 'latest stable release' mentioned in the task rule.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixEnforceNFTokenTrustlineV2' is explicitly described as a bug fix preventing the circumvention of trust line restrictions. Standard XRPL release policy dictates that bug fixes, especially those addressing security or logical inconsistencies like this one, are enabled by default in the source code of stable releases. Therefore, the source default vote is YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 258,
+      "prompt_tokens": 710,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 968
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:00:29Z"
+}

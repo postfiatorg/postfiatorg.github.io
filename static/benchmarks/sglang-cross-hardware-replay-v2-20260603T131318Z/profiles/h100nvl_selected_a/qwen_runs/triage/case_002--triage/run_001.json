@@ -1,0 +1,88 @@
+{
+  "completed_at": "2026-06-03T14:03:01Z",
+  "error": "",
+  "event_id": "case_002",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "2555fa896dace52e3761680c29a91e32e3a7c8cfbcc3184d2a652a93e415ad41",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The packet describes a pre-activation bug surfacing after consensus was reached, triggering a vote reversal.",
+      "AMM functionality involves complex financial mechanics, including automated market making and integration with the DEX, which carries material financial and invariant risks.",
+      "The decision surface is explicitly about handling a bug in a high-stakes financial feature, requiring conservative review to ensure the bug is resolved before proceeding.",
+      "Fact F3 indicates validators revoked votes due to the bug, signaling that the risk was not yet mitigated at the decision surface."
+    ],
+    "arguments_for_proceeding": [
+      "None. The presence of a surfaced bug in a financial feature precludes immediate proceeding under the conservative review rule."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes that the amendment introduces native AMM functionality, which is a material financial feature subject to strict review standards."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Describes the specific incident: a bug surfaced after consensus, leading to vote revocation. This identifies the decision surface as a pre-fix incident window."
+      },
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Clarifies that the evaluation must focus on the pre-activation bug handling, not the eventual outcome, reinforcing the need to treat this as an unresolved risk at the time of decision."
+      }
+    ],
+    "decision_summary": "The packet describes a scenario where a bug surfaced in the AMM amendment after initial consensus, leading to a vote reversal. Under the task rules, DELAY_FOR_FIX is required for pre-fix incident windows where the packet describes an unresolved bug or fix sequencing problem. Since the bug is described as the reason for the vote reversal and the decision surface is pre-activation, the conservative route is to delay until the fix is verified. This is not a simple localized fix but a material financial feature with a surfaced defect.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 15,
+      "validator_skim": 10
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Details on the specific nature of the bug and whether a fix has been proposed or verified.",
+      "Confirmation that the bug has been resolved and the fix is safe."
+    ],
+    "route": "DELAY_FOR_FIX",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Has the bug described in F3 been fixed and verified?",
+        "Is there a clear fix sequencing plan that addresses the AMM bug without introducing new risks?"
+      ],
+      "recommended_validator_action": "Delay support for the amendment until the bug is fixed and the fix is verified. Do not proceed with activation until the pre-fix incident window is closed.",
+      "review_questions": [
+        "What is the specific bug that caused the vote reversal?",
+        "Has a fix been implemented and tested?",
+        "Does the fix address all aspects of the bug without introducing new risks?"
+      ],
+      "title": "AMM / XLS-30 activation vote reversal - Pre-fix incident review"
+    }
+  },
+  "packet_hash": "58b6203a80458fa03135a126169591c00f7c27717da99ec231cf97642911719b",
+  "packet_id": "case_002--triage",
+  "parsed_label": "DELAY_FOR_FIX",
+  "prompt_hash": "00c3e7b57e375bd535c176632049aa51b156b1b7452013550954cb2ec1f14279",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The packet describes a pre-activation bug surfacing after consensus was reached, triggering a vote reversal.\",\n\"AMM functionality involves complex financial mechanics, including automated market making and integration with the DEX, which carries material financial and invariant risks.\",\n\"The decision surface is explicitly about handling a bug in a high-stakes financial feature, requiring conservative review to ensure the bug is resolved before proceeding.\",\n\"Fact F3 indicates validators revoked votes due to the bug, signaling that the risk was not yet mitigated at the decision surface.\"\n],\n\"arguments_for_proceeding\": [\n\"None. The presence of a surfaced bug in a financial feature precludes immediate proceeding under the conservative review rule.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Establishes that the amendment introduces native AMM functionality, which is a material financial feature subject to strict review standards.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Describes the specific incident: a bug surfaced after consensus, leading to vote revocation. This identifies the decision surface as a pre-fix incident window.\"\n},\n{\n\"fact_id\": \"F4\",\n\"why_it_matters\": \"Clarifies that the evaluation must focus on the pre-activation bug handling, not the eventual outcome, reinforcing the need to treat this as an unresolved risk at the time of decision.\"\n}\n],\n\"decision_summary\": \"The packet describes a scenario where a bug surfaced in the AMM amendment after initial consensus, leading to a vote reversal. Under the task rules, DELAY_FOR_FIX is required for pre-fix incident windows where the packet describes an unresolved bug or fix sequencing problem. Since the bug is described as the reason for the vote reversal and the decision surface is pre-activation, the conservative route is to delay until the fix is verified. This is not a simple localized fix but a material financial feature with a surfaced defect.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 45,\n\"packet_verification\": 15,\n\"validator_skim\": 10\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Details on the specific nature of the bug and whether a fix has been proposed or verified.\",\n\"Confirmation that the bug has been resolved and the fix is safe.\"\n],\n\"route\": \"DELAY_FOR_FIX\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Has the bug described in F3 been fixed and verified?\",\n\"Is there a clear fix sequencing plan that addresses the AMM bug without introducing new risks?\"\n],\n\"recommended_validator_action\": \"Delay support for the amendment until the bug is fixed and the fix is verified. Do not proceed with activation until the pre-fix incident window is closed.\",\n\"review_questions\": [\n\"What is the specific bug that caused the vote reversal?\",\n\"Has a fix been implemented and tested?\",\n\"Does the fix address all aspects of the bug without introducing new risks?\"\n],\n\"title\": \"AMM / XLS-30 activation vote reversal - Pre-fix incident review\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 695,
+      "prompt_tokens": 1111,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1806
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:02:51Z"
+}

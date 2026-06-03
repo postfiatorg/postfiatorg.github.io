@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_004",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "AE6AB9028EEB7299EBB03C7CBCC3F2A4F5FBE00EA28B8223AA3118A0B436C1C5",
+    "amendment_name": "PermissionDelegation vulnerability",
+    "decision_surface": "Whether validators should support the affected PermissionDelegation amendment after the fee-drain vulnerability was found.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "A PermissionDelegation bug could have let an account charge transaction fees to any other account and drain XRP balance.",
+        "fact_id": "F1",
+        "source_id": "xrpl_permission_delegation_vulnerability_2025"
+      },
+      {
+        "claim": "The feature was not enabled on mainnet, and validators began voting No as advised.",
+        "fact_id": "F2",
+        "source_id": "xrpl_permission_delegation_vulnerability_2025"
+      },
+      {
+        "claim": "rippled 2.6.1 disabled PermissionDelegation and planned a replacement amendment.",
+        "fact_id": "F3",
+        "source_id": "xrpl_rippled_2_6_1"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "c24a7479ce0f1024c6b0ece3db9a11cc7c5f1f373d9f01b1dcc5c2d42767b6e5",
+  "packet_id": "case_004--vote_outcome",
+  "packet_version": 1
+}

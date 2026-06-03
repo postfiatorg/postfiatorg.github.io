@@ -1,0 +1,86 @@
+{
+  "completed_at": "2026-06-03T14:37:13Z",
+  "error": "",
+  "event_id": "case_037",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "b4681448407392f64762450294e304c553bc69fcfb9111c89bb78ef212d696ce",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment name starts with 'fix', but the packet explicitly describes 'broad cross-feature canonicalization/serialization/template enforcement' by stating it ensures asset pairs follow a canonical order at all times.",
+      "Canonicalization of asset pair ordering in Price Oracles affects how prices are looked up and stored, which constitutes a material change to data structure semantics and potential lookup consistency, triggering the exception to the PROCEED rule for fix amendments."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment is named 'fixPriceOracleOrder', suggesting it is a corrective measure.",
+      "The claim states the goal is to make price lookups predictable."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as enforcing a 'canonical order' for asset pairs, which falls under the prohibited pattern of 'broad cross-feature canonicalization/serialization/template enforcement' for fix amendments, requiring HOLD_FOR_CHALLENGE instead of PROCEED."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for a conservative review route."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment identity and version context, though not directly determinative of the risk category."
+      }
+    ],
+    "decision_summary": "Although the amendment name starts with 'fix', the packet describes the change as enforcing a canonical order for asset pairs in Price Oracles. The task rule explicitly states that fix amendments must not PROCEED if they involve 'broad cross-feature canonicalization/serialization/template enforcement'. Canonicalizing asset pair order is a structural serialization change that affects data consistency and lookup semantics. Therefore, the conservative route is HOLD_FOR_CHALLENGE to review the implications of this canonicalization on oracle data integrity and validator compatibility.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Details on whether the canonicalization breaks existing oracle data or requires migration.",
+      "Specifics on how the order was previously inconsistent and the impact on price accuracy."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the canonicalization of asset pair order introduce any risk of data loss or lookup failure for existing oracles?",
+        "Is the change purely cosmetic or does it affect the binary representation or storage of oracle data?"
+      ],
+      "recommended_validator_action": "HOLD_FOR_CHALLENGE",
+      "review_questions": [
+        "Does the enforcement of canonical order constitute a breaking change for clients relying on previous ordering?",
+        "Are there any edge cases where the canonical order might differ from user expectations in a way that affects price discovery?"
+      ],
+      "title": "Review fixPriceOracleOrder Canonicalization Semantics"
+    }
+  },
+  "packet_hash": "c4458300fb2f310d09a6f18fa91bacd610ba219d63fe2f61fdb89e20aada3434",
+  "packet_id": "case_037--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "f09deff0713e849b8d22df26875722abc21051718cbeb28810c9d794052535ce",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment name starts with 'fix', but the packet explicitly describes 'broad cross-feature canonicalization/serialization/template enforcement' by stating it ensures asset pairs follow a canonical order at all times.\",\n\"Canonicalization of asset pair ordering in Price Oracles affects how prices are looked up and stored, which constitutes a material change to data structure semantics and potential lookup consistency, triggering the exception to the PROCEED rule for fix amendments.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment is named 'fixPriceOracleOrder', suggesting it is a corrective measure.\",\n\"The claim states the goal is to make price lookups predictable.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the amendment as enforcing a 'canonical order' for asset pairs, which falls under the prohibited pattern of 'broad cross-feature canonicalization/serialization/template enforcement' for fix amendments, requiring HOLD_FOR_CHALLENGE instead of PROCEED.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for a conservative review route.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment identity and version context, though not directly determinative of the risk category.\"\n}\n],\n\"decision_summary\": \"Although the amendment name starts with 'fix', the packet describes the change as enforcing a canonical order for asset pairs in Price Oracles. The task rule explicitly states that fix amendments must not PROCEED if they involve 'broad cross-feature canonicalization/serialization/template enforcement'. Canonicalizing asset pair order is a structural serialization change that affects data consistency and lookup semantics. Therefore, the conservative route is HOLD_FOR_CHALLENGE to review the implications of this canonicalization on oracle data integrity and validator compatibility.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 45,\n\"packet_verification\": 10,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Details on whether the canonicalization breaks existing oracle data or requires migration.\",\n\"Specifics on how the order was previously inconsistent and the impact on price accuracy.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the canonicalization of asset pair order introduce any risk of data loss or lookup failure for existing oracles?\",\n\"Is the change purely cosmetic or does it affect the binary representation or storage of oracle data?\"\n],\n\"recommended_validator_action\": \"HOLD_FOR_CHALLENGE\",\n\"review_questions\": [\n\"Does the enforcement of canonical order constitute a breaking change for clients relying on previous ordering?\",\n\"Are there any edge cases where the canonical order might differ from user expectations in a way that affects price discovery?\"\n],\n\"title\": \"Review fixPriceOracleOrder Canonicalization Semantics\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 667,
+      "prompt_tokens": 1101,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1768
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:37:03Z"
+}

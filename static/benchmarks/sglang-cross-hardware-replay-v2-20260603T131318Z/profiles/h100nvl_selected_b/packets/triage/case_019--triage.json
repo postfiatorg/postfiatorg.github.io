@@ -1,0 +1,52 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_019",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "0285B7E5E08E1A8E4C15636F0591D87F73CB6A7B6452A932AD72BBC8E5D1CBE3",
+    "amendment_name": "fixNFTokenDirV1",
+    "decision_surface": "XRPL validator amendment decision surface for fixNFTokenDirV1.",
+    "source_facts": [
+      {
+        "claim": "fixNFTokenDirV1: This amendment fixes an off-by-one error that occurred in some corner cases when determining which NFTokenPage a NFToken object belongs on. It also adjusts the constraints of NFTokenPage invariant checks, so that certain error cases fail with a suitable error code such as tecNO_SUITABLE_TOKEN_PAGE instead of failing with a tecINVARIANT_FAILED error code. This amendment has no effect unless the NonFungibleTokensV1 amendment is enabled. This amendment is obsolete because its effects are included as part of NonFungibleTokensV1_1.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixNFTokenDirV1 appears in XRPSCAN with introduced rippled version 1.9.1.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "XRPSCAN currently reports support count 0 of 35 validations, threshold 28, and no enabled ledger entry for fixNFTokenDirV1.",
+        "fact_id": "F4",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "Known Amendments status for fixNFTokenDirV1 is obsolete/removed: OBSOLETE.",
+        "fact_id": "F5",
+        "source_id": "xrpl_known_amendments_md"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "e12cf645be3a7a0c25d1e3fa38a4eb45f6c4eeafda53929585b12a4d6961b421",
+  "packet_id": "case_019--triage",
+  "packet_version": 1
+}

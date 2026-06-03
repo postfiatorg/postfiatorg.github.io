@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_003",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "1562511F573A19AE9BD103B5D6B9E01B3B46805AEC5D3C4805C902B514399146",
+    "amendment_name": "CryptoConditions",
+    "decision_surface": "XRPL validator amendment decision surface for CryptoConditions.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "CryptoConditions: Although this amendment is enabled, it has no effect unless the SusPay amendment is also enabled. The SusPay amendment was replaced by the Escrow amendment, so the CryptoConditions amendment has no effect.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "CryptoConditions appears in XRPSCAN with introduced rippled version 0.50.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "12a95a56a228fd8493e47e522ce390011007e166e1c6dd0a38e9d8c1dff6accc",
+  "packet_id": "case_003--default_vote",
+  "packet_version": 1
+}

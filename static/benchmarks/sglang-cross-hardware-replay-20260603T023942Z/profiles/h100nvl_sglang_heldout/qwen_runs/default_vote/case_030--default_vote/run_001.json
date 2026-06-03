@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-03T03:30:37Z",
+  "error": "",
+  "event_id": "case_030",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "afe963d0dd7a44565c221ac065c4691b24c958e29a4652e1263c752a4ab935b9",
+  "output_hash": "0c7d16fa2f06f35c04a9e31f7b62d4e975c5b2ffc07c22c4ed89255c9fc9bfcf",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as a fix for a bug causing payments and trades to fail or be blocked, which implies the default vote should be YES to enable the fix."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 1.7.2, establishing it as a stable release feature."
+      }
+    ],
+    "decision_summary": "The amendment fixRmSmallIncreasedQOffers addresses a specific bug where small remaining offer amounts cause incorrect exchange rates and block better offers, leading to failed payments. Since the amendment resolves a negative behavior and enables successful transactions, the source-backed description supports a default vote of YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "ea87259febdd4d4b9b909df5de3bb4e5eba2e7a2646935b8dd15ae85affac6d0",
+  "packet_id": "case_030--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "df90e592ba5fdd402c540f969198718cff08f35e59a3473d8e018514ebf333a4",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as a fix for a bug causing payments and trades to fail or be blocked, which implies the default vote should be YES to enable the fix.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 1.7.2, establishing it as a stable release feature.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixRmSmallIncreasedQOffers addresses a specific bug where small remaining offer amounts cause incorrect exchange rates and block better offers, leading to failed payments. Since the amendment resolves a negative behavior and enables successful transactions, the source-backed description supports a default vote of YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 218,
+      "prompt_tokens": 711,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 929
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:30:33Z"
+}

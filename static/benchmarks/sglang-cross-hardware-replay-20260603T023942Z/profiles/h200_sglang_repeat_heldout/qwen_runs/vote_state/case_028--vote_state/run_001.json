@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T02:52:46Z",
+  "error": "",
+  "event_id": "case_028",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "181ea1e8939ade5cf9c78190a6e581ed607eb16eff422caa4ff76eb128792b58",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment 'fixQualityUpperBound' is included in the validated ledger Amendments object with a recorded enablement date and ledger index. According to the task rules, the presence of enabled ledger membership corresponds to the ENABLED state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "24ebcaff1ea40117a0e6a72ab642abd9675cc9c13f6e28d1e97d40664844fae4",
+  "packet_id": "case_028--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "b397dcf90eec8640e3e07d110f5c5c04a4a8fc006cd7a60fd3856693a32321ff",
+  "raw_message_content": "{\n\"cited_facts\": [\n{\n\"fact_id\": \"F4\",\n\"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n}\n],\n\"decision_summary\": \"Fact F4 confirms that the amendment 'fixQualityUpperBound' is included in the validated ledger Amendments object with a recorded enablement date and ledger index. According to the task rules, the presence of enabled ledger membership corresponds to the ENABLED state.\",\n\"missing_evidence\": [],\n\"state_confidence\": 1.0,\n\"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 156,
+      "prompt_tokens": 830,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 986
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:52:41Z"
+}

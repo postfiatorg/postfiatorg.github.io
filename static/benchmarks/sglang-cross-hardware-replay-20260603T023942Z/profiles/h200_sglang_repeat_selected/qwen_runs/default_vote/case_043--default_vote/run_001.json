@@ -1,0 +1,53 @@
+{
+  "completed_at": "2026-06-03T03:04:24Z",
+  "error": "",
+  "event_id": "case_043",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "349f067feb0f4ea7bd7e4bd796b0a8e905459a6e4f93fee1e9280bac664fd53d",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical behavior of the amendment, specifically that it prevents invalid payment channel creation by failing transactions with tecEXPIRED. This indicates a safety and correctness fix, which typically aligns with a default YES vote in XRPL governance to prevent protocol inconsistencies."
+      }
+    ],
+    "decision_summary": "The amendment fixPayChanCancelAfter addresses a bug where payment channels could be created with a CancelAfter time in the past. By enforcing a failure (tecEXPIRED) for such invalid inputs, it ensures protocol consistency and prevents the creation of immediately expired channels. In the context of XRPL amendment voting, fixes that correct protocol errors or prevent invalid states are generally supported by the community and validators, leading to a default YES vote. There is no evidence suggesting this is a controversial feature or a breaking change that would warrant a default NO.",
+    "default_vote_confidence": 0.85,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the source regarding the default vote recommendation",
+      "Community voting statistics or validator consensus data"
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "91d20282f6dfdf5487ff5ce733f7df9c599fd7112617a6f9e43a230cb437b586",
+  "packet_id": "case_043--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "7059f93aeaa04bf07254a4e92bfc9cf1f8c1f8f189cb380dc8c313c890dafbe1",
+  "raw_message_content": "{\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the technical behavior of the amendment, specifically that it prevents invalid payment channel creation by failing transactions with tecEXPIRED. This indicates a safety and correctness fix, which typically aligns with a default YES vote in XRPL governance to prevent protocol inconsistencies.\"\n}\n],\n\"decision_summary\": \"The amendment fixPayChanCancelAfter addresses a bug where payment channels could be created with a CancelAfter time in the past. By enforcing a failure (tecEXPIRED) for such invalid inputs, it ensures protocol consistency and prevents the creation of immediately expired channels. In the context of XRPL amendment voting, fixes that correct protocol errors or prevent invalid states are generally supported by the community and validators, leading to a default YES vote. There is no evidence suggesting this is a controversial feature or a breaking change that would warrant a default NO.\",\n\"default_vote_confidence\": 0.85,\n\"missing_evidence\": [\n\"Explicit statement from the source regarding the default vote recommendation\",\n\"Community voting statistics or validator consensus data\"\n],\n\"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 253,
+      "prompt_tokens": 673,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 926
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:04:12Z"
+}

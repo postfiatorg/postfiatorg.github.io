@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-03T14:31:34Z",
+  "error": "",
+  "event_id": "case_068",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "af51a5b0cf4973cbc68a636a5b2db7c8a5317d1616643374737b6fa414128a88",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical changes of the amendment, noting it simplifies code and may result in slightly different calculation results for edge cases like offer ranking and payment processing, but does not explicitly state a default vote recommendation."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Indicates the amendment was introduced in rippled version 1.10.0, but does not specify the default vote associated with that release."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical impact of the 'fixUniversalNumber' amendment and its introduction version. However, none of the facts explicitly state the default vote (YES or NO) assigned to this amendment in the latest stable release source. Without explicit evidence of the default vote, the task rule requires outputting UNKNOWN.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote for fixUniversalNumber in the source description",
+      "Documentation linking rippled version 1.10.0 to a specific default vote for this amendment"
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "71debc53988f1d9e7762c0d9ba7ae4ecf54adfa26d7a69bc3399396abd231e42",
+  "packet_id": "case_068--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "04c3cc3b84fb3b6f83ef66e76d1013802e4f4d8e591349f2b81d30a78ca477c6",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical changes of the amendment, noting it simplifies code and may result in slightly different calculation results for edge cases like offer ranking and payment processing, but does not explicitly state a default vote recommendation.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Indicates the amendment was introduced in rippled version 1.10.0, but does not specify the default vote associated with that release.\"\n    }\n  ],\n  \"decision_summary\": \"The provided facts describe the technical impact of the 'fixUniversalNumber' amendment and its introduction version. However, none of the facts explicitly state the default vote (YES or NO) assigned to this amendment in the latest stable release source. Without explicit evidence of the default vote, the task rule requires outputting UNKNOWN.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote for fixUniversalNumber in the source description\",\n    \"Documentation linking rippled version 1.10.0 to a specific default vote for this amendment\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 284,
+      "prompt_tokens": 701,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 985
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:31:30Z"
+}

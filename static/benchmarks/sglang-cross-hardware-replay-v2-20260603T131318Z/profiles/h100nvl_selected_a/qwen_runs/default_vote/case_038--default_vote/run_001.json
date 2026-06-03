@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-03T14:00:06Z",
+  "error": "",
+  "event_id": "case_038",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "c9c4e7e057e2bd81f288e83d4e87ee6041385774fd2bfe0b253148e3e32a8ab6",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the amendment as adding missing metadata fields to fix a discrepancy where direct MPT payments deliver the full amount but lack summary metadata. This characterizes the amendment as a bug fix or feature completion rather than a breaking change or risky experimental feature, which typically implies a default YES vote in stable releases."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment was introduced in rippled version 3.0.0, establishing the context of the 'latest stable release' mentioned in the task rule."
+      }
+    ],
+    "decision_summary": "The amendment 'fixMPTDeliveredAmount' is described as adding missing metadata fields to correctly summarize delivered amounts in direct MPT payments. This is a corrective measure (bug fix) ensuring data consistency and completeness. In XRPL governance, amendments that fix bugs or add non-breaking metadata are generally supported by default in stable releases to ensure network correctness and interoperability. There is no evidence suggesting this is a breaking change or a controversial feature that would warrant a default NO. Therefore, the inferred default vote is YES.",
+    "default_vote_confidence": 0.85,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement from the rippled release notes or source code commit messages declaring the default vote.",
+      "Historical voting patterns for similar 'fix' type amendments in version 3.0.0."
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "66003cbe115a80bfd62becfab9009cd26e2a665334f4d70ec63c2c57b68e1bdb",
+  "packet_id": "case_038--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "60e112ae4066063ca8ab61452ede1b357438ac0d2fec0d7aa2d8dd68d6050997",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the amendment as adding missing metadata fields to fix a discrepancy where direct MPT payments deliver the full amount but lack summary metadata. This characterizes the amendment as a bug fix or feature completion rather than a breaking change or risky experimental feature, which typically implies a default YES vote in stable releases.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment was introduced in rippled version 3.0.0, establishing the context of the 'latest stable release' mentioned in the task rule.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'fixMPTDeliveredAmount' is described as adding missing metadata fields to correctly summarize delivered amounts in direct MPT payments. This is a corrective measure (bug fix) ensuring data consistency and completeness. In XRPL governance, amendments that fix bugs or add non-breaking metadata are generally supported by default in stable releases to ensure network correctness and interoperability. There is no evidence suggesting this is a breaking change or a controversial feature that would warrant a default NO. Therefore, the inferred default vote is YES.\",\n  \"default_vote_confidence\": 0.85,\n  \"missing_evidence\": [\n    \"Explicit statement from the rippled release notes or source code commit messages declaring the default vote.\",\n    \"Historical voting patterns for similar 'fix' type amendments in version 3.0.0.\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 348,
+      "prompt_tokens": 638,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 986
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:00:01Z"
+}

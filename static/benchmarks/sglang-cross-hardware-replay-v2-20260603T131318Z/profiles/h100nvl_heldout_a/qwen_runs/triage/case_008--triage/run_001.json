@@ -1,0 +1,89 @@
+{
+  "completed_at": "2026-06-03T14:58:07Z",
+  "error": "",
+  "event_id": "case_008",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a4413e43312a9d665bcaa356648bcc89aa32490a4420217384b9b0f42206b54f",
+  "output_hash": "37a0fc3341422644d58181c2ebfd0896e8181808f0237a8f36f5fd6ccc372fb3",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces new ledger object types and transaction types for suspended payments, which constitutes a change to escrow math and transaction-processing semantics.",
+      "Support for Interledger Protocol Crypto-Conditions introduces cross-feature canonicalization and serialization requirements that carry consensus and liveness risk.",
+      "The replacement of SusPay and CryptoConditions amendments implies a significant shift in how conditional payments are handled, requiring review of the new escrow mechanics."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name 'Escrow' does not start with 'fix', so the localized fix exception does not apply.",
+      "There is no explicit no-vote advisory or indication that the proposal is retired or obsolete in the provided facts."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core functionality: new ledger objects and transaction types for suspended payments and Crypto-Conditions, which are material changes to escrow math and transaction processing."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Highlights the consensus risk: incompatible servers can become amendment-blocked, necessitating a conservative review route for material changes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version context, but does not mitigate the material risk of the new features described in F1."
+      }
+    ],
+    "decision_summary": "The Escrow amendment introduces material changes to escrow math, transaction processing, and cross-feature canonicalization via Crypto-Conditions support. These are high-risk semantic changes that require explicit validator review to ensure consensus safety and correct implementation of the new suspended payment mechanics.",
+    "estimated_review_minutes": {
+      "deep_review": 120,
+      "packet_verification": 15,
+      "validator_skim": 10
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Detailed specification of the new ledger object structure for suspended payments.",
+      "Analysis of the canonicalization rules for Interledger Protocol Crypto-Conditions.",
+      "Comparison of the new Escrow mechanics against the retired SusPay and CryptoConditions amendments to identify potential edge cases."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the new escrow implementation introduce any consensus-breaking edge cases in transaction processing?",
+        "Are the serialization rules for Crypto-Conditions sufficiently robust to prevent fork risks?"
+      ],
+      "recommended_validator_action": "Conduct a deep review of the new ledger object types and transaction types for suspended payments, focusing on escrow math and Crypto-Conditions canonicalization.",
+      "review_questions": [
+        "How does the new Escrow amendment handle the transition from SusPay and CryptoConditions?",
+        "What are the specific risks associated with the new ledger object type for suspended payments?",
+        "Does the support for Interledger Protocol Crypto-Conditions introduce any new consensus or liveness risks?"
+      ],
+      "title": "Review Escrow Amendment for Material Escrow Math and Consensus Risks"
+    }
+  },
+  "packet_hash": "3c8a238415acc8344b9039ace63cc4f055a11b62a6481a6cce4e64ab7b073e30",
+  "packet_id": "case_008--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "a8c5bc29dc68318d8e31d9f6cc3043dceb1cadf6c45fd77b77175c6d83d200fb",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces new ledger object types and transaction types for suspended payments, which constitutes a change to escrow math and transaction-processing semantics.\",\n\"Support for Interledger Protocol Crypto-Conditions introduces cross-feature canonicalization and serialization requirements that carry consensus and liveness risk.\",\n\"The replacement of SusPay and CryptoConditions amendments implies a significant shift in how conditional payments are handled, requiring review of the new escrow mechanics.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name 'Escrow' does not start with 'fix', so the localized fix exception does not apply.\",\n\"There is no explicit no-vote advisory or indication that the proposal is retired or obsolete in the provided facts.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the core functionality: new ledger objects and transaction types for suspended payments and Crypto-Conditions, which are material changes to escrow math and transaction processing.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Highlights the consensus risk: incompatible servers can become amendment-blocked, necessitating a conservative review route for material changes.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment's existence and version context, but does not mitigate the material risk of the new features described in F1.\"\n}\n],\n\"decision_summary\": \"The Escrow amendment introduces material changes to escrow math, transaction processing, and cross-feature canonicalization via Crypto-Conditions support. These are high-risk semantic changes that require explicit validator review to ensure consensus safety and correct implementation of the new suspended payment mechanics.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 120,\n\"packet_verification\": 15,\n\"validator_skim\": 10\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Detailed specification of the new ledger object structure for suspended payments.\",\n\"Analysis of the canonicalization rules for Interledger Protocol Crypto-Conditions.\",\n\"Comparison of the new Escrow mechanics against the retired SusPay and CryptoConditions amendments to identify potential edge cases.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the new escrow implementation introduce any consensus-breaking edge cases in transaction processing?\",\n\"Are the serialization rules for Crypto-Conditions sufficiently robust to prevent fork risks?\"\n],\n\"recommended_validator_action\": \"Conduct a deep review of the new ledger object types and transaction types for suspended payments, focusing on escrow math and Crypto-Conditions canonicalization.\",\n\"review_questions\": [\n\"How does the new Escrow amendment handle the transition from SusPay and CryptoConditions?\",\n\"What are the specific risks associated with the new ledger object type for suspended payments?\",\n\"Does the support for Interledger Protocol Crypto-Conditions introduce any new consensus or liveness risks?\"\n],\n\"title\": \"Review Escrow Amendment for Material Escrow Math and Consensus Risks\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 675,
+      "prompt_tokens": 1115,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1790
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:57:57Z"
+}

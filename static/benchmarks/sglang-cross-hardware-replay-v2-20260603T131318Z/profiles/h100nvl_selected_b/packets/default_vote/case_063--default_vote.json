@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_063",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "15D61F0C6DB6A2F86BCF96F1E2444FEC54E705923339EC175BD3E517C8B3FF91",
+    "amendment_name": "fixDisallowIncomingV1",
+    "decision_surface": "XRPL validator amendment decision surface for fixDisallowIncomingV1.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixDisallowIncomingV1: This amendment fixes an issue with approving trustlines after a user enables the lsfDisallowIncomingTrustline flag on their account. To recreate this issue: 1. An issuer sets asfRequireAuth on their account. 2. The user sets asfDisallowIncomingTrustline on their account. 3. The user submits a SetTrust transaction to the issuer. 4. The issuer is unable to authorize the trustline. With this amendment, the issuer can now authorize the trustline. This amendment has no effect unless the DisallowIncoming amendment is enabled.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixDisallowIncomingV1 appears in XRPSCAN with introduced rippled version 2.0.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "8280fe7f9fb89e62d7620d70788bfe4102a74cafdf0bb8f965b174c5a4fa4ba4",
+  "packet_id": "case_063--default_vote",
+  "packet_version": 1
+}

@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_064",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "C393B3AEEBF575E475F0C60D5E4241B2070CC4D0EB6C4846B1A07508FAEFC485",
+    "amendment_name": "fixInnerObjTemplate",
+    "decision_surface": "XRPL validator amendment decision surface for fixInnerObjTemplate.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixInnerObjTemplate: This amendment fixes an issue with accessing the AMM sfTradingFee and sfDiscountedFee fields in the inner objects of sfVoteEntry and sfAuctionSlot. Currently, the inner object template isn't set upon object creation. If the object contains an soeDEFAULT field and is initially set to the default value, accessing the field results in a tefEXCEPTION error in some circumstances. This amendment adds an STObject constructor overload that includes an additional boolean argument to set the inner object template.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixInnerObjTemplate appears in XRPSCAN with introduced rippled version 2.1.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "831fb1759f97b52b620a308541d75d16f9224d47e037105862a5c18100455865",
+  "packet_id": "case_064--vote_outcome",
+  "packet_version": 1
+}

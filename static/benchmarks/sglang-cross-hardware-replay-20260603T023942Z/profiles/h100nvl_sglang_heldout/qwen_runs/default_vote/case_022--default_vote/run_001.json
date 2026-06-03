@@ -1,0 +1,61 @@
+{
+  "completed_at": "2026-06-03T03:30:02Z",
+  "error": "",
+  "event_id": "case_022",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "afe963d0dd7a44565c221ac065c4691b24c958e29a4652e1263c752a4ab935b9",
+  "output_hash": "acbdfbfb492ecb6214ec1d1cd5eca680c8bd8608ace78bf56169637b6828fe6f",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical change (adding DeliveredAmount to metadata) but does not specify the default vote configuration in the source code or release notes."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general voting process but does not provide the specific default vote for this amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the version but does not state the default vote."
+      }
+    ],
+    "decision_summary": "The provided facts describe the functionality and version introduction of the fix1623 amendment but do not contain information regarding the default vote setting in the source code or stable release configuration. Without explicit evidence of the default vote being YES or NO, the value cannot be inferred.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Source code default vote configuration for fix1623",
+      "Release notes specifying the default vote for fix1623"
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "e1fb5138b0756bb8ef6f54b7cb12b447b63dd0bc06088f51ece1c42355fff9a7",
+  "packet_id": "case_022--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "756b8088f25e8b979a83d74320b975e22d415754500971a7e0a5b499d2290a63",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical change (adding DeliveredAmount to metadata) but does not specify the default vote configuration in the source code or release notes.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Describes the general voting process but does not provide the specific default vote for this amendment.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Identifies the version but does not state the default vote.\"\n    }\n  ],\n  \"decision_summary\": \"The provided facts describe the functionality and version introduction of the fix1623 amendment but do not contain information regarding the default vote setting in the source code or stable release configuration. Without explicit evidence of the default vote being YES or NO, the value cannot be inferred.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Source code default vote configuration for fix1623\",\n    \"Release notes specifying the default vote for fix1623\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 276,
+      "prompt_tokens": 772,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1048
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:29:58Z"
+}

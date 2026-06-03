@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_011",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "B4D44CC3111ADD964E846FC57760C8B50FFCD5A82C86A72756F6B058DDDF96AD",
+    "amendment_name": "fix1201",
+    "decision_surface": "XRPL validator amendment decision surface for fix1201.",
+    "source_facts": [
+      {
+        "claim": "fix1201: Correctly implements a limit on transfer fees to a 100% fee, represented by a maximum TransferRate value of 2000000000. (A 100% fee in this case means you must send 2 units of the token for every 1 unit you want to deliver.) Without the amendment, the effective limit is a TransferRate value of 232-1, for approximately a 329% fee. With this amendment enabled, an AccountSet transaction that attempts to set TransferRate higher than 2000000000 fails with the result code temBAD_TRANSFER_RATE. Any existing TransferRate which was set to a higher value under the previous rules continues to apply at the higher rate.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1201 appears in XRPSCAN with introduced rippled version 0.80.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "febe5f31ae3f8eda65dad99db3f716301fc8bc0609471fbd1b75339c1fc9ef52",
+  "packet_id": "case_011--triage",
+  "packet_version": 1
+}

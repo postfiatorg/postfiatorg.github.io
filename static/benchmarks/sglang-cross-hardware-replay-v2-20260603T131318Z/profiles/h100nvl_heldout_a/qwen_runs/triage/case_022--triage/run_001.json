@@ -1,0 +1,89 @@
+{
+  "completed_at": "2026-06-03T15:00:33Z",
+  "error": "",
+  "event_id": "case_022",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a4413e43312a9d665bcaa356648bcc89aa32490a4420217384b9b0f42206b54f",
+  "output_hash": "7b3100c8979271d4d33e9947f75456ae4f41cca9bbc637dfbbcae3025656d2f5",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment changes ledger metadata, which results in a different ledger hash, requiring careful verification to ensure no consensus or liveness risks are introduced by the hash change.",
+      "Although the amendment is a fix, it involves transaction processing logic for CheckCash, which requires ensuring no edge-case transaction-processing uncertainty exists."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix' (fix1623), and the packet describes it as a fix for a specific issue (adding delivered amount to metadata).",
+      "The packet explicitly states the change 'does not affect the actual amounts delivered', ruling out material token supply, issuer-balance accounting, or escrow math risks.",
+      "The change is localized to CheckCash transactions with flexible amounts and does not involve broad cross-feature canonicalization, serialization, or template enforcement.",
+      "There is no evidence of AMM invariant changes, freeze/authorization bypasses, NFT offer-settlement semantics, or numeric precision issues.",
+      "The amendment has no effect unless the Checks amendment is enabled, limiting its scope.",
+      "There is no explicit no-vote advisory, nor is the fix described as obsolete."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the scope of the fix: adds DeliveredAmount to metadata for specific CheckCash transactions, explicitly stating it does not affect actual amounts delivered and has no effect on fixed-amount checks or other transaction types. This confirms it is a localized fix without material financial or accounting risk."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the amendment voting process, confirming that incompatible servers can become amendment-blocked, which supports the need for a conservative review but does not inherently trigger a HOLD unless specific risks are present."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version introduction, supporting its validity as a known amendment."
+      }
+    ],
+    "decision_summary": "The amendment fix1623 is a localized fix that adds metadata to specific CheckCash transactions without altering financial outcomes or introducing broad systemic risks. It does not trigger any of the HOLD_FOR_CHALLENGE conditions such as material financial, compliance, or consensus risks. It is not a pre-fix incident window requiring DELAY_FOR_FIX. It is not a no-vote advisory or obsolete proposal requiring REJECT. Therefore, it proceeds under the PROCEED route for fix amendments.",
+    "estimated_review_minutes": {
+      "deep_review": 15,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [
+      "Explicit confirmation that the metadata change does not impact ledger hash collision resistance or consensus stability beyond the stated hash difference."
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the change in ledger hash due to metadata addition pose any risk to consensus or liveness?",
+        "Are there any edge cases in CheckCash processing with flexible amounts that could lead to unexpected behavior?"
+      ],
+      "recommended_validator_action": "Proceed with enabling the amendment after verifying that the metadata change does not introduce consensus risks.",
+      "review_questions": [
+        "Is the DeliveredAmount field correctly calculated and added only to the specified CheckCash transactions?",
+        "Does the amendment have any unintended side effects on other transaction types or ledger structures?"
+      ],
+      "title": "Review fix1623 for localized metadata addition in CheckCash transactions"
+    }
+  },
+  "packet_hash": "cb6a915156722c0736b08ce33048bcc93df32173c325a3d7e7127ace37066d4b",
+  "packet_id": "case_022--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "47bc4499ef9a61ab009a32c3154e90b7606bf832f2243aad3bfa1ce5be725359",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment changes ledger metadata, which results in a different ledger hash, requiring careful verification to ensure no consensus or liveness risks are introduced by the hash change.\",\n\"Although the amendment is a fix, it involves transaction processing logic for CheckCash, which requires ensuring no edge-case transaction-processing uncertainty exists.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix' (fix1623), and the packet describes it as a fix for a specific issue (adding delivered amount to metadata).\",\n\"The packet explicitly states the change 'does not affect the actual amounts delivered', ruling out material token supply, issuer-balance accounting, or escrow math risks.\",\n\"The change is localized to CheckCash transactions with flexible amounts and does not involve broad cross-feature canonicalization, serialization, or template enforcement.\",\n\"There is no evidence of AMM invariant changes, freeze/authorization bypasses, NFT offer-settlement semantics, or numeric precision issues.\",\n\"The amendment has no effect unless the Checks amendment is enabled, limiting its scope.\",\n\"There is no explicit no-vote advisory, nor is the fix described as obsolete.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Defines the scope of the fix: adds DeliveredAmount to metadata for specific CheckCash transactions, explicitly stating it does not affect actual amounts delivered and has no effect on fixed-amount checks or other transaction types. This confirms it is a localized fix without material financial or accounting risk.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Provides context on the amendment voting process, confirming that incompatible servers can become amendment-blocked, which supports the need for a conservative review but does not inherently trigger a HOLD unless specific risks are present.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment's existence and version introduction, supporting its validity as a known amendment.\"\n}\n],\n\"decision_summary\": \"The amendment fix1623 is a localized fix that adds metadata to specific CheckCash transactions without altering financial outcomes or introducing broad systemic risks. It does not trigger any of the HOLD_FOR_CHALLENGE conditions such as material financial, compliance, or consensus risks. It is not a pre-fix incident window requiring DELAY_FOR_FIX. It is not a no-vote advisory or obsolete proposal requiring REJECT. Therefore, it proceeds under the PROCEED route for fix amendments.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 15,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n\"missing_evidence\": [\n\"Explicit confirmation that the metadata change does not impact ledger hash collision resistance or consensus stability beyond the stated hash difference.\"\n],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the change in ledger hash due to metadata addition pose any risk to consensus or liveness?\",\n\"Are there any edge cases in CheckCash processing with flexible amounts that could lead to unexpected behavior?\"\n],\n\"recommended_validator_action\": \"Proceed with enabling the amendment after verifying that the metadata change does not introduce consensus risks.\",\n\"review_questions\": [\n\"Is the DeliveredAmount field correctly calculated and added only to the specified CheckCash transactions?\",\n\"Does the amendment have any unintended side effects on other transaction types or ledger structures?\"\n],\n\"title\": \"Review fix1623 for localized metadata addition in CheckCash transactions\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 785,
+      "prompt_tokens": 1237,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 2022
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T15:00:21Z"
+}

@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-03T02:58:16Z",
+  "error": "",
+  "event_id": "case_042",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "c81ad57ee0b354f13147570a20d5c326afaef443c953e06aabd1551befadc0a0",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The claim states that 'All of Ripple's signing utilities have been providing fully-canonical signatures exclusively since at least 2014.' This indicates that the change is backward compatible with the vast majority of existing infrastructure and does not break existing valid transactions, which is a strong indicator for a default YES vote in XRPL governance to improve security without disruption."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The claim explains that the amendment 'protects against transaction malleability on all transactions,' which is a security improvement. Security enhancements that do not break compatibility are typically supported by default."
+      }
+    ],
+    "decision_summary": "The amendment RequireFullyCanonicalSig enforces a stricter signature format to prevent transaction malleability. Fact F1 explicitly states that Ripple's signing utilities have already been producing fully canonical signatures since 2014, implying that the amendment will not break existing compliant clients. Since the change improves security and is compatible with the dominant signing utilities, the source-backed inference for the default vote is YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote in the source text",
+      "Information on non-Ripple signing utilities' compliance status"
+    ],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "fc4a966cf24671ddcca117bddaed6f3a092a0747c995577aeb7ea47eebc6e467",
+  "packet_id": "case_042--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "b3bc504ffbdf911d51f760dfb180e92acd021cf8cc4e7020e604e46db7032e85",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The claim states that 'All of Ripple's signing utilities have been providing fully-canonical signatures exclusively since at least 2014.' This indicates that the change is backward compatible with the vast majority of existing infrastructure and does not break existing valid transactions, which is a strong indicator for a default YES vote in XRPL governance to improve security without disruption.\"\n    },\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The claim explains that the amendment 'protects against transaction malleability on all transactions,' which is a security improvement. Security enhancements that do not break compatibility are typically supported by default.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment RequireFullyCanonicalSig enforces a stricter signature format to prevent transaction malleability. Fact F1 explicitly states that Ripple's signing utilities have already been producing fully canonical signatures since 2014, implying that the amendment will not break existing compliant clients. Since the change improves security and is compatible with the dominant signing utilities, the source-backed inference for the default vote is YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote in the source text\",\n    \"Information on non-Ripple signing utilities' compliance status\"\n  ],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 323,
+      "prompt_tokens": 794,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1117
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:58:10Z"
+}

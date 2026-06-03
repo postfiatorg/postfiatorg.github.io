@@ -1,0 +1,67 @@
+{
+  "completed_at": "2026-06-03T14:05:32Z",
+  "error": "",
+  "event_id": "case_019",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "911f12a9b7b07b62ea6f08a37cbedb2795ccc5a024dcbf32387b8a32aa1d70ae",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Explicitly states the amendment is obsolete because its effects are included in NonFungibleTokensV1_1."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Confirms the status of the amendment is obsolete/removed."
+      }
+    ],
+    "decision_summary": "The packet explicitly identifies the amendment fixNFTokenDirV1 as obsolete, with its effects subsumed by NonFungibleTokensV1_1. According to the task rules, REJECT is the required route for retired or obsolete proposals.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "That the amendment requires active voting or review for activation.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [],
+      "recommended_validator_action": "Reject the amendment as obsolete.",
+      "review_questions": [],
+      "title": "Reject Obsolete Amendment fixNFTokenDirV1"
+    }
+  },
+  "packet_hash": "e12cf645be3a7a0c25d1e3fa38a4eb45f6c4eeafda53929585b12a4d6961b421",
+  "packet_id": "case_019--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "2856075e76d935fd329c0bc33e72111a5d847a094a1aa5fd8fc6fe840fcc69a1",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Explicitly states the amendment is obsolete because its effects are included in NonFungibleTokensV1_1.\"\n},\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"Confirms the status of the amendment is obsolete/removed.\"\n}\n],\n\"decision_summary\": \"The packet explicitly identifies the amendment fixNFTokenDirV1 as obsolete, with its effects subsumed by NonFungibleTokensV1_1. According to the task rules, REJECT is the required route for retired or obsolete proposals.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"That the amendment requires active voting or review for activation.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [],\n\"recommended_validator_action\": \"Reject the amendment as obsolete.\",\n\"review_questions\": [],\n\"title\": \"Reject Obsolete Amendment fixNFTokenDirV1\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 292,
+      "prompt_tokens": 1280,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1572
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:05:27Z"
+}

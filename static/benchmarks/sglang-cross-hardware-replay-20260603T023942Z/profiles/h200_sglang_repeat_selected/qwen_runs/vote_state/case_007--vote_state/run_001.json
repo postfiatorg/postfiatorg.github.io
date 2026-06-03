@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-03T02:52:05Z",
+  "error": "",
+  "event_id": "case_007",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "e74a1dd67a1b058d400eee2405eb4f56341663a8fe0ce31e2164d835516e24f3",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly states the amendment status is 'obsolete/removed: OBSOLETE', which directly maps to the VETOED_OR_RETIRED classification rule for obsolete or retired amendments."
+      },
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Confirms the amendment is not enabled (no enabled ledger entry) and currently has low support (12/35), consistent with a retired or inactive state rather than an active majority."
+      }
+    ],
+    "decision_summary": "The amendment 'Batch' is classified as VETOED_OR_RETIRED because Fact F5 explicitly labels its status as OBSOLETE. Fact F4 supports this by showing it is not enabled and lacks majority support, consistent with a retired amendment that is no longer being actively voted on for activation.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "5c12b2e30a5ae7b8646f65167d3e29acb65bd98edb20137cd0345f5477292ab3",
+  "packet_id": "case_007--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "cc7487816a11db9d9dde9116f1113ca1ecb1678721ca2687767b60f6da85e8d3",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly states the amendment status is 'obsolete/removed: OBSOLETE', which directly maps to the VETOED_OR_RETIRED classification rule for obsolete or retired amendments.\"\n    },\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Confirms the amendment is not enabled (no enabled ledger entry) and currently has low support (12/35), consistent with a retired or inactive state rather than an active majority.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment 'Batch' is classified as VETOED_OR_RETIRED because Fact F5 explicitly labels its status as OBSOLETE. Fact F4 supports this by showing it is not enabled and lacks majority support, consistent with a retired amendment that is no longer being actively voted on for activation.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 242,
+      "prompt_tokens": 770,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1012
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:52:00Z"
+}

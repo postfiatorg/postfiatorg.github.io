@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_013",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "677E401A423E3708363A36BA8B3A7D019D21AC5ABD00387BDBEA6BDE4C91247E",
+    "amendment_name": "PermissionedDEX",
+    "decision_surface": "XRPL validator amendment decision surface for PermissionedDEX.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "PermissionedDEX: Creates Permissioned DEXes, controlled environments for trading within the XRP Ledger's decentralized exchange (DEX). Trading in a permissioned DEX works like trading in the open DEX, except that a permissioned domain controls who can place and accept offers. Specification: XLS-81",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "PermissionedDEX appears in XRPSCAN with introduced rippled version 2.5.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "5e6e13fdc3bd1cf6da38b47beb69af8ed863d4a07cd17c4bdbabd560197ec5cd",
+  "packet_id": "case_013--vote_outcome",
+  "packet_version": 1
+}

@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_005",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "F64E1EABBE79D55B3BB82020516CEC2C582A98A6BFE20FBE9BB6A0D233418064",
+    "amendment_name": "DepositAuth",
+    "decision_surface": "XRPL validator amendment decision surface for DepositAuth.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "DepositAuth: Adds a new account flag, DepositAuth, which lets an account strictly reject any incoming money from transactions sent by other accounts. Businesses can use this flag to comply with strict regulations that require due diligence before receiving money from any source. When an account enables this flag, Payment transactions fail if the account is the destination, regardless of whether the Payment would have delivered XRP or a token. EscrowFinish and PaymentChannelClaim transactions fail if the account is the destination unless the destination account itself sends those transactions. If the Checks amendment is enabled, the account can receive XRP or tokens by sending CheckCash transactions. As an exception, accounts with DepositAuth enabled can receive Payment transactions for small amounts of XRP (equal or less than the minimum account reserve) if their current XRP balance is below the account reserve. Also fixes a bug in the EscrowCreate and PaymentChannelCreate transactions where they mistakenly enforced the Disallow XRP flag, which is meant to be a non-binding advisory flag. (By not enforcing Disallow XRP in the ledger itself an account can still receive the necessary ",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "DepositAuth appears in XRPSCAN with introduced rippled version 0.90.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "ba29cf87ec1e7aa72a4e344e1c2531bf99b12f392c8f47a7ab82747b1585bf12",
+  "packet_id": "case_005--default_vote",
+  "packet_version": 1
+}

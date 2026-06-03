@@ -1,0 +1,61 @@
+{
+  "completed_at": "2026-06-03T14:22:43Z",
+  "error": "",
+  "event_id": "case_003",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "d9b5cede4f5316a46cd6c3794b71e50790c3ddee4d7458a748ef404914260143",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes the existence of a severe security vulnerability (unauthorized inner transaction execution) that necessitates a negative governance response."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Indicates that validators were explicitly advised to vote No, which aligns with the definition of a vetoed state where advisory guidance opposes enablement."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms that the software implementation (rippled 3.1.1) disabled the amendment, providing technical evidence that the amendment is not active or enabled."
+      }
+    ],
+    "decision_summary": "The amendment is classified as VETOED_OR_RETIRED because source facts indicate a severe bug led to explicit advice against support (vote No) and the amendment was disabled in the software release. This matches the criteria for 'source-backed no advisory' and 'retired' status.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit confirmation of final ledger vote counts",
+      "Official retirement announcement from the foundation"
+    ],
+    "state_confidence": 0.95,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "cc2ce98cd76e97b0ded0d02e212c7c724ccbdb42990ba51fd7212459f11b5c18",
+  "packet_id": "case_003--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "74893d739bfb7f1e0c5314fc03e692a9799aba04e3d261b660422baa8bc0d605",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Establishes the existence of a severe security vulnerability (unauthorized inner transaction execution) that necessitates a negative governance response.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Indicates that validators were explicitly advised to vote No, which aligns with the definition of a vetoed state where advisory guidance opposes enablement.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms that the software implementation (rippled 3.1.1) disabled the amendment, providing technical evidence that the amendment is not active or enabled.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment is classified as VETOED_OR_RETIRED because source facts indicate a severe bug led to explicit advice against support (vote No) and the amendment was disabled in the software release. This matches the criteria for 'source-backed no advisory' and 'retired' status.\",\n  \"missing_evidence\": [\n    \"Explicit confirmation of final ledger vote counts\",\n    \"Official retirement announcement from the foundation\"\n  ],\n  \"state_confidence\": 0.95,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 300,
+      "prompt_tokens": 732,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1032
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:22:39Z"
+}

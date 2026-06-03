@@ -1,0 +1,36 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_033",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "BE2D87DF21B690ED1497B593FDC013CC04276302380B1BD50A033DCF8DEFB2EB",
+    "amendment_name": "MPTokensV2",
+    "decision_surface": "XRPL validator amendment decision surface for MPTokensV2.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "MPTokensV2: Extends the XRPL's Decentralized Exchange to natively support Multi-Purpose Tokens (MPTs) as a tradeable asset class. MPTs can be paired with XRP, Trust Line tokens, or other MPTs across existing DEX transactions such as OfferCreate, Payment, AMM, and Checks. For more details, see XLS-82: MPT DEX Integration.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "c3b7837c213a0a781de1429c6ef224125a7555ce05bc48f16457642e0e770d89",
+  "packet_id": "case_033--default_vote",
+  "packet_version": 1
+}

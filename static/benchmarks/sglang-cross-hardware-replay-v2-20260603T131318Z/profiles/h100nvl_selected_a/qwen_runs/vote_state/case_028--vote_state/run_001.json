@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-03T13:54:41Z",
+  "error": "",
+  "event_id": "case_028",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "c663d563f741aaf8afdc4d0220dd0a3fd189cddad7960e86dc090451b8051fca",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Provides the current quantitative voting state: 5 out of 35 validations support the amendment, which is below the required threshold of 28. It also explicitly states there is no enabled ledger entry, ruling out the ENABLED state."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the rule that a sustained supermajority is required for activation, providing the context to interpret the support count in F4 as insufficient for enablement."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the XChainBridge amendment has 5 validations out of 35, which is below the threshold of 28. Furthermore, there is no enabled ledger entry. Since the support is below the threshold and the amendment is not enabled, the state is classified as NO_MAJORITY.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Historical voting data to determine if a majority was previously held and lost (MAJORITY_LOST).",
+      "Information regarding whether the amendment has been vetoed or retired (VETOED_OR_RETIRED)."
+    ],
+    "state_confidence": 0.95,
+    "vote_state": "NO_MAJORITY"
+  },
+  "packet_hash": "22f05ced8aaeb9391e8a2c32eb5205a75960bfc50c6165fbab62c5fdad62bf8b",
+  "packet_id": "case_028--vote_state",
+  "parsed_label": "NO_MAJORITY",
+  "prompt_hash": "9e968dcf28737fc36ab1796501245da62e12adc06a13061b87ce4ba4819d51f5",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Provides the current quantitative voting state: 5 out of 35 validations support the amendment, which is below the required threshold of 28. It also explicitly states there is no enabled ledger entry, ruling out the ENABLED state.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Establishes the rule that a sustained supermajority is required for activation, providing the context to interpret the support count in F4 as insufficient for enablement.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the XChainBridge amendment has 5 validations out of 35, which is below the threshold of 28. Furthermore, there is no enabled ledger entry. Since the support is below the threshold and the amendment is not enabled, the state is classified as NO_MAJORITY.\",\n  \"missing_evidence\": [\n    \"Historical voting data to determine if a majority was previously held and lost (MAJORITY_LOST).\",\n    \"Information regarding whether the amendment has been vetoed or retired (VETOED_OR_RETIRED).\"\n  ],\n  \"state_confidence\": 0.95,\n  \"vote_state\": \"NO_MAJORITY\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 300,
+      "prompt_tokens": 732,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1032
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:54:36Z"
+}

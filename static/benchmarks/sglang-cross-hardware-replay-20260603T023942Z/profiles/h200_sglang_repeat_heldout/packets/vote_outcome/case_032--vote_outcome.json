@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_032",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "2CD5286D8D687E98B41102BDD797198E81EA41DF7BD104E6561FEB104EFF2561",
+    "amendment_name": "fixTakerDryOfferRemoval",
+    "decision_surface": "XRPL validator amendment decision surface for fixTakerDryOfferRemoval.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixTakerDryOfferRemoval: Fixes a bug in auto-bridging that can leave a dry offer in the XRP Ledger. A dry offer is an offer that, if crossed, cannot yield any funds. Without this fix, the dry offer remains on the ledger and counts toward its owner's reserve requirement without providing any benefit to the owner. Another offer crossing of the right type and quality can remove the dry offer. However, if the required offer crossing type and quality are rare, it may take a while for the dry offer to be removed. With this amendment enabled, the XRP Ledger removes these dry offers when they're matched in auto-bridging.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixTakerDryOfferRemoval appears in XRPSCAN with introduced rippled version 1.2.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "e331578813a52dce6b665d1058a1c7081bc71e5c57e73843fdae2ccbb51051d4",
+  "packet_id": "case_032--vote_outcome",
+  "packet_version": 1
+}

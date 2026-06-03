@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_006",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "3CBC5C4E630A1B82380295CDA84B32B49DD066602E74E39B85EF64137FA65194",
+    "amendment_name": "DepositPreauth",
+    "decision_surface": "XRPL validator amendment decision surface for DepositPreauth.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "DepositPreauth: Provides users of deposit authorization with a way to preauthorize specific senders so those senders are allowed to send payments directly. Adds a new transaction type, DepositPreauth for adding or removing preauthorization, and a DepositPreauth ledger object type for tracking preauthorizations from one account to another. Adds a JSON-RPC command, deposit_authorized, to query whether an account is authorized to send payments directly to another. Changes the behavior of cross-currency Payments from an account to itself when that account requires deposit authorization. Without this amendment, those payments always fail with the code tecNO_PERMISSION. With this amendment, those payments succeed as they would with Deposit Authorization disabled. Also changes the OfferCreate transaction to return tecEXPIRED when trying to create an Offer whose expiration time is in the past. Without this amendment, an OfferCreate whose expiration time is in the past returns tesSUCCESS but does not create or execute an Offer.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "DepositPreauth appears in XRPSCAN with introduced rippled version 1.1.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "25612eb9e2d7723ba9bd5035577a990e9ad37098e00c3fed77102a5f0dd9bb22",
+  "packet_id": "case_006--vote_outcome",
+  "packet_version": 1
+}

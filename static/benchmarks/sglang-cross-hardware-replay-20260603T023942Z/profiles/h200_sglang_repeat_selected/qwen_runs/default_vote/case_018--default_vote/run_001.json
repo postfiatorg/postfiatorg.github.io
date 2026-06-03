@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T02:59:51Z",
+  "error": "",
+  "event_id": "case_018",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "4fff13a4657f29a4df73eec7181e5317d94fd72bbfd9a769751c2908533cec78",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The source description explicitly states that the amendment was disabled in v3.1.1 due to a bug and will be replaced by BatchV1_1. This indicates the amendment is deprecated and not intended for activation in the latest stable release, implying a default vote against it."
+      }
+    ],
+    "decision_summary": "The amendment fixBatchInnerSigs is described as having a bug that caused it to be disabled in v3.1.1 and is slated for replacement. Therefore, the source-backed default vote for the latest stable release is NO, as the amendment is effectively withdrawn or superseded.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "e345208b97e3bc78241e19050063633d83749786c1cc324ffda7cf05cdb31985",
+  "packet_id": "case_018--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "81dc91c62e6d8364cb711775834c2a235007bb5b02f291407ac3bebe4e67c0bd",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The source description explicitly states that the amendment was disabled in v3.1.1 due to a bug and will be replaced by BatchV1_1. This indicates the amendment is deprecated and not intended for activation in the latest stable release, implying a default vote against it.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixBatchInnerSigs is described as having a bug that caused it to be disabled in v3.1.1 and is slated for replacement. Therefore, the source-backed default vote for the latest stable release is NO, as the amendment is effectively withdrawn or superseded.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 193,
+      "prompt_tokens": 667,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 860
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:59:38Z"
+}

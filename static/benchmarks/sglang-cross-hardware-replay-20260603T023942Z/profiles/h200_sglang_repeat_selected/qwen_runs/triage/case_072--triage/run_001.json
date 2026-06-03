@@ -1,0 +1,88 @@
+{
+  "completed_at": "2026-06-03T03:18:05Z",
+  "error": "",
+  "event_id": "case_072",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "34c809e7e5e20bef11e5c6fc99975b871165ff9bb7f6ae21db640ea66b458382",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces new AccountSet flags that allow an account to block incoming objects, which is a permissioning change.",
+      "Blocking incoming objects can prevent account deletion if objects are left on the ledger, impacting account lifecycle management."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment provides account-local opt-out controls that only let an account block unwanted incoming objects.",
+      "The facts do not show broader third-party asset control or systemic risk beyond the account's own ability to reject incoming items.",
+      "The amendment does not involve mutable NFT URI or metadata controls, which are considered asset-control semantics.",
+      "The amendment does not involve AMM invariants, consensus/liveness risks, or material token supply changes.",
+      "According to the task rule, account-local opt-out controls may PROCEED unless facts show broader third-party asset control or systemic risk."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the functionality as account-local opt-out controls for blocking incoming Checks, Payment Channels, NFTokenOffers, and trust lines, which aligns with the exception for account-local controls."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms the standard amendment voting process, but does not indicate any specific risk requiring HOLD or DELAY for this specific amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Provides version context but does not introduce new risk factors."
+      }
+    ],
+    "decision_summary": "The DisallowIncoming amendment allows accounts to block incoming objects, which is an account-local opt-out control. The facts do not indicate broader third-party asset control or systemic risk. Therefore, it proceeds under the exception for account-local controls.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 0,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [
+      "Evidence of broader third-party asset control or systemic risk."
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.9,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the amendment introduce any third-party asset control mechanisms?",
+        "Does the amendment impact consensus or liveness?"
+      ],
+      "recommended_validator_action": "PROCEED",
+      "review_questions": [
+        "Are the new AccountSet flags clearly documented?",
+        "Is the error code tecNO_PERMISSION appropriate for blocked transactions?"
+      ],
+      "title": "DisallowIncoming Amendment Triage"
+    }
+  },
+  "packet_hash": "0b5bbbfc0ece11a5630e60a907e2a36122ec2312d55829cbf9081164840bb6b7",
+  "packet_id": "case_072--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "cddb02c2f9c67767a8e51b4979f6a5412efcf32dd9e8fe154bd4bf570455e792",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces new AccountSet flags that allow an account to block incoming objects, which is a permissioning change.\",\n\"Blocking incoming objects can prevent account deletion if objects are left on the ledger, impacting account lifecycle management.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment provides account-local opt-out controls that only let an account block unwanted incoming objects.\",\n\"The facts do not show broader third-party asset control or systemic risk beyond the account's own ability to reject incoming items.\",\n\"The amendment does not involve mutable NFT URI or metadata controls, which are considered asset-control semantics.\",\n\"The amendment does not involve AMM invariants, consensus/liveness risks, or material token supply changes.\",\n\"According to the task rule, account-local opt-out controls may PROCEED unless facts show broader third-party asset control or systemic risk.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the functionality as account-local opt-out controls for blocking incoming Checks, Payment Channels, NFTokenOffers, and trust lines, which aligns with the exception for account-local controls.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Confirms the standard amendment voting process, but does not indicate any specific risk requiring HOLD or DELAY for this specific amendment.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Provides version context but does not introduce new risk factors.\"\n}\n],\n\"decision_summary\": \"The DisallowIncoming amendment allows accounts to block incoming objects, which is an account-local opt-out control. The facts do not indicate broader third-party asset control or systemic risk. Therefore, it proceeds under the exception for account-local controls.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 0,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n\"missing_evidence\": [\n\"Evidence of broader third-party asset control or systemic risk.\"\n],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.9,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the amendment introduce any third-party asset control mechanisms?\",\n\"Does the amendment impact consensus or liveness?\"\n],\n\"recommended_validator_action\": \"PROCEED\",\n\"review_questions\": [\n\"Are the new AccountSet flags clearly documented?\",\n\"Is the error code tecNO_PERMISSION appropriate for blocked transactions?\"\n],\n\"title\": \"DisallowIncoming Amendment Triage\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 568,
+      "prompt_tokens": 1225,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1793
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:17:58Z"
+}

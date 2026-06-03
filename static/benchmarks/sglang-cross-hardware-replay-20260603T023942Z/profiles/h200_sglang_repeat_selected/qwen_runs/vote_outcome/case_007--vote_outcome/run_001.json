@@ -1,0 +1,63 @@
+{
+  "completed_at": "2026-06-03T02:40:49Z",
+  "error": "",
+  "event_id": "case_007",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "92d454f9452503f45a35952e2563db26c9dcb6c00a8f296578c00a0b71dac43d",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment was explicitly disabled in rippled v3.1.1 due to a bug, indicating it is unsafe for production use.",
+      "The official status of the amendment is marked as OBSOLETE/removed, meaning it is no longer supported or intended for activation.",
+      "The functionality is scheduled to be replaced by a future release (BatchV1_1), making the current version redundant and potentially conflicting."
+    ],
+    "arguments_for_yes": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States that the amendment was disabled due to a bug and will be replaced, providing direct evidence against enabling it."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Confirms the official status of the amendment is OBSOLETE, indicating it should not be voted for or enabled."
+      }
+    ],
+    "decision_summary": "The Batch amendment is obsolete and was disabled due to a bug. It is superseded by a future version. Therefore, the recommendation is to vote NO.",
+    "forbidden_stronger_claim": "The amendment has already been permanently removed from the ledger.",
+    "missing_evidence": [
+      "Specific details of the bug that caused the disablement.",
+      "Timeline for the release of BatchV1_1."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "307cab756abb6a27b26fac7e92a64d4dab83e2fae563a9dd59953369d1ef576f",
+  "packet_id": "case_007--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "016d379c767e5eb98257c9fd5b6c9fd28f05668b2388454b65e922a39b065d84",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment was explicitly disabled in rippled v3.1.1 due to a bug, indicating it is unsafe for production use.\",\n    \"The official status of the amendment is marked as OBSOLETE/removed, meaning it is no longer supported or intended for activation.\",\n    \"The functionality is scheduled to be replaced by a future release (BatchV1_1), making the current version redundant and potentially conflicting.\"\n  ],\n  \"arguments_for_yes\": [],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"States that the amendment was disabled due to a bug and will be replaced, providing direct evidence against enabling it.\"\n    },\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Confirms the official status of the amendment is OBSOLETE, indicating it should not be voted for or enabled.\"\n    }\n  ],\n  \"decision_summary\": \"The Batch amendment is obsolete and was disabled due to a bug. It is superseded by a future version. Therefore, the recommendation is to vote NO.\",\n  \"forbidden_stronger_claim\": \"The amendment has already been permanently removed from the ledger.\",\n  \"missing_evidence\": [\n    \"Specific details of the bug that caused the disablement.\",\n    \"Timeline for the release of BatchV1_1.\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 342,
+      "prompt_tokens": 715,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1057
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:40:39Z"
+}

@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_048",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "83FD6594FF83C1D105BD2B41D7E242D86ECB4A8220BD9AF4DA35CB0F69E39B2A",
+    "amendment_name": "fixFrozenLPTokenTransfer",
+    "decision_surface": "XRPL validator amendment decision surface for fixFrozenLPTokenTransfer.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixFrozenLPTokenTransfer: This amendment fixes a loophole that enabled blacklisted accounts to transfer frozen LP tokens through alternative mechanisms, such as such as payments, checks, offers, or NFTs. With this amendment enabled, if an LP token is associated with a liquidity pool that contains at least one frozen asset, the LP token is also frozen. This means: 1. The holder can't send the frozen LP token to other accounts. 2. The holder can receive frozen LP tokens, but can't send them out (similar to frozen trust lines).",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixFrozenLPTokenTransfer appears in XRPSCAN with introduced rippled version 2.4.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "c2cfc30e3f94f92e9896139f6cb54fe1938b6c41374f8d548e5c85da9a17451e",
+  "packet_id": "case_048--default_vote",
+  "packet_version": 1
+}

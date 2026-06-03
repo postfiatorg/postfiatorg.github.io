@@ -1,0 +1,60 @@
+{
+  "completed_at": "2026-06-03T14:54:21Z",
+  "error": "",
+  "event_id": "case_017",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a4413e43312a9d665bcaa356648bcc89aa32490a4420217384b9b0f42206b54f",
+  "output_hash": "7a646924546733d6f355444ab5250173881560f549dbae5471847541886dded7",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical functionality of fix1523 (adding destination tracking to escrows) but does not specify the default vote configuration in the source code."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general voting process and consequences of incompatibility but does not specify the default vote for this specific amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the version where fix1523 was introduced but does not contain information about the default vote setting."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical changes of fix1523, the general amendment process, and the version introduction. None of the facts explicitly state the default vote (YES or NO) configured in the source code for this amendment. Without explicit evidence of the default vote setting, the value cannot be inferred.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote (YES/NO) for fix1523 in the source code or documentation."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "a13969f89dcabe7a913c51e6a75bbbd1f92eca0ceafb00733119aa1b7e579bdc",
+  "packet_id": "case_017--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "768a413fe6b8a66e8a2943b042dbd576fbba11fe3d7abc1d597d997b60745ca3",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical functionality of fix1523 (adding destination tracking to escrows) but does not specify the default vote configuration in the source code.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Describes the general voting process and consequences of incompatibility but does not specify the default vote for this specific amendment.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Identifies the version where fix1523 was introduced but does not contain information about the default vote setting.\"\n    }\n  ],\n  \"decision_summary\": \"The provided facts describe the technical changes of fix1523, the general amendment process, and the version introduction. None of the facts explicitly state the default vote (YES or NO) configured in the source code for this amendment. Without explicit evidence of the default vote setting, the value cannot be inferred.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote (YES/NO) for fix1523 in the source code or documentation.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 299,
+      "prompt_tokens": 729,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1028
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:54:16Z"
+}

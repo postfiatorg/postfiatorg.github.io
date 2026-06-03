@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_021",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "FBD513F1B893AC765B78F250E6FFA6A11B573209D1842ADC787C850696741288",
+    "amendment_name": "fix1578",
+    "decision_surface": "XRPL validator amendment decision surface for fix1578.",
+    "source_facts": [
+      {
+        "claim": "fix1578: Changes the result codes returned by two transaction types: - Changes the OfferCreate transaction to return a new result code, tecKILLED, if the offer used the tfFillOrKill flag and was killed. Without this amendment, the offer is killed but the transaction result is tesSUCCESS. - Changes the TrustSet transaction to fail with tecNO_PERMISSION if it tries to enable the No Ripple flag but cannot because the trust line has a negative balance. Without this amendment, the transaction does not enable the No Ripple flag, but the transaction result is tesSUCCESS nonetheless.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1578 appears in XRPSCAN with introduced rippled version 1.2.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "1efc70f887618e4f65dddf1b0adbfd2a08526c706deb0fa23837e075809fcc80",
+  "packet_id": "case_021--triage",
+  "packet_version": 1
+}

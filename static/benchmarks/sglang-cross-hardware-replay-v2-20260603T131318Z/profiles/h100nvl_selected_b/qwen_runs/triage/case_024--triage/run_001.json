@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-03T14:35:18Z",
+  "error": "",
+  "event_id": "case_024",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "58266446e9b47495d8329e255f8571fe9e82b45fd5cf0c1aa260e4f42087bacc",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "The packet explicitly states that the status of the OwnerPaysFee amendment is 'obsolete/removed' and 'OBSOLETE'. The task rule mandates using REJECT for retired or obsolete proposals."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Confirms the amendment was removed in v0.80.0 and was never enabled, supporting the classification as obsolete."
+      }
+    ],
+    "decision_summary": "The amendment OwnerPaysFee is explicitly marked as obsolete and removed in the provided facts. According to the task rules, REJECT must be used for retired or obsolete proposals. Therefore, the route is REJECT.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment is safe to proceed with.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any evidence that this amendment has been reintroduced or is active despite being marked obsolete?"
+      ],
+      "recommended_validator_action": "Reject the amendment as it is obsolete and removed.",
+      "review_questions": [
+        "Does the packet contain any contradictory information suggesting the amendment is active?"
+      ],
+      "title": "Reject Obsolete Amendment OwnerPaysFee"
+    }
+  },
+  "packet_hash": "5656a749f257ba72dc9a34935edfb90bf3970fd75c8db9563cf7e6b78d32ecad",
+  "packet_id": "case_024--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "4e735d77382c1aaba0ebe41c1f2bdd4f022d62ab87b669bd42c13128c9a389c2",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"The packet explicitly states that the status of the OwnerPaysFee amendment is 'obsolete/removed' and 'OBSOLETE'. The task rule mandates using REJECT for retired or obsolete proposals.\"\n},\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Confirms the amendment was removed in v0.80.0 and was never enabled, supporting the classification as obsolete.\"\n}\n],\n\"decision_summary\": \"The amendment OwnerPaysFee is explicitly marked as obsolete and removed in the provided facts. According to the task rules, REJECT must be used for retired or obsolete proposals. Therefore, the route is REJECT.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"The amendment is safe to proceed with.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Is there any evidence that this amendment has been reintroduced or is active despite being marked obsolete?\"\n],\n\"recommended_validator_action\": \"Reject the amendment as it is obsolete and removed.\",\n\"review_questions\": [\n\"Does the packet contain any contradictory information suggesting the amendment is active?\"\n],\n\"title\": \"Reject Obsolete Amendment OwnerPaysFee\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 354,
+      "prompt_tokens": 1198,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1552
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:35:13Z"
+}

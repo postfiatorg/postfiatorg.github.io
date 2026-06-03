@@ -1,0 +1,88 @@
+{
+  "completed_at": "2026-06-03T14:03:52Z",
+  "error": "",
+  "event_id": "case_008",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "439236516c9101e891da8905415fb236c4150de782afced6eac0138621bdc265",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces 'Clawback', a mechanism allowing issuers to recover tokens from accounts, which constitutes a material change to asset-control semantics.",
+      "Clawback impacts compliance and permissioning by enabling issuers to reverse transactions for regulatory reasons, such as sanctions enforcement.",
+      "This feature alters the fundamental trust model of the ledger by introducing a counterparty risk where assets are no longer strictly under the sole control of the holder once issued."
+    ],
+    "arguments_for_proceeding": [
+      "The feature is disabled by default, requiring an explicit AccountSet transaction to enable, which limits immediate systemic exposure.",
+      "The amendment addresses a specific regulatory need for issuers, providing a clear use case for compliance."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the core functionality of Clawback as allowing issuers to recover tokens for regulatory purposes, directly implicating asset-control semantics and compliance."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for conservative review of significant semantic changes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the technical introduction of the feature in rippled version 1.12.0, validating the existence of the code change."
+      }
+    ],
+    "decision_summary": "The Clawback amendment introduces material asset-control semantics by allowing issuers to reverse transactions and recover funds. This represents a significant shift in the ledger's trust model and compliance landscape. According to the task rules, material asset-control semantics and compliance features require explicit review via HOLD_FOR_CHALLENGE.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on the cryptographic or ledger-level implementation constraints of the clawback mechanism.",
+      "Potential edge cases regarding double-spend protection during clawback execution."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the default-disabled state sufficiently mitigate the risk to warrant proceeding without challenge?",
+        "Are there sufficient safeguards to prevent abuse of the clawback mechanism by issuers?"
+      ],
+      "recommended_validator_action": "Review the asset-control implications and compliance requirements of the Clawback feature before voting.",
+      "review_questions": [
+        "How does Clawback interact with existing escrow and payment channels?",
+        "What are the auditability and transparency guarantees for clawback transactions?",
+        "Does the implementation prevent race conditions or double-spending during the recovery process?"
+      ],
+      "title": "Review of Clawback Amendment for Asset-Control Semantics"
+    }
+  },
+  "packet_hash": "b770126b43c7099e038a7ecb553ba555e4628291c0432594fa9058f0729de8a2",
+  "packet_id": "case_008--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "251a6628e9584c55bf2b79e4cdedd77701eea389b750406a189098de5d6e749b",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces 'Clawback', a mechanism allowing issuers to recover tokens from accounts, which constitutes a material change to asset-control semantics.\",\n\"Clawback impacts compliance and permissioning by enabling issuers to reverse transactions for regulatory reasons, such as sanctions enforcement.\",\n\"This feature alters the fundamental trust model of the ledger by introducing a counterparty risk where assets are no longer strictly under the sole control of the holder once issued.\"\n],\n\"arguments_for_proceeding\": [\n\"The feature is disabled by default, requiring an explicit AccountSet transaction to enable, which limits immediate systemic exposure.\",\n\"The amendment addresses a specific regulatory need for issuers, providing a clear use case for compliance.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Defines the core functionality of Clawback as allowing issuers to recover tokens for regulatory purposes, directly implicating asset-control semantics and compliance.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for conservative review of significant semantic changes.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the technical introduction of the feature in rippled version 1.12.0, validating the existence of the code change.\"\n}\n],\n\"decision_summary\": \"The Clawback amendment introduces material asset-control semantics by allowing issuers to reverse transactions and recover funds. This represents a significant shift in the ledger's trust model and compliance landscape. According to the task rules, material asset-control semantics and compliance features require explicit review via HOLD_FOR_CHALLENGE.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 45,\n\"packet_verification\": 10,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Specific details on the cryptographic or ledger-level implementation constraints of the clawback mechanism.\",\n\"Potential edge cases regarding double-spend protection during clawback execution.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the default-disabled state sufficiently mitigate the risk to warrant proceeding without challenge?\",\n\"Are there sufficient safeguards to prevent abuse of the clawback mechanism by issuers?\"\n],\n\"recommended_validator_action\": \"Review the asset-control implications and compliance requirements of the Clawback feature before voting.\",\n\"review_questions\": [\n\"How does Clawback interact with existing escrow and payment channels?\",\n\"What are the auditability and transparency guarantees for clawback transactions?\",\n\"Does the implementation prevent race conditions or double-spending during the recovery process?\"\n],\n\"title\": \"Review of Clawback Amendment for Asset-Control Semantics\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 630,
+      "prompt_tokens": 1154,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1784
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:03:43Z"
+}

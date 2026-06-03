@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_007",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "DC9CA96AEA1DCF83E527D1AFC916EFAF5D27388ECA4060A88817C1238CAEE0BF",
+    "amendment_name": "EnforceInvariants",
+    "decision_surface": "XRPL validator amendment decision surface for EnforceInvariants.",
+    "source_facts": [
+      {
+        "claim": "EnforceInvariants: Adds sanity checks to transaction processing to ensure that certain conditions are always met. This provides an extra, independent layer of protection against bugs in transaction processing that could otherwise cause exploits and vulnerabilities in the XRP Ledger. Future versions of rippled may add more invariants without additional amendments. Introduces two new transaction error codes, tecINVARIANT_FAILED and tefINVARIANT_FAILED. Changes transaction processing to add the new checks. Examples of invariant checks: - The total amount of XRP destroyed by a transaction must match the transaction cost exactly. - XRP cannot be created. - AccountRoot objects in the ledger cannot be deleted unless DeletableAccounts is enabled. (See also: Deleting Accounts.) - An entry in the ledger cannot change its type. (The LedgerEntryType field is immutable.) - There cannot be a trust line for XRP.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "EnforceInvariants appears in XRPSCAN with introduced rippled version 0.70.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "9efdfae79209eb875c30a1d2a911c3340f6fe79dfd0e5adbb3955a61dfe4dd17",
+  "packet_id": "case_007--triage",
+  "packet_version": 1
+}

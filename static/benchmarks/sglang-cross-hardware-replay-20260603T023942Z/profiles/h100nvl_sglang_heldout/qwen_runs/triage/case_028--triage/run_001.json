@@ -1,0 +1,77 @@
+{
+  "completed_at": "2026-06-03T03:36:51Z",
+  "error": "",
+  "event_id": "case_028",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "afe963d0dd7a44565c221ac065c4691b24c958e29a4652e1263c752a4ab935b9",
+  "output_hash": "c73c22af8bf3f5dc1f67c791748c64136e96ab7479d04e6eb11320c905a9005c",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix'.",
+      "Fact F1 explicitly states the amendment fixes a bug in unused code.",
+      "Fact F1 states there is no known impact on transaction processing.",
+      "The packet does not describe any material risk patterns such as consensus/liveness risk, AMM invariant changes, NFT semantics, or asset-control issues.",
+      "The fix is localized to unused code, avoiding the need for HOLD_FOR_CHALLENGE."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies the amendment as a fix for unused code with no known impact on transaction processing, satisfying the criteria for PROCEED under the 'fix' rule."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment identity and version context, supporting the classification as a standard fix."
+      }
+    ],
+    "decision_summary": "The amendment 'fixQualityUpperBound' is a fix for a bug in unused code with no known impact on transaction processing. It does not exhibit any of the material risk patterns that would require HOLD_FOR_CHALLENGE or DELAY_FOR_FIX. Therefore, it proceeds.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment has zero risk or is critical infrastructure.",
+    "missing_evidence": [],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the code change affect any active transaction paths despite being labeled 'unused'?"
+      ],
+      "recommended_validator_action": "Approve the amendment as a low-risk fix.",
+      "review_questions": [
+        "Is the code truly unused in all current and planned network states?"
+      ],
+      "title": "Review fixQualityUpperBound"
+    }
+  },
+  "packet_hash": "54ab85815c98cf4536cff5294987806bd1313ddcf5dbc04eabb6541dc3ad5176",
+  "packet_id": "case_028--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "70dda107b865879430bc02b813527519124d9b86100a7be9393cac0d25dbc46a",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix'.\",\n\"Fact F1 explicitly states the amendment fixes a bug in unused code.\",\n\"Fact F1 states there is no known impact on transaction processing.\",\n\"The packet does not describe any material risk patterns such as consensus/liveness risk, AMM invariant changes, NFT semantics, or asset-control issues.\",\n\"The fix is localized to unused code, avoiding the need for HOLD_FOR_CHALLENGE.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Identifies the amendment as a fix for unused code with no known impact on transaction processing, satisfying the criteria for PROCEED under the 'fix' rule.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment identity and version context, supporting the classification as a standard fix.\"\n}\n],\n\"decision_summary\": \"The amendment 'fixQualityUpperBound' is a fix for a bug in unused code with no known impact on transaction processing. It does not exhibit any of the material risk patterns that would require HOLD_FOR_CHALLENGE or DELAY_FOR_FIX. Therefore, it proceeds.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"The amendment has zero risk or is critical infrastructure.\",\n\"missing_evidence\": [],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the code change affect any active transaction paths despite being labeled 'unused'?\"\n],\n\"recommended_validator_action\": \"Approve the amendment as a low-risk fix.\",\n\"review_questions\": [\n\"Is the code truly unused in all current and planned network states?\"\n],\n\"title\": \"Review fixQualityUpperBound\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 437,
+      "prompt_tokens": 1087,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1524
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:36:45Z"
+}

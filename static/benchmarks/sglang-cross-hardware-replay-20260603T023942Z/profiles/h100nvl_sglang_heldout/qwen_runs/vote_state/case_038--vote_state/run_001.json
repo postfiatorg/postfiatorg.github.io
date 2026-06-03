@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T03:27:49Z",
+  "error": "",
+  "event_id": "case_038",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "afe963d0dd7a44565c221ac065c4691b24c958e29a4652e1263c752a4ab935b9",
+  "output_hash": "fadba9f13b77101b1eb00f3b364613d1f159b10dcd5dae5ad704862050b5be00",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment MultiSignReserve (ID 586480873651E106F1D6339B0C4A8945BA705A777F3F4524626FF1FC07EFE41D) is contained in the validated ledger Amendments object with a recorded enablement date of 2019-04-17. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "961670a8ea2ba53c5b3ec9d8af95bb1c3fabb527cbf1ee45a8a19516e0cb1717",
+  "packet_id": "case_038--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "057c1da590d0e468138674ef93e83b005af0bc8ae2551567d26bbcca1e25065b",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 confirms that the amendment MultiSignReserve (ID 586480873651E106F1D6339B0C4A8945BA705A777F3F4524626FF1FC07EFE41D) is contained in the validated ledger Amendments object with a recorded enablement date of 2019-04-17. According to the task rules, source facts showing enabled ledger membership classify the state as ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 237,
+      "prompt_tokens": 828,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1065
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:27:45Z"
+}

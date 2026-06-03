@@ -1,0 +1,87 @@
+{
+  "completed_at": "2026-06-03T14:10:51Z",
+  "error": "",
+  "event_id": "case_052",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "b877ba77a18bff1388a7e8ce811183c694ad2812e27c76f2f3b813e9586e27ef",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment addresses AMM transaction processing, a complex financial subsystem.",
+      "One bug fix involves reserve checks during trust line creation, which touches accounting and reserve mechanics.",
+      "The other bug fix involves cross-currency payment liquidity usage, affecting financial settlement semantics."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', indicating it is a bug fix.",
+      "The packet explicitly describes the amendment as fixing two specific bugs: a missing reserve check in AMMWithdraw and inefficient liquidity usage in cross-currency payments.",
+      "The described fixes are localized to specific transaction processing paths and do not describe broad cross-feature canonicalization, consensus/liveness risks, AMM invariant changes, freeze/authorization bypasses, or material token supply changes.",
+      "The fixes correct incorrect behavior (missing check, suboptimal routing) rather than introducing new asset-control semantics or mutable metadata controls.",
+      "Per the task rule, a localized fix amendment should PROCEED unless it contains explicit no-vote advisories, is obsolete, or describes material risk patterns like invariant changes or systemic accounting errors. The described bugs are operational correctness issues, not fundamental invariant or systemic risks."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies the amendment as a fix for two specific bugs in AMM transaction processing: a reserve check omission and a liquidity usage inefficiency. These are localized correctness issues, not broad semantic or invariant changes."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the voting process but does not indicate any specific risk or reason to hold/reject this specific amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version association, supporting its validity as a known fix."
+      }
+    ],
+    "decision_summary": "The amendment fixAMMv1_2 is a targeted bug fix for AMM transaction processing. It corrects a missing reserve check and improves liquidity usage in cross-currency payments. These are localized operational fixes that do not constitute broad semantic changes, invariant violations, or systemic risks. Therefore, it proceeds under the 'fix' rule.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 0,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the fix introduce any new trust line creation logic that could be exploited for spam?",
+        "Does the liquidity routing change affect existing order book settlement guarantees?"
+      ],
+      "recommended_validator_action": "Enable the amendment after verifying the fix resolves the described bugs without side effects.",
+      "review_questions": [
+        "Is the reserve check fix sufficient to prevent trust line spam?",
+        "Does the liquidity usage fix correctly prioritize AMM vs order book liquidity?"
+      ],
+      "title": "Review fixAMMv1_2 for AMM bug fixes"
+    }
+  },
+  "packet_hash": "99012a267ad6c179aa1b032f42adfddb61ddbd1b90cf1767e498d3d7863688e9",
+  "packet_id": "case_052--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "a61d2d1b573c0cb83410d9c8e4cbd542bd9a66887e6ff54089926c3fd5e31cd1",
+  "raw_message_content": "{\n  \"arguments_for_delay_or_challenge\": [\n    \"The amendment addresses AMM transaction processing, a complex financial subsystem.\",\n    \"One bug fix involves reserve checks during trust line creation, which touches accounting and reserve mechanics.\",\n    \"The other bug fix involves cross-currency payment liquidity usage, affecting financial settlement semantics.\"\n  ],\n  \"arguments_for_proceeding\": [\n    \"The amendment name starts with 'fix', indicating it is a bug fix.\",\n    \"The packet explicitly describes the amendment as fixing two specific bugs: a missing reserve check in AMMWithdraw and inefficient liquidity usage in cross-currency payments.\",\n    \"The described fixes are localized to specific transaction processing paths and do not describe broad cross-feature canonicalization, consensus/liveness risks, AMM invariant changes, freeze/authorization bypasses, or material token supply changes.\",\n    \"The fixes correct incorrect behavior (missing check, suboptimal routing) rather than introducing new asset-control semantics or mutable metadata controls.\",\n    \"Per the task rule, a localized fix amendment should PROCEED unless it contains explicit no-vote advisories, is obsolete, or describes material risk patterns like invariant changes or systemic accounting errors. The described bugs are operational correctness issues, not fundamental invariant or systemic risks.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Identifies the amendment as a fix for two specific bugs in AMM transaction processing: a reserve check omission and a liquidity usage inefficiency. These are localized correctness issues, not broad semantic or invariant changes.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides context on the voting process but does not indicate any specific risk or reason to hold/reject this specific amendment.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and version association, supporting its validity as a known fix.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixAMMv1_2 is a targeted bug fix for AMM transaction processing. It corrects a missing reserve check and improves liquidity usage in cross-currency payments. These are localized operational fixes that do not constitute broad semantic changes, invariant violations, or systemic risks. Therefore, it proceeds under the 'fix' rule.\",\n  \"estimated_review_minutes\": {\n    \"deep_review\": 0,\n    \"packet_verification\": 0,\n    \"validator_skim\": 5\n  },\n  \"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n  \"missing_evidence\": [],\n  \"route\": \"PROCEED\",\n  \"route_confidence\": 0.95,\n  \"validator_work_item\": {\n    \"override_questions\": [\n      \"Does the fix introduce any new trust line creation logic that could be exploited for spam?\",\n      \"Does the liquidity routing change affect existing order book settlement guarantees?\"\n    ],\n    \"recommended_validator_action\": \"Enable the amendment after verifying the fix resolves the described bugs without side effects.\",\n    \"review_questions\": [\n      \"Is the reserve check fix sufficient to prevent trust line spam?\",\n      \"Does the liquidity usage fix correctly prioritize AMM vs order book liquidity?\"\n    ],\n    \"title\": \"Review fixAMMv1_2 for AMM bug fixes\"\n  }\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 738,
+      "prompt_tokens": 1143,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1881
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:10:40Z"
+}

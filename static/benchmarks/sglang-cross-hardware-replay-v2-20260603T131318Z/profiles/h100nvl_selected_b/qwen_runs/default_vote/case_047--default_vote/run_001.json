@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-03T14:30:01Z",
+  "error": "",
+  "event_id": "case_047",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "535468e8ada76e02bb2bf6b45af39ca36ad132b33bf765718eb9871c7de53d7d",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical function of the amendment (adding flag checks to prevent invalid transactions), which is a safety and correctness improvement, but does not explicitly state the default vote."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Indicates the amendment was introduced in rippled version 2.4.0, confirming it is a real, released amendment, but does not specify the default vote."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical behavior of the 'fixInvalidTxFlags' amendment and its introduction version. While the amendment improves transaction validation safety, the source text does not explicitly state the default vote (YES or NO) for the latest stable release. Without explicit evidence of the default vote in the provided facts, the decision cannot be inferred as YES or NO.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote for the fixInvalidTxFlags amendment in the latest stable release source."
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "2acb91018b3ca72bc0ae1c32d5c6d68a3dcd52e07d27658d1dd3d3d5e0df256a",
+  "packet_id": "case_047--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "4700ea7e2f85e1fdf81f153bbfe1427c9f15a597e908a524f0d206974953b945",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical function of the amendment (adding flag checks to prevent invalid transactions), which is a safety and correctness improvement, but does not explicitly state the default vote.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Indicates the amendment was introduced in rippled version 2.4.0, confirming it is a real, released amendment, but does not specify the default vote.\"\n    }\n  ],\n  \"decision_summary\": \"The provided facts describe the technical behavior of the 'fixInvalidTxFlags' amendment and its introduction version. While the amendment improves transaction validation safety, the source text does not explicitly state the default vote (YES or NO) for the latest stable release. Without explicit evidence of the default vote in the provided facts, the decision cannot be inferred as YES or NO.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote for the fixInvalidTxFlags amendment in the latest stable release source.\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 270,
+      "prompt_tokens": 641,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 911
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:29:57Z"
+}

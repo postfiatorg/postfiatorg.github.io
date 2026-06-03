@@ -1,0 +1,45 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_007",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "894646DD5284E97DECFE6674A6D6152686791C4A95F8C132CCA9BAF9E5812FB6",
+    "amendment_name": "Batch",
+    "decision_surface": "XRPL validator amendment decision surface for Batch.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "Batch: Allows multiple transactions to be bundled into a batch that's processed all together. Standard: XLS-56 Warning. This amendment was disabled in v3.1.1 due to a bug. It will be replaced by BatchV1_1 in a future release.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "Batch appears in XRPSCAN with introduced rippled version 2.5.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "Known Amendments status for Batch is obsolete/removed: OBSOLETE.",
+        "fact_id": "F5",
+        "source_id": "xrpl_known_amendments_md"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "307cab756abb6a27b26fac7e92a64d4dab83e2fae563a9dd59953369d1ef576f",
+  "packet_id": "case_007--vote_outcome",
+  "packet_version": 1
+}

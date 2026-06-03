@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T13:49:09Z",
+  "error": "",
+  "event_id": "case_029",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5100f4027d28302eb91a79adc9118aa142a68b824b6dac6104b23bc4a757e8f4",
+  "output_hash": "14f870880d192b12c6350de87c7190a64845b7df458deec9edb313155a377b7a",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific 'enabled_on' timestamp and 'enabled_in_ledger' number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "The source facts confirm that the amendment 'fixRemoveNFTokenAutoTrustLine' is included in the validated ledger Amendments object with a recorded enablement date and ledger index. This satisfies the condition for the ENABLED state, as the amendment has achieved ledger membership.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "4d645eb70ca180b6ac1b9e518d8d2f7e63a6b91a479b2a92246c5220de79b782",
+  "packet_id": "case_029--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "56617b3ba2362a3dcaa4df8438a6d6fc0f75cf57f9116a9a7af25b7c9fdb2805",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific 'enabled_on' timestamp and 'enabled_in_ledger' number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts confirm that the amendment 'fixRemoveNFTokenAutoTrustLine' is included in the validated ledger Amendments object with a recorded enablement date and ledger index. This satisfies the condition for the ENABLED state, as the amendment has achieved ledger membership.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 173,
+      "prompt_tokens": 832,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1005
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:49:06Z"
+}

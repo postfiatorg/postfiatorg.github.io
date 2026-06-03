@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_002",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "8CC0774A3BF66D1D22E76BBDA8E8A232E6B6313834301B3B23E8601196AE6455",
+    "amendment_name": "AMM / XLS-30 activation vote reversal",
+    "decision_surface": "Whether validators should keep supporting AMM activation after a pre-activation AMM bug surfaced.",
+    "source_facts": [
+      {
+        "claim": "AMM adds native automated market maker functionality integrated with the XRPL DEX.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "Contemporaneous reporting said the AMM amendment had reached required validator consensus on 2024-02-01, then validators revoked Yes votes after the bug surfaced.",
+        "fact_id": "F3",
+        "source_id": "crypto_basic_amm_vote_revoke_2024"
+      },
+      {
+        "claim": "The relevant decision surface is pre-activation bug handling, not the later terminal AMM enablement.",
+        "fact_id": "F4",
+        "source_id": "xrpl_get_ready_for_amm_2024"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "3f264c638741707c0ecf761d409f74ea3243d2721147e230ab06a7c15d9dcb8a",
+  "packet_id": "case_002--vote_state",
+  "packet_version": 1
+}

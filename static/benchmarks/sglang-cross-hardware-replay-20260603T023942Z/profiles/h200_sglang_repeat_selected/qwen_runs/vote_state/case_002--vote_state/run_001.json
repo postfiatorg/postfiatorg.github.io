@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-03T02:51:39Z",
+  "error": "",
+  "event_id": "case_002",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "84d020d139ac4097ff3df6c2a50fb6dc16e98842ae9bfbb4bfecbe8f72c452e8",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F3",
+        "why_it_matters": "States that the amendment reached required validator consensus (MAJORITY_ACTIVE) but validators subsequently revoked their Yes votes, indicating the loss of that majority support."
+      },
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Clarifies that the decision surface is pre-activation bug handling, confirming the state is not ENABLED and focusing on the vote dynamics rather than final ledger status."
+      }
+    ],
+    "decision_summary": "Fact F3 explicitly states that the amendment reached required consensus but validators revoked their votes. This transition from having majority support to losing it due to revocation fits the definition of MAJORITY_LOST (a formerly active majority was lost). Fact F4 confirms the context is pre-activation, ruling out ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Current vote count to confirm if NO_MAJORITY is the current static state, though MAJORITY_LOST describes the transition event described."
+    ],
+    "state_confidence": 0.95,
+    "vote_state": "MAJORITY_LOST"
+  },
+  "packet_hash": "3f264c638741707c0ecf761d409f74ea3243d2721147e230ab06a7c15d9dcb8a",
+  "packet_id": "case_002--vote_state",
+  "parsed_label": "MAJORITY_LOST",
+  "prompt_hash": "f4e6660d7b7d1d66c8d6e70657678f149b6b863603d543f912829113ce625aa8",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"States that the amendment reached required validator consensus (MAJORITY_ACTIVE) but validators subsequently revoked their Yes votes, indicating the loss of that majority support.\"\n    },\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Clarifies that the decision surface is pre-activation bug handling, confirming the state is not ENABLED and focusing on the vote dynamics rather than final ledger status.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F3 explicitly states that the amendment reached required consensus but validators revoked their votes. This transition from having majority support to losing it due to revocation fits the definition of MAJORITY_LOST (a formerly active majority was lost). Fact F4 confirms the context is pre-activation, ruling out ENABLED.\",\n  \"missing_evidence\": [\n    \"Current vote count to confirm if NO_MAJORITY is the current static state, though MAJORITY_LOST describes the transition event described.\"\n  ],\n  \"state_confidence\": 0.95,\n  \"vote_state\": \"MAJORITY_LOST\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 266,
+      "prompt_tokens": 771,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1037
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:51:33Z"
+}

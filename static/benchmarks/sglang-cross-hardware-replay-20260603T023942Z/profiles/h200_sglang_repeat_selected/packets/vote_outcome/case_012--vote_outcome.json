@@ -1,0 +1,45 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_012",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "AE6AB9028EEB7299EBB03C7CBCC3F2A4F5FBE00EA28B8223AA3118A0B436C1C5",
+    "amendment_name": "PermissionDelegation",
+    "decision_surface": "XRPL validator amendment decision surface for PermissionDelegation.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "PermissionDelegation: Allows accounts to delegate some permissions to other accounts. Specification: XLS-75. Warning. This amendment was disabled in v2.6.1 due to a bug. It will be replaced by PermissionDelegationV1_1 in a future release.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "PermissionDelegation appears in XRPSCAN with introduced rippled version 2.5.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "Known Amendments status for PermissionDelegation is obsolete/removed: OBSOLETE.",
+        "fact_id": "F5",
+        "source_id": "xrpl_known_amendments_md"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "97fdc94d374bcd3be2431276f1f14ccaf2795bee45cbb1a0aae4a96bf9f154df",
+  "packet_id": "case_012--vote_outcome",
+  "packet_version": 1
+}

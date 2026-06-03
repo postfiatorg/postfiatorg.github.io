@@ -1,0 +1,55 @@
+{
+  "completed_at": "2026-06-03T13:54:45Z",
+  "error": "",
+  "event_id": "case_030",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "5da9b9bd0ddaec9fe176a32f08bb4b6482f98958a74554e2ac30a87fc1bd7032",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general process for XRPL amendment voting (requiring sustained supermajority) but does not provide specific data regarding the current vote count, enablement status, or majority state for the ConfidentialTransfer amendment."
+      }
+    ],
+    "decision_summary": "The provided source facts only contain a general description of the XRPL amendment voting process. There is no specific evidence regarding the current vote state, ledger membership, or majority status for the ConfidentialTransfer amendment. Therefore, the state cannot be determined from the given information.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Current validator vote count or percentage for ConfidentialTransfer",
+      "Ledger sequence or timestamp indicating enablement status",
+      "Historical majority status to determine if MAJORITY_LOST applies",
+      "Information on whether the amendment has been vetoed or retired"
+    ],
+    "state_confidence": 0.0,
+    "vote_state": "UNKNOWN"
+  },
+  "packet_hash": "63b6133594661e1597308cbc51e3e927ed22ca534fdba9997ac1b7cea0c3119a",
+  "packet_id": "case_030--vote_state",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "9fbb8a8dd19acbc3f80bb02995173348ffa5cb1b837646298fb5d3f4a3ec6d84",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Describes the general process for XRPL amendment voting (requiring sustained supermajority) but does not provide specific data regarding the current vote count, enablement status, or majority state for the ConfidentialTransfer amendment.\"\n    }\n  ],\n  \"decision_summary\": \"The provided source facts only contain a general description of the XRPL amendment voting process. There is no specific evidence regarding the current vote state, ledger membership, or majority status for the ConfidentialTransfer amendment. Therefore, the state cannot be determined from the given information.\",\n  \"missing_evidence\": [\n    \"Current validator vote count or percentage for ConfidentialTransfer\",\n    \"Ledger sequence or timestamp indicating enablement status\",\n    \"Historical majority status to determine if MAJORITY_LOST applies\",\n    \"Information on whether the amendment has been vetoed or retired\"\n  ],\n  \"state_confidence\": 0.0,\n  \"vote_state\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 233,
+      "prompt_tokens": 639,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 872
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:54:41Z"
+}

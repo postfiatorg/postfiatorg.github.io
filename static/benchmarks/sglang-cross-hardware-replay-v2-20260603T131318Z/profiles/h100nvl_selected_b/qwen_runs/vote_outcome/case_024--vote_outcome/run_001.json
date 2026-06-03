@@ -1,0 +1,64 @@
+{
+  "completed_at": "2026-06-03T14:16:46Z",
+  "error": "",
+  "event_id": "case_024",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "5d188ba26e29c91a9acfccf305218c73e060679e602e531ea0da06f039d51acb",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment is explicitly marked as OBSOLETE/removed in the source facts, indicating it is no longer a valid candidate for activation.",
+      "The amendment was previously removed from the codebase (v0.80.0) and was never enabled, suggesting it is not part of the current active amendment pipeline.",
+      "Voting for an obsolete amendment provides no functional benefit and may indicate a lack of awareness of the current network state."
+    ],
+    "arguments_for_yes": [
+      "The amendment aims to fix an inconsistency in transfer fee calculation, which is a positive technical improvement if it were active."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly states that the status of OwnerPaysFee is obsolete/removed, making a YES vote invalid for current network progression."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Confirms the amendment was removed in v0.80.0 and never enabled, supporting the conclusion that it is not a current active proposal."
+      }
+    ],
+    "decision_summary": "The OwnerPaysFee amendment is obsolete and has been removed from the XRPL codebase. Therefore, it should not be voted YES for activation.",
+    "forbidden_stronger_claim": "The amendment is currently active and requires immediate voting.",
+    "missing_evidence": [
+      "Current active amendment list to confirm it is not re-introduced (though F5 suggests it is obsolete)."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "62f70a36e3c89791f151564eec83cd739bc0469d9157e9e52ab2b2ffa07a29bd",
+  "packet_id": "case_024--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "4fb5fae46566a4dc94f43361bb5470b5be485e86bff6b84bc57c4d3f228d9b2b",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment is explicitly marked as OBSOLETE/removed in the source facts, indicating it is no longer a valid candidate for activation.\",\n    \"The amendment was previously removed from the codebase (v0.80.0) and was never enabled, suggesting it is not part of the current active amendment pipeline.\",\n    \"Voting for an obsolete amendment provides no functional benefit and may indicate a lack of awareness of the current network state.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment aims to fix an inconsistency in transfer fee calculation, which is a positive technical improvement if it were active.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly states that the status of OwnerPaysFee is obsolete/removed, making a YES vote invalid for current network progression.\"\n    },\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Confirms the amendment was removed in v0.80.0 and never enabled, supporting the conclusion that it is not a current active proposal.\"\n    }\n  ],\n  \"decision_summary\": \"The OwnerPaysFee amendment is obsolete and has been removed from the XRPL codebase. Therefore, it should not be voted YES for activation.\",\n  \"forbidden_stronger_claim\": \"The amendment is currently active and requires immediate voting.\",\n  \"missing_evidence\": [\n    \"Current active amendment list to confirm it is not re-introduced (though F5 suggests it is obsolete).\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 381,
+      "prompt_tokens": 779,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1160
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:16:39Z"
+}

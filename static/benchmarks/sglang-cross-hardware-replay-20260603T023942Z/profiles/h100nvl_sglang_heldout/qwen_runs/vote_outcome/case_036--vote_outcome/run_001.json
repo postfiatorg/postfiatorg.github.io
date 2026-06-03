@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-03T03:24:14Z",
+  "error": "",
+  "event_id": "case_036",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "afe963d0dd7a44565c221ac065c4691b24c958e29a4652e1263c752a4ab935b9",
+  "output_hash": "dec67d956f8250478825f7ab0714b95bea367a387b3baa3b227a7e46ad8456ee",
+  "output_json": {
+    "arguments_for_no": [
+      "No evidence of security vulnerabilities, performance degradation, or consensus-breaking risks is present in the provided facts.",
+      "The amendment is described as adding an optional field, which typically implies backward compatibility and low risk of disruption."
+    ],
+    "arguments_for_yes": [
+      "The amendment explicitly aims to increase the robustness of the consensus process by allowing validators to attest to the hash of the latest fully validated ledger.",
+      "The feature is optional, minimizing the risk of breaking existing validator implementations while providing enhanced security metadata.",
+      "It is associated with a specific rippled version (1.6.0), indicating it has undergone development and release processes."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the core functionality and benefit of the amendment: increasing consensus robustness through optional validation attestation."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the high stakes of amendment voting, where incompatibility can block servers, reinforcing the need for safe, robust changes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and association with a specific software version, providing context for its maturity."
+      }
+    ],
+    "decision_summary": "The HardenedValidations amendment introduces an optional field to enhance consensus robustness without mandating changes that could break compatibility. Given the explicit goal of improving security and the optional nature of the feature, the risk is low and the benefit is positive.",
+    "forbidden_stronger_claim": "This amendment guarantees 100% consensus security or eliminates all future validation attacks.",
+    "missing_evidence": [
+      "Detailed technical specification of the new optional field.",
+      "Performance benchmarks or latency impact analysis.",
+      "Community or validator operator feedback on implementation complexity."
+    ],
+    "vote_confidence": 0.85,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "0d4e236b0da3deffa885d3cf125eea100f0791df5c0bbdf7c6930014a46624b1",
+  "packet_id": "case_036--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "65516b7c079c7795a7399a90ea157ad1b80a3535f180b183c6a9f405a20bfd29",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"No evidence of security vulnerabilities, performance degradation, or consensus-breaking risks is present in the provided facts.\",\n    \"The amendment is described as adding an optional field, which typically implies backward compatibility and low risk of disruption.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment explicitly aims to increase the robustness of the consensus process by allowing validators to attest to the hash of the latest fully validated ledger.\",\n    \"The feature is optional, minimizing the risk of breaking existing validator implementations while providing enhanced security metadata.\",\n    \"It is associated with a specific rippled version (1.6.0), indicating it has undergone development and release processes.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Defines the core functionality and benefit of the amendment: increasing consensus robustness through optional validation attestation.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Establishes the high stakes of amendment voting, where incompatibility can block servers, reinforcing the need for safe, robust changes.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment's existence and association with a specific software version, providing context for its maturity.\"\n    }\n  ],\n  \"decision_summary\": \"The HardenedValidations amendment introduces an optional field to enhance consensus robustness without mandating changes that could break compatibility. Given the explicit goal of improving security and the optional nature of the feature, the risk is low and the benefit is positive.\",\n  \"forbidden_stronger_claim\": \"This amendment guarantees 100% consensus security or eliminates all future validation attacks.\",\n  \"missing_evidence\": [\n    \"Detailed technical specification of the new optional field.\",\n    \"Performance benchmarks or latency impact analysis.\",\n    \"Community or validator operator feedback on implementation complexity.\"\n  ],\n  \"vote_confidence\": 0.85,\n  \"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 459,
+      "prompt_tokens": 676,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1135
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:24:06Z"
+}

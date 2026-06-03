@@ -1,0 +1,52 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_007",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "894646DD5284E97DECFE6674A6D6152686791C4A95F8C132CCA9BAF9E5812FB6",
+    "amendment_name": "Batch",
+    "decision_surface": "XRPL validator amendment decision surface for Batch.",
+    "source_facts": [
+      {
+        "claim": "Batch: Allows multiple transactions to be bundled into a batch that's processed all together. Standard: XLS-56 Warning. This amendment was disabled in v3.1.1 due to a bug. It will be replaced by BatchV1_1 in a future release.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "Batch appears in XRPSCAN with introduced rippled version 2.5.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "XRPSCAN currently reports support count 12 of 35 validations, threshold 28, and no enabled ledger entry for Batch.",
+        "fact_id": "F4",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "Known Amendments status for Batch is obsolete/removed: OBSOLETE.",
+        "fact_id": "F5",
+        "source_id": "xrpl_known_amendments_md"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "ab7864d7ef5b922b86777f2f31384b8b659af2f13e7ca000efe2140a7abb0aba",
+  "packet_id": "case_007--triage",
+  "packet_version": 1
+}

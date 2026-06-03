@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_033",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "740352F2412A9909880C23A559FCECEDA3BE2126FED62FC7660D628A06927F11",
+    "amendment_name": "Flow",
+    "decision_surface": "XRPL validator amendment decision surface for Flow.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "Flow appears in XRPSCAN with introduced rippled version 0.33.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 740352F2412A9909880C23A559FCECEDA3BE2126FED62FC7660D628A06927F11; XRPSCAN reports enabled_on=2016-10-21T19:47:22.000Z and enabled_in_ledger=24970753.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "36a6bd50c327b92315d9f08ef56d7cdadbfbf63cd587b823371dcfd4816ee0a4",
+  "packet_id": "case_033--vote_state",
+  "packet_version": 1
+}

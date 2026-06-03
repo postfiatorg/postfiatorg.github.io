@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_056",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "96FD2F293A519AE1DB6F8BED23E4AD9119342DA7CB6BAFD00953D16C54205D8B",
+    "amendment_name": "PriceOracle",
+    "decision_surface": "XRPL validator amendment decision surface for PriceOracle.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "PriceOracle: This amendment adds a \"Price Oracle\" feature to the XRP Ledger, as defined in the XLS-47 specification. A blockchain oracle is a system where a service provides to the blockchain about the outside world, which can then be used by decentralized applications (dApps) that run primarily on or using the blockchain. This price oracle is intended to store pricing information about asset pairs that exist outside of the XRP Ledger so that smart contracts that rely on the XRP Ledger can use this information. This amendment creates a new ledger entry type, PriceOracle, and new transactions, OracleSet (creates or modifies oracle data) and OracleDelete (deletes a given oracle).",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "PriceOracle appears in XRPSCAN with introduced rippled version 2.2.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "09334b7d0e52590516844c4111964f2a690084c63b4a31f5649f73b8d965b2b1",
+  "packet_id": "case_056--default_vote",
+  "packet_version": 1
+}

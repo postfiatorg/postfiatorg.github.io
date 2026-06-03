@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-03T03:10:07Z",
+  "error": "",
+  "event_id": "case_012",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "8943fdfedd9c62132644297126b937a38263ccb62f7a2971a13481d58593a634",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Explicitly states the amendment was disabled due to a bug and will be replaced, indicating it is not a viable candidate for activation."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly labels the amendment status as 'obsolete/removed', which triggers the REJECT rule for retired/obsolete proposals."
+      }
+    ],
+    "decision_summary": "The packet explicitly identifies the PermissionDelegation amendment as obsolete and removed (F5) and notes it was disabled due to a bug with a planned replacement (F1). According to the task rules, REJECT is the required route for retired or obsolete proposals. The low support count (F4) further confirms it is not active, but the primary driver for rejection is its obsolete status.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment is safe to enable.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any evidence that the 'obsolete' status is incorrect or that the replacement amendment is not the intended path?"
+      ],
+      "recommended_validator_action": "Reject the amendment as it is obsolete and disabled.",
+      "review_questions": [
+        "Does the packet contain any contradictory evidence suggesting the amendment is still active?"
+      ],
+      "title": "Reject Obsolete PermissionDelegation Amendment"
+    }
+  },
+  "packet_hash": "379c8738c52af1d6bdb1aaf283129a88cf8e88d77a2b2570e2ca8866b184650a",
+  "packet_id": "case_012--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "9da22bd6dfdac5823507a90c566c0621ed508f3881c3da95045062e677964fa6",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Explicitly states the amendment was disabled due to a bug and will be replaced, indicating it is not a viable candidate for activation.\"\n},\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"Explicitly labels the amendment status as 'obsolete/removed', which triggers the REJECT rule for retired/obsolete proposals.\"\n}\n],\n\"decision_summary\": \"The packet explicitly identifies the PermissionDelegation amendment as obsolete and removed (F5) and notes it was disabled due to a bug with a planned replacement (F1). According to the task rules, REJECT is the required route for retired or obsolete proposals. The low support count (F4) further confirms it is not active, but the primary driver for rejection is its obsolete status.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"The amendment is safe to enable.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Is there any evidence that the 'obsolete' status is incorrect or that the replacement amendment is not the intended path?\"\n],\n\"recommended_validator_action\": \"Reject the amendment as it is obsolete and disabled.\",\n\"review_questions\": [\n\"Does the packet contain any contradictory evidence suggesting the amendment is still active?\"\n],\n\"title\": \"Reject Obsolete PermissionDelegation Amendment\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 377,
+      "prompt_tokens": 1201,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1578
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:10:02Z"
+}

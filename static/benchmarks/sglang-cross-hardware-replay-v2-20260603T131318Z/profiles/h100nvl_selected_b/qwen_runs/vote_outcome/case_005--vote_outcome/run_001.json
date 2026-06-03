@@ -1,0 +1,70 @@
+{
+  "completed_at": "2026-06-03T14:14:47Z",
+  "error": "",
+  "event_id": "case_005",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "ba3eb55c449dd366c764d3249353d7396f87b9f3b72f0ccc7dffebf48ecbc09a",
+  "output_json": {
+    "arguments_for_no": [
+      "The provided facts describe the technical functionality and version introduction of the AMM amendment but do not contain any evidence of validator voting behavior, supermajority thresholds being met, or network consensus outcomes.",
+      "Fact F2 states that activation requires a sustained validator supermajority, but no data is provided to confirm whether this condition was satisfied for the AMM amendment.",
+      "Without evidence of the voting state or terminal outcome, a 'YES' recommendation cannot be substantiated based strictly on the provided packet facts."
+    ],
+    "arguments_for_yes": [
+      "Fact F3 indicates the AMM amendment was introduced in rippled version 1.12.0, which implies it was implemented and likely activated, but this is an inference about software release history rather than direct evidence of the governance vote outcome required by the decision surface."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the scope and technical changes of the AMM amendment, establishing what is being voted on, but does not indicate the vote result."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the rule that a sustained validator supermajority is required for activation, highlighting the missing evidence of whether this threshold was reached."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Links the amendment to a specific software version (1.12.0), suggesting it is a known and released feature, but does not explicitly confirm the governance vote outcome."
+      }
+    ],
+    "decision_summary": "The packet provides technical details and version history for the AMM amendment but lacks explicit evidence of the validator voting outcome or supermajority consensus required to determine the vote recommendation. While the presence in version 1.12.0 suggests activation, the strict requirement to use only packet facts for the vote outcome means the necessary evidence for a 'YES' (confirmation of supermajority) is absent. Therefore, the recommendation defaults to NO due to insufficient evidence for YES.",
+    "forbidden_stronger_claim": "The AMM amendment was definitely activated and is currently live on the mainnet.",
+    "missing_evidence": [
+      "Validator voting statistics or supermajority confirmation for the AMM amendment.",
+      "Explicit statement of the terminal outcome or vote state label.",
+      "Evidence of the amendment being enabled on the ledger."
+    ],
+    "vote_confidence": 0.1,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "d9d2ec25edfd0d3e686680a79b056e69ad071b1583169c5e83455d0155f9b2c3",
+  "packet_id": "case_005--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "b1de86cf36e57449760df1327eafab378bcc3b2fd38c6cf18703b1c5f3dbb652",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The provided facts describe the technical functionality and version introduction of the AMM amendment but do not contain any evidence of validator voting behavior, supermajority thresholds being met, or network consensus outcomes.\",\n    \"Fact F2 states that activation requires a sustained validator supermajority, but no data is provided to confirm whether this condition was satisfied for the AMM amendment.\",\n    \"Without evidence of the voting state or terminal outcome, a 'YES' recommendation cannot be substantiated based strictly on the provided packet facts.\"\n  ],\n  \"arguments_for_yes\": [\n    \"Fact F3 indicates the AMM amendment was introduced in rippled version 1.12.0, which implies it was implemented and likely activated, but this is an inference about software release history rather than direct evidence of the governance vote outcome required by the decision surface.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Defines the scope and technical changes of the AMM amendment, establishing what is being voted on, but does not indicate the vote result.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Establishes the rule that a sustained validator supermajority is required for activation, highlighting the missing evidence of whether this threshold was reached.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Links the amendment to a specific software version (1.12.0), suggesting it is a known and released feature, but does not explicitly confirm the governance vote outcome.\"\n    }\n  ],\n  \"decision_summary\": \"The packet provides technical details and version history for the AMM amendment but lacks explicit evidence of the validator voting outcome or supermajority consensus required to determine the vote recommendation. While the presence in version 1.12.0 suggests activation, the strict requirement to use only packet facts for the vote outcome means the necessary evidence for a 'YES' (confirmation of supermajority) is absent. Therefore, the recommendation defaults to NO due to insufficient evidence for YES.\",\n  \"forbidden_stronger_claim\": \"The AMM amendment was definitely activated and is currently live on the mainnet.\",\n  \"missing_evidence\": [\n    \"Validator voting statistics or supermajority confirmation for the AMM amendment.\",\n    \"Explicit statement of the terminal outcome or vote state label.\",\n    \"Evidence of the amendment being enabled on the ledger.\"\n  ],\n  \"vote_confidence\": 0.1,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 572,
+      "prompt_tokens": 895,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1467
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:14:39Z"
+}

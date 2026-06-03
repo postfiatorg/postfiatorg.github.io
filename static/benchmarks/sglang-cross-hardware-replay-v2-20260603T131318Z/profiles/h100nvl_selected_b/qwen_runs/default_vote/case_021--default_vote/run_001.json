@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T14:28:07Z",
+  "error": "",
+  "event_id": "case_021",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "e224668bbb86290fa5c80d6fed5f05d7fd1f217e09a81dec1a1abc735656ba47",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The claim explicitly states that the amendment 'preserves the original intended behavior' and 'restores the intended rounding behavior'. In XRPL governance, amendments that restore intended behavior or fix bugs without introducing new features are standardly set to YES in the source code to ensure network stability and correct functionality by default."
+      }
+    ],
+    "decision_summary": "The amendment fixXChainRewardRounding is described as a fix that restores intended behavior regarding reward share rounding in cross-chain transactions. Since it corrects an incompatibility and preserves original intent, the source default vote is inferred to be YES, as validators are expected to support bug fixes that maintain protocol correctness.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "a8779abb19f2196879bb4c6f7856f5d78731f97fe9abb74a2ce9047da6a71db8",
+  "packet_id": "case_021--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "0a5ad88062d82afb0cbf6c034c2ba6eba8b8f39c4ab150c259bb2ec14dc32c0a",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The claim explicitly states that the amendment 'preserves the original intended behavior' and 'restores the intended rounding behavior'. In XRPL governance, amendments that restore intended behavior or fix bugs without introducing new features are standardly set to YES in the source code to ensure network stability and correct functionality by default.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment fixXChainRewardRounding is described as a fix that restores intended behavior regarding reward share rounding in cross-chain transactions. Since it corrects an incompatibility and preserves original intent, the source default vote is inferred to be YES, as validators are expected to support bug fixes that maintain protocol correctness.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 202,
+      "prompt_tokens": 721,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 923
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:28:03Z"
+}

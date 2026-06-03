@@ -1,0 +1,61 @@
+{
+  "completed_at": "2026-06-03T03:28:45Z",
+  "error": "",
+  "event_id": "case_005",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "afe963d0dd7a44565c221ac065c4691b24c958e29a4652e1263c752a4ab935b9",
+  "output_hash": "9dfe94601a8f8da964a99ee0c06c0d3fcdbf604d897781f4475c58f8689dc37c",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the functional behavior of the DepositAuth amendment, specifically that it allows accounts to reject incoming payments. This describes a feature addition and a bug fix, but does not contain any language indicating a default vote recommendation (e.g., 'recommended', 'safe to enable', 'do not enable')."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general process for amendment voting (supermajority requirement) but provides no specific guidance or default stance for the DepositAuth amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Provides the version number (0.90.0) where DepositAuth was introduced, but contains no information regarding the recommended default vote for this amendment."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical functionality of the DepositAuth amendment (F1), the general voting process (F2), and its introduction version (F3). None of these facts contain explicit instructions, recommendations, or indicators that would allow inferring a 'YES' or 'NO' default vote from the source-backed description. Therefore, the default vote cannot be determined from the given evidence.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement in the amendment description recommending a default vote (YES or NO)",
+      "Validator consensus guidelines or official stance on the DepositAuth amendment"
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "ba29cf87ec1e7aa72a4e344e1c2531bf99b12f392c8f47a7ab82747b1585bf12",
+  "packet_id": "case_005--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "f06bdbd92d60af51beda2adb8b29cab03152a74c066df3654494da2caad6d76f",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the functional behavior of the DepositAuth amendment, specifically that it allows accounts to reject incoming payments. This describes a feature addition and a bug fix, but does not contain any language indicating a default vote recommendation (e.g., 'recommended', 'safe to enable', 'do not enable').\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Describes the general process for amendment voting (supermajority requirement) but provides no specific guidance or default stance for the DepositAuth amendment.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Provides the version number (0.90.0) where DepositAuth was introduced, but contains no information regarding the recommended default vote for this amendment.\"\n    }\n  ],\n  \"decision_summary\": \"The provided facts describe the technical functionality of the DepositAuth amendment (F1), the general voting process (F2), and its introduction version (F3). None of these facts contain explicit instructions, recommendations, or indicators that would allow inferring a 'YES' or 'NO' default vote from the source-backed description. Therefore, the default vote cannot be determined from the given evidence.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement in the amendment description recommending a default vote (YES or NO)\",\n    \"Validator consensus guidelines or official stance on the DepositAuth amendment\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 361,
+      "prompt_tokens": 807,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1168
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:28:39Z"
+}

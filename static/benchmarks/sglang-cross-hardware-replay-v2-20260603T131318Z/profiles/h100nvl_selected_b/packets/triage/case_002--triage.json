@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_002",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "8CC0774A3BF66D1D22E76BBDA8E8A232E6B6313834301B3B23E8601196AE6455",
+    "amendment_name": "AMM / XLS-30 activation vote reversal",
+    "decision_surface": "Whether validators should keep supporting AMM activation after a pre-activation AMM bug surfaced.",
+    "source_facts": [
+      {
+        "claim": "AMM adds native automated market maker functionality integrated with the XRPL DEX.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "Contemporaneous reporting said the AMM amendment had reached required validator consensus on 2024-02-01, then validators revoked Yes votes after the bug surfaced.",
+        "fact_id": "F3",
+        "source_id": "crypto_basic_amm_vote_revoke_2024"
+      },
+      {
+        "claim": "The relevant decision surface is pre-activation bug handling, not the later terminal AMM enablement.",
+        "fact_id": "F4",
+        "source_id": "xrpl_get_ready_for_amm_2024"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "58b6203a80458fa03135a126169591c00f7c27717da99ec231cf97642911719b",
+  "packet_id": "case_002--triage",
+  "packet_version": 1
+}

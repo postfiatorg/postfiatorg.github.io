@@ -1,0 +1,40 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_011",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "950AE2EA4654E47F04AA8739C0B214E242097E802FD372D24047A89AB1F5EC38",
+    "amendment_name": "MPTokensV1",
+    "decision_surface": "XRPL validator amendment decision surface for MPTokensV1.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "MPTokensV1: Implements a new type of fungible token, called a Multi-Purpose Token (MPT). This token type is optimized to be used for common token use cases such as stablecoins, and are intended to avoid some of the complexity inherent to the XRP Ledger's existing fungible tokens which are stored in bidirectional trust lines. This amendment adds the following: New ledger entry types: - MPToken - represents tokens held by a specific account, including the amount held and who issued them. - MPTokenIssuance - records information and settings for a specific issuance of MPT, such as the scale and transfer fee of those tokens. Transaction types: - (New) MPTokenIssuanceCreate - Define a new issuance of MPTs. - (New) MPTokenIssuanceDestroy - Remove an issuance definition. - (New) MPTokenIssuanceSet - Modify an issuance definition. - (New) MPTokenAuthorize - Allow an account to hold a specific issuance definition. - (Updated) Payment transactions can also send MPTs. - (Updated) Clawback transactions can also claw back MPTs if the issuance definition allows clawback. API Methods: - (New) mpt_holders method - Returns a list of accounts that hold a specific MPT issuance. - (Updated) ledger_entr",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "MPTokensV1 appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "8b0d20ce56b182c4ec0aecb044996ad159c3de26414e60e7af42373f2439ea4b",
+  "packet_id": "case_011--vote_outcome",
+  "packet_version": 1
+}

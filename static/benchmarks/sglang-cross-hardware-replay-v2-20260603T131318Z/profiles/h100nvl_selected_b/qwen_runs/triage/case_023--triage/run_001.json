@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-03T14:35:13Z",
+  "error": "",
+  "event_id": "case_023",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "986489275beb70e88688f8bd4dcd932eb12837dfaba3e468f7b45570f9e2a629",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States that NonFungibleTokensV1 has been replaced by NonFungibleTokensV1_1 and lists known issues including tecINVARIANT_FAILED errors."
+      },
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly classifies the status of NonFungibleTokensV1 as 'obsolete/removed: OBSOLETE'."
+      }
+    ],
+    "decision_summary": "The packet explicitly states that the amendment NonFungibleTokensV1 is obsolete and has been replaced by NonFungibleTokensV1_1. According to the task rules, REJECT is the required route for retired or obsolete proposals. The presence of known invariant failure issues further supports rejection, but the obsolete status is the primary determinant.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment is safe to enable.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any reason to believe the amendment is not obsolete?"
+      ],
+      "recommended_validator_action": "Reject the amendment as it is obsolete and replaced.",
+      "review_questions": [
+        "Does the packet indicate the amendment is active or current?"
+      ],
+      "title": "Reject Obsolete Amendment NonFungibleTokensV1"
+    }
+  },
+  "packet_hash": "9c261779b59cd82e329bd934eb30c36d40e8a6676cf791d39c346e197f33ecb6",
+  "packet_id": "case_023--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "c3dea4e5fa6257c547a6a17cf08dada940dbcbe6c8cd0612f6c900095a853e7c",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"States that NonFungibleTokensV1 has been replaced by NonFungibleTokensV1_1 and lists known issues including tecINVARIANT_FAILED errors.\"\n},\n{\n\"fact_id\": \"F5\",\n\"why_it_matters\": \"Explicitly classifies the status of NonFungibleTokensV1 as 'obsolete/removed: OBSOLETE'.\"\n}\n],\n\"decision_summary\": \"The packet explicitly states that the amendment NonFungibleTokensV1 is obsolete and has been replaced by NonFungibleTokensV1_1. According to the task rules, REJECT is the required route for retired or obsolete proposals. The presence of known invariant failure issues further supports rejection, but the obsolete status is the primary determinant.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"The amendment is safe to enable.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Is there any reason to believe the amendment is not obsolete?\"\n],\n\"recommended_validator_action\": \"Reject the amendment as it is obsolete and replaced.\",\n\"review_questions\": [\n\"Does the packet indicate the amendment is active or current?\"\n],\n\"title\": \"Reject Obsolete Amendment NonFungibleTokensV1\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 366,
+      "prompt_tokens": 1341,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1707
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:35:07Z"
+}

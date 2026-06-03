@@ -1,0 +1,85 @@
+{
+  "completed_at": "2026-06-03T03:13:12Z",
+  "error": "",
+  "event_id": "case_038",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "e007d84b4b66854d82bb61f2cb8ad0ba5acf71599915752e8fe48ebb5e8d7561",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment involves MPT (Multi-Pass Token) payments, which are part of the broader AMM/Token ecosystem.",
+      "Missing metadata fields could theoretically impact accounting or auditing if relied upon by external systems."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', indicating it is a corrective measure.",
+      "The packet explicitly states the amendment adds 'missing' metadata fields (DeliveredAmount) that were not present in direct MPT Payment transactions.",
+      "The underlying transaction behavior (delivering the full amount) is correct; only the metadata summary is missing.",
+      "The fix is localized to metadata generation and does not alter consensus rules, ledger state validity, or transaction processing logic.",
+      "There is no evidence of broad cross-feature canonicalization, serialization changes, or template enforcement.",
+      "There is no evidence of AMM invariant changes, rounding errors, freeze/authorization bypasses, or ledger repair issues.",
+      "The risk is limited to informational completeness of metadata, not financial correctness or asset control.",
+      "Account-local or metadata-only fixes generally proceed unless they imply broader systemic risk, which is not described here."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes that the amendment is a fix for missing metadata fields in direct MPT payments, confirming the 'fix' nature and the localized scope of the change (metadata only, not transaction logic)."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with rippled version 3.0.0, providing context for its introduction but not altering the risk assessment of the fix itself."
+      }
+    ],
+    "decision_summary": "The amendment 'fixMPTDeliveredAmount' is a localized fix adding missing metadata fields to direct MPT Payment transactions. The packet indicates the underlying payment logic is correct (full amount delivered), and the issue is purely the absence of summary metadata. This does not constitute a material risk to consensus, liveness, AMM invariants, or asset control. It is a straightforward metadata correction. Therefore, it proceeds under the 'fix' rule.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [
+      "None required for this localized metadata fix."
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the missing metadata field cause any known downstream accounting failures in major wallets or exchanges?"
+      ],
+      "recommended_validator_action": "Vote YES to enable the metadata fix.",
+      "review_questions": [
+        "Is the metadata field strictly additive and non-breaking for existing clients?"
+      ],
+      "title": "Review fixMPTDeliveredAmount metadata addition"
+    }
+  },
+  "packet_hash": "e4fb743ec3cc0c070a245c52e369302e6854921e899fb1c8392671cddcb86488",
+  "packet_id": "case_038--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "8b5c6692cc9e3919c7f60b02d73cc7da8731b42587213d73add2827217bccf43",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment involves MPT (Multi-Pass Token) payments, which are part of the broader AMM/Token ecosystem.\",\n\"Missing metadata fields could theoretically impact accounting or auditing if relied upon by external systems.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix', indicating it is a corrective measure.\",\n\"The packet explicitly states the amendment adds 'missing' metadata fields (DeliveredAmount) that were not present in direct MPT Payment transactions.\",\n\"The underlying transaction behavior (delivering the full amount) is correct; only the metadata summary is missing.\",\n\"The fix is localized to metadata generation and does not alter consensus rules, ledger state validity, or transaction processing logic.\",\n\"There is no evidence of broad cross-feature canonicalization, serialization changes, or template enforcement.\",\n\"There is no evidence of AMM invariant changes, rounding errors, freeze/authorization bypasses, or ledger repair issues.\",\n\"The risk is limited to informational completeness of metadata, not financial correctness or asset control.\",\n\"Account-local or metadata-only fixes generally proceed unless they imply broader systemic risk, which is not described here.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Establishes that the amendment is a fix for missing metadata fields in direct MPT payments, confirming the 'fix' nature and the localized scope of the change (metadata only, not transaction logic).\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment is associated with rippled version 3.0.0, providing context for its introduction but not altering the risk assessment of the fix itself.\"\n}\n],\n\"decision_summary\": \"The amendment 'fixMPTDeliveredAmount' is a localized fix adding missing metadata fields to direct MPT Payment transactions. The packet indicates the underlying payment logic is correct (full amount delivered), and the issue is purely the absence of summary metadata. This does not constitute a material risk to consensus, liveness, AMM invariants, or asset control. It is a straightforward metadata correction. Therefore, it proceeds under the 'fix' rule.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n\"missing_evidence\": [\n\"None required for this localized metadata fix.\"\n],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the missing metadata field cause any known downstream accounting failures in major wallets or exchanges?\"\n],\n\"recommended_validator_action\": \"Vote YES to enable the metadata fix.\",\n\"review_questions\": [\n\"Is the metadata field strictly additive and non-breaking for existing clients?\"\n],\n\"title\": \"Review fixMPTDeliveredAmount metadata addition\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 641,
+      "prompt_tokens": 1105,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1746
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:13:04Z"
+}

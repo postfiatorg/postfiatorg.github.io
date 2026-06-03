@@ -1,0 +1,48 @@
+{
+  "provider": "vastai",
+  "provider_run_id": 39300330,
+  "label": "postfiat-sglang-crosshw-v2-h100sxm-20260603T1328Z",
+  "generated_at": "2026-06-03T13:40:41Z",
+  "actual_status": "running",
+  "cur_state": "running",
+  "intended_status": "running",
+  "host_id": 404057,
+  "machine_id": 67296,
+  "offer_id": 36371403,
+  "provider_selection": {
+    "gpu_name": "H100 SXM",
+    "gpu_ram_mb": 81559,
+    "num_gpus": 1,
+    "driver_version": "580.159.03",
+    "cuda_max_good": 13.0,
+    "current_instance_dph_total": 2.722222222222222,
+    "image_uuid": "lmsysorg/sglang:nightly-dev-cu13-20260523-c112f762",
+    "reliability2": 0.9963427,
+    "verification": "verified"
+  },
+  "model_runtime": {
+    "model_id": "Qwen/Qwen3.6-27B-FP8",
+    "model_path": "Qwen/Qwen3.6-27B-FP8",
+    "context_length": 32768,
+    "mem_fraction_static": 0.75,
+    "enable_deterministic_inference": true,
+    "max_running_requests": 1,
+    "chunked_prefill_size": 4096,
+    "attention_backend": "fa3",
+    "reasoning_parser": "qwen3",
+    "temperature": 0,
+    "top_p": 1,
+    "endpoint_transport": "ssh_tunnel",
+    "server_status": "ready"
+  },
+  "network": {
+    "public_endpoint_redacted": true,
+    "endpoint_url": "[redacted-public-endpoint]",
+    "local_tunnel_endpoint": "http://127.0.0.1:18101/v1"
+  },
+  "sanitization": {
+    "public_endpoint_redacted_for_public_artifact": true,
+    "secrets_intentionally_not_recorded": true
+  },
+  "retain_until_done": true
+}

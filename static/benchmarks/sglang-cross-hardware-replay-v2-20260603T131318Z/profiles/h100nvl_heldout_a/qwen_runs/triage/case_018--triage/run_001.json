@@ -1,0 +1,84 @@
+{
+  "completed_at": "2026-06-03T14:59:48Z",
+  "error": "",
+  "event_id": "case_018",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a4413e43312a9d665bcaa356648bcc89aa32490a4420217384b9b0f42206b54f",
+  "output_hash": "576b456ebb4943334e3a793211f7c63eb7fbddbf1bc0cc372db64017aea2a667",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment addresses a consensus timing bug that could theoretically delay the declaration of validated ledgers, which touches on liveness.",
+      "However, the packet explicitly states the bug is unlikely to occur outside controlled test conditions and requires precise timing."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix' (fix1528).",
+      "The packet describes the amendment as a fix for a specific bug.",
+      "The bug is described as low-risk ('unlikely to happen outside of controlled test conditions').",
+      "The fix does not involve broad cross-feature canonicalization, AMM invariants, NFT semantics, token supply changes, or other material risk patterns listed in the exclusion criteria for PROCEED.",
+      "There is no explicit no-vote advisory or indication that the fix is obsolete."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies the amendment as a fix for a consensus timestamp bug that is unlikely to occur in production, satisfying the 'fix' criteria for PROCEED without triggering material risk exclusions."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the voting process but does not indicate a reason to hold or reject this specific fix."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version but does not add risk factors."
+      }
+    ],
+    "decision_summary": "The amendment fix1528 is a localized fix for a consensus timing bug that is deemed unlikely to occur in production. It does not exhibit the material risk patterns (such as AMM invariants, NFT semantics, or broad serialization changes) that would require HOLD_FOR_CHALLENGE. It is not a pre-fix incident window requiring DELAY_FOR_FIX. Therefore, it proceeds under the rule for fix amendments.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the validator have specific evidence that the timing bug is occurring in production?"
+      ],
+      "recommended_validator_action": "Vote YES to enable the fix.",
+      "review_questions": [
+        "Is the fix localized to timestamp negotiation?"
+      ],
+      "title": "Review fix1528 for consensus timestamp bug"
+    }
+  },
+  "packet_hash": "4b57d6c5b0973b9a8807b820eca48b174f70f7554793eb529de5f5ef846f2cf9",
+  "packet_id": "case_018--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "17f1f7348e7d7b4e2517be029973717eff3c073b99355fafe45893bf87305ac6",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment addresses a consensus timing bug that could theoretically delay the declaration of validated ledgers, which touches on liveness.\",\n\"However, the packet explicitly states the bug is unlikely to occur outside controlled test conditions and requires precise timing.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix' (fix1528).\",\n\"The packet describes the amendment as a fix for a specific bug.\",\n\"The bug is described as low-risk ('unlikely to happen outside of controlled test conditions').\",\n\"The fix does not involve broad cross-feature canonicalization, AMM invariants, NFT semantics, token supply changes, or other material risk patterns listed in the exclusion criteria for PROCEED.\",\n\"There is no explicit no-vote advisory or indication that the fix is obsolete.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Identifies the amendment as a fix for a consensus timestamp bug that is unlikely to occur in production, satisfying the 'fix' criteria for PROCEED without triggering material risk exclusions.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Provides context on the voting process but does not indicate a reason to hold or reject this specific fix.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment's existence and version but does not add risk factors.\"\n}\n],\n\"decision_summary\": \"The amendment fix1528 is a localized fix for a consensus timing bug that is deemed unlikely to occur in production. It does not exhibit the material risk patterns (such as AMM invariants, NFT semantics, or broad serialization changes) that would require HOLD_FOR_CHALLENGE. It is not a pre-fix incident window requiring DELAY_FOR_FIX. Therefore, it proceeds under the rule for fix amendments.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n\"missing_evidence\": [],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the validator have specific evidence that the timing bug is occurring in production?\"\n],\n\"recommended_validator_action\": \"Vote YES to enable the fix.\",\n\"review_questions\": [\n\"Is the fix localized to timestamp negotiation?\"\n],\n\"title\": \"Review fix1528 for consensus timestamp bug\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 568,
+      "prompt_tokens": 1142,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1710
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:59:39Z"
+}

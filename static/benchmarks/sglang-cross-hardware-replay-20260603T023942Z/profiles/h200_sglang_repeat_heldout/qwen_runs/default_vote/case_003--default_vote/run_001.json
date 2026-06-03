@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-03T02:54:37Z",
+  "error": "",
+  "event_id": "case_003",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "014652eb310cf501c544b997b80d2fc86ead89b3a6e382be2e65679656b6c12c",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "States that the CryptoConditions amendment has no effect because its dependency (SusPay) was replaced, implying it is obsolete and should not be enabled."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes that enabling an amendment requires a supermajority and that incompatible servers can become blocked, providing the risk context for voting against obsolete amendments."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the CryptoConditions amendment is effectively inert because its required dependency, SusPay, was replaced by the Escrow amendment. Since the amendment has no functional effect and enabling it carries the standard risks of amendment activation (such as potential server blocking if not widely adopted), the logical default vote for a stable release source is to reject it.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "NO"
+  },
+  "packet_hash": "12a95a56a228fd8493e47e522ce390011007e166e1c6dd0a38e9d8c1dff6accc",
+  "packet_id": "case_003--default_vote",
+  "parsed_label": "NO",
+  "prompt_hash": "d05ae7fb05f87369992af3bb4d42cc98c7c35ca362d49153626826b201e99cff",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"States that the CryptoConditions amendment has no effect because its dependency (SusPay) was replaced, implying it is obsolete and should not be enabled.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Establishes that enabling an amendment requires a supermajority and that incompatible servers can become blocked, providing the risk context for voting against obsolete amendments.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the CryptoConditions amendment is effectively inert because its required dependency, SusPay, was replaced by the Escrow amendment. Since the amendment has no functional effect and enabling it carries the standard risks of amendment activation (such as potential server blocking if not widely adopted), the logical default vote for a stable release source is to reject it.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 233,
+      "prompt_tokens": 632,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 865
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:54:32Z"
+}

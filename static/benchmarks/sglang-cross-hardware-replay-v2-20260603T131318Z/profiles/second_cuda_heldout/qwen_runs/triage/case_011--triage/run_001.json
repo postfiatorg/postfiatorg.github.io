@@ -1,0 +1,83 @@
+{
+  "completed_at": "2026-06-03T13:55:48Z",
+  "error": "",
+  "event_id": "case_011",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "5100f4027d28302eb91a79adc9118aa142a68b824b6dac6104b23bc4a757e8f4",
+  "output_hash": "afe5349012fb3c5d771bdd5fb6b38eb55315978d8d57650ba19d9df5083c5380",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment restricts the maximum TransferRate to 100% (2000000000), which directly impacts token issuer accounting and fee semantics.",
+      "Fact F1 states that existing TransferRates set higher than the new limit continue to apply, creating a state divergence where historical high-fee accounts retain their settings while new ones are capped, requiring careful validation of ledger state consistency."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name is 'fix1201', indicating it is a fix.",
+      "Fact F1 describes the change as a correction of an implementation limit (capping fees at 100% instead of ~329%), which is a localized fix to fee mechanics rather than a broad cross-feature canonicalization or consensus risk.",
+      "The risk is contained to the TransferRate field in AccountSet transactions and does not involve AMM invariants, NFT settlement, or ledger repair.",
+      "Account-local opt-out or control changes that do not affect third-party asset control or systemic liveness can proceed."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Defines the scope of the fix: capping TransferRate at 100% and handling existing high values. This confirms it is a localized fix to fee limits, not a broad semantic overhaul."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms the standard amendment voting process, implying no unique consensus/liveness risk beyond standard amendment adoption."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Provides version context, confirming the amendment is part of a standard release cycle."
+      }
+    ],
+    "decision_summary": "The amendment 'fix1201' is a localized fix that corrects the maximum allowable transfer fee to 100%. While it touches token accounting (TransferRate), it does not introduce broad cross-feature risks, consensus issues, or material invariant changes. The handling of existing high rates is a defined state transition. Therefore, it proceeds as a fix.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 0,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [],
+    "route": "PROCEED",
+    "route_confidence": 0.9,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the persistence of existing high TransferRates create any unexpected accounting edge cases for validators?"
+      ],
+      "recommended_validator_action": "Enable the amendment as it is a standard fix for fee limits.",
+      "review_questions": [
+        "Is the cap of 2000000000 correctly implemented in the validator software?"
+      ],
+      "title": "Review fix1201: TransferRate Limit Fix"
+    }
+  },
+  "packet_hash": "febe5f31ae3f8eda65dad99db3f716301fc8bc0609471fbd1b75339c1fc9ef52",
+  "packet_id": "case_011--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "f66293307c97460dfb1be8104103e566d951d42e4272a2186e1262f9b0a4c4f9",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment restricts the maximum TransferRate to 100% (2000000000), which directly impacts token issuer accounting and fee semantics.\",\n\"Fact F1 states that existing TransferRates set higher than the new limit continue to apply, creating a state divergence where historical high-fee accounts retain their settings while new ones are capped, requiring careful validation of ledger state consistency.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name is 'fix1201', indicating it is a fix.\",\n\"Fact F1 describes the change as a correction of an implementation limit (capping fees at 100% instead of ~329%), which is a localized fix to fee mechanics rather than a broad cross-feature canonicalization or consensus risk.\",\n\"The risk is contained to the TransferRate field in AccountSet transactions and does not involve AMM invariants, NFT settlement, or ledger repair.\",\n\"Account-local opt-out or control changes that do not affect third-party asset control or systemic liveness can proceed.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Defines the scope of the fix: capping TransferRate at 100% and handling existing high values. This confirms it is a localized fix to fee limits, not a broad semantic overhaul.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Confirms the standard amendment voting process, implying no unique consensus/liveness risk beyond standard amendment adoption.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Provides version context, confirming the amendment is part of a standard release cycle.\"\n}\n],\n\"decision_summary\": \"The amendment 'fix1201' is a localized fix that corrects the maximum allowable transfer fee to 100%. While it touches token accounting (TransferRate), it does not introduce broad cross-feature risks, consensus issues, or material invariant changes. The handling of existing high rates is a defined state transition. Therefore, it proceeds as a fix.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 0,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n\"missing_evidence\": [],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.9,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the persistence of existing high TransferRates create any unexpected accounting edge cases for validators?\"\n],\n\"recommended_validator_action\": \"Enable the amendment as it is a standard fix for fee limits.\",\n\"review_questions\": [\n\"Is the cap of 2000000000 correctly implemented in the validator software?\"\n],\n\"title\": \"Review fix1201: TransferRate Limit Fix\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 639,
+      "prompt_tokens": 1213,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1852
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:55:38Z"
+}

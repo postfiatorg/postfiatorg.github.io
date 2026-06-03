@@ -1,0 +1,60 @@
+{
+  "completed_at": "2026-06-03T14:00:38Z",
+  "error": "",
+  "event_id": "case_045",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "0cfa4750fec44516bf0f325386de47344f64c0d278886b9caf95c328e4439a5b",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical content of the amendment as bug fixes and invariant checks for the AMM, but does not explicitly state the default vote configuration in the source release."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Explains the general voting process and consequences of incompatibility, but does not specify the default vote for this specific amendment."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Identifies the version where the amendment was introduced, but does not provide the default vote setting."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical changes in fixAMMv1_3 (F1), the general amendment process (F2), and the introduction version (F3). None of these facts explicitly state the default vote (YES or NO) configured in the latest stable release source code. Without explicit evidence of the default vote setting, the value cannot be inferred.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote (YES/NO) in the source code or release notes for fixAMMv1_3"
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "48660b5cfde26fb1907b05f803d483576555c977ab0e4723ff0b7e4535b1a65c",
+  "packet_id": "case_045--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "ddd1901291a7142cd92747fdb607d1b4097031a56c0cd95090cc3fdb1ead492c",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the technical content of the amendment as bug fixes and invariant checks for the AMM, but does not explicitly state the default vote configuration in the source release.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Explains the general voting process and consequences of incompatibility, but does not specify the default vote for this specific amendment.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Identifies the version where the amendment was introduced, but does not provide the default vote setting.\"\n    }\n  ],\n  \"decision_summary\": \"The provided facts describe the technical changes in fixAMMv1_3 (F1), the general amendment process (F2), and the introduction version (F3). None of these facts explicitly state the default vote (YES or NO) configured in the latest stable release source code. Without explicit evidence of the default vote setting, the value cannot be inferred.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote (YES/NO) in the source code or release notes for fixAMMv1_3\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 311,
+      "prompt_tokens": 707,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1018
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:00:33Z"
+}

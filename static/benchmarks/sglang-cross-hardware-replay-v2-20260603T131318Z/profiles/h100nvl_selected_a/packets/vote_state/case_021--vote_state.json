@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_021",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "2BF037D90E1B676B17592A8AF55E88DB465398B4B597AE46EECEE1399AB05699",
+    "amendment_name": "fixXChainRewardRounding",
+    "decision_surface": "XRPL validator amendment decision surface for fixXChainRewardRounding.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixXChainRewardRounding appears in XRPSCAN with introduced rippled version 2.2.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "XRPSCAN currently reports support count 17 of 35 validations, threshold 28, and no enabled ledger entry for fixXChainRewardRounding.",
+        "fact_id": "F4",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "f7b9533f66267cac6cecc620ea33fd71f9a40fe4abde874a6b6d39b7a9a9ef34",
+  "packet_id": "case_021--vote_state",
+  "packet_version": 1
+}

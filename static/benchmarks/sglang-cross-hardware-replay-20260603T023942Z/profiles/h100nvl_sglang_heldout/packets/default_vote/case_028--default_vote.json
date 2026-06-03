@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_028",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "89308AF3B8B10B7192C4E613E1D2E4D9BA64B2EE2D5232402AE82A6A7220D953",
+    "amendment_name": "fixQualityUpperBound",
+    "decision_surface": "XRPL validator amendment decision surface for fixQualityUpperBound.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixQualityUpperBound: Fixes a bug in unused code for estimating the ratio of input to output of individual steps in cross-currency payments. This amendment has no known impact on transaction processing.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixQualityUpperBound appears in XRPSCAN with introduced rippled version 1.5.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "1e12a0f7a5559e5efa4fdd585d0436cf36430040bc9d33b9b5e512132d1427ba",
+  "packet_id": "case_028--default_vote",
+  "packet_version": 1
+}

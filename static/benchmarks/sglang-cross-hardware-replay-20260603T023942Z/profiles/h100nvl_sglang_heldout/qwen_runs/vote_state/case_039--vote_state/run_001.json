@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T03:27:52Z",
+  "error": "",
+  "event_id": "case_039",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "afe963d0dd7a44565c221ac065c4691b24c958e29a4652e1263c752a4ab935b9",
+  "output_hash": "f8cd25149a2d743b3219427d748a7ebed2c5301933da03d0e0162c221b81c258",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment NegativeUNL (ID B4E4F5D2...) is contained in the validated ledger Amendments object with a recorded enablement date of 2021-11-21 and ledger index 67849217. According to the task rule, 'ENABLED' means the source facts show enabled ledger membership. Since the amendment is in the enabled set of the ledger, the state is ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "9c7517c03b8eb240ce1a42a230295ab0f478ed8f867994d02af724aee9e6f3c2",
+  "packet_id": "case_039--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "7da6bfff492b113782cfcc3d53ed37277ede82e8d4feca785f8c717e7b8f54bc",
+  "raw_message_content": "{\n\"cited_facts\": [\n{\n\"fact_id\": \"F4\",\n\"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n}\n],\n\"decision_summary\": \"Fact F4 confirms that the amendment NegativeUNL (ID B4E4F5D2...) is contained in the validated ledger Amendments object with a recorded enablement date of 2021-11-21 and ledger index 67849217. According to the task rule, 'ENABLED' means the source facts show enabled ledger membership. Since the amendment is in the enabled set of the ledger, the state is ENABLED.\",\n\"missing_evidence\": [],\n\"state_confidence\": 1.0,\n\"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 203,
+      "prompt_tokens": 830,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1033
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:27:49Z"
+}

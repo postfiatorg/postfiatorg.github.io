@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-03T02:54:09Z",
+  "error": "",
+  "event_id": "case_033",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "280e6482776d566a87af4ab0d7a57ccde0861bcb592a1dd1c5959977cb75dbcd",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general process for XRPL amendment voting (requiring sustained supermajority) but provides no specific data regarding the current vote count, enablement status, or majority state for the MPTokensV2 amendment."
+      }
+    ],
+    "decision_summary": "The provided source facts only contain a general description of the XRPL amendment voting process. There is no specific evidence regarding the current vote state, majority status, or enablement of the MPTokensV2 amendment. Therefore, the state cannot be determined from the given information.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Current validator vote count or percentage for MPTokensV2",
+      "Ledger enablement status of MPTokensV2",
+      "Historical majority status changes for MPTokensV2"
+    ],
+    "state_confidence": 0.0,
+    "vote_state": "UNKNOWN"
+  },
+  "packet_hash": "f834a9212c0156ca78b9f2599ada484764b82032dec9f29aff646f997d43c0ab",
+  "packet_id": "case_033--vote_state",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "f9f082ea94700c1f262b5f5efc2bf47f1322144350d52a843403d129263cf4ac",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Describes the general process for XRPL amendment voting (requiring sustained supermajority) but provides no specific data regarding the current vote count, enablement status, or majority state for the MPTokensV2 amendment.\"\n    }\n  ],\n  \"decision_summary\": \"The provided source facts only contain a general description of the XRPL amendment voting process. There is no specific evidence regarding the current vote state, majority status, or enablement of the MPTokensV2 amendment. Therefore, the state cannot be determined from the given information.\",\n  \"missing_evidence\": [\n    \"Current validator vote count or percentage for MPTokensV2\",\n    \"Ledger enablement status of MPTokensV2\",\n    \"Historical majority status changes for MPTokensV2\"\n  ],\n  \"state_confidence\": 0.0,\n  \"vote_state\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 226,
+      "prompt_tokens": 638,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 864
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:54:03Z"
+}

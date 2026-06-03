@@ -1,0 +1,90 @@
+{
+  "completed_at": "2026-06-03T14:39:15Z",
+  "error": "",
+  "event_id": "case_049",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "0baf7580b0fc4707527095670873bca5d1292a0fd284506cebcdd149cf22ed3f",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces 'DeepFreeze' capabilities, allowing issuers to freeze trustlines from interacting with payments, offers, AMMs, and the DEX.",
+      "This constitutes a significant change to asset-control semantics and permissioning, as it prevents accounts from sending and receiving frozen assets across multiple subsystems.",
+      "The introduction of new flags (lsfLowDeepFreeze, lsfHighDeepFreeze, tfSetDeepFreeze, tfClearDeepFreeze) expands the issuer's power to restrict asset flow, which carries material financial and compliance implications.",
+      "Freeze/authorization bypasses and asset-control semantics are explicitly listed as reasons to use HOLD_FOR_CHALLENGE."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment is not described as a 'fix' for a bug, so the PROCEED rule for fix amendments does not apply.",
+      "There is no explicit no-vote advisory, retired status, or critical unsafe evidence suggesting REJECT.",
+      "There is no description of an unresolved bug or vulnerability requiring DELAY_FOR_FIX."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core functionality of DeepFreeze, which allows issuers to freeze trustlines from interacting with payments, offers, AMMs, and the DEX, directly impacting asset-control semantics."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Confirms the standard amendment voting process, but does not mitigate the material risk of the feature itself."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Provides version context but does not alter the risk assessment of the freeze capabilities."
+      }
+    ],
+    "decision_summary": "The DeepFreeze amendment introduces significant asset-control semantics by allowing issuers to freeze trustlines from interacting with payments, offers, AMMs, and the DEX. This expands issuer power and impacts financial and compliance workflows. According to the task rules, material asset-control semantics and freeze-related changes require HOLD_FOR_CHALLENGE for explicit review.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on how DeepFreeze interacts with existing freeze flags or edge cases in AMM settlement.",
+      "Potential impact on cross-feature canonicalization or ledger repair."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the DeepFreeze mechanism introduce any consensus or liveness risks?",
+        "Are there any unintended interactions with existing freeze flags or AMM invariants?"
+      ],
+      "recommended_validator_action": "Review the implementation details of DeepFreeze flags and their impact on asset control and compliance workflows.",
+      "review_questions": [
+        "How does DeepFreeze differ from existing freeze capabilities?",
+        "What are the implications for accounts that are deep frozen?",
+        "Are there any risks of asset loss or inability to transact for affected users?"
+      ],
+      "title": "Review DeepFreeze Amendment for Asset-Control Semantics"
+    }
+  },
+  "packet_hash": "7d7dc738b86393bbef5a02256bac07217cd3ec8b8b12fa035da2ebecb3dc6ce3",
+  "packet_id": "case_049--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "469f9762a3c8d832a7185ebb91e755298af4fa5d2aa8a995ebd6864f620011e5",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces 'DeepFreeze' capabilities, allowing issuers to freeze trustlines from interacting with payments, offers, AMMs, and the DEX.\",\n\"This constitutes a significant change to asset-control semantics and permissioning, as it prevents accounts from sending and receiving frozen assets across multiple subsystems.\",\n\"The introduction of new flags (lsfLowDeepFreeze, lsfHighDeepFreeze, tfSetDeepFreeze, tfClearDeepFreeze) expands the issuer's power to restrict asset flow, which carries material financial and compliance implications.\",\n\"Freeze/authorization bypasses and asset-control semantics are explicitly listed as reasons to use HOLD_FOR_CHALLENGE.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment is not described as a 'fix' for a bug, so the PROCEED rule for fix amendments does not apply.\",\n\"There is no explicit no-vote advisory, retired status, or critical unsafe evidence suggesting REJECT.\",\n\"There is no description of an unresolved bug or vulnerability requiring DELAY_FOR_FIX.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the core functionality of DeepFreeze, which allows issuers to freeze trustlines from interacting with payments, offers, AMMs, and the DEX, directly impacting asset-control semantics.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Confirms the standard amendment voting process, but does not mitigate the material risk of the feature itself.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Provides version context but does not alter the risk assessment of the freeze capabilities.\"\n}\n],\n\"decision_summary\": \"The DeepFreeze amendment introduces significant asset-control semantics by allowing issuers to freeze trustlines from interacting with payments, offers, AMMs, and the DEX. This expands issuer power and impacts financial and compliance workflows. According to the task rules, material asset-control semantics and freeze-related changes require HOLD_FOR_CHALLENGE for explicit review.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 45,\n\"packet_verification\": 10,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Specific details on how DeepFreeze interacts with existing freeze flags or edge cases in AMM settlement.\",\n\"Potential impact on cross-feature canonicalization or ledger repair.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the DeepFreeze mechanism introduce any consensus or liveness risks?\",\n\"Are there any unintended interactions with existing freeze flags or AMM invariants?\"\n],\n\"recommended_validator_action\": \"Review the implementation details of DeepFreeze flags and their impact on asset control and compliance workflows.\",\n\"review_questions\": [\n\"How does DeepFreeze differ from existing freeze capabilities?\",\n\"What are the implications for accounts that are deep frozen?\",\n\"Are there any risks of asset loss or inability to transact for affected users?\"\n],\n\"title\": \"Review DeepFreeze Amendment for Asset-Control Semantics\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 705,
+      "prompt_tokens": 1133,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1838
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:39:04Z"
+}

@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_027",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "C1B8D934087225F509BEB5A8EC24447854713EE447D277F69545ABFA0E0FD490",
+    "amendment_name": "Tickets",
+    "decision_surface": "XRPL validator amendment decision surface for Tickets.",
+    "source_facts": [
+      {
+        "claim": "Tickets: This amendment was replaced by the TicketBatch amendment.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "Known Amendments status for Tickets is obsolete/removed: OBSOLETE.",
+        "fact_id": "F5",
+        "source_id": "xrpl_known_amendments_md"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "4cb5885f496e596f7046052226340fc812409dc9ae0226872bacd1caf6ac346d",
+  "packet_id": "case_027--triage",
+  "packet_version": 1
+}

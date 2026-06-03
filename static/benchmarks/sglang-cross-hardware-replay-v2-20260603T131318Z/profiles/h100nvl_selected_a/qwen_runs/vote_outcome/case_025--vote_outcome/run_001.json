@@ -1,0 +1,64 @@
+{
+  "completed_at": "2026-06-03T13:47:29Z",
+  "error": "",
+  "event_id": "case_025",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "218283ef245e63d8cb856b2729301e1cf9059c5ef8ccfdb1f308d4f09db2b65a",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment SHAMapV2 is explicitly marked as OBSOLETE in the source facts, indicating it is no longer a valid or active proposal for the network.",
+      "Voting for an obsolete amendment provides no functional benefit and may indicate a lack of awareness of the current amendment status."
+    ],
+    "arguments_for_yes": [
+      "The technical description in F1 suggests the amendment offers efficiency improvements to the hash tree structure, which is generally a positive technical change if it were active."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "This fact explicitly states that the status of SHAMapV2 is OBSOLETE, which is the primary determinant for the voting recommendation. An obsolete amendment should not be supported."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "This fact describes the technical nature of the amendment, confirming it is a structural change to the ledger hash tree, but its relevance is negated by the obsolete status."
+      }
+    ],
+    "decision_summary": "The amendment SHAMapV2 is classified as OBSOLETE. Therefore, the correct governance action is to not support it, resulting in a NO vote.",
+    "forbidden_stronger_claim": "The amendment is harmful to the network.",
+    "missing_evidence": [
+      "Current active status of the amendment (though F5 implies it is not active/obsolete)",
+      "Validator set's current stance on obsolete amendments"
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "59a04b3a73e2f2a9418c0825ad91558ab0913baf9c9c17d6b8bc447dad207e97",
+  "packet_id": "case_025--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "b7897cc9ccaeb193cefc443766efd32a99b660f5e728b308174bd05222f02603",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment SHAMapV2 is explicitly marked as OBSOLETE in the source facts, indicating it is no longer a valid or active proposal for the network.\",\n    \"Voting for an obsolete amendment provides no functional benefit and may indicate a lack of awareness of the current amendment status.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The technical description in F1 suggests the amendment offers efficiency improvements to the hash tree structure, which is generally a positive technical change if it were active.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"This fact explicitly states that the status of SHAMapV2 is OBSOLETE, which is the primary determinant for the voting recommendation. An obsolete amendment should not be supported.\"\n    },\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"This fact describes the technical nature of the amendment, confirming it is a structural change to the ledger hash tree, but its relevance is negated by the obsolete status.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment SHAMapV2 is classified as OBSOLETE. Therefore, the correct governance action is to not support it, resulting in a NO vote.\",\n  \"forbidden_stronger_claim\": \"The amendment is harmful to the network.\",\n  \"missing_evidence\": [\n    \"Current active status of the amendment (though F5 implies it is not active/obsolete)\",\n    \"Validator set's current stance on obsolete amendments\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 378,
+      "prompt_tokens": 710,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1088
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:47:23Z"
+}

@@ -1,0 +1,45 @@
+
+DeepGEMM warmup:  95%|█████████▌| 15621/16384 [00:18<00:01, 692.99it/s][A
+
+DeepGEMM warmup:  96%|█████████▌| 15691/16384 [00:18<00:01, 691.31it/s][A
+
+DeepGEMM warmup:  96%|█████████▌| 15761/16384 [00:18<00:00, 690.12it/s][A
+
+DeepGEMM warmup:  97%|█████████▋| 15831/16384 [00:18<00:00, 689.19it/s][A
+
+DeepGEMM warmup:  97%|█████████▋| 15900/16384 [00:18<00:00, 686.91it/s][A
+
+DeepGEMM warmup:  97%|█████████▋| 15969/16384 [00:18<00:00, 683.15it/s][A
+
+DeepGEMM warmup:  98%|█████████▊| 16038/16384 [00:18<00:00, 680.53it/s][A
+
+DeepGEMM warmup:  98%|█████████▊| 16107/16384 [00:18<00:00, 678.60it/s][A
+
+DeepGEMM warmup:  99%|█████████▊| 16175/16384 [00:19<00:00, 674.64it/s][A
+
+DeepGEMM warmup:  99%|█████████▉| 16243/16384 [00:19<00:00, 670.75it/s][A
+
+DeepGEMM warmup: 100%|█████████▉| 16311/16384 [00:19<00:00, 667.99it/s][A
+
+DeepGEMM warmup: 100%|█████████▉| 16378/16384 [00:19<00:00, 666.03it/s][A
+DeepGEMM warmup: 100%|██████████| 16384/16384 [00:19<00:00, 845.06it/s]
+
+Capturing batches (bs=1 avail_mem=19.47 GB): 100%|██████████| 1/1 [02:37<00:00, 157.23s/it]
+Capturing batches (bs=1 avail_mem=19.47 GB): 100%|██████████| 1/1 [02:37<00:00, 157.23s/it]
+[2026-06-03 13:37:15] Capture cuda graph end. Time elapsed: 157.82 s. mem usage=0.01 GB. avail mem=19.46 GB.
+[2026-06-03 13:37:15] Disable piecewise CUDA graph because --disable-piecewise-cuda-graph is set
+[2026-06-03 13:37:24] max_total_num_tokens=262748, chunked_prefill_size=4096, max_prefill_tokens=16384, max_running_requests=1, context_len=32768, available_gpu_mem=19.46 GB
+[2026-06-03 13:37:24] Tree cache initialized: source=default impl=MambaRadixCache hybrid_swa=False hybrid_ssm=True hierarchical=False streaming_wrapped=False
+[2026-06-03 13:37:24] INFO:     Started server process [439]
+[2026-06-03 13:37:24] INFO:     Waiting for application startup.
+[2026-06-03 13:37:24] Using default chat sampling params from model generation config: {'temperature': 1.0, 'top_k': 20, 'top_p': 0.95}
+[2026-06-03 13:37:24] INFO:     Application startup complete.
+[2026-06-03 13:37:24] INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+[2026-06-03 13:37:25] INFO:     127.0.0.1:42288 - "GET /model_info HTTP/1.1" 200 OK
+[2026-06-03 13:37:44] Prefill batch, #new-seq: 1, #new-token: 80, #cached-token: 0, full token usage: 0.00, mamba usage: 0.02, #running-req: 0, #queue-req: 0, #pending-token: 0, cuda graph: False, input throughput (token/s): 3.98
+[2026-06-03 13:37:48] INFO:     127.0.0.1:42302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+[2026-06-03 13:37:48] The server is fired up and ready to roll!
+/usr/local/lib/python3.12/dist-packages/fastapi/routing.py:120: FastAPIDeprecationWarning: ORJSONResponse is deprecated, FastAPI now serializes data directly to JSON bytes via Pydantic when a return type or response model is set, which is faster and doesn't need a custom response class. Read more in the FastAPI docs: https://fastapi.tiangolo.com/advanced/custom-response/#orjson-or-response-model and https://fastapi.tiangolo.com/tutorial/response-model/
+  response = await f(request)
+[2026-06-03 13:39:45] INFO:     127.0.0.1:43006 - "GET /v1/models HTTP/1.1" 200 OK
+[2026-06-03 13:40:12] INFO:     127.0.0.1:34446 - "GET /v1/models HTTP/1.1" 200 OK

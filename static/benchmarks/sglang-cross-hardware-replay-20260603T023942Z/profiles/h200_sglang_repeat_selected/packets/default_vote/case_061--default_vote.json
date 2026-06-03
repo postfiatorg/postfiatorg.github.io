@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_061",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "03BDC0099C4E14163ADA272C1B6F6FABB448CC3E51F522F978041E4B57D9158C",
+    "amendment_name": "fixNFTokenReserve",
+    "decision_surface": "XRPL validator amendment decision surface for fixNFTokenReserve.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixNFTokenReserve: This amendment adds a check to the NFTokenAcceptOffer transactor to see if the OwnerCount changes. If it does, it makes an additional check that the reserve requirement is met for the updated owner count.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixNFTokenReserve appears in XRPSCAN with introduced rippled version 2.1.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "db28f7e8477431167c0c15822cd227de7f20897d2b5e8c0cf2c5dac0be2096b5",
+  "packet_id": "case_061--default_vote",
+  "packet_version": 1
+}

@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T13:55:37Z",
+  "error": "",
+  "event_id": "case_042",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "1b7ef72b39d1e1c148d7d4906594ae9c5a99574168e45b80c022aecb7b2b8f8a",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment 'Credentials' (ID 1CB67D082CF7D9102412D34258CEDB400E659352D3B207348889297A6D90F5EF) is contained in the validated ledger Amendments object with a recorded enabled date of 2025-09-04. According to the task rules, the presence of enabled ledger membership corresponds to the ENABLED state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "45d8f1b2ff27ffc376d2012c49a003245ef3a616717de08cee89f0f184d60f79",
+  "packet_id": "case_042--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "b8c29fb999e7c2afbba4532690b5bb2948615c053ed0f69f28a7315543fd57a9",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 confirms that the amendment 'Credentials' (ID 1CB67D082CF7D9102412D34258CEDB400E659352D3B207348889297A6D90F5EF) is contained in the validated ledger Amendments object with a recorded enabled date of 2025-09-04. According to the task rules, the presence of enabled ledger membership corresponds to the ENABLED state.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 235,
+      "prompt_tokens": 822,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1057
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:55:33Z"
+}

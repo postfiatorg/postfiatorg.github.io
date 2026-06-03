@@ -1,0 +1,90 @@
+{
+  "completed_at": "2026-06-03T03:12:47Z",
+  "error": "",
+  "event_id": "case_035",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "6d0b4d0a4a326f0249b499d09727ab0f5dcfb26458dc7641777c11802826dc02",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment modifies NFT offer settlement semantics by deleting expired offers during transaction processing, which is a material risk pattern.",
+      "The amendment modifies Vault withdrawal logic to enforce trust line token limits, impacting asset control and accounting.",
+      "The amendment modifies Lending Protocol accounting and invariants, including loan status updates and CoverAvailable checks, which are material financial and invariant risks.",
+      "The amendment modifies Permissioned Domain invariants, impacting permissioning semantics."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', indicating it is intended as a fix.",
+      "The packet describes the changes as fixes for specific issues (expired entries, skipped checks, accounting updates)."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the specific changes: NFT offer deletion (NFT offer-settlement semantics), Vault withdrawal trust line limits (asset-control/accounting), and Lending Protocol accounting/invariants (material financial/invariant risk). These fall under the material risk patterns that require HOLD_FOR_CHALLENGE despite the 'fix' prefix."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for conservative review of material changes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment identity and version association, but does not mitigate the material risk described in F1."
+      }
+    ],
+    "decision_summary": "Although the amendment name starts with 'fix', the packet describes changes to NFT offer-settlement semantics, Vault asset-control/accounting, and Lending Protocol financial invariants. According to the task rule, these are material risk patterns that require HOLD_FOR_CHALLENGE rather than PROCEED, even for fix amendments.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on the scope of 'expired' offers and potential edge cases in deletion logic.",
+      "Details on the impact of the Vault trust line limit enforcement on existing vault operations."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the NFT offer deletion logic introduce any consensus or liveness risks?",
+        "Could the Vault trust line limit enforcement cause unexpected transaction failures for legitimate withdrawals?",
+        "Are the Lending Protocol invariant checks sufficient to prevent accounting discrepancies?"
+      ],
+      "recommended_validator_action": "Review the implementation details of the NFT, Vault, and Lending Protocol changes to ensure no unintended side effects or consensus risks.",
+      "review_questions": [
+        "Is the deletion of expired NFTokenOffers safe and consistent across all nodes?",
+        "Does the VaultWithdraw trust line limit check align with existing trust line semantics?",
+        "Are the Loan accounting updates complete and accurate for all loan states?"
+      ],
+      "title": "Review fixCleanup3_1_3 for Material Risk in NFT, Vault, and Lending Protocols"
+    }
+  },
+  "packet_hash": "ce837cf03a487658ba0f3ae1c616242dc6179b345a26d0026e6fd662726ede1e",
+  "packet_id": "case_035--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "a971fb6f72e6c3c9d9cf6b4bdd1d8ef5adaed237dc415a1b0d28f59bff473dd6",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment modifies NFT offer settlement semantics by deleting expired offers during transaction processing, which is a material risk pattern.\",\n\"The amendment modifies Vault withdrawal logic to enforce trust line token limits, impacting asset control and accounting.\",\n\"The amendment modifies Lending Protocol accounting and invariants, including loan status updates and CoverAvailable checks, which are material financial and invariant risks.\",\n\"The amendment modifies Permissioned Domain invariants, impacting permissioning semantics.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix', indicating it is intended as a fix.\",\n\"The packet describes the changes as fixes for specific issues (expired entries, skipped checks, accounting updates).\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the specific changes: NFT offer deletion (NFT offer-settlement semantics), Vault withdrawal trust line limits (asset-control/accounting), and Lending Protocol accounting/invariants (material financial/invariant risk). These fall under the material risk patterns that require HOLD_FOR_CHALLENGE despite the 'fix' prefix.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for conservative review of material changes.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment identity and version association, but does not mitigate the material risk described in F1.\"\n}\n],\n\"decision_summary\": \"Although the amendment name starts with 'fix', the packet describes changes to NFT offer-settlement semantics, Vault asset-control/accounting, and Lending Protocol financial invariants. According to the task rule, these are material risk patterns that require HOLD_FOR_CHALLENGE rather than PROCEED, even for fix amendments.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 45,\n\"packet_verification\": 10,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Specific details on the scope of 'expired' offers and potential edge cases in deletion logic.\",\n\"Details on the impact of the Vault trust line limit enforcement on existing vault operations.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the NFT offer deletion logic introduce any consensus or liveness risks?\",\n\"Could the Vault trust line limit enforcement cause unexpected transaction failures for legitimate withdrawals?\",\n\"Are the Lending Protocol invariant checks sufficient to prevent accounting discrepancies?\"\n],\n\"recommended_validator_action\": \"Review the implementation details of the NFT, Vault, and Lending Protocol changes to ensure no unintended side effects or consensus risks.\",\n\"review_questions\": [\n\"Is the deletion of expired NFTokenOffers safe and consistent across all nodes?\",\n\"Does the VaultWithdraw trust line limit check align with existing trust line semantics?\",\n\"Are the Loan accounting updates complete and accurate for all loan states?\"\n],\n\"title\": \"Review fixCleanup3_1_3 for Material Risk in NFT, Vault, and Lending Protocols\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 697,
+      "prompt_tokens": 1284,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1981
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:12:38Z"
+}

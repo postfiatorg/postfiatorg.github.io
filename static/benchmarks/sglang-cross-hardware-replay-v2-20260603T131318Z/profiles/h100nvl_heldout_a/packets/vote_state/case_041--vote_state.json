@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_041",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "08DE7D96082187F6E6578530258C77FAABABE4C20474BDB82F04B021F1A68647",
+    "amendment_name": "PayChan",
+    "decision_surface": "XRPL validator amendment decision surface for PayChan.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "PayChan appears in XRPSCAN with introduced rippled version 0.33.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 08DE7D96082187F6E6578530258C77FAABABE4C20474BDB82F04B021F1A68647; XRPSCAN reports enabled_on=2017-03-31T06:27:20.000Z and enabled_in_ledger=28685313.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "7d9d0e674397e43251fe0a83c390d8fc57cad23bb934dd72706d1fe0cc664aac",
+  "packet_id": "case_041--vote_state",
+  "packet_version": 1
+}

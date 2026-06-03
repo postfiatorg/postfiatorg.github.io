@@ -1,0 +1,68 @@
+{
+  "completed_at": "2026-06-03T13:47:47Z",
+  "error": "",
+  "event_id": "case_035",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "b510d8c9068647500649e97d1fb044e301a5b93af51292af1e64a04851e129c4",
+  "output_json": {
+    "arguments_for_no": [],
+    "arguments_for_yes": [
+      "The amendment addresses critical ledger integrity issues, such as expired NFTokenOffer entries remaining on the ledger and invariant checks for Permissioned Domains.",
+      "It fixes security and accounting bugs in the Lending Protocol and Vaults, including trust line token limit checks and loan accounting updates.",
+      "The changes are bug fixes and invariant enforcements rather than controversial feature additions, reducing the risk of unintended negative consequences.",
+      "Activation ensures consistency across the network by preventing amendment-blocked servers and resolving known defects in version 3.1.3."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Details the specific bug fixes and invariant checks that improve ledger correctness, security, and accounting accuracy for NFTs, Domains, Vaults, and Lending."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the necessity of voting to prevent network fragmentation and amendment-blocking, supporting the standard practice of enabling valid fixes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with a specific rippled version (3.1.3), indicating it is a defined and trackable update."
+      }
+    ],
+    "decision_summary": "The fixCleanup3_1_3 amendment consists of essential bug fixes and invariant checks for NFTs, Permissioned Domains, Vaults, and the Lending Protocol. These changes correct ledger state inconsistencies, enforce security limits, and ensure accurate accounting. As these are corrective measures that enhance network stability and correctness without introducing risky new features, the recommendation is to vote YES.",
+    "forbidden_stronger_claim": "This amendment guarantees zero future bugs in the Lending Protocol.",
+    "missing_evidence": [
+      "Specific test coverage metrics for the new invariant checks.",
+      "Community discussion sentiment regarding the urgency of these specific fixes."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "07dcf02b8ec0782f097be8720edfd4165eb45fb1457e5482aa5546c1bb76ef21",
+  "packet_id": "case_035--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "76df7dff963dba6e41668fce9855e54bb2895d3d4edd156ae43209af0ee29392",
+  "raw_message_content": "{\n\"arguments_for_no\": [],\n\"arguments_for_yes\": [\n\"The amendment addresses critical ledger integrity issues, such as expired NFTokenOffer entries remaining on the ledger and invariant checks for Permissioned Domains.\",\n\"It fixes security and accounting bugs in the Lending Protocol and Vaults, including trust line token limit checks and loan accounting updates.\",\n\"The changes are bug fixes and invariant enforcements rather than controversial feature additions, reducing the risk of unintended negative consequences.\",\n\"Activation ensures consistency across the network by preventing amendment-blocked servers and resolving known defects in version 3.1.3.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Details the specific bug fixes and invariant checks that improve ledger correctness, security, and accounting accuracy for NFTs, Domains, Vaults, and Lending.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Establishes the necessity of voting to prevent network fragmentation and amendment-blocking, supporting the standard practice of enabling valid fixes.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment is associated with a specific rippled version (3.1.3), indicating it is a defined and trackable update.\"\n}\n],\n\"decision_summary\": \"The fixCleanup3_1_3 amendment consists of essential bug fixes and invariant checks for NFTs, Permissioned Domains, Vaults, and the Lending Protocol. These changes correct ledger state inconsistencies, enforce security limits, and ensure accurate accounting. As these are corrective measures that enhance network stability and correctness without introducing risky new features, the recommendation is to vote YES.\",\n\"forbidden_stronger_claim\": \"This amendment guarantees zero future bugs in the Lending Protocol.\",\n\"missing_evidence\": [\n\"Specific test coverage metrics for the new invariant checks.\",\n\"Community discussion sentiment regarding the urgency of these specific fixes.\"\n],\n\"vote_confidence\": 0.95,\n\"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 439,
+      "prompt_tokens": 861,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1300
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:47:40Z"
+}

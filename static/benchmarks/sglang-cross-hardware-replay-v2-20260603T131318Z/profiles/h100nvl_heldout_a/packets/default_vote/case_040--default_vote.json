@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_040",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "32A122F1352A4C7B3A6D790362CC34749C5E57FCE896377BFDC6CCD14F6CD627",
+    "amendment_name": "NonFungibleTokensV1_1",
+    "decision_surface": "XRPL validator amendment decision surface for NonFungibleTokensV1_1.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "NonFungibleTokensV1_1: Adds native support for non-fungible tokens, including fixes to several issues that were discovered after NonFungibleTokensV1. This amendment combines the effects of the following amendments, rendering the individual amendments obsolete: - NonFungibleTokensV1 - fixNFTokenNegOffer - fixNFTokenDirV1 It has no other effects. The fixRemoveNFTokenAutoTrustLine fixes an known issue with this amendment. When creating a new test network, you should make sure that these amendments should be enabled together or the fix amendment is enabled first.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "NonFungibleTokensV1_1 appears in XRPSCAN with introduced rippled version 1.9.2.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "2561bdcf6788af729b20f6ed3ee20c666268e99c2b9717c2d3c417fba4ff4253",
+  "packet_id": "case_040--default_vote",
+  "packet_version": 1
+}

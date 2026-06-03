@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_016",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "5D08145F0A4983F23AFFFF514E83FAD355C5ABFBB6CAB76FB5BC8519FF5F33BE",
+    "amendment_name": "fix1515",
+    "decision_surface": "XRPL validator amendment decision surface for fix1515.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fix1515: Changes how Payment transactions consume offers to remove a minor difference in how payment processing and offer processing consume liquidity. (Also affects how OfferCreate transactions are processed if FlowCross is enabled.) Without the amendment, payment processing gives up on using particular order books if the transaction would consume over 2000 offers at the same exchange rate. In this case, the payment does not use the liquidity from those offers, and does not consider that order book's remaining liquidity when attempting to complete the payment. With this amendment, if any transaction processes over 1000 offers at the same exchange rate, the transaction consumes the liquidity from the first 1000 offers, then does not consider that order book's remaining liquidity when attempting to complete the payment. In both cases, transaction processing can still complete by using liquidity from other paths or exchange rates.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fix1515 appears in XRPSCAN with introduced rippled version 1.1.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "4e87ef21dc7b88fb6ec21635cb657a7fce6eee2b4b5a371ca0489b22d6a28b94",
+  "packet_id": "case_016--default_vote",
+  "packet_version": 1
+}

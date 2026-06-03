@@ -1,0 +1,56 @@
+{
+  "completed_at": "2026-06-03T13:54:16Z",
+  "error": "",
+  "event_id": "case_021",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "83909ab9f37e49ab5bc74b6d7cafb7c749bb48bce505dc97ea47cf4003c4ef30",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Provides the current support count (17), the required threshold (28), and explicitly states there is no enabled ledger entry, which directly determines the vote state."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the general rule that sustained supermajority is required for activation, providing context for interpreting the support count against the threshold."
+      }
+    ],
+    "decision_summary": "The source facts indicate that the amendment has 17 validations out of a required 28 threshold. Since the support count is below the threshold and there is no enabled ledger entry, the amendment is not active and has not been enabled. It does not meet the criteria for MAJORITY_ACTIVE, ENABLED, or VETOED_OR_RETIRED. Therefore, it is classified as NO_MAJORITY.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Historical data to confirm if a majority was previously achieved and lost (to distinguish between NO_MAJORITY and MAJORITY_LOST), though current state is definitively below threshold."
+    ],
+    "state_confidence": 0.95,
+    "vote_state": "NO_MAJORITY"
+  },
+  "packet_hash": "f7b9533f66267cac6cecc620ea33fd71f9a40fe4abde874a6b6d39b7a9a9ef34",
+  "packet_id": "case_021--vote_state",
+  "parsed_label": "NO_MAJORITY",
+  "prompt_hash": "b3871d527c26181bfa32fd2eeb0fbc2d535374e5a6a1cb968bfbc3afeb515d38",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Provides the current support count (17), the required threshold (28), and explicitly states there is no enabled ledger entry, which directly determines the vote state.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Establishes the general rule that sustained supermajority is required for activation, providing context for interpreting the support count against the threshold.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts indicate that the amendment has 17 validations out of a required 28 threshold. Since the support count is below the threshold and there is no enabled ledger entry, the amendment is not active and has not been enabled. It does not meet the criteria for MAJORITY_ACTIVE, ENABLED, or VETOED_OR_RETIRED. Therefore, it is classified as NO_MAJORITY.\",\n  \"missing_evidence\": [\n    \"Historical data to confirm if a majority was previously achieved and lost (to distinguish between NO_MAJORITY and MAJORITY_LOST), though current state is definitively below threshold.\"\n  ],\n  \"state_confidence\": 0.95,\n  \"vote_state\": \"NO_MAJORITY\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 291,
+      "prompt_tokens": 748,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1039
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:54:11Z"
+}

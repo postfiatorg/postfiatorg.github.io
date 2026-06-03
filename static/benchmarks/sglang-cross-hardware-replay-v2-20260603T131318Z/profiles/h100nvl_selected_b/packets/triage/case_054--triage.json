@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_054",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "9196110C23EA879B4229E51C286180C7D02166DA712559F634372F5264D0EC59",
+    "amendment_name": "fixInnerObjTemplate2",
+    "decision_surface": "XRPL validator amendment decision surface for fixInnerObjTemplate2.",
+    "source_facts": [
+      {
+        "claim": "fixInnerObjTemplate2: This amendment standardizes the way inner objects (Object-type fields in the canonical binary format) have their formats and default values enforced. This is the same type of check that the fixInnerObjTemplate applies to AMM-related fields, but this amendment applies to all other types of inner objects, namely: - DisabledValidator field of the NegativeUNL entry. - Members of the Majorities array in the Amendments entry. - Members of the Signers array of multi-signed transactions. - Members of the SignerEntries array of SignerList ledger entries. - Several parts of the XChainBridge amendment : - Members of the XChainClaimAttestations array in XChainOwnedClaimID ledger entries - Members of the XChainCreateAccountAttestations array in XChainOwnedCreateAccountClaimID ledger entries - Members of the XChainClaimAttestationBatch array in XChainAddClaimAttestation transactions - Members of the XChainCreateAccountAttestationBatch array in XChainAddClaimAttestation transactions It is believed that this change does not affect transaction processing, but it is possible that there are edge cases where it could cause an improperly formatted transaction to receive a differen",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixInnerObjTemplate2 appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "b9b69190c3f03f8d4197a6c7ad7e27e680b7ee8c7aa27111f87ffec3ab616f91",
+  "packet_id": "case_054--triage",
+  "packet_version": 1
+}

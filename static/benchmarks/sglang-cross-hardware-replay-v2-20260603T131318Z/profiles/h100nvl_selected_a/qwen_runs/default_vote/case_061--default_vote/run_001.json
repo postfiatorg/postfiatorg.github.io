@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-03T14:01:53Z",
+  "error": "",
+  "event_id": "case_061",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "215b2d34ba8f3fa4824c2f83e8db8e0187c55b5c5cdcbea14433d730ea591a8c",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the technical function of the amendment (adding a check for OwnerCount changes and reserve requirements) but does not explicitly state the default vote or imply a safety-critical rejection default."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Indicates the amendment was introduced in rippled version 2.1.0, but does not specify the default voting stance associated with that release."
+      }
+    ],
+    "decision_summary": "The provided facts describe the technical behavior of the 'fixNFTokenReserve' amendment and its introduction version. However, none of the facts explicitly state the default vote (YES or NO) for the latest stable release. Without explicit source-backed evidence defining the default vote, the task rule requires outputting UNKNOWN.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote for fixNFTokenReserve in the latest stable release",
+      "Documentation linking the amendment to a specific default voting policy (YES/NO)"
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "db28f7e8477431167c0c15822cd227de7f20897d2b5e8c0cf2c5dac0be2096b5",
+  "packet_id": "case_061--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "bce75ce13da80532968f69cb272ca9df5da416386623ff99f5adb952b4ee7e2f",
+  "raw_message_content": "{\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the technical function of the amendment (adding a check for OwnerCount changes and reserve requirements) but does not explicitly state the default vote or imply a safety-critical rejection default.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Indicates the amendment was introduced in rippled version 2.1.0, but does not specify the default voting stance associated with that release.\"\n}\n],\n\"decision_summary\": \"The provided facts describe the technical behavior of the 'fixNFTokenReserve' amendment and its introduction version. However, none of the facts explicitly state the default vote (YES or NO) for the latest stable release. Without explicit source-backed evidence defining the default vote, the task rule requires outputting UNKNOWN.\",\n\"default_vote_confidence\": 0.0,\n\"missing_evidence\": [\n\"Explicit statement of the default vote for fixNFTokenReserve in the latest stable release\",\n\"Documentation linking the amendment to a specific default voting policy (YES/NO)\"\n],\n\"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 642,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 898
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:01:48Z"
+}

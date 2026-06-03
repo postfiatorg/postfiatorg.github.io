@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-03T13:54:03Z",
+  "error": "",
+  "event_id": "case_018",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "3670f7271181c2bfe13962d5daaa0417ff8d446876674da8bf1f62731238813a",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly states the amendment status is 'obsolete/removed: OBSOLETE', which directly maps to the VETOED_OR_RETIRED classification rule for obsolete or retired amendments."
+      },
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Confirms the amendment is not enabled (no enabled ledger entry) and currently has low support (10/35), consistent with an amendment that is no longer actively pursuing majority or has been retired."
+      }
+    ],
+    "decision_summary": "Fact F5 explicitly identifies the amendment 'fixBatchInnerSigs' as OBSOLETE. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED state. Fact F4 supports this by showing no enabled ledger entry and insufficient support, ruling out ENABLED or MAJORITY_ACTIVE states.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "63847b77fa0a9dae18b21ea9cd6a0341204c85ba03a6c36eb769bc975767e2af",
+  "packet_id": "case_018--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "e90e11f7ccedea1b2c6ae0a7c6d199f361746207a2b7c57c36b93876b6120b01",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly states the amendment status is 'obsolete/removed: OBSOLETE', which directly maps to the VETOED_OR_RETIRED classification rule for obsolete or retired amendments.\"\n    },\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Confirms the amendment is not enabled (no enabled ledger entry) and currently has low support (10/35), consistent with an amendment that is no longer actively pursuing majority or has been retired.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F5 explicitly identifies the amendment 'fixBatchInnerSigs' as OBSOLETE. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED state. Fact F4 supports this by showing no enabled ledger entry and insufficient support, ruling out ENABLED or MAJORITY_ACTIVE states.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 255,
+      "prompt_tokens": 789,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1044
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:53:59Z"
+}

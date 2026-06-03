@@ -1,0 +1,47 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_021",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "2BF037D90E1B676B17592A8AF55E88DB465398B4B597AE46EECEE1399AB05699",
+    "amendment_name": "fixXChainRewardRounding",
+    "decision_surface": "XRPL validator amendment decision surface for fixXChainRewardRounding.",
+    "source_facts": [
+      {
+        "claim": "fixXChainRewardRounding: This amendment ensures that reward shares for cross-chain transactions are always rounded down. This preserves the original intended behavior. Without this amendment, the XChainBridge amendment has an incompatibility with the fixUniversalNumber amendment. When those two amendments are both enabled, the Number type may be used for some intermediate calculations of token amounts. In some cases, values that used to round down instead are rounded to nearest, which alters the intended rounding behavior for reward shares in cross-chain transactions. This amendment restores the intended rounding behavior. It has no effect unless both the XChainBridge and fixUniversalNumber amendments are also enabled.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixXChainRewardRounding appears in XRPSCAN with introduced rippled version 2.2.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "XRPSCAN currently reports support count 17 of 35 validations, threshold 28, and no enabled ledger entry for fixXChainRewardRounding.",
+        "fact_id": "F4",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "ec3211ab60d1865a40a7fdca6d694288265c17e14a9496f6b1b208c3954851cf",
+  "packet_id": "case_021--triage",
+  "packet_version": 1
+}

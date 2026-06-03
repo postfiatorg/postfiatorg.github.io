@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T02:53:18Z",
+  "error": "",
+  "event_id": "case_022",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "066f9d2042025d5ac95b4b387d5837173b8f29f8aaf1944eae469d64e5d3a955",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "The fact explicitly states that the status of the FlowV2 amendment is 'obsolete/removed: OBSOLETE', which directly maps to the VETOED_OR_RETIRED classification criteria."
+      }
+    ],
+    "decision_summary": "The source fact F5 identifies the amendment FlowV2 as obsolete/removed. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "8931bcccf6b2bce6d8d129bcfc0e0bc7e633339a96a65969ffd7a4492fc04cdf",
+  "packet_id": "case_022--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "06d0330190de76869f10090908c8844a09a0f9c0775a93da3acded6a5bf48821",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"The fact explicitly states that the status of the FlowV2 amendment is 'obsolete/removed: OBSOLETE', which directly maps to the VETOED_OR_RETIRED classification criteria.\"\n    }\n  ],\n  \"decision_summary\": \"The source fact F5 identifies the amendment FlowV2 as obsolete/removed. According to the task rules, an amendment that is obsolete or retired falls under the VETOED_OR_RETIRED state.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 162,
+      "prompt_tokens": 676,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 838
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:53:14Z"
+}

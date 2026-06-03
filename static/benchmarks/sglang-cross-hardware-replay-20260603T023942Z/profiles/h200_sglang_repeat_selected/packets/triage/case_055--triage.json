@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_055",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "763C37B352BE8C7A04E810F8E462644C45AFEAD624BF3894A08E5C917CF9FF39",
+    "amendment_name": "fixEnforceNFTokenTrustline",
+    "decision_surface": "XRPL validator amendment decision surface for fixEnforceNFTokenTrustline.",
+    "source_facts": [
+      {
+        "claim": "fixEnforceNFTokenTrustline: Fixes two bugs relating to the handling of NFT transfer fees and trust lines: - Adds a check to NFTokenAcceptOffer transactions to ensure that the minter has a trust line to accept the transfer fee. Without this amendment, the check only applies when an NFT trade offer is created, not when the offer is accepted; as a result, if a necessary trust line is removed in between creating and accepting the offer, the trust line is inappropriate re-created when the offer is accepted. With this amendment, the transaction to accept the NFT trade offer fails if the minter no longer has a trust line to accept the transfer fee. (For more detail, see issue #4925.) - Adjusts a check for the presence of a trust line when the minter of the NFT is also the issuer of the fungible token that would be paid as a transfer fee. Without this amendment, the NFTokenCreateOffer transaction fails with the result code tecNO_LINE if the NFT in question has a transfer fee, the offer amount is denominated in fungible tokens issued by the minter, and the account placing the offer does not have a trust line for those tokens. With the amendment, the offer can be created successfully. (For m",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixEnforceNFTokenTrustline appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "0edd833324acce4892207bbeda1a92622360660cc8fcf125263d5283a20feee3",
+  "packet_id": "case_055--triage",
+  "packet_version": 1
+}

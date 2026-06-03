@@ -1,0 +1,41 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_035",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "303ACB16CF8DBD3B5C34F131A9D19A7DE01AE05F480A8A682B869D1B4AAC8CFC",
+    "amendment_name": "fixCleanup3_1_3",
+    "decision_surface": "XRPL validator amendment decision surface for fixCleanup3_1_3.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "fixCleanup3_1_3: This amendment is a collection of fixes for NFTs, Permissioned Domains, Vaults, and the Lending Protocol: - Fixes an issue with expired NFTokenOffer entries remaining on the ledger. With this amendment enabled, using the NFTokenAcceptOffer transaction on an expired NFTokenOffer now deletes it as part of transaction processing. - Adds an invariant check to ensure Permissioned Domains aren't modified by failed transactions. - Fixes a trust line token limit check that was skipped when withdrawing vault assets. With this amendment enabled, VaultWithdraw transactions that specify either vault shares or vault assets will respect the trust line token limit of the destination address. - Fixes loan accounting information not updating in its associated Loan, LoanBroker, and Vault entries if the loan was defaulted, impaired, or unimpaired. - Changes a LoanPay error to return tecNO_PERMISSION instead of temINVALID_FLAG when attempting to overpay on a loan that doesn't permit overpayments. - Adds an additional check for LoanBroker invariants to ensure the listed CoverAvailable exactly matches the assets held in the associated pseudo-account.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixCleanup3_1_3 appears in XRPSCAN with introduced rippled version 3.1.3.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "3cf7aa1afcfa32869e4b30c54855acb8b5906f3a0d955c419041c23c73e17f62",
+  "packet_id": "case_035--default_vote",
+  "packet_version": 1
+}

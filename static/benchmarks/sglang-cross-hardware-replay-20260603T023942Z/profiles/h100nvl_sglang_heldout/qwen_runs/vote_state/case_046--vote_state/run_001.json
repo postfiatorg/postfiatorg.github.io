@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T03:28:16Z",
+  "error": "",
+  "event_id": "case_046",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "afe963d0dd7a44565c221ac065c4691b24c958e29a4652e1263c752a4ab935b9",
+  "output_hash": "4fc76a46d0cd6bad6eaea86a3ccec43f6c6dbdb5fdd0d841bdd2adc38adcc1e5",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "Fact F4 confirms that the amendment 'TickSize' is included in the validated ledger Amendments object and provides historical data showing it was enabled on 2017-02-21. The presence in the enabled set of the ledger Amendments object signifies that the amendment is active and part of the consensus rules. Therefore, the state is ENABLED.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "f4a39131868e2c7bffa82da64b2aea385639376d8aca08100defec15cbde93cb",
+  "packet_id": "case_046--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "1be1f3bdcccf04c153b2241d275607d045d77b0376874106f89e44d3f525351f",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"Fact F4 confirms that the amendment 'TickSize' is included in the validated ledger Amendments object and provides historical data showing it was enabled on 2017-02-21. The presence in the enabled set of the ledger Amendments object signifies that the amendment is active and part of the consensus rules. Therefore, the state is ENABLED.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 189,
+      "prompt_tokens": 820,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1009
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:28:13Z"
+}

@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_066",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "AE35ABDEFBDE520372B31C957020B34A7A4A9DC3115A69803A44016477C84D6E",
+    "amendment_name": "fixNFTokenRemint",
+    "decision_surface": "XRPL validator amendment decision surface for fixNFTokenRemint.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixNFTokenRemint appears in XRPSCAN with introduced rippled version 1.11.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID AE35ABDEFBDE520372B31C957020B34A7A4A9DC3115A69803A44016477C84D6E; XRPSCAN reports enabled_on=2023-11-27T14:44:30.000Z and enabled_in_ledger=84206081.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "4553699b50d305116491e1a0133eb1ce3286e3b9d8463d3003047ad62b5b430a",
+  "packet_id": "case_066--vote_state",
+  "packet_version": 1
+}

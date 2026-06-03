@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_032",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "2CD5286D8D687E98B41102BDD797198E81EA41DF7BD104E6561FEB104EFF2561",
+    "amendment_name": "fixTakerDryOfferRemoval",
+    "decision_surface": "XRPL validator amendment decision surface for fixTakerDryOfferRemoval.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixTakerDryOfferRemoval appears in XRPSCAN with introduced rippled version 1.2.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 2CD5286D8D687E98B41102BDD797198E81EA41DF7BD104E6561FEB104EFF2561; XRPSCAN reports enabled_on=2019-04-02T21:17:41.000Z and enabled_in_ledger=46257665.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "13732d4a4d022867d3404ce0578af10f84b1da1f06047f7fbb68b1f97ab5c8e5",
+  "packet_id": "case_032--vote_state",
+  "packet_version": 1
+}

@@ -1,0 +1,72 @@
+{
+  "completed_at": "2026-06-03T15:11:24Z",
+  "error": "",
+  "event_id": "case_046",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a1a4b78aae204842a6c01e32f84514ea12c5af17b7a6928cd26052300e110764",
+  "output_hash": "a8339a1fd7543544792f494f1bce417f6bf699327fdb322e9ef20457f13b4429",
+  "output_json": {
+    "arguments_for_no": [
+      "Amendment voting requires sustained supermajority, and incompatible servers risk becoming amendment-blocked if they do not upgrade in time.",
+      "The change modifies core order book ranking logic, which introduces complexity and potential for unexpected behavior in trading strategies."
+    ],
+    "arguments_for_yes": [
+      "TickSize reduces the incentive to spam the ledger with offers that are only marginally better than existing ones, improving network efficiency.",
+      "It allows currency issuers to configure significant digits, enabling more meaningful price improvements to outrank previous offers.",
+      "The amendment may increase the efficiency of order book storage by grouping offers into fewer exchange rates.",
+      "It was introduced in rippled version 0.50.0, indicating it has undergone development and testing cycles."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the functional benefits of TickSize, including reduced spam, improved order book efficiency, and configurable significant digits for issuers."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Highlights the operational risk of amendment voting, specifically the potential for servers to become amendment-blocked if they fail to maintain compatibility."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's introduction in a specific rippled version, providing context on its maturity and deployment history."
+      }
+    ],
+    "decision_summary": "The TickSize amendment offers significant benefits for network efficiency and spam reduction by allowing issuers to control price precision. While there are operational risks associated with the upgrade process, the functional improvements to the order book justify a YES vote.",
+    "forbidden_stronger_claim": "The amendment is guaranteed to eliminate all order book spam.",
+    "missing_evidence": [
+      "Data on the actual reduction in ledger spam after deployment.",
+      "Metrics on the impact on order book storage efficiency.",
+      "Feedback from major currency issuers regarding the usability of the TickSize field."
+    ],
+    "vote_confidence": 0.85,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "53f9ed2428ee247ff97575a2220a82c6ee40f01fba77b6e97a05867afccbded8",
+  "packet_id": "case_046--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "ad419313dbc9d33c1c60cd0f7e518e7b4155ae5f077daef62a6e952e3ccb5bb6",
+  "raw_message_content": "{\n\"arguments_for_no\": [\n\"Amendment voting requires sustained supermajority, and incompatible servers risk becoming amendment-blocked if they do not upgrade in time.\",\n\"The change modifies core order book ranking logic, which introduces complexity and potential for unexpected behavior in trading strategies.\"\n],\n\"arguments_for_yes\": [\n\"TickSize reduces the incentive to spam the ledger with offers that are only marginally better than existing ones, improving network efficiency.\",\n\"It allows currency issuers to configure significant digits, enabling more meaningful price improvements to outrank previous offers.\",\n\"The amendment may increase the efficiency of order book storage by grouping offers into fewer exchange rates.\",\n\"It was introduced in rippled version 0.50.0, indicating it has undergone development and testing cycles.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the functional benefits of TickSize, including reduced spam, improved order book efficiency, and configurable significant digits for issuers.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Highlights the operational risk of amendment voting, specifically the potential for servers to become amendment-blocked if they fail to maintain compatibility.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment's introduction in a specific rippled version, providing context on its maturity and deployment history.\"\n}\n],\n\"decision_summary\": \"The TickSize amendment offers significant benefits for network efficiency and spam reduction by allowing issuers to control price precision. While there are operational risks associated with the upgrade process, the functional improvements to the order book justify a YES vote.\",\n\"forbidden_stronger_claim\": \"The amendment is guaranteed to eliminate all order book spam.\",\n\"missing_evidence\": [\n\"Data on the actual reduction in ledger spam after deployment.\",\n\"Metrics on the impact on order book storage efficiency.\",\n\"Feedback from major currency issuers regarding the usability of the TickSize field.\"\n],\n\"vote_confidence\": 0.85,\n\"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 454,
+      "prompt_tokens": 863,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1317
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T15:11:17Z"
+}

@@ -1,0 +1,64 @@
+{
+  "completed_at": "2026-06-03T15:05:30Z",
+  "error": "",
+  "event_id": "case_003",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a1a4b78aae204842a6c01e32f84514ea12c5af17b7a6928cd26052300e110764",
+  "output_hash": "99b51607792a089bf10d6b7b258a60ca161845b3f82159ed07823b9eb04e0e0f",
+  "output_json": {
+    "arguments_for_no": [
+      "The CryptoConditions amendment has no functional effect because it depends on the SusPay amendment, which was replaced by the Escrow amendment.",
+      "Enabling an amendment with no effect provides no benefit to the network while still requiring validator coordination and risking amendment-blocking for incompatible servers."
+    ],
+    "arguments_for_yes": [
+      "The amendment was introduced in rippled version 0.50.0, indicating it is part of the historical software release cycle."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes that CryptoConditions is functionally inert because its dependency (SusPay) was replaced, making the amendment useless."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Highlights the risk of amendment-blocking for incompatible servers, adding cost/risk to enabling a useless amendment."
+      }
+    ],
+    "decision_summary": "The CryptoConditions amendment is functionally obsolete because it relies on the SusPay amendment, which was superseded by the Escrow amendment. Since it has no effect, voting YES provides no value and only introduces unnecessary coordination overhead and potential compatibility risks. Therefore, the recommendation is NO.",
+    "forbidden_stronger_claim": "The amendment is harmful to the network.",
+    "missing_evidence": [
+      "Current status of the amendment in the ledger (enabled/disabled).",
+      "Validator community sentiment or prior voting history for this specific amendment."
+    ],
+    "vote_confidence": 0.95,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "56085095cc7d6b8cfbd6eb78557a5e42fdee3bbca7648af83e1b27a79def9043",
+  "packet_id": "case_003--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "937dbcef2de9f84ae795f74e5344a2d07239f54e7ee56569619d4cf033c7372d",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The CryptoConditions amendment has no functional effect because it depends on the SusPay amendment, which was replaced by the Escrow amendment.\",\n    \"Enabling an amendment with no effect provides no benefit to the network while still requiring validator coordination and risking amendment-blocking for incompatible servers.\"\n  ],\n  \"arguments_for_yes\": [\n    \"The amendment was introduced in rippled version 0.50.0, indicating it is part of the historical software release cycle.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Establishes that CryptoConditions is functionally inert because its dependency (SusPay) was replaced, making the amendment useless.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Highlights the risk of amendment-blocking for incompatible servers, adding cost/risk to enabling a useless amendment.\"\n    }\n  ],\n  \"decision_summary\": \"The CryptoConditions amendment is functionally obsolete because it relies on the SusPay amendment, which was superseded by the Escrow amendment. Since it has no effect, voting YES provides no value and only introduces unnecessary coordination overhead and potential compatibility risks. Therefore, the recommendation is NO.\",\n  \"forbidden_stronger_claim\": \"The amendment is harmful to the network.\",\n  \"missing_evidence\": [\n    \"Current status of the amendment in the ledger (enabled/disabled).\",\n    \"Validator community sentiment or prior voting history for this specific amendment.\"\n  ],\n  \"vote_confidence\": 0.95,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 369,
+      "prompt_tokens": 669,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1038
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T15:05:25Z"
+}

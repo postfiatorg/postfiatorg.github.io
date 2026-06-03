@@ -1,0 +1,37 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_034",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "78ECD9CE17B0BF5B83BB3B275921FB5F5E0F672E9D24BD2E848B7C6277AE296E",
+    "amendment_name": "SmartEscrow",
+    "decision_surface": "XRPL validator amendment decision surface for SmartEscrow.",
+    "source_facts": [
+      {
+        "claim": "SmartEscrow: The Smart Escrows amendment introduces a new programmability layer to the XRPL, powered by a WebAssembly (WASM) engine. Developers can write custom functions that control when an escrow can be finished. For more details, see XLS-100: Smart Escrows.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "d27be7a356e0f1fb59363289dbe005a2fa2b95d3aa96dff9fa7b29a715d31f79",
+  "packet_id": "case_034--triage",
+  "packet_version": 1
+}

@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_047",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "6781F8368C4771B83E8B821D88F580202BCB4228075297B19E4FDC5233F1EFDC",
+    "amendment_name": "TrustSetAuth",
+    "decision_surface": "XRPL validator amendment decision surface for TrustSetAuth.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "TrustSetAuth appears in XRPSCAN with introduced rippled version 0.30.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 6781F8368C4771B83E8B821D88F580202BCB4228075297B19E4FDC5233F1EFDC; XRPSCAN reports enabled_on=2016-07-19T22:10:32.000Z and enabled_in_ledger=22721281.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "3cbfaac4299e88d9871c60a4449cc2afdd24fcf0ba831a60cb142eeb1bbdcb6b",
+  "packet_id": "case_047--vote_state",
+  "packet_version": 1
+}

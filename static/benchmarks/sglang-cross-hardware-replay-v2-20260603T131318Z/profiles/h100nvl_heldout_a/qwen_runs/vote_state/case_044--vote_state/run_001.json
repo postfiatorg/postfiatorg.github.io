@@ -1,0 +1,55 @@
+{
+  "completed_at": "2026-06-03T14:52:46Z",
+  "error": "",
+  "event_id": "case_044",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a4413e43312a9d665bcaa356648bcc89aa32490a4420217384b9b0f42206b54f",
+  "output_hash": "78320a0839cfcd92cf2a89233816705078c8ba1b877b77f11d638cb11883d862",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Describes the general process for XRPL amendment voting (requiring sustained supermajority) but provides no specific data regarding the current vote count, enablement status, or majority history for the 'Sponsor' amendment."
+      }
+    ],
+    "decision_summary": "The provided source facts only contain a general description of the XRPL amendment voting process. There is no specific evidence regarding the current state, vote counts, or enablement status of the 'Sponsor' amendment (BE1F9058...). Without specific data points indicating whether the amendment is enabled, has majority support, lost majority, or is vetoed/retired, the state cannot be determined from the given inputs.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Current vote count or percentage of validators supporting the amendment",
+      "Ledger sequence or timestamp indicating when the amendment was enabled or reached majority",
+      "Status flags indicating if the amendment is active, disabled, or retired",
+      "Historical data showing if a majority was previously held and then lost"
+    ],
+    "state_confidence": 0.0,
+    "vote_state": "UNKNOWN"
+  },
+  "packet_hash": "93379fc3ee9dfaa1ffa7fc91987d9587fcdcbe32b6027ce6ab37717d09cbbcb6",
+  "packet_id": "case_044--vote_state",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "53198bda45a6928d00d699ebf13dc61306ddfefe6ff5ac0c33b90c98ce9e264c",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Describes the general process for XRPL amendment voting (requiring sustained supermajority) but provides no specific data regarding the current vote count, enablement status, or majority history for the 'Sponsor' amendment.\"\n    }\n  ],\n  \"decision_summary\": \"The provided source facts only contain a general description of the XRPL amendment voting process. There is no specific evidence regarding the current state, vote counts, or enablement status of the 'Sponsor' amendment (BE1F9058...). Without specific data points indicating whether the amendment is enabled, has majority support, lost majority, or is vetoed/retired, the state cannot be determined from the given inputs.\",\n  \"missing_evidence\": [\n    \"Current vote count or percentage of validators supporting the amendment\",\n    \"Ledger sequence or timestamp indicating when the amendment was enabled or reached majority\",\n    \"Status flags indicating if the amendment is active, disabled, or retired\",\n    \"Historical data showing if a majority was previously held and then lost\"\n  ],\n  \"state_confidence\": 0.0,\n  \"vote_state\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 276,
+      "prompt_tokens": 627,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 903
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:52:41Z"
+}

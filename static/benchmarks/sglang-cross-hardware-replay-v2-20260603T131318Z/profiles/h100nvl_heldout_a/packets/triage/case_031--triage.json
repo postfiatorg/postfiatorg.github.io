@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_031",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "452F5906C46D46F407883344BFDD90E672B672C5E9943DB4891E3A34FEEEB9DB",
+    "amendment_name": "fixSTAmountCanonicalize",
+    "decision_surface": "XRPL validator amendment decision surface for fixSTAmountCanonicalize.",
+    "source_facts": [
+      {
+        "claim": "fixSTAmountCanonicalize: Fixes an edge case in deserializing Amount-type fields. Without this amendment, in some rare cases the operation could result in otherwise valid serialized amounts overflowing during deserialization. With this amendment, the XRP Ledger detects error conditions more quickly and eliminates the problematic corner cases.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixSTAmountCanonicalize appears in XRPSCAN with introduced rippled version 1.7.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "d54fca9a0bb7fd45c3ae7c0e63e253565933c89acbc0d6be3a61c39ed9ff4523",
+  "packet_id": "case_031--triage",
+  "packet_version": 1
+}

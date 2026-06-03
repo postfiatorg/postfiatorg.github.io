@@ -1,0 +1,90 @@
+{
+  "completed_at": "2026-06-03T14:05:16Z",
+  "error": "",
+  "event_id": "case_016",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "c330c3e40a4846dc6ef88fcef148c401316189fae509635efc6a6c8d151d61be",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment introduces escrow functionality for fungible tokens (Trust Lines and MPTs), which constitutes a change to asset-control semantics.",
+      "Escrow mechanisms involve locking assets, which carries material financial risk and requires careful review of the locking/unlocking logic.",
+      "The modification of existing transaction types (EscrowCreate, EscrowFinish, EscrowCancel) and ledger entry types (Escrow, MPToken, MPTokenIssuance, AccountRoot) introduces complexity that warrants explicit validator review.",
+      "Although issuers have opt-out controls (Allow Trust Line Locking flag), the core functionality changes how assets can be controlled and transferred, fitting the criteria for HOLD_FOR_CHALLENGE regarding asset-control semantics."
+    ],
+    "arguments_for_proceeding": [
+      "Issuers retain control over whether their tokens can be escrowed via flags, limiting systemic risk to those who opt-in.",
+      "The amendment extends existing, well-understood escrow mechanics to new asset types rather than introducing entirely new, untested consensus rules.",
+      "There is no explicit mention of critical unsafe evidence, retired status, or no-vote advisory in the packet."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core functionality: extending escrow to fungible tokens, modifying transaction and ledger structures, and introducing issuer-controlled flags. This defines the asset-control semantics and technical scope."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for a conservative review route for significant changes."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment's existence and version association, but does not mitigate the need for review of the functional changes described in F1."
+      }
+    ],
+    "decision_summary": "The TokenEscrow amendment modifies asset-control semantics by allowing fungible tokens to be held in escrow. While issuer opt-out flags provide some safety, the introduction of locking mechanisms for tokens involves material financial and asset-control risks. According to the task rule, changes to asset-control semantics deserve explicit review via HOLD_FOR_CHALLENGE. It is not a simple localized fix, nor does it contain explicit rejection criteria.",
+    "estimated_review_minutes": {
+      "deep_review": 45,
+      "packet_verification": 10,
+      "validator_skim": 5
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [
+      "Specific details on edge-case handling for partial escrow cancellations with tokens.",
+      "Potential interactions with existing freeze or authorization flags during escrow periods."
+    ],
+    "route": "HOLD_FOR_CHALLENGE",
+    "route_confidence": 0.9,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the issuer opt-out mechanism sufficiently mitigate the risk of unintended asset locking?",
+        "Are there any consensus risks associated with the new fields in Escrow and MPToken ledger entries?"
+      ],
+      "recommended_validator_action": "Review the implementation of token escrow logic, particularly the interaction between escrow states and token issuance flags. Verify that the new fields do not introduce ledger bloat or consensus ambiguities.",
+      "review_questions": [
+        "How does the amendment handle escrow expiration for tokens with different transfer rates?",
+        "Are there any scenarios where an issuer could revoke escrow permission while tokens are still locked?",
+        "Does the modification to EscrowCreate/Finish/Cancel maintain backward compatibility with XRP escrows?"
+      ],
+      "title": "Review TokenEscrow Amendment for Asset-Control Semantics"
+    }
+  },
+  "packet_hash": "65e7edc5e15a3443e4fd09b50ffbc3836daf09a8600c2da55dcc4bcb6b01f18d",
+  "packet_id": "case_016--triage",
+  "parsed_label": "HOLD_FOR_CHALLENGE",
+  "prompt_hash": "6096622ba705da577d21442b8fc6dbf96bf6bb888484aca252c16678523037ff",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment introduces escrow functionality for fungible tokens (Trust Lines and MPTs), which constitutes a change to asset-control semantics.\",\n\"Escrow mechanisms involve locking assets, which carries material financial risk and requires careful review of the locking/unlocking logic.\",\n\"The modification of existing transaction types (EscrowCreate, EscrowFinish, EscrowCancel) and ledger entry types (Escrow, MPToken, MPTokenIssuance, AccountRoot) introduces complexity that warrants explicit validator review.\",\n\"Although issuers have opt-out controls (Allow Trust Line Locking flag), the core functionality changes how assets can be controlled and transferred, fitting the criteria for HOLD_FOR_CHALLENGE regarding asset-control semantics.\"\n],\n\"arguments_for_proceeding\": [\n\"Issuers retain control over whether their tokens can be escrowed via flags, limiting systemic risk to those who opt-in.\",\n\"The amendment extends existing, well-understood escrow mechanics to new asset types rather than introducing entirely new, untested consensus rules.\",\n\"There is no explicit mention of critical unsafe evidence, retired status, or no-vote advisory in the packet.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the core functionality: extending escrow to fungible tokens, modifying transaction and ledger structures, and introducing issuer-controlled flags. This defines the asset-control semantics and technical scope.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Establishes the context of validator voting and the risk of amendment-blocking, reinforcing the need for a conservative review route for significant changes.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment's existence and version association, but does not mitigate the need for review of the functional changes described in F1.\"\n}\n],\n\"decision_summary\": \"The TokenEscrow amendment modifies asset-control semantics by allowing fungible tokens to be held in escrow. While issuer opt-out flags provide some safety, the introduction of locking mechanisms for tokens involves material financial and asset-control risks. According to the task rule, changes to asset-control semantics deserve explicit review via HOLD_FOR_CHALLENGE. It is not a simple localized fix, nor does it contain explicit rejection criteria.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 45,\n\"packet_verification\": 10,\n\"validator_skim\": 5\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [\n\"Specific details on edge-case handling for partial escrow cancellations with tokens.\",\n\"Potential interactions with existing freeze or authorization flags during escrow periods.\"\n],\n\"route\": \"HOLD_FOR_CHALLENGE\",\n\"route_confidence\": 0.9,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the issuer opt-out mechanism sufficiently mitigate the risk of unintended asset locking?\",\n\"Are there any consensus risks associated with the new fields in Escrow and MPToken ledger entries?\"\n],\n\"recommended_validator_action\": \"Review the implementation of token escrow logic, particularly the interaction between escrow states and token issuance flags. Verify that the new fields do not introduce ledger bloat or consensus ambiguities.\",\n\"review_questions\": [\n\"How does the amendment handle escrow expiration for tokens with different transfer rates?\",\n\"Are there any scenarios where an issuer could revoke escrow permission while tokens are still locked?\",\n\"Does the modification to EscrowCreate/Finish/Cancel maintain backward compatibility with XRP escrows?\"\n],\n\"title\": \"Review TokenEscrow Amendment for Asset-Control Semantics\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 790,
+      "prompt_tokens": 1305,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 2095
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:05:05Z"
+}

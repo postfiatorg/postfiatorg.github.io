@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_001",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "98DECF327BF79997AEC178323AD51A830E457BFC6D454DAF3E46E5EC42DC619F",
+    "amendment_name": "CheckCashMakesTrustLine",
+    "decision_surface": "XRPL validator amendment decision surface for CheckCashMakesTrustLine.",
+    "source_facts": [
+      {
+        "claim": "CheckCashMakesTrustLine: Adjusts the CheckCash transaction so that cashing a Check for an issued token automatically creates a trust line to hold the token. The new behavior is similar to how the OfferCreate transaction behaves when users buy tokens in the decentralized exchange: the automatic trust line has a limit value of 0. This removes the setup step of setting up a trust line before receiving a token via a Check. (Checks that send XRP are unaffected.) Without this amendment, users have to separately send a TrustSet transaction before they can cash a Check for an issued token. This amendment does not change the fact that you cannot force anyone to hold tokens they don't want in the XRP Ledger.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "CheckCashMakesTrustLine appears in XRPSCAN with introduced rippled version 1.8.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "b451a47d56a06c5e4359e5d3c2fda28bc264c6c6d44735b111d9fa90b03f79f1",
+  "packet_id": "case_001--triage",
+  "packet_version": 1
+}

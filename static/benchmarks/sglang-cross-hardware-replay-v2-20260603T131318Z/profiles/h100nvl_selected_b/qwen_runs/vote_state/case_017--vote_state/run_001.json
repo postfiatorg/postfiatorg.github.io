@@ -1,0 +1,54 @@
+{
+  "completed_at": "2026-06-03T14:23:38Z",
+  "error": "",
+  "event_id": "case_017",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "507846ae3958df5c46ca1c325b28b1ced71544a37d49075985a8bd53c40fae02",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F5",
+        "why_it_matters": "Explicitly states the amendment status is 'obsolete/removed: OBSOLETE', which directly maps to the VETOED_OR_RETIRED label definition of 'obsolete, or retired'."
+      },
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Confirms the amendment is not enabled (no enabled ledger entry) and has zero support, consistent with a retired or obsolete state rather than an active voting process."
+      }
+    ],
+    "decision_summary": "The amendment CryptoConditionsSuite is classified as VETOED_OR_RETIRED because Fact F5 explicitly identifies its status as OBSOLETE. Fact F4 supports this by showing no current support or enabled status, indicating it is no longer an active candidate for enablement.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "VETOED_OR_RETIRED"
+  },
+  "packet_hash": "0813d22b845e5446c3a964455966683a04be6fe2979c7d0a4b05800fb38782f4",
+  "packet_id": "case_017--vote_state",
+  "parsed_label": "VETOED_OR_RETIRED",
+  "prompt_hash": "c6d663bf384d5da919b159f140368db22dfd18f4adc3084ab283e65e1f662ad0",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F5\",\n      \"why_it_matters\": \"Explicitly states the amendment status is 'obsolete/removed: OBSOLETE', which directly maps to the VETOED_OR_RETIRED label definition of 'obsolete, or retired'.\"\n    },\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"Confirms the amendment is not enabled (no enabled ledger entry) and has zero support, consistent with a retired or obsolete state rather than an active voting process.\"\n    }\n  ],\n  \"decision_summary\": \"The amendment CryptoConditionsSuite is classified as VETOED_OR_RETIRED because Fact F5 explicitly identifies its status as OBSOLETE. Fact F4 supports this by showing no current support or enabled status, indicating it is no longer an active candidate for enablement.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"VETOED_OR_RETIRED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 232,
+      "prompt_tokens": 781,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1013
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:23:35Z"
+}

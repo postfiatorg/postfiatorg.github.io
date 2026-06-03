@@ -1,0 +1,80 @@
+{
+  "completed_at": "2026-06-03T14:03:15Z",
+  "error": "",
+  "event_id": "case_004",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "5d6b17c71bbf7696424664c2cd00f470796241061f825472b57668c6fd29ead3",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The packet describes a critical vulnerability allowing fee draining and XRP balance depletion.",
+      "Validators were explicitly advised to vote No.",
+      "The feature was disabled in client software and a replacement was planned, indicating the original amendment is obsolete/unsafe."
+    ],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies a critical unsafe evidence pattern: a bug allowing unauthorized fee charging and balance draining."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides an explicit no-vote advisory from validators and confirms the feature was not enabled."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is effectively retired/obsolete as it was disabled and replaced."
+      }
+    ],
+    "decision_summary": "The packet describes a critical vulnerability (fee drain) and includes an explicit no-vote advisory. The amendment was disabled and replaced. According to the precedence rules, REJECT is used for explicit no-vote advisories, retired/obsolete proposals, or critical unsafe evidence. All three conditions are met.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment is safe to enable.",
+    "missing_evidence": [],
+    "route": "REJECT",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any evidence that the vulnerability has been patched in this specific amendment version?"
+      ],
+      "recommended_validator_action": "Vote No to reject the amendment.",
+      "review_questions": [
+        "Does the packet contain an explicit no-vote advisory?",
+        "Is the amendment described as containing critical unsafe evidence?"
+      ],
+      "title": "Reject PermissionDelegation due to critical vulnerability and no-vote advisory"
+    }
+  },
+  "packet_hash": "baacb4f246d06d951eb4e742c7d8d08338d25bf454b748bd740442457d2c6920",
+  "packet_id": "case_004--triage",
+  "parsed_label": "REJECT",
+  "prompt_hash": "d4aaa5e9b1954b1f4fb919cee25e1968f0f8d3aacc01f4bb20293b11fad8d9ae",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The packet describes a critical vulnerability allowing fee draining and XRP balance depletion.\",\n\"Validators were explicitly advised to vote No.\",\n\"The feature was disabled in client software and a replacement was planned, indicating the original amendment is obsolete/unsafe.\"\n],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Identifies a critical unsafe evidence pattern: a bug allowing unauthorized fee charging and balance draining.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Provides an explicit no-vote advisory from validators and confirms the feature was not enabled.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment is effectively retired/obsolete as it was disabled and replaced.\"\n}\n],\n\"decision_summary\": \"The packet describes a critical vulnerability (fee drain) and includes an explicit no-vote advisory. The amendment was disabled and replaced. According to the precedence rules, REJECT is used for explicit no-vote advisories, retired/obsolete proposals, or critical unsafe evidence. All three conditions are met.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"The amendment is safe to enable.\",\n\"missing_evidence\": [],\n\"route\": \"REJECT\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Is there any evidence that the vulnerability has been patched in this specific amendment version?\"\n],\n\"recommended_validator_action\": \"Vote No to reject the amendment.\",\n\"review_questions\": [\n\"Does the packet contain an explicit no-vote advisory?\",\n\"Is the amendment described as containing critical unsafe evidence?\"\n],\n\"title\": \"Reject PermissionDelegation due to critical vulnerability and no-vote advisory\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 437,
+      "prompt_tokens": 1090,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1527
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:03:08Z"
+}

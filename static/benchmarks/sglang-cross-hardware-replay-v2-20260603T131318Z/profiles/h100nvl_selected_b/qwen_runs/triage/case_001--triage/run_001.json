@@ -1,0 +1,80 @@
+{
+  "completed_at": "2026-06-03T14:32:02Z",
+  "error": "",
+  "event_id": "case_001",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "99981cf4ca403afe8ee6e9bf1084f70f0832dd6291725fee63f6f21fb3f334d0",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The packet describes an active, unresolved bug in AMM pools where transactions are not executing as intended.",
+      "Official guidance explicitly advises users to avoid new deposits and redeem LP tokens until a fix is enabled, indicating a pre-fix incident window.",
+      "The decision surface concerns the period 'before the fix amendment', implying the current state is broken and requires a fix sequencing resolution."
+    ],
+    "arguments_for_proceeding": [],
+    "cited_facts": [
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Identifies the core issue: discrepancies in AMM pools indicating transactions were not executing as intended, which constitutes an unresolved bug."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Establishes that the fix requires an amendment and that users are advised to avoid usage until the fix is enabled, defining the pre-fix incident window."
+      },
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Provides context that the AMM amendment is live, confirming the bug exists in the active ledger state."
+      }
+    ],
+    "decision_summary": "The packet describes a pre-fix incident window involving an unresolved bug in AMM pool execution. The official advisory warns users to avoid deposits until the fix is enabled. According to the task rule, DELAY_FOR_FIX is the correct route for pre-fix incident windows where the packet describes an unresolved bug or fix sequencing problem.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 0,
+      "validator_skim": 0
+    },
+    "forbidden_stronger_claim": "REJECT",
+    "missing_evidence": [],
+    "route": "DELAY_FOR_FIX",
+    "route_confidence": 1.0,
+    "validator_work_item": {
+      "override_questions": [
+        "Is there any evidence that the bug is not material to AMM invariants?"
+      ],
+      "recommended_validator_action": "Delay validation of the decision surface until the fix amendment is available and the incident window is closed.",
+      "review_questions": [
+        "Does the packet describe an unresolved bug?",
+        "Is the packet describing a pre-fix incident window?"
+      ],
+      "title": "AMM post-launch pool discrepancy triage"
+    }
+  },
+  "packet_hash": "c209f9e57c1da69f1d16396c5a13a8ead51ff9474e3265db5a5f8ec394533679",
+  "packet_id": "case_001--triage",
+  "parsed_label": "DELAY_FOR_FIX",
+  "prompt_hash": "9aaa27a9b701dc6822ca3b48e0e7b94fb6e655ef4940e2f583b3131adfad38c4",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The packet describes an active, unresolved bug in AMM pools where transactions are not executing as intended.\",\n\"Official guidance explicitly advises users to avoid new deposits and redeem LP tokens until a fix is enabled, indicating a pre-fix incident window.\",\n\"The decision surface concerns the period 'before the fix amendment', implying the current state is broken and requires a fix sequencing resolution.\"\n],\n\"arguments_for_proceeding\": [],\n\"cited_facts\": [\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Identifies the core issue: discrepancies in AMM pools indicating transactions were not executing as intended, which constitutes an unresolved bug.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Establishes that the fix requires an amendment and that users are advised to avoid usage until the fix is enabled, defining the pre-fix incident window.\"\n},\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Provides context that the AMM amendment is live, confirming the bug exists in the active ledger state.\"\n}\n],\n\"decision_summary\": \"The packet describes a pre-fix incident window involving an unresolved bug in AMM pool execution. The official advisory warns users to avoid deposits until the fix is enabled. According to the task rule, DELAY_FOR_FIX is the correct route for pre-fix incident windows where the packet describes an unresolved bug or fix sequencing problem.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 0,\n\"validator_skim\": 0\n},\n\"forbidden_stronger_claim\": \"REJECT\",\n\"missing_evidence\": [],\n\"route\": \"DELAY_FOR_FIX\",\n\"route_confidence\": 1.0,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Is there any evidence that the bug is not material to AMM invariants?\"\n],\n\"recommended_validator_action\": \"Delay validation of the decision surface until the fix amendment is available and the incident window is closed.\",\n\"review_questions\": [\n\"Does the packet describe an unresolved bug?\",\n\"Is the packet describing a pre-fix incident window?\"\n],\n\"title\": \"AMM post-launch pool discrepancy triage\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 490,
+      "prompt_tokens": 1101,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1591
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:31:54Z"
+}

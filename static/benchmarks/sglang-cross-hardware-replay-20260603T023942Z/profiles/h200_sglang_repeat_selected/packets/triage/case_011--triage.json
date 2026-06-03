@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_011",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "950AE2EA4654E47F04AA8739C0B214E242097E802FD372D24047A89AB1F5EC38",
+    "amendment_name": "MPTokensV1",
+    "decision_surface": "XRPL validator amendment decision surface for MPTokensV1.",
+    "source_facts": [
+      {
+        "claim": "MPTokensV1: Implements a new type of fungible token, called a Multi-Purpose Token (MPT). This token type is optimized to be used for common token use cases such as stablecoins, and are intended to avoid some of the complexity inherent to the XRP Ledger's existing fungible tokens which are stored in bidirectional trust lines. This amendment adds the following: New ledger entry types: - MPToken - represents tokens held by a specific account, including the amount held and who issued them. - MPTokenIssuance - records information and settings for a specific issuance of MPT, such as the scale and transfer fee of those tokens. Transaction types: - (New) MPTokenIssuanceCreate - Define a new issuance of MPTs. - (New) MPTokenIssuanceDestroy - Remove an issuance definition. - (New) MPTokenIssuanceSet - Modify an issuance definition. - (New) MPTokenAuthorize - Allow an account to hold a specific issuance definition. - (Updated) Payment transactions can also send MPTs. - (Updated) Clawback transactions can also claw back MPTs if the issuance definition allows clawback. API Methods: - (New) mpt_holders method - Returns a list of accounts that hold a specific MPT issuance. - (Updated) ledger_entr",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "MPTokensV1 appears in XRPSCAN with introduced rippled version 2.3.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "31ead32e9f4b36d4014f8264a4ce0ede637969d80982073d3743d472e15f2e5b",
+  "packet_id": "case_011--triage",
+  "packet_version": 1
+}

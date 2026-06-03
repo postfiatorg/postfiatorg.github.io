@@ -1,0 +1,92 @@
+{
+  "completed_at": "2026-06-03T14:35:01Z",
+  "error": "",
+  "event_id": "case_021",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "bb08fc4b09d00632bfb0cbf16faa1c59b9da5c57cdf2732b44592bb6777829fd",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [
+      "The amendment addresses a rounding behavior change in cross-chain transaction reward shares.",
+      "Rounding changes can impact financial calculations and token amounts, which falls under material risk patterns requiring review.",
+      "The interaction between XChainBridge and fixUniversalNumber introduces complexity that warrants explicit validator scrutiny to ensure no unintended financial discrepancies."
+    ],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix', indicating it is a corrective measure.",
+      "The packet explicitly states the amendment restores 'intended behavior' and preserves original design, suggesting it is not introducing new risk but correcting a deviation.",
+      "The impact is localized to cross-chain reward shares and only active when both XChainBridge and fixUniversalNumber are enabled, limiting the blast radius.",
+      "There is no evidence of consensus/liveness risk, freeze/authorization bypasses, or broad canonicalization changes."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the core functionality: restoring intended rounding down for reward shares to fix an incompatibility between XChainBridge and fixUniversalNumber. This confirms it is a fix for a specific calculation issue rather than a new feature or broad semantic change."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Contextualizes the voting process and risk of amendment-blocking, reinforcing the need for a conservative review route if material risks are present."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with a specific rippled version, establishing its technical context."
+      },
+      {
+        "fact_id": "F4",
+        "why_it_matters": "Provides current voting status, though the decision must be based on the amendment's nature rather than its current vote count."
+      }
+    ],
+    "decision_summary": "The amendment 'fixXChainRewardRounding' is a targeted fix to restore intended rounding behavior for cross-chain reward shares, addressing an incompatibility between XChainBridge and fixUniversalNumber. While it involves financial calculations (rounding), it is explicitly described as restoring original intended behavior rather than introducing new semantics or broad changes. The risk is localized to specific cross-chain scenarios. However, given the involvement of financial rounding and cross-chain bridges, a conservative approach suggests holding for challenge to ensure validators explicitly review the financial implications, although it leans towards proceeding as a localized fix. Applying the precedence rule: it is a 'fix' amendment. Does it contain explicit no-vote advisory? No. Is it obsolete? No. Does it describe broad cross-feature canonicalization? No. Does it describe consensus/liveness risk? No. Does it describe AMM invariant or rounding changes? It describes a rounding change, but specifically to *restore* intended behavior in a narrow context. The rule says 'hold only when the supplied facts identify one of those material risk patterns'. The fact identifies a rounding change, but frames it as a fix for an unintended deviation. The instruction says 'Do not hold a localized fix amendment merely because the underlying domain name mentions... accounting...'. This is a localized fix. Therefore, PROCEED is the appropriate route under the 'fix' precedence, as it does not exhibit the *material risk patterns* of *new* or *broad* rounding changes, but rather corrects a specific bug.",
+    "estimated_review_minutes": {
+      "deep_review": 15,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "The amendment introduces new financial risks or changes the fundamental semantics of cross-chain bridges beyond correcting a specific rounding bug.",
+    "missing_evidence": [
+      "Detailed mathematical proof of the rounding correction's impact on total token supply or specific edge cases beyond the general description."
+    ],
+    "route": "PROCEED",
+    "route_confidence": 0.85,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the restoration of rounding down behavior have any unintended side effects on other parts of the XChainBridge logic?",
+        "Is there any risk that this fix could be exploited if the XChainBridge and fixUniversalNumber amendments are enabled in a specific sequence?"
+      ],
+      "recommended_validator_action": "Vote YES, as this is a localized fix restoring intended behavior without introducing new material risks.",
+      "review_questions": [
+        "Does the amendment clearly state that it only affects reward shares when both XChainBridge and fixUniversalNumber are enabled?",
+        "Is there any indication that this rounding change affects the total supply or issuer balances in a way that could be considered a material accounting change?"
+      ],
+      "title": "Review fixXChainRewardRounding for localized rounding correction"
+    }
+  },
+  "packet_hash": "ec3211ab60d1865a40a7fdca6d694288265c17e14a9496f6b1b208c3954851cf",
+  "packet_id": "case_021--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "950aed88b0027abd64aad1a91e57280e05a07c84758458fa145f0836749334ec",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [\n\"The amendment addresses a rounding behavior change in cross-chain transaction reward shares.\",\n\"Rounding changes can impact financial calculations and token amounts, which falls under material risk patterns requiring review.\",\n\"The interaction between XChainBridge and fixUniversalNumber introduces complexity that warrants explicit validator scrutiny to ensure no unintended financial discrepancies.\"\n],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix', indicating it is a corrective measure.\",\n\"The packet explicitly states the amendment restores 'intended behavior' and preserves original design, suggesting it is not introducing new risk but correcting a deviation.\",\n\"The impact is localized to cross-chain reward shares and only active when both XChainBridge and fixUniversalNumber are enabled, limiting the blast radius.\",\n\"There is no evidence of consensus/liveness risk, freeze/authorization bypasses, or broad canonicalization changes.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Describes the core functionality: restoring intended rounding down for reward shares to fix an incompatibility between XChainBridge and fixUniversalNumber. This confirms it is a fix for a specific calculation issue rather than a new feature or broad semantic change.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Contextualizes the voting process and risk of amendment-blocking, reinforcing the need for a conservative review route if material risks are present.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment is associated with a specific rippled version, establishing its technical context.\"\n},\n{\n\"fact_id\": \"F4\",\n\"why_it_matters\": \"Provides current voting status, though the decision must be based on the amendment's nature rather than its current vote count.\"\n}\n],\n\"decision_summary\": \"The amendment 'fixXChainRewardRounding' is a targeted fix to restore intended rounding behavior for cross-chain reward shares, addressing an incompatibility between XChainBridge and fixUniversalNumber. While it involves financial calculations (rounding), it is explicitly described as restoring original intended behavior rather than introducing new semantics or broad changes. The risk is localized to specific cross-chain scenarios. However, given the involvement of financial rounding and cross-chain bridges, a conservative approach suggests holding for challenge to ensure validators explicitly review the financial implications, although it leans towards proceeding as a localized fix. Applying the precedence rule: it is a 'fix' amendment. Does it contain explicit no-vote advisory? No. Is it obsolete? No. Does it describe broad cross-feature canonicalization? No. Does it describe consensus/liveness risk? No. Does it describe AMM invariant or rounding changes? It describes a rounding change, but specifically to *restore* intended behavior in a narrow context. The rule says 'hold only when the supplied facts identify one of those material risk patterns'. The fact identifies a rounding change, but frames it as a fix for an unintended deviation. The instruction says 'Do not hold a localized fix amendment merely because the underlying domain name mentions... accounting...'. This is a localized fix. Therefore, PROCEED is the appropriate route under the 'fix' precedence, as it does not exhibit the *material risk patterns* of *new* or *broad* rounding changes, but rather corrects a specific bug.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 15,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"The amendment introduces new financial risks or changes the fundamental semantics of cross-chain bridges beyond correcting a specific rounding bug.\",\n\"missing_evidence\": [\n\"Detailed mathematical proof of the rounding correction's impact on total token supply or specific edge cases beyond the general description.\"\n],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.85,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the restoration of rounding down behavior have any unintended side effects on other parts of the XChainBridge logic?\",\n\"Is there any risk that this fix could be exploited if the XChainBridge and fixUniversalNumber amendments are enabled in a specific sequence?\"\n],\n\"recommended_validator_action\": \"Vote YES, as this is a localized fix restoring intended behavior without introducing new material risks.\",\n\"review_questions\": [\n\"Does the amendment clearly state that it only affects reward shares when both XChainBridge and fixUniversalNumber are enabled?\",\n\"Is there any indication that this rounding change affects the total supply or issuer balances in a way that could be considered a material accounting change?\"\n],\n\"title\": \"Review fixXChainRewardRounding for localized rounding correction\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 996,
+      "prompt_tokens": 1246,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 2242
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:34:47Z"
+}

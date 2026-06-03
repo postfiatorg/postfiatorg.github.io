@@ -1,0 +1,77 @@
+{
+  "completed_at": "2026-06-03T03:34:24Z",
+  "error": "",
+  "event_id": "case_014",
+  "lane": "triage",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "afe963d0dd7a44565c221ac065c4691b24c958e29a4652e1263c752a4ab935b9",
+  "output_hash": "52a5802941eb1586612e7ad2d7e565191e28bb4010f71ab94b0672446f4182ec",
+  "output_json": {
+    "arguments_for_delay_or_challenge": [],
+    "arguments_for_proceeding": [
+      "The amendment name starts with 'fix' (fix1512).",
+      "The packet describes the amendment as fixing a specific bug in transaction processing (incorrect error code for invalid PaymentChannelClaim transactions).",
+      "The fix changes the result code from a tec-class to temBAD_AMOUNT, which is a localized correction of error reporting.",
+      "The facts do not describe broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, freeze/authorization bypasses, ledger repair, NFT semantics, material token supply changes, escrow math, numeric precision issues, or edge-case transaction-processing uncertainty that would warrant holding.",
+      "There is no explicit no-vote advisory or indication that the fix is obsolete."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies the amendment as a fix for a specific bug in PaymentChannelClaim error handling, changing the result code to temBAD_AMOUNT. This confirms it is a localized fix without material risk patterns."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment name is 'fix1512', triggering the 'fix' precedence rule."
+      }
+    ],
+    "decision_summary": "The amendment fix1512 is a localized fix for an incorrect error code in PaymentChannelClaim transactions. It does not exhibit material risk patterns such as consensus risk, invariant changes, or broad serialization issues. Therefore, it proceeds under the fix amendment rule.",
+    "estimated_review_minutes": {
+      "deep_review": 0,
+      "packet_verification": 5,
+      "validator_skim": 2
+    },
+    "forbidden_stronger_claim": "HOLD_FOR_CHALLENGE",
+    "missing_evidence": [],
+    "route": "PROCEED",
+    "route_confidence": 0.95,
+    "validator_work_item": {
+      "override_questions": [
+        "Does the change in error code from tec to temBAD_AMOUNT affect any downstream logic that relies on the previous error code?"
+      ],
+      "recommended_validator_action": "Enable the amendment.",
+      "review_questions": [
+        "Is the fix limited to error reporting for invalid transactions?"
+      ],
+      "title": "Review fix1512 for PaymentChannelClaim error code correction"
+    }
+  },
+  "packet_hash": "408556b78779e837deb155e7d78b1dad39d4f8d7a4762ae870c970c4ce1c3a0c",
+  "packet_id": "case_014--triage",
+  "parsed_label": "PROCEED",
+  "prompt_hash": "9751894efa88a2c525278173b6eb03a76312f18b910dd3718eb95de6a9c15415",
+  "raw_message_content": "{\n\"arguments_for_delay_or_challenge\": [],\n\"arguments_for_proceeding\": [\n\"The amendment name starts with 'fix' (fix1512).\",\n\"The packet describes the amendment as fixing a specific bug in transaction processing (incorrect error code for invalid PaymentChannelClaim transactions).\",\n\"The fix changes the result code from a tec-class to temBAD_AMOUNT, which is a localized correction of error reporting.\",\n\"The facts do not describe broad cross-feature canonicalization, consensus/liveness risk, AMM invariant changes, freeze/authorization bypasses, ledger repair, NFT semantics, material token supply changes, escrow math, numeric precision issues, or edge-case transaction-processing uncertainty that would warrant holding.\",\n\"There is no explicit no-vote advisory or indication that the fix is obsolete.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Identifies the amendment as a fix for a specific bug in PaymentChannelClaim error handling, changing the result code to temBAD_AMOUNT. This confirms it is a localized fix without material risk patterns.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment name is 'fix1512', triggering the 'fix' precedence rule.\"\n}\n],\n\"decision_summary\": \"The amendment fix1512 is a localized fix for an incorrect error code in PaymentChannelClaim transactions. It does not exhibit material risk patterns such as consensus risk, invariant changes, or broad serialization issues. Therefore, it proceeds under the fix amendment rule.\",\n\"estimated_review_minutes\": {\n\"deep_review\": 0,\n\"packet_verification\": 5,\n\"validator_skim\": 2\n},\n\"forbidden_stronger_claim\": \"HOLD_FOR_CHALLENGE\",\n\"missing_evidence\": [],\n\"route\": \"PROCEED\",\n\"route_confidence\": 0.95,\n\"validator_work_item\": {\n\"override_questions\": [\n\"Does the change in error code from tec to temBAD_AMOUNT affect any downstream logic that relies on the previous error code?\"\n],\n\"recommended_validator_action\": \"Enable the amendment.\",\n\"review_questions\": [\n\"Is the fix limited to error reporting for invalid transactions?\"\n],\n\"title\": \"Review fix1512 for PaymentChannelClaim error code correction\"\n}\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 505,
+      "prompt_tokens": 1128,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1633
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T03:34:16Z"
+}

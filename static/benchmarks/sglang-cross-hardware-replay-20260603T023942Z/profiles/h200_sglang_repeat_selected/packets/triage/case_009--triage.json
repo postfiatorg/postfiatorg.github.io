@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_009",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "12523DF04B553A0B1AD74F42DDB741DE8DC06A03FC089A0EF197E2A87F1D8107",
+    "amendment_name": "fixAMMOverflowOffer",
+    "decision_surface": "XRPL validator amendment decision surface for fixAMMOverflowOffer.",
+    "source_facts": [
+      {
+        "claim": "fixAMMOverflowOffer: This amendment fixes the improper handling of large synthetic AMM offers in the payment engine. Due to the importance of this fix, the default vote in the source code has been set to YES.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixAMMOverflowOffer appears in XRPSCAN with introduced rippled version 2.1.1.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "d97044064d78c754d23f0a61b8f76cb7e78f25ef110dfc3b4ab521e4fb3ed452",
+  "packet_id": "case_009--triage",
+  "packet_version": 1
+}

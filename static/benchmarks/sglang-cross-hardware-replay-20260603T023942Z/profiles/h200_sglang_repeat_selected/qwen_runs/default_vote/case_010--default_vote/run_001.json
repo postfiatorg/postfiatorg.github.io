@@ -1,0 +1,57 @@
+{
+  "completed_at": "2026-06-03T02:58:30Z",
+  "error": "",
+  "event_id": "case_010",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "892e3cba766e77aff7555371115dd72ad07905a3b2fe5fc0164eb21a5b14ba24",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Describes the LendingProtocol as enabling uncollateralized loans relying on off-chain underwriting, which introduces significant counterparty and systemic risk to the XRPL network."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with rippled version 3.1.0, establishing the context of the software release."
+      }
+    ],
+    "decision_summary": "The source description in F1 highlights that the LendingProtocol relies on off-chain underwriting for uncollateralized loans. In the context of XRPL governance, features that introduce significant off-chain dependencies and credit risk to the ledger are typically treated with caution. Without explicit evidence of a 'YES' default (which usually applies to low-risk, backward-compatible, or purely additive features with no risk), and given the high-risk nature of uncollateralized lending described, the evidence does not support a YES. However, the packet does not contain explicit evidence of a 'NO' default (such as a known rejection or critical bug). Therefore, the default vote cannot be definitively inferred as YES or NO based strictly on the provided facts.",
+    "default_vote_confidence": 0.0,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [
+      "Explicit statement of the default vote in the source documentation",
+      "Historical voting record or community consensus indicating a default stance for this specific amendment"
+    ],
+    "source_default_vote": "UNKNOWN"
+  },
+  "packet_hash": "854ea641b64e260c0429a7567818a349c7cc7598217ef4733c86a3cd2d97b187",
+  "packet_id": "case_010--default_vote",
+  "parsed_label": "UNKNOWN",
+  "prompt_hash": "e39bf4b5361e4b13efd434a4fe30f247f5dd380aff53cc882b3e3b6e60eb8e3e",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Describes the LendingProtocol as enabling uncollateralized loans relying on off-chain underwriting, which introduces significant counterparty and systemic risk to the XRPL network.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is associated with rippled version 3.1.0, establishing the context of the software release.\"\n    }\n  ],\n  \"decision_summary\": \"The source description in F1 highlights that the LendingProtocol relies on off-chain underwriting for uncollateralized loans. In the context of XRPL governance, features that introduce significant off-chain dependencies and credit risk to the ledger are typically treated with caution. Without explicit evidence of a 'YES' default (which usually applies to low-risk, backward-compatible, or purely additive features with no risk), and given the high-risk nature of uncollateralized lending described, the evidence does not support a YES. However, the packet does not contain explicit evidence of a 'NO' default (such as a known rejection or critical bug). Therefore, the default vote cannot be definitively inferred as YES or NO based strictly on the provided facts.\",\n  \"default_vote_confidence\": 0.0,\n  \"missing_evidence\": [\n    \"Explicit statement of the default vote in the source documentation\",\n    \"Historical voting record or community consensus indicating a default stance for this specific amendment\"\n  ],\n  \"source_default_vote\": \"UNKNOWN\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 347,
+      "prompt_tokens": 655,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1002
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:58:23Z"
+}

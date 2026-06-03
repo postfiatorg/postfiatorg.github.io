@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T14:53:59Z",
+  "error": "",
+  "event_id": "case_012",
+  "lane": "default_vote",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "a4413e43312a9d665bcaa356648bcc89aa32490a4420217384b9b0f42206b54f",
+  "output_hash": "0440f48ee73abef2e717f06b93169f9e8679331bf7978d9f9983086c191f22ef",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "The amendment description explicitly states that it fixes a bug causing valid payments to fail and corrects transaction processing so payments can no longer fail in this manner. This indicates the amendment is a beneficial bug fix that improves system reliability and correctness, which is the standard criterion for a default YES vote in XRPL governance."
+      }
+    ],
+    "decision_summary": "The source-backed description in F1 characterizes fix1368 as a correction for a bug that causes valid payments to fail due to precision loss. Since the amendment resolves a failure condition and ensures payments succeed as intended, it represents a positive improvement to the ledger's functionality. In the absence of any negative side effects or breaking changes mentioned in the source facts, the default vote for a beneficial bug fix is YES.",
+    "default_vote_confidence": 0.95,
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "source_default_vote": "YES"
+  },
+  "packet_hash": "e46550fa3f9bd4701f3125f7e3aba2e71248c86fa405732ee994b633da612317",
+  "packet_id": "case_012--default_vote",
+  "parsed_label": "YES",
+  "prompt_hash": "8a94521da6430d17683aebff9e643f1304ef4ee3159b7f9a6e2fff2fa8ca94d4",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"The amendment description explicitly states that it fixes a bug causing valid payments to fail and corrects transaction processing so payments can no longer fail in this manner. This indicates the amendment is a beneficial bug fix that improves system reliability and correctness, which is the standard criterion for a default YES vote in XRPL governance.\"\n    }\n  ],\n  \"decision_summary\": \"The source-backed description in F1 characterizes fix1368 as a correction for a bug that causes valid payments to fail due to precision loss. Since the amendment resolves a failure condition and ensures payments succeed as intended, it represents a positive improvement to the ledger's functionality. In the absence of any negative side effects or breaking changes mentioned in the source facts, the default vote for a beneficial bug fix is YES.\",\n  \"default_vote_confidence\": 0.95,\n  \"missing_evidence\": [],\n  \"source_default_vote\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 225,
+      "prompt_tokens": 700,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 925
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:53:55Z"
+}

@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_040",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "32A122F1352A4C7B3A6D790362CC34749C5E57FCE896377BFDC6CCD14F6CD627",
+    "amendment_name": "NonFungibleTokensV1_1",
+    "decision_surface": "XRPL validator amendment decision surface for NonFungibleTokensV1_1.",
+    "source_facts": [
+      {
+        "claim": "NonFungibleTokensV1_1: Adds native support for non-fungible tokens, including fixes to several issues that were discovered after NonFungibleTokensV1. This amendment combines the effects of the following amendments, rendering the individual amendments obsolete: - NonFungibleTokensV1 - fixNFTokenNegOffer - fixNFTokenDirV1 It has no other effects. The fixRemoveNFTokenAutoTrustLine fixes an known issue with this amendment. When creating a new test network, you should make sure that these amendments should be enabled together or the fix amendment is enabled first.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "NonFungibleTokensV1_1 appears in XRPSCAN with introduced rippled version 1.9.2.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "639ab57038dcc4efe5f729705553bab46d790d672eef3f4a6aeb278f424bc753",
+  "packet_id": "case_040--triage",
+  "packet_version": 1
+}

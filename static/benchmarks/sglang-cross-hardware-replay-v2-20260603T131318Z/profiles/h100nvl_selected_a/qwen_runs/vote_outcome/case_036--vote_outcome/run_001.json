@@ -1,0 +1,71 @@
+{
+  "completed_at": "2026-06-03T13:47:56Z",
+  "error": "",
+  "event_id": "case_036",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "107c0226773b6a4c80ebee8cf4d9bd70e7f11d937dfddd88d97feb25697d6516",
+  "output_json": {
+    "arguments_for_no": [
+      "Activating the amendment may cause temporary network instability or require validators to upgrade to rippled version 3.0.0 or later to avoid being amendment-blocked.",
+      "There is a non-zero risk that the fix for the accounting error could introduce new bugs or edge cases in MPT escrow handling that are not yet fully tested in production."
+    ],
+    "arguments_for_yes": [
+      "The amendment fixes a critical accounting error in MPT escrows where the issuer's locked token balance was incorrectly reduced by the gross amount instead of the net amount, leading to discrepancies in total supply accounting.",
+      "Correcting this accounting error is essential for maintaining the integrity and accuracy of the Multi-Purpose Token (MPT) system on the XRPL.",
+      "The fix ensures that when escrowed MPTs are unlocked, the issuer's locked amount is reduced by the net amount and the total supply is reduced by the transfer fees, aligning the ledger state with the intended economic model."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies the specific bug (incorrect accounting of MPT escrow unlocks) and the corrective action (reducing locked amount by net amount), which is the primary justification for voting YES to fix the ledger integrity."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the voting mechanism and the risk of being amendment-blocked, which is a consideration for the timing and necessity of the vote, but does not outweigh the need to fix the accounting error."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is associated with rippled version 3.0.0, indicating it is a recent and relevant update to the protocol."
+      }
+    ],
+    "decision_summary": "The fixTokenEscrowV1 amendment addresses a significant accounting discrepancy in MPT escrows. The error causes the issuer's locked balance to be reduced incorrectly, affecting total supply accounting. Voting YES is recommended to correct this ledger inconsistency and ensure the proper functioning of the MPT system, despite the standard risks associated with protocol upgrades.",
+    "forbidden_stronger_claim": "The amendment is guaranteed to have no negative side effects or performance impacts.",
+    "missing_evidence": [
+      "Independent security audit results for the fixTokenEscrowV1 code changes.",
+      "Data on the current prevalence or financial impact of the accounting error on the network.",
+      "Feedback from major MPT issuers regarding the urgency of the fix."
+    ],
+    "vote_confidence": 0.85,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "d590f3f9ec920cc5ab02188cd49f41a2359495bc0193433fb891c608b4487dd7",
+  "packet_id": "case_036--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "d0d9ca0bc0ce4b49137080e5d70c7a5394cd2288145df44028836e3e15948034",
+  "raw_message_content": "{\n\"arguments_for_no\": [\n\"Activating the amendment may cause temporary network instability or require validators to upgrade to rippled version 3.0.0 or later to avoid being amendment-blocked.\",\n\"There is a non-zero risk that the fix for the accounting error could introduce new bugs or edge cases in MPT escrow handling that are not yet fully tested in production.\"\n],\n\"arguments_for_yes\": [\n\"The amendment fixes a critical accounting error in MPT escrows where the issuer's locked token balance was incorrectly reduced by the gross amount instead of the net amount, leading to discrepancies in total supply accounting.\",\n\"Correcting this accounting error is essential for maintaining the integrity and accuracy of the Multi-Purpose Token (MPT) system on the XRPL.\",\n\"The fix ensures that when escrowed MPTs are unlocked, the issuer's locked amount is reduced by the net amount and the total supply is reduced by the transfer fees, aligning the ledger state with the intended economic model.\"\n],\n\"cited_facts\": [\n{\n\"fact_id\": \"F1\",\n\"why_it_matters\": \"Identifies the specific bug (incorrect accounting of MPT escrow unlocks) and the corrective action (reducing locked amount by net amount), which is the primary justification for voting YES to fix the ledger integrity.\"\n},\n{\n\"fact_id\": \"F2\",\n\"why_it_matters\": \"Provides context on the voting mechanism and the risk of being amendment-blocked, which is a consideration for the timing and necessity of the vote, but does not outweigh the need to fix the accounting error.\"\n},\n{\n\"fact_id\": \"F3\",\n\"why_it_matters\": \"Confirms the amendment is associated with rippled version 3.0.0, indicating it is a recent and relevant update to the protocol.\"\n}\n],\n\"decision_summary\": \"The fixTokenEscrowV1 amendment addresses a significant accounting discrepancy in MPT escrows. The error causes the issuer's locked balance to be reduced incorrectly, affecting total supply accounting. Voting YES is recommended to correct this ledger inconsistency and ensure the proper functioning of the MPT system, despite the standard risks associated with protocol upgrades.\",\n\"forbidden_stronger_claim\": \"The amendment is guaranteed to have no negative side effects or performance impacts.\",\n\"missing_evidence\": [\n\"Independent security audit results for the fixTokenEscrowV1 code changes.\",\n\"Data on the current prevalence or financial impact of the accounting error on the network.\",\n\"Feedback from major MPT issuers regarding the urgency of the fix.\"\n],\n\"vote_confidence\": 0.85,\n\"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 575,
+      "prompt_tokens": 750,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1325
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:47:47Z"
+}

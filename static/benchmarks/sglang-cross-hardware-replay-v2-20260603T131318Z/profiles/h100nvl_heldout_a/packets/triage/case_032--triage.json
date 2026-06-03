@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_032",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "2CD5286D8D687E98B41102BDD797198E81EA41DF7BD104E6561FEB104EFF2561",
+    "amendment_name": "fixTakerDryOfferRemoval",
+    "decision_surface": "XRPL validator amendment decision surface for fixTakerDryOfferRemoval.",
+    "source_facts": [
+      {
+        "claim": "fixTakerDryOfferRemoval: Fixes a bug in auto-bridging that can leave a dry offer in the XRP Ledger. A dry offer is an offer that, if crossed, cannot yield any funds. Without this fix, the dry offer remains on the ledger and counts toward its owner's reserve requirement without providing any benefit to the owner. Another offer crossing of the right type and quality can remove the dry offer. However, if the required offer crossing type and quality are rare, it may take a while for the dry offer to be removed. With this amendment enabled, the XRP Ledger removes these dry offers when they're matched in auto-bridging.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixTakerDryOfferRemoval appears in XRPSCAN with introduced rippled version 1.2.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "e1f2aa9729a0ce86ff53447a814583fe710b7ba82c232155bfe67b842188ece8",
+  "packet_id": "case_032--triage",
+  "packet_version": 1
+}

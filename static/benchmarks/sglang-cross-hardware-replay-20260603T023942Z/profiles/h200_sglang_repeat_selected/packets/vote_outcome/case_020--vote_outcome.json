@@ -1,0 +1,45 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_020",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "36799EA497B1369B170805C078AEFE6188345F9B3E324C21E9CA3FF574E3C3D6",
+    "amendment_name": "fixNFTokenNegOffer",
+    "decision_surface": "XRPL validator amendment decision surface for fixNFTokenNegOffer.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixNFTokenNegOffer: This amendment fixes a bug in the NonFungibleTokensV1 amendment code where NFTs could be traded for negative amounts of money. Without this fix, users could place and accept an offer to buy or sell a NFToken for a negative amount of money, which resulted in the person \"buying\" the NFT also receiving money from the \"seller\". With this amendment, NFT offers for negative amounts are considered invalid. This amendment has no effect unless the NonFungibleTokensV1 amendment is enabled. This amendment is obsolete because its effects are included as part of NonFungibleTokensV1_1.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixNFTokenNegOffer appears in XRPSCAN with introduced rippled version 1.9.2.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "Known Amendments status for fixNFTokenNegOffer is obsolete/removed: OBSOLETE.",
+        "fact_id": "F5",
+        "source_id": "xrpl_known_amendments_md"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "486e8f5dc04576c40d4f86034b64f4ee9f0e8793d15cc7860189e1dfb802f4f1",
+  "packet_id": "case_020--vote_outcome",
+  "packet_version": 1
+}

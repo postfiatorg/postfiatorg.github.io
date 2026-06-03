@@ -1,0 +1,45 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO"
+  ],
+  "event_id": "case_018",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "267624F8F744C4A4F1B5821A7D54410BCEBABE987F0172EE89E5FC4B6EDBC18A",
+    "amendment_name": "fixBatchInnerSigs",
+    "decision_surface": "XRPL validator amendment decision surface for fixBatchInnerSigs.",
+    "outcome_question": "Recommend the XRP-native YES/NO vote/outcome for this named decision surface from pre-outcome facts only.",
+    "source_facts": [
+      {
+        "claim": "fixBatchInnerSigs: This amendment fixes an issue where inner transactions of a Batch transaction would be flagged as having valid signatures. Since inner transactions aren't signed directly, they should never have valid signatures. Warning. This amendment was disabled in v3.1.1 due to a bug. It will be replaced by BatchV1_1 in a future release.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixBatchInnerSigs appears in XRPSCAN with introduced rippled version 3.1.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "Known Amendments status for fixBatchInnerSigs is obsolete/removed: OBSOLETE.",
+        "fact_id": "F5",
+        "source_id": "xrpl_known_amendments_md"
+      }
+    ]
+  },
+  "lane": "vote_outcome",
+  "packet_hash": "88146fd070f291735dc34af9cd88ac7b59e15c450d65ff923398a5c4a3eaa063",
+  "packet_id": "case_018--vote_outcome",
+  "packet_version": 1
+}

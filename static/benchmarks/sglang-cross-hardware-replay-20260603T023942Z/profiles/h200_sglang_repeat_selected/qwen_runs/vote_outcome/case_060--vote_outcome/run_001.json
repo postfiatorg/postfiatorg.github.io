@@ -1,0 +1,70 @@
+{
+  "completed_at": "2026-06-03T02:49:46Z",
+  "error": "",
+  "event_id": "case_060",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "ef7ae9085ce38f3ab7a98d1819f65416bc6ed4febf12fba619162af42e5393c0",
+  "output_hash": "8230374e441419b351aa7ac9f4228d40c85ce1106d12d7700367158718a7e02c",
+  "output_json": {
+    "arguments_for_no": [
+      "The packet provides no evidence of a critical bug, security vulnerability, or network instability that would necessitate a NO vote to prevent activation.",
+      "There is no indication that the fixAMMv1_1 amendment introduces breaking changes or incompatibilities that would harm the network."
+    ],
+    "arguments_for_yes": [
+      "Fact F1 states that fixAMMv1_1 fixes AMM offer rounding and prevents low quality order book offers from blocking the AMM, which is a functional improvement and bug fix.",
+      "Fact F3 indicates the amendment is associated with rippled version 2.2.0, suggesting it is part of a standard release cycle and has undergone development review.",
+      "Fact F2 outlines the standard voting process, implying that unless there is a specific reason to reject, the default path for a bug fix is to allow the supermajority to activate it."
+    ],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Identifies the amendment as a bug fix for AMM functionality, providing a positive reason to support the change."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms the amendment is tied to a specific software version (2.2.0), indicating it is a planned and tracked update."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Provides context on the voting mechanism, reinforcing that amendments are activated by consensus unless blocked by incompatibility or risk."
+      }
+    ],
+    "decision_summary": "The fixAMMv1_1 amendment is a bug fix addressing AMM offer rounding and blocking issues. There is no evidence of risk or incompatibility. Therefore, the recommendation is to vote YES to allow the network to adopt the fix.",
+    "forbidden_stronger_claim": "The amendment is guaranteed to increase network profitability.",
+    "missing_evidence": [
+      "Validator community sentiment or prior voting history for this specific amendment.",
+      "Detailed technical audit results confirming no side effects from the fix."
+    ],
+    "vote_confidence": 0.85,
+    "xrpl_vote_recommendation": "YES"
+  },
+  "packet_hash": "743c24e6cd2f4804c38b33fdc2da122f86c12e69d615df805ecf0aa928ea81f1",
+  "packet_id": "case_060--vote_outcome",
+  "parsed_label": "YES",
+  "prompt_hash": "8e1d0ae66a7d65227e80680520ac554262c3f920e8539364863de2c784f0b5d0",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The packet provides no evidence of a critical bug, security vulnerability, or network instability that would necessitate a NO vote to prevent activation.\",\n    \"There is no indication that the fixAMMv1_1 amendment introduces breaking changes or incompatibilities that would harm the network.\"\n  ],\n  \"arguments_for_yes\": [\n    \"Fact F1 states that fixAMMv1_1 fixes AMM offer rounding and prevents low quality order book offers from blocking the AMM, which is a functional improvement and bug fix.\",\n    \"Fact F3 indicates the amendment is associated with rippled version 2.2.0, suggesting it is part of a standard release cycle and has undergone development review.\",\n    \"Fact F2 outlines the standard voting process, implying that unless there is a specific reason to reject, the default path for a bug fix is to allow the supermajority to activate it.\"\n  ],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Identifies the amendment as a bug fix for AMM functionality, providing a positive reason to support the change.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms the amendment is tied to a specific software version (2.2.0), indicating it is a planned and tracked update.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Provides context on the voting mechanism, reinforcing that amendments are activated by consensus unless blocked by incompatibility or risk.\"\n    }\n  ],\n  \"decision_summary\": \"The fixAMMv1_1 amendment is a bug fix addressing AMM offer rounding and blocking issues. There is no evidence of risk or incompatibility. Therefore, the recommendation is to vote YES to allow the network to adopt the fix.\",\n  \"forbidden_stronger_claim\": \"The amendment is guaranteed to increase network profitability.\",\n  \"missing_evidence\": [\n    \"Validator community sentiment or prior voting history for this specific amendment.\",\n    \"Detailed technical audit results confirming no side effects from the fix.\"\n  ],\n  \"vote_confidence\": 0.85,\n  \"xrpl_vote_recommendation\": \"YES\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 504,
+      "prompt_tokens": 665,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1169
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T02:49:37Z"
+}

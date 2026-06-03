@@ -1,0 +1,37 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_031",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "58E92F338758479C06084E1B6BA366BAD8F75E5329A7F0EEAFFFDA51E5106B7F",
+    "amendment_name": "DynamicMPT",
+    "decision_surface": "XRPL validator amendment decision surface for DynamicMPT.",
+    "source_facts": [
+      {
+        "claim": "DynamicMPT: Extends Multi-Purpose Tokens to allow issuers to designate specific properties as mutable during token creation, enabling selected attributes to be updated later as business needs change. For more details, see XLS-94: Dynamic MPTs.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "2d3513de1db2795203ccae8bccbbe2e4dc5c67f83f08ecf2418072978001be31",
+  "packet_id": "case_031--triage",
+  "packet_version": 1
+}

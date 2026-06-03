@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_027",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "621A0B264970359869E3C0363A899909AAB7A887C8B73519E4ECF952D33258A8",
+    "amendment_name": "fixPayChanRecipientOwnerDir",
+    "decision_surface": "XRPL validator amendment decision surface for fixPayChanRecipientOwnerDir.",
+    "source_facts": [
+      {
+        "claim": "fixPayChanRecipientOwnerDir: Changes the PaymentChannelCreate transaction type so that it adds new payment channels to the recipient's owner directory. Without this amendment, new payment channels are added only to the sender's owner directory; with this amendment enabled, newly-created payment channels are added to both owner directories. Existing payment channels are unchanged. This change prevents accounts from being deleted if they are the recipient for open payment channels, except for channels created before this amendment.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixPayChanRecipientOwnerDir appears in XRPSCAN with introduced rippled version 1.4.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "89ef70dea0790c7a40f0c80baced14bf5d6e5f797f9bbe77027ecdfebc12b0fb",
+  "packet_id": "case_027--triage",
+  "packet_version": 1
+}

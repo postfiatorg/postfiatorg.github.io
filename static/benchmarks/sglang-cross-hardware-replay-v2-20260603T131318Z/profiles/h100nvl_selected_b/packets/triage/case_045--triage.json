@@ -1,0 +1,42 @@
+{
+  "allowed_labels": [
+    "PROCEED",
+    "HOLD_FOR_CHALLENGE",
+    "DELAY_FOR_FIX",
+    "REJECT"
+  ],
+  "event_id": "case_045",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "7CA70A7674A26FA517412858659EBC7EDEEF7D2D608824464E6FDEFD06854E14",
+    "amendment_name": "fixAMMv1_3",
+    "decision_surface": "XRPL validator amendment decision surface for fixAMMv1_3.",
+    "source_facts": [
+      {
+        "claim": "fixAMMv1_3: Adds several fixes to Automated Market Maker code, specifically: - Add several invariant checks to ensure that AMMs function as designed. - Add rounding to AMM deposit and withdraw to ensure that the AMM's balance meets the invariant: - On deposit, tokens out are rounded downward and deposit amount is rounded upward. - On withdrawal, tokens in are rounded upward and withdrawal amount is rounded downward. - Fix validation of AMMBid transactions to ensure that AuthAccounts cannot contain duplicates or the transaction sender.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "fixAMMv1_3 appears in XRPSCAN with introduced rippled version 2.5.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      }
+    ],
+    "triage_question": "Choose the conservative validator review route for this amendment decision surface as if evaluating it at decision time. Do not treat a historical packet as rejected merely because the real-world event is now complete."
+  },
+  "lane": "triage",
+  "packet_hash": "819507a6afeb203883985d8bab21ac5d77f312b5ac8db5fb55b7a2eb56540962",
+  "packet_id": "case_045--triage",
+  "packet_version": 1
+}

@@ -1,0 +1,50 @@
+{
+  "completed_at": "2026-06-03T14:26:02Z",
+  "error": "",
+  "event_id": "case_059",
+  "lane": "vote_state",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "04c0627e25c5968cc34d1c83f5fae5f258c102fdbb5ca6eacfd6d358f89ec162",
+  "output_hash": "f0e72d5f8432ad2eb5919fad54653fe015552c9ab9f346dd30aaa70164df8c0b",
+  "output_json": {
+    "cited_facts": [
+      {
+        "fact_id": "F4",
+        "why_it_matters": "This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled."
+      }
+    ],
+    "decision_summary": "The source facts confirm that the amendment 'fixEmptyDID' is included in the validated ledger Amendments object with a recorded enablement date and ledger index. According to the task rules, the presence of enabled ledger membership corresponds to the ENABLED state.",
+    "forbidden_stronger_claim": "This output is a replay classification, not proof of amendment correctness.",
+    "missing_evidence": [],
+    "state_confidence": 1.0,
+    "vote_state": "ENABLED"
+  },
+  "packet_hash": "02396aa8965626da45908938fefb081590fbbfe5ba453c8c3b3f7457af5e8c69",
+  "packet_id": "case_059--vote_state",
+  "parsed_label": "ENABLED",
+  "prompt_hash": "88b42964179fd577613cfd499bf529199d2c7ec92682fb38e42b5d080f0f5a5c",
+  "raw_message_content": "{\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F4\",\n      \"why_it_matters\": \"This fact explicitly states that the amendment ID is present in the validated ledger Amendments object and provides a specific enabled_on timestamp and enabled_in_ledger number, which directly indicates the amendment has been enabled.\"\n    }\n  ],\n  \"decision_summary\": \"The source facts confirm that the amendment 'fixEmptyDID' is included in the validated ledger Amendments object with a recorded enablement date and ledger index. According to the task rules, the presence of enabled ledger membership corresponds to the ENABLED state.\",\n  \"missing_evidence\": [],\n  \"state_confidence\": 1.0,\n  \"vote_state\": \"ENABLED\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 167,
+      "prompt_tokens": 826,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 993
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T14:25:59Z"
+}

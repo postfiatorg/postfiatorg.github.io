@@ -1,0 +1,36 @@
+{
+  "allowed_labels": [
+    "YES",
+    "NO",
+    "UNKNOWN"
+  ],
+  "event_id": "case_034",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "78ECD9CE17B0BF5B83BB3B275921FB5F5E0F672E9D24BD2E848B7C6277AE296E",
+    "amendment_name": "SmartEscrow",
+    "decision_surface": "XRPL validator amendment decision surface for SmartEscrow.",
+    "default_vote_question": "Infer the latest stable release source default vote from the source-backed amendment description only.",
+    "source_facts": [
+      {
+        "claim": "SmartEscrow: The Smart Escrows amendment introduces a new programmability layer to the XRPL, powered by a WebAssembly (WASM) engine. Developers can write custom functions that control when an escrow can be finished. For more details, see XLS-100: Smart Escrows.",
+        "fact_id": "F1",
+        "source_id": "xrpl_known_amendments_md"
+      },
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      }
+    ]
+  },
+  "lane": "default_vote",
+  "packet_hash": "4a6dd0c9146697c7eb88e0b69472c67292ef67d9d2337cfc42572f4bc7953425",
+  "packet_id": "case_034--default_vote",
+  "packet_version": 1
+}

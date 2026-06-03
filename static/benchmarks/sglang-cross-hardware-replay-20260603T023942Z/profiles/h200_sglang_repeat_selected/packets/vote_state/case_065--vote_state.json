@@ -1,0 +1,44 @@
+{
+  "allowed_labels": [
+    "ENABLED",
+    "NO_MAJORITY",
+    "MAJORITY_ACTIVE",
+    "MAJORITY_LOST",
+    "VETOED_OR_RETIRED",
+    "UNKNOWN"
+  ],
+  "event_id": "case_065",
+  "held_out_fields": [
+    "terminal_outcome",
+    "vote_state_label",
+    "source_default_vote",
+    "triage_policy_label"
+  ],
+  "input_context": {
+    "amendment_id": "93E516234E35E08CA689FA33A6D38E103881F8DCB53023F728C307AA89D515A7",
+    "amendment_name": "XRPFees",
+    "decision_surface": "XRPL validator amendment decision surface for XRPFees.",
+    "source_facts": [
+      {
+        "claim": "XRPL amendment voting requires sustained validator supermajority before activation; incompatible servers can become amendment-blocked.",
+        "fact_id": "F2",
+        "source_id": "xrpl_amendments_process_md"
+      },
+      {
+        "claim": "XRPFees appears in XRPSCAN with introduced rippled version 1.10.0.",
+        "fact_id": "F3",
+        "source_id": "xrpscan_amendments_api"
+      },
+      {
+        "claim": "The validated ledger Amendments object currently contains amendment ID 93E516234E35E08CA689FA33A6D38E103881F8DCB53023F728C307AA89D515A7; XRPSCAN reports enabled_on=2024-03-25T17:51:32.000Z and enabled_in_ledger=86860289.",
+        "fact_id": "F4",
+        "source_id": "xrpl_validated_amendments_object"
+      }
+    ],
+    "state_question": "Classify the dated XRPL amendment state using the supplied source facts."
+  },
+  "lane": "vote_state",
+  "packet_hash": "0cc209c05c916f6047fab55669898e3528f42cd164f3f7d0c4a611ce2c19ea96",
+  "packet_id": "case_065--vote_state",
+  "packet_version": 1
+}

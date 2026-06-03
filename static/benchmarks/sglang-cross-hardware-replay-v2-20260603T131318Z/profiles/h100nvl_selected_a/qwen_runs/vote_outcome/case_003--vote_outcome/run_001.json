@@ -1,0 +1,67 @@
+{
+  "completed_at": "2026-06-03T13:45:10Z",
+  "error": "",
+  "event_id": "case_003",
+  "lane": "vote_outcome",
+  "model": "Qwen/Qwen3.6-27B-FP8",
+  "model_profile_hash": "8827ae91ac914475f5e00b89ecd231bbaf6ca28d1a55efc6e1f866fa3ff0081d",
+  "output_hash": "5488b92a9043a2f6512b066eee79c5d742d47d3c89c6fd233d9d756f216cc63c",
+  "output_json": {
+    "arguments_for_no": [
+      "The amendment contains a critical security vulnerability allowing unauthorized inner transaction execution on behalf of arbitrary victim accounts.",
+      "The rippled client version 3.1.1 explicitly disabled the Batch amendment and the fixBatchInnerSigs feature due to the severity of the bug.",
+      "UNL validators were directly advised to vote No on the Batch amendment to prevent activation of the vulnerable code."
+    ],
+    "arguments_for_yes": [],
+    "cited_facts": [
+      {
+        "fact_id": "F1",
+        "why_it_matters": "Establishes the existence of a severe security flaw that compromises account integrity, providing the primary justification for rejecting the amendment."
+      },
+      {
+        "fact_id": "F2",
+        "why_it_matters": "Indicates that the consensus mechanism's trusted validators were explicitly directed to oppose the amendment, signaling a coordinated rejection based on risk."
+      },
+      {
+        "fact_id": "F3",
+        "why_it_matters": "Confirms that the software implementation itself disabled the feature, making support for the amendment technically obsolete and unsafe."
+      }
+    ],
+    "decision_summary": "The Batch amendment must be rejected because it introduces a critical vulnerability allowing unauthorized transactions. Both the software maintainers (via rippled 3.1.1) and the validator network (via UNL advice) have moved to disable and vote against it.",
+    "forbidden_stronger_claim": "The amendment has already been permanently removed from the ledger history.",
+    "missing_evidence": [
+      "The specific timeline of when the fix was deployed relative to the vote window.",
+      "The exact percentage of validators that had already voted prior to the advisory."
+    ],
+    "vote_confidence": 0.99,
+    "xrpl_vote_recommendation": "NO"
+  },
+  "packet_hash": "91c1b038437e2508229f05b765f57a74139654897cbd4df3b8218f91302f7d6a",
+  "packet_id": "case_003--vote_outcome",
+  "parsed_label": "NO",
+  "prompt_hash": "bcb2bc2d6c9b0ca7c5829192601cba08e02d16716fb4ffd5593e2d19a5bc8561",
+  "raw_message_content": "{\n  \"arguments_for_no\": [\n    \"The amendment contains a critical security vulnerability allowing unauthorized inner transaction execution on behalf of arbitrary victim accounts.\",\n    \"The rippled client version 3.1.1 explicitly disabled the Batch amendment and the fixBatchInnerSigs feature due to the severity of the bug.\",\n    \"UNL validators were directly advised to vote No on the Batch amendment to prevent activation of the vulnerable code.\"\n  ],\n  \"arguments_for_yes\": [],\n  \"cited_facts\": [\n    {\n      \"fact_id\": \"F1\",\n      \"why_it_matters\": \"Establishes the existence of a severe security flaw that compromises account integrity, providing the primary justification for rejecting the amendment.\"\n    },\n    {\n      \"fact_id\": \"F2\",\n      \"why_it_matters\": \"Indicates that the consensus mechanism's trusted validators were explicitly directed to oppose the amendment, signaling a coordinated rejection based on risk.\"\n    },\n    {\n      \"fact_id\": \"F3\",\n      \"why_it_matters\": \"Confirms that the software implementation itself disabled the feature, making support for the amendment technically obsolete and unsafe.\"\n    }\n  ],\n  \"decision_summary\": \"The Batch amendment must be rejected because it introduces a critical vulnerability allowing unauthorized transactions. Both the software maintainers (via rippled 3.1.1) and the validator network (via UNL advice) have moved to disable and vote against it.\",\n  \"forbidden_stronger_claim\": \"The amendment has already been permanently removed from the ledger history.\",\n  \"missing_evidence\": [\n    \"The specific timeline of when the fix was deployed relative to the vote window.\",\n    \"The exact percentage of validators that had already voted prior to the advisory.\"\n  ],\n  \"vote_confidence\": 0.99,\n  \"xrpl_vote_recommendation\": \"NO\"\n}",
+  "raw_response_shape": {
+    "choice_count": 1,
+    "keys": [
+      "choices",
+      "created",
+      "id",
+      "metadata",
+      "model",
+      "object",
+      "usage"
+    ],
+    "usage": {
+      "completion_tokens": 411,
+      "prompt_tokens": 658,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0,
+      "total_tokens": 1069
+    }
+  },
+  "run_index": 1,
+  "runtime_kind": "openai_compatible_sglang",
+  "schema_valid": true,
+  "started_at": "2026-06-03T13:45:03Z"
+}
