@@ -106,13 +106,21 @@ jobs:
           rows = []
           for packet_path in packet_paths:
               packet = json.loads(packet_path.read_text())
-              prompt = build_prompt(packet)
+              base_prompt = build_prompt(packet)
+              prompt = base_prompt + "\n\n/no_think"
               messages = [
-                  {"role": "system", "content": "Return only valid JSON. No markdown. No commentary."},
+                  {"role": "system", "content": "Return only valid JSON. No markdown. No commentary. Do not include reasoning or thinking text."},
                   {"role": "user", "content": prompt},
               ]
               if tokenizer.chat_template is not None:
-                  model_prompt = tokenizer.apply_chat_template(messages, add_generation_prompt=True)
+                  try:
+                      model_prompt = tokenizer.apply_chat_template(
+                          messages,
+                          add_generation_prompt=True,
+                          enable_thinking=False,
+                      )
+                  except TypeError:
+                      model_prompt = tokenizer.apply_chat_template(messages, add_generation_prompt=True)
               else:
                   model_prompt = messages[0]["content"] + "\n\n" + messages[1]["content"]
 
@@ -140,7 +148,9 @@ jobs:
                       "run_index": run_idx,
                       "model": model_id,
                       "packet_hash": hashlib.sha256(packet_path.read_bytes()).hexdigest(),
+                      "base_prompt_hash": hashlib.sha256(base_prompt.encode("utf-8")).hexdigest(),
                       "prompt_hash": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
+                      "prompt_profile": "mlx_no_think_suffix",
                       "raw_output_hash": hashlib.sha256(str(raw).encode("utf-8")).hexdigest(),
                       "parsed_output_hash": sha_json(output_json) if schema_valid else "",
                       "schema_valid": schema_valid,
