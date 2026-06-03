@@ -1,6 +1,6 @@
 ---
 title: "LLM Governance Replay: Cheap Public Verification Before Private Committees"
-date: 2026-06-03T00:00:00Z
+date: 2026-06-02T00:00:00Z
 summary: "A replay experiment on XRPL amendment history: deterministic LLM replay can make governance review cheaper by making first-pass claims public, typed, hash-bound, and contestable—not by replacing validator judgment."
 aliases:
   - /llm-governance-replay/
@@ -40,7 +40,7 @@ The most interesting single event was the Batch pre-disclosure replay. With the 
 
 ## Status And Claim Boundaries
 
-This revision is written on **June 3, 2026**. The 2026 artifact dates, the `Qwen/Qwen3.6-27B-FP8` model reference, the SGLang deterministic-inference runtime, the XRPL February 2026 Batch disclosure, and the CoinDesk February 2026 Batch article are current public anchors for this post, not forward-dated fiction.
+This article is dated **June 2, 2026**. The 2026 artifact dates, the `Qwen/Qwen3.6-27B-FP8` model reference, the SGLang deterministic-inference runtime, the XRPL February 2026 Batch disclosure, and the CoinDesk February 2026 Batch article are public anchors for this post, not forward-dated fiction.
 
 The empirical objects are also public benchmark artifacts:
 
