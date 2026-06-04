@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc">
+  <title id="title">PostFiat devnet Orchard verifier before and after remediation</title>
+  <desc id="desc">A two-column diagram comparing the legacy devnet Orchard v1 verifier path with the patched v2 verifier path. The legacy path accepted v1 proof profile identifiers and used orchard 0.13.1 with halo2_gadgets 0.4.0. The patched path rejects v1 identifiers, uses orchard 0.14.0 with halo2_gadgets 0.5.0, and enforces strict proof-size reconstruction before state application.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ddffdc" stroke-opacity=".05" stroke-width="1"/>
+    </pattern>
+    <marker id="arrowGreen" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M2 2L10 6L2 10Z" fill="#7fee64"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M2 2L10 6L2 10Z" fill="#f0bc5e"/>
+    </marker>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity=".45"/>
+    </filter>
+    <style>
+      .bg{fill:#050805}
+      .panel{fill:#101410;stroke:#ddffdc;stroke-opacity:.18;stroke-width:1.3;filter:url(#softShadow)}
+      .panel-left{stroke:#f0bc5e;stroke-opacity:.36}
+      .panel-right{stroke:#7fee64;stroke-opacity:.42}
+      .kicker{font:600 14px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:.11em;text-transform:uppercase}
+      .title{font:650 34px Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:0}
+      .subtitle{font:500 17px Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+      .panel-title{font:650 24px Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:0}
+      .body{font:500 16px Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+      .small{font:500 13px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+      .tiny{font:600 11px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
+      .pale{fill:#ddffdc}
+      .muted{fill:#a9baa5}
+      .green{fill:#7fee64}
+      .amber{fill:#f0bc5e}
+      .red{fill:#ff7d72}
+      .blue{fill:#7ac7ff}
+      .box{fill:#070a07;stroke:#ddffdc;stroke-opacity:.16;stroke-width:1}
+      .leftbox{stroke:#f0bc5e;stroke-opacity:.33}
+      .rightbox{stroke:#7fee64;stroke-opacity:.36}
+      .risk{fill:#21140b;stroke:#f0bc5e;stroke-opacity:.45}
+      .safe{fill:#0d1a11;stroke:#7fee64;stroke-opacity:.48}
+      .badge{fill:#151d15;stroke:#ddffdc;stroke-opacity:.17}
+      .before-badge{fill:#1f160d;stroke:#f0bc5e;stroke-opacity:.46}
+      .after-badge{fill:#0e1d12;stroke:#7fee64;stroke-opacity:.5}
+      .arrow-line{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+      .divider{stroke:#ddffdc;stroke-opacity:.13;stroke-width:1}
+    </style>
+  </defs>
+
+  <rect class="bg" width="1280" height="760"/>
+  <rect width="1280" height="760" fill="url(#grid)"/>
+  <path d="M0 0H1280V760H0Z" fill="none" stroke="#ddffdc" stroke-opacity=".08"/>
+
+  <text x="52" y="48" class="kicker green">Devnet Orchard verifier boundary</text>
+  <text x="52" y="88" class="title pale">Before and after the Orchard/Halo2 remediation</text>
+  <text x="52" y="121" class="subtitle muted">The important change is the verifier gate: legacy profile + affected stack on the left; patched profile + strict reconstruction on the right.</text>
+
+  <rect x="52" y="152" width="558" height="552" rx="8" class="panel panel-left"/>
+  <rect x="670" y="152" width="558" height="552" rx="8" class="panel panel-right"/>
+
+  <text x="84" y="197" class="tiny amber">Before</text>
+  <text x="84" y="229" class="panel-title pale">Legacy devnet v1 path</text>
+  <rect x="418" y="176" width="154" height="34" rx="8" class="before-badge"/>
+  <text x="441" y="198" class="small amber">affected range</text>
+
+  <text x="702" y="197" class="tiny green">After</text>
+  <text x="702" y="229" class="panel-title pale">Patched devnet v2 path</text>
+  <rect x="1031" y="176" width="159" height="34" rx="8" class="after-badge"/>
+  <text x="1052" y="198" class="small green">fixed profile</text>
+
+  <rect x="86" y="262" width="490" height="72" rx="8" class="box leftbox"/>
+  <text x="110" y="291" class="body pale">Serialized PostFiat Orchard action</text>
+  <text x="110" y="317" class="small muted">proof_system_id: postfiat.privacy.orchard-halo2.v1</text>
+
+  <path d="M331 340V373" class="arrow-line" stroke="#f0bc5e" marker-end="url(#arrowAmber)"/>
+  <rect x="86" y="380" width="490" height="76" rx="8" class="box leftbox"/>
+  <text x="110" y="410" class="body pale">Adapter reconstructs upstream bundle</text>
+  <text x="110" y="436" class="small muted">orchard 0.13.1  +  halo2_gadgets 0.4.0</text>
+
+  <path d="M331 462V495" class="arrow-line" stroke="#f0bc5e" marker-end="url(#arrowAmber)"/>
+  <rect x="86" y="502" width="490" height="76" rx="8" class="box leftbox"/>
+  <text x="110" y="532" class="body pale">Proof verifies under legacy circuit profile</text>
+  <text x="110" y="558" class="small muted">downstream state trusts the hidden statement</text>
+
+  <path d="M331 584V611" class="arrow-line" stroke="#f0bc5e" marker-end="url(#arrowAmber)"/>
+  <rect x="86" y="620" width="490" height="62" rx="8" class="risk"/>
+  <text x="110" y="644" class="small amber">If the proof is false, nullifiers and value balance</text>
+  <text x="110" y="664" class="small amber">can still look ordinary.</text>
+
+  <rect x="704" y="262" width="490" height="72" rx="8" class="box rightbox"/>
+  <text x="728" y="291" class="body pale">Profile gate accepts only v2 identifiers</text>
+  <text x="728" y="317" class="small muted">legacy v1 proof_system_id and circuit_id are rejected</text>
+
+  <path d="M949 340V373" class="arrow-line" stroke="#7fee64" marker-end="url(#arrowGreen)"/>
+  <rect x="704" y="380" width="490" height="76" rx="8" class="box rightbox"/>
+  <text x="728" y="410" class="body pale">Adapter uses corrected upstream stack</text>
+  <text x="728" y="436" class="small muted">orchard 0.14.0  +  halo2_gadgets 0.5.0</text>
+
+  <path d="M949 462V495" class="arrow-line" stroke="#7fee64" marker-end="url(#arrowGreen)"/>
+  <rect x="704" y="502" width="490" height="76" rx="8" class="box rightbox"/>
+  <text x="728" y="532" class="body pale">Strict bundle reconstruction before verification</text>
+  <text x="728" y="556" class="small muted">Bundle::try_from_parts(...)</text>
+  <text x="728" y="574" class="small muted">ProofSizeEnforcement::Strict</text>
+
+  <path d="M949 584V611" class="arrow-line" stroke="#7fee64" marker-end="url(#arrowGreen)"/>
+  <rect x="704" y="620" width="490" height="62" rx="8" class="safe"/>
+  <text x="728" y="644" class="small green">Legacy IDs and padded proofs fail before</text>
+  <text x="728" y="664" class="small green">devnet state application.</text>
+
+  <line x1="640" y1="178" x2="640" y2="676" class="divider"/>
+  <path d="M596 428H684" class="arrow-line" stroke="#7ac7ff" marker-end="url(#arrowGreen)"/>
+  <rect x="571" y="389" width="138" height="58" rx="8" class="badge"/>
+  <text x="597" y="413" class="tiny blue">remediation</text>
+  <text x="602" y="435" class="small muted">change gate</text>
+
+  <text x="52" y="734" class="small muted">Not shown: an exploit witness. The public point is the implementation boundary: profile versioning, fixed dependencies, strict proof shape, and rejection tests.</text>
+</svg>
