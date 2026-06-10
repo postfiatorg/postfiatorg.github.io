@@ -1,142 +1,155 @@
 <figure class="trust-shift" aria-labelledby="trust-shift-title" aria-describedby="trust-shift-caption trust-shift-machine">
   <style>
-    .trust-shift{--amber:#f5c66a;--cyan:#8fd6ff;margin:2rem 0 2.25rem;scroll-margin-top:96px}
+    .trust-shift{--amber:#f5c66a;--cyan:#8fd6ff;--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;--ink:#090c0a;margin:2rem 0 2.25rem;scroll-margin-top:96px}
     .trust-shift *{box-sizing:border-box}
-    .trust-shift code{padding:0;background:transparent;color:inherit;font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.94em}
+    .trust-shift code{padding:0;background:transparent;color:inherit;font-family:var(--mono);font-size:.94em}
     .trust-shift sub{font-size:.68em;line-height:0}
-    .trust-shift-shell{position:relative;overflow:hidden;border:1px solid rgba(221,255,220,.16);border-radius:8px;background:linear-gradient(180deg,rgba(13,17,14,.96),rgba(5,8,6,.96))}
-    .trust-shift-shell::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(221,255,220,.025) 1px,transparent 1px),linear-gradient(rgba(221,255,220,.022) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(180deg,rgba(0,0,0,.78),transparent 85%)}
-    .trust-shift-inner{position:relative;padding:18px}
-    .trust-shift-eyebrow{margin:0 0 .45rem;color:var(--green);font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.72rem;font-weight:650;letter-spacing:.11em;text-transform:uppercase}
-    .trust-shift-title{max-width:760px;margin:0 0 1.1rem;color:var(--pale);font-size:clamp(1.28rem,2.2vw,1.8rem);font-weight:650;line-height:1.12}
-    .trust-shift-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
-    .trust-shift-lane{min-width:0;border:1px solid rgba(221,255,220,.13);border-radius:8px;background:rgba(0,0,0,.27)}
-    .trust-shift-lane--file{border-color:rgba(245,198,106,.28)}
-    .trust-shift-lane--state{border-color:rgba(143,214,255,.28)}
-    .trust-shift-lane-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:13px 14px;border-bottom:1px solid rgba(221,255,220,.1)}
-    .trust-shift-lane-head h3{margin:0;color:var(--pale);font-size:1rem;line-height:1.2;font-weight:650}
-    .trust-shift-lane-head p{margin:.22rem 0 0;color:var(--muted);font-size:.82rem;line-height:1.35}
-    .trust-shift-badge{flex:none;border:1px solid currentColor;border-radius:999px;padding:4px 8px;font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.64rem;font-weight:650;letter-spacing:.08em;text-transform:uppercase}
-    .trust-shift-lane--file .trust-shift-badge{color:var(--amber)}
-    .trust-shift-lane--state .trust-shift-badge{color:var(--cyan)}
-    .trust-shift-flow{display:grid;gap:10px;padding:13px 14px}
-    .trust-step{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start}
-    .trust-step-index{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.72rem;font-weight:650}
-    .trust-shift-lane--file .trust-step-index{border:1px solid rgba(245,198,106,.38);color:var(--amber);background:rgba(245,198,106,.08)}
-    .trust-shift-lane--state .trust-step-index{border:1px solid rgba(143,214,255,.36);color:var(--cyan);background:rgba(143,214,255,.07)}
-    .trust-step strong{display:block;margin:.05rem 0 .18rem;color:var(--pale);font-size:.93rem;line-height:1.22}
-    .trust-step span{display:block;color:var(--muted);font-size:.82rem;line-height:1.35}
-    .trust-mini-lists{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:7px}
-    .trust-mini{padding:8px;border:1px solid rgba(221,255,220,.11);border-radius:7px;background:rgba(221,255,220,.035);font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
-    .trust-mini b{display:block;margin-bottom:.28rem;color:var(--green);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase}
-    .trust-mini code{display:block;color:var(--pale);font-size:.78rem;white-space:normal}
-    .trust-check-list{display:grid;gap:6px;margin:7px 0 0;padding:0;list-style:none}
-    .trust-check-list li{display:grid;grid-template-columns:16px 1fr;gap:7px;margin:0;color:var(--pale-2);font-size:.8rem;line-height:1.28}
-    .trust-check-list li::before{content:"";width:8px;height:8px;margin-top:.42rem;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(127,238,100,.12)}
-    .trust-outcome-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 14px}
-    .trust-outcome{min-height:84px;padding:10px;border:1px solid rgba(221,255,220,.12);border-radius:8px;background:rgba(0,0,0,.32)}
-    .trust-outcome strong{display:block;color:var(--pale);font-size:.88rem;line-height:1.2}
-    .trust-outcome span{display:block;margin-top:.32rem;color:var(--muted);font-size:.76rem;line-height:1.32}
-    .trust-outcome--warn{border-color:rgba(245,198,106,.3);background:rgba(245,198,106,.055)}
-    .trust-outcome--pass{border-color:rgba(127,238,100,.32);background:rgba(127,238,100,.065)}
-    .trust-shift figcaption{margin:.68rem 0 0;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;line-height:1.52}
+    .ts-shell{position:relative;overflow:hidden;border:1px solid rgba(221,255,220,.16);border-radius:8px;background:linear-gradient(180deg,rgba(13,17,14,.96),rgba(5,8,6,.96))}
+    .ts-shell::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(221,255,220,.025) 1px,transparent 1px),linear-gradient(rgba(221,255,220,.022) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(180deg,rgba(0,0,0,.78),transparent 85%)}
+    .ts-inner{position:relative;padding:18px}
+    .ts-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:16px}
+    .ts-eyebrow{margin:0 0 .4rem;color:var(--green);font:650 .72rem/1 var(--mono);letter-spacing:.11em;text-transform:uppercase}
+    .ts-title{margin:0;max-width:580px;color:var(--pale);font-size:1.08rem;font-weight:650;line-height:1.35}
+    .ts-motto{flex:none;border:1px solid rgba(221,255,220,.15);border-radius:999px;padding:6px 10px;color:var(--pale-2);font:500 .7rem/1 var(--mono);white-space:nowrap}
+    .ts-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
+    .ts-lane{min-width:0;border:1px solid rgba(221,255,220,.13);border-top:2px solid;border-radius:8px;background:rgba(0,0,0,.27)}
+    .ts-lane--file{border-top-color:rgba(245,198,106,.65)}
+    .ts-lane--state{border-top-color:rgba(143,214,255,.65)}
+    .ts-lane-head{padding:12px 14px 11px;border-bottom:1px solid rgba(221,255,220,.09)}
+    .trust-shift .ts-lane-k{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0;font:650 .7rem/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase}
+    .trust-shift .ts-lane-k small{font:500 .64rem/1.3 var(--mono);letter-spacing:.07em;color:var(--muted);white-space:nowrap}
+    .ts-lane--file .ts-lane-k{color:var(--amber)}
+    .ts-lane--state .ts-lane-k{color:var(--cyan)}
+    .ts-lane-head p{margin:.4rem 0 0;color:var(--muted);font-size:.82rem;line-height:1.4}
+    .ts-flow{position:relative;display:grid;gap:13px;margin:0;padding:14px 14px 12px;list-style:none}
+    .ts-flow::before{content:"";position:absolute;left:25px;top:20px;bottom:0;width:1px}
+    .ts-lane--file .ts-flow::before{background:rgba(245,198,106,.32)}
+    .ts-lane--state .ts-flow::before{background:rgba(143,214,255,.3)}
+    .ts-step{display:grid;grid-template-columns:22px 1fr;gap:11px;align-items:start}
+    .ts-step-i{position:relative;z-index:1;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--ink);font:650 .66rem/1 var(--mono)}
+    .ts-lane--file .ts-step-i{border:1px solid rgba(245,198,106,.45);color:var(--amber)}
+    .ts-lane--state .ts-step-i{border:1px solid rgba(143,214,255,.42);color:var(--cyan)}
+    .ts-step strong{display:block;margin-top:.12rem;color:var(--pale);font-size:.9rem;line-height:1.25}
+    .ts-step span{display:block;margin-top:.16rem;color:var(--muted);font-size:.8rem;line-height:1.42}
+    .ts-checks{display:grid;gap:4px;margin:.5rem 0 0;padding:0;list-style:none}
+    .ts-checks li{position:relative;margin:0;padding-left:16px;color:var(--pale-2);font:400 .76rem/1.45 var(--mono)}
+    .ts-checks li::before{content:"✓";position:absolute;left:0;top:0;color:var(--green);font-weight:650}
+    .ts-fork{position:relative;height:26px;margin:0 14px}
+    .ts-fork i{position:absolute;display:block}
+    .ts-fork .f-stem{left:11px;top:0;width:1px;height:13px}
+    .ts-fork .f-bus{left:11px;right:25%;top:13px;height:1px}
+    .ts-fork .f-d1{left:25%;top:13px;width:1px;height:13px}
+    .ts-fork .f-d2{left:calc(75% - 1px);top:13px;width:1px;height:13px}
+    .ts-fork .f-d1::after,.ts-fork .f-d2::after{content:"";position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);border:4px solid transparent;border-bottom:0;border-top:5px solid}
+    .ts-lane--file .ts-fork i{background:rgba(245,198,106,.38)}
+    .ts-lane--file .ts-fork .f-d1::after,.ts-lane--file .ts-fork .f-d2::after{border-top-color:rgba(245,198,106,.75)}
+    .ts-lane--state .ts-fork i{background:rgba(143,214,255,.36)}
+    .ts-lane--state .ts-fork .f-d1::after{border-top-color:rgba(186,216,182,.7)}
+    .ts-lane--state .ts-fork .f-d2::after{border-top-color:var(--green)}
+    .ts-fork .f-stem,.ts-fork .f-d1,.ts-fork .f-d2{width:1px}
+    .ts-pair{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 14px}
+    .ts-pair::after{content:"≠";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:22px;height:22px;border:1px solid rgba(245,198,106,.45);border-radius:999px;background:var(--ink);color:var(--amber);font:650 .74rem/1 var(--mono)}
+    .ts-mini{min-width:0;padding:9px 10px;border:1px solid rgba(245,198,106,.22);border-radius:7px;background:rgba(245,198,106,.04);font-family:var(--mono)}
+    .ts-mini b{display:block;margin-bottom:.3rem;color:var(--muted);font-size:.62rem;font-weight:650;letter-spacing:.09em;text-transform:uppercase}
+    .ts-mini code{display:block;color:var(--pale);font-size:.78rem;white-space:normal}
+    .ts-mini em{font-style:normal;color:var(--amber);font-weight:650}
+    .ts-end{margin:10px 14px 14px;padding:10px 12px;border:1px solid rgba(245,198,106,.32);border-radius:8px;background:rgba(245,198,106,.055)}
+    .ts-end strong{display:block;color:var(--pale);font-size:.84rem;line-height:1.3}
+    .ts-end span{display:block;margin-top:.26rem;color:var(--muted);font-size:.76rem;line-height:1.42}
+    .ts-outs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 14px 14px}
+    .ts-out{min-width:0;padding:10px 12px;border:1px solid rgba(221,255,220,.14);border-radius:8px;background:rgba(0,0,0,.3)}
+    .ts-out--pass{border-color:rgba(127,238,100,.34);background:rgba(127,238,100,.06)}
+    .ts-out-k{display:block;font:650 .68rem/1.3 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--pale-2)}
+    .ts-out--pass .ts-out-k{color:var(--green)}
+    .ts-out span{display:block;margin-top:.3rem;color:var(--muted);font-size:.76rem;line-height:1.42}
+    .trust-shift figcaption{margin:.68rem 0 0;color:var(--muted);font-family:var(--mono);font-size:.78rem;line-height:1.52}
     .trust-shift-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    @media(max-width:820px){.trust-shift{scroll-margin-top:80px}.trust-shift-inner{padding:14px}.trust-shift-grid{grid-template-columns:1fr}.trust-shift-title{font-size:1.25rem}.trust-outcome-row,.trust-mini-lists{grid-template-columns:1fr}.trust-shift-lane-head{display:block}.trust-shift-badge{display:inline-flex;margin-top:9px}.trust-outcome{min-height:0}}
+    @media(max-width:820px){.trust-shift{scroll-margin-top:80px}.ts-inner{padding:14px}.ts-head{display:block}.ts-motto{display:inline-block;margin-top:10px}.ts-grid{grid-template-columns:1fr}}
   </style>
 
-  <div class="trust-shift-shell" role="img">
-    <div class="trust-shift-inner">
-      <p class="trust-shift-eyebrow">Trust transition</p>
-      <div id="trust-shift-title" class="trust-shift-title">The same validator-list change has two very different failure modes.</div>
+  <div class="ts-shell" role="img">
+    <div class="ts-inner">
+      <div class="ts-head">
+        <div>
+          <p class="ts-eyebrow">Trust transition</p>
+          <div id="trust-shift-title" class="ts-title">The same validator-list change has two very different failure modes.</div>
+        </div>
+        <span class="ts-motto"><code>&chi;<sub>t</sub></code> validates <code>G<sub>t</sub> &rarr; G<sub>t+1</sub></code></span>
+      </div>
 
-      <div class="trust-shift-grid">
-        <section class="trust-shift-lane trust-shift-lane--file" aria-label="Trust as a published file">
-          <div class="trust-shift-lane-head">
-            <div>
-              <h3>Trust as a published file</h3>
-              <p>A signed list can be transparent, but its transition is not checked by consensus.</p>
-            </div>
-            <span class="trust-shift-badge">off-chain</span>
+      <div class="ts-grid">
+        <section class="ts-lane ts-lane--file" aria-label="Trust as a published file">
+          <div class="ts-lane-head">
+            <h3 class="ts-lane-k">Trust as a published file <small>off-chain</small></h3>
+            <p>A signed list can be transparent — but nothing checks its transitions.</p>
           </div>
 
-          <div class="trust-shift-flow">
-            <div class="trust-step">
-              <span class="trust-step-index">1</span>
+          <ol class="ts-flow">
+            <li class="ts-step">
+              <span class="ts-step-i">1</span>
               <div><strong>Publisher signs <code>vl.json</code></strong><span>Evidence, scores, and selector logic may all be public.</span></div>
-            </div>
-            <div class="trust-step">
-              <span class="trust-step-index">2</span>
-              <div><strong>Operators copy the file</strong><span>Each server updates locally, on its own timing, or not at all.</span></div>
-            </div>
-            <div class="trust-step">
-              <span class="trust-step-index">3</span>
-              <div>
-                <strong>Servers can diverge</strong>
-                <span>Overlap is a social assumption rather than a transition witness.</span>
-                <div class="trust-mini-lists">
-                  <div class="trust-mini"><b>Server A</b><code>v1 v2 v3 v4</code></div>
-                  <div class="trust-mini"><b>Server B</b><code>v1 v2 v3 v6</code></div>
-                </div>
-              </div>
-            </div>
+            </li>
+            <li class="ts-step">
+              <span class="ts-step-i">2</span>
+              <div><strong>Operators copy the file</strong><span>Each server updates on its own timing — or never.</span></div>
+            </li>
+          </ol>
+
+          <div class="ts-fork" aria-hidden="true"><i class="f-stem"></i><i class="f-bus"></i><i class="f-d1"></i><i class="f-d2"></i></div>
+
+          <div class="ts-pair">
+            <div class="ts-mini"><b>Server A</b><code>v1 v2 v3 <em>v4</em></code></div>
+            <div class="ts-mini"><b>Server B</b><code>v1 v2 v3 <em>v6</em></code></div>
           </div>
 
-          <div class="trust-outcome-row">
-            <div class="trust-outcome trust-outcome--warn">
-              <strong>Change = new file</strong>
-              <span>The safety of the change is not protocol-checkable.</span>
-            </div>
-            <div class="trust-outcome">
-              <strong>If unsafe</strong>
-              <span>There is no old-rules rejection path.</span>
-            </div>
+          <div class="ts-end">
+            <strong>The change itself is never checked</strong>
+            <span>Overlap is a social assumption, not a transition witness. An unsafe list has no old-rules rejection path.</span>
           </div>
         </section>
 
-        <section class="trust-shift-lane trust-shift-lane--state" aria-label="Trust as protocol state">
-          <div class="trust-shift-lane-head">
-            <div>
-              <h3>Trust as protocol state</h3>
-              <p>Cobalt turns list evolution into a typed transition object checked by the prior rules.</p>
-            </div>
-            <span class="trust-shift-badge">on-chain roots</span>
+        <section class="ts-lane ts-lane--state" aria-label="Trust as protocol state">
+          <div class="ts-lane-head">
+            <h3 class="ts-lane-k">Trust as protocol state <small>on-chain roots</small></h3>
+            <p>Cobalt makes the change a typed object the previous rules must accept.</p>
           </div>
 
-          <div class="trust-shift-flow">
-            <div class="trust-step">
-              <span class="trust-step-index">1</span>
-              <div><strong>Commit the current state</strong><span>Registry <code>G<sub>t</sub></code>, trust graph <code>T<sub>t</sub></code>, checker <code>&chi;<sub>t</sub></code>.</span></div>
-            </div>
-            <div class="trust-step">
-              <span class="trust-step-index">2</span>
-              <div><strong>Submit transition packet</strong><span><code>G<sub>t</sub> &rarr; G<sub>t+1</sub></code>, with a complete witness.</span></div>
-            </div>
-            <div class="trust-step">
-              <span class="trust-step-index">3</span>
+          <ol class="ts-flow">
+            <li class="ts-step">
+              <span class="ts-step-i">1</span>
+              <div><strong>Commit the current state</strong><span>Registry <code>G<sub>t</sub></code> &middot; trust graph <code>T<sub>t</sub></code> &middot; checker <code>&chi;<sub>t</sub></code>, hash-rooted.</span></div>
+            </li>
+            <li class="ts-step">
+              <span class="ts-step-i">2</span>
+              <div><strong>Submit a transition packet</strong><span><code>G<sub>t</sub> &rarr; G<sub>t+1</sub></code>, with a complete safety witness.</span></div>
+            </li>
+            <li class="ts-step">
+              <span class="ts-step-i">3</span>
               <div>
-                <strong>Run old-rule checks</strong>
-                <ul class="trust-check-list">
+                <strong>Old rules run the checks</strong>
+                <ul class="ts-checks">
                   <li>local quorum arithmetic</li>
                   <li>linkedness closure</li>
-                  <li>old-new intersection exceeds B</li>
-                  <li>complete cover stays within limit</li>
-                  <li>old checker only</li>
+                  <li>old &cap; new quorums &gt; B</li>
+                  <li>complete cover &le; M<sub>cover</sub></li>
+                  <li>old checker &chi;<sub>t</sub> only</li>
                 </ul>
               </div>
+            </li>
+          </ol>
+
+          <div class="ts-fork" aria-hidden="true"><i class="f-stem"></i><i class="f-bus"></i><i class="f-d1"></i><i class="f-d2"></i></div>
+
+          <div class="ts-outs">
+            <div class="ts-out">
+              <strong class="ts-out-k">&#10007; any check fails</strong>
+              <span>Fail closed — <code>G<sub>t</sub></code> stays active.</span>
+            </div>
+            <div class="ts-out ts-out--pass">
+              <strong class="ts-out-k">&#10003; all checks pass</strong>
+              <span><code>G<sub>t+1</sub></code> activates with a replayable witness.</span>
             </div>
           </div>
-
-          <div class="trust-outcome-row">
-            <div class="trust-outcome">
-              <strong>Any check fails</strong>
-              <span>Keep <code>G<sub>t</sub></code> active.</span>
-            </div>
-            <div class="trust-outcome trust-outcome--pass">
-              <strong>All checks pass</strong>
-              <span>Activate <code>G<sub>t+1</sub></code> with a replayable witness.</span>
-            </div>
-          </div>
-
         </section>
       </div>
     </div>
