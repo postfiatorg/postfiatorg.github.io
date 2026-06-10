@@ -75,28 +75,7 @@ The second inequality guarantees any two quorums of $S$ intersect in at least on
 
 The counterexample worth memorizing shows why local soundness isn't enough. Old registry $\{A..G\}$, proposed registry $\{A,B,H..L\}$, each a single subset with $n_S=7$, $q_S=5$, $t_S=2$. **Both pass every local inequality.** But old quorum $\{A,B,C,D,E\}$ and new quorum $\{A,B,H,I,J\}$ intersect only in $\{A,B\}$ — and with $B=2$, that whole intersection can be Byzantine: the two quorums can certify conflicting histories with no correct validator forced to sign both. The old–new matrix catches it; the transition is rejected; the old registry stays active. **A published list cannot even express this failure class** — there is no protocol object on which to run the check. Make the list protocol state, and the check is a few lines of arithmetic over declared quorums.
 
-```text
-        TRUST AS A PUBLISHED FILE                    TRUST AS PROTOCOL STATE
-
-   ┌─────────────────────────────┐           ┌─────────────────────────────────────┐
-   │ Publisher signs vl.json      │           │  Registry root G_t   (on-chain)     │
-   │ (Post Fiat testnet: the      │           │  Trust-graph root T_t (on-chain)    │
-   │  most auditable version      │           │  Checker root  χ_t   (on-chain)     │
-   │  of this — evidence,         │           └──────────────────┬──────────────────┘
-   │  scores, selector public)    │                              ▼
-   └──────────────┬──────────────┘           ┌─────────────────────────────────────┐
-                  │ operators copy            │ Transition packet G_t → G_{t+1}     │
-                  ▼ the file (or don't)       │  • local rows: t<2q−n, 2t<q   ✓    │
-   ┌──────────────────────────────┐           │  • linkedness closure          ✓    │
-   │ Server A UNL   Server B UNL  │           │  • old∩new quorums > B         ✓    │
-   │  v1 v2 v3 v4   v1 v2 v3 v6   │           │  • complete cover ≤ M_cover    ✓    │
-   │  overlap assumed, verified   │           │  • validated by OLD rules χ_t  ✓    │
-   │  by no one                   │           └──────────────────┬──────────────────┘
-   └──────────────┬───────────────┘            any check fails → old registry stays
-                  ▼                            active (fail closed); all pass →
-   CHANGE = a new file.                        G_{t+1} activates with a replayable
-   Is the change safe? Unverifiable.           witness.
-```
+{{< trust-state-transition-diagram >}}
 
 Underneath, Cobalt is built from standard asynchronous components — reliable broadcast (RBC), binary and multi-valued Byzantine agreement (ABBA/MVBA), and democratic atomic broadcast (DABC) ordering accepted governance transitions on top. Safety is certificate arithmetic, never timing.
 
