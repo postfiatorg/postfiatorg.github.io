@@ -1491,8 +1491,10 @@
     .community-card-track{
       display:flex;
       width:max-content;
-      animation:communityMarquee 54s linear infinite;
       will-change:transform;
+    }
+    .community-card-track.is-looping{
+      animation:communityMarquee 54s linear infinite;
     }
     .community-viewport:hover .community-card-track,
     .community-viewport:focus-within .community-card-track{animation-play-state:paused}
@@ -2506,19 +2508,18 @@
         <div class="community-viewport" role="region" aria-label="Public Task Node profile cards" tabindex="0">
           <div class="community-card-track" data-community-track>
             {{ $profiles := (unmarshal (readFile "static/tasknode/community-profiles.json")).cards }}
-            {{ range $dup := slice false true }}
-            <div class="community-card-group"{{ if $dup }} aria-hidden="true"{{ end }}>
+            <div class="community-card-group">
               {{ range $profiles }}
               <article class="community-card">
-                <a class="community-nft-link" href="{{ .profile_url }}" target="_blank" rel="noopener" aria-label="Open {{ .display_name }} public Task Node profile"{{ if $dup }} tabindex="-1"{{ end }}>
+                <a class="community-nft-link" href="{{ .profile_url }}" target="_blank" rel="noopener" aria-label="Open {{ .display_name }} public Task Node profile">
                   <img src="{{ .nft_image_url }}" alt="{{ .display_name }} public profile NFT" loading="lazy" decoding="async">
                 </a>
                 <div class="community-card-body">
                   <div class="community-card-top">
                     <span class="community-slug mono">{{ .public_slug }}</span>
                     <div class="community-card-link-row">
-                      <a class="community-profile-link" href="{{ .profile_url }}" target="_blank" rel="noopener"{{ if $dup }} tabindex="-1"{{ end }}>View profile</a>
-                      {{ with .nft_mint_url }}<a class="community-profile-link" href="{{ . }}" target="_blank" rel="noopener"{{ if $dup }} tabindex="-1"{{ end }}>NFT mint</a>{{ end }}
+                      <a class="community-profile-link" href="{{ .profile_url }}" target="_blank" rel="noopener">View profile</a>
+                      {{ with .nft_mint_url }}<a class="community-profile-link" href="{{ . }}" target="_blank" rel="noopener">NFT mint</a>{{ end }}
                     </div>
                   </div>
                   <h3>{{ .display_name }}</h3>
@@ -2539,14 +2540,13 @@
                     </div>
                   </div>
                   <div class="community-card-actions">
-                    {{ with .nft_mint_url }}<a href="{{ . }}" target="_blank" rel="noopener"{{ if $dup }} tabindex="-1"{{ end }}>NFT mint &gt;</a>{{ end }}
-                    <a href="{{ .profile_url }}" target="_blank" rel="noopener"{{ if $dup }} tabindex="-1"{{ end }}>Public profile &gt;</a>
+                    {{ with .nft_mint_url }}<a href="{{ . }}" target="_blank" rel="noopener">NFT mint &gt;</a>{{ end }}
+                    <a href="{{ .profile_url }}" target="_blank" rel="noopener">Public profile &gt;</a>
                   </div>
                 </div>
               </article>
               {{ end }}
             </div>
-            {{ end }}
           </div>
         </div>
       </section>
@@ -3030,6 +3030,7 @@
       profiles.forEach((profile) => duplicateGroup.appendChild(renderCommunityCard(profile, true)));
 
       communityTrack.replaceChildren(primaryGroup, duplicateGroup);
+      communityTrack.classList.add('is-looping');
     }
 
     async function refreshCommunityProfiles(){
