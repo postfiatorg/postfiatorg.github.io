@@ -84,16 +84,35 @@ def build_validator_stats(payload: dict, now_iso: str) -> dict:
 
 
 def display_time(iso: str) -> str:
+    # Always include the year: undated or year-less timestamps next to a
+    # dated whitepaper read as inconsistent to careful reviewers.
     try:
         stamp = dt.datetime.fromisoformat(iso.replace("Z", "+00:00"))
     except ValueError:
         return "UTC"
-    return stamp.strftime("%b %-d, %H:%M UTC")
+    return stamp.strftime("%b %-d, %Y, %H:%M UTC")
+
+
+def diversify_by_actor(raw_items: list, limit: int, per_actor: int = 2) -> list:
+    """Prefer a mix of contributors over a single node's burst of activity."""
+    picked: list = []
+    counts: dict[str, int] = {}
+    deferred: list = []
+    for item in raw_items:
+        actor = str(item.get("actor") or "node")
+        if counts.get(actor, 0) < per_actor:
+            picked.append(item)
+            counts[actor] = counts.get(actor, 0) + 1
+        else:
+            deferred.append(item)
+        if len(picked) >= limit:
+            return picked
+    return (picked + deferred)[:limit]
 
 
 def build_feed_snapshot(payload: dict, now_iso: str) -> dict:
     items = []
-    for item in payload.get("items", [])[:FEED_ITEMS]:
+    for item in diversify_by_actor(payload.get("items", []), FEED_ITEMS):
         title = (item.get("title") or item.get("summary") or "Task Node update").strip()
         summary = (item.get("summary") or "").strip()
         if title.endswith("...") and summary:
