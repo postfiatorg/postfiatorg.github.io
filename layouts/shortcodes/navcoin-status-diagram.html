@@ -1,0 +1,143 @@
+<figure class="nv-shift" aria-labelledby="nv-shift-title" aria-describedby="nv-shift-caption nv-shift-machine">
+  <style>
+    .nv-shift{--amber:#f5c66a;--cyan:#8fd6ff;--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;--ink:#090c0a;margin:2rem 0 2.25rem;scroll-margin-top:96px}
+    .nv-shift *{box-sizing:border-box}
+    .nv-shift code{padding:0;background:transparent;color:inherit;font-family:var(--mono);font-size:.94em}
+    .nv-shell{position:relative;overflow:hidden;border:1px solid rgba(221,255,220,.16);border-radius:8px;background:linear-gradient(180deg,rgba(13,17,14,.96),rgba(5,8,6,.96))}
+    .nv-shell::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(221,255,220,.025) 1px,transparent 1px),linear-gradient(rgba(221,255,220,.022) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(180deg,rgba(0,0,0,.78),transparent 85%)}
+    .nv-inner{position:relative;padding:18px}
+    .nv-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:16px}
+    .nv-eyebrow{margin:0 0 .4rem;color:var(--green);font:650 .72rem/1 var(--mono);letter-spacing:.11em;text-transform:uppercase}
+    .nv-title{margin:0;max-width:580px;color:var(--pale);font-size:1.08rem;font-weight:650;line-height:1.35}
+    .nv-motto{flex:none;border:1px solid rgba(221,255,220,.15);border-radius:999px;padding:6px 10px;color:var(--pale-2);font:500 .7rem/1 var(--mono);white-space:nowrap}
+    .nv-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
+    .nv-lane{min-width:0;border:1px solid rgba(221,255,220,.13);border-top:2px solid;border-radius:8px;background:rgba(0,0,0,.27)}
+    .nv-lane--pdf{border-top-color:rgba(245,198,106,.65)}
+    .nv-lane--state{border-top-color:rgba(143,214,255,.65)}
+    .nv-lane-head{padding:12px 14px 11px;border-bottom:1px solid rgba(221,255,220,.09)}
+    .nv-shift .nv-lane-k{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0;font:650 .7rem/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase}
+    .nv-shift .nv-lane-k small{font:500 .64rem/1.3 var(--mono);letter-spacing:.07em;color:var(--muted);white-space:nowrap}
+    .nv-lane--pdf .nv-lane-k{color:var(--amber)}
+    .nv-lane--state .nv-lane-k{color:var(--cyan)}
+    .nv-lane-head p{margin:.4rem 0 0;color:var(--muted);font-size:.82rem;line-height:1.4}
+    .nv-flow{position:relative;display:grid;gap:13px;margin:0;padding:14px 14px 12px;list-style:none}
+    .nv-flow::before{content:"";position:absolute;left:25px;top:20px;bottom:0;width:1px}
+    .nv-lane--pdf .nv-flow::before{background:rgba(245,198,106,.32)}
+    .nv-lane--state .nv-flow::before{background:rgba(143,214,255,.3)}
+    .nv-step{display:grid;grid-template-columns:22px 1fr;gap:11px;align-items:start}
+    .nv-step-i{position:relative;z-index:1;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--ink);font:650 .66rem/1 var(--mono)}
+    .nv-lane--pdf .nv-step-i{border:1px solid rgba(245,198,106,.45);color:var(--amber)}
+    .nv-lane--state .nv-step-i{border:1px solid rgba(143,214,255,.42);color:var(--cyan)}
+    .nv-step strong{display:block;margin-top:.12rem;color:var(--pale);font-size:.9rem;line-height:1.25}
+    .nv-step div span{display:block;margin-top:.16rem;color:var(--muted);font-size:.8rem;line-height:1.42}
+    .nv-fork{position:relative;height:26px;margin:0 14px}
+    .nv-fork i{position:absolute;display:block}
+    .nv-fork .f-stem{left:11px;top:0;width:1px;height:13px}
+    .nv-fork .f-bus{left:11px;right:25%;top:13px;height:1px}
+    .nv-fork .f-d1{left:25%;top:13px;width:1px;height:13px}
+    .nv-fork .f-d2{left:calc(75% - 1px);top:13px;width:1px;height:13px}
+    .nv-fork .f-d1::after,.nv-fork .f-d2::after{content:"";position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);border:4px solid transparent;border-bottom:0;border-top:5px solid}
+    .nv-lane--pdf .nv-fork i{background:rgba(245,198,106,.38)}
+    .nv-lane--pdf .nv-fork .f-d1::after,.nv-lane--pdf .nv-fork .f-d2::after{border-top-color:rgba(245,198,106,.75)}
+    .nv-lane--state .nv-fork i{background:rgba(143,214,255,.36)}
+    .nv-lane--state .nv-fork .f-d1::after{border-top-color:rgba(186,216,182,.7)}
+    .nv-lane--state .nv-fork .f-d2::after{border-top-color:var(--green)}
+    .nv-outs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 14px 14px}
+    .nv-out{min-width:0;padding:10px 12px;border:1px solid rgba(221,255,220,.14);border-radius:8px;background:rgba(0,0,0,.3)}
+    .nv-out--warn{border-color:rgba(245,198,106,.32);background:rgba(245,198,106,.055)}
+    .nv-out--pass{border-color:rgba(127,238,100,.34);background:rgba(127,238,100,.06)}
+    .nv-out-k{display:block;font:650 .68rem/1.3 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--pale-2)}
+    .nv-out--pass .nv-out-k{color:var(--green)}
+    .nv-out--warn .nv-out-k{color:var(--amber)}
+    .nv-out span{display:block;margin-top:.3rem;color:var(--muted);font-size:.76rem;line-height:1.42}
+    .nv-shift figcaption{margin:.68rem 0 0;color:var(--muted);font-family:var(--mono);font-size:.78rem;line-height:1.52}
+    .nv-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:820px){.nv-shift{scroll-margin-top:80px}.nv-inner{padding:14px}.nv-head{display:block}.nv-motto{display:inline-block;margin-top:10px}.nv-grid{grid-template-columns:1fr}}
+  </style>
+
+  <div class="nv-shell" role="img">
+    <div class="nv-inner">
+      <div class="nv-head">
+        <div>
+          <p class="nv-eyebrow">Proof of reserves</p>
+          <div id="nv-shift-title" class="nv-title">The same backed-asset claim, under two verification regimes.</div>
+        </div>
+        <span class="nv-motto">supply moves only if evidence verifies</span>
+      </div>
+
+      <div class="nv-grid">
+        <section class="nv-lane nv-lane--pdf" aria-label="Status quo: trust as a quarterly PDF">
+          <div class="nv-lane-head">
+            <h3 class="nv-lane-k">Status quo — attestation as PDF <small>human cadence</small></h3>
+            <p>Best practice today is point-in-time, accountant-paced, and mechanically unlinked from the token.</p>
+          </div>
+
+          <ol class="nv-flow">
+            <li class="nv-step">
+              <span class="nv-step-i">1</span>
+              <div><strong>Reserves sit across venues</strong><span>Custodian vaults, broker futures, exchange balances — only the issuer sees all of it.</span></div>
+            </li>
+            <li class="nv-step">
+              <span class="nv-step-i">2</span>
+              <div><strong>An accountant samples balances</strong><span>A point-in-time attestation, published weeks later, with no completeness guarantee on liabilities.</span></div>
+            </li>
+            <li class="nv-step">
+              <span class="nv-step-i">3</span>
+              <div><strong>A PDF is published</strong><span>Holders extrapolate last quarter's snapshot into today's solvency.</span></div>
+            </li>
+          </ol>
+
+          <div class="nv-fork" aria-hidden="true"><i class="f-stem"></i><i class="f-bus"></i><i class="f-d1"></i><i class="f-d2"></i></div>
+
+          <div class="nv-outs">
+            <div class="nv-out nv-out--warn">
+              <strong class="nv-out-k">mint unconstrained</strong>
+              <span>Supply moves on issuer keys, attestation or not.</span>
+            </div>
+            <div class="nv-out nv-out--warn">
+              <strong class="nv-out-k">failure found late</strong>
+              <span>Shortfalls surface after the loss, in court documents.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="nv-lane nv-lane--state" aria-label="NAVCoin: reserves as protocol state">
+          <div class="nv-lane-head">
+            <h3 class="nv-lane-k">NAVCoin — reserves as protocol state <small>epoch cadence</small></h3>
+            <p>Evidence is machine-checked in consensus; supply is capped by what actually verified.</p>
+          </div>
+
+          <ol class="nv-flow">
+            <li class="nv-step">
+              <span class="nv-step-i">1</span>
+              <div><strong>A measured fetcher reads the venues</strong><span>Inside a TEE; the hardware attestation binds the exact code <em>and</em> valuation policy that produced the numbers.</span></div>
+            </li>
+            <li class="nv-step">
+              <span class="nv-step-i">2</span>
+              <div><strong>Validators verify in consensus</strong><span>Finalizing an epoch is <code>invalid</code> unless the attestation, arithmetic, and freshness all check — a validity rule, not a committee vote.</span></div>
+            </li>
+            <li class="nv-step">
+              <span class="nv-step-i">3</span>
+              <div><strong>The epoch becomes ledger state</strong><span>Supply cap, NAV per unit, freshness clock, and disclosure tier — readable by anyone, bonded-challengeable.</span></div>
+            </li>
+          </ol>
+
+          <div class="nv-fork" aria-hidden="true"><i class="f-stem"></i><i class="f-bus"></i><i class="f-d1"></i><i class="f-d2"></i></div>
+
+          <div class="nv-outs">
+            <div class="nv-out">
+              <strong class="nv-out-k">stale or challenged</strong>
+              <span>Mint and redeem fail closed — the asset halts itself.</span>
+            </div>
+            <div class="nv-out nv-out--pass">
+              <strong class="nv-out-k">fresh + verified</strong>
+              <span>Mint capped to verified reserves; redeem at NAV on-chain.</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <figcaption id="nv-shift-caption">The comparison is structural, not aspirational: a PDF cannot prevent anything, while the right lane's verification is a precondition for supply to move. Trust is narrowed — to source honesty and TEE roots — not eliminated.</figcaption>
+  <p id="nv-shift-machine" class="nv-sr">Machine-readable diagram summary: Left lane, status quo: reserves sit across custodians, brokers, and exchanges; an accountant samples balances at a point in time; a PDF is published weeks later; minting is unconstrained by the attestation and failures are discovered after losses. Right lane, NAVCoin proposal: a measured fetcher inside a trusted execution environment reads venue APIs and produces a hardware attestation binding code and policy; validators verify the attestation as a consensus validity rule; the finalized epoch writes supply cap, NAV, freshness deadline, and disclosure tier into ledger state; stale or challenged packets halt mint and redeem, fresh verified packets allow mint capped to verified reserves and redemption at NAV.</p>
+</figure>
