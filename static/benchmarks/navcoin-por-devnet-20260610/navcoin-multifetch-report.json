@@ -1,0 +1,103 @@
+{
+  "schema": "navcoin-multifetch-smoke-v1",
+  "run_id": "navcoin-multifetch-20260610T190400Z",
+  "source": {
+    "venue": "hyperliquid",
+    "address": "0xdfc24b077bc1425ad1dea75bcb6f8158e10df303",
+    "issuer_observed_account_value": "274666732.7615870237"
+  },
+  "profile": {
+    "id": "593903a4132abb224b2bfd9cabe568d65adf45bc937500d327a103f03fceaf52b82da3e68902f1fa647daba13885a480",
+    "tolerance_bp": 100,
+    "min_attestations": 3
+  },
+  "asset_id": "2da26e4ee405fe145a89dd2171fe4e0a135e7994c88707a5a3333fe55a0083da7af4e2197343ad2afe5ec705be894269",
+  "reserve_packet_hash": "372c5a58937582d1846fc427a024c3d18326518943b7c03813015b752bc98d746ff17ed914539e9e765138c055a8a70e",
+  "nav_attestors": [
+    {
+      "address": "pf3706bfeb78137814125042fa1e756ef3635dd9be",
+      "domain": "obs1.devnet.postfiat.example",
+      "bond": 25,
+      "registered_at_height": 5
+    },
+    {
+      "address": "pf072535687d86db8a3a619a4b41d0c64478794b0b",
+      "domain": "obs2.devnet.postfiat.example",
+      "bond": 25,
+      "registered_at_height": 6
+    },
+    {
+      "address": "pfc39e4acdb7a40c65d4d33ddc2da0cd0271b65e71",
+      "domain": "obs3.devnet.postfiat.example",
+      "bond": 25,
+      "registered_at_height": 7
+    }
+  ],
+  "nav_reserve_packets": [
+    {
+      "packet_id": "59f11da0c4569f82642ef391ca4b7682b30cdf32c04a9d9c476988e6c5963390233494175b121c81ba55ddf9cb60f32d",
+      "asset_id": "2da26e4ee405fe145a89dd2171fe4e0a135e7994c88707a5a3333fe55a0083da7af4e2197343ad2afe5ec705be894269",
+      "issuer": "pf0155bed0f835ef08c05faab668e7a94fe49f52cf",
+      "submitter": "pf0155bed0f835ef08c05faab668e7a94fe49f52cf",
+      "epoch": 1,
+      "nav_per_unit": 274666732,
+      "circulating_supply": 1,
+      "verified_net_assets": 274666732,
+      "proof_profile": "593903a4132abb224b2bfd9cabe568d65adf45bc937500d327a103f03fceaf52b82da3e68902f1fa647daba13885a480",
+      "source_root": "d6f70622160c869ab4fb794e7f08c71f2784a10f5abfeb8895a89b512659706950cb6f38149c1c7372bd1d28073298e1",
+      "attestor_root": "a8c50209bba417e8b7e7d640035931a91528c3e05208795a260857a27dba783f1e970e4afee2054a5c5e52bff6c43d2d",
+      "reserve_packet_hash": "372c5a58937582d1846fc427a024c3d18326518943b7c03813015b752bc98d746ff17ed914539e9e765138c055a8a70e",
+      "state": "finalized",
+      "submitted_at_height": 11,
+      "reserve_accounts": [
+        "hyperliquid:0xdfc24b077bc1425ad1dea75bcb6f8158e10df303"
+      ],
+      "challenge_bond": 0,
+      "attestations": [
+        {
+          "attestor": "pf3706bfeb78137814125042fa1e756ef3635dd9be",
+          "pass": true,
+          "observation_root": "86486adb95b3d60c7555ede97fcaec68697093fc913b24f1e16652131e610a292175315e817f7fe79552996a71a833d7",
+          "attested_at_height": 12
+        },
+        {
+          "attestor": "pf072535687d86db8a3a619a4b41d0c64478794b0b",
+          "pass": true,
+          "observation_root": "0bd6cd9b08332fc4518121a147430fddbb2f596176baa733965246cb691e9d0d23522db0ff67d03ed88e09f1b7e38103",
+          "attested_at_height": 13
+        },
+        {
+          "attestor": "pfc39e4acdb7a40c65d4d33ddc2da0cd0271b65e71",
+          "pass": true,
+          "observation_root": "b28176141e6bef96357bc7a34e6b5b7b8a32d88d80f0e127ee39eae183d9aa8cd29215600d90332b44e0361485f0ab04",
+          "attested_at_height": 14
+        }
+      ]
+    }
+  ],
+  "nav_assets": [
+    {
+      "asset_id": "2da26e4ee405fe145a89dd2171fe4e0a135e7994c88707a5a3333fe55a0083da7af4e2197343ad2afe5ec705be894269",
+      "issuer": "pf0155bed0f835ef08c05faab668e7a94fe49f52cf",
+      "reserve_operator": "pf0155bed0f835ef08c05faab668e7a94fe49f52cf",
+      "proof_profile": "593903a4132abb224b2bfd9cabe568d65adf45bc937500d327a103f03fceaf52b82da3e68902f1fa647daba13885a480",
+      "valuation_unit": "usd_1e0",
+      "redemption_account": "pf0155bed0f835ef08c05faab668e7a94fe49f52cf",
+      "finalized_epoch": 1,
+      "nav_per_unit": 274666732,
+      "circulating_supply": 1,
+      "finalized_reserve_packet_hash": "372c5a58937582d1846fc427a024c3d18326518943b7c03813015b752bc98d746ff17ed914539e9e765138c055a8a70e",
+      "halted": false,
+      "finalized_at_height": 15
+    }
+  ],
+  "checks": {
+    "attestors_registered": true,
+    "packet_finalized": true,
+    "attestation_count": 3,
+    "all_attestations_pass": true,
+    "distinct_observation_roots": 3,
+    "asset_finalized_epoch": 1,
+    "validators_converged": true
+  }
+}
