@@ -1,6 +1,8 @@
 ---
 title: "Orchard Privacy Research"
 date: 2026-05-05T00:00:00Z
+aliases:
+  - /posts/orchard-privacy-research/
 summary: "A Post Fiat privacy research note covering Orchard/Halo2 shielded payments, Railgun-style assurance, DID-bound providers, and why this material no longer belongs inside the validator-list whitepaper."
 categories:
   - PostFiat Research

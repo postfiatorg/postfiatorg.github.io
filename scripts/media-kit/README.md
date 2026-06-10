@@ -5,7 +5,7 @@ This directory contains the official Post Fiat logo generation scripts and sourc
 ## Organization
 
 - **Scripts & Source SVG:**
-  - Remain in this directory (`content/media-kit/`)
+  - Remain in this directory (`scripts/media-kit/`)
   - Not published to the website
 - **Public Assets (PNG, SVG, ICO):**
   - Located in `static/media-kit/`
