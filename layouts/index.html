@@ -1665,6 +1665,61 @@
       to{transform:translateX(-50%)}
     }
 
+    .trust-strip{
+      padding:88px 0 26px;
+      border-top:1px solid var(--line);
+    }
+    .trust-title{
+      margin:0 0 14px;
+      max-width:720px;
+      font-size:clamp(1.7rem, 3vw, 2.6rem);
+      line-height:1.05;
+      font-weight:500;
+      color:var(--pale);
+    }
+    .trust-copy{
+      margin:0 0 34px;
+      max-width:620px;
+      color:var(--muted);
+      font-size:1.02rem;
+      line-height:1.55;
+    }
+    .trust-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:12px;
+    }
+    .trust-item{
+      display:block;
+      padding:16px 18px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:var(--surface);
+      text-decoration:none;
+      transition:border-color .18s ease, background .18s ease;
+    }
+    .trust-item:hover{
+      border-color:var(--line-strong);
+      background:var(--surface-2);
+    }
+    .trust-item strong{
+      display:block;
+      margin-bottom:6px;
+      color:var(--green);
+      font-size:.92rem;
+      font-weight:600;
+    }
+    .trust-item span{
+      display:block;
+      color:var(--pale-2);
+      font-size:.86rem;
+      line-height:1.5;
+    }
+    @media(max-width:880px){
+      .trust-grid{grid-template-columns:1fr}
+      .trust-strip{padding:64px 0 12px}
+    }
+
     .final-cta{
       padding:96px 0 82px;
     }
@@ -2332,46 +2387,48 @@
               </div>
             </div>
           </div>
+          {{ $vhs := unmarshal (readFile "static/benchmarks/live-testnet-validator-stats.json") }}
           <aside class="validator-proof-card" id="live-validator-card" data-live-url="https://vhs.testnet.postfiat.org/v1/network/validators/test" data-fallback-url="/benchmarks/live-testnet-validator-stats.json" aria-labelledby="validator-proof-title">
             <div class="validator-proof-topbar mono">
               <span class="validator-proof-source">Live VHS</span>
-              <span class="validator-badge mono" id="live-validator-badge">Loading</span>
+              <span class="validator-badge mono" id="live-validator-badge">Snapshot</span>
             </div>
             <h3 class="validator-proof-quote" id="validator-proof-title"><span>Live testnet</span> validator evidence.</h3>
             <div class="validator-proof-grid" aria-label="Live validator summary">
               <div class="validator-proof-stat">
-                <div class="validator-number" id="live-validator-count">45</div>
+                <div class="validator-number" id="live-validator-count">{{ $vhs.validator_count }}</div>
                 <div class="validator-label mono">Validators Live</div>
               </div>
               <div class="validator-proof-stat">
-                <div class="validator-number" id="live-domain-count">29</div>
+                <div class="validator-number" id="live-domain-count">{{ $vhs.publishing_domain_count }}</div>
                 <div class="validator-label mono">Publishing Domains</div>
               </div>
               <div class="validator-proof-stat">
-                <div class="validator-number" id="live-verified-domain-count">26</div>
+                <div class="validator-number" id="live-verified-domain-count">{{ $vhs.verified_domain_count }}</div>
                 <div class="validator-label mono">Verified Domains</div>
               </div>
             </div>
             <div class="validator-metrics">
               <div class="validator-metric">
                 <div class="validator-metric-top">
-                  <span id="live-agreement-24-label">24h agreement at 99.9%+</span>
-                  <span class="validator-metric-value" id="live-agreement-24-value">41 / 45</span>
+                  <span id="live-agreement-24-label">24h agreement at {{ $vhs.agreement_24h.threshold_label }}</span>
+                  <span class="validator-metric-value" id="live-agreement-24-value">{{ $vhs.agreement_24h.count }} / {{ $vhs.validator_count }}</span>
                 </div>
-                <div class="validator-bar"><span class="validator-fill" id="live-agreement-24-fill" style="width:91.1%"></span></div>
+                <div class="validator-bar"><span class="validator-fill" id="live-agreement-24-fill" style="width:{{ printf "%.1f" (mul $vhs.agreement_24h.ratio 100) }}%"></span></div>
               </div>
               <div class="validator-metric">
                 <div class="validator-metric-top">
-                  <span id="live-agreement-30-label">30d agreement at 99%+</span>
-                  <span class="validator-metric-value" id="live-agreement-30-value">39 / 45</span>
+                  <span id="live-agreement-30-label">30d agreement at {{ $vhs.agreement_30day.threshold_label }}</span>
+                  <span class="validator-metric-value" id="live-agreement-30-value">{{ $vhs.agreement_30day.count }} / {{ $vhs.validator_count }}</span>
                 </div>
-                <div class="validator-bar"><span class="validator-fill" id="live-agreement-30-fill" style="width:86.7%"></span></div>
+                <div class="validator-bar"><span class="validator-fill" id="live-agreement-30-fill" style="width:{{ printf "%.1f" (mul $vhs.agreement_30day.ratio 100) }}%"></span></div>
               </div>
             </div>
-            <p class="validator-note" id="live-validator-note"><strong>Live VHS snapshot</strong> 45 validators, 29 publishing domains, 26 verified domains. Ledger 2,472,489.</p>
+            <p class="validator-note" id="live-validator-note"><strong>VHS snapshot</strong> {{ $vhs.validator_count }} validators, {{ $vhs.publishing_domain_count }} publishing domains, {{ $vhs.verified_domain_count }} verified domains. Ledger {{ lang.FormatNumberCustom 0 $vhs.latest_ledger_index }}. Updated {{ dateFormat "Jan 2, 15:04" $vhs.generated_at }} UTC.</p>
             <div class="validator-proof-actions">
               <a class="btn primary" href="https://explorer.testnet.postfiat.org/network/validators" target="_blank" rel="noopener">View the Testnet Explorer</a>
               <a class="btn dark" href="/validator-benchmark/">Validator Benchmark</a>
+              <a class="btn dark" href="https://vhs.testnet.postfiat.org/v1/network/validators/test" target="_blank" rel="noopener">Source API</a>
             </div>
           </aside>
         </div>
@@ -2389,7 +2446,7 @@
               <div class="task-feed-actions">
                 <div class="feed-status" aria-label="Task Node feed status" aria-live="polite">
                   <span class="mono">Operating stream</span>
-                  <p>Refreshing from public Task Node activity.</p>
+                  <p>Snapshot from {{ site.Data.task_feed_snapshot.generated_at_display }}; refreshes live in your browser.</p>
                 </div>
                 <a class="btn dark" href="https://agtico.github.io/task-node-feed/" target="_blank" rel="noopener">View full feed</a>
               </div>
@@ -2398,78 +2455,25 @@
               <button class="feed-nav feed-nav-prev" type="button" data-feed-prev aria-label="Previous Task Node update" title="Previous update"><span aria-hidden="true">&lsaquo;</span></button>
               <div class="task-feed-preview" role="region" aria-label="Recent Task Node updates carousel" tabindex="0">
                 <div class="feed-carousel-track">
+              {{ range site.Data.task_feed_snapshot.items }}
               <article class="feed-preview-item">
-                <div class="feed-preview-meta mono">trading</div>
-                <time class="mono" datetime="2026-05-02T19:06:12.834Z">May 2, 19:06 UTC</time>
-                <h3>Passed on building a 13F tracker MVP after the offer expired with no response.</h3>
-                <p>Passed on building a 13F tracker MVP after the offer expired with no response.</p>
-                <span class="feed-actor mono">node:d438f686</span>
+                <div class="feed-preview-meta mono">{{ .category }}</div>
+                <time class="mono" datetime="{{ .timestamp }}">{{ .display_time }}</time>
+                <h3>{{ .title }}</h3>
+                <p>{{ .summary }}</p>
+                <span class="feed-actor mono">{{ .actor }}</span>
+                {{ with .tickers }}
                 <div class="feed-preview-tags">
-                  <span>$BRK</span>
+                  {{ range . }}<span>${{ . }}</span>{{ end }}
                 </div>
-              </article>
-              <article class="feed-preview-item">
-                <div class="feed-preview-meta mono">network</div>
-                <time class="mono" datetime="2026-05-02T18:59:14.156Z">May 2, 18:59 UTC</time>
-                <h3>Delivered a Python QA validator for Alpha Registry submissions and earned a reward.</h3>
-                <p>Delivered a Python QA validator for Alpha Registry submissions and earned a reward.</p>
-                <span class="feed-actor mono">node:d53de16f</span>
-                <div class="feed-preview-tags">
-                  <span>$PFT</span>
-                </div>
+                {{ end }}
+                {{ with .links }}
                 <div class="feed-preview-links">
-                  <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/F66F51EE7569FBA0DEB2DD0032E59E39509036790CC38905B2217E65F3C9C5BA/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
-                  <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/0AD9FC76888FD9127E6726CED8CD46F4BBEC240E77280C32D1C9DD37C6233712/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
+                  {{ range . }}<a class="feed-preview-link" href="{{ .url }}" target="_blank" rel="noopener">{{ .label }} <span aria-hidden="true">&rsaquo;</span></a>{{ end }}
                 </div>
+                {{ end }}
               </article>
-              <article class="feed-preview-item">
-                <div class="feed-preview-meta mono">network</div>
-                <time class="mono" datetime="2026-05-02T18:58:42.197Z">May 2, 18:58 UTC</time>
-                <h3>Recorded a verification response for a Python QA pack validating Alpha Registry submissions on PFTL.</h3>
-                <p>Recorded a verification response for a Python QA pack validating Alpha Registry submissions on PFTL.</p>
-                <span class="feed-actor mono">node:d53de16f</span>
-                <div class="feed-preview-tags">
-                  <span>$PFT</span>
-                </div>
-                <div class="feed-preview-links">
-                  <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/3F92503ECAD2F140A95A564261A562D94FBB45A249EC7131DFBE9080975CFFD8/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
-                  <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/0AD9FC76888FD9127E6726CED8CD46F4BBEC240E77280C32D1C9DD37C6233712/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
-                </div>
-              </article>
-              <article class="feed-preview-item">
-                <div class="feed-preview-meta mono">network</div>
-                <time class="mono" datetime="2026-05-02T18:57:42.234Z">May 2, 18:57 UTC</time>
-                <h3>Uploaded follow-up evidence for a Python QA pack validating Alpha Registry submissions.</h3>
-                <p>Uploaded follow-up evidence for a Python QA pack validating Alpha Registry submissions.</p>
-                <span class="feed-actor mono">node:d53de16f</span>
-                <div class="feed-preview-tags">
-                  <span>$PFT</span>
-                </div>
-              </article>
-              <article class="feed-preview-item">
-                <div class="feed-preview-meta mono">network</div>
-                <time class="mono" datetime="2026-05-02T18:48:14.795Z">May 2, 18:48 UTC</time>
-                <h3>Planning a privacy-safe adoption metrics snapshot for Post Fiat network participation.</h3>
-                <p>Planning a privacy-safe adoption metrics snapshot for Post Fiat network participation.</p>
-                <span class="feed-actor mono">node:c8ff8d57</span>
-                <div class="feed-preview-tags">
-                  <span>$PFT</span>
-                </div>
-              </article>
-              <article class="feed-preview-item">
-                <div class="feed-preview-meta mono">network</div>
-                <time class="mono" datetime="2026-05-02T18:44:12.005Z">May 2, 18:44 UTC</time>
-                <h3>Delivered a reusable Post Fiat evidence manifest guide and earned a reward.</h3>
-                <p>Delivered a reusable Post Fiat evidence manifest guide and earned a reward.</p>
-                <span class="feed-actor mono">node:5f58cdc7</span>
-                <div class="feed-preview-tags">
-                  <span>$PFT</span>
-                </div>
-                <div class="feed-preview-links">
-                  <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/53875E11482E6DEC493B2F1D7D2A6F2B767A660F59E5B78691553F37B75AB91E/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
-                  <a class="feed-preview-link" href="https://explorer.testnet.postfiat.org/transactions/FE02FB44AF093674C074EB9080FC4BCF524700F0DE536FB631D0FB2225085B7B/detailed" target="_blank" rel="noopener">PFTL proof <span aria-hidden="true">&rsaquo;</span></a>
-                </div>
-              </article>
+              {{ end }}
                 </div>
               </div>
               <button class="feed-nav feed-nav-next" type="button" data-feed-next aria-label="Next Task Node update" title="Next update"><span aria-hidden="true">&rsaquo;</span></button>
@@ -2485,7 +2489,7 @@
       <section class="community-band" id="community" aria-labelledby="community-title">
         <div class="container community-shell">
           <div class="community-slug-strip mono" data-community-slugs aria-label="Public Task Node profile slugs">
-            <span>public profile slugs</span>
+            {{ range (unmarshal (readFile "static/tasknode/community-profiles.json")).cards }}<span>{{ .public_slug }}</span>{{ end }}
           </div>
           <div class="community-header">
             <div>
@@ -2501,7 +2505,82 @@
         </div>
         <div class="community-viewport" role="region" aria-label="Public Task Node profile cards" tabindex="0">
           <div class="community-card-track" data-community-track>
-            <div class="community-card-placeholder">Loading public Task Node profiles.</div>
+            {{ $profiles := (unmarshal (readFile "static/tasknode/community-profiles.json")).cards }}
+            {{ range $dup := slice false true }}
+            <div class="community-card-group"{{ if $dup }} aria-hidden="true"{{ end }}>
+              {{ range $profiles }}
+              <article class="community-card">
+                <a class="community-nft-link" href="{{ .profile_url }}" target="_blank" rel="noopener" aria-label="Open {{ .display_name }} public Task Node profile"{{ if $dup }} tabindex="-1"{{ end }}>
+                  <img src="{{ .nft_image_url }}" alt="{{ .display_name }} public profile NFT" loading="lazy" decoding="async">
+                </a>
+                <div class="community-card-body">
+                  <div class="community-card-top">
+                    <span class="community-slug mono">{{ .public_slug }}</span>
+                    <div class="community-card-link-row">
+                      <a class="community-profile-link" href="{{ .profile_url }}" target="_blank" rel="noopener"{{ if $dup }} tabindex="-1"{{ end }}>View profile</a>
+                      {{ with .nft_mint_url }}<a class="community-profile-link" href="{{ . }}" target="_blank" rel="noopener"{{ if $dup }} tabindex="-1"{{ end }}>NFT mint</a>{{ end }}
+                    </div>
+                  </div>
+                  <h3>{{ .display_name }}</h3>
+                  <p class="community-summary">{{ .summary }}</p>
+                  <p class="community-panel-title">Demonstrated Skills</p>
+                  <p class="community-panel-subtitle">Based on all-time task completion analysis</p>
+                  <ul class="community-knowledge-list">
+                    {{ range first 8 (.expert_knowledge | default (slice)) }}
+                    <li><strong>{{ .domain }}</strong><span>{{ .confidence }}</span></li>
+                    {{ end }}
+                  </ul>
+                  <div class="community-tickers">
+                    <div class="community-ticker-title mono">Associated tickers, top 3</div>
+                    <div class="community-ticker-row">
+                      {{ range first 3 (.associated_tickers | default (slice)) }}
+                      <span class="community-ticker mono" title="{{ .name }} - {{ .relevance }}% relevance">${{ .symbol }}</span>
+                      {{ end }}
+                    </div>
+                  </div>
+                  <div class="community-card-actions">
+                    {{ with .nft_mint_url }}<a href="{{ . }}" target="_blank" rel="noopener"{{ if $dup }} tabindex="-1"{{ end }}>NFT mint &gt;</a>{{ end }}
+                    <a href="{{ .profile_url }}" target="_blank" rel="noopener"{{ if $dup }} tabindex="-1"{{ end }}>Public profile &gt;</a>
+                  </div>
+                </div>
+              </article>
+              {{ end }}
+            </div>
+            {{ end }}
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-strip" id="verify" aria-labelledby="trust-title">
+        <div class="container">
+          <p class="section-kicker mono">Accountability</p>
+          <h2 class="trust-title" id="trust-title">Verify this project from the public record.</h2>
+          <p class="trust-copy">Post Fiat is open source and at public testnet stage. The load-bearing claims on this page link to artifacts you can check without trusting us.</p>
+          <div class="trust-grid">
+            <a class="trust-item" href="https://github.com/postfiatorg" target="_blank" rel="noopener">
+              <strong>Open source</strong>
+              <span>Node, site, scoring stack, and tooling at github.com/postfiatorg.</span>
+            </a>
+            <a class="trust-item" href="/whitepaper/">
+              <strong>Whitepaper</strong>
+              <span>Auditable, model-assisted validator-list publication — May 2026 revision.</span>
+            </a>
+            <a class="trust-item" href="https://vhs.testnet.postfiat.org/v1/network/validators/test" target="_blank" rel="noopener">
+              <strong>Live validator API</strong>
+              <span>The same public endpoint the stats on this page render from.</span>
+            </a>
+            <a class="trust-item" href="https://explorer.testnet.postfiat.org" target="_blank" rel="noopener">
+              <strong>Testnet explorer</strong>
+              <span>Ledgers, transactions, and the validator set, live.</span>
+            </a>
+            <a class="trust-item" href="/validator-benchmark/">
+              <strong>Benchmark methodology</strong>
+              <span>How validators are scored, with replayable evidence bundles.</span>
+            </a>
+            <a class="trust-item" href="https://github.com/postfiatorg/postfiatorg.github.io/issues" target="_blank" rel="noopener">
+              <strong>Contact &amp; disclosure</strong>
+              <span>Report issues or security findings via GitHub, X, or Discord.</span>
+            </a>
           </div>
         </div>
       </section>
