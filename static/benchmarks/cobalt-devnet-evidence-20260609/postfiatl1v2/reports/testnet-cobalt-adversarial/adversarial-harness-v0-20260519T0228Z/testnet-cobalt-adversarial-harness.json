@@ -1,0 +1,385 @@
+{
+  "behavior_scripts": [
+    "collude",
+    "crash",
+    "delay",
+    "duplicate",
+    "equivocate",
+    "honest",
+    "invalid_signature",
+    "malformed_payload",
+    "reorder",
+    "restart",
+    "stale_root",
+    "withhold"
+  ],
+  "checks": {
+    "all_scenarios_passed": true,
+    "non_identical_trust_views": true,
+    "outside_operators_required": false,
+    "seven_logical_validators": true
+  },
+  "distinct_trust_view_count": 7,
+  "generated_at_unix_seconds": 1779153389,
+  "ok": true,
+  "scenario_failures": [],
+  "scenarios": [
+    {
+      "behavior": [
+        "honest"
+      ],
+      "expected": "all seven local trust views accept the same RBC payload",
+      "name": "honest_all_accept",
+      "observed": {
+        "accepted_by": [
+          "validator-0",
+          "validator-1",
+          "validator-2",
+          "validator-3",
+          "validator-4",
+          "validator-5",
+          "validator-6"
+        ],
+        "per_validator": [
+          [
+            "validator-0",
+            true,
+            true,
+            true
+          ],
+          [
+            "validator-1",
+            true,
+            true,
+            true
+          ],
+          [
+            "validator-2",
+            true,
+            true,
+            true
+          ],
+          [
+            "validator-3",
+            true,
+            true,
+            true
+          ],
+          [
+            "validator-4",
+            true,
+            true,
+            true
+          ],
+          [
+            "validator-5",
+            true,
+            true,
+            true
+          ],
+          [
+            "validator-6",
+            true,
+            true,
+            true
+          ]
+        ]
+      },
+      "ok": true
+    },
+    {
+      "behavior": [
+        "withhold"
+      ],
+      "expected": "one validator withholding messages does not break strong support in G1",
+      "name": "single_withhold_still_accepts",
+      "observed": {
+        "accepted_by": [
+          "validator-0",
+          "validator-1",
+          "validator-2",
+          "validator-3",
+          "validator-4",
+          "validator-5",
+          "validator-6"
+        ],
+        "per_validator": [
+          [
+            "validator-0",
+            true,
+            true,
+            true
+          ],
+          [
+            "validator-1",
+            true,
+            true,
+            true
+          ],
+          [
+            "validator-2",
+            true,
+            true,
+            true
+          ],
+          [
+            "validator-3",
+            true,
+            true,
+            true
+          ],
+          [
+            "validator-4",
+            true,
+            true,
+            true
+          ],
+          [
+            "validator-5",
+            true,
+            true,
+            true
+          ],
+          [
+            "validator-6",
+            true,
+            true,
+            true
+          ]
+        ],
+        "withheld": [
+          "validator-0"
+        ]
+      },
+      "ok": true
+    },
+    {
+      "behavior": [
+        "collude",
+        "withhold"
+      ],
+      "expected": "below-quorum support prevents local acceptance rather than accepting partial support",
+      "name": "colluding_withhold_breaks_liveness_not_safety",
+      "observed": {
+        "accepted_by": [],
+        "per_validator": [
+          [
+            "validator-0",
+            false,
+            false,
+            false
+          ],
+          [
+            "validator-1",
+            false,
+            false,
+            false
+          ],
+          [
+            "validator-2",
+            false,
+            false,
+            false
+          ],
+          [
+            "validator-3",
+            false,
+            false,
+            false
+          ],
+          [
+            "validator-4",
+            false,
+            false,
+            false
+          ],
+          [
+            "validator-5",
+            false,
+            false,
+            false
+          ],
+          [
+            "validator-6",
+            false,
+            false,
+            false
+          ]
+        ],
+        "retained_senders": [
+          "validator-2",
+          "validator-3",
+          "validator-4",
+          "validator-6"
+        ]
+      },
+      "ok": true
+    },
+    {
+      "behavior": [
+        "delay",
+        "duplicate",
+        "reorder"
+      ],
+      "expected": "duplicate and reordered messages preserve deterministic support evaluation",
+      "name": "duplicate_reordered_messages_deduped",
+      "observed": {
+        "accepted_by": [
+          "validator-0",
+          "validator-1",
+          "validator-2",
+          "validator-3",
+          "validator-4",
+          "validator-5",
+          "validator-6"
+        ],
+        "echo_count_with_duplicate": 8,
+        "ready_count_with_duplicate": 8
+      },
+      "ok": true
+    },
+    {
+      "behavior": [
+        "invalid_signature"
+      ],
+      "expected": "malformed signature hex fails before support evaluation succeeds",
+      "name": "invalid_signature_rejected",
+      "observed": {
+        "error": "RBC signature must be lowercase hex"
+      },
+      "ok": true
+    },
+    {
+      "behavior": [
+        "malformed_payload"
+      ],
+      "expected": "malformed RBC payload hash is rejected",
+      "name": "malformed_payload_rejected",
+      "observed": {
+        "error": "RBC payload hash must be 96 lowercase hex characters"
+      },
+      "ok": true
+    },
+    {
+      "behavior": [
+        "stale_root"
+      ],
+      "expected": "messages bound to a non-active trust graph root are detected before local support evaluation",
+      "name": "stale_root_detected_before_active_graph_evaluation",
+      "observed": {
+        "active_trust_graph_root": "6c93bae6064370cf088f6dbdb689cf0df0640d28313f0b9051c6eb39755099ee4548e00a5e494c965fa6d5ba47331505",
+        "message_trust_graph_root": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stale_root_detected": true
+      },
+      "ok": true
+    },
+    {
+      "behavior": [
+        "equivocate"
+      ],
+      "expected": "linked validators accepting conflicting RBC payloads produce deterministic evidence",
+      "name": "rbc_conflicting_accept_detected",
+      "observed": {
+        "evidence": {
+          "amendment_slot": 702,
+          "chain_id": "postfiat-local",
+          "evidence_id": "dcbfe48d2709715041144b218382188ab71e29fbbaa458173e08dde6da3e0d9ecdca2ca90f67673bbff9868a9a474d7c",
+          "fully_linked": true,
+          "genesis_hash": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "left_payload_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "left_propose_message_id": "889e1673d851301ca6f28a1b7ca82574b7e6c4d00abd63f718a84cacb6d1e9f2f6d54cb3b5fe02c4270778e1a2b087ec",
+          "left_sender": "validator-1",
+          "linked": true,
+          "proposer": "validator-0",
+          "protocol_version": 1,
+          "reason": "linked validators accepted conflicting RBC payloads",
+          "right_payload_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "right_propose_message_id": "17ad866c16ee49f10e299a13f30836de9ac0b8d0eeafa31cfa5a8bf6c66cb1c5cca26189bba15312e57a22a2cf7c5db5",
+          "right_sender": "validator-2",
+          "trust_graph_root": "6c93bae6064370cf088f6dbdb689cf0df0640d28313f0b9051c6eb39755099ee4548e00a5e494c965fa6d5ba47331505"
+        }
+      },
+      "ok": true
+    },
+    {
+      "behavior": [
+        "equivocate"
+      ],
+      "expected": "same-sender ABBA init equivocation produces deterministic evidence",
+      "name": "abba_same_sender_equivocation_detected",
+      "observed": {
+        "evidence": {
+          "agreement_id": "777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777",
+          "chain_id": "postfiat-local",
+          "evidence_id": "2e1cc9b1b29ae2178dc2c5a2de14a4e78ba5af9f24f9ed799eab31864e87137b86dbf600f3ee79d4a93052a8fe6df6f8",
+          "genesis_hash": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "left_message_id": "4baa873faf4a24e4a7d4a37a6124771f558dae595a3323784833dbe83d4f1ef8582bd0b3e4662dc0cae461db44638043",
+          "left_value": false,
+          "message_kind": "init",
+          "protocol_version": 1,
+          "reason": "same validator sent conflicting ABBA values for one round",
+          "right_message_id": "8b46312a206e0092d6232309557d59253eefca1af4653b7c5112f511b3419cdd047942b2d985ec59263543d35785825d",
+          "right_value": true,
+          "round": 1,
+          "sender": "validator-3",
+          "trust_graph_root": "6c93bae6064370cf088f6dbdb689cf0df0640d28313f0b9051c6eb39755099ee4548e00a5e494c965fa6d5ba47331505"
+        }
+      },
+      "ok": true
+    },
+    {
+      "behavior": [
+        "equivocate"
+      ],
+      "expected": "equivocal ABBA sender is excluded while remaining support stays strong",
+      "name": "abba_equivocal_sender_excluded_from_support",
+      "observed": {
+        "equivocal_sender_excluded": true,
+        "strong_support": true,
+        "support": [
+          "validator-1",
+          "validator-2",
+          "validator-3",
+          "validator-4",
+          "validator-5",
+          "validator-6"
+        ]
+      },
+      "ok": true
+    },
+    {
+      "behavior": [
+        "crash",
+        "restart"
+      ],
+      "expected": "deterministic replay after simulated restart yields the same accepted validators",
+      "name": "crash_restart_replay_idempotent",
+      "observed": {
+        "accepted_after": [
+          "validator-0",
+          "validator-1",
+          "validator-2",
+          "validator-3",
+          "validator-4",
+          "validator-5",
+          "validator-6"
+        ],
+        "accepted_before": [
+          "validator-0",
+          "validator-1",
+          "validator-2",
+          "validator-3",
+          "validator-4",
+          "validator-5",
+          "validator-6"
+        ]
+      },
+      "ok": true
+    }
+  ],
+  "schema": "postfiat-testnet-cobalt-adversarial-harness-v1",
+  "scope": "controlled-pre-testnet",
+  "status": "passed",
+  "trust_graph_root": "6c93bae6064370cf088f6dbdb689cf0df0640d28313f0b9051c6eb39755099ee4548e00a5e494c965fa6d5ba47331505",
+  "validator_count": 7
+}

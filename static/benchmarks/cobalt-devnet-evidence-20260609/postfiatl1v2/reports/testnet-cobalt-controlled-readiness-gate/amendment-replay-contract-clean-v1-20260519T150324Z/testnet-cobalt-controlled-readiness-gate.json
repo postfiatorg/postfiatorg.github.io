@@ -1,0 +1,646 @@
+{
+  "adversarial_packet_set_binding": {
+    "expected_packet_count": 19,
+    "expected_packet_names": [
+      "abba_byzantine",
+      "adversarial_harness",
+      "adversarial_soak",
+      "amendment_replay_bundle",
+      "capture_model",
+      "collusion_threshold",
+      "crash_restart",
+      "dabc_invalid_candidates",
+      "governance_spam",
+      "key_compromise_recovery",
+      "live_process_kill",
+      "membership_race",
+      "parser_payload_fuzz",
+      "partition_simulation",
+      "rbc_byzantine",
+      "resource_dos",
+      "rollback_recovery",
+      "stale_replay",
+      "trust_graph_poison"
+    ],
+    "expected_packet_names_sha256": "9a4a85f98c2b38c5c68b35d49bf39fec6aae78fd5275206916121b93ed9da573",
+    "release_bound": true,
+    "release_exact": true,
+    "release_extra_packet_names": [],
+    "release_missing_packet_names": [],
+    "release_packet_count": 19,
+    "release_packet_names_sha256": "9a4a85f98c2b38c5c68b35d49bf39fec6aae78fd5275206916121b93ed9da573",
+    "replay_bound": true,
+    "replay_exact": true,
+    "replay_extra_packet_names": [],
+    "replay_missing_packet_names": [],
+    "replay_packet_count": 19,
+    "replay_packet_names_sha256": "9a4a85f98c2b38c5c68b35d49bf39fec6aae78fd5275206916121b93ed9da573"
+  },
+  "blockers": [],
+  "checks": {
+    "adversarial_harness_bound_to_release": true,
+    "adversarial_harness_bound_to_replay": true,
+    "adversarial_harness_command_returned_zero": true,
+    "adversarial_harness_report_present": true,
+    "adversarial_harness_report_redacted": true,
+    "adversarial_harness_required_in_release": true,
+    "adversarial_harness_required_in_replay": true,
+    "adversarial_packet_commands_returned_zero": true,
+    "adversarial_packet_set_bound_to_release": true,
+    "adversarial_packet_set_bound_to_replay": true,
+    "adversarial_packet_set_digest_bound_to_release": true,
+    "adversarial_packet_set_digest_bound_to_replay": true,
+    "adversarial_packet_set_exact_in_release": true,
+    "adversarial_packet_set_exact_in_replay": true,
+    "adversarial_packet_set_reports_present": true,
+    "adversarial_packet_set_reports_redacted": true,
+    "adversarial_packet_set_required_in_release": true,
+    "adversarial_packet_set_required_in_replay": true,
+    "git_clean_if_required": true,
+    "git_revision_present": true,
+    "placement_preflight_not_required_in_release": true,
+    "placement_preflight_not_required_in_replay": true,
+    "release_adversarial_harness_requirement_satisfied": true,
+    "release_adversarial_packet_identity_bound_to_expected": true,
+    "release_adversarial_packet_set_requirement_satisfied": true,
+    "release_bound_to_selected_remote": true,
+    "release_clean_git_requirement_matches_gate": true,
+    "release_command_returned_zero": true,
+    "release_gate_passed": true,
+    "release_gate_report_present": true,
+    "release_gate_report_redacted": true,
+    "release_gate_schema_matches": true,
+    "release_git_branch_matches_gate": true,
+    "release_git_checks_pass": true,
+    "release_git_dirty_matches_gate": true,
+    "release_git_revision_matches_gate": true,
+    "release_non_identical_trust_views_ok": true,
+    "release_subreport_schema_checks_pass": true,
+    "release_topology_bound_to_remote_drill": true,
+    "release_topology_requirement_satisfied": true,
+    "release_trust_view_count_minimum_ok": true,
+    "replay_adversarial_harness_requirement_satisfied": true,
+    "replay_adversarial_packet_identity_bound_to_expected": true,
+    "replay_adversarial_packet_set_requirement_satisfied": true,
+    "replay_bound_to_selected_remote": true,
+    "replay_clean_git_requirement_matches_gate": true,
+    "replay_command_returned_zero": true,
+    "replay_git_branch_matches_gate": true,
+    "replay_git_checks_pass": true,
+    "replay_git_dirty_matches_gate": true,
+    "replay_git_revision_matches_gate": true,
+    "replay_non_identical_trust_views_ok": true,
+    "replay_report_present": true,
+    "replay_report_redacted": true,
+    "replay_schema_matches": true,
+    "replay_subreport_schema_checks_pass": true,
+    "replay_topology_bound_to_remote_drill": true,
+    "replay_topology_requirement_satisfied": true,
+    "replay_trust_view_count_minimum_ok": true,
+    "replay_verify_passed": true,
+    "reused_machine_topology_allowed_in_release": true,
+    "reused_machine_topology_allowed_in_replay": true,
+    "selected_remote_report_mechanics_ok": true,
+    "selected_remote_report_present": true,
+    "topology_command_returned_zero": true,
+    "topology_gate_bound_to_selected_remote": true,
+    "topology_gate_passed_for_controlled_mode": true,
+    "topology_gate_report_present": true,
+    "topology_gate_report_redacted": true,
+    "topology_gate_schema_matches": true,
+    "topology_minimum_hosts_is_controlled_mode": true,
+    "topology_required_in_release": true,
+    "topology_required_in_replay": true,
+    "topology_reused_machine_mode_allowed": true
+  },
+  "commands": {
+    "adversarial_harness": {
+      "argv": [
+        "scripts/testnet-cobalt-adversarial-harness"
+      ],
+      "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/adversarial-harness.out",
+      "returncode": 0,
+      "stderr_line_count": 0,
+      "stdout_line_count": 1
+    },
+    "adversarial_packet_set": {
+      "abba_byzantine": {
+        "argv": [
+          "scripts/testnet-cobalt-abba-byzantine"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/abba_byzantine.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "adversarial_harness": {
+        "argv": [
+          "scripts/testnet-cobalt-adversarial-harness"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/adversarial-harness.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "adversarial_soak": {
+        "argv": [
+          "scripts/testnet-cobalt-adversarial-soak"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/adversarial_soak.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "amendment_replay_bundle": {
+        "argv": [
+          "scripts/testnet-cobalt-amendment-replay-bundle"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/amendment_replay_bundle.out",
+        "returncode": 0,
+        "stderr_line_count": 2,
+        "stdout_line_count": 1
+      },
+      "capture_model": {
+        "argv": [
+          "scripts/testnet-cobalt-capture-model"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/capture_model.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "collusion_threshold": {
+        "argv": [
+          "scripts/testnet-cobalt-collusion-threshold"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/collusion_threshold.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "crash_restart": {
+        "argv": [
+          "scripts/testnet-cobalt-crash-restart"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/crash_restart.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "dabc_invalid_candidates": {
+        "argv": [
+          "scripts/testnet-cobalt-dabc-invalid-candidates"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/dabc_invalid_candidates.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "governance_spam": {
+        "argv": [
+          "scripts/testnet-cobalt-governance-spam"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/governance_spam.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "key_compromise_recovery": {
+        "argv": [
+          "scripts/testnet-cobalt-key-compromise-recovery"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/key_compromise_recovery.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "live_process_kill": {
+        "argv": [
+          "scripts/testnet-cobalt-live-process-kill"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/live_process_kill.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "membership_race": {
+        "argv": [
+          "scripts/testnet-cobalt-membership-race"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/membership_race.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "parser_payload_fuzz": {
+        "argv": [
+          "scripts/testnet-cobalt-parser-payload-fuzz"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/parser_payload_fuzz.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "partition_simulation": {
+        "argv": [
+          "scripts/testnet-cobalt-partition-simulation"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/partition_simulation.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "rbc_byzantine": {
+        "argv": [
+          "scripts/testnet-cobalt-rbc-byzantine"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/rbc_byzantine.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "resource_dos": {
+        "argv": [
+          "scripts/testnet-cobalt-resource-dos"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/resource_dos.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "rollback_recovery": {
+        "argv": [
+          "scripts/testnet-cobalt-rollback-recovery"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/rollback_recovery.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "stale_replay": {
+        "argv": [
+          "scripts/testnet-cobalt-stale-replay"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/stale_replay.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      },
+      "trust_graph_poison": {
+        "argv": [
+          "scripts/testnet-cobalt-trust-graph-poison"
+        ],
+        "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/trust_graph_poison.out",
+        "returncode": 0,
+        "stderr_line_count": 0,
+        "stdout_line_count": 1
+      }
+    },
+    "release_gate": {
+      "argv": [
+        "scripts/testnet-cobalt-full-release-gate"
+      ],
+      "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/release-gate.out",
+      "returncode": 0,
+      "stderr_line_count": 0,
+      "stdout_line_count": 2
+    },
+    "replay_verify": {
+      "argv": [
+        "scripts/testnet-cobalt-full-replay-verify"
+      ],
+      "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/replay-verify.out",
+      "returncode": 0,
+      "stderr_line_count": 0,
+      "stdout_line_count": 2
+    },
+    "topology_diversity": {
+      "argv": [
+        "scripts/testnet-cobalt-topology-diversity-gate"
+      ],
+      "log": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/logs/topology-diversity.out",
+      "returncode": 0,
+      "stderr_line_count": 0,
+      "stdout_line_count": 2
+    }
+  },
+  "controlled_readiness_gate_ok": true,
+  "controlled_topology": {
+    "strict_gate_unchanged": true,
+    "strict_independent_topology_caveat": {
+      "host_fingerprints_missing": 4,
+      "host_fingerprints_present": 3,
+      "host_fingerprints_required": 7,
+      "max_validators_per_host": 3,
+      "operator_host_fingerprints_missing": 4,
+      "operator_host_fingerprints_present": 3,
+      "operator_host_fingerprints_required": 7,
+      "required_for_this_gate": false,
+      "strict_gate": "scripts/testnet-cobalt-controlled-launch-gate",
+      "strict_independent_topology_ok": false,
+      "validator_slots_to_move_off_reused_hosts": 4,
+      "validators": 7
+    },
+    "summary": {
+      "blockers": [],
+      "independent_topology_ok": false,
+      "max_validators_per_host": 3,
+      "ok": true,
+      "required_operator_inputs": [
+        "Provide seven validator credential slots for validator-0 through validator-6.",
+        "Place each Cobalt validator on a distinct host fingerprint for strict independent-topology evidence.",
+        "Use distinct operator-host fingerprints for each Cobalt validator.",
+        "Regenerate the Cobalt deploy plan and rerun the strict controlled-launch gate after placement changes."
+      ],
+      "requirements": {
+        "allow_reused_machines": true,
+        "independent_topology_required": false,
+        "minimum_operator_groups": 1,
+        "minimum_operator_host_groups": 1,
+        "minimum_public_diversity_groups": 1,
+        "minimum_unique_host_fingerprints": 1,
+        "minimum_validators": 7,
+        "placement_manifest_required": false,
+        "public_diversity_required": false
+      },
+      "rerun_commands": {
+        "strict_controlled_launch": "scripts/testnet-cobalt-controlled-launch-gate",
+        "topology_diversity": "scripts/testnet-cobalt-topology-diversity-gate"
+      },
+      "reused_machine_topology": true,
+      "status": "passed",
+      "strict_independent_topology_delta": {
+        "host_fingerprints_missing": 0,
+        "host_fingerprints_present": 3,
+        "host_fingerprints_required": 1,
+        "max_validators_per_host": 3,
+        "operator_host_fingerprints_missing": 0,
+        "operator_host_fingerprints_present": 3,
+        "operator_host_fingerprints_required": 1,
+        "validator_slots_missing": 0,
+        "validator_slots_to_move_off_reused_hosts": 0,
+        "validators": 7,
+        "validators_required": 7
+      },
+      "unique_host_count": 3,
+      "unique_host_user_count": 3,
+      "validator_count": 7
+    }
+  },
+  "generated_utc": "2026-05-19T15:04:03Z",
+  "git": {
+    "branch": "main",
+    "dirty": false,
+    "revision": "2080c17436abcb1f0de0a7dc21a0646aa404c4bd"
+  },
+  "release_gate": {
+    "adversarial_behavior_scripts": [
+      "collude",
+      "crash",
+      "delay",
+      "duplicate",
+      "equivocate",
+      "honest",
+      "invalid_signature",
+      "malformed_payload",
+      "reorder",
+      "restart",
+      "stale_root",
+      "withhold"
+    ],
+    "adversarial_ok_for_requirement": true,
+    "adversarial_packet_count": 19,
+    "adversarial_packet_set_ok_for_requirement": true,
+    "adversarial_packet_set_required": true,
+    "adversarial_required": true,
+    "adversarial_scenario_count": 11,
+    "adversarial_scenario_failures": [],
+    "blockers": [],
+    "diversity_overlay_template": "reports/testnet-cobalt-placement-preflight/preflight-template-integrated-functional-v0-20260519T0029Z/cobalt-placement-diversity-overlay-template.json",
+    "draft_manifest_available": true,
+    "independent_topology_ok": false,
+    "minimum_no_blocking_delta": {
+      "credential_slots_missing_for_manifest": 0,
+      "host_groups_missing": 0,
+      "independent_groups_required": 3,
+      "operator_groups_missing": 0,
+      "operator_host_groups_missing": 0,
+      "validators": 3
+    },
+    "non_identical_trust_views_ok": true,
+    "ok": true,
+    "placement_blockers": [
+      "topology_diversity_gate_failed",
+      "topology_diversity_gate_not_ok"
+    ],
+    "placement_bound_to_remote_drill": true,
+    "placement_manifest_source": "generated_draft",
+    "placement_ok_for_requirement": false,
+    "placement_required": false,
+    "placement_source": "latest_standalone",
+    "required_operator_inputs": [
+      "Provide a seven-target Cobalt placement manifest for validator-0 through validator-6.",
+      "Ensure each manifest target references a complete credential machine entry.",
+      "For minimum no-blocking evidence, provide at least four distinct host, operator, and operator-host groups across the first seven targets.",
+      "For strict independent topology evidence, provide seven distinct host, operator, and operator-host groups across the first seven targets.",
+      "Populate public diversity labels for cloud provider, region, jurisdiction, legal domain, and funding source before requiring public-diversity evidence."
+    ],
+    "rerun_commands": {
+      "mutation_guarded_remote_drill": "REQUIRE_COBALT_PLACEMENT_PREFLIGHT=1 scripts/testnet-cobalt-full-remote-drill",
+      "placement_preflight": "scripts/testnet-cobalt-placement-preflight",
+      "public_diversity_preflight": "REQUIRE_PUBLIC_DIVERSITY=1 scripts/testnet-cobalt-placement-preflight"
+    },
+    "reused_machine_topology": true,
+    "status": "passed",
+    "strict_independent_delta": {
+      "credential_slots_missing": 0,
+      "host_groups_missing": 0,
+      "operator_groups_missing": 0,
+      "operator_host_groups_missing": 0,
+      "validators": 3
+    },
+    "topology_bound_to_remote_drill": true,
+    "topology_report_ok_for_requirement": true,
+    "topology_required": true,
+    "trust_view_count_minimum_ok": true,
+    "trust_views": {
+      "g1_non_identical_trust_views": true,
+      "g1_trust_view_count": 7,
+      "minimum_trust_views": 3,
+      "rbc_distinct_trust_view_count": 7
+    }
+  },
+  "remote_drill_selection": {
+    "selected_report": "reports/testnet-cobalt-full-nonuniform-remote-drill/full-cobalt-remote-v0-20260518T223730Z/testnet-cobalt-full-nonuniform-remote-drill.json",
+    "selected_report_mechanics_ok": true,
+    "selection_policy": "explicit env wins; otherwise newest mechanics-passing full-Cobalt remote drill; fallback newest file for diagnostics",
+    "source": "latest_mechanics_passing"
+  },
+  "replay_verify": {
+    "adversarial_behavior_scripts": [
+      "collude",
+      "crash",
+      "delay",
+      "duplicate",
+      "equivocate",
+      "honest",
+      "invalid_signature",
+      "malformed_payload",
+      "reorder",
+      "restart",
+      "stale_root",
+      "withhold"
+    ],
+    "adversarial_ok_for_requirement": true,
+    "adversarial_packet_count": 19,
+    "adversarial_packet_set_ok_for_requirement": true,
+    "adversarial_packet_set_required": true,
+    "adversarial_required": true,
+    "adversarial_scenario_count": 11,
+    "adversarial_scenario_failures": [],
+    "blockers": [],
+    "diversity_overlay_template": "reports/testnet-cobalt-placement-preflight/preflight-template-integrated-functional-v0-20260519T0029Z/cobalt-placement-diversity-overlay-template.json",
+    "draft_manifest_available": true,
+    "independent_topology_ok": false,
+    "minimum_no_blocking_delta": {
+      "credential_slots_missing_for_manifest": 0,
+      "host_groups_missing": 0,
+      "independent_groups_required": 3,
+      "operator_groups_missing": 0,
+      "operator_host_groups_missing": 0,
+      "validators": 3
+    },
+    "non_identical_trust_views_ok": true,
+    "ok": true,
+    "placement_blockers": [
+      "topology_diversity_gate_failed",
+      "topology_diversity_gate_not_ok"
+    ],
+    "placement_bound_to_remote_drill": true,
+    "placement_manifest_source": "generated_draft",
+    "placement_ok_for_requirement": false,
+    "placement_required": false,
+    "placement_source": "release_gate",
+    "required_operator_inputs": [
+      "Provide a seven-target Cobalt placement manifest for validator-0 through validator-6.",
+      "Ensure each manifest target references a complete credential machine entry.",
+      "For minimum no-blocking evidence, provide at least four distinct host, operator, and operator-host groups across the first seven targets.",
+      "For strict independent topology evidence, provide seven distinct host, operator, and operator-host groups across the first seven targets.",
+      "Populate public diversity labels for cloud provider, region, jurisdiction, legal domain, and funding source before requiring public-diversity evidence."
+    ],
+    "rerun_commands": {
+      "mutation_guarded_remote_drill": "REQUIRE_COBALT_PLACEMENT_PREFLIGHT=1 scripts/testnet-cobalt-full-remote-drill",
+      "placement_preflight": "scripts/testnet-cobalt-placement-preflight",
+      "public_diversity_preflight": "REQUIRE_PUBLIC_DIVERSITY=1 scripts/testnet-cobalt-placement-preflight"
+    },
+    "reused_machine_topology": true,
+    "status": "passed",
+    "strict_independent_delta": {
+      "credential_slots_missing": 0,
+      "host_groups_missing": 0,
+      "operator_groups_missing": 0,
+      "operator_host_groups_missing": 0,
+      "validators": 3
+    },
+    "topology_bound_to_remote_drill": true,
+    "topology_report_ok_for_requirement": true,
+    "topology_required": true,
+    "trust_view_count_minimum_ok": true,
+    "trust_views": {
+      "g1_non_identical_trust_views": true,
+      "g1_trust_view_count": 7,
+      "local_rbc_distinct_trust_view_count": 7,
+      "minimum_trust_views": 3,
+      "release_gate_g1_trust_view_count": 7,
+      "release_gate_non_identical_trust_views": true
+    }
+  },
+  "reports": {
+    "adversarial_harness": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-harness/testnet-cobalt-adversarial-harness.json",
+    "adversarial_packet_set": {
+      "abba_byzantine": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/abba_byzantine/testnet-cobalt-abba-byzantine.json",
+      "adversarial_harness": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-harness/testnet-cobalt-adversarial-harness.json",
+      "adversarial_soak": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/adversarial_soak/testnet-cobalt-adversarial-soak.json",
+      "amendment_replay_bundle": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/amendment_replay_bundle/testnet-cobalt-amendment-replay-bundle.json",
+      "capture_model": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/capture_model/testnet-cobalt-capture-model.json",
+      "collusion_threshold": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/collusion_threshold/testnet-cobalt-collusion-threshold.json",
+      "crash_restart": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/crash_restart/testnet-cobalt-crash-restart.json",
+      "dabc_invalid_candidates": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/dabc_invalid_candidates/testnet-cobalt-dabc-invalid-candidates.json",
+      "governance_spam": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/governance_spam/testnet-cobalt-governance-spam.json",
+      "key_compromise_recovery": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/key_compromise_recovery/testnet-cobalt-key-compromise-recovery.json",
+      "live_process_kill": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/live_process_kill/testnet-cobalt-live-process-kill.json",
+      "membership_race": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/membership_race/testnet-cobalt-membership-race.json",
+      "parser_payload_fuzz": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/parser_payload_fuzz/testnet-cobalt-parser-payload-fuzz.json",
+      "partition_simulation": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/partition_simulation/testnet-cobalt-partition-simulation.json",
+      "rbc_byzantine": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/rbc_byzantine/testnet-cobalt-rbc-byzantine.json",
+      "resource_dos": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/resource_dos/testnet-cobalt-resource-dos.json",
+      "rollback_recovery": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/rollback_recovery/testnet-cobalt-rollback-recovery.json",
+      "stale_replay": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/stale_replay/testnet-cobalt-stale-replay.json",
+      "trust_graph_poison": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/adversarial-packets/trust_graph_poison/testnet-cobalt-trust-graph-poison.json"
+    },
+    "full_cobalt_release_gate": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/release-gate/testnet-cobalt-full-release-gate.json",
+    "full_cobalt_remote_drill_from_release": "reports/testnet-cobalt-full-nonuniform-remote-drill/full-cobalt-remote-v0-20260518T223730Z/testnet-cobalt-full-nonuniform-remote-drill.json",
+    "full_cobalt_remote_drill_from_replay": "reports/testnet-cobalt-full-nonuniform-remote-drill/full-cobalt-remote-v0-20260518T223730Z/testnet-cobalt-full-nonuniform-remote-drill.json",
+    "full_cobalt_replay_verify": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/replay-verify/testnet-cobalt-full-replay-verify.json",
+    "selected_full_cobalt_remote_drill": "reports/testnet-cobalt-full-nonuniform-remote-drill/full-cobalt-remote-v0-20260518T223730Z/testnet-cobalt-full-nonuniform-remote-drill.json",
+    "topology_diversity_gate": "reports/testnet-cobalt-controlled-readiness-gate/amendment-replay-contract-clean-v1-20260519T150324Z/topology-diversity/testnet-cobalt-topology-diversity-gate.json",
+    "topology_diversity_remote_drill": "reports/testnet-cobalt-full-nonuniform-remote-drill/full-cobalt-remote-v0-20260518T223730Z/testnet-cobalt-full-nonuniform-remote-drill.json"
+  },
+  "requirements": {
+    "adversarial_harness_required": true,
+    "adversarial_packet_set_required": true,
+    "clean_git_required": true,
+    "minimum_unique_host_fingerprints": 1,
+    "non_uniform_cobalt_mechanics": true,
+    "placement_preflight_required": false,
+    "remote_mutation": false,
+    "reused_machine_topology_allowed": true,
+    "seven_logical_validators": true,
+    "strict_independent_topology_required": false,
+    "topology_evidence_required": true
+  },
+  "schema": "postfiat-testnet-cobalt-controlled-readiness-gate-v1",
+  "status": "passed",
+  "subreport_schema_checks": {
+    "release": {
+      "all_true": true,
+      "expected_checks": [
+        "local_harness_schema_ok",
+        "remote_drill_schema_ok",
+        "topology_diversity_schema_ok",
+        "cobalt_placement_preflight_schema_ok",
+        "cobalt_adversarial_harness_schema_ok"
+      ],
+      "missing_or_false": [],
+      "values": {
+        "cobalt_adversarial_harness_schema_ok": true,
+        "cobalt_placement_preflight_schema_ok": true,
+        "local_harness_schema_ok": true,
+        "remote_drill_schema_ok": true,
+        "topology_diversity_schema_ok": true
+      }
+    },
+    "replay": {
+      "all_true": true,
+      "expected_checks": [
+        "remote_report_schema_ok",
+        "release_gate_schema_ok",
+        "credential_preflight_schema_ok",
+        "local_harness_schema_ok",
+        "topology_diversity_schema_ok",
+        "placement_preflight_schema_ok",
+        "adversarial_harness_schema_ok"
+      ],
+      "missing_or_false": [],
+      "values": {
+        "adversarial_harness_schema_ok": true,
+        "credential_preflight_schema_ok": true,
+        "local_harness_schema_ok": true,
+        "placement_preflight_schema_ok": true,
+        "release_gate_schema_ok": true,
+        "remote_report_schema_ok": true,
+        "topology_diversity_schema_ok": true
+      }
+    }
+  }
+}

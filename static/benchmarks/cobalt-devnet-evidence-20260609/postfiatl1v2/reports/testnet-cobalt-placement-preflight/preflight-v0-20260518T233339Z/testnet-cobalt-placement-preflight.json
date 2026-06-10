@@ -1,0 +1,421 @@
+{
+  "blockers": [
+    "placement_capacity_gate_not_ok",
+    "placement_capacity_profile_failed",
+    "placement_manifest_controlled_diversity_not_ok",
+    "placement_manifest_validator_coverage_not_ok",
+    "placement_manifest_verify_failed",
+    "placement_manifest_verify_report_missing",
+    "topology_diversity_gate_failed",
+    "topology_diversity_gate_not_ok"
+  ],
+  "cobalt_placement_preflight_ok": false,
+  "commands": {
+    "placement_capacity_profile": {
+      "argv": [
+        "scripts/testnet-remote-placement-capacity-profile"
+      ],
+      "returncode": 1,
+      "stderr_line_count": 0,
+      "stdout_line_count": 1
+    },
+    "placement_manifest_verify": {
+      "argv": [
+        "scripts/testnet-placement-manifest-verify",
+        "docs/status/controlled-testnet-placement-manifest.json"
+      ],
+      "returncode": 1,
+      "stderr_line_count": 0,
+      "stdout_line_count": 0
+    },
+    "topology_diversity_gate": {
+      "argv": [
+        "scripts/testnet-cobalt-topology-diversity-gate"
+      ],
+      "returncode": 1,
+      "stderr_line_count": 0,
+      "stdout_line_count": 3
+    }
+  },
+  "generated_utc": "2026-05-18T23:33:39Z",
+  "inputs": {
+    "placement_manifest": "docs/status/controlled-testnet-placement-manifest.json",
+    "ssh_credential_file_path_redacted": true,
+    "ssh_credential_file_present": true,
+    "ssh_credential_file_values_redacted": true
+  },
+  "manifest_static": {
+    "contains_sensitive_material": false,
+    "controlled_diversity_ok": false,
+    "field_counts": {
+      "cloud_provider_group": 0,
+      "funding_source_group": 0,
+      "host_group": 5,
+      "jurisdiction_group": 0,
+      "legal_domain_group": 0,
+      "operator_group": 5,
+      "operator_host_group": 5,
+      "region_group": 0
+    },
+    "machine_indexes_unique": true,
+    "missing_field_counts": {
+      "cloud_provider_group": 5,
+      "funding_source_group": 5,
+      "host_group": 0,
+      "jurisdiction_group": 5,
+      "legal_domain_group": 5,
+      "operator_group": 0,
+      "operator_host_group": 0,
+      "region_group": 5
+    },
+    "path": "docs/status/controlled-testnet-placement-manifest.json",
+    "present": true,
+    "public_diversity_ok": false,
+    "require_public_diversity": false,
+    "schema_ok": true,
+    "selected_target_count": 5,
+    "target_count": 5,
+    "validator_coverage_ok": false
+  },
+  "placement_capacity": {
+    "blocking_reasons": [
+      "manifest_host_groups_below_required_independent_groups",
+      "manifest_operator_groups_below_required_independent_groups",
+      "manifest_operator_host_groups_below_required_independent_groups",
+      "manifest_bindable_targets_below_validators",
+      "manifest_complete_controlled_targets_below_validators"
+    ],
+    "blocking_threshold": 3,
+    "controlled_shortfall": {
+      "bindable_targets_missing": 4,
+      "complete_targets_missing": 4,
+      "host_groups_missing": 1,
+      "max_missing_independent_groups": 4,
+      "operator_groups_missing": 1,
+      "operator_host_groups_missing": 1
+    },
+    "credential_capacity": {
+      "complete_machine_entries": {
+        "count": 3,
+        "name": "complete_machine_entries",
+        "required_independent_groups": 4,
+        "satisfies_no_blocking_minimum": false
+      },
+      "host_groups": {
+        "count": 3,
+        "name": "host_groups",
+        "required_independent_groups": 4,
+        "satisfies_no_blocking_minimum": false
+      },
+      "operator_groups": {
+        "count": 3,
+        "name": "operator_groups",
+        "required_independent_groups": 4,
+        "satisfies_no_blocking_minimum": false
+      },
+      "operator_host_groups": {
+        "count": 3,
+        "name": "operator_host_groups",
+        "required_independent_groups": 4,
+        "satisfies_no_blocking_minimum": false
+      }
+    },
+    "credential_capacity_gate_ok": false,
+    "credential_complete_machine_entries": 3,
+    "machine_reuse_required_for_requested_validators": true,
+    "minimum_independent_groups_for_no_blocking": 4,
+    "placement_capacity_gate_ok": false,
+    "placement_manifest": {
+      "bindable_targets": 3,
+      "complete_controlled_targets": 3,
+      "complete_public_targets": 0,
+      "controlled_capacity": {
+        "host_groups": {
+          "count": 3,
+          "name": "host_groups",
+          "required_independent_groups": 4,
+          "satisfies_no_blocking_minimum": false
+        },
+        "operator_groups": {
+          "count": 3,
+          "name": "operator_groups",
+          "required_independent_groups": 4,
+          "satisfies_no_blocking_minimum": false
+        },
+        "operator_host_groups": {
+          "count": 3,
+          "name": "operator_host_groups",
+          "required_independent_groups": 4,
+          "satisfies_no_blocking_minimum": false
+        }
+      },
+      "controlled_capacity_gate_ok": false,
+      "present": true,
+      "public_expansion_blocking_reasons": [
+        "manifest_host_groups_below_required_independent_groups",
+        "manifest_operator_groups_below_required_independent_groups",
+        "manifest_operator_host_groups_below_required_independent_groups",
+        "manifest_cloud_provider_groups_below_required_independent_groups",
+        "manifest_region_groups_below_required_independent_groups",
+        "manifest_jurisdiction_groups_below_required_independent_groups",
+        "manifest_legal_domain_groups_below_required_independent_groups",
+        "manifest_funding_source_groups_below_required_independent_groups",
+        "manifest_complete_public_targets_below_validators"
+      ],
+      "public_expansion_capacity": {
+        "cloud_provider_groups": {
+          "count": 0,
+          "name": "cloud_provider_groups",
+          "required_independent_groups": 4,
+          "satisfies_no_blocking_minimum": false
+        },
+        "funding_source_groups": {
+          "count": 0,
+          "name": "funding_source_groups",
+          "required_independent_groups": 4,
+          "satisfies_no_blocking_minimum": false
+        },
+        "host_groups": {
+          "count": 0,
+          "name": "host_groups",
+          "required_independent_groups": 4,
+          "satisfies_no_blocking_minimum": false
+        },
+        "jurisdiction_groups": {
+          "count": 0,
+          "name": "jurisdiction_groups",
+          "required_independent_groups": 4,
+          "satisfies_no_blocking_minimum": false
+        },
+        "legal_domain_groups": {
+          "count": 0,
+          "name": "legal_domain_groups",
+          "required_independent_groups": 4,
+          "satisfies_no_blocking_minimum": false
+        },
+        "operator_groups": {
+          "count": 0,
+          "name": "operator_groups",
+          "required_independent_groups": 4,
+          "satisfies_no_blocking_minimum": false
+        },
+        "operator_host_groups": {
+          "count": 0,
+          "name": "operator_host_groups",
+          "required_independent_groups": 4,
+          "satisfies_no_blocking_minimum": false
+        },
+        "region_groups": {
+          "count": 0,
+          "name": "region_groups",
+          "required_independent_groups": 4,
+          "satisfies_no_blocking_minimum": false
+        }
+      },
+      "public_expansion_capacity_gate_ok": false,
+      "schema": "postfiat-testnet-placement-manifest-v1",
+      "targets_seen": 5
+    },
+    "public_expansion_capacity_gate_ok": false,
+    "public_expansion_shortfall": {
+      "cloud_provider_groups_missing": 4,
+      "complete_targets_missing": 7,
+      "funding_source_groups_missing": 4,
+      "host_groups_missing": 4,
+      "jurisdiction_groups_missing": 4,
+      "legal_domain_groups_missing": 4,
+      "max_missing_independent_groups": 7,
+      "operator_groups_missing": 4,
+      "operator_host_groups_missing": 4,
+      "region_groups_missing": 4
+    },
+    "quorum_threshold": 5,
+    "status": "profiled",
+    "validators": 7
+  },
+  "placement_manifest_verify": {
+    "ok": null,
+    "required_independent_groups": null,
+    "status": null,
+    "validators": null
+  },
+  "remediation": {
+    "manifest_delta": {
+      "bindable_targets_missing": 4,
+      "complete_controlled_targets_missing": 4,
+      "complete_public_targets_missing": 7,
+      "controlled_fields": {
+        "host_group": {
+          "distinct_groups_present": 5,
+          "groups_missing_for_minimum_no_blocking": 0,
+          "groups_missing_for_strict_independent": 2,
+          "rows_missing_value": 0
+        },
+        "operator_group": {
+          "distinct_groups_present": 5,
+          "groups_missing_for_minimum_no_blocking": 0,
+          "groups_missing_for_strict_independent": 2,
+          "rows_missing_value": 0
+        },
+        "operator_host_group": {
+          "distinct_groups_present": 5,
+          "groups_missing_for_minimum_no_blocking": 0,
+          "groups_missing_for_strict_independent": 2,
+          "rows_missing_value": 0
+        }
+      },
+      "public_diversity_required_for_this_run": false,
+      "public_fields": {
+        "cloud_provider_group": {
+          "distinct_groups_present": 0,
+          "groups_missing_for_minimum_no_blocking": 4,
+          "groups_missing_for_strict_independent": 7,
+          "rows_missing_value": 5
+        },
+        "funding_source_group": {
+          "distinct_groups_present": 0,
+          "groups_missing_for_minimum_no_blocking": 4,
+          "groups_missing_for_strict_independent": 7,
+          "rows_missing_value": 5
+        },
+        "jurisdiction_group": {
+          "distinct_groups_present": 0,
+          "groups_missing_for_minimum_no_blocking": 4,
+          "groups_missing_for_strict_independent": 7,
+          "rows_missing_value": 5
+        },
+        "legal_domain_group": {
+          "distinct_groups_present": 0,
+          "groups_missing_for_minimum_no_blocking": 4,
+          "groups_missing_for_strict_independent": 7,
+          "rows_missing_value": 5
+        },
+        "region_group": {
+          "distinct_groups_present": 0,
+          "groups_missing_for_minimum_no_blocking": 4,
+          "groups_missing_for_strict_independent": 7,
+          "rows_missing_value": 5
+        }
+      },
+      "targets_missing": 2,
+      "targets_present": 5
+    },
+    "profiles": {
+      "minimum_no_single_group_can_block_quorum": {
+        "credential_slots_missing_for_seven_target_manifest": 4,
+        "independent_groups_required": 4,
+        "independent_host_groups_missing": 1,
+        "independent_operator_groups_missing": 1,
+        "independent_operator_host_groups_missing": 1,
+        "topology_host_fingerprints_missing": 1,
+        "topology_host_user_fingerprints_missing": 1,
+        "validators": 7
+      },
+      "strict_one_validator_per_independent_host": {
+        "credential_slots_missing": 4,
+        "independent_groups_required": 7,
+        "independent_host_groups_missing": 4,
+        "independent_operator_groups_missing": 4,
+        "independent_operator_host_groups_missing": 4,
+        "topology_host_fingerprints_missing": 4,
+        "topology_host_user_fingerprints_missing": 4,
+        "validators": 7
+      }
+    },
+    "required_operator_inputs": [
+      "Provide a seven-target Cobalt placement manifest for validator-0 through validator-6.",
+      "Ensure each manifest target references a complete credential machine entry.",
+      "For minimum no-blocking evidence, provide at least four distinct host, operator, and operator-host groups across the first seven targets.",
+      "For strict independent topology evidence, provide seven distinct host, operator, and operator-host groups across the first seven targets.",
+      "Populate public diversity labels for cloud provider, region, jurisdiction, legal domain, and funding source before requiring public-diversity evidence."
+    ],
+    "rerun_commands": {
+      "mutation_guarded_remote_drill": "REQUIRE_COBALT_PLACEMENT_PREFLIGHT=1 scripts/testnet-cobalt-full-remote-drill",
+      "placement_preflight": "scripts/testnet-cobalt-placement-preflight",
+      "public_diversity_preflight": "REQUIRE_PUBLIC_DIVERSITY=1 scripts/testnet-cobalt-placement-preflight"
+    },
+    "status": "action_required"
+  },
+  "report_redacted": true,
+  "requirements": {
+    "blocking_threshold": 3,
+    "quorum_threshold": 5,
+    "require_public_diversity": false,
+    "require_source_evidence": false,
+    "required_independent_groups_for_no_blocking": 4,
+    "required_topology_groups": 7,
+    "strict_independent_topology": true,
+    "validators": 7
+  },
+  "schema": "postfiat-testnet-cobalt-placement-preflight-v1",
+  "status": "blocked",
+  "subreports": {
+    "placement_capacity_profile": {
+      "exists": true,
+      "path": "reports/testnet-cobalt-placement-preflight/preflight-v0-20260518T233339Z/testnet-remote-placement-capacity-profile.json",
+      "redacted": true
+    },
+    "placement_manifest_verify": {
+      "exists": false,
+      "path": "reports/testnet-cobalt-placement-preflight/preflight-v0-20260518T233339Z/testnet-placement-manifest-verify.json",
+      "redacted": null
+    },
+    "topology_diversity_gate": {
+      "exists": true,
+      "path": "reports/testnet-cobalt-placement-preflight/preflight-v0-20260518T233339Z/testnet-cobalt-topology-diversity-gate.json",
+      "redacted": true
+    }
+  },
+  "topology_diversity": {
+    "blockers": [
+      "remote_drill_passed",
+      "host_diversity_ok",
+      "independent_topology_ok",
+      "reused_machine_topology_allowed",
+      "topology_mode_requirement_ok",
+      "placement_manifest_requirement_satisfied"
+    ],
+    "independent_topology_ok": false,
+    "max_validators_per_host": 3,
+    "placement_manifest_controlled_diversity_ok": false,
+    "placement_manifest_field_counts": {
+      "cloud_provider_group": 0,
+      "funding_source_group": 0,
+      "host_group": 5,
+      "jurisdiction_group": 0,
+      "legal_domain_group": 0,
+      "operator_group": 5,
+      "operator_host_group": 5,
+      "region_group": 0
+    },
+    "placement_manifest_missing_fields": {
+      "cloud_provider_group": 7,
+      "funding_source_group": 7,
+      "host_group": 2,
+      "jurisdiction_group": 7,
+      "legal_domain_group": 7,
+      "operator_group": 2,
+      "operator_host_group": 2,
+      "region_group": 7
+    },
+    "placement_manifest_present": true,
+    "placement_manifest_public_diversity_ok": false,
+    "requirements": {
+      "allow_reused_machines": false,
+      "independent_topology_required": true,
+      "minimum_operator_groups": 7,
+      "minimum_operator_host_groups": 7,
+      "minimum_public_diversity_groups": 7,
+      "minimum_unique_host_fingerprints": 7,
+      "minimum_validators": 7,
+      "placement_manifest_required": true,
+      "public_diversity_required": false
+    },
+    "reused_machine_topology": true,
+    "status": "blocked",
+    "topology_gate_ok": false,
+    "unique_host_count": 3,
+    "unique_host_user_count": 3,
+    "validator_count": 7
+  }
+}

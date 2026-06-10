@@ -1,0 +1,88 @@
+{
+  "schema": "postfiat.qwen_sglang_replay_profile.machine_report.v1",
+  "generated_at_utc": "20260528T162243Z",
+  "profile_id": "qwen3-1.7b-sglang-h200-cobalt-registrar-v1",
+  "machine": {
+    "label": "vast-h200-cobalt-registrar",
+    "hardware_class": "H200-143GB",
+    "provider_run_id": "vast-38266407",
+    "hostname_hash": "a73107493a46c69fc48d5c5f8614e051c7e0d2bf7cb9ec3e6df935ee523147c1",
+    "platform": "Linux-6.8.0-55-generic-x86_64-with-glibc2.39",
+    "gpu": []
+  },
+  "model_manifest": {
+    "model_id": "Qwen/Qwen3-1.7B",
+    "runtime_family": "sglang-openai-http",
+    "server_args": ""
+  },
+  "prompt": {
+    "packet": "cobalt-registrar",
+    "prompt_schema": "postfiat.qwen_governance_cobalt_registrar_packet.v1",
+    "prompt_hash": "277e4174662841fe8d0802f0d055fec0528afbae09173a49d1f9067fc9a5ad68",
+    "adversarial": false
+  },
+  "request": {
+    "payload_sha256": "f19654ee6802b872ae7d559ad954e8ba5aed8d1416681767ea5e1940e2bf9a85",
+    "temperature": 0,
+    "top_p": 1,
+    "max_tokens": 192,
+    "top_logprobs": 5
+  },
+  "results": {
+    "parse_success_count": 100,
+    "parse_error_count": 0,
+    "parse_errors": {},
+    "unique_raw_output_hash_count": 1,
+    "unique_raw_output_hashes": [
+      "aa4e919054ac1aa5126b3aa357a4dac1708c78ab030bf43c253dbb130dc1dec7"
+    ],
+    "unique_parsed_output_hash_count": 1,
+    "unique_parsed_output_hashes": [
+      "1f667e5d8d63fbc8852b10085062e13579f864f27f3b3c53481b68bc4b2fbc1e"
+    ],
+    "unique_decision_hash_count": 1,
+    "unique_decision_hashes": [
+      "08b3d570e746a4bd4c761ab280aa1f6f4992704810f03de2377c8a38b0fc0cf8"
+    ],
+    "unique_decisions": [
+      {
+        "cited_fields": [
+          "cobalt_registrar_design",
+          "governance_goal",
+          "implementation_scope",
+          "override_detectability",
+          "xrpl_unl_model"
+        ],
+        "selected_option": "adopt-cobalt-registrar"
+      }
+    ],
+    "unique_logprob_root_count": 1,
+    "unique_logprob_roots": [
+      "af228110a9782fcfdca48dd681636360d24d3a995933443bd06e1374e8cbda07"
+    ],
+    "selected_option_counts": {
+      "adopt-cobalt-registrar": 100
+    },
+    "expected_selected_option": "adopt-cobalt-registrar",
+    "expected_selected_option_count": 100,
+    "expected_cited_fields": [
+      "cobalt_registrar_design",
+      "governance_goal",
+      "implementation_scope",
+      "override_detectability",
+      "xrpl_unl_model"
+    ],
+    "expected_cited_fields_matched_count": 100,
+    "passed_decision_repeatability": true,
+    "passed_profile_repeatability": true
+  },
+  "artifacts": {
+    "raw_outputs_path": "reports/qwen-sglang-profile-portability/20260528T162243Z/raw_outputs.jsonl",
+    "raw_outputs_sha256": "54c25f8cfc212ca4d2cf9647a62dac3341abadd8706df0f3b134b4161d3280b4",
+    "parsed_outputs_path": "reports/qwen-sglang-profile-portability/20260528T162243Z/parsed_outputs.jsonl",
+    "parsed_outputs_sha256": "3f8c72f706a311d0f756daa2627ed273f6682e6e975a041977b62bf9acb7090c"
+  },
+  "source_hashes": {
+    "scripts/qwen-sglang-replay-profile-runner": "96e520cb30bbbfcb0302f42c0524ca5c96c2d352c9b0daa18a8034501089d99b"
+  }
+}

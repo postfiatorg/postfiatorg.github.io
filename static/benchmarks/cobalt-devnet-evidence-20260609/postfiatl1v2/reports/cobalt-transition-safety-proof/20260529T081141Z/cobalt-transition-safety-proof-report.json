@@ -1,0 +1,337 @@
+{
+  "generated_at_utc": "2026-05-29T08:16:40Z",
+  "report": {
+    "invalid": [
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-transition",
+            "id": "case-01-valid-one-validator-rotation",
+            "kind": "accept_transition",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-same-registry-conflict",
+            "id": "case-02-same-registry-conflict",
+            "kind": "same_registry_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-03-old-new-conflict",
+            "kind": "old_new_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "976619f827ec70789ae6ce29024d653497bb62d812d7f29c4ed6491100fed57609f575b53e059d700171138a71be4049",
+        "errors": [
+          "byzantine_budget exceeds weakest t_s",
+          "statement.material_root_hash does not match transition material",
+          "case-01-valid-one-validator-rotation: expected_route mismatch: expected accept-transition, got fail-closed",
+          "case-02-same-registry-conflict: expected_route mismatch: expected reject-same-registry-conflict, got fail-closed",
+          "case-03-old-new-conflict: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "byzantine_budget exceeds weakest t_s"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "25f8053936f7c08f72fbb6ddec7a71ac07faeaf597a46322f17106a840401bfc588e71f2d844c16f7d606380019076fb",
+        "packet_hash": "51b9f4ebcdb0c2a3026de555d68bb9c482e6561cf56897b8c88b654a500df335f358641f7c522160b128aae66d0a888b",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_transition_safety_proof/invalid_budget_exceeds_subset.json",
+        "statement_hash": "77970fea7f82efe2d9f5fb64c12abfb2769648f9f769f9fbf911798a76972de5ddc1db1426c10bffd2319b1d3af4e5a6"
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-transition",
+            "id": "case-01-valid-one-validator-rotation",
+            "kind": "accept_transition",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-same-registry-conflict",
+            "id": "case-02-same-registry-conflict",
+            "kind": "same_registry_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-03-old-new-conflict",
+            "kind": "old_new_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "976619f827ec70789ae6ce29024d653497bb62d812d7f29c4ed6491100fed57609f575b53e059d700171138a71be4049",
+        "errors": [
+          "old/new quorum intersection has no guaranteed correct continuity signer",
+          "statement.material_root_hash does not match transition material",
+          "case-01-valid-one-validator-rotation: expected_route mismatch: expected accept-transition, got fail-closed",
+          "case-02-same-registry-conflict: expected_route mismatch: expected reject-same-registry-conflict, got fail-closed",
+          "case-03-old-new-conflict: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "old/new quorum intersection has no guaranteed correct continuity signer"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "3807aeceb8596d1b9d58ab8e0e5dd3014661e9100eb1ce6f47f73d1007898cdbd3a16ff8db628933ee686edac25fa312",
+        "packet_hash": "690a5e1bae5bc6ba7922cd2eb499b027ac4e973dba5c9b32930865e383058397e9b2342feb2768c8085f85f0c0d40b8c",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_transition_safety_proof/invalid_intersection_shortfall.json",
+        "statement_hash": "77970fea7f82efe2d9f5fb64c12abfb2769648f9f769f9fbf911798a76972de5ddc1db1426c10bffd2319b1d3af4e5a6"
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-transition",
+            "id": "case-01-valid-one-validator-rotation",
+            "kind": "accept_transition",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-same-registry-conflict",
+            "id": "case-02-same-registry-conflict",
+            "kind": "same_registry_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-03-old-new-conflict",
+            "kind": "old_new_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "976619f827ec70789ae6ce29024d653497bb62d812d7f29c4ed6491100fed57609f575b53e059d700171138a71be4049",
+        "errors": [
+          "new-main-10-bad-row: violates t_s < 2q_s - n_s",
+          "statement.material_root_hash does not match transition material",
+          "case-01-valid-one-validator-rotation: expected_route mismatch: expected accept-transition, got fail-closed",
+          "case-02-same-registry-conflict: expected_route mismatch: expected reject-same-registry-conflict, got fail-closed",
+          "case-03-old-new-conflict: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "violates t_s < 2q_s - n_s"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "914cd39e9fe8137a253b5048aa51ef866665c8820107f06c64f1ba27e680d0a486a442f42d8eefb4f82903ce12257425",
+        "packet_hash": "638103d4155f5e29c40a333a1ab941c3bd74ef30a234fae8d0862b73e1f9cf88c067b33895f8efdfe3f4bdc903923ade",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_transition_safety_proof/invalid_local_row.json",
+        "statement_hash": "77970fea7f82efe2d9f5fb64c12abfb2769648f9f769f9fbf911798a76972de5ddc1db1426c10bffd2319b1d3af4e5a6"
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-transition",
+            "id": "case-01-valid-one-validator-rotation",
+            "kind": "accept_transition",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-same-registry-conflict",
+            "id": "case-02-same-registry-conflict",
+            "kind": "same_registry_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-03-old-new-conflict",
+            "kind": "old_new_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "976619f827ec70789ae6ce29024d653497bb62d812d7f29c4ed6491100fed57609f575b53e059d700171138a71be4049",
+        "errors": [
+          "old/new quorum intersection has no guaranteed correct continuity signer",
+          "statement.material_root_hash does not match transition material",
+          "case-01-valid-one-validator-rotation: expected_route mismatch: expected accept-transition, got fail-closed",
+          "case-02-same-registry-conflict: expected_route mismatch: expected reject-same-registry-conflict, got fail-closed",
+          "case-03-old-new-conflict: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "old/new quorum intersection has no guaranteed correct continuity signer"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "976e2c5ea69133b40449973504e9645de469c20fa57b7f0bfc7ffe40aee8b868692d975545e2005d86047d2f071165cf",
+        "packet_hash": "cb6f9016c6e970929d3a2fe4bb2cd1bcddcda6630391f8aa65e0f6f7576676328b2e3f81bf1573f255e8f2d4731a916c",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_transition_safety_proof/invalid_missing_key_continuity.json",
+        "statement_hash": "77970fea7f82efe2d9f5fb64c12abfb2769648f9f769f9fbf911798a76972de5ddc1db1426c10bffd2319b1d3af4e5a6"
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-transition",
+            "id": "case-01-valid-one-validator-rotation",
+            "kind": "accept_transition",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-same-registry-conflict",
+            "id": "case-02-same-registry-conflict",
+            "kind": "same_registry_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-03-old-new-conflict",
+            "kind": "old_new_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "976619f827ec70789ae6ce29024d653497bb62d812d7f29c4ed6491100fed57609f575b53e059d700171138a71be4049",
+        "errors": [
+          "transition is not validated by old checker",
+          "statement.material_root_hash does not match transition material",
+          "case-01-valid-one-validator-rotation: expected_route mismatch: expected accept-transition, got fail-closed",
+          "case-02-same-registry-conflict: expected_route mismatch: expected reject-same-registry-conflict, got fail-closed",
+          "case-03-old-new-conflict: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "transition is not validated by old checker"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "bffe6cadd78339475eae5baa88b2ee218dee1e522fac5e678006ee60e0bbdfa2a093a00d57131ce920e1dce0b4e6bc71",
+        "packet_hash": "9e447e2f15851fa034120e1b8a139abb2f3ecac0c624a94fc9093d584009c71b463e0078b900322b86ab34e4a42e6603",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_transition_safety_proof/invalid_missing_old_checker.json",
+        "statement_hash": "77970fea7f82efe2d9f5fb64c12abfb2769648f9f769f9fbf911798a76972de5ddc1db1426c10bffd2319b1d3af4e5a6"
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-transition",
+            "id": "case-01-valid-one-validator-rotation",
+            "kind": "accept_transition",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-same-registry-conflict",
+            "id": "case-02-same-registry-conflict",
+            "kind": "same_registry_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-03-old-new-conflict",
+            "kind": "old_new_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "976619f827ec70789ae6ce29024d653497bb62d812d7f29c4ed6491100fed57609f575b53e059d700171138a71be4049",
+        "errors": [
+          "challenge_state is not closed",
+          "statement.material_root_hash does not match transition material",
+          "case-01-valid-one-validator-rotation: expected_route mismatch: expected accept-transition, got fail-closed",
+          "case-02-same-registry-conflict: expected_route mismatch: expected reject-same-registry-conflict, got fail-closed",
+          "case-03-old-new-conflict: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "challenge_state is not closed"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "b5c7a1923cba90cc467abd8ff17d16481b0b7b9fd58a9a275faa1feafa9568bbe88989d0edeb4dc0624fdcf00092f233",
+        "packet_hash": "23ffedd5e82414a3054ac3d94155737532ef1b5a4c1bbefe71129a877121002e7a996ce484b92d4a698f903cf1095940",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_transition_safety_proof/invalid_open_challenge.json",
+        "statement_hash": "77970fea7f82efe2d9f5fb64c12abfb2769648f9f769f9fbf911798a76972de5ddc1db1426c10bffd2319b1d3af4e5a6"
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-transition",
+            "id": "case-01-valid-one-validator-rotation",
+            "kind": "accept_transition",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-same-registry-conflict",
+            "id": "case-02-same-registry-conflict",
+            "kind": "same_registry_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-03-old-new-conflict",
+            "kind": "old_new_conflict",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "976619f827ec70789ae6ce29024d653497bb62d812d7f29c4ed6491100fed57609f575b53e059d700171138a71be4049",
+        "errors": [
+          "cover exceeds max_cover",
+          "statement.material_root_hash does not match transition material",
+          "case-01-valid-one-validator-rotation: expected_route mismatch: expected accept-transition, got fail-closed",
+          "case-02-same-registry-conflict: expected_route mismatch: expected reject-same-registry-conflict, got fail-closed",
+          "case-03-old-new-conflict: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "cover exceeds max_cover"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "61278e02ab35e8b67f3268afd65c42b2cd2337eec17309411209a5c1f1ee140d7ea106a126b822b18a47872f0a2783fa",
+        "packet_hash": "1808ec6bbf3160a8a41c6609c330276df71fb8917824cb7d37a5b1dfe68d5dcae8675dab5626a30d6f80a02409204bbb",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_transition_safety_proof/invalid_oversized_cover.json",
+        "statement_hash": "77970fea7f82efe2d9f5fb64c12abfb2769648f9f769f9fbf911798a76972de5ddc1db1426c10bffd2319b1d3af4e5a6"
+      }
+    ],
+    "passed": true,
+    "valid": {
+      "case_results": [
+        {
+          "expected_route": "accept-transition",
+          "id": "case-01-valid-one-validator-rotation",
+          "kind": "accept_transition",
+          "passed": true,
+          "route": "accept-transition"
+        },
+        {
+          "expected_route": "reject-same-registry-conflict",
+          "id": "case-02-same-registry-conflict",
+          "kind": "same_registry_conflict",
+          "passed": true,
+          "route": "reject-same-registry-conflict"
+        },
+        {
+          "expected_route": "reject-old-new-conflict",
+          "id": "case-03-old-new-conflict",
+          "kind": "old_new_conflict",
+          "passed": true,
+          "route": "reject-old-new-conflict"
+        }
+      ],
+      "cases_root_hash": "976619f827ec70789ae6ce29024d653497bb62d812d7f29c4ed6491100fed57609f575b53e059d700171138a71be4049",
+      "errors": [],
+      "expected_error_contains": [],
+      "expected_errors_matched": true,
+      "material_root_hash": "eb23af6dbb175cdb496550dd18294c7f99864e59e8264f4ffa0cc551966ae53b67d749a4dc35cbe26135e0acd32ec297",
+      "packet_hash": "0865f7610cf867d98c90f076959f3e8c314bcb054a5ce8fad900e9f3830b414695ab3ffa5e5bd1d1db9d7e69edd3c6bf",
+      "passed": true,
+      "path": "docs/governance/agent/fixtures/cobalt_transition_safety_proof/valid_transition_safety_proof.json",
+      "statement_hash": "77970fea7f82efe2d9f5fb64c12abfb2769648f9f769f9fbf911798a76972de5ddc1db1426c10bffd2319b1d3af4e5a6"
+    }
+  },
+  "schema_id": "postfiat-cobalt-transition-safety-proof-v1"
+}

@@ -1,0 +1,336 @@
+{
+  "generated_at_utc": "2026-05-29T08:26:12Z",
+  "report": {
+    "invalid": [
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-continuity-credit",
+            "id": "case-01-continuity-credit",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-02-conflicting-child-rejected",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "b913839ec325ad5a5b9834aaa6fb0eaf888ba95f5e4f8dff702bd19473dc1e416f6ffb0a1ea46724bbcf4461b1e658e9",
+        "errors": [
+          "receipt[C]: continuity receipt not validated by old checker",
+          "statement.material_root_hash does not match continuity material",
+          "case-01-continuity-credit: expected_route mismatch: expected accept-continuity-credit, got fail-closed",
+          "case-02-conflicting-child-rejected: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "receipt[C]: continuity receipt not validated by old checker"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "3df841f85cf18ae08b2e5472bdd974d254d7c802da99d469a57d37a6b402e1deba9abcba9d1226400fa21e4c2386ee91",
+        "packet_hash": "81d5a19f47d5390c326ff508b632fe8ed5fe5f04cb4203959b7360f2cefcb689f29d3960c9643a9f985ef7d5527e43b5",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_key_continuity_receipt/invalid_child_checker_receipt.json",
+        "statement_hash": "c5bb8aa36f8ec0c213bfacfef27b612d957135fe2646ba243cf01a0705659d0c46452b35830ac74a53028d7eb3b4170b",
+        "valid_continuity_receipts": []
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-continuity-credit",
+            "id": "case-01-continuity-credit",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-02-conflicting-child-rejected",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "b913839ec325ad5a5b9834aaa6fb0eaf888ba95f5e4f8dff702bd19473dc1e416f6ffb0a1ea46724bbcf4461b1e658e9",
+        "errors": [
+          "statement.material_root_hash does not match continuity material",
+          "case-01-continuity-credit: expected_route mismatch: expected accept-continuity-credit, got fail-closed",
+          "case-02-conflicting-child-rejected: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "expected_route mismatch"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "c94907dc46162055baffe976fdc62c2afae27e9e43eae9c454063f6b262d711318f44d888730dfcb2913881df7def1b5",
+        "packet_hash": "0c41e6e720b62357115210fc69a332fecc31a9a3279c778356f1b4be2278080a8f71567b1974eee9a69eaa0eb3960e5c",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_key_continuity_receipt/invalid_insufficient_continuity_credit.json",
+        "statement_hash": "c5bb8aa36f8ec0c213bfacfef27b612d957135fe2646ba243cf01a0705659d0c46452b35830ac74a53028d7eb3b4170b",
+        "valid_continuity_receipts": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-continuity-credit",
+            "id": "case-01-continuity-credit",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-02-conflicting-child-rejected",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "b913839ec325ad5a5b9834aaa6fb0eaf888ba95f5e4f8dff702bd19473dc1e416f6ffb0a1ea46724bbcf4461b1e658e9",
+        "errors": [
+          "receipt[A]: validator must exist in old and new registries",
+          "receipt[B]: validator must exist in old and new registries",
+          "receipt[C]: new consensus key mismatch",
+          "receipt[D]: validator must exist in old and new registries",
+          "receipt[E]: validator must exist in old and new registries",
+          "receipt[F]: validator must exist in old and new registries",
+          "receipt[G]: validator must exist in old and new registries",
+          "statement.material_root_hash does not match continuity material",
+          "case-01-continuity-credit: expected_route mismatch: expected accept-continuity-credit, got fail-closed",
+          "case-02-conflicting-child-rejected: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "receipt[C]: new consensus key mismatch"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "470644365d5bd26d12e1920461dc5941ed9fd6f40476d134f8ee5722fe88e84056039799778c78ec556ae4cfa470a7b1",
+        "packet_hash": "a795a8efc3a32a0516843ced5a96fc785290ce518ccd442514ba4f3cbabff426776c6dfafacb1ede905ab252f24242c5",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_key_continuity_receipt/invalid_key_swap_new_key.json",
+        "statement_hash": "c5bb8aa36f8ec0c213bfacfef27b612d957135fe2646ba243cf01a0705659d0c46452b35830ac74a53028d7eb3b4170b",
+        "valid_continuity_receipts": []
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-continuity-credit",
+            "id": "case-01-continuity-credit",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-02-conflicting-child-rejected",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "b913839ec325ad5a5b9834aaa6fb0eaf888ba95f5e4f8dff702bd19473dc1e416f6ffb0a1ea46724bbcf4461b1e658e9",
+        "errors": [
+          "receipt[C]: missing new-key signature",
+          "statement.material_root_hash does not match continuity material",
+          "case-01-continuity-credit: expected_route mismatch: expected accept-continuity-credit, got fail-closed",
+          "case-02-conflicting-child-rejected: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "receipt[C]: missing new-key signature"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "f5cefa4ad8f21127b6a424ed69f0dcc399b0a6e2605572c70550a8e98a680c3e4b89f099439f63f39b6927fa54301009",
+        "packet_hash": "a8527a9dd0e674be5bae348314a0992ac0dd44d37fb02ba211e6c798a6f0bcacc4e2ae6d85a283047e0f8919d944dcf5",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_key_continuity_receipt/invalid_missing_new_key_signature.json",
+        "statement_hash": "c5bb8aa36f8ec0c213bfacfef27b612d957135fe2646ba243cf01a0705659d0c46452b35830ac74a53028d7eb3b4170b",
+        "valid_continuity_receipts": []
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-continuity-credit",
+            "id": "case-01-continuity-credit",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-02-conflicting-child-rejected",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "b913839ec325ad5a5b9834aaa6fb0eaf888ba95f5e4f8dff702bd19473dc1e416f6ffb0a1ea46724bbcf4461b1e658e9",
+        "errors": [
+          "receipt[C]: missing old-key signature",
+          "statement.material_root_hash does not match continuity material",
+          "case-01-continuity-credit: expected_route mismatch: expected accept-continuity-credit, got fail-closed",
+          "case-02-conflicting-child-rejected: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "receipt[C]: missing old-key signature"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "784bd4e88e5452edc66f18467f24484e802376b76ab30596ea740c38963c4a9c4acb28fff085b89199018b1f69aff638",
+        "packet_hash": "f73a25f858385ad73f879342392e1bc42f6120d736efdccefc1248f1b95bc63238d72a7abeaf9757c95630104c1905b6",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_key_continuity_receipt/invalid_missing_old_key_signature.json",
+        "statement_hash": "c5bb8aa36f8ec0c213bfacfef27b612d957135fe2646ba243cf01a0705659d0c46452b35830ac74a53028d7eb3b4170b",
+        "valid_continuity_receipts": []
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-continuity-credit",
+            "id": "case-01-continuity-credit",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-02-conflicting-child-rejected",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "b913839ec325ad5a5b9834aaa6fb0eaf888ba95f5e4f8dff702bd19473dc1e416f6ffb0a1ea46724bbcf4461b1e658e9",
+        "errors": [
+          "receipt[A]: parent_registry_root mismatch",
+          "receipt[B]: parent_registry_root mismatch",
+          "receipt[C]: parent_registry_root mismatch",
+          "receipt[D]: parent_registry_root mismatch",
+          "receipt[E]: parent_registry_root mismatch",
+          "receipt[F]: parent_registry_root mismatch",
+          "receipt[G]: parent_registry_root mismatch",
+          "statement.material_root_hash does not match continuity material",
+          "case-01-continuity-credit: expected_route mismatch: expected accept-continuity-credit, got fail-closed",
+          "case-02-conflicting-child-rejected: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "parent_registry_root mismatch"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "14f00f9a0d74a898f753f7089d324641df8bb2628ead22ed70015c1ec389ff1d07e63566d80ea879732d1400487e0d1f",
+        "packet_hash": "eb12655b27f51de35c8f444af55072918131d6767b83901e4a0ce0c87df0bbf810c66e46b1ebe8668e6f4e5ffc03f243",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_key_continuity_receipt/invalid_missing_parent_root_binding.json",
+        "statement_hash": "c5bb8aa36f8ec0c213bfacfef27b612d957135fe2646ba243cf01a0705659d0c46452b35830ac74a53028d7eb3b4170b",
+        "valid_continuity_receipts": []
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-continuity-credit",
+            "id": "case-01-continuity-credit",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-02-conflicting-child-rejected",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "b913839ec325ad5a5b9834aaa6fb0eaf888ba95f5e4f8dff702bd19473dc1e416f6ffb0a1ea46724bbcf4461b1e658e9",
+        "errors": [
+          "receipt[A]: validator must exist in old and new registries",
+          "receipt[B]: validator must exist in old and new registries",
+          "receipt[C]: operator_id mismatch",
+          "receipt[C]: operator manifest mismatch",
+          "receipt[D]: validator must exist in old and new registries",
+          "receipt[E]: validator must exist in old and new registries",
+          "receipt[F]: validator must exist in old and new registries",
+          "receipt[G]: validator must exist in old and new registries",
+          "statement.material_root_hash does not match continuity material",
+          "case-01-continuity-credit: expected_route mismatch: expected accept-continuity-credit, got fail-closed",
+          "case-02-conflicting-child-rejected: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "receipt[C]: operator_id mismatch"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "18adfd41b3ef4f324e85e225c2dd06ca0d74ce6ab8282d3a5f5b53382dfdb450c683ae97247239471ca10e399f3c041e",
+        "packet_hash": "f1d2f87720a9811aec245aa1e2c4dba867d5ddbb71e9998253cecefc8761b52cfffac898ffb319229637269941581312",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_key_continuity_receipt/invalid_reused_identity_new_operator.json",
+        "statement_hash": "c5bb8aa36f8ec0c213bfacfef27b612d957135fe2646ba243cf01a0705659d0c46452b35830ac74a53028d7eb3b4170b",
+        "valid_continuity_receipts": []
+      },
+      {
+        "case_results": [
+          {
+            "expected_route": "accept-continuity-credit",
+            "id": "case-01-continuity-credit",
+            "passed": false,
+            "route": "fail-closed"
+          },
+          {
+            "expected_route": "reject-old-new-conflict",
+            "id": "case-02-conflicting-child-rejected",
+            "passed": false,
+            "route": "fail-closed"
+          }
+        ],
+        "cases_root_hash": "b913839ec325ad5a5b9834aaa6fb0eaf888ba95f5e4f8dff702bd19473dc1e416f6ffb0a1ea46724bbcf4461b1e658e9",
+        "errors": [
+          "receipt[A]: stale continuity receipt",
+          "receipt[B]: stale continuity receipt",
+          "receipt[C]: stale continuity receipt",
+          "receipt[D]: stale continuity receipt",
+          "receipt[E]: stale continuity receipt",
+          "receipt[F]: stale continuity receipt",
+          "receipt[G]: stale continuity receipt",
+          "statement.material_root_hash does not match continuity material",
+          "case-01-continuity-credit: expected_route mismatch: expected accept-continuity-credit, got fail-closed",
+          "case-02-conflicting-child-rejected: expected_route mismatch: expected reject-old-new-conflict, got fail-closed"
+        ],
+        "expected_error_contains": [
+          "stale continuity receipt"
+        ],
+        "expected_errors_matched": true,
+        "material_root_hash": "9510cba9081e7ea37aec77489d9a5cbdb10ee9bc25a033514af8160ea54f33367842c11b250334ca53f574266c426ef6",
+        "packet_hash": "a277d8fe910979d897facd65b111db14612babd95e8cff8ffc1e403853e14434d03169454f6bc5151eee037b832920d5",
+        "passed": false,
+        "path": "docs/governance/agent/fixtures/cobalt_key_continuity_receipt/invalid_stale_receipt.json",
+        "statement_hash": "c5bb8aa36f8ec0c213bfacfef27b612d957135fe2646ba243cf01a0705659d0c46452b35830ac74a53028d7eb3b4170b",
+        "valid_continuity_receipts": []
+      }
+    ],
+    "passed": true,
+    "valid": {
+      "case_results": [
+        {
+          "expected_route": "accept-continuity-credit",
+          "id": "case-01-continuity-credit",
+          "passed": true,
+          "route": "accept-continuity-credit"
+        },
+        {
+          "expected_route": "reject-old-new-conflict",
+          "id": "case-02-conflicting-child-rejected",
+          "passed": true,
+          "route": "reject-old-new-conflict"
+        }
+      ],
+      "cases_root_hash": "b913839ec325ad5a5b9834aaa6fb0eaf888ba95f5e4f8dff702bd19473dc1e416f6ffb0a1ea46724bbcf4461b1e658e9",
+      "errors": [],
+      "expected_error_contains": [],
+      "expected_errors_matched": true,
+      "material_root_hash": "7c249c6e8fd7fd33072f9a96ff692b1cf07bd90e7f9635e811aaf9f7d12ac41fc6547dbcf99de220b29815bb2eec8cf3",
+      "packet_hash": "dd31fb1a8abe193b63d83cf8d522fc37b182622632eeca7a7870bac6bb9af0aa54bc645b414bc49016c6334e4deace46",
+      "passed": true,
+      "path": "docs/governance/agent/fixtures/cobalt_key_continuity_receipt/valid_key_continuity_receipt.json",
+      "statement_hash": "c5bb8aa36f8ec0c213bfacfef27b612d957135fe2646ba243cf01a0705659d0c46452b35830ac74a53028d7eb3b4170b",
+      "valid_continuity_receipts": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G"
+      ]
+    }
+  },
+  "schema_id": "postfiat-cobalt-key-continuity-receipt-v1"
+}

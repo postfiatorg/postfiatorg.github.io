@@ -1,0 +1,115 @@
+{
+  "schema": "postfiat.replay_profile_portability.machine_report.v1",
+  "generated_at_utc": "20260528T155652Z",
+  "profile_id": "qwen3-1.7b-mlx-bf16-cobalt-registrar-v1",
+  "machine": {
+    "label": "mac-local-cobalt-registrar",
+    "hardware_class": "Apple M5",
+    "hostname_hash": "a4ce2cc2d9e349fcc0272dd695a8036c76047dddcad4ba5e5103b2253a51c879",
+    "platform": "macOS-26.3-arm64-arm-64bit-Mach-O",
+    "system": "Darwin",
+    "release": "25.3.0",
+    "machine": "arm64",
+    "processor": "arm",
+    "mac_ver": "26.3"
+  },
+  "runtime_versions": {
+    "python": "3.14.5",
+    "mlx": "0.31.2",
+    "mlx-lm": "0.31.3",
+    "transformers": "5.9.0",
+    "huggingface_hub": "1.16.4"
+  },
+  "model_manifest": {
+    "model_id": "lmstudio-community/Qwen3-1.7B-MLX-bf16",
+    "model_revision": "",
+    "tokenizer_revision": "",
+    "quantization": "bf16",
+    "tokenizer_config": {}
+  },
+  "prompt": {
+    "packet": "cobalt-registrar",
+    "prompt_schema": "postfiat.qwen_governance_cobalt_registrar_packet.v1",
+    "prompt_hash": "277e4174662841fe8d0802f0d055fec0528afbae09173a49d1f9067fc9a5ad68",
+    "adversarial": false,
+    "rendered_prompt_sha256": "5fad91189222e13c27bafc17fc62a9cc6430212a488d844c681a9c2d01d6fd93",
+    "chat_template_kwargs": {
+      "tokenize": false,
+      "add_generation_prompt": true,
+      "enable_thinking": false
+    }
+  },
+  "run_config": {
+    "repeats": 300,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_tokens": 256,
+    "sampler_kwargs": {
+      "temp": 0.0,
+      "top_p": 1.0,
+      "top_k": 0,
+      "min_p": 0.0
+    },
+    "generation_metadata": {
+      "mode": "direct",
+      "kwargs": {
+        "prompt_sha256": "5fad91189222e13c27bafc17fc62a9cc6430212a488d844c681a9c2d01d6fd93",
+        "verbose": false
+      }
+    },
+    "load_elapsed_ms": 1880
+  },
+  "results": {
+    "parse_success_count": 300,
+    "parse_error_count": 0,
+    "parse_errors": {},
+    "unique_raw_output_hash_count": 1,
+    "unique_raw_output_hashes": [
+      "aa4e919054ac1aa5126b3aa357a4dac1708c78ab030bf43c253dbb130dc1dec7"
+    ],
+    "unique_parsed_output_hash_count": 1,
+    "unique_parsed_output_hashes": [
+      "1f667e5d8d63fbc8852b10085062e13579f864f27f3b3c53481b68bc4b2fbc1e"
+    ],
+    "unique_decision_hash_count": 1,
+    "unique_decision_hashes": [
+      "08b3d570e746a4bd4c761ab280aa1f6f4992704810f03de2377c8a38b0fc0cf8"
+    ],
+    "unique_decisions": [
+      {
+        "cited_fields": [
+          "cobalt_registrar_design",
+          "governance_goal",
+          "implementation_scope",
+          "override_detectability",
+          "xrpl_unl_model"
+        ],
+        "selected_option": "adopt-cobalt-registrar"
+      }
+    ],
+    "selected_option_counts": {
+      "adopt-cobalt-registrar": 300
+    },
+    "expected_selected_option": "adopt-cobalt-registrar",
+    "expected_selected_option_count": 300,
+    "expected_cited_fields": [
+      "cobalt_registrar_design",
+      "governance_goal",
+      "implementation_scope",
+      "override_detectability",
+      "xrpl_unl_model"
+    ],
+    "expected_cited_fields_matched_count": 300,
+    "passed_decision_repeatability": true,
+    "passed_profile_repeatability": true
+  },
+  "artifacts": {
+    "raw_outputs_path": "reports/qwen-mlx-profile-portability/20260528T155652Z/raw_outputs.jsonl",
+    "raw_outputs_sha256": "33aa76cacacea7c17fd5bdc4e463054063bccc4e22241432b85fb111614f4201",
+    "parsed_outputs_path": "reports/qwen-mlx-profile-portability/20260528T155652Z/parsed_outputs.jsonl",
+    "parsed_outputs_sha256": "3264ce15a97456938b08b5a29427f6566b550a2d2a25a2a52d845b85a96e4dbe"
+  },
+  "source_hashes": {
+    "scripts/qwen-mlx-replay-profile-runner": "62bd38cae1b613b0ca8dc71e97fba4df7393d1c469f6ac2f2214633eabd67f90"
+  }
+}

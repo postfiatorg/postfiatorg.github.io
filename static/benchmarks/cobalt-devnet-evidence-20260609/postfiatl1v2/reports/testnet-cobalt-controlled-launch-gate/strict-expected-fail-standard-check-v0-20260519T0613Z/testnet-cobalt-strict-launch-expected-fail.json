@@ -1,0 +1,61 @@
+{
+  "command": {
+    "argv": [
+      "scripts/testnet-cobalt-controlled-launch-gate"
+    ],
+    "log": "reports/testnet-cobalt-controlled-launch-gate/strict-expected-fail-standard-check-v0-20260519T0613Z/strict-launch/logs/controlled-launch-gate.out",
+    "returncode": 1,
+    "stderr_line_count": 0,
+    "stdout_line_count": 3
+  },
+  "expected_blockers": [
+    "placement_preflight_remote_bound_in_release",
+    "placement_preflight_remote_bound_in_replay",
+    "release_gate_passed",
+    "release_placement_preflight_requirement_satisfied",
+    "release_topology_requirement_satisfied",
+    "replay_placement_preflight_requirement_satisfied",
+    "replay_topology_requirement_satisfied",
+    "replay_verify_passed"
+  ],
+  "failed_validations": [],
+  "generated_utc": "2026-05-19T06:15:33Z",
+  "missing_expected_blockers": [],
+  "missing_false_checks": [],
+  "missing_true_checks": [],
+  "observed_blockers": [
+    "placement_preflight_remote_bound_in_release",
+    "placement_preflight_remote_bound_in_replay",
+    "release_gate_passed",
+    "release_placement_preflight_requirement_satisfied",
+    "release_topology_requirement_satisfied",
+    "replay_placement_preflight_requirement_satisfied",
+    "replay_topology_requirement_satisfied",
+    "replay_verify_passed"
+  ],
+  "reports": {
+    "full_cobalt_release_gate": "reports/testnet-cobalt-controlled-launch-gate/strict-expected-fail-standard-check-v0-20260519T0613Z/strict-launch/release-gate/testnet-cobalt-full-release-gate.json",
+    "full_cobalt_replay_verify": "reports/testnet-cobalt-controlled-launch-gate/strict-expected-fail-standard-check-v0-20260519T0613Z/strict-launch/replay-verify/testnet-cobalt-full-replay-verify.json",
+    "strict_controlled_launch": "reports/testnet-cobalt-controlled-launch-gate/strict-expected-fail-standard-check-v0-20260519T0613Z/strict-launch/testnet-cobalt-controlled-launch-gate.json",
+    "topology_diversity_gate": "reports/testnet-cobalt-controlled-launch-gate/strict-expected-fail-standard-check-v0-20260519T0613Z/strict-launch/topology-diversity/testnet-cobalt-topology-diversity-gate.json"
+  },
+  "schema": "postfiat-testnet-cobalt-strict-launch-expected-fail-v1",
+  "status": "passed",
+  "strict_launch_expected_fail_ok": true,
+  "unexpected_blockers": [],
+  "validation": {
+    "all_expected_blockers_present": true,
+    "only_expected_blockers": true,
+    "required_mechanics_checks_true": true,
+    "required_strict_blocker_checks_false": true,
+    "selected_remote_report_mechanics_ok": true,
+    "strict_gate_ok_false": true,
+    "strict_gate_report_present": true,
+    "strict_gate_returned_nonzero": true,
+    "strict_gate_status_failed": true,
+    "topology_delta_records_missing_hosts": true,
+    "topology_independent_false": true,
+    "topology_reused_machine_true": true,
+    "topology_status_blocked": true
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "blockers": [
+    "host_diversity_ok",
+    "independent_topology_ok",
+    "reused_machine_topology_allowed",
+    "topology_mode_requirement_ok"
+  ],
+  "checks": {
+    "all_validator_hosts_matched": true,
+    "contiguous_validator_ids": true,
+    "credential_material_redacted": true,
+    "credential_preflight_passed": true,
+    "credential_preflight_schema_ok": true,
+    "host_diversity_ok": false,
+    "host_fingerprints_valid": true,
+    "host_user_fingerprints_valid": true,
+    "independent_topology_ok": false,
+    "placement_manifest_requirement_satisfied": true,
+    "public_diversity_requirement_satisfied": true,
+    "remote_drill_passed": true,
+    "remote_report_schema_ok": true,
+    "report_redacted": true,
+    "reused_machine_topology_allowed": false,
+    "topology_mode_requirement_ok": false,
+    "validator_count_ok": true
+  },
+  "generated_utc": "2026-05-18T23:07:05Z",
+  "placement_manifest": {
+    "controlled_diversity_ok": false,
+    "field_counts": {},
+    "missing_fields": {},
+    "path": null,
+    "present": false,
+    "public_diversity_ok": false,
+    "schema_ok": false,
+    "validator_coverage_ok": false,
+    "validator_mapping": []
+  },
+  "report_redacted": true,
+  "reports": {
+    "credential_preflight": "reports/testnet-cobalt-full-nonuniform-remote-drill/full-cobalt-remote-v0-20260518T223730Z/credential-preflight/testnet-cobalt-remote-credential-preflight.json",
+    "full_cobalt_remote_drill": "reports/testnet-cobalt-full-nonuniform-remote-drill/full-cobalt-remote-v0-20260518T223730Z/testnet-cobalt-full-nonuniform-remote-drill.json"
+  },
+  "requirements": {
+    "allow_reused_machines": false,
+    "independent_topology_required": true,
+    "minimum_operator_groups": 7,
+    "minimum_operator_host_groups": 7,
+    "minimum_public_diversity_groups": 7,
+    "minimum_unique_host_fingerprints": 7,
+    "minimum_validators": 7,
+    "placement_manifest_required": false,
+    "public_diversity_required": false
+  },
+  "schema": "postfiat-testnet-cobalt-topology-diversity-gate-v1",
+  "status": "blocked",
+  "topology": {
+    "host_user_validator_counts": {
+      "460d747b3ffb:f860900ebf6d": 2,
+      "8017fb7cb9d6:618483bf7524": 3,
+      "81d31f9dce34:48a270f5f6ed": 2
+    },
+    "host_validator_counts": {
+      "460d747b3ffb": 2,
+      "8017fb7cb9d6": 3,
+      "81d31f9dce34": 2
+    },
+    "independent_topology_ok": false,
+    "max_validators_per_host": 3,
+    "reused_machine_topology": true,
+    "unique_host_count": 3,
+    "unique_host_fps": [
+      "460d747b3ffb",
+      "8017fb7cb9d6",
+      "81d31f9dce34"
+    ],
+    "unique_host_user_count": 3,
+    "unique_user_count": 3,
+    "unique_user_fps": [
+      "48a270f5f6ed",
+      "618483bf7524",
+      "f860900ebf6d"
+    ],
+    "validator_count": 7,
+    "validator_mapping": [
+      {
+        "matched": true,
+        "node_id": "validator-0",
+        "plan_host_fp": "8017fb7cb9d6",
+        "plan_host_user_fp": "8017fb7cb9d6:618483bf7524",
+        "plan_user_fp": "618483bf7524"
+      },
+      {
+        "matched": true,
+        "node_id": "validator-1",
+        "plan_host_fp": "81d31f9dce34",
+        "plan_host_user_fp": "81d31f9dce34:48a270f5f6ed",
+        "plan_user_fp": "48a270f5f6ed"
+      },
+      {
+        "matched": true,
+        "node_id": "validator-2",
+        "plan_host_fp": "460d747b3ffb",
+        "plan_host_user_fp": "460d747b3ffb:f860900ebf6d",
+        "plan_user_fp": "f860900ebf6d"
+      },
+      {
+        "matched": true,
+        "node_id": "validator-3",
+        "plan_host_fp": "8017fb7cb9d6",
+        "plan_host_user_fp": "8017fb7cb9d6:618483bf7524",
+        "plan_user_fp": "618483bf7524"
+      },
+      {
+        "matched": true,
+        "node_id": "validator-4",
+        "plan_host_fp": "81d31f9dce34",
+        "plan_host_user_fp": "81d31f9dce34:48a270f5f6ed",
+        "plan_user_fp": "48a270f5f6ed"
+      },
+      {
+        "matched": true,
+        "node_id": "validator-5",
+        "plan_host_fp": "460d747b3ffb",
+        "plan_host_user_fp": "460d747b3ffb:f860900ebf6d",
+        "plan_user_fp": "f860900ebf6d"
+      },
+      {
+        "matched": true,
+        "node_id": "validator-6",
+        "plan_host_fp": "8017fb7cb9d6",
+        "plan_host_user_fp": "8017fb7cb9d6:618483bf7524",
+        "plan_user_fp": "618483bf7524"
+      }
+    ],
+    "validator_rows": 7,
+    "validators_by_host_fp": {
+      "460d747b3ffb": [
+        "validator-2",
+        "validator-5"
+      ],
+      "8017fb7cb9d6": [
+        "validator-0",
+        "validator-3",
+        "validator-6"
+      ],
+      "81d31f9dce34": [
+        "validator-1",
+        "validator-4"
+      ]
+    }
+  },
+  "topology_gate_ok": false
+}

@@ -1,0 +1,131 @@
+{
+  "schema": "postfiat-cobalt-devnet-implementation-surface-v1",
+  "created_utc": "2026-06-09T00:00:00Z",
+  "scope": "Public source-surface inventory for the Cobalt devnet evidence bundle. This is not a full source-code mirror.",
+  "source": {
+    "repository": "postfiatl1v2",
+    "bundle_creation_head": "c13113817602093f1bf3bae00c957e8c7e6b0418",
+    "release_and_replay_report_revision": "9d648c24544506a3cbade3c50b4e1dd2f6fe5a74",
+    "controlled_readiness_report_revision": "2080c17436abcb1f0de0a7dc21a0646aa404c4bd",
+    "note": "The cited JSON reports are mirrored in this bundle. The full repository source is not copied here; report-level git fields identify the clean revisions used by each gate."
+  },
+  "consensus_cobalt": {
+    "crate_root": "crates/consensus_cobalt/src/lib.rs",
+    "purpose": "Cobalt governance and validator-set control",
+    "current_head_layout": [
+      "lib_parts/core_types.rs",
+      "lib_parts/validator_admission_policy.rs",
+      "lib_parts/cobalt_cover_extractor.rs",
+      "lib_parts/trust_graph_governance.rs",
+      "lib_parts/rbc_abba_mvba.rs",
+      "lib_parts/dabc_registry.rs",
+      "lib_parts/internal_validation.rs"
+    ],
+    "release_revision_surface": [
+      "CobaltDomain",
+      "EssentialSubset",
+      "TrustView",
+      "TrustGraph",
+      "TrustGraphTransition",
+      "LinkageReport",
+      "CobaltProposal",
+      "CobaltVote",
+      "CobaltCertificate",
+      "NonUniformGovernanceCertificate",
+      "RbcPropose",
+      "RbcEcho",
+      "RbcReady",
+      "RbcAccept",
+      "AbbaInit",
+      "AbbaAux",
+      "AbbaConf",
+      "AbbaFinish",
+      "MvbaCandidate",
+      "MvbaValidInputSet",
+      "DabcRatifiedAmendment",
+      "DabcReplayBundle",
+      "ValidatorRegistryUpdateRequest"
+    ],
+    "release_revision_entrypoints": [
+      "build_trust_graph",
+      "validate_trust_graph",
+      "analyze_trust_graph",
+      "verify_nonuniform_governance_certificate",
+      "build_rbc_propose",
+      "validate_rbc_propose",
+      "evaluate_rbc_echo_support",
+      "evaluate_rbc_ready_support",
+      "detect_rbc_conflicting_accept",
+      "build_abba_init",
+      "validate_abba_init",
+      "evaluate_abba_aux_support",
+      "evaluate_abba_conf_support",
+      "evaluate_abba_finish_support",
+      "detect_abba_conflicting_finish",
+      "build_mvba_valid_input_set",
+      "ratify_dabc_amendment",
+      "validate_dabc_ratified_amendment",
+      "verify_dabc_replay_bundle",
+      "validator_registry_update_id",
+      "verify_governance_amendment",
+      "verify_governance_amendment_for_mode"
+    ]
+  },
+  "node_governance": {
+    "source_file": "crates/node/src/governance.rs",
+    "entrypoints_checked_at_release_revision": [
+      {
+        "line": 1,
+        "name": "ratify_validator_set"
+      },
+      {
+        "line": 23,
+        "name": "ratify_governance"
+      },
+      {
+        "line": 46,
+        "name": "apply_amendment"
+      },
+      {
+        "line": 78,
+        "name": "create_governance_batch"
+      },
+      {
+        "line": 116,
+        "name": "validator_registry_root_report"
+      },
+      {
+        "line": 139,
+        "name": "create_validator_registry_update"
+      },
+      {
+        "line": 176,
+        "name": "verify_validator_registry_update_file"
+      },
+      {
+        "line": 233,
+        "name": "apply_validator_registry_update"
+      },
+      {
+        "line": 293,
+        "name": "verify_validator_registry_lifecycle_replay_bundle"
+      },
+      {
+        "line": 409,
+        "name": "verify_governance_replay_package"
+      },
+      {
+        "line": 707,
+        "name": "verify_governance_amendment_replay_bundle"
+      },
+      {
+        "line": 1333,
+        "name": "apply_governance_batch"
+      },
+      {
+        "line": 1411,
+        "name": "verify_governance"
+      }
+    ]
+  }
+}
