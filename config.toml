@@ -50,8 +50,17 @@ disableXML = true
       url = "validator-benchmark/"
       weight = 30
       
+[mediaTypes."text/markdown"]
+  suffixes = ["md"]
+
+[outputFormats.markdown]
+  mediaType = "text/markdown"
+  baseName = "index"
+  isPlainText = true
+
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+  page = ["HTML", "markdown"]
 
 [params]
   env = "production"
