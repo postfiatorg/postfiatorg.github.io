@@ -5,9 +5,9 @@ aliases:
   - /posts/orchard-privacy-research/
 summary: "A Post Fiat privacy research note covering Orchard/Halo2 shielded payments, Railgun-style assurance, DID-bound providers, and why this material no longer belongs inside the validator-list whitepaper."
 categories:
-  - PostFiat Research
+  - Post Fiat Research
 tags:
-  - PostFiat
+  - Post Fiat
   - Orchard
   - Halo2
   - Privacy

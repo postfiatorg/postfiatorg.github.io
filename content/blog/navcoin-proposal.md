@@ -3,13 +3,13 @@ title: "The NAVCoin Proposal"
 date: 2026-06-10T00:00:00Z
 summary: "A NAVCoin is a token whose unit value tracks the machine-verified net asset value of a reserve portfolio — not a peg. The settlement rail already runs on the Post Fiat devnet; this post proposes the verification layer, the privacy model, and the cross-chain mechanics, and is published before implementation so the design can be attacked first."
 categories:
-  - PostFiat Research
+  - Post Fiat Research
 tags:
   - NAVCoin
   - Proof of Reserves
   - TEE
   - RWA
-  - PostFiat
+  - Post Fiat
 ---
 
 This is a proposal, published deliberately before implementation. The settlement rail it builds on already runs on the Post Fiat devnet; the verification layer described here does not exist yet. We want the design criticized while changing it is still cheap. If you can break an assumption below, that is the contribution we are asking for.

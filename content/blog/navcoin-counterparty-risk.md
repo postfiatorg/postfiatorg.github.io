@@ -3,14 +3,14 @@ title: "Pricing Counterparty Risk into the NAVCoin"
 date: 2026-06-11T00:00:00Z
 summary: "A NAVCoin verifies what its venues report. Option markets price whether those venues survive. Multiply the two and every NAVCoin carries a live credit spread on-chain — turning the silent source of crypto yield into a number anyone can read."
 categories:
-  - PostFiat Research
+  - Post Fiat Research
 tags:
   - NAVCoin
   - Credit Risk
   - Counterparty Risk
   - Options
   - Basis Trading
-  - PostFiat
+  - Post Fiat
 ---
 
 *This article extends the NAVCoin design published by Post Fiat Research on June 10, 2026 ([postfiat.org/blog/navcoin-proposal](https://postfiat.org/blog/navcoin-proposal/)). It stands alone: Section 1 summarizes the NAVCoin in three paragraphs, and everything after is new.*

@@ -6,9 +6,9 @@ aliases:
   - /llm-governance-replay/
   - /posts/llm-governance-replay/
 categories:
-  - PostFiat Research
+  - Post Fiat Research
 tags:
-  - PostFiat
+  - Post Fiat
   - Research
   - Governance
   - XRPL

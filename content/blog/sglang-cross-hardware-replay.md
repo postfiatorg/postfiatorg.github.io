@@ -3,9 +3,9 @@ title: "Viability of SGLang Replay: Cross-Hardware"
 date: 2026-06-03T00:00:00Z
 summary: "An evidence note on SGLang replay across H200 and H100 NVL profiles: exact held-out packet replay, explicit prompt-drift quarantine, MLX capability control, machine receipts, comparison hashes, and shutdown receipts."
 categories:
-  - PostFiat Research
+  - Post Fiat Research
 tags:
-  - PostFiat
+  - Post Fiat
   - Research
   - Governance
   - Replay
