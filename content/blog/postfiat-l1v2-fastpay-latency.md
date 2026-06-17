@@ -1,7 +1,7 @@
 ---
 title: "Post Fiat Latency Series II: FastPay — Removing Consensus from Owned-Value Settlement"
 date: 2026-06-16T00:00:00Z
-summary: "Series II implements a FastPay-style owned-value lane for Post Fiat: simple payments finalize on validator certificates, while consensus checkpoints them asynchronously. The result is measured on the same controlled EU validator fleet and supported by a formal safety invariant, implementation notes, and an adversarial gate."
+summary: "Series II implements a FastPay-style owned-value lane for Post Fiat: simple payments finalize on validator certificates, while consensus checkpoints them asynchronously. The result is measured on a controlled EU validator fleet and a six-validator cross-continent testnet — reaching 183 ms finality across three continents with post-quantum signatures — and is supported by a formal safety invariant, implementation notes, and an adversarial gate."
 aliases:
   - /post-fiat-latency-series-ii/
   - /posts/post-fiat-latency-series-ii/
@@ -46,7 +46,9 @@ All latency and cryptographic figures used in this article are reconciled here:
 | Account-lane mempool admission | ~5 ms | p50 decomposition of the consensus-bound transfer path |
 | Account-lane batch step | ~6 ms | p50 decomposition of the consensus-bound transfer path |
 | Account-lane certified consensus round | 141 ms p50 | the round on the account-lane critical path; the owned lane does not pay it |
-| Owned lane, wallet-to-certificate (n=25,000) | p50 55 ms; p95 58 ms; p99 60 ms | consensusless certificate path |
+| Owned lane, wallet-to-certificate (n=25,000) | p50 55 ms; p95 58 ms; p99 60 ms | consensusless certificate path; co-located EU fleet, per-request connections |
+| Owned lane, cross-continent WAN, wallet-to-quorum (n=5,000) | p50 183 ms; p95 186 ms; p99 188 ms | 6 validators across 3 continents (EU + NJ + SG); persistent connections, finality at quorum(4) |
+| Owned lane, cross-continent WAN, wallet-to-all-6-signed (n=5,000) | p50 287 ms; p95 289 ms; p99 291 ms | full certificate propagation across 3 continents |
 | Owned-lane serving path | 55 ms production in-process path; earlier 63 ms included an ~8 ms child-process harness artifact | deployed validators do not pay a per-request child-process fork |
 | Owned-lane network contribution | ~53 ms | two EU-internal round trips for broadcast and quorum collection |
 | Owned-lane critical-path cryptography | ~1 ms | 3 parallel validator signatures at 0.52 ms each plus client verification |
@@ -93,6 +95,27 @@ The certificate is ~15 KB because it carries 4x ML-DSA-65 signatures. In the mea
 The 55 ms figure is the validator's production serving path. Validators answer `owned_sign` from their long-lived RPC process — the same process that serves every other RPC method — so the figure includes full JSON serialization over the wire and the ML-DSA signature computation. What it does not include is per-request process forking, because a deployed validator never forks a child per request. An earlier 63 ms measurement routed the call through a child process; that ~8 ms was a benchmark harness artifact, not protocol cost, and a deployed validator does not pay it.
 
 The external FastPay paper’s 43 ms result is a calibration point, not the Post Fiat claim. The claim here is the structural one: for owned-value payments, Post Fiat settles on a quorum certificate and checkpoints later.
+
+## Cross-continent: the same lane at geographic scale
+
+The co-located EU result above proves the structural delta. The question that matters for a real network is whether it holds when the validators are not in one region. To answer it, the same owned-value lane was deployed across **six validators on three continents** — three in the EU, one in New Jersey, one in Amsterdam, one in Singapore — and measured end-to-end over the public internet.
+
+The owned lane reaches **p50 183 ms to finality** (the quorum certificate) and **287 ms to every validator signed** over n=5,000 samples, with zero failures. Measured peer-to-peer round-trips on this fleet span 81 ms (US↔EU), 169 ms (EU↔Asia), and 234 ms (US↔Asia).
+
+The number is not 55 ms because the certificate has to physically round-trip to the quorum at the speed of light, and the quorum now spans oceans. FastPay removes **consensus rounds**, not **network latency**: a consensus-bound spend on the same geography would pay several of those round-trips for proposal, voting, and certification; the owned lane pays one round-trip to the quorum and stops. The 183 ms is that one round-trip, dominated by the leg to the fourth-closest validator. Removing consensus is worth more, not less, when the round-trips it removes are expensive.
+
+For context against deployed fast chains:
+
+| chain | path | latency | notes |
+|---|---|---:|---|
+| Solana | all transactions (leader / consensus) | ~400 ms optimistic; ~12.8 s hard finality | Proof-of-History clock, Tower BFT; no owned-object fast path |
+| Sui | owned-object fast path (BCB) | sub-second (hundreds of ms) | the same Byzantine consistent broadcast mechanism this lane uses |
+| Sui | shared-object consensus (Mysticeti) | ~390 ms | for objects that require global ordering |
+| Post Fiat | owned-value fast path (BCB) | **183 ms to finality** | six validators across three continents; **ML-DSA-65 post-quantum signatures** |
+
+Post Fiat's owned lane is competitive with Sui's owned-object path and faster than Solana's optimistic confirmation — and it carries ML-DSA-65 signatures that are roughly 50× the size of the ed25519 signatures those chains use. The post-quantum cost is not on the critical path.
+
+The WAN measurement uses persistent TCP connections: the wallet opens one connection per validator and reuses it, so each certificate costs one network round-trip rather than a fresh handshake plus a round-trip. That keep-alive path is now part of the deployed `rpc-serve` (the earlier co-located figures used per-request connections; the structural result — owned far below consensus — is the same either way).
 
 ## Why removing consensus is safe
 
@@ -194,7 +217,7 @@ The current boundary of the result is precise:
 - **Measurement scope:** both lanes were measured by native TCP RPC from a fleet-co-located client against the same three-validator Hetzner EU WAN testnet, back-to-back; these are not mainnet measurements.
 - **Review scope:** the safety mechanisms are implemented and tested, including the adversarial gate above; independent security review has not completed.
 - **Sampling:** the account lane is n=25 because it is consensus-round-bound (range 145–163 ms across 25 samples; p50 152 ms) — each sample is a full consensus round plus a funding cycle. The owned lane is n=25,000 because each sample is a sub-100 ms certificate.
-- **Scale:** the measurements are on a 3-validator fleet. The owned-lane cryptography is ~1 ms on the critical path because validator signing is parallel, and the certificate is ~15 KB (4× ML-DSA-65 signatures at quorum 3). Certificate size and the broadcast fan-out scale with the quorum size, so at mainnet-scale validator counts the certificate cost and network contribution grow; the structural result — no consensus round on the critical path — is independent of validator count.
+- **Scale:** the co-located measurements are on a 3-validator EU fleet; the cross-continent measurements are on a 6-validator fleet spanning three continents (n=5,000). The owned-lane cryptography is ~1 ms on the critical path because validator signing is parallel, and the certificate is ~15 KB (4× ML-DSA-65 signatures at quorum 3). Certificate size and the broadcast fan-out scale with the quorum size, so at mainnet-scale validator counts the certificate cost and network contribution grow; the structural result — no consensus round on the critical path — is independent of validator count.
 - **Production hardening:** remaining work is DOS/admission limits on the broadcast path, validation at mainnet-scale validator counts and registry topologies, and checkpoint cadence tuning.
 
 ## Conclusion
@@ -202,6 +225,8 @@ The current boundary of the result is precise:
 Series I reduced the synchronous wait for certified finality. Series II removes consensus from the simple owned-value payment path.
 
 For this class of transfer, finality is a quorum certificate over a single owned-object spend. Consensus remains in the system, but it runs after settlement to checkpoint the certificate into the governed chain. The implementation now includes the certificate verifier, validator lock table, single-consumption execution rule, durable checkpoint lane, registry-safe unlock path, and adversarial gate.
+
+The result holds at geographic scale: on a six-validator testnet spanning three continents, the owned lane reaches finality in 183 ms — competitive with Sui's owned-object path and faster than Solana's optimistic confirmation, while carrying post-quantum signatures. Removing consensus is worth the most exactly where the round-trips it removes are the most expensive.
 
 The protocol result is simple: a payment no longer needs to wait for a block when ownership and quorum intersection are enough.
 
