@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 560" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect width="920" height="560" fill="#fafafa" rx="12"/>
+
+  <!-- title -->
+  <text x="460" y="32" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">FastPay Consensusless Fast Path</text>
+  <text x="460" y="52" text-anchor="middle" font-size="12" fill="#64748b">Simple transfer = 2 round trips + 3.3 ms ML-DSA crypto. No consensus on the critical path.</text>
+
+  <!-- ============ WALLET ============ -->
+  <rect x="40" y="170" width="130" height="70" rx="10" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="105" y="200" text-anchor="middle" font-size="14" font-weight="600" fill="#f8fafc">Wallet</text>
+  <text x="105" y="220" text-anchor="middle" font-size="11" fill="#94a3b8">signs order,</text>
+  <text x="105" y="233" text-anchor="middle" font-size="11" fill="#94a3b8">aggregates cert</text>
+
+  <!-- ============ VALIDATORS ============ -->
+  <!-- V0 -->
+  <rect x="690" y="100" width="150" height="55" rx="8" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="765" y="123" text-anchor="middle" font-size="13" font-weight="600" fill="#dbeafe">Validator 0</text>
+  <text x="765" y="140" text-anchor="middle" font-size="10" fill="#93c5fd">lock + sign</text>
+  <!-- V1 -->
+  <rect x="690" y="185" width="150" height="55" rx="8" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="765" y="208" text-anchor="middle" font-size="13" font-weight="600" fill="#dbeafe">Validator 1</text>
+  <text x="765" y="225" text-anchor="middle" font-size="10" fill="#93c5fd">lock + sign</text>
+  <!-- V2 -->
+  <rect x="690" y="270" width="150" height="55" rx="8" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="765" y="293" text-anchor="middle" font-size="13" font-weight="600" fill="#dbeafe">Validator 2</text>
+  <text x="765" y="310" text-anchor="middle" font-size="10" fill="#93c5fd">lock + sign</text>
+
+  <!-- ============ STEP 1: broadcast (wallet -> validators) ============ -->
+  <line x1="170" y1="195" x2="688" y2="127" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="170" y1="205" x2="688" y2="212" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="170" y1="215" x2="688" y2="297" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="400" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="#2563eb">① broadcast owned-transfer order (parallel)</text>
+
+  <!-- ============ STEP 2: votes (validators -> wallet) ============ -->
+  <line x1="688" y1="140" x2="172" y2="200" stroke="#16a34a" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrow-green)"/>
+  <line x1="688" y1="225" x2="172" y2="210" stroke="#16a34a" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrow-green)"/>
+  <line x1="688" y1="310" x2="172" y2="220" stroke="#16a34a" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrow-green)"/>
+  <text x="400" y="160" text-anchor="middle" font-size="12" font-weight="600" fill="#16a34a">② each validator returns signed vote</text>
+
+  <!-- ============ STEP 3: CERTIFICATE = FINAL ============ -->
+  <!-- highlight box -->
+  <rect x="35" y="310" width="280" height="60" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="175" y="335" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">③ CERTIFICATE ASSEMBLED</text>
+  <text x="175" y="355" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">★ TRANSFER IS FINAL ★</text>
+
+  <!-- arrow from votes to cert -->
+  <line x1="105" y1="245" x2="105" y2="308" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="120" y="282" font-size="10" fill="#92400e">2f+1 votes</text>
+  <text x="120" y="295" font-size="10" fill="#92400e">aggregated</text>
+
+  <!-- timing callout -->
+  <rect x="340" y="315" width="200" height="50" rx="8" fill="#ecfdf5" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="440" y="335" text-anchor="middle" font-size="12" font-weight="600" fill="#065f46">wall-clock = 2 × RTT + 3.3 ms</text>
+  <text x="440" y="352" text-anchor="middle" font-size="11" fill="#16a34a">EU WAN: ~43 ms · Local: ~5 ms</text>
+
+  <!-- ============ STEP 4: confirm + apply ============ -->
+  <line x1="315" y1="340" x2="688" y2="127" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow-gray)"/>
+  <text x="560" y="380" text-anchor="middle" font-size="11" fill="#64748b">④ submit certificate → validators verify + apply</text>
+
+  <!-- ============ STEP 5: checkpoint (async) ============ -->
+  <rect x="690" y="380" width="170" height="40" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="775" y="398" text-anchor="middle" font-size="11" fill="#475569">⑤ checkpoint into</text>
+  <text x="775" y="412" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Cobalt chain (async)</text>
+  <line x1="765" y1="325" x2="775" y2="378" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow-gray)"/>
+
+  <!-- ============ COMPARISON BAR ============ -->
+  <text x="460" y="465" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Latency comparison (3-validator EU WAN)</text>
+
+  <!-- account lane bar -->
+  <rect x="60" y="480" width="456" height="24" rx="4" fill="#fca5a5" stroke="#ef4444" stroke-width="1"/>
+  <text x="80" y="496" font-size="11" font-weight="600" fill="#7f1d1d">Account lane (consensus): 152 ms</text>
+  <text x="525" y="496" font-size="11" fill="#64748b">← proposal + vote round + certificate + apply</text>
+
+  <!-- owned lane bar -->
+  <rect x="60" y="515" width="129" height="24" rx="4" fill="#86efac" stroke="#16a34a" stroke-width="1"/>
+  <text x="70" y="531" font-size="11" font-weight="600" fill="#14532d">Owned lane: ~43 ms</text>
+  <text x="200" y="531" font-size="11" fill="#64748b">← 2×RTT + 3.3 ms crypto (no consensus round)</text>
+
+  <!-- speedup badge -->
+  <rect x="800" y="490" width="80" height="36" rx="18" fill="#16a34a"/>
+  <text x="840" y="508" text-anchor="middle" font-size="11" font-weight="700" fill="white">~3.5×</text>
+  <text x="840" y="520" text-anchor="middle" font-size="9" fill="#dcfce7">faster</text>
+
+  <!-- ML-DSA badge -->
+  <rect x="800" y="420" width="85" height="22" rx="11" fill="#7c3aed"/>
+  <text x="842" y="435" text-anchor="middle" font-size="10" font-weight="600" fill="white">ML-DSA-65 PQ</text>
+</svg>
