@@ -494,6 +494,7 @@ docs/status/zk-prover-baseline-benchmark.md
 docs/status/zk-prover-multicore-determination.md
 docs/status/zk-prover-key-cache-optimization.md
 docs/status/zk-prover-k15-circuit-optimization.md
+docs/status/zk-prover-circuit-deep-triage.md
 docs/status/zk-prover-backend-fork-decision.md
 docs/status/icicle-gpu-prover-scope.md
 docs/status/zk-prover-optimization-results.md
