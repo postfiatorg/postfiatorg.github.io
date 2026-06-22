@@ -2,6 +2,8 @@
 title: "Heavy ZK: Circuit Anatomy and Prover Optimization for Shielded NAVCoin Swaps"
 date: 2026-06-20T00:00:00Z
 summary: "A grounded technical look at the devnet-proven, code-reviewed Halo2 circuit behind Post Fiat's shielded NAVCoin swaps: every major constraint, the measured CPU prover bottleneck, the K=15/key-cache optimization sprint, and the remaining path to GPU-accelerated proving."
+aliases:
+  - /blog/heavy-zk-optimization-v2/
 categories:
   - Post Fiat Research
 tags:
@@ -15,7 +17,7 @@ tags:
   - Post Fiat
 ---
 
-*Companion to the [private NAV OTC swaps design](/blog/private-nav-otc-swaps/) and the [shielded-swap proven-live record](/blog/navcoin-otc-mvp-proven/). This post dissects the circuit that makes private NAVCoin swaps work, analyzes why proving is slow on the current devnet prover path, and lays out a benchmark-driven optimization roadmap toward mainnet-grade proving performance.*
+*Companion to the [private NAV OTC swaps design](/research/private-nav-otc-swaps/) and the [shielded-swap proven-live record](/blog/navcoin-otc-mvp-proven/). This post dissects the circuit that makes private NAVCoin swaps work, analyzes why proving is slow on the current devnet prover path, and lays out a benchmark-driven optimization roadmap toward mainnet-grade proving performance.*
 
 In this design, **NAVCoins are assets that trade to NAV**. The circuit treats each NAVCoin as an asset identity committed inside an Orchard-style note, then proves conservation and spend validity without revealing asset identity, value, or owner.
 
