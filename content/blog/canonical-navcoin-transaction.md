@@ -17,7 +17,7 @@ tags:
 draft: false
 ---
 
-Start with the [illustrated primer](/research/canonical-navcoin-transaction-primer/). It walks through the whole transaction as a click-through deck: proof of reserves, PFTL supply, wrapping to Ethereum, Uniswap trading, Orchard privacy, private egress, and the safety gates.
+Start with the [illustrated primer](/blog/canonical-navcoin-transaction-primer/). It walks through the whole transaction as a click-through deck: proof of reserves, PFTL supply, wrapping to Ethereum, Uniswap trading, Orchard privacy, private egress, and the safety gates.
 
 This post explains the same thing in plain English.
 
