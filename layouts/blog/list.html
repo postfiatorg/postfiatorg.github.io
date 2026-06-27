@@ -32,7 +32,7 @@
         <p>{{ .Description }}</p>
       </header>
       <section class="post-grid" aria-label="Research posts">
-        {{ range .Pages.ByDate.Reverse }}
+        {{ range where .Pages.ByDate.Reverse "Params.hide_from_blog" "ne" true }}
           <a class="post-card" href="{{ .RelPermalink }}">
             <div class="post-meta">
               <span>{{ .Date.Format "Jan 2, 2006" }}</span>

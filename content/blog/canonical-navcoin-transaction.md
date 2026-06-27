@@ -1,10 +1,16 @@
 ---
 title: "Canonical NAVCoin Transaction"
 date: 2026-06-27T00:00:00Z
-url: "/blog/canonical-navcoin-transaction/"
-summary: "A plain-English explanation of the correct NAVCoin transaction architecture: PFTL as the source of truth, proof-of-reserves epochs, bridge-verified wrapping, Uniswap as a venue, Orchard privacy, and the gates that keep supply honest."
-description: "Plain-English explanation of canonical NAVCoin transactions, including PFTL, proof of reserves, wrapped Ethereum venue tokens, Uniswap, Orchard notes, bridge proofs, and safety gates."
+url: "/canonical-navcoin-transaction/"
+aliases:
+  - "/blog/canonical-navcoin-transaction/"
+  - "/blog/canonical-navcoin-transaction-primer/"
+summary: "A click-through slide deck explaining the correct NAVCoin transaction: proof of reserves, PFTL supply, Ethereum wrapping, Uniswap trading, Orchard privacy, private egress, and the gates that keep supply honest."
+description: "Slide deck explaining canonical NAVCoin transactions, including PFTL proof of reserves, wrapped Ethereum venue tokens, Uniswap, Orchard notes, bridge packets, and safety gates."
 author: "Post Fiat"
+breadcrumb_label: "Slide Deck"
+breadcrumb_url: "/canonical-navcoin-transaction/"
+hide_from_blog: true
 categories:
   - Post Fiat Research
 tags:
@@ -17,363 +23,611 @@ tags:
 draft: false
 ---
 
-Start with the [illustrated primer](/blog/canonical-navcoin-transaction-primer/). It walks through the whole transaction as a click-through deck: proof of reserves, PFTL supply, wrapping to Ethereum, Uniswap trading, Orchard privacy, private egress, and the safety gates.
-
-This post explains the same thing in plain English.
-
-## The simple version
-
-A canonical NAVCoin transaction has one rule:
-
-> **PFTL decides what exists. Other chains are venues where that claim can trade.**
-
-That sounds abstract, so use a concert-ticket analogy.
-
-PFTL is the official ticket office. It knows how many real tickets exist. Ethereum is a resale marketplace. Uniswap is one booth inside that marketplace. A wrapped NAVCoin on Ethereum is not a second official ticket office. It is a resale-market version of a ticket that must trace back to the official office.
-
-If Ethereum can mint wrapped NAVCoins without checking PFTL, the system is not canonical. It is just another token with a story.
-
-## What came before
-
-The first a651 deployment was a useful demo. It put an Ethereum token in a Uniswap pool and connected it to an Ethereum-side proof adapter. That let us test market behavior, launch mechanics, dashboards, and NAVCoin UX.
-
-But it was not the correct final architecture.
-
-The problem was not Uniswap. Uniswap did its job: it gave the token a public market. The problem was truth. The Ethereum token and Ethereum proof adapter were too close to being treated as the source of truth, while the actual source of truth should be PFTL.
-
-The old shape was:
-
-```text
-Ethereum a651 token
-  -> Ethereum proof adapter
-  -> Uniswap a651/USDC pool
-```
-
-The correct shape is:
-
-```text
-PFTL reserve proof + PFTL supply ledger
-  -> verified bridge packet
-  -> wrapped Ethereum NAVCoin
-  -> Uniswap venue
-```
-
-That change matters. It means the external token can only exist because PFTL authorized it.
-
-## What a NAVCoin is
-
-A NAVCoin is a token tied to a verified reserve portfolio.
-
-It is not a stablecoin. A stablecoin usually says, "one token is worth one dollar." A NAVCoin says, "one token is worth its pro-rata share of the verified net asset value."
-
-If the reserve portfolio is worth `$28,000` and there are `4,000` valid units, the NAV is:
-
-```text
-$28,000 / 4,000 = $7.00 per unit
-```
-
-If the portfolio goes up, NAV goes up. If the portfolio goes down, NAV goes down. The promise is not "always one dollar." The promise is narrower:
-
-- the reserve proof is fresh;
-- the policy is known;
-- liabilities are counted;
-- supply is counted;
-- stale or invalid proofs fail closed;
-- minting cannot outrun the verified accounting.
-
-## Proof of reserves: the balance sheet
-
-Before any token movement matters, the system needs to know what backs the coin.
-
-A proof-of-reserves run collects reserve evidence. That can include on-chain wallets, exchange balances, cash balances, collateral, borrowings, and venue positions. It also counts liabilities, because a wallet with `$10,000` of assets and `$3,000` of debt is not a `$10,000` reserve.
-
-The basic formula is:
-
-```text
-verified net assets = reserves + cash - liabilities
-```
-
-The proof packet should include:
-
-| Item | Why it matters |
-|---|---|
-| Reserve legs | Where the assets are and how they were measured. |
-| Cash | Cash or stablecoin-like balances that are real reserve assets. |
-| Liabilities | Borrowing or claims that reduce net assets. |
-| Valuation policy | The rulebook for prices, haircuts, and treatment of positions. |
-| Timestamp | So stale proofs cannot pretend to be current. |
-| Proof hash | So the displayed number is tied to evidence, not copy. |
-
-Cryptography cannot make a lying venue honest. If an exchange lies about a balance, the proof can only prove what was reported. But the proof can make the process checkable, repeatable, hash-bound, and fresh.
-
-That is already a large improvement over "trust this dashboard number."
-
-## PFTL finalizes the NAV epoch
-
-Once the reserve proof exists, PFTL should turn it into protocol state.
-
-That means validators check the packet and finalize an epoch. The epoch says:
-
-- this is the asset;
-- this is the verified net asset value;
-- this is the NAV per unit;
-- this is the timestamp;
-- this is the supply denominator;
-- this proof is fresh enough to use.
-
-If the packet is stale, the chain should not let it silently power new minting. If the arithmetic is wrong, it should fail. If the proof does not match the registered policy, it should fail.
-
-That is the first major gate:
-
-```text
-No fresh finalized NAV epoch -> no canonical mint.
-```
-
-## Native supply comes first
-
-The clean model starts with native NAVCoin supply on PFTL.
-
-A user can bring in counted cash, such as pfUSDC. PFTL can then mint or release native NAVCoin under the NAV policy.
-
-Why not mint directly on Ethereum? Because that puts the venue in charge of existence. The venue should not decide what is real. It should only trade a representation of what PFTL already authorized.
-
-So the native path is:
-
-```text
-pfUSDC or other counted input
-  -> PFTL NAV policy
-  -> native NAVCoin balance on PFTL
-```
-
-## Wrapping to Ethereum
-
-Now suppose the user wants to trade on Uniswap.
-
-The user does not need a new, separately backed Ethereum NAVCoin. They need a wrapped representation of the PFTL claim.
-
-The bridge flow should look like this:
-
-```text
-1. Debit native NAVCoin on PFTL.
-2. Finalize a PFTL bridge receipt.
-3. Prove that receipt to Ethereum.
-4. Mint the same amount of wrapped NAVCoin on Ethereum.
-5. Mark the packet nonce as used so it cannot mint twice.
-```
-
-The wrapped token is normal enough for Ethereum wallets and Uniswap. But its mint function is not normal. It should only accept verified PFTL packets.
-
-That is the second major gate:
-
-```text
-No verified PFTL packet -> no wrapped Ethereum token.
-```
-
-## The bridge is the hard part
-
-The bridge is not just a messenger. A messenger can carry a packet, but it must not be trusted to decide whether the packet is true.
-
-The Ethereum bridge needs to verify one of these:
-
-- a direct PFTL finality proof;
-- a succinct proof that PFTL finalized the packet;
-- an optimistic packet with a real challenge window and bonded watchers;
-- or, for an early controlled stage only, a threshold-signed packet clearly labeled as trusted.
-
-Only the first two deserve the clean word "trustless." A threshold-signed bridge may be useful during a rollout, but it is not the final design.
-
-A real bridge packet needs to bind every field that could be abused:
-
-| Field | Why it matters |
-|---|---|
-| Source chain | Prevents using a packet from another chain. |
-| Destination chain | Prevents replaying the packet somewhere else. |
-| Asset id | Prevents swapping the asset meaning. |
-| Amount | Prevents changing the mint size. |
-| Recipient | Prevents redirecting the mint. |
-| Nonce | Prevents replay. |
-| Expiry | Prevents ancient packets from floating forever. |
-| Receipt root | Ties the packet to finalized PFTL state. |
-
-If any of that can be changed after PFTL debit, the bridge is unsafe.
-
-## Uniswap is a market, not an oracle
-
-Once wrapped NAVCoin exists on Ethereum, Uniswap can trade it against USDC.
-
-That is useful. Uniswap gives:
-
-- public liquidity;
-- routing;
-- market price;
-- composability with Ethereum wallets;
-- an easy way for outsiders to buy or sell.
-
-But Uniswap does not know the NAV. It only knows pool balances and swap math.
-
-So a good NAVCoin interface should show two numbers side by side:
-
-```text
-Canonical NAV/unit from PFTL: $X.XX
-Current market price on Uniswap: $Y.YY
-```
-
-If market price is below NAV, that may be a discount, a liquidity problem, a stale proof problem, or a real risk signal. The pool itself cannot tell you which one. The NAV proof and bridge state are separate from the AMM.
-
-## Returning from Ethereum to PFTL
-
-The return path is the mirror image.
-
-If a user wants to leave Ethereum and return to PFTL, the wrapped token should be burned on Ethereum. That burn creates a public event. PFTL then verifies the Ethereum event or accepts a properly challenged packet and releases or mints the native NAVCoin back on PFTL.
-
-The return path is:
-
-```text
-wrapped NAVCoin burn on Ethereum
-  -> Ethereum finality proof or accepted packet
-  -> PFTL release of native NAVCoin
-```
-
-Again, the bridge should prevent replay. The same burn event cannot release twice.
-
-## Where Orchard fits
-
-Orchard is the privacy system.
-
-If you have never heard of Orchard, think of it this way:
-
-A normal public token transfer says:
-
-```text
-Alice paid Bob 10 tokens.
-```
-
-An Orchard-style shielded transfer says:
-
-```text
-Someone who owns a valid private note spent it once,
-created a new valid private note,
-and did not create money from nothing.
-```
-
-The chain can check the proof without learning the private note opening.
-
-There are three core ideas:
-
-| Term | Plain-English meaning |
-|---|---|
-| Note | A private coin-like record owned by a wallet. |
-| Commitment | A public fingerprint of that private note. |
-| Nullifier | A public "spent once" marker that prevents double spending. |
-
-The nullifier is important. It lets validators reject a reused private note without knowing which note belonged to whom.
-
-## A shielded NAVCoin swap
-
-Now combine NAVCoin with Orchard.
-
-A user can start with public pfUSDC on PFTL, shield it into a private note, and privately swap that note into a NAVCoin note.
-
-The public chain sees:
-
-- a valid shielded action;
-- note commitments;
-- nullifiers;
-- proof validity;
-- finality certificate.
-
-The public chain does not need to see:
-
-- which note was the user's;
-- the note opening;
-- the user's full route through the shielded pool.
-
-That gives a private middle, but not a fully invisible universe. The edges are still accounting edges. If the user bridges out to Ethereum or redeems to USDC, the exit artifact becomes public because public settlement requires public fields.
-
-## The gates
-
-The correct architecture is mostly a list of places where the system must be willing to say no.
-
-| Gate | What it blocks |
-|---|---|
-| Proof freshness gate | Stale NAV data powering new mints. |
-| Reserve arithmetic gate | Wrong net asset values. |
-| Supply gate | More valid supply than authorized. |
-| Bridge finality gate | Minting from unfinalized source-chain messages. |
-| Replay gate | Reusing a packet or burn event. |
-| Nullifier gate | Spending the same private note twice. |
-| Egress gate | Leaving privacy without a valid public exit. |
-| Pause/halt gate | Continuing when proof, bridge, or policy status is unsafe. |
-
-These gates are not user-hostile. They are the product. Without them, the token is just a wrapper with branding.
-
-## A full canonical transaction
-
-Here is the whole thing as one path:
-
-```text
-1. Reserves are measured.
-2. A proof packet computes verified net assets.
-3. PFTL finalizes a fresh NAV epoch.
-4. User enters counted cash, such as pfUSDC.
-5. PFTL mints or releases native NAVCoin under policy.
-6. User optionally shields into Orchard.
-7. User optionally swaps privately inside Orchard.
-8. User wants Ethereum venue access.
-9. PFTL debits native NAVCoin and creates a bridge export packet.
-10. Ethereum verifies PFTL finality or a succinct proof.
-11. Ethereum bridge mints wrapped NAVCoin.
-12. Wrapped NAVCoin trades on Uniswap against USDC.
-13. User can burn wrapped NAVCoin to return to PFTL.
-14. PFTL verifies the return and releases native NAVCoin.
-```
-
-The user-facing version can be simple: buy, shield, swap, bridge, trade, return.
-
-The protocol version is stricter: prove, finalize, mint, debit, verify, wrap, trade, burn, verify, release.
-
-## What needs to be built
-
-The old pool has been cleared out. The correct version needs a new contract stack.
-
-At minimum:
-
-1. **A new bridge-aware Ethereum wrapped NAVCoin.** Not the retired standalone demo token.
-2. **An Ethereum bridge controller.** It mints only after verified PFTL packets and burns for return.
-3. **A PFTL finality verifier on Ethereum.** Direct or succinct proof preferred.
-4. **A PFTL inbound verifier for Ethereum burns.** PFTL must verify return events or accepted packets.
-5. **Replay protection.** Every packet and burn event is consumed once.
-6. **Proof freshness adapter.** Interfaces should show canonical PFTL NAV, not stale Ethereum mirror data.
-7. **A new Uniswap pool.** The pool trades the wrapped token, not the old standalone token.
-8. **Dashboard labels.** Users should see "canonical NAV," "market price," "wrapped supply," "bridge status," and "proof freshness" as separate concepts.
-
-There can be staged versions. A threshold-signed bridge can help test UX. An optimistic bridge can reduce trust if watchers are real. The final target is direct or succinct verification of PFTL finality.
-
-## What this does not claim
-
-This is a design explanation, not a statement that the final bridge is deployed.
-
-It does not claim:
-
-- a production trustless bridge exists today;
-- the old Ethereum a651 token can be safely upgraded in place;
-- Uniswap price equals NAV;
-- proof of reserves eliminates source dishonesty;
-- Orchard privacy works without a real anonymity set;
-- a relayer is a trust anchor;
-- a threshold-signed bridge is the final trustless design.
-
-The claim is narrower: if NAVCoin is going to be canonical, PFTL must be the truth layer, external tokens must be bridge-verified representations, and privacy must sit inside a proof-checked transaction path rather than replacing public accounting.
-
-## Why this is worth doing
-
-The correct version is more work than deploying another ERC-20 and seeding a pool.
-
-But it gives a clean answer to the core question:
-
-> Why should anyone believe this token represents the verified NAVCoin supply?
-
-Because every wrapped unit can be traced to a finalized PFTL debit, every native unit sits under a finalized NAV epoch, every proof has freshness rules, every packet has replay protection, and every private movement still has a proof the chain can check.
-
-That is the difference between "a token with a NAV website" and a canonical NAVCoin transaction.
-
+This is the visual primer. The longer prose version has been moved to [research notes](/research/canonical-navcoin-transaction/).
+
+<style>
+.navcoin-deck {
+  --deck-bg: #030604;
+  --deck-panel: rgba(6, 14, 9, 0.74);
+  --deck-line: rgba(221, 255, 220, 0.18);
+  --deck-bright: #ddffdc;
+  --deck-soft: #bad8b6;
+  --deck-muted: #83917f;
+  --deck-green: #7fee64;
+  --deck-cyan: #4fc3ff;
+  --deck-amber: #ffd166;
+  position: relative;
+  left: 50%;
+  width: min(1280px, calc(100vw - 24px));
+  margin: 1.4rem 0 3rem;
+  transform: translateX(-50%);
+  color: var(--deck-bright);
+}
+.deck-shell {
+  border: 1px solid var(--deck-line);
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 22% 12%, rgba(127, 238, 100, 0.16), transparent 34%),
+    radial-gradient(circle at 82% 4%, rgba(79, 195, 255, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(12, 22, 15, 0.95), rgba(0, 0, 0, 0.96));
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+}
+.deck-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid rgba(221, 255, 220, 0.12);
+  background: rgba(0, 0, 0, 0.34);
+}
+.deck-eyebrow,
+.deck-count {
+  color: var(--deck-green);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.deck-count {
+  color: var(--deck-soft);
+}
+.deck-stage {
+  position: relative;
+  min-height: clamp(660px, 72vw, 790px);
+  overflow: hidden;
+}
+.deck-slide {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.24fr) minmax(360px, 0.76fr);
+  gap: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(18px);
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+.deck-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+.deck-art {
+  position: relative;
+  min-height: 100%;
+  background: #020402;
+  overflow: hidden;
+}
+.deck-art img {
+  width: 100%;
+  height: 100%;
+  min-height: 660px;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.04) contrast(1.04);
+}
+.deck-slide.is-active.motion-source .deck-art img { animation: deck-pan-right 8800ms ease-out both; }
+.deck-slide.is-active.motion-map .deck-art img { animation: deck-breathe 9000ms ease-in-out both; }
+.deck-slide.is-active.motion-proof .deck-art img { animation: deck-pan-left 8200ms ease-out both; }
+.deck-slide.is-active.motion-gate .deck-art img { animation: deck-gate-pulse 7600ms ease-in-out both; }
+.deck-slide.is-active.motion-private .deck-art img { animation: deck-private-drift 8600ms ease-out both; }
+.deck-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.08), transparent 26%, transparent 74%, rgba(0, 0, 0, 0.42)),
+    radial-gradient(circle at 50% 120%, rgba(127, 238, 100, 0.12), transparent 38%);
+}
+.deck-slide.is-active .deck-art::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent 20%, rgba(127, 238, 100, 0.13), transparent 48%);
+  transform: translateX(-72%);
+  animation: deck-scan 2400ms ease-out 260ms both;
+}
+.deck-copy {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+  padding: clamp(1.3rem, 3vw, 2.4rem);
+  border-left: 1px solid rgba(221, 255, 220, 0.14);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.62)),
+    rgba(4, 8, 5, 0.86);
+}
+.deck-slide.is-active .deck-copy {
+  animation: deck-copy-in 420ms ease-out both;
+}
+.deck-kicker {
+  margin: 0;
+  color: var(--deck-green);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.deck-copy h2 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  color: var(--deck-bright);
+  font-size: clamp(2rem, 4.5vw, 4.4rem);
+  line-height: 0.96;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+.deck-copy p {
+  margin: 0;
+  color: var(--deck-soft);
+  font-size: clamp(1rem, 1.4vw, 1.16rem);
+  line-height: 1.55;
+}
+.deck-beats {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.deck-beats li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.62rem;
+  align-items: start;
+  min-height: 48px;
+  padding: 0.72rem 0.82rem;
+  border: 1px solid rgba(221, 255, 220, 0.13);
+  border-radius: 10px;
+  background: rgba(221, 255, 220, 0.045);
+  color: var(--deck-soft);
+  opacity: 0;
+  transform: translateY(10px);
+}
+.deck-beats li::before {
+  content: attr(data-step);
+  display: grid;
+  place-items: center;
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 50%;
+  background: rgba(127, 238, 100, 0.14);
+  color: var(--deck-green);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.deck-slide.is-active .deck-beats li {
+  animation: deck-beat-in 360ms ease-out both;
+  animation-delay: calc(var(--i) * 105ms + 250ms);
+}
+.deck-term {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 0.1rem;
+  padding: 0.28rem 0.52rem;
+  border: 1px solid rgba(127, 238, 100, 0.24);
+  border-radius: 999px;
+  color: var(--deck-green);
+  background: rgba(127, 238, 100, 0.08);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+}
+.slide-notes {
+  margin-top: 0.25rem;
+  border: 1px solid rgba(221, 255, 220, 0.11);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+.slide-notes summary {
+  padding: 0.62rem 0.75rem;
+  color: var(--deck-muted);
+  cursor: pointer;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.slide-notes div {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0 0.75rem 0.75rem;
+  color: var(--deck-soft);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.deck-controls {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.9rem 1rem 1rem;
+  border-top: 1px solid rgba(221, 255, 220, 0.12);
+  background: rgba(0, 0, 0, 0.42);
+}
+.deck-button {
+  min-height: 42px;
+  border: 1px solid rgba(127, 238, 100, 0.35);
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  background: rgba(127, 238, 100, 0.08);
+  color: var(--deck-green);
+  cursor: pointer;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.deck-button:hover,
+.deck-button:focus-visible {
+  border-color: rgba(127, 238, 100, 0.78);
+  color: var(--deck-bright);
+}
+.deck-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.38rem;
+}
+.deck-tab {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 1px solid rgba(221, 255, 220, 0.13);
+  border-radius: 50%;
+  background: rgba(221, 255, 220, 0.04);
+  color: var(--deck-soft);
+  cursor: pointer;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+}
+.deck-tab.is-active {
+  border-color: rgba(127, 238, 100, 0.75);
+  background: rgba(127, 238, 100, 0.17);
+  color: var(--deck-green);
+  box-shadow: 0 0 22px rgba(127, 238, 100, 0.18);
+}
+@keyframes deck-pan-right { from { transform: scale(1.03) translateX(-1.8%); } to { transform: scale(1.08) translateX(1.2%); } }
+@keyframes deck-pan-left { from { transform: scale(1.04) translateX(1.6%); } to { transform: scale(1.08) translateX(-1.2%); } }
+@keyframes deck-breathe { 0% { transform: scale(1.02); } 55% { transform: scale(1.07); } 100% { transform: scale(1.04); } }
+@keyframes deck-gate-pulse { 0% { transform: scale(1.02); filter: saturate(1) brightness(1); } 50% { transform: scale(1.065); filter: saturate(1.12) brightness(1.08); } 100% { transform: scale(1.035); filter: saturate(1.04) brightness(1); } }
+@keyframes deck-private-drift { from { transform: scale(1.04) translateY(0.8%); } to { transform: scale(1.08) translateY(-1.2%); } }
+@keyframes deck-scan { from { transform: translateX(-72%); opacity: 0; } 25% { opacity: 1; } to { transform: translateX(72%); opacity: 0; } }
+@keyframes deck-copy-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes deck-beat-in { to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 920px) {
+  .deck-stage { min-height: auto; }
+  .deck-slide {
+    position: relative;
+    display: none;
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .deck-slide.is-active { display: grid; }
+  .deck-art img { min-height: 310px; aspect-ratio: 16 / 9; }
+  .deck-copy {
+    border-left: 0;
+    border-top: 1px solid rgba(221, 255, 220, 0.14);
+  }
+  .deck-controls {
+    grid-template-columns: 1fr;
+  }
+  .deck-button { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .deck-slide,
+  .deck-slide.is-active .deck-art img,
+  .deck-slide.is-active .deck-art::before,
+  .deck-slide.is-active .deck-copy,
+  .deck-slide.is-active .deck-beats li {
+    animation: none !important;
+    transition: none !important;
+  }
+  .deck-beats li { opacity: 1; transform: none; }
+}
+</style>
+
+<div class="navcoin-deck" id="navcoinDeck">
+<div class="deck-shell">
+<div class="deck-topbar">
+<span class="deck-eyebrow">Canonical NAVCoin Transaction</span>
+<span class="deck-count" id="deckCount" data-deck-count>01 / 14</span>
+</div>
+<div class="deck-stage">
+<section class="deck-slide is-active motion-source" data-slide="1">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-01-source-of-truth-web.png" alt="PFTL official ledger path replacing the retired Ethereum-first demo path."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 01</p>
+<h2>PFTL decides what exists.</h2>
+<p>The old demo proved market mechanics. The canonical design moves truth back to PostFiat L1, then lets venues trade verified claims.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">The retired path treated the Ethereum token too much like the source of truth.</li>
+<li style="--i:2" data-step="2">The correct path starts with PFTL proof state and native supply.</li>
+<li style="--i:3" data-step="3">Ethereum receives a wrapped claim only after PFTL finality.</li>
+</ul>
+<span class="deck-term">Rule: source chain first, venue second.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> show a muted retired Ethereum-first path in the background and a bright PFTL-authorized path in the foreground. <strong>Animation:</strong> slow rightward push, scan beam, bullets reveal as the corrected path becomes primary.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-map" data-slide="2">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-02-map-web.png" alt="End-to-end NAVCoin path from reserves to PFTL, wrapping, venue trading, privacy, and exit."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 02</p>
+<h2>The whole path is one chain of custody.</h2>
+<p>A canonical transaction is not just a swap. It is a proof, an epoch, a supply change, a bridge receipt, a venue trade, and optional privacy.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">Proof of reserves establishes verified net assets.</li>
+<li style="--i:2" data-step="2">PFTL finalizes the epoch and controls supply.</li>
+<li style="--i:3" data-step="3">Bridge and privacy steps are receipts over that source state.</li>
+</ul>
+<span class="deck-term">Think: official ledger -> trading venues -> private settlement.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> seven stations connected by clean rails: proof, PFTL, bridge, wrapped token, market venue, Orchard, exit. <strong>Animation:</strong> gentle breathing zoom, bullets reveal in transaction order.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-proof" data-slide="3">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-03-proof-of-reserves-web.png" alt="Reserve sources feeding a cryptographic evidence packet."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 03</p>
+<h2>First, prove the balance sheet.</h2>
+<p>NAVCoin starts with reserve evidence. The proof counts assets, cash, and liabilities, then binds the output to a timestamp and proof hash.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">Assets and cash are reserve value.</li>
+<li style="--i:2" data-step="2">Liabilities reduce that value.</li>
+<li style="--i:3" data-step="3">The result is verified net assets, not a marketing number.</li>
+</ul>
+<span class="deck-term">Formula: spot + cash - liabilities.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> reserve legs fan into a proof engine and sealed packet. <strong>Animation:</strong> leftward pan and scan line, reinforcing inputs being checked before output.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-gate" data-slide="4">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-04-nav-epoch-web.png" alt="Validators finalizing a NAV epoch around a ledger block."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 04</p>
+<h2>PFTL finalizes a NAV epoch.</h2>
+<p>The proof is not useful until it becomes protocol state. Validators finalize an epoch that says which NAV number is current and fresh.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">Validators verify the proof packet.</li>
+<li style="--i:2" data-step="2">The chain records NAV per unit, timestamp, and freshness.</li>
+<li style="--i:3" data-step="3">No fresh finalized epoch means no canonical mint.</li>
+</ul>
+<span class="deck-term">Gate: fresh epoch required.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> validator pillars closing a quorum ring around a finalized NAV block. <strong>Animation:</strong> pulse zoom to make the epoch feel like a confirmed checkpoint.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-map" data-slide="5">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-05-native-mint-web.png" alt="pfUSDC entering a policy gate and producing native NAVCoin on PFTL."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 05</p>
+<h2>Native NAVCoin comes before wrapping.</h2>
+<p>A user brings counted value into PFTL. The NAV policy then mints or releases native NAVCoin under the current epoch.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">The input is counted value, such as pfUSDC.</li>
+<li style="--i:2" data-step="2">The policy gate checks the epoch and supply rules.</li>
+<li style="--i:3" data-step="3">Native NAVCoin is the official unit.</li>
+</ul>
+<span class="deck-term">Do not let a venue mint reality.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> simple user-facing flow: stable value -> policy gate -> official ledger -> native units. <strong>Animation:</strong> breathing zoom, bullets reveal like a mint checklist.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-source" data-slide="6">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-06-bridge-wrap-web.png" alt="PFTL bridge receipt minting wrapped NAVCoin on Ethereum."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 06</p>
+<h2>Wrapping is a receipt, not a second coin.</h2>
+<p>To trade on Ethereum, PFTL debits or locks native NAVCoin, finalizes a receipt, and the Ethereum bridge mints the matching wrapped amount.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">Debit or lock on PFTL.</li>
+<li style="--i:2" data-step="2">Finalize a bridge packet with amount, asset, recipient, nonce, and destination.</li>
+<li style="--i:3" data-step="3">Mint wrapped NAVCoin only from the verified packet.</li>
+</ul>
+<span class="deck-term">Gate: no verified packet, no wrapped token.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> two chain islands with a guarded receipt packet and replay seals. <strong>Animation:</strong> rightward push, making the receipt feel like it crosses from source to venue.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-proof" data-slide="7">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-07-finality-proof-web.png" alt="Verifier accepting an exact finalized packet and rejecting altered packets."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 07</p>
+<h2>The bridge verifies finality.</h2>
+<p>The messenger is not trusted. Ethereum needs proof that PFTL actually finalized this exact receipt.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">Source chain, destination chain, asset id, amount, recipient, nonce, and expiry are bound.</li>
+<li style="--i:2" data-step="2">Changed packets fail.</li>
+<li style="--i:3" data-step="3">Used nonces cannot mint twice.</li>
+</ul>
+<span class="deck-term">Replay protection is part of the asset.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> verifier gate with green accepted packet and red rejected branch. <strong>Animation:</strong> leftward pan and scan line to suggest proof checking.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-source" data-slide="8">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-08-wrapped-token-web.png" alt="Wrapped NAVCoin tethered back to official PFTL ledger state."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 08</p>
+<h2>The wrapped token is a claim ticket.</h2>
+<p>The Ethereum token can be familiar to wallets and markets, but it is only valid because it traces back to a PFTL receipt.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">It is convenient for Ethereum users.</li>
+<li style="--i:2" data-step="2">It is not the official supply ledger.</li>
+<li style="--i:3" data-step="3">Its redemption path points back to PFTL.</li>
+</ul>
+<span class="deck-term">Analogy: resale ticket, not ticket office.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> wrapped token in a transparent shell tethered to official PFTL ledger state. <strong>Animation:</strong> rightward push, emphasizing the tether to source truth.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-gate" data-slide="9">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-09-uniswap-venue-web.png" alt="Market pool with separate canonical NAV and market price gauges."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 09</p>
+<h2>Uniswap is a venue, not the oracle.</h2>
+<p>The pool gives public liquidity and market price. The canonical NAV per unit still comes from PFTL.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">Market price can differ from NAV.</li>
+<li style="--i:2" data-step="2">The interface should show both numbers.</li>
+<li style="--i:3" data-step="3">The pool cannot mint canonical supply by itself.</li>
+</ul>
+<span class="deck-term">Show NAV/unit beside market price.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> generic AMM pool with two separate gauges. <strong>Animation:</strong> gate pulse, because the key idea is separation between venue math and canonical proof math.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-private" data-slide="10">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-10-shielding-web.png" alt="Public NAVCoin entering an Orchard shielded note commitment tree."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 10</p>
+<h2>Shielding turns a public balance into a private note.</h2>
+<p>Orchard is the shielded pool. Instead of a public account balance, the wallet owns private notes and later spends them with proofs.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">Public deposit creates a note commitment.</li>
+<li style="--i:2" data-step="2">The owner stays wallet-side.</li>
+<li style="--i:3" data-step="3">Nullifiers prevent double spend without revealing the note.</li>
+</ul>
+<span class="deck-term">Orchard = notes + commitments + nullifiers.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> public side passing through a privacy gate into a commitment tree. <strong>Animation:</strong> private drift and scan, suggesting a veil rather than a public ledger entry.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-private" data-slide="11">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-11-orchard-swap-web.png" alt="Zero-knowledge circuit consuming a pfUSDC note and emitting a NAVCoin note."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 11</p>
+<h2>The private swap happens inside Orchard.</h2>
+<p>The wallet proves that it consumed the right input note and created the right output note without exposing the note details publicly.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">Input: private pfUSDC note.</li>
+<li style="--i:2" data-step="2">Circuit enforces conservation and allowed exchange.</li>
+<li style="--i:3" data-step="3">Output: private NAVCoin note.</li>
+</ul>
+<span class="deck-term">Validators see proof validity, not wallet path.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> sealed notes entering and leaving a zero-knowledge circuit with a proof check below. <strong>Animation:</strong> private drift, making the note path feel hidden behind the proof.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-private" data-slide="12">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-12-private-egress-web.png" alt="Private Orchard note producing a public exit artifact without revealing note opening."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 12</p>
+<h2>Private egress reveals only what the exit needs.</h2>
+<p>To return to a public bridge-out flow, the wallet proves it can open a valid note while disclosing only the public exit fields.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">The note opening stays private.</li>
+<li style="--i:2" data-step="2">The exit artifact is public and verifiable.</li>
+<li style="--i:3" data-step="3">Bridge-out and redemption can proceed from that public artifact.</li>
+</ul>
+<span class="deck-term">Privacy ends only at the chosen public exit.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> hidden note behind veil, proof gate, public receipt and bridge-out path. <strong>Animation:</strong> private drift with reveal bullets, distinguishing hidden ownership from visible exit fields.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-gate" data-slide="13">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-13-gates-web.png" alt="Safety gate dashboard for freshness, arithmetic, supply, replay, privacy proof, and market display."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 13</p>
+<h2>Every dangerous shortcut gets a gate.</h2>
+<p>The system should fail closed when proof, supply, bridge, or privacy rules do not match.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">Stale reserve proofs cannot power fresh minting.</li>
+<li style="--i:2" data-step="2">Bridge packets cannot be replayed or rewritten.</li>
+<li style="--i:3" data-step="3">Privacy proofs must verify before state changes.</li>
+</ul>
+<span class="deck-term">Good UX says which gate failed.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> six safety gates in a control-room grid with one closed stale gate. <strong>Animation:</strong> pulsing gate zoom and staged bullet reveal.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-map" data-slide="14">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-14-complete-path-web.png" alt="Complete canonical NAVCoin transaction map from reserve proof through PFTL, bridge, venue, Orchard, and exit."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 14</p>
+<h2>The transaction is canonical because every claim points home.</h2>
+<p>The final design can use Uniswap and private settlement without asking either one to be the official truth source.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">PFTL owns proof state and native supply.</li>
+<li style="--i:2" data-step="2">Ethereum trades a verified wrapper.</li>
+<li style="--i:3" data-step="3">Orchard hides wallet movement while preserving proof validity.</li>
+</ul>
+<span class="deck-term">Canonical does not mean single venue. It means single source of truth.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> complete circular transaction map with all stations visible and empty callout positions. <strong>Animation:</strong> gentle breathing zoom, final bullets summarize source, venue, and privacy roles.</div></details>
+</div>
+</section>
+</div>
+
+<div class="deck-controls" aria-label="Slide controls">
+<button class="deck-button" type="button" data-prev="true">Previous</button>
+<div class="deck-tabs" role="tablist" aria-label="Slides">
+<button class="deck-tab is-active" type="button" data-goto="1" aria-label="Slide 1">01</button>
+<button class="deck-tab" type="button" data-goto="2" aria-label="Slide 2">02</button>
+<button class="deck-tab" type="button" data-goto="3" aria-label="Slide 3">03</button>
+<button class="deck-tab" type="button" data-goto="4" aria-label="Slide 4">04</button>
+<button class="deck-tab" type="button" data-goto="5" aria-label="Slide 5">05</button>
+<button class="deck-tab" type="button" data-goto="6" aria-label="Slide 6">06</button>
+<button class="deck-tab" type="button" data-goto="7" aria-label="Slide 7">07</button>
+<button class="deck-tab" type="button" data-goto="8" aria-label="Slide 8">08</button>
+<button class="deck-tab" type="button" data-goto="9" aria-label="Slide 9">09</button>
+<button class="deck-tab" type="button" data-goto="10" aria-label="Slide 10">10</button>
+<button class="deck-tab" type="button" data-goto="11" aria-label="Slide 11">11</button>
+<button class="deck-tab" type="button" data-goto="12" aria-label="Slide 12">12</button>
+<button class="deck-tab" type="button" data-goto="13" aria-label="Slide 13">13</button>
+<button class="deck-tab" type="button" data-goto="14" aria-label="Slide 14">14</button>
+</div>
+<button class="deck-button" type="button" data-next="true">Next</button>
+</div>
+</div>
+</div>
+
+<script>
+(function () {
+const deck = document.getElementById("navcoinDeck");
+if (!deck) return;
+const slides = Array.from(deck.querySelectorAll(".deck-slide"));
+const tabs = Array.from(deck.querySelectorAll(".deck-tab"));
+const count = deck.querySelector("[data-deck-count]");
+let active = 1;
+const total = slides.length;
+
+function show(index) {
+active = ((index - 1 + total) % total) + 1;
+slides.forEach((slide) => {
+const selected = Number(slide.dataset.slide) === active;
+slide.classList.toggle("is-active", selected);
+slide.setAttribute("aria-hidden", selected ? "false" : "true");
+});
+tabs.forEach((tab) => {
+const selected = Number(tab.dataset.goto) === active;
+tab.classList.toggle("is-active", selected);
+tab.setAttribute("aria-selected", selected ? "true" : "false");
+});
+if (count) count.textContent = String(active).padStart(2, "0") + " / " + String(total).padStart(2, "0");
+}
+
+deck.querySelector("[data-prev='true']")?.addEventListener("click", () => show(active - 1));
+deck.querySelector("[data-next='true']")?.addEventListener("click", () => show(active + 1));
+tabs.forEach((tab) => tab.addEventListener("click", () => show(Number(tab.dataset.goto))));
+document.addEventListener("keydown", (event) => {
+const tag = String(event.target?.tagName || "").toLowerCase();
+if (tag === "input" || tag === "textarea" || event.target?.isContentEditable) return;
+if (event.key === "ArrowLeft") show(active - 1);
+if (event.key === "ArrowRight") show(active + 1);
+});
+show(active);
+})();
+</script>
