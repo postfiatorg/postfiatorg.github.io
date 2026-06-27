@@ -5,8 +5,8 @@ url: "/research/canonical-navcoin-transaction/"
 type: "blog"
 breadcrumb_label: "Research"
 breadcrumb_url: "/research/"
-summary: "A plain-English explanation of the correct NAVCoin transaction architecture: PFTL as the source of truth, proof-of-reserves epochs, bridge-verified wrapping, Uniswap as a venue, Orchard privacy, and the gates that keep supply honest."
-description: "Plain-English explanation of canonical NAVCoin transactions, including PFTL, proof of reserves, wrapped Ethereum venue tokens, Uniswap, Orchard notes, bridge proofs, and safety gates."
+summary: "A plain-English explanation of the correct NAVCoin transaction architecture: PFTL as the source of truth, proof-of-reserves epochs, USDC bridge-in, private Orchard swaps, atomic handoff to Uniswap-side a651, and the gates that keep supply honest."
+description: "Plain-English explanation of canonical NAVCoin transactions, including PFTL, proof of reserves, wrapped Ethereum venue tokens, Uniswap, Orchard notes, bridge proofs, atomic handoff, and safety gates."
 author: "Post Fiat"
 categories:
   - Post Fiat Research
@@ -20,7 +20,7 @@ tags:
 draft: false
 ---
 
-Start with the [slide deck](/canonical-navcoin-transaction/). It walks through the whole transaction click by click: proof of reserves, PFTL supply, wrapping to Ethereum, Uniswap trading, Orchard privacy, private egress, and the safety gates.
+Start with the [slide deck](/canonical-navcoin-transaction/). It walks through the whole transaction click by click: proof of reserves, USDC bridge-in to PFTL, the private Orchard swap into a651, atomic handoff into the Uniswap-side representation, and the safety gates.
 
 These research notes explain the same thing in plain English.
 
@@ -331,9 +331,9 @@ Here is the whole thing as one path:
 14. PFTL verifies the return and releases native NAVCoin.
 ```
 
-The user-facing version can be simple: buy, shield, swap, bridge, trade, return.
+The user-facing version can be simple: bridge USDC into PFTL, privately swap into a651, then atomically hand off public a651 into the Uniswap-side representation.
 
-The protocol version is stricter: prove, finalize, mint, debit, verify, wrap, trade, burn, verify, release.
+The protocol version is stricter: prove, finalize, bridge counted USDC, shield, privately swap, privately egress, lock public a651, verify the PFTL receipt on Ethereum, release wrapped a651, and trade or redeem through the venue.
 
 ## What needs to be built
 
@@ -342,12 +342,12 @@ The old pool has been cleared out. The correct version needs a new contract stac
 At minimum:
 
 1. **A new bridge-aware Ethereum wrapped NAVCoin.** Not the retired standalone demo token.
-2. **An Ethereum bridge controller.** It mints only after verified PFTL packets and burns for return.
+2. **An Ethereum bridge / atomic handoff controller.** It releases the Uniswap-side representation only after verified PFTL packets and supports timeout/refund semantics rather than inventory settlement.
 3. **A PFTL finality verifier on Ethereum.** Direct or succinct proof preferred.
 4. **A PFTL inbound verifier for Ethereum burns.** PFTL must verify return events or accepted packets.
 5. **Replay protection.** Every packet and burn event is consumed once.
 6. **Proof freshness adapter.** Interfaces should show canonical PFTL NAV, not stale Ethereum mirror data.
-7. **A new Uniswap pool.** The pool trades the wrapped token, not the old standalone token.
+7. **A new Uniswap pool.** The pool trades the wrapped token released by the verified/atomic handoff path, not the old standalone token.
 8. **Dashboard labels.** Users should see "canonical NAV," "market price," "wrapped supply," "bridge status," and "proof freshness" as separate concepts.
 
 There can be staged versions. A threshold-signed bridge can help test UX. An optimistic bridge can reduce trust if watchers are real. The final target is direct or succinct verification of PFTL finality.

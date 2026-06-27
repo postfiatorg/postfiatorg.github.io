@@ -5,8 +5,8 @@ url: "/canonical-navcoin-transaction/"
 aliases:
   - "/blog/canonical-navcoin-transaction/"
   - "/blog/canonical-navcoin-transaction-primer/"
-summary: "A click-through slide deck explaining the correct NAVCoin transaction: proof of reserves, PFTL supply, Ethereum wrapping, Uniswap trading, Orchard privacy, private egress, and the gates that keep supply honest."
-description: "Slide deck explaining canonical NAVCoin transactions, including PFTL proof of reserves, wrapped Ethereum venue tokens, Uniswap, Orchard notes, bridge packets, and safety gates."
+summary: "A click-through slide deck explaining the correct NAVCoin transaction: proof of reserves, PFTL supply, USDC bridge-in, private Orchard swap, atomic handoff to Uniswap-side a651, and the gates that keep supply honest."
+description: "Slide deck explaining canonical NAVCoin transactions, including PFTL proof of reserves, wrapped Ethereum venue tokens, Uniswap, Orchard notes, bridge packets, atomic handoff, and safety gates."
 author: "Post Fiat"
 breadcrumb_label: "Slide Deck"
 breadcrumb_url: "/canonical-navcoin-transaction/"
@@ -338,7 +338,7 @@ This is the visual primer. The longer prose version has been moved to [research 
 <div class="deck-shell">
 <div class="deck-topbar">
 <span class="deck-eyebrow">Canonical NAVCoin Transaction</span>
-<span class="deck-count" id="deckCount" data-deck-count>01 / 14</span>
+<span class="deck-count" id="deckCount" data-deck-count>01 / 15</span>
 </div>
 <div class="deck-stage">
 <section class="deck-slide is-active motion-source" data-slide="1">
@@ -550,18 +550,34 @@ This is the visual primer. The longer prose version has been moved to [research 
 </section>
 
 <section class="deck-slide motion-map" data-slide="14">
-<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-14-complete-path-web.png" alt="Complete canonical NAVCoin transaction map from reserve proof through PFTL, bridge, venue, Orchard, and exit."></figure>
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-14-complete-path-web.png" alt="Complete user path from USDC bridge-in through private a651 swap and atomic handoff to Uniswap-side a651."></figure>
 <div class="deck-copy">
 <p class="deck-kicker">Slide 14</p>
-<h2>The transaction is canonical because every claim points home.</h2>
-<p>The final design can use Uniswap and private settlement without asking either one to be the official truth source.</p>
+<h2>The user path ends at Uniswap-side a651.</h2>
+<p>The intended flow is explicit: bridge USDC into PFTL, privately swap into a651, then atomically hand off public a651 into the Uniswap-side representation.</p>
 <ul class="deck-beats">
-<li style="--i:1" data-step="1">PFTL owns proof state and native supply.</li>
-<li style="--i:2" data-step="2">Ethereum trades a verified wrapper.</li>
-<li style="--i:3" data-step="3">Orchard hides wallet movement while preserving proof validity.</li>
+<li style="--i:1" data-step="1">USDC becomes pfUSDC on PFTL.</li>
+<li style="--i:2" data-step="2">The Orchard swap privately turns pfUSDC into a651.</li>
+<li style="--i:3" data-step="3">The public a651 exit feeds an atomic handoff to the Uniswap-side token.</li>
 </ul>
-<span class="deck-term">Canonical does not mean single venue. It means single source of truth.</span>
-<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> complete circular transaction map with all stations visible and empty callout positions. <strong>Animation:</strong> gentle breathing zoom, final bullets summarize source, venue, and privacy roles.</div></details>
+<span class="deck-term">User version: USDC -> PFTL -> private a651 -> atomic handoff -> Uniswap-side a651.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> four-lane user path showing reserve proof, PFTL public state, Orchard privacy, and Ethereum/Uniswap venue. <strong>Animation:</strong> lane reveal in user-action order.</div></details>
+</div>
+</section>
+
+<section class="deck-slide motion-gate" data-slide="15">
+<figure class="deck-art"><img src="/navcoin/canonical-transaction/slide-15-atomic-uniswap-handoff-web.png" alt="Atomic handoff from public PFTL a651 to Uniswap-side wrapped a651 using a matching lock, receipt, secret, and timeout refund."></figure>
+<div class="deck-copy">
+<p class="deck-kicker">Slide 15</p>
+<h2>The a651 handoff is atomic, not inventory-based.</h2>
+<p>The PFTL side locks public a651 under a swap id. The Ethereum side releases the Uniswap-side claim only after the matching finalized receipt is verified.</p>
+<ul class="deck-beats">
+<li style="--i:1" data-step="1">The PFTL lock binds asset, amount, recipient, and swap id.</li>
+<li style="--i:2" data-step="2">Ethereum verifies the PFTL receipt before releasing wrapped a651.</li>
+<li style="--i:3" data-step="3">If the handoff does not complete, the timeout path refunds instead of relying on inventory.</li>
+</ul>
+<span class="deck-term">Atomic means both sides settle from the same proof, or the lock refunds.</span>
+<details class="slide-notes"><summary>Slide instructions</summary><div><strong>Image:</strong> PFTL hashlock escrow, finalized receipt, Ethereum verifier, wrapped a651 release, and timeout refund path. <strong>Animation:</strong> proof path lights first, then refund path remains as the fail-safe.</div></details>
 </div>
 </section>
 </div>
@@ -583,6 +599,7 @@ This is the visual primer. The longer prose version has been moved to [research 
 <button class="deck-tab" type="button" data-goto="12" aria-label="Slide 12">12</button>
 <button class="deck-tab" type="button" data-goto="13" aria-label="Slide 13">13</button>
 <button class="deck-tab" type="button" data-goto="14" aria-label="Slide 14">14</button>
+<button class="deck-tab" type="button" data-goto="15" aria-label="Slide 15">15</button>
 </div>
 <button class="deck-button" type="button" data-next="true">Next</button>
 </div>

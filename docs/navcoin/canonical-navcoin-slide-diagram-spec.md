@@ -734,60 +734,91 @@ Animation intent:
 
 - Gates light up sequentially; failed gate stays red and blocks the downstream arrow.
 
-## Slide 14 - Complete Canonical Transaction
+## Slide 14 - Complete User Path
 
-Purpose: final overview that ties all pieces together without becoming decorative.
+Purpose: show the user-level flow that was missing from the earlier deck: USDC enters PFTL, the user swaps privately into a651, then atomically hands off public a651 into the Uniswap-side representation.
 
-Diagram type: full swimlane transaction map.
+Diagram type: full swimlane user-path map.
 
 Layout:
 
 - Four horizontal lanes:
   - `Reserve proof`
-  - `PFTL canonical ledger`
-  - `Ethereum venue`
+  - `PFTL public state`
   - `Orchard privacy`
-- Numbered steps left to right.
-- Include a legend in the lower right.
+  - `Ethereum / Uniswap venue`
+- Keep labels sparse and large.
 
-Numbered steps:
+Required path:
 
-1. `collect reserve evidence`
-2. `prove verified NAV`
-3. `finalize NAV epoch`
-4. `mint native NAVCoin`
-5. `debit/lock for bridge`
-6. `verify bridge packet`
-7. `mint wrapped NAVCoin`
-8. `trade in USDC pool`
-9. `shield into Orchard`
-10. `private swap`
-11. `private egress`
-12. `redeem / withdraw`
-
-Legend:
-
-- Green solid box: `canonical state`
-- Cyan arrow: `verified receipt`
-- Amber diamond: `gate`
-- Dashed mint box: `private note`
-- Gray box: `venue state`
+1. `fresh NAV`
+2. `bridge USDC`
+3. `shield`
+4. `private swap`
+5. `private egress`
+6. `lock a651`
+7. `verify lock`
+8. `release wA651`
+9. `Uniswap pool`
 
 Required relationships:
 
-- All external venue activity must trace back to PFTL state.
-- Orchard privacy is optional but proof-checked.
-- Uniswap is a venue and not the source of NAV.
-- Bridge receipts connect chains; they do not replace PFTL finality.
+- The path must read as: `USDC -> PFTL -> private a651 -> atomic handoff -> Uniswap-side a651`.
+- The private swap happens inside Orchard before the public atomic handoff.
+- The Ethereum/Uniswap-side release depends on verified PFTL lock/finality.
 
 Do not include:
 
 - Circular map with empty callout boxes.
 - Pretty icons without the numbered path.
-- Any unlabeled bridge or privacy step.
+- Any implication that the Ethereum venue can mint without a PFTL receipt.
 
 Animation intent:
 
-- Animate numbered path in sequence.
+- Animate the path in user-action order.
 - Use lane highlighting rather than zooming the whole image.
 
+## Slide 15 - Atomic Handoff To Uniswap
+
+Purpose: explain the atomic swap/handoff primitive explicitly. This is the step that turns public PFTL a651, produced after private egress, into the Uniswap-side representation without using an inventory IOU.
+
+Diagram type: two-chain atomic handoff / hashlock escrow diagram.
+
+Layout:
+
+- Three horizontal lanes:
+  - `PFTL side`
+  - `Ethereum side`
+  - `timeout / safety`
+- The PFTL lane shows the asset lock.
+- The Ethereum lane shows receipt verification and wrapped-token release.
+- The safety lane shows both the success and refund outcomes.
+
+Required boxes:
+
+1. `public a651`
+2. `hashlock escrow`
+3. `PFTL receipt`
+4. `secret reveal`
+5. `verify receipt`
+6. `release wA651`
+7. `both settle`
+8. `or refund`
+
+Required relationships:
+
+- The PFTL lock binds asset, amount, recipient, and swap id.
+- Ethereum verifies the finalized PFTL receipt before releasing the Uniswap-side claim.
+- A secret or matching swap id links both sides.
+- Timeout produces refund rather than relying on relayer inventory.
+
+Do not include:
+
+- A custodian inventory box.
+- A vague bridge arrow without lock, receipt, and refund mechanics.
+- Any text suggesting this is already production deployed unless the deployment exists.
+
+Animation intent:
+
+- Highlight the lock, receipt, verification, release path.
+- Keep the timeout/refund path visible as the safety fallback.
