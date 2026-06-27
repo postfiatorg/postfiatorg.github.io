@@ -71,7 +71,7 @@
             </button>
           </div>
         </header>
-        {{ if .TableOfContents }}
+        {{ if and .TableOfContents (ne .Params.show_toc false) }}
           <details class="post-toc" open>
             <summary>Table of Contents</summary>
             <div class="post-toc-body">

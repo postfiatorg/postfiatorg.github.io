@@ -11,6 +11,7 @@ author: "Post Fiat"
 breadcrumb_label: "Slide Deck"
 breadcrumb_url: "/canonical-navcoin-transaction/"
 hide_from_blog: true
+show_toc: false
 categories:
   - Post Fiat Research
 tags:
@@ -76,36 +77,34 @@ This is the visual primer. The longer prose version has been moved to [research 
 }
 .deck-stage {
   position: relative;
-  min-height: clamp(660px, 72vw, 790px);
-  overflow: hidden;
+  min-height: 0;
+  overflow: visible;
 }
 .deck-slide {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1.24fr) minmax(360px, 0.76fr);
+  position: relative;
+  display: none;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
   gap: 0;
-  opacity: 0;
   pointer-events: none;
-  transform: translateX(18px);
-  transition: opacity 320ms ease, transform 320ms ease;
 }
 .deck-slide.is-active {
-  opacity: 1;
+  display: grid;
   pointer-events: auto;
-  transform: translateX(0);
 }
 .deck-art {
   position: relative;
-  min-height: 100%;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
   background: #020402;
   overflow: hidden;
 }
 .deck-art img {
   width: 100%;
   height: 100%;
-  min-height: 660px;
-  object-fit: cover;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
   display: block;
   filter: saturate(1.04) contrast(1.04);
 }
@@ -120,7 +119,7 @@ This is the visual primer. The longer prose version has been moved to [research 
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.08), transparent 26%, transparent 74%, rgba(0, 0, 0, 0.42)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.04), transparent 28%, rgba(0, 0, 0, 0.18)),
     radial-gradient(circle at 50% 120%, rgba(127, 238, 100, 0.12), transparent 38%);
 }
 .deck-slide.is-active .deck-art::before {
@@ -137,10 +136,10 @@ This is the visual primer. The longer prose version has been moved to [research 
   position: relative;
   z-index: 2;
   display: grid;
-  align-content: center;
+  align-content: start;
   gap: 1rem;
-  padding: clamp(1.3rem, 3vw, 2.4rem);
-  border-left: 1px solid rgba(221, 255, 220, 0.14);
+  padding: clamp(1.15rem, 2.4vw, 1.9rem);
+  border-top: 1px solid rgba(221, 255, 220, 0.14);
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.62)),
     rgba(4, 8, 5, 0.86);
@@ -162,8 +161,8 @@ This is the visual primer. The longer prose version has been moved to [research 
   border: 0;
   padding: 0;
   color: var(--deck-bright);
-  font-size: clamp(2rem, 4.5vw, 4.4rem);
-  line-height: 0.96;
+  font-size: clamp(1.7rem, 3.35vw, 3.35rem);
+  line-height: 1;
   font-weight: 650;
   letter-spacing: 0;
 }
@@ -175,6 +174,7 @@ This is the visual primer. The longer prose version has been moved to [research 
 }
 .deck-beats {
   display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.55rem;
   margin: 0;
   padding: 0;
@@ -299,28 +299,23 @@ This is the visual primer. The longer prose version has been moved to [research 
   color: var(--deck-green);
   box-shadow: 0 0 22px rgba(127, 238, 100, 0.18);
 }
-@keyframes deck-pan-right { from { transform: scale(1.03) translateX(-1.8%); } to { transform: scale(1.08) translateX(1.2%); } }
-@keyframes deck-pan-left { from { transform: scale(1.04) translateX(1.6%); } to { transform: scale(1.08) translateX(-1.2%); } }
-@keyframes deck-breathe { 0% { transform: scale(1.02); } 55% { transform: scale(1.07); } 100% { transform: scale(1.04); } }
-@keyframes deck-gate-pulse { 0% { transform: scale(1.02); filter: saturate(1) brightness(1); } 50% { transform: scale(1.065); filter: saturate(1.12) brightness(1.08); } 100% { transform: scale(1.035); filter: saturate(1.04) brightness(1); } }
-@keyframes deck-private-drift { from { transform: scale(1.04) translateY(0.8%); } to { transform: scale(1.08) translateY(-1.2%); } }
+@keyframes deck-pan-right { from { filter: saturate(1.02) contrast(1.02) brightness(0.96); } to { filter: saturate(1.08) contrast(1.05) brightness(1.04); } }
+@keyframes deck-pan-left { from { filter: saturate(1.08) contrast(1.04) brightness(1.03); } to { filter: saturate(1.02) contrast(1.02) brightness(0.98); } }
+@keyframes deck-breathe { 0% { filter: saturate(1.02) brightness(0.98); } 55% { filter: saturate(1.1) brightness(1.06); } 100% { filter: saturate(1.04) brightness(1); } }
+@keyframes deck-gate-pulse { 0% { filter: saturate(1) brightness(1); } 50% { filter: saturate(1.12) brightness(1.08); } 100% { filter: saturate(1.04) brightness(1); } }
+@keyframes deck-private-drift { from { filter: saturate(1.02) brightness(0.98); } to { filter: saturate(1.09) brightness(1.05); } }
 @keyframes deck-scan { from { transform: translateX(-72%); opacity: 0; } 25% { opacity: 1; } to { transform: translateX(72%); opacity: 0; } }
 @keyframes deck-copy-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes deck-beat-in { to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 920px) {
-  .deck-stage { min-height: auto; }
   .deck-slide {
-    position: relative;
     display: none;
     grid-template-columns: 1fr;
     min-height: 0;
   }
   .deck-slide.is-active { display: grid; }
-  .deck-art img { min-height: 310px; aspect-ratio: 16 / 9; }
-  .deck-copy {
-    border-left: 0;
-    border-top: 1px solid rgba(221, 255, 220, 0.14);
-  }
+  .deck-art img { min-height: 0; aspect-ratio: 16 / 9; }
+  .deck-beats { grid-template-columns: 1fr; }
   .deck-controls {
     grid-template-columns: 1fr;
   }
