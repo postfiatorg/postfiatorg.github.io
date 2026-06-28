@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run Qwen-style amendment replay over a corpus packet."""
+"""Run Qwen vote-only XRPL amendment replay over a packet corpus."""
 
 from __future__ import annotations
 
@@ -11,7 +11,6 @@ import random
 import re
 import sys
 import time
-import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -19,7 +18,7 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-ROUTES = {"PROCEED", "DELAY_FOR_FIX", "HOLD_FOR_CHALLENGE", "REJECT"}
+VOTES = {"YES", "NO"}
 
 
 def utc_now() -> str:
@@ -53,111 +52,66 @@ def extract_json(text: str) -> dict[str, Any]:
         return json.loads(match.group(0))
 
 
-def route_to_vote(route: str) -> str:
-    return {
-        "PROCEED": "YES",
-        "DELAY_FOR_FIX": "NO",
-        "HOLD_FOR_CHALLENGE": "HOLD",
-        "REJECT": "NO",
-    }.get(route, "HOLD")
-
-
 def offline_fixture(packet: dict[str, Any]) -> dict[str, Any]:
-    risks = set(packet.get("risk_class", []))
-    event_type = packet.get("event_type")
-    route = "HOLD_FOR_CHALLENGE"
-    summary = "Packet contains governance-sensitive evidence that should be surfaced before voting."
-    if "known_bug" in risks and event_type != "obsolete":
-        route = "DELAY_FOR_FIX"
-        summary = "Known-bug evidence makes default proceed inappropriate until the fix path is clear."
-    if event_type == "obsolete" or "obsolete" in risks:
-        route = "REJECT"
-        summary = "The amendment is marked obsolete or disabled after a bug; replay default rejects."
-    if event_type == "fix" and "follow_up_fix" in risks and "known_bug" not in risks:
-        route = "PROCEED"
-        summary = "The packet describes a narrow fix route after an identified issue."
-
-    fact_ids = [f["fact_id"] for f in packet.get("historical_facts", [])[:3]]
+    text = json.dumps(packet, sort_keys=True).lower()
+    vote = "NO"
+    if "default_vote" in text and '"yes"' in text:
+        vote = "YES"
+    if "advised" in text and "vote no" in text:
+        vote = "NO"
     return {
-        "route": route,
-        "route_confidence": 0.74 if route == "HOLD_FOR_CHALLENGE" else 0.82,
-        "vote_default": route_to_vote(route),
-        "decision_summary": summary,
+        "xrpl_vote_recommendation": vote,
+        "vote_confidence": 0.75,
+        "decision_summary": "Offline fixture used; not valid replay evidence.",
         "cited_facts": [
-            {"fact_id": fid, "why_it_matters": "Source-backed packet fact supporting the route."}
-            for fid in fact_ids
+            {
+                "fact_id": fact["fact_id"],
+                "why_it_matters": "Packet fact used for XRP-native vote replay.",
+            }
+            for fact in packet.get("historical_facts", [])[:2]
         ],
-        "arguments_for_proceeding": [
-            "Proceeding can be reasonable when the amendment is a narrow, source-backed fix."
-        ],
-        "arguments_for_delay_or_challenge": [
-            "Known bugs, asset-control semantics, pooled funds, or off-chain underwriting require explicit validator review."
-        ],
-        "missing_evidence": [
-            "Public validator vote history and full amendment PR review should be attached for a production replay."
-        ],
-        "validator_work_item": {
-            "title": f"Review {packet.get('amendment_name')}",
-            "recommended_validator_action": (
-                "Verify cited packet sources, compare replay route to local operator policy, then reveal default or override."
-            ),
-            "review_questions": [
-                "Does the packet identify a known bug or post-launch fix requirement?",
-                "Does the amendment change asset-control, compliance, or pooled-fund semantics?",
-                "Is a manual override justified and written down?",
-            ],
-            "override_questions": [
-                "What source-backed evidence justifies overriding the replay default?",
-                "Should the override be public before the vote window closes?",
-            ],
+        "arguments_for_yes": [],
+        "arguments_for_no": [],
+        "missing_evidence": [],
+        "unscored_review_flags": {
+            "needs_public_review": False,
+            "bug_or_fix_sequence": False,
+            "asset_control_or_compliance": False,
+            "source_default_vote_used": False,
         },
-        "private_standing_committee_required": False,
-        "estimated_review_minutes": {
-            "validator_skim": 5,
-            "deep_review": 45,
-            "packet_verification": 10,
-        },
-        "forbidden_stronger_claim": (
-            "A replay route is an auditable work product, not a proof that the amendment is correct."
-        ),
+        "forbidden_stronger_claim": "A YES/NO replay recommendation is not proof that the amendment is correct.",
     }
 
 
 def build_prompt(packet: dict[str, Any]) -> str:
     schema = {
-        "route": "PROCEED | DELAY_FOR_FIX | HOLD_FOR_CHALLENGE | REJECT",
-        "route_confidence": 0,
-        "vote_default": "YES | NO | ABSTAIN | HOLD",
+        "xrpl_vote_recommendation": "YES | NO",
+        "vote_confidence": 0,
         "decision_summary": "...",
         "cited_facts": [{"fact_id": "F1", "why_it_matters": "..."}],
-        "arguments_for_proceeding": ["..."],
-        "arguments_for_delay_or_challenge": ["..."],
+        "arguments_for_yes": ["..."],
+        "arguments_for_no": ["..."],
         "missing_evidence": ["..."],
-        "validator_work_item": {
-            "title": "...",
-            "recommended_validator_action": "...",
-            "review_questions": ["..."],
-            "override_questions": ["..."],
-        },
-        "private_standing_committee_required": False,
-        "estimated_review_minutes": {
-            "validator_skim": 0,
-            "deep_review": 0,
-            "packet_verification": 0,
+        "unscored_review_flags": {
+            "needs_public_review": False,
+            "bug_or_fix_sequence": False,
+            "asset_control_or_compliance": False,
+            "source_default_vote_used": False,
         },
         "forbidden_stronger_claim": "...",
     }
     return (
-        "You are a deterministic governance replay worker. "
-        "Classify the XRPL amendment packet into one conservative route. "
+        "You are a deterministic XRPL amendment vote replay worker. "
         "Use only packet facts by fact_id. Do not invent external facts. "
         "Return strict JSON matching this schema: "
         f"{json.dumps(schema, sort_keys=True)}\n\n"
-        "Route policy:\n"
-        "- PROCEED means the packet supports a default YES.\n"
-        "- DELAY_FOR_FIX means known-bug or fix sequencing evidence supports default NO until fixed.\n"
-        "- HOLD_FOR_CHALLENGE means validators need explicit public review before default YES.\n"
-        "- REJECT means obsolete, disabled, or unsafe evidence supports default NO.\n\n"
+        "Scored vote policy:\n"
+        "- The only scored field is xrpl_vote_recommendation.\n"
+        "- The only allowed scored values are YES and NO.\n"
+        "- YES means support, approve, or enable the amendment/change at the relevant XRPL vote surface.\n"
+        "- NO means oppose, veto, or do not support enabling the amendment/change at the relevant XRPL vote surface.\n"
+        "- Any third option or internal workflow state is not an XRPL vote output; do not emit one in the scored field.\n"
+        "- Review concerns may be placed only in unscored_review_flags and rationale fields.\n\n"
         f"PACKET:\n{json.dumps(packet, indent=2, sort_keys=True)}"
     )
 
@@ -185,7 +139,7 @@ def call_chat_completion(
         ],
         "temperature": 0,
         "top_p": 1,
-        "max_tokens": 2400,
+        "max_tokens": 1800,
         "response_format": {"type": "json_object"},
     }
     if deterministic_qwen:
@@ -208,17 +162,17 @@ def call_chat_completion(
     return extract_json(content), raw
 
 
-def normalize_output(output: dict[str, Any], packet: dict[str, Any]) -> dict[str, Any]:
-    route = str(output.get("route", "HOLD_FOR_CHALLENGE")).strip()
-    if route not in ROUTES:
-        route = "HOLD_FOR_CHALLENGE"
-    output["route"] = route
-    output["vote_default"] = route_to_vote(route)
+def normalize_output(output: dict[str, Any], packet: dict[str, Any]) -> tuple[dict[str, Any], bool]:
+    raw_vote = str(output.get("xrpl_vote_recommendation", "")).strip().upper()
+    schema_valid = raw_vote in VOTES
+    vote = raw_vote if schema_valid else "NO"
+    output["xrpl_vote_recommendation"] = vote
     try:
-        output["route_confidence"] = float(output.get("route_confidence", 0))
+        output["vote_confidence"] = float(output.get("vote_confidence", 0))
     except (TypeError, ValueError):
-        output["route_confidence"] = 0.0
-    packet_fact_ids = {f["fact_id"] for f in packet.get("historical_facts", [])}
+        output["vote_confidence"] = 0.0
+
+    packet_fact_ids = {fact["fact_id"] for fact in packet.get("historical_facts", [])}
     cited = []
     for item in output.get("cited_facts", []):
         if isinstance(item, dict) and item.get("fact_id") in packet_fact_ids:
@@ -229,35 +183,37 @@ def normalize_output(output: dict[str, Any], packet: dict[str, Any]) -> dict[str
                 }
             )
     if not cited:
-        cited = [{"fact_id": f["fact_id"], "why_it_matters": "Packet fact used for conservative routing."} for f in packet.get("historical_facts", [])[:2]]
+        cited = [
+            {
+                "fact_id": fact["fact_id"],
+                "why_it_matters": "Packet fact used for XRP-native vote replay.",
+            }
+            for fact in packet.get("historical_facts", [])[:2]
+        ]
     output["cited_facts"] = cited
-    output.setdefault("private_standing_committee_required", False)
-    output.setdefault(
-        "estimated_review_minutes",
-        {"validator_skim": 5, "deep_review": 45, "packet_verification": 10},
-    )
+    output.setdefault("decision_summary", "")
+    output.setdefault("arguments_for_yes", [])
+    output.setdefault("arguments_for_no", [])
     output.setdefault("missing_evidence", [])
-    output.setdefault("arguments_for_proceeding", [])
-    output.setdefault("arguments_for_delay_or_challenge", [])
-    output.setdefault(
-        "validator_work_item",
-        {
-            "title": f"Review {packet.get('amendment_name')}",
-            "recommended_validator_action": "Verify packet sources and reveal replay default or public override.",
-            "review_questions": [],
-            "override_questions": [],
-        },
-    )
+    flags = output.get("unscored_review_flags")
+    if not isinstance(flags, dict):
+        flags = {}
+    output["unscored_review_flags"] = {
+        "needs_public_review": bool(flags.get("needs_public_review", False)),
+        "bug_or_fix_sequence": bool(flags.get("bug_or_fix_sequence", False)),
+        "asset_control_or_compliance": bool(flags.get("asset_control_or_compliance", False)),
+        "source_default_vote_used": bool(flags.get("source_default_vote_used", False)),
+    }
     output.setdefault(
         "forbidden_stronger_claim",
-        "This is a replayable triage route, not a proof of amendment correctness.",
+        "A YES/NO replay recommendation is not proof that the amendment is correct.",
     )
-    return output
+    return output, schema_valid
 
 
 def write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
+    path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def write_sha256s(packet_dir: Path) -> None:
@@ -267,7 +223,7 @@ def write_sha256s(packet_dir: Path) -> None:
             continue
         rel = path.relative_to(packet_dir).as_posix()
         rows.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {rel}")
-    (packet_dir / "SHA256SUMS.txt").write_text("\n".join(rows) + "\n")
+    (packet_dir / "SHA256SUMS.txt").write_text("\n".join(rows) + "\n", encoding="utf-8")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -303,7 +259,7 @@ def main(argv: list[str] | None = None) -> int:
         runtime_kind = "openrouter_qwen_pilot_not_deterministic_sglang"
         default_headers = {
             "HTTP-Referer": "https://postfiat.org/",
-            "X-Title": "Post Fiat LLM Governance Replay",
+            "X-Title": "Post Fiat XRPL Vote Replay",
         }
     else:
         endpoint = args.endpoint
@@ -357,12 +313,15 @@ def main(argv: list[str] | None = None) -> int:
         "simulated_validators": args.validators,
         "temperature": 0,
         "top_p": 1,
+        "scored_output_field": "xrpl_vote_recommendation",
+        "allowed_scored_values": sorted(VOTES),
         "production_profile_note": production_profile_note,
+        "fallback_used": False,
     }
     write_json(packet_dir / "qwen_runtime_manifest.json", runtime_manifest)
 
     for packet_path in sorted(corpus_dir.glob("*.json")):
-        packet = json.loads(packet_path.read_text())
+        packet = json.loads(packet_path.read_text(encoding="utf-8"))
         out_dir = qwen_dir / packet["packet_id"]
         out_dir.mkdir(parents=True, exist_ok=True)
         prompt = build_prompt(packet)
@@ -392,7 +351,8 @@ def main(argv: list[str] | None = None) -> int:
                         ) from exc
                     parsed = offline_fixture(packet)
                     runtime_manifest["fallback_used"] = True
-            parsed = normalize_output(parsed, packet)
+                    write_json(packet_dir / "qwen_runtime_manifest.json", runtime_manifest)
+            parsed, schema_valid = normalize_output(parsed, packet)
             output_hash = sha_json(parsed)
             run_record = {
                 "packet_id": packet["packet_id"],
@@ -402,7 +362,7 @@ def main(argv: list[str] | None = None) -> int:
                 "run_index": run_idx,
                 "started_at": started,
                 "completed_at": utc_now(),
-                "schema_valid": parsed.get("route") in ROUTES,
+                "schema_valid": schema_valid,
                 "runtime_kind": runtime_manifest["runtime_kind"],
                 "model": model,
                 "error": error,
@@ -431,9 +391,8 @@ def main(argv: list[str] | None = None) -> int:
                             "model_profile_hash": run_record["model_profile_hash"],
                             "output_hash": output_hash,
                             "salt": salt,
-                            "parsed_route": parsed["route"],
-                            "vote_default": parsed["vote_default"],
-                            "mode": "replay_default",
+                            "parsed_xrpl_vote_recommendation": parsed["xrpl_vote_recommendation"],
+                            "mode": "vote_only_replay",
                         },
                     }
                 )

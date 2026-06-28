@@ -1,0 +1,39 @@
+{
+  "generated_at": "20260601T190931Z",
+  "source_document": "content/whitepaper.md",
+  "source_sha256": "dceec07dbbb9f2f82e72adbbe96d95303e109b9ead7f4a37732a2b937b06a677",
+  "target_criticism": "The paper carries a May 2026 revision with a March 2026 production date and benchmark artifacts generated May 5, 2026, while centering validation on Qwen/Qwen3.6-27B-FP8, challenged as an unestablished or non-real release served on a hash-pinned SGLang nightly image.",
+  "decision": "MATERIAL_NEW_INPUT_AVAILABLE",
+  "material_input": [
+    {
+      "kind": "public_model_card",
+      "url": "https://huggingface.co/Qwen/Qwen3.6-27B-FP8",
+      "api_url": "https://huggingface.co/api/models/Qwen/Qwen3.6-27B-FP8",
+      "observed_model_id": "Qwen/Qwen3.6-27B-FP8",
+      "observed_author": "Qwen",
+      "observed_private": false,
+      "observed_sha": "e89b16ebf1988b3d6befa7de50abc2d76f26eb09",
+      "observed_last_modified": "2026-04-24T02:39:18.000Z",
+      "observed_license": "apache-2.0"
+    }
+  ],
+  "completed_artifacts_reviewed": [
+    {
+      "path": "docs/evidence/whitepaper-provenance-20260601T175048Z/SHA256SUMS.txt",
+      "finding": "22 local artifacts present, 3 public receipts OK, public testnet VL sequence 5 decoded, public scoring config verified."
+    },
+    {
+      "path": "static/benchmarks/model-lift-baseline-20260601T154824Z/",
+      "finding": "Comparator audit shows exact replay and boundary disagreement versus a deterministic baseline, not model accuracy."
+    },
+    {
+      "path": "static/benchmarks/model-lift-adjudication-20260601T165516Z/",
+      "finding": "Boundary disagreements are policy tradeoffs under existing fields; no proven model or baseline superiority."
+    }
+  ],
+  "why_repeating_completed_artifacts_adds_no_information": "The existing packets already establish replayability, publication provenance, and the present limit of model-lift evidence. The remaining gap is public citation of the exact model artifact and careful wording of the claim.",
+  "next_command": "curl -L -s https://huggingface.co/api/models/Qwen/Qwen3.6-27B-FP8 | python3 -m json.tool",
+  "safe_replacement_sentence": "The active replay profile uses `Qwen/Qwen3.6-27B-FP8`, a public Qwen Hugging Face model card last modified on 2026-04-24 and documented for SGLang serving, under a pinned Modal/SGLang container; this supports reproducible pinned-stack replay, not model-correctness or production authority transfer.",
+  "do_not_claim": "The Qwen3.6 benchmark proves that AI governance is correct, that the model is the optimal selector, or that replayability across heterogeneous production profiles has been established.",
+  "integration_target": "One compact citation sentence near the Qwen3.6 replay profile references; no new benchmark section."
+}

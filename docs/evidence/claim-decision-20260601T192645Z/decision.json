@@ -1,0 +1,50 @@
+{
+  "generated_at": "20260601T192645Z",
+  "source_document": "content/whitepaper.md",
+  "source_sha256": "dceec07dbbb9f2f82e72adbbe96d95303e109b9ead7f4a37732a2b937b06a677",
+  "target_criticism": "The central benchmark evidence is thin and self-referential: determinism results come from a single GPU class, a single model, and small cohorts of 29 and 42 validators, while supporting references appear to point to internal project files rather than independently retrievable artifacts.",
+  "decision": "MATERIAL_NEW_INPUT_AVAILABLE",
+  "material_input": [
+    {
+      "kind": "public_static_benchmark_url",
+      "url": "https://postfiat.org/benchmarks/xrpl-validator-sglang-determinism-20260505T205530Z-summary.json",
+      "status": 200,
+      "sha256": "7f73e8b2f255bf4a7d65ce2c30e7646a8a19b497a44ebc62febe9c9658589ed0"
+    },
+    {
+      "kind": "public_static_benchmark_url",
+      "url": "https://postfiat.org/benchmarks/xrpl-validator-sglang-determinism-20260505T205530Z.json",
+      "status": 200,
+      "sha256": "de3076a5ec71f6e5ae81392ccda62b0880ec60c92b2b98a44812997186dcdcb4"
+    },
+    {
+      "kind": "public_static_benchmark_url",
+      "url": "https://postfiat.org/benchmarks/model-lift-baseline-20260601T154824Z/REPORT.md",
+      "status": 200,
+      "sha256": "c69e696d69be533e4f20ba07f0cc1a488ebbb377b6886f6234bb0360ea38db1f"
+    },
+    {
+      "kind": "public_static_benchmark_url",
+      "url": "https://postfiat.org/benchmarks/model-lift-adjudication-20260601T165516Z/REPORT.md",
+      "status": 200,
+      "sha256": "061976ecf3105d8c0c58565f8d48a459c80f64e2463e642d46f197cba45a297f"
+    },
+    {
+      "kind": "public_static_benchmark_url",
+      "url": "https://postfiat.org/benchmarks/ai-governance-evidence-challenge-20260601T170829Z/REPORT.md",
+      "status": 200,
+      "sha256": "e2dbdf95d18d21553daa44abc3bd674586de227f161234dcd32790fd40dc4243"
+    }
+  ],
+  "what_this_changes": "Public URLs address the claim that the static benchmark artifacts are only internal project files.",
+  "what_this_does_not_change": "The benchmark evidence remains narrow: one active model family, one pinned SGLang/Modal profile, and small saved validator cohorts.",
+  "materially_different_measurement_needed": [
+    "Second public model profile rerun on the same frozen inputs.",
+    "Cross-hardware replay beyond the current pinned H100/H200-style profile.",
+    "Larger or newer live validator cohorts.",
+    "Human or deterministic baseline labels sufficient to evaluate usefulness rather than repeatability."
+  ],
+  "safe_replacement_sentence": "The benchmark artifacts cited here are publicly retrievable and hash-checkable, but the current empirical claim remains deliberately narrow: same-stack replayability under one pinned Qwen/SGLang profile on the saved XRPL and PFT validator cohorts.",
+  "do_not_claim": "The published artifacts establish cross-model reproducibility, heterogeneous hardware replay, model superiority over deterministic or human baselines, or production-sufficient AI governance.",
+  "integration_target": "One compact public-artifact sentence or appendix line; no new breadth claim."
+}

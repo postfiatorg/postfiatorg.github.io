@@ -1,0 +1,95 @@
+{
+  "schema": "postfiat-private-otc-swaps-evidence-v1",
+  "generated_at": "2026-06-25T22:35:00Z",
+  "scope": "StakeHub shielded NAV swap and transparent PFTL-only NAV roundtrip evidence summary",
+  "network": "postfiat-wan-devnet",
+  "asset_pair": {
+    "input": "pfUSDC",
+    "output": "a651 NAVCoin"
+  },
+  "status_boundary": {
+    "mainnet_deployed": false,
+    "third_party_audited": false,
+    "values": "small-dollar devnet proof amounts",
+    "ethereum_mainnet_spend": false
+  },
+  "shielded_runs": [
+    {
+      "report": "stakehub-shielded-nav-swap-e2e-20260625T034439Z.json",
+      "started_at": "2026-06-25T03:44:39Z",
+      "completed_at": "2026-06-25T04:07:19Z",
+      "status": "complete",
+      "ok": true,
+      "step_count": 12,
+      "ok_steps": 12
+    },
+    {
+      "report": "stakehub-shielded-nav-swap-e2e-20260625T040738Z.json",
+      "started_at": "2026-06-25T04:07:38Z",
+      "completed_at": "2026-06-25T04:21:18Z",
+      "status": "complete",
+      "ok": true,
+      "step_count": 12,
+      "ok_steps": 12
+    },
+    {
+      "report": "stakehub-shielded-nav-swap-e2e-20260625T122435Z.json",
+      "started_at": "2026-06-25T12:24:35Z",
+      "completed_at": "2026-06-25T12:38:20Z",
+      "status": "complete",
+      "ok": true,
+      "step_count": 12,
+      "ok_steps": 12,
+      "amount": "1.00",
+      "bridge_in_amount": "10",
+      "settlement_reserve_amount": "1"
+    }
+  ],
+  "latest_shielded_execution": {
+    "report": "stakehub-shielded-nav-swap-e2e-20260625T122435Z.json",
+    "prover_prewarm_ms": 341568.160297,
+    "swap_create_ms": 6064.954345,
+    "transport_certification_ms": 4903.615972,
+    "shielded_swap_certificate_height": 437,
+    "shielded_swap_vote_count": 5,
+    "shielded_swap_receipt_accepted": true,
+    "private_egress_status": "private_egressed",
+    "private_egress_privacy_scan_ok": true,
+    "private_egress_proof_bytes": 6848,
+    "bridge_out_status": "bridged_out",
+    "bridge_out_delta_ok": true,
+    "final_balances": {
+      "pfusdc_atoms": 20152055,
+      "a651_atoms": 1
+    }
+  },
+  "transparent_runs": [
+    {
+      "report": "stakehub-transparent-20260625T133727Z-07e3aad6/pftl-only-summary.json",
+      "completion_status": "on_pftl_complete_bridge_out_deferred",
+      "final_summary_ok": true,
+      "failure_reasons": [],
+      "mint_amount": 1,
+      "total_ms": 43142.285399,
+      "primary_mint_receipt_id": "24196973e01710a7d9e688b90776c49a4fea5324bbc46dd0733c995179755e6f536d5e7e19c149d14d5577de451b7d44",
+      "nav_exit_redemption_id": "18589843d0da274da8b82af6f30c01fa8afdb95470eae20d45cccb332fb9f6b6898bf4647acbe5b1abc9b1516d0e34df"
+    },
+    {
+      "report": "stakehub-transparent-20260625T133820Z-d86740e9/pftl-only-summary.json",
+      "completion_status": "on_pftl_complete_bridge_out_deferred",
+      "final_summary_ok": true,
+      "failure_reasons": [],
+      "mint_amount": 1,
+      "total_ms": 38040.763465,
+      "primary_mint_receipt_id": "91cff679b3f955beb46fcc10a98f5ea37775eb52de23edd6088886b6a91f0abd1ba12a014f84bcc2c291b43fc61f7b1b",
+      "nav_exit_redemption_id": "34f83fc9a5a4ff0622dffe41ed2010009823681ca775658fb34acc3257f01eef8ef8372df4540cdfc829cb1a212c2116"
+    }
+  ],
+  "ui_verification": {
+    "transparent_pageerrors": 0,
+    "transparent_console_errors": 0,
+    "transparent_button_path": "Shielded NAV Swap tab -> Transparent No Orchard -> Run Transparent E2E",
+    "stakehub_commit": "dce65b1 Make transparent NAV roundtrip demo repeatable",
+    "shielded_repeatability_commit": "2795afc Make shielded NAV swap repeatable end to end"
+  }
+}

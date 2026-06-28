@@ -1,0 +1,40 @@
+<figure class="pol-fig" aria-labelledby="pol-how-title" aria-describedby="pol-how-cap">
+  <style>.pol-fig{margin:1.9rem auto 2.1rem;max-width:760px}.pol-fig-eyebrow{font:650 .72rem/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.09em;text-transform:uppercase;color:#7fee64;margin:0 0 .5rem}.pol-fig-cap{margin:.6rem 0 0;color:#83917f;font:400 .82rem/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}</style>
+  <div id="pol-how-title" class="pol-fig-eyebrow">HOW IT WORKS · one portfolio, six chains, one proof</div>
+  <svg viewBox="0 0 760 470" role="img" aria-describedby="pol-how-cap" style="width:100%;height:auto;max-width:760px;display:block;margin:0 auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace">
+    <defs>
+      <marker id="polArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#7fee64"/>
+      </marker>
+    </defs>
+    <rect x="0" y="0" width="760" height="470" fill="#0b0f0c" rx="10"/>
+    <!-- stage 1 -->
+    <rect x="40" y="18" width="680" height="58" rx="8" fill="rgba(143,214,255,.06)" stroke="#8fd6ff" stroke-opacity=".5"/>
+    <text x="380" y="42" text-anchor="middle" fill="#ddffdc" font-size="15" font-weight="650">The portfolio — six venues</text>
+    <text x="380" y="62" text-anchor="middle" fill="#83917f" font-size="12.5">Hyperliquid perps (long/short) · Aave borrow · multi-chain spot · Monero · NEAR · Solana</text>
+    <line x1="380" y1="76" x2="380" y2="96" stroke="#7fee64" stroke-width="1.5" marker-end="url(#polArrow)"/>
+    <!-- stage 2 -->
+    <rect x="40" y="98" width="680" height="58" rx="8" fill="rgba(127,238,100,.05)" stroke="#7fee64" stroke-opacity=".45"/>
+    <text x="380" y="122" text-anchor="middle" fill="#ddffdc" font-size="15" font-weight="650">Each leg opened to its own chain's consensus</text>
+    <text x="380" y="142" text-anchor="middle" fill="#83917f" font-size="12.5">storage proof · receipt-inclusion · light-client outcome proof · in-circuit reserve proof</text>
+    <line x1="380" y1="156" x2="380" y2="176" stroke="#7fee64" stroke-width="1.5" marker-end="url(#polArrow)"/>
+    <!-- stage 3 -->
+    <rect x="40" y="178" width="680" height="58" rx="8" fill="rgba(127,238,100,.05)" stroke="#7fee64" stroke-opacity=".45"/>
+    <text x="380" y="202" text-anchor="middle" fill="#ddffdc" font-size="15" font-weight="650">SP1 zkVM — verify all six, compute the buckets</text>
+    <text x="380" y="222" text-anchor="middle" fill="#83917f" font-size="12.5">in zero knowledge: no addresses, no per-position sizes leave the circuit</text>
+    <line x1="380" y1="236" x2="380" y2="256" stroke="#7fee64" stroke-width="1.5" marker-end="url(#polArrow)"/>
+    <!-- stage 4 -->
+    <rect x="40" y="258" width="680" height="58" rx="8" fill="rgba(127,238,100,.05)" stroke="#7fee64" stroke-opacity=".45"/>
+    <text x="380" y="282" text-anchor="middle" fill="#ddffdc" font-size="15" font-weight="650">One Groth16 proof + the public buckets</text>
+    <text x="380" y="302" text-anchor="middle" fill="#83917f" font-size="12.5">spot · cash · gross perp notional · liability — plus an evidence tier per leg</text>
+    <line x1="380" y1="316" x2="380" y2="336" stroke="#7fee64" stroke-width="1.5" marker-end="url(#polArrow)"/>
+    <!-- stage 5 -->
+    <rect x="40" y="338" width="680" height="64" rx="8" fill="rgba(245,198,106,.06)" stroke="#f5c66a" stroke-opacity=".55"/>
+    <text x="380" y="364" text-anchor="middle" fill="#ddffdc" font-size="15" font-weight="650">Verified by the real SP1 verifier on Arbitrum</text>
+    <text x="380" y="385" text-anchor="middle" fill="#83917f" font-size="12.5">submitExposure · status 1 · gas 1,195,653 · total cost $0.23 · tx 0x9960…75f08</text>
+    <!-- footnote -->
+    <text x="380" y="430" text-anchor="middle" fill="#bad8b6" font-size="12">anyone re-runs the verifier against the published proof and reaches the same numbers</text>
+    <text x="380" y="450" text-anchor="middle" fill="#83917f" font-size="11.5">no trusted auditor · no exchange's word · no node to run</text>
+  </svg>
+  <figcaption id="pol-how-cap" class="pol-fig-cap">The pipeline: every leg is opened against the source chain's own cryptography, an SP1 zkVM verifies all six and computes the balance-sheet buckets without revealing addresses or positions, and a single Groth16 proof is checked on-chain by the canonical SP1 verifier.</figcaption>
+</figure>

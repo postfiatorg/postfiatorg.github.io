@@ -1,6 +1,7 @@
 ---
 title: "Origination Replay: The System Is What It Does"
 date: 2026-06-04T00:00:00Z
+draft: true
 summary: "XRPL shows that protocol governance has an upstream origination layer. Post Fiat's proposal is to keep that reality explicit: publish the context, prompt, model choice, verdict, and replay trail behind institutional agenda formation."
 aliases:
   - /origination-replay/

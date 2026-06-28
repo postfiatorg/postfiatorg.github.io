@@ -1,0 +1,32 @@
+{
+  "date_inventory_rows": 81,
+  "decoded_testnet_vl": {
+    "effective_ripple_time": 833133023,
+    "effective_utc": "2026-05-26T17:50:23Z",
+    "expiration_ripple_time": 876331223,
+    "expiration_utc": "2027-10-08T17:20:23Z",
+    "public_key": "ED3F1E0DA736FCF99BE2880A60DBD470715C0E04DD793FB862236B070571FC09E2",
+    "public_scoring_config": {
+      "cadence_hours": 168.0,
+      "unl_max_size": 20,
+      "unl_min_score_gap": 5,
+      "unl_score_cutoff": 40
+    },
+    "sequence": 5,
+    "source_url": "https://postfiat.org/testnet_vl.json",
+    "validator_count": 20,
+    "version": 2
+  },
+  "generated_at": "20260601T175048Z",
+  "local_artifacts_missing": 0,
+  "local_artifacts_present": 22,
+  "principal_findings": [
+    "May 2026 provenance is not future-dated relative to this packet generation date.",
+    "The signed public testnet validator list decodes to sequence 5 with 20 validators effective 2026-05-26T17:50:23Z.",
+    "The public scoring config endpoint returns cadence=168, cutoff=40, max_size=20, min_gap=5.",
+    "References [16]-[17] are backed by local dynamic-unl-scoring files but are not public URLs in this packet.",
+    "The 'Originally published to production' timestamp is production metadata; the nearest git commit is 25 seconds later."
+  ],
+  "public_receipts_ok": 3,
+  "whitepaper_sha256": "dceec07dbbb9f2f82e72adbbe96d95303e109b9ead7f4a37732a2b937b06a677"
+}

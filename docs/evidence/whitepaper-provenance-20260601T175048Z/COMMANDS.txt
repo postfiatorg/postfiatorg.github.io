@@ -1,0 +1,7 @@
+python3 scripts/whitepaper_provenance_packet.py
+rg -n "2026|May|published|production|generated|inspected|revision|artifact|benchmark" content/whitepaper.md
+git log --follow --format='%H%x09%cI%x09%an%x09%s' -- content/whitepaper.md
+git log --format='%H%x09%cI%x09%an%x09%s' -- content/testnet_vl.json static/benchmarks/live-testnet-validator-stats.json public/testnet_vl.json
+curl -fsS https://postfiat.org/testnet_vl.json
+curl -fsS https://scoring-testnet.postfiat.org/api/scoring/config
+sha256sum docs/evidence/whitepaper-provenance-20260601T175048Z/*

@@ -1,0 +1,57 @@
+Working directory: /home/postfiat/repos/postfiatorg.github.io
+
+Command:
+python3 - <<'PY'
+import hashlib, json, urllib.request
+base='https://scoring-testnet.postfiat.org/api/scoring/rounds/7/'
+def fetch(path):
+    with urllib.request.urlopen(base+path, timeout=30) as r:
+        return r.status, r.read()
+def canon_hash(raw):
+    data=json.loads(raw)
+    return hashlib.sha256(json.dumps(data, sort_keys=True, separators=(',', ':'), default=str).encode()).hexdigest()
+status, raw = fetch('bundle.json')
+bundle=json.loads(raw)
+print('bundle_status', status)
+print('bundle_version', bundle.get('bundle_version'))
+print('round_kind', bundle.get('round_kind'))
+print('file_count', len(bundle['file_hashes']))
+print('bundle_hashes_self', 'bundle.json' in bundle['file_hashes'])
+missing=[]; mismatches=[]; checked=0
+for path, expected in sorted(bundle['file_hashes'].items()):
+    try:
+        st, b = fetch(path)
+        if st != 200:
+            missing.append((path, st)); continue
+        got=canon_hash(b)
+        checked += 1
+        if got != expected:
+            mismatches.append((path, expected, got))
+    except Exception as e:
+        missing.append((path, str(e)))
+print('checked', checked)
+print('missing', missing)
+print('mismatches', mismatches)
+st, vh_raw=fetch('outputs/verification_hashes.json')
+vh=json.loads(vh_raw)
+print('verification_hashes', json.dumps(vh, sort_keys=True))
+for key, path in [('model_response_hash','outputs/model_response.json'),('validator_scores_hash','outputs/validator_scores.json'),('selected_unl_hash','outputs/selected_unl.json'),('signed_validator_list_hash','outputs/signed_validator_list.json')]:
+    st,b=fetch(path)
+    print(key, vh.get(key)==canon_hash(b), vh.get(key))
+PY
+
+Output:
+bundle_status 200
+bundle_version 2
+round_kind normal
+file_count 14
+bundle_hashes_self False
+checked 14
+missing []
+mismatches []
+verification_hashes {"model_response_hash": "8da0de1e666a6665aa15e4897ab8b120888c21b2bf8d72a6c269f829479f2d40", "selected_unl_hash": "a0922bea53b1cd1f3f4b1cc92dce902a87bcd5a506a9fa578836c83bb8f819fc", "signed_validator_list_hash": "a0983ea17e0ee18a54e9ea78dfcb5c4334c88e36aa5db4673af5c24819ebfd44", "validator_scores_hash": "c96bf06445753b241a6ac4748830bbe542e090eb50caa30e36c7f771c561bf04"}
+model_response_hash True 8da0de1e666a6665aa15e4897ab8b120888c21b2bf8d72a6c269f829479f2d40
+validator_scores_hash True c96bf06445753b241a6ac4748830bbe542e090eb50caa30e36c7f771c561bf04
+selected_unl_hash True a0922bea53b1cd1f3f4b1cc92dce902a87bcd5a506a9fa578836c83bb8f819fc
+signed_validator_list_hash True a0983ea17e0ee18a54e9ea78dfcb5c4334c88e36aa5db4673af5c24819ebfd44
+
