@@ -91,7 +91,7 @@ Never ask for or accept the relay seed, Modal secrets, or validator key material
 - A host already running a Post Fiat **testnet** validator. If you do not have one yet, set it up first with the [validator setup guide](https://postfiat.org/validator-setup/). The sidecar runs on the same host.
 - Docker and Docker Compose (already present if you followed the validator setup guide).
 
-Participation additionally needs the three "bring your own" pieces covered in Part B: a funded relay wallet, your `validator-keys.json` on the host, and an inference runtime.
+Participation additionally needs the three "bring your own" pieces covered in Part B: a funded relay wallet, your `validator-keys.json` on the host, and an inference runtime (a GPU). With managed Modal the GPU runs only during each weekly scoring round and scales to zero when idle, so the cost is on the order of a few dollars a month.
 
 ## Part A — Verify-Only (Start Here)
 
@@ -137,7 +137,7 @@ This is the key safety property. The commit and reveal memos are **signed by you
 
 Participation scores on a GPU runtime that matches the foundation's pinned setup. The managed path is Modal, and it is zero-touch: once configured, the sidecar deploys the foundation-pinned endpoint itself and redeploys when the foundation pins a new runtime.
 
-1. Sign up at [modal.com](https://modal.com) and enable **billing** for your workspace. The endpoint uses an **H100** GPU, so deploys and scoring incur GPU charges. (The endpoint scales to zero when idle, so you pay only for the few minutes of inference each weekly round needs.)
+1. Sign up at [modal.com](https://modal.com) and enable **billing** for your workspace. The endpoint uses an **H100** GPU, so deploys and scoring incur GPU charges. Cost is minimal: Modal bills per GPU-second and scales to zero when idle, so you pay only for the few minutes of H100 time each weekly scoring round uses, on the order of a few dollars a month and nothing while idle.
 2. Create a **Modal account API token** (the deploy credential): create one in the Modal dashboard, or — with the Modal CLI installed (`pip install modal`) and authenticated — run `modal token new`. This yields a token **id** and **secret** — these become `MODAL_TOKEN_ID` and `MODAL_TOKEN_SECRET`.
 3. Create a **Modal Proxy Auth Token** from the Modal web UI (the deployed endpoint runs with proxy auth required). Store its token **id** as `POSTFIAT_SIDECAR_MODAL_KEY` and its **secret** as `POSTFIAT_SIDECAR_MODAL_SECRET`.
 
