@@ -137,11 +137,15 @@ This is the key safety property. The commit and reveal memos are **signed by you
 
 Participation scores on a GPU runtime that matches the foundation's pinned setup. The managed path is Modal, and it is zero-touch: once configured, the sidecar deploys the foundation-pinned endpoint itself and redeploys when the foundation pins a new runtime.
 
-1. Sign up at [modal.com](https://modal.com) and enable **billing** for your workspace. The endpoint uses an **H100** GPU, so deploys and scoring incur GPU charges. Cost is minimal: Modal bills per GPU-second and scales to zero when idle, so you pay only for the few minutes of H100 time each weekly scoring round uses, on the order of a few dollars a month and nothing while idle.
-2. Create a **Modal account API token** (the deploy credential): create one in the Modal dashboard, or — with the Modal CLI installed (`pip install modal`) and authenticated — run `modal token new`. This yields a token **id** and **secret** — these become `MODAL_TOKEN_ID` and `MODAL_TOKEN_SECRET`.
-3. Create a **Modal Proxy Auth Token** from the Modal web UI (the deployed endpoint runs with proxy auth required). Store its token **id** as `POSTFIAT_SIDECAR_MODAL_KEY` and its **secret** as `POSTFIAT_SIDECAR_MODAL_SECRET`.
+New to Modal? It is a serverless GPU host, and the agent can walk you through this live. You need an account plus two kinds of token:
 
-All four are secrets — they go in `.env` only. Running more than one validator against the same Modal account? Set a distinct `POSTFIAT_SIDECAR_MODAL_APP_NAME` per validator so they do not manage the same Modal app.
+1. Sign up at [modal.com](https://modal.com) and add a payment method under **Settings → Billing**. The endpoint runs on an **H100**, billed per GPU-second. Cost is minimal: Modal scales to zero when idle, so you pay only for the few minutes of H100 time each weekly scoring round uses, on the order of a few dollars a month and nothing while idle.
+2. **Account token** (lets the sidecar deploy): in the Modal dashboard under **Settings → API Tokens**, create a token. Its id is `MODAL_TOKEN_ID`, its secret is `MODAL_TOKEN_SECRET`. CLI alternative: `pip install modal`, then `modal token new`.
+3. **Proxy-auth token** (lets the sidecar call its own deployed endpoint): in the dashboard under **Settings → Proxy Auth Tokens**, create a token. Its id is `POSTFIAT_SIDECAR_MODAL_KEY`, its secret is `POSTFIAT_SIDECAR_MODAL_SECRET`.
+
+These are two different token types: the first authorizes deploys, the second authorizes requests to the deployed endpoint. A token's secret is shown only once, when you create it, so copy it then; if you lose it, create a new one. All four are secret and go in `.env` only. Modal's own setup docs: https://modal.com/docs/guide
+
+Running more than one validator against the same Modal account? Set a distinct `POSTFIAT_SIDECAR_MODAL_APP_NAME` per validator so they do not manage the same Modal app.
 
 > Prefer your own hardware? See [Option: local SGLang](#option-local-sglang) below. Modal is the default and the simplest path.
 
