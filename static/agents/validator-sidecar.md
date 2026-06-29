@@ -38,7 +38,7 @@ NETWORK=testnet
 SIDECAR_DIR=/opt/validator-scoring-sidecar
 INFERENCE=modal
 
-I will provide the relay wallet seed, Modal credentials, and the path to my validator-keys.json through the .env file and on disk — never in chat. Keep all secrets out of chat, logs, and image layers. Set up participation mode, start the container with the participation overlay, and verify a round reaches COMMITTED and then REVEALED before finishing.
+I will provide the relay wallet seed, Modal credentials, and the path to my validator-keys.json through the .env file and on disk, never in chat. Before any step that needs my Modal account, relay wallet, or validator keys, stop and tell me plainly what I must do by hand (create the Modal account and its two tokens, create and fund a Task Node relay wallet, and place validator-keys.json on the host), then wait for me to paste the secrets into .env and confirm before you continue. Keep all secrets out of chat, logs, and image layers. Set up participation mode, start the container with the participation overlay, and verify a round reaches COMMITTED and then REVEALED before finishing.
 ```
 
 ## Scope
@@ -163,6 +163,8 @@ MODAL_TOKEN_SECRET=<modal account token secret>
 POSTFIAT_SIDECAR_MODAL_KEY=<modal proxy-auth token id>
 POSTFIAT_SIDECAR_MODAL_SECRET=<modal proxy-auth token secret>
 ```
+
+If an agent is driving the setup, have it prepare these lines in `.env`, then paste your seed and the four Modal values into the file yourself, so the secrets never pass through the chat.
 
 The PFTL RPC URL and the foundation publisher address are discovered automatically (RPC defaults to `https://rpc.testnet.postfiat.org`, the publisher comes from the scoring service config). Override them only if you have a reason to.
 
