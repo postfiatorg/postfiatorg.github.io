@@ -144,7 +144,16 @@ Bring-your-own alternative: any funded testnet `r...` account works, and keeps y
 
 Participation signs commit/reveal authorship with your validator master key, so the `validator-keys.json` you generated during validator setup must be present on the host and is mounted **read-only** into the container.
 
-**Security note.** The validator setup guide recommends moving `validator-keys.json` off the host to offline storage after configuration. Participation needs it back on the host. Bring it back deliberately: place it at a known path, keep it `chmod 600`, and set its host path. The participation overlay mounts it read-only at `/keys/validator-keys.json`; the sidecar reads only the public key from it and never copies it into an image or logs it. The on-chain sender remains the relay wallet, not your validator identity.
+**Security note.** The validator setup guide recommends moving `validator-keys.json` off the host to offline storage after configuration. Participation needs it back on the host. Bring it back deliberately: place it at a known path and set its host path. The participation overlay mounts it read-only at `/keys/validator-keys.json`; the sidecar reads only the public key from it and never copies it into an image or logs it. The on-chain sender remains the relay wallet, not your validator identity.
+
+**File permissions.** The sidecar container runs as a **non-root** user (uid/gid `1000`), so a root-owned `chmod 600` key file cannot be read inside the container and every commit fails with `could not read validator-keys file … Permission denied`. Grant read access to the container's group while keeping the file unreadable to other host users:
+
+```bash
+sudo chown root:1000 /opt/validator-scoring-sidecar/validator-keys.json
+sudo chmod 640 /opt/validator-scoring-sidecar/validator-keys.json
+```
+
+This keeps the owner as `root` and grants read access only to gid `1000` (the container's user) — not to the world. Do not use `chmod 600` (unreadable by the non-root container) or `chmod 644` (world-readable on the host).
 
 Set the host path:
 
@@ -258,6 +267,7 @@ State in the named volume is untouched.
 
 | Symptom | Likely cause | What to do |
 |---|---|---|
+| `participate failed` with `could not read validator-keys file … Permission denied` | The key file is not readable by the container's non-root user (uid/gid `1000`) — typically left at root-owned `chmod 600` | `sudo chown root:1000 … && sudo chmod 640 …` the key file (see the **B3** file-permissions note). A root-only `chmod 600` file cannot be read inside the non-root container. |
 | A commit or reveal status is `skipped_low_balance` | Relay wallet underfunded | Fund the relay `r...` account. A low-balance reveal retries while its window is open; a low-balance commit is terminal for that round. |
 | Won't start: `PFTL RPC … is not reachable` | RPC down or wrong URL | Fix `POSTFIAT_SIDECAR_PFTL_RPC_URL`; confirm the node answers `server_info`. |
 | `participate failed; sleeping …` with an RPC error | Transient RPC failure | No action — the round is retried next pass. If it persists, check the RPC node. |
@@ -271,7 +281,7 @@ For the full operator reference, see the repository docs: [`Usage.md`](https://g
 ## Agent Safety Checklist
 
 - Never paste the relay wallet seed, Modal secrets, or `validator-keys.json` contents into chat. Keep them in `.env` and on disk only.
-- Keep `validator-keys.json` `chmod 600` and mounted read-only; prefer removing it from the host again if you stop participating.
+- Keep `validator-keys.json` mounted read-only and readable only by `root` and the container's group (`chown root:1000 && chmod 640` — a root-only `chmod 600` file is unreadable by the non-root container); prefer removing it from the host again if you stop participating.
 - The relay wallet is deliberately not your validator identity — keep them separate, and use a distinct relay wallet per sidecar.
 - Start verify-only first and confirm `sync completed` before taking on participation cost.
 - Participation is all-or-nothing: expect it to fail fast and change nothing on-chain if a prerequisite is missing.
