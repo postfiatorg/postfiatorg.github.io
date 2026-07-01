@@ -57,7 +57,7 @@ NETWORK=testnet
 SIDECAR_DIR=/opt/validator-scoring-sidecar
 INFERENCE=modal
 
-I will provide the relay wallet seed, Modal credentials, and the path to my validator-keys.json through the .env file and on disk, never in chat. Before any step that needs my Modal account, relay wallet, or validator keys, stop and tell me plainly what I must do by hand (create the Modal account and its two tokens, create and fund a Task Node relay wallet, and place validator-keys.json on the host), then wait for me to paste the secrets into .env and confirm before you continue. Keep all secrets out of chat, logs, and image layers. Set up participation mode, start the container with the participation overlay, and verify a round reaches COMMITTED and then REVEALED before finishing.
+I will provide the relay wallet seed, Modal credentials, and the path to my validator-keys.json through the .env file and on disk, never in chat. Before any step that needs my Modal account, relay wallet, or validator keys, stop and tell me plainly what I must do by hand (create the Modal account and its two tokens, create and fund a Task Node relay wallet, and place validator-keys.json on the host), then wait for me to paste the secrets into .env and confirm before you continue. Keep all secrets out of chat, logs, and image layers. Set up participation mode, start the container with the participation overlay, then run `preflight` and confirm it prints `Preflight: READY` before finishing. Do not wait for a live round; the sidecar handles the next round on its own.
 ```
 
 ## Scope
@@ -237,7 +237,32 @@ docker compose cp <path>/deployment_record.json sidecar:/data/runtime/deployment
 
 Local mode is operator-managed: when the foundation pins a new runtime, the sidecar reports the round as runtime-incompatible and you re-run `start-sglang`. See the repository [`docs/Deployment.md`](https://github.com/postfiatorg/validator-scoring-sidecar/blob/main/docs/Deployment.md) for details.
 
+## Confirm It Will Work
+
+Before you wait on a live round, prove the setup end to end with the `preflight` command. Run it until it prints `Preflight: READY`:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.participate.yml run --rm sidecar preflight
+```
+
+Run preflight in its own one-off container with the participate loop stopped (or before you start it); doing it first also gets the one-time ~18-minute Modal build out of the way under supervision. A `round_reproduction` failure that says `sync is already running` is a lock collision with the running loop, not a misconfiguration — stop the loop (or use `--quick`) and re-run.
+
+It prints one verdict line — `Preflight: READY` or `Preflight: NOT READY` — then the relay `r...` address and a `[PASS]`/`[FAIL]` line per check. Exit code is `0` when READY, and no secret (relay seed, Modal credentials, validator key contents) is printed. Each check maps to a step a live commit/reveal depends on:
+
+- **Relay wallet derived** — the `r...` address is derived from the configured secret, with no secret shown.
+- **Validator keys readable** — the key file is readable by the container's non-root user, so the container can read the key it signs commits with (the common permission trap).
+- **RPC reachable** — the PFTL RPC answers, so submission works.
+- **Relay wallet funded** — confirmed over the PFTL RPC, so commits and reveals can pay their fees.
+- **Foundation publisher discoverable** — the foundation publisher address is discoverable, so round discovery works.
+- **Round reproduced** — it reproduces the latest completed round on your own runtime and compares it with the foundation, proving the whole scoring/inference pipeline works without submitting anything on-chain.
+
+Add `--quick` to skip only the round-reproduction step for a fast, config-only check. Because of that reproduction, the first full run can take roughly **18 minutes** if Modal deploys the endpoint for the first time. That is the same cost the first real round would incur, paid now rather than mid-round; `--quick` avoids it.
+
+`Preflight: READY` means the setup has passed every readiness check a live commit/reveal depends on — that is the setup readiness gate, and it is the end of setup. You don't wait for a live round: the running sidecar joins the next round (roughly weekly) on its own. If you want end-to-end confirmation afterward you can optionally watch a round reach `COMMITTED` then `REVEALED` or read its convergence report, but that happens on its own schedule and is not part of setup.
+
 ## Verifying A Healthy Participation Run
+
+Optional and after the fact: preflight is the end of setup, and the running sidecar joins the next round on its own. If you later want to confirm it end to end — on its own schedule, not as part of setup — here is how.
 
 Watch the loop:
 
@@ -258,7 +283,7 @@ for r in db.execute('SELECT round_number, sidecar_state, commit_tx_hash, reveal_
 "
 ```
 
-A round advances `DISCOVERED → INPUT_PACKAGE_VERIFIED → SCORED → COMMITTED → REVEALED`. Seeing a round reach `COMMITTED` (with a `commit_tx_hash`) and then `REVEALED` (with a `reveal_tx_hash`) is the success signal.
+A round advances `DISCOVERED → INPUT_PACKAGE_VERIFIED → SCORED → COMMITTED → REVEALED`. Preflight (see [Confirm It Will Work](#confirm-it-will-work)) is the setup readiness gate; you don't wait for a live round. If you want end-to-end confirmation afterward you can optionally watch a round reach `COMMITTED` (with a `commit_tx_hash`) and then `REVEALED` (with a `reveal_tx_hash`), but that happens on its own schedule and is not part of setup.
 
 After your reveal, the foundation publishes a per-round convergence report you can read back, keyed on the on-chain round number:
 
@@ -304,4 +329,4 @@ For the full operator reference, see the repository docs: [`Usage.md`](https://g
 - The relay wallet is deliberately not your validator identity — keep them separate, and use a distinct relay wallet per sidecar.
 - Start verify-only first and confirm `sync completed` before taking on participation cost.
 - Participation is all-or-nothing: expect it to fail fast and change nothing on-chain if a prerequisite is missing.
-- Verify a round reaches `COMMITTED` then `REVEALED` before declaring the setup healthy.
+- Run preflight and confirm `Preflight: READY` — that is the end of setup. You do not wait for a live round; the sidecar handles the next scoring round on its own.
