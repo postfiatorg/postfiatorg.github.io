@@ -1,10 +1,11 @@
 ---
 title: "A Proposal for Better Private FX Settlement"
 date: 2026-07-03T00:00:00Z
-url: "/research/private-fx-settlement/"
-type: "blog"
-breadcrumb_label: "Research"
-breadcrumb_url: "/research/"
+url: "/private-fx-settlement/"
+aliases:
+  - "/blog/private-fx-settlement/"
+breadcrumb_label: "Blog"
+breadcrumb_url: "/blog/"
 summary: "Foreign exchange settles on rails that leak size and carry Herstatt risk on every uncovered leg. We rebuild the argument from theory — settlement finality, Kyle's model of information and impact, frequent batch auctions, dark-pool adverse selection — and propose a shielded frequent batch auction with atomic PvP over reserve-backed assets. New in this revision: a square-root law for internal netting, an information bound on what the externalized residual reveals, an equal-cost rule for batch length, and an unsentimental account of the two conditions the design still has to earn — a matcher nobody can see into, and a crowd."
 description: "Market-design analysis of confidential FX settlement: settlement-risk theory (BIS 2025 Triennial, Herstatt), the microstructure of information leakage (Kyle 1985, Almgren-Chriss 2000), frequent batch auctions (Budish-Cramton-Shim 2015), dark-pool adverse selection (Zhu 2014), multi-CBDC bridges (Mariana, mBridge, Agorá), and original quantitative results: a square-root netting law, a mutual-information leakage bound, and a batch-length optimum."
 author: "Post Fiat"
