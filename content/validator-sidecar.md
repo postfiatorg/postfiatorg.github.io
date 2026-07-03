@@ -23,7 +23,7 @@ copyMarkdownId: "pftSidecarCopyTool"
 
 ## Agent Operator Quick Start
 
-This guide is written to be run by a coding agent (Codex or Claude Code) on your validator host, or followed by hand. Start the agent from a terminal on the same server that runs your validator. Do not paste the relay wallet seed, Modal secrets, or `validator-keys.json` contents into agent chat — keep all secret material in `.env` and on disk only.
+This guide is written to be run by a coding agent (Codex or Claude Code) on your validator host, or followed by hand. Start the agent from a terminal on the same server that runs your validator. Do not paste the relay wallet seed, Modal secrets, or `validator-keys.json` contents into agent chat — provide the seed and Modal secrets through a labeled local secrets file the agent injects into `.env` for you without reading the values (see B4), keep `validator-keys.json` a file on disk (see B3), and keep all secret material on disk only.
 
 For a hands-off run, start the agent in its bypass-permissions mode:
 
@@ -57,7 +57,7 @@ NETWORK=testnet
 SIDECAR_DIR=/opt/validator-scoring-sidecar
 INFERENCE=modal
 
-I will provide the relay wallet seed, Modal credentials, and the path to my validator-keys.json through the .env file and on disk, never in chat. Before any step that needs my Modal account, relay wallet, or validator keys, stop and tell me plainly what I must do by hand (create the Modal account and its two tokens, create and fund a Task Node relay wallet, and place validator-keys.json on the host), then wait for me to paste the secrets into .env and confirm before you continue. Keep all secrets out of chat, logs, and image layers. Set up participation mode, start the container with the participation overlay, then run `preflight` and confirm it prints `Preflight: READY` before finishing. Do not wait for a live round; the sidecar handles the next round on its own.
+I will provide the relay wallet seed and Modal credentials through a labeled local secrets file, and my validator-keys.json on disk, never in chat. Before any step that needs my Modal account, relay wallet, or validator keys, stop and tell me plainly what I must do by hand (create the Modal account and its two tokens, create and fund a Task Node relay wallet, and place validator-keys.json on the host), give me the secrets-file format from the guide, and wait for me to confirm the file is ready. Then finish the configuration yourself: inspect the file's structure only (labels, value prefixes, lengths, word counts — never the values), move it to this server over SSH if it is not already here (or ask me to copy it here if you cannot reach it), inject the values into .env, delete the transferred copy and any helper artifacts, and tell me which keys you set. If I say I prefer to edit .env myself, prepare placeholder lines and wait for me instead. Keep all secrets out of chat, logs, and image layers. Set up participation mode, start the container with the participation overlay, then run `preflight` and confirm it prints `Preflight: READY` before finishing. Do not wait for a live round; the sidecar handles the next round on its own.
 ```
 
 ## Scope
@@ -84,7 +84,7 @@ For participation only, also:
 - The host path of your **`validator-keys.json`**.
 - An **inference runtime**: a Modal account (default) or a local SGLang H100.
 
-Never ask for or accept the relay seed, Modal secrets, or validator key material in chat. They belong in `.env` and on disk only.
+Never ask for or accept the relay seed, Modal secrets, or validator key material in chat. For the seed and Modal secrets, the default channel is a labeled local secrets file that the agent injects into `.env` without reading the values (see B4), and the alternative is the operator editing `.env` by hand; `validator-keys.json` stays a file on disk (see B3). Either way, secrets live on disk only.
 
 ## Prerequisites
 
@@ -143,7 +143,7 @@ New to Modal? It is a serverless GPU host, and the agent can walk you through th
 2. **Account token** (lets the sidecar deploy): in the Modal dashboard under **Settings → API Tokens**, create a token. Its id is `MODAL_TOKEN_ID`, its secret is `MODAL_TOKEN_SECRET`. CLI alternative: `pip install modal`, then `modal token new`.
 3. **Proxy-auth token** (lets the sidecar call its own deployed endpoint): in the dashboard under **Settings → Proxy Auth Tokens**, create a token. Its id is `POSTFIAT_SIDECAR_MODAL_KEY`, its secret is `POSTFIAT_SIDECAR_MODAL_SECRET`.
 
-These are two different token types: the first authorizes deploys, the second authorizes requests to the deployed endpoint. A token's secret is shown only once, when you create it, so copy it then; if you lose it, create a new one. All four are secret and go in `.env` only. Modal's own setup docs: https://modal.com/docs/guide
+These are two different token types: the first authorizes deploys, the second authorizes requests to the deployed endpoint. A token's secret is shown only once, when you create it, so copy it then; if you lose it, create a new one. All four are secret: they go in your secrets file (see B4), or straight into `.env` if you configure by hand — never in chat. Modal's own setup docs: https://modal.com/docs/guide
 
 Running more than one validator against the same Modal account? Set a distinct `POSTFIAT_SIDECAR_MODAL_APP_NAME` per validator so they do not manage the same Modal app.
 
@@ -154,8 +154,8 @@ Running more than one validator against the same Modal account? Set a distinct `
 The relay wallet is a standard testnet `r...` account that pays the small per-round fees. The easiest way to get a funded one is **Task Node**, Post Fiat's onboarding app:
 
 1. Go to [tasknode.postfiat.org](https://tasknode.postfiat.org/) and create a wallet (reply `new_wallet` in the Task Node messaging flow).
-2. Task Node creates a self-custodial testnet wallet, sends you its **seed** (save it in a password manager — Post Fiat cannot recover it), and the faucet funds it with **100 testnet PFT** automatically. That is a long runway: each round costs only two tiny fees (commit + reveal).
-3. Use that wallet's seed as `POSTFIAT_SIDECAR_VALIDATOR_WALLET_SEED`.
+2. Task Node creates a self-custodial testnet wallet, sends you its wallet secret — an `s...` seed or a 24-word recovery phrase; the sidecar accepts either (save it in a password manager — Post Fiat cannot recover it) — and the faucet funds it with **100 testnet PFT** automatically. That is a long runway: each round costs only two tiny fees (commit + reveal).
+3. That secret is your `POSTFIAT_SIDECAR_VALIDATOR_WALLET_SEED` — the `seed` line of the secrets file in B4.
 
 Bring-your-own alternative: any funded testnet `r...` account works, and keeps your participation cleanly separate from your Task Node identity. It must be a **different** account from your validator identity, and if you run more than one sidecar, each needs its own relay wallet so concurrent submissions do not collide on transaction sequence.
 
@@ -182,7 +182,7 @@ POSTFIAT_SIDECAR_VALIDATOR_KEYS_FILE=/opt/validator-scoring-sidecar/validator-ke
 
 ### B4 — Configure `.env` For Participation
 
-Edit `.env` and uncomment/set the participation block:
+The participation block in `.env` takes these values:
 
 ```dotenv
 POSTFIAT_SIDECAR_MODE=participate
@@ -196,7 +196,30 @@ POSTFIAT_SIDECAR_MODAL_KEY=<modal proxy-auth token id>
 POSTFIAT_SIDECAR_MODAL_SECRET=<modal proxy-auth token secret>
 ```
 
-If an agent is driving the setup, have it prepare these lines in `.env`, then paste your seed and the four Modal values into the file yourself, so the secrets never pass through the chat.
+#### Default: hand the agent a secrets file
+
+If an agent is driving the setup, do not paste secrets into the chat and do not stop to hand-edit `.env` mid-setup. Instead, put the five secret values in a plain text file the agent can reach — on this host if the agent runs here, or on your local machine if the agent drives this host over SSH. One labeled value per line, each value on the same line as its label (the 24-word recovery phrase included):
+
+```text
+seed: <s... family seed, or the full 24-word recovery phrase>
+token_id: ak-...
+token_secret: as-...
+modal_key: wk-...
+modal_secret: ws-...
+```
+
+Labels are case-insensitive and may be separated with `:` or `=`; quotes around a value are stripped. The labels map one-to-one onto the `.env` keys: `seed` → `POSTFIAT_SIDECAR_VALIDATOR_WALLET_SEED`, `token_id`/`token_secret` → `MODAL_TOKEN_ID`/`MODAL_TOKEN_SECRET`, `modal_key`/`modal_secret` → `POSTFIAT_SIDECAR_MODAL_KEY`/`POSTFIAT_SIDECAR_MODAL_SECRET`. Tell the agent where the file is, and it completes the configuration without ever reading the secret values:
+
+1. **Inspect structure only.** Confirm all five labels are present and each value has the expected shape — an `s...` seed or a 24-word phrase for `seed`, `ak-`/`as-` prefixes for the Modal account token pair, `wk-`/`ws-` for the proxy-auth pair — judging by labels, value prefixes, lengths, and word counts. Full values must never appear in chat, logs, or command output.
+2. **Move the file to the host if needed.** If the file is on the operator's machine, transfer it over SSH (for example with `scp`); never move the contents by reading them into the conversation.
+3. **Inject server-side.** Parse the file on the host and write each value into `.env` there, quoting values that contain spaces (the recovery phrase). Set `.env` to `chmod 600`. Report success by naming which keys were set — never by printing values.
+4. **Clean up.** Delete the secrets file from this host — the transferred copy, or the original if it was created here — along with any helper script used for the injection. The server's `.env` is now the working copy.
+
+Once `preflight` reports `READY` at the end of setup, store the five values in a password manager and, if the secrets file started on your own machine, delete it there too.
+
+#### Alternative: edit `.env` yourself
+
+Prefer to place the values by hand? Have the agent prepare the participation lines in `.env` with placeholders, then paste your seed and the four Modal values into the file yourself in your own SSH session, so the secrets never pass through the chat. Tell the agent when you are done and it continues from there.
 
 The PFTL RPC URL and the foundation publisher address are discovered automatically (RPC defaults to `https://rpc.testnet.postfiat.org`, the publisher comes from the scoring service config). Override them only if you have a reason to.
 
@@ -324,7 +347,8 @@ For the full operator reference, see the repository docs: [`Usage.md`](https://g
 
 ## Agent Safety Checklist
 
-- Never paste the relay wallet seed, Modal secrets, or `validator-keys.json` contents into chat. Keep them in `.env` and on disk only.
+- Never paste the relay wallet seed, Modal secrets, or `validator-keys.json` contents into chat, and never read, print, or log the values in the operator's secrets file — inspect labels, value prefixes, lengths, and word counts only. Secrets live in the secrets file and `.env`, on disk only.
+- After injecting the secrets file into `.env`, delete the on-host secrets file and any helper script, set `.env` to `chmod 600`, and confirm by naming the keys that were set — never by echoing values. Once preflight is READY, remind the operator to store the values in a password manager and delete the secrets file wherever it was created.
 - Keep `validator-keys.json` mounted read-only and readable only by `root` and the container's group (`chown root:1000 && chmod 640` — a root-only `chmod 600` file is unreadable by the non-root container); prefer removing it from the host again if you stop participating.
 - The relay wallet is deliberately not your validator identity — keep them separate, and use a distinct relay wallet per sidecar.
 - Start verify-only first and confirm `sync completed` before taking on participation cost.
