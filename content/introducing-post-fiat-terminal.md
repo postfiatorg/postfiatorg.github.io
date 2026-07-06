@@ -91,6 +91,22 @@ Why is the same model faster and cheaper under Post Fiat Terminal? It sends lean
 
 Full per-run data, billing artifacts, and a reproduction script are in the [appendix](#appendix-evidence--reproduction).
 
+## Why efficiency first
+
+There's a deeper reason this works, and it's core to what we're building.
+
+Modern agent harnesses ship with heavy prompts — a large system prompt, a tool preamble, layers of generic rule-following scaffolding that run on every turn. For an orchestrator especially, that's already a big, very specific set of instructions riding on every single call. It's overhead. You pay for it in tokens and latency, every time.
+
+But here's the thing about orchestration: a good orchestrator is *already* writing detailed prompts to its workers. When I spawn a task, the instructions I hand the individual contributor are often 200+ lines — specific, contextual, exactly what that job needs. That's where the real signal lives.
+
+So when the harness stacks a second layer of generic rule-following on top of that, it isn't adding signal — it's adding cost. For an orchestrator system, that generic overhead is negative expected value. You're paying, on every call, for guardrails you already wrote yourself, more precisely, for the job at hand.
+
+And as the benchmarks above show, accuracy doesn't drop when you strip it out. Same models, same tasks, 100% pass on both sides. The overhead wasn't buying correctness. It was just buying tokens.
+
+To be fair: it's entirely possible that Claude Code's and Hermes's prompts and systems are additive to *your* process — for a lot of people they are. But when your PnL is heavily driven by AI spend — when this is your single largest business expense — we've found it's better to start from efficiency and layer on complexity where it earns its keep, rather than pay for complexity by default and try to claw it back later.
+
+That's the bet Post Fiat Terminal makes: lean by default. You add what you need.
+
 ## Coordination, Panes and Vaults
 
 Post Fiat Terminal adds four core features.
