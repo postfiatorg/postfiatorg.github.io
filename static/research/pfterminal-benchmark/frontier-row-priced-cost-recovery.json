@@ -1,0 +1,3073 @@
+{
+  "admin_usage_artifact": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/keyed_parallel_20260705/frontier_admin_settle.json",
+  "comparisons": {
+    "fable_frontier": {
+      "claude_code_lane": "fable_claude_code",
+      "pfterminal_lane": "fable_pfterminal",
+      "publishable_cost_method": "row_api_tokens_x_published_price_schedule",
+      "publishable_cost_ratio_cc_over_pft": 1.4326988856933223,
+      "raw_admin_window_cost_ratio_cc_over_pft": 1.6559963366160089,
+      "row_priced_cost_ratio_cc_over_pft": 1.4326988856933223,
+      "status": "pass"
+    },
+    "opus_frontier": {
+      "claude_code_lane": "opus_claude_code",
+      "pfterminal_lane": "opus_pfterminal",
+      "publishable_cost_method": "admin_usage_api_key_id",
+      "publishable_cost_ratio_cc_over_pft": 2.6228238305745206,
+      "raw_admin_window_cost_ratio_cc_over_pft": 2.6228238305745206,
+      "row_priced_cost_ratio_cc_over_pft": 2.6226992046481556,
+      "status": "pass"
+    }
+  },
+  "created_at": "2026-07-06T01:08:31Z",
+  "credibility_proof": {
+    "fable_pfterminal_row_vs_admin_cost_delta_pct": -3.5136571803562062,
+    "fable_pfterminal_token_delta_pct": -2.734568859200377,
+    "interpretation": "Row pricing reproduces clean Opus lanes to effectively zero and the clean Fable PfTerminal lane within the known PfTerminal aggregate-token/cache-write split drift; fable5 raw Admin excess is excluded from the counted cohort.",
+    "opus_claude_code_row_vs_admin_cost_delta_pct": 0.0,
+    "opus_pfterminal_row_vs_admin_cost_delta_pct": 0.004751819276238661
+  },
+  "fable5_contamination": {
+    "admin_excess_price_weighted_cost_usd": 16.1724295,
+    "admin_excess_tokens": 3649460,
+    "basis": "opus_claude_code reconciles at 0.000%, proving Claude Code per-row token capture is complete when the key window is clean; fable5 Admin excess is therefore real non-cohort traffic. The only explicit fable5 probe is 20 tokens; the material remainder maps to the interrupted fable5 Claude Code attempts that were killed before summary and later rerun from the resume manifest.",
+    "direct_fable5_probe_cost_usd": 0.00036,
+    "direct_fable5_probe_tokens": 20,
+    "lane": "fable_claude_code",
+    "resume_created_at": "2026-07-05T23:39:16Z",
+    "resume_manifest": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/keyed_parallel_20260705/fable_resume_manifest.json",
+    "resume_total_specs": 35,
+    "resumed_fable5_claude_code_specs": 25,
+    "resumed_fable5_claude_code_waves_by_task": {
+      "queryforge": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "queuecraft": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "textwright": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    "status": "confirmed_outside_counted_cohort",
+    "unattributed_interrupted_or_stray_cost_after_probe_usd": 16.1720695,
+    "unattributed_interrupted_or_stray_tokens_after_probe": 3649440
+  },
+  "lanes": {
+    "fable_claude_code": {
+      "admin_price_weighted_cost_usd": 97.8720985,
+      "admin_window_cost_usd": 97.8720985,
+      "agent": "claude-code",
+      "api_key_id": "apikey_01SkUWKM1VvMXAt2CR4H3Mk6",
+      "comparison": "fable_frontier",
+      "lane": "fable_claude_code",
+      "model": "claude-fable-5",
+      "publish_cost_status": "pass_row_priced_contamination_excluded",
+      "row_costs": [
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave1",
+          "row_priced_cost_usd": 1.360496,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 54851,
+            "cache_write_1h": 0,
+            "cache_write_5m": 27290,
+            "input": 12,
+            "output": 19288,
+            "web_search_requests": 0
+          },
+          "wave": "wave1"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave2",
+          "row_priced_cost_usd": 1.3380935,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 50911,
+            "cache_write_1h": 0,
+            "cache_write_5m": 28069,
+            "input": 12,
+            "output": 18724,
+            "web_search_requests": 0
+          },
+          "wave": "wave2"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave3",
+          "row_priced_cost_usd": 1.200108,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 50338,
+            "cache_write_1h": 0,
+            "cache_write_5m": 24748,
+            "input": 12,
+            "output": 16806,
+            "web_search_requests": 0
+          },
+          "wave": "wave3"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave4",
+          "row_priced_cost_usd": 1.710245,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 144865,
+            "cache_write_1h": 0,
+            "cache_write_5m": 30864,
+            "input": 18,
+            "output": 23588,
+            "web_search_requests": 0
+          },
+          "wave": "wave4"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave5",
+          "row_priced_cost_usd": 1.023651,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 69586,
+            "cache_write_1h": 0,
+            "cache_write_5m": 21690,
+            "input": 14,
+            "output": 13656,
+            "web_search_requests": 0
+          },
+          "wave": "wave5"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave6",
+          "row_priced_cost_usd": 1.4325045,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 195832,
+            "cache_write_1h": 0,
+            "cache_write_5m": 26933,
+            "input": 26,
+            "output": 17995,
+            "web_search_requests": 0
+          },
+          "wave": "wave6"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave7",
+          "row_priced_cost_usd": 1.2768185,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 102246,
+            "cache_write_1h": 0,
+            "cache_write_5m": 25169,
+            "input": 16,
+            "output": 17196,
+            "web_search_requests": 0
+          },
+          "wave": "wave7"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave8",
+          "row_priced_cost_usd": 1.778652,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 263097,
+            "cache_write_1h": 0,
+            "cache_write_5m": 32066,
+            "input": 28,
+            "output": 22289,
+            "web_search_requests": 0
+          },
+          "wave": "wave8"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave9",
+          "row_priced_cost_usd": 1.2052555,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 75178,
+            "cache_write_1h": 0,
+            "cache_write_5m": 24723,
+            "input": 14,
+            "output": 16418,
+            "web_search_requests": 0
+          },
+          "wave": "wave9"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave10",
+          "row_priced_cost_usd": 1.1170185,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 72041,
+            "cache_write_1h": 0,
+            "cache_write_5m": 22979,
+            "input": 14,
+            "output": 15152,
+            "web_search_requests": 0
+          },
+          "wave": "wave10"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave11",
+          "row_priced_cost_usd": 1.635197,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 254737,
+            "cache_write_1h": 0,
+            "cache_write_5m": 31248,
+            "input": 26,
+            "output": 19792,
+            "web_search_requests": 0
+          },
+          "wave": "wave11"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave12",
+          "row_priced_cost_usd": 1.309123,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 117668,
+            "cache_write_1h": 0,
+            "cache_write_5m": 26386,
+            "input": 18,
+            "output": 17229,
+            "web_search_requests": 0
+          },
+          "wave": "wave12"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave13",
+          "row_priced_cost_usd": 1.243426,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 73811,
+            "cache_write_1h": 0,
+            "cache_write_5m": 26142,
+            "input": 14,
+            "output": 16854,
+            "web_search_requests": 0
+          },
+          "wave": "wave13"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave14",
+          "row_priced_cost_usd": 1.651084,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 209189,
+            "cache_write_1h": 0,
+            "cache_write_5m": 30838,
+            "input": 22,
+            "output": 21124,
+            "web_search_requests": 0
+          },
+          "wave": "wave14"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave15",
+          "row_priced_cost_usd": 1.268195,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 100560,
+            "cache_write_1h": 0,
+            "cache_write_5m": 25078,
+            "input": 16,
+            "output": 17080,
+            "web_search_requests": 0
+          },
+          "wave": "wave15"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave16",
+          "row_priced_cost_usd": 1.58938,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 57960,
+            "cache_write_1h": 0,
+            "cache_write_5m": 31284,
+            "input": 12,
+            "output": 22805,
+            "web_search_requests": 0
+          },
+          "wave": "wave16"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave17",
+          "row_priced_cost_usd": 1.337512,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 98902,
+            "cache_write_1h": 0,
+            "cache_write_5m": 26608,
+            "input": 16,
+            "output": 18117,
+            "web_search_requests": 0
+          },
+          "wave": "wave17"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave18",
+          "row_priced_cost_usd": 1.5472585,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 224011,
+            "cache_write_1h": 0,
+            "cache_write_5m": 28511,
+            "input": 26,
+            "output": 19332,
+            "web_search_requests": 0
+          },
+          "wave": "wave18"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave19",
+          "row_priced_cost_usd": 1.4146815,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 234209,
+            "cache_write_1h": 0,
+            "cache_write_5m": 26473,
+            "input": 26,
+            "output": 16986,
+            "web_search_requests": 0
+          },
+          "wave": "wave19"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/claude-code/wave20",
+          "row_priced_cost_usd": 1.3908,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 270425,
+            "cache_write_1h": 0,
+            "cache_write_5m": 25686,
+            "input": 30,
+            "output": 15980,
+            "web_search_requests": 0
+          },
+          "wave": "wave20"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave2",
+          "row_priced_cost_usd": 1.236402,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 262197,
+            "cache_write_1h": 0,
+            "cache_write_5m": 41438,
+            "input": 28,
+            "output": 9119,
+            "web_search_requests": 0
+          },
+          "wave": "wave2"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave3",
+          "row_priced_cost_usd": 1.331977,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 257062,
+            "cache_write_1h": 0,
+            "cache_write_5m": 49190,
+            "input": 24,
+            "output": 9196,
+            "web_search_requests": 0
+          },
+          "wave": "wave3"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave4",
+          "row_priced_cost_usd": 1.633679,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 458539,
+            "cache_write_1h": 0,
+            "cache_write_5m": 49112,
+            "input": 34,
+            "output": 11218,
+            "web_search_requests": 0
+          },
+          "wave": "wave4"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave5",
+          "row_priced_cost_usd": 1.271735,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 272870,
+            "cache_write_1h": 0,
+            "cache_write_5m": 46098,
+            "input": 24,
+            "output": 8448,
+            "web_search_requests": 0
+          },
+          "wave": "wave5"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave6",
+          "row_priced_cost_usd": 1.926103,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 501133,
+            "cache_write_1h": 0,
+            "cache_write_5m": 57604,
+            "input": 32,
+            "output": 14092,
+            "web_search_requests": 0
+          },
+          "wave": "wave6"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave7",
+          "row_priced_cost_usd": 1.798819,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 576224,
+            "cache_write_1h": 0,
+            "cache_write_5m": 59994,
+            "input": 32,
+            "output": 9447,
+            "web_search_requests": 0
+          },
+          "wave": "wave7"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave8",
+          "row_priced_cost_usd": 1.667512,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 287137,
+            "cache_write_1h": 0,
+            "cache_write_5m": 56678,
+            "input": 20,
+            "output": 13434,
+            "web_search_requests": 0
+          },
+          "wave": "wave8"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave9",
+          "row_priced_cost_usd": 1.633574,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 336889,
+            "cache_write_1h": 0,
+            "cache_write_5m": 54878,
+            "input": 26,
+            "output": 12209,
+            "web_search_requests": 0
+          },
+          "wave": "wave9"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave10",
+          "row_priced_cost_usd": 1.5107655,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 297123,
+            "cache_write_1h": 0,
+            "cache_write_5m": 48193,
+            "input": 28,
+            "output": 12219,
+            "web_search_requests": 0
+          },
+          "wave": "wave10"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave11",
+          "row_priced_cost_usd": 1.606948,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 307938,
+            "cache_write_1h": 0,
+            "cache_write_5m": 53532,
+            "input": 26,
+            "output": 12592,
+            "web_search_requests": 0
+          },
+          "wave": "wave11"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave12",
+          "row_priced_cost_usd": 1.8745625,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 543470,
+            "cache_write_1h": 0,
+            "cache_write_5m": 61385,
+            "input": 28,
+            "output": 11270,
+            "web_search_requests": 0
+          },
+          "wave": "wave12"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave13",
+          "row_priced_cost_usd": 1.7122735,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 496506,
+            "cache_write_1h": 0,
+            "cache_write_5m": 58007,
+            "input": 28,
+            "output": 9808,
+            "web_search_requests": 0
+          },
+          "wave": "wave13"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave14",
+          "row_priced_cost_usd": 1.8312435,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 405566,
+            "cache_write_1h": 0,
+            "cache_write_5m": 59979,
+            "input": 24,
+            "output": 13514,
+            "web_search_requests": 0
+          },
+          "wave": "wave14"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave15",
+          "row_priced_cost_usd": 1.4223565,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 206389,
+            "cache_write_1h": 0,
+            "cache_write_5m": 56103,
+            "input": 18,
+            "output": 10290,
+            "web_search_requests": 0
+          },
+          "wave": "wave15"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave16",
+          "row_priced_cost_usd": 1.68737,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 439770,
+            "cache_write_1h": 0,
+            "cache_write_5m": 55180,
+            "input": 30,
+            "output": 11151,
+            "web_search_requests": 0
+          },
+          "wave": "wave16"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave17",
+          "row_priced_cost_usd": 1.580633,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 318813,
+            "cache_write_1h": 0,
+            "cache_write_5m": 60716,
+            "input": 22,
+            "output": 10053,
+            "web_search_requests": 0
+          },
+          "wave": "wave17"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave18",
+          "row_priced_cost_usd": 1.709205,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 397700,
+            "cache_write_1h": 0,
+            "cache_write_5m": 54498,
+            "input": 28,
+            "output": 12600,
+            "web_search_requests": 0
+          },
+          "wave": "wave18"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave19",
+          "row_priced_cost_usd": 1.829489,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 478374,
+            "cache_write_1h": 0,
+            "cache_write_5m": 50946,
+            "input": 34,
+            "output": 14279,
+            "web_search_requests": 0
+          },
+          "wave": "wave19"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/claude-code/wave20",
+          "row_priced_cost_usd": 1.428923,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 271518,
+            "cache_write_1h": 0,
+            "cache_write_5m": 37358,
+            "input": 28,
+            "output": 13803,
+            "web_search_requests": 0
+          },
+          "wave": "wave20"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave1",
+          "row_priced_cost_usd": 1.1231175,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 297925,
+            "cache_write_1h": 0,
+            "cache_write_5m": 38793,
+            "input": 28,
+            "output": 6800,
+            "web_search_requests": 0
+          },
+          "wave": "wave1"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave2",
+          "row_priced_cost_usd": 1.277496,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 349026,
+            "cache_write_1h": 0,
+            "cache_write_5m": 41452,
+            "input": 32,
+            "output": 8200,
+            "web_search_requests": 0
+          },
+          "wave": "wave2"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave3",
+          "row_priced_cost_usd": 1.275881,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 379886,
+            "cache_write_1h": 0,
+            "cache_write_5m": 39146,
+            "input": 32,
+            "output": 8127,
+            "web_search_requests": 0
+          },
+          "wave": "wave3"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave4",
+          "row_priced_cost_usd": 0.870481,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 205666,
+            "cache_write_1h": 0,
+            "cache_write_5m": 32594,
+            "input": 24,
+            "output": 5143,
+            "web_search_requests": 0
+          },
+          "wave": "wave4"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave5",
+          "row_priced_cost_usd": 0.8973205,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 217578,
+            "cache_write_1h": 0,
+            "cache_write_5m": 28149,
+            "input": 28,
+            "output": 6552,
+            "web_search_requests": 0
+          },
+          "wave": "wave5"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave6",
+          "row_priced_cost_usd": 1.342421,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 426411,
+            "cache_write_1h": 0,
+            "cache_write_5m": 37640,
+            "input": 36,
+            "output": 8903,
+            "web_search_requests": 0
+          },
+          "wave": "wave6"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave7",
+          "row_priced_cost_usd": 1.119502,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 291702,
+            "cache_write_1h": 0,
+            "cache_write_5m": 36364,
+            "input": 30,
+            "output": 7459,
+            "web_search_requests": 0
+          },
+          "wave": "wave7"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave8",
+          "row_priced_cost_usd": 1.1983275,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 279465,
+            "cache_write_1h": 0,
+            "cache_write_5m": 34849,
+            "input": 30,
+            "output": 9659,
+            "web_search_requests": 0
+          },
+          "wave": "wave8"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave9",
+          "row_priced_cost_usd": 1.781499,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 502334,
+            "cache_write_1h": 0,
+            "cache_write_5m": 67430,
+            "input": 24,
+            "output": 8721,
+            "web_search_requests": 0
+          },
+          "wave": "wave9"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave10",
+          "row_priced_cost_usd": 1.2484115,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 296039,
+            "cache_write_1h": 0,
+            "cache_write_5m": 42217,
+            "input": 26,
+            "output": 8488,
+            "web_search_requests": 0
+          },
+          "wave": "wave10"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave11",
+          "row_priced_cost_usd": 1.1094625,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 258165,
+            "cache_write_1h": 0,
+            "cache_write_5m": 37363,
+            "input": 26,
+            "output": 7680,
+            "web_search_requests": 0
+          },
+          "wave": "wave11"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave12",
+          "row_priced_cost_usd": 1.1702205,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 331433,
+            "cache_write_1h": 0,
+            "cache_write_5m": 35223,
+            "input": 30,
+            "output": 7964,
+            "web_search_requests": 0
+          },
+          "wave": "wave12"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave13",
+          "row_priced_cost_usd": 1.167919,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 319839,
+            "cache_write_1h": 0,
+            "cache_write_5m": 39296,
+            "input": 28,
+            "output": 7132,
+            "web_search_requests": 0
+          },
+          "wave": "wave13"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave14",
+          "row_priced_cost_usd": 0.987345,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 198105,
+            "cache_write_1h": 0,
+            "cache_write_5m": 31076,
+            "input": 24,
+            "output": 8011,
+            "web_search_requests": 0
+          },
+          "wave": "wave14"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave15",
+          "row_priced_cost_usd": 1.2553285,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 319671,
+            "cache_write_1h": 0,
+            "cache_write_5m": 40107,
+            "input": 32,
+            "output": 8680,
+            "web_search_requests": 0
+          },
+          "wave": "wave15"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave16",
+          "row_priced_cost_usd": 1.130586,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 248221,
+            "cache_write_1h": 0,
+            "cache_write_5m": 39446,
+            "input": 24,
+            "output": 7781,
+            "web_search_requests": 0
+          },
+          "wave": "wave16"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave17",
+          "row_priced_cost_usd": 0.989234,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 244479,
+            "cache_write_1h": 0,
+            "cache_write_5m": 33718,
+            "input": 28,
+            "output": 6460,
+            "web_search_requests": 0
+          },
+          "wave": "wave17"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave18",
+          "row_priced_cost_usd": 0.9365635,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 214521,
+            "cache_write_1h": 0,
+            "cache_write_5m": 29961,
+            "input": 28,
+            "output": 6945,
+            "web_search_requests": 0
+          },
+          "wave": "wave18"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave19",
+          "row_priced_cost_usd": 1.1512165,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 351474,
+            "cache_write_1h": 0,
+            "cache_write_5m": 31629,
+            "input": 38,
+            "output": 8080,
+            "web_search_requests": 0
+          },
+          "wave": "wave19"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/claude-code/wave20",
+          "row_priced_cost_usd": 1.1442665,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 292484,
+            "cache_write_1h": 0,
+            "cache_write_5m": 34297,
+            "input": 32,
+            "output": 8455,
+            "web_search_requests": 0
+          },
+          "wave": "wave20"
+        }
+      ],
+      "row_count": 59,
+      "row_priced_cost_usd": 81.699669,
+      "row_result_dirs_count": 59,
+      "row_vs_admin_cost_delta_pct": -16.524044899272294,
+      "row_vs_admin_cost_delta_usd": -16.1724295,
+      "token_reconciliation_admin_excess_tokens": 3649460,
+      "token_reconciliation_status": "review",
+      "tokens_admin": {
+        "cache_read": 18917411,
+        "cache_write_1h": 0,
+        "cache_write_5m": 2743831,
+        "input": 1780,
+        "output": 892780,
+        "web_search_requests": 0
+      },
+      "tokens_rows": {
+        "cache_read": 15860059,
+        "cache_write_1h": 0,
+        "cache_write_5m": 2304424,
+        "input": 1466,
+        "output": 740393,
+        "web_search_requests": 0
+      },
+      "total_token_delta_pct": -16.1796951400797,
+      "total_token_delta_tokens": -3649460,
+      "total_tokens_admin": 22555802,
+      "total_tokens_rows": 18906342
+    },
+    "fable_pfterminal": {
+      "admin_price_weighted_cost_usd": 59.1016395,
+      "admin_window_cost_usd": 59.1016395,
+      "agent": "pfterminal",
+      "api_key_id": "apikey_01ETPF8aNWXS17BDVpWkzPQD",
+      "comparison": "fable_frontier",
+      "lane": "fable_pfterminal",
+      "model": "claude-fable-5",
+      "publish_cost_status": "pass_clean_admin_window",
+      "row_costs": [
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave1",
+          "row_priced_cost_usd": 1.2876685,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 153856,
+            "cache_write_1h": 0,
+            "cache_write_5m": 32641,
+            "input": 0,
+            "output": 14516,
+            "web_search_requests": 0
+          },
+          "wave": "wave1"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave2",
+          "row_priced_cost_usd": 1.1968185,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 126081,
+            "cache_write_1h": 0,
+            "cache_write_5m": 31859,
+            "input": 0,
+            "output": 13450,
+            "web_search_requests": 0
+          },
+          "wave": "wave2"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave3",
+          "row_priced_cost_usd": 0.823834,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 100084,
+            "cache_write_1h": 0,
+            "cache_write_5m": 20572,
+            "input": 0,
+            "output": 9332,
+            "web_search_requests": 0
+          },
+          "wave": "wave3"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave4",
+          "row_priced_cost_usd": 1.269548,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 96323,
+            "cache_write_1h": 0,
+            "cache_write_5m": 24938,
+            "input": 0,
+            "output": 17230,
+            "web_search_requests": 0
+          },
+          "wave": "wave4"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave5",
+          "row_priced_cost_usd": 1.0834705,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 103958,
+            "cache_write_1h": 0,
+            "cache_write_5m": 22349,
+            "input": 0,
+            "output": 14003,
+            "web_search_requests": 0
+          },
+          "wave": "wave5"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave6",
+          "row_priced_cost_usd": 1.2199595,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 134172,
+            "cache_write_1h": 0,
+            "cache_write_5m": 27051,
+            "input": 0,
+            "output": 14953,
+            "web_search_requests": 0
+          },
+          "wave": "wave6"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave7",
+          "row_priced_cost_usd": 1.3836185,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 166206,
+            "cache_write_1h": 0,
+            "cache_write_5m": 29301,
+            "input": 0,
+            "output": 17023,
+            "web_search_requests": 0
+          },
+          "wave": "wave7"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave8",
+          "row_priced_cost_usd": 0.850143,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 100318,
+            "cache_write_1h": 0,
+            "cache_write_5m": 20982,
+            "input": 0,
+            "output": 9751,
+            "web_search_requests": 0
+          },
+          "wave": "wave8"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave9",
+          "row_priced_cost_usd": 1.2362815,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 133844,
+            "cache_write_1h": 0,
+            "cache_write_5m": 27387,
+            "input": 0,
+            "output": 15202,
+            "web_search_requests": 0
+          },
+          "wave": "wave9"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave10",
+          "row_priced_cost_usd": 1.1142055,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 100068,
+            "cache_write_1h": 0,
+            "cache_write_5m": 25855,
+            "input": 0,
+            "output": 13819,
+            "web_search_requests": 0
+          },
+          "wave": "wave10"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave11",
+          "row_priced_cost_usd": 0.965559,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 156209,
+            "cache_write_1h": 0,
+            "cache_write_5m": 22520,
+            "input": 0,
+            "output": 10557,
+            "web_search_requests": 0
+          },
+          "wave": "wave11"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave12",
+          "row_priced_cost_usd": 1.1578605,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 131473,
+            "cache_write_1h": 0,
+            "cache_write_5m": 26163,
+            "input": 0,
+            "output": 13987,
+            "web_search_requests": 0
+          },
+          "wave": "wave12"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave13",
+          "row_priced_cost_usd": 1.151624,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 132049,
+            "cache_write_1h": 0,
+            "cache_write_5m": 26062,
+            "input": 0,
+            "output": 13876,
+            "web_search_requests": 0
+          },
+          "wave": "wave13"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave14",
+          "row_priced_cost_usd": 0.7759555,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 97793,
+            "cache_write_1h": 0,
+            "cache_write_5m": 19789,
+            "input": 0,
+            "output": 8616,
+            "web_search_requests": 0
+          },
+          "wave": "wave14"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave15",
+          "row_priced_cost_usd": 1.2667955,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 148433,
+            "cache_write_1h": 0,
+            "cache_write_5m": 27485,
+            "input": 0,
+            "output": 15496,
+            "web_search_requests": 0
+          },
+          "wave": "wave15"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave16",
+          "row_priced_cost_usd": 0.9160795,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 127192,
+            "cache_write_1h": 0,
+            "cache_write_5m": 21683,
+            "input": 0,
+            "output": 10357,
+            "web_search_requests": 0
+          },
+          "wave": "wave16"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave17",
+          "row_priced_cost_usd": 0.8375905,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 92528,
+            "cache_write_1h": 0,
+            "cache_write_5m": 25889,
+            "input": 0,
+            "output": 8429,
+            "web_search_requests": 0
+          },
+          "wave": "wave17"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave18",
+          "row_priced_cost_usd": 1.284311,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 135461,
+            "cache_write_1h": 0,
+            "cache_write_5m": 28092,
+            "input": 0,
+            "output": 15954,
+            "web_search_requests": 0
+          },
+          "wave": "wave18"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave19",
+          "row_priced_cost_usd": 0.778835,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 85485,
+            "cache_write_1h": 0,
+            "cache_write_5m": 19972,
+            "input": 0,
+            "output": 8874,
+            "web_search_requests": 0
+          },
+          "wave": "wave19"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queryforge/pfterminal/wave20",
+          "row_priced_cost_usd": 0.877999,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 153049,
+            "cache_write_1h": 0,
+            "cache_write_5m": 20784,
+            "input": 0,
+            "output": 9303,
+            "web_search_requests": 0
+          },
+          "wave": "wave20"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave2",
+          "row_priced_cost_usd": 0.9472585,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 276246,
+            "cache_write_1h": 0,
+            "cache_write_5m": 41901,
+            "input": 0,
+            "output": 2945,
+            "web_search_requests": 0
+          },
+          "wave": "wave2"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave3",
+          "row_priced_cost_usd": 1.0402015,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 204439,
+            "cache_write_1h": 0,
+            "cache_write_5m": 48029,
+            "input": 0,
+            "output": 4708,
+            "web_search_requests": 0
+          },
+          "wave": "wave3"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave4",
+          "row_priced_cost_usd": 1.0972435,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 384106,
+            "cache_write_1h": 0,
+            "cache_write_5m": 40903,
+            "input": 0,
+            "output": 4037,
+            "web_search_requests": 0
+          },
+          "wave": "wave4"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave5",
+          "row_priced_cost_usd": 1.0986185,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 334056,
+            "cache_write_1h": 0,
+            "cache_write_5m": 44309,
+            "input": 0,
+            "output": 4214,
+            "web_search_requests": 0
+          },
+          "wave": "wave5"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave6",
+          "row_priced_cost_usd": 1.058911,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 247486,
+            "cache_write_1h": 0,
+            "cache_write_5m": 41014,
+            "input": 0,
+            "output": 5975,
+            "web_search_requests": 0
+          },
+          "wave": "wave6"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave7",
+          "row_priced_cost_usd": 0.890516,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 262541,
+            "cache_write_1h": 0,
+            "cache_write_5m": 38550,
+            "input": 0,
+            "output": 2922,
+            "web_search_requests": 0
+          },
+          "wave": "wave7"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave8",
+          "row_priced_cost_usd": 0.986162,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 305187,
+            "cache_write_1h": 0,
+            "cache_write_5m": 39694,
+            "input": 0,
+            "output": 3696,
+            "web_search_requests": 0
+          },
+          "wave": "wave8"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave9",
+          "row_priced_cost_usd": 0.8242835,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 272321,
+            "cache_write_1h": 0,
+            "cache_write_5m": 33885,
+            "input": 0,
+            "output": 2568,
+            "web_search_requests": 0
+          },
+          "wave": "wave9"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave10",
+          "row_priced_cost_usd": 0.784514,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 239539,
+            "cache_write_1h": 0,
+            "cache_write_5m": 33458,
+            "input": 0,
+            "output": 2535,
+            "web_search_requests": 0
+          },
+          "wave": "wave10"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave11",
+          "row_priced_cost_usd": 0.89823,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 246330,
+            "cache_write_1h": 0,
+            "cache_write_5m": 35196,
+            "input": 0,
+            "output": 4239,
+            "web_search_requests": 0
+          },
+          "wave": "wave11"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave12",
+          "row_priced_cost_usd": 0.885359,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 296759,
+            "cache_write_1h": 0,
+            "cache_write_5m": 37064,
+            "input": 0,
+            "output": 2506,
+            "web_search_requests": 0
+          },
+          "wave": "wave12"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave13",
+          "row_priced_cost_usd": 0.909393,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 268693,
+            "cache_write_1h": 0,
+            "cache_write_5m": 39540,
+            "input": 0,
+            "output": 2929,
+            "web_search_requests": 0
+          },
+          "wave": "wave13"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave14",
+          "row_priced_cost_usd": 1.047801,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 368351,
+            "cache_write_1h": 0,
+            "cache_write_5m": 42680,
+            "input": 0,
+            "output": 2919,
+            "web_search_requests": 0
+          },
+          "wave": "wave14"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave15",
+          "row_priced_cost_usd": 0.935009,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 244159,
+            "cache_write_1h": 0,
+            "cache_write_5m": 38096,
+            "input": 0,
+            "output": 4293,
+            "web_search_requests": 0
+          },
+          "wave": "wave15"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave16",
+          "row_priced_cost_usd": 0.824288,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 246563,
+            "cache_write_1h": 0,
+            "cache_write_5m": 35466,
+            "input": 0,
+            "output": 2688,
+            "web_search_requests": 0
+          },
+          "wave": "wave16"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave17",
+          "row_priced_cost_usd": 0.9492425,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 290805,
+            "cache_write_1h": 0,
+            "cache_write_5m": 43959,
+            "input": 0,
+            "output": 2179,
+            "web_search_requests": 0
+          },
+          "wave": "wave17"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave18",
+          "row_priced_cost_usd": 1.100771,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 376596,
+            "cache_write_1h": 0,
+            "cache_write_5m": 40406,
+            "input": 0,
+            "output": 4382,
+            "web_search_requests": 0
+          },
+          "wave": "wave18"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave19",
+          "row_priced_cost_usd": 1.200926,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 460726,
+            "cache_write_1h": 0,
+            "cache_write_5m": 41160,
+            "input": 0,
+            "output": 4514,
+            "web_search_requests": 0
+          },
+          "wave": "wave19"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/queuecraft/pfterminal/wave20",
+          "row_priced_cost_usd": 0.9377955,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 247058,
+            "cache_write_1h": 0,
+            "cache_write_5m": 37519,
+            "input": 0,
+            "output": 4435,
+            "web_search_requests": 0
+          },
+          "wave": "wave20"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave1",
+          "row_priced_cost_usd": 0.8705035,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 205016,
+            "cache_write_1h": 0,
+            "cache_write_5m": 42791,
+            "input": 0,
+            "output": 2612,
+            "web_search_requests": 0
+          },
+          "wave": "wave1"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave2",
+          "row_priced_cost_usd": 1.0363015,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 256064,
+            "cache_write_1h": 0,
+            "cache_write_5m": 49031,
+            "input": 0,
+            "output": 3347,
+            "web_search_requests": 0
+          },
+          "wave": "wave2"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave3",
+          "row_priced_cost_usd": 1.0612925,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 294705,
+            "cache_write_1h": 0,
+            "cache_write_5m": 49671,
+            "input": 0,
+            "output": 2914,
+            "web_search_requests": 0
+          },
+          "wave": "wave3"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave4",
+          "row_priced_cost_usd": 0.9152985,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 255736,
+            "cache_write_1h": 0,
+            "cache_write_5m": 41317,
+            "input": 0,
+            "output": 2862,
+            "web_search_requests": 0
+          },
+          "wave": "wave4"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave5",
+          "row_priced_cost_usd": 0.917819,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 284194,
+            "cache_write_1h": 0,
+            "cache_write_5m": 37786,
+            "input": 0,
+            "output": 3226,
+            "web_search_requests": 0
+          },
+          "wave": "wave5"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave6",
+          "row_priced_cost_usd": 0.889812,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 265412,
+            "cache_write_1h": 0,
+            "cache_write_5m": 38080,
+            "input": 0,
+            "output": 2968,
+            "web_search_requests": 0
+          },
+          "wave": "wave6"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave7",
+          "row_priced_cost_usd": 0.7784105,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 204823,
+            "cache_write_1h": 0,
+            "cache_write_5m": 34983,
+            "input": 0,
+            "output": 2726,
+            "web_search_requests": 0
+          },
+          "wave": "wave7"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave8",
+          "row_priced_cost_usd": 0.790547,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 263747,
+            "cache_write_1h": 0,
+            "cache_write_5m": 31012,
+            "input": 0,
+            "output": 2783,
+            "web_search_requests": 0
+          },
+          "wave": "wave8"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave9",
+          "row_priced_cost_usd": 0.8956655,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 253028,
+            "cache_write_1h": 0,
+            "cache_write_5m": 36711,
+            "input": 0,
+            "output": 3675,
+            "web_search_requests": 0
+          },
+          "wave": "wave9"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave10",
+          "row_priced_cost_usd": 0.9261495,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 291337,
+            "cache_write_1h": 0,
+            "cache_write_5m": 37409,
+            "input": 0,
+            "output": 3344,
+            "web_search_requests": 0
+          },
+          "wave": "wave10"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave11",
+          "row_priced_cost_usd": 0.6435525,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 161940,
+            "cache_write_1h": 0,
+            "cache_write_5m": 25689,
+            "input": 0,
+            "output": 3210,
+            "web_search_requests": 0
+          },
+          "wave": "wave11"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave12",
+          "row_priced_cost_usd": 0.853309,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 246234,
+            "cache_write_1h": 0,
+            "cache_write_5m": 36874,
+            "input": 0,
+            "output": 2923,
+            "web_search_requests": 0
+          },
+          "wave": "wave12"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave13",
+          "row_priced_cost_usd": 0.9272885,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 300076,
+            "cache_write_1h": 0,
+            "cache_write_5m": 37725,
+            "input": 0,
+            "output": 3113,
+            "web_search_requests": 0
+          },
+          "wave": "wave13"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave14",
+          "row_priced_cost_usd": 0.826957,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 240157,
+            "cache_write_1h": 0,
+            "cache_write_5m": 35752,
+            "input": 0,
+            "output": 2798,
+            "web_search_requests": 0
+          },
+          "wave": "wave14"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave15",
+          "row_priced_cost_usd": 1.06963,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 308755,
+            "cache_write_1h": 0,
+            "cache_write_5m": 47798,
+            "input": 0,
+            "output": 3268,
+            "web_search_requests": 0
+          },
+          "wave": "wave15"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave16",
+          "row_priced_cost_usd": 0.844037,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 243662,
+            "cache_write_1h": 0,
+            "cache_write_5m": 36126,
+            "input": 0,
+            "output": 2976,
+            "web_search_requests": 0
+          },
+          "wave": "wave16"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave17",
+          "row_priced_cost_usd": 0.6737055,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 220768,
+            "cache_write_1h": 0,
+            "cache_write_5m": 25243,
+            "input": 0,
+            "output": 2748,
+            "web_search_requests": 0
+          },
+          "wave": "wave17"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave18",
+          "row_priced_cost_usd": 0.6454815,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 190969,
+            "cache_write_1h": 0,
+            "cache_write_5m": 25457,
+            "input": 0,
+            "output": 2726,
+            "web_search_requests": 0
+          },
+          "wave": "wave18"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave19",
+          "row_priced_cost_usd": 0.8040475,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 214210,
+            "cache_write_1h": 0,
+            "cache_write_5m": 37171,
+            "input": 0,
+            "output": 2504,
+            "web_search_requests": 0
+          },
+          "wave": "wave19"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/fable_frontier/textwright/pfterminal/wave20",
+          "row_priced_cost_usd": 0.760522,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 204722,
+            "cache_write_1h": 0,
+            "cache_write_5m": 34796,
+            "input": 0,
+            "output": 2417,
+            "web_search_requests": 0
+          },
+          "wave": "wave20"
+        }
+      ],
+      "row_count": 59,
+      "row_priced_cost_usd": 57.0250105,
+      "row_result_dirs_count": 59,
+      "row_vs_admin_cost_delta_pct": -3.5136571803562062,
+      "row_vs_admin_cost_delta_usd": -2.076629,
+      "token_reconciliation_admin_excess_tokens": 431003,
+      "token_reconciliation_status": "pass",
+      "tokens_admin": {
+        "cache_read": 13287417,
+        "cache_write_1h": 0,
+        "cache_write_5m": 2075589,
+        "input": 1106,
+        "output": 397166,
+        "web_search_requests": 0
+      },
+      "tokens_rows": {
+        "cache_read": 12952098,
+        "cache_write_1h": 0,
+        "cache_write_5m": 1995625,
+        "input": 0,
+        "output": 382552,
+        "web_search_requests": 0
+      },
+      "total_token_delta_pct": -2.734568859200377,
+      "total_token_delta_tokens": -431003,
+      "total_tokens_admin": 15761278,
+      "total_tokens_rows": 15330275
+    },
+    "opus_claude_code": {
+      "admin_price_weighted_cost_usd": 53.54031725,
+      "admin_window_cost_usd": 53.54031725,
+      "agent": "claude-code",
+      "api_key_id": "apikey_016t3eMqE5rFmPyzMNGsHBro",
+      "comparison": "opus_frontier",
+      "lane": "opus_claude_code",
+      "model": "claude-opus-4-8",
+      "publish_cost_status": "pass_clean_admin_window",
+      "row_costs": [
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave7",
+          "row_priced_cost_usd": 1.36420775,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 402368,
+            "cache_write_1h": 0,
+            "cache_write_5m": 49859,
+            "input": 26,
+            "output": 34051,
+            "web_search_requests": 0
+          },
+          "wave": "wave7"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave8",
+          "row_priced_cost_usd": 1.019314,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 140898,
+            "cache_write_1h": 0,
+            "cache_write_5m": 38040,
+            "input": 18,
+            "output": 28441,
+            "web_search_requests": 0
+          },
+          "wave": "wave8"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave9",
+          "row_priced_cost_usd": 1.238298,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 245971,
+            "cache_write_1h": 0,
+            "cache_write_5m": 44782,
+            "input": 20,
+            "output": 33413,
+            "web_search_requests": 0
+          },
+          "wave": "wave9"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave10",
+          "row_priced_cost_usd": 0.9985185,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 138952,
+            "cache_write_1h": 0,
+            "cache_write_5m": 38550,
+            "input": 16,
+            "output": 27521,
+            "web_search_requests": 0
+          },
+          "wave": "wave10"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave11",
+          "row_priced_cost_usd": 0.9939775,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 168130,
+            "cache_write_1h": 0,
+            "cache_write_5m": 35986,
+            "input": 20,
+            "output": 27396,
+            "web_search_requests": 0
+          },
+          "wave": "wave11"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave12",
+          "row_priced_cost_usd": 1.244277,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 224484,
+            "cache_write_1h": 0,
+            "cache_write_5m": 52252,
+            "input": 22,
+            "output": 32214,
+            "web_search_requests": 0
+          },
+          "wave": "wave12"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave13",
+          "row_priced_cost_usd": 1.2671695,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 425614,
+            "cache_write_1h": 0,
+            "cache_write_5m": 45162,
+            "input": 30,
+            "output": 30878,
+            "web_search_requests": 0
+          },
+          "wave": "wave13"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave14",
+          "row_priced_cost_usd": 0.60628425,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 116401,
+            "cache_write_1h": 0,
+            "cache_write_5m": 31059,
+            "input": 18,
+            "output": 14155,
+            "web_search_requests": 0
+          },
+          "wave": "wave14"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave15",
+          "row_priced_cost_usd": 1.318066,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 328672,
+            "cache_write_1h": 0,
+            "cache_write_5m": 43840,
+            "input": 26,
+            "output": 35184,
+            "web_search_requests": 0
+          },
+          "wave": "wave15"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave16",
+          "row_priced_cost_usd": 0.992812,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 108414,
+            "cache_write_1h": 0,
+            "cache_write_5m": 38640,
+            "input": 16,
+            "output": 27881,
+            "web_search_requests": 0
+          },
+          "wave": "wave16"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave17",
+          "row_priced_cost_usd": 1.159974,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 145063,
+            "cache_write_1h": 0,
+            "cache_write_5m": 41906,
+            "input": 16,
+            "output": 33018,
+            "web_search_requests": 0
+          },
+          "wave": "wave17"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave18",
+          "row_priced_cost_usd": 1.074403,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 141146,
+            "cache_write_1h": 0,
+            "cache_write_5m": 39312,
+            "input": 16,
+            "output": 30322,
+            "web_search_requests": 0
+          },
+          "wave": "wave18"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave19",
+          "row_priced_cost_usd": 1.41023,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 202830,
+            "cache_write_1h": 0,
+            "cache_write_5m": 60296,
+            "input": 18,
+            "output": 37275,
+            "web_search_requests": 0
+          },
+          "wave": "wave19"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/claude-code/wave20",
+          "row_priced_cost_usd": 1.34329675,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 319546,
+            "cache_write_1h": 0,
+            "cache_write_5m": 52263,
+            "input": 26,
+            "output": 34270,
+            "web_search_requests": 0
+          },
+          "wave": "wave20"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave7",
+          "row_priced_cost_usd": 1.476017,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 961224,
+            "cache_write_1h": 0,
+            "cache_write_5m": 80812,
+            "input": 36,
+            "output": 19606,
+            "web_search_requests": 0
+          },
+          "wave": "wave7"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave8",
+          "row_priced_cost_usd": 2.125844,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 1390583,
+            "cache_write_1h": 0,
+            "cache_write_5m": 112402,
+            "input": 38,
+            "output": 29114,
+            "web_search_requests": 0
+          },
+          "wave": "wave8"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave9",
+          "row_priced_cost_usd": 1.35648025,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 603933,
+            "cache_write_1h": 0,
+            "cache_write_5m": 91863,
+            "input": 24,
+            "output": 19210,
+            "web_search_requests": 0
+          },
+          "wave": "wave9"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave10",
+          "row_priced_cost_usd": 1.295735,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 818555,
+            "cache_write_1h": 0,
+            "cache_write_5m": 74526,
+            "input": 34,
+            "output": 16820,
+            "web_search_requests": 0
+          },
+          "wave": "wave10"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave11",
+          "row_priced_cost_usd": 1.52291225,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 911517,
+            "cache_write_1h": 0,
+            "cache_write_5m": 89575,
+            "input": 32,
+            "output": 20286,
+            "web_search_requests": 0
+          },
+          "wave": "wave11"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave12",
+          "row_priced_cost_usd": 1.420844,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 773078,
+            "cache_write_1h": 0,
+            "cache_write_5m": 96004,
+            "input": 26,
+            "output": 17366,
+            "web_search_requests": 0
+          },
+          "wave": "wave12"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave13",
+          "row_priced_cost_usd": 1.58310675,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 953161,
+            "cache_write_1h": 0,
+            "cache_write_5m": 85957,
+            "input": 34,
+            "output": 22765,
+            "web_search_requests": 0
+          },
+          "wave": "wave13"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave14",
+          "row_priced_cost_usd": 2.2979365,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 1458618,
+            "cache_write_1h": 0,
+            "cache_write_5m": 117638,
+            "input": 38,
+            "output": 33328,
+            "web_search_requests": 0
+          },
+          "wave": "wave14"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave15",
+          "row_priced_cost_usd": 1.78254725,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 994817,
+            "cache_write_1h": 0,
+            "cache_write_5m": 92555,
+            "input": 34,
+            "output": 28260,
+            "web_search_requests": 0
+          },
+          "wave": "wave15"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave16",
+          "row_priced_cost_usd": 1.37870625,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 793350,
+            "cache_write_1h": 0,
+            "cache_write_5m": 82981,
+            "input": 30,
+            "output": 18530,
+            "web_search_requests": 0
+          },
+          "wave": "wave16"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave17",
+          "row_priced_cost_usd": 1.297241,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 938872,
+            "cache_write_1h": 0,
+            "cache_write_5m": 77216,
+            "input": 36,
+            "output": 13801,
+            "web_search_requests": 0
+          },
+          "wave": "wave17"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave18",
+          "row_priced_cost_usd": 1.44094825,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 714404,
+            "cache_write_1h": 0,
+            "cache_write_5m": 84893,
+            "input": 28,
+            "output": 22121,
+            "web_search_requests": 0
+          },
+          "wave": "wave18"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave19",
+          "row_priced_cost_usd": 1.33614875,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 926875,
+            "cache_write_1h": 0,
+            "cache_write_5m": 79781,
+            "input": 36,
+            "output": 14956,
+            "web_search_requests": 0
+          },
+          "wave": "wave19"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/claude-code/wave20",
+          "row_priced_cost_usd": 1.784117,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 827084,
+            "cache_write_1h": 0,
+            "cache_write_5m": 98132,
+            "input": 30,
+            "output": 30284,
+            "web_search_requests": 0
+          },
+          "wave": "wave20"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave7",
+          "row_priced_cost_usd": 1.00772575,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 448294,
+            "cache_write_1h": 0,
+            "cache_write_5m": 71827,
+            "input": 22,
+            "output": 13382,
+            "web_search_requests": 0
+          },
+          "wave": "wave7"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave8",
+          "row_priced_cost_usd": 1.1203245,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 622754,
+            "cache_write_1h": 0,
+            "cache_write_5m": 65242,
+            "input": 32,
+            "output": 16041,
+            "web_search_requests": 0
+          },
+          "wave": "wave8"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave9",
+          "row_priced_cost_usd": 1.31013225,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 893302,
+            "cache_write_1h": 0,
+            "cache_write_5m": 68281,
+            "input": 40,
+            "output": 17461,
+            "web_search_requests": 0
+          },
+          "wave": "wave9"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave10",
+          "row_priced_cost_usd": 1.41788025,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 936813,
+            "cache_write_1h": 0,
+            "cache_write_5m": 81807,
+            "input": 36,
+            "output": 17520,
+            "web_search_requests": 0
+          },
+          "wave": "wave10"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave11",
+          "row_priced_cost_usd": 0.952389,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 498763,
+            "cache_write_1h": 0,
+            "cache_write_5m": 71566,
+            "input": 24,
+            "output": 10224,
+            "web_search_requests": 0
+          },
+          "wave": "wave11"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave12",
+          "row_priced_cost_usd": 1.122251,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 598892,
+            "cache_write_1h": 0,
+            "cache_write_5m": 75696,
+            "input": 26,
+            "output": 13983,
+            "web_search_requests": 0
+          },
+          "wave": "wave12"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave13",
+          "row_priced_cost_usd": 0.92527975,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 553387,
+            "cache_write_1h": 0,
+            "cache_write_5m": 50769,
+            "input": 36,
+            "output": 13244,
+            "web_search_requests": 0
+          },
+          "wave": "wave13"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave14",
+          "row_priced_cost_usd": 0.84969975,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 512617,
+            "cache_write_1h": 0,
+            "cache_write_5m": 48949,
+            "input": 32,
+            "output": 11492,
+            "web_search_requests": 0
+          },
+          "wave": "wave14"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave15",
+          "row_priced_cost_usd": 1.24197825,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 898659,
+            "cache_write_1h": 0,
+            "cache_write_5m": 75887,
+            "input": 36,
+            "output": 12727,
+            "web_search_requests": 0
+          },
+          "wave": "wave15"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave16",
+          "row_priced_cost_usd": 1.04780575,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 701399,
+            "cache_write_1h": 0,
+            "cache_write_5m": 68713,
+            "input": 30,
+            "output": 10700,
+            "web_search_requests": 0
+          },
+          "wave": "wave16"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave17",
+          "row_priced_cost_usd": 1.194403,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 793361,
+            "cache_write_1h": 0,
+            "cache_write_5m": 74454,
+            "input": 32,
+            "output": 13289,
+            "web_search_requests": 0
+          },
+          "wave": "wave17"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave18",
+          "row_priced_cost_usd": 1.106386,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 781627,
+            "cache_write_1h": 0,
+            "cache_write_5m": 71454,
+            "input": 32,
+            "output": 10753,
+            "web_search_requests": 0
+          },
+          "wave": "wave18"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave19",
+          "row_priced_cost_usd": 1.00061675,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 630866,
+            "cache_write_1h": 0,
+            "cache_write_5m": 52435,
+            "input": 38,
+            "output": 14291,
+            "web_search_requests": 0
+          },
+          "wave": "wave19"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/claude-code/wave20",
+          "row_priced_cost_usd": 1.11403275,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 676528,
+            "cache_write_1h": 0,
+            "cache_write_5m": 72259,
+            "input": 30,
+            "output": 12960,
+            "web_search_requests": 0
+          },
+          "wave": "wave20"
+        }
+      ],
+      "row_count": 42,
+      "row_priced_cost_usd": 53.54031725,
+      "row_result_dirs_count": 42,
+      "row_vs_admin_cost_delta_pct": 0.0,
+      "row_vs_admin_cost_delta_usd": 0.0,
+      "token_reconciliation_admin_excess_tokens": 0,
+      "token_reconciliation_status": "pass",
+      "tokens_admin": {
+        "cache_read": 25721822,
+        "cache_write_1h": 0,
+        "cache_write_5m": 2825621,
+        "input": 1190,
+        "output": 920533,
+        "web_search_requests": 0
+      },
+      "tokens_rows": {
+        "cache_read": 25721822,
+        "cache_write_1h": 0,
+        "cache_write_5m": 2825621,
+        "input": 1190,
+        "output": 920533,
+        "web_search_requests": 0
+      },
+      "total_token_delta_pct": 0.0,
+      "total_token_delta_tokens": 0,
+      "total_tokens_admin": 29469166,
+      "total_tokens_rows": 29469166
+    },
+    "opus_pfterminal": {
+      "admin_price_weighted_cost_usd": 20.41323425,
+      "admin_window_cost_usd": 20.41323425,
+      "agent": "pfterminal",
+      "api_key_id": "apikey_01CgoTt8K32z8kiqLkERjBpn",
+      "comparison": "opus_frontier",
+      "lane": "opus_pfterminal",
+      "model": "claude-opus-4-8",
+      "publish_cost_status": "pass_clean_admin_window",
+      "row_costs": [
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave7",
+          "row_priced_cost_usd": 0.5500415,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 97083,
+            "cache_write_1h": 0,
+            "cache_write_5m": 30536,
+            "input": 0,
+            "output": 12426,
+            "web_search_requests": 0
+          },
+          "wave": "wave7"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave8",
+          "row_priced_cost_usd": 0.48040075,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 111514,
+            "cache_write_1h": 0,
+            "cache_write_5m": 23079,
+            "input": 0,
+            "output": 11216,
+            "web_search_requests": 0
+          },
+          "wave": "wave8"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave9",
+          "row_priced_cost_usd": 0.52246275,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 118463,
+            "cache_write_1h": 0,
+            "cache_write_5m": 24329,
+            "input": 0,
+            "output": 12447,
+            "web_search_requests": 0
+          },
+          "wave": "wave9"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave10",
+          "row_priced_cost_usd": 0.48,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 126025,
+            "cache_write_1h": 0,
+            "cache_write_5m": 23294,
+            "input": 0,
+            "output": 10856,
+            "web_search_requests": 0
+          },
+          "wave": "wave10"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave11",
+          "row_priced_cost_usd": 0.48653725,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 112037,
+            "cache_write_1h": 0,
+            "cache_write_5m": 23155,
+            "input": 0,
+            "output": 11432,
+            "web_search_requests": 0
+          },
+          "wave": "wave11"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave12",
+          "row_priced_cost_usd": 0.45465825,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 87079,
+            "cache_write_1h": 0,
+            "cache_write_5m": 22407,
+            "input": 0,
+            "output": 10843,
+            "web_search_requests": 0
+          },
+          "wave": "wave12"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave13",
+          "row_priced_cost_usd": 0.50798775,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 88938,
+            "cache_write_1h": 0,
+            "cache_write_5m": 24099,
+            "input": 0,
+            "output": 12516,
+            "web_search_requests": 0
+          },
+          "wave": "wave13"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave14",
+          "row_priced_cost_usd": 0.53431075,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 118484,
+            "cache_write_1h": 0,
+            "cache_write_5m": 24495,
+            "input": 0,
+            "output": 12879,
+            "web_search_requests": 0
+          },
+          "wave": "wave14"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave15",
+          "row_priced_cost_usd": 0.6547815,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 134888,
+            "cache_write_1h": 0,
+            "cache_write_5m": 28354,
+            "input": 0,
+            "output": 16405,
+            "web_search_requests": 0
+          },
+          "wave": "wave15"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave16",
+          "row_priced_cost_usd": 0.51421775,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 75823,
+            "cache_write_1h": 0,
+            "cache_write_5m": 24465,
+            "input": 0,
+            "output": 12936,
+            "web_search_requests": 0
+          },
+          "wave": "wave16"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave17",
+          "row_priced_cost_usd": 0.465281,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 87562,
+            "cache_write_1h": 0,
+            "cache_write_5m": 22740,
+            "input": 0,
+            "output": 11175,
+            "web_search_requests": 0
+          },
+          "wave": "wave17"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave18",
+          "row_priced_cost_usd": 0.505752,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 88879,
+            "cache_write_1h": 0,
+            "cache_write_5m": 24234,
+            "input": 0,
+            "output": 12394,
+            "web_search_requests": 0
+          },
+          "wave": "wave18"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave19",
+          "row_priced_cost_usd": 0.74627075,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 173154,
+            "cache_write_1h": 0,
+            "cache_write_5m": 54867,
+            "input": 0,
+            "output": 12671,
+            "web_search_requests": 0
+          },
+          "wave": "wave19"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queryforge/pfterminal/wave20",
+          "row_priced_cost_usd": 0.838023,
+          "task": "queryforge",
+          "tokens": {
+            "cache_read": 158071,
+            "cache_write_1h": 0,
+            "cache_write_5m": 48914,
+            "input": 0,
+            "output": 18131,
+            "web_search_requests": 0
+          },
+          "wave": "wave20"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave8",
+          "row_priced_cost_usd": 0.396416,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 215982,
+            "cache_write_1h": 0,
+            "cache_write_5m": 36492,
+            "input": 0,
+            "output": 2414,
+            "web_search_requests": 0
+          },
+          "wave": "wave8"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave9",
+          "row_priced_cost_usd": 0.40426825,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 290274,
+            "cache_write_1h": 0,
+            "cache_write_5m": 30297,
+            "input": 0,
+            "output": 2791,
+            "web_search_requests": 0
+          },
+          "wave": "wave9"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave10",
+          "row_priced_cost_usd": 0.46402175,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 271331,
+            "cache_write_1h": 0,
+            "cache_write_5m": 42777,
+            "input": 0,
+            "output": 2440,
+            "web_search_requests": 0
+          },
+          "wave": "wave10"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave11",
+          "row_priced_cost_usd": 0.478781,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 328212,
+            "cache_write_1h": 0,
+            "cache_write_5m": 37872,
+            "input": 0,
+            "output": 3119,
+            "web_search_requests": 0
+          },
+          "wave": "wave11"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave12",
+          "row_priced_cost_usd": 0.3605185,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 219387,
+            "cache_write_1h": 0,
+            "cache_write_5m": 29736,
+            "input": 0,
+            "output": 2599,
+            "web_search_requests": 0
+          },
+          "wave": "wave12"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave13",
+          "row_priced_cost_usd": 0.370883,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 219441,
+            "cache_write_1h": 0,
+            "cache_write_5m": 30030,
+            "input": 0,
+            "output": 2939,
+            "web_search_requests": 0
+          },
+          "wave": "wave13"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave14",
+          "row_priced_cost_usd": 0.386287,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 241274,
+            "cache_write_1h": 0,
+            "cache_write_5m": 30432,
+            "input": 0,
+            "output": 3018,
+            "web_search_requests": 0
+          },
+          "wave": "wave14"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave15",
+          "row_priced_cost_usd": 0.43835425,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 325646,
+            "cache_write_1h": 0,
+            "cache_write_5m": 30697,
+            "input": 0,
+            "output": 3347,
+            "web_search_requests": 0
+          },
+          "wave": "wave15"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave16",
+          "row_priced_cost_usd": 0.40746725,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 242897,
+            "cache_write_1h": 0,
+            "cache_write_5m": 35803,
+            "input": 0,
+            "output": 2490,
+            "web_search_requests": 0
+          },
+          "wave": "wave16"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave17",
+          "row_priced_cost_usd": 0.46685425,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 234871,
+            "cache_write_1h": 0,
+            "cache_write_5m": 41191,
+            "input": 0,
+            "output": 3679,
+            "web_search_requests": 0
+          },
+          "wave": "wave17"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave18",
+          "row_priced_cost_usd": 0.45979425,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 277601,
+            "cache_write_1h": 0,
+            "cache_write_5m": 41479,
+            "input": 0,
+            "output": 2470,
+            "web_search_requests": 0
+          },
+          "wave": "wave18"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave19",
+          "row_priced_cost_usd": 0.328769,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 188388,
+            "cache_write_1h": 0,
+            "cache_write_5m": 30000,
+            "input": 0,
+            "output": 1883,
+            "web_search_requests": 0
+          },
+          "wave": "wave19"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/queuecraft/pfterminal/wave20",
+          "row_priced_cost_usd": 0.35913375,
+          "task": "queuecraft",
+          "tokens": {
+            "cache_read": 233280,
+            "cache_write_1h": 0,
+            "cache_write_5m": 28599,
+            "input": 0,
+            "output": 2550,
+            "web_search_requests": 0
+          },
+          "wave": "wave20"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave7",
+          "row_priced_cost_usd": 0.487036,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 302647,
+            "cache_write_1h": 0,
+            "cache_write_5m": 38762,
+            "input": 0,
+            "output": 3738,
+            "web_search_requests": 0
+          },
+          "wave": "wave7"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave8",
+          "row_priced_cost_usd": 0.454626,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 312277,
+            "cache_write_1h": 0,
+            "cache_write_5m": 33030,
+            "input": 0,
+            "output": 3682,
+            "web_search_requests": 0
+          },
+          "wave": "wave8"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave9",
+          "row_priced_cost_usd": 0.458212,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 312449,
+            "cache_write_1h": 0,
+            "cache_write_5m": 33742,
+            "input": 0,
+            "output": 3644,
+            "web_search_requests": 0
+          },
+          "wave": "wave9"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave10",
+          "row_priced_cost_usd": 0.42631525,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 274318,
+            "cache_write_1h": 0,
+            "cache_write_5m": 32697,
+            "input": 0,
+            "output": 3392,
+            "web_search_requests": 0
+          },
+          "wave": "wave10"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave11",
+          "row_priced_cost_usd": 0.4684695,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 321714,
+            "cache_write_1h": 0,
+            "cache_write_5m": 34262,
+            "input": 0,
+            "output": 3739,
+            "web_search_requests": 0
+          },
+          "wave": "wave11"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave12",
+          "row_priced_cost_usd": 0.48357275,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 340183,
+            "cache_write_1h": 0,
+            "cache_write_5m": 36801,
+            "input": 0,
+            "output": 3339,
+            "web_search_requests": 0
+          },
+          "wave": "wave12"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave13",
+          "row_priced_cost_usd": 0.653457,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 603564,
+            "cache_write_1h": 0,
+            "cache_write_5m": 38160,
+            "input": 0,
+            "output": 4527,
+            "web_search_requests": 0
+          },
+          "wave": "wave13"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave14",
+          "row_priced_cost_usd": 0.66536375,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 576565,
+            "cache_write_1h": 0,
+            "cache_write_5m": 38533,
+            "input": 0,
+            "output": 5450,
+            "web_search_requests": 0
+          },
+          "wave": "wave14"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave15",
+          "row_priced_cost_usd": 0.469419,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 349438,
+            "cache_write_1h": 0,
+            "cache_write_5m": 33448,
+            "input": 0,
+            "output": 3426,
+            "web_search_requests": 0
+          },
+          "wave": "wave15"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave16",
+          "row_priced_cost_usd": 0.4928045,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 360659,
+            "cache_write_1h": 0,
+            "cache_write_5m": 35692,
+            "input": 0,
+            "output": 3576,
+            "web_search_requests": 0
+          },
+          "wave": "wave16"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave17",
+          "row_priced_cost_usd": 0.8256925,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 358610,
+            "cache_write_1h": 0,
+            "cache_write_5m": 87506,
+            "input": 0,
+            "output": 3979,
+            "web_search_requests": 0
+          },
+          "wave": "wave17"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave18",
+          "row_priced_cost_usd": 0.542913,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 403951,
+            "cache_write_1h": 0,
+            "cache_write_5m": 37114,
+            "input": 0,
+            "output": 4359,
+            "web_search_requests": 0
+          },
+          "wave": "wave18"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave19",
+          "row_priced_cost_usd": 0.540758,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 420541,
+            "cache_write_1h": 0,
+            "cache_write_5m": 37166,
+            "input": 0,
+            "output": 3928,
+            "web_search_requests": 0
+          },
+          "wave": "wave19"
+        },
+        {
+          "result_dir": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/results/opus_frontier/textwright/pfterminal/wave20",
+          "row_priced_cost_usd": 0.38329175,
+          "task": "textwright",
+          "tokens": {
+            "cache_read": 199021,
+            "cache_write_1h": 0,
+            "cache_write_5m": 32513,
+            "input": 0,
+            "output": 3223,
+            "web_search_requests": 0
+          },
+          "wave": "wave20"
+        }
+      ],
+      "row_count": 41,
+      "row_priced_cost_usd": 20.41420425,
+      "row_result_dirs_count": 41,
+      "row_vs_admin_cost_delta_pct": 0.004751819276238661,
+      "row_vs_admin_cost_delta_usd": 0.00097,
+      "token_reconciliation_admin_excess_tokens": 0,
+      "token_reconciliation_status": "pass",
+      "tokens_admin": {
+        "cache_read": 10002521,
+        "cache_write_1h": 0,
+        "cache_write_5m": 1393023,
+        "input": 776,
+        "output": 268068,
+        "web_search_requests": 0
+      },
+      "tokens_rows": {
+        "cache_read": 10002521,
+        "cache_write_1h": 0,
+        "cache_write_5m": 1393799,
+        "input": 0,
+        "output": 268068,
+        "web_search_requests": 0
+      },
+      "total_token_delta_pct": 0.0,
+      "total_token_delta_tokens": 0,
+      "total_tokens_admin": 11664388,
+      "total_tokens_rows": 11664388
+    }
+  },
+  "method": "Counted benchmark rows are priced from their own API-reported token breakdown using the published Anthropic schedule; raw Admin Usage remains authoritative for clean lanes and validates the formula.",
+  "price_schedule_usd_per_million_tokens": {
+    "claude-fable-5": {
+      "cache_read": 1.0,
+      "cache_write_1h": 20.0,
+      "cache_write_5m": 12.5,
+      "input": 10.0,
+      "output": 50.0
+    },
+    "claude-opus-4-8": {
+      "cache_read": 0.5,
+      "cache_write_1h": 10.0,
+      "cache_write_5m": 6.25,
+      "input": 5.0,
+      "output": 25.0
+    }
+  },
+  "status": "pass",
+  "summary_updates": {
+    "fable_rows_annotated_with_row_priced_recovered_cost": 118
+  },
+  "token_reconciliation_artifact": "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/keyed_parallel_20260705/frontier_token_reconciliation.json"
+}

@@ -1,0 +1,205 @@
+{
+  "benchmark_adjustment": {
+    "probe_adjustments_by_api_key_name": {
+      "vcel2": {
+        "cost_delta": 7.4e-05,
+        "request_delta": 1
+      },
+      "vcel3": {
+        "cost_delta": 0.000148,
+        "request_delta": 2
+      }
+    },
+    "probe_artifacts": [
+      "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/keyed_parallel_20260705/vercel_key_name_probe_vercel_proper.json",
+      "/home/pfrpc/repos/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705/keyed_parallel_20260705/vercel_key_name_probe_all.json"
+    ],
+    "reason": "subtract isolated Vercel key-name probe requests run after benchmark completion"
+  },
+  "created_at": "2026-07-05T23:33:13Z",
+  "samples": [
+    {
+      "attempt": 1,
+      "deltas": {
+        "created_at": "2026-07-05T23:33:13Z",
+        "lanes": {
+          "hermes": {
+            "api_key_name": "vcel3",
+            "billed_delta_usd": 36.57681161,
+            "cost_after_usd": 36.57681161,
+            "cost_before_usd": 0.0,
+            "request_count_after": 964,
+            "request_count_before": 0,
+            "request_count_delta": 964
+          },
+          "pfterminal": {
+            "api_key_name": "vcel2",
+            "billed_delta_usd": 18.45877304,
+            "cost_after_usd": 64.23002023,
+            "cost_before_usd": 45.77124719,
+            "request_count_after": 2471,
+            "request_count_before": 1674,
+            "request_count_delta": 797
+          }
+        },
+        "source": "Vercel AI Gateway /v1/report group_by=api_key_name"
+      },
+      "snapshot": {
+        "captured_at": "2026-07-05T23:33:13Z",
+        "http_status": 200,
+        "params": {
+          "end_date": "2026-07-05",
+          "group_by": "api_key_name",
+          "model": "zai/glm-5.2-fast",
+          "start_date": "2026-07-05"
+        },
+        "rows": [
+          {
+            "api_key_name": "v2",
+            "market_cost": 95.07642461,
+            "request_count": 744,
+            "total_cost": 95.07642461
+          },
+          {
+            "api_key_name": "vcel2",
+            "market_cost": 64.23002023,
+            "request_count": 2471,
+            "total_cost": 64.23002023
+          },
+          {
+            "api_key_name": "vcel3",
+            "market_cost": 36.57681161,
+            "request_count": 964,
+            "total_cost": 36.57681161
+          }
+        ],
+        "url": "https://ai-gateway.vercel.sh/v1/report"
+      }
+    },
+    {
+      "attempt": 2,
+      "deltas": {
+        "created_at": "2026-07-05T23:33:13Z",
+        "lanes": {
+          "hermes": {
+            "api_key_name": "vcel3",
+            "billed_delta_usd": 36.57681161,
+            "cost_after_usd": 36.57681161,
+            "cost_before_usd": 0.0,
+            "request_count_after": 964,
+            "request_count_before": 0,
+            "request_count_delta": 964
+          },
+          "pfterminal": {
+            "api_key_name": "vcel2",
+            "billed_delta_usd": 18.45877304,
+            "cost_after_usd": 64.23002023,
+            "cost_before_usd": 45.77124719,
+            "request_count_after": 2471,
+            "request_count_before": 1674,
+            "request_count_delta": 797
+          }
+        },
+        "source": "Vercel AI Gateway /v1/report group_by=api_key_name"
+      },
+      "snapshot": {
+        "captured_at": "2026-07-05T23:33:13Z",
+        "http_status": 200,
+        "params": {
+          "end_date": "2026-07-05",
+          "group_by": "api_key_name",
+          "model": "zai/glm-5.2-fast",
+          "start_date": "2026-07-05"
+        },
+        "rows": [
+          {
+            "api_key_name": "v2",
+            "market_cost": 95.07642461,
+            "request_count": 744,
+            "total_cost": 95.07642461
+          },
+          {
+            "api_key_name": "vcel2",
+            "market_cost": 64.23002023,
+            "request_count": 2471,
+            "total_cost": 64.23002023
+          },
+          {
+            "api_key_name": "vcel3",
+            "market_cost": 36.57681161,
+            "request_count": 964,
+            "total_cost": 36.57681161
+          }
+        ],
+        "url": "https://ai-gateway.vercel.sh/v1/report"
+      }
+    }
+  ],
+  "selected": {
+    "attempt": 2,
+    "deltas": {
+      "created_at": "2026-07-05T23:33:13Z",
+      "lanes": {
+        "hermes": {
+          "api_key_name": "vcel3",
+          "billed_delta_usd": 36.57666361,
+          "cost_after_usd": 36.57681161,
+          "cost_before_usd": 0.0,
+          "nonbenchmark_probe_cost_subtracted_usd": 0.000148,
+          "nonbenchmark_probe_requests_subtracted": 2,
+          "raw_billed_delta_usd_including_key_probes": 36.57681161,
+          "raw_request_count_delta_including_key_probes": 964,
+          "request_count_after": 964,
+          "request_count_before": 0,
+          "request_count_delta": 962
+        },
+        "pfterminal": {
+          "api_key_name": "vcel2",
+          "billed_delta_usd": 18.45869904,
+          "cost_after_usd": 64.23002023,
+          "cost_before_usd": 45.77124719,
+          "nonbenchmark_probe_cost_subtracted_usd": 7.4e-05,
+          "nonbenchmark_probe_requests_subtracted": 1,
+          "raw_billed_delta_usd_including_key_probes": 18.45877304,
+          "raw_request_count_delta_including_key_probes": 797,
+          "request_count_after": 2471,
+          "request_count_before": 1674,
+          "request_count_delta": 796
+        }
+      },
+      "source": "Vercel AI Gateway /v1/report group_by=api_key_name"
+    },
+    "snapshot": {
+      "captured_at": "2026-07-05T23:33:13Z",
+      "http_status": 200,
+      "params": {
+        "end_date": "2026-07-05",
+        "group_by": "api_key_name",
+        "model": "zai/glm-5.2-fast",
+        "start_date": "2026-07-05"
+      },
+      "rows": [
+        {
+          "api_key_name": "v2",
+          "market_cost": 95.07642461,
+          "request_count": 744,
+          "total_cost": 95.07642461
+        },
+        {
+          "api_key_name": "vcel2",
+          "market_cost": 64.23002023,
+          "request_count": 2471,
+          "total_cost": 64.23002023
+        },
+        {
+          "api_key_name": "vcel3",
+          "market_cost": 36.57681161,
+          "request_count": 964,
+          "total_cost": 36.57681161
+        }
+      ],
+      "url": "https://ai-gateway.vercel.sh/v1/report"
+    }
+  },
+  "status": "pass"
+}

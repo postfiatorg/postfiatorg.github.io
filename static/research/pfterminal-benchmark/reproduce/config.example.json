@@ -1,0 +1,194 @@
+{
+  "run_dir": "/path/to/pfterminal-perf-probe/runs/launch-phase1-0.1.8-highn-20260705",
+  "waves": 20,
+  "caps": {
+    "spend_usd": 400.0,
+    "timeout_seconds": 3600
+  },
+  "phase1_claude_max_budget_usd": 20.0,
+  "anthropic_admin_key_file": "/path/to/your/anthropic_admin_key.txt",
+  "anthropic_admin_api_key_id": "YOUR_ANTHROPIC_ADMIN_API_KEY_ID",
+  "anthropic_admin_max_delta_pct": 1.0,
+  "anthropic_admin_settle_seconds": 120,
+  "key_files": "/path/to/your/key.txt",
+  "shell_snapshot_roots": [
+    "/path/to/.claude/shell-snapshots",
+    "/path/to/.claude/session-env",
+    "/path/to/.codex/shell-snapshots",
+    "/path/to/.hermes/sessions"
+  ],
+  "agents": [
+    {
+      "name": "pfterminal",
+      "kind": "pfterminal",
+      "binary": "/path/to/.local/bin/pfterminal",
+      "provider": "pfterminal",
+      "endpoint": "mixed",
+      "lane": "serialized-provider-billing",
+      "model": "per-comparison",
+      "key_file": "/path/to/your/key.txt",
+      "cost_source": "vercel_credits_delta"
+    },
+    {
+      "name": "hermes",
+      "kind": "hermes",
+      "binary": "/path/to/.local/bin/hermes",
+      "provider": "ai-gateway",
+      "endpoint": "https://ai-gateway.vercel.sh/v1",
+      "lane": "vercel-ai-gateway",
+      "model": "zai/glm-5.2-fast",
+      "key_file": "/path/to/your/key.txt",
+      "cost_source": "vercel_credits_delta"
+    },
+    {
+      "name": "claude-code",
+      "kind": "claude-code",
+      "binary": "/path/to/.npm-global/bin/claude",
+      "provider": "anthropic-direct",
+      "endpoint": "https://api.anthropic.com",
+      "lane": "anthropic-direct",
+      "model": "per-comparison",
+      "key_file": "/path/to/your/key.txt",
+      "cost_source": "claude_code_total_cost_usd"
+    }
+  ],
+  "phase1_agent_key_overrides": {
+    "pfterminal": {
+      "vercel_glm": "/path/to/vercel_proper.txt",
+      "opus_frontier": "/path/to/antfable.txt",
+      "fable_frontier": "/path/to/antfable.txt"
+    }
+  },
+  "phase1_comparisons": [
+    {
+      "name": "vercel_glm",
+      "label": "Vercel GLM-5.2-fast: PfTerminal vs Hermes",
+      "model": "zai/glm-5.2-fast",
+      "agents": [
+        "pfterminal",
+        "hermes"
+      ],
+      "tasks": [
+        "eventforge",
+        "rategate",
+        "confclerk",
+        "queuecraft",
+        "pipeflow"
+      ]
+    },
+    {
+      "name": "opus_frontier",
+      "label": "Opus-4.8: PfTerminal vs Claude Code",
+      "model": "claude-opus-4-8",
+      "agents": [
+        "pfterminal",
+        "claude-code"
+      ],
+      "tasks": [
+        "queuecraft",
+        "textwright",
+        "queryforge"
+      ]
+    },
+    {
+      "name": "fable_frontier",
+      "label": "Fable-5: PfTerminal vs Claude Code",
+      "model": "claude-fable-5",
+      "agents": [
+        "pfterminal",
+        "claude-code"
+      ],
+      "tasks": [
+        "queuecraft",
+        "textwright",
+        "queryforge"
+      ]
+    }
+  ],
+  "phase1_tasks": [
+    {
+      "name": "eventforge",
+      "kind": "greenfield",
+      "baseline": "/path/to/glm52-agent-bench/baseline",
+      "prompt": "/path/to/glm52-agent-bench/task_prompt.md",
+      "verifier": "/path/to/glm52-agent-bench/verifier/verify.py",
+      "summary_prefix": "HIDDEN_VERIFIER_SUMMARY",
+      "expected_tests": 12,
+      "expected_bugs": null,
+      "timeout_seconds": 1800,
+      "package": "eventforge"
+    },
+    {
+      "name": "rategate",
+      "kind": "greenfield",
+      "baseline": "/path/to/glm52-agent-bench/tasks/rategate/baseline",
+      "prompt": "/path/to/glm52-agent-bench/tasks/rategate/task_prompt.md",
+      "verifier": "/path/to/glm52-agent-bench/tasks/rategate/verifier/verify.py",
+      "summary_prefix": "HIDDEN_VERIFIER_SUMMARY",
+      "expected_tests": 6,
+      "expected_bugs": null,
+      "timeout_seconds": 1800,
+      "package": "rategate"
+    },
+    {
+      "name": "queryforge",
+      "kind": "greenfield",
+      "baseline": "/path/to/glm52-agent-bench/tasks/queryforge/baseline",
+      "prompt": "/path/to/glm52-agent-bench/tasks/queryforge/task_prompt.md",
+      "verifier": "/path/to/glm52-agent-bench/tasks/queryforge/verifier/verify.py",
+      "summary_prefix": "QUERYFORGE_VERIFIER_SUMMARY",
+      "expected_tests": 12,
+      "expected_bugs": null,
+      "timeout_seconds": 3600,
+      "package": "queryforge"
+    },
+    {
+      "name": "confclerk",
+      "kind": "debugging",
+      "baseline": "/path/to/glm52-agent-bench/tasks/confclerk/bugged",
+      "prompt": "/path/to/glm52-agent-bench/tasks/confclerk/bugged/BENCHMARK_TASK.md",
+      "verifier": "/path/to/glm52-agent-bench/tasks/confclerk/verifier/verify.py",
+      "summary_prefix": "CONFCLERK_VERIFIER_SUMMARY",
+      "expected_tests": 23,
+      "expected_bugs": 3,
+      "timeout_seconds": 1800,
+      "package": "confclerk"
+    },
+    {
+      "name": "queuecraft",
+      "kind": "debugging",
+      "baseline": "/path/to/glm52-agent-bench/tasks/queuecraft/bugged",
+      "prompt": "/path/to/glm52-agent-bench/tasks/queuecraft/bugged/BENCHMARK_TASK.md",
+      "verifier": "/path/to/glm52-agent-bench/tasks/queuecraft/verifier/verify.py",
+      "summary_prefix": "QUEUECRAFT_VERIFIER_SUMMARY",
+      "expected_tests": 35,
+      "expected_bugs": 7,
+      "timeout_seconds": 3600,
+      "package": "queuecraft"
+    },
+    {
+      "name": "pipeflow",
+      "kind": "debugging",
+      "baseline": "/path/to/glm52-agent-bench/tasks/pipeflow/bugged",
+      "prompt": "/path/to/glm52-agent-bench/tasks/pipeflow/bugged/BENCHMARK_TASK.md",
+      "verifier": "/path/to/glm52-agent-bench/tasks/pipeflow/verifier/verify.py",
+      "summary_prefix": "LIMITPRESS_VERIFIER_SUMMARY",
+      "expected_tests": 31,
+      "expected_bugs": 5,
+      "timeout_seconds": 3600,
+      "package": "pipeflow"
+    },
+    {
+      "name": "textwright",
+      "kind": "debugging",
+      "baseline": "/path/to/glm52-agent-bench/tasks/textwright/bugged",
+      "prompt": "/path/to/glm52-agent-bench/tasks/textwright/bugged/BENCHMARK_TASK.md",
+      "verifier": "/path/to/glm52-agent-bench/tasks/textwright/verifier/verify.py",
+      "summary_prefix": "TEXTWRIGHT_VERIFIER_SUMMARY",
+      "expected_tests": 24,
+      "expected_bugs": 5,
+      "timeout_seconds": 3600,
+      "package": "textwright"
+    }
+  ]
+}
