@@ -223,6 +223,49 @@ root that an external verifier can recompute. Remaining hardening
 (receipt-inclusion proofs, bonded challenges, a reserve deadman, and a
 threshold withdrawal verifier) is staged and tracked — see Section 9.
 
+### External validation: Zcash's Orchard incident and the Ironwood turnstile
+
+The industry just ran this exact playbook at billion-dollar scale. In
+May 2026, a researcher found a soundness flaw in Zcash's Orchard shielded
+pool — an under-constrained scalar-multiplication gadget that could let a
+malicious prover pass an invalid proof, meaning counterfeit notes could
+in principle have been created invisibly inside the pool. The flaw had
+shipped in 2022 and sat undetected for four years. Zcash's answer, the
+Ironwood upgrade (NU6.3, activating late July 2026), is instructive: it
+**seals the old pool** — no new deposits, no internal circulation — and
+forces every exiting coin through a public **turnstile checkpoint**, so
+that anyone running a node can verify circulating supply without seeing
+any individual transaction. Any theoretical counterfeits are boxed in at
+the boundary, because the turnstile refuses to let more value out than
+legitimately went in.
+
+Three lessons transfer directly:
+
+1. **Boundary accounting is the containment mechanism.** Zcash is
+   retrofitting what this product has by construction: every entry and
+   exit of Asset Orchard is already a counted public event, so a circuit
+   soundness bug is contained at the pool boundary rather than becoming
+   systemic supply inflation.
+2. **You cannot prove a negative inside a shielded pool.** Nobody can
+   cryptographically confirm that counterfeiting *never* happened in a
+   private pool — only bound the damage at the boundary. That is why the
+   boundaries must be counted from day one, not added after an incident.
+3. **Our circuits share the lineage — and were already patched.** The
+   Asset Orchard circuits derive from the same Orchard/Halo2 code family.
+   Our [June research note](/blog/orchard-halo2-vulnerability-response/)
+   records the dependency-intersection finding and the remediation:
+   the patched profile moved to `orchard 0.14.0` / `halo2_gadgets 0.5.0`,
+   rejects legacy profile identifiers, and enforces strict proof-size
+   reconstruction. The final Ironwood circuit revisions will be
+   diff-checked when they ship.
+
+Ironwood also raises the bar: it ships with independent audits and
+near-complete **formal verification** of its circuits. That is now table
+stakes for any shielded system holding real value, and an independent
+audit plus scoped formal verification of the Asset Orchard conservation
+and nullifier constraints is a named pre-mainnet requirement on this
+product's roadmap.
+
 ---
 
 ## 5. Wallet warm-ups for Orchard transactions, and the latency work
