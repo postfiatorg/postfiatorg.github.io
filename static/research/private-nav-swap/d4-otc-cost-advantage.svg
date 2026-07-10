@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" font-family="system-ui,-apple-system,'Segoe UI',sans-serif">
+  <rect width="960" height="520" fill="#0f172a"/>
+  <text x="480" y="34" fill="#e2e8f0" font-size="19" font-weight="700" text-anchor="middle">Two routes to the same mainnet asset</text>
+  <rect x="380" y="52" width="200" height="44" rx="8" fill="#1e293b" stroke="#475569"/>
+  <text x="480" y="79" fill="#e2e8f0" font-size="13.5" font-weight="600" text-anchor="middle">You hold 1,000,000 USDC</text>
+  <!-- Route A: pool -->
+  <text x="235" y="140" fill="#f87171" font-size="14" font-weight="700" text-anchor="middle">ROUTE A — buy in the pool</text>
+  <rect x="80" y="155" width="310" height="180" rx="12" fill="#1c1017" stroke="#7f1d1d"/>
+  <text x="235" y="182" fill="#fecaca" font-size="12.5" font-weight="600" text-anchor="middle">swap USDC → a651 on Uniswap v4</text>
+  <g fill="#fca5a5" font-size="12">
+    <text x="105" y="210">· LP fee: 0.05% of notional</text>
+    <text x="105" y="232">· price impact: scales with size ÷ depth</text>
+    <text x="105" y="254">· today's pool depth ≈ $2k → $1M is</text>
+    <text x="118" y="271">  simply impossible at any sane price</text>
+    <text x="105" y="293">· MEV / sandwich exposure, mainnet gas</text>
+    <text x="105" y="315">· the whole trade is public</text>
+  </g>
+  <!-- Route B: OTC -->
+  <text x="725" y="140" fill="#6ee7b7" font-size="14" font-weight="700" text-anchor="middle">ROUTE B — OTC at NAV, then bridge</text>
+  <rect x="570" y="155" width="310" height="180" rx="12" fill="#122b22" stroke="#14532d"/>
+  <g fill="#a7f3d0" font-size="12">
+    <text x="592" y="185">1 · USDC → pfUSDC (counted cash)</text>
+    <text x="592" y="209">2 · private swap at NAV (± band)</text>
+    <text x="606" y="226">   no pool touched: no LP fee,</text>
+    <text x="606" y="243">   no price impact, no sandwich</text>
+    <text x="592" y="267">3 · bridge a651 out → same wrapped</text>
+    <text x="606" y="284">   ERC-20 the pool trades</text>
+    <text x="592" y="308">costs: desk spread, bridge + gas</text>
+  </g>
+  <!-- arrows from start -->
+  <g stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#e)">
+    <path d="M405 96 L240 151"/>
+    <path d="M555 96 L720 151"/>
+    <path d="M235 335 L235 375"/>
+    <path d="M725 335 L725 375"/>
+  </g>
+  <!-- outcomes -->
+  <rect x="80" y="380" width="310" height="60" rx="10" fill="#1e293b" stroke="#7f1d1d"/>
+  <text x="235" y="405" fill="#fecaca" font-size="12.5" font-weight="600" text-anchor="middle">mainnet a651, at pool price + fee + impact</text>
+  <text x="235" y="425" fill="#f87171" font-size="11.5" text-anchor="middle">cost grows with your size</text>
+  <rect x="570" y="380" width="310" height="60" rx="10" fill="#1e293b" stroke="#14532d"/>
+  <text x="725" y="405" fill="#d1fae5" font-size="12.5" font-weight="600" text-anchor="middle">the same mainnet a651, at NAV ± band</text>
+  <text x="725" y="425" fill="#6ee7b7" font-size="11.5" text-anchor="middle">cost independent of size and pool depth</text>
+  <text x="480" y="472" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle">Same asset out the other side — the pool is bypassed, not required.</text>
+  <text x="480" y="494" fill="#94a3b8" font-size="11.5" text-anchor="middle">The pool stays useful for small trades and price discovery; the OTC rail is how size moves.</text>
+  <defs><marker id="e" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 z" fill="#64748b"/></marker></defs>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" font-family="system-ui,-apple-system,'Segoe UI',sans-serif">
+  <rect width="960" height="500" fill="#0f172a"/>
+  <text x="480" y="34" fill="#e2e8f0" font-size="19" font-weight="700" text-anchor="middle">RFQ lifecycle: Bob quotes, Alice fills</text>
+  <!-- lanes -->
+  <text x="150" y="70" fill="#7dd3fc" font-size="14" font-weight="700" text-anchor="middle">BOB (maker)</text>
+  <text x="480" y="70" fill="#6ee7b7" font-size="14" font-weight="700" text-anchor="middle">PROTOCOL / CHAIN</text>
+  <text x="810" y="70" fill="#f9a8d4" font-size="14" font-weight="700" text-anchor="middle">ALICE (taker)</text>
+  <g stroke="#334155" stroke-width="1.5"><line x1="150" y1="80" x2="150" y2="470"/><line x1="480" y1="80" x2="480" y2="470"/><line x1="810" y1="80" x2="810" y2="470"/></g>
+  <!-- 1 quote -->
+  <rect x="45" y="95" width="210" height="72" rx="8" fill="#0c4a6e" stroke="#38bdf8"/>
+  <text x="150" y="117" fill="#e0f2fe" font-size="12.5" font-weight="700" text-anchor="middle">1 · Post quote</text>
+  <text x="150" y="135" fill="#bae6fd" font-size="11" text-anchor="middle">sell 500 a651 @ 8.25</text>
+  <text x="150" y="150" fill="#bae6fd" font-size="11" text-anchor="middle">NAV epoch #41 ref · 120 s expiry</text>
+  <text x="150" y="163" fill="#bae6fd" font-size="11" text-anchor="middle">signed</text>
+  <path d="M255 131 L700 131" stroke="#7dd3fc" stroke-width="2" fill="none" marker-end="url(#c)" stroke-dasharray="7 5"/>
+  <text x="480" y="122" fill="#7dd3fc" font-size="10.5" text-anchor="middle">off-chain: the chain never sees the negotiation</text>
+  <!-- 2 confirm -->
+  <rect x="705" y="150" width="210" height="76" rx="8" fill="#500724" stroke="#f9a8d4"/>
+  <text x="810" y="172" fill="#fce7f3" font-size="12.5" font-weight="700" text-anchor="middle">2 · Confirm once, ex ante</text>
+  <text x="810" y="190" fill="#fbcfe8" font-size="11" text-anchor="middle">8.25 vs NAV 8.20 (+0.61%)</text>
+  <text x="810" y="205" fill="#fbcfe8" font-size="11" text-anchor="middle">band, fees, expiry, ETA shown</text>
+  <text x="810" y="220" fill="#fbcfe8" font-size="11" text-anchor="middle">no mid-flight re-confirmation</text>
+  <!-- 3 lock -->
+  <rect x="375" y="245" width="210" height="72" rx="8" fill="#452a03" stroke="#f59e0b"/>
+  <text x="480" y="267" fill="#fef3c7" font-size="12.5" font-weight="700" text-anchor="middle">3 · Price locks at accept</text>
+  <text x="480" y="285" fill="#fde68a" font-size="11" text-anchor="middle">two clocks: quote expiry +</text>
+  <text x="480" y="300" fill="#fde68a" font-size="11" text-anchor="middle">NAV staleness → fail closed</text>
+  <path d="M705 195 L560 250" stroke="#f9a8d4" stroke-width="2" fill="none" marker-end="url(#c)"/>
+  <!-- 4 proof -->
+  <rect x="375" y="335" width="210" height="66" rx="8" fill="#2e1065" stroke="#a78bfa"/>
+  <text x="480" y="357" fill="#ede9fe" font-size="12.5" font-weight="700" text-anchor="middle">4 · Joint shielded proof</text>
+  <text x="480" y="375" fill="#ddd6fe" font-size="11" text-anchor="middle">both sides' notes committed</text>
+  <text x="480" y="390" fill="#ddd6fe" font-size="11" text-anchor="middle">built on the warm prover (~12 s)</text>
+  <path d="M480 317 L480 331" stroke="#94a3b8" stroke-width="2" marker-end="url(#c)"/>
+  <!-- 5 certified -->
+  <rect x="375" y="418" width="210" height="52" rx="8" fill="#064e3b" stroke="#34d399"/>
+  <text x="480" y="440" fill="#d1fae5" font-size="12.5" font-weight="700" text-anchor="middle">5 · Certified 6/6</text>
+  <text x="480" y="457" fill="#a7f3d0" font-size="11" text-anchor="middle">each side holds new private notes</text>
+  <path d="M480 401 L480 414" stroke="#94a3b8" stroke-width="2" marker-end="url(#c)"/>
+  <!-- failure branch -->
+  <rect x="45" y="335" width="210" height="66" rx="8" fill="#450a0a" stroke="#f87171"/>
+  <text x="150" y="357" fill="#fee2e2" font-size="12.5" font-weight="700" text-anchor="middle">If a side vanishes</text>
+  <text x="150" y="375" fill="#fecaca" font-size="11" text-anchor="middle">deadline passes → notes unlock</text>
+  <text x="150" y="390" fill="#fecaca" font-size="11" text-anchor="middle">typed failure, nothing moves</text>
+  <path d="M373 368 L257 368" stroke="#f87171" stroke-width="2" fill="none" marker-end="url(#d)" stroke-dasharray="6 5"/>
+  <defs>
+    <marker id="c" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 z" fill="#94a3b8"/></marker>
+    <marker id="d" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 z" fill="#f87171"/></marker>
+  </defs>
+</svg>
