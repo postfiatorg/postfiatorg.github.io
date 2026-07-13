@@ -157,7 +157,7 @@ The relay wallet is a standard testnet `r...` account that pays the small per-ro
 2. Task Node creates a self-custodial testnet wallet, sends you its wallet secret — an `s...` seed or a 24-word recovery phrase; the sidecar accepts either (save it in a password manager — Post Fiat cannot recover it) — and the faucet funds it with **100 testnet PFT** automatically. That is a long runway: each round costs only two tiny fees (commit + reveal).
 3. That secret is your `POSTFIAT_SIDECAR_VALIDATOR_WALLET_SEED` — the `seed` line of the secrets file in B4.
 
-Bring-your-own alternative: any funded testnet `r...` account works, and keeps your participation cleanly separate from your Task Node identity. It must be a **different** account from your validator identity, and if you run more than one sidecar, each needs its own relay wallet so concurrent submissions do not collide on transaction sequence.
+Bring-your-own alternative: any funded testnet `r...` account works. It must be a **different** account from your validator identity, and if you run more than one sidecar, give each instance its own relay wallet.
 
 ### B3 — Place Your `validator-keys.json`
 
