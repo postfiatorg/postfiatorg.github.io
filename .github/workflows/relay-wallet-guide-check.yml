@@ -1,0 +1,25 @@
+name: Relay Wallet Guide Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  relay-wallet-guide-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run drift-check tests
+        run: node --test scripts/check_relay_wallet_guidance.test.mjs
+
+      - name: Check relay-wallet guidance surfaces
+        run: node scripts/check_relay_wallet_guidance.mjs

@@ -38,6 +38,9 @@ jobs:
 
       - name: Validate public profile snapshot
         run: node scripts/validate_market_symbols.mjs
+
+      - name: Check relay-wallet guidance surfaces
+        run: node scripts/check_relay_wallet_guidance.mjs
         
       - name: Build Site
         env:

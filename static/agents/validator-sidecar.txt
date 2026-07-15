@@ -38,7 +38,7 @@ NETWORK=testnet
 SIDECAR_DIR=/opt/validator-scoring-sidecar
 INFERENCE=modal
 
-I will provide the relay wallet seed and Modal credentials through a labeled local secrets file, and my validator-keys.json on disk, never in chat. Before any step that needs my Modal account, relay wallet, or validator keys, stop and tell me plainly what I must do by hand (create the Modal account and its two tokens, create and fund a Task Node relay wallet, and place validator-keys.json on the host), give me the secrets-file format from the guide, and wait for me to confirm the file is ready. Then finish the configuration yourself: inspect the file's structure only (labels, value prefixes, lengths, word counts — never the values), move it to this server over SSH if it is not already here (or ask me to copy it here if you cannot reach it), inject the values into .env, delete the transferred copy and any helper artifacts, and tell me which keys you set. If I say I prefer to edit .env myself, prepare placeholder lines and wait for me instead. Keep all secrets out of chat, logs, and image layers. Set up participation mode, start the container with the participation overlay, then run `preflight` and confirm it prints `Preflight: READY` before finishing. Do not wait for a live round; the sidecar handles the next round on its own.
+I will provide the relay wallet seed and Modal credentials through a labeled local secrets file, and my validator-keys.json on disk, never in chat. Before any step that needs my Modal account, relay wallet, or validator keys, stop and tell me plainly what I must do by hand (create the Modal account and its two tokens, retrieve the wallet secret of my existing Task Node wallet — or create and fund a new relay wallet only if I say I do not want to use my Task Node one — and place validator-keys.json on the host), give me the secrets-file format from the guide, and wait for me to confirm the file is ready. Then finish the configuration yourself: inspect the file's structure only (labels, value prefixes, lengths, word counts — never the values), move it to this server over SSH if it is not already here (or ask me to copy it here if you cannot reach it), inject the values into .env, delete the transferred copy and any helper artifacts, and tell me which keys you set. If I say I prefer to edit .env myself, prepare placeholder lines and wait for me instead. Keep all secrets out of chat, logs, and image layers. Set up participation mode, start the container with the participation overlay, then run `preflight` and confirm it prints `Preflight: READY` before finishing. Do not wait for a live round; the sidecar handles the next round on its own.
 ```
 
 ## Scope
@@ -61,7 +61,7 @@ Confirm these before starting:
 
 For participation only, also:
 
-- A funded operator **relay wallet seed** (a standard `r...` testnet account; Task Node is the default source — see below).
+- A funded operator **relay wallet seed** — by default the wallet already active in your Task Node account; a new wallet is the fallback (see B2).
 - The host path of your **`validator-keys.json`**.
 - An **inference runtime**: a Modal account (default) or a local SGLang H100.
 
@@ -130,15 +130,20 @@ Running more than one validator against the same Modal account? Set a distinct `
 
 > Prefer your own hardware? See [Option: local SGLang](#option-local-sglang) below. Modal is the default and the simplest path.
 
-### B2 — Get A Funded Relay Wallet (Task Node, default)
+### B2 — Relay Wallet: Use Your Task Node Wallet (default)
 
-The relay wallet is a standard testnet `r...` account that pays the small per-round fees. The easiest way to get a funded one is **Task Node**, Post Fiat's onboarding app:
+The relay wallet is a standard testnet `r...` account that pays the small per-round fees. If you use Task Node, Post Fiat's onboarding app, you already have one — the wallet active in your Task Node account is the default relay wallet. Retrieve its secret:
 
-1. Go to [tasknode.postfiat.org](https://tasknode.postfiat.org/) and create a wallet (reply `new_wallet` in the Task Node messaging flow).
-2. Task Node creates a self-custodial testnet wallet, sends you its wallet secret — an `s...` seed or a 24-word recovery phrase; the sidecar accepts either (save it in a password manager — Post Fiat cannot recover it) — and the faucet funds it with **100 testnet PFT** automatically. That is a long runway: each round costs only two tiny fees (commit + reveal).
-3. That secret is your `POSTFIAT_SIDECAR_VALIDATOR_WALLET_SEED` — the `seed` line of the secrets file in B4.
+1. Open [tasknode.postfiat.org/#wallet](https://tasknode.postfiat.org/#wallet) and log in if needed.
+2. If the local seed vault shows **Locked**, unlock it with your wallet password — **Back up seed** stays password-gated until you do.
+3. Click **Back up seed** and copy the wallet secret — an `s...` seed or a 24-word recovery phrase; the sidecar accepts either. Put it straight into the labeled secrets file (B4) or a password manager, never into agent chat.
+4. That secret is your `POSTFIAT_SIDECAR_VALIDATOR_WALLET_SEED` — the `seed` line of the secrets file in B4.
 
-Bring-your-own alternative: any funded testnet `r...` account works. It must be a **different** account from your validator identity, and if you run more than one sidecar, give each instance its own relay wallet.
+Your Task Node wallet already satisfies the identity rule below: it is a funded, ordinary `r...` account and it is not your validator identity. Keep it funded — each round costs only two tiny fees (commit + reveal), and `preflight` confirms the balance.
+
+Only if you don't want to use your Task Node wallet — you have none, you can't retrieve the secret, or it already serves another sidecar — create a fresh one: reply `new_wallet` in the [Task Node](https://tasknode.postfiat.org/) messaging flow (Task Node creates a self-custodial testnet wallet, sends you its secret — save it in a password manager, Post Fiat cannot recover it — and the faucet funds it with **100 testnet PFT** automatically), or bring any funded testnet `r...` account.
+
+Either way, the relay wallet must be a **different** account from your validator identity, and if you run more than one sidecar, give each instance its own relay wallet.
 
 ### B3 — Place Your `validator-keys.json`
 
