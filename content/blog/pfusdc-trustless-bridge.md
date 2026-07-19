@@ -28,6 +28,8 @@ for much of the value stolen in DeFi — on the order of $2.8B — and the root 
 the same: a signature or attestation an attacker learned to forge or bypass. The verification layer
 *is* the bridge, and when it fails the rest just automates the loss.
 
+{{< bridge-flow mode="status-quo" >}}
+
 Proof-based bridges — zk light clients like Polyhedra and Succinct's work — answer this by
 replacing the committee's attestation with a succinct proof of the source chain's consensus.
 pfUSDC belongs to that class and pushes it further: both directions are proof-verified, the two
@@ -41,6 +43,8 @@ a proof; it cannot forge one or redirect funds, because every proof is bound to 
 or withdrawal it authorizes, and there is no fallback path to a signer.
 
 ## How a dollar moves
+
+{{< bridge-flow mode="pfusdc" >}}
 
 **In (USDC → pfUSDC).** You deposit USDC into a vault contract on Arbitrum. A zero-knowledge
 proof (generated with SP1, a RISC-V zkVM) demonstrates that your exact deposit is included in a

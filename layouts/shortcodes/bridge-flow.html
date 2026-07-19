@@ -1,0 +1,84 @@
+{{- $mode := .Get "mode" | default "pfusdc" -}}
+<figure class="bridge-flow bf-{{ $mode }}" role="img" aria-label="{{ if eq $mode "status-quo" }}How a standard committee-signed bridge works and where it fails{{ else }}How the pfUSDC proof-verified bridge works{{ end }}">
+  <style>
+    .bridge-flow{--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;--ink:#090c0a;--amber:#f5c66a;--red:#ff8f8f;--cyan:#8fd6ff;margin:2rem 0 2.25rem;scroll-margin-top:96px}
+    .bridge-flow *{box-sizing:border-box}
+    .bridge-flow code{padding:0;background:transparent;color:inherit;font-family:var(--mono);font-size:.92em}
+    .bf-shell{position:relative;overflow:hidden;border:1px solid rgba(221,255,220,.16);border-radius:8px;background:linear-gradient(180deg,rgba(13,17,14,.96),rgba(5,8,6,.96))}
+    .bf-shell::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(221,255,220,.025) 1px,transparent 1px),linear-gradient(rgba(221,255,220,.022) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(180deg,rgba(0,0,0,.78),transparent 88%)}
+    .bf-inner{position:relative;padding:18px}
+    .bf-top{border-top:2px solid;border-top-color:rgba(143,214,255,.6);border-radius:8px 8px 0 0;height:0}
+    .bf-status-quo .bf-shell{border-color:rgba(245,198,106,.22)}
+    .bf-head{margin-bottom:18px}
+    .bf-eyebrow{margin:0 0 .45rem;font:650 .72rem/1 var(--mono);letter-spacing:.13em;text-transform:uppercase}
+    .bf-status-quo .bf-eyebrow{color:var(--amber)}
+    .bf-pfusdc .bf-eyebrow{color:var(--green)}
+    .bf-eyebrow .bf-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle}
+    .bf-status-quo .bf-dot{background:var(--amber);box-shadow:0 0 8px rgba(245,198,106,.6)}
+    .bf-pfusdc .bf-dot{background:var(--green);box-shadow:0 0 8px rgba(127,238,100,.55)}
+    .bf-title{margin:0;max-width:640px;color:var(--pale);font-size:1.06rem;font-weight:650;line-height:1.4}
+    .bf-flow{display:flex;align-items:stretch;gap:0;margin:0;padding:0;list-style:none}
+    .bf-step{position:relative;flex:1 1 0;min-width:0;display:flex;flex-direction:column;padding:0 12px}
+    .bf-step:first-child{padding-left:2px}
+    .bf-step:last-child{padding-right:2px}
+    .bf-step::after{content:"";position:absolute;top:15px;right:-5px;width:10px;height:10px;border-top:1.5px solid;border-right:1.5px solid;transform:rotate(45deg);opacity:.85}
+    .bf-status-quo .bf-step::after{border-color:var(--amber)}
+    .bf-pfusdc .bf-step::after{border-color:var(--green)}
+    .bf-step:last-child::after{display:none}
+    .bf-node{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+    .bf-num{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);font:650 .82rem/1 var(--mono)}
+    .bf-status-quo .bf-num{border:1.5px solid rgba(245,198,106,.5);color:var(--amber)}
+    .bf-pfusdc .bf-num{border:1.5px solid rgba(127,238,100,.5);color:var(--green)}
+    .bf-k{font:650 .74rem/1.2 var(--mono);letter-spacing:.04em;color:var(--pale)}
+    .bf-step p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.45}
+    .bf-step .bf-flag{display:inline-block;margin-top:9px;padding:3px 8px;border-radius:999px;font:650 .62rem/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+    .bf-flag--risk{border:1px solid rgba(255,143,143,.5);background:rgba(255,143,143,.09);color:var(--red)}
+    .bf-flag--safe{border:1px solid rgba(127,238,100,.45);background:rgba(127,238,100,.08);color:var(--green)}
+    .bf-note{display:flex;gap:11px;align-items:flex-start;margin-top:20px;padding:13px 15px;border-radius:8px;font-size:.85rem;line-height:1.5}
+    .bf-note-ic{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:6px;font:650 .9rem/1 var(--mono);margin-top:1px}
+    .bf-status-quo .bf-note{border:1px solid rgba(255,143,143,.34);background:rgba(255,143,143,.06)}
+    .bf-status-quo .bf-note-ic{background:rgba(255,143,143,.14);color:var(--red)}
+    .bf-pfusdc .bf-note{border:1px solid rgba(127,238,100,.32);background:rgba(127,238,100,.06)}
+    .bf-pfusdc .bf-note-ic{background:rgba(127,238,100,.14);color:var(--green)}
+    .bf-note b{color:var(--pale);font-weight:650}
+    .bf-note span{color:var(--muted)}
+    .bridge-flow figcaption{margin:.68rem 0 0;color:var(--muted);font-family:var(--mono);font-size:.78rem;line-height:1.52}
+    @media(max-width:760px){
+      .bf-inner{padding:14px}
+      .bf-flow{flex-direction:column;gap:0}
+      .bf-step{padding:0 0 20px}
+      .bf-step::after{top:auto;right:auto;left:14px;bottom:4px;transform:rotate(135deg)}
+      .bf-step:last-child{padding-bottom:0}
+    }
+  </style>
+  <div class="bf-shell">
+    <div class="bf-inner">
+      {{- if eq $mode "status-quo" -}}
+      <div class="bf-head">
+        <p class="bf-eyebrow"><span class="bf-dot"></span>Status Quo &middot; committee-signed bridge</p>
+        <div class="bf-title">A validator committee watches one chain and <em>signs</em>; the other chain mints against that signature.</div>
+      </div>
+      <ol class="bf-flow">
+        <li class="bf-step"><div class="bf-node"><span class="bf-num">1</span><span class="bf-k">Deposit</span></div><p>You lock funds in a bridge contract on Chain&nbsp;A.</p></li>
+        <li class="bf-step"><div class="bf-node"><span class="bf-num">2</span><span class="bf-k">Committee watches</span></div><p>An off-chain validator / multisig set observes the deposit.</p></li>
+        <li class="bf-step"><div class="bf-node"><span class="bf-num">3</span><span class="bf-k">Committee signs</span></div><p>A quorum produces a signed attestation of the deposit.<span class="bf-flag bf-flag--risk">Attack surface</span></p></li>
+        <li class="bf-step"><div class="bf-node"><span class="bf-num">4</span><span class="bf-k">Contract mints</span></div><p>Chain&nbsp;B mints wrapped tokens against the signature.</p></li>
+      </ol>
+      <div class="bf-note"><span class="bf-note-ic">!</span><div><b>The signature <em>is</em> the bridge.</b> <span>Forge it, phish one key, or collude the quorum and the contract mints unbacked tokens and drains the vault &mdash; no source-chain fact is ever checked. This attestation layer is where the majority of the ~$2.8B in bridge exploits since 2022 has been lost.</span></div></div>
+      {{- else -}}
+      <div class="bf-head">
+        <p class="bf-eyebrow"><span class="bf-dot"></span>pfUSDC &middot; proof-verified bridge</p>
+        <div class="bf-title">A succinct proof of the source chain's finalized state replaces the committee entirely.</div>
+      </div>
+      <ol class="bf-flow">
+        <li class="bf-step"><div class="bf-node"><span class="bf-num">1</span><span class="bf-k">Deposit</span></div><p>You lock USDC in the vault contract on Arbitrum.</p></li>
+        <li class="bf-step"><div class="bf-node"><span class="bf-num">2</span><span class="bf-k">Prove</span></div><p>An SP1 zkVM proves your <em>exact</em> deposit is included in finalized Ethereum/Arbitrum state.</p></li>
+        <li class="bf-step"><div class="bf-node"><span class="bf-num">3</span><span class="bf-k">Verify on-chain</span></div><p>PFTL checks the proof against a pinned checkpoint that only advances by proof.<span class="bf-flag bf-flag--safe">No signer</span></p></li>
+        <li class="bf-step"><div class="bf-node"><span class="bf-num">4</span><span class="bf-k">Mint exactly</span></div><p>Exactly the deposited amount of pfUSDC is minted &mdash; the proof is the authorization.</p></li>
+      </ol>
+      <div class="bf-note"><span class="bf-note-ic">&#10003;</span><div><b>No committee, no multisig, no signer.</b> <span>Every proof is bound to your exact deposit, so a relayer can carry it but cannot forge one or redirect funds &mdash; and there is no fallback path to a signer. Redemption (burn pfUSDC &rarr; release USDC) works the same way in reverse, proving finalized PFTL consensus back to the vault.</span></div></div>
+      {{- end -}}
+    </div>
+  </div>
+  <figcaption>{{ if eq $mode "status-quo" }}Standard bridge: trust concentrates in a signing committee whose attestation the destination contract accepts without verifying the source chain.{{ else }}pfUSDC: trust reduces to the two chains' own finality and the cryptography &mdash; verified on-chain by proof, with no intermediary able to move funds.{{ end }}</figcaption>
+</figure>
