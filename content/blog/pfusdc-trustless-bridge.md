@@ -144,3 +144,22 @@ zkVM programs — which the whole trust model rests on and which could still sur
 before mainnet. The trust model is proof-based and demonstrated on-chain today; the engineering to
 make it cheap, fast, and operable at scale, and the review to earn confidence in the code, are
 what come next. We will keep claiming only the rung we can prove.
+
+## Appendix: reference code table
+
+The whole system is open source — the same code that produced the round trip above. The core
+components, with links for navigation:
+
+| Component | Role | Source |
+|---|---|---|
+| **Bridge vault** *(Arbitrum)* | Custodies USDC; accepts deposits and releases exactly the proven amount on a verified withdrawal. The owner can only pause the bridge — never move, mint, or redirect funds. | [`ERC20BridgeVaultV2.sol`](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/ethereum-contracts/src/ERC20BridgeVaultV2.sol) |
+| **PFTL finality verifier** *(Arbitrum)* | The on-Arbitrum light client of PFTL consensus. Verifies the egress proof — the burn plus its finalized ancestry, including validator ML-DSA signatures — before any release. Its checkpoint advances only by proof. | [`PFTLFinalityVerifierV1.sol`](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/ethereum-contracts/src/PFTLFinalityVerifierV1.sol) |
+| **Ingress anchor** *(Arbitrum)* | Records deposits so the ingress proof binds to the exact deposit that was made. | [`PfUsdcIngressAnchorV1.sol`](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/ethereum-contracts/src/PfUsdcIngressAnchorV1.sol) |
+| **Egress guest** *(SP1 zkVM)* | Proves a finalized PFTL burn and its ancestry back to a trusted checkpoint, verifying the validators' post-quantum ML-DSA signatures *in-circuit*. | [`programs/pfusdc-egress`](https://github.com/postfiatorg/postfiatl1v2/tree/main/programs/pfusdc-egress) |
+| **Ingress guest** *(SP1 zkVM)* | Proves that a confirmed Arbitrum deposit is settled under finalized Ethereum state. | [`programs/pfusdc-ingress`](https://github.com/postfiatorg/postfiatl1v2/tree/main/programs/pfusdc-ingress) |
+| **ML-DSA acceleration** | Tuned lattice NTT / polynomial arithmetic — the dominant cost of ML-DSA verification — so post-quantum signatures can be checked inside the zkVM cheaply. | [`third_party/fips204/src/ntt.rs`](https://github.com/postfiatorg/postfiatl1v2/blob/main/third_party/fips204/src/ntt.rs) · [`crates/crypto_provider`](https://github.com/postfiatorg/postfiatl1v2/tree/main/crates/crypto_provider) |
+| **PFTL proof verifier** | The bounded, fail-closed SP1 Groth16 verification the PFTL node uses to admit an ingress proof. | [`nav_sp1_verifier.rs`](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/execution/src/nav_sp1_verifier.rs) |
+| **Bridge workflows** *(PFTL node)* | Node-side mint / burn / route-activation logic. | [`vault_bridge_workflows.rs`](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/node/src/vault_bridge_workflows.rs) |
+| **Prover & witness tooling** | Builds the checkpoint-pinned ingress and egress witnesses and drives SP1 proving. | [`tools/pfusdc-tier4-prover`](https://github.com/postfiatorg/postfiatl1v2/tree/main/tools/pfusdc-tier4-prover) |
+
+Repository: [github.com/postfiatorg/postfiatl1v2](https://github.com/postfiatorg/postfiatl1v2).
