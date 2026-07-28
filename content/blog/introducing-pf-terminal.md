@@ -25,8 +25,8 @@ PF Terminal is designed to reduce that overhead while preserving access to stron
 
 Across three matched waves in our release benchmark:
 
-- Three Opus website runs cost **$8.6756 with PF Terminal**, compared with **$20.1103 with Claude Code**. PF Terminal finished the three runs in **3,061.9 seconds**, compared with **5,337.7 seconds**.
-- Three Kimi QueueCraft runs cost **$0.9153 with PF Terminal**, compared with **$4.8031 with Hermes**. PF Terminal finished the three runs in **435.8 seconds**, compared with **1,844.5 seconds**. Both harnesses solved all three.
+- Three Opus website runs cost **$8.68 with PF Terminal**, compared with **$20.11 with Claude Code**. PF Terminal finished the three runs in **3,061.9 seconds**, compared with **5,337.7 seconds**.
+- Three Kimi QueueCraft runs cost **$0.92 with PF Terminal**, compared with **$4.80 with Hermes**. PF Terminal finished the three runs in **435.8 seconds**, compared with **1,844.5 seconds**. Both harnesses solved all three.
 
 That is meaningful time and money saved without switching to a weaker model.
 
@@ -34,9 +34,9 @@ That is meaningful time and money saved without switching to a weaker model.
 
 [PF Terminal](https://github.com/agtico/PfTerminal) is an open-source fork of Codex.
 
-Codex is a market-leading open-source coding system developed by OpenAI. It provides an excellent terminal experience, but it natively supports OpenAI models. Its agent orchestration therefore stays within the OpenAI model family rather than routing work among providers.
+[Codex](https://github.com/openai/codex) is OpenAI's open-source coding agent. In a dated comparison of major terminal agents distributed through npm, Codex ranked first by package downloads. It provides an excellent terminal experience, but it natively supports OpenAI models. Its agent orchestration therefore stays within the OpenAI model family rather than routing work among providers.
 
-Hermes is the leading open-source multi-model coding harness. It gives developers broad model choice, but our measurements showed a heavier execution loop on several matched tasks.
+[Hermes](https://openrouter.ai/apps/hermes-agent) is OpenRouter's most-used public application by attributed token volume and its top-ranked coding agent. It gives developers broad model choice, but our measurements showed a heavier execution loop on several matched tasks.
 
 PF Terminal fills the gap between them. It keeps the Codex foundation and terminal workflow while adding multi-model routing and a leaner execution path.
 
@@ -49,13 +49,17 @@ PF Terminal fills the gap between them. It keeps the Codex foundation and termin
 | Live accounting | Track route, elapsed time, retries, token telemetry, and settled provider cost where available. |
 | Open-source code | Inspect prompts, adapters, cache behavior, and orchestration logic. |
 
-To install PF Terminal, start with the [GitHub releases page](https://github.com/agtico/PfTerminal/releases). Inspect the release, install script, and available checksums before running downloaded code.
-
-The convenience installer is:
+To install PF Terminal on Linux or from a macOS terminal, download the installer, inspect it, and then run it:
 
 ```sh
-curl -fsSL https://github.com/agtico/PfTerminal/releases/latest/download/install.sh | sh
+curl --fail --location --proto '=https' --tlsv1.2 \
+  --output pfterminal-install.sh \
+  https://github.com/agtico/PfTerminal/releases/latest/download/install.sh
+less pfterminal-install.sh
+sh pfterminal-install.sh
 ```
+
+The installer downloads the platform-specific release archive and verifies its SHA-256 digest before installation. macOS users can instead download the DMG from the [GitHub releases page](https://github.com/agtico/PfTerminal/releases).
 
 ## The result in under a minute
 
@@ -65,8 +69,8 @@ Here are the two clearest comparisons:
 
 | Matched task | Correctness or quality | Agent spend | Wall time | Plain-language result |
 | --- | --- | ---: | ---: | --- |
-| Opus 5 website: PF Terminal vs Claude Code | Verifier-clean: 3/3 vs 2/3. Visual result: draw across all three waves. | **$8.6756 vs $20.1103** | **3,061.9s vs 5,337.7s** | Claude Code spent **2.32× as much** and took **1.74× as long**. PF Terminal saved 56.9% of agent spend. |
-| Kimi K3 QueueCraft: PF Terminal vs Hermes | Both solved **3/3** | **$0.9153 vs $4.8031** | **435.8s vs 1,844.5s** | Hermes spent about **5.25× as much** and took **4.23× as long**. PF Terminal saved 80.9% of agent spend. |
+| Opus 5 website: PF Terminal vs Claude Code | Verifier-clean: 3/3 vs 2/3. Visual result: draw across all three waves. | **$8.68 vs $20.11** | **3,061.9s vs 5,337.7s** | Claude Code spent **2.32× as much** and took **1.74× as long**. PF Terminal saved 56.9% of agent spend. |
+| Kimi K3 QueueCraft: PF Terminal vs Hermes | Both solved **3/3** | **$0.92 vs $4.80** | **435.8s vs 1,844.5s** | Hermes spent about **5.25× as much** and took **4.23× as long**. PF Terminal saved 80.9% of agent spend. |
 
 “Agent spend” means provider billing for the coding model. Website “all-in” figures elsewhere in the study also include every confirmed GPT Image 2 output, including discarded generations. Neutral visual judging remains experiment overhead.
 
@@ -145,6 +149,23 @@ One fully route-valid GLM website pair also finished faster under Hermes. The be
 
 ## Appendix: methodology, limits, and evidence
 
+### Why Codex and Hermes are the baselines
+
+We chose the comparison harnesses for demonstrated adoption.
+
+OpenRouter's public [Hermes Agent profile](https://openrouter.ai/apps/hermes-agent) ranked Hermes first globally and first among coding agents when checked on July 28, 2026. OpenRouter also [describes Hermes as its most-used application by token volume](https://openrouter.ai/blog/tutorials/hermes-agent/). This measures attributed OpenRouter traffic, rather than all agent usage: the [ranking methodology](https://openrouter.ai/docs/agent-sdk/typescript/api-reference/datasets) excludes hidden and private apps, and token totals can span different provider tokenizers.
+
+For terminal agents published on npm, we queried npm's download-count API for the fixed seven-day period from July 18 through July 24, 2026:
+
+| Terminal agent package | npm downloads |
+| --- | ---: |
+| `@openai/codex` | [**15,226,164**](https://api.npmjs.org/downloads/point/2026-07-18:2026-07-24/%40openai%2Fcodex) |
+| `@anthropic-ai/claude-code` | [10,760,218](https://api.npmjs.org/downloads/point/2026-07-18:2026-07-24/%40anthropic-ai%2Fclaude-code) |
+| `@google/gemini-cli` | [567,566](https://api.npmjs.org/downloads/point/2026-07-18:2026-07-24/%40google%2Fgemini-cli) |
+| `@qwen-code/qwen-code` | [97,147](https://api.npmjs.org/downloads/point/2026-07-18:2026-07-24/%40qwen-code%2Fqwen-code) |
+
+Codex ranked first in this comparison at about 1.42 times Claude Code's package downloads. The package pages identify [Codex](https://www.npmjs.com/package/%40openai/codex), [Claude Code](https://www.npmjs.com/package/%40anthropic-ai/claude-code), [Gemini CLI](https://www.npmjs.com/package/%40google/gemini-cli), and [Qwen Code](https://www.npmjs.com/package/%40qwen-code/qwen-code) as the measured distributions. [npm downloads count package retrievals](https://blog.npmjs.org/post/92574016600/numeric-precision-matters-how-npm-download-counts-work.html), not unique developers, and the comparison excludes agents primarily distributed through other channels. It supports the narrower claim that Codex led this major npm-distributed terminal-agent set during the measured week.
+
 ### Study design
 
 The campaign used:
@@ -164,7 +185,7 @@ GPT-5.6-Sol judged each website pair twice with labels hidden and A/B order reve
 
 Two Hermes GLM website waves were excluded from matched-route success comparisons. In those isolated terminals, Hermes removed the supplied OpenAI key and discovered other image routes: ChatGPT Codex OAuth in one wave and Vercel AI Gateway in another. Their time and spend remain in the denominators, but no comparable GLM all-in cost ratio is reported.
 
-Provider billing supplied contestant costs. Total attributed campaign spend was $60.7347 for agents, a confirmed $11.3300 image-output lower bound, and $6.1174 for neutral judging, before GPT Image 2 prompt-input charges.
+Provider billing supplied contestant costs. Total attributed campaign spend was $60.73 for agents, a confirmed $11.33 image-output lower bound, and $6.12 for neutral judging, before GPT Image 2 prompt-input charges.
 
 This study was designed and run by the PF Terminal team. Three waves per cell cannot establish statistical significance, and no independent replication has been completed. Results are a dated measurement of these frozen versions and routes.
 
