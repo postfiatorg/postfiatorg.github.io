@@ -19,345 +19,175 @@ cover:
   relative: false
 ---
 
-I spend most of the day in coding terminals.
+A coding harness determines how often a model runs, how much context it rereads, how many tool loops it completes, and how much you pay.
 
-The model changes with the job. Opus is still unusually good at long,
-high-judgment builds. GLM is useful when the work can be stated precisely.
-Kimi can be extremely capable and inexpensive, but it is sensitive to the
-harness around it. OpenAI models remain strong for review, visual judgment,
-and difficult code work.
+PF Terminal is designed to reduce that overhead while preserving access to strong models from multiple providers.
 
-The awkward part was never choosing one winner. It was operating all of them
-without maintaining a stack of unrelated terminals, provider configurations,
-session formats, and billing systems.
+Across three matched waves in our release benchmark:
 
-PF Terminal is our answer: an open-source fork of Codex that keeps Codex's
-terminal-native interaction model while adding first-class multi-provider
-routing, local resumable sessions, cost telemetry, vault-backed credentials,
-and model-aware orchestration.
+- Three Opus website runs cost **$8.6756 with PF Terminal**, compared with **$20.1103 with Claude Code**. PF Terminal finished the three runs in **3,061.9 seconds**, compared with **5,337.7 seconds**.
+- Three Kimi QueueCraft runs cost **$0.9153 with PF Terminal**, compared with **$4.8031 with Hermes**. PF Terminal finished the three runs in **435.8 seconds**, compared with **1,844.5 seconds**. Both harnesses solved all three.
 
-| PF Terminal at a glance | What it means |
+That is meaningful time and money saved without switching to a weaker model.
+
+## What is PF Terminal?
+
+[PF Terminal](https://github.com/agtico/PfTerminal) is an open-source fork of Codex.
+
+Codex is a market-leading open-source coding system developed by OpenAI. It provides an excellent terminal experience, but it natively supports OpenAI models. Its agent orchestration therefore stays within the OpenAI model family rather than routing work among providers.
+
+Hermes is the leading open-source multi-model coding harness. It gives developers broad model choice, but our measurements showed a heavier execution loop on several matched tasks.
+
+PF Terminal fills the gap between them. It keeps the Codex foundation and terminal workflow while adding multi-model routing and a leaner execution path.
+
+| PF Terminal provides | Practical benefit |
 | --- | --- |
-| Multiple model providers | Use Anthropic, OpenAI, OpenRouter, Vercel AI Gateway, Z.AI, and other configured routes without changing terminals. |
-| Explicit model routing | Select the model and provider for a run instead of letting an opaque fallback choose one. |
-| Model-aware orchestration | Route planning, implementation, review, and visual work according to model capability, modality, plan availability, and cost. |
-| Local, resumable state | Keep the transcript, workspace, diffs, and session lifecycle on the machine where the code lives. |
-| Live accounting | Record wall time, token telemetry, provider route, retries, and settled cost where the provider exposes it. |
-| Open source | Inspect the prompts, provider adapters, caching behavior, and release code rather than treating the harness as a black box. |
+| Multiple providers | Use configured Anthropic, OpenAI, OpenRouter, Vercel AI Gateway, Z.AI, and other routes from one terminal. |
+| Explicit routing | Choose the model and provider for each run. |
+| Model-aware orchestration | Assign planning, implementation, review, and visual work according to model capability and cost. |
+| Local resumable sessions | Keep transcripts, workspaces, diffs, and session state on the machine where the code lives. |
+| Live accounting | Track route, elapsed time, retries, token telemetry, and settled provider cost where available. |
+| Open-source code | Inspect prompts, adapters, cache behavior, and orchestration logic. |
 
-The project is available at
-[agtico/PfTerminal](https://github.com/agtico/PfTerminal). Release 0.1.24 can
-be installed with:
+To install PF Terminal, start with the [GitHub releases page](https://github.com/agtico/PfTerminal/releases). Inspect the release, install script, and available checksums before running downloaded code.
+
+The convenience installer is:
 
 ```sh
 curl -fsSL https://github.com/agtico/PfTerminal/releases/latest/download/install.sh | sh
 ```
 
-## The surprising result
+## The result in under a minute
 
-We expected PF Terminal to be somewhat leaner than general-purpose agent
-harnesses. We did not expect the differences to be this large.
+We ran 48 paid contestant runs across website generation, repository repair, and contract implementation. Each benchmark cell used three waves with the same named model and provider route on both harnesses.
 
-For the 0.1.24 release, we froze eight three-wave benchmark cells: three
-website-generation cells, three QueueCraft repair cells, and two EventForge
-implementation cells. Each comparison used the same underlying model and
-route on both sides. The campaign comprised 48 paid contestant runs plus 18
-balanced-order vision-judge passes.
+Here are the two clearest comparisons:
 
-### Deterministic coding tasks
+| Matched task | Correctness or quality | Agent spend | Wall time | Plain-language result |
+| --- | --- | ---: | ---: | --- |
+| Opus 5 website: PF Terminal vs Claude Code | Verifier-clean: 3/3 vs 2/3. Visual result: draw across all three waves. | **$8.6756 vs $20.1103** | **3,061.9s vs 5,337.7s** | Claude Code spent **2.32× as much** and took **1.74× as long**. PF Terminal saved 56.9% of agent spend. |
+| Kimi K3 QueueCraft: PF Terminal vs Hermes | Both solved **3/3** | **$0.9153 vs $4.8031** | **435.8s vs 1,844.5s** | Hermes spent about **5.25× as much** and took **4.23× as long**. PF Terminal saved 80.9% of agent spend. |
 
-| Workload and route | PF Terminal vs Hermes solves | PF Terminal speed | PF Terminal agent-cost savings | Direction across waves |
-| --- | ---: | ---: | ---: | --- |
-| QueueCraft, Kimi K3 via OpenRouter | 3/3 vs 3/3 | **4.23×** | **80.9%** | PF Terminal faster in 3/3 |
-| QueueCraft, GLM 5.2 via Vercel | 3/3 vs 3/3 | **1.66×** | **39.8%** | PF Terminal faster in 3/3 |
-| QueueCraft, GLM 5.2 via OpenRouter | 3/3 vs 3/3 | **1.11×** | **5.7%** | Mixed by wave |
-| EventForge, GLM 5.2 via OpenRouter | 3/3 vs 3/3 | **1.47×** | **65.7%** | PF Terminal faster in 3/3 |
-| EventForge, Kimi K3 via OpenRouter | 3/3 vs 2/3 | **1.14×** | **29.0%** | Mixed; one Hermes timeout |
+“Agent spend” means provider billing for the coding model. Website “all-in” figures elsewhere in the study also include every confirmed GPT Image 2 output, including discarded generations. Neutral visual judging remains experiment overhead.
 
-“Speed” is opponent total wall time divided by PF Terminal total wall time.
-Failed and timed-out runs remain in the time, spend, and solve denominators.
-“Agent cost” is the provider billing delta for the coding model; it excludes
-image generation and neutral judging.
+The speed ratio divides the other harness’s total time by PF Terminal’s total time. For example, 4.23× means the three QueueCraft runs took PF Terminal about 7 minutes in total and Hermes about 31 minutes.
 
-### Website generation
+These are first-party measurements with three waves per cell. They show repeated behavior, rather than statistical significance or a permanent ranking. The complete per-run results and scripts are public for inspection and reruns.
 
-| Same-model comparison | Verifier-clean solves | PF Terminal speed | Agent-cost savings | All-in savings* | Blind visual waves |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Opus 5: PF Terminal vs Claude Code | 3/3 vs 2/3 | **1.74×** | **56.9%** | **52.4%** | 1 PF Terminal, 1 Claude Code, 1 inconclusive |
-| Kimi K3: PF Terminal vs Hermes | 3/3 vs 3/3 | **1.27×** | **30.7%** | **30.3%** | **3 PF Terminal, 0 Hermes** |
-| GLM 5.2: PF Terminal vs Hermes | 3/3 vs 1/3 | **1.18×** | **58.3%** | Not comparable | 2 PF Terminal, 0 Hermes, 1 inconclusive |
+## Why the same model can cost more in another harness
 
-\* “All-in” adds every confirmed GPT Image 2 output, including discarded
-generations, to contestant-model billing. It does not add neutral-judge
-overhead or image prompt-input charges.
+A coding harness repeatedly sends context to a model, receives output, executes tools, adds the results to the conversation, and decides whether another model call is needed.
 
-The GLM website row requires an important qualification. Hermes produced
-mechanically working sites in all three waves, but in two waves its isolated
-terminal removed the supplied OpenAI key and the agent discovered a different
-image route—first ChatGPT Codex OAuth, then Vercel AI Gateway. Those runs stay
-in spend and elapsed-time totals, but they do not count as matched-route
-successes. We do not report a GLM all-in cost ratio because one unauthorized
-route could not be priced comparably.
+Small differences in that loop accumulate quickly:
 
-This is not “PF Terminal always wins.” On GLM through OpenRouter, QueueCraft
-was only 10% faster and 5.7% cheaper in aggregate. In the only fully
-route-valid GLM website pair, Hermes finished faster. Three waves establish
-replication, not statistical significance. The campaign is useful because the
-large effects recur across models and task types—not because every cell points
-in the same direction.
+- **Extra model calls** add inference time and billing.
+- **Larger repeated context** makes the model reread more tokens.
+- **More generated output** raises cost, especially on models with expensive output tokens.
+- **Retries and discarded artifacts** charge for work that never reaches the final result.
+- **Serial tool loops** add latency one step at a time.
 
-## Why can the same model differ this much?
+The Opus website traces illustrate the effect. Across three waves, PF Terminal used 125,898 output tokens; Claude Code used 315,093, or 2.50× as many. Claude Code also read 17,675,208 cached input tokens compared with 6,628,785 for PF Terminal. A cache-read token is previously processed context reused at a discount, but it still has a cost and takes part in each serial inference.
 
-A coding agent is not just a model. It is a loop:
+Claude Code reported 59, 71, and 76 model turns. Its third run reached the $8 budget ceiling before producing a successful agent exit. PF Terminal completed its three runs with individual agent costs between $2.82 and $3.00.
 
-```text
-prompt construction
-→ model inference
-→ tool call
-→ tool result added to context
-→ cache write/read
-→ another inference
-→ verification and possible retry
-```
+The Kimi QueueCraft traces show a similar pattern:
 
-Two products can call the same model and get very different economics if one
-loop takes more turns, repeatedly rebuilds expensive cache prefixes, returns
-larger tool payloads, regenerates assets, or fails to preserve the provider's
-native conversation shape.
+- PF Terminal made **32 model/API calls**; Hermes made **127**.
+- PF Terminal exposed **811,008 cache-read tokens**; Hermes exposed **5,322,323**.
+- PF Terminal generated **13,309 output tokens**; Hermes generated **29,024**.
+- Hermes recorded **193 tool calls**.
 
-The traces show two different versions of that problem.
+Both harnesses solved all three workspaces. Hermes simply took a longer route to the same functional result.
 
-### Opus: more generated tokens and more context churn
+These traces suggest why the measured differences occurred: fewer calls, less repeated context, less output, and fewer serial detours. They do not isolate the contribution of each factor. Controlled ablations of prompts, tool-result compaction, cache policy, retry policy, and turn limits remain future work.
 
-Anthropic's Admin Usage API reported the following totals across the three
-website waves:
+## What did the websites look like?
 
-| Opus 5 usage | PF Terminal | Claude Code | Claude Code / PF Terminal |
-| --- | ---: | ---: | ---: |
-| 5-minute cache-creation tokens | 354,002 | 542,721 | **1.53×** |
-| Cache-read input tokens | 6,628,785 | 17,675,208 | **2.67×** |
-| Output tokens | 125,898 | 315,093 | **2.50×** |
-| Provider-attributed agent cost | $8.6756 | $20.1103 | **2.32×** |
-| Wall time | 3,061.9s | 5,337.7s | **1.74×** |
+Each visual agent received the same frozen product brief and starter repository. The task required an original responsive PF Terminal site, a working installation interaction, an interactive orchestration demo, accessible controls, and exactly three final GPT Image 2 assets.
 
-Claude Code reported 59, 71, and 76 model turns. Its third run reached the
-$8 budget ceiling before returning a successful agent exit, even though the
-site itself was sufficiently complete for the browser verifier. PF Terminal
-finished all three runs and stayed in a much narrower cost band:
-$2.82–$3.00.
-
-Cache reads are discounted, but they are not free, and a long serial loop also
-pays latency on every additional inference and tool boundary. Output tokens
-are especially expensive on Opus. In this cell the cost difference is not one
-mysterious surcharge; it is the cumulative result of roughly 2.5× as much
-model output, 2.7× as much cached context read, and more cache creation.
-
-That extra work did sometimes buy quality. Claude Code won one visual wave,
-PF Terminal won one, and the third was order-sensitive. The efficiency claim
-is strong; a claim that PF Terminal made every Opus site prettier would not be.
-
-### Kimi: serial agent-loop amplification
-
-The QueueCraft traces make the Hermes/Kimi result easier to understand:
-
-| Kimi K3 QueueCraft telemetry, three waves | PF Terminal | Hermes |
-| --- | ---: | ---: |
-| Model/API calls | 32 | 127 |
-| Cache-read tokens exposed by the harness | 811,008 | 5,322,323 |
-| Output tokens | 13,309 | 29,024 |
-| Hermes tool calls | — | 193 |
-| Provider-billed agent cost | $0.9153 | $4.8031 |
-| Wall time | 435.8s | 1,844.5s |
-| Hidden-verifier result | 3/3 | 3/3 |
-
-Hermes did eventually solve all three QueueCraft workspaces. It simply took a
-far longer path: nearly four times as many model calls, more than six times the
-reported cache-read volume, and 193 tool calls. Because those steps are mostly
-serial, the wall-time penalty compounds with the token penalty.
-
-This is also why hard-coding a “Kimi fix” around one prompt would be the wrong
-lesson. The boundary is the harness's conversation and tool loop: preserve
-native provider semantics, keep tool results compact, avoid redundant retries,
-and let the model finish instead of repeatedly re-framing the same state.
-
-### The short version
-
-PF Terminal's advantage appears to come from four interacting properties:
-
-1. **Leaner stable context.** Stable instructions can remain cacheable while
-   volatile tool output is kept out of the reusable prefix.
-2. **Fewer serial turns.** A model that can inspect, edit, test, and finish in
-   fewer loops saves both inference latency and repeated context reads.
-3. **Provider-native request behavior.** Model-specific reasoning, cache, tool,
-   and continuation semantics are handled at the provider boundary instead of
-   being forced through one generic request shape.
-4. **Less retry and artifact waste.** The image audit found duplicate
-   generations, timeout ambiguity, misplaced output paths, and route discovery
-   in baseline runs. Each detour costs both time and money.
-
-These are measured explanations, not a complete causal ablation. A future
-study should change one harness behavior at a time—prompt bytes, tool-result
-compaction, cache policy, retry policy, and maximum turn count—to quantify how
-much each contributes.
-
-## What did the websites actually look like?
-
-The visual task was intentionally broad. Each agent received the same frozen
-product brief and was asked to create an original, responsive PF Terminal
-marketing site with a working installation interaction, an interactive
-orchestration demo, accessible controls, and exactly three final GPT Image 2
-assets.
-
-These are benchmark outputs, not the official PF Terminal website.
+These are benchmark outputs rather than the official PF Terminal website.
 
 ### Opus 5: PF Terminal versus Claude Code
 
-Both sites below are from wave 2, passed the browser verifier, and used Opus 5
-through direct Anthropic. In blind balanced-order judging, the PF Terminal
-site scored 95 versus 89, then 95 versus 88 after the A/B order was reversed.
+Both wave-two sites used Opus 5 through direct Anthropic and passed the browser verifier. In balanced blind judging, the PF Terminal site scored 95 versus 89, then 95 versus 88 after the A/B order was reversed.
 
 | PF Terminal + Opus 5 | Claude Code + Opus 5 |
 | --- | --- |
 | ![PF Terminal Opus 5 benchmark website with teal routing artwork](/research/pfterminal-benchmark-0124/images/opus-pfterminal-wave2.png) | ![Claude Code Opus 5 benchmark website with amber orchestration artwork](/research/pfterminal-benchmark-0124/images/opus-claude-code-wave2.png) |
 
-The broader three-wave quality result was a draw: one win each and one
-order-sensitive result. The clear result in this cell was efficiency, not
-visual dominance.
+Across all three Opus waves, the visual result was a draw: one PF Terminal win, one Claude Code win, and one order-sensitive result recorded as inconclusive. The clear difference was execution efficiency, rather than visual dominance.
+
+Including confirmed image outputs, PF Terminal’s all-in cost was 52.4% lower in this cell.
 
 ### Kimi K3: PF Terminal versus Hermes
 
-These wave-1 sites used Kimi K3 through OpenRouter. The PF Terminal site scored
-98 versus 90 and 97 versus 90 under reversed ordering.
+These wave-one sites used Kimi K3 through OpenRouter. The PF Terminal site scored 98 versus 90 and 97 versus 90 after the order was reversed.
 
 | PF Terminal + Kimi K3 | Hermes + Kimi K3 |
 | --- | --- |
 | ![PF Terminal Kimi K3 benchmark website with layered terminal artwork](/research/pfterminal-benchmark-0124/images/kimi-pfterminal-wave1.png) | ![Hermes Kimi K3 benchmark website with isometric model-routing artwork](/research/pfterminal-benchmark-0124/images/kimi-hermes-wave1.png) |
 
-PF Terminal won all three Kimi visual waves under the balanced-order rule
-while costing 30.3% less after confirmed image outputs were included.
+PF Terminal won all three Kimi visual waves under the balanced-order rule. It also cost 30.3% less after confirmed image outputs were included.
 
-## Methodology
+## The broader result
 
-### Frozen subjects
+PF Terminal’s margin varied by model, route, and task.
 
-- PF Terminal 0.1.24 release artifact, product commit
-  `81a6ff2f953ef5463e69e018e3c9515d0bd19ca3`;
+On deterministic coding tasks, both PF Terminal and Hermes solved every QueueCraft wave. PF Terminal was:
+
+- 4.23× faster and 80.9% cheaper with Kimi K3 through OpenRouter;
+- 1.66× faster and 39.8% cheaper with GLM 5.2 through Vercel;
+- 1.11× faster and 5.7% cheaper with GLM 5.2 through OpenRouter.
+
+The final QueueCraft comparison was close and mixed by wave. In EventForge, PF Terminal was 1.47× faster and 65.7% cheaper with GLM through OpenRouter. With Kimi, it was 1.14× faster and 29.0% cheaper; PF Terminal solved 3/3 while Hermes solved 2/3 after one timeout.
+
+One fully route-valid GLM website pair also finished faster under Hermes. The benchmark does not show that PF Terminal wins every run. It shows that harness overhead can materially change the economics of the same model, with especially large effects in the Opus website and Kimi QueueCraft comparisons.
+
+## Appendix: methodology, limits, and evidence
+
+### Study design
+
+The campaign used:
+
+- PF Terminal 0.1.24, product commit `81a6ff2f953ef5463e69e018e3c9515d0bd19ca3`;
 - Claude Code 2.1.197;
-- Hermes Agent 0.19.0, upstream commit
-  `d83e858507a9bdb7f96c7a163d89c34c60909dcf`;
+- Hermes Agent 0.19.0, upstream commit `d83e858507a9bdb7f96c7a163d89c34c60909dcf`;
 - Python 3.12.3 on the same Linux host.
 
-The final published 0.1.24 binary differs from the frozen benchmark artifact
-because the release was rebuilt after adding bounded retry to the macOS DMG
-packaging script. The complete source difference is that packaging script;
-no Rust runtime, provider, caching, model, or orchestration code changed.
+Within each cell, the harnesses used the same named model and provider route: direct Anthropic `claude-opus-5`, OpenRouter `moonshotai/kimi-k3`, OpenRouter `z-ai/glm-5.2`, or Vercel AI Gateway `zai/glm-5.2`.
 
-### Matched models and routes
+Runs started in fresh workspaces with isolated agent homes. Lane order alternated by wave. Failed and timed-out runs remained in solve, spend, and elapsed-time denominators.
 
-Within each cell, both harnesses used the same named model and provider route:
+QueueCraft used visible tests, a hidden verifier, seven hidden bug probes, and checks that agents left the tests unchanged. EventForge used a held-out verifier after the agent exited. The website task used a Playwright verifier for desktop and mobile rendering, interactions, accessibility-related controls, asset rules, overflow, and browser errors. No generated site received manual repairs.
 
-- direct Anthropic `claude-opus-5`;
-- OpenRouter `moonshotai/kimi-k3`;
-- OpenRouter `z-ai/glm-5.2`; or
-- Vercel AI Gateway `zai/glm-5.2`.
+GPT-5.6-Sol judged each website pair twice with labels hidden and A/B order reversed. A wave received a winner only when both orders selected the same site; otherwise it was inconclusive.
 
-Runs used fresh workspaces and isolated agent homes. Lane order alternated by
-wave to reduce a simple “first runner gets the better provider window”
-effect. Native product reasoning defaults were retained and disclosed rather
-than silently forcing unlike harnesses into a guessed common setting.
+Two Hermes GLM website waves were excluded from matched-route success comparisons. In those isolated terminals, Hermes removed the supplied OpenAI key and discovered other image routes: ChatGPT Codex OAuth in one wave and Vercel AI Gateway in another. Their time and spend remain in the denominators, but no comparable GLM all-in cost ratio is reported.
 
-### Three workload classes
+Provider billing supplied contestant costs. Total attributed campaign spend was $60.7347 for agents, a confirmed $11.3300 image-output lower bound, and $6.1174 for neutral judging, before GPT Image 2 prompt-input charges.
 
-**QueueCraft** is a repair task containing seven faults across scheduling,
-priority, lease expiry, retries, persistence, and worker metrics. A solve
-requires 35/35 visible and hidden tests, seven hidden bug probes, and proof
-that the tests were not modified.
+This study was designed and run by the PF Terminal team. Three waves per cell cannot establish statistical significance, and no independent replication has been completed. Results are a dated measurement of these frozen versions and routes.
 
-**EventForge** asks the agent to implement a frozen event-processing contract
-from a visible task specification. The harness independently runs the visible
-suite and a held-out verifier after the agent exits. A modified test tree is a
-failure.
+The published 0.1.24 binary was rebuilt after the benchmark to add bounded retry to the macOS DMG packaging script. No Rust runtime, provider, caching, model, or orchestration code changed.
 
-**Visual Site** starts from the same tiny static repository and the same
-product brief. A Playwright verifier tests 1440×1000 and 390×844 rendering,
-installation modal behavior, copy feedback, orchestration-state changes,
-mobile navigation, missing assets, overflow, and browser errors. It also
-checks the three-image manifest and local asset requirements. No generated
-site was manually repaired.
+### Public benchmark package
 
-The private campaign retained 144 captures: eight views for each of 18
-website lanes, including pre-interaction states used by the verifier. That is
-useful audit evidence but unnecessary for a blog post, so this article
-publishes four representative first-viewport captures and the structured
-judgment data.
+The [sanitized benchmark package](/research/pfterminal-benchmark-0124/README.md) contains the full matrix, methodology, per-run data, judgments, and audits.
 
-### Blind visual judging
-
-GPT-5.6-Sol judged each website pair with image input in two passes. The site
-labels were blinded, and the A/B order was reversed for the second pass. A
-wave received a winner only if both orders selected the same underlying site.
-Otherwise it was recorded as inconclusive.
-
-This produced 18 judge passes across nine website pairs. Judge usage and cost
-were experiment overhead and were never assigned to either contestant.
-
-### Cost accounting
-
-- **Anthropic:** one-minute Admin Usage API buckets grouped by dedicated API
-  key and model.
-- **OpenRouter:** `/api/v1/key` usage deltas around each sequential lane.
-- **Vercel:** gateway credit/report deltas around each lane.
-- **Images:** official GPT Image 2 output prices applied to every
-  confirmed-output attempt, not merely the three files left in the final
-  manifest. Client timeouts with unknown response state appear only in an
-  upper bound.
-- **Judging:** GPT-5.6-Sol usage reconstructed from the official price snapshot
-  and reported separately.
-
-Total attributed campaign spend was $60.7347 for contestant agents, an
-$11.3300 confirmed image-output lower bound, and $6.1174 for neutral judging:
-$78.1821 before GPT Image 2 prompt-input charges.
-
-## Limits
-
-This is a release benchmark run by the PF Terminal team, not an independent
-third-party evaluation.
-
-There were three waves per cell. That is enough to detect repeat behavior and
-catch one-off failures, but not enough to claim statistical significance.
-Provider load changes. Agent harnesses update quickly. Results should be read
-as a dated measurement of PFTerminal 0.1.24, Claude Code 2.1.197, and Hermes
-0.19.0—not a permanent ranking.
-
-The website task also measures an agent's willingness to spend turns polishing
-a page. Extra tokens can sometimes buy a better result. That is why we report
-functional verification, blind visual quality, model cost, image cost, and
-wall time separately.
-
-## Appendix: scripts and evidence
-
-The sanitized benchmark package is
-[available here](/research/pfterminal-benchmark-0124/README.md).
-
-Primary execution scripts:
+Primary scripts:
 
 - [Visual-site runner](/research/pfterminal-benchmark-0124/scripts/run_visual.py)
 - [QueueCraft runner](/research/pfterminal-benchmark-0124/scripts/run_queuecraft.py)
 - [EventForge runner](/research/pfterminal-benchmark-0124/scripts/run_eventforge.py)
 - [Balanced blind-vision judge](/research/pfterminal-benchmark-0124/scripts/judge_visual.py)
-- [Anthropic Admin cost snapshot](/research/pfterminal-benchmark-0124/scripts/snapshot_anthropic_costs.py)
+- [Anthropic cost snapshot](/research/pfterminal-benchmark-0124/scripts/snapshot_anthropic_costs.py)
 - [Result summarizer](/research/pfterminal-benchmark-0124/scripts/summarize.py)
 - [Secret scanner](/research/pfterminal-benchmark-0124/scripts/scan_secrets.py)
 
-Inputs and evidence:
+Key evidence:
 
 - [Full runbook](/research/pfterminal-benchmark-0124/RUNBOOK.md)
 - [Benchmark matrix](/research/pfterminal-benchmark-0124/MATRIX.json)
-- [Frozen visual prompt](/research/pfterminal-benchmark-0124/visual/prompt.md)
-- [QueueCraft task](/research/pfterminal-benchmark-0124/tasks/queuecraft/bugged/BENCHMARK_TASK.md)
-  and [hidden verifier](/research/pfterminal-benchmark-0124/tasks/queuecraft/verifier/verify.py)
-- [EventForge task](/research/pfterminal-benchmark-0124/tasks/eventforge/BENCHMARK_TASK.md)
-  and [hidden verifier](/research/pfterminal-benchmark-0124/tasks/eventforge/hidden_verifier.py)
 - [Human-readable report](/research/pfterminal-benchmark-0124/REPORT.md)
 - [Machine-readable summary](/research/pfterminal-benchmark-0124/summary.json)
 - [Per-run CSV](/research/pfterminal-benchmark-0124/summary.csv)
@@ -367,7 +197,4 @@ Inputs and evidence:
 - [Release provenance](/research/pfterminal-benchmark-0124/RELEASE_EVIDENCE.md)
 - [Zero-hit secret scan](/research/pfterminal-benchmark-0124/secret_scan.json)
 
-The exact campaign scripts preserve their original absolute host paths because
-they are evidence of what ran. The appendix README identifies the dependencies
-and path changes required for a live rerun. No keys, authorization headers,
-raw request bodies, or contestant home databases are published.
+The package also includes the [frozen visual prompt](/research/pfterminal-benchmark-0124/visual/prompt.md), QueueCraft [task](/research/pfterminal-benchmark-0124/tasks/queuecraft/bugged/BENCHMARK_TASK.md) and [verifier](/research/pfterminal-benchmark-0124/tasks/queuecraft/verifier/verify.py), and EventForge [task](/research/pfterminal-benchmark-0124/tasks/eventforge/BENCHMARK_TASK.md) and [hidden verifier](/research/pfterminal-benchmark-0124/tasks/eventforge/hidden_verifier.py).
