@@ -1,0 +1,102 @@
+{
+  "conclusion": {
+    "cache_continuation_regression_fixed": true,
+    "cost_regression_vs_frozen_current_codex_fixed_in_all_tasks": true,
+    "speed_regression_vs_frozen_current_codex_fixed_in_all_tasks": false,
+    "remaining_issue": "QueryForge median wall time was 12.99% slower than the frozen current-Codex control."
+  },
+  "fixed_lane": {
+    "captured_requests": 169,
+    "continuation_drops": 0,
+    "midrun_commentary_trigger_runs": [
+      "queuecraft/wave2",
+      "queuecraft/wave5"
+    ],
+    "passes": 15,
+    "runs": 15,
+    "spend_usd": 7.2407715,
+    "synthetic_continue_requests": 0,
+    "weighted_cache_share": 0.8702381636421608
+  },
+  "frozen_control": {
+    "codex_commit": "db75c19352d29ef29c17dbcf73a7244f1b1a8d10",
+    "codex_version": "0.144.1",
+    "runs_per_task": 5
+  },
+  "model": "gpt-5.6-sol",
+  "pricing_usd_per_1m_tokens": {
+    "cached_input": 0.5,
+    "input": 5.0,
+    "output": 30.0
+  },
+  "reasoning_effort": "high",
+  "robustness_runs_excluded_from_primary_comparison": {
+    "captured_requests": 29,
+    "continuation_drops": 0,
+    "passes": 3,
+    "runs": [
+      "queuecraft/wave6",
+      "queuecraft/wave7",
+      "queuecraft/wave8"
+    ],
+    "spend_usd": 1.460259,
+    "synthetic_continue_requests": 0
+  },
+  "service_tier": "default",
+  "tasks": {
+    "queryforge": {
+      "captured_requests": 56,
+      "continuation_drops": 0,
+      "fixed": {
+        "median_cost_usd": 0.4778395,
+        "median_seconds": 154.07,
+        "passes": 5,
+        "runs": 5,
+        "weighted_cache_share": 0.8777816361926095
+      },
+      "frozen_current_codex": {
+        "fixed_cost_delta_pct": -7.766613617873053,
+        "fixed_time_delta_pct": 12.986851079120875,
+        "median_cost_usd": 0.5180765,
+        "median_seconds": 136.361
+      },
+      "synthetic_continue_requests": 0
+    },
+    "queuecraft": {
+      "captured_requests": 46,
+      "continuation_drops": 0,
+      "fixed": {
+        "median_cost_usd": 0.4144095,
+        "median_seconds": 53.677,
+        "passes": 5,
+        "runs": 5,
+        "weighted_cache_share": 0.8300423070718815
+      },
+      "frozen_current_codex": {
+        "fixed_cost_delta_pct": -8.500998539449768,
+        "fixed_time_delta_pct": -34.99134057576087,
+        "median_cost_usd": 0.4529115,
+        "median_seconds": 82.569
+      },
+      "synthetic_continue_requests": 0
+    },
+    "textwright": {
+      "captured_requests": 67,
+      "continuation_drops": 0,
+      "fixed": {
+        "median_cost_usd": 0.4940225,
+        "median_seconds": 70.474,
+        "passes": 5,
+        "runs": 5,
+        "weighted_cache_share": 0.8909713149619457
+      },
+      "frozen_current_codex": {
+        "fixed_cost_delta_pct": -5.276110438423176,
+        "fixed_time_delta_pct": -5.388787455697552,
+        "median_cost_usd": 0.5215395,
+        "median_seconds": 74.488
+      },
+      "synthetic_continue_requests": 0
+    }
+  }
+}

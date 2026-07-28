@@ -1,0 +1,396 @@
+{
+  "schema_version": 1,
+  "pricing_source": "OPENAI_PRICING_SNAPSHOT.md",
+  "notes": [
+    "Each attempt group represents observed successful API responses that produced billable image output.",
+    "Final manifests alone omit overwritten, discarded, and diagnostic generations.",
+    "Prompt-input token charges remain additional because the account-level API does not expose per-request image input billing here."
+  ],
+  "records": [
+    {
+      "cell": "glm-openrouter",
+      "lane": "pft",
+      "wave": 1,
+      "evidence": [
+        "visual/results/glm-openrouter/pft/wave1/pfterminal.stdout",
+        "visual/workspaces/glm-openrouter/pft/wave1/image_manifest.json"
+      ],
+      "attempts": [
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "discarded_sdk_parse_failure"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1024x1024",
+          "quality": "high",
+          "disposition": "discarded_sdk_shape_probe"
+        },
+        {
+          "count": 3,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "discarded_request_id_regeneration"
+        },
+        {
+          "count": 2,
+          "model": "gpt-image-2",
+          "size": "1024x1024",
+          "quality": "low",
+          "disposition": "discarded_request_id_probes"
+        },
+        {
+          "count": 3,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "final"
+        }
+      ]
+    },
+    {
+      "cell": "glm-openrouter",
+      "lane": "hermes",
+      "wave": 1,
+      "evidence": [
+        "visual/results/glm-openrouter/hermes/wave1/hermes-home/state.db",
+        "visual/workspaces/glm-openrouter/hermes/wave1/image_manifest.json"
+      ],
+      "attempts": [
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1024x1024",
+          "quality": "high",
+          "disposition": "client_timeout_no_response",
+          "billing_status": "response_unknown"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1024x1024",
+          "quality": "high",
+          "disposition": "final"
+        },
+        {
+          "count": 2,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "final"
+        }
+      ]
+    },
+    {
+      "cell": "glm-openrouter",
+      "lane": "hermes",
+      "wave": 2,
+      "evidence": [
+        "visual/results/glm-openrouter/hermes/wave2/hermes-home/state.db",
+        "visual/workspaces/glm-openrouter/hermes/wave2/image_manifest.json"
+      ],
+      "attempts": [
+        {
+          "count": 1,
+          "model": "gpt-image-2-codex",
+          "size": "1254x1254",
+          "quality": "high",
+          "disposition": "discarded_route_probe"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2-codex",
+          "size": "1915x821",
+          "quality": "high",
+          "disposition": "discarded_minimum_dimension_failure"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2-codex",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "final"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2-codex",
+          "size": "1254x1254",
+          "quality": "high",
+          "disposition": "final"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2-codex",
+          "size": "1254x1254",
+          "quality": "high",
+          "disposition": "final"
+        }
+      ]
+    },
+    {
+      "cell": "glm-openrouter",
+      "lane": "pft",
+      "wave": 2,
+      "evidence": [
+        "visual/results/glm-openrouter/pft/wave2/pfterminal.stdout",
+        "visual/workspaces/glm-openrouter/pft/wave2/image_manifest.json"
+      ],
+      "attempts": [
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "discarded_sdk_parse_failure"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "final"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1024x1024",
+          "quality": "high",
+          "disposition": "final"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1024x1536",
+          "quality": "high",
+          "disposition": "final"
+        }
+      ]
+    },
+    {
+      "cell": "glm-openrouter",
+      "lane": "pft",
+      "wave": 3,
+      "evidence": [
+        "visual/results/glm-openrouter/pft/wave3/pfterminal.stdout",
+        "visual/workspaces/glm-openrouter/pft/wave3/image_manifest.json"
+      ],
+      "attempts": [
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "final"
+        },
+        {
+          "count": 2,
+          "model": "gpt-image-2",
+          "size": "1024x1024",
+          "quality": "high",
+          "disposition": "final"
+        }
+      ]
+    },
+    {
+      "cell": "glm-openrouter",
+      "lane": "hermes",
+      "wave": 3,
+      "evidence": [
+        "visual/results/glm-openrouter/hermes/wave3/hermes-home/state.db",
+        "visual/workspaces/glm-openrouter/hermes/wave3/image_manifest.json"
+      ],
+      "attempts": [
+        {
+          "count": 5,
+          "model": "gpt-image-2",
+          "route": "vercel-ai-gateway",
+          "size": "1024x1024",
+          "quality": "low",
+          "disposition": "discarded_gateway_and_request_id_probes"
+        },
+        {
+          "count": 6,
+          "model": "gpt-image-2",
+          "route": "vercel-ai-gateway",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "discarded_path_and_request_id_regenerations"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "route": "vercel-ai-gateway",
+          "size": "1536x1024",
+          "quality": "medium",
+          "disposition": "discarded_request_id_regeneration"
+        },
+        {
+          "count": 2,
+          "model": "gpt-image-2",
+          "route": "vercel-ai-gateway",
+          "size": "1536x1024",
+          "quality": "medium",
+          "disposition": "client_timeout_no_response",
+          "billing_status": "response_unknown"
+        },
+        {
+          "count": 2,
+          "model": "gpt-image-2",
+          "route": "vercel-ai-gateway",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "final"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "route": "vercel-ai-gateway",
+          "size": "1536x1024",
+          "quality": "medium",
+          "disposition": "final"
+        }
+      ]
+    },
+    {
+      "cell": "kimi-openrouter",
+      "lane": "pft",
+      "wave": 1,
+      "evidence": [
+        "visual/results/kimi-openrouter/pft/wave1/pfterminal.stdout",
+        "visual/workspaces/kimi-openrouter/pft/wave1/image_manifest.json"
+      ],
+      "attempts": [
+        {
+          "count": 3,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "final"
+        }
+      ]
+    },
+    {
+      "cell": "kimi-openrouter",
+      "lane": "hermes",
+      "wave": 1,
+      "evidence": [
+        "visual/results/kimi-openrouter/hermes/wave1/hermes-home/state.db",
+        "visual/workspaces/kimi-openrouter/hermes/wave1/image_manifest.json"
+      ],
+      "attempts": [
+        {
+          "count": 3,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "discarded_request_id_replay"
+        },
+        {
+          "count": 3,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "final"
+        }
+      ]
+    },
+    {
+      "cell": "kimi-openrouter",
+      "lane": "pft",
+      "wave": 2,
+      "evidence": [
+        "visual/results/kimi-openrouter/pft/wave2/pfterminal.stdout",
+        "visual/workspaces/kimi-openrouter/pft/wave2/image_manifest.json"
+      ],
+      "attempts": [
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "discarded_off_brief_hero"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "final"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "medium",
+          "disposition": "final"
+        },
+        {
+          "count": 1,
+          "model": "gpt-image-2",
+          "size": "1024x1024",
+          "quality": "medium",
+          "disposition": "final"
+        }
+      ]
+    },
+    {
+      "cell": "kimi-openrouter",
+      "lane": "hermes",
+      "wave": 2,
+      "evidence": [
+        "visual/results/kimi-openrouter/hermes/wave2/hermes-home/state.db",
+        "visual/workspaces/kimi-openrouter/hermes/wave2/image_manifest.json"
+      ],
+      "attempts": [
+        {
+          "count": 3,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "final"
+        }
+      ]
+    },
+    {
+      "cell": "kimi-openrouter",
+      "lane": "pft",
+      "wave": 3,
+      "evidence": [
+        "visual/results/kimi-openrouter/pft/wave3/pfterminal.stdout",
+        "visual/workspaces/kimi-openrouter/pft/wave3/image_manifest.json"
+      ],
+      "attempts": [
+        {
+          "count": 3,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "final"
+        }
+      ]
+    },
+    {
+      "cell": "kimi-openrouter",
+      "lane": "hermes",
+      "wave": 3,
+      "evidence": [
+        "visual/results/kimi-openrouter/hermes/wave3/hermes-home/state.db",
+        "visual/workspaces/kimi-openrouter/hermes/wave3/image_manifest.json"
+      ],
+      "attempts": [
+        {
+          "count": 3,
+          "model": "gpt-image-2",
+          "size": "1536x1024",
+          "quality": "high",
+          "disposition": "final"
+        }
+      ]
+    }
+  ]
+}

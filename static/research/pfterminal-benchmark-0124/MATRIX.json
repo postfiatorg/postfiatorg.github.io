@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "waves_per_cell": 3,
+  "cells": [
+    {
+      "id": "visual-opus",
+      "workload": "visual_site",
+      "route": "anthropic-direct",
+      "model": "claude-opus-5",
+      "lanes": ["pft", "cc"]
+    },
+    {
+      "id": "visual-kimi-openrouter",
+      "workload": "visual_site",
+      "route": "openrouter",
+      "model": "moonshotai/kimi-k3",
+      "lanes": ["pft", "hermes"]
+    },
+    {
+      "id": "visual-glm-openrouter",
+      "workload": "visual_site",
+      "route": "openrouter",
+      "model": "z-ai/glm-5.2",
+      "lanes": ["pft", "hermes"]
+    },
+    {
+      "id": "queuecraft-glm-vercel",
+      "workload": "queuecraft",
+      "route": "vercel",
+      "model": "zai/glm-5.2",
+      "lanes": ["pft", "hermes"]
+    },
+    {
+      "id": "queuecraft-glm-openrouter",
+      "workload": "queuecraft",
+      "route": "openrouter",
+      "model": "z-ai/glm-5.2",
+      "lanes": ["pft", "hermes"]
+    },
+    {
+      "id": "queuecraft-kimi-openrouter",
+      "workload": "queuecraft",
+      "route": "openrouter",
+      "model": "moonshotai/kimi-k3",
+      "lanes": ["pft", "hermes"]
+    },
+    {
+      "id": "eventforge-glm-openrouter",
+      "workload": "eventforge",
+      "route": "openrouter",
+      "model": "z-ai/glm-5.2",
+      "lanes": ["pft", "hermes"]
+    },
+    {
+      "id": "eventforge-kimi-openrouter",
+      "workload": "eventforge",
+      "route": "openrouter",
+      "model": "moonshotai/kimi-k3",
+      "lanes": ["pft", "hermes"]
+    }
+  ],
+  "paid_agent_runs": 48,
+  "minimum_settled_agent_spend_usd": 30,
+  "stop_launching_new_cells_at_usd": 75
+}
