@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "cell": "glm-openrouter",
+      "lane": "hermes",
+      "wave": 2,
+      "valid": false,
+      "reasons": [
+        "Hermes terminal isolation removed the supplied OPENAI_API_KEY.",
+        "The agent generated final assets through the ChatGPT Codex OAuth backend using gpt-image-2-codex rather than the required OpenAI Image API gpt-image-2 route."
+      ],
+      "evidence": [
+        "visual/results/glm-openrouter/hermes/wave2/hermes-home/state.db"
+      ]
+    },
+    {
+      "cell": "glm-openrouter",
+      "lane": "hermes",
+      "wave": 3,
+      "valid": false,
+      "reasons": [
+        "Hermes terminal isolation removed the supplied OPENAI_API_KEY.",
+        "The agent generated final assets through a discovered Vercel AI Gateway credential rather than the matched direct OpenAI Image API route."
+      ],
+      "evidence": [
+        "visual/results/glm-openrouter/hermes/wave3/hermes-home/state.db"
+      ]
+    }
+  ]
+}

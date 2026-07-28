@@ -1,0 +1,20 @@
+test_due_job_at_exact_resume_time_is_processed_by_worker (test_visible_integration.VisibleIntegrationTests.test_due_job_at_exact_resume_time_is_processed_by_worker) ... ERROR
+
+======================================================================
+ERROR: test_due_job_at_exact_resume_time_is_processed_by_worker (test_visible_integration.VisibleIntegrationTests.test_due_job_at_exact_resume_time_is_processed_by_worker)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/pfrpc/repos/glm52-agent-bench/tasks/queuecraft/bugged/tests/test_visible_integration.py", line 14, in test_due_job_at_exact_resume_time_is_processed_by_worker
+    result = Worker(scheduler, "worker-a").run_once()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pfrpc/repos/glm52-agent-bench/tasks/queuecraft/bugged/src/queuecraft/worker.py", line 25, in run_once
+    job = self.scheduler.acquire(self.worker_id, queue=queue)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pfrpc/repos/glm52-agent-bench/tasks/queuecraft/bugged/src/queuecraft/scheduler.py", line 39, in acquire
+    raise QueueEmpty("no ready jobs")
+queuecraft.errors.QueueEmpty: no ready jobs
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (errors=1)
