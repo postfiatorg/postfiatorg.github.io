@@ -70,80 +70,92 @@ Every row below is one task and model route tested three times in each harness. 
 
 ### PF Terminal versus Hermes
 
+<p class="pf-run-count"><strong>6 runs per comparison</strong><span>3 PF Terminal + 3 Hermes. Cost and time are averages per run.</span></p>
+
 <div class="pf-benchmark-table" role="region" aria-label="PF Terminal versus Hermes benchmark results" tabindex="0">
 <table>
+  <colgroup>
+    <col class="pf-col-task">
+    <col class="pf-col-route">
+    <col span="6" class="pf-col-metric">
+  </colgroup>
   <thead>
     <tr>
-      <th>Task</th>
-      <th>Model and route</th>
-      <th>Average PF Terminal cost</th>
-      <th>Average Hermes cost</th>
-      <th>PF cost improvement</th>
-      <th>Average PF Terminal time</th>
-      <th>Average Hermes time</th>
-      <th>PF speed improvement</th>
+      <th rowspan="2" scope="col">Task</th>
+      <th rowspan="2" scope="col">Model / route</th>
+      <th colspan="2" scope="colgroup">PF Terminal</th>
+      <th colspan="2" scope="colgroup">Hermes</th>
+      <th colspan="2" scope="colgroup">PF improvement</th>
+    </tr>
+    <tr>
+      <th scope="col">Cost / run</th>
+      <th scope="col">Time / run</th>
+      <th scope="col">Cost / run</th>
+      <th scope="col">Time / run</th>
+      <th scope="col">Cost saved</th>
+      <th scope="col">Speed gain</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td data-label="Task"><strong>EventForge implementation</strong></td>
-      <td data-label="Model and route">GLM 5.2 · OpenRouter</td>
-      <td data-label="Average PF Terminal cost">$0.05</td>
-      <td data-label="Average Hermes cost">$0.15</td>
-      <td data-label="PF cost improvement" class="pf-win">65.7% cheaper</td>
-      <td data-label="Average PF Terminal time">6.6 min</td>
-      <td data-label="Average Hermes time">9.6 min</td>
-      <td data-label="PF speed improvement" class="pf-win">46.6% faster</td>
+      <td data-label="Task" class="pf-table-label"><strong>EventForge</strong><span>Implementation</span></td>
+      <td data-label="Model / route" class="pf-table-label"><strong>GLM 5.2</strong><span>OpenRouter</span></td>
+      <td data-label="PF Terminal cost / run" class="pf-number">$0.05</td>
+      <td data-label="PF Terminal time / run" class="pf-number">6.6 min</td>
+      <td data-label="Hermes cost / run" class="pf-number">$0.15</td>
+      <td data-label="Hermes time / run" class="pf-number">9.6 min</td>
+      <td data-label="PF cost saved" class="pf-number pf-win">65.7%</td>
+      <td data-label="PF speed gain" class="pf-number pf-win">46.6%</td>
     </tr>
     <tr>
-      <td data-label="Task"><strong>EventForge implementation</strong></td>
-      <td data-label="Model and route">Kimi K3 · OpenRouter</td>
-      <td data-label="Average PF Terminal cost">$0.38</td>
-      <td data-label="Average Hermes cost">$0.54</td>
-      <td data-label="PF cost improvement" class="pf-win">29.0% cheaper</td>
-      <td data-label="Average PF Terminal time">8.7 min</td>
-      <td data-label="Average Hermes time">10.0 min</td>
-      <td data-label="PF speed improvement" class="pf-win">14.0% faster</td>
+      <td data-label="Task" class="pf-table-label"><strong>EventForge</strong><span>Implementation</span></td>
+      <td data-label="Model / route" class="pf-table-label"><strong>Kimi K3</strong><span>OpenRouter</span></td>
+      <td data-label="PF Terminal cost / run" class="pf-number">$0.38</td>
+      <td data-label="PF Terminal time / run" class="pf-number">8.7 min</td>
+      <td data-label="Hermes cost / run" class="pf-number">$0.54</td>
+      <td data-label="Hermes time / run" class="pf-number">10.0 min</td>
+      <td data-label="PF cost saved" class="pf-number pf-win">29.0%</td>
+      <td data-label="PF speed gain" class="pf-number pf-win">14.0%</td>
     </tr>
     <tr>
-      <td data-label="Task"><strong>QueueCraft repository repair</strong></td>
-      <td data-label="Model and route">GLM 5.2 · OpenRouter</td>
-      <td data-label="Average PF Terminal cost">$0.32</td>
-      <td data-label="Average Hermes cost">$0.34</td>
-      <td data-label="PF cost improvement" class="pf-win">5.7% cheaper</td>
-      <td data-label="Average PF Terminal time">5.3 min</td>
-      <td data-label="Average Hermes time">5.9 min</td>
-      <td data-label="PF speed improvement" class="pf-win">11.1% faster</td>
+      <td data-label="Task" class="pf-table-label"><strong>QueueCraft</strong><span>Repository repair</span></td>
+      <td data-label="Model / route" class="pf-table-label"><strong>GLM 5.2</strong><span>OpenRouter</span></td>
+      <td data-label="PF Terminal cost / run" class="pf-number">$0.32</td>
+      <td data-label="PF Terminal time / run" class="pf-number">5.3 min</td>
+      <td data-label="Hermes cost / run" class="pf-number">$0.34</td>
+      <td data-label="Hermes time / run" class="pf-number">5.9 min</td>
+      <td data-label="PF cost saved" class="pf-number pf-win">5.7%</td>
+      <td data-label="PF speed gain" class="pf-number pf-win">11.1%</td>
     </tr>
     <tr>
-      <td data-label="Task"><strong>QueueCraft repository repair</strong></td>
-      <td data-label="Model and route">GLM 5.2 · Vercel</td>
-      <td data-label="Average PF Terminal cost">$0.35</td>
-      <td data-label="Average Hermes cost">$0.58</td>
-      <td data-label="PF cost improvement" class="pf-win">39.8% cheaper</td>
-      <td data-label="Average PF Terminal time">2.6 min</td>
-      <td data-label="Average Hermes time">4.4 min</td>
-      <td data-label="PF speed improvement" class="pf-win">65.7% faster</td>
+      <td data-label="Task" class="pf-table-label"><strong>QueueCraft</strong><span>Repository repair</span></td>
+      <td data-label="Model / route" class="pf-table-label"><strong>GLM 5.2</strong><span>Vercel</span></td>
+      <td data-label="PF Terminal cost / run" class="pf-number">$0.35</td>
+      <td data-label="PF Terminal time / run" class="pf-number">2.6 min</td>
+      <td data-label="Hermes cost / run" class="pf-number">$0.58</td>
+      <td data-label="Hermes time / run" class="pf-number">4.4 min</td>
+      <td data-label="PF cost saved" class="pf-number pf-win">39.8%</td>
+      <td data-label="PF speed gain" class="pf-number pf-win">65.7%</td>
     </tr>
     <tr>
-      <td data-label="Task"><strong>QueueCraft repository repair</strong></td>
-      <td data-label="Model and route">Kimi K3 · OpenRouter</td>
-      <td data-label="Average PF Terminal cost">$0.31</td>
-      <td data-label="Average Hermes cost">$1.60</td>
-      <td data-label="PF cost improvement" class="pf-win">80.9% cheaper</td>
-      <td data-label="Average PF Terminal time">2.4 min</td>
-      <td data-label="Average Hermes time">10.2 min</td>
-      <td data-label="PF speed improvement" class="pf-win">323.3% faster</td>
+      <td data-label="Task" class="pf-table-label"><strong>QueueCraft</strong><span>Repository repair</span></td>
+      <td data-label="Model / route" class="pf-table-label"><strong>Kimi K3</strong><span>OpenRouter</span></td>
+      <td data-label="PF Terminal cost / run" class="pf-number">$0.31</td>
+      <td data-label="PF Terminal time / run" class="pf-number">2.4 min</td>
+      <td data-label="Hermes cost / run" class="pf-number">$1.60</td>
+      <td data-label="Hermes time / run" class="pf-number">10.2 min</td>
+      <td data-label="PF cost saved" class="pf-number pf-win">80.9%</td>
+      <td data-label="PF speed gain" class="pf-number pf-win">323.3%</td>
     </tr>
     <tr>
-      <td data-label="Task"><strong>PF Terminal website generation</strong></td>
-      <td data-label="Model and route">Kimi K3 · OpenRouter</td>
-      <td data-label="Average PF Terminal cost">$1.75</td>
-      <td data-label="Average Hermes cost">$2.52</td>
-      <td data-label="PF cost improvement" class="pf-win">30.7% cheaper</td>
-      <td data-label="Average PF Terminal time">24.7 min</td>
-      <td data-label="Average Hermes time">31.2 min</td>
-      <td data-label="PF speed improvement" class="pf-win">26.7% faster</td>
+      <td data-label="Task" class="pf-table-label"><strong>PF Terminal website</strong><span>Generation</span></td>
+      <td data-label="Model / route" class="pf-table-label"><strong>Kimi K3</strong><span>OpenRouter</span></td>
+      <td data-label="PF Terminal cost / run" class="pf-number">$1.75</td>
+      <td data-label="PF Terminal time / run" class="pf-number">24.7 min</td>
+      <td data-label="Hermes cost / run" class="pf-number">$2.52</td>
+      <td data-label="Hermes time / run" class="pf-number">31.2 min</td>
+      <td data-label="PF cost saved" class="pf-number pf-win">30.7%</td>
+      <td data-label="PF speed gain" class="pf-number pf-win">26.7%</td>
     </tr>
   </tbody>
 </table>
@@ -151,30 +163,42 @@ Every row below is one task and model route tested three times in each harness. 
 
 ### PF Terminal versus Claude Code
 
+<p class="pf-run-count"><strong>6 runs in this comparison</strong><span>3 PF Terminal + 3 Claude Code. Cost and time are averages per run.</span></p>
+
 <div class="pf-benchmark-table pf-benchmark-table--claude" role="region" aria-label="PF Terminal versus Claude Code benchmark results" tabindex="0">
 <table>
+  <colgroup>
+    <col class="pf-col-task">
+    <col class="pf-col-route">
+    <col span="6" class="pf-col-metric">
+  </colgroup>
   <thead>
     <tr>
-      <th>Task</th>
-      <th>Model and route</th>
-      <th>Average PF Terminal cost</th>
-      <th>Average Claude Code cost</th>
-      <th>PF cost improvement</th>
-      <th>Average PF Terminal time</th>
-      <th>Average Claude Code time</th>
-      <th>PF speed improvement</th>
+      <th rowspan="2" scope="col">Task</th>
+      <th rowspan="2" scope="col">Model / route</th>
+      <th colspan="2" scope="colgroup">PF Terminal</th>
+      <th colspan="2" scope="colgroup">Claude Code</th>
+      <th colspan="2" scope="colgroup">PF improvement</th>
+    </tr>
+    <tr>
+      <th scope="col">Cost / run</th>
+      <th scope="col">Time / run</th>
+      <th scope="col">Cost / run</th>
+      <th scope="col">Time / run</th>
+      <th scope="col">Cost saved</th>
+      <th scope="col">Speed gain</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td data-label="Task"><strong>PF Terminal website generation</strong></td>
-      <td data-label="Model and route">Opus 5 · Anthropic</td>
-      <td data-label="Average PF Terminal cost">$2.89</td>
-      <td data-label="Average Claude Code cost">$6.70</td>
-      <td data-label="PF cost improvement" class="pf-win">56.9% cheaper</td>
-      <td data-label="Average PF Terminal time">17.0 min</td>
-      <td data-label="Average Claude Code time">29.7 min</td>
-      <td data-label="PF speed improvement" class="pf-win">74.3% faster</td>
+      <td data-label="Task" class="pf-table-label"><strong>PF Terminal website</strong><span>Generation</span></td>
+      <td data-label="Model / route" class="pf-table-label"><strong>Opus 5</strong><span>Anthropic</span></td>
+      <td data-label="PF Terminal cost / run" class="pf-number">$2.89</td>
+      <td data-label="PF Terminal time / run" class="pf-number">17.0 min</td>
+      <td data-label="Claude Code cost / run" class="pf-number">$6.70</td>
+      <td data-label="Claude Code time / run" class="pf-number">29.7 min</td>
+      <td data-label="PF cost saved" class="pf-number pf-win">56.9%</td>
+      <td data-label="PF speed gain" class="pf-number pf-win">74.3%</td>
     </tr>
   </tbody>
 </table>
@@ -188,55 +212,66 @@ Before the release campaign, we ran Opus 5 through PF Terminal and Claude Code o
 
 Both harnesses passed all nine runs. Anthropic Admin Usage attributed **$5.03** to PF Terminal and **$11.22** to Claude Code. PF Terminal therefore used **55.1% less model spend**, while Claude Code took **3.80× as long** on the overall median run.
 
+<p class="pf-run-count"><strong>6 runs per task</strong><span>3 PF Terminal + 3 Claude Code. The final row summarizes 9 runs per harness.</span></p>
+
 <div class="pf-benchmark-table pf-benchmark-table--opus-suite" role="region" aria-label="Opus 5 coding benchmark results" tabindex="0">
 <table>
+  <colgroup>
+    <col class="pf-col-task pf-col-task--wide">
+    <col span="6" class="pf-col-metric">
+  </colgroup>
   <thead>
     <tr>
-      <th>Task</th>
-      <th>PF cost per solve</th>
-      <th>Claude cost per solve</th>
-      <th>PF cost improvement</th>
-      <th>PF median time</th>
-      <th>Claude median time</th>
-      <th>PF speed improvement</th>
+      <th rowspan="2" scope="col">Task</th>
+      <th colspan="2" scope="colgroup">PF Terminal</th>
+      <th colspan="2" scope="colgroup">Claude Code</th>
+      <th colspan="2" scope="colgroup">PF improvement</th>
+    </tr>
+    <tr>
+      <th scope="col">Cost / solve</th>
+      <th scope="col">Median time</th>
+      <th scope="col">Cost / solve</th>
+      <th scope="col">Median time</th>
+      <th scope="col">Cost saved</th>
+      <th scope="col">Speed gain</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td data-label="Task"><strong>QueueCraft repository repair</strong></td>
-      <td data-label="PF cost per solve">$0.53</td>
-      <td data-label="Claude cost per solve">$1.15</td>
-      <td data-label="PF cost improvement" class="pf-win">54.1% cheaper</td>
-      <td data-label="PF median time">73.0 sec</td>
-      <td data-label="Claude median time">214.6 sec</td>
-      <td data-label="PF speed improvement" class="pf-win">194.0% faster</td>
+      <td data-label="Task" class="pf-table-label"><strong>QueueCraft</strong><span>Repository repair</span></td>
+      <td data-label="PF cost / solve" class="pf-number">$0.53</td>
+      <td data-label="PF median time" class="pf-number">73.0 sec</td>
+      <td data-label="Claude cost / solve" class="pf-number">$1.15</td>
+      <td data-label="Claude median time" class="pf-number">214.6 sec</td>
+      <td data-label="PF cost saved" class="pf-number pf-win">54.1%</td>
+      <td data-label="PF speed gain" class="pf-number pf-win">194.0%</td>
     </tr>
     <tr>
-      <td data-label="Task"><strong>TextWright repository repair</strong></td>
-      <td data-label="PF cost per solve">$0.54</td>
-      <td data-label="Claude cost per solve">$1.19</td>
-      <td data-label="PF cost improvement" class="pf-win">55.0% cheaper</td>
-      <td data-label="PF median time">72.9 sec</td>
-      <td data-label="Claude median time">278.7 sec</td>
-      <td data-label="PF speed improvement" class="pf-win">282.3% faster</td>
+      <td data-label="Task" class="pf-table-label"><strong>TextWright</strong><span>Repository repair</span></td>
+      <td data-label="PF cost / solve" class="pf-number">$0.54</td>
+      <td data-label="PF median time" class="pf-number">72.9 sec</td>
+      <td data-label="Claude cost / solve" class="pf-number">$1.19</td>
+      <td data-label="Claude median time" class="pf-number">278.7 sec</td>
+      <td data-label="PF cost saved" class="pf-number pf-win">55.0%</td>
+      <td data-label="PF speed gain" class="pf-number pf-win">282.3%</td>
     </tr>
     <tr>
-      <td data-label="Task"><strong>QueryForge repository repair</strong></td>
-      <td data-label="PF cost per solve">$0.61</td>
-      <td data-label="Claude cost per solve">$1.40</td>
-      <td data-label="PF cost improvement" class="pf-win">56.1% cheaper</td>
-      <td data-label="PF median time">128.2 sec</td>
-      <td data-label="Claude median time">395.1 sec</td>
-      <td data-label="PF speed improvement" class="pf-win">208.2% faster</td>
+      <td data-label="Task" class="pf-table-label"><strong>QueryForge</strong><span>Repository repair</span></td>
+      <td data-label="PF cost / solve" class="pf-number">$0.61</td>
+      <td data-label="PF median time" class="pf-number">128.2 sec</td>
+      <td data-label="Claude cost / solve" class="pf-number">$1.40</td>
+      <td data-label="Claude median time" class="pf-number">395.1 sec</td>
+      <td data-label="PF cost saved" class="pf-number pf-win">56.1%</td>
+      <td data-label="PF speed gain" class="pf-number pf-win">208.2%</td>
     </tr>
     <tr>
-      <td data-label="Task"><strong>All nine runs</strong></td>
-      <td data-label="PF cost per solve">$0.56</td>
-      <td data-label="Claude cost per solve">$1.25</td>
-      <td data-label="PF cost improvement" class="pf-win">55.1% cheaper</td>
-      <td data-label="PF median time">73.3 sec</td>
-      <td data-label="Claude median time">278.7 sec</td>
-      <td data-label="PF speed improvement" class="pf-win">280.2% faster</td>
+      <td data-label="Task" class="pf-table-label"><strong>All tasks</strong><span>9 runs per harness</span></td>
+      <td data-label="PF cost / solve" class="pf-number">$0.56</td>
+      <td data-label="PF median time" class="pf-number">73.3 sec</td>
+      <td data-label="Claude cost / solve" class="pf-number">$1.25</td>
+      <td data-label="Claude median time" class="pf-number">278.7 sec</td>
+      <td data-label="PF cost saved" class="pf-number pf-win">55.1%</td>
+      <td data-label="PF speed gain" class="pf-number pf-win">280.2%</td>
     </tr>
   </tbody>
 </table>
@@ -248,7 +283,9 @@ The dollar figures in the task rows come from client telemetry. The lane totals 
 
 PF Terminal adds multi-model support to Codex. That wider model choice should come without sacrificing Codex's performance on OpenAI models.
 
-We compared PF Terminal with Codex on three coding tasks using the same `gpt-5.6-sol` model, with five runs per task in each harness. Both passed all 15 runs. At the median, PF Terminal cost less on all three tasks and finished faster on two:
+We compared PF Terminal with Codex on three coding tasks using the same `gpt-5.6-sol` model. Both passed every run. At the median, PF Terminal cost less on all three tasks and finished faster on two:
+
+<p class="pf-run-count"><strong>30 balanced runs</strong><span>5 runs per task in each harness; 15 PF Terminal + 15 Codex.</span></p>
 
 | Task | PF Terminal cost versus Codex | PF Terminal speed versus Codex |
 | --- | ---: | ---: |
