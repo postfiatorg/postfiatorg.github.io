@@ -1,7 +1,7 @@
 ---
 title: "Introducing PF Terminal"
 date: 2026-07-28T00:00:00Z
-summary: "PF Terminal is an open-source, multi-model coding terminal built on Codex. In seven matched benchmark comparisons, it used less model spend and less wall time than Hermes or Claude Code."
+summary: "PF Terminal is an open-source, multi-model Codex fork. We tested Kimi K3 and GLM 5.2 against Hermes, Opus 5 against Claude Code, and GPT-5.6-Sol against Codex on website and repository tasks."
 url: "/research/introducing-pf-terminal/"
 categories:
   - PostFiat Research
@@ -19,17 +19,37 @@ cover:
   relative: false
 ---
 
-A coding harness determines how often a model runs, how much context it rereads, how many tool loops it completes, and how much you pay.
+A coding harness determines how often a model runs, how much context it rereads, how many tool loops it completes, and how much you pay. PF Terminal is an open-source, multi-model fork of Codex designed to reduce that overhead.
 
-PF Terminal is designed to reduce that overhead while preserving access to strong models from multiple providers.
+We benchmarked the harnesses rather than asking different models to compete. Within every comparison, PF Terminal and the other harness used the **same named model and provider route**.
 
-Across seven matched comparisons in our first-party release benchmark:
+## Benchmark summary
 
-- PF Terminal's three-run coding-model spend was lower in **7/7 comparisons**. Savings ranged from **5.7% to 80.9%**, with a **39.8% median**.
-- PF Terminal's three-run wall time was lower in **7/7 comparisons**. Its speed advantage ranged from **11.1% to 323.3%**, with the other harness taking a median **1.47× as long**.
-- PF Terminal completed all three runs in **7/7 comparisons**; the matched baseline did so in **5/7**.
+### Long-running website generation
 
-The PF Terminal team designed and ran the study. Each comparison used three PF Terminal runs and three baseline runs. No independent replication exists yet, so these results describe the frozen versions, tasks, and routes we tested rather than predicting every future run. Six comparisons use Hermes; one uses Claude Code.
+Each harness received the same product brief and built a complete website in a fresh workspace. Every pairing contained three PF Terminal runs and three comparison runs.
+
+- **Kimi K3 through OpenRouter — PF Terminal versus Hermes:** PF Terminal averaged **$1.75 and 24.7 minutes** per run; Hermes averaged **$2.52 and 31.2 minutes**. PF Terminal was **30.7% cheaper and 26.7% faster**. A balanced blind-vision judge selected the PF Terminal website in all three waves.
+- **Opus 5 through direct Anthropic — PF Terminal versus Claude Code:** PF Terminal averaged **$2.89 and 17.0 minutes** per run; Claude Code averaged **$6.70 and 29.7 minutes**. PF Terminal was **56.9% cheaper and 74.3% faster**. Visual quality across the three waves was a draw: one PF Terminal win, one Claude Code win, and one order-sensitive result recorded as inconclusive.
+
+### Repository implementation and repair
+
+We ran **30 matched runs** across EventForge implementation and QueueCraft repository repair. Five comparisons covered GLM 5.2 through OpenRouter, GLM 5.2 through Vercel AI Gateway, and Kimi K3 through OpenRouter, always against Hermes on the same route.
+
+PF Terminal completed **15/15 runs** and Hermes completed **14/15**. Depending on the model, provider, and task, PF Terminal used **5.7% to 80.9% less coding-model spend** and finished **11.1% to 323.3% faster**.
+
+### What the release headline means
+
+The website and repository results above form the seven-comparison release campaign: **42 matched runs**, with 21 PF Terminal runs and 21 baseline runs. PF Terminal used less coding-model spend and less wall time in **7/7 comparisons**. Median savings were **39.8%**, and the other harness took a median **1.47× as long**. PF Terminal completed **21/21 runs**; Hermes and Claude Code completed **19/21**.
+
+Two separate suites answer questions that the release headline does not:
+
+- **Opus coding efficiency:** On QueueCraft, TextWright, and QueryForge through direct Anthropic, PF Terminal and Claude Code each passed all nine runs. Anthropic Admin Usage attributed **$5.03** to PF Terminal and **$11.22** to Claude Code; Claude Code took **3.80× as long** on the overall median run.
+- **OpenAI/Codex parity:** On the same three tasks using GPT-5.6-Sol through the direct OpenAI API, PF Terminal and Codex both passed **15/15 runs**. PF Terminal's median cost was **5.3% to 8.5% lower** across the three tasks. It was faster on QueueCraft and TextWright, while QueryForge was **13.0% slower**. This 30-run parity backtest checks that PF Terminal's multi-model additions do not create a general OpenAI performance drop-off; QueryForge latency remains an explicit improvement target.
+
+Performance and visual quality were scored separately. Functional verifiers determined whether the coding task passed. Provider billing supplied coding-model cost, and wall-clock measurement supplied elapsed time. GPT-5.6-Sol with vision judged each website pair twice with identities hidden and A/B order reversed. Image-generation and judging costs are reported separately from coding-model spend.
+
+The PF Terminal team designed and ran these studies. They use frozen versions, tasks, and routes and have not yet been independently replicated, so the results describe this campaign rather than predicting every future run.
 
 ## What is PF Terminal?
 
