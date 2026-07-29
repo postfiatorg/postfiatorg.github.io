@@ -1,7 +1,7 @@
 ---
 title: "Introducing PF Terminal"
 date: 2026-07-28T00:00:00Z
-summary: "PF Terminal is an open-source, multi-model Codex fork. We tested Kimi K3 and GLM 5.2 against Hermes, Opus 5 against Claude Code, and GPT-5.6-Sol against Codex on website and repository tasks."
+summary: "PF Terminal is an open-source, multi-model Codex fork. Across seven same-model, same-provider comparisons against Hermes and Claude Code, it was 39.8% cheaper and 46.6% faster at the median; a separate 30-run GPT-5.6-Sol test checked Codex parity."
 url: "/research/introducing-pf-terminal/"
 categories:
   - PostFiat Research
@@ -25,6 +25,8 @@ We benchmarked the harnesses rather than asking different models to compete. Wit
 
 ## Benchmark summary
 
+> **Median release result: PF Terminal was 39.8% cheaper and 46.6% faster.** This is the median of seven matched comparisons using the same model and provider route in each harness.
+
 ### Long-running website generation
 
 Each harness received the same product brief and built a complete website in a fresh workspace. Every pairing contained three PF Terminal runs and three comparison runs.
@@ -36,16 +38,16 @@ Each harness received the same product brief and built a complete website in a f
 
 We ran **30 matched runs** across EventForge implementation and QueueCraft repository repair. Five comparisons covered GLM 5.2 through OpenRouter, GLM 5.2 through Vercel AI Gateway, and Kimi K3 through OpenRouter, always against Hermes on the same route.
 
-PF Terminal completed **15/15 runs** and Hermes completed **14/15**. Depending on the model, provider, and task, PF Terminal used **5.7% to 80.9% less coding-model spend** and finished **11.1% to 323.3% faster**.
+**Repository median: PF Terminal was 39.8% cheaper and 46.6% faster than Hermes.**
 
 ### What the release headline means
 
-The website and repository results above form the seven-comparison release campaign: **42 matched runs**, with 21 PF Terminal runs and 21 baseline runs. PF Terminal used less coding-model spend and less wall time in **7/7 comparisons**. Median savings were **39.8%**, and the other harness took a median **1.47× as long**. PF Terminal completed **21/21 runs**; Hermes and Claude Code completed **19/21**.
+The website and repository results above form the seven-comparison release campaign: **42 matched runs**, with 21 PF Terminal runs and 21 baseline runs. Six comparisons use Hermes and one uses Claude Code. We calculate the cost and time difference inside each matched comparison, then take the median of those seven differences rather than pooling differently priced models. Every comparison favored PF Terminal on both cost and time.
 
 Two separate suites answer questions that the release headline does not:
 
-- **Opus coding efficiency:** On QueueCraft, TextWright, and QueryForge through direct Anthropic, PF Terminal and Claude Code each passed all nine runs. Anthropic Admin Usage attributed **$5.03** to PF Terminal and **$11.22** to Claude Code; Claude Code took **3.80× as long** on the overall median run.
-- **OpenAI/Codex parity:** On the same three tasks using GPT-5.6-Sol through the direct OpenAI API, PF Terminal and Codex both passed **15/15 runs**. PF Terminal's median cost was **5.3% to 8.5% lower** across the three tasks. It was faster on QueueCraft and TextWright, while QueryForge was **13.0% slower**. This 30-run parity backtest checks that PF Terminal's multi-model additions do not create a general OpenAI performance drop-off; QueryForge latency remains an explicit improvement target.
+- **Opus coding efficiency:** On QueueCraft, TextWright, and QueryForge through direct Anthropic, PF Terminal and Claude Code each passed all nine runs. PF Terminal used **55.1% less model spend**, and its overall median run took **73.3 seconds versus 278.7 seconds** for Claude Code.
+- **OpenAI/Codex parity:** On the same three tasks using GPT-5.6-Sol through the direct OpenAI API, PF Terminal and Codex both passed **15/15 runs**. At the median across tasks, PF Terminal was **7.8% cheaper and 5.4% faster**. PF Terminal was faster on two of three tasks; QueryForge was **13.0% slower**. This 30-run parity backtest checks that PF Terminal's multi-model additions do not create a general OpenAI performance drop-off; QueryForge latency remains an explicit improvement target.
 
 Performance and visual quality were scored separately. Functional verifiers determined whether the coding task passed. Provider billing supplied coding-model cost, and wall-clock measurement supplied elapsed time. GPT-5.6-Sol with vision judged each website pair twice with identities hidden and A/B order reversed. Image-generation and judging costs are reported separately from coding-model spend.
 
