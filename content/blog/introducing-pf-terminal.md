@@ -1,7 +1,7 @@
 ---
 title: "Introducing PF Terminal"
 date: 2026-07-28T00:00:00Z
-summary: "PF Terminal is an open-source, multi-model coding terminal built on Codex. In a first-party release benchmark, its three-run totals used less agent spend and wall time in all seven route-clean cells."
+summary: "PF Terminal is an open-source, multi-model coding terminal built on Codex. In seven matched benchmark comparisons, it used less model spend and less wall time than Hermes or Claude Code."
 url: "/research/introducing-pf-terminal/"
 categories:
   - PostFiat Research
@@ -23,13 +23,13 @@ A coding harness determines how often a model runs, how much context it rereads,
 
 PF Terminal is designed to reduce that overhead while preserving access to strong models from multiple providers.
 
-Across the seven route-clean cells in our first-party release benchmark:
+Across seven matched comparisons in our first-party release benchmark:
 
-- PF Terminal's three-run coding-model spend was lower in **7/7 cells**. Savings ranged from **5.7% to 80.9%**, with a **39.8% median** across cells.
-- PF Terminal's three-run wall time was lower in **7/7 cells**. The baseline took **1.11× to 4.23× as long**, with a **1.47× median**.
-- PF Terminal completed all three runs in **7/7 cells**; the matched baseline did so in **5/7**.
+- PF Terminal's three-run coding-model spend was lower in **7/7 comparisons**. Savings ranged from **5.7% to 80.9%**, with a **39.8% median**.
+- PF Terminal's three-run wall time was lower in **7/7 comparisons**. Its speed advantage ranged from **11.1% to 323.3%**, with the other harness taking a median **1.47× as long**.
+- PF Terminal completed all three runs in **7/7 comparisons**; the matched baseline did so in **5/7**.
 
-The PF Terminal team designed and ran the study. Three waves per cell and no independent replication make these descriptive results for frozen versions and tasks, rather than estimates of future performance. Six cells compare PF Terminal with Hermes; one compares it with Claude Code. A separate six-run operational cell tested route conformance and is reported outside these performance ranges.
+The PF Terminal team designed and ran the study. Each comparison used three PF Terminal runs and three baseline runs. No independent replication exists yet, so these results describe the frozen versions, tasks, and routes we tested rather than predicting every future run. Six comparisons use Hermes; one uses Claude Code.
 
 ## What is PF Terminal?
 
@@ -62,26 +62,125 @@ sh pfterminal-install.sh
 
 The installer downloads the platform-specific release archive and verifies its SHA-256 digest before installation. macOS users can instead download the DMG from the [GitHub releases page](https://github.com/agtico/PfTerminal/releases).
 
-## The complete result
+## Cost and speed: PF Terminal versus other harnesses
 
-We ran 48 paid contestant runs across eight cells covering website generation, repository repair, and contract implementation. Each cell contained three PF Terminal runs and three baseline runs. Failures and timeouts remain in the route-clean totals.
+Every row below is one task and model route run three times in each harness. Costs are the provider's settled bill for the coding model. Times are the total minutes for all three runs, including failures and timeouts.
 
-The table reports each cell separately rather than combining differently priced models. Three route-clean cells showed the same directional speed result in every wave; four were mixed or included a failed baseline run.
+**Cost improvement** is the percentage PF Terminal saved versus the other harness. **Speed improvement** compares how quickly the same three-run workload finished: other-harness time divided by PF Terminal time, minus one. Higher percentages favor PF Terminal. Percentages use unrounded run data, so they can differ slightly from the displayed dollar and minute totals.
 
-| Workload and route | Baseline | Successful runs, PF / baseline | Agent spend, PF / baseline | Minutes, PF / baseline |
-| --- | --- | ---: | ---: | ---: |
-| EventForge, GLM 5.2 via OpenRouter | Hermes | 3/3 · 3/3 | $0.15 · $0.44 | 19.7 · 28.8 |
-| EventForge, Kimi K3 via OpenRouter | Hermes | 3/3 · 2/3 | $1.14 · $1.61 | 26.2 · 29.9 |
-| QueueCraft, GLM 5.2 via OpenRouter | Hermes | 3/3 · 3/3 | $0.96 · $1.02 | 16.0 · 17.7 |
-| QueueCraft, GLM 5.2 via Vercel | Hermes | 3/3 · 3/3 | $1.05 · $1.74 | 7.9 · 13.2 |
-| QueueCraft, Kimi K3 via OpenRouter | Hermes | 3/3 · 3/3 | $0.92 · $4.80 | 7.3 · 30.7 |
-| Website, GLM 5.2 via OpenRouter | Hermes | 3/3 · 1/3* | — | — |
-| Website, Kimi K3 via OpenRouter | Hermes | 3/3 · 3/3 | $5.25 · $7.57 | 74.0 · 93.7 |
-| Website, Opus 5 via Anthropic | Claude Code | 3/3 · 2/3 | $8.68 · $20.11 | 51.0 · 89.0 |
+### PF Terminal versus Hermes
 
-“Agent spend” is settled provider billing for the coding model. It excludes image generation and neutral judging. The [complete report](/research/pfterminal-benchmark-0124/REPORT.md) includes exact seconds, per-run costs, all-in website costs, visual verdicts, and exclusions.
+<div class="pf-benchmark-table" role="region" aria-label="PF Terminal versus Hermes benchmark results" tabindex="0">
+<table>
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Model and route</th>
+      <th>PF Terminal cost</th>
+      <th>Hermes cost</th>
+      <th>PF cost improvement</th>
+      <th>PF Terminal time</th>
+      <th>Hermes time</th>
+      <th>PF speed improvement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td data-label="Task"><strong>EventForge implementation</strong></td>
+      <td data-label="Model and route">GLM 5.2 · OpenRouter</td>
+      <td data-label="PF Terminal cost">$0.15</td>
+      <td data-label="Hermes cost">$0.44</td>
+      <td data-label="PF cost improvement" class="pf-win">65.7% cheaper</td>
+      <td data-label="PF Terminal time">19.7 min</td>
+      <td data-label="Hermes time">28.8 min</td>
+      <td data-label="PF speed improvement" class="pf-win">46.6% faster</td>
+    </tr>
+    <tr>
+      <td data-label="Task"><strong>EventForge implementation</strong></td>
+      <td data-label="Model and route">Kimi K3 · OpenRouter</td>
+      <td data-label="PF Terminal cost">$1.14</td>
+      <td data-label="Hermes cost">$1.61</td>
+      <td data-label="PF cost improvement" class="pf-win">29.0% cheaper</td>
+      <td data-label="PF Terminal time">26.2 min</td>
+      <td data-label="Hermes time">29.9 min</td>
+      <td data-label="PF speed improvement" class="pf-win">14.0% faster</td>
+    </tr>
+    <tr>
+      <td data-label="Task"><strong>QueueCraft repository repair</strong></td>
+      <td data-label="Model and route">GLM 5.2 · OpenRouter</td>
+      <td data-label="PF Terminal cost">$0.96</td>
+      <td data-label="Hermes cost">$1.02</td>
+      <td data-label="PF cost improvement" class="pf-win">5.7% cheaper</td>
+      <td data-label="PF Terminal time">16.0 min</td>
+      <td data-label="Hermes time">17.7 min</td>
+      <td data-label="PF speed improvement" class="pf-win">11.1% faster</td>
+    </tr>
+    <tr>
+      <td data-label="Task"><strong>QueueCraft repository repair</strong></td>
+      <td data-label="Model and route">GLM 5.2 · Vercel</td>
+      <td data-label="PF Terminal cost">$1.05</td>
+      <td data-label="Hermes cost">$1.74</td>
+      <td data-label="PF cost improvement" class="pf-win">39.8% cheaper</td>
+      <td data-label="PF Terminal time">7.9 min</td>
+      <td data-label="Hermes time">13.2 min</td>
+      <td data-label="PF speed improvement" class="pf-win">65.7% faster</td>
+    </tr>
+    <tr>
+      <td data-label="Task"><strong>QueueCraft repository repair</strong></td>
+      <td data-label="Model and route">Kimi K3 · OpenRouter</td>
+      <td data-label="PF Terminal cost">$0.92</td>
+      <td data-label="Hermes cost">$4.80</td>
+      <td data-label="PF cost improvement" class="pf-win">80.9% cheaper</td>
+      <td data-label="PF Terminal time">7.3 min</td>
+      <td data-label="Hermes time">30.7 min</td>
+      <td data-label="PF speed improvement" class="pf-win">323.3% faster</td>
+    </tr>
+    <tr>
+      <td data-label="Task"><strong>PF Terminal website generation</strong></td>
+      <td data-label="Model and route">Kimi K3 · OpenRouter</td>
+      <td data-label="PF Terminal cost">$5.25</td>
+      <td data-label="Hermes cost">$7.57</td>
+      <td data-label="PF cost improvement" class="pf-win">30.7% cheaper</td>
+      <td data-label="PF Terminal time">74.0 min</td>
+      <td data-label="Hermes time">93.7 min</td>
+      <td data-label="PF speed improvement" class="pf-win">26.7% faster</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-*Two Hermes GLM website runs used image routes outside the matched configuration. This operational cell shows that PF Terminal stayed on route in 3/3 runs while Hermes stayed on route in 1/3. We omit its performance ratios and exclude the whole cell from the headline aggregate. The [full campaign report](/research/pfterminal-benchmark-0124/REPORT.md) retains all six runs and their spend and time.
+### PF Terminal versus Claude Code
+
+<div class="pf-benchmark-table pf-benchmark-table--claude" role="region" aria-label="PF Terminal versus Claude Code benchmark results" tabindex="0">
+<table>
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Model and route</th>
+      <th>PF Terminal cost</th>
+      <th>Claude Code cost</th>
+      <th>PF cost improvement</th>
+      <th>PF Terminal time</th>
+      <th>Claude Code time</th>
+      <th>PF speed improvement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td data-label="Task"><strong>PF Terminal website generation</strong></td>
+      <td data-label="Model and route">Opus 5 · Anthropic</td>
+      <td data-label="PF Terminal cost">$8.68</td>
+      <td data-label="Claude Code cost">$20.11</td>
+      <td data-label="PF cost improvement" class="pf-win">56.9% cheaper</td>
+      <td data-label="PF Terminal time">51.0 min</td>
+      <td data-label="Claude Code time">89.0 min</td>
+      <td data-label="PF speed improvement" class="pf-win">74.3% faster</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+The GLM 5.2 website attempt is omitted because two Hermes runs left the assigned image route, so it did not produce a valid harness-to-harness cost or speed comparison. The [complete report](/research/pfterminal-benchmark-0124/REPORT.md) retains those runs for route-adherence auditing.
 
 ### A separate Opus 5 coding suite
 
@@ -89,12 +188,59 @@ Before the release campaign, we ran Opus 5 through PF Terminal and Claude Code o
 
 Both harnesses passed all nine runs. Anthropic Admin Usage attributed **$5.03** to PF Terminal and **$11.22** to Claude Code. PF Terminal therefore used **55.1% less model spend**, while Claude Code took **3.80× as long** on the overall median run.
 
-| Opus 5 task | Successful runs, PF / Claude | Cost per solve, PF / Claude | Median seconds, PF / Claude | Claude / PF cost | Claude / PF time |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| QueueCraft | 3/3 · 3/3 | $0.53 · $1.15 | 73.0 · 214.6 | 2.18× | 2.94× |
-| TextWright | 3/3 · 3/3 | $0.54 · $1.19 | 72.9 · 278.7 | 2.22× | 3.82× |
-| QueryForge | 3/3 · 3/3 | $0.61 · $1.40 | 128.2 · 395.1 | 2.28× | 3.08× |
-| **All nine runs** | **9/9 · 9/9** | **$0.56 · $1.25** | **73.3 · 278.7** | **2.23×** | **3.80×** |
+<div class="pf-benchmark-table pf-benchmark-table--opus-suite" role="region" aria-label="Opus 5 coding benchmark results" tabindex="0">
+<table>
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>PF cost per solve</th>
+      <th>Claude cost per solve</th>
+      <th>PF cost improvement</th>
+      <th>PF median time</th>
+      <th>Claude median time</th>
+      <th>PF speed improvement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td data-label="Task"><strong>QueueCraft repository repair</strong></td>
+      <td data-label="PF cost per solve">$0.53</td>
+      <td data-label="Claude cost per solve">$1.15</td>
+      <td data-label="PF cost improvement" class="pf-win">54.1% cheaper</td>
+      <td data-label="PF median time">73.0 sec</td>
+      <td data-label="Claude median time">214.6 sec</td>
+      <td data-label="PF speed improvement" class="pf-win">194.0% faster</td>
+    </tr>
+    <tr>
+      <td data-label="Task"><strong>TextWright repository repair</strong></td>
+      <td data-label="PF cost per solve">$0.54</td>
+      <td data-label="Claude cost per solve">$1.19</td>
+      <td data-label="PF cost improvement" class="pf-win">55.0% cheaper</td>
+      <td data-label="PF median time">72.9 sec</td>
+      <td data-label="Claude median time">278.7 sec</td>
+      <td data-label="PF speed improvement" class="pf-win">282.3% faster</td>
+    </tr>
+    <tr>
+      <td data-label="Task"><strong>QueryForge repository repair</strong></td>
+      <td data-label="PF cost per solve">$0.61</td>
+      <td data-label="Claude cost per solve">$1.40</td>
+      <td data-label="PF cost improvement" class="pf-win">56.1% cheaper</td>
+      <td data-label="PF median time">128.2 sec</td>
+      <td data-label="Claude median time">395.1 sec</td>
+      <td data-label="PF speed improvement" class="pf-win">208.2% faster</td>
+    </tr>
+    <tr>
+      <td data-label="Task"><strong>All nine runs</strong></td>
+      <td data-label="PF cost per solve">$0.56</td>
+      <td data-label="Claude cost per solve">$1.25</td>
+      <td data-label="PF cost improvement" class="pf-win">55.1% cheaper</td>
+      <td data-label="PF median time">73.3 sec</td>
+      <td data-label="Claude median time">278.7 sec</td>
+      <td data-label="PF speed improvement" class="pf-win">280.2% faster</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 The dollar figures in the task rows come from client telemetry. The lane totals and overall cost-per-solve figures come from Anthropic Admin Usage grouped by the two dedicated API-key IDs; client telemetry differed from the Admin total by $0.00022 across PF Terminal's nine runs and matched it exactly for Claude Code.
 
@@ -153,21 +299,59 @@ These are benchmark outputs rather than the official PF Terminal website.
 
 Both wave-two sites used Opus 5 through direct Anthropic and passed the browser verifier. In balanced blind judging, the PF Terminal site scored 95 versus 89, then 95 versus 88 after the A/B order was reversed.
 
-| PF Terminal + Opus 5 | Claude Code + Opus 5 |
-| --- | --- |
-| ![PF Terminal Opus 5 benchmark website with teal routing artwork](/research/pfterminal-benchmark-0124/images/opus-pfterminal-wave2.png) | ![Claude Code Opus 5 benchmark website with amber orchestration artwork](/research/pfterminal-benchmark-0124/images/opus-claude-code-wave2.png) |
+<p class="pf-comparison-instruction">Click either screenshot to open the full 1440 × 1000 capture.</p>
+
+<div class="pf-site-comparison" aria-label="Opus 5 website comparison">
+  <figure>
+    <figcaption>
+      <strong>PF Terminal + Opus 5</strong>
+      <span>Three runs: $8.68 · 51.0 minutes</span>
+    </figcaption>
+    <a href="/research/pfterminal-benchmark-0124/images/opus-pfterminal-wave2.png" target="_blank" rel="noopener">
+      <img src="/research/pfterminal-benchmark-0124/images/opus-pfterminal-wave2.png" alt="PF Terminal Opus 5 benchmark website with teal routing artwork" loading="lazy" decoding="async">
+    </a>
+  </figure>
+  <figure>
+    <figcaption>
+      <strong>Claude Code + Opus 5</strong>
+      <span>Three runs: $20.11 · 89.0 minutes</span>
+    </figcaption>
+    <a href="/research/pfterminal-benchmark-0124/images/opus-claude-code-wave2.png" target="_blank" rel="noopener">
+      <img src="/research/pfterminal-benchmark-0124/images/opus-claude-code-wave2.png" alt="Claude Code Opus 5 benchmark website with amber orchestration artwork" loading="lazy" decoding="async">
+    </a>
+  </figure>
+</div>
 
 Across all three Opus waves, the visual result was a draw: one PF Terminal win, one Claude Code win, and one order-sensitive result recorded as inconclusive. The clear difference was execution efficiency, rather than visual dominance.
 
-Including confirmed image outputs, PF Terminal’s all-in cost was 52.4% lower in this cell.
+Including confirmed image outputs, PF Terminal’s all-in cost was 52.4% lower in this comparison.
 
 ### Kimi K3: PF Terminal versus Hermes
 
 These wave-one sites used Kimi K3 through OpenRouter. The PF Terminal site scored 98 versus 90 and 97 versus 90 after the order was reversed.
 
-| PF Terminal + Kimi K3 | Hermes + Kimi K3 |
-| --- | --- |
-| ![PF Terminal Kimi K3 benchmark website with layered terminal artwork](/research/pfterminal-benchmark-0124/images/kimi-pfterminal-wave1.png) | ![Hermes Kimi K3 benchmark website with isometric model-routing artwork](/research/pfterminal-benchmark-0124/images/kimi-hermes-wave1.png) |
+<p class="pf-comparison-instruction">Click either screenshot to open the full 1440 × 1000 capture.</p>
+
+<div class="pf-site-comparison" aria-label="Kimi K3 website comparison">
+  <figure>
+    <figcaption>
+      <strong>PF Terminal + Kimi K3</strong>
+      <span>Three runs: $5.25 · 74.0 minutes</span>
+    </figcaption>
+    <a href="/research/pfterminal-benchmark-0124/images/kimi-pfterminal-wave1.png" target="_blank" rel="noopener">
+      <img src="/research/pfterminal-benchmark-0124/images/kimi-pfterminal-wave1.png" alt="PF Terminal Kimi K3 benchmark website with layered terminal artwork" loading="lazy" decoding="async">
+    </a>
+  </figure>
+  <figure>
+    <figcaption>
+      <strong>Hermes + Kimi K3</strong>
+      <span>Three runs: $7.57 · 93.7 minutes</span>
+    </figcaption>
+    <a href="/research/pfterminal-benchmark-0124/images/kimi-hermes-wave1.png" target="_blank" rel="noopener">
+      <img src="/research/pfterminal-benchmark-0124/images/kimi-hermes-wave1.png" alt="Hermes Kimi K3 benchmark website with isometric model-routing artwork" loading="lazy" decoding="async">
+    </a>
+  </figure>
+</div>
 
 PF Terminal won all three Kimi visual waves under the balanced-order rule. It also cost 30.3% less after confirmed image outputs were included.
 
@@ -199,7 +383,7 @@ The campaign used:
 - Hermes Agent 0.19.0, upstream commit `d83e858507a9bdb7f96c7a163d89c34c60909dcf`;
 - Python 3.12.3 on the same Linux host.
 
-Within each cell, the harnesses used the same named model and provider route: direct Anthropic `claude-opus-5`, OpenRouter `moonshotai/kimi-k3`, OpenRouter `z-ai/glm-5.2`, or Vercel AI Gateway `zai/glm-5.2`.
+Within each comparison, the harnesses used the same named model and provider route: direct Anthropic `claude-opus-5`, OpenRouter `moonshotai/kimi-k3`, OpenRouter `z-ai/glm-5.2`, or Vercel AI Gateway `zai/glm-5.2`.
 
 Runs started in fresh workspaces with isolated agent homes. Lane order alternated by wave. Failed and timed-out runs remained in solve, spend, and elapsed-time denominators.
 
@@ -211,7 +395,7 @@ Two Hermes GLM website waves were excluded from matched-route success comparison
 
 Provider billing supplied contestant costs. Total attributed campaign spend was $60.73 for agents, a confirmed $11.33 image-output lower bound, and $6.12 for neutral judging, before GPT Image 2 prompt-input charges.
 
-Three waves per cell establish replication within this campaign, rather than statistical significance. Results are a dated measurement of these frozen versions and routes.
+Three waves per comparison establish replication within this campaign, rather than statistical significance. Results are a dated measurement of these frozen versions and routes.
 
 The published 0.1.24 binary was rebuilt after the benchmark to add bounded retry to the macOS DMG packaging script. No Rust runtime, provider, caching, model, or orchestration code changed.
 
