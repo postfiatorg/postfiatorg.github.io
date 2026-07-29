@@ -1,0 +1,178 @@
+.pf-benchmark-table,
+.pf-site-comparison {
+  position: relative;
+  left: 50%;
+  width: min(1320px, calc(100vw - 48px));
+  transform: translateX(-50%);
+}
+
+.pf-benchmark-table {
+  margin: 20px 0 32px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.post-content .pf-benchmark-table table {
+  width: 100%;
+  min-width: 1160px;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.post-content .pf-benchmark-table th,
+.post-content .pf-benchmark-table td {
+  min-width: 0;
+  padding: 12px 10px;
+  vertical-align: top;
+}
+
+.post-content .pf-benchmark-table th {
+  position: sticky;
+  top: 0;
+  color: var(--pale);
+  background: var(--surface);
+  font-size: 0.78rem;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+}
+
+.post-content .pf-benchmark-table tbody tr:nth-child(even) {
+  background: rgba(221, 255, 220, 0.025);
+}
+
+.post-content .pf-benchmark-table .pf-win {
+  color: #21a366;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pf-comparison-instruction {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.pf-site-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin: 20px 0 32px;
+}
+
+.post-content .pf-site-comparison figure {
+  min-width: 0;
+  margin: 0;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.post-content .pf-site-comparison figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0 0 12px;
+  color: var(--pale);
+}
+
+.post-content .pf-site-comparison figcaption strong {
+  font-size: 1.08rem;
+}
+
+.post-content .pf-site-comparison figcaption span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.post-content .pf-site-comparison a {
+  display: block;
+  overflow: hidden;
+  border-radius: 9px;
+  box-shadow: none;
+  background: #070a07;
+}
+
+.post-content .pf-site-comparison img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  object-fit: contain;
+  transition: transform 160ms ease;
+}
+
+.post-content .pf-site-comparison a:hover img {
+  transform: scale(1.015);
+}
+
+@media (max-width: 780px) {
+  .pf-benchmark-table,
+  .pf-site-comparison {
+    left: auto;
+    width: 100%;
+    transform: none;
+  }
+
+  .pf-benchmark-table {
+    overflow: visible;
+    border: 0;
+  }
+
+  .post-content .pf-benchmark-table table,
+  .post-content .pf-benchmark-table tbody,
+  .post-content .pf-benchmark-table tr,
+  .post-content .pf-benchmark-table td {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .post-content .pf-benchmark-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .post-content .pf-benchmark-table tr {
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .post-content .pf-benchmark-table td {
+    display: grid;
+    grid-template-columns: minmax(112px, 42%) minmax(0, 1fr);
+    gap: 12px;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--line);
+    overflow-wrap: anywhere;
+  }
+
+  .post-content .pf-benchmark-table td:last-child {
+    border-bottom: 0;
+  }
+
+  .post-content .pf-benchmark-table td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 700;
+    line-height: 1.35;
+    text-transform: uppercase;
+    letter-spacing: 0.035em;
+  }
+
+  .pf-site-comparison {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
