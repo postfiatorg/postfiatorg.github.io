@@ -18,7 +18,7 @@ Release and performance facts:
 - {{ $v }} release documented here
 - ~9.5 s -> ~1.6 s resumed native Z.AI local setup, measured 2026-06-28
 - 4.05 s large resumed Vercel thread, fresh process, measured 2026-06-28
-- 1-200 USDC prepaid plan range, no credit card
+- 1-200 USDC prepaid plan range, 1M-200M tokens per month
 - Apache-2.0, public repository, written in Rust
 
 ## 01 — Install it in one line.
@@ -41,6 +41,9 @@ Windows (native PowerShell installer; PowerShell's curl alias is unsupported):
 ```
 Invoke-RestMethod https://github.com/agtico/PfTerminal/releases/latest/download/install.ps1 | Invoke-Expression
 ```
+
+PFTerminal is a Post Fiat product. Its source is published under the `agtico` GitHub
+organisation and its npm package under the `@agticorp` scope.
 
 Creates a `pfterminal` command. Does not touch an existing `codex` command. Stores all state in
 `$HOME/.pfterminal`.

@@ -136,9 +136,11 @@
     main > section#hero{border-top:0;padding:82px 0 72px}
     #install{scroll-margin-top:96px}
     #install h2{font-size:clamp(1.7rem,2.3vw,2.3rem);margin-bottom:12px;max-width:none}
-    .eyebrow{display:inline-flex;align-items:center;gap:10px;margin:0 0 22px;color:var(--pale-2);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;line-height:1.35;letter-spacing:.16em;text-transform:uppercase}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;margin:0 0 22px;color:var(--pale);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;line-height:1.35;letter-spacing:.16em;text-transform:uppercase}
     .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
-    .section-number{margin:0 0 10px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;font-weight:600;line-height:1.35;letter-spacing:.2em;text-transform:uppercase}
+    .section-number{display:flex;align-items:center;gap:12px;margin:0 0 12px;color:var(--pale-2);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;font-weight:600;line-height:1.35;letter-spacing:.2em;text-transform:uppercase}
+    .section-number::before{content:"\250C\2500";color:var(--green);letter-spacing:0}
+    .section-number::after{content:"";flex:1 1 auto;height:1px;background:linear-gradient(90deg,var(--line-strong),transparent)}
     h2{margin:0 0 22px;color:var(--pale);font-size:clamp(2.4rem,4.6vw,4.4rem);line-height:.98;font-weight:500;max-width:22ch}
     .lede{max-width:68ch;color:var(--pale-2);font-size:clamp(1.05rem,1.4vw,1.18rem);line-height:1.5;margin:0 0 40px}
     .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
@@ -149,7 +151,7 @@
     .panel p:last-child{margin-bottom:0}
     .panel ul{margin:0;padding:0;list-style:none}
     .panel ul li{padding:9px 0;border-top:1px solid var(--line);color:var(--pale-2);font-size:1.02rem}
-    .label{display:block;margin-bottom:12px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;font-weight:500;line-height:1.35;letter-spacing:.13em;text-transform:uppercase}
+    .label{display:block;margin-bottom:12px;color:var(--pale-2);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;font-weight:500;line-height:1.35;letter-spacing:.13em;text-transform:uppercase}
     .counterparties{display:flex;flex-wrap:wrap;gap:10px 18px;margin:0;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:15px}
     .counterparties a{color:var(--ansi-cyan);text-decoration:none;border-bottom:1px solid rgba(103,232,249,.3)}
     .counterparties a:hover{color:var(--green);border-bottom-color:var(--green)}
@@ -164,12 +166,13 @@
 
     .scroll-region{overflow-x:auto;min-width:0;max-width:100%;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
     .scroll-hint[hidden]{display:none}
+    @media (min-width:769px){.scroll-hint{display:none}}
     .scroll-hint{margin:0 0 8px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase}
     table{width:100%;border-collapse:collapse;font-size:15px}
     caption{text-align:left;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;padding:16px 16px 12px}
     th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top;white-space:nowrap}
     td.wrap{white-space:normal;min-width:22ch}
-    thead th{color:var(--muted);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-bottom-color:var(--line-strong)}
+    thead th{color:var(--pale-2);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-bottom-color:var(--line-strong)}
     tbody td:first-child{color:var(--pale);font-weight:600}
     tbody tr:last-child td{border-bottom:0}
 
@@ -225,7 +228,7 @@
     .trust-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--line);border-left:1px solid var(--line);border-right:1px solid var(--line)}
     .trust-grid > div{background:var(--black);padding:26px 18px}
     .trust-grid dt{color:var(--pale);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:clamp(1.15rem,1.9vw,1.75rem);line-height:1.15;font-weight:600}
-    .trust-grid dd{margin:10px 0 0;color:var(--muted);font-size:.8rem;line-height:1.35}
+    .trust-grid dd{margin:10px 0 0;color:var(--pale-2);font-size:.84rem;line-height:1.35}
 
     /* provider packet */
     .provider-wrap{position:relative}
@@ -394,7 +397,7 @@
               <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
             </div>
 
-            <p class="install-note">Creates a <code>pfterminal</code> command. Does not touch an existing <code>codex</code> command. Stores all state in <code>$HOME/.pfterminal</code>.</p>
+            <p class="install-note">PFTerminal is a Post Fiat product. Its source is published under the <code>agtico</code> GitHub organisation and its npm package under the <code>@agticorp</code> scope. Creates a <code>pfterminal</code> command. Does not touch an existing <code>codex</code> command. Stores all state in <code>$HOME/.pfterminal</code>.</p>
             <ul class="install-facts">
               <li>npm package: <code>@agticorp/pfterminal</code></li>
               <li>Bun: <code>bun add -g @agticorp/pfterminal</code></li>
@@ -409,7 +412,7 @@
         <figure class="tui-figure">
           <p class="scroll-hint" id="hero-tui-hint">Scroll terminal horizontally &rarr;</p>
           <div class="tui-scroll" tabindex="0" role="region" aria-label="PFTerminal product-surface schematic" aria-describedby="hero-tui-caption hero-tui-hint">
-            <pre class="tui" aria-hidden="true"><code><span class="d">┌─</span> PFTerminal {{ $v }} · product surface <span class="d">────────────────────────────┐</span>
+            <pre class="tui" aria-hidden="true"><code><span class="d">┌─</span> PFTerminal {{ $v }} · product surface <span class="d">─────────────────────────────┐</span>
 <span class="d">│</span> default model   <span class="c">Ambient GLM 5.2</span>                                  <span class="d">│</span>
 <span class="d">│</span>                                                                  <span class="d">│</span>
 <span class="d">│</span> <span class="c">/providers</span>      grant access                                     <span class="d">│</span>
@@ -422,7 +425,7 @@
 <span class="d">│</span>                                                                  <span class="d">│</span>
 <span class="d">│</span> /vault           encrypted credentials and user secrets          <span class="d">│</span>
 <span class="d">│</span> <span class="m">/wallet</span>          <span class="m">Solana mainnet · SOL · canonical USDC · locked</span>  <span class="d">│</span>
-<span class="d">│</span> /gpu             Vast.ai · RunPod · <span class="k">READY</span> → /model               <span class="d">│</span>
+<span class="d">│</span> /gpu             Vast.ai · RunPod · <span class="k">READY</span> → <span class="c">/model</span>               <span class="d">│</span>
 <span class="d">│</span> /tasknode        work · evidence · rewards                       <span class="d">│</span>
 <span class="d">│</span>                                                                  <span class="d">│</span>
 <span class="d">│</span> &gt; /docs <span class="tui-cursor">█</span>                                                        <span class="d">│</span>
@@ -441,7 +444,7 @@
           <div><dt>{{ $v }}</dt><dd>release documented here</dd></div>
           <div><dt>~9.5 s &rarr; ~1.6 s</dt><dd>resumed native Z.AI local setup · 2026-06-28</dd></div>
           <div><dt>4.05 s</dt><dd>large resumed Vercel thread · fresh process · 2026-06-28</dd></div>
-          <div><dt>{{ (index $plans.plans 0).priceUsdc }}&ndash;{{ (index (last 1 $plans.plans) 0).priceUsdc }} USDC</dt><dd>prepaid plan range · no credit card</dd></div>
+          <div><dt>{{ (index $plans.plans 0).priceUsdc }}&ndash;{{ (index (last 1 $plans.plans) 0).priceUsdc }} USDC</dt><dd>prepaid plan range · {{ if ge (index $plans.plans 0).monthlyTokenLimit 1000000 }}{{ lang.FormatNumberCustom 0 (div (float (index $plans.plans 0).monthlyTokenLimit) 1000000.0) }}M{{ end }}&ndash;{{ lang.FormatNumberCustom 0 (div (float (index (last 1 $plans.plans) 0).monthlyTokenLimit) 1000000.0) }}M tokens per month</dd></div>
         </dl>
       </div>
     </aside>
@@ -457,15 +460,15 @@
           <p class="scroll-hint" id="provider-hint">Scroll table horizontally &rarr;</p>
           <div class="scroll-region" tabindex="0" role="region" aria-label="Built-in provider configuration table" aria-describedby="provider-hint">
             <table>
-              <caption>Built-in providers, as configured in <code>docs/config.md</code></caption>
-              <thead><tr><th scope="col">Provider id</th><th scope="col">Display name</th><th scope="col">Base URL</th><th scope="col">Credential</th><th scope="col">Wire API</th></tr></thead>
+              <caption>The six built-in providers, numbered 1&ndash;6, as configured in <code>docs/config.md</code>. Additional access surfaces are listed below and are not part of this count.</caption>
+              <thead><tr><th scope="col">#</th><th scope="col">Provider id</th><th scope="col">Display name</th><th scope="col">Base URL</th><th scope="col">Credential</th><th scope="col">Wire API</th></tr></thead>
               <tbody>
-                <tr><td><code>openai</code></td><td>OpenAI</td><td><code>https://chatgpt.com/backend-api/codex</code></td><td>Account login</td><td>Responses</td></tr>
-                <tr><td><code>ambient</code></td><td>Ambient</td><td><code>https://api.ambient.xyz/v1</code></td><td><code>AMBIENT_API_KEY</code></td><td>Chat Completions</td></tr>
-                <tr><td><code>zai</code></td><td>Z.AI</td><td><code>https://api.z.ai/api/coding/paas/v4</code></td><td><code>ZAI_API_KEY</code></td><td>Chat Completions</td></tr>
-                <tr><td><code>openrouter</code></td><td>OpenRouter</td><td><code>https://openrouter.ai/api/v1</code></td><td><code>OPENROUTER_API_KEY</code></td><td>Chat Completions</td></tr>
-                <tr><td><code>baseten</code></td><td>Baseten</td><td><code>https://inference.baseten.co/v1</code></td><td><code>BASETEN_API_KEY</code></td><td>Chat Completions</td></tr>
-                <tr><td><code>vercel</code></td><td>Vercel AI Gateway</td><td><code>https://ai-gateway.vercel.sh/v1</code></td><td><code>AI_GATEWAY_API_KEY</code></td><td>Responses</td></tr>
+                <tr><td>1</td><td><code>openai</code></td><td>OpenAI</td><td><code>https://chatgpt.com/backend-api/codex</code></td><td>Account login</td><td>Responses</td></tr>
+                <tr><td>2</td><td><code>ambient</code></td><td>Ambient</td><td><code>https://api.ambient.xyz/v1</code></td><td><code>AMBIENT_API_KEY</code></td><td>Chat Completions</td></tr>
+                <tr><td>3</td><td><code>zai</code></td><td>Z.AI</td><td><code>https://api.z.ai/api/coding/paas/v4</code></td><td><code>ZAI_API_KEY</code></td><td>Chat Completions</td></tr>
+                <tr><td>4</td><td><code>openrouter</code></td><td>OpenRouter</td><td><code>https://openrouter.ai/api/v1</code></td><td><code>OPENROUTER_API_KEY</code></td><td>Chat Completions</td></tr>
+                <tr><td>5</td><td><code>baseten</code></td><td>Baseten</td><td><code>https://inference.baseten.co/v1</code></td><td><code>BASETEN_API_KEY</code></td><td>Chat Completions</td></tr>
+                <tr><td>6</td><td><code>vercel</code></td><td>Vercel AI Gateway</td><td><code>https://ai-gateway.vercel.sh/v1</code></td><td><code>AI_GATEWAY_API_KEY</code></td><td>Responses</td></tr>
               </tbody>
             </table>
           </div>
@@ -552,6 +555,24 @@
             <p><strong>Unlock</strong> grants signing capability to the current TUI for one action or the selected duration. <strong>Lock</strong> revokes it. <strong>Remove wallet from this device</strong> removes local custody and the local plan credential; it does not move on-chain funds and does not cancel a paid period.</p>
           </div>
         </div>
+        <figure class="tui-figure" style="margin-top:32px">
+          <p class="scroll-hint" id="custody-tui-hint">Scroll diagram horizontally &rarr;</p>
+          <div class="tui-scroll" tabindex="0" role="region" aria-label="Vault and wallet separation diagram" aria-describedby="custody-tui-caption custody-tui-hint">
+            <pre class="tui" aria-hidden="true"><code><span class="d">┌─</span> <span class="c">/vault</span>  vs  <span class="m">/wallet</span> <span class="d">────────────────────────────────────────┐</span>
+<span class="d">│</span> <span class="c">/vault</span>    provider API keys · arbitrary user secrets         <span class="d">│</span>
+<span class="d">│</span>           encrypted at rest · metadata-only inspection       <span class="d">│</span>
+<span class="d">│</span>           values are never printed into the transcript       <span class="d">│</span>
+<span class="d">│</span>                                                              <span class="d">│</span>
+<span class="d">│</span> <span class="m">/wallet</span>   Solana mainnet keypair · SOL · canonical USDC      <span class="d">│</span>
+<span class="d">│</span>           passcode-protected recovery material               <span class="d">│</span>
+<span class="d">│</span>           unlock is scoped to one action or one duration     <span class="d">│</span>
+<span class="d">│</span>                                                              <span class="d">│</span>
+<span class="d">│</span> vault  ──▶ signs provider calls                              <span class="d">│</span>
+<span class="d">│</span> wallet ──▶ signs the prepaid plan purchase                   <span class="d">│</span>
+<span class="d">└──────────────────────────────────────────────────────────────┘</span></code></pre>
+          </div>
+          <figcaption id="custody-tui-caption">Two separate local stores. The vault encrypts provider API keys and arbitrary user secrets and never prints a value into chat. The wallet holds a Solana-mainnet keypair with SOL and canonical USDC behind a passcode, and unlocking grants signing capability only for one action or a chosen duration.</figcaption>
+        </figure>
         <p class="pull">The vault holds your credentials. The wallet holds your money. Neither holds you.</p>
       </div>
     </section>
@@ -585,6 +606,23 @@
             <p style="margin-top:14px">Only <code>READY</code> means the rented model is available in <code>/model</code>. <code>/gpu</code> is the authoritative cross-process view of active or potentially billable rentals and estimated spend.</p>
           </div>
         </div>
+        <figure class="tui-figure" style="margin-top:32px">
+          <p class="scroll-hint" id="gpu-tui-hint">Scroll diagram horizontally &rarr;</p>
+          <div class="tui-scroll" tabindex="0" role="region" aria-label="GPU rental provisioning ladder" aria-describedby="gpu-tui-caption gpu-tui-hint">
+            <pre class="tui" aria-hidden="true"><code><span class="d">┌─</span> <span class="c">/gpu</span> provisioning <span class="d">──────────────────────────────────────────┐</span>
+<span class="d">│</span> 1  hardware checks        <span class="d">[■■■■■■■■■■]</span>                       <span class="d">│</span>
+<span class="d">│</span> 2  runtime setup / build  <span class="d">[■■■■■■■■■■]</span>                       <span class="d">│</span>
+<span class="d">│</span> 3  model download         <span class="d">[■■■■■■■■■■]</span>                       <span class="d">│</span>
+<span class="d">│</span> 4  artifact verification  <span class="d">[■■■■■■■■■■]</span>                       <span class="d">│</span>
+<span class="d">│</span> 5  loading                <span class="d">[■■■■■■■■■■]</span>                       <span class="d">│</span>
+<span class="d">│</span> 6  endpoint qualified     <span class="d">[■■■■■■■■■■]</span>  <span class="k">READY</span>                <span class="d">│</span>
+<span class="d">│</span>                                                              <span class="d">│</span>
+<span class="d">│</span> only <span class="k">READY</span> is selectable in /model                           <span class="d">│</span>
+<span class="d">│</span> caps set first: max $/hr · max total $ · whole minutes       <span class="d">│</span>
+<span class="d">└──────────────────────────────────────────────────────────────┘</span></code></pre>
+          </div>
+          <figcaption id="gpu-tui-caption">A rental only becomes selectable in <code>/model</code> after all six provisioning stages complete and the endpoint reports READY. The maximum hourly price, maximum total spend, and duration are set before PFTerminal searches for offers.</figcaption>
+        </figure>
         <div class="panel warn" style="margin-top:32px">
           <span class="label">Cleanup: two different actions</span>
           <p><strong>Stop serving</strong> removes the endpoint from model selection, and provider billing continues. <strong>Terminate rental</strong> requests provider cleanup; treat billing as unresolved until PFTerminal reports provider-confirmed termination. Exiting PFTerminal is never a substitute for terminating a rental.</p>
@@ -614,7 +652,7 @@
           <p class="scroll-hint" id="bench-hint">Scroll table horizontally &rarr;</p>
           <div class="scroll-region" tabindex="0" role="region" aria-label="Native provider performance table" aria-describedby="bench-hint">
             <table>
-              <caption>Native provider performance report, 2026-06-28</caption>
+              <caption>Native provider performance report, 2026-06-28 — <a href="https://github.com/agtico/PfTerminal/blob/main/docs/features/native-provider-performance.md" target="_blank" rel="noopener" style="color:#0a5c2e">read the source report</a></caption>
               <thead><tr><th scope="col">Measurement</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
               <tbody>
                 <tr><td class="wrap">Local client and provider setup, resumed native Z.AI turn</td><td>~9.5 s</td><td><strong>~1.6 s</strong></td></tr>
@@ -633,7 +671,7 @@
               <p>Responses requests now set <code>store: true</code>, persist <code>ModelResponseCompleted</code>, restore the last response id on resume, and send only the incremental input.</p>
             </div>
           </div>
-          <p class="evidence-note">Scope and method: measured 2026-06-28 on the <code>native-provider-performance</code> bench. Both figures are fresh-process runs against a large resumed thread, not cold first turns. The Vercel figure is corroborated by the dumped request: <code>store: true</code>, <code>previous_response_id</code> populated, <code>input_len: 1</code>, <code>input_chars: 119</code>. These are self-measured, single-configuration numbers on one machine — not a cross-vendor benchmark — and they are the only performance figures published on this page.</p>
+          <p class="evidence-note"><strong>Method and raw report:</strong> <a href="https://github.com/agtico/PfTerminal/blob/main/docs/features/native-provider-performance.md" target="_blank" rel="noopener" style="color:#0a5c2e">docs/features/native-provider-performance.md</a>. Scope and method: measured 2026-06-28 on the <code>native-provider-performance</code> bench (<a href="https://github.com/agtico/PfTerminal/blob/main/docs/features/native-provider-performance.md" target="_blank" rel="noopener" style="color:#0a5c2e">read the report</a>). Both figures are fresh-process runs against a large resumed thread, not cold first turns. The Vercel figure is corroborated by the dumped request: <code>store: true</code>, <code>previous_response_id</code> populated, <code>input_len: 1</code>, <code>input_chars: 119</code>. These are self-measured, single-configuration numbers on one machine — not a cross-vendor benchmark — and they are the only performance figures published on this page.</p>
         </div>
       </div>
     </section>
@@ -644,6 +682,19 @@
         <p class="section-number">07 / RUNTIME</p>
         <h2 id="runtime-title">It is a fork of a real runtime, not a wrapper.</h2>
         <p class="lede">PFTerminal keeps the Codex CLI's local coding-agent runtime and makes provider access, credential storage, packaging, and product surfaces first-class. The changes are code-level, not prompt text.</p>
+        <div class="panel" style="margin-bottom:32px">
+          <span class="label">Check any claim on this page against its source</span>
+          <p class="counterparties">
+            <a href="https://github.com/agtico/PfTerminal/blob/main/docs/features/native-provider-performance.md" target="_blank" rel="noopener">performance report</a>
+            <a href="https://github.com/agtico/PfTerminal/blob/main/docs/config.md" target="_blank" rel="noopener">provider config</a>
+            <a href="https://github.com/agtico/PfTerminal/blob/main/docs/slash_commands.md" target="_blank" rel="noopener">slash commands</a>
+            <a href="https://github.com/agtico/PfTerminal/blob/main/CHANGELOG.md" target="_blank" rel="noopener">changelog 0.1.19</a>
+            <a href="https://github.com/agtico/PfTerminal/blob/main/LICENSE" target="_blank" rel="noopener">Apache-2.0 licence</a>
+            <a href="https://github.com/agtico/PfTerminal/releases" target="_blank" rel="noopener">releases</a>
+            <a href="https://pfterminal-plan-gateway.fly.dev/v1/plans" target="_blank" rel="noopener">live plan catalogue</a>
+          </p>
+          <p style="margin-top:14px;color:var(--muted);font-size:.95rem">Every number, provider row, command, price, and date on this page comes from one of these files. They are public; read them before you trust us.</p>
+        </div>
         <div class="grid-3">
           <div class="panel">
             <span class="label">Inherited runtime surfaces</span>
