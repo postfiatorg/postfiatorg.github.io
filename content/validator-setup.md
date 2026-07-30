@@ -192,6 +192,8 @@ In non-sudo mode, do not change firewall rules. Record this as an operator actio
 Required operator action: preserve SSH on the configured SSH_PORT, allow inbound TCP 2559, and keep 5005, 6005, 6006, and 50051 private.
 ```
 
+Keeping TCP `2559` publicly reachable is also what lets the Dynamic UNL scoring pipeline resolve your endpoint for the infrastructure-diversity score — see [Endpoint Visibility and Your Diversity Score](#endpoint-visibility-and-your-diversity-score). To stay reachable without exposing your own address, use the sentry pattern described there.
+
 ## 3. Create the Node Directory
 
 Sudo mode:
@@ -561,6 +563,31 @@ docker exec postfiatd curl -s http://localhost:5005/ -X POST \
   -d '{"method": "server_info", "params": [{}]}' \
   | python3 -m json.tool | grep -E '"server_state"|"build_version"'
 ```
+
+## Endpoint Visibility and Your Diversity Score
+
+The Dynamic UNL scoring pipeline scores infrastructure diversity from your validator's resolved public endpoint. The foundation's peer crawl walks the network on TCP `2559`, matches each node's validator public key, and resolves the address it saw. From that address the pipeline derives your provider family and country and hands the scoring model precomputed concentration counts across the whole validator set: the fewer validators that share your provider family and country, the higher your diversity sub-score.
+
+If your endpoint cannot be resolved — the peer port is unreachable from the public internet, your postfiatd predates `pubkey_validator` exposure in `/crawl` (upgrading fixes this), or the crawl cannot otherwise match your key to an address — the scoring model marks your diversity down as an unknown-concentration risk. The penalty is bounded to the diversity sub-score only; consensus, reliability, software, and identity are never affected by endpoint visibility. An unresolved endpoint also cannot earn the credit an uncommon setup deserves: in published rounds so far, unresolved validators have landed at the bottom of the diversity range, below even the most crowded visible providers. Making that ordering a hard code-level rule is on the scoring roadmap; today it is the model's consistently observed behavior.
+
+### Running privately: the sentry pattern
+
+You do not have to expose your home or datacenter address to become visible. Front the validator with a sentry: a small relay host (a modest VPS is enough) that forwards the peer protocol to your validator, so the network peers with the sentry and the crawl resolves the sentry's address. Your validator's own network stays private, and the sentry absorbs the direct exposure, including DDoS surface. This is a networking concept — the validator scoring sidecar's "relay wallet" is an unrelated fee-paying wallet.
+
+The pattern only works when all peer traffic actually flows through the sentry:
+
+- On the sentry, forward TCP `2559` to the validator with a plain TCP forwarder (nginx `stream`, HAProxy, or iptables DNAT). Do not run a second postfiatd on the sentry: its `/crawl` endpoint would answer with its own identity and your key would resolve to nothing.
+- On the validator, point peering exclusively at the sentry and mark the node private so its real address never enters other nodes' peer lists: in `postfiatd.cfg`, list the sentry under `[ips_fixed]` and set `[peer_private]` to `1`, then restart.
+- Restrict the validator host's inbound TCP `2559` to the sentry's address only.
+- Verify after the next scoring round: your validator's entry in the round's frozen evidence (`inputs/validator_evidence.json` in the published input package) should carry the ASN and country of the sentry's address, and the explorer's validator drill-down shows the same per-validator fields.
+
+When choosing the sentry's provider:
+
+- **Reliability first.** The sentry is part of your validation path around the clock and a single point of failure: if it goes down, your validator stops being heard and your agreement history suffers. Pick a provider with a strong uptime record and monitor the sentry like any production host.
+- **Close to your validator.** Every consensus message crosses the validator-to-sentry leg. A sentry in your region adds a few milliseconds; a distant one adds latency without benefit. A nearby sentry also keeps your scored country close to your real one.
+- **Uncommon in the validator set.** The provider family of the sentry's address is what earns the diversity credit. Each round's frozen input package publishes the set's concentration counts in the `NETWORK CONCENTRATION` block of `inputs/model_request.json` — pick a provider with few or no validators in it.
+
+Choosing a less crowded provider for your public endpoint is the behavior the diversity score exists to encourage: it spreads the network's public paths across more providers and routes. Endpoint evidence cannot see the hardware behind an address for any hosting arrangement. Hidden concentration still shows up over time, because correlated failures appear in agreement history, and the operational dimensions carry most of the final score.
 
 ## Troubleshooting
 

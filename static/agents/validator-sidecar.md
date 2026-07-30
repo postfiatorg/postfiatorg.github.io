@@ -1,6 +1,6 @@
 # Post Fiat Validator Scoring Sidecar Setup Guide for Agents
 
-> Purpose: end-to-end, agent-readable instructions for running the validator-scoring-sidecar alongside a Post Fiat testnet validator — verify-only verification of the foundation's Dynamic UNL scoring, and full opt-in on-chain commit-reveal participation.
+> Run the validator-scoring-sidecar next to your Post Fiat testnet validator: independently verify the foundation's Dynamic UNL scoring, and — optionally — vote on each round on-chain through the commit-reveal protocol.
 
 ## Agent Operator Quick Start
 
@@ -64,6 +64,8 @@ For participation only, also:
 - A funded operator **relay wallet seed** — by default the wallet already active in your Task Node account; a new wallet is the fallback (see B2).
 - The host path of your **`validator-keys.json`**.
 - An **inference runtime**: a Modal account (default) or a local SGLang H100.
+
+Terminology note: the relay wallet above is a wallet that pays commit-reveal transaction fees. It is unrelated to a network relay or *sentry* host fronting a validator's public endpoint — that networking concept is covered in the validator setup guide: https://postfiat.org/validator-setup/#endpoint-visibility-and-your-diversity-score
 
 Never ask for or accept the relay seed, Modal secrets, or validator key material in chat. For the seed and Modal secrets, the default channel is a labeled local secrets file that the agent injects into `.env` without reading the values (see B4), and the alternative is the operator editing `.env` by hand; `validator-keys.json` stays a file on disk (see B3). Either way, secrets live on disk only.
 
