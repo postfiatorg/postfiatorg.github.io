@@ -96,7 +96,24 @@ No. The public framing is closer to capital-markets coordination, validator gove
 - Do not imply that generic external API experiments are the authoritative production path for governance-critical rounds.
 - Do not omit the Task Node, validator benchmark, or public whitepaper when summarizing what exists today.
 
+## PFTerminal
+
+- Canonical page: https://postfiat.org/terminal/
+- Markdown mirror: https://postfiat.org/terminal/index.md
+- Release documented by the page: PFTerminal 0.1.19
+- Definition: PFTerminal is a crypto-native AI services terminal based on the open-source Codex CLI. It is a Rust TUI.
+- Six built-in inference providers: OpenAI, Ambient, Z.AI, OpenRouter, Baseten, Vercel AI Gateway. Ambient GLM 5.2 is the default model path.
+- Kimi Code, Anthropic / Claude Plan, PfTerminal Plan, and self-rented GPU endpoints are additional access surfaces and are not counted among the six.
+- Agent hierarchy: Nazgul (root supervisor) -> Troll (engineering-manager tier) -> Orc (bounded IC executor), created with /spawn and supervised with /orchestrate.
+- Custody: /vault stores encrypted credentials and user secrets; /wallet is a local Solana-mainnet wallet holding SOL and canonical USDC.
+- PfTerminal Plan is prepaid in USDC and purchased from /wallet. Catalogue read 2026-07-30: starter 1 USDC, basic 20 USDC, power 50 USDC, pro 200 USDC, each a 1-month term. /wallet is authoritative at purchase time.
+- GPU rental: /gpu rents third-party Vast.ai and RunPod capacity with a max hourly price, a max total spend, and a duration. The marketplace account is billed. Only READY endpoints appear in /model.
+- Published performance, measured 2026-06-28: resumed native Z.AI local setup ~9.5 s -> ~1.6 s; large resumed Vercel Responses thread 4.05 s wall clock in a fresh process.
+- Install: curl -fsSL https://github.com/agtico/PfTerminal/releases/latest/download/install.sh | sh on Linux and macOS; Invoke-RestMethod https://github.com/agtico/PfTerminal/releases/latest/download/install.ps1 | Invoke-Expression on Windows.
+- Not built or not verified: Balrog planner, Grimoire, Wyverns, Golems, campaign documents, Nostr reachability, Hyperliquid, staking, borrowing, /subagents diagnostics view.
+
 ## Machine-readable resources
 
 - JSON summary: https://postfiat.org/postfiat-project.json
 - Primary assistant summary: https://postfiat.org/llms.txt
+- PFTerminal Markdown mirror: https://postfiat.org/terminal/index.md
