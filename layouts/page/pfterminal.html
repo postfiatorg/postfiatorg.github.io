@@ -1,0 +1,974 @@
+{{- $v := .Params.version -}}
+{{- $plans := .Site.Data.pfterminal_plans -}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PFTerminal — The AI terminal that answers to you | Post Fiat</title>
+  <meta name="description" content="PFTerminal is a crypto-native AI services terminal based on the open-source Codex CLI, with multi-provider inference, an agent hierarchy, an encrypted vault, a Solana wallet, GPU rental, and Post Fiat Task Node.">
+  <link rel="canonical" href="https://postfiat.org/terminal/">
+  <link rel="icon" href="/media-kit/favicon.ico">
+  <link rel="alternate" type="text/markdown" title="PFTerminal page in Markdown" href="/terminal/index.md">
+  <link rel="alternate" type="text/plain" title="LLM instructions" href="https://postfiat.org/llms.txt">
+  <link rel="alternate" type="text/plain" title="Extended LLM overview" href="https://postfiat.org/llms-full.txt">
+  <link rel="alternate" type="application/json" title="Machine-readable project summary" href="https://postfiat.org/postfiat-project.json">
+  <meta property="og:title" content="PFTerminal — The AI terminal that answers to you">
+  <meta property="og:description" content="A Rust TUI for multi-provider inference, supervised agents, local custody, GPU rental, and Post Fiat Task Node.">
+  <meta property="og:url" content="https://postfiat.org/terminal/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://postfiat.org/media-kit/pfterminal-og-1200x630.png">
+  <meta property="og:image:alt" content="PFTerminal {{ $v }} terminal-style agent hierarchy on a black Post Fiat grid.">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "PFTerminal",
+        "url": "https://postfiat.org/terminal/",
+        "description": "PFTerminal is a crypto-native AI services terminal based on the open-source Codex CLI.",
+        "softwareVersion": "{{ $v }}",
+        "operatingSystem": "Linux, macOS, Windows",
+        "applicationCategory": "DeveloperApplication",
+        "downloadUrl": "https://github.com/agtico/PfTerminal/releases",
+        "offers": [
+          {{- range $i, $p := $plans.plans }}{{ if $i }},{{ end }}
+          { "@type": "Offer", "name": {{ printf "PfTerminal Plan — %s" $p.id | jsonify }}, "price": {{ $p.priceUsdc | jsonify }}, "priceCurrency": "USDC", "category": "prepaid" }
+          {{- end }}
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Post Fiat", "item": "https://postfiat.org/" },
+          { "@type": "ListItem", "position": 2, "name": "PFTerminal", "item": "https://postfiat.org/terminal/" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --black:#000;
+      --ground:#060806;
+      --surface:#101410;
+      --surface-2:#151b15;
+      --pale:#ddffdc;
+      --pale-2:#bad8b6;
+      --muted:#83917f;
+      --green:#7fee64;
+      --green-2:#09af58;
+      --line:rgba(221,255,220,.18);
+      --line-strong:rgba(221,255,220,.32);
+      --light:#def0dd;
+      --light-line:#899987;
+      --ink:#061006;
+      --max:1340px;
+    }
+    :root{
+      --ansi-red:#ff6b6b;
+      --ansi-yellow:#ffd166;
+      --ansi-cyan:#67e8f9;
+      --ansi-magenta:#e879f9;
+      --ansi-dim:#5c6b59;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--pale);
+      background:var(--black);
+      font-family:"Inter Tight", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height:1.5;
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(221,255,220,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(221,255,220,.025) 1px, transparent 1px);
+      background-size:52px 52px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.72), transparent 78%);
+      z-index:0;
+    }
+    a{color:inherit}
+    button{font:inherit}
+    h1,h2,h3,h4,p,ul,ol,dl{margin-top:0}
+    h1,h2{text-wrap:balance}
+    :focus-visible{outline:1px solid var(--green);outline-offset:4px}
+    .page{position:relative;z-index:1}
+    .container{width:min(calc(100% - 32px), var(--max));margin-inline:auto}
+    .mono{font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .skip-link{position:absolute;left:16px;top:16px;padding:10px 14px;background:var(--green);color:#000;border-radius:999px;transform:translateY(-150%);z-index:200}
+    .skip-link:focus{transform:translateY(0)}
+
+    /* ---------- header: reused from layouts/index.html ---------- */
+    .site-header{position:sticky;top:18px;z-index:50;width:min(calc(100% - 28px), var(--max));margin:18px auto 0}
+    .nav-shell{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;min-height:54px;padding:9px 10px;border:1px solid rgba(221,255,220,.12);border-radius:999px;background:rgba(25,30,26,.88);backdrop-filter:blur(18px)}
+    .brand{display:flex;align-items:center;gap:10px;min-width:0;padding-left:12px;text-decoration:none;font-weight:700}
+    .brand img{width:30px;height:30px;object-fit:contain}
+    .brand span{font-size:1.02rem;white-space:nowrap}
+    .nav-links{display:flex;align-items:center;justify-content:center;gap:22px}
+    .nav-links a,.nav-actions a{color:var(--pale);text-decoration:none;font-size:.94rem;opacity:.9}
+    .nav-links a:hover,.nav-actions a:hover{color:var(--green);opacity:1}
+    .nav-links a[aria-current="page"]{color:var(--green);opacity:1}
+    .nav-actions{display:flex;align-items:center;justify-content:flex-end;gap:14px}
+    .signup-link{display:inline-flex;align-items:center;gap:8px;padding:4px 4px 4px 10px;border-radius:999px;color:var(--green) !important;overflow:hidden}
+    .signup-link .arrow{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#000}
+    .menu-button{display:none;width:36px;height:36px;border:0;border-radius:50%;background:transparent;color:var(--pale);align-items:center;justify-content:center;justify-self:end;cursor:pointer;gap:4px;flex-direction:column}
+    .menu-button span,.menu-button::before,.menu-button::after{content:"";display:block;width:18px;height:1.5px;background:currentColor;border-radius:4px}
+    .menu-button[aria-expanded="true"] span{opacity:0}
+    .menu-button[aria-expanded="true"]::before{transform:translateY(5.5px) rotate(45deg)}
+    .menu-button[aria-expanded="true"]::after{transform:translateY(-5.5px) rotate(-45deg)}
+
+    /* ---------- shared ---------- */
+    main > section{padding:112px 0;border-top:1px solid rgba(221,255,220,.08);scroll-margin-top:96px}
+    main > section#hero{border-top:0;padding:82px 0 72px}
+    #install{scroll-margin-top:96px}
+    #install h2{font-size:clamp(1.7rem,2.3vw,2.3rem);margin-bottom:12px;max-width:none}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;margin:0 0 22px;color:var(--pale-2);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;line-height:1.35;letter-spacing:.16em;text-transform:uppercase}
+    .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
+    .section-number{margin:0 0 10px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;font-weight:600;line-height:1.35;letter-spacing:.2em;text-transform:uppercase}
+    h2{margin:0 0 22px;color:var(--pale);font-size:clamp(2.4rem,4.6vw,4.4rem);line-height:.98;font-weight:500;max-width:22ch}
+    .lede{max-width:68ch;color:var(--pale-2);font-size:clamp(1.05rem,1.4vw,1.18rem);line-height:1.5;margin:0 0 40px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+    .panel{border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:32px}
+    .panel h3{margin:0 0 14px;font-size:1.14rem;font-weight:600;color:var(--pale)}
+    .panel p{margin:0 0 14px;color:var(--pale-2);font-size:1.05rem}
+    .panel p:last-child{margin-bottom:0}
+    .panel ul{margin:0;padding:0;list-style:none}
+    .panel ul li{padding:9px 0;border-top:1px solid var(--line);color:var(--pale-2);font-size:1.02rem}
+    .label{display:block;margin-bottom:12px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;font-weight:500;line-height:1.35;letter-spacing:.13em;text-transform:uppercase}
+    .counterparties{display:flex;flex-wrap:wrap;gap:10px 18px;margin:0;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:15px}
+    .counterparties a{color:var(--ansi-cyan);text-decoration:none;border-bottom:1px solid rgba(103,232,249,.3)}
+    .counterparties a:hover{color:var(--green);border-bottom-color:var(--green)}
+    .pull{margin:40px 0 0;padding:24px 28px;border-left:2px solid var(--green);background:var(--surface-2);color:var(--pale);font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.3;font-weight:500}
+    code,.mono-inline{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;color:var(--ansi-cyan);overflow-wrap:anywhere}
+    pre code{overflow-wrap:normal}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 24px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--pale);text-decoration:none;font-weight:600;font-size:.96rem}
+    .btn:hover{border-color:var(--green);color:var(--green)}
+    .btn.primary{border-color:var(--green);background:var(--green);color:#000}
+    .btn.primary:hover{background:var(--pale);color:#000}
+
+    .scroll-region{overflow-x:auto;min-width:0;max-width:100%;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
+    .scroll-hint[hidden]{display:none}
+    .scroll-hint{margin:0 0 8px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase}
+    table{width:100%;border-collapse:collapse;font-size:15px}
+    caption{text-align:left;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;padding:16px 16px 12px}
+    th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top;white-space:nowrap}
+    td.wrap{white-space:normal;min-width:22ch}
+    thead th{color:var(--muted);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-bottom-color:var(--line-strong)}
+    tbody td:first-child{color:var(--pale);font-weight:600}
+    tbody tr:last-child td{border-bottom:0}
+
+    /* ---------- hero ---------- */
+    .hero-statement{margin-bottom:26px}
+    .hero-grid{display:grid;grid-template-columns:5fr 7fr;gap:32px;align-items:start}
+    .hero-grid > *{min-width:0}
+    h1{margin:0 0 14px;max-width:16ch;color:var(--pale);font-size:clamp(3rem,7.2vw,6.4rem);line-height:.92;font-weight:600}
+    h1 .accent{color:var(--green)}
+    .hero-claim{max-width:52ch;margin:0 0 10px;color:var(--pale);font-size:clamp(1.16rem,1.9vw,1.5rem);line-height:1.25;font-weight:600}
+    .hero-sub{max-width:78ch;margin:0 0 0;color:var(--pale-2);font-size:clamp(1.05rem,1.3vw,1.14rem);line-height:1.5}
+
+    /* install */
+    .install{border:1px solid var(--line-strong);border-radius:4px;background:var(--ground)}
+    .install-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line);color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase}
+    .os-nav{display:flex;gap:6px}
+    .os-nav a,.os-nav button{display:inline-block;padding:7px 15px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--pale-2);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer}
+    .os-nav a:hover,.os-nav button:hover{border-color:var(--green);color:var(--green)}
+    .os-nav [aria-selected="true"]{background:var(--green);border-color:var(--green);color:#000;font-weight:600}
+    .install-panel{padding:14px 16px;border-bottom:1px solid var(--line)}
+    .install-panel:last-of-type{border-bottom:0}
+    .install-panel h3{margin:0 0 10px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase}
+    .cmd-row{display:flex;flex-direction:column;align-items:stretch;gap:12px}
+    .cmd-scroll{flex:1 1 auto;overflow-x:auto;padding:10px 12px;border:1px solid var(--line);border-radius:4px;background:#050705;mask-image:linear-gradient(90deg,#000 0,#000 94%,transparent 100%)}
+    .cmd-scroll pre{margin:0}
+    .cmd-scroll code{display:block;white-space:pre;color:var(--pale);font-size:15px;line-height:1.35}
+    .cmd-scroll .sigil{color:var(--green)}
+    .copy-btn{flex:0 0 auto;align-self:flex-start;min-height:42px;padding:10px 24px;border:1px solid var(--green);border-radius:999px;background:var(--green);color:#000;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.95rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+    .copy-btn:hover{background:var(--pale)}
+    .install-panel p{margin:10px 0 0;color:var(--muted);font-size:.95rem}
+    .copy-status{margin:0;padding:0 16px 14px;color:var(--green);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;min-height:1.2em}
+    .install-note{margin:16px 0 0;color:var(--pale-2);font-size:1rem;line-height:1.5}
+    .install-facts{margin:14px 0 0;padding:0;list-style:none;color:var(--muted);font-size:.95rem}
+    .install-facts li{padding:6px 0}
+    .install-facts a{color:var(--pale-2)}
+    .install-facts a:hover{color:var(--green)}
+
+    /* TUI */
+    .tui-figure{margin:0}
+    .tui-scroll{overflow-x:auto;min-width:0;max-width:100%;border:1px solid var(--line);border-radius:4px;background:var(--ground);padding:22px}
+    .tui{margin:0}
+    .tui code{display:block;white-space:pre;color:var(--pale);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:15px;line-height:1.35}
+    .tui .k{color:var(--green)}
+    .tui .c{color:var(--ansi-cyan)}
+    .tui .m{color:var(--ansi-magenta)}
+    .tui .d{color:var(--ansi-dim)}
+    .tui-cursor{color:var(--green);animation:tuiblink 1.1s steps(1,end) infinite}
+    @keyframes tuiblink{0%,49%{opacity:1}50%,100%{opacity:0}}
+    figcaption{margin-top:12px;max-width:70ch;color:var(--muted);font-size:.92rem;line-height:1.5}
+
+    /* trust bar */
+    .trust-bar{border-top:1px solid rgba(221,255,220,.08);border-bottom:1px solid rgba(221,255,220,.08)}
+    .trust-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--line);border-left:1px solid var(--line);border-right:1px solid var(--line)}
+    .trust-grid > div{background:var(--black);padding:26px 18px}
+    .trust-grid dt{color:var(--pale);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:clamp(1.15rem,1.9vw,1.75rem);line-height:1.15;font-weight:600}
+    .trust-grid dd{margin:10px 0 0;color:var(--muted);font-size:.8rem;line-height:1.35}
+
+    /* provider packet */
+    .provider-wrap{position:relative}
+    .provider-packet{position:absolute;top:0;left:0;width:10px;height:2px;background:var(--green);animation:packet 3.4s linear infinite;pointer-events:none}
+    @keyframes packet{0%{left:0;opacity:0}6%{opacity:1}94%{opacity:1}100%{left:calc(100% - 10px);opacity:0}}
+
+    /* hierarchy */
+    .hierarchy-tree{list-style:none;margin:0;padding:0}
+    .hierarchy-tree li{position:relative;padding:22px 26px 22px 84px;border:1px solid var(--line);border-radius:4px;margin-bottom:12px;background:var(--surface)}
+    .hierarchy-tree li::before{position:absolute;left:26px;top:22px;color:var(--green);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:15px}
+    .hierarchy-tree li[data-level="0"]::before{content:"[ 1 ]"}
+    .hierarchy-tree li[data-level="1"]::before{content:"[ 2 ]"}
+    .hierarchy-tree li[data-level="2"]::before{content:"[ 3 ]"}
+    .hierarchy-tree li[data-level="1"]{margin-left:40px}
+    .hierarchy-tree li[data-level="2"]{margin-left:80px}
+    .hierarchy-tree strong{display:block;margin-bottom:8px;color:var(--pale);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:1rem;letter-spacing:.08em;text-transform:uppercase}
+    .hierarchy-tree span{color:var(--pale-2);font-size:1.05rem}
+    .hierarchy-tree.is-armed li{opacity:0;transform:translateY(8px)}
+    .hierarchy-tree.is-revealed li{opacity:1;transform:none;transition:opacity 180ms ease,transform 180ms ease}
+
+    /* light evidence sheet */
+    .evidence-sheet{background:var(--light);color:var(--ink);border:1px solid var(--light-line);border-radius:4px;padding:36px}
+    .evidence-sheet h3{color:var(--ink)}
+    .evidence-sheet p{color:#22301f}
+    .evidence-sheet caption{color:#3d4b3c}
+    .evidence-sheet table{background:transparent}
+    .evidence-sheet th,.evidence-sheet td{border-bottom-color:rgba(6,16,6,.18);color:#22301f}
+    .evidence-sheet thead th{color:#3d4b3c;border-bottom-color:rgba(6,16,6,.34)}
+    .evidence-sheet tbody td:first-child{color:var(--ink)}
+    .evidence-sheet code{color:#0a5c2e}
+    .evidence-sheet .scroll-region{border-color:rgba(6,16,6,.2);background:rgba(255,255,255,.5)}
+    .evidence-sheet .label{color:#3d4b3c}
+    .evidence-note{margin:24px 0 0;color:#3d4b3c;font-size:.95rem}
+
+    /* commands */
+    .cmd-index{columns:3;column-gap:32px;margin:0;padding:0;list-style:none}
+    .cmd-index li{break-inside:avoid;padding:11px 0;border-bottom:1px solid var(--line);color:var(--pale-2);font-size:1rem}
+    .cmd-index code{display:block;color:var(--green);font-weight:500}
+
+    /* status matrix */
+    .status-panel h3{display:flex;align-items:center;gap:10px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.86rem;letter-spacing:.12em;text-transform:uppercase}
+    .status-mark{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:1rem}
+    .status-mark.ship{color:var(--green)}
+    .status-mark.exp{color:var(--ansi-yellow)}
+    .status-mark.no{color:var(--muted)}
+    .warn{border-color:rgba(255,107,107,.4)}
+    .warn .label{color:var(--ansi-red)}
+
+    /* cta */
+    #cta{text-align:center}
+    #cta h2{margin-inline:auto;max-width:18ch}
+    #cta p{max-width:52ch;margin:0 auto 30px;color:var(--pale-2);font-size:1.1rem}
+    .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+    /* footer */
+    .site-footer{padding:72px 0 64px;border-top:1px solid rgba(221,255,220,.1);color:var(--pale-2)}
+    .footer-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:36px}
+    .site-footer h3{margin:0 0 14px;color:var(--pale);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
+    .site-footer ul{list-style:none;margin:0;padding:0}
+    .site-footer li{padding:5px 0}
+    .site-footer a{color:var(--pale-2);text-decoration:none;font-size:.96rem}
+    .site-footer a:hover{color:var(--green)}
+    .footer-social{display:flex;gap:16px;margin-top:16px}
+    .site-footer p{font-size:.95rem;color:var(--muted)}
+
+    @media (max-width:1180px){
+      .hero-grid{grid-template-columns:1fr}
+      .cmd-index{columns:2}
+      .trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:768px){
+      .nav-links,.nav-actions{display:none}
+      .nav-shell{grid-template-columns:1fr auto}
+      .menu-button{display:flex}
+      .nav-shell.is-open{border-radius:22px;row-gap:14px;padding-bottom:16px}
+      .nav-shell.is-open .nav-links,.nav-shell.is-open .nav-actions{display:flex;grid-column:1/-1;flex-wrap:wrap;justify-content:flex-start;gap:14px 20px;padding:0 12px}
+      main section{padding:72px 0}
+      main section#hero{padding:124px 0 60px}
+      .grid-2,.grid-3{grid-template-columns:1fr}
+      .cmd-index{columns:1}
+      .trust-grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+      .os-nav{width:100%}
+      .os-nav a,.os-nav button{flex:1 1 0;text-align:center}
+      .cmd-row{flex-direction:column;align-items:stretch;gap:12px}
+      .copy-btn{width:100%}
+      .hierarchy-tree li[data-level="1"]{margin-left:16px}
+      .hierarchy-tree li[data-level="2"]{margin-left:32px}
+      .evidence-sheet{padding:24px}
+    }
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .tui-cursor{animation:none}
+      .provider-packet{animation:none;display:none}
+      .hierarchy-tree.is-armed li{opacity:1;transform:none}
+      .hierarchy-tree.is-revealed li{transition:none}
+      *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+    }
+  </style>
+</head>
+<body class="pfterminal-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="page">
+
+  {{ partial "site_nav.html" . }}
+
+  <main id="main">
+
+    <!-- ===================== HERO + 01 INSTALL ===================== -->
+    <section id="hero" aria-labelledby="hero-title">
+      <div class="container hero-statement">
+        <p class="eyebrow">PFTerminal {{ $v }} · Rust TUI · based on the open-source Codex CLI</p>
+        <h1 id="hero-title">The AI terminal that answers to <span class="accent">you.</span></h1>
+        <p class="hero-claim">One terminal. Every model. Your keys, your wallet, your chain of command.</p>
+        <p class="hero-sub">PFTerminal is a crypto-native AI services terminal based on the open-source Codex CLI that routes across six built-in providers, assigns a provider, model, and reasoning effort to each spawned agent, and lets you buy prepaid inference in USDC from a Solana wallet you hold.</p>
+      </div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <section id="install" aria-labelledby="install-title">
+            <p class="section-number">01 / INSTALL</p>
+            <h2 id="install-title">Install it in one line.</h2>
+
+            <div class="install" id="install-component">
+              <div class="install-head">
+                <span>Install · PFTerminal {{ $v }}</span>
+                <div class="os-nav" id="osNav">
+                  <a href="#install-linux" data-os="linux">Linux</a>
+                  <a href="#install-macos" data-os="macos">macOS</a>
+                  <a href="#install-windows" data-os="windows">Windows</a>
+                </div>
+              </div>
+
+              <div class="install-panel" id="install-linux">
+                <h3>Linux</h3>
+                <div class="cmd-row">
+                  <div class="cmd-scroll" tabindex="0" role="region" aria-label="Linux install command">
+                    <pre><code id="code-linux"><span class="sigil" aria-hidden="true">$ </span>curl -fsSL https://github.com/agtico/PfTerminal/releases/latest/download/install.sh | sh</code></pre>
+                  </div>
+                  <button class="copy-btn" type="button" data-copy="code-linux" aria-label="Copy Linux install command">Copy</button>
+                </div>
+              </div>
+
+              <div class="install-panel" id="install-macos">
+                <h3>macOS</h3>
+                <div class="cmd-row">
+                  <div class="cmd-scroll" tabindex="0" role="region" aria-label="macOS install command">
+                    <pre><code id="code-macos"><span class="sigil" aria-hidden="true">$ </span>curl -fsSL https://github.com/agtico/PfTerminal/releases/latest/download/install.sh | sh</code></pre>
+                  </div>
+                  <button class="copy-btn" type="button" data-copy="code-macos" aria-label="Copy macOS install command">Copy</button>
+                </div>
+                <p>Also available as <code>PFTerminal-aarch64-apple-darwin.dmg</code> and <code>PFTerminal-x86_64-apple-darwin.dmg</code>.</p>
+              </div>
+
+              <div class="install-panel" id="install-windows">
+                <h3>Windows</h3>
+                <div class="cmd-row">
+                  <div class="cmd-scroll" tabindex="0" role="region" aria-label="Windows install command">
+                    <pre><code id="code-windows"><span class="sigil" aria-hidden="true">&gt; </span>Invoke-RestMethod https://github.com/agtico/PfTerminal/releases/latest/download/install.ps1 | Invoke-Expression</code></pre>
+                  </div>
+                  <button class="copy-btn" type="button" data-copy="code-windows" aria-label="Copy Windows install command">Copy</button>
+                </div>
+                <p>Use the native PowerShell installer. PowerShell's curl alias is unsupported.</p>
+              </div>
+
+              <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
+            </div>
+
+            <p class="install-note">Creates a <code>pfterminal</code> command. Does not touch an existing <code>codex</code> command. Stores all state in <code>$HOME/.pfterminal</code>.</p>
+            <ul class="install-facts">
+              <li>npm package: <code>@agticorp/pfterminal</code></li>
+              <li>Bun: <code>bun add -g @agticorp/pfterminal</code></li>
+              <li>macOS DMGs: <code>PFTerminal-aarch64-apple-darwin.dmg</code> · <code>PFTerminal-x86_64-apple-darwin.dmg</code></li>
+              <li>Releases: <a href="https://github.com/agtico/PfTerminal/releases" target="_blank" rel="noopener">github.com/agtico/PfTerminal/releases</a></li>
+              <li>Documented uninstall covers the binary, packages, and local state.</li>
+              <li>For trusted workspaces, <code>pfterminal --yolo</code> launches without approval prompts.</li>
+            </ul>
+          </section>
+        </div>
+
+        <figure class="tui-figure">
+          <p class="scroll-hint" id="hero-tui-hint">Scroll terminal horizontally &rarr;</p>
+          <div class="tui-scroll" tabindex="0" role="region" aria-label="PFTerminal product-surface schematic" aria-describedby="hero-tui-caption hero-tui-hint">
+            <pre class="tui" aria-hidden="true"><code><span class="d">┌─</span> PFTerminal {{ $v }} · product surface <span class="d">────────────────────────────┐</span>
+<span class="d">│</span> default model   <span class="c">Ambient GLM 5.2</span>                                  <span class="d">│</span>
+<span class="d">│</span>                                                                  <span class="d">│</span>
+<span class="d">│</span> <span class="c">/providers</span>      grant access                                     <span class="d">│</span>
+<span class="d">│</span> <span class="c">/model</span>          provider · model · reasoning effort              <span class="d">│</span>
+<span class="d">│</span>                                                                  <span class="d">│</span>
+<span class="d">│</span> /spawn status                                                    <span class="d">│</span>
+<span class="d">│</span> <span class="k">Nazgul</span>           root supervisor                                 <span class="d">│</span>
+<span class="d">│</span> └─ <span class="k">Troll</span>         engineering-manager tier                        <span class="d">│</span>
+<span class="d">│</span>    └─ <span class="k">Orc</span>        bounded IC executor                             <span class="d">│</span>
+<span class="d">│</span>                                                                  <span class="d">│</span>
+<span class="d">│</span> /vault           encrypted credentials and user secrets          <span class="d">│</span>
+<span class="d">│</span> <span class="m">/wallet</span>          <span class="m">Solana mainnet · SOL · canonical USDC · locked</span>  <span class="d">│</span>
+<span class="d">│</span> /gpu             Vast.ai · RunPod · <span class="k">READY</span> → /model               <span class="d">│</span>
+<span class="d">│</span> /tasknode        work · evidence · rewards                       <span class="d">│</span>
+<span class="d">│</span>                                                                  <span class="d">│</span>
+<span class="d">│</span> &gt; /docs <span class="tui-cursor">█</span>                                                        <span class="d">│</span>
+<span class="d">└──────────────────────────────────────────────────────────────────┘</span></code></pre>
+          </div>
+          <figcaption id="hero-tui-caption">PFTerminal {{ $v }} command map. Ambient GLM 5.2 is the default model path; <code>/providers</code> grants access; <code>/model</code> selects provider, model, and reasoning effort; Nazgul supervises Trolls and Orcs; the vault, wallet, GPU, and Task Node surfaces remain separate commands.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== TRUST BAR ===================== -->
+    <aside class="trust-bar" aria-label="Release and performance facts">
+      <div class="container">
+        <dl class="trust-grid">
+          <div><dt>6</dt><dd>built-in providers</dd></div>
+          <div><dt>{{ $v }}</dt><dd>release documented here</dd></div>
+          <div><dt>~9.5 s &rarr; ~1.6 s</dt><dd>resumed native Z.AI local setup · 2026-06-28</dd></div>
+          <div><dt>4.05 s</dt><dd>large resumed Vercel thread · fresh process · 2026-06-28</dd></div>
+          <div><dt>{{ (index $plans.plans 0).priceUsdc }}&ndash;{{ (index (last 1 $plans.plans) 0).priceUsdc }} USDC</dt><dd>prepaid plan range · no credit card</dd></div>
+        </dl>
+      </div>
+    </aside>
+
+    <!-- ===================== 02 MODELS ===================== -->
+    <section id="models" aria-labelledby="models-title">
+      <div class="container">
+        <p class="section-number">02 / MODELS</p>
+        <h2 id="models-title">Every model, one terminal.</h2>
+        <p class="lede">Ambient GLM 5.2 is the default model path. <code>/providers</code> grants provider access; <code>/model</code> selects the provider, the model, and the reasoning effort. A spawned agent may differ from its parent on all three.</p>
+        <div class="provider-wrap">
+          <span class="provider-packet" aria-hidden="true"></span>
+          <p class="scroll-hint" id="provider-hint">Scroll table horizontally &rarr;</p>
+          <div class="scroll-region" tabindex="0" role="region" aria-label="Built-in provider configuration table" aria-describedby="provider-hint">
+            <table>
+              <caption>Built-in providers, as configured in <code>docs/config.md</code></caption>
+              <thead><tr><th scope="col">Provider id</th><th scope="col">Display name</th><th scope="col">Base URL</th><th scope="col">Credential</th><th scope="col">Wire API</th></tr></thead>
+              <tbody>
+                <tr><td><code>openai</code></td><td>OpenAI</td><td><code>https://chatgpt.com/backend-api/codex</code></td><td>Account login</td><td>Responses</td></tr>
+                <tr><td><code>ambient</code></td><td>Ambient</td><td><code>https://api.ambient.xyz/v1</code></td><td><code>AMBIENT_API_KEY</code></td><td>Chat Completions</td></tr>
+                <tr><td><code>zai</code></td><td>Z.AI</td><td><code>https://api.z.ai/api/coding/paas/v4</code></td><td><code>ZAI_API_KEY</code></td><td>Chat Completions</td></tr>
+                <tr><td><code>openrouter</code></td><td>OpenRouter</td><td><code>https://openrouter.ai/api/v1</code></td><td><code>OPENROUTER_API_KEY</code></td><td>Chat Completions</td></tr>
+                <tr><td><code>baseten</code></td><td>Baseten</td><td><code>https://inference.baseten.co/v1</code></td><td><code>BASETEN_API_KEY</code></td><td>Chat Completions</td></tr>
+                <tr><td><code>vercel</code></td><td>Vercel AI Gateway</td><td><code>https://ai-gateway.vercel.sh/v1</code></td><td><code>AI_GATEWAY_API_KEY</code></td><td>Responses</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:32px">
+          <div class="panel">
+            <span class="label">Additional access surfaces</span>
+            <p>Kimi Code, Anthropic / Claude Plan, and the PfTerminal Plan are credentialed through <code>/providers</code>. A GPU endpoint you rent yourself appears in <code>/model</code> once it reports <code>READY</code>. None of these are counted among the six built-in providers.</p>
+          </div>
+          <div class="panel">
+            <span class="label">Two controls, kept separate</span>
+            <p>Adding a credential does not select a provider. If a model is unavailable, <code>/providers</code> shows authentication state and <code>/model</code> shows catalog visibility — before anything is reconfigured or reset.</p>
+          </div>
+        </div>
+        <div class="panel" style="margin-top:32px">
+          <span class="label">Surfaces PFTerminal integrates with</span>
+          <p class="counterparties">
+            <a href="https://openai.com/" target="_blank" rel="noopener">OpenAI</a>
+            <a href="https://www.ambient.xyz/" target="_blank" rel="noopener">Ambient</a>
+            <a href="https://z.ai/" target="_blank" rel="noopener">Z.AI</a>
+            <a href="https://openrouter.ai/" target="_blank" rel="noopener">OpenRouter</a>
+            <a href="https://www.baseten.co/" target="_blank" rel="noopener">Baseten</a>
+            <a href="https://vercel.com/ai-gateway" target="_blank" rel="noopener">Vercel AI Gateway</a>
+            <a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>
+            <a href="https://www.moonshot.ai/" target="_blank" rel="noopener">Moonshot Kimi</a>
+            <a href="https://vast.ai/" target="_blank" rel="noopener">Vast.ai</a>
+            <a href="https://www.runpod.io/" target="_blank" rel="noopener">RunPod</a>
+            <a href="https://solana.com/" target="_blank" rel="noopener">Solana</a>
+            <a href="/task-node/">Post Fiat Task Node</a>
+          </p>
+          <p style="margin-top:14px;color:var(--muted);font-size:.95rem">These are the systems PFTerminal talks to, not partners, customers, or endorsers.</p>
+        </div>
+        <p class="pull">The model is a per-agent decision, not a per-company one.</p>
+      </div>
+    </section>
+
+    <!-- ===================== 03 HIERARCHY ===================== -->
+    <section id="hierarchy" aria-labelledby="hierarchy-title">
+      <div class="container">
+        <p class="section-number">03 / HIERARCHY</p>
+        <h2 id="hierarchy-title">A chain of command, not a pile of tabs.</h2>
+        <p class="lede"><code>/spawn</code> creates managed work entities with an explicit role, model, harness, and parent/child relationship. Agents do not exist as isolated tabs with no visible chain of command.</p>
+        <ul class="hierarchy-tree" id="hierarchyTree">
+          <li data-level="0"><strong>Nazgul</strong><span>Root supervisor bound to the pane you talk to. Converts your objective into coordinated work.</span></li>
+          <li data-level="1"><strong>Troll</strong><span>Engineering-manager tier. Manages delegated execution, reviews Orc output, and reports upward.</span></li>
+          <li data-level="2"><strong>Orc</strong><span>Bounded IC executor. Performs implementation or investigation work and reports results upward.</span></li>
+        </ul>
+        <div class="grid-3" style="margin-top:32px">
+          <div class="panel">
+            <span class="label">Per-agent model selection</span>
+            <p>Every spawned agent can be given a different provider, model, and reasoning effort than its parent.</p>
+          </div>
+          <div class="panel">
+            <span class="label">Persistent supervision</span>
+            <p><code>/orchestrate</code> attaches a lasting supervisory assignment to an existing worker or pane — attach, pause, resume, extend, test/fire, detach. <code>/spawn</code> creates the crew; <code>/orchestrate</code> manages it.</p>
+          </div>
+          <div class="panel">
+            <span class="label">Cross-provider tool surface</span>
+            <p>Spawn tools serialize as plain functions rather than <code>ToolSpec::Namespace</code>, so the hierarchy survives providers whose <code>namespace_tools</code> capability is false.</p>
+          </div>
+        </div>
+        <div class="panel" style="margin-top:32px">
+          <span class="label">Claude Code headless panes</span>
+          <p>PFTerminal runs real <code>claude -p</code> headless turns against a local Anthropic Messages bridge that translates Claude Code Messages requests to the chosen provider using the vault-held key, then returns Claude-compatible JSON/SSE. The Ambient parity workflow suite passed on <strong>2026-06-25</strong>. Every other profile's status is listed in the shipped, experimental, and not-built matrix below.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 04 CUSTODY ===================== -->
+    <section id="custody" aria-labelledby="custody-title">
+      <div class="container">
+        <p class="section-number">04 / CUSTODY</p>
+        <h2 id="custody-title">You hold the keys and the wallet.</h2>
+        <p class="lede">Two separate stores, deliberately. The vault stores service credentials. The wallet manages a signing key, on-chain balances, and PfTerminal Plan linkage.</p>
+        <div class="grid-2">
+          <div class="panel">
+            <span class="label">/vault — encrypted credentials and user secrets</span>
+            <p>Masked entry for provider keys and arbitrary secrets. <code>/vault list</code> and <code>/vault show &lt;label&gt;</code> are metadata-only views. <code>/vault credential add</code> refuses an inline secret and opens the secure modal. Copy-to-clipboard never prints the secret into chat.</p>
+            <p>Release {{ $v }} hardened recovery: an existing vault validates every available key source against its own ciphertext and never generates or overwrites a key during recovery. Stale file-fallback keys can no longer shadow a valid OS-keyring key, and every failure path preserves ciphertext.</p>
+          </div>
+          <div class="panel">
+            <span class="label">/wallet — Solana signing key and on-chain funds</span>
+            <p>A local Solana-mainnet wallet holding SOL and canonical USDC. Create or restore a wallet, save the recovery material from the secure view, and set a passcode. Recovery material is never requested or repeated in chat.</p>
+            <p><strong>Unlock</strong> grants signing capability to the current TUI for one action or the selected duration. <strong>Lock</strong> revokes it. <strong>Remove wallet from this device</strong> removes local custody and the local plan credential; it does not move on-chain funds and does not cancel a paid period.</p>
+          </div>
+        </div>
+        <p class="pull">The vault holds your credentials. The wallet holds your money. Neither holds you.</p>
+      </div>
+    </section>
+
+    <!-- ===================== 05 GPU ===================== -->
+    <section id="gpu" aria-labelledby="gpu-title">
+      <div class="container">
+        <p class="section-number">05 / GPU</p>
+        <h2 id="gpu-title">Rent third-party GPU capacity with explicit spend limits.</h2>
+        <p class="lede"><code>/gpu</code> rents third-party capacity on Vast.ai and RunPod. PFTerminal does not provide a free GPU pool; the marketplace account you connect is the account that gets billed.</p>
+        <div class="grid-2">
+          <div class="panel">
+            <span class="label">Three controls, asked before the search</span>
+            <ul>
+              <li>Maximum hourly USD price</li>
+              <li>Maximum total USD spend</li>
+              <li>Duration in whole minutes — setup, model download, and loading consume this time</li>
+            </ul>
+            <p style="margin-top:14px">PFTerminal then searches compatible offers and shows a final billable confirmation.</p>
+          </div>
+          <div class="panel">
+            <span class="label">Provisioning stages</span>
+            <ul>
+              <li>Hardware checks</li>
+              <li>Runtime setup and build</li>
+              <li>Model download</li>
+              <li>Artifact verification</li>
+              <li>Loading</li>
+              <li>Endpoint qualification &rarr; <code>READY</code></li>
+            </ul>
+            <p style="margin-top:14px">Only <code>READY</code> means the rented model is available in <code>/model</code>. <code>/gpu</code> is the authoritative cross-process view of active or potentially billable rentals and estimated spend.</p>
+          </div>
+        </div>
+        <div class="panel warn" style="margin-top:32px">
+          <span class="label">Cleanup: two different actions</span>
+          <p><strong>Stop serving</strong> removes the endpoint from model selection, and provider billing continues. <strong>Terminate rental</strong> requests provider cleanup; treat billing as unresolved until PFTerminal reports provider-confirmed termination. Exiting PFTerminal is never a substitute for terminating a rental.</p>
+        </div>
+        <p class="scroll-hint" id="gpu-hint" style="margin-top:32px">Scroll table horizontally &rarr;</p>
+        <div class="scroll-region" tabindex="0" role="region" aria-label="Qualified GPU recipe table" aria-describedby="gpu-hint">
+          <table>
+            <caption>Qualified GPU recipes on record</caption>
+            <thead><tr><th scope="col">Provider</th><th scope="col">Recipe</th><th scope="col">Endpoint boundary</th></tr></thead>
+            <tbody>
+              <tr><td>Vast.ai</td><td>4&times;H200, SGLang TP4</td><td class="wrap">Token-authenticated SGLang endpoint behind a verified HTTPS tunnel</td></tr>
+              <tr><td>RunPod</td><td>2&times;H200, pinned SGLang TP2</td><td class="wrap">RunPod authenticated HTTPS proxy boundary</td></tr>
+              <tr><td>Vast.ai</td><td>Official <code>zai-org/GLM-5.2-FP8</code> weights</td><td class="wrap">Served and qualified end to end</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 06 SPEED ===================== -->
+    <section id="speed" aria-labelledby="speed-title">
+      <div class="container">
+        <p class="section-number">06 / PERFORMANCE</p>
+        <h2 id="speed-title">Measured, dated, and published.</h2>
+        <p class="lede">Native non-OpenAI turns were slow for fixable local reasons. Here is exactly what was measured, what changed, and what it measures at now.</p>
+        <div class="evidence-sheet">
+          <p class="scroll-hint" id="bench-hint">Scroll table horizontally &rarr;</p>
+          <div class="scroll-region" tabindex="0" role="region" aria-label="Native provider performance table" aria-describedby="bench-hint">
+            <table>
+              <caption>Native provider performance report, 2026-06-28</caption>
+              <thead><tr><th scope="col">Measurement</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+              <tbody>
+                <tr><td class="wrap">Local client and provider setup, resumed native Z.AI turn</td><td>~9.5 s</td><td><strong>~1.6 s</strong></td></tr>
+                <tr><td class="wrap">Large resumed thread, fresh process, Vercel Responses — wall clock</td><td>—</td><td><strong>4.05 s</strong></td></tr>
+                <tr><td class="wrap">↳ local setup / provider request and stream</td><td>—</td><td>~1.6 s / ~1.6 s</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="grid-2" style="margin-top:28px">
+            <div>
+              <h3>What changed locally</h3>
+              <p>Removed the hot-path vault fingerprint read, cached provider auth in the model provider, and cached decrypted local secrets inside the secrets backend.</p>
+            </div>
+            <div>
+              <h3>What changed on the Vercel path</h3>
+              <p>Responses requests now set <code>store: true</code>, persist <code>ModelResponseCompleted</code>, restore the last response id on resume, and send only the incremental input.</p>
+            </div>
+          </div>
+          <p class="evidence-note">Scope and method: measured 2026-06-28 on the <code>native-provider-performance</code> bench. Both figures are fresh-process runs against a large resumed thread, not cold first turns. The Vercel figure is corroborated by the dumped request: <code>store: true</code>, <code>previous_response_id</code> populated, <code>input_len: 1</code>, <code>input_chars: 119</code>. These are self-measured, single-configuration numbers on one machine — not a cross-vendor benchmark — and they are the only performance figures published on this page.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 07 RUNTIME ===================== -->
+    <section id="runtime" aria-labelledby="runtime-title">
+      <div class="container">
+        <p class="section-number">07 / RUNTIME</p>
+        <h2 id="runtime-title">It is a fork of a real runtime, not a wrapper.</h2>
+        <p class="lede">PFTerminal keeps the Codex CLI's local coding-agent runtime and makes provider access, credential storage, packaging, and product surfaces first-class. The changes are code-level, not prompt text.</p>
+        <div class="grid-3">
+          <div class="panel">
+            <span class="label">Inherited runtime surfaces</span>
+            <ul>
+              <li>Tools and approvals</li>
+              <li>Sandboxing and execpolicy</li>
+              <li>MCP servers</li>
+              <li>Non-interactive <code>exec</code> mode</li>
+              <li>Review modes</li>
+              <li><code>AGENTS.md</code> project instructions</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <span class="label">Skills and plugins</span>
+            <ul>
+              <li>Bundled system skills in <code>$HOME/.pfterminal/skills/.system/</code></li>
+              <li>User skills in <code>$HOME/.agents/skills/</code></li>
+              <li>Repo skills in <code>&lt;repo&gt;/.agents/skills/</code></li>
+              <li>Plugins with a <code>.codex-plugin/plugin.json</code> manifest</li>
+              <li>Apps and connectors exposed as MCP tool sets</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <span class="label">Open source and guardrails</span>
+            <ul>
+              <li><strong>Apache-2.0</strong>, public repository</li>
+              <li>Written in Rust: <a href="https://github.com/agtico/PfTerminal" target="_blank" rel="noopener">github.com/agtico/PfTerminal</a></li>
+              <li>Provider hammer reduction</li>
+              <li>Tool-call runaway guard</li>
+              <li><code>/docs</code> browses the bundled documentation inside the terminal</li>
+              <li><code>/status</code> and <code>/usage</code> report session and allowance state</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 08 TASK NODE ===================== -->
+    <section id="tasknode" aria-labelledby="tasknode-title">
+      <div class="container">
+        <p class="section-number">08 / TASK NODE</p>
+        <h2 id="tasknode-title">Wired into Post Fiat Task Node.</h2>
+        <p class="lede">Task Node is the agent-side work ledger. Link an account, inspect tasks, submit evidence, answer verification, read rewards and balances, and open Task Node chat or context — without leaving the terminal.</p>
+        <div class="panel">
+          <span class="label">Every /tasknode form</span>
+          <ul class="cmd-index" style="columns:3">
+            <li><code>/tasknode link</code> link a GitHub-backed Task Node account</li>
+            <li><code>/tasknode status</code> account and session status</li>
+            <li><code>/tasknode tasks [tab]</code> tasks; defaults to outstanding</li>
+            <li><code>/tasknode outstanding</code> outstanding tasks</li>
+            <li><code>/tasknode verification</code> tasks awaiting verification</li>
+            <li><code>/tasknode refused</code> refused tasks</li>
+            <li><code>/tasknode rewarded</code> rewarded tasks</li>
+            <li><code>/tasknode task &lt;id&gt;</code> actions for one task</li>
+            <li><code>/tasknode request</code> open the request prompt</li>
+            <li><code>/tasknode request &lt;text&gt;</code> submit a request inline</li>
+            <li><code>/tasknode requests</code> active requests</li>
+            <li><code>/tasknode context</code> open Task Node context</li>
+            <li><code>/tasknode chat</code> open Task Node chat</li>
+            <li><code>/tasknode chat &lt;text&gt;</code> submit a chat message</li>
+            <li><code>/tasknode balance</code> read-only balance</li>
+            <li><code>/tasknode rewards</code> recent rewards</li>
+            <li><code>/tasknode logout</code> end the Task Node session</li>
+          </ul>
+        </div>
+        <div class="cta-actions" style="margin-top:32px;justify-content:flex-start">
+          <a class="btn" href="/task-node/">About the Task Node</a>
+          <a class="btn" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Open Task Node</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 09 PRICING ===================== -->
+    <section id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <p class="section-number">09 / PAYMENT</p>
+        <h2 id="pricing-title">Buy AI inference with USDC. No credit card, no seat license, no account signup.</h2>
+        <div class="grid-3">
+          <article class="panel">
+            <h3>Provider access</h3>
+            <p>Use <code>/providers</code> to grant provider access and <code>/model</code> to select the provider, model, and reasoning effort. Provider credentials can be stored in the encrypted <code>/vault</code>.</p>
+          </article>
+          <article class="panel">
+            <h3>PfTerminal Plan</h3>
+            <p>Buy a prepaid PfTerminal Plan from <code>/wallet</code>: unlock the wallet, review the tier and exact USDC amount, then confirm. After activation, the plan's models appear in <code>/model</code>.</p>
+            <ul>
+              <li>Plan details show prepaid tier, token use, limits, reset dates, and queued periods.</li>
+              <li>Upgrade purchases the period shown on the confirmation screen.</li>
+              <li>Recover existing plan signs an ownership proof and sends no USDC.</li>
+              <li>Disconnect PfTerminal Plan removes the local plan credential while retaining the wallet and paid period.</li>
+              <li>Durable payment receipts are the settlement evidence.</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <h3>Third-party GPU rentals</h3>
+            <p>Vast.ai and RunPod bill the marketplace account. PFTerminal requires a max hourly USD price, max total USD spend, and duration in whole minutes before it searches compatible offers.</p>
+          </article>
+        </div>
+        <p class="scroll-hint" id="plan-hint" style="margin-top:32px">Scroll table horizontally &rarr;</p>
+        <div class="scroll-region" tabindex="0" role="region" aria-label="PfTerminal Plan price table" aria-describedby="plan-hint">
+          <table>
+            <caption>PfTerminal Plan catalogue, read from the plan gateway on {{ dateFormat "2 January 2006" $plans.fetched_at_utc }}</caption>
+            <thead><tr><th scope="col">Plan</th><th scope="col">Price</th><th scope="col">Term</th><th scope="col">Tokens / month</th><th scope="col">Tokens / week</th><th scope="col">Max output tokens</th></tr></thead>
+            <tbody>
+              {{- range $plans.plans }}
+              <tr><td><code>{{ .id }}</code></td><td>{{ .priceUsdc }} USDC</td><td>{{ .termMonths }} month</td><td>{{ lang.FormatNumberCustom 0 (float .monthlyTokenLimit) }}</td><td>{{ lang.FormatNumberCustom 0 (float .weeklyTokenLimit) }}</td><td>{{ lang.FormatNumberCustom 0 (float .maxOutputTokens) }}</td></tr>
+              {{- end }}
+            </tbody>
+          </table>
+        </div>
+        <p class="install-note">Settlement is canonical USDC on Solana mainnet. Plan model allowlist as published by the gateway: {{ range $i, $m := (index $plans.plans 0).modelAllowlist }}{{ if $i }}, {{ end }}<code>{{ $m }}</code>{{ end }} — this describes plan scope, not a complete PFTerminal model roster. <code>/wallet</code> is authoritative at purchase time.</p>
+        <p class="pull">The exact tier and USDC amount are shown in <code>/wallet</code> before confirmation.</p>
+        <div class="grid-3" style="margin-top:32px">
+          <div class="panel"><span class="label">Prepaid</span><p>You buy a period up front. There is no recurring charge to cancel.</p></div>
+          <div class="panel"><span class="label">Non-custodial</span><p>The signing key stays on your machine, behind a passcode you set.</p></div>
+          <div class="panel"><span class="label">Revocable</span><p>Disconnect the plan credential and keep both the wallet and the paid period.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 10 COMMANDS ===================== -->
+    <section id="commands" aria-labelledby="commands-title">
+      <div class="container">
+        <p class="section-number">10 / COMMANDS</p>
+        <h2 id="commands-title">The whole product-specific surface, in one screen.</h2>
+        <p class="lede">The index below contains 24 product-specific command entries. Variants such as <code>/spawn status</code> are counted as entries. The Task Node forms remain grouped under <code>/tasknode</code>.</p>
+        <ul class="cmd-index">
+          <li><code>/model</code> select provider, model, and reasoning effort</li>
+          <li><code>/providers</code> manage provider credentials and account login</li>
+          <li><code>/vault</code> open the encrypted credential vault menu</li>
+          <li><code>/vault list</code> list credential labels and metadata</li>
+          <li><code>/vault show &lt;label&gt;</code> inspect one credential's metadata</li>
+          <li><code>/vault credential add</code> masked secure-entry flow</li>
+          <li><code>/wallet</code> wallet, balances, and PfTerminal Plan</li>
+          <li><code>/gpu</code> rent, monitor, and terminate GPU capacity</li>
+          <li><code>/spawn</code> open managed Nazgul, Troll, and Orc orchestration</li>
+          <li><code>/spawn status</code> show the hierarchy and worker status</li>
+          <li><code>/spawn nazgul</code> bind an existing user pane as the root</li>
+          <li><code>/spawn troll</code> create a Troll under a parent</li>
+          <li><code>/spawn orc</code> create an Orc under a parent</li>
+          <li><code>/orchestrate</code> attach persistent supervision to a worker</li>
+          <li><code>/orchestrate status</code> show supervisory assignments</li>
+          <li><code>/panes</code> switch user, Claude Code, and spawned panes</li>
+          <li><code>/agent</code> switch the active native agent thread</li>
+          <li><code>/tasknode</code> Task Node menu and its listed forms</li>
+          <li><code>/skills</code> browse bundled, repo, user, and plugin skills</li>
+          <li><code>/docs</code> browse bundled documentation in the terminal</li>
+          <li><code>/status</code> session, model, permissions, and token config</li>
+          <li><code>/usage</code> provider allowance and reset information</li>
+          <li><code>/ps</code> inspect background terminals</li>
+          <li><code>/stop</code> stop all background terminals</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== 11 ROADMAP ===================== -->
+    <section id="roadmap" aria-labelledby="roadmap-title">
+      <div class="container">
+        <p class="section-number">11 / STATUS</p>
+        <h2 id="roadmap-title">What is shipped, what is experimental, and what is not built.</h2>
+        <p class="lede">Publishing the third column is the point. Everything in it exists as a specification or a backlog item, not as a feature you can use today.</p>
+        <div class="grid-3">
+          <div class="panel status-panel">
+            <h3><span class="status-mark ship" aria-hidden="true">[+]</span>Shipped</h3>
+            <ul>
+              <li>Six built-in providers</li>
+              <li>Encrypted vault</li>
+              <li><code>/spawn</code> Nazgul, Troll, and Orc orchestration</li>
+              <li><code>/orchestrate</code> persistent supervision</li>
+              <li>Claude Code headless panes on Ambient</li>
+              <li><code>/wallet</code> and PfTerminal Plan purchase</li>
+              <li><code>/gpu</code> rental on Vast.ai and RunPod</li>
+              <li><code>/tasknode</code>, <code>/docs</code>, skills, plugins, MCP</li>
+            </ul>
+          </div>
+          <div class="panel status-panel">
+            <h3><span class="status-mark exp" aria-hidden="true">[~]</span>Experimental</h3>
+            <ul>
+              <li>Claude pane profile on Z.AI</li>
+              <li>Claude pane profile on Baseten</li>
+              <li>Claude pane profile on OpenRouter</li>
+              <li>Claude pane profile on Vercel</li>
+              <li>Claude pane profile on Claude Plan</li>
+              <li>Live-smoke-tested, and not yet through the four-workflow parity suite that Ambient passed</li>
+            </ul>
+          </div>
+          <div class="panel status-panel">
+            <h3><span class="status-mark no" aria-hidden="true">[ ]</span>Not built or not verified</h3>
+            <ul>
+              <li>Balrog planner and the Grimoire</li>
+              <li>Wyverns, Golems, and campaign documents</li>
+              <li>Nostr reachability</li>
+              <li>Hyperliquid, staking, and borrowing</li>
+              <li><code>/subagents</code> diagnostics view</li>
+              <li>These are specifications and backlog items, not features</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA ===================== -->
+    <section id="cta" aria-labelledby="cta-title">
+      <div class="container">
+        <h2 id="cta-title">Start with one command.</h2>
+        <p>Install PFTerminal {{ $v }} on Linux, macOS, or Windows. Apache-2.0, public repository, written in Rust.</p>
+        <div class="cta-actions">
+          <a class="btn primary" href="#install">Install PFTerminal {{ $v }}</a>
+          <a class="btn" href="https://github.com/agtico/PfTerminal/releases" target="_blank" rel="noopener">View GitHub releases</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="/" style="padding-left:0"><img src="/media-kit/logo.svg" alt="Post Fiat logo"><span>Post Fiat</span></a>
+        <p style="max-width:420px">Fair, private XRP-derived infrastructure for capital markets and collective intelligence.</p>
+        <div class="footer-social" aria-label="Post Fiat social links">
+          <a href="https://github.com/postfiatorg" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://x.com/postfiatorg" target="_blank" rel="noopener">X</a>
+          <a href="https://discord.gg/U6HjgDSmhR" target="_blank" rel="noopener">Discord</a>
+        </div>
+      </div>
+      <div>
+        <h3>Products</h3>
+        <ul>
+          <li><a href="/terminal/">PFTerminal</a></li>
+          <li><a href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Task Node</a></li>
+          <li><a href="/validator-setup/">Validator Setup</a></li>
+          <li><a href="/validator-benchmark/">Validator Benchmark</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="/whitepaper/">Whitepaper</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="https://github.com/agtico/PfTerminal" target="_blank" rel="noopener">PFTerminal source</a></li>
+          <li><a href="https://github.com/agtico/PfTerminal/releases" target="_blank" rel="noopener">PFTerminal releases</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Machine-readable</h3>
+        <ul>
+          <li><a href="/terminal/index.md">terminal/index.md</a></li>
+          <li><a href="/llms.txt">llms.txt</a></li>
+          <li><a href="/llms-full.txt">llms-full.txt</a></li>
+          <li><a href="/agents.txt">agents.txt</a></li>
+          <li><a href="/postfiat-project.json">postfiat-project.json</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var navShell=document.getElementById('navShell'),menuButton=document.getElementById('menuButton');
+  if(menuButton){menuButton.addEventListener('click',function(){var o=menuButton.getAttribute('aria-expanded')==='true';menuButton.setAttribute('aria-expanded',String(!o));menuButton.setAttribute('aria-label',o?'Open menu':'Close menu');navShell.classList.toggle('is-open',!o);});}
+
+  var osNav=document.getElementById('osNav');
+  var ids={linux:'install-linux',macos:'install-macos',windows:'install-windows'};
+  if(osNav){
+    var links=[].slice.call(osNav.querySelectorAll('a'));
+    osNav.setAttribute('role','tablist');
+    osNav.setAttribute('aria-label','Choose an operating system');
+    links.forEach(function(a){
+      var p=document.getElementById(ids[a.dataset.os]);
+      a.setAttribute('role','tab');a.id='tab-'+a.dataset.os;a.setAttribute('aria-controls',ids[a.dataset.os]);
+      if(p){p.setAttribute('role','tabpanel');p.setAttribute('aria-labelledby',a.id);}
+      a.addEventListener('click',function(e){e.preventDefault();select(a.dataset.os);});
+      a.addEventListener('keydown',function(e){
+        var i=links.indexOf(a);
+        if(e.key==='ArrowRight'){e.preventDefault();links[(i+1)%links.length].focus();select(links[(i+1)%links.length].dataset.os);}
+        if(e.key==='ArrowLeft'){e.preventDefault();links[(i-1+links.length)%links.length].focus();select(links[(i-1+links.length)%links.length].dataset.os);}
+      });
+    });
+    function select(os){
+      links.forEach(function(a){var on=a.dataset.os===os;a.setAttribute('aria-selected',String(on));a.tabIndex=on?0:-1;});
+      Object.keys(ids).forEach(function(k){var el=document.getElementById(ids[k]);if(el)el.hidden=(k!==os);});
+    }
+    select('linux');
+  }
+
+  var status=document.getElementById('copyStatus');
+  [].forEach.call(document.querySelectorAll('.copy-btn'),function(btn){
+    btn.addEventListener('click',function(){
+      var src=document.getElementById(btn.dataset.copy);
+      if(!src)return;
+      var text=src.textContent.replace(/^[$>]\s*/,'').trim();
+      function fail(){if(status)status.textContent='Copy failed. Select the command.';src.parentNode.parentNode.focus();}
+      if(!navigator.clipboard){fail();return;}
+      navigator.clipboard.writeText(text).then(function(){
+        var prev=btn.textContent;btn.textContent='Copied';
+        if(status)status.textContent='Copied the '+(btn.getAttribute('aria-label')||'install command').replace('Copy ','')+'.';
+        window.setTimeout(function(){btn.textContent=prev;if(status)status.textContent='';},1400);
+      },fail);
+    });
+  });
+
+  function syncHints(){
+    [].forEach.call(document.querySelectorAll('.scroll-hint'),function(hint){
+      var region=document.getElementById(hint.id.replace('-hint','')) ||
+                 (hint.nextElementSibling&&hint.nextElementSibling.matches('.scroll-region,.tui-scroll')?hint.nextElementSibling:null);
+      if(!region)return;
+      hint.hidden=region.scrollWidth<=region.clientWidth+1;
+    });
+  }
+  syncHints();
+  window.addEventListener('resize',syncHints);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(syncHints);
+
+  var tree=document.getElementById('hierarchyTree');
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(tree&&!reduced&&'IntersectionObserver' in window){
+    tree.classList.add('is-armed');
+    var io=new IntersectionObserver(function(e){
+      if(e.some(function(x){return x.isIntersecting;})){tree.classList.add('is-revealed');io.disconnect();}
+    },{threshold:.25});
+    io.observe(tree);
+  }
+})();
+</script>
+</body>
+</html>
