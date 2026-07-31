@@ -5,8 +5,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PFTerminal — The AI terminal that answers to you | Post Fiat</title>
-  <meta name="description" content="PFTerminal is a crypto-native AI services terminal based on the open-source Codex CLI, with multi-provider inference, an agent hierarchy, an encrypted vault, a Solana wallet, GPU rental, and Post Fiat Task Node.">
+  <title>PFTerminal — Open-source AI harness, 39.8% cheaper at the median | Post Fiat</title>
+  <meta name="description" content="PFTerminal is an enterprise-grade, open-source coding-agent harness built on Codex. Across 42 matched runs, it was 39.8% cheaper and 46.6% faster at the median; prepaid inference accepts USDC.">
   <link rel="canonical" href="https://postfiat.org/terminal/">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="/media-kit/favicon.ico">
@@ -14,8 +14,8 @@
   <link rel="alternate" type="text/plain" title="LLM instructions" href="https://postfiat.org/llms.txt">
   <link rel="alternate" type="text/plain" title="Extended LLM overview" href="https://postfiat.org/llms-full.txt">
   <link rel="alternate" type="application/json" title="Machine-readable project summary" href="https://postfiat.org/postfiat-project.json">
-  <meta property="og:title" content="PFTerminal — The AI terminal that answers to you">
-  <meta property="og:description" content="A Rust TUI for multi-provider inference, supervised agents, local custody, GPU rental, and Post Fiat Task Node.">
+  <meta property="og:title" content="PFTerminal — Same models. Less time. Less spend.">
+  <meta property="og:description" content="An enterprise-grade, open-source coding-agent harness built on Codex, benchmarked at 39.8% cheaper and 46.6% faster at the median across 42 matched runs.">
   <meta property="og:url" content="https://postfiat.org/terminal/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://postfiat.org/media-kit/pfterminal-og-1200x630.png">
@@ -29,7 +29,7 @@
         "@type": "SoftwareApplication",
         "name": "PFTerminal",
         "url": "https://postfiat.org/terminal/",
-        "description": "PFTerminal is a crypto-native AI services terminal based on the open-source Codex CLI.",
+        "description": "PFTerminal is an enterprise-grade, open-source coding-agent harness built on Codex, with multi-model routing and prepaid USDC inference.",
         "softwareVersion": "{{ $v }}",
         "operatingSystem": "Linux, macOS, Windows",
         "applicationCategory": "DeveloperApplication",
@@ -3528,6 +3528,62 @@
       .statement.signal p .signal-beat:first-child{border-top:0}
     }
     @media (min-width:769px){.scroll-hint{display:none}}
+    /* Release benchmark: make the economic case the dominant proof surface. */
+    .benchmark-scorecard{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+      margin:0 0 44px;border:1px solid var(--ink);background:#030603;color:var(--pale);
+    }
+    .benchmark-scorecard > div{
+      display:flex;min-width:0;min-height:230px;padding:34px 30px;
+      flex-direction:column;justify-content:space-between;border-right:1px solid var(--line);
+    }
+    .benchmark-scorecard > div:last-child{border-right:0}
+    .benchmark-scorecard span,
+    .benchmark-kicker{
+      color:#dff2da;font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:15px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
+    }
+    .benchmark-scorecard strong{
+      color:var(--green);font-family:"Bricolage Grotesque","Inter Tight",system-ui,sans-serif;
+      font-size:clamp(3.5rem,6.2vw,6.8rem);font-weight:650;line-height:.78;letter-spacing:-.07em;
+    }
+    .benchmark-scorecard em{
+      color:#fff;font-family:"Instrument Serif",Georgia,serif;
+      font-size:clamp(1.8rem,2.3vw,2.5rem);font-weight:400;line-height:1;font-style:italic;
+    }
+    .benchmark-matchups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+    .benchmark-matchups article{min-width:0;padding:34px 34px 32px}
+    .benchmark-matchups article + article{border-left:1px solid var(--ink-line-strong)}
+    .benchmark-matchups .benchmark-kicker{display:block;color:#08713a;margin-bottom:18px}
+    .benchmark-matchups h3{max-width:24ch;margin:0 0 28px;color:var(--ink);font-size:clamp(1.45rem,2vw,2rem);line-height:1.08}
+    .benchmark-matchups dl{margin:0 0 24px}
+    .benchmark-matchups dl > div{display:flex;justify-content:space-between;gap:24px;padding:11px 0;border-top:1px solid var(--ink-line)}
+    .benchmark-matchups dt{color:var(--ink-3);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:15px;text-transform:uppercase}
+    .benchmark-matchups dd{margin:0;color:var(--ink);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:16px;font-weight:600;text-align:right}
+    #speed .benchmark-matchups p{margin:0;color:var(--ink);font-size:1.18rem}
+    #speed .benchmark-matchups p strong{color:#08713a}
+    .benchmark-proof{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:40px;align-items:end;padding-top:34px}
+    #speed .benchmark-proof p{margin:0;color:var(--ink-2);font-size:1.08rem;line-height:1.62}
+    .benchmark-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px}
+    #speed .benchmark-actions .btn{border-color:var(--ink-line-strong);color:var(--ink)}
+    #speed .benchmark-actions .btn.primary{border-color:#08713a;background:#08713a;color:#fff}
+    @media (min-width:981px){
+      #speed > .container{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px}
+      #speed .section-number{grid-column:1/-1;grid-row:1}
+      #speed h2{grid-column:1/8;grid-row:2;max-width:13ch;margin:0;font-size:clamp(4rem,5.3vw,5.7rem)}
+      #speed > .container > .lede{grid-column:8/-1;grid-row:2;align-self:end;max-width:none;margin:0;padding-left:30px;border-left:2px solid var(--green-2)}
+      #speed .evidence-sheet{display:block;grid-column:1/-1;grid-row:3;margin-top:72px;padding:0;border:0;background:transparent}
+    }
+    @media (max-width:800px){
+      .benchmark-scorecard{grid-template-columns:1fr}
+      .benchmark-scorecard > div{min-height:180px;border-right:0;border-bottom:1px solid var(--line)}
+      .benchmark-scorecard > div:last-child{border-bottom:0}
+      .benchmark-matchups{grid-template-columns:1fr}
+      .benchmark-matchups article + article{border-left:0;border-top:1px solid var(--ink-line-strong)}
+      .benchmark-proof{grid-template-columns:1fr}
+      .benchmark-actions{justify-content:flex-start}
+    }
+
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
       .tui-cursor{animation:none}
@@ -3551,8 +3607,8 @@
       <div class="container hero-statement">
         <p class="eyebrow">PFTerminal {{ $v }} · Rust TUI · based on the open-source Codex CLI</p>
         <h1 id="hero-title">The AI terminal that answers to <span class="accent">you.</span></h1>
-        <p class="hero-claim">One terminal. Every model. Your keys, your wallet, your chain of command.</p>
-        <p class="hero-sub">PFTerminal is a crypto-native AI services terminal based on the open-source Codex CLI that routes across six built-in providers, assigns a provider, model, and reasoning effort to each spawned agent, and lets you buy prepaid inference in USDC from a Solana wallet you hold.</p>
+        <p class="hero-claim">Same models. Less time. Less spend. Open source.</p>
+        <p class="hero-sub">PFTerminal is an enterprise-grade, open-source coding-agent harness built on Codex. Across seven matched comparisons using the same named model and provider route, it was 39.8% cheaper and 46.6% faster at the median. Bring your own provider keys or buy prepaid inference with USDC—without a credit card or seat license.</p>
       </div>
       <div class="container hero-grid">
         <div class="hero-copy">
@@ -3665,11 +3721,11 @@
     <aside class="trust-bar" aria-label="Release and performance facts">
       <div class="container">
         <dl class="trust-grid">
-          <div><dt>6</dt><dd>built-in providers</dd></div>
-          <div><dt>{{ $v }}</dt><dd>release documented here</dd></div>
-          <div><dt>~9.5 s &rarr; ~1.6 s</dt><dd>resumed native Z.AI local setup · 2026-06-28</dd></div>
-          <div><dt>4.05 s</dt><dd>large resumed Vercel thread · fresh process · 2026-06-28</dd></div>
-          <div><dt>{{ (index $plans.plans 0).priceUsdc }}&ndash;{{ (index (last 1 $plans.plans) 0).priceUsdc }} USDC</dt><dd>prepaid plan range · {{ if ge (index $plans.plans 0).monthlyTokenLimit 1000000 }}{{ lang.FormatNumberCustom 0 (div (float (index $plans.plans 0).monthlyTokenLimit) 1000000.0) }}M{{ end }}&ndash;{{ lang.FormatNumberCustom 0 (div (float (index (last 1 $plans.plans) 0).monthlyTokenLimit) 1000000.0) }}M tokens per month</dd></div>
+          <div><dt>39.8%</dt><dd>cheaper at the median · seven matched harness comparisons</dd></div>
+          <div><dt>46.6%</dt><dd>faster at the median · same models and provider routes</dd></div>
+          <div><dt>42</dt><dd>matched runs · 21 PFTerminal and 21 comparison runs</dd></div>
+          <div><dt>Apache-2.0</dt><dd>open-source Codex fork · public Rust repository</dd></div>
+          <div><dt>{{ (index $plans.plans 0).priceUsdc }}&ndash;{{ (index (last 1 $plans.plans) 0).priceUsdc }} USDC</dt><dd>prepaid inference · no credit card or seat license</dd></div>
         </dl>
       </div>
     </aside>
@@ -3935,51 +3991,51 @@
 
     <aside class="statement signal" aria-label="Positioning statement">
       <div class="container signal-layout">
-        <p><span class="signal-beat">Six providers in.</span><span class="signal-beat">One supervised chain of command out.</span><span class="signal-beat">You hold the keys the whole way.</span></p>
+        <p><span class="signal-beat">Same models. Same providers.</span><span class="signal-beat">39.8% cheaper at the median.</span><span class="signal-beat">46.6% faster at the median.</span></p>
         <div class="signal-equation" aria-hidden="true"><span>6</span><i>&rarr;</i><span>1</span></div>
       </div>
     </aside>
-    <!-- ===================== 06 SPEED ===================== -->
+    <!-- ===================== 06 PERFORMANCE ===================== -->
     <section id="speed" class="light" data-chapter="06" aria-labelledby="speed-title">
       <div class="container">
         <p class="section-number">06 / PERFORMANCE</p>
-        <h2 id="speed-title">Measured, dated, and published.</h2>
-        <p class="lede">Native non-OpenAI turns were slow for fixable local reasons. Here is exactly what was measured, what changed, and what it measures at now.</p>
+        <h2 id="speed-title">39.8% cheaper. 46.6% faster.</h2>
+        <p class="lede">PF Terminal is a leaner open-source coding harness. Across seven matched comparisons, each harness used the same named model and provider route. Every comparison favored PF Terminal on both cost and elapsed time.</p>
         <div class="evidence-sheet">
-          <div class="bench-hero" aria-label="Local setup improved from about 9.5 seconds to about 1.6 seconds">
-            <div><span>Before</span><strong>~9.5 s</strong></div>
-            <i aria-hidden="true">&rarr;</i>
-            <div><span>After</span><strong>~1.6 s</strong></div>
+          <div class="benchmark-scorecard" aria-label="PF Terminal release benchmark summary">
+            <div><span>Median cost</span><strong>39.8%</strong><em>cheaper</em></div>
+            <div><span>Median time</span><strong>46.6%</strong><em>faster</em></div>
+            <div><span>Release campaign</span><strong>42</strong><em>matched runs</em></div>
           </div>
-          <details class="reference-disclosure bench-table" data-appendix>
-          <summary>Open the full measurement table</summary>
-          <p class="scroll-hint" id="bench-hint">Scroll table horizontally &rarr;</p>
-          <div class="scroll-region" tabindex="0" role="region" aria-label="Native provider performance table" aria-describedby="bench-hint">
-            <table>
-              <caption>Native provider performance report, 2026-06-28 — <a href="https://github.com/agtico/PfTerminal/blob/main/docs/features/native-provider-performance.md" target="_blank" rel="noopener" aria-label="Read the native provider performance source report" style="color:#0a5c2e">read the source report</a></caption>
-              <thead><tr><th scope="col">Measurement</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
-              <tbody>
-                <tr><td class="wrap">Local client and provider setup, resumed native Z.AI turn</td><td>~9.5 s</td><td><strong>~1.6 s</strong></td></tr>
-                <tr><td class="wrap">Large resumed thread, fresh process, Vercel Responses — wall clock</td><td>—</td><td><strong>4.05 s</strong></td></tr>
-                <tr><td class="wrap">↳ local setup / provider request and stream</td><td>—</td><td>~1.6 s / ~1.6 s</td></tr>
-              </tbody>
-            </table>
+
+          <div class="benchmark-matchups">
+            <article>
+              <span class="benchmark-kicker">PF Terminal vs Hermes</span>
+              <h3>Kimi K3 · OpenRouter · website generation</h3>
+              <dl>
+                <div><dt>PF Terminal</dt><dd>$1.75 · 24.7 min</dd></div>
+                <div><dt>Hermes</dt><dd>$2.52 · 31.2 min</dd></div>
+              </dl>
+              <p><strong>30.7% cheaper</strong> and <strong>26.7% faster</strong>.</p>
+            </article>
+            <article>
+              <span class="benchmark-kicker">PF Terminal vs Claude Code</span>
+              <h3>Opus 5 · Anthropic · website generation</h3>
+              <dl>
+                <div><dt>PF Terminal</dt><dd>$2.89 · 17.0 min</dd></div>
+                <div><dt>Claude Code</dt><dd>$6.70 · 29.7 min</dd></div>
+              </dl>
+              <p><strong>56.9% cheaper</strong> and <strong>74.3% faster</strong>.</p>
+            </article>
           </div>
-          </details>
-          <div class="grid-2" style="margin-top:28px">
-            <div>
-              <h3>What changed locally</h3>
-              <p>Removed the hot-path vault fingerprint read, cached provider auth in the model provider, and cached decrypted local secrets inside the secrets backend.</p>
+
+          <div class="benchmark-proof">
+            <p><strong>What was held constant:</strong> the named model and provider route inside each comparison. Functional verifiers scored task completion; provider billing supplied model cost; wall-clock measurement supplied elapsed time. The PF Terminal team designed and ran the study, and it has not yet been independently replicated.</p>
+            <div class="benchmark-actions">
+              <a class="btn primary" href="/research/introducing-pf-terminal/">Read the full benchmark</a>
+              <a class="btn" href="/research/pfterminal-benchmark-0124/REPORT.md">Inspect the evidence package</a>
             </div>
-            <div>
-              <h3>What changed on the Vercel path</h3>
-              <p>Responses requests now set <code>store: true</code>, persist <code>ModelResponseCompleted</code>, restore the last response id on resume, and send only the incremental input.</p>
-            </div>
           </div>
-          <details class="reference-disclosure" data-appendix>
-            <summary>Method and raw report</summary>
-            <p class="evidence-note"><strong>Method and raw report:</strong> <a href="https://github.com/agtico/PfTerminal/blob/main/docs/features/native-provider-performance.md" target="_blank" rel="noopener" aria-label="Native provider performance report source" style="color:#0a5c2e">docs/features/native-provider-performance.md</a>. Scope and method: measured 2026-06-28 on the <code>native-provider-performance</code> bench (<a href="https://github.com/agtico/PfTerminal/blob/main/docs/features/native-provider-performance.md" target="_blank" rel="noopener" aria-label="Read the native provider performance report" style="color:#0a5c2e">read the report</a>). Both figures are fresh-process runs against a large resumed thread, not cold first turns. The Vercel figure is corroborated by the dumped request: <code>store: true</code>, <code>previous_response_id</code> populated, <code>input_len: 1</code>, <code>input_chars: 119</code>. These are self-measured, single-configuration numbers on one machine — not a cross-vendor benchmark — and they are the only performance figures published on this page.</p>
-          </details>
         </div>
       </div>
     </section>
