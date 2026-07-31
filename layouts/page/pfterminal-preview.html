@@ -3584,6 +3584,776 @@
       .benchmark-actions{justify-content:flex-start}
     }
 
+
+    /* Benchmark-first hero: one large, legible economic proof surface replaces
+       the orchestration schematic and eliminates repeated metric bands. */
+    .hero-benchmark{
+      position:relative;min-width:0;margin:0;overflow:hidden;
+      border:1px solid rgba(145,245,116,.5);background:
+        linear-gradient(rgba(145,245,116,.055) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(145,245,116,.055) 1px,transparent 1px),
+        #020502;
+      background-size:44px 44px;color:#fff;
+    }
+    .hero-benchmark-top{
+      display:flex;align-items:center;justify-content:space-between;gap:24px;
+      min-height:76px;padding:20px 28px;border-bottom:1px solid var(--line-strong);
+      font-family:"IBM Plex Mono",ui-monospace,monospace;text-transform:uppercase;
+    }
+    .hero-benchmark-top span{color:#dff2da;font-size:17px;letter-spacing:.11em}
+    .hero-benchmark-top strong{color:var(--green);font-size:18px;letter-spacing:.06em}
+    .hero-benchmark-control{
+      display:grid;grid-template-columns:auto 1fr auto 1fr auto;align-items:center;gap:18px;
+      padding:26px 28px;border-bottom:1px solid var(--line);
+    }
+    .hero-benchmark-control span{
+      display:grid;place-items:center;min-height:48px;padding:10px 20px;
+      border:1px solid rgba(145,245,116,.55);background:#071007;color:#f7fff4;
+      font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:17px;font-weight:600;
+      letter-spacing:.06em;text-transform:uppercase;
+    }
+    .hero-benchmark-control i{height:1px;background:var(--green);position:relative}
+    .hero-benchmark-control i::after{
+      content:"";position:absolute;right:0;top:-4px;width:7px;height:7px;
+      border-top:1px solid var(--green);border-right:1px solid var(--green);transform:rotate(45deg);
+    }
+    .hero-benchmark-outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+    .hero-benchmark-outcomes > div{
+      display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr;
+      gap:14px 24px;min-height:270px;padding:36px 32px;align-items:end;
+    }
+    .hero-benchmark-outcomes > div + div{border-left:1px solid var(--line-strong)}
+    .hero-benchmark-outcomes span{
+      grid-column:1/-1;align-self:start;color:#dff2da;font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:17px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    }
+    .hero-benchmark-outcomes strong{
+      color:var(--green);font-family:"Bricolage Grotesque","Inter Tight",system-ui,sans-serif;
+      font-size:clamp(5rem,9vw,9.5rem);font-weight:650;line-height:.76;letter-spacing:-.08em;
+    }
+    .hero-benchmark-outcomes em{
+      padding-bottom:4px;color:#fff;font-family:"Instrument Serif",Georgia,serif;
+      font-size:clamp(2rem,3vw,3.2rem);font-style:italic;line-height:1;
+    }
+    .hero-benchmark figcaption{
+      display:flex;gap:14px;flex-wrap:wrap;max-width:none;margin:0;padding:18px 28px;
+      border-top:1px solid var(--line);color:#e8f5e4;font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:16px;letter-spacing:.05em;text-transform:uppercase;
+    }
+    .hero-benchmark figcaption span{color:var(--green)}
+
+    /* Replace the saturated lime slab with a quieter mint field; the black
+       provisioning instrument remains the chapter's high-contrast anchor. */
+    main > section#gpu{background:#dfffd5;color:#020402;border-color:#020402}
+    #gpu h2,#gpu > .container > .lede,#gpu .section-number{color:#020402}
+    #gpu .section-number::before{background:#020402}
+    #gpu .section-number::after{background:linear-gradient(90deg,rgba(2,4,2,.45),transparent)}
+    #gpu > .container > .lede code{color:#020402}
+    #gpu .artifact-stage{border-color:#020402;background-color:#020402}
+    #gpu .gpu-flow-note{color:#f7fff4 !important}
+
+    /* Keep secondary syntax accents inside the green family. */
+    #custody .tui .c,#custody .tui .m{color:var(--green)}
+    .surface-commands span{color:#dff2da !important}
+
+    @media (min-width:981px){
+      #hero .hero-grid::before{display:none}
+      #hero .hero-benchmark{grid-column:1/-1;grid-row:2}
+      #hero .hero-grid{grid-template-rows:auto auto}
+      #hero .cmd-scroll code{font-size:17px}
+      #pricing .receipt table,
+      #pricing .receipt th,
+      #pricing .receipt td{font-size:20px}
+      .provider-node span,.provider-node code,.task-ledger-head span,.task-ledger-foot{font-size:18px}
+    }
+    @media (max-width:800px){
+      .hero-benchmark-top{align-items:flex-start;flex-direction:column}
+      .hero-benchmark-control{grid-template-columns:1fr;gap:10px}
+      .hero-benchmark-control i{width:1px;height:18px;justify-self:center}
+      .hero-benchmark-control i::after{right:-3px;top:auto;bottom:0;transform:rotate(135deg)}
+      .hero-benchmark-outcomes{grid-template-columns:1fr}
+      .hero-benchmark-outcomes > div{min-height:220px}
+      .hero-benchmark-outcomes > div + div{border-left:0;border-top:1px solid var(--line-strong)}
+      .hero-benchmark-outcomes strong{font-size:clamp(4rem,19vw,6rem)}
+    }
+
+    /* V153: strengthen the binary editorial system and give each proof chapter
+       a distinct composition instead of repeating dark inset panels. */
+    main > section#hierarchy{
+      background:#020402;color:var(--pale);
+      background-image:
+        linear-gradient(rgba(145,245,116,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(145,245,116,.035) 1px,transparent 1px);
+      background-size:72px 72px;border-top:1px solid var(--line-strong);
+      border-bottom:1px solid var(--line-strong);
+    }
+    #hierarchy h2{color:#f7fff4}
+    #hierarchy > .container > .lede{color:#eef8eb}
+    #hierarchy > .container > .lede code{color:var(--green)}
+    main > section#hierarchy .section-number{color:#eef8eb}
+    main > section#hierarchy .section-number::after{
+      background:linear-gradient(90deg,var(--line-strong),transparent);
+    }
+    #hierarchy .hierarchy-tree::before{display:none}
+    #hierarchy .hierarchy-tree li,
+    #hierarchy .hierarchy-tree li:first-child{
+      border:1px solid rgba(145,245,116,.72);border-left:6px solid var(--green);
+      border-radius:0;background:#f8fbf5;box-shadow:none;color:var(--ink);
+    }
+    #hierarchy .hierarchy-tree li[data-level="1"],
+    #hierarchy .hierarchy-tree li[data-level="2"]{
+      border-left-color:var(--green);background:#f8fbf5;
+    }
+    #hierarchy .hierarchy-tree strong,
+    #hierarchy .hierarchy-tree span{color:var(--ink)}
+    #hierarchy .hierarchy-tree li[data-level="0"]::before,
+    #hierarchy .hierarchy-tree li[data-level="1"]::before,
+    #hierarchy .hierarchy-tree li[data-level="2"]::before{color:#08713a}
+
+    /* GPU is the dark machine room between two paper chapters. */
+    main > section#gpu{
+      background:#020402;color:var(--pale);border-color:var(--line-strong);
+    }
+    #gpu h2,#gpu > .container > .lede,#gpu .section-number{color:#f7fff4}
+    main > section#gpu.light > .container > p.lede{color:#f7fff4 !important}
+    #gpu .section-number::before{background:var(--green)}
+    #gpu .section-number::after{
+      background:linear-gradient(90deg,var(--line-strong),transparent);
+    }
+    #gpu > .container > .lede code{color:var(--green)}
+    #gpu .artifact-stage{
+      border:1px solid rgba(145,245,116,.58);background:#020402;
+    }
+
+    /* Price plans read as an audited ledger, not another terminal window. */
+    #pricing .receipt{
+      border:0;border-top:4px solid var(--ink);border-bottom:1px solid var(--ink);
+      border-radius:0;background:transparent;color:var(--ink);box-shadow:none;
+    }
+    #pricing .receipt .scroll-region{border:0;background:transparent}
+    #pricing .receipt caption,
+    #pricing .receipt thead th{color:var(--ink-3)}
+    #pricing .receipt th,
+    #pricing .receipt td{
+      border-bottom-color:var(--ink-line-strong);color:var(--ink);
+    }
+    #pricing .receipt tbody tr{background:transparent}
+    #pricing .receipt tbody tr:hover{background:rgba(8,113,58,.045)}
+    #pricing .receipt tbody td:first-child,
+    #pricing .receipt tbody td:first-child code,
+    #pricing .receipt tbody td:nth-child(2){color:#08713a}
+
+    /* The runtime plate is a deliberate technical instrument. */
+    #runtime .runtime-index > summary{
+      border:1px solid var(--ink);border-left:6px solid var(--green-2);
+      background:
+        url('/media-kit/terminal/runtime-stack.svg') center bottom 8px / calc(100% - 34px) auto no-repeat,
+        linear-gradient(rgba(8,113,58,.055) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(8,113,58,.055) 1px,transparent 1px),
+        #f8fbf5;
+      background-size:calc(100% - 34px) auto,32px 32px,32px 32px,auto;
+      box-shadow:12px 12px 0 rgba(8,113,58,.08);
+    }
+
+    .technical-appendix{padding-block:76px}
+    .appendix-drawer > summary{font-size:clamp(1.8rem,2.4vw,2.4rem)}
+    .site-footer h3{font-size:17px}
+    .site-footer a{font-size:18px}
+    .site-footer p{font-size:17px;line-height:1.55}
+
+    @media (min-width:981px){
+      #hierarchy .hierarchy-tree{
+        display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:0;align-items:start;width:100%;max-width:none;margin:76px 0 0;
+      }
+      #hierarchy .hierarchy-tree li,
+      #hierarchy .hierarchy-tree li:first-child{
+        width:auto;min-height:282px;margin:0;padding:94px 30px 32px;
+      }
+      #hierarchy .hierarchy-tree li[data-level="1"]{margin:54px 0 0 -1px}
+      #hierarchy .hierarchy-tree li[data-level="2"]{margin:108px 0 0 -1px}
+      #hierarchy .hierarchy-tree li::before{
+        left:30px;top:28px;transform:none;font-size:2.35rem;
+      }
+      #hierarchy .hierarchy-tree strong{font-size:1.32rem}
+      #hierarchy .hierarchy-tree span{font-size:1.16rem;line-height:1.5}
+
+      .technical-appendix .container{
+        display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+        column-gap:24px;align-items:center;
+      }
+      .technical-appendix .section-number{
+        grid-column:1/6;grid-row:1;margin:0 0 22px;
+      }
+      .technical-appendix .appendix-title{
+        grid-column:1/6;grid-row:2;max-width:10ch;margin:0;
+        font-size:clamp(3.5rem,4.5vw,4.6rem);
+      }
+      .technical-appendix .appendix-drawer{
+        grid-column:7/-1;grid-row:1/span 2;align-self:center;margin:0;
+      }
+      .technical-appendix .appendix-drawer > summary{
+        min-height:196px;border:1px solid var(--line-strong);
+        border-left:4px solid var(--green);padding:30px 28px;
+        grid-template-columns:auto minmax(0,1fr) auto;
+      }
+      .technical-appendix .appendix-drawer > summary::before{
+        display:block;font-size:clamp(3.5rem,5vw,5.4rem);
+      }
+      .technical-appendix .appendix-grid{
+        grid-column:1/-1;grid-row:auto;
+      }
+    }
+    @media (max-width:980px){
+      #hierarchy .hierarchy-tree li,
+      #hierarchy .hierarchy-tree li:first-child{background:#f8fbf5}
+      .technical-appendix .appendix-title{max-width:12ch}
+    }
+
+    /* V154: reduce full-page density by turning long vertical chapters into
+       horizontal editorial spreads, while making benchmark evidence larger. */
+    #custody .custody-vault strong,
+    #custody .custody-wallet strong{color:var(--green)}
+
+    .benchmark-result{
+      display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;margin-top:8px;
+    }
+    .benchmark-result strong{
+      display:flex;min-width:0;flex-direction:column;gap:2px;
+      padding-top:18px;border-top:2px solid var(--green-2);
+    }
+    .benchmark-result b{
+      color:#08713a;font-family:"Bricolage Grotesque","Inter Tight",system-ui,sans-serif;
+      font-size:clamp(2.7rem,3.7vw,4rem);font-weight:650;line-height:.86;letter-spacing:-.055em;
+    }
+    .benchmark-result span{
+      color:var(--ink);font-family:"Instrument Serif",Georgia,serif;
+      font-size:1.55rem;font-style:italic;font-weight:400;
+    }
+    .benchmark-matchups .benchmark-kicker{font-size:17px}
+    .benchmark-matchups dt{font-size:16px}
+    .benchmark-matchups dd{font-size:18px}
+
+    #runtime .runtime-index > summary{
+      padding:36px;
+      background:
+        url('/media-kit/terminal/runtime-stack.svg') center bottom -4px / calc(100% - 6px) auto no-repeat,
+        linear-gradient(rgba(8,113,58,.055) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(8,113,58,.055) 1px,transparent 1px),
+        #f8fbf5;
+      background-size:calc(100% - 6px) auto,32px 32px,32px 32px,auto;
+      font-size:clamp(2.65rem,3.7vw,3.8rem);
+    }
+    #cta::before{
+      right:max(30px,calc((100vw - var(--max))/2));width:44%;
+      font-size:clamp(4.5rem,8vw,8rem);letter-spacing:-.06em;
+    }
+
+    @media (min-width:981px){
+      #hero{padding-bottom:86px}
+      #hero .hero-statement{margin-bottom:50px}
+      #hero .hero-sub{
+        align-self:start;padding-top:8px;
+        font-size:clamp(1.48rem,1.78vw,1.66rem);line-height:1.45;
+      }
+      .hero-benchmark-control span{font-size:20px}
+      .hero-benchmark-outcomes > div{min-height:230px}
+
+      .trust-grid{
+        grid-template-columns:repeat(5,minmax(0,1fr));
+      }
+      .trust-grid > div,
+      .trust-grid > div:nth-child(1),
+      .trust-grid > div:nth-child(2),
+      .trust-grid > div:nth-child(3),
+      .trust-grid > div:nth-child(4),
+      .trust-grid > div:nth-child(5){
+        grid-column:auto;min-height:216px;padding:34px 24px;
+      }
+      .trust-grid dt,
+      .trust-grid > div:nth-child(3) dt,
+      .trust-grid > div:nth-child(5) dt{
+        white-space:normal;font-size:clamp(1.45rem,1.8vw,1.8rem);
+      }
+      .trust-grid dd{font-size:18px}
+
+      #models{padding-block:110px}
+      #custody,#gpu,#speed,#pricing{padding-block:108px}
+      #tasknode{padding-block:100px}
+
+      main > section#hierarchy{padding:100px 0 62px}
+      #hierarchy > .container{
+        display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+        column-gap:24px;align-items:start;
+      }
+      #hierarchy .section-number{
+        grid-column:1/-1;grid-row:1;justify-content:flex-start;
+      }
+      #hierarchy .section-number::after{display:block}
+      #hierarchy h2{
+        grid-column:1/8;grid-row:2;max-width:12ch;margin:38px 0 0;
+        text-align:left;font-size:clamp(4rem,5.1vw,5.3rem);
+      }
+      #hierarchy > .container > .lede{
+        grid-column:8/-1;grid-row:2;align-self:end;
+        max-width:none;margin:38px 0 4px;padding-left:28px;
+        border-left:2px solid var(--green);text-align:left;
+      }
+      #hierarchy .hierarchy-tree{
+        grid-column:1/-1;grid-row:3;margin-top:54px;
+      }
+      #hierarchy .hierarchy-tree li,
+      #hierarchy .hierarchy-tree li:first-child{
+        min-height:258px;padding-top:88px;
+      }
+      #hierarchy .hierarchy-tree li[data-level="1"]{margin-top:32px}
+      #hierarchy .hierarchy-tree li[data-level="2"]{margin-top:64px}
+
+      main > section#commands{padding-block:92px}
+      #commands > .container{
+        display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+        column-gap:24px;align-items:start;
+      }
+      #commands .section-number{
+        grid-column:1/7;grid-row:1;justify-content:flex-start;
+      }
+      #commands .section-number::after{display:block}
+      #commands h2{
+        grid-column:1/7;grid-row:2;max-width:11.7ch;margin:28px 0 0;
+        text-align:left;font-size:clamp(3.7rem,4.45vw,4.6rem);
+      }
+      #commands > .container > .lede{
+        grid-column:1/7;grid-row:3;max-width:40ch;margin:28px 0 0;
+        text-align:left;font-size:1.25rem;
+      }
+      #commands .command-deck{
+        grid-column:7/-1;grid-row:1/span 3;
+        grid-template-columns:repeat(3,minmax(0,1fr));margin:0;
+      }
+      #commands .command-deck code,
+      #commands .command-deck code:nth-child(odd),
+      #commands .command-deck code:nth-child(2),
+      #commands .command-deck code:nth-child(3),
+      #commands .command-deck code:nth-child(4),
+      #commands .command-deck code:nth-child(5),
+      #commands .command-deck code:nth-child(6){
+        min-height:126px;padding:24px 20px;border-right:1px solid var(--line);
+        border-bottom:1px solid var(--line);font-size:clamp(1.45rem,1.8vw,1.8rem);
+      }
+      #commands .command-deck code:nth-child(3n){border-right:0}
+      #commands .command-deck code:nth-child(n+4){border-bottom:0}
+      #commands > .container > .reference-disclosure{
+        z-index:2;grid-column:7/-1;grid-row:1/span 3;
+        align-self:start;margin-top:266px;
+      }
+    }
+    @media (max-width:800px){
+      .benchmark-result{grid-template-columns:1fr}
+    }
+
+    /* V155: add one atmospheric signature and break the remaining repeated
+       split-heading formula with centered evidence and status compositions. */
+    main > section#hero{
+      background-color:#020402;background-image:none;
+    }
+    #hero::before{
+      content:"";display:block;position:absolute;
+      inset:-90px -8% auto 30%;height:680px;z-index:0;pointer-events:none;
+      background:url('/media-kit/terminal/aurora.webp') center / cover no-repeat;
+      opacity:.72;filter:saturate(1.12) contrast(1.06);
+      -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 78%,transparent 100%);
+      mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 78%,transparent 100%);
+    }
+    #hero .hero-sub{
+      padding-left:0;border-left:0;text-shadow:0 2px 12px #020402;
+    }
+    #hero .hero-sub::before{display:none}
+
+    #custody .custody-stage{
+      background:
+        linear-gradient(90deg,rgba(2,4,2,.96),rgba(2,4,2,.7)),
+        url('/media-kit/terminal/custody-cubes.webp') center / cover no-repeat;
+    }
+    #custody .custody-node{background:rgba(3,12,3,.84)}
+    #gpu .artifact-stage{
+      background:
+        linear-gradient(rgba(2,4,2,.68),rgba(2,4,2,.88)),
+        url('/media-kit/terminal/compute-lattice.webp') center / cover no-repeat;
+    }
+    #gpu .gpu-flow-visual li,
+    #gpu .gpu-flow-visual li:nth-child(n+4){background:rgba(3,8,3,.74)}
+
+    @media (min-width:981px){
+      #speed{padding-block:92px}
+      #speed .section-number{
+        grid-column:1/-1;grid-row:1;justify-content:center;
+      }
+      #speed .section-number::after{display:none}
+      #speed h2{
+        grid-column:1/-1;grid-row:2;max-width:none;margin:28px 0 0;
+        text-align:center;font-size:clamp(4rem,5.25vw,5.5rem);
+      }
+      #speed > .container > .lede{
+        grid-column:3/11;grid-row:3;max-width:56ch;margin:26px auto 0;
+        padding:0;border-left:0;text-align:center;
+      }
+      #speed .evidence-sheet{grid-row:4;margin-top:58px}
+
+      #pricing h2{
+        grid-column:1/10;max-width:17ch;
+        font-size:clamp(3.7rem,4.35vw,4.55rem);
+      }
+
+      #roadmap .section-number{
+        justify-content:center;
+      }
+      #roadmap .section-number::after{display:none}
+      #roadmap h2{
+        max-width:18ch;margin:0 auto;text-align:center;
+        font-size:clamp(3.7rem,4.55vw,4.7rem);
+      }
+      #roadmap > .container > .lede{
+        max-width:50ch;margin:28px auto 0;text-align:center;
+      }
+      #roadmap .status-grid{margin-top:54px}
+    }
+
+    /* V156: one composed hero stage replaces the stacked install/benchmark
+       column, and the command hierarchy becomes an explicit horizontal chain. */
+    #hero::before{display:none}
+    #hero .hero-sub{text-shadow:none}
+
+    @media (min-width:981px){
+      #hero{padding-top:26px}
+      #hero .hero-statement{margin-bottom:28px}
+      #hero .hero-grid{
+        display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+        grid-template-rows:auto;column-gap:24px;align-items:start;
+      }
+      #hero .hero-copy{grid-column:1/5;grid-row:1}
+      #hero .hero-benchmark{grid-column:5/-1;grid-row:1;margin:0}
+      #hero #install{
+        display:block;
+      }
+      #hero #install .section-number{
+        display:flex;margin:0 0 14px;
+      }
+      #hero #install h2{
+        max-width:8ch;margin:0 0 18px;
+        font-size:clamp(2.7rem,3.3vw,3.4rem);
+      }
+      #hero #install > .install{margin:0}
+      #hero #install > .install-details{margin-top:14px}
+      #hero .install-head{
+        display:grid;grid-template-columns:1fr;gap:6px;
+      }
+      #hero .os-nav{
+        display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+      #hero .os-nav a{justify-content:center;padding-inline:8px}
+      #hero .hero-benchmark-outcomes > div{
+        grid-template-columns:1fr;grid-template-rows:auto 1fr auto;gap:8px;
+      }
+      #hero .hero-benchmark-outcomes span{grid-column:1}
+      #hero .hero-benchmark-outcomes strong{
+        font-size:clamp(4.6rem,6.35vw,6.6rem);
+      }
+      #hero .hero-benchmark-outcomes em{justify-self:end;padding:0}
+
+      #hierarchy .hierarchy-tree{gap:18px}
+      #hierarchy .hierarchy-tree li,
+      #hierarchy .hierarchy-tree li:first-child,
+      #hierarchy .hierarchy-tree li[data-level="1"],
+      #hierarchy .hierarchy-tree li[data-level="2"]{
+        min-height:258px;margin-top:0;
+      }
+      #hierarchy .hierarchy-tree li:not(:last-child)::after{
+        content:"→";position:absolute;right:-24px;top:50%;z-index:3;
+        display:grid;place-items:center;width:30px;height:30px;
+        border:1px solid var(--green);background:#020402;color:var(--green);
+        font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:20px;
+        transform:translateY(-50%);
+      }
+    }
+
+    /* V157: simplify the hero proof and reserve the editorial serif for true
+       signature moments; pricing becomes a proportional financial ledger. */
+    .hero-benchmark-control{
+      display:flex;align-items:center;justify-content:center;gap:18px;
+      min-height:68px;padding:18px 24px;
+    }
+    .hero-benchmark-control span{
+      min-height:0;padding:0;border:0;background:transparent;
+      color:#eef8eb;font-size:17px;letter-spacing:.08em;
+    }
+    .hero-benchmark-control i{
+      display:grid;place-items:center;width:auto;height:auto;background:none;
+    }
+    .hero-benchmark-control i::before{
+      content:"·";color:var(--green);font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:22px;line-height:1;
+    }
+    .hero-benchmark-control i::after{display:none}
+    .hero-benchmark-outcomes em{
+      color:var(--green);font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:18px;font-style:normal;font-weight:600;letter-spacing:.11em;
+      text-transform:uppercase;
+    }
+    .benchmark-result span{
+      font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:17px;font-style:normal;font-weight:600;letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    #pricing .receipt tbody tr:nth-child(1){
+      background:linear-gradient(90deg,rgba(8,113,58,.055) 0 18%,transparent 18%);
+    }
+    #pricing .receipt tbody tr:nth-child(2){
+      background:linear-gradient(90deg,rgba(8,113,58,.055) 0 45%,transparent 45%);
+    }
+    #pricing .receipt tbody tr:nth-child(3){
+      background:linear-gradient(90deg,rgba(8,113,58,.055) 0 70%,transparent 70%);
+    }
+    #pricing .receipt tbody tr:nth-child(4){
+      background:linear-gradient(90deg,rgba(8,113,58,.055) 0 100%,transparent 100%);
+    }
+    #pricing .receipt tbody td:nth-child(2){
+      font-size:1.35rem;font-weight:700;
+    }
+
+    @media (min-width:981px){
+      #hero .hero-copy{grid-column:1/6}
+      #hero .hero-benchmark{grid-column:6/-1}
+      #hero .hero-benchmark-control span{font-size:18px}
+      #hero .hero-benchmark-outcomes strong{
+        font-size:clamp(4.2rem,5.65vw,5.9rem);
+      }
+    }
+
+    /* V158: dark proof surfaces keep only high-contrast information; remove
+       redundant microcopy and atmospheric textures that read as visual murk. */
+    #hero .install-head > span{display:none}
+    #hero .install-head{gap:0}
+    #hero .hero-benchmark figcaption,
+    #hero .hero-benchmark-top strong{display:none}
+    .hero-benchmark-control{min-height:58px;padding-block:14px}
+    .hero-benchmark-top span,
+    .hero-benchmark-top strong{font-size:18px}
+
+    #custody .custody-stage{background:#020402}
+    #custody .custody-node{background:#071007}
+    #custody .custody-node > span{font-size:19px}
+    #custody .custody-node p{font-size:20px;line-height:1.5}
+    #gpu .artifact-stage{background:#020402}
+    #gpu .gpu-flow-visual li,
+    #gpu .gpu-flow-visual li:nth-child(n+4){background:#030803}
+    #gpu .gpu-flow-visual strong{font-size:1.55rem}
+    #gpu .gpu-flow-note{font-size:22px;letter-spacing:.09em}
+
+    @media (min-width:981px){
+      #hero .os-nav{margin:0}
+      #hero .hero-benchmark-outcomes > div{min-height:220px}
+    }
+
+    /* V159: introduce a crisp proof mark, open the evidence rail, and remove
+       boxed repetition from the hierarchy and status palette. */
+    #hero::before{
+      content:"42";display:flex;align-items:center;justify-content:flex-end;
+      position:absolute;right:42px;top:46px;width:510px;height:250px;z-index:0;
+      background:none;color:transparent;opacity:1;pointer-events:none;
+      -webkit-text-stroke:1px rgba(145,245,116,.26);
+      font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:clamp(9rem,17vw,17rem);font-weight:600;line-height:.8;letter-spacing:-.12em;
+    }
+
+    #roadmap .status-panel:nth-child(2){
+      border-top-color:var(--green-2);background:transparent;
+    }
+    #roadmap .status-mark.exp{color:#08713a}
+
+    @media (min-width:981px){
+      .trust-grid{
+        grid-template-columns:repeat(6,minmax(0,1fr));
+      }
+      .trust-grid > div,
+      .trust-grid > div:nth-child(1),
+      .trust-grid > div:nth-child(2),
+      .trust-grid > div:nth-child(3),
+      .trust-grid > div:nth-child(4),
+      .trust-grid > div:nth-child(5){
+        min-height:158px;padding:28px 30px;
+      }
+      .trust-grid > div:nth-child(1),
+      .trust-grid > div:nth-child(2),
+      .trust-grid > div:nth-child(3){grid-column:span 2}
+      .trust-grid > div:nth-child(4),
+      .trust-grid > div:nth-child(5){grid-column:span 3}
+
+      #hierarchy .hierarchy-tree li,
+      #hierarchy .hierarchy-tree li:first-child,
+      #hierarchy .hierarchy-tree li[data-level="1"],
+      #hierarchy .hierarchy-tree li[data-level="2"]{
+        min-height:238px;padding:84px 26px 26px;
+        border:0;border-top:2px solid var(--green);background:transparent;
+      }
+      #hierarchy .hierarchy-tree strong,
+      #hierarchy .hierarchy-tree span{color:#f7fff4}
+      #hierarchy .hierarchy-tree li::before{left:26px;color:var(--green)}
+      #hierarchy .hierarchy-tree li:not(:last-child)::after{
+        right:-24px;background:#020402;
+      }
+    }
+
+    /* V160: the hero uses a crisp routing sculpture instead of atmosphere,
+       and the now-concise release facts return to one calm five-column rail. */
+    #hero::before{
+      content:"";display:block;position:absolute;
+      right:-24px;top:12px;width:650px;height:345px;z-index:0;pointer-events:none;
+      background:url('/media-kit/terminal/orchestration-sculpture.webp') center / contain no-repeat;
+      opacity:.88;filter:brightness(1.12) saturate(1.12);
+      -webkit-text-stroke:0;
+      -webkit-mask-image:linear-gradient(90deg,transparent 0 42%,#000 66%,#000 100%);
+      mask-image:linear-gradient(90deg,transparent 0 42%,#000 66%,#000 100%);
+    }
+    #hero .hero-sub{
+      padding:20px 22px;border-left:1px solid var(--green);
+      background:linear-gradient(90deg,rgba(2,4,2,.94),rgba(2,4,2,.74));
+    }
+
+    @media (min-width:981px){
+      .trust-grid{
+        grid-template-columns:repeat(5,minmax(0,1fr));
+      }
+      .trust-grid > div,
+      .trust-grid > div:nth-child(1),
+      .trust-grid > div:nth-child(2),
+      .trust-grid > div:nth-child(3),
+      .trust-grid > div:nth-child(4),
+      .trust-grid > div:nth-child(5){
+        grid-column:auto;min-height:190px;padding:34px 28px;
+      }
+      .trust-grid dd{font-size:19px}
+    }
+
+    /* V161: the hero's visual device is the benchmark itself — a large,
+       typographic 42-run proof mark rather than decorative imagery. */
+    #hero::before{display:none}
+    #hero .hero-sub{
+      display:grid;grid-template-columns:146px minmax(0,1fr);gap:24px;align-items:end;
+      padding:18px 0;border:0;background:none;
+    }
+    #hero .hero-run{
+      display:flex;min-width:0;flex-direction:column;justify-content:flex-end;
+      padding-right:22px;border-right:1px solid var(--green);
+    }
+    #hero .hero-run b{
+      color:var(--green);font-family:"Bricolage Grotesque","Inter Tight",system-ui,sans-serif;
+      font-size:clamp(6.4rem,8.5vw,8.8rem);font-weight:650;line-height:.68;letter-spacing:-.09em;
+    }
+    #hero .hero-run span{
+      margin-top:18px;color:#eef8eb;font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:16px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    }
+    #hero .hero-sub > span:last-child{
+      color:#f7fff4;font-size:1.03em;line-height:1.46;
+    }
+    @media (min-width:981px){
+      main > section#hero{padding-top:26px}
+      #hero .hero-claim{margin-top:28px}
+    }
+    @media (max-width:700px){
+      #hero .hero-sub{grid-template-columns:1fr}
+      #hero .hero-run{
+        display:grid;grid-template-columns:auto 1fr;align-items:end;gap:18px;
+        padding:0 0 18px;border-right:0;border-bottom:1px solid var(--green);
+      }
+      #hero .hero-run span{margin:0 0 4px}
+    }
+
+    /* V162: one unambiguous hero focal point — headline, value line, then
+       working install and benchmark proof. */
+    #hero .hero-statement{display:block}
+    #hero .hero-statement h1{max-width:15ch}
+    #hero .hero-sub{display:none}
+    #speed .benchmark-proof p{font-size:1.2rem;line-height:1.65}
+
+    @media (min-width:981px){
+      #hero .hero-claim{margin-top:30px}
+    }
+
+    /* V163: resolve module baselines and legibility floors. */
+    h2{letter-spacing:-.025em}
+    main > section.light:not(#tasknode) p:not(.lede):not(.section-number):not(.pull):not(.scroll-hint):not(.fineprint){
+      color:#050b05;font-size:20px;line-height:1.55;
+    }
+
+    @media (min-width:981px){
+      #hero .hero-benchmark{
+        display:grid;grid-template-rows:auto auto 1fr;align-self:stretch;
+      }
+      #hero .hero-benchmark-outcomes{height:100%}
+      #hero .hero-benchmark-outcomes > div{min-height:0;height:100%}
+    }
+
+    /* V164: finish sparse process cells and keep the late-page command
+       headline from collapsing into a four-line column. */
+    #tasknode .task-flow small{
+      display:block;color:#dff2da;font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:16px;font-weight:500;line-height:1.35;letter-spacing:.02em;
+    }
+
+    @media (min-width:981px){
+      #tasknode .task-flow li{
+        justify-content:flex-start;min-height:188px;padding:28px;gap:14px;
+      }
+      #tasknode .task-flow span{
+        margin:0 0 14px;font-size:clamp(2.6rem,3.4vw,3.2rem);line-height:.8;
+        letter-spacing:-.07em;
+      }
+      #tasknode .task-flow strong{font-size:clamp(1.65rem,2vw,1.95rem)}
+      #tasknode .task-ledger-foot{margin-top:24px}
+      #commands h2{
+        max-width:none;font-size:clamp(3.3rem,3.65vw,3.8rem);
+      }
+    }
+
+    /* V165: replace the fashionable editorial accent with a terminal-native
+       outline/cursor signature, and let the benchmark data draw itself. */
+    #hero h1 .accent{
+      position:relative;display:inline-block;
+      background:none;color:transparent;
+      -webkit-background-clip:border-box;background-clip:border-box;
+      -webkit-text-stroke:2px var(--green);
+      font-family:"Bricolage Grotesque","Inter Tight",system-ui,sans-serif;
+      font-size:.88em;font-style:normal;font-weight:650;letter-spacing:-.07em;
+    }
+    #hero h1 .accent::after{
+      content:"";display:inline-block;width:.1em;height:.72em;margin-left:.11em;
+      background:var(--green);transform:translateY(.04em);
+    }
+
+    .benchmark-matchups .benchmark-kicker{
+      font-family:"Bricolage Grotesque","Inter Tight",system-ui,sans-serif;
+      font-size:20px;font-weight:700;letter-spacing:-.01em;text-transform:none;
+    }
+    .benchmark-result strong{
+      position:relative;border-top:2px solid var(--ink-line-strong);
+    }
+    .benchmark-result strong::before{
+      content:"";position:absolute;left:0;top:-3px;width:var(--gain);height:5px;
+      background:var(--green-2);
+    }
+    .benchmark-result span{
+      font-family:"Bricolage Grotesque","Inter Tight",system-ui,sans-serif;
+      font-size:20px;font-style:normal;font-weight:650;letter-spacing:-.01em;
+      text-transform:none;
+    }
+    #tasknode .task-flow small{
+      font-family:"Bricolage Grotesque","Inter Tight",system-ui,sans-serif;
+      font-size:17px;letter-spacing:0;
+    }
+
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
       .tui-cursor{animation:none}
@@ -3607,8 +4377,8 @@
       <div class="container hero-statement">
         <p class="eyebrow">PFTerminal {{ $v }} · Rust TUI · based on the open-source Codex CLI</p>
         <h1 id="hero-title">The AI terminal that answers to <span class="accent">you.</span></h1>
-        <p class="hero-claim">Same models. Less time. Less spend. Open source.</p>
-        <p class="hero-sub">PFTerminal is an enterprise-grade, open-source coding-agent harness built on Codex. Across seven matched comparisons using the same named model and provider route, it was 39.8% cheaper and 46.6% faster at the median. Bring your own provider keys or buy prepaid inference with USDC—without a credit card or seat license.</p>
+        <p class="hero-claim">Enterprise-grade. Open source. Same models. Less time. Less spend. Your keys or USDC.</p>
+        <p class="hero-sub"><strong class="hero-run"><b>42</b><span>matched runs</span></strong><span>Enterprise-grade and open-source, built on Codex. Bring your own keys—or buy inference with USDC.</span></p>
       </div>
       <div class="container hero-grid">
         <div class="hero-copy">
@@ -3676,44 +4446,20 @@
           </section>
         </div>
 
-      <p class="sr-only">Six providers route through the model selector into a supervised chain: Nazgul, Troll, and Orc.</p>
-      <div class="surface-wrap">
-        <div class="surface-meta" aria-hidden="true">
-          <span>Product / surface</span>
-          <strong>PFTerminal</strong>
-          <em>{{ $v }}</em>
+      <figure class="hero-benchmark" aria-label="PFTerminal release benchmark: 42 matched runs using the same model, provider, and task; 39.8 percent cheaper and 46.6 percent faster at the median">
+        <div class="hero-benchmark-top">
+          <span>Release benchmark / matched harnesses</span>
+          <strong>42 matched runs</strong>
         </div>
-        <figure class="tui-figure">
-          <p class="scroll-hint" id="hero-tui-hint">Scroll terminal horizontally &rarr;</p>
-          <div class="tui-scroll" tabindex="0" role="region" aria-label="PFTerminal product-surface schematic" aria-describedby="hero-tui-caption hero-tui-hint">
-            <div class="surface-map" aria-hidden="true">
-              <div class="surface-model"><span>Default / model</span><strong>Ambient GLM 5.2</strong></div>
-              <div class="surface-route"><span>/providers</span><i>&rarr;</i><span>/model</span></div>
-              <div class="surface-chain"><span>Nazgul</span><i>&rarr;</i><span>Troll</span><i>&rarr;</i><span>Orc</span></div>
-              <div class="surface-commands"><span>/vault</span><span>/wallet</span><span>/gpu</span><span>/tasknode</span></div>
-            </div>
-            <pre class="tui" aria-hidden="true"><code><span class="d">┌─</span> PFTerminal {{ $v }} · product surface <span class="d">─────────────────────────────┐</span>
-<span class="d">│</span> default model   <span class="c">Ambient GLM 5.2</span>                                  <span class="d">│</span>
-<span class="d">│</span>                                                                  <span class="d">│</span>
-<span class="d">│</span> <span class="c">/providers</span>      grant access                                     <span class="d">│</span>
-<span class="d">│</span> <span class="c">/model</span>          provider · model · reasoning effort              <span class="d">│</span>
-<span class="d">│</span>                                                                  <span class="d">│</span>
-<span class="d">│</span> /spawn status                                                    <span class="d">│</span>
-<span class="d">│</span> <span class="k">Nazgul</span>           root supervisor                                 <span class="d">│</span>
-<span class="d">│</span> └─ <span class="k">Troll</span>         engineering-manager tier                        <span class="d">│</span>
-<span class="d">│</span>    └─ <span class="k">Orc</span>        bounded IC executor                             <span class="d">│</span>
-<span class="d">│</span>                                                                  <span class="d">│</span>
-<span class="d">│</span> /vault           encrypted credentials and user secrets          <span class="d">│</span>
-<span class="d">│</span> <span class="m">/wallet</span>          <span class="m">Solana mainnet · SOL · canonical USDC · locked</span>  <span class="d">│</span>
-<span class="d">│</span> /gpu             Vast.ai · RunPod · <span class="k">READY</span> → <span class="c">/model</span>               <span class="d">│</span>
-<span class="d">│</span> /tasknode        work · evidence · rewards                       <span class="d">│</span>
-<span class="d">│</span>                                                                  <span class="d">│</span>
-<span class="d">│</span> &gt; /docs <span class="tui-cursor">█</span>                                                        <span class="d">│</span>
-<span class="d">└──────────────────────────────────────────────────────────────────┘</span></code></pre>
-          </div>
-          <figcaption class="sr-only" id="hero-tui-caption">PFTerminal {{ $v }} command map. Ambient GLM 5.2 is the default model path; <code>/providers</code> grants access; <code>/model</code> selects provider, model, and reasoning effort; Nazgul supervises Trolls and Orcs; the vault, wallet, GPU, and Task Node surfaces remain separate commands.</figcaption>
-        </figure>
-      </div>
+        <div class="hero-benchmark-control" aria-hidden="true">
+          <span>Same model</span><i></i><span>Same provider</span><i></i><span>Same task</span>
+        </div>
+        <div class="hero-benchmark-outcomes">
+          <div><span>Median model cost</span><strong>&minus;39.8%</strong><em>cheaper</em></div>
+          <div><span>Median elapsed time</span><strong>&minus;46.6%</strong><em>faster</em></div>
+        </div>
+        <figcaption>PF Terminal vs Hermes + Claude Code <span>·</span> functional verifier <span>·</span> provider-settled cost</figcaption>
+      </figure>
       </div>
     </section>
 
@@ -3721,11 +4467,11 @@
     <aside class="trust-bar" aria-label="Release and performance facts">
       <div class="container">
         <dl class="trust-grid">
-          <div><dt>39.8%</dt><dd>cheaper at the median · seven matched harness comparisons</dd></div>
-          <div><dt>46.6%</dt><dd>faster at the median · same models and provider routes</dd></div>
-          <div><dt>42</dt><dd>matched runs · 21 PFTerminal and 21 comparison runs</dd></div>
-          <div><dt>Apache-2.0</dt><dd>open-source Codex fork · public Rust repository</dd></div>
-          <div><dt>{{ (index $plans.plans 0).priceUsdc }}&ndash;{{ (index (last 1 $plans.plans) 0).priceUsdc }} USDC</dt><dd>prepaid inference · no credit card or seat license</dd></div>
+          <div><dt>Apache-2.0</dt><dd>open source · public Rust repo</dd></div>
+          <div><dt>6</dt><dd>built-in providers</dd></div>
+          <div><dt>Your keys</dt><dd>encrypted local vault</dd></div>
+          <div><dt>{{ (index $plans.plans 0).priceUsdc }}&ndash;{{ (index (last 1 $plans.plans) 0).priceUsdc }} USDC</dt><dd>prepaid · no card or seat license</dd></div>
+          <div><dt>3 platforms</dt><dd>Linux · macOS · Windows</dd></div>
         </dl>
       </div>
     </aside>
@@ -3735,7 +4481,7 @@
       <div class="container">
         <p class="section-number">02 / MODELS</p>
         <h2 id="models-title">Every model, one terminal.</h2>
-        <p class="lede">Ambient GLM 5.2 is the default model path. <code>/providers</code> grants provider access; <code>/model</code> selects the provider, the model, and the reasoning effort. A spawned agent may differ from its parent on all three.</p>
+        <p class="lede">Choose provider, model, and reasoning effort per agent. Ambient GLM 5.2 is the default; spawned agents can take a different route from their parent.</p>
         <div class="provider-map" aria-label="Six built-in providers converge into per-agent model selection">
           <span class="provider-packet" aria-hidden="true"></span>
           <div class="provider-nodes">
@@ -3809,7 +4555,7 @@
       <div class="container">
         <p class="section-number">03 / HIERARCHY</p>
         <h2 id="hierarchy-title">A chain of command, not a pile of tabs.</h2>
-        <p class="lede"><code>/spawn</code> creates managed work entities with an explicit role, model, harness, and parent/child relationship. Agents do not exist as isolated tabs with no visible chain of command.</p>
+        <p class="lede">Spawn managed work with an explicit role, model, harness, and parent. Every agent stays visible inside a chain of command.</p>
         <ul class="hierarchy-tree" id="hierarchyTree">
           <li data-level="0"><strong>Nazgul</strong><span>Root supervisor bound to the pane you talk to. Converts your objective into coordinated work.</span></li>
           <li data-level="1"><strong>Troll</strong><span>Engineering-manager tier. Manages delegated execution, reviews Orc output, and reports upward.</span></li>
@@ -3844,7 +4590,7 @@
       <div class="container">
         <p class="section-number">04 / CUSTODY</p>
         <h2 id="custody-title">You hold the keys and the wallet.</h2>
-        <p class="lede">Two separate stores, deliberately. The vault stores service credentials. The wallet manages a signing key, on-chain balances, and PfTerminal Plan linkage.</p>
+        <p class="lede">Two local stores: the encrypted vault for provider credentials, and the wallet for the signing key and USDC.</p>
         <details class="reference-disclosure custody-details" data-appendix>
           <summary>Vault and wallet implementation details</summary>
           <div class="grid-2">
@@ -3988,26 +4734,13 @@
       </div>
     </section>
 
-
-    <aside class="statement signal" aria-label="Positioning statement">
-      <div class="container signal-layout">
-        <p><span class="signal-beat">Same models. Same providers.</span><span class="signal-beat">39.8% cheaper at the median.</span><span class="signal-beat">46.6% faster at the median.</span></p>
-        <div class="signal-equation" aria-hidden="true"><span>6</span><i>&rarr;</i><span>1</span></div>
-      </div>
-    </aside>
     <!-- ===================== 06 PERFORMANCE ===================== -->
     <section id="speed" class="light" data-chapter="06" aria-labelledby="speed-title">
       <div class="container">
         <p class="section-number">06 / PERFORMANCE</p>
         <h2 id="speed-title">39.8% cheaper. 46.6% faster.</h2>
-        <p class="lede">PF Terminal is a leaner open-source coding harness. Across seven matched comparisons, each harness used the same named model and provider route. Every comparison favored PF Terminal on both cost and elapsed time.</p>
+        <p class="lede">Seven comparisons. 42 matched runs. The same named model and provider route. Every comparison favored PF Terminal on cost and elapsed time.</p>
         <div class="evidence-sheet">
-          <div class="benchmark-scorecard" aria-label="PF Terminal release benchmark summary">
-            <div><span>Median cost</span><strong>39.8%</strong><em>cheaper</em></div>
-            <div><span>Median time</span><strong>46.6%</strong><em>faster</em></div>
-            <div><span>Release campaign</span><strong>42</strong><em>matched runs</em></div>
-          </div>
-
           <div class="benchmark-matchups">
             <article>
               <span class="benchmark-kicker">PF Terminal vs Hermes</span>
@@ -4016,7 +4749,7 @@
                 <div><dt>PF Terminal</dt><dd>$1.75 · 24.7 min</dd></div>
                 <div><dt>Hermes</dt><dd>$2.52 · 31.2 min</dd></div>
               </dl>
-              <p><strong>30.7% cheaper</strong> and <strong>26.7% faster</strong>.</p>
+              <div class="benchmark-result"><strong style="--gain:30.7%"><b>30.7%</b> <span>cheaper</span></strong><strong style="--gain:26.7%"><b>26.7%</b> <span>faster</span></strong></div>
             </article>
             <article>
               <span class="benchmark-kicker">PF Terminal vs Claude Code</span>
@@ -4025,7 +4758,7 @@
                 <div><dt>PF Terminal</dt><dd>$2.89 · 17.0 min</dd></div>
                 <div><dt>Claude Code</dt><dd>$6.70 · 29.7 min</dd></div>
               </dl>
-              <p><strong>56.9% cheaper</strong> and <strong>74.3% faster</strong>.</p>
+              <div class="benchmark-result"><strong style="--gain:56.9%"><b>56.9%</b> <span>cheaper</span></strong><strong style="--gain:74.3%"><b>74.3%</b> <span>faster</span></strong></div>
             </article>
           </div>
 
@@ -4045,7 +4778,7 @@
       <div class="container">
         <p class="section-number">07 / RUNTIME</p>
         <h2 id="runtime-title">It is a fork of a real runtime, not a wrapper.</h2>
-        <p class="lede">PFTerminal keeps the Codex CLI's local coding-agent runtime and makes provider access, credential storage, packaging, and product surfaces first-class. The changes are code-level, not prompt text.</p>
+        <p class="lede">PFTerminal keeps the Codex CLI's local coding-agent runtime. Provider access, credentials, packaging, and product surfaces are code-level—not prompt text.</p>
         <details class="panel source-ledger" style="margin-bottom:32px">
           <summary>Source ledger and claim provenance</summary>
           <span class="label">Check any claim on this page against its source</span>
@@ -4110,13 +4843,13 @@
       <div class="container">
         <p class="section-number">08 / TASK NODE</p>
         <h2 id="tasknode-title">Wired into Post Fiat Task Node.</h2>
-        <p class="lede">Task Node is the agent-side work ledger. Link an account, inspect tasks, submit evidence, answer verification, read rewards and balances, and open Task Node chat or context — without leaving the terminal.</p>
+        <p class="lede">Request tasks, submit evidence, answer verification, read rewards, and open Task Node chat—without leaving the terminal.</p>
         <div class="task-ledger" aria-label="Task Node work ledger flow">
           <div class="task-ledger-head"><strong>Work ledger</strong><span>Task Node / workflow</span></div>
           <ol class="task-flow">
-            <li><span>01</span><strong>Request</strong></li>
-            <li><span>02</span><strong>Evidence</strong></li>
-            <li><span>03</span><strong>Reward</strong></li>
+            <li><span>01</span><strong>Request</strong><small>Pull scoped work</small></li>
+            <li><span>02</span><strong>Evidence</strong><small>Submit proof</small></li>
+            <li><span>03</span><strong>Reward</strong><small>Read the outcome</small></li>
           </ol>
           <p class="task-ledger-foot"><span>Chat</span><span>Context</span><span>Verification</span></p>
         </div>
