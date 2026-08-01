@@ -1,0 +1,5902 @@
+/*
+ * PF Terminal — Command Instrument v3
+ *
+ * Final art-direction layer for the SOL Pro 90/100 brief. This file is kept
+ * separate from the broad v2 implementation so the approved composition can
+ * be audited without searching through the earlier exploratory passes.
+ */
+
+/* ---------- Global editorial grammar ---------- */
+
+body {
+  font-size: 18px;
+}
+
+.nav-shell {
+  min-height: 66px;
+}
+
+.nav-links a,
+.nav-actions a,
+.nav-shell .brand {
+  font-size: 17px;
+}
+
+.section-number {
+  position: static !important;
+  display: flex !important;
+  width: max-content !important;
+  margin: 0 0 20px !important;
+  color: var(--pf-green-ink);
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+  opacity: 1 !important;
+  writing-mode: horizontal-tb !important;
+  transform: none !important;
+}
+
+.section-number .section-index,
+.section-number .section-name {
+  display: inline !important;
+  color: inherit !important;
+  font: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+/* V249: the slash is literal markup text now, not generated content. */
+.section-number .section-index::after {
+  content: none !important;
+  display: none !important;
+}
+
+.section-number::before,
+.section-number::after {
+  display: none !important;
+}
+
+.band .section-number,
+#hero .section-number,
+#gpu .section-number,
+#tasknode .section-number,
+#commands .section-number,
+.technical-appendix .section-number {
+  color: var(--pf-green);
+}
+
+.lede {
+  font-size: clamp(20px, 1.55vw, 23px);
+  line-height: 1.48;
+}
+
+.eyebrow,
+.label,
+.scroll-hint,
+caption,
+.install-head,
+.benchmark-kicker,
+.reference-disclosure > summary,
+.source-ledger > summary,
+.appendix-drawer > summary {
+  letter-spacing: .075em;
+}
+
+/* ---------- Opening peak ---------- */
+
+#hero {
+  padding: 40px 0 68px;
+  background: var(--pf-ground);
+}
+
+#hero::before,
+#hero::after,
+.hero-statement::after {
+  display: none !important;
+}
+
+.hero-statement {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto auto auto;
+  gap: 0 var(--pf-gap);
+  align-items: start;
+  margin-bottom: 26px;
+}
+
+.hero-statement > .eyebrow {
+  grid-column: 1 / 11;
+  grid-row: 1;
+  margin-bottom: 24px;
+  color: var(--pf-green);
+  font-size: 15px;
+}
+
+#hero .hero-statement h1 {
+  grid-column: 1 / 11;
+  grid-row: 2;
+  max-width: 11.5ch;
+  margin: 0;
+  color: var(--pf-light);
+  font-size: clamp(86px, 7.15vw, 104px);
+  font-weight: 620;
+  line-height: .9;
+  letter-spacing: -.055em;
+}
+
+#hero h1 .accent {
+  position: relative;
+  display: inline-block;
+  color: var(--pf-green);
+  font-family: var(--pf-display);
+  font-style: normal;
+  font-weight: 620;
+  letter-spacing: -.055em;
+  -webkit-text-fill-color: currentColor;
+}
+
+#hero h1 .accent::after {
+  display: none;
+}
+
+.hero-line,
+.hero-together {
+  white-space: nowrap;
+}
+
+.hero-statement > .hero-claim {
+  grid-column: 1 / 9;
+  grid-row: 3;
+  max-width: 58ch;
+  margin: 22px 0 0;
+  padding: 16px 0 0;
+  border: 0;
+  border-top: 1px solid var(--pf-line-dark-strong);
+  color: var(--pf-body);
+  font-size: clamp(20px, 1.55vw, 23px);
+  font-weight: 520;
+  line-height: 1.48;
+}
+
+.hero-sub {
+  display: none !important;
+}
+
+.hero-relay {
+  display: none;
+  position: relative;
+  grid-column: 8 / 13;
+  grid-row: 1 / 4;
+  align-self: stretch;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 0 22px;
+  border-left: 1px solid var(--pf-line-dark-strong);
+}
+
+.hero-relay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 7px;
+  width: 1px;
+  background: rgba(127, 238, 100, .24);
+}
+
+.hero-relay img {
+  width: 100%;
+  height: auto;
+  border: 0;
+}
+
+.hero-relay figcaption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 0 0;
+  color: var(--pf-body-soft);
+  font-family: var(--pf-mono);
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+#install .section-number {
+  margin-bottom: 8px !important;
+}
+
+#install-title {
+  margin-bottom: 24px;
+}
+
+.hero-relay figcaption strong {
+  color: var(--pf-green);
+  font: inherit;
+  white-space: nowrap;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--pf-gap);
+  margin-top: 0;
+  align-items: stretch;
+}
+
+.hero-copy {
+  grid-column: 1 / 6;
+}
+
+.hero-benchmark {
+  grid-column: 6 / 13;
+  min-height: 330px;
+  margin: 0;
+  padding: 28px 0 0 34px;
+  border: 0;
+  border-left: 1px solid var(--pf-line-dark-strong);
+  background: transparent;
+}
+
+.hero-benchmark-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+}
+
+.hero-benchmark-top span,
+.hero-benchmark-top strong {
+  display: block;
+  color: var(--pf-body-soft);
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .065em;
+  text-transform: uppercase;
+}
+
+.hero-benchmark-top strong {
+  color: var(--pf-green);
+}
+
+.hero-benchmark-outcomes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0;
+}
+
+.hero-benchmark-outcomes > div {
+  min-height: 240px;
+  padding: 34px 24px 26px 0;
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+}
+
+.hero-benchmark-outcomes > div + div {
+  padding-left: 32px;
+  border-left: 1px solid var(--pf-line-dark-strong);
+}
+
+.hero-benchmark-outcomes > div > span {
+  color: var(--pf-body-soft);
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  letter-spacing: .065em;
+  text-transform: uppercase;
+}
+
+.hero-benchmark-outcomes strong {
+  display: block;
+  margin-top: 42px;
+  color: var(--pf-green-major);
+  font-family: var(--pf-display);
+  font-size: clamp(68px, 6vw, 92px);
+  font-weight: 620;
+  line-height: .78;
+  letter-spacing: -.07em;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-benchmark-outcomes em {
+  display: block;
+  margin-top: 18px;
+  color: var(--pf-light);
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  font-style: normal;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+
+#install-title {
+  max-width: 8ch;
+  font-size: clamp(54px, 4.7vw, 68px);
+}
+
+.install {
+  border: 0;
+  border-top: 2px solid var(--pf-green);
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+  background: transparent;
+}
+
+.install-head {
+  padding-inline: 0;
+  border-bottom-color: var(--pf-line-dark-strong);
+}
+
+.install-panel {
+  padding: 20px 0 0;
+}
+
+.cmd-row {
+  min-height: 102px;
+  border: 0;
+  border-top: 1px solid var(--pf-line-dark);
+  background: var(--pf-inset);
+}
+
+.cmd-scroll pre,
+.cmd-scroll code {
+  white-space: pre-wrap !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.cmd-scroll code {
+  min-width: 0 !important;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.trust-bar {
+  border-color: rgba(5, 7, 5, .5);
+  background: var(--pf-green);
+  color: var(--pf-ink);
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: 2.2fr 1.5fr 2.3fr;
+}
+
+.trust-grid > div,
+.trust-grid > div:first-child {
+  min-height: 144px;
+  padding: 28px 26px;
+  border-right: 1px solid rgba(5, 7, 5, .36);
+}
+
+.trust-grid > div:first-child {
+  padding-left: 0;
+}
+
+.trust-grid > div:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.trust-grid dt {
+  color: var(--pf-ink);
+  font-family: var(--pf-display);
+  font-size: clamp(28px, 2.7vw, 42px);
+  font-weight: 610;
+  line-height: 1;
+  letter-spacing: -.035em;
+}
+
+.trust-grid dd {
+  max-width: 34ch;
+  margin-top: 14px;
+  color: #10220e;
+  font-size: 16px;
+}
+
+.provider-node span,
+.provider-node code,
+.provider-core span,
+.benchmark-kicker,
+.benchmark-matchups dt,
+.benchmark-matchups dd,
+.gpu-flow-visual span,
+.task-ledger-head span,
+.task-ledger-foot,
+.task-flow span,
+.task-flow small,
+.command-deck > div > span {
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.provider-node strong,
+.gpu-flow-visual strong,
+.task-flow strong {
+  font-size: 21px;
+}
+
+/* ---------- Peaks, rests, and report chapters ---------- */
+
+#models,
+#hierarchy,
+#speed,
+#tasknode,
+#pricing {
+  padding-block: 128px;
+}
+
+#custody,
+#runtime {
+  padding-block: 96px;
+}
+
+#gpu {
+  padding-block: 120px;
+}
+
+#commands,
+#roadmap {
+  padding-block: 76px;
+}
+
+#roadmap > .container {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--pf-gap);
+}
+
+#roadmap .section-number {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+#roadmap h2 {
+  grid-column: 1 / 9;
+  grid-row: 2;
+  max-width: 17ch;
+  font-size: clamp(48px, 4.1vw, 58px);
+}
+
+#roadmap > .container > .lede {
+  grid-column: 1 / 8;
+  grid-row: 3;
+  margin-top: 26px;
+}
+
+#roadmap > .container > .grid-3 {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  margin-top: 52px;
+}
+
+/* Models: one centered introduction, one dominant routing field. */
+
+#models .section-number {
+  color: var(--pf-green-ink);
+}
+
+#models .provider-map {
+  margin-top: 68px;
+  border: 0;
+  border-top: 2px solid var(--pf-green);
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+  border-radius: 0;
+  background: var(--pf-inset);
+  box-shadow: none;
+}
+
+/* Hierarchy: open stepped ledger; no repeated card chrome. */
+
+#hierarchy .section-number {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+#hierarchy h2 {
+  grid-column: 1 / 10;
+  grid-row: 2;
+}
+
+#hierarchy > .container > .lede {
+  grid-column: 1 / 7;
+  grid-row: 3;
+  align-self: start;
+  margin: 30px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+#hierarchy .hierarchy-tree {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  display: block;
+  max-width: none;
+  margin: 72px 0 0;
+  padding: 0 0 0 34px;
+  border-top: 1px solid var(--pf-line-dark-strong);
+}
+
+#hierarchy .hierarchy-tree::before {
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--pf-green);
+}
+
+#hierarchy .hierarchy-tree::after {
+  left: 16px;
+  top: 8px;
+  bottom: -8px;
+}
+
+#hierarchy .hierarchy-tree li,
+#hierarchy .hierarchy-tree li:first-child {
+  display: grid;
+  grid-template-columns: minmax(190px, 1fr) minmax(0, 3fr);
+  gap: 32px;
+  align-items: center;
+  width: 100%;
+  min-height: 140px;
+  margin: 0;
+  padding: 28px 30px 28px 38px;
+  border: 0;
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+  border-radius: 0;
+  background: transparent;
+}
+
+#hierarchy .hierarchy-tree li[data-level="1"] {
+  width: 92%;
+  margin-left: 8%;
+}
+
+#hierarchy .hierarchy-tree li[data-level="2"] {
+  width: 84%;
+  margin-left: 16%;
+}
+
+#hierarchy .hierarchy-tree li::before {
+  top: 50%;
+  right: 100%;
+  left: auto;
+  width: 34px;
+  height: 2px;
+  background: var(--pf-green);
+  transform: none;
+}
+
+#hierarchy .hierarchy-tree li::after {
+  top: calc(50% + 8px);
+  right: 100%;
+  left: auto;
+  width: 26px;
+  height: 1px;
+}
+
+#hierarchy .hierarchy-tree strong {
+  font-size: clamp(42px, 4vw, 56px);
+}
+
+#hierarchy .hierarchy-tree span {
+  max-width: 48ch;
+  color: var(--pf-body);
+  font-size: 19px;
+}
+
+/* GPU: a single route with a clear READY endpoint. */
+
+#gpu .artifact-stage {
+  border-inline: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.gpu-flow-visual li:not(.is-ready) span {
+  font-size: 14px;
+}
+
+.gpu-flow-visual .is-ready {
+  border-left: 2px solid var(--pf-green);
+  background: linear-gradient(180deg, rgba(127, 238, 100, .14), transparent 78%);
+}
+
+.gpu-flow-visual .is-ready strong {
+  color: var(--pf-green-major);
+  font-size: 28px;
+}
+
+/* Performance: printed report with one black benchmark header. */
+
+#speed .section-number {
+  margin-inline: auto !important;
+}
+
+#speed h2 {
+  max-width: 12ch;
+  margin-inline: auto;
+  font-size: clamp(76px, 7vw, 98px);
+  line-height: .94;
+  letter-spacing: -.055em;
+}
+
+#speed h2 span {
+  display: block;
+}
+
+#speed h2 span:last-child {
+  color: var(--pf-green-ink);
+}
+
+#speed .evidence-sheet {
+  margin-top: 72px;
+  padding-top: 96px;
+  border: 0;
+  border-bottom: 1px solid var(--pf-line-light-strong);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#speed .evidence-sheet::before {
+  min-height: 96px;
+  padding: 34px 38px;
+  border-top: 2px solid var(--pf-green);
+  background: var(--pf-ground);
+  color: var(--pf-green);
+  font-size: 16px;
+}
+
+#speed .benchmark-matchups {
+  border-inline: 1px solid var(--pf-line-light-strong);
+}
+
+#speed .benchmark-matchups article {
+  padding: 44px 46px 38px;
+}
+
+#speed .benchmark-result b {
+  font-size: clamp(58px, 5vw, 76px);
+}
+
+/* V248: gain bar removed — no line or pseudo-element may cross or
+   touch a benchmark result (delta acceptance check 13). */
+
+#speed .benchmark-proof {
+  border: 1px solid var(--pf-line-light-strong);
+  border-bottom: 0;
+  background: transparent;
+}
+
+/* Task Node: restore the lower-page dark proof peak. */
+
+#tasknode {
+  background: var(--pf-ground) !important;
+  color: var(--pf-body) !important;
+}
+
+#tasknode .section-number {
+  grid-column: 8 / 13;
+  grid-row: 1;
+  justify-self: start;
+  color: var(--pf-green);
+}
+
+#tasknode h2 {
+  color: var(--pf-light);
+}
+
+#tasknode > .container > .lede {
+  color: var(--pf-body);
+}
+
+#tasknode .task-ledger {
+  padding: 36px 38px;
+  border: 0;
+  border-top: 2px solid var(--pf-green);
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+  border-radius: 0;
+  background:
+    linear-gradient(rgba(127, 238, 100, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(127, 238, 100, .035) 1px, transparent 1px),
+    var(--pf-inset);
+  background-size: 40px 40px;
+  color: var(--pf-body);
+}
+
+#tasknode .task-ledger::before {
+  background: var(--pf-green);
+}
+
+#tasknode .task-ledger-head,
+#tasknode .task-ledger-foot {
+  border-color: var(--pf-line-dark-strong);
+}
+
+#tasknode .task-ledger-head strong,
+#tasknode .task-flow strong {
+  color: var(--pf-light);
+}
+
+#tasknode .task-ledger-head span,
+#tasknode .task-ledger-foot,
+#tasknode .task-flow small {
+  color: var(--pf-body-soft);
+}
+
+#tasknode .task-flow {
+  border-color: var(--pf-line-dark-strong);
+  background: transparent;
+}
+
+#tasknode .task-flow::before {
+  background: var(--pf-green);
+}
+
+#tasknode .task-flow li {
+  border-color: var(--pf-line-dark-strong);
+  background: var(--pf-inset);
+}
+
+#tasknode .task-flow li::after {
+  background: var(--pf-inset);
+  color: var(--pf-green);
+}
+
+#tasknode .task-flow span {
+  color: var(--pf-green);
+}
+
+#tasknode .btn {
+  border-color: var(--pf-line-dark-strong);
+  color: var(--pf-light);
+}
+
+#tasknode .btn:first-child {
+  border-color: var(--pf-green);
+  background: var(--pf-green);
+  color: var(--pf-ink);
+}
+
+/* Pricing: commercial proof becomes a dark receipt. */
+
+#pricing .receipt {
+  border: 0;
+  border-top: 3px solid var(--pf-green);
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+  border-radius: 0;
+  background: var(--pf-ground);
+  color: var(--pf-body);
+  box-shadow: none;
+}
+
+#pricing .receipt .scroll-region {
+  border: 0;
+  background: transparent;
+}
+
+#pricing .receipt caption,
+#pricing .receipt thead th {
+  color: var(--pf-body-soft);
+}
+
+#pricing .receipt th,
+#pricing .receipt td {
+  border-color: var(--pf-line-dark-strong);
+  color: var(--pf-body);
+}
+
+#pricing .receipt tbody tr,
+#pricing .receipt tbody tr:nth-child(even) {
+  background: transparent;
+}
+
+#pricing .receipt tbody tr:hover {
+  background: rgba(127, 238, 100, .05);
+}
+
+#pricing .receipt tbody td:first-child,
+#pricing .receipt tbody td:first-child code,
+#pricing .receipt tbody td:nth-child(2) {
+  color: var(--pf-green-major);
+}
+
+#pricing > .container > .pull {
+  padding-top: 18px;
+  border-top: 1px solid var(--pf-green-paper);
+  text-align: left;
+}
+
+/* Commands + status: a single paper reference macro-band. */
+
+#commands {
+  background: var(--pf-paper);
+  color: var(--pf-ink);
+}
+
+#commands .section-number {
+  color: var(--pf-green-ink);
+}
+
+#commands h2 {
+  color: var(--pf-ink);
+}
+
+#commands > .container > .lede {
+  color: var(--pf-ink-soft);
+}
+
+#commands .command-deck {
+  border: 0;
+  border-top: 1px solid var(--pf-line-light-strong);
+  border-bottom: 1px solid var(--pf-line-light-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--pf-ink);
+  box-shadow: none;
+}
+
+#commands .command-deck > div,
+#commands .command-deck > div:first-child {
+  border-color: var(--pf-line-light);
+  background: transparent;
+}
+
+#commands .command-deck > div code,
+#commands .command-deck > div:first-child code,
+#commands .command-deck > div:not(:first-child) code {
+  color: var(--pf-ink);
+}
+
+#commands .command-deck > div:first-child code {
+  color: var(--pf-green-ink);
+}
+
+#commands .command-deck > div > span,
+#commands .command-deck > div:not(:first-child) > span {
+  color: var(--pf-ink-soft);
+}
+
+#commands .command-deck > div::after {
+  color: var(--pf-green-ink);
+}
+
+#commands .reference-disclosure > summary {
+  border-color: var(--pf-line-light-strong);
+  color: var(--pf-ink);
+}
+
+#roadmap {
+  border-top: 1px solid var(--pf-line-light-strong);
+  background: var(--pf-paper);
+}
+
+#roadmap .section-number {
+  color: var(--pf-green-ink);
+}
+
+#roadmap .status-panel,
+#roadmap .status-panel:first-child,
+#roadmap .status-panel:nth-child(1),
+#roadmap .status-panel:nth-child(2),
+#roadmap .status-panel:nth-child(3) {
+  border: 0;
+  border-top: 1px solid var(--pf-line-light-strong);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#roadmap .status-panel > summary {
+  min-height: 132px;
+  padding-inline: 0;
+  color: var(--pf-ink);
+}
+
+#roadmap .status-panel:nth-child(1) > summary {
+  border-top: 3px solid var(--pf-green-paper);
+}
+
+#roadmap .status-panel:nth-child(2) > summary {
+  border-top: 3px solid #847400;
+}
+
+#roadmap .status-panel:nth-child(3) > summary {
+  border-top: 3px solid #5b6558;
+}
+
+#roadmap .status-mark,
+#roadmap .status-deck {
+  font-size: 16px;
+}
+
+/* ---------- Coda ---------- */
+
+.technical-appendix {
+  border-top: 1px solid var(--pf-line-dark-strong);
+}
+
+#cta {
+  border-top: 1px solid var(--pf-line-dark-strong);
+  background: var(--pf-ground);
+}
+
+#cta h2 span {
+  color: var(--pf-green);
+  font-family: var(--pf-display);
+  font-style: normal;
+  font-weight: 620;
+  letter-spacing: -.045em;
+  -webkit-text-fill-color: currentColor;
+}
+
+#cta::before {
+  color: transparent;
+  -webkit-text-stroke-color: rgba(127, 238, 100, .27);
+}
+
+.site-footer .footer-marquee {
+  color: var(--pf-light);
+  font-weight: 620;
+  -webkit-text-fill-color: var(--pf-light);
+}
+
+.site-footer .footer-marquee span {
+  color: var(--pf-green);
+  font-style: normal;
+  -webkit-text-fill-color: var(--pf-green);
+}
+
+/* ---------- Responsive recomposition ---------- */
+
+@media (max-width: 1080px) {
+  .hero-statement > .eyebrow,
+  #hero .hero-statement h1,
+  .hero-statement > .hero-claim {
+    grid-column: 1 / 8;
+  }
+
+  .hero-relay {
+    grid-column: 8 / 13;
+  }
+
+  #hero .hero-statement h1 {
+    font-size: clamp(72px, 8.2vw, 88px);
+  }
+
+  .hero-relay figcaption {
+    display: grid;
+    gap: 5px;
+  }
+
+  .hero-copy {
+    grid-column: 1 / 5;
+  }
+
+  .hero-benchmark {
+    grid-column: 5 / 13;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-statement {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .hero-statement > .eyebrow,
+  #hero .hero-statement h1,
+  .hero-statement > .hero-claim {
+    grid-column: 1 / 9;
+  }
+
+  .hero-relay {
+    grid-column: 1 / 9;
+    grid-row: 4;
+    width: min(100%, 620px);
+    margin-top: 48px;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .hero-relay::before {
+    display: none;
+  }
+
+  .hero-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 48px 24px;
+  }
+
+  .hero-copy,
+  .hero-benchmark {
+    grid-column: 1 / 9;
+  }
+
+  .hero-benchmark {
+    padding-left: 0;
+    border-top: 1px solid var(--pf-line-dark-strong);
+    border-left: 0;
+  }
+
+  #hierarchy .section-number,
+  #hierarchy h2,
+  #hierarchy > .container > .lede {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  #hierarchy > .container > .lede {
+    margin-top: 28px;
+  }
+
+  #tasknode .section-number,
+  #tasknode h2,
+  #tasknode > .container > .lede,
+  #tasknode > .container > .cta-actions,
+  #tasknode .task-ledger {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  #tasknode .task-ledger {
+    margin-top: 52px;
+  }
+
+  #roadmap .section-number,
+  #roadmap h2,
+  #roadmap > .container > .lede,
+  #roadmap > .container > .grid-3 {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  #hero {
+    padding: 78px 0 68px;
+  }
+
+  .hero-statement {
+    display: block;
+    margin-bottom: 52px;
+  }
+
+  #hero .hero-statement h1 {
+    max-width: 10.5ch;
+    font-size: clamp(48px, 13.2vw, 54px);
+    line-height: .92;
+  }
+
+  .hero-line:last-child {
+    white-space: normal;
+  }
+
+  .hero-statement > .hero-claim {
+    margin-top: 28px;
+    font-size: 18px;
+  }
+
+  .hero-relay {
+    width: 100%;
+    margin-top: 40px;
+  }
+
+  .hero-relay figcaption {
+    font-size: 13.5px;
+  }
+
+  .hero-grid {
+    display: block;
+  }
+
+  .hero-benchmark {
+    margin-top: 48px;
+    padding: 22px 0 0;
+  }
+
+  .hero-benchmark-outcomes {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-benchmark-outcomes > div {
+    min-height: 180px;
+  }
+
+  .hero-benchmark-outcomes > div + div {
+    padding-left: 0;
+    border-top: 1px solid var(--pf-line-dark-strong);
+    border-left: 0;
+  }
+
+  .trust-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-grid > div,
+  .trust-grid > div:first-child,
+  .trust-grid > div:last-child {
+    min-height: 0;
+    padding: 24px 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(5, 7, 5, .36);
+  }
+
+  .trust-grid > div:last-child {
+    border-bottom: 0;
+  }
+
+  #models,
+  #hierarchy,
+  #speed,
+  #tasknode,
+  #pricing {
+    padding-block: 72px;
+  }
+
+  #custody,
+  #runtime,
+  #gpu,
+  #commands,
+  #roadmap {
+    padding-block: 60px;
+  }
+
+  #hierarchy .hierarchy-tree {
+    margin-top: 48px;
+    padding-left: 24px;
+  }
+
+  #hierarchy .hierarchy-tree li,
+  #hierarchy .hierarchy-tree li:first-child,
+  #hierarchy .hierarchy-tree li[data-level="1"],
+  #hierarchy .hierarchy-tree li[data-level="2"] {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    width: 100%;
+    min-height: 0;
+    margin-left: 0;
+    padding: 26px 18px;
+  }
+
+  #hierarchy .hierarchy-tree li[data-level="1"] {
+    margin-left: 6%;
+    width: 94%;
+  }
+
+  #hierarchy .hierarchy-tree li[data-level="2"] {
+    margin-left: 12%;
+    width: 88%;
+  }
+
+  #runtime .runtime-index {
+    margin-top: 44px;
+  }
+
+  #tasknode .task-ledger {
+    padding: 28px 20px;
+  }
+
+  #commands .command-deck {
+    padding-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-relay,
+  .hero-relay * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ========================================================================== */
+/* SOL Pro V241 delta — lower-page amplitude, metadata budget, green authority */
+/* ========================================================================== */
+
+.chapter-intro {
+  position: relative;
+}
+
+.chapter-intro > :last-child {
+  margin-bottom: 0;
+}
+
+/* Opening console: one complete claim and three restrained trust facts. */
+
+.hero-copy,
+.hero-benchmark {
+  min-height: 390px;
+}
+
+.hero-statement {
+  margin-bottom: 16px;
+}
+
+.hero-statement > .hero-claim {
+  grid-column: 1 / -1;
+  max-width: 88ch;
+  margin-top: 16px;
+  padding-top: 12px;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+#install-title {
+  max-width: 9ch;
+  font-size: clamp(48px, 4vw, 60px);
+}
+
+.hero-benchmark-control,
+.hero-benchmark figcaption {
+  display: none;
+}
+
+.trust-bar {
+  border-top: 1px solid var(--pf-line-dark-strong);
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+  background: var(--pf-ground);
+  color: var(--pf-light);
+}
+
+.trust-grid {
+  grid-template-columns: 2.2fr 1.5fr 2.3fr;
+}
+
+.trust-grid > div,
+.trust-grid > div:first-child,
+.trust-grid > div:last-child {
+  min-height: 112px;
+  padding: 24px 28px;
+  border-right: 1px solid var(--pf-line-dark-strong);
+  border-bottom: 0;
+}
+
+.trust-grid > div:first-child {
+  padding-left: 0;
+}
+
+.trust-grid > div:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.trust-grid dt {
+  color: var(--pf-green-major);
+  font-size: clamp(27px, 2.2vw, 34px);
+}
+
+.trust-grid dd {
+  margin-top: 10px;
+  color: var(--pf-body);
+  font-size: 16px;
+}
+
+/* Provider IDs/slugs remain in the protocol table, not the default routing view. */
+
+#models .provider-node > span,
+#models .provider-node > code {
+  display: none;
+}
+
+#models .provider-node strong {
+  font-family: var(--pf-body-font);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.gpu-flow-visual .is-ready {
+  background: transparent;
+}
+
+/* 06 / Performance — centered printed report and matched PF Relay header. */
+
+#speed {
+  padding-block: 136px 120px;
+}
+
+#speed > .container {
+  display: block;
+}
+
+#speed .chapter-intro {
+  width: min(100%, 920px);
+  margin-inline: auto;
+  text-align: center;
+}
+
+#speed .chapter-intro .section-number {
+  margin-inline: auto !important;
+}
+
+#speed .chapter-intro .lede {
+  max-width: 58ch;
+  margin: 30px auto 0;
+  color: var(--pf-ink-soft);
+}
+
+#speed .evidence-sheet {
+  display: block;
+  margin-top: 72px;
+  padding-top: 0;
+  border: 0;
+  border-bottom: 1px solid var(--pf-line-light-strong);
+  background: transparent;
+}
+
+#speed .evidence-sheet::before {
+  display: none;
+}
+
+#speed .benchmark-route {
+  min-height: 166px;
+  padding: 28px 38px 32px;
+  border-top: 3px solid var(--pf-green);
+  background: var(--pf-ground);
+  color: var(--pf-light);
+}
+
+.benchmark-route__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+}
+
+.benchmark-route__controls span {
+  color: var(--pf-body);
+  font-family: var(--pf-mono);
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.45;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.benchmark-route__controls span::before {
+  content: "[✓] ";
+  color: var(--pf-green);
+}
+
+.benchmark-route__rails {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 1.15fr 34px 1fr 1fr;
+  gap: 18px;
+  align-items: center;
+  min-height: 74px;
+  padding-top: 22px;
+  font-family: var(--pf-mono);
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.35;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.benchmark-route__rails .route,
+.benchmark-route__rails .output {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 10px;
+  background: var(--pf-ground);
+}
+
+.benchmark-route__rails .route {
+  border-left: 2px solid var(--pf-green);
+  color: var(--pf-light);
+}
+
+.benchmark-route__rails .output {
+  border-right: 1px solid var(--pf-line-dark-strong);
+  color: var(--pf-green-major);
+  justify-content: flex-end;
+}
+
+.benchmark-route__rails::before,
+.benchmark-route__rails::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 13%;
+  left: 13%;
+  background: var(--pf-green);
+}
+
+.benchmark-route__rails::before {
+  top: 48px;
+  height: 2px;
+}
+
+.benchmark-route__rails::after {
+  top: 56px;
+  height: 1px;
+  background: rgba(127, 238, 100, .38);
+}
+
+.benchmark-route__rails .junction {
+  position: relative;
+  z-index: 3;
+  width: 10px;
+  height: 10px;
+  justify-self: center;
+  background: var(--pf-green);
+  box-shadow: 8px 8px 0 rgba(127, 238, 100, .32);
+}
+
+#speed .benchmark-matchups {
+  border: 0;
+  border-bottom: 1px solid var(--pf-line-light-strong);
+}
+
+#speed .benchmark-matchups article {
+  border: 0;
+}
+
+#speed .benchmark-matchups article + article {
+  border-left: 1px solid var(--pf-line-light-strong);
+}
+
+#speed h2,
+#speed h2 *,
+#speed .benchmark-result,
+#speed .benchmark-result * {
+  text-decoration: none !important;
+}
+
+#speed .benchmark-result > strong::after {
+  display: none !important;
+}
+
+#speed .benchmark-proof {
+  border: 0;
+  border-bottom: 1px solid var(--pf-line-light-strong);
+  background: var(--pf-paper-deep);
+}
+
+/* 08 / Task Node — broad open workflow rail. */
+
+#tasknode {
+  padding-block: 112px;
+  background: var(--pf-ground) !important;
+}
+
+#tasknode > .container {
+  display: block;
+}
+
+#tasknode .chapter-intro {
+  display: block;
+  max-width: 1040px;
+}
+
+#tasknode .chapter-intro .section-number {
+  justify-self: auto;
+}
+
+#tasknode .chapter-intro h2 {
+  max-width: 16ch;
+  color: var(--pf-light);
+}
+
+#tasknode .chapter-intro .lede {
+  max-width: 48ch;
+  margin-top: 28px;
+  color: var(--pf-body);
+}
+
+#tasknode .task-ledger {
+  min-height: 0;
+  margin-top: 72px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#tasknode .task-ledger::before,
+#tasknode .task-ledger::after {
+  display: none;
+}
+
+#tasknode .task-flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-top: 2px solid var(--pf-green);
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+  background: transparent;
+}
+
+#tasknode .task-flow::before,
+#tasknode .task-flow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 1px;
+}
+
+#tasknode .task-flow::before {
+  top: 6px;
+  background: rgba(127, 238, 100, .34);
+}
+
+#tasknode .task-flow::after {
+  display: none;
+}
+
+#tasknode .task-flow li,
+#tasknode .task-flow li:first-child {
+  position: relative;
+  min-height: 240px;
+  padding: 38px 32px 34px 0;
+  border: 0;
+  background: transparent;
+}
+
+#tasknode .task-flow li + li {
+  padding-left: 32px;
+  border-left: 1px solid var(--pf-line-dark-strong);
+}
+
+#tasknode .task-flow li::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  right: -11px;
+  z-index: 3;
+  width: 22px;
+  height: 28px;
+  margin-top: -14px;
+  border-radius: 0;
+  background: var(--pf-ground);
+  color: var(--pf-green);
+  font-family: var(--pf-mono);
+  font-size: 20px;
+  line-height: 28px;
+  text-align: center;
+}
+
+#tasknode .task-flow li:last-child::after {
+  display: none;
+}
+
+#tasknode .task-flow li > span {
+  color: var(--pf-green);
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .06em;
+}
+
+#tasknode .task-flow strong {
+  display: block;
+  margin-top: 42px;
+  color: var(--pf-light);
+  font-family: var(--pf-display);
+  font-size: clamp(42px, 4vw, 58px);
+  line-height: .95;
+}
+
+#tasknode .task-flow small {
+  display: block;
+  margin-top: 16px;
+  color: var(--pf-body);
+  font-family: var(--pf-body-font);
+  font-size: 17px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#tasknode .tasknode-actions {
+  justify-content: flex-end;
+  margin-top: 28px;
+}
+
+/* 09 / Payment — one dense receipt followed by one quiet assurance strip. */
+
+#pricing {
+  padding-block: 120px 128px;
+}
+
+#pricing > .container {
+  display: block;
+}
+
+#pricing .chapter-intro {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--pf-gap);
+  align-items: end;
+}
+
+#pricing .chapter-intro .section-number {
+  grid-column: 1 / -1;
+}
+
+#pricing .chapter-intro h2 {
+  grid-column: 1 / 9;
+  max-width: 17ch;
+}
+
+#pricing .chapter-intro .pull {
+  grid-column: 9 / 13;
+  margin: 0;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--pf-green-paper);
+  color: var(--pf-ink-soft);
+  text-align: left;
+}
+
+#pricing .receipt {
+  width: 100%;
+  margin-top: 64px;
+}
+
+#pricing > .container > .cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+  margin-top: 56px;
+  border-top: 1px solid var(--pf-line-light-strong);
+  border-bottom: 1px solid var(--pf-line-light-strong);
+}
+
+#pricing > .container > .cols .col,
+#pricing > .container > .cols .col:first-child {
+  padding: 28px 32px 30px 0;
+  border: 0;
+  background: transparent;
+}
+
+#pricing > .container > .cols .col + .col {
+  padding-left: 32px;
+  border-left: 1px solid var(--pf-line-light-strong);
+}
+
+/* 10–11 / Reference macro — open command typography and audit rows. */
+
+#commands {
+  padding-block: 72px 56px;
+  border-top: 0;
+}
+
+#commands > .container {
+  display: block;
+}
+
+#commands .chapter-intro {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--pf-gap);
+  align-items: end;
+}
+
+#commands .chapter-intro .section-number {
+  grid-column: 1 / -1;
+}
+
+#commands .chapter-intro h2 {
+  grid-column: 1 / 8;
+  max-width: 16ch;
+  hyphens: none;
+  overflow-wrap: normal;
+}
+
+#commands .chapter-intro .lede {
+  grid-column: 8 / 13;
+  margin: 0;
+}
+
+#commands .no-break {
+  white-space: nowrap;
+}
+
+#commands .command-deck {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 72px;
+  width: 100%;
+  margin-top: 52px;
+  padding: 40px 0;
+  border: 0;
+  border-top: 1px solid var(--pf-line-light-strong);
+  border-bottom: 1px solid var(--pf-line-light-strong);
+  background: transparent;
+}
+
+#commands .command-deck > div,
+#commands .command-deck > div:first-child,
+#commands .command-deck > div:nth-child(odd),
+#commands .command-deck > div:nth-child(even) {
+  display: grid;
+  grid-template-columns: minmax(150px, .8fr) minmax(0, 1.2fr);
+  gap: 24px;
+  align-items: baseline;
+  min-height: 0;
+  margin: 0;
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+}
+
+#commands .command-deck code,
+#commands .command-deck > div:first-child code,
+#commands .command-deck > div:not(:first-child) code {
+  color: var(--pf-green-ink);
+  font-size: clamp(28px, 2.7vw, 38px);
+}
+
+#commands .command-deck span,
+#commands .command-deck > div > span {
+  color: var(--pf-ink-soft);
+  font-family: var(--pf-body-font);
+  font-size: 17px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+#commands .command-deck > div::after {
+  display: none;
+}
+
+#commands > .container > .reference-disclosure {
+  width: 100%;
+  margin-top: 24px;
+}
+
+#roadmap {
+  padding-block: 56px 80px;
+  border-top: 0;
+}
+
+#roadmap > .container {
+  display: block;
+}
+
+#roadmap .chapter-intro {
+  max-width: 980px;
+}
+
+#roadmap .chapter-intro h2 {
+  max-width: 17ch;
+}
+
+#roadmap .chapter-intro .lede {
+  max-width: 58ch;
+  margin-top: 26px;
+}
+
+#roadmap > .container > .grid-3 {
+  display: block;
+  margin-top: 48px;
+  border-top: 3px solid var(--pf-green-paper);
+}
+
+#roadmap .status-panel,
+#roadmap .status-panel:first-child,
+#roadmap .status-panel:nth-child(1),
+#roadmap .status-panel:nth-child(2),
+#roadmap .status-panel:nth-child(3) {
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid var(--pf-line-light-strong);
+  background: transparent;
+  box-shadow: none;
+}
+
+#roadmap .status-panel > summary,
+#roadmap .status-panel:nth-child(1) > summary,
+#roadmap .status-panel:nth-child(2) > summary,
+#roadmap .status-panel:nth-child(3) > summary {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px minmax(240px, 1fr) minmax(220px, .8fr) 44px;
+  gap: 20px;
+  align-items: center;
+  min-height: 112px;
+  padding: 0;
+  border: 0;
+  color: var(--pf-ink);
+}
+
+#roadmap .status-panel > summary::after {
+  position: static;
+  justify-self: end;
+}
+
+#roadmap .status-panel > summary strong {
+  font-family: var(--pf-display);
+  font-size: clamp(28px, 2.6vw, 38px);
+  letter-spacing: -.03em;
+  text-transform: none;
+}
+
+#roadmap .status-deck {
+  color: var(--pf-ink-soft);
+  text-align: left;
+}
+
+/* Narrow appendix seam and quiet footer. */
+
+.technical-appendix {
+  min-height: 104px;
+  padding-block: 24px;
+  border-top: 1px solid var(--pf-line-dark-strong);
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+  background: var(--pf-ground);
+}
+
+.technical-appendix > .container {
+  display: grid;
+  grid-template-columns: 1.2fr 2.2fr .8fr 2fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.technical-appendix .section-number {
+  margin: 0 !important;
+}
+
+.technical-appendix .appendix-title {
+  max-width: none;
+  margin: 0;
+  color: var(--pf-light);
+  font-size: clamp(26px, 2.4vw, 34px);
+  line-height: 1;
+}
+
+.technical-appendix .appendix-count {
+  margin: 0;
+  color: var(--pf-body-soft);
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.technical-appendix .appendix-drawer {
+  margin: 0;
+}
+
+.technical-appendix .appendix-drawer > summary {
+  min-height: 48px;
+  padding: 10px 0;
+  border: 0;
+  color: var(--pf-green);
+  font-size: 15px;
+}
+
+.technical-appendix .appendix-grid {
+  grid-column: 1 / -1;
+}
+
+.site-footer .footer-marquee {
+  max-width: var(--pf-grid);
+  margin-inline: auto;
+  color: var(--pf-light);
+  font-family: var(--pf-display);
+  font-size: clamp(58px, 6vw, 84px);
+  font-style: normal;
+  -webkit-text-stroke: 0;
+}
+
+.site-footer .footer-grid {
+  border-block: 1px solid var(--pf-line-dark);
+}
+
+.site-footer .footer-grid > div,
+.site-footer .footer-grid > div:first-child {
+  border-right: 0;
+  border-left: 0;
+}
+
+.site-footer .footer-grid a,
+.site-footer .footer-grid p {
+  color: var(--pf-body);
+  opacity: 1;
+}
+
+/* Metadata budget: readable body copy, mono only for real protocol metadata. */
+
+.artifact-meta,
+.reference-disclosure > summary {
+  opacity: 1;
+}
+
+.artifact-meta {
+  color: var(--pf-body);
+  font-family: var(--pf-mono);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: .06em;
+}
+
+.hierarchy-tree span,
+.task-flow small,
+.command-deck span {
+  font-family: var(--pf-body-font);
+  letter-spacing: 0;
+}
+
+/* Tablet: every split introduction stacks in source order. */
+
+@media (max-width: 900px) {
+  #runtime .chapter-intro,
+  #pricing .chapter-intro,
+  #commands .chapter-intro {
+    display: block;
+  }
+
+  #runtime .chapter-intro h2,
+  #pricing .chapter-intro h2,
+  #commands .chapter-intro h2 {
+    max-width: 16ch;
+  }
+
+  #runtime .chapter-intro .lede,
+  #pricing .chapter-intro .pull,
+  #commands .chapter-intro .lede {
+    max-width: 54ch;
+    margin-top: 28px;
+  }
+
+#tasknode .task-flow li,
+  #tasknode .task-flow li:first-child {
+    min-height: 210px;
+  }
+
+  #commands .command-deck {
+    gap-inline: 40px;
+  }
+
+  #roadmap .status-panel > summary,
+  #roadmap .status-panel:nth-child(1) > summary,
+  #roadmap .status-panel:nth-child(2) > summary,
+  #roadmap .status-panel:nth-child(3) > summary {
+    grid-template-columns: 64px minmax(0, 1fr) minmax(180px, .7fr) 36px;
+  }
+
+  .technical-appendix > .container {
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+
+  .technical-appendix .section-number {
+    grid-column: 1 / -1;
+  }
+
+  .technical-appendix .appendix-drawer {
+    justify-self: end;
+  }
+}
+
+/* Mobile: core-first cutaway, vertical workflow, one-column reference deck. */
+
+@media (max-width: 720px) {
+  .hero-copy,
+  .hero-benchmark {
+    min-height: 0;
+  }
+
+  .trust-grid > div,
+  .trust-grid > div:first-child,
+  .trust-grid > div:last-child {
+    padding: 24px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--pf-line-dark-strong);
+  }
+
+  .trust-grid > div:last-child {
+    border-bottom: 0;
+  }
+
+  #speed .benchmark-route {
+    min-height: 0;
+    padding: 24px 20px;
+  }
+
+  .benchmark-route__controls {
+    display: grid;
+    gap: 8px;
+  }
+
+  .benchmark-route__rails {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .benchmark-route__rails::before,
+  .benchmark-route__rails::after,
+  .benchmark-route__rails .junction {
+    display: none;
+  }
+
+  .benchmark-route__rails .route,
+  .benchmark-route__rails .output {
+    justify-content: flex-start;
+    border-right: 0;
+    border-left: 2px solid var(--pf-green);
+  }
+
+  #tasknode .task-flow {
+    grid-template-columns: 1fr;
+  }
+
+  #tasknode .task-flow li,
+  #tasknode .task-flow li:first-child,
+  #tasknode .task-flow li + li {
+    min-height: 0;
+    padding: 30px 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--pf-line-dark-strong);
+  }
+
+  #tasknode .task-flow li:last-child {
+    border-bottom: 0;
+  }
+
+  #tasknode .task-flow li::after {
+    top: auto;
+    right: auto;
+    bottom: -15px;
+    left: 16px;
+    margin: 0;
+    transform: rotate(90deg);
+  }
+
+  #tasknode .task-flow strong {
+    margin-top: 24px;
+  }
+
+  #tasknode .tasknode-actions {
+    justify-content: flex-start;
+  }
+
+  #pricing > .container > .cols {
+    grid-template-columns: 1fr;
+  }
+
+  #pricing > .container > .cols .col,
+  #pricing > .container > .cols .col:first-child,
+  #pricing > .container > .cols .col + .col {
+    padding: 24px 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--pf-line-light-strong);
+  }
+
+  #pricing > .container > .cols .col:last-child {
+    border-bottom: 0;
+  }
+
+  #commands .chapter-intro h2 {
+    overflow-wrap: normal;
+  }
+
+  #commands .no-break {
+    white-space: normal;
+  }
+
+  #commands .command-deck {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  #commands .command-deck > div,
+  #commands .command-deck > div:first-child,
+  #commands .command-deck > div:nth-child(odd),
+  #commands .command-deck > div:nth-child(even) {
+    grid-template-columns: minmax(124px, .8fr) minmax(0, 1.2fr);
+    padding: 18px 0;
+    border-bottom: 1px solid var(--pf-line-light);
+  }
+
+  #roadmap .status-panel > summary,
+  #roadmap .status-panel:nth-child(1) > summary,
+  #roadmap .status-panel:nth-child(2) > summary,
+  #roadmap .status-panel:nth-child(3) > summary {
+    grid-template-columns: 46px minmax(0, 1fr) 34px;
+    gap: 14px;
+    min-height: 118px;
+  }
+
+  #roadmap .status-deck {
+    grid-column: 2;
+    grid-row: 2;
+    padding-bottom: 18px;
+  }
+
+  #roadmap .status-panel > summary::after {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+
+  .technical-appendix {
+    padding-block: 28px;
+  }
+
+  .technical-appendix > .container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px 20px;
+  }
+
+  .technical-appendix .section-number,
+  .technical-appendix .appendix-title {
+    grid-column: 1 / -1;
+  }
+
+  .technical-appendix .appendix-drawer {
+    justify-self: end;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .benchmark-route__rails::before,
+  .benchmark-route__rails::after,
+  #tasknode .task-flow::before,
+  #tasknode .task-flow::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* V243 — amplitude and relief layer                                   */
+/* The three V242 Kimi runs (90 / 83 / 85) agreed on two systemic      */
+/* causes: the kicker + giant stacked-headline device repeats across   */
+/* all twelve chapters, and the two dense artifacts (benchmark report  */
+/* and plan receipt) feel cramped. This layer creates genuine          */
+/* peak/rest amplitude inside the approved brief type spec,            */
+/* de-restages the hero figures so Performance owns the big-figure     */
+/* moment, relieves the dense artifacts, enlarges the footer           */
+/* wordmark, and repairs two real contrast failures. Locked copy,      */
+/* order, artifacts, and disclosures are unchanged.                    */
+/* ------------------------------------------------------------------ */
+
+/* Rest and reference chapters settle to a quieter register so the     */
+/* peaks (Models, Hierarchy, Performance, Task Node, Payment, CTA)     */
+/* actually read as peaks at full-page scale. */
+
+#custody h2 {
+  font-size: clamp(38px, 3.2vw, 46px);
+  line-height: 1.02;
+  letter-spacing: -.03em;
+}
+
+#gpu h2 {
+  font-size: clamp(42px, 3.7vw, 56px);
+  line-height: 1;
+  letter-spacing: -.032em;
+}
+
+#runtime h2,
+#commands h2,
+#roadmap h2 {
+  font-size: clamp(38px, 3.3vw, 50px);
+  line-height: 1.02;
+  letter-spacing: -.03em;
+}
+
+#roadmap h2 {
+  max-width: none;
+}
+
+#custody > .container > .lede,
+#gpu > .container > .lede,
+#runtime .chapter-intro .lede,
+#commands .chapter-intro .lede,
+#roadmap > .container > .lede {
+  font-size: clamp(18px, 1.45vw, 20px);
+  line-height: 1.5;
+}
+
+/* The hero keeps its evidence, but the figures move to a tabular      */
+/* register so the Performance chapter owns the oversized-stat moment  */
+/* instead of restaging it. */
+
+.hero-benchmark-outcomes > div > span {
+  font-size: 16px;
+}
+
+.hero-benchmark-outcomes strong {
+  margin-top: 32px;
+  font-size: clamp(46px, 3.9vw, 58px);
+  line-height: .92;
+  letter-spacing: -.045em;
+}
+
+.hero-benchmark-outcomes em {
+  margin-top: 14px;
+}
+
+/* Performance report: more air inside the paired comparison columns. */
+
+#speed h2 {
+  line-height: .92;
+}
+
+#speed .benchmark-matchups article {
+  padding: 56px 52px 48px;
+}
+
+#speed .benchmark-matchups h3 {
+  margin-bottom: 30px;
+  font-size: clamp(24px, 2vw, 29px);
+  line-height: 1.18;
+}
+
+#speed .benchmark-matchups dl > div {
+  padding-block: 16px;
+}
+
+#speed .benchmark-matchups dt,
+#speed .benchmark-matchups dd {
+  font-size: 17px;
+}
+
+#speed .benchmark-result {
+  margin-top: 38px;
+}
+
+#speed .benchmark-matchups .no-break {
+  white-space: nowrap;
+}
+
+/* Contrast repairs: the custody separation tag and the final CTA      */
+/* primary action both failed 4.5:1. */
+
+.custody-divider span {
+  color: var(--pf-green-ink);
+}
+
+#cta .btn.primary {
+  border-color: var(--pf-green-paper);
+  background: var(--pf-green-paper);
+  color: var(--pf-ground);
+}
+
+/* Footer: a confident solid sign-off instead of an ordinary one. */
+
+.site-footer .footer-marquee {
+  margin-bottom: 60px;
+  padding: 44px 0 38px;
+  font-size: clamp(72px, 8.5vw, 118px);
+  letter-spacing: -.055em;
+}
+
+/* Task Node: bigger verbs, less dead air, so the rail reads as a      */
+/* bold typographic band rather than a sparse diagram. */
+
+#tasknode .task-flow li,
+#tasknode .task-flow li:first-child {
+  min-height: 196px;
+  padding-top: 32px;
+}
+
+#tasknode .task-flow strong {
+  margin-top: 30px;
+  font-size: clamp(48px, 4.6vw, 66px);
+}
+
+/* Lift the smallest recurring labels out of the legibility gutter. */
+
+.section-number {
+  font-size: 16px;
+}
+
+.benchmark-route__controls span {
+  font-size: 15px;
+}
+
+/* Hero: one more breath between the claim and the console, answering  */
+/* the crowded-opening note without removing any required module. */
+
+#hero {
+  padding-bottom: 88px;
+}
+
+.hero-statement {
+  margin-bottom: 42px;
+}
+
+/* ------------------------------------------------------------------ */
+/* V245 — one command voice, a higher text floor, and tighter ledger   */
+/* Across the nine V242–V244 judge reports the two most repeated       */
+/* complaints are the small/low-contrast text floor and remaining      */
+/* type-voice inconsistencies: the deck rendered Bricolage while the   */
+/* custody cards set the same commands in serif italic, and the        */
+/* hierarchy descriptions floated in a mid-row gap. This layer sets    */
+/* the deck in the same serif voice, raises every default-surface      */
+/* sentence to 17px+ (18px where it carries meaning), and closes the   */
+/* hierarchy name/description gap. Locked copy and order unchanged.    */
+/* ------------------------------------------------------------------ */
+
+/* The six primary commands speak in the same italic serif as the      */
+/* custody cards that introduced /vault and /wallet. */
+
+#commands .command-deck code {
+  font-family: var(--pf-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.015em;
+}
+
+/* Raise the remaining sub-comfort sizes on the default surface. */
+
+.benchmark-route__rails .route,
+.benchmark-route__rails .output {
+  font-size: 15px;
+}
+
+.hero-statement > .eyebrow {
+  font-size: 16px;
+}
+
+.trust-grid dd {
+  font-size: 17px;
+}
+
+#install .install-panel > p {
+  font-size: 17px;
+}
+
+#roadmap .status-deck {
+  font-size: 17px;
+}
+
+#tasknode .task-flow small {
+  font-size: 18px;
+}
+
+#commands .command-deck span {
+  font-size: 18px;
+}
+
+.site-footer .footer-grid a,
+.site-footer .footer-grid p {
+  font-size: 18px;
+}
+
+/* Hierarchy: descriptions join the role names instead of floating     */
+/* across a mid-row gap. */
+
+@media (min-width: 721px) {
+  #hierarchy .hierarchy-tree li {
+    grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+    gap: 56px;
+  }
+}
+
+/* Every small label on dark ground steps up to full body brightness. */
+
+.hero-benchmark-top span,
+.hero-benchmark-top strong,
+.hero-benchmark-outcomes > div > span,
+#pricing .receipt caption,
+#pricing .receipt thead th,
+#pricing .receipt tbody td::before,
+.technical-appendix .appendix-count,
+.provider-core span,
+.custody-node > span,
+.os-nav a {
+  color: var(--pf-body);
+}
+
+.gpu-flow-visual li span,
+.gpu-flow-visual li:not(.is-ready) span {
+  color: var(--pf-body);
+  font-size: 16px;
+}
+
+/* Real 3.3:1 contrast failure inside the dark provider disclosure. */
+
+.panel .counterparties a,
+.counterparties a {
+  color: var(--pf-green);
+}
+
+/* ------------------------------------------------------------------ */
+/* V247 — PF Command Cuts: page-level chassis, opening grammars,       */
+/* Runtime colophon, PF Relay manifold, hero briefing masthead         */
+/* Implements the SOL Pro V246 delta as one authoritative layer.       */
+/* The middle of the page becomes one warm-paper instrument chassis    */
+/* with asymmetrical dark Command Cut plates entering from             */
+/* alternating edges; Runtime becomes a deliberate quiet colophon;     */
+/* PF Relay gets the 6px sleeve / 2px primary / 1px echo               */
+/* construction with 16px collars and 10px junctions; the hero claim   */
+/* moves beside the headline; all benchmark captions lock to their     */
+/* numerals. Locked copy, order, facts, and disclosures unchanged.     */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --pf-cut: max(72px, calc((100vw - 1340px) / 2 + 72px));
+}
+
+/* ---------- Priority 1: folio chassis and Command Cuts ---------- */
+
+/* Folio-era transparency, narrowed in V248: only Hierarchy still needs a
+   transparent section so the paper gutter survives around its dark blade.
+   Models/Custody/GPU are transparent via the system-folio rules; Speed,
+   Pricing, and the appendix chapters restore their own paper surfaces. */
+#hierarchy {
+  background: transparent;
+}
+
+#models {
+  padding-block: 136px 72px;
+}
+
+#hierarchy {
+  padding-block: 72px;
+}
+
+#custody {
+  padding-block: 72px;
+}
+
+#gpu {
+  padding-block: 72px 96px;
+}
+
+#speed {
+  padding-block: 136px 72px;
+}
+
+#runtime {
+  padding-block: 64px 96px;
+}
+
+#tasknode {
+  padding-block: 136px 120px;
+}
+
+#pricing {
+  padding-block: 136px 96px;
+}
+
+#commands {
+  padding-block: 72px 48px;
+}
+
+#roadmap {
+  padding-block: 48px 128px;
+}
+
+.command-cut {
+  position: relative;
+  padding-block: 88px 80px;
+  background: var(--pf-ground);
+  color: var(--pf-body);
+}
+
+.command-cut--right {
+  width: calc(100% - var(--pf-cut));
+  margin-left: var(--pf-cut);
+}
+
+.command-cut .container {
+  width: min(calc(100% - 96px), 1268px);
+}
+
+.command-cut h2 {
+  color: var(--pf-light);
+}
+
+.command-cut .lede {
+  color: var(--pf-body);
+}
+
+.command-cut .section-number {
+  color: var(--pf-green);
+}
+
+.command-cut .reference-disclosure {
+  color: var(--pf-body);
+}
+
+.command-folio {
+  position: absolute;
+  z-index: 2;
+  top: 76px;
+  color: #08713a;
+  font-family: "Instrument Serif", serif;
+  font-size: 46px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.02em;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.command-cut--right .command-folio {
+  left: calc(-1 * var(--pf-cut) + 24px);
+}
+
+/* ---------- Priority 2: four opening grammars ---------- */
+
+/* Grammar A — side rail (Models, Hierarchy, Runtime, Pricing, Commands). */
+
+.intro--rail {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--pf-gap);
+  align-items: start;
+  width: 100%;
+}
+
+.intro--rail .section-number {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  margin: 8px 0 0 !important;
+}
+
+.intro--rail h2 {
+  grid-column: 3 / 9;
+  grid-row: 1;
+  margin: 0;
+}
+
+.intro--rail .lede,
+.intro--rail .pull {
+  grid-column: 9 / 13;
+  grid-row: 1;
+  align-self: end;
+  margin: 0;
+}
+
+/* Per-section rail resolutions against legacy ID-scoped grid rules. */
+
+#models .chapter-intro {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+/* Runtime and GPU containers no longer use a 12-column grid; their    */
+/* introductions and artifacts own their own layout. */
+
+#runtime > .container,
+#gpu > .container {
+  display: block;
+}
+
+#models h2 {
+  max-width: 13ch;
+  margin-inline: 0;
+  text-align: left;
+}
+
+#models > .container > .lede {
+  max-width: 44ch;
+}
+
+#hierarchy .chapter-intro .section-number {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+
+#hierarchy .chapter-intro h2 {
+  grid-column: 3 / 9;
+  grid-row: 1;
+  max-width: 14ch;
+}
+
+#hierarchy .chapter-intro .lede {
+  grid-column: 9 / 13;
+  grid-row: 1;
+  align-self: end;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+#runtime .chapter-intro .section-number {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+
+#runtime .chapter-intro h2 {
+  grid-column: 3 / 9;
+  grid-row: 1;
+  max-width: 16ch;
+  font-size: clamp(42px, 3.5vw, 50px);
+  line-height: 1;
+  letter-spacing: -.03em;
+}
+
+#runtime .chapter-intro .lede {
+  grid-column: 9 / 13;
+  grid-row: 1;
+  align-self: end;
+  margin: 0;
+}
+
+#pricing .chapter-intro .section-number,
+#commands .chapter-intro .section-number {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+
+#pricing .chapter-intro h2,
+#commands .chapter-intro h2 {
+  grid-column: 3 / 9;
+  grid-row: 1;
+}
+
+#pricing .chapter-intro .pull {
+  grid-column: 9 / 13;
+  grid-row: 1;
+  align-self: end;
+  margin: 0;
+  padding: 20px 0 0;
+  border: 0;
+  border-top: 1px solid var(--pf-green-paper);
+  color: var(--pf-ink-soft);
+  text-align: left;
+}
+
+#commands .chapter-intro .lede {
+  grid-column: 9 / 13;
+  grid-row: 1;
+  align-self: end;
+  margin: 0;
+}
+
+/* Grammar B — compact editorial split (Custody, GPU). */
+
+#custody .chapter-intro {
+  grid-column: 1 / 5;
+  align-self: start;
+}
+
+#custody .custody-details {
+  grid-column: 1 / 5;
+}
+
+#custody .custody-stage {
+  grid-column: 5 / 13;
+  grid-row: 1 / span 2;
+  margin-top: 0;
+}
+
+#gpu .chapter-intro {
+  width: min(100%, 900px);
+}
+
+#gpu .chapter-intro h2 {
+  max-width: 15ch;
+  color: var(--pf-ink);
+}
+
+#gpu .chapter-intro .lede {
+  color: var(--pf-ink-soft);
+}
+
+#gpu .chapter-intro .lede code {
+  color: var(--pf-green-ink);
+}
+
+#gpu .chapter-intro .lede {
+  max-width: 58ch;
+  margin-top: 28px;
+}
+
+#gpu .section-number {
+  color: var(--pf-green-ink);
+}
+
+/* Grammar D — register introduction (Task Node, Status). */
+
+#tasknode .chapter-intro {
+  max-width: 980px;
+}
+
+#tasknode .chapter-intro h2 {
+  max-width: 15ch;
+}
+
+#tasknode .chapter-intro .lede {
+  max-width: 48ch;
+  margin-top: 28px;
+}
+
+#roadmap .chapter-intro {
+  max-width: 860px;
+}
+
+#roadmap .chapter-intro h2 {
+  max-width: 18ch;
+}
+
+#roadmap .chapter-intro .lede {
+  max-width: 58ch;
+  margin-top: 24px;
+}
+
+/* Models closing pull: left-aligned editorial note, not a centered slab. */
+
+#models > .container > .pull {
+  grid-column: 1 / 9;
+  margin-top: 52px;
+  padding: 4px 0 4px 24px;
+  border: 0;
+  border-left: 3px solid var(--pf-green-paper);
+  text-align: left;
+}
+
+/* ---------- Priority 3: Runtime colophon ---------- */
+
+#runtime .runtime-index {
+  margin-top: 52px;
+  border: 0;
+  background: transparent;
+  color: var(--pf-ink);
+}
+
+.runtime-colophon {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  border-top: 3px solid #08713a;
+  border-bottom: 1px solid var(--pf-line-light-strong);
+  background: transparent;
+}
+
+.runtime-colophon__core {
+  grid-column: 1 / 5;
+  min-height: 164px;
+  padding: 28px 30px 30px 0;
+  border-right: 1px solid var(--pf-line-light-strong);
+}
+
+.runtime-colophon__core > span,
+.runtime-colophon__core > code {
+  display: block;
+  color: var(--pf-ink-soft);
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  font-weight: 550;
+  line-height: 1.45;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.runtime-colophon__core > strong {
+  display: block;
+  margin-block: 22px 10px;
+  color: var(--pf-ink);
+  font-family: var(--pf-display);
+  font-size: clamp(34px, 3vw, 44px);
+  font-weight: 620;
+  line-height: .95;
+  letter-spacing: -.04em;
+}
+
+.runtime-colophon__surfaces {
+  grid-column: 5 / 13;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.runtime-colophon__surfaces li {
+  min-height: 164px;
+  padding: 30px 24px;
+  border-left: 1px solid var(--pf-line-light-strong);
+}
+
+.runtime-colophon__surfaces li:first-child {
+  border-left: 0;
+}
+
+.runtime-colophon__surfaces span {
+  display: block;
+  color: #08713a;
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .06em;
+}
+
+.runtime-colophon__surfaces strong {
+  display: block;
+  margin-top: 34px;
+  color: var(--pf-ink);
+  font-family: var(--pf-body-font);
+  font-size: 19px;
+  font-weight: 550;
+  line-height: 1.25;
+}
+
+#runtime .runtime-index-details {
+  margin-top: 40px;
+}
+
+#runtime .source-ledger {
+  margin-top: 40px;
+}
+
+/* ---------- Priority 4: PF Relay shared construction ---------- */
+
+.pf-relay__sleeve {
+  fill: none;
+  stroke: #08713a;
+  stroke-width: 6px;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  vector-effect: non-scaling-stroke;
+  opacity: .72;
+}
+
+.pf-relay__primary {
+  fill: none;
+  stroke: #7fee64;
+  stroke-width: 2px;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  vector-effect: non-scaling-stroke;
+}
+
+.pf-relay__echo {
+  fill: none;
+  stroke: #08713a;
+  stroke-width: 1px;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  vector-effect: non-scaling-stroke;
+}
+
+.pf-relay__node-collar {
+  fill: #08713a;
+}
+
+.pf-relay__node {
+  fill: #7fee64;
+}
+
+.relay-ready .pf-relay-draw {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  transition: stroke-dashoffset 880ms cubic-bezier(.2, .75, .25, 1);
+}
+
+.relay-ready.is-revealed .pf-relay-draw {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .relay-ready .pf-relay-draw {
+    transition: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Models: the six-feed relay manifold replaces the staircase. */
+
+#models .provider-nodes {
+  gap: 20px 24px;
+}
+
+#models .provider-node {
+  text-align: center;
+}
+
+#models .provider-node strong {
+  font-family: var(--pf-body-font);
+  font-size: 18px;
+  font-weight: 550;
+  line-height: 1.2;
+}
+
+.provider-routes--manifold {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 10px 0 0;
+}
+
+.provider-routes--trunk {
+  display: none;
+}
+
+#models .provider-core {
+  width: 240px;
+  min-height: 84px;
+  margin: 14px auto 0;
+  padding: 16px 20px 18px;
+  border: 0;
+  border-top: 3px solid var(--pf-green);
+  background: var(--pf-inset);
+  box-shadow: none;
+}
+
+#models .provider-core span {
+  font-size: 14px;
+}
+
+#models .provider-core code {
+  margin-top: 6px;
+  color: var(--pf-green);
+  font-family: "Instrument Serif", serif;
+  font-size: 34px;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.015em;
+}
+
+/* GPU: the six-gate qualification rail replaces the thin timeline. */
+
+#gpu .gpu-stage {
+  position: relative;
+  width: auto;
+  margin: 0 !important;
+  padding: 56px 0 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#gpu .gpu-stage::before {
+  top: 8px;
+  left: 0;
+}
+
+.gpu-flow-visual {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gpu-rail {
+  position: absolute;
+  top: 52px;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  overflow: visible;
+}
+
+.gpu-rail--vertical {
+  display: none;
+}
+
+.gpu-flow-visual li {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 196px;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 12px;
+  text-align: center;
+}
+
+.gpu-flow-visual li::before {
+  content: "";
+  order: 2;
+  width: 1px;
+  height: 32px;
+  background: var(--pf-line-dark-strong);
+}
+
+.gpu-node {
+  position: relative;
+  order: 1;
+  width: 16px;
+  height: 16px;
+  margin-bottom: 32px;
+  background: #08713a;
+}
+
+.gpu-node::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  background: #7fee64;
+}
+
+.gpu-flow-visual li::before {
+  display: none;
+}
+
+.gpu-node::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 7px;
+  width: 1px;
+  height: 32px;
+  background: var(--pf-line-dark-strong);
+}
+
+.gpu-flow-visual span,
+.gpu-flow-visual strong,
+.gpu-flow-visual em {
+  display: block;
+}
+
+.gpu-flow-visual span {
+  order: 3;
+  margin-top: 0;
+  color: var(--pf-body);
+  font-family: var(--pf-mono);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.gpu-flow-visual strong {
+  order: 4;
+  margin-top: 8px;
+  color: var(--pf-light);
+  font-family: var(--pf-body-font);
+  font-size: 18px;
+  font-weight: 550;
+  line-height: 1.25;
+}
+
+.gpu-flow-visual .is-ready {
+  border: 0;
+  background: transparent;
+}
+
+.gpu-flow-visual .is-ready strong {
+  color: var(--pf-green-major);
+  font-size: 24px;
+}
+
+.gpu-flow-visual em {
+  order: 5;
+  width: max-content;
+  margin-top: 14px;
+  padding: 6px 8px;
+  border: 2px solid var(--pf-green);
+  border-radius: 0;
+  background: transparent;
+  color: var(--pf-green);
+  font-family: var(--pf-mono);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .06em;
+}
+
+.gpu-terminal {
+  position: absolute;
+  top: -8px;
+  right: 6px;
+  bottom: 0;
+  width: 4px;
+  background: var(--pf-green);
+}
+
+#gpu .gpu-flow-note {
+  margin-top: 40px;
+  color: var(--pf-body);
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  letter-spacing: .08em;
+  text-align: center;
+}
+
+#gpu .gpu-stage .tui-scroll {
+  margin-top: 36px;
+}
+
+/* Hierarchy: heft the praised stepped tree with the shared rail. */
+
+#hierarchy .hierarchy-tree::before {
+  background: #7fee64;
+  box-shadow: 0 0 0 2px rgba(8, 113, 58, .72);
+}
+
+#hierarchy .hierarchy-tree::after {
+  background: #08713a;
+  opacity: 1;
+}
+
+#hierarchy .hierarchy-tree li::before {
+  background: #7fee64;
+  box-shadow: 0 0 0 2px rgba(8, 113, 58, .72);
+}
+
+#hierarchy .hierarchy-tree li::after {
+  background: #08713a;
+  opacity: 1;
+}
+
+#hierarchy .hierarchy-tree li {
+  position: relative;
+}
+
+.relay-junction {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 34px);
+  width: 16px;
+  height: 16px;
+  background: #08713a;
+  transform: translate(50%, -50%);
+}
+
+.relay-junction::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  background: #7fee64;
+}
+
+/* Performance: the matched-route header uses the same construction. */
+
+.benchmark-route__rails::before {
+  background: #7fee64;
+  box-shadow: 0 0 0 2px rgba(8, 113, 58, .72);
+}
+
+.benchmark-route__rails::after {
+  background: #08713a;
+  opacity: 1;
+}
+
+.benchmark-route__rails .junction {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  background: #08713a;
+  box-shadow: none;
+}
+
+.benchmark-route__rails .junction::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  background: #7fee64;
+}
+
+/* Performance matchup results: captions locked to numerals. */
+
+#speed .benchmark-result {
+  display: grid;
+  gap: 32px;
+  align-items: start;
+  margin-top: 38px;
+}
+
+@media (min-width: 721px) {
+  #speed .benchmark-result {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+#speed .benchmark-result > strong {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 22px;
+  justify-items: start;
+  min-width: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+#speed .benchmark-result > strong::before,
+#speed .benchmark-result > strong::after {
+  display: none !important;
+}
+
+#speed .benchmark-result b,
+#speed .benchmark-result span {
+  width: 100%;
+  text-align: left;
+}
+
+#speed .benchmark-result b {
+  color: var(--pf-green-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+#speed .benchmark-result span {
+  margin-top: 10px;
+  color: var(--pf-ink-soft);
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+/* ---------- Priority 5: hero briefing masthead and alignment lock ---------- */
+
+.hero-statement {
+  grid-template-rows: auto auto;
+  align-items: end;
+  margin-bottom: 64px;
+}
+
+.hero-statement > .eyebrow {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin-bottom: 30px;
+}
+
+#hero .hero-statement h1 {
+  grid-column: 1 / 9;
+  grid-row: 2;
+  max-width: 11ch;
+  margin: 0;
+  font-size: clamp(92px, 7.3vw, 106px);
+  line-height: .9;
+}
+
+.hero-statement > .hero-claim {
+  grid-column: 9 / 13;
+  grid-row: 2;
+  align-self: end;
+  max-width: 40ch;
+  margin: 0 0 4px;
+  padding: 22px 0 0;
+  border: 0;
+  border-top: 1px solid var(--pf-line-dark-strong);
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* The rewarded Instrument Serif signature: exactly two editorial      */
+/* phrases plus literal slash-command tokens. */
+
+#hero h1 .accent,
+#cta h2 span {
+  color: var(--pf-green);
+  font-family: "Instrument Serif", serif;
+  font-size: 1.06em;
+  font-style: italic;
+  font-weight: 400;
+  line-height: .82;
+  letter-spacing: -.025em;
+  -webkit-text-fill-color: currentColor;
+  -webkit-text-stroke: 0;
+}
+
+/* Hero benchmark outcomes: one shared three-row internal grid. */
+
+.hero-benchmark-outcomes > div {
+  display: grid;
+  grid-template-rows: 28px 1fr 24px;
+  align-items: end;
+  min-height: 238px;
+  padding: 34px 28px 28px 0;
+}
+
+.hero-benchmark-outcomes > div + div {
+  padding-left: 32px;
+}
+
+.hero-benchmark-outcomes > div > span,
+.hero-benchmark-outcomes strong,
+.hero-benchmark-outcomes em {
+  width: 100%;
+  margin: 0;
+  text-align: left;
+  justify-self: start;
+}
+
+.hero-benchmark-outcomes strong {
+  align-self: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-benchmark-outcomes em {
+  align-self: start;
+  margin-top: 12px;
+}
+
+/* Trust register: one open ruled line of evidence, no tile borders. */
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: 2.2fr 1.5fr 2.3fr;
+  gap: 56px;
+}
+
+.trust-grid > div,
+.trust-grid > div:first-child,
+.trust-grid > div:last-child {
+  min-height: 108px;
+  padding: 24px 0;
+  border: 0;
+}
+
+/* ---------- Coda: appendix, CTA, and footer read as one dark mass ---------- */
+
+.technical-appendix {
+  border-bottom: 0;
+}
+
+#cta {
+  border-top: 0;
+}
+
+.site-footer {
+  border-top: 0;
+}
+
+/* ---------- Responsive recomposition ---------- */
+
+@media (max-width: 900px) {
+  .command-cut--right,
+  .command-cut--left {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .command-cut {
+    padding-block: 64px 56px;
+  }
+
+  .command-cut .container {
+    width: min(calc(100% - 64px), 1268px);
+  }
+
+  .command-folio {
+    position: static;
+    display: block;
+    margin: 0 max(32px, calc((100% - 1268px) / 2)) 32px;
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 36px;
+  }
+
+  .intro--rail {
+    display: block;
+  }
+
+  .intro--rail .section-number {
+    margin: 0 0 18px !important;
+  }
+
+  /* Delta tablet rule: matchups stack when articles fall below 320px inner. */
+  #speed .benchmark-matchups {
+    grid-template-columns: 1fr;
+  }
+
+  #speed .benchmark-matchups article + article {
+    border-top: 1px solid var(--pf-line-light-strong);
+    border-left: 0;
+  }
+
+  .intro--rail .lede,
+  .intro--rail .pull {
+    max-width: 54ch;
+    margin-top: 26px;
+  }
+
+  #models h2,
+  #hierarchy .chapter-intro h2,
+  #runtime .chapter-intro h2,
+  #pricing .chapter-intro h2,
+  #commands .chapter-intro h2 {
+    max-width: 16ch;
+  }
+
+  #models > .container > .pull {
+    grid-column: 1 / -1;
+    margin-top: 40px;
+  }
+
+  .hero-statement > .hero-claim {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    max-width: 62ch;
+    margin-top: 28px;
+  }
+
+  #hero .hero-statement h1 {
+    grid-column: 1 / -1;
+  }
+
+  #custody .chapter-intro,
+  #custody .custody-details,
+  #custody .custody-stage {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  #custody .custody-stage {
+    margin-top: 44px;
+  }
+
+  #runtime .runtime-index {
+    margin-top: 44px;
+  }
+
+  .runtime-colophon {
+    display: block;
+  }
+
+  .runtime-colophon__core {
+    min-height: 0;
+    padding: 28px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--pf-line-light-strong);
+  }
+
+  .runtime-colophon__surfaces {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .runtime-colophon__surfaces li,
+  .runtime-colophon__surfaces li:first-child {
+    min-height: 0;
+    padding: 24px 20px 24px 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--pf-line-light-strong);
+  }
+
+  .runtime-colophon__surfaces li:nth-child(even) {
+    padding-left: 20px;
+    border-left: 1px solid var(--pf-line-light-strong);
+  }
+
+  .provider-routes--manifold {
+    display: none;
+  }
+
+  .provider-routes--trunk {
+    display: block;
+    width: 40px;
+    height: 200px;
+    margin: 10px auto 0;
+  }
+
+  #models .provider-nodes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .relay-junction {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  #models .provider-nodes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #models .provider-node {
+    text-align: left;
+  }
+
+  .gpu-rail {
+    display: none;
+  }
+
+  #gpu .gpu-stage {
+    padding-bottom: 40px;
+  }
+
+  /* 320px reflow: matchups keep min-content inside the viewport, and
+     long single-token disclosure links wrap instead of overflowing. */
+  #speed .benchmark-matchups article {
+    padding: 40px 22px 34px;
+  }
+
+  .reference-disclosure a {
+    overflow-wrap: anywhere;
+  }
+
+  .gpu-rail--vertical {
+    display: block;
+    position: absolute;
+    top: 76px;
+    bottom: 24px;
+    left: 0;
+    width: 40px;
+    /* SVG is a replaced element: height:auto resolves to the intrinsic
+       1000px and ignores top/bottom stretch, spilling below the plate. */
+    height: calc(100% - 100px);
+  }
+
+  .gpu-flow-visual {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .gpu-flow-visual li {
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 4px 20px;
+    align-items: center;
+    min-height: 0;
+    padding: 18px 0;
+    text-align: left;
+  }
+
+  .gpu-node {
+    grid-row: 1 / 5;
+    margin-bottom: 0;
+  }
+
+  .gpu-node::after {
+    display: none;
+  }
+
+  .gpu-flow-visual span,
+  .gpu-flow-visual strong,
+  .gpu-flow-visual em {
+    grid-column: 2;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .gpu-flow-visual strong {
+    margin-top: 2px;
+  }
+
+  .gpu-terminal {
+    top: auto;
+    right: auto;
+    bottom: -18px;
+    left: 6px;
+    width: 4px;
+    height: 18px;
+  }
+
+  #gpu .gpu-flow-note {
+    text-align: left;
+  }
+
+  .runtime-colophon__surfaces {
+    display: block;
+  }
+
+  .runtime-colophon__surfaces li,
+  .runtime-colophon__surfaces li:first-child,
+  .runtime-colophon__surfaces li:nth-child(even) {
+    min-height: 0;
+    padding: 22px 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--pf-line-light-strong);
+  }
+
+  .trust-grid {
+    gap: 0;
+  }
+
+  .trust-grid > div,
+  .trust-grid > div:first-child,
+  .trust-grid > div:last-child {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--pf-line-dark-strong);
+  }
+
+  .trust-grid > div:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* ================================================================== */
+/* SOL Pro V247 delta (V248) — Relay Folio: narrative compression     */
+/* and page-silhouette replacement. Five visible acts; Runtime,       */
+/* Commands, and Status become collapsed appendix chapters; the       */
+/* system folio draws PF Relay on paper; Performance becomes a        */
+/* horizontal proof broadsheet; the plan catalogue returns to a       */
+/* native ledger; paper metadata is hardened.                         */
+/* ================================================================== */
+
+/* ---------- Priority 1: five visible acts, appendix chapters ------- */
+
+.system-folio {
+  background: var(--pf-paper);
+  color: var(--pf-ink);
+}
+
+.system-folio__control-spread {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 88px;
+  align-items: start;
+  width: min(calc(100% - 80px), 1340px);
+  margin-inline: auto;
+  padding-block: 96px 120px;
+}
+
+.system-folio__control-spread > #custody,
+.system-folio__control-spread > #gpu {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+/* Legacy per-ID chapter grids (#custody > .container, #gpu > .container)
+   outrank class-only selectors, so the spread resets use ID strength. */
+.system-folio__control-spread > #custody > .container,
+.system-folio__control-spread > #gpu > .container {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.system-folio__control-spread > #custody .chapter-intro,
+.system-folio__control-spread > #gpu .chapter-intro {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+/* V249: two equal-authority controls — firmer headings against fewer,
+   quieter micro-labels. */
+.system-folio__control-spread > #custody .chapter-intro h2,
+.system-folio__control-spread > #gpu .chapter-intro h2 {
+  max-width: 14ch;
+  margin: 0;
+  color: #0b140a;
+  font-family: var(--pf-display);
+  font-size: clamp(42px, 3.3vw, 48px);
+  font-weight: 600;
+  line-height: .98;
+  letter-spacing: -.038em;
+  text-wrap: balance;
+}
+
+.system-folio__control-spread > #custody .chapter-intro .lede,
+.system-folio__control-spread > #gpu .chapter-intro .lede {
+  max-width: 45ch;
+  margin: 20px 0 0;
+  color: #1d291b;
+  font-family: var(--pf-body-font);
+  font-size: 18.5px;
+  font-weight: 450;
+  line-height: 1.52;
+  text-wrap: pretty;
+}
+
+.system-folio__control-spread > #custody .chapter-intro .lede code,
+.system-folio__control-spread > #gpu .chapter-intro .lede code {
+  color: #08713a;
+}
+
+/* ---------- Priority 2: open PF Relay field (02–05) ---------------- */
+
+#models {
+  padding-block: 120px 64px;
+  background: transparent;
+}
+
+#models .provider-map {
+  margin-top: 56px;
+  padding: 42px 0 30px;
+  border: 0;
+  background: transparent;
+  color: var(--pf-ink);
+  box-shadow: none;
+}
+
+#models .provider-map::before {
+  color: #08713a;
+}
+
+#models .provider-node {
+  border-top: 0;
+  padding-top: 0;
+}
+
+#models .provider-node span,
+#models .provider-node code {
+  display: none;
+}
+
+#models .provider-node strong {
+  min-height: 0;
+  margin: 0;
+  color: var(--pf-ink);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#models .provider-core {
+  width: 260px;
+  min-height: 88px;
+  margin: 12px auto 0;
+  padding: 18px 20px 0;
+  border: 0;
+  border-top: 2px solid #08713a;
+  background: transparent;
+  box-shadow: none;
+}
+
+#models .provider-core span {
+  color: var(--pf-ink-soft);
+  font-size: 16px;
+}
+
+#models .provider-core code {
+  color: #08713a;
+  font-size: 38px;
+}
+
+/* Light-field PF Relay variant (Models + GPU). */
+
+#models .pf-relay__sleeve,
+#gpu .pf-relay__sleeve {
+  stroke: #08713a;
+  opacity: .22;
+}
+
+#models .pf-relay__primary,
+#gpu .pf-relay__primary {
+  stroke: #08713a;
+}
+
+#models .pf-relay__echo,
+#gpu .pf-relay__echo {
+  stroke: #09af58;
+  opacity: .8;
+}
+
+#models .pf-relay__node-collar,
+#gpu .pf-relay__node-collar {
+  fill: #08713a;
+}
+
+#models .pf-relay__node,
+#gpu .pf-relay__node {
+  fill: var(--pf-paper);
+}
+
+/* Hierarchy keeps the singular dark blade with a wider paper gutter. */
+
+@media (min-width: 901px) {
+  #hierarchy .command-cut--right {
+    width: calc(100% - 144px);
+    margin-left: 144px;
+  }
+
+  #hierarchy .command-cut--right .command-folio {
+    left: -120px;
+  }
+}
+
+/* Custody: two open paper stores. */
+
+#custody .custody-stage {
+  margin-top: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#custody .custody-visual {
+  display: block;
+  background: transparent;
+}
+
+/* V249: one strong entry rule, one quiet store boundary, no flanking
+   separator rules. */
+#custody .custody-node {
+  min-height: 0;
+  padding: 22px 0 26px;
+  border: 0;
+  background: transparent;
+  color: var(--pf-ink);
+}
+
+#custody .custody-vault {
+  border-top: 2px solid #08713a;
+}
+
+#custody .custody-wallet {
+  border-top: 1px solid var(--pf-line-light-strong);
+}
+
+#custody .custody-node > span {
+  color: #08713a;
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: .05em;
+}
+
+#custody .custody-node > strong {
+  display: block;
+  margin: 16px 0 12px;
+  color: #08713a;
+  font-family: var(--pf-serif);
+  font-size: 46px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: .9;
+  letter-spacing: -.02em;
+}
+
+#custody .custody-node p {
+  margin: 0;
+  color: #1d291b;
+  font-size: 18.5px;
+  line-height: 1.5;
+}
+
+#custody .custody-divider {
+  display: block;
+  min-height: 0;
+  padding: 14px 0;
+  color: #08713a;
+  font-family: var(--pf-mono);
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: .05em;
+  text-align: left;
+}
+
+#custody .custody-divider i {
+  display: none;
+}
+
+#custody .pull {
+  margin: 40px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--pf-line-light-strong);
+  color: var(--pf-ink);
+}
+
+/* GPU: the six-gate qualification rail drawn directly on paper. */
+
+#gpu .chapter-intro {
+  width: 100%;
+}
+
+/* V249: rail orientation is decided by the GPU column's own width. */
+#gpu {
+  container-type: inline-size;
+  container-name: gpu-control;
+}
+
+#gpu .gpu-stage {
+  margin-top: 40px !important;
+  padding: 36px 0 0;
+  border: 0;
+  background: transparent;
+  color: var(--pf-ink);
+  box-shadow: none;
+  overflow: visible;
+}
+
+#gpu .gpu-flow-visual {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+#gpu .gpu-flow-visual li {
+  min-height: 144px;
+  padding-inline: 8px;
+}
+
+#gpu .gpu-node {
+  margin-bottom: 24px;
+  background: #08713a;
+}
+
+#gpu .gpu-node::before {
+  background: var(--pf-paper);
+}
+
+/* The six drop rules are removed: the PF Relay rail alone expresses
+   sequence. */
+#gpu .gpu-node::after {
+  display: none;
+}
+
+#gpu .gpu-flow-visual span {
+  margin: 0;
+  color: #08713a;
+  font-family: var(--pf-mono);
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: .04em;
+}
+
+#gpu .gpu-flow-visual strong {
+  margin-top: 7px;
+  color: #0b140a;
+  font-family: var(--pf-body-font);
+  font-size: 18.5px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+#gpu .gpu-flow-visual .is-ready strong {
+  color: #08713a;
+  font-size: 22px;
+}
+
+#gpu .gpu-flow-visual .is-ready em {
+  margin-top: 12px;
+  padding: 6px 8px;
+  border: 2px solid #08713a;
+  background: transparent;
+  color: #08713a;
+  font-size: 15px;
+  letter-spacing: .05em;
+}
+
+#gpu .gpu-terminal {
+  width: 3px;
+  background: #08713a;
+}
+
+#gpu .gpu-flow-note {
+  color: var(--pf-ink-soft);
+}
+
+#gpu .gpu-stage .tui-scroll,
+#gpu .gpu-stage > .scroll-hint {
+  margin-top: 32px;
+  color: var(--pf-ink);
+}
+
+/* ---------- Priority 3: Performance proof broadsheet --------------- */
+
+#speed {
+  padding-block: 120px 104px;
+}
+
+#speed .evidence-sheet {
+  margin-top: 64px;
+}
+
+#speed .benchmark-route {
+  min-height: 136px;
+  padding: 26px 34px 28px;
+}
+
+#speed .benchmark-matchups {
+  display: block;
+  border: 0;
+}
+
+#speed .benchmark-matchups article,
+#speed .benchmark-matchups article + article {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  gap: 10px 24px;
+  align-items: center;
+  min-height: 224px;
+  padding: 40px 0;
+  border: 0;
+  border-bottom: 1px solid var(--pf-line-light-strong);
+}
+
+#speed .benchmark-matchups article:first-child {
+  border-top: 1px solid var(--pf-line-light-strong);
+}
+
+#speed .benchmark-kicker {
+  grid-column: 1 / 5;
+  grid-row: 1;
+  align-self: end;
+  color: #08713a;
+  font-size: 16px;
+}
+
+#speed .benchmark-matchups h3 {
+  grid-column: 1 / 5;
+  grid-row: 2;
+  max-width: 24ch;
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.16;
+}
+
+#speed .benchmark-matchups dl {
+  grid-column: 5 / 9;
+  grid-row: 1 / 3;
+  margin: 0;
+}
+
+#speed .benchmark-matchups dl > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  min-height: 58px;
+  padding: 16px 0;
+  border: 0;
+  border-bottom: 1px solid var(--pf-line-light);
+}
+
+#speed .benchmark-matchups dl > div:last-child {
+  border-bottom: 0;
+}
+
+#speed .benchmark-matchups dt,
+#speed .benchmark-matchups dd {
+  color: #1d291b;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+#speed .benchmark-result {
+  grid-column: 9 / 13;
+  grid-row: 1 / 3;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+}
+
+#speed .benchmark-result b {
+  font-size: clamp(52px, 4.4vw, 64px);
+}
+
+#speed .benchmark-result span {
+  margin-top: 10px;
+  color: var(--pf-ink-soft);
+  font-size: 16px;
+}
+
+/* ---------- Priority 4: plan catalogue as a native ledger ---------- */
+
+#pricing {
+  padding-block: 112px 104px;
+}
+
+#pricing .receipt {
+  margin-top: 56px;
+  padding: 30px 36px 34px;
+  border: 0;
+  border-top: 3px solid var(--pf-green);
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+  background: var(--pf-ground);
+}
+
+#pricing .receipt table {
+  display: table;
+  width: 100%;
+  min-width: 980px;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+#pricing .receipt caption {
+  display: table-caption;
+  padding: 0 0 24px;
+  color: var(--pf-body);
+  font-size: 16px;
+  line-height: 1.45;
+  letter-spacing: .05em;
+  text-align: left;
+}
+
+#pricing .receipt thead {
+  display: table-header-group;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+  border: 0 !important;
+}
+
+#pricing .receipt thead tr {
+  border-top: 1px solid var(--pf-line-dark-strong);
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+}
+
+#pricing .receipt th {
+  padding: 18px 16px;
+  border: 0;
+  color: var(--pf-body);
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: .055em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+#pricing .receipt tbody {
+  display: table-row-group;
+}
+
+#pricing .receipt tbody tr {
+  display: table-row;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+  border-left: 0;
+  background: transparent;
+}
+
+#pricing .receipt tbody td {
+  display: table-cell;
+  min-height: 0;
+  padding: 22px 16px;
+  border: 0;
+  color: var(--pf-body);
+  font-family: var(--pf-mono);
+  font-size: 17px;
+  line-height: 1.4;
+  text-align: left;
+  vertical-align: middle;
+}
+
+#pricing .receipt tbody td::before {
+  content: none;
+}
+
+#pricing .receipt tbody td:first-child,
+#pricing .receipt tbody td:first-child code {
+  color: var(--pf-green-major);
+  font-size: 25px;
+  font-weight: 600;
+  text-align: left;
+}
+
+#pricing .receipt tbody td:nth-child(2) {
+  padding: 22px 16px;
+  color: var(--pf-green-major);
+  font-family: var(--pf-display);
+  font-size: 27px;
+  font-weight: 620;
+  line-height: 1.1;
+  letter-spacing: -.035em;
+  text-align: left;
+}
+
+/* ---------- Priority 5: hardened paper metadata -------------------- */
+
+.system-folio .section-number,
+#speed .section-number,
+#speed .benchmark-kicker,
+#pricing .section-number,
+#pricing .receipt .paper-meta {
+  color: #08713a;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: .055em;
+  opacity: 1;
+}
+
+.paper-meta--neutral {
+  color: #1d291b;
+}
+
+/* Visually hidden chapter markers must survive the !important
+   .section-number reset and the rail-margin overrides. At equal
+   specificity the later rule wins, so this lives at the end of the
+   cascade layer. */
+.section-number.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* The absolute PF RELAY / PROVIDER ROUTING label needs clearance
+   above the provider-name row. */
+#models .provider-nodes {
+  margin-top: 24px;
+}
+
+/* ---------- Install console relief (6/6 hero) ---------------------- */
+
+.hero-copy {
+  grid-column: 1 / 7;
+}
+
+.hero-benchmark {
+  grid-column: 7 / 13;
+  padding-left: 32px;
+}
+
+.install-head {
+  min-height: 54px;
+}
+
+.os-nav a {
+  min-height: 52px;
+  padding-inline: 18px;
+  font-size: 15px;
+}
+
+.cmd-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 88px;
+  min-height: 116px;
+}
+
+.cmd-scroll {
+  min-width: 0;
+  padding: 20px 18px;
+  overflow-x: auto;
+}
+
+.cmd-scroll code {
+  font-size: 15px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.copy-btn {
+  min-width: 88px;
+  min-height: 52px;
+}
+
+/* ---------- Appendix chapters (07 Runtime / 10 Commands / 11 Status) */
+
+.technical-appendix > .container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px 32px;
+  align-items: end;
+}
+
+.technical-appendix .section-number {
+  grid-column: 1 / -1;
+  grid-row: auto;
+}
+
+.technical-appendix .appendix-title {
+  grid-column: 1;
+  grid-row: auto;
+}
+
+.technical-appendix .appendix-count {
+  grid-column: 2;
+  grid-row: auto;
+  text-align: right;
+}
+
+.appendix-chapters {
+  grid-column: 1 / -1;
+  margin-top: 30px;
+  border-top: 1px solid var(--pf-line-dark-strong);
+}
+
+.appendix-chapter {
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+}
+
+.appendix-chapter > summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 56px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.appendix-chapter > summary::-webkit-details-marker {
+  display: none;
+}
+
+.appendix-chapter > summary > span {
+  color: var(--pf-green);
+  font-family: var(--pf-mono);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.appendix-chapter > summary::after {
+  content: "+";
+  margin-left: auto;
+  color: var(--pf-green);
+  font-family: var(--pf-mono);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.appendix-chapter[open] > summary::after {
+  content: "\2013";
+}
+
+.appendix-chapter > summary:focus-visible {
+  outline: 2px solid var(--pf-green);
+  outline-offset: 4px;
+}
+
+.appendix-chapter > #runtime,
+.appendix-chapter > #commands,
+.appendix-chapter > #roadmap {
+  margin: 0 0 26px;
+  padding: 52px 44px 56px;
+  border: 0;
+  background: var(--pf-paper);
+  color: var(--pf-ink);
+}
+
+.appendix-chapter > #runtime > .container,
+.appendix-chapter > #commands > .container,
+.appendix-chapter > #roadmap > .container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.appendix-chapter .chapter-intro {
+  margin-bottom: 40px;
+}
+
+.appendix-chapter .chapter-intro h2 {
+  color: var(--pf-ink);
+}
+
+.appendix-chapter .chapter-intro .lede {
+  color: var(--pf-ink-soft);
+}
+
+.appendix-chapter .section-number {
+  color: #08713a;
+}
+
+.technical-appendix .appendix-drawer {
+  grid-column: 1 / -1;
+  margin-top: 8px;
+}
+
+/* ---------- V248 responsive: tablet (≤900px) ----------------------- */
+
+@media (max-width: 900px) {
+  .system-folio__control-spread {
+    display: block;
+    padding-block: 72px 84px;
+  }
+
+  .system-folio__control-spread > #gpu {
+    margin-top: 72px;
+  }
+
+  /* Performance proof bands: 8-column layout. */
+  #speed .benchmark-matchups article,
+  #speed .benchmark-matchups article + article {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  #speed .benchmark-kicker,
+  #speed .benchmark-matchups h3 {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  #speed .benchmark-matchups h3 {
+    margin-bottom: 18px;
+  }
+
+  #speed .benchmark-matchups dl {
+    grid-column: 1 / 5;
+    grid-row: auto;
+  }
+
+  #speed .benchmark-result {
+    grid-column: 5 / 9;
+    grid-row: auto;
+    min-width: 280px;
+  }
+
+  /* Pricing: keep the native table with a horizontal scroll region. */
+  #pricing .receipt table {
+    min-width: 900px;
+  }
+
+  .appendix-chapter > #runtime,
+  .appendix-chapter > #commands,
+  .appendix-chapter > #roadmap {
+    padding: 40px 28px 44px;
+  }
+}
+
+/* GPU rail turns vertical whenever the GPU column itself falls below
+   680px (V249: the decision uses the column, not the spread proxy). */
+
+@container gpu-control (max-width: 679px) {
+  #gpu .gpu-rail {
+    display: none;
+  }
+
+  #gpu .gpu-stage {
+    padding-bottom: 40px;
+  }
+
+  #gpu .gpu-rail--vertical {
+    display: block;
+    position: absolute;
+    top: 76px;
+    bottom: 24px;
+    left: 0;
+    width: 40px;
+    height: calc(100% - 100px);
+  }
+
+  #gpu .gpu-flow-visual {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  #gpu .gpu-flow-visual li {
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 4px 20px;
+    align-items: center;
+    min-height: 0;
+    padding: 18px 0;
+    text-align: left;
+  }
+
+  #gpu .gpu-node {
+    grid-row: 1 / 5;
+    margin-bottom: 0;
+  }
+
+  #gpu .gpu-node::after {
+    display: none;
+  }
+
+  #gpu .gpu-flow-visual span,
+  #gpu .gpu-flow-visual strong,
+  #gpu .gpu-flow-visual em {
+    grid-column: 2;
+    justify-self: start;
+    text-align: left;
+  }
+
+  #gpu .gpu-flow-visual strong {
+    margin-top: 2px;
+  }
+
+  #gpu .gpu-terminal {
+    top: auto;
+    right: auto;
+    bottom: -18px;
+    left: 6px;
+    width: 4px;
+    height: 18px;
+  }
+}
+
+/* ---------- V248 responsive: mobile (≤720px) ----------------------- */
+
+@media (max-width: 720px) {
+  .system-folio__control-spread {
+    padding-block: 56px 64px;
+  }
+
+  .system-folio__control-spread > #gpu {
+    margin-top: 56px;
+  }
+
+  /* Performance proof bands become block flow. */
+  #speed .benchmark-matchups article,
+  #speed .benchmark-matchups article + article {
+    display: block;
+    min-height: 0;
+    padding: 34px 0;
+  }
+
+  #speed .benchmark-matchups h3 {
+    margin: 10px 0 26px;
+  }
+
+  #speed .benchmark-result {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    min-width: 0;
+    margin-top: 30px;
+  }
+
+  .appendix-chapter > summary {
+    min-height: 48px;
+  }
+
+  .appendix-chapter > #runtime,
+  .appendix-chapter > #commands,
+  .appendix-chapter > #roadmap {
+    padding: 32px 20px 36px;
+  }
+}
+
+/* Result figures stack only below 360px. */
+
+@media (max-width: 359px) {
+  #speed .benchmark-result {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================================================== */
+/* V248 repair + depth calibration. Color/rule repairs apply at all   */
+/* widths; depth calibration is desktop-only so the tuned tablet and  */
+/* mobile mechanics above are untouched. Acceptance check 20 binds:   */
+/* the closed 1440px page must settle under ~8,000px.                 */
+/* ================================================================== */
+
+/* GPU qualification label is bounded protocol metadata on paper. */
+#gpu .gpu-stage::before {
+  color: #08713a;
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: .05em;
+}
+
+/* Models relay label uses standard paper tracking. */
+#models .provider-map::before {
+  letter-spacing: .055em;
+}
+
+/* Chapter introductions receive no decorative rule (hairline budget). */
+#pricing .chapter-intro .pull {
+  padding: 0;
+  border-top: 0;
+}
+
+@media (min-width: 901px) {
+
+  #hero {
+    padding-bottom: 56px;
+  }
+
+  .trust-grid > div,
+  .trust-grid > div:first-child,
+  .trust-grid > div:last-child {
+    min-height: 0;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  #models {
+    padding-block: 88px 48px;
+  }
+
+  #models .provider-map {
+    margin-top: 36px;
+    padding: 30px 0 22px;
+  }
+
+  #models .provider-nodes {
+    margin-top: 20px;
+  }
+
+  #models .provider-core {
+    min-height: 80px;
+    margin-top: 8px;
+    padding-top: 14px;
+  }
+
+  #models > .container > .pull {
+    margin-top: 32px;
+  }
+
+  #hierarchy {
+    padding-block: 0;
+  }
+
+  #hierarchy .command-cut--right {
+    padding-block: 56px 52px;
+  }
+
+  #hierarchy .hierarchy-tree {
+    margin-top: 44px;
+  }
+
+  .system-folio__control-spread {
+    padding-block: 64px 72px;
+  }
+
+  #speed {
+    padding-block: 88px 80px;
+  }
+
+  #speed .chapter-intro .lede {
+    margin-top: 24px;
+  }
+
+  #speed .evidence-sheet {
+    margin-top: 44px;
+  }
+
+  #speed .benchmark-route {
+    min-height: 116px;
+    padding: 22px 34px 24px;
+  }
+
+  #speed .benchmark-matchups article,
+  #speed .benchmark-matchups article + article {
+    min-height: 196px;
+    padding: 32px 0;
+  }
+
+  #speed .benchmark-proof {
+    padding: 24px 30px;
+  }
+
+  #tasknode {
+    padding-block: 88px 80px;
+  }
+
+  #tasknode .task-ledger {
+    margin-top: 44px;
+  }
+
+  #tasknode .task-flow li,
+  #tasknode .task-flow li:first-child {
+    min-height: 176px;
+    padding: 28px 28px 26px 0;
+  }
+
+  #pricing {
+    padding-block: 88px 80px;
+  }
+
+  #pricing .receipt {
+    margin-top: 40px;
+    padding: 26px 32px 28px;
+  }
+
+  #pricing .receipt caption {
+    padding-bottom: 18px;
+  }
+
+  #pricing .receipt th {
+    padding: 14px 16px;
+  }
+
+  #pricing .receipt tbody td {
+    padding: 18px 16px;
+  }
+
+  #pricing > .container > .cols {
+    margin-top: 36px;
+  }
+
+  .technical-appendix {
+    padding-block: 20px;
+  }
+
+  .technical-appendix > .container {
+    gap: 12px 32px;
+  }
+
+  .appendix-chapters {
+    margin-top: 16px;
+  }
+
+  .appendix-chapter > summary {
+    min-height: 50px;
+  }
+
+  .technical-appendix .appendix-drawer {
+    margin-top: 4px;
+  }
+
+  .site-footer {
+    padding-bottom: 44px;
+  }
+}
+
+/* ---------- V248 depth calibration, round 2 ----------------------- */
+
+@media (min-width: 901px) {
+
+  #hero {
+    padding-bottom: 48px;
+  }
+
+  .cmd-row {
+    min-height: 108px;
+  }
+
+  .trust-grid > div,
+  .trust-grid > div:first-child,
+  .trust-grid > div:last-child {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  /* Models: single-line rail heading, tighter manifold + annexes. */
+  #models h2 {
+    max-width: 100%;
+  }
+
+  #models .chapter-intro .section-number {
+    margin-bottom: 14px !important;
+  }
+
+  #models .provider-map {
+    margin-top: 28px;
+    padding: 26px 0 20px;
+  }
+
+  #models .provider-core {
+    min-height: 72px;
+    margin-top: 4px;
+    padding-top: 10px;
+  }
+
+  #models .reference-disclosure {
+    margin-top: 20px;
+  }
+
+  #models > .container > .pull {
+    margin-top: 24px;
+  }
+
+  /* Hierarchy blade: tighter cut, same tree. */
+  #hierarchy .command-cut--right {
+    padding-block: 48px 44px;
+  }
+
+  #hierarchy .hierarchy-tree {
+    margin-top: 36px;
+  }
+
+  /* Control spread. */
+  .system-folio__control-spread {
+    padding-block: 56px 64px;
+  }
+
+  /* Performance: bands settle at content depth. */
+  #speed .benchmark-route {
+    padding: 18px 34px 20px;
+  }
+
+  #speed .benchmark-matchups article,
+  #speed .benchmark-matchups article + article {
+    min-height: 180px;
+    padding: 28px 0;
+  }
+
+  #speed .benchmark-proof {
+    padding: 20px 28px;
+  }
+
+  /* Task Node: single-line peak heading, wider lede measure. */
+  #tasknode .chapter-intro h2 {
+    max-width: none;
+  }
+
+  #tasknode .chapter-intro .lede {
+    max-width: 64ch;
+    margin-top: 22px;
+  }
+
+  #tasknode .task-ledger {
+    margin-top: 36px;
+  }
+
+  #tasknode .task-flow li,
+  #tasknode .task-flow li:first-child {
+    min-height: 0;
+    padding: 24px 28px 22px 0;
+  }
+
+  #tasknode .tasknode-actions {
+    margin-top: 24px;
+  }
+
+  /* Payment: three-line heading measure, tighter ledger. */
+  #pricing .chapter-intro h2 {
+    max-width: 24ch;
+  }
+
+  #pricing .receipt {
+    margin-top: 32px;
+    padding: 22px 32px 24px;
+  }
+
+  #pricing .receipt caption {
+    padding-bottom: 14px;
+  }
+
+  #pricing .receipt th {
+    padding: 13px 16px;
+  }
+
+  #pricing .receipt tbody td {
+    padding: 16px;
+  }
+
+  #pricing > .container > .cols {
+    margin-top: 28px;
+  }
+
+  /* Appendix coda. */
+  .appendix-chapters {
+    margin-top: 12px;
+  }
+
+  .appendix-chapter > summary {
+    min-height: 48px;
+  }
+
+  .site-footer {
+    padding-bottom: 36px;
+  }
+}
+
+/* ---------- V248 depth calibration, round 3 ----------------------- */
+
+@media (min-width: 901px) {
+
+  /* The commercial heading is the longest on the page; the ledger chapter sits quieter than the peaks. */
+  #pricing .chapter-intro h2 {
+    max-width: none;
+    font-size: clamp(44px, 3.75vw, 54px);
+  }
+
+  #models {
+    padding-block: 72px 48px;
+  }
+
+  #hierarchy .command-cut--right {
+    padding-block: 44px 40px;
+  }
+
+  #hierarchy .hierarchy-tree {
+    margin-top: 32px;
+  }
+
+  .system-folio__control-spread {
+    padding-block: 48px 56px;
+  }
+
+  #speed .chapter-intro .lede {
+    margin-top: 18px;
+  }
+
+  #speed .evidence-sheet {
+    margin-top: 32px;
+  }
+
+  #speed .benchmark-route {
+    padding: 14px 34px 16px;
+  }
+
+  .technical-appendix {
+    padding-block: 16px;
+  }
+
+  .site-footer {
+    padding-bottom: 28px;
+  }
+}
+
+/* ---------- V248 depth calibration, round 4 (final) --------------- */
+
+@media (min-width: 901px) {
+
+  #hero {
+    padding-bottom: 40px;
+  }
+
+  #models {
+    padding-block: 64px 44px;
+  }
+
+  .system-folio__control-spread {
+    padding-block: 44px 52px;
+  }
+
+  #speed {
+    padding-block: 80px 72px;
+  }
+
+  #speed .benchmark-matchups article,
+  #speed .benchmark-matchups article + article {
+    min-height: 176px;
+  }
+
+  #tasknode {
+    padding-block: 80px 72px;
+  }
+
+  #pricing {
+    padding-block: 80px 72px;
+  }
+
+  .appendix-chapter > summary {
+    min-height: 46px;
+  }
+
+  #cta {
+    padding: 96px 0;
+  }
+
+  .site-footer {
+    padding-bottom: 24px;
+  }
+}
+
+/* ================================================================== */
+/* SOL Pro V248 delta (V249) — Bound Control Score: one 144px binding */
+/* axis for the system folio, articulated three-sentence hero claim,  */
+/* de-densified control spread, running-label act markers, asymmetric */
+/* footer index, and an enforced body-copy floor.                     */
+/* ================================================================== */
+
+/* ---------- Numbering noise: names stay, numeric prefixes hide ----- */
+
+:is(#install, #models, #speed, #tasknode, #pricing)
+  .section-number:not(.sr-only)
+  .section-index {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* The appendix count stays a phrase, never an isolated chapter-like
+   marker; the disclosure drawer follows the three chapter summaries.
+   The legacy drawer summary carried a boxed "12" ::before — killed too
+   (V249 check 22). */
+.technical-appendix :is(.appendix-drawer, .appendix-count)::before,
+.technical-appendix .appendix-drawer > summary::before {
+  content: none !important;
+  display: none !important;
+}
+
+.technical-appendix .appendix-count {
+  white-space: nowrap;
+}
+
+.technical-appendix .appendix-drawer {
+  grid-row: auto;
+}
+
+/* The V249–V253 hero-claim patches are removed here; the consolidated
+   V254 claim geometry lives in the final V254 layer at the end of this
+   file (hero-claim leaves the H1 plane at every width). */
+
+/* ---------- Install-cell relief: full-width tabs, narrower copy ---- */
+
+.install-head {
+  display: block;
+  min-height: 52px;
+  padding: 0;
+}
+
+.os-nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+}
+
+.os-nav a {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 52px;
+  padding: 0 12px;
+  font-size: 15px;
+}
+
+.cmd-row {
+  grid-template-columns: minmax(0, 1fr) 76px;
+  min-height: 126px;
+}
+
+.cmd-scroll {
+  padding: 16px 18px;
+}
+
+.cmd-scroll pre {
+  margin: 0;
+}
+
+/* The V249 break-all wrap is removed. V254 renders the command as a
+   controlled three-line instrument (verb / complete URL / pipe) via a
+   post-DOM-ready enhancement; the segmented rules live in the final
+   V254 layer. The untouched source command remains the no-JS fallback. */
+
+.copy-btn {
+  min-width: 76px;
+  min-height: 52px;
+  padding-inline: 8px;
+}
+
+/* ================================================================== */
+/* V249 (cont.): 144px binding axis at wide desktop, asymmetric       */
+/* footer index, enforced body-copy floor, dark-drawer pull repair.   */
+/* ================================================================== */
+
+/* ---------- Binding axis: Models, the Hierarchy blade edge, and the
+   control spread begin on one 144px paper margin at wide desktop.
+   Nothing draws a line through the margin; /spawn stays its only
+   object. The blade gutter itself is set at 901px above. ----------- */
+
+@media (min-width: 1200px) {
+  #models > .container {
+    width: auto;
+    max-width: none;
+    margin-right: 40px;
+    margin-left: 144px;
+  }
+
+  .system-folio__control-spread {
+    width: auto;
+    max-width: none;
+    margin-right: 40px;
+    margin-left: 144px;
+    padding: 72px 0 80px;
+  }
+}
+
+/* ---------- Footer: 8/4 wordmark + ruled link-index composition ---- */
+
+.site-footer {
+  padding: 72px 0 64px;
+}
+
+/* Small desktop keeps the V249 composition (full-row wordmark, then
+   identity beside the link registers). Wide desktop (>=1200px) uses the
+   V254 binding-registered closing plate in the final layer. */
+@media (min-width: 901px) and (max-width: 1199px) {
+  .footer-composition {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    gap: 48px 24px;
+    align-items: start;
+  }
+
+  .footer-composition .footer-marquee {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0 0 44px;
+    border-bottom: 1px solid var(--pf-line-dark-strong);
+    line-height: .82;
+  }
+
+  .footer-composition .footer-identity {
+    grid-column: 1 / 7;
+    grid-row: 2;
+    max-width: 540px;
+  }
+
+  .footer-composition .footer-index {
+    grid-column: 9 / 13;
+    grid-row: 2;
+    border-top: 2px solid var(--pf-green);
+  }
+}
+
+.footer-index > section {
+  padding: 22px 0 24px;
+  border-bottom: 1px solid var(--pf-line-dark-strong);
+}
+
+.footer-index h3 {
+  margin: 0 0 14px;
+  color: var(--pf-green);
+  font-family: var(--pf-mono);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.footer-index ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-index li {
+  margin: 0;
+}
+
+.footer-index a {
+  color: var(--pf-body-soft);
+  font-size: 18px;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.footer-index a:hover {
+  color: var(--pf-green);
+}
+
+.footer-identity .footer-social a {
+  color: var(--pf-body-soft);
+  font-size: 18px;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.footer-identity .footer-social a:hover {
+  color: var(--pf-green);
+}
+
+/* Small desktop: the wordmark takes the full row so it never crowds
+   the link registers. */
+@media (min-width: 901px) and (max-width: 1199px) {
+  .footer-composition .footer-marquee {
+    grid-column: 1 / -1;
+    font-size: clamp(88px, 11vw, 128px);
+  }
+
+  .footer-composition .footer-index {
+    grid-row: 2;
+  }
+}
+
+/* Tablet and mobile: wordmark → identity → ruled registers, stacked. */
+@media (max-width: 900px) {
+  .footer-composition {
+    display: block;
+  }
+
+  .footer-composition .footer-marquee {
+    font-size: clamp(56px, 15vw, 104px);
+  }
+
+  .footer-composition .footer-identity {
+    max-width: 540px;
+    margin-top: 40px;
+  }
+
+  .footer-composition .footer-index {
+    margin-top: 48px;
+  }
+}
+
+/* ---------- Body-copy floor ---------------------------------------- */
+
+:root {
+  --pf-body-paper-size: 18px;
+  --pf-body-paper-leading: 1.52;
+  --pf-body-dark-size: 18px;
+  --pf-body-dark-leading: 1.55;
+}
+
+:is(
+  #models,
+  #custody,
+  #gpu,
+  #speed,
+  #pricing,
+  .appendix-chapter
+) :is(.lede, .pull, .body-copy),
+#speed .benchmark-proof p,
+#pricing > .container > .cols p {
+  color: #1d291b;
+  font-size: var(--pf-body-paper-size);
+  line-height: var(--pf-body-paper-leading);
+}
+
+:is(
+  #hero,
+  #hierarchy,
+  #tasknode,
+  #cta,
+  .technical-appendix,
+  .site-footer
+) :is(.lede, .body-copy),
+#hierarchy .hierarchy-tree span,
+#tasknode .task-flow small,
+#cta p,
+.footer-identity p,
+.footer-index a {
+  font-size: var(--pf-body-dark-size);
+  line-height: var(--pf-body-dark-leading);
+}
+
+#hierarchy .lede,
+#hierarchy .hierarchy-tree span,
+#tasknode .lede,
+#tasknode .task-flow small,
+#cta p {
+  color: #f1faee;
+}
+
+.footer-identity p,
+.technical-appendix .body-copy {
+  color: #bad8b6;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --pf-body-paper-size: 17px;
+    --pf-body-paper-leading: 1.55;
+    --pf-body-dark-size: 17px;
+    --pf-body-dark-leading: 1.55;
+  }
+}
+
+/* ---------- Dark drawer: relocated custody pull stays legible ------ */
+
+.technical-appendix .pull {
+  border-left-color: var(--pf-green);
+  color: var(--pf-body);
+}
+
+/* The V251–V253 hero-claim patches (green entry rule, support-sentence
+   color, 26px beside-H1 typography) are superseded by the consolidated
+   V254 claim geometry in the final layer below. V251's matchup-band
+   air is retained: */
+
+@media (min-width: 901px) {
+  #speed .benchmark-matchups article,
+  #speed .benchmark-matchups article + article {
+    min-height: 200px;
+    padding: 36px 0;
+  }
+}
+
+/* (V252/V253 claim patches removed — see the V254 layer below.) */
+
+/* ================================================================== */
+/* V254 — Bound Score Plate (SOL Pro V253 delta). One page coordinate */
+/* (--pf-score-left: 144px) binds every paper evidence plate and the  */
+/* split footer wordmark; the four legacy greens reconcile onto two   */
+/* per-surface signal tokens; the hero claim leaves the H1 plane; the */
+/* install command becomes a controlled three-line instrument.        */
+/* ================================================================== */
+
+:root {
+  --pf-signal-dark: #7fee64;
+  --pf-signal-paper: #08713a;
+  --pf-score-left: 144px;
+  --pf-score-right: 40px;
+  --pf-meta-size: 15.5px;
+  --pf-meta-small: 14.5px;
+  --pf-meta-leading: 1.45;
+  --pf-meta-tracking: .055em;
+  /* Two-greens reconciliation: legacy token consumers now resolve to */
+  /* the correct per-surface signal (V254 checks 31–33).              */
+  --pf-green-major: #7fee64;
+  --pf-green-paper: #08713a;
+}
+
+/* ---------- Two greens: explicit surface assignments --------------- */
+
+#hero .accent,
+#hero .hero-benchmark strong,
+#tasknode .task-flow > li > span,
+#cta h2 span {
+  color: var(--pf-signal-dark);
+}
+
+/* The CTA primary action is a filled signal on the dark cut. */
+#cta .btn.primary {
+  border-color: var(--pf-signal-dark);
+  background: var(--pf-signal-dark);
+  color: var(--pf-ground);
+}
+
+/* Drawer disclosures live on the dark appendix seam: their markers   */
+/* take the dark signal, not the forest paper green.                  */
+.technical-appendix .reference-disclosure > summary::after,
+.technical-appendix .appendix-drawer > summary::after {
+  color: var(--pf-signal-dark);
+}
+
+#models :is(.pf-relay__primary, .pf-relay__echo),
+#gpu :is(.pf-relay__primary, .pf-relay__echo) {
+  stroke: var(--pf-signal-paper);
+}
+
+#speed .benchmark-result b,
+#speed h2 span:last-child,
+#custody .custody-node > strong {
+  color: var(--pf-signal-paper);
+}
+
+/* The receipt is a black plate on paper: its signal entries keep the */
+/* dark-surface green.                                                */
+#pricing .receipt tbody td:first-child,
+#pricing .receipt tbody td:first-child code,
+#pricing .receipt tbody td:nth-child(2) {
+  color: var(--pf-signal-dark);
+}
+
+/* ---------- Bound Score Plate: one evidence coordinate ------------- */
+/* Models, the control spread, and the Hierarchy blade already hold   */
+/* the 144px axis (V249). V254 extends it to Performance, Payment,    */
+/* and the CTA copy; the footer plate registers to it below. Hero,    */
+/* Task Node, and the appendix stay full-width dark cuts.             */
+
+@media (min-width: 1200px) {
+  #speed > .container,
+  #pricing > .container,
+  #cta > .container {
+    width: auto;
+    max-width: none;
+    margin-right: var(--pf-score-right);
+    margin-left: var(--pf-score-left);
+  }
+}
+
+/* Paper calibration: one clean stock, no muddy deep-paper surface. */
+.system-folio,
+#speed,
+#pricing,
+#speed .benchmark-proof {
+  background: #fbfbf7;
+}
+
+/* ---------- Hero: the claim leaves the H1 plane -------------------- */
+/* Consolidated V254 geometry (supersedes every V249–V253 patch).     */
+/* One strong full-width lead, then a quiet two-column support row;   */
+/* no rule, panel, number, or side column (V254 checks 1–7).          */
+
+#hero .hero-statement > .hero-claim {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  max-width: 68ch;
+  margin: 36px 0 0;
+  padding: 0;
+  border: 0;
+  color: #f1faee;
+  font-family: var(--pf-body-font);
+  text-align: left;
+}
+
+.hero-claim > span {
+  display: block;
+}
+
+.hero-claim__lead {
+  margin: 0 0 2px;
+  color: #f1faee;
+  font-size: 27px;
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: -.018em;
+  text-wrap: balance;
+}
+
+.hero-claim > span:not(.hero-claim__lead) {
+  max-width: 62ch;
+  margin: 0;
+  color: #f1faee;
+  font-size: 20px;
+  font-weight: 450;
+  line-height: 1.52;
+  text-wrap: pretty;
+}
+
+@media (min-width: 1181px) {
+  #hero .hero-statement {
+    grid-template-rows: auto auto auto;
+    margin-bottom: 56px;
+  }
+
+  #hero .hero-statement > .eyebrow {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin: 0 0 30px;
+  }
+
+  #hero .hero-statement h1 {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: 11.5ch;
+    margin: 0;
+  }
+
+  #hero .hero-statement > .hero-claim {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 14px 24px;
+    width: 100%;
+    max-width: none;
+    margin: 42px 0 0;
+    padding: 0;
+    border: 0;
+    color: #f1faee;
+    text-align: left;
+  }
+
+  #hero .hero-claim__lead {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    max-width: none;
+    margin: 0;
+    font-size: clamp(29px, 2.25vw, 32px);
+    font-weight: 600;
+    line-height: 1.24;
+    letter-spacing: -.018em;
+    text-wrap: balance;
+  }
+
+  #hero .hero-claim > span:nth-child(2) {
+    grid-column: 1 / 7;
+    grid-row: 2;
+  }
+
+  #hero .hero-claim > span:nth-child(3) {
+    grid-column: 7 / 13;
+    grid-row: 2;
+  }
+
+  #hero .hero-claim > span:not(.hero-claim__lead) {
+    max-width: 52ch;
+    margin: 0;
+    font-size: 21px;
+    font-weight: 450;
+    line-height: 1.5;
+    letter-spacing: 0;
+    text-wrap: pretty;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  #hero .hero-statement h1,
+  #hero .hero-statement > .hero-claim {
+    grid-column: 1 / -1;
+  }
+
+  #hero .hero-statement > .hero-claim {
+    display: grid;
+    gap: 12px;
+    max-width: 68ch;
+    margin: 36px 0 0;
+    padding: 0;
+    border: 0;
+  }
+
+  #hero .hero-claim__lead {
+    font-size: 27px;
+    line-height: 1.28;
+  }
+
+  #hero .hero-claim > span:not(.hero-claim__lead) {
+    max-width: 62ch;
+    font-size: 20px;
+    line-height: 1.52;
+  }
+}
+
+@media (max-width: 720px) {
+  #hero .hero-statement > .hero-claim {
+    display: grid;
+    gap: 10px;
+    max-width: 100%;
+    margin-top: 30px;
+    padding: 0;
+    border: 0;
+  }
+
+  #hero .hero-claim__lead {
+    margin: 0 0 2px;
+    color: #f1faee;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  #hero .hero-claim > span:not(.hero-claim__lead) {
+    max-width: 100%;
+    color: #f1faee;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+}
+
+/* ---------- Install: seven columns + three-line instrument --------- */
+
+@media (min-width: 901px) {
+  #hero .hero-copy {
+    grid-column: 1 / 8;
+  }
+
+  #hero .hero-benchmark {
+    grid-column: 8 / 13;
+    padding-left: 32px;
+  }
+
+  /* Seven columns let the install title sit on one line at 1440px,   */
+  /* which keeps the command and copy button above the 900px fold.    */
+  #hero #install-title {
+    max-width: none;
+  }
+}
+
+.cmd-scroll {
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-gutter: stable;
+}
+
+.cmd-scroll code.is-segmented {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.cmd-scroll .cmd-line {
+  display: block;
+  width: max-content;
+  min-height: 1.55em;
+  white-space: nowrap;
+}
+
+.cmd-scroll .cmd-line--url {
+  color: #f1faee;
+}
+
+/* ---------- Hero benchmark: joined masthead, compact docket -------- */
+
+#hero .hero-benchmark-top {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+#hero .hero-benchmark-top strong::before {
+  content: "\00a0\00b7\00a0";
+  color: #f1faee;
+}
+
+/* Deviation from the delta's 15.5px masthead: the joined phrase needs
+   ~597px at 15.5px but the five-column benchmark gives 511px at 1440px.
+   14.5px at .02em keeps the mandated single joined line unwrapped. */
+#hero .hero-benchmark-top span,
+#hero .hero-benchmark-top strong {
+  color: #f1faee;
+  font-size: 14.5px;
+  line-height: 1.45;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+
+/* Hero answers "what happened" in compact mono; Performance owns the */
+/* sole oversized grotesque rendering (V254 checks 29–30).            */
+#hero .hero-benchmark-outcomes strong {
+  color: var(--pf-signal-dark);
+  font-family: var(--pf-mono);
+  font-size: clamp(38px, 3.2vw, 42px);
+  font-weight: 600;
+  line-height: .95;
+  letter-spacing: -.045em;
+  font-variant-numeric: tabular-nums;
+}
+
+#speed h2 {
+  font-family: var(--pf-display);
+  font-size: clamp(76px, 7vw, 98px);
+  line-height: .94;
+}
+
+#speed .benchmark-result b {
+  font-family: var(--pf-display);
+  font-size: clamp(46px, 3.8vw, 54px);
+  line-height: .92;
+}
+
+/* ---------- Performance protocol controls: one quiet line ---------- */
+
+.benchmark-route__controls {
+  gap: 8px 24px;
+  padding-bottom: 18px;
+}
+
+.benchmark-route__controls span {
+  color: #f1faee;
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: .05em;
+}
+
+.benchmark-route__controls span::before {
+  color: var(--pf-signal-dark);
+}
+
+/* ---------- Metadata: fewer voices, one bounded register ----------- */
+
+.protocol-id,
+.section-number,
+.hero-benchmark-top,
+.benchmark-route__controls,
+.appendix-chapter > summary > span,
+.footer-index h3 {
+  font-family: var(--pf-mono);
+  font-weight: 600;
+  line-height: var(--pf-meta-leading);
+  letter-spacing: var(--pf-meta-tracking);
+  opacity: 1;
+}
+
+/* The moved protocol IDs are bounded metadata on their surfaces. */
+.protocol-id {
+  display: block;
+  margin: 18px 0 0;
+  color: var(--pf-green-ink);
+  font-size: var(--pf-meta-small);
+  text-transform: uppercase;
+}
+
+.custody-details .panel .protocol-id {
+  margin: 0 0 10px;
+}
+
+/* The Models routing caption moves into the provider disclosure. */
+#models .provider-map::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* The appendix kicker stays in the DOM but leaves the visible layer; */
+/* the title and joined disclosure count already identify the seam.   */
+.technical-appendix > .container > .section-number {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+/* §3.1 size budget for labels that remain visible. */
+.hero-statement > .eyebrow {
+  font-size: var(--pf-meta-size);
+  font-weight: 600;
+  line-height: var(--pf-meta-leading);
+  letter-spacing: var(--pf-meta-tracking);
+}
+
+.section-number {
+  font-size: 16px;
+  letter-spacing: var(--pf-meta-tracking);
+}
+
+.os-nav a {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+#gpu .gpu-flow-visual li > span {
+  font-size: var(--pf-meta-small);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+#gpu .gpu-flow-visual li > strong {
+  font-family: var(--pf-body-font);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+#pricing .receipt thead th {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.footer-index h3 {
+  font-size: var(--pf-meta-size);
+}
+
+/* ---------- Matchups: three-beat rows at wide desktop -------------- */
+
+.matchup-subject,
+.matchup-task {
+  display: block;
+}
+
+@media (min-width: 1200px) {
+  #speed .benchmark-matchups article,
+  #speed .benchmark-matchups article + article {
+    display: grid;
+    grid-template-columns:
+      minmax(310px, 3.7fr)
+      minmax(270px, 3.1fr)
+      minmax(330px, 4.2fr);
+    gap: 32px;
+    align-items: center;
+    min-height: 196px;
+    padding: 34px 0;
+  }
+
+  #speed .benchmark-kicker,
+  #speed .benchmark-matchups h3 {
+    grid-column: 1;
+  }
+
+  #speed .benchmark-kicker {
+    align-self: end;
+    color: var(--pf-signal-paper);
+    font-family: var(--pf-body-font);
+    font-size: 16.5px;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: .025em;
+    text-transform: uppercase;
+  }
+
+  #speed .benchmark-matchups h3 {
+    align-self: start;
+    margin: 8px 0 0;
+    font-size: 25px;
+    line-height: 1.16;
+  }
+
+  #speed .benchmark-matchups dl {
+    grid-column: 2;
+    margin: 0;
+  }
+
+  #speed .benchmark-result {
+    grid-column: 3;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    margin: 0;
+  }
+}
+
+/* ---------- Footer: binding-registered closing plate --------------- */
+
+.site-footer .footer-marquee span.footer-marquee__pf {
+  margin-left: 0;
+  color: #f1faee;
+  -webkit-text-fill-color: #f1faee;
+}
+
+.site-footer .footer-marquee span.footer-marquee__terminal {
+  margin-left: 0;
+  color: var(--pf-signal-dark);
+  -webkit-text-fill-color: var(--pf-signal-dark);
+}
+
+@media (min-width: 1200px) {
+  .site-footer {
+    padding: 72px 0 64px;
+  }
+
+  .footer-composition {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 48px 24px;
+    width: auto;
+    max-width: none;
+    margin-right: var(--pf-score-right);
+    margin-left: var(--pf-score-right);
+  }
+
+  .footer-composition .footer-marquee {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 0;
+    align-items: end;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 42px;
+    border-bottom: 1px solid var(--pf-line-dark-strong);
+    line-height: .78;
+  }
+
+  .site-footer .footer-marquee__pf {
+    display: block;
+    color: #f1faee;
+    font-family: var(--pf-display);
+    font-size: 94px;
+    font-weight: 620;
+    letter-spacing: -.065em;
+    white-space: nowrap;
+  }
+
+  .site-footer .footer-marquee__terminal {
+    display: block;
+    padding-left: 0;
+    color: var(--pf-signal-dark);
+    font-family: var(--pf-display);
+    font-size: clamp(126px, 10.4vw, 150px);
+    font-weight: 620;
+    letter-spacing: -.065em;
+    white-space: nowrap;
+  }
+
+  .footer-identity {
+    grid-column: 1 / 5;
+    grid-row: 2;
+    max-width: 440px;
+  }
+
+  .footer-index {
+    grid-column: 5 / 13;
+    grid-row: 2;
+    border-top: 2px solid var(--pf-signal-dark);
+  }
+
+  .footer-index > section {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 24px;
+    align-items: baseline;
+    padding: 20px 0 22px;
+    border-bottom: 1px solid var(--pf-line-dark-strong);
+  }
+
+  .footer-index h3 {
+    margin: 0;
+  }
+
+  .footer-index ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+  }
+}
