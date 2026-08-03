@@ -26,9 +26,16 @@ test('renders fourteen scenes and supports keyboard navigation', async ({ page }
   await expect(page.locator('#slide-14')).toContainText('TVL investment');
   await expect(page.locator('#slide-14')).toContainText('Post Fiat token sale');
 
+  await page.locator('.deck-dots button').nth(11).click();
+  await expect(page.locator('#slide-12')).toContainText('More followers');
+  await expect(page.locator('#slide-12')).toContainText('More alpha');
+  await expect(page.locator('#slide-12')).toContainText('More TVL');
+  await expect(page.locator('#slide-12')).toContainText('Higher market cap');
+  await expect(page.locator('#slide-12')).toContainText('Stronger PFT base layer');
+
   await page.locator('#sourcesButton').click();
   await expect(page.locator('#sourceDialog')).toBeVisible();
-  await expect(page.locator('[data-source-slide="14"]')).toBeVisible();
+  await expect(page.locator('[data-source-slide="12"]')).toBeVisible();
   await page.locator('#sourceClose').click();
 
   const imagesLoaded = await page.locator('img').evaluateAll((images) =>
