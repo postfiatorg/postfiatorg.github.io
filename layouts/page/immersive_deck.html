@@ -61,13 +61,20 @@
       <div class="slide__content">
         <p class="eyebrow">The whole system</p>
         <h2>Five parts.<br><span>One network.</span></h2>
-        <div class="system-map" role="list" aria-label="Five parts of Post Fiat">
-          <article role="listitem"><b>01</b><h3>PF Terminal</h3><p>An AI workbench built from Codex.</p></article>
-          <article role="listitem"><b>02</b><h3>Task Node</h3><p>Work, proof, review, reputation, and reward.</p></article>
-          <article role="listitem"><b>03</b><h3>NAVCoins</h3><p>Private tokens whose value follows a defined portfolio.</p></article>
-          <article role="listitem"><b>04</b><h3>Settlement</h3><p>Independent operators check transfers and agree on the record.</p></article>
-          <article role="listitem"><b>05</b><h3>GoodAlexander</h3><p>On-chain finance publishing that brings people into the network.</p></article>
-          <span class="system-map__core" aria-hidden="true">PF</span>
+        <div class="system-orbit" role="list" aria-label="Five parts of Post Fiat orbiting one network">
+          <svg class="system-orbit__lines" viewBox="0 0 1000 470" aria-hidden="true">
+            <defs><radialGradient id="systemGlow"><stop offset="0" stop-color="#9de9ff" stop-opacity=".8"/><stop offset="1" stop-color="#4cc9f0" stop-opacity="0"/></radialGradient></defs>
+            <ellipse cx="500" cy="235" rx="400" ry="185" fill="none" stroke="#9de9ff" stroke-opacity=".24"/>
+            <ellipse cx="500" cy="235" rx="300" ry="138" fill="none" stroke="#ddb66d" stroke-opacity=".18" stroke-dasharray="5 12"/>
+            <path d="M500 235 500 30M500 235 880 170M500 235 735 420M500 235 265 420M500 235 120 170" stroke="#9de9ff" stroke-opacity=".28"/>
+            <circle cx="500" cy="235" r="92" fill="url(#systemGlow)" opacity=".32"/>
+          </svg>
+          <strong class="system-orbit__core" aria-hidden="true"><img src="/media-kit/logo.svg" alt=""><small>ONE NETWORK</small></strong>
+          <article role="listitem" style="--n:0"><b>01</b><h3>PF Terminal</h3><p>AI workbench</p></article>
+          <article role="listitem" style="--n:1"><b>02</b><h3>Task Node</h3><p>Verifiable work</p></article>
+          <article role="listitem" style="--n:2"><b>03</b><h3>NAVCoins</h3><p>Private portfolios</p></article>
+          <article role="listitem" style="--n:3"><b>04</b><h3>Settlement</h3><p>Shared financial record</p></article>
+          <article role="listitem" style="--n:4"><b>05</b><h3>GoodAlexander</h3><p>On-chain publishing</p></article>
         </div>
       </div>
     </section>
@@ -77,13 +84,20 @@
         <p class="eyebrow">The financial product</p>
         <h2>What is a <span>NAVCoin?</span></h2>
         <p class="lede">A private token tied to a defined portfolio. Its price follows the portfolio’s net asset value rather than a fixed currency peg.</p>
-        <div class="flow flow--six" aria-label="NAVCoin lifecycle">
-          <div><i>1</i><b>Assets</b><small>What the portfolio owns</small></div>
-          <div><i>2</i><b>Reserve record</b><small>Evidence and data sources</small></div>
-          <div><i>3</i><b>NAV</b><small>Assets minus liabilities</small></div>
-          <div><i>4</i><b>Issue</b><small>Create matching units</small></div>
-          <div><i>5</i><b>Private exchange</b><small>Move value discreetly</small></div>
-          <div><i>6</i><b>Redeem</b><small>Return units for value</small></div>
+        <div class="nav-journey" role="img" aria-label="NAVCoin path from assets through reserve records, NAV, issuance, private exchange, and redemption">
+          <svg viewBox="0 0 1200 310" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="navPath" x1="0" x2="1"><stop stop-color="#ddb66d"/><stop offset=".42" stop-color="#9de9ff"/><stop offset="1" stop-color="#89e483"/></linearGradient><filter id="navBlur"><feGaussianBlur stdDeviation="8"/></filter></defs>
+            <path class="nav-journey__glow" d="M55 224 C170 12 265 24 365 180 S545 280 660 74 850 35 915 188 1060 235 1145 74"/>
+            <path class="nav-journey__path" d="M55 224 C170 12 265 24 365 180 S545 280 660 74 850 35 915 188 1060 235 1145 74"/>
+          </svg>
+          <ol>
+            <li style="--x:5%;--y:72%"><i>1</i><b>Assets</b><small>Portfolio holdings</small></li>
+            <li style="--x:22%;--y:20%"><i>2</i><b>Reserve record</b><small>Evidence and sources</small></li>
+            <li style="--x:38%;--y:58%"><i>3</i><b>NAV</b><small>Net asset value</small></li>
+            <li style="--x:55%;--y:23%"><i>4</i><b>Issue</b><small>Create matching units</small></li>
+            <li style="--x:76%;--y:61%"><i>5</i><b>Private exchange</b><small>Move value discreetly</small></li>
+            <li style="--x:95%;--y:24%"><i>6</i><b>Redeem</b><small>Return units for value</small></li>
+          </ol>
         </div>
         <details class="evidence"><summary>What “private” means</summary><p>Transaction details are revealed only to the people and systems allowed by the product rules. Operators still retain the information required to check and run the product.</p></details>
       </div>
@@ -94,13 +108,13 @@
         <p class="eyebrow">Controlled product evidence</p>
         <h2>The money and the token supply <span>move together.</span></h2>
         <p class="lede">The A666 research environment exercised the complete pfUSDC sequence with recorded evidence.</p>
-        <div class="proof-rail" aria-label="Recorded pfUSDC run stages">
-          <div><b>01</b><span>Deposit USDC</span></div>
-          <div><b>02</b><span>Record reserves</span></div>
-          <div><b>03</b><span>Set NAV</span></div>
-          <div><b>04</b><span>Issue pfUSDC</span></div>
-          <div><b>05</b><span>Hold privately</span></div>
-          <div><b>06</b><span>Redeem</span></div>
+        <div class="proof-instrument" role="img" aria-label="Reserve value and token supply locked together across the six recorded stages">
+          <div class="gauge gauge--reserve"><span>RESERVE</span><strong>COUNTED</strong><small>External value recorded</small></div>
+          <div class="proof-instrument__link"><i></i><b>=</b><small>ONE RECORDED STATE</small></div>
+          <div class="gauge gauge--supply"><span>SUPPLY</span><strong>BOUNDED</strong><small>Matching units issued</small></div>
+          <ol class="proof-events">
+            <li><i>01</i>Deposit</li><li><i>02</i>Reserve</li><li><i>03</i>NAV</li><li><i>04</i>Issue</li><li><i>05</i>Private hold</li><li><i>06</i>Redeem</li>
+          </ol>
         </div>
         <div class="status-line"><span>Controlled run</span><span>Replayable evidence</span><span>Research software</span></div>
         <details class="evidence"><summary>Evidence boundary</summary><p>The run demonstrates reserve-state, NAV, issuance, private ownership, and redemption mechanics. Production custody, legal rights, security review, and operating controls require separate approval.</p></details>
@@ -165,13 +179,21 @@
       <div class="slide__content">
         <p class="eyebrow">The contributor network</p>
         <h2>Task Node makes useful work <span>verifiable.</span></h2>
-        <div class="task-ribbon" aria-label="Task Node lifecycle">
-          <span><b>1</b>Request</span><i>→</i><span><b>2</b>Accept</span><i>→</i><span><b>3</b>Work</span><i>→</i><span><b>4</b>Evidence</span><i>→</i><span><b>5</b>Review</span><i>→</i><span><b>6</b>Reputation</span><i>→</i><span><b>7</b>Reward</span>
+        <div class="task-constellation" role="img" aria-label="Task Node path from request to reward">
+          <svg viewBox="0 0 1200 230" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="taskPath" x1="0" x2="1"><stop stop-color="#9de9ff"/><stop offset=".52" stop-color="#ddb66d"/><stop offset="1" stop-color="#89e483"/></linearGradient></defs><path d="M45 145 C160 28 245 36 340 138 S505 215 600 92 755 17 840 127 1010 206 1155 54"/></svg>
+          <ol>
+            <li style="--x:4%;--y:64%"><b>1</b><span>Request</span></li>
+            <li style="--x:18%;--y:25%"><b>2</b><span>Accept</span></li>
+            <li style="--x:32%;--y:62%"><b>3</b><span>Work</span></li>
+            <li style="--x:50%;--y:38%"><b>4</b><span>Evidence</span></li>
+            <li style="--x:66%;--y:57%"><b>5</b><span>Review</span></li>
+            <li style="--x:82%;--y:30%"><b>6</b><span>Reputation</span></li>
+            <li style="--x:96%;--y:24%"><b>7</b><span>Reward</span></li>
+          </ol>
         </div>
         <div class="two-col">
           <p>A contributor completes a defined task with AI or other tools, attaches evidence, and submits it for review. The result can affect rewards and public reputation.</p>
           <p>With consent and quality controls, aggregate activity can inform future research and content. Direct use in reserve or NAV calculations remains a future design area.</p>
-        </div>
       </div>
     </section>
 

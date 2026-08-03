@@ -15,6 +15,12 @@ test('renders fourteen scenes and supports keyboard navigation', async ({ page }
   await expect(page.locator('#slide-1')).toHaveClass(/is-active/);
   await expect(page.locator('#currentSlide')).toHaveText('01');
   await expect(page.locator('.world__layer[data-world="network"]')).toHaveClass(/is-active/);
+  await expect(page.locator('.system-orbit')).toHaveCount(1);
+  await expect(page.locator('.nav-journey')).toHaveCount(1);
+  await expect(page.locator('.proof-instrument')).toHaveCount(1);
+  await expect(page.locator('.task-constellation')).toHaveCount(1);
+  await expect(page.locator('.replay-packet span')).toHaveCount(5);
+  await expect(page.locator('.horizon-grid article')).toHaveCount(7);
 
   await page.keyboard.press('ArrowRight');
   await expect(page.locator('#currentSlide')).toHaveText('02');
@@ -53,6 +59,23 @@ test('keeps the private FX scene usable on a phone viewport', async ({ page }) =
   await expect(page.locator('#slide-5')).toContainText('18/18');
   await expect(page.locator('#slide-5')).toContainText('10×');
   await expect(page.locator('#slide-5 .product-shot img')).toBeVisible();
+
+  const viewportOverflow = await page.evaluate(() =>
+    document.documentElement.scrollWidth > window.innerWidth
+  );
+  expect(viewportOverflow).toBe(false);
+});
+
+test('keeps spatial governance and participation scenes legible on a phone', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`${deckUrl}#slide-9`, { waitUntil: 'networkidle' });
+
+  await expect(page.locator('#slide-9 .replay-packet span')).toHaveCount(5);
+  await expect(page.locator('#slide-9 .replay-packet span').last()).toBeVisible();
+
+  await page.goto(`${deckUrl}#slide-14`, { waitUntil: 'networkidle' });
+  await expect(page.locator('#slide-14 .deal-doors article')).toHaveCount(2);
+  await expect(page.locator('#slide-14 .deal-doors article').last()).toBeVisible();
 
   const viewportOverflow = await page.evaluate(() =>
     document.documentElement.scrollWidth > window.innerWidth
