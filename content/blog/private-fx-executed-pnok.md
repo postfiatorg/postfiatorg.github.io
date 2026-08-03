@@ -174,4 +174,3 @@ A single trade can have cryptographically private state and weak statistical cov
 The experiment established a specific primitive: mainnet USDC could enter as pfUSDC, two private asset notes could exchange atomically under a public fixed quote, replays could be made ineffective, six validators could converge, recovery could survive the tested failures, and supply accounting could remain intact.
 
 The remaining work is separate and substantial: Tier-4 pNOK finality, proof-verified egress and live redemption, operator-blind matching, price discovery, multi-party depth, independent security review, and production operations. The proposal’s market is not complete, but its atomic settlement primitive has now been exercised under controlled conditions with the trust boundary stated alongside the result.
-
