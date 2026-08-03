@@ -31,6 +31,16 @@ test('renders fourteen scenes and supports keyboard navigation', async ({ page }
   await expect(page.locator('#slide-14 .deal-doors article')).toHaveCount(2);
   await expect(page.locator('#slide-14')).toContainText('TVL investment');
   await expect(page.locator('#slide-14')).toContainText('Post Fiat token sale');
+  const portalHeadingsAreUnclipped = await page.locator('#slide-14 .deal-doors article').evaluateAll((portals) =>
+    portals.every((portal) => {
+      const portalRect = portal.getBoundingClientRect();
+      const headingRect = portal.querySelector('h3').getBoundingClientRect();
+      return getComputedStyle(portal).clipPath === 'none'
+        && headingRect.left >= portalRect.left
+        && headingRect.right <= portalRect.right;
+    })
+  );
+  expect(portalHeadingsAreUnclipped).toBe(true);
 
   await page.locator('.deck-dots button').nth(11).click();
   await expect(page.locator('#slide-12')).toContainText('More followers');

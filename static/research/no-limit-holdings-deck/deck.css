@@ -1595,21 +1595,34 @@ h2 span {
 
 .deal-doors article {
   position: relative;
+  isolation: isolate;
   min-height: 265px;
   padding: clamp(1.2rem, 2vw, 2rem);
-  overflow: hidden;
-  border-top: 1px solid rgba(157, 233, 255, 0.46);
-  border-bottom: 1px solid rgba(157, 233, 255, 0.22);
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.deal-doors article::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
   background:
     linear-gradient(180deg, rgba(76, 201, 240, 0.13), transparent 34%),
     rgba(3, 10, 16, 0.8);
-  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow:
+    inset 0 1px rgba(157, 233, 255, 0.46),
+    inset 0 -1px rgba(157, 233, 255, 0.22);
+  pointer-events: none;
 }
 
 .deal-doors article::before {
   content: "";
   position: absolute;
+  z-index: 1;
   left: 50%;
   top: 0;
   width: 46%;
@@ -2219,6 +2232,9 @@ h2 span {
   .deal-doors article {
     min-height: 0;
     padding: 1.05rem 1.25rem 0.95rem;
+  }
+
+  .deal-doors article::after {
     clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%);
   }
 
