@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#05090f">
+  <meta name="robots" content="noindex,nofollow">
+  <title>{{ .Title }} | Post Fiat</title>
+  <meta name="description" content="{{ .Description }}">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ .Description }}">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="{{ "research/no-limit-holdings-deck/network-atrium.webp" | absURL }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="icon" href="/media-kit/logo32x32-whiteonblack.png">
+  <link rel="preload" as="image" href="/research/no-limit-holdings-deck/network-atrium.webp">
+  <link rel="stylesheet" href="/research/no-limit-holdings-deck/deck.css">
+</head>
+<body class="pf-deck" data-active-world="network">
+  <a class="skip-link" href="#slide-1">Skip to the presentation</a>
+
+  <div class="world" aria-hidden="true">
+    <div class="world__layer is-active" data-world="network" style="--world-image:url('/research/no-limit-holdings-deck/network-atrium.webp')"></div>
+    <div class="world__layer" data-world="reserve" style="--world-image:url('/research/no-limit-holdings-deck/reserve-vault.webp')"></div>
+    <div class="world__layer" data-world="governance" style="--world-image:url('/research/no-limit-holdings-deck/governance-observatory.webp')"></div>
+    <div class="world__layer" data-world="market" style="--world-image:url('/research/no-limit-holdings-deck/capital-market.webp')"></div>
+    <div class="world__vignette"></div>
+    <div class="world__grid"></div>
+    <div class="world__grain"></div>
+  </div>
+
+  <header class="deck-bar">
+    <a class="deck-brand" href="/" aria-label="Post Fiat home">
+      <img src="/media-kit/logo.svg" alt="" width="34" height="34">
+      <span>POST FIAT</span>
+    </a>
+    <div class="deck-context">No Limit Holdings · discussion draft</div>
+    <div class="deck-progress" aria-label="Presentation progress">
+      <span id="currentSlide">01</span><span aria-hidden="true"> / </span><span>14</span>
+      <span class="deck-progress__track"><span id="progressFill"></span></span>
+    </div>
+  </header>
+
+  <nav class="deck-dots" id="deckDots" aria-label="Slide navigation"></nav>
+
+  <main class="slides" id="slides">
+    <section class="slide slide--hero" id="slide-1" data-index="1" data-world="network" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">Post Fiat × No Limit Holdings</p>
+        <img class="hero-mark" src="/media-kit/logo.svg" alt="Post Fiat connected-bottom X mark">
+        <h1>THE INTERNET OF VALUE<br><span>FOR THE AI ERA</span></h1>
+        <p class="lede">People and AI agents can contribute work, verify claims, move private value, and govern one shared network.</p>
+        <div class="hero-constellation" aria-label="Post Fiat's four connected areas">
+          <span>Contributors</span><span>Private capital</span><span>Validators</span><span>Publishing</span>
+        </div>
+      </div>
+      <p class="slide__cue">Scroll or use the arrow keys <span aria-hidden="true">↓</span></p>
+    </section>
+
+    <section class="slide" id="slide-2" data-index="2" data-world="network" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">The whole system</p>
+        <h2>Five parts.<br><span>One network.</span></h2>
+        <div class="system-map" role="list" aria-label="Five parts of Post Fiat">
+          <article role="listitem"><b>01</b><h3>PF Terminal</h3><p>An AI workbench built from Codex.</p></article>
+          <article role="listitem"><b>02</b><h3>Task Node</h3><p>Work, proof, review, reputation, and reward.</p></article>
+          <article role="listitem"><b>03</b><h3>NAVCoins</h3><p>Private tokens whose value follows a defined portfolio.</p></article>
+          <article role="listitem"><b>04</b><h3>Settlement</h3><p>Independent operators check transfers and agree on the record.</p></article>
+          <article role="listitem"><b>05</b><h3>GoodAlexander</h3><p>On-chain finance publishing that brings people into the network.</p></article>
+          <span class="system-map__core" aria-hidden="true">PF</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-3" data-index="3" data-world="reserve" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">The financial product</p>
+        <h2>What is a <span>NAVCoin?</span></h2>
+        <p class="lede">A private token tied to a defined portfolio. Its price follows the portfolio’s net asset value rather than a fixed currency peg.</p>
+        <div class="flow flow--six" aria-label="NAVCoin lifecycle">
+          <div><i>1</i><b>Assets</b><small>What the portfolio owns</small></div>
+          <div><i>2</i><b>Reserve record</b><small>Evidence and data sources</small></div>
+          <div><i>3</i><b>NAV</b><small>Assets minus liabilities</small></div>
+          <div><i>4</i><b>Issue</b><small>Create matching units</small></div>
+          <div><i>5</i><b>Private exchange</b><small>Move value discreetly</small></div>
+          <div><i>6</i><b>Redeem</b><small>Return units for value</small></div>
+        </div>
+        <details class="evidence"><summary>What “private” means</summary><p>Transaction details are revealed only to the people and systems allowed by the product rules. Operators still retain the information required to check and run the product.</p></details>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-4" data-index="4" data-world="reserve" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">Controlled product evidence</p>
+        <h2>The money and the token supply <span>move together.</span></h2>
+        <p class="lede">The A666 research environment exercised the complete pfUSDC sequence with recorded evidence.</p>
+        <div class="proof-rail" aria-label="Recorded pfUSDC run stages">
+          <div><b>01</b><span>Deposit USDC</span></div>
+          <div><b>02</b><span>Record reserves</span></div>
+          <div><b>03</b><span>Set NAV</span></div>
+          <div><b>04</b><span>Issue pfUSDC</span></div>
+          <div><b>05</b><span>Hold privately</span></div>
+          <div><b>06</b><span>Redeem</span></div>
+        </div>
+        <div class="status-line"><span>Controlled run</span><span>Replayable evidence</span><span>Research software</span></div>
+        <details class="evidence"><summary>Evidence boundary</summary><p>The run demonstrates reserve-state, NAV, issuance, private ownership, and redemption mechanics. Production custody, legal rights, security review, and operating controls require separate approval.</p></details>
+      </div>
+    </section>
+
+    <section class="slide slide--split" id="slide-5" data-index="5" data-world="reserve" tabindex="-1">
+      <div class="slide__content">
+        <div class="slide__copy">
+          <p class="eyebrow">Private foreign exchange</p>
+          <h2>pfUSDC <span>↔</span> pNOK</h2>
+          <p class="lede">A browser wallet completed a private fixed-price exchange using a test token based on the Norwegian krone sandbox design.</p>
+          <div class="metric-row">
+            <div><strong>18/18</strong><span>acceptance checks</span></div>
+            <div><strong>10×</strong><span>browser repetitions</span></div>
+            <div><strong>6</strong><span>controlled validators</span></div>
+          </div>
+          <details class="evidence"><summary>Exact scope</summary><p>This Post Fiat experiment used a fork of the Norges Bank CBDC tokenization sandbox. It carries zero official Norges Bank deployment or endorsement claim.</p></details>
+        </div>
+        <figure class="product-shot">
+          <img src="/research/no-limit-holdings-deck/pnok-demo-wallet.png" alt="Post Fiat wallet showing a controlled private pfUSDC to pNOK exchange">
+          <figcaption>Live controlled-run wallet · public evidence capture</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-6" data-index="6" data-world="reserve" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">What the proof actually answers</p>
+        <h2>Four questions.<br><span>Four visible answers.</span></h2>
+        <div class="question-grid">
+          <article><b>01</b><h3>Which assets count?</h3><p>The product names the reserve assets and the rule for counting them.</p></article>
+          <article><b>02</b><h3>Who supplied the data?</h3><p>Every reserve, custody, and price source has an identity and a role.</p></article>
+          <article><b>03</b><h3>How many units may exist?</h3><p>Issuance is bounded by the recorded reserve and valuation rules.</p></article>
+          <article><b>04</b><h3>How does redemption work?</h3><p>The product defines the holder’s path back to the underlying value.</p></article>
+        </div>
+        <p class="contrast-line">Fiat-backed tokens showed how large a market can form around issuer reserves and issuer trust. NAVCoins ask how much of the reserve, valuation, supply, exchange, and redemption process can become directly checkable.</p>
+        <p class="boundary-note">The proof checks declared data and rules. Reviewers still examine asset quality, data origin, custody, legal rights, and recovery procedures.</p>
+      </div>
+    </section>
+
+    <section class="slide slide--terminal" id="slide-7" data-index="7" data-world="network" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">The workbench</p>
+        <h2>PF Terminal puts Post Fiat <span>inside the AI workflow.</span></h2>
+        <p class="lede">A Post Fiat fork of Codex that brings models, local tools, protected credentials, task history, and agent coordination into one terminal.</p>
+        <div class="terminal" role="img" aria-label="Illustration of PF Terminal routing a task through a model and local tools into Task Node evidence">
+          <div class="terminal__bar"><i></i><i></i><i></i><span>PF TERMINAL · ACTIVE</span></div>
+          <div class="terminal__body">
+            <div><em>01</em><b>Request</b><small>Describe the work</small></div>
+            <span>→</span><div><em>02</em><b>Choose model</b><small>Match the job</small></div>
+            <span>→</span><div><em>03</em><b>Use tools</b><small>Work locally</small></div>
+            <span>→</span><div><em>04</em><b>Return proof</b><small>Send evidence</small></div>
+          </div>
+          <pre><code><span>$</span> pf task run --evidence
+✓ context loaded   ✓ tools authorized   ✓ result recorded</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-8" data-index="8" data-world="network" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">The contributor network</p>
+        <h2>Task Node makes useful work <span>verifiable.</span></h2>
+        <div class="task-ribbon" aria-label="Task Node lifecycle">
+          <span><b>1</b>Request</span><i>→</i><span><b>2</b>Accept</span><i>→</i><span><b>3</b>Work</span><i>→</i><span><b>4</b>Evidence</span><i>→</i><span><b>5</b>Review</span><i>→</i><span><b>6</b>Reputation</span><i>→</i><span><b>7</b>Reward</span>
+        </div>
+        <div class="two-col">
+          <p>A contributor completes a defined task with AI or other tools, attaches evidence, and submits it for review. The result can affect rewards and public reputation.</p>
+          <p>With consent and quality controls, aggregate activity can inform future research and content. Direct use in reserve or NAV calculations remains a future design area.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-9" data-index="9" data-world="governance" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">Replayable AI governance</p>
+        <h2>AI proposes.<br><span>Validators inspect.</span></h2>
+        <p class="lede">Governance replay means running the same recorded input, rules, and model setup again so reviewers can compare the output.</p>
+        <div class="replay-packet" aria-label="Governance replay packet">
+          <span>Input</span><i>→</i><span>Model output</span><i>→</i><span>Policy checks</span><i>→</i><span>Validator action</span><i>→</i><span>Recorded result</span>
+        </div>
+        <div class="validator-counts">
+          <div><strong>57</strong><span>observed on the public testnet snapshot</span></div>
+          <div><strong>20</strong><span>inside one signed validator list</span></div>
+          <div><strong>6</strong><span>inside the controlled Rust environment</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--cobalt" id="slide-10" data-index="10" data-world="governance" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">Distributed agreement</p>
+        <h2>Cobalt: agreement without <span>one permanent authority.</span></h2>
+        <p class="lede">Each validator chooses whom it trusts. Cobalt uses enough overlap among those choices to help honest validators reach the same result.</p>
+        <div class="cobalt-map" role="img" aria-label="Overlapping validator trust groups reaching agreement">
+          <span class="node node--1">A</span><span class="node node--2">B</span><span class="node node--3">C</span><span class="node node--4">D</span><span class="node node--5">E</span><span class="node node--6">F</span>
+          <i class="orbit orbit--1"></i><i class="orbit orbit--2"></i><i class="orbit orbit--3"></i>
+          <b>AGREEMENT</b>
+        </div>
+        <div class="definition-row"><span><b>Linkedness</b> enough overlap to stay connected</span><span><b>Reliable broadcast</b> receive the same proposal</span><span><b>Binary agreement</b> settle on the same yes-or-no result</span></div>
+        <details class="evidence"><summary>Current implementation boundary</summary><p>The Rust workspace contains Cobalt agreement machinery and transition tests. Active registry changes still use signatures under the current authorization rules.</p></details>
+      </div>
+    </section>
+
+    <section class="slide slide--comparison" id="slide-11" data-index="11" data-world="market" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">Three approaches to settlement</p>
+        <h2>Post Fiat vs. <span>XRP Ledger and Canton</span></h2>
+        <div class="comparison-wrap" tabindex="0" aria-label="Comparison table; scroll horizontally on a small screen">
+          <table>
+            <thead><tr><th>Question</th><th>XRP Ledger</th><th>Canton</th><th>Post Fiat</th></tr></thead>
+            <tbody>
+              <tr><th>Main idea</th><td>Fast public value transfer and issued assets</td><td>Connected private institutional applications</td><td>Private portfolio products plus contributor and AI-governed networks</td></tr>
+              <tr><th>Privacy</th><td>Public ledger with application controls</td><td>Data shared among entitled parties</td><td>Shielded asset paths with product-specific visible data</td></tr>
+              <tr><th>Governance</th><td>Validator agreement and amendments</td><td>Operators govern applications and networks</td><td>Recorded AI recommendations, validator authorization, and Cobalt research</td></tr>
+              <tr><th>Product focus</th><td>Payments, exchange, token issuance</td><td>Regulated financial applications</td><td>NAV portfolios, private swaps, and contributor intelligence</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="question-callout">What could an XRP-like value network become if redesigned for AI agents, private portfolios, signatures designed to resist future quantum computers, and replayable governance?</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-12" data-index="12" data-world="market" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">The network effect</p>
+        <h2>The Post Fiat <span>flywheel</span></h2>
+        <div class="flywheel" role="img" aria-label="Post Fiat flywheel from publishing to contribution, verification, stronger products, better information, and back to publishing">
+          <span style="--n:0"><b>1</b>Explain</span>
+          <span style="--n:1"><b>2</b>Contribute</span>
+          <span style="--n:2"><b>3</b>Verify</span>
+          <span style="--n:3"><b>4</b>Strengthen products</span>
+          <span style="--n:4"><b>5</b>Create better information</span>
+          <span style="--n:5"><b>6</b>Explain again</span>
+          <strong>POST<br>FIAT</strong>
+        </div>
+        <p class="flywheel-copy">GoodAlexander is the top of the funnel. PF Terminal and Task Node turn attention into useful work. Contributors test the products. Validators strengthen the network. Consented activity can improve future research and publishing. Every GoodAlexander publication carries <b>Sponsored by Post Fiat</b>.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-13" data-index="13" data-world="market" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">The product horizon</p>
+        <h2>One portfolio system.<br><span>Many forms of value.</span></h2>
+        <div class="horizon-grid">
+          <article class="is-proven"><small>CONTROLLED RUN</small><h3>Private portfolio issuance</h3><p>Register value, issue units, hold privately, and redeem.</p></article>
+          <article class="is-proven"><small>CONTROLLED RUN</small><h3>Private fixed-price FX</h3><p>Atomic exchange between pfUSDC and pNOK.</p></article>
+          <article><small>PRODUCT DIRECTION</small><h3>Market-neutral portfolios</h3><p>Defined return streams as private stores of value.</p></article>
+          <article><small>PRODUCT DIRECTION</small><h3>On-chain equities</h3><p>Portfolio products connected to tokenized public markets.</p></article>
+          <article><small>PRODUCT DIRECTION</small><h3>Staked spot tracking</h3><p>Defined value for previously hard-to-track positions.</p></article>
+          <article><small>PRODUCT DIRECTION</small><h3>Total-return exposure</h3><p>Fixed collateral and cross-exchange implementation.</p></article>
+          <article><small>INTERNAL WORK</small><h3>Post Fiat treasury</h3><p>AI-driven trading strategies deployed with internal capital can support treasury accumulation.</p></article>
+        </div>
+        <p class="boundary-note">Each product needs its own asset rules, valuation sources, custody, liquidity, redemption, privacy, legal structure, and dated evidence. Any public capital or performance figure also requires management approval.</p>
+      </div>
+    </section>
+
+    <section class="slide slide--close" id="slide-14" data-index="14" data-world="network" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">No Limit Holdings</p>
+        <h2>Two ways to <span>participate.</span></h2>
+        <div class="deal-doors">
+          <article>
+            <small>01</small><h3>TVL investment</h3>
+            <p>NLH places capital into an agreed Post Fiat portfolio or strategy after reviewing assets, custody, liquidity, risk controls, fees, and redemption terms.</p>
+            <b>TVL = capital placed into the product</b>
+          </article>
+          <article>
+            <small>02</small><h3>Post Fiat token sale</h3>
+            <p>NLH buys Post Fiat tokens under separately agreed sale terms.</p>
+            <b>Terms come from a separate written agreement</b>
+          </article>
+        </div>
+        <p class="terms-line">Amount · price · valuation · token quantity · vesting · rights · timing · custody · fees · returns · legal terms</p>
+        <div class="close-mark"><img src="/media-kit/logo.svg" alt="Post Fiat"><span>POST FIAT</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="deck-controls" aria-label="Presentation controls">
+    <button id="prevSlide" type="button" aria-label="Previous slide">←</button>
+    <button id="nextSlide" type="button" aria-label="Next slide">→</button>
+    <button id="sourcesButton" class="deck-controls__text" type="button">Sources</button>
+    <a href="/research/">Research</a>
+  </footer>
+
+  <dialog class="source-dialog" id="sourceDialog" aria-labelledby="sourceTitle">
+    <div class="source-dialog__head">
+      <div><small>Evidence for the current slide</small><h2 id="sourceTitle">Sources</h2></div>
+      <button id="sourceClose" type="button" aria-label="Close sources">×</button>
+    </div>
+    <div class="source-dialog__body">
+      <section data-source-slide="1"><h3>Post Fiat overview</h3><a href="/whitepaper/">Public whitepaper</a><a href="https://github.com/postfiatorg/postfiatl1v2" target="_blank" rel="noopener">Rust settlement network</a><a href="/blog/navcoin-proposal/">NAVCoin proposal</a></section>
+      <section data-source-slide="2"><h3>Five connected parts</h3><a href="/research/introducing-post-fiat-terminal/">PF Terminal</a><a href="/task-node/">Task Node</a><a href="/blog/navcoin-proposal/">NAVCoin</a><a href="/whitepaper/">Settlement and governance</a></section>
+      <section data-source-slide="3"><h3>NAVCoin</h3><a href="/blog/navcoin-proposal/">NAVCoin proposal</a><a href="/research/private-nav-swap-explainer/">Private NAV swaps explained from zero</a><a href="/research/private-nav-otc-swaps/">Private subscriptions and OTC swaps</a></section>
+      <section data-source-slide="4"><h3>pfUSDC controlled run</h3><a href="/blog/pfusdc/">pfUSDC design</a><a href="/blog/navcoin-otc-mvp-proven/">Private swap execution record</a><a href="https://github.com/postfiatorg/postfiatl1v2" target="_blank" rel="noopener">Public Rust workspace</a></section>
+      <section data-source-slide="5"><h3>pNOK private exchange</h3><a href="/private-fx-settlement/">Private FX proposal</a><span>Executed pNOK follow-up and wallet capture: controlled public evidence packet, 1 August 2026</span></section>
+      <section data-source-slide="6"><h3>Reserve proof boundaries</h3><a href="/research/private-nav-swap-explainer/">Reserve, NAV, supply, and privacy explainer</a><a href="/research/private-nav-otc-swaps/">Reserve and redemption trust boundaries</a></section>
+      <section data-source-slide="7"><h3>PF Terminal</h3><a href="/research/introducing-post-fiat-terminal/">Product overview and benchmark</a><span>Local product specification and authentication documentation available for diligence</span></section>
+      <section data-source-slide="8"><h3>Task Node</h3><a href="/task-node/">Public Task Node guide</a><a href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Live Task Node</a></section>
+      <section data-source-slide="9"><h3>Replayable governance</h3><a href="/whitepaper/">Governance design</a><a href="/blog/llm-governance-replay/">XRPL governance replay</a><a href="/blog/sglang-cross-hardware-replay/">Cross-hardware replay</a><a href="/validator-benchmark/">Validator evidence</a></section>
+      <section data-source-slide="10"><h3>Cobalt</h3><a href="/blog/cobalt-implementation-evidence/">Implementation evidence</a><a href="https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/governance/cobalt.md" target="_blank" rel="noopener">Current Cobalt status</a><a href="https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/governance/cobalt-implementation.md" target="_blank" rel="noopener">Implementation map</a></section>
+      <section data-source-slide="11"><h3>Post Fiat, XRP Ledger, and Canton</h3><a href="/whitepaper/">Post Fiat architecture and governance</a><span>Full comparison research packet available for diligence</span></section>
+      <section data-source-slide="12"><h3>Network flywheel</h3><a href="/task-node/">Task Node</a><a href="/research/introducing-post-fiat-terminal/">PF Terminal</a><span>GoodAlexander distribution strategy: management-supplied; audience verification pending</span></section>
+      <section data-source-slide="13"><h3>Product horizon</h3><a href="/blog/navcoin-ethereum/">One portfolio across access venues</a><a href="/blog/navcoin-collateralization/">Collateral and market design</a><a href="/research/private-nav-swap-explainer/">Current and future product boundaries</a></section>
+      <section data-source-slide="14"><h3>NLH discussion</h3><span>TVL-investment and token-sale terms require separate management, legal, and counterparty approval.</span></section>
+    </div>
+  </dialog>
+
+  <noscript><div class="noscript">JavaScript adds navigation and depth. Every slide remains available by scrolling.</div></noscript>
+  <script src="/research/no-limit-holdings-deck/deck.js" defer></script>
+</body>
+</html>
