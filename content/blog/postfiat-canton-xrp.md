@@ -1,10 +1,13 @@
 ---
 title: "Post Fiat, Canton, and XRP: Three Bets on the Future of Settlement"
 date: 2026-08-01T00:00:00Z
-url: "/research/postfiat-canton-xrp/"
+url: "/blog/postfiat-canton-xrp/"
+aliases:
+  - /research/postfiat-canton-xrp/
+  - /posts/postfiat-canton-xrp/
 type: "blog"
-breadcrumb_label: "Research"
-breadcrumb_url: "/research/"
+breadcrumb_label: "Blog"
+breadcrumb_url: "/blog/"
 summary: "What Post Fiat is, explained by contrast: zero-issuance economics, protocol-state governance, and shielded settlement, set against the XRP Ledger and the Canton Network — and the economic bet behind each design."
 description: "A Post Fiat position paper for investors and community members: the conceptual architecture of Post Fiat compared with XRP and Canton across economics, governance, privacy, and the NAVCoin settlement thesis."
 author: "Post Fiat"
