@@ -2,7 +2,9 @@
 title: "Post Fiat Community Update — August 2026"
 date: 2026-08-06T21:30:00Z
 draft: false
-url: "/posts/community-update-august-2026/"
+url: "/blog/community-update-august-2026/"
+aliases:
+  - /posts/community-update-august-2026/
 description: "What is live, what runs on the controlled testnet, and what ships next across Post Fiat L1 V2, Task Node, PF Terminal, NAVCoin, and the on-chain finance content push."
 ---
 
