@@ -2,9 +2,17 @@
 title: "Post Fiat Community Update — August 2026"
 date: 2026-08-06T21:30:00Z
 draft: false
-url: "/blog/community-update-august-2026/"
+summary: "Layer 1 V2 on controlled testnet, the rebuilt Task Node board system, PF Terminal benchmarks, NAVCoin architecture, and the on-chain finance content push — with links to code and evidence throughout."
 aliases:
   - /posts/community-update-august-2026/
+categories:
+  - Post Fiat Updates
+tags:
+  - Community Update
+  - Task Node
+  - PF Terminal
+  - NAVCoin
+  - Layer 1
 description: "What is live, what runs on the controlled testnet, and what ships next across Post Fiat L1 V2, Task Node, PF Terminal, NAVCoin, and the on-chain finance content push."
 ---
 
