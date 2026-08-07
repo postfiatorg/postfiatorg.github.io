@@ -117,7 +117,7 @@ NAVCoin's approach:
 
 > Wrap a market-neutral portfolio, prove its net asset value with zero-knowledge proofs, and make that provable NAV swappable.
 
-The market-neutral and basis-trading strategies AGTI has run for years operate at 7–8 realized vol — below G10 currencies — while carrying real drawdowns and an upward drift over time. Wrapping such a portfolio as a fixed dollar creates a liability mismatch. Presenting its changing NAV directly creates a distinct, honest asset.
+Long-running external benchmarks provide the relevant reference class. The legacy [Eurekahedge Equity Market Neutral Hedge Fund Index](https://platform.withintelligence.com/performance/indices/11811) and [Eurekahedge Macro Hedge Fund Index](https://platform.withintelligence.com/performance/indices?referrer=ekh&IndexName=Eurekahedge%20Macro%20Hedge%20Fund%20Index) track portfolios whose value changes through gains and drawdowns rather than holding a fixed dollar. Wrapping that return stream as a fixed dollar creates a liability mismatch. Presenting its changing NAV directly creates a distinct, honest asset.
 
 NAVCoin lives inside the Layer 1 repository: the **[NAVCoin documentation](https://github.com/postfiatorg/postfiatl1v2/tree/main/docs/navcoins)** covers reserve primitives, supported assets and venues, the Uniswap pool design, and PFTL tooling, while the chain-side OTC-swap and proof-of-reserve primitives run in the L1 V2 controlled testnet. The connector set covers staked NEAR, staked SOL, staked ETH, Hyperliquid perpetuals, and collateral plus its yield. The full architecture appears in the **[Post Fiat Whitepaper](https://postfiat.org/whitepaper/)**.
 
