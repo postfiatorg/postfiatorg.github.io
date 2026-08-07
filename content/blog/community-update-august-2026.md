@@ -135,11 +135,15 @@ Two directions sit in research today.
 
 **Agent NAVCoins.** AI agent tokens sell a story about an agent's future output. A NAVCoin wrapping a PF Terminal agent sells a defined asset: the agent's NAV, proven over time. Think VendingBench — the benchmark testing whether an agent can run a small business over long horizons — applied to real capital, with performance anyone can verify on-chain.
 
-### Economics: studying the Chainlink Reserve model
+### Economics: protocol fees, ecosystem revenue, and the Chainlink Reserve model
 
-NAVCoin swaps, index fixes, and PF Terminal inference are fee-generating services operated by the project. The open design question is how fee-generating services should relate to a protocol's economics, and the model we study most closely is the Chainlink Reserve.
+NAVCoin is generic infrastructure: many issuers will run NAVCoins, and each active NAVCoin generates fees for the network. Use cases span AI agents publishing provable treasury balances, index fixes for perpetual swaps, and wrapped staked-crypto positions. The fee model separates into two clean layers.
 
-Chainlink's approach has three properties worth learning from. Revenue from real services — enterprise integrations, data feeds — flows into an on-chain reserve with public, verifiable accounting. The structure was developed in the open, through years of iteration alongside U.S. regulators, rather than announced first and defended later. And it sequences conservatively: services earn first, the reserve accounts publicly, and structural claims follow the record instead of preceding it.
+**Protocol fees belong to the protocol.** On-chain NAVCoin activity — issuance, swaps, redemptions — pays network fees handled entirely at the protocol layer, the same way the [XRP Ledger prices and destroys transaction costs](https://xrpl.org/docs/concepts/transactions/transaction-cost) and Ethereum burns the [EIP-1559 base fee](https://eips.ethereum.org/EIPS/eip-1559). This is standard gas mechanics, identical in kind to XRP or ETH.
+
+**Ecosystem revenue belongs to whoever earns it.** As NAVCoin usage grows, revenue opportunities open across the ecosystem: market makers earn spreads, issuers earn management economics, integrators earn service fees. AGTI — the research-and-services company in the Post Fiat ecosystem — sees candidate service lines in NAVCoin configuration, fund management, index licensing, and swap or integration work.
+
+How service revenue of that kind should relate to a protocol's broader economics is an open design question, and the model we study most closely for the AGTI service lines is the [Chainlink Reserve](https://blog.chain.link/chainlink-reserve/). Chainlink's approach has three properties worth learning from. Revenue from real services — enterprise integrations, data feeds — flows into an on-chain reserve with public, verifiable accounting. The structure was developed in the open, through [sustained engagement with U.S. regulators](https://chainlinktoday.com/chainlink-labs-joins-sec-crypto-task-force/), rather than announced first and defended later. And it sequences conservatively: services earn first, the reserve accounts publicly, and structural claims follow the record instead of preceding it.
 
 That sequencing matches how Post Fiat operates: build the services, publish the accounting, let structure follow evidence. Which services fit such a model, in which jurisdictions, under what structure — those are live research questions. Decisions will be announced through official channels after full legal review.
 
