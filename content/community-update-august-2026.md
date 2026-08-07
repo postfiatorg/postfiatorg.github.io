@@ -21,7 +21,7 @@ Post Fiat runs five connected workstreams: Layer 1 V2, Task Node, PF Terminal, N
 | **1 — Distribution** | **Content / [Doom Index](https://goodalexander.com/doom-thesis/)** | Live, with published methodology, full history, and open JSON | Pivot [goodalexander.com](https://goodalexander.com) to on-chain finance |
 | **2a — Hardening** | **[Post Fiat L1 V2](https://github.com/postfiatorg/postfiatl1v2)** | On controlled testnet: wallets, RPCs, Python libraries, validators, privacy, governance primitives | Governance-replay port; PF Terminal integration; public mainnet |
 | **2b — Hardening** | **Task Node** | Rebuilt board system live; agents route and review tasks continuously | Private inference through Ambient; free chat |
-| **3 — Monetization** | **[NAVCoin](https://github.com/postfiatorg/nav-coin)** | Connector layer and provable-NAV architecture built; chain primitives on the controlled testnet | Total-return perp and staking fixes; swap infrastructure; CBDC bridge research |
+| **3 — Monetization** | **[NAVCoin](https://github.com/postfiatorg/postfiatl1v2/tree/main/docs/navcoins)** | Connector layer and provable-NAV architecture built; chain primitives on the controlled testnet | Total-return perp and staking fixes; swap infrastructure; CBDC bridge research |
 | **All stages** | **[PF Terminal](https://github.com/agtico/PfTerminal)** | Shipping, with live multi-provider model orchestration | Crypto-paid plans; native L1 V2 integration |
 
 Hardening is one stage with two products, 2a and 2b; PF Terminal powers every stage. The sequence: content creates distribution, reliable products convert that attention into participation, and NAVCoin turns participation and portfolio activity into fees. Task Node and PF Terminal produce the data, research, code, and agent capabilities that feed all of it.
@@ -91,7 +91,7 @@ Confidentiality is the most consistent product request: users want plans and cod
 
 PF Terminal began as a Codex fork with Task Node integration and grew into a multi-provider coding terminal with model-aware agent orchestration. The product rationale is in **[Introducing Post Fiat Terminal](https://postfiat.org/research/introducing-post-fiat-terminal/)**.
 
-Our published benchmark measures PF Terminal at roughly 2–3× faster and 1.4–2.6× cheaper than Claude Code and Hermes on the same Anthropic and GLM models at identical accuracy. We ran those tests ourselves, priced them at provider-billed costs, and published a reproduction script so anyone can rerun them: **[Post Fiat Chat Benchmark](https://postfiat.org/post-fiat-chat-benchmark/)**. Inside OpenAI's own ecosystem, performance is at par.
+Our published benchmark measures PF Terminal at roughly 2–3× faster and 1.4–2.6× cheaper than Claude Code and Hermes on the same Anthropic and GLM models at identical accuracy. We ran those tests ourselves, priced them at provider-billed costs, and published a reproduction script so anyone can rerun them — methodology and results are in **[Introducing Post Fiat Terminal](https://postfiat.org/research/introducing-post-fiat-terminal/)**. Inside OpenAI's own ecosystem, performance is at par.
 
 The gain came from replacing an OpenAI-specific assumption inside Codex. OpenAI models emit file edits through ApplyPatch, an editing format wired into their training and harness; PF Terminal rebuilt that layer for multiple providers. Its orchestrator now routes sub-agents on three signals: cost, tokens per second, and benchmark performance.
 
@@ -111,7 +111,7 @@ NAVCoin's approach:
 
 The market-neutral and basis-trading strategies AGTI has run for years operate at 7–8 realized vol — below G10 currencies — while carrying real drawdowns and an upward drift over time. Wrapping such a portfolio as a fixed dollar creates a liability mismatch. Presenting its changing NAV directly creates a distinct, honest asset.
 
-The **[NAVCoin repository](https://github.com/postfiatorg/nav-coin)** contains the React frontend, transaction-history and staking-leaderboard services, and smart contracts for Ethereum mainnet and Sepolia testnet. The Layer 1 connector set covers staked NEAR, staked SOL, staked ETH, Hyperliquid perpetuals, and collateral plus its yield. The chain-side OTC-swap and proof-of-reserve primitives run in the L1 V2 controlled testnet, and the full architecture appears in the **[Post Fiat Whitepaper](https://postfiat.org/whitepaper/)**.
+NAVCoin lives inside the Layer 1 repository: the **[NAVCoin documentation](https://github.com/postfiatorg/postfiatl1v2/tree/main/docs/navcoins)** covers reserve primitives, supported assets and venues, the Uniswap pool design, and PFTL tooling, while the chain-side OTC-swap and proof-of-reserve primitives run in the L1 V2 controlled testnet. The connector set covers staked NEAR, staked SOL, staked ETH, Hyperliquid perpetuals, and collateral plus its yield. The full architecture appears in the **[Post Fiat Whitepaper](https://postfiat.org/whitepaper/)**.
 
 Provable NAV unlocks a concrete sequence: private OTC portfolio swaps, then Uniswap pools for exit liquidity, then trustless redemption at NAV on the Post Fiat L1. Bob bridges USDC and swaps into Alice's NAVCoin; he can exit through the pool or redeem privately at NAV.
 
