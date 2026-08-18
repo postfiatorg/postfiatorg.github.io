@@ -1,0 +1,120 @@
+<svg viewBox="0 0 1200 660" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Replayable financial index pipeline</title>
+  <desc id="desc">A frozen company universe and public scoring prompt enter three deterministic SGLang replicas. Matching response hashes produce a score vector, which transparent transformations convert into index weights.</desc>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d100b"/>
+      <stop offset="1" stop-color="#050604"/>
+    </linearGradient>
+    <radialGradient id="wash" cx="70%" cy="12%" r="76%">
+      <stop offset="0" stop-color="#d6f750" stop-opacity=".11"/>
+      <stop offset="1" stop-color="#d6f750" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#d6f750"/>
+    </marker>
+    <style>
+      .sans{font-family:Inter,"Helvetica Neue",Arial,sans-serif}.mono{font-family:Menlo,Consolas,monospace}.kicker{font-size:12px;letter-spacing:2.6px}.label{font-size:11px;letter-spacing:1.8px}.title{font-size:29px;font-weight:700;letter-spacing:-.5px}.node-title{font-size:16px;font-weight:700}.copy{font-size:12.5px}.hash{font-size:10.5px;letter-spacing:.6px}.muted{fill:#98a08d}.paper{fill:#eef1e6}.lime{fill:#d6f750}.violet{fill:#c4b0f5}
+    </style>
+  </defs>
+
+  <rect x="2" y="2" width="1196" height="656" rx="28" fill="url(#panel)"/>
+  <rect x="2" y="2" width="1196" height="656" rx="28" fill="url(#wash)"/>
+  <rect x="2" y="2" width="1196" height="656" rx="28" fill="none" stroke="#fff" stroke-opacity=".09"/>
+
+  <text x="52" y="58" class="mono kicker lime">REPLAYABLE FINANCIAL INDEX</text>
+  <text x="52" y="98" class="sans title paper">Qualitative judgment becomes a verifiable build artifact</text>
+  <text x="52" y="126" class="sans copy muted">Same evidence + same prompt + same runtime → same score vector → same index epoch</text>
+
+  <!-- Inputs -->
+  <g>
+    <rect x="52" y="188" width="218" height="124" rx="15" fill="#0b0d09" stroke="#fff" stroke-opacity=".16"/>
+    <text x="72" y="217" class="mono label lime">01 · FROZEN INPUTS</text>
+    <text x="72" y="252" class="sans node-title paper">Universe + evidence</text>
+    <text x="72" y="277" class="sans copy muted">Ticker, company identity,</text>
+    <text x="72" y="296" class="sans copy muted">as-of date, source hashes</text>
+
+    <rect x="52" y="338" width="218" height="124" rx="15" fill="#0b0d09" stroke="#fff" stroke-opacity=".16"/>
+    <text x="72" y="367" class="mono label lime">02 · PUBLIC CONTRACT</text>
+    <text x="72" y="402" class="sans node-title paper">Prompt + schema</text>
+    <text x="72" y="427" class="sans copy muted">Question, scoring anchors,</text>
+    <text x="72" y="446" class="sans copy muted">JSON response contract</text>
+  </g>
+
+  <!-- arrows in -->
+  <path d="M270 250 C312 250 315 295 358 295" fill="none" stroke="#d6f750" stroke-width="2.2" marker-end="url(#arrow)"/>
+  <path d="M270 400 C312 400 315 355 358 355" fill="none" stroke="#d6f750" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <!-- Runtime -->
+  <rect x="362" y="168" width="350" height="324" rx="20" fill="#d6f750" fill-opacity=".035" stroke="#d6f750" stroke-opacity=".55" stroke-width="1.5" stroke-dasharray="9 7"/>
+  <text x="386" y="199" class="mono label lime">03 · PINNED SGLANG PROFILE</text>
+  <text x="386" y="228" class="sans copy muted">Qwen weights · tokenizer · kernels · seed</text>
+
+  <g>
+    <rect x="390" y="254" width="294" height="56" rx="11" fill="#0b0d09" stroke="#d6f750" stroke-opacity=".35"/>
+    <circle cx="411" cy="282" r="5" fill="#d6f750" filter="url(#glow)"/>
+    <text x="428" y="279" class="sans node-title paper">H200 · replica A</text>
+    <text x="428" y="297" class="mono hash muted">deterministic inference</text>
+
+    <rect x="390" y="324" width="294" height="56" rx="11" fill="#0b0d09" stroke="#d6f750" stroke-opacity=".35"/>
+    <circle cx="411" cy="352" r="5" fill="#d6f750" filter="url(#glow)"/>
+    <text x="428" y="349" class="sans node-title paper">H200 · replica B</text>
+    <text x="428" y="367" class="mono hash muted">deterministic inference</text>
+
+    <rect x="390" y="394" width="294" height="56" rx="11" fill="#0b0d09" stroke="#d6f750" stroke-opacity=".35"/>
+    <circle cx="411" cy="422" r="5" fill="#d6f750" filter="url(#glow)"/>
+    <text x="428" y="419" class="sans node-title paper">H200 · replica C</text>
+    <text x="428" y="437" class="mono hash muted">deterministic inference</text>
+  </g>
+
+  <!-- exact match gate -->
+  <path d="M712 330 H776" fill="none" stroke="#d6f750" stroke-width="2.2" marker-end="url(#arrow)"/>
+  <circle cx="744" cy="330" r="18" fill="#d6f750"/>
+  <path d="m735 330 6 6 12-14" fill="none" stroke="#0a0c04" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="744" y="366" text-anchor="middle" class="mono hash lime">HASH MATCH</text>
+
+  <!-- Outputs -->
+  <rect x="780" y="188" width="176" height="274" rx="17" fill="#0b0d09" stroke="#c4b0f5" stroke-opacity=".45"/>
+  <text x="802" y="217" class="mono label violet">04 · SCORE VECTOR</text>
+  <text x="802" y="253" class="sans node-title paper">Auditable outputs</text>
+  <text x="802" y="280" class="sans copy muted">Score</text>
+  <text x="923" y="280" text-anchor="end" class="mono copy lime">0–100</text>
+  <line x1="802" y1="294" x2="934" y2="294" stroke="#fff" stroke-opacity=".08"/>
+  <text x="802" y="322" class="sans copy muted">Rationale</text>
+  <text x="923" y="322" text-anchor="end" class="mono copy violet">JSON</text>
+  <line x1="802" y1="336" x2="934" y2="336" stroke="#fff" stroke-opacity=".08"/>
+  <text x="802" y="364" class="sans copy muted">Response</text>
+  <text x="923" y="364" text-anchor="end" class="mono copy violet">SHA-256</text>
+  <line x1="802" y1="378" x2="934" y2="378" stroke="#fff" stroke-opacity=".08"/>
+  <text x="802" y="406" class="sans copy muted">Replay state</text>
+  <text x="923" y="406" text-anchor="end" class="mono copy lime">EXACT</text>
+  <text x="802" y="438" class="mono hash muted">54 / 54 VALID</text>
+
+  <path d="M956 330 H1000" fill="none" stroke="#d6f750" stroke-width="2.2" marker-end="url(#arrow)"/>
+
+  <rect x="1004" y="188" width="144" height="274" rx="17" fill="#d6f750" fill-opacity=".06" stroke="#d6f750" stroke-opacity=".5"/>
+  <text x="1024" y="217" class="mono label lime">05 · INDEX</text>
+  <text x="1024" y="253" class="sans node-title paper">Mechanical</text>
+  <text x="1024" y="273" class="sans node-title paper">weights</text>
+  <g fill="#d6f750">
+    <rect x="1024" y="304" width="88" height="9" rx="4" opacity=".95"/>
+    <rect x="1024" y="326" width="62" height="9" rx="4" opacity=".8"/>
+    <rect x="1024" y="348" width="101" height="9" rx="4" opacity=".65"/>
+    <rect x="1024" y="370" width="45" height="9" rx="4" opacity=".5"/>
+  </g>
+  <text x="1024" y="408" class="mono hash muted">NORMALIZE</text>
+  <text x="1024" y="426" class="mono hash muted">CAP · REBALANCE</text>
+  <text x="1024" y="444" class="mono hash lime">EPOCH HASH</text>
+
+  <!-- receipt rail -->
+  <rect x="52" y="535" width="1096" height="70" rx="14" fill="#fff" fill-opacity=".025" stroke="#fff" stroke-opacity=".1"/>
+  <text x="74" y="562" class="mono label lime">PUBLIC REPLAY RECEIPT</text>
+  <text x="74" y="586" class="mono hash muted">UNIVERSE SHA · PROMPT SHA · MODEL REVISION · RUNTIME PROFILE · RAW RESPONSE SHA · PARSER VERSION · WEIGHTS SHA</text>
+  <text x="1127" y="574" text-anchor="end" class="mono label violet">VERIFY OR FORK</text>
+
+  <text x="600" y="638" text-anchor="middle" class="sans copy muted">Determinism does not prove the thesis. It proves which thesis, inputs, and judgments produced the index.</text>
+</svg>

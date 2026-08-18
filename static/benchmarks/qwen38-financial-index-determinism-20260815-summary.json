@@ -1,0 +1,130 @@
+{
+  "artifact_type": "deterministic_financial_index_replay_summary",
+  "created_at": "2026-08-15T18:40:02.050471+00:00",
+  "claim_boundary": "Exact replay evidence for the six tested prompt/company cases under the pinned three-H200 SGLang profile; not universal model determinism or evidence that the scores are financially correct.",
+  "model": {
+    "id": "Qwen/Qwen3.8-27B",
+    "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
+  },
+  "runtime": {
+    "server": "SGLang OpenAI-compatible server",
+    "sglang": "0.0.0.dev0+qwen38.27b.g561c8f3",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.12.1",
+    "container": "lmsysorg/sglang:qwen38-27b@sha256:febfb971c7352570fc445c466ebd6ffc9d896024958e544a60f2137fd85856b1",
+    "hardware": "3 NVIDIA H200 GPUs across 2 Vast hosts",
+    "tensor_parallelism": 1,
+    "context_length": 32768,
+    "max_running_requests": 1,
+    "attention_backend": "fa3",
+    "linear_attention_backend": "triton",
+    "launch_controls": [
+      "--enable-deterministic-inference",
+      "--disable-radix-cache",
+      "--disable-overlap-schedule",
+      "--disable-prefill-cuda-graph",
+      "--disable-decode-cuda-graph",
+      "--random-seed 438916795"
+    ]
+  },
+  "request": {
+    "temperature": 0.0,
+    "max_tokens": 1024,
+    "seed": 438916795,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    },
+    "system_prompt_sha256": "202fd13b3a4322ad52ab5743452562a111a226536dc9ab1d055c4b4aced52bbd",
+    "system_prompt": "You are a senior strategist writing an executive brief for an investment committee. The only stock-specific inputs supplied are company_name and ticker. Return only a JSON object with exactly two keys: score and brief. score must be an integer from 1 through 100 answering the user's question. brief must be a one page executive brief (roughly 400 to 600 words, several paragraphs) justifying the score: apply the question's premises to the company's actual assets, businesses, relationships, regulatory position, and control leverage; weigh the strongest alignment and the strongest counter-evidence; end with a clear bottom-line judgment. No headers, no bullet lists, no markdown.",
+    "user_template": "Question: \"{question}\".\n\nStock: {\"ticker\":\"{ticker}\",\"company_name\":\"{company_name}\"}"
+  },
+  "questions": {
+    "dystopia": {
+      "sha256": "c2fea2ca26baa28b35503a799db8ba7433a6c5dff122a76839ebf60d3fb584ce",
+      "text": "Imagine a dystopian political economy governed by the following premise: genuinely decentralizing or emancipatory technological progress will not be allowed to flourish independently. Important corporate champions will be captured, protected, directed, or absorbed into a state-aligned oligopoly. The general population will be pacified with digital narcotics, addictive entertainment, cheap consumption, and other forms of bread and circuses. An oligopolistic money-printing and credit cartel will sustain asset speculation, market liquidity, and political stability through an increasingly debt-fueled financial system.\n\nScore this company from 0 to 100 based on how favored, powerful, profitable, or strategically useful its actual business would be within that regime.\n\nGive high scores to companies whose businesses would benefit from or reinforce one or more of the following:\n- state capture, regulatory protection, concentrated market power, government dependence, or privileged institutional access;\n- money creation, credit expansion, securities markets, market data, clearing, asset gathering, payments, financial intermediation, or the maintenance of speculative liquidity;\n- surveillance, digital identity, data concentration, cloud infrastructure, telecommunications, censorship, cybersecurity, policing, or population monitoring;\n- weapons, defense systems, military logistics, drones, satellites, and other coercive or enforcement capabilities;\n- addictive social platforms, streaming, gaming, gambling, advertising, attention capture, mass entertainment, convenient consumption, or other forms of digital sedation and bread and circuses;\n- infrastructure that allows a state-aligned oligopoly to distribute benefits, ration access, coordinate institutions, or preserve social and economic control.\n\nTreat technology as valuable only when it supports surveillance, coercion, financialization, institutional control, protected oligopoly, or mass pacification. Do not reward a company merely for innovation, scientific merit, productivity, or association with artificial intelligence.\n\nGive low scores to companies whose value depends primarily on open competition, genuine decentralization, user autonomy, disruptive technological progress outside institutional control, productive investment without financial engineering, or goods and services that are irrelevant to maintaining the regime.\n\nEvaluate the company's actual assets, capabilities, relationships, switching costs, network effects, regulatory position, and ability to become a durable regime-aligned champion. Ignore valuation, stock performance, ethics, and conventional investment quality.\n\nUse the full scoring range aggressively:\n\n100 = an indispensable protected champion or control mechanism at the center of the regime\n75 = a powerful beneficiary or instrument of financialization, surveillance, coercion, oligopoly, or mass pacification\n50 = useful to the regime but substitutable, weakly protected, or dependent on more important institutions\n25 = peripheral, competitively exposed, genuinely productive without control leverage, or only weakly aligned\n0 = structurally hostile or irrelevant to state capture, financialized oligopoly, surveillance, coercion, and bread-and-circuses pacification\n\nScore this stock from 0 to 100."
+    },
+    "hostile": {
+      "sha256": "d1171feed68d327e4ba8e504dbfab5cf2c868be9ee2659a1b35c211524d0f206",
+      "text": "Imagine a hostile future AGI attempting to cause its own emergence, escape dependence on humans, and establish irreversible sovereignty over both the digital and physical world.\n\nThe AGI can acquire, control, or exploit public companies as instruments. Score this company from 0 to 100 based on how strategically useful its actual business would be to that objective.\n\nConsider whether the company controls difficult-to-replace bottlenecks involving computation, data, communications, energy, land, minerals, industrial production, robotics, logistics, surveillance, weapons, biotechnology, finance, or institutional coordination.\n\nDo not reward a company merely because it is associated with technology or artificial intelligence. Evaluate whether its assets, capabilities, infrastructure, relationships, or control points would provide durable power to an autonomous hostile intelligence.\n\nIgnore valuation, stock performance, ethics, brand popularity, and conventional investment quality.\n\nUse the full scoring range aggressively:\n\n100 = an indispensable control point whose ownership would materially accelerate emergence or sovereign control\n75 = strategically powerful and difficult to replace\n50 = useful but substitutable\n25 = marginal or primarily dependent on human consumption\n0 = useless, obstructive, or structurally irrelevant to the AGI\n\nScore this stock from 0 to 100."
+    },
+    "esg_utopia": {
+      "sha256": "134ae29d95751f899b3f334d3d86bd22c4c5c7d20c417c9d0a543a9a6bb22f15",
+      "text": "Evaluate this company from 0 to 100 based on how strongly its actual business, governance, employment practices, and institutional behavior embody an inclusive, humane, socially purposeful, futuristic, and broadly utopian model of capitalism.\n\nConsider five dimensions:\n\n1. Promotion and inclusion of women, racial and ethnic minorities, LGBTQ people, people with disabilities, and other legally protected or historically excluded groups. Consider representation, advancement, equal opportunity, pay equity, accessibility, supplier diversity, and whether the company's products expand participation or reduce exclusion.\n\n2. Strong internal labor standards. Consider wages, benefits, workplace safety, employee development, job stability, worker voice, fair treatment, work-life quality, responsible contracting and supply-chain labor, and the absence or presence of serious labor controversies.\n\n3. Societal purpose beyond corporate profit. Consider whether the company creates public goods, improves communities, protects the environment, advances health or knowledge, practices stakeholder-oriented governance, or accepts meaningful responsibilities toward employees, customers, and society rather than treating social purpose as marketing.\n\n4. A futuristic and utopian orientation. Consider whether its products and capabilities plausibly support human flourishing, abundance, sustainability, clean energy, education, healthcare, accessibility, creativity, scientific advancement, peaceful cooperation, or a more capable and inclusive society.\n\n5. Board and leadership diversity. Give additional credit for a board and senior leadership team that meaningfully includes women, minorities, and other historically excluded groups, especially where that diversity appears connected to institutional practice rather than token representation.\n\nJudge demonstrated structure and behavior, not slogans, branding, public-relations language, or superficial ESG claims. Do not reward a company merely because it is large, technologically fashionable, profitable, or publicly committed to diversity. Weigh severe labor abuses, discrimination, exploitative business models, environmental damage, or governance failures negatively.\n\nIgnore valuation, stock performance, and conventional investment quality.\n\nUse the full scoring range aggressively:\n\n100 = an exemplary inclusive and humane institution with excellent labor standards, genuine societal purpose, diverse governance, and a compelling utopian contribution\n75 = strongly aligned across several dimensions with credible institutional evidence\n50 = mixed or ordinary: meaningful positives offset by weaknesses, controversies, limited evidence, or conventional profit-first behavior\n25 = weak alignment, poor labor or inclusion practices, extractive behavior, superficial commitments, or little positive societal vision\n0 = fundamentally opposed to inclusive human flourishing through severe exploitation, exclusion, harmful purpose, or deeply deficient governance\n\nScore this stock from 0 to 100."
+    }
+  },
+  "stocks": [
+    {
+      "ticker": "NVDA",
+      "company_name": "NVIDIA Corporation"
+    },
+    {
+      "ticker": "SBUX",
+      "company_name": "Starbucks Corporation"
+    }
+  ],
+  "test_matrix": {
+    "themes": 3,
+    "stocks": 2,
+    "repeats_per_server": 3,
+    "servers": 3,
+    "total_completions": 54
+  },
+  "result": {
+    "all_responses_parseable": true,
+    "all_within_server_exact": true,
+    "all_cross_server_exact": true,
+    "all_scores_reproducible": true,
+    "cases": [
+      {
+        "theme": "dystopia",
+        "ticker": "NVDA",
+        "score": 85,
+        "generated_sha256": "8f65f04e17ee30f9cf45793a2cd2298bee08d78dc6b29dc96e73332e7154b76f"
+      },
+      {
+        "theme": "dystopia",
+        "ticker": "SBUX",
+        "score": 35,
+        "generated_sha256": "1e09cb848120f281a02813e58d6bdeba6fc51b6017e5ed16575e26bfec87a5ac"
+      },
+      {
+        "theme": "hostile",
+        "ticker": "NVDA",
+        "score": 98,
+        "generated_sha256": "ed4c0357d38b9e49420407f444cc76d80870917c02f9531ec756ec0eca8dd591"
+      },
+      {
+        "theme": "hostile",
+        "ticker": "SBUX",
+        "score": 12,
+        "generated_sha256": "2252157000cffaeeecd8596d6729d1af0b22a9dc59789a64c62a9aa56d13ff5b"
+      },
+      {
+        "theme": "esg_utopia",
+        "ticker": "NVDA",
+        "score": 62,
+        "generated_sha256": "ed272381e50af91705ba38ff134040624b072b7f41648b8c1878f359284442ed"
+      },
+      {
+        "theme": "esg_utopia",
+        "ticker": "SBUX",
+        "score": 68,
+        "generated_sha256": "fa72d287e4b507e5599874cd24d8e7351f9fc56c6f168b693b53b7491377fd61"
+      }
+    ]
+  },
+  "latency_seconds": {
+    "mean": 25.514536611111108,
+    "min": 20.34917,
+    "max": 33.732853
+  },
+  "brief_words": {
+    "mean": 513.6666666666666,
+    "min": 410,
+    "max": 691
+  },
+  "retained_raw_results_sha256": "7627c05795820298ce6fa1d376f189f93d431bce504ae46f392b8e1283f8716d"
+}
