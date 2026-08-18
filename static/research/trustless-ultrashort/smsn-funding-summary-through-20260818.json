@@ -1,0 +1,96 @@
+{
+  "annualized_arithmetic_mean_1x_pct": 35.053570174941996,
+  "annualized_arithmetic_mean_2x_pct_of_equity": 70.10714034988399,
+  "coin": "xyz:SMSN",
+  "constant_2x_funding_contribution_pct_of_starting_equity": 34.4933533,
+  "constant_2x_funding_dollars_per_1000_starting_equity": 344.933533,
+  "csv_sha256": "7c21257621a0af7817f13062ffd8f1ff9468c773323e4e7b0275bff16a859daf",
+  "first_observation_utc": "2026-02-20T01:00:00.190+00:00",
+  "last_observation_utc": "2026-08-18T14:00:00.021+00:00",
+  "limitations": [
+    "Historical funding is not a forecast.",
+    "The calculation isolates funding and is not a token return backtest.",
+    "Price P&L, changing notional, rebalancing, liquidation, fees, slippage, and compounding are excluded.",
+    "The public API may not retain the full history indefinitely; the CSV is the immutable snapshot used here."
+  ],
+  "longest_consecutive_negative_hours": 35,
+  "mean_hourly_rate": 4.001549106728538e-05,
+  "median_hourly_rate": 1.3312e-05,
+  "methodology": {
+    "annualization": "arithmetic mean hourly rate * 24 * 365",
+    "constant_2x_example": "2 * simple cumulative funding; holds notional at twice starting equity and excludes price P&L, rebalancing, fees, and compounding",
+    "cumulative_funding": "simple sum of settled hourly rates",
+    "funding_convention": "positive funding is paid by longs to shorts; negative funding is paid by shorts to longs",
+    "source": "Hyperliquid public info endpoint fundingHistory",
+    "source_url": "https://api.hyperliquid.xyz/info"
+  },
+  "monthly": [
+    {
+      "annualized_arithmetic_mean_1x_pct": 45.022656424186046,
+      "month": "2026-02",
+      "observations": 215,
+      "positive_hours_pct": 73.02325581395348,
+      "simple_cumulative_funding_1x_pct": 1.1050081200000001
+    },
+    {
+      "annualized_arithmetic_mean_1x_pct": -9.03284350483871,
+      "month": "2026-03",
+      "observations": 744,
+      "positive_hours_pct": 49.46236559139785,
+      "simple_cumulative_funding_1x_pct": -0.7671730099999999
+    },
+    {
+      "annualized_arithmetic_mean_1x_pct": 47.064486878333334,
+      "month": "2026-04",
+      "observations": 720,
+      "positive_hours_pct": 59.44444444444444,
+      "simple_cumulative_funding_1x_pct": 3.8683139900000003
+    },
+    {
+      "annualized_arithmetic_mean_1x_pct": 64.77283041451612,
+      "month": "2026-05",
+      "observations": 744,
+      "positive_hours_pct": 65.99462365591398,
+      "simple_cumulative_funding_1x_pct": 5.50125409
+    },
+    {
+      "annualized_arithmetic_mean_1x_pct": 43.52970010166667,
+      "month": "2026-06",
+      "observations": 720,
+      "positive_hours_pct": 67.08333333333333,
+      "simple_cumulative_funding_1x_pct": 3.5777835700000002
+    },
+    {
+      "annualized_arithmetic_mean_1x_pct": 37.12625334193548,
+      "month": "2026-07",
+      "observations": 744,
+      "positive_hours_pct": 65.86021505376344,
+      "simple_cumulative_funding_1x_pct": 3.15318864
+    },
+    {
+      "annualized_arithmetic_mean_1x_pct": 16.73928829787234,
+      "month": "2026-08",
+      "observations": 423,
+      "positive_hours_pct": 64.30260047281324,
+      "simple_cumulative_funding_1x_pct": 0.80830125
+    }
+  ],
+  "negative_contribution_1x_pct": -30.66638988,
+  "negative_hours_pct": 37.61020881670534,
+  "observations": 4310,
+  "positive_contribution_1x_pct": 47.913066529999995,
+  "positive_hours_pct": 62.38979118329466,
+  "rolling_30d_apr_pct": {
+    "maximum": 70.40899956333328,
+    "median": 41.11183303499992,
+    "minimum": -34.23976803833339
+  },
+  "rolling_7d_apr_pct": {
+    "maximum": 124.00791884285735,
+    "median": 36.40074867857155,
+    "minimum": -102.22927039285707
+  },
+  "schema": "postfiat-ultrashort-funding-evidence-v1",
+  "simple_cumulative_funding_1x_pct": 17.24667665,
+  "worst_cumulative_funding_drawdown_1x_pct": -4.175886269999999
+}

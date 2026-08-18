@@ -1,0 +1,126 @@
+{
+  "cohorts": {
+    "core_crypto": {
+      "cohort": "core_crypto",
+      "cutoff_utc": "2026-07-02T10:00:00+00:00",
+      "eligible_market_hours": 315360,
+      "eligible_markets": 146,
+      "equal_market_annualized_arithmetic_mean_1x_pct": {
+        "maximum": 36.92364240055556,
+        "mean": -2.936016716388888,
+        "median": 1.168686179722223,
+        "minimum": -57.190999915000006,
+        "q25": -7.7096878320833335,
+        "q75": 7.026895046250002
+      },
+      "equal_market_constant_2x_funding_pct_of_starting_equity": {
+        "maximum": 18.20891954,
+        "mean": -1.4478986546575336,
+        "median": 0.5763383900000003,
+        "minimum": -28.203780780000002,
+        "q25": -3.8020378349999997,
+        "q75": 3.465318105000001
+      },
+      "equal_market_positive_hours_pct": {
+        "maximum": 99.9537037037037,
+        "mean": 75.51021055301878,
+        "median": 76.62037037037038,
+        "minimum": 23.194444444444446,
+        "q25": 62.61574074074074,
+        "q75": 87.82407407407408
+      },
+      "equal_market_simple_cumulative_funding_1x_pct": {
+        "maximum": 9.10445977,
+        "mean": -0.7239493273287668,
+        "median": 0.28816919500000016,
+        "minimum": -14.101890390000001,
+        "q25": -1.9010189174999998,
+        "q75": 1.7326590525000005
+      },
+      "markets_with_positive_cumulative_funding": 82,
+      "markets_with_positive_cumulative_funding_pct": 56.16438356164384,
+      "pooled_annualized_arithmetic_mean_1x_pct": -2.9360167163888877,
+      "pooled_positive_market_hours_pct": 75.51021055301877,
+      "universe_markets": 200,
+      "window_start_exclusive_utc": "2026-04-03T10:00:00+00:00"
+    },
+    "hip3_xyz": {
+      "cohort": "hip3_xyz",
+      "cutoff_utc": "2026-07-02T15:00:00+00:00",
+      "eligible_market_hours": 101261,
+      "eligible_markets": 47,
+      "equal_market_annualized_arithmetic_mean_1x_pct": {
+        "maximum": 58.22089770388889,
+        "mean": 11.265436541041707,
+        "median": 10.158379807777777,
+        "minimum": -42.583605379999995,
+        "q25": 3.255607320555556,
+        "q75": 15.580126530833331
+      },
+      "equal_market_constant_2x_funding_pct_of_starting_equity": {
+        "maximum": 28.711675579999994,
+        "mean": 5.56405121361702,
+        "median": 5.00961196,
+        "minimum": -21.00013416,
+        "q25": 1.60550498,
+        "q75": 7.6833500699999995
+      },
+      "equal_market_positive_hours_pct": {
+        "maximum": 93.14814814814815,
+        "mean": 75.25776956407078,
+        "median": 78.98148148148148,
+        "minimum": 3.2407407407407405,
+        "q25": 66.69090896657366,
+        "q75": 86.94444444444444
+      },
+      "equal_market_simple_cumulative_funding_1x_pct": {
+        "maximum": 14.355837789999997,
+        "mean": 2.78202560680851,
+        "median": 2.50480598,
+        "minimum": -10.50006708,
+        "q25": 0.80275249,
+        "q75": 3.8416750349999997
+      },
+      "markets_with_positive_cumulative_funding": 40,
+      "markets_with_positive_cumulative_funding_pct": 85.1063829787234,
+      "pooled_annualized_arithmetic_mean_1x_pct": 11.311517591522895,
+      "pooled_positive_market_hours_pct": 75.30144873149584,
+      "universe_markets": 84,
+      "window_start_exclusive_utc": "2026-04-03T15:00:00+00:00"
+    }
+  },
+  "combined_inventory": {
+    "eligible_market_hours": 416621,
+    "eligible_markets": 193,
+    "note": "Cohorts have different cutoffs and market structures; use their separate distributions for economic inference."
+  },
+  "limitations": [
+    "Historical funding is not a forecast and can reverse sign.",
+    "This is a funding decomposition, not a token or short-strategy return backtest.",
+    "Price P&L, changing notional, rebalancing, liquidation, fees, slippage, and compounding are excluded.",
+    "Survivorship remains possible because the test requires a market to be active and sufficiently complete at the cohort cutoff.",
+    "Core crypto and HIP-3 xyz markets are reported separately because their assets, operators, and funding regimes differ."
+  ],
+  "methodology": {
+    "constant_2x_example": "twice the 1x simple funding sum; excludes price P&L, changing notional, rebalancing, fees, liquidation, and compounding",
+    "cumulative_funding": "simple sum of settled hourly funding rates",
+    "funding_convention": "positive funding is paid by longs to shorts; negative funding is paid by shorts to longs",
+    "market_weighting": "distribution statistics give each eligible market equal weight; pooled statistics give each observed market-hour equal weight",
+    "maximum_staleness_hours": 6.0,
+    "minimum_coverage_pct": 90.0,
+    "window_days": 90
+  },
+  "schema": "postfiat-ultrashort-funding-universe-v1",
+  "sources": {
+    "core_panel": {
+      "bytes": 120628193,
+      "file": "panel.parquet",
+      "sha256": "b4c040d8e7b3283fb17ec353ac773b7f9a5dc7c1f0388c42a304d2f1ca260575"
+    },
+    "markets_csv_sha256": "d3f5902cd8a957b1cfdd46876716349ea288903365cfa838c7811ef5a25af1aa",
+    "xyz_archive": {
+      "files": 97,
+      "manifest_sha256": "acec01aa1a6de10f993dea56634f41391e7cb37ccaa904d11e10bab82da2f78a"
+    }
+  }
+}
