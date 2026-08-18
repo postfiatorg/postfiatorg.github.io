@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Glass reserve assignment and passport state machine</title>
+  <desc id="desc">A reserve right is assigned to one liability cell in Glass. Passing current evidence and a solvency specification activates a passport. Challenges, staleness, deficiency, or revocation disable new risk but preserve risk-reducing actions.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071008"/><stop offset="1" stop-color="#020402"/></linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#7fee64"/></marker>
+    <marker id="mutedarrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#9ba997"/></marker>
+  </defs>
+  <rect width="1200" height="760" rx="18" fill="url(#bg)"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="600" y="50" text-anchor="middle" fill="#ddffdc" font-size="28" font-weight="700">EXCLUSIVE IN-PROTOCOL ASSIGNMENT, ASYMMETRIC FAILURE</text>
+
+    <text x="60" y="102" fill="#7fee64" font-size="14" font-family="monospace" letter-spacing="1.5">COLLATERAL GRAPH</text>
+    <g>
+      <rect x="60" y="130" width="250" height="92" rx="12" fill="#111811" stroke="#7fee64" stroke-width="2"/>
+      <text x="185" y="165" text-anchor="middle" fill="#ddffdc" font-size="21" font-weight="700">ReserveRight R-42</text>
+      <text x="185" y="193" text-anchor="middle" fill="#83917f" font-size="14">100 USDC · DIRECT · active</text>
+      <rect x="455" y="130" width="280" height="92" rx="12" fill="#11161a" stroke="#8db7ff" stroke-width="2"/>
+      <text x="595" y="165" text-anchor="middle" fill="#ddffdc" font-size="21" font-weight="700">LiabilityCell NAV-A666</text>
+      <text x="595" y="193" text-anchor="middle" fill="#83917f" font-size="14">global authorized supply perimeter</text>
+      <path d="M310 176h130" stroke="#7fee64" stroke-width="3" marker-end="url(#arrow)"/>
+      <text x="375" y="159" text-anchor="middle" fill="#7fee64" font-size="13" font-family="monospace">ASSIGNED ONCE</text>
+      <rect x="890" y="130" width="250" height="92" rx="12" fill="#17100f" stroke="#6d3932" stroke-width="2" stroke-dasharray="8 6"/>
+      <text x="1015" y="165" text-anchor="middle" fill="#ddffdc" font-size="21" font-weight="700">LiabilityCell B</text>
+      <text x="1015" y="193" text-anchor="middle" fill="#ff816e" font-size="14">same Glass right rejected</text>
+      <path d="M735 176h140" stroke="#ff816e" stroke-width="3" stroke-dasharray="8 6"/>
+      <path d="M800 157l22 38M822 157l-22 38" stroke="#ff816e" stroke-width="4"/>
+    </g>
+    <text x="60" y="255" fill="#83917f" font-size="14">This prevents duplicate assignment in Glass state. It does not prove that no external pledge exists.</text>
+
+    <line x1="60" y1="295" x2="1140" y2="295" stroke="#2f3c31"/>
+    <text x="60" y="335" fill="#7fee64" font-size="14" font-family="monospace" letter-spacing="1.5">PASSPORT LIFECYCLE</text>
+
+    <g>
+      <rect x="60" y="375" width="180" height="82" rx="41" fill="#151815" stroke="#9ba997" stroke-width="2"/>
+      <text x="150" y="410" text-anchor="middle" fill="#ddffdc" font-size="18" font-weight="700">PROPOSED</text>
+      <text x="150" y="433" text-anchor="middle" fill="#83917f" font-size="13">challenge window</text>
+      <rect x="350" y="375" width="180" height="82" rx="41" fill="#102015" stroke="#7fee64" stroke-width="3"/>
+      <text x="440" y="410" text-anchor="middle" fill="#ddffdc" font-size="18" font-weight="700">ACTIVE</text>
+      <text x="440" y="433" text-anchor="middle" fill="#7fee64" font-size="13">new risk permitted</text>
+      <path d="M240 416h95" stroke="#7fee64" stroke-width="3" marker-end="url(#arrow)"/>
+      <text x="287" y="397" text-anchor="middle" fill="#7fee64" font-size="12">ALL RULES PASS</text>
+    </g>
+
+    <g>
+      <rect x="665" y="335" width="170" height="64" rx="12" fill="#18130e" stroke="#c58b3c"/><text x="750" y="374" text-anchor="middle" fill="#f2ca62" font-size="17" font-weight="700">CHALLENGED</text>
+      <rect x="665" y="420" width="170" height="64" rx="12" fill="#18130e" stroke="#c58b3c"/><text x="750" y="459" text-anchor="middle" fill="#f2ca62" font-size="17" font-weight="700">STALE</text>
+      <rect x="910" y="335" width="170" height="64" rx="12" fill="#19100f" stroke="#ff816e"/><text x="995" y="374" text-anchor="middle" fill="#ff816e" font-size="17" font-weight="700">DEFICIENT</text>
+      <rect x="910" y="420" width="170" height="64" rx="12" fill="#19100f" stroke="#ff816e"/><text x="995" y="459" text-anchor="middle" fill="#ff816e" font-size="17" font-weight="700">REVOKED</text>
+      <g stroke="#9ba997" stroke-width="2" marker-end="url(#mutedarrow)"><path d="M530 400l120-25"/><path d="M530 428l120 19"/><path d="M530 398l365-28"/><path d="M530 433l365 20"/></g>
+    </g>
+
+    <rect x="60" y="545" width="1080" height="150" rx="16" fill="#0d130e" stroke="#3e5a41" stroke-width="2"/>
+    <text x="90" y="580" fill="#7fee64" font-size="14" font-family="monospace" letter-spacing="1.5">FAILURE POLICY</text>
+    <g>
+      <rect x="90" y="603" width="465" height="58" rx="10" fill="#1a100f" stroke="#6d3932"/>
+      <text x="322" y="629" text-anchor="middle" fill="#ff816e" font-size="17" font-weight="700">DISABLE NEW RISK</text>
+      <text x="322" y="650" text-anchor="middle" fill="#bad8b6" font-size="13">issuance · borrowing · added exposure</text>
+      <rect x="645" y="603" width="465" height="58" rx="10" fill="#102015" stroke="#477f4d"/>
+      <text x="877" y="629" text-anchor="middle" fill="#7fee64" font-size="17" font-weight="700">PRESERVE RISK REDUCTION</text>
+      <text x="877" y="650" text-anchor="middle" fill="#bad8b6" font-size="13">redemption · repayment · collateral addition · challenge</text>
+    </g>
+    <text x="600" y="730" text-anchor="middle" fill="#83917f" font-size="14" font-family="monospace">A published warning is not enforcement unless the consuming application binds to current state.</text>
+  </g>
+</svg>
