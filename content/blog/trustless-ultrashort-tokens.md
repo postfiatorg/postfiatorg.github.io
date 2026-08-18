@@ -317,6 +317,75 @@ of starting equity over 90 days** before underlying-price P&L and every other
 cost. This is the broad economic evidence for the product; it is not an
 annualized projection.
 
+The equal-market table answers a breadth question, not a capacity-weighted
+portfolio question. A tiny market receives the same weight as a market that
+traded billions of dollars. To test the economically relevant version, we
+matched the 30 US-listed stocks and ETFs in the eligible HIP-3 panel to
+IBorrowDesk's historical Interactive Brokers stock-loan observations and
+weighted them by their HIP-3 notional volume over the same window. The matched
+set represented **$40.19 billion** of venue-reported notional. Its
+volume-weighted 90-day funding paid shorts **+2.56% of constant 1× notional**,
+close to the +2.74% equal-market mean for those same 30 instruments. Twenty-eight
+of the 30 paid shorts positive net funding. Volume weighting therefore
+strengthens rather than reverses the equity-perp result.
+
+### Against the actual alternative: borrow the stock
+
+The relevant comparison is not a hypothetical instrument with zero carry. A
+conventional short seller borrows shares, pays the stock-loan fee, posts margin,
+and may receive interest on the cash collateral created by the short sale.
+IBorrowDesk publishes historical indicative fee, availability, and rebate
+observations sourced from Interactive Brokers.[^iborrowdesk] IBKR calculates the
+daily gross borrow charge as collateral value multiplied by the annual fee rate
+and divided by 360.[^ibkrborrow] Its quoted rebate rate is the applicable
+benchmark rate minus the charge for borrowing the shares.[^ibkrrebate]
+
+For each matched ticker, we forward-filled the last available daily observation
+across weekends and holidays and accumulated 90 calendar days on IBKR's
+360-day convention. The result, per $100 of constant short notional, was:
+
+| Same-window, volume-weighted carry | HIP-3 perp short | Direct stock short |
+|---|---:|---:|
+| Funding or stock-loan rebate proxy | **+$2.56** | **+$0.83** |
+| Gross stock-borrow fee alone | — | -$0.076 |
+| HIP-3 advantage versus rebate proxy | **+$1.73** | — |
+
+At constant 2× exposure on $1,000 of starting equity, this isolates about
+**$51.11 of HIP-3 funding** against **$16.61 of stock-loan rebate proxy**, a
+**$34.50 difference over 90 days** before price P&L and all other costs. If an
+account received no interest on its short-sale proceeds, the corresponding
+HIP-3 advantage over the gross borrow charge would be about $52.63.
+
+| Market | HIP-3 notional | HIP-3 short funding | Stock rebate proxy | HIP-3 minus stock |
+|---|---:|---:|---:|---:|
+| MU | $10.46B | +4.01% | +0.84% | **+3.17%** |
+| NVDA | $3.92B | +2.86% | +0.84% | **+2.03%** |
+| CRWV | $482M | +5.43% | +0.83% | **+4.59%** |
+| HIMS | $291M | +9.68% | +0.75% | **+8.93%** |
+| TSLA | $1.89B | +0.87% | +0.83% | +0.04% |
+| AAPL | $541M | -0.08% | +0.84% | **-0.92%** |
+| EWJ | $61M | -1.32% | +0.62% | **-1.94%** |
+
+Twenty-five of the 30 matched HIP-3 markets beat the stock-loan rebate proxy;
+AAPL, EWJ, EWY, MSTR, and TSM did not. This is not evidence that liquid US
+stocks are expensive to borrow—they were generally cheap in this sample. The
+economic claim is more specific: **during this fixed window, long demand in the
+matched HIP-3 markets paid shorts a funding premium materially larger than both
+the gross cost of sourcing shares and the cash-collateral rebate available to a
+conventional stock borrower.**
+
+The rebate comparison is deliberately favorable to the stock short but still
+not an account statement. Actual proceeds interest depends on broker, account
+size, balance tier, currency, and collateral treatment. Direct stock shorts also
+owe manufactured dividends and face recalls, margin rules, market hours, and
+corporate actions; perp shorts instead face basis, oracle, venue, liquidation,
+and continuously variable funding risk. Underlying-price returns cancel only
+approximately because the HIP-3 contract may not track the cash security
+perfectly. The published
+[matched comparison CSV](/research/trustless-ultrashort/ibkr-comparison-90d-through-20260702.csv)
+contains every included ticker and derived field. Its SHA-256 is
+`8e8f5e4cac739f4a94522f606beb684f5b83adc596e1d2280351e9c439e25ca7`.
+
 The core result is an equally important warning. Shorts received funding in
 roughly three quarters of individual hours, yet large negative observations
 left the equal-market 90-day mean below zero. Sign frequency is therefore not a
@@ -716,6 +785,9 @@ product branding. Production naming requires trademark and regulatory review.
 [^etfcom]: ETF.com, [“ETFs Just Set a Trading Volume Record”](https://www.etf.com/sections/features/etfs-just-set-trading-volume-record), July 21, 2026.
 [^spglobal]: S&P Global Market Intelligence, [“Leveraged ETFs gain momentum as borrow demand builds”](https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/07/leveraged-etfs-gain-momentum-as-borrow-demand-builds), July 2026.
 [^funding]: Hyperliquid documentation, [Funding](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding).
+[^iborrowdesk]: IBorrowDesk, [Stock Borrow Fees & Short Availability](https://www.iborrowdesk.com/). IBorrowDesk is an independent site and is not affiliated with Interactive Brokers.
+[^ibkrborrow]: Interactive Brokers Reporting Reference, [Borrow Fee Details](https://www.ibkrguides.com/reportingreference/reportguide/borrowfeedetails_default.htm).
+[^ibkrrebate]: Interactive Brokers Campus, [Rebate Rate](https://www.interactivebrokers.com/campus/glossary-terms/rebate-rate/).
 [^corewriter]: Hyperliquid documentation, [Interacting with HyperCore](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/hyperevm/interacting-with-hypercore).
 [^coreevm]: Hyperliquid documentation, [HyperCore ↔ HyperEVM transfers](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/hyperevm/hypercore-less-than-greater-than-hyperevm-transfers).
 [^timing]: Hyperliquid documentation, [Interaction timings](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/hyperevm/interaction-timings).
