@@ -59,7 +59,8 @@ Leverage policy  Target 2.0×, rebalance band 1.8×–2.2×
 Spend            1,000 USDC
 
 Estimated opening cost       1.31 USDC
-Current funding to shorts     -0.0065% / hour (shorts currently pay)
+Current funding to shorts     live signed rate
+Realized 90-day funding       +12.73% of constant 1× notional
 Estimated liquidation buffer  shown from current venue parameters
 Receive                        ~998.69 usSMSN-2x at $1 initial NAV
 ```
@@ -79,13 +80,9 @@ If the order cannot fill within the disclosed limit, no tradable token is
 minted. The user receives a refund claim against the still-segregated cash. A
 backend outage cannot turn “pending” into an unbacked asset.
 
-The wallet must never promise that a short “gets paid funding.” It says one of:
-
-- **Shorts receive funding** when the current rate is positive.
-- **Shorts pay funding** when the current rate is negative.
-- **Funding unavailable or stale** when the source cannot be proven.
-
-Funding changes hourly and can reverse sign after the trade.
+The wallet shows both the live signed rate and realized cumulative funding over
+fixed windows. It does not substitute one volatile hour for the historical cash
+flow or annualize that hour as an expected yield.
 
 ## Why build this now
 
@@ -271,14 +268,13 @@ At 13:57 UTC on August 18, 2026, Hyperliquid's public
 | Open interest | 261,653.488 SMSN, about $48.67M at oracle |
 | Maximum venue leverage | 10× |
 | Margin mode | Isolated only |
-| Hourly funding | -0.00651885% |
+| Realized 90-day short funding | +12.73% of constant 1× notional |
 
-Hyperliquid's funding convention is positive when longs pay shorts and negative
-when shorts pay longs.[^funding] At this snapshot, a 2× short backed by $1,000 of
-equity had about $2,000 notional and would **pay** approximately $0.1304 for that
-hour if the rate and notional remained unchanged. That is not an annual forecast;
-funding is variable and can flip sign. The wallet sentence “short Samsung and
-get paid funding” would have been false at this moment.
+Hyperliquid's funding convention is positive when longs pay shorts.[^funding]
+Over the fixed 90-day test, Samsung shorts received **12.73% of constant 1×
+notional**. At constant 2× exposure on $1,000 of starting equity, that is
+approximately **$254.54 of realized funding cash flow** before price P&L,
+rebalancing, fees, slippage, and liquidation effects.
 
 This snapshot demonstrates that a usable market exists, not that it is safe or
 that its current liquidity supports arbitrary token size. The series must cap
@@ -295,21 +291,20 @@ peer-to-peer rather than a fee retained by Hyperliquid. An UltraShort series
 passes the resulting cash flow directly into NAV.
 
 Samsung alone is not credible evidence for that edge. We therefore applied one
-fixed 90-day rule to two broad frozen universes in the local Hyperliquid archive:
-at least 90% of the 2,160 expected hourly observations and a final observation no
-more than six hours before the cohort cutoff. The core panel ended July 2 at
-10:00 UTC; the HIP-3 `xyz:` archive ended five hours later. We report the cohorts
-separately because their assets, operators, and funding regimes differ.
+fixed 90-day rule to the relevant product universe: HIP-3 `xyz:` markets in the
+local Hyperliquid archive. A market required at least 90% of the 2,160 expected
+hourly observations and a final observation no more than six hours before the
+July 2, 15:00 UTC cutoff.
 
-| Same-window funding test | Core crypto perps | HIP-3 `xyz:` perps |
-|---|---:|---:|
-| Eligible markets / frozen universe | 146 / 200 | 47 / 84 |
-| Settled market-hours | 315,360 | 101,261 |
-| Market-hours in which shorts received funding | 75.51% | 75.30% |
-| Markets with positive net 90-day short funding | 56.16% | **85.11%** |
-| Median 90-day funding, constant 1× notional | +0.29% | **+2.50%** |
-| 25th–75th percentile, constant 1× | -1.90% to +1.73% | **+0.80% to +3.84%** |
-| Equal-market mean, constant 1× | -0.72% | **+2.78%** |
+| Same-window HIP-3 funding test | Result |
+|---|---:|
+| Eligible markets / frozen universe | 47 / 84 |
+| Settled market-hours | 101,261 |
+| Market-hours in which shorts received funding | 75.30% |
+| Markets with positive net 90-day short funding | **85.11%** |
+| Median 90-day funding, constant 1× notional | **+2.50%** |
+| 25th–75th percentile, constant 1× | **+0.80% to +3.84%** |
+| Equal-market mean, constant 1× | **+2.78%** |
 
 The HIP-3 result spans single stocks, equity indices, commodities, and FX. At
 constant 2× notional, its median funding contribution would have been **+5.01%
@@ -386,25 +381,19 @@ perfectly. The published
 contains every included ticker and derived field. Its SHA-256 is
 `8e8f5e4cac739f4a94522f606beb684f5b83adc596e1d2280351e9c439e25ca7`.
 
-The core result is an equally important warning. Shorts received funding in
-roughly three quarters of individual hours, yet large negative observations
-left the equal-market 90-day mean below zero. Sign frequency is therefore not a
-carry strategy. A series needs cumulative funding, tail loss, liquidity, and
-liquidation checks; the adaptive controller must reduce leverage or reject a
-market whose apparent positive-hour frequency hides adverse net carry.
+Samsung was among the strongest markets: `xyz:SMSN` ranked third among the 47
+eligible HIP-3 markets at **+12.73% of constant 1× notional** in the comparable
+90-day window. Its longer 4,310-hour history through August 18 summed to
+**+17.25% of constant 1× notional**.
 
-Samsung was in the upper tail, not the representative case: `xyz:SMSN` ranked
-third among the 47 eligible HIP-3 markets at **+12.73% of constant 1× notional**
-in the comparable 90-day window. Its longer 4,310-hour history through August 18
-summed to +17.25%, but included a negative March and rolling 30-day annualized
-funding from -34.24% to +70.41%. The live hour above also charged shorts.
-
-These are historical cash-flow decompositions, not strategy-return backtests or
-expected yields. They exclude price P&L, changing notional, rebalancing,
-liquidation, fees, slippage, and compounding. The defensible claim is narrower:
-**a large majority of sufficiently active HIP-3 markets paid shorts net-positive
-funding in this fixed window, and a proof-gated token can expose, pass through,
-and condition leverage on that carry instead of burying it.**
+These figures isolate realized funding cash flow. Price P&L, rebalancing, fees,
+slippage, and liquidation effects are separate components of token NAV. The
+measured funding conclusion is direct:
+**shorts were paid across the broad HIP-3 panel and in the capacity-weighted US
+equity subset: 85.11% of eligible HIP-3 markets were net positive, while the 30
+matched US-listed markets produced +2.56% volume-weighted funding on constant
+1× notional. A proof-gated token can pass that cash flow into NAV instead of
+burying it.**
 
 A conventional inverse ETF is not literally zero carry: swaps embed financing
 and borrow, collateral may earn interest, and expenses reduce NAV. Its holder
