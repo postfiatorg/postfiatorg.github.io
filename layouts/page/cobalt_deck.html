@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#05070a">
+  <meta name="robots" content="noindex,nofollow">
+  <title>{{ .Title }} | Post Fiat</title>
+  <meta name="description" content="{{ .Description }}">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ .Description }}">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="icon" href="/media-kit/logo32x32-whiteonblack.png">
+  <link rel="stylesheet" href="/research/cobalt-consensus-deck/deck.css">
+</head>
+<body class="cobalt-deck">
+  <a class="skip-link" href="#slide-1">Skip to presentation</a>
+
+  <div class="field" aria-hidden="true">
+    <div class="field__mesh"></div>
+    <div class="field__orb field__orb--a"></div>
+    <div class="field__orb field__orb--b"></div>
+    <div class="field__scan"></div>
+  </div>
+
+  <header class="deck-bar">
+    <a class="deck-brand" href="/" aria-label="Post Fiat home"><img src="/media-kit/logo.svg" alt="" width="32" height="32"><span>POST FIAT</span></a>
+    <div class="deck-context">Consensus decision brief · 21 Aug 2026</div>
+    <div class="deck-progress"><span id="currentSlide">01</span><span>/</span><span>18</span><i><b id="progressFill"></b></i></div>
+  </header>
+
+  <nav class="deck-dots" id="deckDots" aria-label="Slide navigation"></nav>
+
+  <main class="slides" id="slides">
+    <section class="slide slide--hero" id="slide-1" data-index="1" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">Post Fiat protocol decision</p>
+        <div class="hero-lockup">
+          <div class="hero-mark" aria-hidden="true"><span>Co</span><i>27</i></div>
+          <div><h1>COBALT</h1><p>Consensus machinery, governance replay,<br>and the production decision.</p></div>
+        </div>
+        <div class="thesis-strip"><span>Implemented research</span><i>≠</i><span>Live authority</span><i>≠</i><span>Correct governance</span></div>
+      </div>
+      <p class="slide-cue">Scroll or use arrow keys <span>↓</span></p>
+    </section>
+
+    <section class="slide" id="slide-2" data-index="2" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">01 · Definition</p>
+        <h2>What is <span>Cobalt?</span></h2>
+        <p class="lede">A family of Byzantine agreement protocols for networks where participants do <em>not</em> share one global membership list—and may hold different trust assumptions.</p>
+        <div class="stack-diagram">
+          <article><small>Application</small><strong>Governance decision or ordered ledger value</strong></article>
+          <i>↓</i><article class="accent"><small>Cobalt composition</small><strong>Reliable broadcast · binary agreement · multi-value agreement</strong></article>
+          <i>↓</i><article><small>Local trust</small><strong>Essential subsets with quorum and fault thresholds</strong></article>
+        </div>
+        <div class="truth-row"><span>Not a validator scorer</span><span>Not a trust oracle</span><span>Not proof that a proposal is wise</span></div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-3" data-index="3" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">01 · Why Ripple proposed it</p>
+        <h2>XRPL's safety depends on <span>who overlaps whom.</span></h2>
+        <div class="overlap-stage" role="img" aria-label="Two validator trust lists with a shared overlap">
+          <div class="trust-set trust-set--left"><b>SERVER A UNL</b><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span></div>
+          <div class="trust-set trust-set--right"><b>SERVER B UNL</b><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div>
+          <div class="overlap-core"><strong>D · E</strong><small>intersection carries safety</small></div>
+        </div>
+        <div class="three-cards">
+          <article><b>Problem</b><p>Each server configures a Unique Node List. Insufficient overlap can permit divergent validations.</p></article>
+          <article><b>2018 proposal</b><p>Make heterogeneous trust a first-class protocol input instead of assuming nearly identical lists.</p></article>
+          <article><b>Goal</b><p>More flexible UNLs, less reliance on coordinated list uniformity, and agreement under arbitrary asynchrony.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-4" data-index="4" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">01 · What XRPL actually shipped</p>
+        <h2>Cobalt did not ship. <span>Operational mitigations did.</span></h2>
+        <div class="record-grid">
+          <article class="record-card">
+            <small>Documented record</small>
+            <h3>Signed validator lists</h3><p>Publishers distribute recommended validators; modern rippled can require a validator to appear on multiple configured lists.</p>
+            <h3>Negative UNL</h3><p>Consensus temporarily deactivates persistently offline validators and adjusts quorum within tight bounds. This improves liveness, not trust-list decentralization.</p>
+          </article>
+          <article class="record-card record-card--warn">
+            <small>What is not documented</small>
+            <h3>No official postmortem</h3><p>Ripple did not publish a canonical explanation for abandoning Cobalt. Claims about a single definitive reason should be treated as inference.</p>
+            <h3>Engineering inference</h3><p>XRPL retained a proven consensus path and incrementally addressed availability and list distribution, avoiding the migration, complexity, and new cryptographic machinery of a consensus replacement.</p>
+          </article>
+        </div>
+        <p class="callout">Negative UNL is not “Cobalt lite.” It temporarily discounts unavailable members of the existing trust configuration.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-5" data-index="5" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">02 · Post Fiat today</p>
+        <h2>The codebase has <span>two different authority stories.</span></h2>
+        <div class="authority-split">
+          <article class="authority-live"><small>LIVE AUTHORIZATION</small><h3>Old-rule signature quorum</h3><ul><li>Distinct ML-DSA-65 authorizations</li><li>Active registry validates the complete action</li><li>Delayed activation, replay protection, rollback</li></ul><b>Production truth</b></article>
+          <div class="not-equal">≠</div>
+          <article class="authority-research"><small>CONTROLLED COBALT MACHINERY</small><h3>Agreement + transition research</h3><ul><li>Trust graphs and essential subsets</li><li>RBC / ABBA / MVBA / DABC</li><li>Safety witnesses and transition checks</li></ul><b>Implemented, not authoritative</b></article>
+        </div>
+        <p class="boundary">The whitepaper and governance docs explicitly say the Cobalt research types do not replace or bypass the live signature boundary.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-6" data-index="6" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">02 · Machinery in <code>consensus_cobalt</code></p>
+        <h2>This is not a stub. <span>It is a substantial protocol lab.</span></h2>
+        <div class="protocol-pipeline">
+          <article><b>01</b><strong>RBC</strong><small>same proposal</small></article><i>→</i>
+          <article><b>02</b><strong>ABBA</strong><small>same bit</small></article><i>→</i>
+          <article><b>03</b><strong>MVBA</strong><small>same valid value</small></article><i>→</i>
+          <article><b>04</b><strong>DABC</strong><small>ordered decision</small></article><i>→</i>
+          <article class="accent"><b>05</b><strong>Registry</strong><small>typed activation</small></article>
+        </div>
+        <div class="inventory-grid">
+          <article><h3>Core types</h3><p>Trust views, essential subsets, proposals, votes, certificates, round state, ratifications, replay records.</p></article>
+          <article><h3>Lifecycle</h3><p>Trust-graph updates, registry transitions, delayed activation, challenge state, rollback and stale-root rejection.</p></article>
+          <article><h3>Bindings</h3><p>Domain-separated links among registry, trust graph, transaction network membership, and block context.</p></article>
+          <article><h3>Adversarial harness</h3><p>Partitions, equivocation, poisoning, stale replay, crash/restart, membership races, parser fuzz and resource DoS.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-7" data-index="7" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">02 · What its safety checker proves</p>
+        <h2>Local safety is not enough. <span>Transitions need cross-era overlap.</span></h2>
+        <div class="inequality-panel">
+          <div><small>PER ESSENTIAL SUBSET</small><strong>t<sub>S</sub> &lt; 2q<sub>S</sub> − n<sub>S</sub></strong><strong>2t<sub>S</sub> &lt; q<sub>S</sub></strong></div>
+          <i>+</i><div><small>OLD ↔ NEW REGISTRY</small><strong>|Q<sub>old</sub> ∩ Q<sub>new</sub>| &gt; B</strong><p>Every old/new quorum pair must share more than the active Byzantine budget.</p></div>
+        </div>
+        <div class="counterexample"><span>Old: A B C D E F G</span><span>New: A B H I J K L</span><b>Only A · B overlap</b><em>Both rows may pass locally while the transition is unsafe.</em></div>
+        <p class="boundary">The bounded cover extractor rejects omitted or stale rows, conflicting views, unsafe deltas, and covers above 64 entries. That is strong controlled evidence—not a public-network readiness claim.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-8" data-index="8" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">03 · AgentHub / original Dynamic UNL program</p>
+        <h2>Phase 1 and 2 are complete. <span>Authority transfer is not.</span></h2>
+        <div class="phase-roadmap">
+          <article class="done"><b>PHASE 1</b><h3>Foundation pipeline</h3><strong>13 / 13</strong><p>Evidence collection, pinned inference, deterministic selector, signed list publication, IPFS and ledger anchoring.</p><i>COMPLETE</i></article>
+          <article class="done"><b>PHASE 2</b><h3>Validator shadow replay</h3><strong>11 / 11</strong><p>Frozen inputs, commit/reveal, independent sidecars, on-chain participation and withholding hardening.</p><i>COMPLETE</i></article>
+          <article><b>PHASE 3A</b><h3>Content authority</h3><strong>0 / 3</strong><p>Converged validator results become the list content while the foundation still signs and publishes.</p><i>NOT STARTED</i></article>
+          <article><b>PHASE 3B</b><h3>Publication authority</h3><strong>0 / 3</strong><p>Ledger-held registry; old rules ratify new; remove the single signing key and canonical URL.</p><i>DESIGN-GATED</i></article>
+        </div>
+        <p class="callout">Byte-identical replay proves reproducible execution. It does not prove the scoring policy is correct, robust, or superior to deterministic rules.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-9" data-index="9" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">04 · Where the programs meet</p>
+        <h2>Replay produces the packet. <span>Cobalt can authorize the packet.</span></h2>
+        <div class="dovetail-flow">
+          <article><small>OBSERVE</small><b>Evidence snapshot</b></article><i>→</i>
+          <article><small>REPLAY</small><b>Model + manifest</b></article><i>→</i>
+          <article><small>COMPILE</small><b>Deterministic policy</b></article><i>→</i>
+          <article><small>BIND</small><b>Exact packet root</b></article><i>→</i>
+          <article class="accent"><small>RATIFY</small><b>Cobalt / quorum cert</b></article><i>→</i>
+          <article><small>ACTIVATE</small><b>Typed registry update</b></article>
+        </div>
+        <div class="two-cards">
+          <article><h3>Clean interface</h3><p>Cobalt never interprets prose or reruns the model. It agrees on one hash-bound, schema-valid transition packet after deterministic conformance checks.</p></article>
+          <article><h3>Critical separation</h3><p>The replay layer answers “what was proposed?” The agreement layer answers “did the current authority approve this exact proposal?” Neither answers “is it wise?”</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-10" data-index="10" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">05 · Concrete benefit I</p>
+        <h2>Cobalt makes heterogeneous trust <span>checkable.</span></h2>
+        <div class="benefit-list">
+          <article><b>01</b><h3>Non-uniform trust is explicit</h3><p>Validators can declare different essential subsets instead of relying on near-identical publisher lists.</p></article>
+          <article><b>02</b><h3>Safety assumptions become machine inputs</h3><p>Thresholds, fault budgets, linkedness, covers, and intersection witnesses are validated before activation.</p></article>
+          <article><b>03</b><h3>Unsafe membership deltas fail closed</h3><p>A transition can be rejected even when both the old and new configurations look safe in isolation.</p></article>
+          <article><b>04</b><h3>Asynchronous agreement target</h3><p>The paper targets safety without timing assumptions and probabilistic progress under its fault and trust assumptions.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-11" data-index="11" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">05 · Concrete benefit II</p>
+        <h2>Cobalt can remove a <span>publisher-shaped root of trust.</span></h2>
+        <div class="before-after">
+          <div><small>XRPL-STYLE LIST GOVERNANCE</small><div class="publisher">SIGNED LIST PUBLISHER</div><i>↓</i><div class="nodes"><b>V1</b><b>V2</b><b>V3</b><b>V4</b></div><p>Servers still choose configuration, but publisher compromise or social coordination can influence the recommended topology.</p></div>
+          <strong>→</strong>
+          <div><small>RATIFIED TRANSITION GOVERNANCE</small><div class="nodes nodes--ring"><b>V1</b><b>V2</b><b>V3</b><b>V4</b></div><i>↓</i><div class="publisher publisher--packet">PACKET ROOT + CERTIFICATE</div><p>Old rules collectively authorize the exact new registry after transition-safety checks.</p></div>
+        </div>
+        <p class="callout">The gain is constitutional: validator membership becomes ledger-verifiable protocol state rather than a signed web artifact.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-12" data-index="12" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">06 · Cobalt attack surface</p>
+        <h2>Formal agreement does not make the <span>trust graph true.</span></h2>
+        <div class="risk-grid">
+          <article><b>GRAPH POISONING</b><p>Adversaries manipulate declared trust edges or evidence used to construct them.</p></article>
+          <article><b>CORRELATED OPERATORS</b><p>Five validators may be one cloud, owner, key ceremony, or legal coercion domain.</p></article>
+          <article><b>SYBIL INFILTRATION</b><p>Admission mistakes let one actor occupy multiple essential subsets.</p></article>
+          <article><b>OLD-SET ENTRENCHMENT</b><p>“Old rules approve new” can let incumbents block legitimate rotation indefinitely.</p></article>
+          <article><b>CHECKER BUG</b><p>A defect in cover extraction or transition arithmetic becomes a constitutional vulnerability.</p></article>
+          <article><b>KEY COMPROMISE</b><p>Agreement among compromised identities is still valid agreement.</p></article>
+        </div>
+        <p class="boundary">Cobalt can prove agreement under encoded assumptions. It cannot prove operator independence, honest evidence, competent policy, or resistance to off-chain capture.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-13" data-index="13" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">06 · Operational attack surface</p>
+        <h2>The default failure mode may be safer—<span>but it is still a halt.</span></h2>
+        <div class="failure-spectrum">
+          <article><span>Availability</span><b>message amplification</b><p>RBC + repeated binary agreement creates more messages, state, and verification work than a simple threshold certificate.</p></article>
+          <article><span>Randomness</span><b>coin withholding or bias</b><p>A production common coin or signed beacon adds availability, implementation, and key-management dependencies.</p></article>
+          <article><span>Governance</span><b>challenge / cover griefing</b><p>Attackers can force oversized covers, repeated challenges, or transition deadlock. Fail-closed preserves safety while freezing change.</p></article>
+          <article><span>Migration</span><b>mixed-version ambiguity</b><p>Partial rollout, replay bugs, or state divergence at the authority boundary can strand the network between constitutions.</p></article>
+        </div>
+        <div class="risk-meter"><span>FORK RISK</span><i></i><b>HALT / COMPLEXITY RISK</b></div>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-14" data-index="14" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">07 · Comparable deployments</p>
+        <h2>No credible production chain was found running <span>MacBrough Cobalt.</span></h2>
+        <div class="chain-table" role="table" aria-label="Cobalt and related consensus implementations">
+          <div role="row" class="head"><span>System</span><span>Production?</span><span>Relationship</span><span>Critical difference</span></div>
+          <div role="row"><b>Cobalt paper</b><em>No identified chain</em><span>Exact protocol family</span><p>DABC for non-uniform trust</p></div>
+          <div role="row"><b>Post Fiat</b><em>Controlled only</em><span>Cobalt machinery</span><p>Live authority remains signature quorum</p></div>
+          <div role="row"><b>Stellar SCP</b><em class="yes">Yes</em><span>Federated Byzantine agreement</span><p>Quorum slices; not Cobalt's RBC/ABBA/MVBA/DABC stack</p></div>
+          <div role="row"><b>MobileCoin</b><em class="yes">Yes</em><span>SCP-derived FBA</span><p>Related non-uniform trust lineage, not Cobalt</p></div>
+          <div role="row"><b>XRPL</b><em class="yes">Yes</em><span>UNL-based consensus</span><p>Cobalt proposed, never adopted</p></div>
+        </div>
+        <p class="callout">A release named “Cobalt” is not evidence of the Cobalt consensus protocol. Exact implementation claims require protocol-level confirmation.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-15" data-index="15" tabindex="-1">
+      <div class="slide__content">
+        <p class="eyebrow">08 · Alternative</p>
+        <h2>Can Post Fiat simply copy <span>XRPL consensus?</span></h2>
+        <div class="verdict"><strong>YES</strong><span>as a conservative operational model</span><i>/</i><strong>NO</strong><span>as a shortcut to inherited safety</span></div>
+        <div class="two-cards">
+          <article><h3>Valid if we admit the trust model</h3><p>Signed multi-publisher lists, conservative overlap, Negative-UNL-style availability handling, and social governance are coherent for a permissioned or curated network.</p></article>
+          <article><h3>Invalid as cargo cult</h3><p>Safety depends on Post Fiat's actual topology, thresholds, churn, key model, and implementation. Rust certified ordering is not rippled; copying parameters does not copy the proof.</p></article>
+        </div>
+        <p class="boundary">This path is simpler and lower-risk, but it requires revising any whitepaper claim that membership evolution is protocol-ratified rather than publisher- or committee-governed.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-16" data-index="16" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">09 · Governance replay interface</p>
+        <h2>The model should be a <span>proposer—not a voter.</span></h2>
+        <div class="replay-architecture">
+          <div class="machine"><small>REPLAYABLE MACHINE</small><b>Evidence → model → proposed policy</b><p>Produces citations, scores, rationale, manifest and exact hashes.</p></div>
+          <div class="guard"><small>DETERMINISTIC GUARD</small><b>Schema → compile → simulate → compare</b><p>Rejects invalid, unsafe, non-actionable, or non-reproducible packets.</p></div>
+          <div class="choice"><small>AUTHORITY CHOICE</small><section><b>With Cobalt</b><p>Old trust graph ratifies and safely transitions registry state.</p></section><section><b>Without Cobalt</b><p>Current ML-DSA quorum ratifies; publisher or ledger action distributes the result.</p></section></div>
+        </div>
+        <p class="callout">Replay makes a governance decision inspectable. Ratification makes it authorized. Deterministic rules make it executable. These are three separate properties.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="slide-17" data-index="17" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">10 · Decision matrix</p>
+        <h2>Full Cobalt is not the only way to <span>decentralize authority.</span></h2>
+        <div class="decision-table" role="table" aria-label="Decision matrix comparing governance paths">
+          <div class="head" role="row"><span>Option</span><span>Safety clarity</span><span>Complexity</span><span>Publisher removal</span><span>Time to credible testnet</span></div>
+          <div role="row"><b>A · Current path</b><span>Known signature quorum</span><em>Low</em><span>No</span><strong>Fastest</strong></div>
+          <div role="row"><b>B · XRPL-style</b><span>Topology-dependent</span><em>Low–medium</em><span>Partial, multi-publisher</span><strong>Fast</strong></div>
+          <div role="row" class="recommended"><b>C · Governance QC</b><span>Explicit old-rule certificate + transition checker</span><em>Medium</em><span>Yes</span><strong>Practical</strong></div>
+          <div role="row"><b>D · Full Cobalt</b><span>Strongest encoded heterogeneous-trust target</span><em>Very high</em><span>Yes</span><strong>Slowest</strong></div>
+        </div>
+        <p class="decision-note"><b>Key test:</b> if a simple quorum certificate plus the existing cross-registry safety witness satisfies the constitutional requirement, full RBC/ABBA/MVBA/DABC adds risk without enough marginal benefit.</p>
+      </div>
+    </section>
+
+    <section class="slide slide--final" id="slide-18" data-index="18" tabindex="-1">
+      <div class="slide__content slide__content--wide">
+        <p class="eyebrow">Recommendation</p>
+        <h2>Do not replace transaction consensus.<br><span>Earn Cobalt at the governance boundary.</span></h2>
+        <div class="recommendation-grid">
+          <article><b>NOW</b><h3>Ship the minimal authority bridge</h3><p>Phase 3A content convergence → typed packet root → current ML-DSA old-rule quorum certificate → deterministic transition-safety check.</p></article>
+          <article><b>COMPARE</b><h3>Run two ratifiers in shadow</h3><p>Replay identical governance packets through the minimal QC path and the full Cobalt path. Measure divergence, latency, traffic, restart behavior and operator burden.</p></article>
+          <article><b>GATE</b><h3>Activate only after hostile proof</h3><p>Formal spec/model check, deterministic simulation, multi-node partitions, mixed-version migration, common-coin review, external audit and rollback rehearsal.</p></article>
+        </div>
+        <div class="final-verdict"><small>PRODUCTION POSITION</small><strong>Cobalt is a candidate governance ratifier—not yet the chain's consensus authority.</strong></div>
+      </div>
+      <button class="source-button source-button--final" id="sourcesButton" type="button">Sources & evidence</button>
+    </section>
+  </main>
+
+  <div class="deck-controls" aria-label="Presentation controls"><button id="prevSlide" type="button" aria-label="Previous slide">←</button><button id="sourceQuick" type="button">Sources</button><button id="nextSlide" type="button" aria-label="Next slide">→</button></div>
+
+  <dialog class="source-dialog" id="sourceDialog" aria-labelledby="sourcesTitle">
+    <div class="source-dialog__head"><div><small>EVIDENCE INDEX</small><h2 id="sourcesTitle">Sources for this decision brief</h2></div><button id="sourceClose" type="button" aria-label="Close sources">×</button></div>
+    <div class="source-dialog__body">
+      <section><h3>Cobalt and XRPL</h3><ol>
+        <li><a href="https://arxiv.org/abs/1802.07240">Ethan MacBrough, “Cobalt: BFT Governance in Open Networks” (2018)</a></li>
+        <li><a href="https://ripple.com/insights/continued-decentralization-xrp-ledger-consensus-protocol/">Ripple, “Continued Decentralization & the XRP Ledger Consensus Protocol” (2018)</a></li>
+        <li><a href="https://xrpl.org/docs/concepts/consensus-protocol/unl">XRPL documentation: Unique Node Lists</a></li>
+        <li><a href="https://xrpl.org/docs/concepts/consensus-protocol/negative-unl">XRPL documentation: Negative UNL</a></li>
+        <li><a href="https://xrpl.org/blog/2020/rippled-1.6.0">XRPL: rippled 1.6.0 and Negative UNL</a></li>
+        <li><a href="https://github.com/XRPLF/rippled/discussions/5463">XRPLF: multi-publisher validator-list threshold</a></li>
+      </ol></section>
+      <section><h3>Post Fiat implementation</h3><ol>
+        <li><a href="https://github.com/postfiatorg/postfiatl1v2-private-archive-20260717/blob/open-source-productionization-20260716/docs/whitepaper.md">Post Fiat L1 whitepaper: certified ordering, Cobalt and replay boundaries</a></li>
+        <li><a href="https://github.com/postfiatorg/postfiatl1v2-private-archive-20260717/blob/open-source-productionization-20260716/docs/governance/cobalt.md">Cobalt governance boundary</a></li>
+        <li><a href="https://github.com/postfiatorg/postfiatl1v2-private-archive-20260717/blob/open-source-productionization-20260716/docs/governance/cobalt-implementation.md">Cobalt implementation map</a></li>
+        <li><a href="https://github.com/postfiatorg/postfiatl1v2-private-archive-20260717/tree/open-source-productionization-20260716/crates/consensus_cobalt">Rust consensus_cobalt crate</a></li>
+      </ol></section>
+      <section><h3>AgentHub governance program</h3><ol>
+        <li><a href="https://github.com/postfiatorg/agent-hub/blob/codex/experimental-unl-testing/products/blockchain/status/2026-08-19.md">AgentHub blockchain status, 19 Aug 2026</a></li>
+        <li><a href="https://github.com/postfiatorg/dynamic-unl-scoring/blob/main/docs/CurrentRoadmap.md">Dynamic UNL current roadmap</a></li>
+        <li><a href="https://github.com/postfiatorg/dynamic-unl-scoring/blob/main/docs/research/Phase3ResearchCharter.md">Phase 3 research charter</a></li>
+        <li><a href="https://github.com/postfiatorg/agent-hub/blob/codex/experimental-unl-testing/experimental_unl_testing/POSTFIAT_MACHINE_GOVERNANCE_EVOLUTION_SPEC.md">Machine governance evolution specification</a></li>
+      </ol></section>
+      <section><h3>Related deployed protocols</h3><ol>
+        <li><a href="https://developers.stellar.org/docs/learn/fundamentals/stellar-consensus-protocol">Stellar Consensus Protocol documentation</a></li>
+        <li><a href="https://github.com/stellar/stellar-core">stellar-core implementation</a></li>
+        <li><a href="https://github.com/mobilecoinfoundation/mobilecoin">MobileCoin source and consensus lineage</a></li>
+      </ol></section>
+      <p class="source-caveat">Research cutoff: 21 August 2026. “Why Cobalt did not ship” is explicitly presented as inference because no official XRPL postmortem was found. Post Fiat implementation claims reflect the audited local branches named above.</p>
+    </div>
+  </dialog>
+
+  <script src="/research/cobalt-consensus-deck/deck.js" defer></script>
+</body>
+</html>
