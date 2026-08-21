@@ -14,6 +14,7 @@ test("renders the complete Cobalt decision and supports navigation", async ({
   });
   await page.goto(deckUrl, { waitUntil: "networkidle" });
   await expect(page.locator(".slide")).toHaveCount(18);
+  await expect(page.locator(".human-blurb")).toHaveCount(18);
   await expect(page.locator("#currentSlide")).toHaveText("01");
   await expect(page.locator("#slide-5")).toContainText("LIVE AUTHORIZATION");
   await expect(page.locator("#slide-8")).toContainText("13 / 13");
@@ -54,20 +55,39 @@ test("keeps every slide inside the desktop presentation frame", async ({
   for (let index = 0; index < 18; index += 1) {
     await page.locator(".deck-dots button").nth(index).click();
     await expect(page.locator(`#slide-${index + 1}`)).toHaveClass(/is-active/);
-    await page.waitForTimeout(400);
+    await page.waitForTimeout(800);
     const bounds = await page
-      .locator(`#slide-${index + 1} .slide__content`)
-      .evaluate((element) => {
-        const rect = element.getBoundingClientRect();
-        return { top: rect.top, bottom: rect.bottom };
+      .locator(`#slide-${index + 1}`)
+      .evaluate((slide) => {
+        const frame = slide.getBoundingClientRect();
+        const technical = [
+          ...slide.querySelectorAll(
+            ":scope > .slide__content > :not(.human-blurb)",
+          ),
+        ].map((element) => element.getBoundingClientRect());
+        const blurb = slide
+          .querySelector(".human-blurb")
+          .getBoundingClientRect();
+        return {
+          contentTop:
+            Math.min(...technical.map((rect) => rect.top)) - frame.top,
+          contentBottom:
+            Math.max(...technical.map((rect) => rect.bottom)) - frame.top,
+          blurbTop: blurb.top - frame.top,
+          blurbBottom: blurb.bottom - frame.top,
+        };
       });
     expect(
-      bounds.top,
+      bounds.contentTop,
       `slide ${index + 1} starts beneath the header`,
     ).toBeGreaterThanOrEqual(67);
     expect(
-      bounds.bottom,
+      bounds.contentBottom,
+      `slide ${index + 1} clears its plain-English line`,
+    ).toBeLessThanOrEqual(bounds.blurbTop - 2);
+    expect(
+      bounds.blurbBottom,
       `slide ${index + 1} clears the controls`,
-    ).toBeLessThanOrEqual(825);
+    ).toBeLessThanOrEqual(834);
   }
 });
