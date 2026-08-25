@@ -1,7 +1,7 @@
 ---
 title: "Cobalt: Further Evaluation"
 date: 2026-08-23T00:00:00Z
-lastmod: 2026-08-24T00:00:00Z
+lastmod: 2026-08-25T00:00:00Z
 draft: false
 summary: "Deterministic liveness evidence supports activating Cobalt for validator governance on Post Fiat's controlled testnet."
 aliases:
@@ -151,7 +151,7 @@ Those limits define the next experiment. They support a reversible controlled-te
 
 The [release qualification](https://github.com/postfiatorg/postfiatl1v2/blob/main/benchmarks/cobalt-handoff-rehearsal/release-qualification-v1.json) used the optimized binary and replayed the exact 915-block migrated controlled-testnet archive. The disposable qualification environment then exercised a signed future-height activation, six rejected transition cases, a scoped validator-key rotation, and a separately authorized return to Foundation authority.
 
-All 15 handoff gates passed. The release packet's SHA256SUMS root is `f4f2f202111dc327ee590310ba65dc53e0611a578041ba878a3e23298e47a3e2`. The live fleet remained unchanged, and Cobalt authority remains off today.
+All 15 handoff gates passed. The release packet's SHA256SUMS root is `f4f2f202111dc327ee590310ba65dc53e0611a578041ba878a3e23298e47a3e2`. Cobalt has been the live validator-trust authority on the controlled testnet since height 916 on 2026-08-25, with the first Cobalt-authorized key rotation committed at height 917.
 
 The controlled-testnet cutover should proceed at a newly authorized future height. Its acceptance conditions are concrete:
 
