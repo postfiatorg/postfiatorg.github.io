@@ -100,11 +100,35 @@ The observed result is precise: progress at the configured quorum, stable state 
 
 ## The RippleD difference
 
-A RippleD-style server measures support against its local Unique Node List. That proves a quorum under that server's list. By itself, local quorum cannot prove that different validator views authorize one shared registry transition.
+A RippleD-style server measures support against its local Unique Node List. That answers a local question: did enough validators I trust support this proposal? It does not answer the network-wide governance question: did validators with different trust views authorize one compatible registry state?
 
-The decisive comparison case is `six-divergent-local-quorums`. In the frozen validator-governance adapter, two local UNL quorums admitted two registry roots. Cobalt rejected the incompatible trust graph before commitment.
+The decisive comparison case, `six-divergent-local-quorums`, isolates that gap without Byzantine validators, unavailable nodes, delay, duplication, reordering, or stale messages.
 
-This result applies to the validator-governance comparison adapter. It identifies the exact capability Cobalt adds to Post Fiat: trust compatibility becomes part of the decision each validator verifies.
+The six validators form two trust groups:
+
+| Local view | Trusted validators | Local quorum | Supported registry |
+|---|---|---:|---|
+| Validators 00, 01, 02 | Validators 00, 01, 02 | 3 of 3 | Root A |
+| Validators 03, 04, 05 | Validators 03, 04, 05 | 3 of 3 | Root B |
+
+Every validator sees unanimous support inside its own UNL. Validators 00 through 02 therefore accept Root A. Validators 03 through 05 accept Root B. Each decision is locally valid, yet the validator-governance adapter ends with two incompatible accepted registry roots.
+
+That conflict matters even while ledger consensus remains synchronized. A validator registry defines which identities and keys may authorize later governance and participate under the active network rules. Two accepted roots mean the two groups disagree about the authority set from which the next valid transition must descend. Key rotation, validator admission, removal, and future authorization can therefore begin from different histories.
+
+Cobalt evaluates the relationship between the trust views before accepting either proposal. In this case, every cross-group pair is unsafe: three validators on the left multiplied by three on the right produces nine pairs with no shared essential subset satisfying linkage. The production trust-graph gate marks the graph unsafe, all six validators halt the governance transition, no candidate reaches commitment, and the current registry remains authoritative.
+
+| Same input | RippleD-style governance adapter | Cobalt |
+|---|---|---|
+| Local support | Each group has a valid 3-of-3 quorum | Each group has local support |
+| Cross-view compatibility | Outside the local quorum decision | Nine unsafe cross-group pairs detected |
+| Accepted result | Root A for one group, Root B for the other | No new root |
+| Registry history | Two incompatible accepted states | Current registry preserved |
+
+This is a validator-governance result, not a claim that RippleD ledger consensus forked. The native RippleD CSF control stayed synchronized on one ledger branch in the same packet. The comparison isolates a narrower point: local ledger quorum and globally compatible validator-governance authority are different properties.
+
+Cobalt's advantage is also more precise than “halt when views differ.” The compatible 90%-overlap cases decide successfully. Cobalt permits non-identical trust views when their essential subsets satisfy linkage, then rejects the disconnected topology where two locally unanimous groups could authorize different registry histories.
+
+That is the capability Post Fiat gains: trust compatibility becomes an explicit, signed precondition of validator-governance authority rather than an operating assumption maintained outside the decision itself.
 
 ## Consensus v2 remains in control
 
