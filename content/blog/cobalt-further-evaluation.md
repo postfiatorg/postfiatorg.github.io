@@ -1,9 +1,9 @@
 ---
 title: "Cobalt: Further Evaluation"
 date: 2026-08-23T00:00:00Z
-lastmod: 2026-08-25T00:00:00Z
+lastmod: 2026-08-26T00:00:00Z
 draft: false
-summary: "Deterministic liveness evidence supports activating Cobalt for validator governance on Post Fiat's controlled testnet."
+summary: "Cobalt remains active on Post Fiat's controlled devnet after six adversarial experiments and live authority drills."
 aliases:
   - /cobalt-further-evaluation/
   - /posts/cobalt-further-evaluation/
@@ -16,166 +16,137 @@ tags:
   - Cobalt
   - Governance
   - Consensus
-  - RippleD
-  - XRPL
+  - Security
 ---
 
-Post Fiat should activate Cobalt as the validator-registry and trust-transition authority on its controlled testnet.
+Cobalt remains active as the validator-registry and trust-graph ratification authority on Post Fiat's controlled devnet. It has held that bounded role since height 916. Consensus v2 still orders and finalizes blocks.
 
-This is a reversible testnet experiment, not a mainnet certification. It moves a qualified governance protocol from shadow operation to limited live authority. Consensus v2 will continue ordering transactions and finalizing blocks. Cobalt will govern validator membership, validator keys, and trust relationships. Its block-control flag will remain false.
+That sentence needs two qualifications up front. A separate layer decides which validators deserve trust; Cobalt ratifies changes against those declared trust views. Current proposals and authorizations originate from Foundation-administered validators. The result described here proves protocol capability, not operator decentralization, mainnet readiness, or provider independence.
 
-The decision standard is whether Cobalt behaves predictably at the current six-validator boundary and can be removed cleanly if live results diverge. Six questions matter:
+The adversarial-verification campaign closed with **KEEP_ACTIVE** after six experiments. It attacked trust-graph agreement, Byzantine schedules, durable recovery, block-finality isolation, the live authority-transition path, and the proposal-source boundary. Every required experiment passed.
 
-| Question | Required result |
-|---|---|
-| Agreement | Participating validators converge on one registry history |
-| Quorum liveness | Five of six validators progress in the tested schedules |
-| Below-quorum safety | Four of six preserve the current registry |
-| Recovery | A lagging or restarted validator recovers the exact history |
-| Finality isolation | Consensus v2 remains the sole block-finality protocol |
-| Reversibility | A separately authorized transition restores Foundation authority |
+## What was attacked
 
-The qualification evidence passes all six at the tested boundary. Live activation is the next gate.
+The campaign used independent oracles, generated trust graphs, signed Byzantine evidence, schedule search, tampered histories, forged catch-up material, governance pressure during block finality, and live controlled-devnet drills.
 
-## Why Cobalt belongs on the testnet
+| Experiment | Question | Result |
+| --- | --- | --- |
+| E1 | Does production agree with an independent oracle across generated trust graphs? | Passed |
+| E2 | Can Byzantine validators or searched message schedules create conflicting roots, false accepts, or false halts? | Passed |
+| E3 | Can tampered durable state or forged catch-up history rejoin as accepted state? | Passed |
+| E4 | Can governance stress stop, fork, or materially regress Consensus v2? | Passed |
+| E5 | Do the signed live rollback, return, rejection, and stolen-key paths behave as specified? | Passed |
+| E6 | Is the proposal source decentralized, or does that require a separate milestone? | Separate milestone required |
 
-Foundation governance is the current default authority. It can authorize registry updates, but it does not give the validator set a protocol-checked way to ratify changes across non-identical trust views.
+The packets are checksum-bound in the [public repository](https://github.com/postfiatorg/postfiatl1v2/tree/main/benchmarks/cobalt-adversarial-verification). Each has its own verifier.
 
-Cobalt adds that capability. Each validator has a declared trust view. The protocol checks whether those views are compatible, whether each relevant group has enough support, and whether a proposed registry transition follows the active rules. The accepted result is a signed, replayable governance history.
+## Agreement across generated trust graphs
 
-Leaving Cobalt in shadow mode would keep producing rehearsal evidence while avoiding the question a controlled testnet exists to answer: can the qualified authority path operate live without disturbing block finality? Activation answers that question with limited blast radius and an exercised return path.
+E1 built an oracle from the formal essential-subset, strong-support, and linkage rules without importing production Cobalt or the first oracle. The generated corpus covered 46,080 canonical graph cases across six-, seven-, eight-, and ten-validator configurations.
 
-## What the evidence establishes
+Production and both independent oracles agreed on every case. Compatible graphs decided one root. Incompatible graphs halted without mutating the accepted registry. The packet root is 9151c9b7f43e2c75f367416b9087e7255ca1c03ae734bfdd362fc79ff0cbbc05.
 
-Determinism, safety, and liveness are separate claims.
+## Byzantine validators and searched schedules
 
-- **Determinism:** the same admitted evidence replays to the same registry decision and history.
-- **Safety:** incompatible or insufficient support produces no competing accepted registry roots.
-- **Liveness:** the configured five-validator quorum progresses under the tested network and fault schedules.
-- **Recovery:** a validator that misses history verifies and restores the exact accepted sequence before rejoining.
+E2 combined RBC, ABBA, MVBA, and DABC equivocation with selective withholding, changing trust views, competing proposals, late votes, re-proposals, partitions, delay, drop, duplication, and reordering.
 
-The controlled-testnet registry contains six validators and uses a five-validator governance quorum. The tests therefore expect progress with five available domains and preservation of the current registry with four.
-
-The [frozen 18-case comparison](https://github.com/postfiatorg/postfiatl1v2/tree/main/benchmarks/cobalt-activate-or-retire/section2-packet) covers compatible views, incompatible views, support boundaries, divergent roots, faults, recovery, and validator changes. The expected outcomes were frozen in an oracle with no production Cobalt dependency, and the production adapters cannot call it. The packet records source commit `01822ecc53ad1cdab50e6c55536fcc7b81aba02a` and SHA256SUMS root `40bc86c9416a1b468f5625a2ff83724c9268f9d49c41007e9b0c4bc70c43c1e1`.
-
-Cobalt passed all 18 cases with:
+All 108 validator/strategy cases and 442,368 searched event schedules passed. The campaign verified 120 signed evidence pairs and observed:
 
 - zero conflicting registry roots;
-- zero validator-outcome mismatches; and
-- identical replay for all 17 decision-producing cases.
+- zero false accepts;
+- zero false halts;
+- zero synchrony-bound violations; and
+- zero rejected-state mutations.
 
-A registry root is the cryptographic commitment to one validator-registry state. Conflicting roots mean validators accepted incompatible states for the same governance step. Zero conflicts is therefore the direct safety result, while identical replay is the determinism result.
+The packet root is 8742d9603621408339d99c3d9fcc1ba8cc43dafdc900acdfccbf86cc60d7cba3.
 
-Three tested 20-validator configurations used 90% trust-list overlap:
+## Recovery from adversarial history
 
-| Configuration | Outcome |
-|---|---|
-| Compatible views with sufficient support | Decide |
-| Support exactly at the declared boundary | Decide |
-| Support below the declared boundary | Preserve the current registry |
+E3 attacked disposable clones bound to the live registry root. It truncated, padded, reordered, and modified durable history; submitted fabricated transitions and wrong-root certificates; omitted the latest update from catch-up; interrupted transfer; and switched recovery peers.
 
-These cases show that Cobalt can progress across compatible non-identical views. It halts at the tested support boundary rather than treating every difference in validator trust as a reason to stop.
+All 24 durable-history tamper cases and 18 forged catch-up cases rejected with named reasons and no durable mutation. All six interrupted recoveries resumed from a second honest peer and restored byte-identical accepted history without manual repair. The packet root is 9302b3555ab9091b2cae9b2d372d0548fe9f2fb1e67be43dfb3f63d89140b600.
 
-## Liveness under faults
+## Consensus v2 under governance stress
 
-The [six-domain simulation](https://github.com/postfiatorg/postfiatl1v2/tree/main/benchmarks/cobalt-activate-or-retire/section3-packet) runs the production Cobalt decision and recovery paths across six isolated validator domains. Each domain has its own identity, key, trust view, durable state, message schedule, and failure boundary.
+E4 ran 500 baseline and 500 attack-lane block-finality rounds from the same signed initial state, six-validator topology, full-vote policy, binaries, and CPU allocation.
 
-Five available domains progressed. Four available domains preserved the accepted registry. Those are alternative schedules that test the two sides of the quorum boundary.
+Both lanes converged independently at height 501. Consensus v2 never stopped or forked. Baseline wallet-to-finality p95 was 14,133.57 ms; attack-lane p95 was 14,197.47 ms. The increase was 0.4521%, inside the locked 5% budget.
 
-Across 14 governance rounds, the simulation covered:
+The attack lane completed 47 governance-stress runs covering 940 proposals, 329 safe halts, and 329 view changes. It recorded 987 boundary rejections, 846 named limit rejections, 752 flood rejections, and 12 automatic validator restarts. No manual operator action was required.
 
-- crash and restart;
-- delay and message loss;
-- duplicate and reordered delivery;
-- equivocation;
-- partition and healing;
-- stale replay;
-- validator admission and removal;
-- validator-key rotation; and
-- trust-view transition.
+Two harness failures are preserved in the packet. One retry window ended before a deliberate restart outage; the other incorrectly compared exact hashes across independent runs with randomized authentication. Neither failure observed a fork or durable divergence. The harness was corrected and the unchanged 500+500 corpus reran cleanly. The packet root is 93ba3db0bcc145144713088b612606fbb3b92c0f542809f258da49a555c14508.
 
-Every recovering domain reached byte-identical durable history. Cobalt produced zero conflicting roots throughout the fault matrix. The packet records source commit `eb1c84b3e88e710256ab09fce7a90ea501906925` and SHA256SUMS root `9a35119045698754ffdd11eea123bfad03bf2b3c23b700a55f0f539f5152bc18`.
+## Live authority drills
 
-The observed result is precise: progress at the configured quorum, stable state below quorum, and exact recovery under the listed schedules.
+E5 exercised the actual controlled-devnet authority lane from heights 920 through 924.
 
-## The RippleD difference
+The first signed rollback at height 920 and return at height 921 both committed. The return used a trust binding that did not match the protocol-native post-return graph. No conflicting root, fork, or finality interruption occurred, but that pair was not used as the final gate. The accepted history and remediation are retained rather than erased.
 
-A RippleD-style server measures support against its local Unique Node List. That answers a local question: did enough validators I trust support this proposal? It does not answer the network-wide governance question: did validators with different trust views authorize one compatible registry state?
+A corrective signed rollback committed at height 922. A separately authorized return to Cobalt committed at height 923 with the correct protocol-native trust binding. Those are the final-gate rollback and return pair.
 
-The decisive comparison case, `six-divergent-local-quorums`, isolates that gap without Byzantine validators, unavailable nodes, delay, duplication, reordering, or stale messages.
+At height 924, five current validators authorized a legitimate validator-5 key rotation. Validator 5's treated-as-stolen old key did not participate in that authorization quorum. The replacement key was staged only after the registry update committed, and a retry with the old key rejected before write because it no longer matched the current registry.
 
-The six validators form two trust groups:
+All nine required negative cases rejected without durable governance or registry mutation:
 
-| Local view | Trusted validators | Local quorum | Supported registry |
-|---|---|---:|---|
-| Validators 00, 01, 02 | Validators 00, 01, 02 | 3 of 3 | Root A |
-| Validators 03, 04, 05 | Validators 03, 04, 05 | 3 of 3 | Root B |
+- early transition;
+- stale transition;
+- replayed transition;
+- wrong registry root;
+- cross-chain transition;
+- mixed authority;
+- new-set self-authorization;
+- replayed rollback; and
+- stolen-key rotation.
 
-Every validator sees unanimous support inside its own UNL. Validators 00 through 02 therefore accept Root A. Validators 03 through 05 accept Root B. Each decision is locally valid, yet the validator-governance adapter ends with two incompatible accepted registry roots.
+All six validators accepted one height-920-through-924 history. Every block had at least the five required Consensus v2 votes. The final observation found all validator, RPC, and advisory shadow services active and converged at height 924. Cobalt was active for validator-trust governance; Consensus v2 remained block finality.
 
-That conflict matters even while ledger consensus remains synchronized. A validator registry defines which identities and keys may authorize later governance and participate under the active network rules. Two accepted roots mean the two groups disagree about the authority set from which the next valid transition must descend. Key rotation, validator admission, removal, and future authorization can therefore begin from different histories.
+The E5 packet root is 0695284a7b38ac0129c47e1242f4a2227ad25096147920e79569a924e5f3b3db.
 
-Cobalt evaluates the relationship between the trust views before accepting either proposal. In this case, every cross-group pair is unsafe: three validators on the left multiplied by three on the right produces nine pairs with no shared essential subset satisfying linkage. The production trust-graph gate marks the graph unsafe, all six validators halt the governance transition, no candidate reaches commitment, and the current registry remains authoritative.
+## What held
 
-| Same input | RippleD-style governance adapter | Cobalt |
-|---|---|---|
-| Local support | Each group has a valid 3-of-3 quorum | Each group has local support |
-| Cross-view compatibility | Outside the local quorum decision | Nine unsafe cross-group pairs detected |
-| Accepted result | Root A for one group, Root B for the other | No new root |
-| Registry history | Two incompatible accepted states | Current registry preserved |
+The campaign supports a precise conclusion:
 
-This is a validator-governance result, not a claim that RippleD ledger consensus forked. The native RippleD CSF control stayed synchronized on one ledger branch in the same packet. The comparison isolates a narrower point: local ledger quorum and globally compatible validator-governance authority are different properties.
+- incompatible trust views did not produce competing accepted roots;
+- Byzantine strategies and searched schedules did not create false decisions;
+- tampered recovery material did not rejoin accepted history;
+- governance stress did not stop or fork Consensus v2;
+- the signed live return path restored Cobalt after rollback;
+- negative and stolen-key attempts rejected without durable mutation; and
+- six validators converged on one accepted live history.
 
-Cobalt's advantage is also more precise than “halt when views differ.” The compatible 90%-overlap cases decide successfully. Cobalt permits non-identical trust views when their essential subsets satisfy linkage, then rejects the disconnected topology where two locally unanimous groups could authorize different registry histories.
+Cobalt's block-control flag remained false throughout. This was a validator-trust governance result, not a change to transaction ordering or block finality.
 
-That is the capability Post Fiat gains: trust compatibility becomes an explicit, signed precondition of validator-governance authority rather than an operating assumption maintained outside the decision itself.
+## What was fixed
 
-## Consensus v2 remains in control
+The campaign found and corrected several implementation and harness defects:
 
-The [matched finality receipt](https://github.com/postfiatorg/postfiatl1v2/blob/main/benchmarks/cobalt-activate-or-retire/section3-packet/consensus-v2-finality-receipt.json) compares 50 Consensus v2 rounds without Cobalt workload against 50 rounds with the Cobalt workload running for 99.9985% of the integration-lane wall time. Both lanes used the same identities, keys, topology, binary, host, and initial state.
+- post-rotation DABC ratification now follows the prior committed ratification anchor across registry-root changes;
+- the live helper resolves legacy validator sets from the active count when the explicit ID vector is absent;
+- already-compact decision certificates are no longer compacted a second time;
+- the E4 restart window covers the deliberate outage; and
+- the E4 comparator checks convergence within each independently authenticated lane instead of requiring identical cross-lane hashes.
 
-| Lane | Finality p95 |
-|---|---:|
-| Consensus v2 baseline | 1,617.88 ms |
-| Consensus v2 with Cobalt | 1,660.42 ms |
+The unchanged affected corpora passed after remediation. The live authority history preserves the initial h920/h921 pair and the corrective h922/h923 pair.
 
-The increase was 2.63%, inside the 5% qualification budget. Fifty rounds make this a focused integration-regression result rather than a performance SLA. The decisive isolation result is architectural: Cobalt remained outside transaction ordering and block finality.
+## What remains open
 
-## Residual risk
+E6 concluded that operator decentralization is not established by these tests. Foundation administration still originates the current proposals and controls the validator authorization custody boundary. That is disclosed, not treated as a protocol pass.
 
-Finite simulations cannot enumerate every trust graph, Byzantine strategy, WAN schedule, or implementation failure. The finality run is too small to predict long-duration latency. Live service orchestration may expose faults absent from the controlled harness.
-
-Those limits define the next experiment. They support a reversible controlled-testnet activation with explicit stop conditions, while leaving mainnet authorization for a later evidence gate. Continued shadow operation cannot produce evidence from the live authority path.
-
-## Release and cutover
-
-The [release qualification](https://github.com/postfiatorg/postfiatl1v2/blob/main/benchmarks/cobalt-handoff-rehearsal/release-qualification-v1.json) used the optimized binary and replayed the exact 915-block migrated controlled-testnet archive. The disposable qualification environment then exercised a signed future-height activation, six rejected transition cases, a scoped validator-key rotation, and a separately authorized return to Foundation authority.
-
-All 15 handoff gates passed. The release packet's SHA256SUMS root is `f4f2f202111dc327ee590310ba65dc53e0611a578041ba878a3e23298e47a3e2`. Cobalt has been the live validator-trust authority on the controlled testnet since height 916 on 2026-08-25, with the first Cobalt-authorized key rotation committed at height 917.
-
-The controlled-testnet cutover should proceed at a newly authorized future height. Its acceptance conditions are concrete:
-
-- one accepted registry history;
-- zero conflicting roots;
-- five-of-six progress;
-- exact catch-up after interruption;
-- Consensus v2 continues finalizing while live latency is compared with the qualification baseline; and
-- Cobalt block control remains false.
-
-A conflicting root, failed five-of-six progress, divergent catch-up history, unexpected block authority, or sustained finality regression stops the activation. The last accepted registry remains in force while the qualified transition restores Foundation authority.
+A separately locked follow-on milestone must establish a non-Foundation proposal path and a trust graph in which no single administrator can reach quorum or block it alone. Mainnet authorization, HSM-backed validator custody, public peer discovery, and production storage remain separate release gates.
 
 ## Decision
 
-The evidence supports activation on the controlled testnet. Cobalt makes compatible trust views live, preserves one registry history under faults, recovers deterministically, and stays outside block finality. Continued shadow operation would repeat tests that have already passed while withholding the live governance evidence the testnet is designed to produce.
+The adversarial result is **KEEP_ACTIVE** for the controlled devnet.
 
-Mainnet authorization remains a later decision with its own evidence standard.
+This decision is bounded to Cobalt's validator-registry and trust-graph ratification scope. It does not authorize Cobalt to finalize blocks, does not prove operator decentralization, and does not authorize mainnet use.
+
+Rollback remains reserved for a live conflicting root, failed five-of-six progress under an honest majority, divergent catch-up history, unexpected block authority, or sustained Consensus v2 finality regression. No such stop condition was observed.
 
 ## Code and evidence
 
-- Trust graph and transitions: [`trust_graph_governance.rs`](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/consensus_cobalt/src/trust_graph_governance.rs)
-- Agreement validation: [`rbc_abba_mvba.rs`](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/consensus_cobalt/src/rbc_abba_mvba.rs)
-- Ordered governance history: [`dabc_registry.rs`](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/consensus_cobalt/src/dabc_registry.rs)
-- Recovery service: [`cobalt_shadow.rs`](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/node/src/cobalt_shadow.rs)
-- Authority handoff: [`cobalt_handoff.rs`](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/node/src/cobalt_handoff.rs)
+- [Adversarial verification packets](https://github.com/postfiatorg/postfiatl1v2/tree/main/benchmarks/cobalt-adversarial-verification)
+- [Live E5 authority-drill packet](https://github.com/postfiatorg/postfiatl1v2/tree/main/benchmarks/cobalt-adversarial-verification/e5)
+- [Cobalt authority handoff](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/node/src/cobalt_handoff.rs)
+- [Cobalt decision certificate](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/node/src/cobalt_authority_certificate.rs)
+- [Cobalt trust-graph governance](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/consensus_cobalt/src/trust_graph_governance.rs)
 - Ethan MacBrough, [“Cobalt: BFT Governance in Open Networks”](https://arxiv.org/abs/1802.07240)
-- Post Fiat, [“Cobalt on the Devnet: Implementing the Road Not Taken”](/blog/cobalt-implementation-evidence/)
