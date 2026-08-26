@@ -42,7 +42,7 @@ The packets are checksum-bound in the [public repository](https://github.com/pos
 
 ## Agreement across generated trust graphs
 
-E1 built an oracle from the formal essential-subset, strong-support, and linkage rules without importing production Cobalt or the first oracle. The generated corpus covered 46,080 canonical graph cases across six-, seven-, eight-, and ten-validator configurations.
+E1 built an oracle from the formal essential-subset, strong-support, and linkage rules without importing production Cobalt or the first oracle. The generated corpus covered 10,240 deterministic cases spanning six to 20 validators, randomized view shapes, and named subset/linkage boundaries.
 
 Production and both independent oracles agreed on every case. Compatible graphs decided one root. Incompatible graphs halted without mutating the accepted registry. The packet root is 9151c9b7f43e2c75f367416b9087e7255ca1c03ae734bfdd362fc79ff0cbbc05.
 
