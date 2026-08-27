@@ -8,6 +8,7 @@ import hashlib
 import json
 import shutil
 from collections import Counter
+from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
@@ -64,6 +65,14 @@ def file_sha256(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def money_display(value: Any) -> str:
+    return f"{Decimal(str(value)):,.2f}"
+
+
+def decimal_display(value: Any, places: int) -> str:
+    return f"{Decimal(str(value)):.{places}f}"
 
 
 def load(path: Path) -> dict[str, Any]:
@@ -142,20 +151,49 @@ def build_index(
 
     score_counts = Counter(int(row["score"]) for row in score_run["scores"])
     transcript_count = sum(bool(row["transcript_available"]) for row in score_run["scores"])
-    constituents = [
-        {
-            "rank": rank,
-            "cik": str(row["cik"]),
-            "ticker": str(row["ticker"]),
-            "company_name": str(row["company_name"]),
-            "qwen_score": int(row["qwen_score"]),
-            "qwen_confidence": int(row["qwen_confidence"]),
-            "profitability_factor": str(row["profitability_factor"]),
-            "weight": str(row["weight"]),
-            "weight_percent": f"{int(row['weight_units']) / 10_000_000_000:.6f}",
-        }
-        for rank, row in enumerate(ranked, start=1)
-    ]
+    constituents = []
+    for rank, row in enumerate(ranked, start=1):
+        constituent_cik = str(row["cik"])
+        score_row = score_by_cik[constituent_cik]
+        reasoning = [str(paragraph) for paragraph in row["qwen_reasoning_block"]]
+        if reasoning != [str(paragraph) for paragraph in score_row["reasoning_block"]]:
+            raise ValueError(f"{basket_path}: reasoning mismatch for CIK {constituent_cik}")
+        if int(row["qwen_score"]) != int(score_row["score"]):
+            raise ValueError(f"{basket_path}: score mismatch for CIK {constituent_cik}")
+        constituents.append(
+            {
+                "rank": rank,
+                "cik": constituent_cik,
+                "ticker": str(row["ticker"]),
+                "company_name": str(row["company_name"]),
+                "qwen_score": int(row["qwen_score"]),
+                "qwen_confidence": int(row["qwen_confidence"]),
+                "qwen_reasoning_block": reasoning,
+                "transcript": {
+                    "available": bool(score_row["transcript_available"]),
+                    "provider": score_row["transcript_provider"],
+                    "fiscal_year": score_row["transcript_fiscal_year"],
+                    "fiscal_quarter": score_row["transcript_fiscal_quarter"],
+                    "sha256": score_row["transcript_sha256"],
+                },
+                "accounting_regime": str(row["accounting_regime"]),
+                "profitability_factor": str(row["profitability_factor"]),
+                "weight": str(row["weight"]),
+                "weight_percent": f"{int(row['weight_units']) / 10_000_000_000:.6f}",
+                "weight_inputs": {
+                    "ttm_revenue_display": money_display(row["ttm_revenue"]),
+                    "selected_profitability_display": money_display(row["selected_profitability"]),
+                    "profitability_z_score": decimal_display(row["profitability_z_score"], 6),
+                    "profitability_multiplier": decimal_display(row["profitability_multiplier"], 8),
+                    "adjusted_scale_display": money_display(row["adjusted_scale"]),
+                    "score_multiplier": decimal_display(
+                        Decimal(int(row["qwen_score"])) / Decimal(100), 2
+                    ),
+                    "raw_weight_display": money_display(row["raw_weight_decimal"]),
+                    "normalized_weight_units": int(row["weight_units"]),
+                },
+            }
+        )
     representative_score = score_by_cik[cik]
     return {
         "position": int(spec["position"]),

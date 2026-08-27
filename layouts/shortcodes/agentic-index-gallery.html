@@ -5,7 +5,7 @@
     <div>
       <p class="agentic-kicker">Live artifacts / frozen 2026-08-27</p>
       <h2 class="agentic-visual-title">Four indices. Every company scored twice.</h2>
-      <p class="agentic-visual-copy">These are the actual constituents, Qwen scores and uncapped weights produced by the frozen pipeline. Open a slide to inspect every holding or download its 1,000-company byte comparison.</p>
+      <p class="agentic-visual-copy">These are the actual constituents, Qwen scores and uncapped weights produced by the frozen pipeline. Open any holding to read the exact three-paragraph score reasoning and replay its mechanical weight calculation.</p>
     </div>
     <div class="aig-proof agentic-mono" aria-label="Replay result">
       <strong>4,000</strong><span>responses compared</span>
@@ -54,6 +54,41 @@
                   {{- end }}
                 </tbody>
               </table>
+            </div>
+          </details>
+          <details class="aig-details aig-reasoning-explorer">
+            <summary>Explore reasoning and weight calculations</summary>
+            <p class="aig-explorer-note">Qwen determines thematic relevance. It does not choose the weight: deterministic code applies the displayed revenue and profitability inputs after the company clears the score floor.</p>
+            <div class="aig-reasoning-list">
+              {{- range $index.constituents }}
+              <details class="aig-reasoning-item">
+                <summary>
+                  <span><b>{{ .ticker }}</b> {{ .company_name }}</span>
+                  <span class="aig-reasoning-summary-metrics">score {{ .qwen_score }} / {{ .weight_percent }}%</span>
+                </summary>
+                <div class="aig-reasoning-body">
+                  <div class="aig-weight-proof">
+                    <div><span>TTM revenue</span><strong>${{ .weight_inputs.ttm_revenue_display }}</strong></div>
+                    <div><span>Selected {{ if eq .profitability_factor "free_cash_flow" }}FCF{{ else }}net income{{ end }}</span><strong>${{ .weight_inputs.selected_profitability_display }}</strong></div>
+                    <div><span>Profitability z-score</span><strong>{{ .weight_inputs.profitability_z_score }}</strong></div>
+                    <div><span>Profitability multiplier</span><strong>{{ .weight_inputs.profitability_multiplier }}&times;</strong></div>
+                    <div><span>Adjusted scale</span><strong>${{ .weight_inputs.adjusted_scale_display }}</strong></div>
+                    <div><span>Score multiplier</span><strong>{{ .weight_inputs.score_multiplier }}&times;</strong></div>
+                    <div><span>Raw thematic weight</span><strong>${{ .weight_inputs.raw_weight_display }}</strong></div>
+                    <div><span>Final normalized weight</span><strong>{{ .weight_percent }}%</strong></div>
+                  </div>
+                  <div class="aig-reasoning-copy">
+                    <div class="aig-reasoning-heading"><strong>Exact Qwen reasoning</strong><span>confidence {{ .qwen_confidence }}/100</span></div>
+                    {{- range .qwen_reasoning_block }}<p>{{ . }}</p>{{- end }}
+                  </div>
+                  <div class="aig-source-binding">
+                    <span>CIK {{ .cik }}</span>
+                    <span>Accounting route: {{ .accounting_regime }} / {{ .profitability_factor }}</span>
+                    {{- if .transcript.available }}<span>Transcript: {{ .transcript.provider }} FY{{ .transcript.fiscal_year }} Q{{ .transcript.fiscal_quarter }}</span><code title="Transcript SHA-256">{{ .transcript.sha256 }}</code>{{- else }}<span>Transcript: unavailable; scored from frozen model knowledge</span>{{- end }}
+                  </div>
+                </div>
+              </details>
+              {{- end }}
             </div>
           </details>
         </div>
