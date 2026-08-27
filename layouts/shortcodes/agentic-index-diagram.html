@@ -9,7 +9,7 @@
       <div class="aid-node"><small>02 / Identity</small><strong>SEC CIK universe</strong><p>The eligible top 1,000 are fixed by trailing four-quarter revenue.</p></div>
       <div class="aid-node"><small>03 / Assessment</small><strong>Company identity + grounding</strong><p>Qwen applies the rubric from frozen company knowledge, supplemented by a transcript when available.</p></div>
       <div class="aid-node"><small>04 / Fundamentals</small><strong>SEC statements</strong><p>Revenue supplies scale. FCF or net income adds a small profitability tilt.</p></div>
-      <div class="aid-node is-green"><small>05 / Published object</small><strong>Canonical weights</strong><p>Scores at or above 75 enter. Integer weights and every dependency are hashed.</p></div>
+      <div class="aid-node is-green"><small>05 / Published object</small><strong>Weights or rejection</strong><p>Scores at or above 80 qualify. The committed cap can reject a factor with too few names.</p></div>
     </div>
     <div class="aid-callout"><strong>The separation matters:</strong> revenue, free cash flow and net income do not decide whether a company is “AI” or “elder care.” They only size a company after Qwen has applied the thematic rubric.</div>
   </div>
@@ -20,7 +20,8 @@
       <div class="aid-branch"><h4>Use trailing free cash flow</h4><div class="aid-rule"><b>OCF</b><span>Sum the last four discrete quarters of operating cash flow.</span></div><div class="aid-rule"><b>CAPX</b><span>Subtract the absolute value of four-quarter capital expenditure.</span></div><div class="aid-rule"><b>FIT</b><span>Ordinary operating companies and settlement-float businesses.</span></div></div>
       <div class="aid-branch"><h4>Use trailing net income</h4><div class="aid-rule"><b>FIN</b><span>Deposits and loans, regulatory capital, insurance liabilities or material trading assets indicate a balance-sheet financial.</span></div><div class="aid-rule"><b>UTE</b><span>Regulatory assets or liabilities, regulated revenue, or utility plant plus filing evidence indicate a regulated utility.</span></div><div class="aid-rule"><b>WHY</b><span>Customer funds, loan creation and reimbursable utility capex make industrial FCF misleading.</span></div></div>
     </div>
-    <div class="aid-formula">raw weight(i) = TTM revenue(i) &times; exp[0.03 &times; z(selected profitability(i))] &times; Qwen score(i) / 100</div>
+    <div class="aid-formula">pre-cap weight(i) = 20% &times; factor share(i) + 80% &times; fundamental share(i)</div>
+    <div class="aid-callout"><strong>Locked definitions:</strong> factor strength is (score - 70) / 30. Fundamental scale is sqrt(market cap) &times; exp[0.03 &times; z(selected profitability)]. Final weights are redistributed mechanically under a 20% cap.</div>
   </div>
 {{- else if eq $kind "backtest" }}
   <div class="aid-head"><div><p class="agentic-kicker">Historical reasonableness test / 7,154 days</p><h3 class="agentic-visual-title">The fundamental selector behaved like a broad large-cap index—with a factor tilt, not proven alpha.</h3></div><span class="agentic-chip">1998-03-17 to 2026-08-24</span></div>

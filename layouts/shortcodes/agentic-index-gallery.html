@@ -4,8 +4,8 @@
   <div class="aig-head">
     <div>
       <p class="agentic-kicker">Live artifacts / frozen 2026-08-27</p>
-      <h2 class="agentic-visual-title">Four indices. Every company scored twice.</h2>
-      <p class="agentic-visual-copy">These are the actual constituents, Qwen scores and uncapped weights produced by the frozen pipeline. Open any holding to read the exact three-paragraph score reasoning and replay its mechanical weight calculation.</p>
+      <h2 class="agentic-visual-title">Four factors tested. Three indices accepted. One rejected.</h2>
+      <p class="agentic-visual-copy">These are the actual continuous Qwen scores and capped weights produced by the frozen pipeline. Open any accepted holding to read the exact four-paragraph reasoning and replay its mechanical weight calculation; inspect the rejected factor to see the rules fail closed.</p>
     </div>
     <div class="aig-proof agentic-mono" aria-label="Replay result">
       <strong>4,000</strong><span>responses compared</span>
@@ -25,13 +25,18 @@
             <div class="aig-stat"><span>Score floor</span><strong>{{ $index.score_cutoff }}</strong></div>
             <div class="aig-stat"><span>Replay</span><strong>{{ $index.replay_proof.byte_identical_count }}/{{ $index.replay_proof.comparison_count }}</strong></div>
           </div>
+          {{- if eq $index.status "accepted" }}
           <div class="aig-hash"><span>Final weights SHA-256</span><code title="{{ $index.bindings.final_weights_sha256 }}">{{ $index.bindings.final_weights_sha256 }}</code></div>
+          {{- else }}
+          <div class="aig-hash"><span>Deterministic rejection SHA-256</span><code title="{{ $index.rejection.rejection_sha256 }}">{{ $index.rejection.rejection_sha256 }}</code></div>
+          {{- end }}
           <div class="aig-evidence-links">
             <a href="{{ $index.replay_proof.public_artifact }}">Download byte comparison</a>
             <a href="/benchmarks/agentic-index-live-samples-20260827.json">Download full evidence</a>
           </div>
         </div>
         <div class="aig-holdings">
+          {{- if eq $index.status "accepted" }}
           <div class="aig-holdings-head"><strong>Largest weights</strong><span>weight / Qwen score</span></div>
           <div class="aig-bars">
             {{- range first 8 $index.constituents }}
@@ -58,7 +63,7 @@
           </details>
           <details class="aig-details aig-reasoning-explorer">
             <summary>Explore reasoning and weight calculations</summary>
-            <p class="aig-explorer-note">Qwen determines thematic relevance. It does not choose the weight: deterministic code applies the displayed revenue and profitability inputs after the company clears the score floor.</p>
+            <p class="aig-explorer-note">Qwen determines thematic relevance. Deterministic code converts the score to factor strength, blends 20% factor share with 80% square-root-market-cap and profitability scale, then enforces the 20% cap.</p>
             <div class="aig-reasoning-list">
               {{- range $index.constituents }}
               <details class="aig-reasoning-item">
@@ -68,13 +73,16 @@
                 </summary>
                 <div class="aig-reasoning-body">
                   <div class="aig-weight-proof">
-                    <div><span>TTM revenue</span><strong>${{ .weight_inputs.ttm_revenue_display }}</strong></div>
+                    <div><span>Market capitalization</span><strong>${{ .weight_inputs.market_cap_display }}</strong></div>
+                    <div><span>Square root market cap</span><strong>${{ .weight_inputs.market_cap_root_display }}</strong></div>
                     <div><span>Selected {{ if eq .profitability_factor "free_cash_flow" }}FCF{{ else }}net income{{ end }}</span><strong>${{ .weight_inputs.selected_profitability_display }}</strong></div>
                     <div><span>Profitability z-score</span><strong>{{ .weight_inputs.profitability_z_score }}</strong></div>
                     <div><span>Profitability multiplier</span><strong>{{ .weight_inputs.profitability_multiplier }}&times;</strong></div>
-                    <div><span>Adjusted scale</span><strong>${{ .weight_inputs.adjusted_scale_display }}</strong></div>
-                    <div><span>Score multiplier</span><strong>{{ .weight_inputs.score_multiplier }}&times;</strong></div>
-                    <div><span>Raw thematic weight</span><strong>${{ .weight_inputs.raw_weight_display }}</strong></div>
+                    <div><span>Fundamental scale</span><strong>${{ .weight_inputs.fundamental_scale_display }}</strong></div>
+                    <div><span>Factor strength</span><strong>{{ .weight_inputs.factor_strength }}</strong></div>
+                    <div><span>20% factor share</span><strong>{{ .weight_inputs.factor_share_percent }}%</strong></div>
+                    <div><span>80% fundamental share</span><strong>{{ .weight_inputs.fundamental_share_percent }}%</strong></div>
+                    <div><span>Pre-cap weight</span><strong>{{ .weight_inputs.pre_cap_weight_percent }}%</strong></div>
                     <div><span>Final normalized weight</span><strong>{{ .weight_percent }}%</strong></div>
                   </div>
                   <div class="aig-reasoning-copy">
@@ -83,7 +91,7 @@
                   </div>
                   <div class="aig-source-binding">
                     <span>CIK {{ .cik }}</span>
-                    <span>Accounting route: {{ .accounting_regime }} / {{ .profitability_factor }}</span>
+                    <span>Profitability route: {{ .profitability_factor }}</span>
                     {{- if .transcript.available }}<span>Transcript: {{ .transcript.provider }} FY{{ .transcript.fiscal_year }} Q{{ .transcript.fiscal_quarter }}</span><code title="Transcript SHA-256">{{ .transcript.sha256 }}</code>{{- else }}<span>Transcript: unavailable; scored from frozen model knowledge</span>{{- end }}
                   </div>
                 </div>
@@ -91,6 +99,19 @@
               {{- end }}
             </div>
           </details>
+          {{- else }}
+          <div class="aig-rejection">
+            <p class="agentic-kicker">Rejected by committed portfolio rules</p>
+            <h4>Only {{ $index.rejection.qualifying_score_count }} companies cleared 80; the 20% cap requires at least {{ $index.rejection.minimum_constituents_required_by_cap }}.</h4>
+            <p>The factor scores replayed perfectly. The portfolio did not exist because relaxing either the relevance floor or concentration limit after seeing the names would violate the commitment.</p>
+            <div class="aig-bars">
+              {{- range $index.rejection.qualifying_scores }}
+              <div class="aig-row"><span class="aig-ticker">{{ .ticker }}</span><span class="aig-track"><span class="aig-fill" style="width:{{ .score }}%"></span></span><span class="aig-weight">score</span><span class="aig-score">{{ .score }}</span></div>
+              {{- end }}
+            </div>
+            <details class="aig-details aig-reasoning-explorer"><summary>Inspect exact qualifying-company reasoning</summary>{{- range $index.rejection.qualifying_scores }}<div class="aig-reasoning-copy"><div class="aig-reasoning-heading"><strong>{{ .ticker }} / score {{ .score }}</strong><span>confidence {{ .reasoning_confidence }}/100</span></div><p>{{ .classification_verdict }}</p>{{- range .reasoning_block }}<p>{{ . }}</p>{{- end }}</div>{{- end }}</details>
+          </div>
+          {{- end }}
         </div>
       </div>
     </section>
