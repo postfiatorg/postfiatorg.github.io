@@ -40,9 +40,9 @@ We gave a frozen Qwen model a global-macro mandate: describe the economic and sp
 
 The result was not 15 versions of “AI.” It covered generative compute, grid modernization, critical minerals, defense and space, biotechnology and longevity, digital finance, supply-chain resilience, elder care, climate adaptation, robotics, water security, private credit, cybersecurity, advanced manufacturing, and the experience economy. The complete model-generated catalog is included in the [public evidence packet](/benchmarks/agentic-index-live-samples-20260827.json).
 
-We used each rubric exactly as generated. Every scoring request contains the SEC identity record and clearly labels any supplemental earnings-call transcript. In each demonstrated run, 950 companies had a hashed transcript and 50 did not. Qwen had to reason from the transcript when present; the remaining 50 were explicitly flagged and scored from knowledge encoded in the model weights. Across the resulting 200 transcript-free factor-company cases, only AES and Tennessee Valley Authority scored at least 75; they received 4.586350% and 4.963395% of the energy-transition index. The fallback is reproducible but not transcript-auditable, so a transcript-required series would exclude those names and renormalize. Every result is strict JSON containing a score, confidence and at least three paragraphs of edge-case reasoning.
+We used each rubric exactly as generated. Every scoring request binds the SEC identity record and clearly labels the earnings-call transcript as **supplemental information**. Qwen assesses the company's substantive business exposure from the identity, products, technologies and industry role encoded in its frozen weights; the transcript adds contemporaneous detail when available. In each demonstrated run, 950 companies had a hashed transcript and 50 did not, and the same classifier scored both groups. Across the resulting 200 transcript-free factor-company cases, only AES and Tennessee Valley Authority scored at least 75; they received 4.586350% and 4.963395% of the energy-transition index. Every result is strict JSON containing a score, confidence and at least three paragraphs of edge-case reasoning.
 
-Using one model to author and apply the rubric is deliberate: the objective is internally consistent factor expression, not independent validation. Introducing an uncommitted second model would add another semantic authority capable of silently redefining the factor. Nor is a transcript objective truth—management can optimize its language. The index measures documented management exposure to a theme, with the exact input and score available for challenge.
+Using one model to author and apply the rubric is deliberate: the objective is internally consistent factor expression, not independent validation. Introducing an uncommitted second model would add another semantic authority capable of silently redefining the factor. This is not a keyword or transcript-sentiment index. Repeating thematic language cannot turn a grocery chain into an AI-compute company or a diversified user of AI into a major AI supplier. The transcript can confirm or qualify current operations; it cannot by itself establish the substantive business exposure—expressed through products, revenue, R&D commitment or recognized industry role—required for a score of 75.
 
 The score answers one question only:
 
@@ -96,7 +96,7 @@ The coefficient `0.03` was chosen to keep revenue dominant while giving profitab
 
 The thematic score then has a direct, intelligible effect: with everything else equal, a score of 100 receives one-third more raw weight than a score of 75.
 
-One constituent shows the whole calculation. AMD's transcript described its Instinct GPUs, EPYC CPUs and Helios rack-scale platform, while also showing material PC, gaming and embedded businesses. Qwen therefore assigned **75**—AI is a major pillar, but AMD is not a pure-play model company. Its $41.305 billion of trailing revenue and $8.403 billion of selected FCF produced a `+0.7506z` profitability score, a `1.02277` multiplier and $42.246 billion of adjusted scale. Multiplying by `75/100` produced $31.684 billion of raw thematic weight; deterministic normalization made AMD **1.075245883%** of the 54-company AI index.
+One constituent shows the whole calculation. AMD actually designs Instinct GPUs, EPYC CPUs and the Helios rack-scale platform and is a recognized supplier of AI-compute infrastructure. Its transcript grounded that existing identity with current product and customer detail while also documenting material PC, gaming and embedded businesses. Qwen assigned **75** because AI is a major pillar but AMD is not a pure play. Its $41.305 billion of trailing revenue and $8.403 billion of selected FCF produced a `+0.7506z` profitability score, a `1.02277` multiplier and $42.246 billion of adjusted scale. Multiplying by `75/100` produced $31.684 billion of raw thematic weight; deterministic normalization made AMD **1.075245883%** of the 54-company AI index.
 
 ## Does the Fundamental Rule Survive Contact With History?
 
@@ -171,7 +171,7 @@ Optional Flare integration binds an allowed trusted-execution-environment image 
 
 The clean division is:
 
-> **SEC and transcripts provide evidence. Qwen supplies qualitative factor judgments. Deterministic accounting supplies economic scale. PFTL records agreement and lineage. Flare can attest the authorized compute path. An execution venue or token issuer moves assets.**
+> **Qwen's frozen company knowledge supplies the qualitative baseline; supplemental transcripts ground it in current operations. Deterministic accounting supplies economic scale. PFTL records agreement and lineage. Flare can attest the authorized compute path. An execution venue or token issuer moves assets.**
 
 ## What the Demonstration Establishes
 
