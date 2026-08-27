@@ -1,0 +1,68 @@
+{{- $kind := .Get "kind" -}}
+{{- $evidence := unmarshal (readFile "static/benchmarks/agentic-index-live-samples-20260827.json") -}}
+<figure class="agentic-wide agentic-panel aid aid-{{ $kind }}">
+{{- if eq $kind "pipeline" }}
+  <div class="aid-head"><div><p class="agentic-kicker">The index factory</p><h3 class="agentic-visual-title">The model writes the mandate. Evidence scores the companies. Filings set economic scale.</h3></div><span class="agentic-chip">no portfolio-manager edit</span></div>
+  <div class="aid-canvas">
+    <div class="aid-flow">
+      <div class="aid-node"><small>01 / World model</small><strong>15 themes + rubrics</strong><p>A frozen Qwen prompt generates diversified, investor-legible thematic mandates.</p></div>
+      <div class="aid-node"><small>02 / Identity</small><strong>SEC CIK universe</strong><p>The eligible top 1,000 are fixed by trailing four-quarter revenue.</p></div>
+      <div class="aid-node"><small>03 / Evidence</small><strong>Company transcript</strong><p>The same rubric scores each issuer 0, 25, 50, 75 or 100 with reasoning.</p></div>
+      <div class="aid-node"><small>04 / Fundamentals</small><strong>SEC statements</strong><p>Revenue supplies scale. FCF or net income adds a small profitability tilt.</p></div>
+      <div class="aid-node is-green"><small>05 / Published object</small><strong>Canonical weights</strong><p>Scores at or above 75 enter. Integer weights and every dependency are hashed.</p></div>
+    </div>
+    <div class="aid-callout"><strong>The separation matters:</strong> revenue, free cash flow and net income do not decide whether a company is “AI” or “elder care.” They only size a company after Qwen has applied the thematic rubric.</div>
+  </div>
+{{- else if eq $kind "fundamentals" }}
+  <div class="aid-head"><div><p class="agentic-kicker">A quantitative spine</p><h3 class="agentic-visual-title">One profitability number cannot mean the same thing for a factory, a bank and a utility.</h3></div><span class="agentic-chip">SEC-only routing</span></div>
+  <div class="aid-canvas">
+    <div class="aid-split">
+      <div class="aid-branch"><h4>Use trailing free cash flow</h4><div class="aid-rule"><b>OCF</b><span>Sum the last four discrete quarters of operating cash flow.</span></div><div class="aid-rule"><b>CAPX</b><span>Subtract the absolute value of four-quarter capital expenditure.</span></div><div class="aid-rule"><b>FIT</b><span>Ordinary operating companies and settlement-float businesses.</span></div></div>
+      <div class="aid-branch"><h4>Use trailing net income</h4><div class="aid-rule"><b>FIN</b><span>Deposits and loans, regulatory capital, insurance liabilities or material trading assets indicate a balance-sheet financial.</span></div><div class="aid-rule"><b>UTE</b><span>Regulatory assets or liabilities, regulated revenue, or utility plant plus filing evidence indicate a regulated utility.</span></div><div class="aid-rule"><b>WHY</b><span>Customer funds, loan creation and reimbursable utility capex make industrial FCF misleading.</span></div></div>
+    </div>
+    <div class="aid-formula">raw weight(i) = TTM revenue(i) &times; exp[0.03 &times; z(selected profitability(i))] &times; Qwen score(i) / 100</div>
+  </div>
+{{- else if eq $kind "backtest" }}
+  <div class="aid-head"><div><p class="agentic-kicker">Historical reasonableness test / 7,154 days</p><h3 class="agentic-visual-title">The fundamental selector behaved like a broad large-cap index—with a factor tilt, not proven alpha.</h3></div><span class="agentic-chip">1998-03-17 to 2026-08-24</span></div>
+  <div class="aid-canvas">
+    <div class="aid-bars">
+      <div class="aid-benchmark-row"><span>CAGR / candidate</span><div class="aid-benchmark-track"><div class="aid-benchmark-fill" style="width:91%"></div></div><strong>10.92%</strong></div>
+      <div class="aid-benchmark-row"><span>CAGR / SPY</span><div class="aid-benchmark-track"><div class="aid-benchmark-fill spy" style="width:75%"></div></div><strong>8.98%</strong></div>
+      <div class="aid-benchmark-row"><span>Vol / candidate</span><div class="aid-benchmark-track"><div class="aid-benchmark-fill" style="width:79%"></div></div><strong>18.91%</strong></div>
+      <div class="aid-benchmark-row"><span>Vol / SPY</span><div class="aid-benchmark-track"><div class="aid-benchmark-fill spy" style="width:81%"></div></div><strong>19.37%</strong></div>
+      <div class="aid-benchmark-row"><span>Max DD / candidate</span><div class="aid-benchmark-track"><div class="aid-benchmark-fill" style="width:92%"></div></div><strong>-55.05%</strong></div>
+      <div class="aid-benchmark-row"><span>Max DD / SPY</span><div class="aid-benchmark-track"><div class="aid-benchmark-fill spy" style="width:92%"></div></div><strong>-55.20%</strong></div>
+    </div>
+    <div class="aid-proofline"><div class="aid-proofmetric"><small>Correlation to SPY</small><strong>0.949</strong></div><div class="aid-proofmetric"><small>Excess-return t-stat</small><strong>1.59</strong></div><div class="aid-proofmetric"><small>FF5 alpha t-stat</small><strong>0.91</strong></div></div>
+    <div class="aid-callout"><strong>Read it correctly:</strong> this in-sample study rejected an obviously incoherent sizing rule. Its confidence interval includes zero and its five-factor intercept is not significant. It does not establish future outperformance.</div>
+  </div>
+{{- else if eq $kind "replay" }}
+  <div class="aid-head"><div><p class="agentic-kicker">Byte replay</p><h3 class="agentic-visual-title">A conclusion is auditable only when a second machine can reproduce the raw bytes.</h3></div><span class="agentic-chip">4,000 / 4,000 exact</span></div>
+  <div class="aid-canvas">
+    <div class="aid-lanes"><div class="aid-lane"><h4>H200 A / original</h4><ul><li>same model commit + tokenizer</li><li>same canonical request bytes</li><li>temperature 0 + seed 438916795</li><li>deterministic fixed-32 SGLang profile</li><li>raw response SHA-256</li></ul></div><div class="aid-compare"><div><b>=</b>BYTE FOR BYTE</div></div><div class="aid-lane"><h4>H200 B / replay</h4><ul><li>same model commit + tokenizer</li><li>same canonical request bytes</li><li>temperature 0 + seed 438916795</li><li>deterministic fixed-32 SGLang profile</li><li>raw response SHA-256</li></ul></div></div>
+    <div class="aid-proofline"><div class="aid-proofmetric"><small>Indices tested</small><strong>4</strong></div><div class="aid-proofmetric"><small>Companies each</small><strong>1,000</strong></div><div class="aid-proofmetric"><small>Mismatches</small><strong>0</strong></div></div>
+    {{- $sample := (index $evidence.indexes 0).representative_replay -}}
+    <details class="aid-replay-sample"><summary>Open one byte-identical raw response: {{ $sample.ticker }} / CIK {{ $sample.cik }}</summary><div class="aid-replay-hashes"><code title="original SHA-256">original: {{ $sample.original_content_sha256 }}</code><code title="replay SHA-256">replay: {{ $sample.replay_content_sha256 }}</code></div><pre><code>{{ $sample.raw_model_output }}</code></pre></details>
+    <div class="aid-callout"><strong>What this proves:</strong> frozen input plus frozen runtime produced the same response bytes. It does not prove the transcript is true, the rubric is wise, the upstream training corpus is known, or the portfolio will perform.</div>
+  </div>
+{{- else if eq $kind "rebalance" }}
+  <div class="aid-head"><div><p class="agentic-kicker">Model-vintage rebalancing</p><h3 class="agentic-visual-title">A new model does not silently change an old index. It proposes a new, reviewable epoch.</h3></div><span class="agentic-chip">locked release gate</span></div>
+  <div class="aid-canvas">
+    <div class="aid-timeline"><div class="aid-time"><small>T0</small><strong>Open weights ship</strong><p>Shard, tokenizer and license hashes become a candidate manifest.</p></div><div class="aid-time"><small>T1</small><strong>Admission window</strong><p>Operators mirror the artifacts and reproduce conformance cases.</p></div><div class="aid-time"><small>T2</small><strong>SEC cutoff</strong><p>Universe, filings, transcripts and trailing quarters freeze.</p></div><div class="aid-time"><small>T3</small><strong>Regenerate</strong><p>The catalog, issuer scores and mechanical weights run once.</p></div><div class="aid-time"><small>T4</small><strong>Independent replay</strong><p>Any byte mismatch rejects the candidate epoch.</p></div><div class="aid-time"><small>T5</small><strong>Finalize</strong><p>Turnover rules apply; the old index remains queryable forever.</p></div></div>
+    <div class="aid-callout"><strong>Why more frequent can become feasible:</strong> Thomson describes a controlled continual-learning factory built on open Qwen checkpoints, with complete artifact lineage and a final large-model run measured in weeks. That supports shorter model-release cycles operationally; it does not show that higher portfolio turnover improves returns.</div>
+  </div>
+{{- else if eq $kind "atp" }}
+  <div class="aid-head"><div><p class="agentic-kicker">The distribution layer</p><h3 class="agentic-visual-title">An index file becomes an investable portfolio only after four distinct jobs are connected.</h3></div><span class="agentic-chip">roles, not a magic wrapper</span></div>
+  <div class="aid-canvas">
+    <div class="aid-stack"><div class="aid-role is-user"><small>Owner</small><h4>Investor wallet</h4><p>Holds tokenized positions or vault shares and authorizes an automation policy.</p></div><div class="aid-role"><small>Methodology</small><h4>Bitwise / index author</h4><p>Publishes target weights and charges a methodology-access fee; does not execute or custody.</p></div><div class="aid-role"><small>Automation</small><h4>Glider</h4><p>A smart-contract vault and session key implement scheduled or threshold rebalancing.</p></div><div class="aid-role"><small>Asset representation</small><h4>Coinbase Tokenize</h4><p>B20 tokens represent beneficial claims on shares held in regulated, bankruptcy-remote custody.</p></div></div>
+    <div class="aid-callout"><strong>The honest comparison with a robo-adviser:</strong> the strategy can be delivered to a self-directed onchain account without pooling it in the index author's app. But the tokenized stock still depends on its issuer, custodian, legal claim and redemption design.</div>
+  </div>
+{{- else if eq $kind "pftl" }}
+  <div class="aid-head"><div><p class="agentic-kicker">Post Fiat implementation</p><h3 class="agentic-visual-title">PFTL can finalize the index lineage. Flare can optionally strengthen execution identity and attestation.</h3></div><span class="agentic-chip">two composable paths</span></div>
+  <div class="aid-canvas">
+    <div class="aid-chain"><div class="aid-chain-path"><h4>PFTL-only core</h4><div class="aid-chain-step"><b>01</b><span>Register series mandate and admitted model-manifest hash.</span></div><div class="aid-chain-step"><b>02</b><span>Publish epoch manifest: SEC inputs, transcript hashes, prompt, runtime, score vector and fundamental data.</span></div><div class="aid-chain-step"><b>03</b><span>Require independent replay receipts with identical output and weight hashes.</span></div><div class="aid-chain-step"><b>04</b><span>Finalize one canonical pft.index.snapshot.v1 object; publish to IPFS and a PFTL pointer.</span></div></div><div class="aid-plus">+</div><div class="aid-chain-path"><h4>Optional Flare assurance</h4><div class="aid-chain-step"><b>FCE</b><span>An allowed TEE code image loads the committed shards and signs the accepted epoch digest.</span></div><div class="aid-chain-step"><b>FDC</b><span>Web2Json can attest small official manifest or SEC retrieval facts—not semantic truth or giant weight files.</span></div><div class="aid-chain-step"><b>GATE</b><span>A contract accepts one epoch only when input, model, replay and final-weight hashes match.</span></div><div class="aid-chain-step"><b>LIMIT</b><span>Neither chain proves investment merit, reserves, fills, redemption or an undocumented training corpus.</span></div></div></div>
+  </div>
+{{- else }}
+  {{- errorf "unknown agentic-index-diagram kind %q" $kind -}}
+{{- end }}
+</figure>

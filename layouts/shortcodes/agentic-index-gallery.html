@@ -1,0 +1,75 @@
+{{- $evidence := unmarshal (readFile "static/benchmarks/agentic-index-live-samples-20260827.json") -}}
+{{- $id := printf "agentic-index-gallery-%d" .Ordinal -}}
+<figure class="agentic-wide agentic-panel aig" id="{{ $id }}" data-agentic-gallery>
+  <div class="aig-head">
+    <div>
+      <p class="agentic-kicker">Live artifacts / frozen 2026-08-27</p>
+      <h2 class="agentic-visual-title">Four indices. Every company scored twice.</h2>
+      <p class="agentic-visual-copy">These are the actual constituents, Qwen scores and uncapped weights produced by the frozen pipeline. Open a slide to inspect every holding or download its 1,000-company byte comparison.</p>
+    </div>
+    <div class="aig-proof agentic-mono" aria-label="Replay result">
+      <strong>4,000</strong><span>responses compared</span>
+      <strong>4,000</strong><span>byte-identical</span>
+    </div>
+  </div>
+  <div class="aig-stage">
+    {{- range $indexNumber, $index := $evidence.indexes }}
+    <section class="aig-slide{{ if eq $indexNumber 0 }} is-active{{ end }}" data-gallery-slide aria-hidden="{{ if eq $indexNumber 0 }}false{{ else }}true{{ end }}">
+      <div class="aig-slide-grid">
+        <div class="aig-overview">
+          <p class="aig-index-num">Index {{ printf "%02d" (int $index.position) }} / canonical catalog of 15</p>
+          <h3 class="aig-name">{{ $index.basket_name }}</h3>
+          <p class="aig-desc">{{ $index.basket_description }}</p>
+          <div class="aig-stats">
+            <div class="aig-stat"><span>Holdings</span><strong>{{ $index.constituent_count }}</strong></div>
+            <div class="aig-stat"><span>Score floor</span><strong>{{ $index.score_cutoff }}</strong></div>
+            <div class="aig-stat"><span>Replay</span><strong>{{ $index.replay_proof.byte_identical_count }}/{{ $index.replay_proof.comparison_count }}</strong></div>
+          </div>
+          <div class="aig-hash"><span>Final weights SHA-256</span><code title="{{ $index.bindings.final_weights_sha256 }}">{{ $index.bindings.final_weights_sha256 }}</code></div>
+          <div class="aig-evidence-links">
+            <a href="{{ $index.replay_proof.public_artifact }}">Download byte comparison</a>
+            <a href="/benchmarks/agentic-index-live-samples-20260827.json">Download full evidence</a>
+          </div>
+        </div>
+        <div class="aig-holdings">
+          <div class="aig-holdings-head"><strong>Largest weights</strong><span>weight / Qwen score</span></div>
+          <div class="aig-bars">
+            {{- range first 8 $index.constituents }}
+            <div class="aig-row" title="{{ .company_name }}">
+              <span class="aig-ticker">{{ .ticker }}</span>
+              <span class="aig-track"><span class="aig-fill" style="width:{{ mul (float .weight_percent) 4.75 }}%"></span></span>
+              <span class="aig-weight">{{ .weight_percent }}%</span>
+              <span class="aig-score">{{ .qwen_score }}</span>
+            </div>
+            {{- end }}
+          </div>
+          <details class="aig-details">
+            <summary>Inspect all {{ $index.constituent_count }} constituents</summary>
+            <div class="aig-table-wrap">
+              <table class="aig-table">
+                <thead><tr><th>#</th><th>Ticker</th><th>Company</th><th>Score</th><th>Weight</th><th>Profitability</th></tr></thead>
+                <tbody>
+                  {{- range $index.constituents }}
+                  <tr><td>{{ .rank }}</td><td>{{ .ticker }}</td><td>{{ .company_name }}</td><td>{{ .qwen_score }}</td><td>{{ .weight_percent }}%</td><td>{{ .profitability_factor }}</td></tr>
+                  {{- end }}
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+    {{- end }}
+  </div>
+  <div class="aig-controls">
+    <button class="aig-arrow" type="button" data-gallery-prev aria-label="Previous index">&#8592;</button>
+    <div class="aig-dots" role="tablist" aria-label="Choose an index">
+      {{- range $indexNumber, $index := $evidence.indexes }}<button type="button" class="aig-dot{{ if eq $indexNumber 0 }} is-active{{ end }}" data-gallery-dot="{{ $indexNumber }}" aria-label="Show {{ $index.basket_name }}"></button>{{- end }}
+    </div>
+    <button class="aig-arrow" type="button" data-gallery-next aria-label="Next index">&#8594;</button>
+  </div>
+  <figcaption class="aid-callout"><strong>What is live here:</strong> the page reads a public canonical JSON evidence packet. The visual is a view over that file; it is not a hand-entered mockup.</figcaption>
+  <script>
+  (()=>{const root=document.getElementById("{{ $id }}");if(!root)return;const slides=[...root.querySelectorAll("[data-gallery-slide]")],dots=[...root.querySelectorAll("[data-gallery-dot]")];let active=0;const show=(next)=>{active=(next+slides.length)%slides.length;slides.forEach((slide,i)=>{const selected=i===active;slide.classList.toggle("is-active",selected);slide.setAttribute("aria-hidden",String(!selected))});dots.forEach((dot,i)=>dot.classList.toggle("is-active",i===active))};root.querySelector("[data-gallery-prev]")?.addEventListener("click",()=>show(active-1));root.querySelector("[data-gallery-next]")?.addEventListener("click",()=>show(active+1));dots.forEach((dot)=>dot.addEventListener("click",()=>show(Number(dot.dataset.galleryDot))));})();
+  </script>
+</figure>
