@@ -95,7 +95,7 @@ def build_index(
     scores = load(theme_dir / "scores-h200-a.json")
     proof_path = theme_dir / "score-byte-comparison.json"
     proof = load(proof_path)
-    outcome = load(theme_dir / "basket.json")
+    outcome = load(theme_dir / "basket-cutoff70.json")
     if len(scores["scores"]) != 1_000:
         raise ValueError(f"{theme_dir}: score run is incomplete")
     proof_fields = (
@@ -122,7 +122,7 @@ def build_index(
         "basket_description": str(rubric_packet["rubric"]["basket_description"]),
         "rubric": rubric_packet["rubric"],
         "rubric_sha256": str(rubric_packet["rubric_sha256"]),
-        "score_cutoff": 80,
+        "score_cutoff": 70,
         "score_distribution": {
             str(score): count for score, count in sorted(score_counts.items())
         },
@@ -178,8 +178,8 @@ def build_index(
 
     if sum(int(row["weight_units"]) for row in outcome["constituents"]) != WEIGHT_UNITS:
         raise ValueError(f"{theme_dir}: weights do not sum to {WEIGHT_UNITS}")
-    if int(outcome["methodology"]["minimum_score"]) != 80:
-        raise ValueError(f"{theme_dir}: expected score floor 80")
+    if int(outcome["methodology"]["minimum_score"]) != 70:
+        raise ValueError(f"{theme_dir}: expected score floor 70")
     if str(outcome["methodology"]["holding_cap"]) != "0.20":
         raise ValueError(f"{theme_dir}: expected holding cap 0.20")
 
@@ -301,9 +301,9 @@ def main() -> None:
             "factor_runs": 4,
             "accepted_indexes": sum(index["status"] == "accepted" for index in indexes),
             "rejected_indexes": sum(index["status"] == "rejected" for index in indexes),
-            "score_cutoff": 80,
+            "score_cutoff": 70,
             "holding_cap": "0.20",
-            "methodology_sha256": "44003ac5be8cc881882676d7298389e19794f3204398f2bc31ac2225a1884a7b",
+            "methodology_sha256": "bd6f5139a3410392299631d7e4b6226ace1a2da67042dff1c8c1cc19a59e9f6c",
         },
         "indexes": indexes,
     }

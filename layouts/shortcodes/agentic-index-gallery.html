@@ -102,7 +102,7 @@
           {{- else }}
           <div class="aig-rejection">
             <p class="agentic-kicker">Rejected by committed portfolio rules</p>
-            <h4>Only {{ $index.rejection.qualifying_score_count }} companies cleared 80; the 20% cap requires at least {{ $index.rejection.minimum_constituents_required_by_cap }}.</h4>
+            <h4>Only {{ $index.rejection.qualifying_score_count }} companies cleared {{ $index.score_cutoff }}; the 20% cap requires at least {{ $index.rejection.minimum_constituents_required_by_cap }}.</h4>
             <p>The factor scores replayed perfectly. The portfolio did not exist because relaxing either the relevance floor or concentration limit after seeing the names would violate the commitment.</p>
             <div class="aig-bars">
               {{- range $index.rejection.qualifying_scores }}

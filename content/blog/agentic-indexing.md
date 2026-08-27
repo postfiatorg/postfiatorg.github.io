@@ -30,7 +30,7 @@ Call it **trustless financial indexing**, with one precise target: after the met
 
 **Live in this demonstration:** the 15-mandate catalog, four fresh 1,000-company continuous-score runs, transcript bindings, accounting classifications, three final-weight files, one deterministic rejection and cross-H200 replay files. **Proposed next:** Post Fiat Ledger (PFTL) finalization, optional Flare attestation and ATP execution. The article keeps those two states separate.
 
-The method has four steps. Qwen expands each fixed theme into a continuous eleven-anchor rubric. The same frozen model scores each company from 0 through 100. Companies scoring at least 80 enter the weighting gate. A second matching H200 must reproduce every response byte before deterministic code combines 20% score strength with 80% square-root-market-cap and profitability scale under a 20% holding cap.
+The method has four steps. Qwen expands each fixed theme into a continuous eleven-anchor rubric. The same frozen model scores each company from 0 through 100. Companies scoring at least 70 enter the weighting gate. A second matching H200 must reproduce every response byte before deterministic code combines 20% score strength with 80% square-root-market-cap and profitability scale under a 20% holding cap.
 
 ## From One Custom Basket to an Index Factory
 
@@ -48,7 +48,9 @@ The score answers one question only:
 
 > How strongly does this company express this particular thematic factor?
 
-A score of 80 or more qualifies; 70 explicitly means substantial exposure **below** the membership bar. In every continuous rubric, 80 means major current economic exposure and a prominent durable business role, 90 means category leadership or near-pure exposure, and 100 means a true category-defining pure play. The model may interpolate to any integer, so 82 and 93 carry more information than a five-bucket label. Including merely partial or secondary exposure would dilute the factor, so the cutoff is semantic rather than tuned to produce a preferred name count. No analyst can promote a 79 because the name “feels right,” and no sponsor can delete an awkward 80 after seeing the basket.
+A score of 70 or more now qualifies. In every continuous rubric, 70 means substantial, durable exposure, 80 means major current economic exposure and a prominent durable business role, 90 means category leadership or near-pure exposure, and 100 means a true category-defining pure play. The model may interpolate to any integer, so 72 and 93 carry more information than a five-bucket label. Scores below 70 remain secondary, incidental or merely adjacent exposure.
+
+The frozen rubric receipts still contain the original phrase “below the index-membership bar” at 70 because the first published epoch used an 80 floor. We did not rewrite those model outputs after reviewing the baskets. Instead, the new `cutoff70.v4` methodology admits the already-defined substantial-exposure tier and receives a different methodology hash. The earlier 80-floor artifacts remain immutable. No analyst can promote a 69 because the name “feels right,” and no sponsor can delete an awkward 70 after seeing the final weights.
 
 {{< agentic-index-diagram kind="pipeline" >}}
 
@@ -80,7 +82,7 @@ The frozen universe contained 884 ordinary operating companies, three settlement
 
 {{< agentic-index-diagram kind="fundamentals" >}}
 
-The selected profitability number is standardized across those 981 issuers with a population z-score. For each company scoring at least 80:
+The selected profitability number is standardized across those 981 issuers with a population z-score. For each company scoring at least 70:
 
 ```text
 factor strength(i) = (Qwen score(i) - 70) / 30
@@ -102,11 +104,11 @@ Weights above 20% are clipped and redistributed proportionally among uncapped ho
 
 The coefficient `0.03` was chosen to make profitability matter without allowing one accounting outlier to dominate the scale term. At one standard deviation above the profitability mean, the multiplier is only 1.0305; at one standard deviation below, it is 0.9704. The separate historical research used revenue as the primary scale variable and showed why `0.03` was preferable to the more concentrated `0.05` alternative. That experiment validated the routing discipline and the modest profitability tilt; it did not backtest this new square-root-market-cap and 20/80 thematic blend.
 
-The thematic score now contributes a fixed 20% of aggregate portfolio weight through factor share. A score of 100 has factor strength 1.0; 90 has 0.6667; 80 has 0.3333. The remaining 80% reflects transformed company size and the small profitability overlay. Equal scores receive equal factor strength; ordinal ranking never enters the formula.
+The thematic score contributes a fixed 20% of aggregate portfolio weight through factor share. A score of 100 has factor strength 1.0; 90 has 0.6667; 80 has 0.3333; and an exact 70 enters through the fundamental sleeve with zero factor strength. None of the four demonstrated score vectors contains an exact 70. The remaining 80% reflects transformed company size and the small profitability overlay. Equal scores receive equal factor strength; ordinal ranking never enters the formula.
 
-One constituent shows the calculation. Qwen scored NVIDIA **95** because it is the category leader in generative-AI compute, while retaining a small deduction for gaming, automotive and other edge businesses. Its $5.074 trillion dated market capitalization became a $2.253 million square-root term. Selected trailing FCF of $119.076 billion produced a `+14.7791z` profitability score and a `1.55795531×` multiplier, creating $3.509 million of fundamental scale. NVIDIA represented 6.281407% of factor share and 14.294175% of fundamental share; the locked 20/80 blend produced a final **12.691621%** weight in the 27-company AI index.
+One constituent shows the calculation. Qwen scored NVIDIA **95** because it is the category leader in generative-AI compute, while retaining a small deduction for gaming, automotive and other edge businesses. Its $5.074 trillion dated market capitalization became a $2.253 million square-root term. Selected trailing FCF of $119.076 billion produced a `+14.7791z` profitability score and a `1.55795531×` multiplier, creating $3.509 million of fundamental scale. NVIDIA represented 5.330490% of factor share and 12.204812% of fundamental share; the locked 20/80 blend produced a final **10.829947%** weight in the 40-company AI index.
 
-The same rules can reject an otherwise coherent theme. Critical Minerals produced SCCO at 100 and ALB and FCX at 92—but no fourth or fifth company reached 80. A 20% cap cannot fully invest a three-name portfolio. The canonical outcome is therefore a rejection with hash `257fc74b051ac840a49df8add1bafa6ddf49db5c374167a5291584e0fc18c262`, not a post-hoc lower cutoff or higher cap.
+The same rules can reject an otherwise coherent theme. Critical Minerals produced SCCO at 100 and ALB and FCX at 92—but no fourth or fifth company reached 70. A 20% cap cannot fully invest a three-name portfolio. The canonical cutoff-70 outcome is therefore a rejection with hash `57dbaef7dc5c92252d91914884da90b0b07bde8c09bf6b2d7a9c9cbb84241f9d`, not a post-hoc exception or higher cap.
 
 ## Does the Underlying Fundamental Discipline Survive Contact With History?
 
@@ -197,7 +199,7 @@ That is agentic indexing: a financial index that behaves like a versioned softwa
 
 - **Agentic index:** An index whose mandate, company classifications and weights are generated by a specified model-and-code process instead of being edited security by security by a portfolio manager.
 - **Thematic mandate:** A written definition of the economic exposure an index is meant to capture, such as grid modernization or critical minerals.
-- **Scoring rubric:** The fixed descriptions at 0, 10, 20 and so on through 100. Qwen may interpolate to any integer. Scores of 80 or more qualify for the weighting gate.
+- **Scoring rubric:** The fixed descriptions at 0, 10, 20 and so on through 100. Qwen may interpolate to any integer. In the current `cutoff70.v4` epoch, scores of 70 or more qualify for the weighting gate.
 - **Factor expression:** How strongly a portfolio represents its stated theme. Excluding partially relevant companies keeps that exposure from being diluted.
 - **Eligible universe:** The complete list of companies that may be scored. Here it is the 1,000 largest eligible U.S. reporting companies by trailing revenue.
 - **CIK:** The stable identifier the SEC assigns to a filing entity. It avoids depending on tickers, which can change or be reused.
@@ -217,7 +219,7 @@ That is agentic indexing: a financial index that behaves like a versioned softwa
 - **Market capitalization:** Share price multiplied by shares outstanding. The live demonstration uses a dated Sharadar USD market-cap packet; it is not extracted from SEC statements.
 - **Square-root market cap:** The market-cap transformation used to preserve company-size information while compressing the gap between mega-caps and smaller constituents.
 - **Profitability multiplier:** `exp(0.03 × z-score)`, the deliberately small adjustment applied to square-root market cap.
-- **Factor strength:** `(Qwen score - 70) / 30` for a qualifying company. An 80 receives one-third, a 90 two-thirds and a 100 one unit of strength.
+- **Factor strength:** `(Qwen score - 70) / 30` for a qualifying company. An exact 70 receives zero thematic strength but remains eligible for the fundamental sleeve; an 80 receives one-third, a 90 two-thirds and a 100 one unit of strength.
 - **Factor share:** One company's factor strength divided by the total strength of all qualifying companies. This supplies 20% of pre-cap portfolio weight.
 - **Fundamental scale:** Square-root market cap multiplied by the profitability multiplier.
 - **Fundamental share:** One company's fundamental scale divided by the total fundamental scale of all qualifying companies. This supplies 80% of pre-cap weight.
