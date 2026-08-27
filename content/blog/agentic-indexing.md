@@ -26,11 +26,9 @@ We built that system. These four factor runs are live views over frozen output f
 
 {{< agentic-index-gallery >}}
 
-Call it **trustless financial indexing**, with one precise target: after the methodology and inputs are committed, an operator should not be able to replace the model's portfolio with its own. The current artifacts make substitution detectable; the proposed PFTL/Flare gate would make it rejectable. Qwen proposes the factor and applies bound company inputs, accounting rules set scale, and independent machines replay the result.
+Call it **trustless financial indexing**, with one precise target: after the methodology and inputs are committed, an operator should not be able to substitute its own portfolio. Qwen defines the factor and scores companies; accounting rules set economic scale; a second matching H200 must reproduce every response byte; deterministic code then combines 20% score strength with 80% square-root-market-cap and profitability scale under a 20% holding cap. Scores of 70 or more qualify.
 
-**Live in this demonstration:** the 15-mandate catalog, four fresh 1,000-company continuous-score runs, transcript bindings, accounting classifications, three final-weight files, one deterministic rejection and cross-H200 replay files. **Proposed next:** Post Fiat Ledger (PFTL) finalization, optional Flare attestation and ATP execution. The article keeps those two states separate.
-
-The method has four steps. Qwen expands each fixed theme into a continuous eleven-anchor rubric. The same frozen model scores each company from 0 through 100. Companies scoring at least 70 enter the weighting gate. A second matching H200 must reproduce every response byte before deterministic code combines 20% score strength with 80% square-root-market-cap and profitability scale under a 20% holding cap.
+The live demonstration contains a 15-mandate catalog, four 1,000-company score runs, transcript and accounting bindings, three final portfolios, one deterministic rejection and 4,000 cross-H200 replay receipts. PFTL finalization, Flare attestation and ATP execution remain proposed distribution and enforcement layers.
 
 ## From One Custom Basket to an Index Factory
 
@@ -42,15 +40,13 @@ The result was not 15 versions of “AI.” It covered generative compute, grid 
 
 We used each continuous rubric exactly as generated. Every scoring request binds the SEC identity record and clearly labels the earnings-call transcript as **supplemental information**. Qwen assesses the company's substantive business exposure from the identity, products, technologies and industry role encoded in its frozen weights; the transcript adds contemporaneous detail when available. The same classifier scores companies with and without transcripts. Every result is strict JSON containing an integer score, confidence, verdict, counter-case, prior-versus-transcript assessment and exactly four substantive reasoning paragraphs.
 
-Using one model to author and apply the rubric is deliberate: the objective is internally consistent factor expression, not independent validation. Introducing an uncommitted second model would add another semantic authority capable of silently redefining the factor. This is not a keyword or transcript-sentiment index. Repeating thematic language cannot turn a grocery chain into an AI-compute company or a diversified user of AI into a major AI supplier. The transcript grounds current operations; it does not replace the model's durable knowledge of the company's products, customers, assets, research and recognized industry role. A score of 80 requires major current economic exposure, not management emphasis.
+Using one model to author and apply the rubric produces internally consistent factor expression; it is not independent validation. This is also not a keyword or transcript-sentiment index. Repeating thematic language cannot turn a grocery chain into an AI-compute company. The transcript grounds current operations but does not replace the model's knowledge of the company's products, customers, assets and industry role.
 
 The score answers one question only:
 
 > How strongly does this company express this particular thematic factor?
 
-A score of 70 or more now qualifies. In every continuous rubric, 70 means substantial, durable exposure, 80 means major current economic exposure and a prominent durable business role, 90 means category leadership or near-pure exposure, and 100 means a true category-defining pure play. The model may interpolate to any integer, so 72 and 93 carry more information than a five-bucket label. Scores below 70 remain secondary, incidental or merely adjacent exposure.
-
-The frozen rubric receipts still contain the original phrase “below the index-membership bar” at 70 because the first published epoch used an 80 floor. We did not rewrite those model outputs after reviewing the baskets. Instead, the new `cutoff70.v4` methodology admits the already-defined substantial-exposure tier and receives a different methodology hash. The earlier 80-floor artifacts remain immutable. No analyst can promote a 69 because the name “feels right,” and no sponsor can delete an awkward 70 after seeing the final weights.
+A score of 70 or more qualifies. Seventy means substantial, durable exposure; 80 means major current economic exposure and a prominent business role; 90 means category leadership or near-pure exposure; and 100 means a category-defining pure play. The model may interpolate to any integer. Scores below 70 remain secondary, incidental or merely adjacent exposure, and deterministic code—not an analyst—applies the boundary.
 
 {{< agentic-index-diagram kind="pipeline" >}}
 
@@ -102,13 +98,13 @@ pre-cap weight(i)
 
 Weights above 20% are clipped and redistributed proportionally among uncapped holdings until the portfolio again sums to 100%. The result is normalized to one trillion integer units using a largest-remainder rule with CIK as the tie-break. Negative profitability remains in the population. There is no revenue percentile, ordinal score rank, confidence multiplier, winsorization or imputation.
 
-The coefficient `0.03` was chosen to make profitability matter without allowing one accounting outlier to dominate the scale term. At one standard deviation above the profitability mean, the multiplier is only 1.0305; at one standard deviation below, it is 0.9704. The separate historical research used revenue as the primary scale variable and showed why `0.03` was preferable to the more concentrated `0.05` alternative. That experiment validated the routing discipline and the modest profitability tilt; it did not backtest this new square-root-market-cap and 20/80 thematic blend.
+The coefficient `0.03` makes an ordinary one-standard-deviation difference small: the multiplier is 1.0305 at `+1z` and 0.9704 at `-1z`. It does not erase genuine extremes. The historical research used revenue as its scale variable and found `0.03` less concentration-prone than `0.05`; it validated the accounting route and coefficient choice, not the live square-root-market-cap and 20/80 blend.
 
 The thematic score contributes a fixed 20% of aggregate portfolio weight through factor share. A score of 100 has factor strength 1.0; 90 has 0.6667; 80 has 0.3333; and an exact 70 enters through the fundamental sleeve with zero factor strength. None of the four demonstrated score vectors contains an exact 70. The remaining 80% reflects transformed company size and the small profitability overlay. Equal scores receive equal factor strength; ordinal ranking never enters the formula.
 
-One constituent shows the calculation. Qwen scored NVIDIA **95** because it is the category leader in generative-AI compute, while retaining a small deduction for gaming, automotive and other edge businesses. Its $5.074 trillion dated market capitalization became a $2.253 million square-root term. Selected trailing FCF of $119.076 billion produced a `+14.7791z` profitability score and a `1.55795531×` multiplier, creating $3.509 million of fundamental scale. NVIDIA represented 5.330490% of factor share and 12.204812% of fundamental share; the locked 20/80 blend produced a final **10.829947%** weight in the 40-company AI index.
+NVIDIA shows how an extreme value behaves. Qwen scored it **95** as the category leader in generative-AI compute, with a small deduction for gaming, automotive and other businesses. Its dated market capitalization was $5.074 trillion and trailing FCF was $119.076 billion. That cash flow sits `14.7791` standard deviations above the universe mean because raw corporate profits are heavily skewed: a handful of companies earn vastly more dollars than the typical issuer. This is not a claim that NVIDIA represents a statistically impossible event, and it does not multiply its weight by 14.8. The formula converts the outlier into a **1.55795531×** profitability multiplier applied to square-root market cap. After normalization, NVIDIA held 5.330490% of factor share and 12.204812% of fundamental share, producing a final **10.829947%** weight in the 40-company AI index. The adjustment is material and published; it does not let NVIDIA dominate the portfolio.
 
-The same rules can reject an otherwise coherent theme. Critical Minerals produced SCCO at 100 and ALB and FCX at 92—but no fourth or fifth company reached 70. A 20% cap cannot fully invest a three-name portfolio. The canonical cutoff-70 outcome is therefore a rejection with hash `57dbaef7dc5c92252d91914884da90b0b07bde8c09bf6b2d7a9c9cbb84241f9d`, not a post-hoc exception or higher cap.
+The same rules can reject an otherwise coherent theme. Critical Minerals produced SCCO at 100 and ALB and FCX at 92—but no fourth or fifth company reached 70. A 20% cap cannot fully invest a three-name portfolio. The canonical outcome is therefore a rejection with hash `57dbaef7dc5c92252d91914884da90b0b07bde8c09bf6b2d7a9c9cbb84241f9d`, not a discretionary exception or higher cap.
 
 ## Does the Underlying Fundamental Discipline Survive Contact With History?
 
@@ -116,11 +112,9 @@ Before adding themes, we asked whether revenue selection plus the same FCF/net-i
 
 {{< agentic-index-diagram kind="backtest" >}}
 
-The backtest used Sharadar's licensed point-in-time normalized statements and SEP adjusted prices; SPY used Tiingo adjusted closes. It does **not** assume that modern EDGAR XBRL APIs existed in 1998. Licensed institutional history tests the economics. The live calculation uses the SEC as the authoritative filing source and publishes accession, acceptance time, period, amendment state, facts and hashes. Reconstructing an open pre-XBRL history would require deterministic extraction from legacy filings, but that is not a coverage defect in this backtest.
+The backtest used Sharadar point-in-time statements and adjusted prices; SPY used Tiingo adjusted closes. Candidate-minus-SPY annualized arithmetic return was 1.68%, with a Newey-West t-statistic of 1.59 and a 95% interval of -0.40% to 3.76%. Five-factor annualized alpha was 0.64% with a t-statistic of 0.91. Those results establish reasonableness, not alpha. The study was developed in sample, and the [frozen report at commit `d4d6b4f`](https://github.com/postfiatorg/navstrategies/blob/d4d6b4f13d4725e637e2b17fe8e859815f7d5486/research/pre_catalyst/data_exploration/sec_10q_size_proxy/open_sec_fundamental_index_research_report.md) publishes its data lineage, coefficient sweep, costs, delisting stress and attribution.
 
-The result establishes reasonableness, not alpha. Candidate-minus-SPY annualized arithmetic return was 1.68%, with a Newey-West t-statistic of 1.59 and a 95% interval of -0.40% to 3.76%. Five-factor annualized alpha fell to 0.64% with a t-statistic of 0.91. The study was developed in sample; it is a methodology test, not a forecast. The [frozen report at commit `d4d6b4f`](https://github.com/postfiatorg/navstrategies/blob/d4d6b4f13d4725e637e2b17fe8e859815f7d5486/research/pre_catalyst/data_exploration/sec_10q_size_proxy/open_sec_fundamental_index_research_report.md) publishes the complete data lineage, coefficient sweep, cost tests, delisting stress and factor attribution.
-
-This backtest validates the **accounting routing and modest profitability overlay**, not the exact live square-root-market-cap blend and not historical AI themes. A 2026 Qwen rubric cannot honestly be projected backward as though the model existed in 1998. The four live factor runs demonstrate internally consistent scoring and replay; three demonstrate portfolio construction, while the fourth demonstrates deterministic rejection. Score stability and thematic performance require prospective observation.
+The historical test validates the accounting routing and profitability adjustment, not the exact live weighting blend or historical AI themes. A 2026 Qwen rubric cannot be projected backward as though it existed in 1998. The thematic system therefore needs prospective score-stability and performance evidence.
 
 ## What “Byte-Reproducible” Actually Means
 
@@ -134,11 +128,11 @@ The strict profile pinned:
 - deterministic inference with radix cache, overlap scheduling and CUDA graphs disabled; and
 - seed `438916795` plus canonical prompt, schema, parser, universe, transcripts and rubric.
 
-We ran 1,000 companies across four of the 15 factors and replayed every request on the other H200. All 4,000 raw responses, parsed objects and attempt traces matched. The opening gallery links the comparison files containing request and response hashes for every CIK, while the replay diagram exposes one raw original/replay pair inline. Byte replay held for the rejected Critical Minerals factor too; reproducible inference does not guarantee that the committed portfolio constraints admit a portfolio.
+We ran 1,000 companies across four factors and replayed every request on the other H200. All 4,000 raw responses, parsed objects and attempt traces matched. The opening gallery links every comparison file, and the replay diagram exposes one original/replay pair inline. Byte replay also held for the rejected Critical Minerals factor.
 
 {{< agentic-index-diagram kind="replay" >}}
 
-A parsed-score match could hide changed reasoning, so the test compares raw UTF-8 bytes before parsing and weighting. Both hosts used the same H200 profile; cross-hardware portability remains untested. The result proves execution reproducibility for committed inputs, not economic correctness.
+A parsed-score match could hide changed reasoning, so the test compares raw UTF-8 bytes before parsing and weighting. Both hosts used the same H200 profile; cross-hardware portability remains untested.
 
 ## Rebalancing When the World Model Changes
 
@@ -166,8 +160,6 @@ An ATP separates model authorship from execution. [Glider](https://docs.glider.f
 
 Wallet control of the token is not personal custody of the registered share. [Coinbase describes B20](https://www.coinbase.com/tokenize) as tokens backed one-for-one by shares in regulated, bankruptcy-remote custody, giving holders a beneficial claim. Issuer, custodian, legal wrapper, redemption and jurisdiction remain separate dependencies. Index-provider and investment-advice treatment likewise depends on product design and jurisdiction; replayability does not answer that legal question.
 
-The point is programmable distribution: one weight object can reach many execution venues without the index author holding customer assets.
-
 ## The PFTL Implementation
 
 PFTL should finalize index lineage, not supply accounting truth or custody assets:
@@ -187,11 +179,10 @@ The clean division is:
 
 ## What the Demonstration Establishes
 
-The result is not that Qwen can name AI stocks. It is that a model can originate a catalog, apply continuous rubrics to 1,000 companies, combine qualifying scores with committed fundamentals, reproduce every response on a second machine and reject a factor when the frozen portfolio constraints cannot be satisfied. Humans choose the universe, evidence, model, threshold, weighting, cap and turnover rules; every later change leaves a different hash.
+The system can originate a thematic catalog, score 1,000 companies, combine qualifying scores with committed fundamentals, reproduce every model response on a second machine and reject a factor when its portfolio constraints cannot be satisfied. Humans still choose the universe, model and rules; the system makes the resulting lineage inspectable and replayable.
 
 > A financial index that can explain where it came from, reproduce itself on another machine, and arrive directly in an investor-controlled account.
 
-That is agentic indexing: a financial index that behaves like a versioned software artifact rather than an editable spreadsheet.
 
 ## Appendix: The Jargon in Plain English
 
@@ -199,14 +190,14 @@ That is agentic indexing: a financial index that behaves like a versioned softwa
 
 - **Agentic index:** An index whose mandate, company classifications and weights are generated by a specified model-and-code process instead of being edited security by security by a portfolio manager.
 - **Thematic mandate:** A written definition of the economic exposure an index is meant to capture, such as grid modernization or critical minerals.
-- **Scoring rubric:** The fixed descriptions at 0, 10, 20 and so on through 100. Qwen may interpolate to any integer. In the current `cutoff70.v4` epoch, scores of 70 or more qualify for the weighting gate.
+- **Scoring rubric:** The fixed descriptions at 0, 10, 20 and so on through 100. Qwen may interpolate to any integer; scores of 70 or more qualify.
 - **Factor expression:** How strongly a portfolio represents its stated theme. Excluding partially relevant companies keeps that exposure from being diluted.
 - **Eligible universe:** The complete list of companies that may be scored. Here it is the 1,000 largest eligible U.S. reporting companies by trailing revenue.
 - **CIK:** The stable identifier the SEC assigns to a filing entity. It avoids depending on tickers, which can change or be reused.
 - **SEC accession:** The unique identifier for one submitted SEC filing. Binding an accession identifies the exact filing used by the calculation.
 - **XBRL fact:** A tagged accounting value in an SEC filing, accompanied by metadata such as period, unit and filing form.
 - **Trailing four quarters, or TTM:** The sum of the latest four discrete fiscal quarters. This avoids treating one unusually strong or weak quarter as a full-year result.
-- **Revenue:** Sales generated by the business. The methodology uses trailing revenue as its primary measure of company scale, not as evidence of thematic relevance.
+- **Revenue:** Sales generated by the business. Trailing revenue ranks the eligible universe; it does not establish thematic relevance or determine live portfolio weights.
 - **Operating cash flow, or OCF:** Cash generated by normal operations before capital expenditure and financing activity.
 - **Capital expenditure, or capex:** Cash spent on long-lived assets such as factories, equipment or infrastructure.
 - **Free cash flow, or FCF:** In this methodology, trailing OCF minus the absolute value of trailing capex. It is the profitability measure for ordinary operating companies.
@@ -218,7 +209,7 @@ That is agentic indexing: a financial index that behaves like a versioned softwa
 - **Population z-score:** The number of population standard deviations an issuer's selected profitability lies above or below the universe mean.
 - **Market capitalization:** Share price multiplied by shares outstanding. The live demonstration uses a dated Sharadar USD market-cap packet; it is not extracted from SEC statements.
 - **Square-root market cap:** The market-cap transformation used to preserve company-size information while compressing the gap between mega-caps and smaller constituents.
-- **Profitability multiplier:** `exp(0.03 × z-score)`, the deliberately small adjustment applied to square-root market cap.
+- **Profitability multiplier:** `exp(0.03 × z-score)`, the adjustment applied to square-root market cap. It is small near the population mean but material for extreme profitability values.
 - **Factor strength:** `(Qwen score - 70) / 30` for a qualifying company. An exact 70 receives zero thematic strength but remains eligible for the fundamental sleeve; an 80 receives one-third, a 90 two-thirds and a 100 one unit of strength.
 - **Factor share:** One company's factor strength divided by the total strength of all qualifying companies. This supplies 20% of pre-cap portfolio weight.
 - **Fundamental scale:** Square-root market cap multiplied by the profitability multiplier.
@@ -228,7 +219,6 @@ That is agentic indexing: a financial index that behaves like a versioned softwa
 - **Largest-remainder normalization:** A deterministic way to convert fractional weights into fixed integer units while preserving a total of exactly one trillion units. Remaining units go to the largest fractional remainders, with CIK breaking ties.
 - **Winsorization:** Replacing extreme values with less-extreme boundary values. The published methodology does not use it.
 - **Rebalance:** A scheduled recalculation of constituents and weights using newly admitted inputs.
-- **Retention band:** A turnover-control rule that lets an existing constituent remain eligible through rank 750 even though new entrants normally must rank in the top 500.
 - **Index epoch:** One immutable version of an index, including its cutoff time, inputs, scores, rules and final weights.
 
 ### Backtest and Portfolio Statistics
