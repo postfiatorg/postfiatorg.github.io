@@ -1,0 +1,61 @@
+{
+  "schema": "postfiat.arc_current_main_h100_verification.v1",
+  "date_utc": "2026-09-02",
+  "candidate": {
+    "repository": "postfiatorg/postfiatl1v2",
+    "pull_request": 37,
+    "commit": "fba263ef59c5de89b1b00a6d2e5e0ffb19ec670c",
+    "base_commit": "544130028fd928a5fd32177b27980d5d0522689a",
+    "merge_decision": "blocked_pending_current_v2_proof"
+  },
+  "hardware": {
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "driver": "590.48.01",
+    "memory_mib": 81559,
+    "compute_capability": "9.0",
+    "hourly_usd": 2.2044444444444444,
+    "rental_elapsed_seconds": 1054,
+    "estimated_cost_usd": 0.65,
+    "provider_confirmed_terminated": true
+  },
+  "current_v2": {
+    "arc_conformance_tests": {
+      "passed": 4,
+      "failed": 0
+    },
+    "arc_guest_tests": {
+      "passed": 5,
+      "failed": 0
+    },
+    "elf_sha256": "830634e6bf67333315bda7874ed1155dfc45c7e3b1ebc5e97a1fd34f9af7f130",
+    "program_vkey": "0x00d8e761fd2e0034388813ad8febd38beb3b271a83575a05834168450ea814c5",
+    "archived_v1_witness_result": "rejected_before_proving",
+    "error_code": "ARC_INGRESS_BOUNDS",
+    "reason": "The archived witness is schema v1, has an empty next_validators list, and has no validator_registry_proof; the current v2 guest requires an authenticated registry proof even for an unchanged validator set.",
+    "public_recapture_result": "blocked",
+    "public_rpc_error": {
+      "method": "eth_getProof",
+      "code": -32601,
+      "message": "method not supported"
+    }
+  },
+  "historical_v1_control": {
+    "source_commit": "3e2c9caa9159cd899664434f0377f05b27f31deb",
+    "proof_result": "pass",
+    "sp1_gpu_server_version": "6.3.1",
+    "instruction_count": 2376633,
+    "execute_elapsed_ms": 934,
+    "run_wall_seconds_including_compile_and_first_circuit_download": 335,
+    "setup_and_prove_ms": 266600,
+    "proof_mode": "groth16",
+    "proof_bytes": 356,
+    "public_values_bytes": 314,
+    "program_vkey": "0x00b218e0ab7d2582baacca0dfaa8a5b211f258880ee44898797e109ae6b55ee0",
+    "public_values_byte_exact_to_archive": true,
+    "public_values_sha256": "cd985257ccb45f8dd3c54c0dbdec8f63e3ab6ee14e8846485e3b5749032f074b",
+    "proof_calldata_sha256": "9413bf3f98c52ed68996283cf317547c7efaeacf976d0f168b5cc1720616b9f3",
+    "serialized_proof_sha256": "d082e3958b3044f0f68e415c3c0ec70daf55a28ccb682489be28457135cc4241",
+    "note": "Proof bytes are not used as the deterministic comparison; the verified program identity and canonical public-value bytes are."
+  },
+  "conclusion": "The source transplant is mechanically feasible, and the historical Arc v1 proof replays successfully on H100. The current v2 merge is not proof-qualified because no v2 ingress witness is available and the public Arc RPC cannot supply the required historical registry state proof."
+}
