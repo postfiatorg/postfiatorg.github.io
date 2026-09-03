@@ -1,7 +1,7 @@
 ---
 title: "pfUSDC on Arc: one USDC, there and back, authorized by proofs of both chains' finality"
 date: 2026-09-02T00:00:00Z
-lastmod: 2026-09-03T00:00:00Z
+lastmod: 2026-09-03T02:00:00Z
 url: "/research/pfusdc-on-arc-round-trip/"
 type: "page"
 layout: "pfusdc_arc_round_trip"
