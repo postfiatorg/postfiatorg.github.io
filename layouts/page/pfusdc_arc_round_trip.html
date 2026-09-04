@@ -13,6 +13,8 @@
 {{ if .Params.robotsNoIndex }}<meta name="robots" content="noindex,nofollow">{{ end }}
 <link rel="canonical" href="{{ .Permalink }}">
 <link rel="icon" href="/media-kit/logo32x32-whiteonblack.png">
+<link rel="preload" as="image" href="/research/pfusdc-arc-deck/arc-vault.webp">
+<link rel="stylesheet" href="/research/pfusdc-arc-deck/deck.css">
 <style>
   :root{
     --bg:#0b0d10; --surface:#12151a; --surface-2:#171b21; --line:#262c35; --line-strong:#3a424d;
@@ -115,11 +117,165 @@
 </style>
 </head>
 <body>
+
+<div class="arcdeck" id="deck" aria-label="pfUSDC on Arc proposal deck">
+  <div class="arcdeck__world" aria-hidden="true">
+    <div class="arcdeck__layer is-active" data-world="vault" style="--img:url('/research/pfusdc-arc-deck/arc-vault.webp')"></div>
+    <div class="arcdeck__layer" data-world="bridge" style="--img:url('/research/pfusdc-arc-deck/proof-bridge.webp')"></div>
+    <div class="arcdeck__layer" data-world="market" style="--img:url('/research/pfusdc-arc-deck/agent-market.webp')"></div>
+    <div class="arcdeck__layer" data-world="audit" style="--img:url('/research/pfusdc-arc-deck/audit-observatory.webp')"></div>
+    <div class="arcdeck__vignette"></div><div class="arcdeck__grid"></div><div class="arcdeck__grain"></div>
+  </div>
+
+  <header class="arcdeck__bar">
+    <a class="arcdeck__brand" href="/" aria-label="Post Fiat home"><img src="/media-kit/logo.svg" alt="">Post Fiat</a>
+    <div class="arcdeck__ctx">pfUSDC on Arc · Arc Ecosystem Program application</div>
+    <div class="arcdeck__progress" aria-label="Deck progress"><span id="arcdeckCurrent">01</span><span aria-hidden="true">/</span><span>09</span><span class="arcdeck__track"><span class="arcdeck__fill" id="arcdeckFill"></span></span></div>
+  </header>
+
+  <div class="arcdeck__slides">
+
+  <section class="slide slide--hero" id="d1" data-world="vault">
+    <div class="slide__content slide__content--wide">
+      <p class="eyebrow">Post Fiat × Circle Arc</p>
+      <img class="hero-mark" src="/media-kit/logo.svg" alt="">
+      <h1>pfUSDC on Arc.<br><span>One USDC, there and back.</span></h1>
+      <p class="lede">A USDC vault on Arc that releases funds only against a zero-knowledge proof of the other chain's finality, with no committee in the loop. Deposit, mint, burn and release have already run end to end on Arc testnet, every hop pinned to its hash.</p>
+      <div class="hero-chips"><span><b>Arc testnet</b> chain 5042002</span><span><b>2 September 2026</b></span><span><b>1.000000 USDC</b> conserved exactly</span><span><b>32</b> tampered inputs rejected</span></div>
+      <div class="hero-ask"><strong>$250,000</strong><small>four milestone-locked tranches</small></div>
+    </div>
+    <p class="slide__cue">Scroll or use the arrow keys · <a href="#packet">skip to the technical packet</a></p>
+  </section>
+
+  <section class="slide" id="d2" data-world="market">
+    <div class="slide__content">
+      <p class="eyebrow">Why dollars flow at all</p>
+      <h2>What is a <span>NAVCoin?</span></h2>
+      <p class="lede">A token whose value tracks the machine-verified net asset value of a real portfolio, the way a fund share tracks a fund. It turns USDC into private portfolio exposure and back again, built for the surge in on-chain stocks, commodities and other tokenized real-world assets.</p>
+      <div class="cycle" role="img" aria-label="USDC subscribes into a NAVCoin and redeems back to USDC; every leg is a USDC movement through the pfUSDC vault">
+        <div class="cycle__node cycle__node--usdc"><small>Dollar leg</small><b>USDC on Arc</b><p>Locked in the pfUSDC vault. One pfUSDC exists on Post Fiat for every USDC in the vault.</p></div>
+        <div class="cycle__arrows"><span><i>→</i>Subscribe</span><span><i>←</i>Redeem</span></div>
+        <div class="cycle__node cycle__node--nav"><small>Portfolio leg</small><b>NAVCoin on Post Fiat</b><p>Private units priced at verified NAV. Backing, valuation and the redemption claim are checked by code, not a quarterly PDF.</p></div>
+      </div>
+      <p class="note">Every subscription and every redemption is a real USDC transaction. That is what makes the vault recurring settlement volume rather than a one-off demo.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="d3" data-world="bridge">
+    <div class="slide__content slide__content--wide">
+      <p class="eyebrow">What we built</p>
+      <h2>The round trip, <span>authorized by proofs of both chains' finality.</span></h2>
+      <div class="loop" role="img" aria-label="Six hops: deposit USDC on Arc; prove Arc finality in Groth16; mint pfUSDC on Post Fiat; burn pfUSDC; prove Post Fiat finality in SP1 under ML-DSA signatures; release USDC on Arc">
+        <svg viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="loopGrad" x1="0" x2="1"><stop stop-color="#8ab4ff"/><stop offset=".5" stop-color="#9de9ff"/><stop offset="1" stop-color="#c9a0ff"/></linearGradient></defs>
+          <path class="loop__glow" d="M130 150 C130 40 300 40 500 40 S870 40 870 150 S700 260 500 260 S130 260 130 150 Z"/>
+          <path class="loop__path" d="M130 150 C130 40 300 40 500 40 S870 40 870 150 S700 260 500 260 S130 260 130 150 Z"/>
+        </svg>
+        <div class="loop__chain loop__chain--arc"><small>Circle</small><b>Arc</b></div>
+        <div class="loop__chain loop__chain--pf"><small>Post Fiat</small><b>PostFiat L1</b></div>
+        <ol>
+          <li style="--x:28%;--y:14%"><i>1</i><span><b>Deposit</b><small>1.000000 USDC into the Arc vault</small></span></li>
+          <li class="is-proof" style="--x:50%;--y:12%"><i>2</i><span><b>Prove Arc finality</b><small>Groth16 proof that Arc's validator quorum finalized it</small></span></li>
+          <li style="--x:72%;--y:14%"><i>3</i><span><b>Mint pfUSDC</b><small>Post Fiat verifies the proof, mints exactly 1,000,000 atoms</small></span></li>
+          <li style="--x:72%;--y:86%"><i>4</i><span><b>Burn pfUSDC</b><small>Holder burns; supply returns to zero</small></span></li>
+          <li class="is-proof" style="--x:50%;--y:88%"><i>5</i><span><b>Prove Post Fiat finality</b><small>SP1 proof of the burn under ML-DSA signatures</small></span></li>
+          <li style="--x:28%;--y:86%"><i>6</i><span><b>Release USDC</b><small>Arc vault verifies the proof, releases 1.000000 USDC</small></span></li>
+        </ol>
+      </div>
+      <div class="loop__legend"><span><i></i>State change on a chain</span><span><i class="gold"></i>Zero-knowledge proof checked on-chain</span><span>No multisig, no attestation committee, none involved in any transaction shown</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="d4" data-world="market">
+    <div class="slide__content slide__content--wide">
+      <p class="eyebrow">Why Circle would want this</p>
+      <h2>Real USDC usage on Arc, <span>by construction.</span></h2>
+      <p class="lede">Arc is Circle's own chain and fees on it are paid in USDC. What it needs from early builders is usage that recurs because a product depends on it, and integrations that show what the chain was built for.</p>
+      <div class="cards">
+        <article><b>Settlement</b><h3>Every NAVCoin round trip settles in USDC on Arc</h3><p>Subscriptions and redemptions move real USDC into and out of the vault, gas paid in USDC, tied to asset management rather than farmed activity.</p></article>
+        <article><b>Reserves</b><h3>A capped reserve pilot, then migration</h3><p>An initial $500,000 USDC reserve on Arc after the contract audit clears, and a governed path to moving the majority of Post Fiat's reserves there.</p><strong>$5M+<small>durable TVL target, Q1 2027</small></strong></article>
+        <article><b>Agents</b><h3>An AI-agent economy paid in USDC on Arc</h3><p>Post Fiat's agents already earn task rewards and settle on its own chain. Arc becomes the dollar rail underneath, with a public agent-settlement demo in M4.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="d5" data-world="bridge">
+    <div class="slide__content">
+      <p class="eyebrow">Why the zero-knowledge part matters</p>
+      <h2>No committee <span>to hack.</span></h2>
+      <div class="versus">
+        <article class="is-bad"><small>The usual bridge</small><h3>A small group says "yes, that deposit happened."</h3><ul><li>Multisig or attestation committee signs off on every transfer</li><li>Compromise the keys, drain the vault</li><li>Adds a trust assumption neither chain has</li></ul><span class="figure">~$2.8B<small>bridge losses since 2022, mostly this layer</small></span></article>
+        <article class="is-good"><small>This bridge</small><h3>Each chain checks a proof of the other chain's own finality.</h3><ul><li>Arc → Post Fiat: Groth16 proof that Arc's validator quorum finalized the deposit</li><li>Post Fiat → Arc: SP1 proof of the burn under ML-DSA signatures</li><li>No signer, no downgrade path to a signer</li></ul><span class="figure">0<small>trusted parties in any transaction shown</small></span></article>
+      </div>
+      <p class="note">One caveat, stated in full on the next slides: on this test deployment an administrative key can still bypass the withdrawal check. Removing it is the first item in the audit scope.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="d6" data-world="audit">
+    <div class="slide__content slide__content--wide">
+      <p class="eyebrow">Evidence, not claims</p>
+      <h2>Every number below is <span>pinned to a hash.</span></h2>
+      <div class="metrics">
+        <div class="is-ok"><strong>1,000,000</strong><span>atoms deposited, minted, burned and released, exact each way</span></div>
+        <div class="is-ok"><strong>12 + 20</strong><span>corrupted ingress and egress witnesses, all rejected with documented errors</span></div>
+        <div class="is-ok"><strong>22 / 22</strong><span>Foundry tests passing, including a four-test proof of concept for the open finding</span></div>
+        <div><strong>49</strong><span>evidence files, pinned to commit <code>1c136a17</code> so links cannot drift</span></div>
+      </div>
+      <p class="note">Rebuilt proof programs matched CI's builds byte for byte. Arc's own finality was proven from its validator quorum, not from an RPC's word. Full hop-by-hop table with transaction hashes in <a href="#s2">§02</a> of the packet below.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="d7" data-world="audit">
+    <div class="slide__content slide__content--wide">
+      <p class="eyebrow">Stated up front</p>
+      <h2>One open finding, <span>and what the audit money fixes.</span></h2>
+      <div class="finding">
+        <div class="finding__box"><small>Open · egress soundness</small><p>The SP1 gateway owner key (<code>0xdB9b78C8…3814</code>) can admit an unproven withdrawal by registering a permissive verifier under a new selector, because the finality verifier does not pin the proof selector. Reproduced by a Foundry test; documented in <a href="#s4">§04</a>.</p></div>
+        <div class="finding__fix"><small>Remediation path</small><ol><li>Pin the verifier selector in the finality verifier</li><li>Move the gateway owner behind a timelock, then renounce for the pilot</li><li>Independent audit of contracts and both proof programs before any real money</li><li>Cap increases gated on audit remediation</li></ol></div>
+      </div>
+      <p class="note">Two administrative keys exist on this deployment. Both are listed, both are in scope. Nothing here is described as audited.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="d8" data-world="vault">
+    <div class="slide__content slide__content--wide">
+      <p class="eyebrow">The ask</p>
+      <h2>$250,000, <span>paid on delivered gates.</span></h2>
+      <table class="ms-table">
+        <thead><tr><th>Milestone</th><th>Acceptance gate</th><th>Target</th><th>Tranche</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><b>M1</b> Testnet contracts live</td><td>Vault, ingress anchor and finality verifier deployed and source-verified on Arc testnet</td><td>2026-09-05</td><td class="amt">$50,000</td><td><span class="st st--done">Done</span></td></tr>
+          <tr><td><b>M2</b> Arc ingress circuit</td><td>Ingress proof program with pinned verifying key; corrupted-witness suite rejected</td><td>2026-09-12</td><td class="amt">$50,000</td><td><span class="st st--done">Done</span></td></tr>
+          <tr><td><b>M3</b> Round trip + contract audit</td><td>Full round trip on Arc testnet, conservation exact, both proofs on-chain; third-party contract audit delivered and remediated</td><td>through 2026-10-10</td><td class="amt">$75,000</td><td><span class="st st--half">Technical half done</span></td></tr>
+          <tr><td><b>M4</b> Audited mainnet pilot + agent demo</td><td>Mainnet vault behind the $500K cap after M3's audit; public agent-settlement demo; proof-program audits before any cap increase; hardened prover service</td><td>Q4 2026</td><td class="amt">$75,000</td><td><span class="st st--open">Open</span></td></tr>
+        </tbody>
+      </table>
+      <div class="budget" role="img" aria-label="Budget: $150,000 independent audits, $60,000 prover service and GPU infrastructure, $40,000 mainnet pilot operations"><span>$150K audits</span><span>$60K prover service</span><span>$40K pilot ops</span></div>
+      <p class="note">Post Fiat funds all core protocol engineering itself. The grant buys the independent review and the reliable proving infrastructure that turn a testnet demonstration into something institutions can rely on.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="d9" data-world="vault">
+    <div class="slide__content slide__content--wide">
+      <p class="eyebrow">In one line</p>
+      <h2>A proof-secured USDC vault on Arc, <span>with real volume behind it.</span></h2>
+      <div class="doors">
+        <article><small>What Circle gets</small><h3>An Arc flagship integration</h3><ul><li>The first bridge on Arc secured by proofs rather than a committee</li><li>Recurring USDC settlement from live asset-management flows</li><li>A live agent economy settling to USDC on Arc at launch</li><li>Joint co-marketing artifact at M4</li></ul></article>
+        <article><small>What Post Fiat commits</small><h3>Gates, not dates</h3><ul><li>Tranches pay only on delivered acceptance gates</li><li>Reserve pilot activates only after the audit clears</li><li>Every claim backed by running software and pinned evidence</li><li>Open findings published before they are fixed</li></ul></article>
+      </div>
+      <div class="links"><a class="primary" href="#packet">Read the technical packet ↓</a><a href="https://github.com/postfiatorg/postfiatl1v2/blob/1c136a17ad6dbf8ff34f1b15502e0521a690afad/docs/business/pfusdc-arc-grant-proposal-20260828-v3.md">Proposal v3</a><a href="https://github.com/postfiatorg/postfiatl1v2/pull/37">PR #37</a><a href="https://github.com/postfiatorg/postfiatl1v2">Source</a></div>
+    </div>
+  </section>
+
+  </div>
+  <div class="arcdeck__controls" aria-label="Deck controls"><button id="arcdeckPrev" type="button" aria-label="Previous slide">←</button><button id="arcdeckNext" type="button" aria-label="Next slide">→</button></div>
+</div>
+
 <div class="wrap">
 
 <div class="sitebar"><a class="brand" href="/" aria-label="Post Fiat home"><img src="/media-kit/logo.svg" alt="">POST FIAT</a><nav><a href="/research/">Research</a><a href="/whitepaper/">Whitepaper</a><a href="https://github.com/postfiatorg/postfiatl1v2/pull/37">PR #37</a></nav></div>
 
-<header class="masthead">
+<header class="masthead" id="packet">
   <div>
     <p class="kicker">Post Fiat · pfUSDC on Arc · technical review packet</p>
     <h1>One USDC, there and back, authorized by proofs of the two chains&rsquo; own finality.</h1>
@@ -136,19 +292,19 @@
 <section class="story" aria-labelledby="s0">
   <h2 id="s0">The story, in plain English: what this is for</h2>
   <p><strong>What is a NAVCoin.</strong> A NAVCoin is a new financial primitive: a token whose value tracks the machine-verified net asset value of a real portfolio, the way a fund share tracks a fund, rather than a peg to a dollar. It lets someone turn USDC into exposure to a portfolio and back again, privately, and without trusting an issuer's quarterly PDF, because the backing, the valuation, and the redemption claim are checked by code and tied to the token's supply. It is built to ride the surge in on-chain stocks, commodities, and other tokenized real-world assets: as those assets move on-chain, portfolios of them can be held, swapped, and redeemed the same way. The design is public in <a href="https://postfiat.org/blog/navcoin-proposal/">the NAVCoin proposal</a> and the <a href="https://postfiat.org/research/private-nav-swap-explainer/">private swap explainer</a>.</p>
-  <p><strong>Who is asking, and for what.</strong> Post Fiat runs its own blockchain, where people and AI agents hold and trade NAVCoins. When someone buys into a NAVCoin they pay in dollars, and when they cash out they get dollars back. Those dollars are USDC, and the copy of that USDC that lives on Post Fiat's chain is called pfUSDC. Every pfUSDC is backed one-for-one by real USDC locked in a vault contract on another blockchain, so the pfUSDC vault is the dollar leg of every NAVCoin subscription and redemption. Post Fiat is applying to Circle's Arc Ecosystem Program for $250,000 in four milestone-locked payments, and is proposing that the security firm Zellic join as co-applicant and independent auditor. Zellic has not yet agreed to this; this page is the material we are putting in front of them to decide. The money pays for independent security audits and for running the proof-generating machines as a reliable service; Post Fiat pays for the engineering itself. This page exists because <a href="https://github.com/postfiatorg/postfiatl1v2/blob/1c136a17ad6dbf8ff34f1b15502e0521a690afad/docs/business/pfusdc-arc-grant-proposal-20260828-v3.md">the proposal</a> promised that every claim would be backed by running software, and this is that software, running.</p>
+  <p><strong>Who is asking, and for what.</strong> Post Fiat runs its own blockchain, where people and AI agents hold and trade NAVCoins. When someone buys into a NAVCoin they pay in dollars, and when they cash out they get dollars back. Those dollars are USDC, and the copy of that USDC that lives on Post Fiat's chain is called pfUSDC. Every pfUSDC is backed one-for-one by real USDC locked in a vault contract on another blockchain, so the pfUSDC vault is the dollar leg of every NAVCoin subscription and redemption. Post Fiat is applying to Circle's Arc Ecosystem Program for $250,000 in four milestone-locked payments. The money pays for independent security audits of the contracts and proof programs and for running the proof-generating machines as a reliable service; Post Fiat pays for the engineering itself. This page exists because <a href="https://github.com/postfiatorg/postfiatl1v2/blob/1c136a17ad6dbf8ff34f1b15502e0521a690afad/docs/business/pfusdc-arc-grant-proposal-20260828-v3.md">the proposal</a> promised that every claim would be backed by running software, and this is that software, running.</p>
   <p><strong>Why Circle would want this.</strong> Arc is Circle's own blockchain, and transaction fees on it are paid in USDC. What Circle needs from early builders is real usage rather than farmed activity, and integrations that show what Arc was built for. Post Fiat's offer is to move its USDC vault onto Arc. After that, every time anyone buys into or cashes out of a NAVCoin, real USDC moves into or out of a vault on Arc, with the fee paid in USDC. That is recurring settlement volume tied to asset management, not a one-off demo. The proposal starts with a $500,000 reserve on Arc once the audit clears, a path to moving most of Post Fiat's reserves there, and a public demonstration of an AI agent doing paid work and being paid in USDC on Arc.</p>
   <p><strong>Why the zero-knowledge part matters to Arc.</strong> A bridge is the software that lets USDC locked on one chain be represented on another. Almost every bridge relies on a small trusted group, a committee or multisig, to say "yes, that deposit happened," and that trusted group is where most of the billions in bridge hacks came from. This bridge is designed to have no such group, and none was involved in the transactions on this page. One caveat, stated in <a href="#s4">§04</a>: on this test deployment a single administrative key could still bypass the withdrawal check, and removing it is the first job of the audit. Going in, a zero-knowledge proof, a compact piece of math anyone can check, shows that Arc's own validators confirmed the deposit. Going out, a contract on Arc checks a proof that Post Fiat's validators confirmed the withdrawal. That gives Circle two things to talk about: Arc's confirmations can be verified by other chains with math rather than trust, and Post Fiat's validators sign with post-quantum signatures, the kind designed to survive quantum computers, verified inside a proof on Arc. Several of Arc's founding validators are banks and payment networks with active quantum-risk programs; this is a concrete answer for them.</p>
-  <p><strong>Why a co-application with Zellic would make sense.</strong> A demonstration on a test network is a demo. The same system, audited by an independent security firm and then run with a capped amount of real money, is a product Circle can point to. The proposed split is simple: Post Fiat brings the working software, the auditor brings the review that makes it something institutions can rely on, and the grant's audit tranches pay for that review. If Zellic takes this on, the rest of this page is the evidence they would start from rather than a pitch: every step tied to a transaction you can look up, 32 deliberately tampered inputs correctly rejected, and the one known weakness stated up front rather than buried (<a href="#s4">§04</a>). Closing that weakness before real money is at stake is exactly what the audit money is for.</p>
+  <p><strong>Why the audit is the point.</strong> A demonstration on a test network is a demo. The same system, audited by an independent security firm and then run with a capped amount of real money, is a product Circle can point to. The split is simple: Post Fiat brings the working software, and the grant's audit tranches buy the independent review that makes it something institutions can rely on. The rest of this page is what an auditor would start from rather than a pitch: every step tied to a transaction you can look up, 32 deliberately tampered inputs correctly rejected, and the one known weakness stated up front rather than buried (<a href="#s4">§04</a>). Closing that weakness before real money is at stake is exactly what the audit money is for.</p>
   <ul class="ms" aria-label="Proposal milestones and status">
     <li class="done"><b>M1</b>The bridge contracts are deployed and live on Arc's test network.</li>
     <li class="done"><b>M2</b>The proof program for deposits works; 12 tampered deposit inputs were correctly rejected.</li>
     <li class="done"><b>M3 · technical half</b>One USDC went Arc → Post Fiat → Arc with both proofs checked on-chain and not an atom lost; 20 tampered withdrawal inputs rejected. This page.</li>
-    <li class="open"><b>M3 · audit half → M4</b>Independent audits (proposed: Zellic), then the capped real-money pilot on Arc and the AI-agent payment demo. This is what the grant funds.</li>
+    <li class="open"><b>M3 · audit half → M4</b>Independent audits of the contracts and proof programs, then the capped real-money pilot on Arc and the AI-agent payment demo. This is what the grant funds.</li>
   </ul>
 </section>
 
-<div class="notice"><strong>Status of this document.</strong> Prepared as the basis for a proposed co-application with Zellic, who have not yet reviewed or agreed to anything. Nothing here has been audited, reviewed, endorsed, or co-sponsored by Zellic or Circle. Arc testnet is alpha software operated by Circle; the PostFiat devnet is a controlled six-validator network. Amounts are testnet USDC. <strong>One open finding qualifies the egress claim on this deployment:</strong> the SP1 gateway owner key (EOA 0xdB9b78C8…3814) can admit an unproven withdrawal by registering a permissive verifier under a new selector, because the finality verifier does not pin the proof selector. It is stated in full in <a href="#s4">§04</a>, reproduced by a forge test, and its fix is the first item in the audit scope.</div>
+<div class="notice"><strong>Status of this document.</strong> Prepared as the technical basis for Post Fiat's Arc Ecosystem Program application. Nothing here has been audited, reviewed, endorsed, or sponsored by Circle or by any security firm. Arc testnet is alpha software operated by Circle; the PostFiat devnet is a controlled six-validator network. Amounts are testnet USDC. <strong>One open finding qualifies the egress claim on this deployment:</strong> the SP1 gateway owner key (EOA 0xdB9b78C8…3814) can admit an unproven withdrawal by registering a permissive verifier under a new selector, because the finality verifier does not pin the proof selector. It is stated in full in <a href="#s4">§04</a>, reproduced by a forge test, and its fix is the first item in the audit scope.</div>
 
 <div class="strip" role="list" aria-label="Round-trip summary">
   <div role="listitem"><div class="k">Deposited on Arc</div><div class="v num">1,000,000<small>atoms · 1.000000 USDC</small></div></div>
@@ -348,7 +504,7 @@
 
 <section aria-labelledby="s5">
   <h2 id="s5"><span class="n">05</span> Reproduce and review</h2>
-  <p>Everything is open source at <a href="https://github.com/postfiatorg/postfiatl1v2">github.com/postfiatorg/postfiatl1v2</a>, branch <a href="https://github.com/postfiatorg/postfiatl1v2/tree/integrate/arc-tier4-current-v2-20260901"><code>integrate/arc-tier4-current-v2-20260901</code></a>. Evidence and source links on this page are pinned to commit <code>1c136a17</code> so they cannot drift; the evidence directory is <a href="https://github.com/postfiatorg/postfiatl1v2/tree/1c136a17ad6dbf8ff34f1b15502e0521a690afad/docs/evidence/arc-mvp-20260828/devnet-20260902">docs/evidence/arc-mvp-20260828/devnet-20260902</a> (49 files). The <a href="https://github.com/postfiatorg/postfiatl1v2/blob/1c136a17ad6dbf8ff34f1b15502e0521a690afad/docs/business/zellic-review-packet-20260902.md">claim-classification packet</a> maps every statement in the grant proposal to verified / demonstrated / implemented / planned / aspirational, and the <a href="https://github.com/postfiatorg/postfiatl1v2/blob/1c136a17ad6dbf8ff34f1b15502e0521a690afad/docs/business/zellic-audit-scope-20260902.md">audit scope</a> lists the components, threat model, and deliverables we are requesting. Contracts: <a href="https://github.com/postfiatorg/postfiatl1v2/tree/1c136a17ad6dbf8ff34f1b15502e0521a690afad/crates/ethereum-contracts/src">crates/ethereum-contracts/src</a>. Guests: <a href="https://github.com/postfiatorg/postfiatl1v2/tree/1c136a17ad6dbf8ff34f1b15502e0521a690afad/programs/pfusdc-arc-ingress">programs/pfusdc-arc-ingress</a>, <a href="https://github.com/postfiatorg/postfiatl1v2/tree/1c136a17ad6dbf8ff34f1b15502e0521a690afad/programs/pfusdc-egress">programs/pfusdc-egress</a>. Prover and audit tool: <a href="https://github.com/postfiatorg/postfiatl1v2/tree/1c136a17ad6dbf8ff34f1b15502e0521a690afad/tools/pfusdc-tier4-prover">tools/pfusdc-tier4-prover</a>.</p>
+  <p>Everything is open source at <a href="https://github.com/postfiatorg/postfiatl1v2">github.com/postfiatorg/postfiatl1v2</a>, branch <a href="https://github.com/postfiatorg/postfiatl1v2/tree/integrate/arc-tier4-current-v2-20260901"><code>integrate/arc-tier4-current-v2-20260901</code></a>. Evidence and source links on this page are pinned to commit <code>1c136a17</code> so they cannot drift; the evidence directory is <a href="https://github.com/postfiatorg/postfiatl1v2/tree/1c136a17ad6dbf8ff34f1b15502e0521a690afad/docs/evidence/arc-mvp-20260828/devnet-20260902">docs/evidence/arc-mvp-20260828/devnet-20260902</a> (49 files). The <a href="https://github.com/postfiatorg/postfiatl1v2/blob/279780096e97703b06519a1e2994dfd67bc330ee/docs/business/arc-grant-claim-classification-20260902.md">claim-classification packet</a> maps every statement in the grant proposal to verified / demonstrated / implemented / planned / aspirational, and the <a href="https://github.com/postfiatorg/postfiatl1v2/blob/279780096e97703b06519a1e2994dfd67bc330ee/docs/business/arc-audit-scope-20260902.md">audit scope</a> lists the components, threat model, and deliverables we are requesting. Contracts: <a href="https://github.com/postfiatorg/postfiatl1v2/tree/1c136a17ad6dbf8ff34f1b15502e0521a690afad/crates/ethereum-contracts/src">crates/ethereum-contracts/src</a>. Guests: <a href="https://github.com/postfiatorg/postfiatl1v2/tree/1c136a17ad6dbf8ff34f1b15502e0521a690afad/programs/pfusdc-arc-ingress">programs/pfusdc-arc-ingress</a>, <a href="https://github.com/postfiatorg/postfiatl1v2/tree/1c136a17ad6dbf8ff34f1b15502e0521a690afad/programs/pfusdc-egress">programs/pfusdc-egress</a>. Prover and audit tool: <a href="https://github.com/postfiatorg/postfiatl1v2/tree/1c136a17ad6dbf8ff34f1b15502e0521a690afad/tools/pfusdc-tier4-prover">tools/pfusdc-tier4-prover</a>.</p>
 <pre><code># conformance against pinned arc-node source (certificates, receipts, negatives)
 cargo test -p arc-conformance --locked
 
@@ -376,5 +532,6 @@ pfusdc-tier4-prover arc-ingress --witness witness.v2.json --output-dir ./x   # e
 </footer>
 
 </div>
+<script src="/research/pfusdc-arc-deck/deck.js" defer></script>
 </body>
 </html>
