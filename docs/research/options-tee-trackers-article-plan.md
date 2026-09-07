@@ -14,9 +14,14 @@ story. This is an explainer of existing work, not a new portfolio specification.
 - [x] Build with the deployment Hugo version; inspect desktop/mobile and keyboard/no-JS behavior.
 - [x] Preserve readable diagram descriptions in Markdown and Copy for LLM output.
 
-Publication target: `/research/single-stock-options-trackers/`. The website PR
+Publication target: `/blog/trustless-single-stock-option-indices/`. The website PR
 and GitHub Pages deployment provide the publication record; verify the live page,
-assets, Markdown output and research-index entry after deployment.
+assets, Markdown output, blog-index entry and research redirect after deployment.
+
+The owner subsequently requested the main blog placement and exact title
+“A Framework for Trustless Single Stock Option Indices.” The original research
+URL redirects to the blog article. Its body, diagrams and scoped trust claims
+remain the published explainer; the main blog index now provides discovery.
 
 Local validation on September 7, 2026 passed with Hugo 0.148.1 and both repository
 content checks. Browser checks covered all ten figures at 1280px and 390px, all

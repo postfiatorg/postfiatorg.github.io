@@ -115,7 +115,7 @@
   {{ $copyRawContent := replace $copyRawContentAtp "{{< agentic-index-diagram kind=\"pftl\" >}}" $agenticPftlDescription }}
   {{ $copyRawContent = partial "options-tee/markdown.html" (dict "page" . "text" $copyRawContent) }}
   {{ $articleMarkdown := printf "# %s\n\nDate: %s\nURL: %s\nSummary: %s\n\n%s" .Title (.Date.Format "January 2, 2006") .Permalink (.Summary | plainify) $copyRawContent }}
-  <script id="articleMarkdownSource" type="application/json">{{ $articleMarkdown | jsonify }}</script>
+  <script id="articleMarkdownSource" type="application/json">{{ $articleMarkdown }}</script>
   <script>
     const navShell=document.getElementById("navShell"),menuButton=document.getElementById("menuButton");
     if(navShell&&menuButton){menuButton.addEventListener("click",()=>{const e=menuButton.getAttribute("aria-expanded")==="true";menuButton.setAttribute("aria-expanded",String(!e));menuButton.setAttribute("aria-label",e?"Open menu":"Close menu");navShell.classList.toggle("is-open",!e)})}
