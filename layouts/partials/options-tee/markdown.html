@@ -2,7 +2,8 @@
 {{- if .page.Params.options_tee -}}
   {{- range $kind, $diagram := .page.Site.Data.options_tee_diagrams -}}
     {{- $tag := printf "{{< options-tee-diagram kind=\"%s\" >}}" $kind -}}
-    {{- $description := printf "**Figure %s: %s**\n\n%s\n\n%s" $diagram.number $diagram.title $diagram.description $diagram.caption -}}
+    {{- $asset := printf "research/options-tee-indices/figures/%s.png" $kind | absURL -}}
+    {{- $description := printf "**Figure %s: %s**\n\n![%s](%s)\n\n%s" $diagram.number $diagram.title $diagram.title $asset $diagram.description -}}
     {{- $text = replace $text $tag $description -}}
   {{- end -}}
 {{- end -}}
