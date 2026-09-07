@@ -13,3 +13,14 @@
 @media print{.post-content .ot-figure{break-inside:avoid;background:#fff;color:#13240f;border-color:#596c51;--ot-ink:#13240f;--ot-muted:#374b32;--ot-green:#245b16;--ot-blue:#224b78;--ot-line:#b1bbaa}.ot-figure button{display:none}.ot-figure .ot-node,.ot-figure .ot-step,.ot-figure .ot-check,.ot-figure .ot-calculator,.ot-figure .ot-result,.ot-figure .ot-enclave,.ot-figure .ot-chain,.ot-figure .ot-source{background:#f2f5ed}}
 
 .ot-check[data-state=skipped]{background:#1c211c;border-color:#52604e}.ot-check[data-state=skipped] small,.ot-check[data-state=skipped] .ot-check-mark{color:var(--ot-muted);border-color:#6b7a64}
+
+/* The proposed NAVCoin separates the custody, verification and access layers. */
+.ot-navcoin-map{display:grid;grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr) 22px minmax(0,1fr);gap:8px;align-items:stretch}
+.ot-navcoin-map .ot-node{padding:16px}.ot-navcoin-map .ot-connector{font-size:24px}.ot-navcoin-map .ot-fingerprint{font-size:11px}
+.ot-navcoin-access .ot-chain>strong{font-size:20px}.ot-exit-paths .ot-node{padding:20px}
+.post-content .ot-exit-steps{list-style:none;margin:12px 0 18px;padding:0;display:flex;flex-direction:column;gap:16px}
+.post-content .ot-exit-steps li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;margin:0;font-size:15px;color:var(--ot-muted)}
+.ot-exit-steps b{display:grid;place-items:center;align-self:start;width:26px;height:26px;border:1px solid #658653;border-radius:50%;font:12px/1 ui-monospace,monospace;color:var(--ot-green)}
+.ot-nav-prices{display:grid;grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr);gap:12px;align-items:center;margin-top:18px;padding:18px;border:1px solid #536c89;border-radius:10px;background:#132235;text-align:center}
+.ot-nav-prices>span{font-size:28px;color:var(--ot-blue)}.ot-nav-prices strong{display:block;font-size:19px;margin:7px 0}.ot-nav-prices .ot-kicker{color:var(--ot-blue)}
+@media(max-width:700px){.ot-navcoin-map{grid-template-columns:1fr;gap:8px}.ot-navcoin-map .ot-connector{line-height:26px}.ot-nav-prices{grid-template-columns:1fr;gap:8px}.ot-nav-prices>span{transform:rotate(90deg);line-height:28px}.ot-exit-paths .ot-node{padding:16px}}

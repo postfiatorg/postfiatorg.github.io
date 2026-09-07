@@ -7,12 +7,12 @@ url: "/blog/trustless-single-stock-option-indices/"
 aliases: ["/research/single-stock-options-trackers/"]
 breadcrumb_label: "Post Fiat Blog"
 breadcrumb_url: "/blog/"
-summary: "A financial primitive for maintaining options exposure to one company—with explicit portfolio rules, private market data, and a result that anyone can verify."
-description: "A visual explanation of single-stock options trackers: rolling call baskets, trusted execution environments, zero-knowledge proofs, Post Fiat receipts, and the boundary between verifiable rules and a funded investment product."
+summary: "A verifiable engine for single-stock options exposure—and a framework for packaging it as a NAVCoin held on Ethereum and traded on Uniswap."
+description: "A visual explanation of single-stock options trackers and proposed options NAVCoins: upside convexity, brokerage custody, Ethereum tokens, Uniswap trading, redemption, and Post Fiat verification."
 author: "Post Fiat"
 options_tee: true
 categories: ["Post Fiat Research"]
-tags: ["Options", "Verifiable Indices", "TEE", "Post Fiat"]
+tags: ["Options", "Verifiable Indices", "NAVCoin", "Ethereum", "Uniswap", "TEE", "Post Fiat"]
 ---
 
 A single-stock options tracker maintains an options strategy on one company as
@@ -27,9 +27,12 @@ can use private brokerage data while publishing enough evidence for other system
 to check it. This is the primitive we built: a verifiable engine for single-stock
 options trackers.
 
-The long-term product could be a model portfolio, a managed account or a tokenized
-investment product. The engine underneath those products is the subject of this
-article.
+A funded version could become an **options NAVCoin**: a token representing a
+share of an actual options portfolio, held in an Ethereum wallet and traded on
+Uniswap. The rulebook maintains the exposure; verified accounting connects the
+token to the portfolio's net asset value, or NAV. That product architecture is
+the next layer proposed here. The completed demonstration proves target
+construction; custody, live execution and token issuance remain additional work.
 
 ## 1. What exactly is being tracked?
 
@@ -76,7 +79,100 @@ calculation and check that it follows the same specification. This reduces the
 need to accept an operator's spreadsheet, API response or assertion on faith.
 It does not establish that the strategy is profitable or suitable for an investor.
 
-## 3. The rulebook is part of the product
+The exposure also answers a different need from a leveraged perpetual. A fully
+paid long call offers **upside convexity**: its participation can increase as the
+stock rises, while its loss is limited to the premium paid, plus fees. It has no
+maintenance-margin liquidation as a standalone funded position. A margined long
+perpetual gives linear exposure and can be liquidated during a drawdown before
+the stock recovers. The call pays for this difference through premium, time decay
+and expiry; perpetual funding can be paid or received and changes over time.
+[OIC call mechanics](https://www.optionseducation.org/strategies/all-strategies/long-call),
+[Hyperliquid liquidation](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/liquidations)
+and [funding](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding).
+
+A rolling call portfolio carries that convex exposure forward by buying new
+options under its rulebook. It can still lose all its invested capital. A token
+wrapper preserves the absence of holder margin calls only when its underlying
+calls are fully funded and the holder does not borrow against the token.
+
+## 3. An options NAVCoin in an Ethereum wallet
+
+Imagine a Nvidia options NAVCoin and a separate Micron options NAVCoin. Each
+represents its own portfolio. Investors hold an ERC-20 token; the portfolio holds
+the actual calls selected by its rulebook and any residual cash. NAV changes as
+those positions change value, trading occurs and expenses accrue.
+
+**NAV per token = (actual options value + cash − liabilities and accrued fees)
+÷ valid token supply.**
+
+For illustration, a portfolio with $1 million of net assets and 100,000 tokens
+has a $10 NAV per token. That number comes from the portfolio's own holdings,
+not from total open interest in the stock's options chain or the money in a
+Uniswap pool.
+
+{{< options-tee-diagram kind="navcoin" >}}
+
+The architecture separates three responsibilities:
+
+| Layer | What it holds or enforces |
+|---|---|
+| Broker / custodian | Actual listed options, brokerage cash and the account records needed to establish the portfolio's assets and obligations |
+| Post Fiat verification | The registered strategy, authenticated reserve evidence, NAV calculations and canonical supply accounting in the proposed NAVCoin integration |
+| Ethereum / Uniswap | ERC-20 ownership, settlement USDC, issuance and redemption contracts, and secondary-market trading |
+
+**Self-custody of the token is different from custody of the options.** A Schwab
+call remains a brokerage-held security. Putting its portfolio share on Ethereum
+does not move that contract into an Ethereum vault. The fund arrangement must
+establish who controls the account and what token holders can claim. Authenticated
+account evidence makes that arrangement more checkable; cryptography cannot make
+a broker's obligations disappear.
+
+Ethereum contracts would need to authenticate accepted NAV and supply
+authorizations before acting on them. In the PFTL-ledger design, this includes
+verifying the relevant PFTL finality evidence. A relayer merely carrying a number
+across chains is insufficient. This separation follows the
+[existing NAVCoin architecture](https://postfiat.org/research/private-nav-swap-explainer/):
+the canonical accounting and the trading venue can live on different chains.
+
+## 4. Selling the token and redeeming the portfolio
+
+Uniswap provides a market where buyers and sellers exchange the token. It does
+not automatically set its price to NAV. A $10 NAV token may trade at $9.70 or
+$10.30 depending on liquidity, expected portfolio moves and the ease of entering
+or leaving the fund.
+
+{{< options-tee-diagram kind="redemption" >}}
+
+In a redeemable design, a trader buying below NAV can request redemption against
+portfolio value; above NAV, a subscriber can acquire new shares and sell them.
+That mechanism can narrow price differences when costs, settlement times and
+access permit. A published NAV alone provides no such arbitrage route, and
+redemption does not guarantee an exact market-price match.
+
+Brokerage-held options make **queued settlement** a useful design candidate.
+Investors can trade existing ERC-20 tokens while the stock-options market is
+closed, provided the token is transferable and the pool has liquidity. A primary
+subscription or redemption can settle after the required valuation, execution
+and cash movement. The product must specify when its exchange rate is determined
+and which costs apply, so stale quotes do not transfer value between holders.
+[ERC-7540](https://eips.ethereum.org/EIPS/eip-7540) provides a standard request-and-claim
+interface for asynchronous vault deposits and redemptions; it does not itself
+provide custody or determine a fair NAV.
+
+Earlier NAVCoin work contains two distinct product models:
+
+| Model | Holder's exit and price connection |
+|---|---|
+| Redeemable portfolio share | Sell on the market or request redemption under the fund's stated settlement terms; subscriptions and redemptions connect price to NAV |
+| NAV-tracked token without a standing redemption right | Sell on the market; disclosed, bounded market operations may support alignment, while discounts or premiums can persist |
+
+The second model appears in the
+[collateralization draft](https://github.com/postfiatorg/postfiatorg.github.io/blob/main/content/blog/navcoin-collateralization.md).
+Both can use Ethereum and Uniswap. This article identifies the choice; it does
+not select redemption terms, trading rules or market-support budgets for a live
+options fund.
+
+## 5. The rulebook is part of the product
 
 “Use liquid calls on this stock” leaves many decisions unresolved. Which maturity?
 What counts as liquid? Which strikes? How are quantities rounded? What happens
@@ -105,7 +201,7 @@ same registered expectations.
 The deterministic [Rust calculator](https://github.com/postfiatorg/postfiatl1v2/blob/d3aeb780bff327bc2d9734226770aba7433ba5d9/tools/nav-reserve-proof/crates/reserve-proof-types/src/yolo_target.rs)
 implements those choices. Python and Rust were checked against one another.
 
-## 4. From a private options chain to a verifiable target
+## 6. From a private options chain to a verifiable target
 
 A useful tracker needs market data. Brokerage responses may contain licensed
 quotes and account-related inputs that should not be copied onto a public ledger.
@@ -142,7 +238,7 @@ The important separation is **evidence about the data-producing software** and
 binding the normalized inputs. It does not independently prove a Schwab TLS
 transcript or establish that the broker's market data is economically correct.
 
-## 5. What can remain private?
+## 7. What can remain private?
 
 A public verifier needs the proof and the public commitments. It does not need the
 whole options chain, the private witness or the complete target position table.
@@ -165,7 +261,7 @@ or auditors remains a product-policy choice.
 The [public ABI](https://github.com/postfiatorg/postfiatl1v2/blob/c1b3a6bec14b4fe76bc3e4f95fecd4b9b0691f53/crates/types/src/yolo_target_public_values.rs)
 defines exactly which fields are exposed.
 
-## 6. What does “trustless” mean here?
+## 8. What does “trustless” mean here?
 
 The valuable claim is precise: **a verifier does not have to trust the operator's
 assertion that it applied the registered calculation correctly.** The proof and
@@ -198,7 +294,7 @@ It is best understood as **verifiable rule execution over attested inputs**.
 That guarantee can be embedded in products with different custody and disclosure
 arrangements without confusing the proof with those arrangements.
 
-## 7. What does Post Fiat add?
+## 9. What does Post Fiat add?
 
 A mathematical proof can be checked independently. A shared ledger answers the
 next questions: which tracker and program were registered, which result was
@@ -217,11 +313,14 @@ administrator can query the receipt instead of deciding which operator API
 response is authoritative. The validators verify the succinct proof; they do
 not retrieve private chains or regenerate it.
 
-PFTL is the intended ledger of record for this primitive. Another chain is not a
-dependency of the demonstrated architecture. A target receipt itself grants no
-order, minting or reserve authority; normal transaction fees still apply.
+PFTL is the intended ledger of record for this primitive. In the proposed NAVCoin
+product, Ethereum distribution would sit above that verification and accounting
+layer. The completed target receipt itself grants no order, minting or reserve
+authority; normal transaction fees still apply. The bridge, reserve checks and
+issuance controls need their own integration and evidence before investor funds
+depend on them.
 
-## 8. What could be built on top?
+## 10. How this connects to earlier NAVCoin proposals
 
 The primitive produces a target and evidence for that target. It is useful because
 several different products can consume the same object.
@@ -240,7 +339,26 @@ tradable token requires another explicit set of economic and legal arrangements.
 The value of the primitive is that these products can share a verifiable strategy
 engine instead of treating every calculation as an opaque operator claim.
 
-## 9. What we have demonstrated
+The options NAVCoin fits a product family already described in Post Fiat's work:
+
+| Precedent | Connection to the options tracker |
+|---|---|
+| [The NAVCoin Proposal](https://postfiat.org/blog/navcoin-proposal/) | Binds portfolio evidence, valuation, liabilities and supply to a floating-NAV token |
+| [One Portfolio, Many Access Venues — draft](https://github.com/postfiatorg/postfiatorg.github.io/blob/main/content/blog/navcoin-ethereum.md) | Separates one portfolio's backing and global supply from the venues where its tokens trade |
+| [Trustless UltraShort Tokens](https://postfiat.org/blog/trustless-ultrashort-tokens/) | Proposes packaging a managed perpetual position as a transferable, redeemable NAVCoin; an options portfolio supplies a different payoff and custody model |
+| [Glass: Institutionalizing NAVCoins](https://postfiat.org/research/glass-institutionalizing-navcoins/) | Explores how reserve rights, liabilities and control evidence could support institutional acceptance of portfolio claims |
+
+These are architectural precedents with their own declared implementation
+boundaries. The UltraShort design uses an on-chain perpetual venue; its proposed
+custody controls cannot simply be assumed to apply to a Schwab account.
+
+An external precedent is [Enzyme Onyx](https://docs.enzyme.finance/onyx-faq), which
+supports ERC-20 vault shares and portfolios of on-chain or off-chain assets, with
+configurable transferability and manager-reported valuation. The proposed Post
+Fiat contribution is to bind authenticated evidence and verified calculations to
+the controls that determine which portfolio claims may exist.
+
+## 11. What we have demonstrated
 
 On September 6, we completed the target/proof workflow for **Micron and Nvidia**.
 Each calculation produced target quantities for five November 20 calls using retained,
@@ -266,7 +384,9 @@ qualification records. The [verification map](https://github.com/postfiatorg/pos
 links the guest, attestation verifier, calculator, consensus checks and client.
 NAVStrategies contains the measured collection, orchestration and replay side.
 
-The next product milestone is to connect this demonstrated calculation primitive
-to an operating service: deploy and activate the receipt feature, establish the
-ongoing collection process, and add any explicitly chosen execution and custody
-layer.
+The next product milestone is to connect the demonstrated calculation to actual
+holdings: deploy and activate the receipt feature, maintain ongoing collection,
+execute the chosen strategy and reconcile the resulting account. An options
+NAVCoin then adds reserve valuation, custody and holder rights, share accounting,
+Ethereum issuance, liquidity and a specified exit process. Each layer needs
+evidence for its own claim before the combined product can be presented as live.
