@@ -1,0 +1,8 @@
+{{- $kind := .Get "kind" -}}
+{{- $diagram := index .Site.Data.options_tee_diagrams $kind -}}
+{{- if not $diagram -}}{{ errorf "Unknown options tracker diagram: %s" $kind }}{{- end -}}
+<figure class="ot-figure ot-{{ $kind }}" id="ot-{{ $kind }}" aria-labelledby="ot-{{ $kind }}-title">
+  <div class="ot-heading"><span class="ot-kicker">Figure {{ $diagram.number }}</span><h3 id="ot-{{ $kind }}-title">{{ $diagram.title }}</h3></div>
+  {{ partial (printf "options-tee/%s.html" $kind) . }}
+  <figcaption>{{ $diagram.caption }}</figcaption>
+</figure>

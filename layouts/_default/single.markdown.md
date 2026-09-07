@@ -9,4 +9,4 @@ Markdown source of the page above. Other formats and the research blog index: ht
 
 ---
 
-{{ .RawContent }}
+{{ partial "options-tee/markdown.html" (dict "page" . "text" .RawContent) }}

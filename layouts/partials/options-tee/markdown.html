@@ -1,0 +1,9 @@
+{{- $text := .text -}}
+{{- if .page.Params.options_tee -}}
+  {{- range $kind, $diagram := .page.Site.Data.options_tee_diagrams -}}
+    {{- $tag := printf "{{< options-tee-diagram kind=\"%s\" >}}" $kind -}}
+    {{- $description := printf "**Figure %s: %s**\n\n%s\n\n%s" $diagram.number $diagram.title $diagram.description $diagram.caption -}}
+    {{- $text = replace $text $tag $description -}}
+  {{- end -}}
+{{- end -}}
+{{- return $text -}}

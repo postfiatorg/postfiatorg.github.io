@@ -1,0 +1,17 @@
+<div class="ot-verification" data-ot-verification>
+ <div class="ot-button-label" id="ot-scenarios-label">Try a submitted claim</div>
+ <div class="ot-scenarios" role="group" aria-labelledby="ot-scenarios-label">
+  <button type="button" data-scenario="original" aria-pressed="true">Original result</button>
+  <button type="button" data-scenario="rules" aria-pressed="false">Change rules</button>
+  <button type="button" data-scenario="input" aria-pressed="false">Change input</button>
+  <button type="button" data-scenario="target" aria-pressed="false">Alter target</button>
+  <button type="button" data-scenario="duplicate" aria-pressed="false">Submit twice</button>
+ </div>
+ <div class="ot-checks">
+  <div class="ot-check" data-check="registration"><span class="ot-check-mark" aria-hidden="true">✓</span><strong>Registered expectations</strong><small data-check-text>Match</small></div>
+  <div class="ot-check" data-check="proof"><span class="ot-check-mark" aria-hidden="true">✓</span><strong>Proof / public result binding</strong><small data-check-text>Valid</small></div>
+  <div class="ot-check" data-check="replay"><span class="ot-check-mark" aria-hidden="true">✓</span><strong>Unused run registration</strong><small data-check-text>Available</small></div>
+ </div>
+ <div class="ot-verdict" role="status" aria-live="polite" aria-atomic="true"><strong data-verdict>Accepted in this illustration</strong><p data-explanation>The proof matches the registered run, the public result is unchanged and the registration has not been consumed.</p></div>
+ <noscript><p>The buttons require JavaScript. The original result is shown above. Rule or input substitutions conflict with registration; altered target bytes invalidate the proof; submitting the same run twice is rejected.</p></noscript>
+</div>
