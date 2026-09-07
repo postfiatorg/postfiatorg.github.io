@@ -1,6 +1,7 @@
 ---
 title: "Post Fiat Community Update — August 2026"
 date: 2026-08-06T21:30:00Z
+lastmod: 2026-09-07T00:00:00Z
 draft: false
 summary: "Layer 1 V2 on controlled testnet, the rebuilt Task Node board system, PF Terminal benchmarks, NAVCoin architecture, and the on-chain finance content push — with links to code and evidence throughout."
 aliases:
@@ -46,7 +47,9 @@ PF Terminal supports all three stages. It deploys validators, powers coding agen
 
 ### Current status: controlled testnet
 
-**[Post Fiat L1 V2](https://github.com/postfiatorg/postfiatl1v2)** is a Rust Layer 1 in its controlled-testnet phase — a network our team operates end to end. The repository holds 19 crates spanning consensus (`consensus_cobalt`, `ordering_fast`), privacy (`privacy_orchard`, `proofs`), execution, mempool, RPC, SDKs, and a WASM wallet. Wallets, RPCs, and Python libraries operate inside that controlled testnet, and operators can join it today using the published validator setup guide.
+> **L1 clarification — 7 September 2026.** The measurements below remain the August publication's historical observations. The [later Cobalt campaign](/blog/cobalt-further-evaluation/) records scoped activation at height 916 and authority drills through 924. Cobalt ratifies validator-trust updates; Consensus v2 finalizes blocks. The [admission selector](https://github.com/postfiatorg/postfiatl1v2/blob/d351353e57b295368450a57866ace17b5e1ce6ad/crates/consensus_cobalt/src/validator_admission_policy.rs) checks supplied evidence fields, not independently proven economic exposure or operator independence. A passing candidate still needs signed authority and an accepted consensus-ordered update. The public XRPL-derived testnet and its validator setup guide are a separate network.
+
+**[Post Fiat L1 V2](https://github.com/postfiatorg/postfiatl1v2)** is a Rust Layer 1 in its controlled-testnet phase — a network our team operates end to end. The repository holds 19 crates spanning consensus (`consensus_cobalt`, `ordering_fast`), privacy (`privacy_orchard`, `proofs`), execution, mempool, RPC, SDKs, and a WASM wallet. Wallets, RPCs and Python libraries operate inside that controlled testnet. The public website's validator setup guide applies to the XRPL-derived PFT Ledger; it is not an open-admission procedure for this L1 v2 fleet.
 
 `STATUS.md` records the current measurements:
 
@@ -54,7 +57,7 @@ PF Terminal supports all three stages. It deploys validators, powers coding agen
 - A p50 1.03s certified round over WAN — validators separated by real internet distance.
 - Working transparent transfers.
 - Orchard/Halo2 shielded deposits, spends, and withdrawals — Halo2 is Orchard's zero-knowledge proving system — with nullifier sets providing double-spend protection for shielded notes.
-- Cobalt validator-registry transitions with safety-witness verification.
+- Cobalt validator-trust transition machinery; the later activation record establishes its signed, bounded authority scope.
 - ML-DSA signatures from genesis.
 - NAVCoin OTC-swap and proof-of-reserve primitives.
 
@@ -70,11 +73,11 @@ Three requirements drove the rebuild:
 
 1. **Quantum resistance.** ML-DSA is the NIST post-quantum signature standard. Post Fiat requires it from genesis.
 2. **Private settlement.** Orchard — the shielded-pool design pioneered in Zcash — enables shielded transactions for buy-side workflows. The design, including exclusion of validator-consensus accounts, is covered in the **[Orchard Privacy Research](https://postfiat.org/posts/orchard-privacy-research/)**.
-3. **Replayable governance.** Cobalt lets each validator declare and update its UNL on-chain. Ripple designed and published the approach; Post Fiat implemented it.
+3. **Replayable governance.** Cobalt represents declared trust and ratifies authorized validator-trust changes. A validator cannot unilaterally rewrite the active registry, and Cobalt does not independently determine who deserves trust.
 
-ML-DSA and Orchard live in Rust ecosystems, so since May the Layer 1 has been rebuilt in Rust with vendored Orchard/Halo2 dependencies, private swaps, Cobalt-governed validator evolution, and HotStuff-style finality — the consensus family behind modern Byzantine fault-tolerant chains.
+ML-DSA and Orchard live in Rust ecosystems, so since May the Layer 1 has been rebuilt in Rust with vendored Orchard/Halo2 dependencies, private swaps, Cobalt-governed validator evolution, and activated Consensus v2 finality with prepare/precommit certificates, durable locks and signed timeout recovery.
 
-Next: the governance-replay port and native PF Terminal integration. The **[Validator Setup guide](https://postfiat.org/validator-setup/)** covers installation, configuration, domain attestation, and verification. The **[Validator Benchmark](https://postfiat.org/validator-benchmark/)** publishes mode scores, ranks, and correlation tables from validator credibility runs.
+Next: the governance-replay port and native PF Terminal integration. The **[Validator Setup guide](https://postfiat.org/validator-setup/)** covers installation, configuration, domain attestation and verification for the separate XRPL-derived public testnet. The **[Validator Benchmark](https://postfiat.org/validator-benchmark/)** publishes mode scores, ranks, and correlation tables from validator credibility runs.
 
 ## 2. Task Node: the Hive rebuilt
 

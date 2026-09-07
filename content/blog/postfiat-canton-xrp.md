@@ -1,6 +1,7 @@
 ---
 title: "Post Fiat, Canton, and XRP: Three Bets on the Future of Settlement"
 date: 2026-08-01T00:00:00Z
+lastmod: 2026-09-07T00:00:00Z
 url: "/blog/postfiat-canton-xrp/"
 aliases:
   - /research/postfiat-canton-xrp/
@@ -30,6 +31,8 @@ tags:
 
 > **Reproduction note (2 August 2026).** From a fresh public clone at that commit, `cargo test -p postfiat-execution nav_ --lib` ran 23 NAV-focused tests with 23 passing and none failing. The selected tests cover stale/deadman gating, multi-fetch attestations, bonded challenges, SP1 proof binding and tamper rejection, minting, pending redemption, and settlement deadlines. This is implementation evidence, not a production audit or reserve attestation.
 
+> **Governance clarification — 7 September 2026.** The Cobalt and admission passages below now use [L1 source `d351353e`](https://github.com/postfiatorg/postfiatl1v2/blob/d351353e57b295368450a57866ace17b5e1ce6ad/crates/node/src/cobalt_handoff.rs) and the [retained August authority campaign](/blog/cobalt-further-evaluation/). NAV and reserve examples retain their original `2ee110b` source and reproduction date. Cobalt's controlled L1 v2 activation is separate from the public XRPL-derived PFT Ledger's signed-list publication.
+
 ## Three answers to the same question
 
 Every settlement ledger is a set of answers to three old questions. Who keeps the books? Who pays the bookkeepers? And who gets to look?
@@ -46,7 +49,7 @@ This piece lays the three side by side, so a reader can see precisely what Post 
 
 More than a decade ago, the XRP Ledger demonstrated something quietly radical: a financial ledger can run without miners, stakers, or direct validator rewards. Each server reaches agreement by listening to validators on its [Unique Node List](https://xrpl.org/docs/concepts/consensus-protocol/unl); validated ledgers provide final results, although the safety model depends on sufficient UNL overlap. XRP began with [100 billion units](https://xrpl.org/docs/introduction/what-is-xrp), and transaction fees are burned rather than paid to validators. Behind the engineering sits a simple idea about who should secure a settlement system: parties who depend on settlement should have a natural reason to help operate it.
 
-The [Post Fiat whitepaper](/whitepaper/) specifies the same broad category—known validators, certificate finality, fixed supply, and fee burn—while changing validator-set governance, disclosure, and authorization. Its post-quantum authorization and governance claims are design and implementation claims; they need public test vectors, compatibility evidence, and independent cryptographic review before they should be treated as deployed guarantees.
+The [L1 v2 protocol whitepaper](https://github.com/postfiatorg/postfiatl1v2/blob/f920f63c845eaafe05c4bee998314e7a4f77e19d/docs/whitepaper.md) describes known validators, certificate finality, fixed native supply and fee burn, with versioned governance, disclosure and authorization. The website's [May whitepaper](/whitepaper/) documents the separate XRPL-derived validator-list publication pipeline. Its post-quantum authorization and governance claims are design and implementation claims; they need public test vectors, compatibility evidence, and independent cryptographic review before they should be treated as deployed guarantees.
 
 Canton takes a different road. Built by Digital Asset around Daml, it is a "network of networks" whose applications can use a [Global Synchronizer](https://docs.dev.sync.global/overview/overview.html) operated by Super Validators. The same primary documentation describes the Global Synchronizer Foundation, two-thirds BFT governance, and Canton Coin rewards for infrastructure, validators, and application providers. This is a stronger and narrower statement than treating every Canton deployment as one monolithic consortium ledger.
 
@@ -64,7 +67,9 @@ Canton makes the opposite bet, deliberately. Its published schedule targets 100 
 
 ### Post Fiat: zero issuance, with the condition finally priced
 
-Post Fiat keeps XRP's proposed economic answer—fixed supply, fee burn, and zero validator pay—and adds an explicit evidence predicate to the [governance design](/whitepaper/). Candidate evidence includes economic exposure, signed identity and revocation paths, operational reliability, attack surface, and correlation. The proposed selector treats shared control—such as a release manager, key-management vendor, or funding controller—as a reason to hold or reject admission. This is a policy claim until the live predicate, inputs, thresholds, and decisions are publicly replayable.
+Post Fiat keeps fixed native supply, fee burn and zero validator subsidy. The target admission policy asks whether a candidate has real economic reliance on settlement, accountable identity, reliable operations and sufficiently independent control. The [implemented selector](https://github.com/postfiatorg/postfiatl1v2/blob/d351353e57b295368450a57866ace17b5e1ce6ad/crates/consensus_cobalt/src/validator_admission_policy.rs) evaluates a narrower supplied packet: reliability/accountability/correlation scores, control-group labels and manifest/domain/linkedness flags. It does not independently establish those facts or implement the target's separate exposure and attack-risk thresholds.
+
+Explicit shared-control labels reject under the controlled profile, even if another field is missing. Different labels do not prove different controllers. A clean pass creates a candidate; current-registry authorization and Cobalt ratification must still precede an accepted state change. Zero-subsidy recruitment and genuine operator independence remain claims the network must demonstrate empirically.
 
 And, because pricing our own bet is the house style: zero issuance means zero protocol treasury. Ecosystem development is funded off-protocol, where it can be disclosed and vetted rather than minted. Canton has a machine for funding its bootstrap; XRP and Post Fiat pay for theirs some other way. Post Fiat chooses that trade with eyes open, because a subsidized validator class is exactly the constituency a settlement ledger should decline to create.
 
@@ -75,9 +80,9 @@ The great privacy systems took the other path. Zcash funded development through 
 | | XRP Ledger | Canton Network | Post Fiat |
 |---|---|---|---|
 | Native issuance | None — 100B fixed at genesis | Scheduled minting curve (100B over decade one, 2.5B/yr thereafter), offset by fee burn | None — fixed supply at genesis |
-| Fees | Burned | Burned (burn-mint equilibrium) | Burned — the only protocol-level economic flow |
+| Fees | Burned | Burned (burn-mint equilibrium) | Native transaction fees burn; application settlement and issued-asset flows remain |
 | Validator compensation | None from the protocol | Super Validators, validators, and app providers mint CC for measured utility | None from the protocol |
-| Who validates, and why | Natural stakeholders | Participants rewarded in the network's token | Natural stakeholders, admitted by a public evidence predicate |
+| Who validates, and why | Natural stakeholders | Participants rewarded in the network's token | Natural-stakeholder target; supplied-packet screening and separately authorized admission |
 | Ecosystem funding | Off-protocol | On-protocol, via emissions | Off-protocol, disclosed and vetted |
 | Governance–economics coupling | Indirect, through UNL and amendment choices | Super Validators govern while operator/app classes receive emissions | Intended separation: no validator emissions; admission still creates political power |
 
@@ -89,23 +94,23 @@ Strip away the branding, and the deepest difference among the three networks is 
 
 **Canton: in an on-chain governance application operated by the Super Validator collective.** The official Global Synchronizer documentation describes [two-thirds BFT ordering and governance voting](https://docs.dev.sync.global/overview/overview.html), with the Foundation coordinating and itself operating a Super Validator. For institutions that want identified operators and contractual recourse, that may be a feature. The concentration, independence, and upgrade risks must still be judged from the actual operator set and voting state.
 
-**Post Fiat: intended to live in protocol state.** The design draws on Ethan MacBrough's [Cobalt paper](https://arxiv.org/abs/1802.07240), which studies atomic broadcast and governance under non-uniform trust. Cobalt supplies a research basis, not an audit of Post Fiat's transition checker or proof that every implementation-specific threshold is safe.
+**Post Fiat L1 v2: a bounded authority in protocol state.** Cobalt's validator-registry and trust-graph scope activated on the controlled devnet at height 916. Subsequent signed rollback/return and key-rotation drills are recorded through height 924. The [live consumer](https://github.com/postfiatorg/postfiatl1v2/blob/d351353e57b295368450a57866ace17b5e1ce6ad/crates/node/src/cobalt_handoff.rs) requires a signed protocol decision and current-registry Cobalt authorizations. Consensus v2 finalizes blocks; unrelated governance retains Foundation authorization. MacBrough's [Cobalt paper](https://arxiv.org/abs/1802.07240) is the research basis; the implementation and its dated evidence carry their own verification burden.
 
 The core design principle fits in five words: **old rules judge new rules.** The intended genesis state commits the initial registry, trust graph, and rule-checker. A subsequent transition packet is evaluated under the previously active rules, including a proposal to replace the checker. That construction makes the trust handoff explicit; it does not eliminate the initial trusted launch or guarantee that incumbents will approve a necessary recovery.
 
-The intended checker evaluates quorum arithmetic, old-to-new continuity, and connectivity, and rejects transitions that fail those predicates. Those are implementation claims that require test vectors, adversarial simulation, and independent review in addition to the Cobalt citation. "Fail closed" is safer against an invalid transition but can also preserve a captured or deadlocked incumbent registry; liveness and emergency recovery are part of the threat model, not footnotes.
+The trust-graph and safety-witness libraries evaluate quorum arithmetic, old-to-new continuity and linkage under a supplied fault model. The August campaign tested the scoped authority path, Byzantine schedules and recovery. Those results do not establish every proposed checker-replacement or universal transition object, nor do they establish the real-world truth of the trust inputs. Fail-closed rejection can preserve a captured or deadlocked incumbent registry; the signed recovery path and operator-independence requirements retain their own limits.
 
 Genesis remains a trusted act. The design calls for a signed launch certificate committing the initial state so that later auditors can identify the bootstrap assumption. Its value depends on publication, signer independence, reproducible genesis generation, and verification by shipped node software.
 
 **Closing the last private room — without pretending the model is consensus.** The design proposes a pinned language model that converts public evidence into a typed, cited classification, followed by deterministic selector code. That split reduces authority only if the model artifact, prompt, retrieval corpus, evidence snapshot, and parser are all hash-bound and replayable. Evidence poisoning, model nondeterminism, unavailable model weights, and ambiguous outputs must resolve to abstention. "Deletion monotonicity" — removing the model can make the system no more permissive — is the target invariant; it still needs executable conformance tests.
 
-A representative test case would submit a candidate with strong uptime but a release manager, monitoring endpoint, and funding source shared with an incumbent. The expected conservative result is *cosmetic diversity* and a held application, with citations to each shared-control field. Publishing that fixture and its deterministic expected output would turn the example from prose into evidence.
+The [retained admission fixtures](https://github.com/postfiatorg/postfiatl1v2/blob/d351353e57b295368450a57866ace17b5e1ce6ad/crates/consensus_cobalt/src/tests.rs) include a candidate sharing release-management and funding-source labels with an incumbent. The controlled selector **rejects** it; rejection outranks a simultaneous hold reason. This tests supplied-packet behavior. It does not test the independent discovery of concealed shared control.
 
 | | XRP Ledger | Canton Network | Post Fiat |
 |---|---|---|---|
 | Where the validator list lives | Operator configuration files | Foundation process | Protocol state |
-| How it changes | Publishers post signed recommended lists; operators configure publishers | Two-thirds Super Validator governance | Intended transition packets validated under the prior rules |
-| Who judges a change | Reputation and convention | The consortium itself | The old rules' checker: quorum intersection, continuity, connectivity — fail-closed |
+| How it changes | Publishers post signed recommended lists; operators configure publishers | Two-thirds Super Validator governance | Signed scoped Cobalt decisions and current-registry authorizations, ordered by Consensus v2 |
+| Who judges a change | Reputation and convention | The consortium itself | Active-authority verifier over declared trust; separate evidence work must justify operator selection |
 | Qualitative questions | Operator/publisher discretion | Governance process | Proposed replayable classification; deterministic selector |
 | A failed change | Resolved socially | Resolved procedurally | Previous registry remains in force, automatically |
 

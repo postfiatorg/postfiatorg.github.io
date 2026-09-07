@@ -1,8 +1,9 @@
 ---
 title: "Cobalt on the Devnet: Implementing the Road Not Taken"
 date: 2026-06-09T00:00:00Z
+lastmod: 2026-09-07T00:00:00Z
 draft: false
-summary: "Post Fiat has implemented Cobalt — the 2018 trust-evolution protocol Ripple proposed and never shipped — on its devnet, with a public, replayable evidence bundle. Adoption is an open governance question. Here is the problem Cobalt solves, what we built, how to verify it, and what it would mean under a control-based regulatory test."
+summary: "The June 2026 Cobalt implementation record, with a September clarification: L1 v2 subsequently activated bounded validator-trust authority on its controlled devnet. Admission evidence and operator independence remain separate obligations."
 aliases:
   - /cobalt-implementation-evidence/
   - /posts/cobalt-implementation-evidence/
@@ -19,7 +20,13 @@ tags:
   - XRPL
 ---
 
+> **Update — 7 September 2026.** This article preserves the **9 June** implementation and adoption discussion. L1 v2 subsequently activated Cobalt's bounded validator-trust authority at height **916**. The [August evaluation](/blog/cobalt-further-evaluation/) records signed rollback/return at **922/923**, key rotation and six-validator convergence at **924**, and a **KEEP_ACTIVE** conclusion. These are historical controlled-devnet observations. Consensus v2 owns block finality; unrelated governance retains Foundation authorization. The public XRPL-derived PFT Ledger and its signed validator-list publisher are a separate network and authority surface.
+>
+> Cobalt validates an authorized change over declared trust views. The [admission selector](https://github.com/postfiatorg/postfiatl1v2/blob/d351353e57b295368450a57866ace17b5e1ce6ad/crates/consensus_cobalt/src/validator_admission_policy.rs) checks supplied scores, group labels and flags; it does not independently establish economic exposure, hidden shared control or every attack-risk threshold. A clean decision produces a candidate, which still needs the active authority's signed verification and consensus ordering. Protocol agreement does not prove the candidate's real-world independence.
+
 ## In One Page
+
+*The implementation status, topology counts, adoption question and experiment results in the June record below refer to 9 June 2026. The dated update above describes the subsequent authority milestone.*
 
 Post Fiat has implemented **Cobalt** — the asynchronous BFT governance protocol Ripple published in 2018 and never deployed — end to end on our devnet, and published the evidence bundle so the question of whether to adopt it can be argued from artifacts rather than a whitepaper section.
 
@@ -69,7 +76,7 @@ $$0 \le t_S, q_S \le n_S, \qquad t_S < 2 q_S - n_S, \qquad 2 t_S < q_S.$$
 
 The second inequality guarantees any two quorums of \(S\) intersect in at least one *correct* validator under \(S\)'s own fault budget; the third keeps any quorum from being majority-Byzantine. These are checkable arithmetic facts about a declared object.
 
-**Views must be linked.** Two trust views are **fully linked** when they share an essential subset whose active faults are within budget *and* which retains a full correct quorum. A validator's position is safe when every pair of views in its trust closure is fully linked — a graph of pairwise obligations, recomputable from the declared trust graph alone, replacing one global "~90% overlap" requirement that nobody checks. A proposer cannot assert linkedness; the checker recomputes it.
+**Views must be linked.** Two trust views are **fully linked** when they share an essential subset whose active faults are within budget *and* which retains a full correct quorum. A validator's position is safe when every pair of views in its trust closure is fully linked — a graph of pairwise obligations, recomputable from the declared trust graph **and an explicit fault model**. The graph does not reveal which real operators are Byzantine. The trust-graph checker recomputes linkage under that model; the separate admission selector consumes a supplied linkedness flag.
 
 **Old rules validate new rules.** A transition from registry \(G_t\) to \(G_{t+1}\) is validated entirely by the rules active at \(t\) — a new registry, trust graph, or checker never participates in validating its own activation — and must satisfy a cross-registry condition: every old-rules quorum and every new-rules quorum intersect in strictly more than \(B\) validators, the transition's Byzantine budget.
 
@@ -87,9 +94,9 @@ One sentence describes the deployment posture:
 
 > Post Fiat's devnet deploys Cobalt as a rooted, bounded, fail-closed validator-registry and trust-graph transition checker derived from MacBrough's construction, where the previous active rules validate proposed new rules; it is not a claim to the full open-network Cobalt result, and it is not an adoption decision.
 
-Each narrowing buys a checkable property. **Rooted:** all trust views live in a hash-committed trust graph, so there is no undeclared trust for the checker to miss. **Bounded:** a profile fixes \(M_{cover}\), the maximum subsets one transition may involve, and cover enumeration is taken away from the proposer — an extractor walks the rooted graphs and emits a hash-bound report the safety witness must match exactly, so an unfavorable quorum cannot be pruned from the matrix. **Fail-closed:** missing, stale, conflicting, or oversized evidence produces a hold under the last valid rules; deadlock preserves the old registry; emergency recovery is limited to precommitted quorum-signed actions. The same conservative-failure principle our live pipeline already follows (missed round → last known-good list), one level deeper.
+Each narrowing buys a checkable property. **Rooted:** declared trust views live in a hash-committed graph. Undeclared social, funding and custody dependencies remain invisible to the checker. **Bounded:** a profile fixes \(M_{cover}\), the maximum subsets one transition may involve, and cover enumeration is taken away from the proposer — an extractor walks the rooted graphs and emits a hash-bound report the safety witness must match exactly, so an unfavorable quorum cannot be pruned from the matrix. **Fail-closed:** missing, stale, conflicting, or oversized evidence produces a hold under the last valid rules; deadlock preserves the old registry; emergency recovery is limited to precommitted quorum-signed actions. The same conservative-failure principle our live pipeline already follows (missed round → last known-good list), one level deeper.
 
-The implementation is not a demo crate. The `consensus_cobalt` crate implements the §2 machinery module-for-module (core types, admission policy, cover extractor, trust-graph governance, RBC/ABBA/MVBA, DABC registry, internal validation), and the node layer wires it into the operations a network would actually use to change its registry — ratifying validator sets and amendments, creating and applying registry updates, and replaying amendment bundles through Cobalt evidence checks. The [implementation-surface inventory](/benchmarks/cobalt-devnet-evidence-20260609/implementation-surface.json) lists the entry points.
+The June source includes core types, admission policy, cover extraction, trust-graph governance, RBC/ABBA/MVBA, DABC and node governance/replay operations. The [historical implementation inventory](/benchmarks/cobalt-devnet-evidence-20260609/implementation-surface.json) lists those entry points; their presence does not establish live authority for every listed amendment. The subsequently activated [consumer](https://github.com/postfiatorg/postfiatl1v2/blob/d351353e57b295368450a57866ace17b5e1ce6ad/crates/node/src/cobalt_handoff.rs) accepts the bounded validator-trust scope with a signed protocol decision and current-registry authorizations. Other governance remains on its applicable Foundation path.
 
 The evidence is layered so each layer checks the one below it:
 
@@ -113,7 +120,7 @@ A strict public-launch gate exists and **currently fails — by design.** It dem
 
 The gap is informational today — no adoption decision has been made, so there is no launch to gate. It is published anyway, so that if adoption is ever decided, the topology requirements and the distance to them are already on the record. The gates exist to make compressing "devnet mechanics passed" into "decentralized launch achieved" mechanically impossible.
 
-Why build before deciding? Because the decision deserves better inputs than a paper. Our pipeline's own endgame poses the question — later phases transfer list-content authority to validator-converged output and decentralize publication, but even a fully decentralized publication of a *file* leaves transitions uncheckable (§2). If that last gap is ever to close, Cobalt-style registry-as-protocol-state is the candidate mechanism, and the honest way to evaluate a candidate is to implement it, attack it, gate it, and publish the results. If adopted, Cobalt would *validate and activate* membership changes; the transparency pipeline would remain the process that *proposes* them; availability suspension (our Negative UNL analog) would keep handling temporary outages separately from membership; and PFT would continue to play no role in consensus or governance — validator-based, not token-voting, with no validator rewards.
+Why build before deciding? Because the decision deserves better inputs than a paper. Our pipeline's own endgame poses the question — later phases transfer list-content authority to validator-converged output and decentralize publication, but even a fully decentralized publication of a *file* leaves transitions uncheckable (§2). If that last gap is ever to close, Cobalt-style registry-as-protocol-state is the candidate mechanism, and the honest way to evaluate a candidate is to implement it, attack it, gate it, and publish the results. If adopted, Cobalt would *validate and activate* membership changes; the transparency pipeline would remain the process that *proposes* them; availability suspension would need its own specified and implemented mechanism, separate from membership; and PFT would continue to play no role in consensus or governance — validator-based, not token-voting, with no validator rewards.
 
 ---
 

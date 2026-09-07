@@ -1,6 +1,7 @@
 ---
 title: "Proposal: derive the UNL from Task Node identity and ratify it through Cobalt"
 date: 2026-09-04T00:00:00Z
+lastmod: 2026-09-07T00:00:00Z
 summary: "Validator lists on public ledgers are bought with grants and market-development fees. Post Fiat should instead derive its validator list deterministically from Task Node identity: a proven wallet, a replayable work history, and a public vouch graph. This proposal grounds that in the existing Admission Policy V1, the Task Node ledger replay, and the Cobalt ratification path, and evaluates World ID against a Task Node social graph for one-person-one-seat."
 categories:
   - Post Fiat Research
@@ -13,6 +14,8 @@ tags:
   - Post Fiat L1
 robotsNoIndex: false
 ---
+
+> **Implementation clarification — 7 September 2026.** This remains a proposal for deriving and eventually ratifying a list. The [subsequent Task Node replay](https://github.com/postfiatorg/postfiatl1v2/blob/d351353e57b295368450a57866ace17b5e1ce6ad/docs/governance/tasknode-unl-shadow-run-20260904.md) is explicitly shadow-only. Admission Policy V1 checks supplied scores, group labels and manifest/domain/linkedness flags. It does not independently prove those facts or implement the full economic-exposure/attack-risk predicate. Wallet, funding and vouch graphs can support investigation; they do not prove distinct human control. Cobalt's signed ratification is a separate authority boundary on L1 v2, not an automatic consequence of a score or a transfer of the public PFT Ledger's publisher authority.
 
 ## The problem in one paragraph
 
@@ -117,11 +120,14 @@ are documented:
 - Admission Policy V1 is a pure selector in `postfiat-consensus-cobalt`. Its
   controlled-testnet floors are uptime of at least 9,950 basis points over the
   window, `accountability_score >= 70`, `rho_score <= 0`, no shared operator,
-  release-manager, key-management or funding-source group, a signed operator
-  manifest with a proved key-domain binding, and `cobalt.linkedness_safe`.
-  Missing evidence holds; a clean pass emits an `add` registry-delta
-  candidate, which is decision support and only changes registry state after
-  old-rule authorization.
+  release-manager, key-management or funding-source group, supplied true operator-manifest,
+  key-domain-binding and `cobalt.linkedness_safe` flags. The selector does not
+  authenticate those external facts itself. Missing/stale/conflicting evidence
+  creates hold reasons; explicit failures such as shared control reject first.
+  A clean pass emits an `add` registry-delta candidate. An accepted live change
+  still requires verification under the active authority, including the signed
+  Cobalt decision and current-registry authorizations after scoped activation,
+  followed by consensus ordering.
 - The evidence field registry forbids specific inputs to any rule:
   social-media reputation, private KYC status, private messages, uncollected
   web search, unbounded browsing, raw IP geolocation as proof of jurisdiction,
