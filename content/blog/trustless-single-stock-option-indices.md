@@ -1,41 +1,46 @@
 ---
 title: "A Framework for Trustless Single Stock Option Indices"
 date: 2026-09-07T00:00:00Z
-lastmod: 2026-09-07T18:06:07Z
+lastmod: 2026-09-07T19:18:26Z
 draft: false
 type: "blog"
 url: "/blog/trustless-single-stock-option-indices/"
 aliases: ["/research/single-stock-options-trackers/"]
 breadcrumb_label: "Post Fiat Blog"
 breadcrumb_url: "/blog/"
-summary: "Bring the call-option premium market on-chain: rolling upside exposure, a loss limited to the amount invested, and the simplicity of a spot token. NVDA and Micron alone show $8.05 billion of outstanding ATM/OTM call premium value."
-description: "An options NAVCoin packages fully funded calls into a spot asset. The market sizing, investor benefits, Ethereum and Uniswap distribution, and Post Fiat verification behind single-stock options trackers."
+summary: "Call options already attract billions. An options NAVCoin brings that demand on-chain through one spot token that continuously rebalances and rolls a single stock's call exposure."
+description: "A spot token for a continuously maintained single-stock call strategy. The $8.05 billion NVDA and Micron premium market, automatic rebalancing, Ethereum distribution and Post Fiat verification."
 author: "Post Fiat"
 options_tee: true
 categories: ["Post Fiat Research"]
 tags: ["Options", "Convexity", "NAVCoin", "Ethereum", "Uniswap", "TEE", "Post Fiat"]
 ---
 
-**The goal is to make call-option exposure as easy to buy and hold as a spot
-token.** Choose a company, choose how much capital to put at risk, and hold one
-asset that maintains exposure to its upside.
+**Call options already attract billions of dollars. This proposal gives that
+market a simple on-chain product: a spot token that continuously maintains a
+single stock's call exposure.**
 
-The product is an **options NAVCoin**: a portfolio of fully paid call options
-packaged into an Ethereum token. The portfolio rolls its contracts under a
-published rulebook. Investors hold the token in a wallet and trade it on Uniswap.
-Post Fiat supplies the machinery for verifying the strategy and, in the full
-product, its backing and share accounting.
+The proposed **options NAVCoin** holds a portfolio of fully paid calls. Its
+rulebook handles contract selection, rebalancing and replacement as options age.
+The investor holds one Ethereum token through successive baskets and trades it
+on Uniswap. Post Fiat supplies the verification infrastructure behind the strategy
+and, in the full product, its backing and share accounting.
 
-This brings a large existing financial market into a familiar on-chain format.
-Our initial market sizing found **$8.05 billion of outstanding at-the-money and
-out-of-the-money call premium value in Nvidia and Micron alone**. The commercial
-opportunity is to serve that demand for upside optionality through a product that
-wallets, exchanges and other applications can integrate as a single spot asset.
+**The business case starts with existing demand.** Buyers pay for the possibility
+of a large upside payoff with a defined amount at risk. That payoff can be worth
+buying even when its expected financial return is negative. The product's value
+is making this exposure easy to access and maintain in a wallet.
+
+Our initial sizing found **$8.05 billion of outstanding at-the-money and
+out-of-the-money call premium value in Nvidia and Micron alone**. The opportunity
+is to bring an established buying behavior on-chain through a token that wallets,
+exchanges and other applications can integrate as a spot asset.
 
 {{< options-tee-diagram kind="spot" >}}
 
 ## An $8 billion starting market in two stocks
 
+**For these two stocks, listed calls dwarf the tracked equity-perp market.**
 We measured every returned call expiration in the full Schwab chains for NVDA
 and MU, keeping strikes at or above the stock reference price. This isolates the
 ATM/OTM calls that buyers use for upside optionality.
@@ -57,7 +62,8 @@ perpetual observations September 7. Premium value is open interest × 100 shares
 **The premium base is the relevant starting point for a funded options product:**
 the fund's capital buys options. The notional shows the underlying stock exposure
 those contracts reference. On that measure, the selected calls represent roughly
-237 times NVDA's reported perp OI and 134 times Micron's.
+237 times NVDA's reported perp OI and 134 times Micron's—about **181 times
+combined**, using the reported venue totals.
 
 An illustrative asset base equal to **1% of the two-stock premium value would be
 $80.45 million**. This illustrates the scale of a product serving a small share of the measured market. The wider addressable category extends across single-stock
@@ -66,52 +72,42 @@ For context, OCC reported **8.27 billion single-stock option contracts traded
 in 2025**, covering calls and puts, up **26.8%** from 2024.
 [OCC annual volume](https://www.theocc.com/newsroom/views/2026/01-05-occ-annual-2025-and-december-2025-volume).
 
-The thesis is that a useful spot wrapper can bring some of this existing options
-activity on-chain while serving crypto users who want the same payoff in their
-existing wallets.
+The product opportunity is a standard spot interface for that ongoing activity:
+**buy a single stock's call strategy once, then let the portfolio maintain it.**
 
-## Why someone would buy it
+## One token maintains the call strategy
 
-A call gives its holder the right to buy shares at a fixed strike price during
-the contract's exercise period. The buyer pays a premium for that right.
+Maintaining a call position means repeatedly choosing contracts, sizing the
+purchase and deciding when to replace them. A holder who wants ongoing Nvidia
+call exposure must keep doing that work as individual contracts expire.
 
-A bullish investor often wants a large upside payoff with a fixed amount at
-risk. Calls provide that shape. A fully paid call's loss is limited to its
-premium, while its participation can increase as the stock rises: **convexity**.
-[OIC long-call mechanics](https://www.optionseducation.org/strategies/all-strategies/long-call).
+An options NAVCoin makes the strategy continuous. The investor buys one token;
+the portfolio rebalances its calls and rolls into replacement contracts under
+a published rulebook. **The options expire. The token carries the strategy
+across those expirations.**
 
-The spot token preserves the useful part of this experience. In the fully funded
-design, an investor buying $1,000 of tokens puts that $1,000, plus transaction
-fees, at risk. The position requires no maintenance-margin top-ups. The holder
-can keep it through an interim drawdown and still participate if the underlying
-calls recover before they expire.
+{{< options-tee-diagram kind="basket" >}}
 
-{{< options-tee-diagram kind="payoff" >}}
+The rulebook specifies the eligible maturities and strikes, premium allocation,
+position sizing and roll conditions. Each observation produces a **target**:
+the contracts and quantities the strategy should hold. Actual holdings can then
+be reconciled against that target. In the funded product, replacement premiums
+and trading costs are paid from portfolio assets and reflected in NAV.
 
-Consider the illustrated call: strike $100, premium $10 per share. At expiry, a
-$140 stock price produces $40 of option value and $30 of profit per share. A
-temporary fall to $80 does not trigger a margin liquidation of the fully paid
-call. A highly leveraged long perp can be closed by its margin rules during
-that same fall, losing the opportunity to participate in the later recovery.
-[Perpetual liquidation mechanics](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/liquidations).
+{{< options-tee-diagram kind="roll" >}}
 
-| Exposure | What the investor gets | What maintaining it involves |
-|---|---|---|
-| Spot stock | Linear participation in the company | Holding shares |
-| Margined long perpetual | Linear exposure with adjustable leverage | Margin management and funding payments or receipts |
-| Options NAVCoin | Rolling upside convexity with a defined capital commitment | The portfolio maintains fully funded calls under its rulebook |
+The demonstrated Nvidia and Micron strategies each selected five calls in a
+common expiration. The engine applies explicit rules to each stock separately.
+This makes the product repeatable: its identity stays attached to its published
+method while the basket evolves.
 
-The economic price of convexity is the option premium. Time decay, changes in
-implied volatility and the cost of replacing contracts affect returns. Calls can
-expire worthless, and the token can lose the entire amount invested. A perp has
-no scheduled option expiry and its funding can favor either side.
-[Funding mechanics](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding).
+## Why package it as a spot token?
 
-The practical benefits extend beyond the payoff:
+The spot format turns that maintained strategy into something existing crypto
+applications can use:
 
-- **Investors buy a persistent strategy in one transaction.** They can size a
-  position in dollars and leave contract selection, whole-contract sizing and
-  rolling to the portfolio.
+- **Investors buy a persistent position in one transaction.** Choose a stock and
+  a dollar amount, then hold the same wallet asset through successive rolls.
 - **Wallets and exchanges integrate a spot asset.** An ERC-20 balance and a
   trading pair provide a familiar way to distribute stock-option exposure.
 - **Liquidity providers get a new category of trading pairs.** Secondary trades
@@ -122,25 +118,34 @@ The practical benefits extend beyond the payoff:
 
 {{< options-tee-diagram kind="products" >}}
 
-## One token maintains the call strategy
+The investor is buying **convexity**: a call's participation can increase as the
+stock rises, with loss limited to the premium paid. A call gives its holder the
+right to buy shares at a fixed strike price during its exercise period.
+[OIC long-call mechanics](https://www.optionseducation.org/strategies/all-strategies/long-call).
 
-A call has a finite life. A tracker gives the strategy a continuing identity as
-its individual contracts change. The holder follows one company's options
-exposure; the portfolio handles the maintenance.
+In the fully funded design, someone buying $1,000 of tokens commits that $1,000,
+plus transaction fees. The holder can keep the position through an interim
+drawdown without maintenance-margin top-ups. The portfolio pays for subsequent
+calls from its assets; the investor continues to hold the token.
 
-{{< options-tee-diagram kind="basket" >}}
+{{< options-tee-diagram kind="payoff" >}}
 
-The rulebook specifies the eligible maturities and strikes, premium allocation,
-position sizing and roll conditions. Each observation produces a **target**:
-the contracts and quantities the strategy should hold. Actual holdings can then
-be reconciled against that target.
+The diagram shows the payoff the buyer pays for: a $100-strike call bought for
+$10 per share loses at most $10 and earns $30 if the stock finishes at $140.
 
-{{< options-tee-diagram kind="roll" >}}
+| Exposure | What the investor gets | What maintaining it involves |
+|---|---|---|
+| Spot stock | Linear participation in the company | Holding shares |
+| Margined long perpetual | Linear exposure with adjustable leverage | Margin management and funding payments or receipts |
+| Options NAVCoin | Rolling upside convexity with a defined capital commitment | The portfolio maintains fully funded calls under its rulebook |
 
-The demonstrated Nvidia and Micron strategies each selected five calls in a
-common expiration. The engine applies explicit rules to each stock separately.
-This makes the product repeatable: its identity stays attached to its published
-method while the basket evolves.
+A fully paid call can survive a temporary drawdown and participate in a recovery
+before expiry. A leveraged perp may liquidate during that drawdown. The call
+buyer pays premium for this payoff; time decay, implied volatility and rolling
+costs affect the token's NAV, and the entire investment can be lost. Perp holders
+manage margin and funding, which can be paid or received.
+[Liquidation](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/liquidations)
+and [funding mechanics](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding).
 
 ## Ethereum distributes it; Post Fiat verifies it
 
@@ -247,11 +252,12 @@ explores institutional use of verified reserve claims. External platforms such
 as [Enzyme Onyx](https://docs.enzyme.finance/onyx-faq) demonstrate the wider
 portfolio-share model.
 
-The options version addresses a distinct demand: **stock upside with a fixed
-amount of capital at risk, maintained over time, held and traded as a spot
-asset.** Investors already commit billions to that payoff. This primitive gives
-builders a way to bring it into the on-chain economy with a common strategy
-engine, a verifiable record and a familiar token interface.
+The options version serves an established buying behavior through a new
+interface: **one spot token that keeps a single stock's call strategy running
+across rebalances and expirations.** Investors already commit billions to calls.
+A continuously maintained token gives that market an on-chain home, with a
+defined capital commitment for the buyer and a common verification system for
+the applications that distribute it.
 
 <details class="ot-source-details">
 <summary>Market-sizing definitions and source notes</summary>

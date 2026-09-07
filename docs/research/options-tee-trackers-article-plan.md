@@ -100,3 +100,30 @@ all five interactive cases, keyboard/no-JavaScript reading, expandable source
 notes, canonical/blog links and exact Markdown/clipboard descriptions. Publish
 through the repository PR and Pages workflow, then verify the live article and
 all five new data/chart assets.
+
+## September 7: existing demand and continuous exposure
+
+The owner clarified the business thesis: buyers already spend heavily on calls,
+including when they expect negative financial returns. Product value comes from
+serving that demand through an easy on-chain position that continuously
+rebalances and rolls its options. Expected outperformance is outside the thesis.
+
+- Lead with demonstrated demand and the proposed spot interface. Explain the
+  persistent token and automatic contract maintenance before the payoff example.
+- Make portfolio-funded replacement premiums explicit: the investor keeps one
+  token while its assets pay the ongoing costs of exposure.
+- Preserve the measured NVDA/MU comparison. The approximately 181x combined
+  ratio compares call underlying notional with tracked reported perp notional
+  OI. Premium value remains a separately labeled capital-value measure; no
+  worldwide options/perps ratio or universal product-novelty claim is inferred.
+- Update the product and roll diagrams, metadata and figure numbering to match
+  the new reading order. Keep payoff mechanics as a product explanation.
+- Retain exact market source dates, the implementation record and funded-product
+  responsibilities. This publication changes no portfolio or execution rules.
+
+Hugo 0.148.1 and both repository content checks passed. Browser validation at
+1280px and 390px passed for all twelve figures, revised reading order, overflow,
+five interactive scenarios, keyboard controls, no-JavaScript reading, blog
+discovery and Markdown/clipboard parity. Product and roll diagrams were visually
+inspected. The PR and Pages workflow record publication, followed by a live-page
+check including exact deployed Markdown parity.
