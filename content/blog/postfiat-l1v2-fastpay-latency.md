@@ -1,6 +1,7 @@
 ---
 title: "Post Fiat Latency Series II: FastPay — Removing Consensus from Owned-Value Settlement"
 date: 2026-06-16T00:00:00Z
+lastmod: 2026-09-07T00:00:00Z
 summary: "Series II implements a FastPay-style owned-value lane for Post Fiat: simple payments finalize on validator certificates, while consensus checkpoints them asynchronously. The result is measured on a controlled EU validator fleet and a six-validator cross-continent testnet — reaching 183 ms finality across three continents with post-quantum signatures — and is supported by a formal safety invariant, implementation notes, and an adversarial gate."
 aliases:
   - /post-fiat-latency-series-ii/
@@ -20,15 +21,19 @@ tags:
   - Post-Quantum
 ---
 
+> **Terminology clarification — 7 September 2026.** The measurements and quorum counts below retain their June experiment profiles. Current L1 v2 uses [Consensus v2 for block finality](https://github.com/postfiatorg/postfiatl1v2/blob/d351353e57b295368450a57866ace17b5e1ce6ad/crates/ordering_fast/src/consensus_v2.rs) and [Cobalt for the activated validator-trust scope](https://github.com/postfiatorg/postfiatl1v2/blob/d351353e57b295368450a57866ace17b5e1ce6ad/crates/node/src/cobalt_handoff.rs). Earlier wording calling account ordering or checkpointing “Cobalt consensus” conflated those roles. This clarification does not relabel the June benchmark as a new Consensus v2 run.
+
 [Series I](/blog/postfiat-l1v2-private-xrpl-latency-benchmark/) made certified-receipt finality small. Series II removes the consensus wait from the simple-payment critical path.
 
-A blockchain normally routes payments through consensus because consensus is the general-purpose double-spend firewall: it puts transactions in one total order before state changes. A **lane** is the settlement path a transfer takes. The account lane uses Cobalt consensus. The owned-value lane is narrower and faster: when the value being spent has one logical writer — the owner — validators only need to agree that this exact object version has not already been spent.
+A blockchain normally routes payments through consensus because consensus is the general-purpose double-spend firewall: it puts transactions in one total order before state changes. A **lane** is the settlement path a transfer takes. The account lane uses the block-consensus path; activated current networks use Consensus v2. The owned-value lane is narrower and faster: when the value being spent has one logical writer — the owner — validators only need to agree that this exact object version has not already been spent.
 
-That is the FastPay move. The wallet broadcasts one canonical owned-transfer order, validators lock that input object version and sign it, and the wallet assembles a quorum certificate. The certificate is final; Cobalt checkpoints it asynchronously.
+That is the FastPay move. The wallet broadcasts one canonical owned-transfer order, validators lock that input object version and sign it, and the wallet assembles a quorum certificate. The certificate is the owned-lane settlement artifact; the block-consensus path carries its asynchronous checkpoint.
 
 Post Fiat now has that lane.
 
-![FastPay consensusless fast path: wallet broadcasts to validators, collects signed votes, assembles a final certificate — no consensus round on the critical path](/benchmarks/fastpay-fastpath-diagram.svg)
+![FastPay consensusless fast path: wallet broadcasts to validators, collects signed votes, assembles a final certificate — no consensus round on the critical path](/images/fastpay-finality-roles-20260907.svg)
+
+*The checkpoint role label was corrected on 7 September. The [original June diagram](/benchmarks/fastpay-fastpath-diagram.svg) and its measurement annotations remain archived.*
 
 ## The result
 
@@ -59,7 +64,7 @@ All latency and cryptographic figures used in this article are reconciled here:
 
 ## The design move
 
-Cobalt is Post Fiat’s governed consensus and registry layer. The account lane enters Cobalt to get a certified total order before application. The owned-value lane settles a single owned-object spend directly with validator signatures.
+The account lane uses block consensus to obtain a certified total order before application. On current activated L1 v2 networks, Consensus v2 owns that role. Cobalt separately ratifies validator-trust changes. The owned-value lane settles a single owned-object spend directly with validator signatures.
 
 ```text
 Account lane                              Owned-value lane
@@ -73,7 +78,7 @@ wallet signs transfer                     wallet signs owned-transfer order
   -> local application                      -> client aggregates quorum certificate
   -> finality receipt                       -> TRANSFER CERTIFICATE  *** FINAL ***
                                             -> certificate applied by validators
-                                            -> checkpointed into Cobalt asynchronously
+                                            -> checkpointed through block consensus asynchronously
 ```
 
 There is no proposal, consensus vote round, or block on the owned-value critical path. The certificate is the settlement artifact. Once the client holds a valid quorum certificate, no conflicting certificate for the same input object version can be formed.
@@ -208,7 +213,7 @@ registry transition N -> N+1
         unfinalized equivocation cannot create permanent deadlock
 ```
 
-This is Sui-Lutris epoch-close safety adapted to Cobalt’s governed registry transitions: close the old validator set, carry finalized state forward, and clear only registry-scoped unfinalized locks. Cobalt already supplies the transition handoff and cover-intersection invariant; the owned-value lane uses those properties for certificate settlement.
+This epoch-transition argument requires closing the old validator set, carrying finalized state forward and clearing only registry-scoped unfinalized locks. Those are obligations of the owned-value lane's checkpoint and recovery consumers. Cobalt's authorization of a registry change does not, by itself, prove that every lane has satisfied its own handoff and conservation rules.
 
 ## Limitations and what's next
 

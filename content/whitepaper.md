@@ -3,6 +3,7 @@ title: "Post Fiat Whitepaper"
 layout: "whitepaper_page"
 url: "/whitepaper/"
 summary: "Post Fiat Whitepaper"
+lastmod: 2026-09-07T00:00:00Z
 ---
 
 # Post Fiat: Auditable, Model-Assisted Validator-List Publication for XRPL-Derived Networks
@@ -14,6 +15,8 @@ summary: "Post Fiat Whitepaper"
 **Current revision:** 2026-05-31, incorporating live Phase 1 testnet validator-list publication evidence and the Qwen3.6/SGLang deterministic replay artifacts.
 
 ---
+
+> **Reading guide — 7 September 2026.** This May paper concerns signed validator-list publication for the **XRPL-derived public PFT Ledger**. The separate Rust **L1 v2** protocol and its controlled-devnet Cobalt authority are described in the [L1 v2 whitepaper](https://github.com/postfiatorg/postfiatl1v2/blob/f920f63c845eaafe05c4bee998314e7a4f77e19d/docs/whitepaper.md) and [August Cobalt evaluation](/blog/cobalt-further-evaluation/). Its activation does not transfer this public ledger's publisher authority. In either system, replayable scoring and packet validation do not independently establish an operator's economic exposure, hidden control relationships or trustworthiness. The publication dates and phase observations below remain historical.
 
 ## Abstract
 

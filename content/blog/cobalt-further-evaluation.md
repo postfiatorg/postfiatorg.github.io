@@ -1,7 +1,7 @@
 ---
 title: "Cobalt: Further Evaluation"
 date: 2026-08-23T00:00:00Z
-lastmod: 2026-08-26T00:00:00Z
+lastmod: 2026-09-07T00:00:00Z
 draft: false
 summary: "Cobalt remains active on Post Fiat's controlled devnet after six adversarial experiments and live authority drills."
 aliases:
@@ -19,11 +19,21 @@ tags:
   - Security
 ---
 
-Cobalt remains active as the validator-registry and trust-graph ratification authority on Post Fiat's controlled devnet. It has held that bounded role since height 916. Consensus v2 still orders and finalizes blocks.
+The August 2026 campaign's final observation found Cobalt active as the validator-registry and trust-graph ratification authority on Post Fiat's controlled L1 v2 devnet. Activation first committed at height 916; the later signed rollback and return are recorded below. Consensus v2 continued to order and finalize blocks.
+
+*Clarified 7 September 2026 against the pinned L1 source. This article reports the retained August experiments, not a new fleet probe. The public XRPL-derived PFT Ledger and its signed validator-list publisher are a separate network and authority surface.*
 
 That sentence needs two qualifications up front. A separate layer decides which validators deserve trust; Cobalt ratifies changes against those declared trust views. Current proposals and authorizations originate from Foundation-administered validators. The result described here proves protocol capability, not operator decentralization, mainnet readiness, or provider independence.
 
 The adversarial-verification campaign closed with **KEEP_ACTIVE** after six experiments. It attacked trust-graph agreement, Byzantine schedules, durable recovery, block-finality isolation, the live authority-transition path, and the proposal-source boundary. Every required experiment passed.
+
+## What admission and ratification each establish
+
+The [controlled admission selector](https://github.com/postfiatorg/postfiatl1v2/blob/d351353e57b295368450a57866ace17b5e1ce6ad/crates/consensus_cobalt/src/validator_admission_policy.rs) evaluates a supplied packet. Its profile requires reliability of at least 9,950 basis points, accountability at least 70, a correlation score at most zero, no prohibited shared control-group label, and true manifest/domain/linkedness flags. Missing, stale or conflicting required evidence creates hold reasons; an explicit failure such as shared release management creates a rejection and takes precedence.
+
+These are checks on supplied values. The selector does not independently verify the manifest signature or domain challenge, discover undisclosed common control, recompute linkedness, or implement the whitepaper's separate economic-exposure and attack-risk thresholds. A source hash commits to evidence; it does not establish that evidence's truth. Matching model replays likewise do not establish independent judgment.
+
+A clean result is an **add candidate**. After activation, the [live authority consumer](https://github.com/postfiatorg/postfiatl1v2/blob/d351353e57b295368450a57866ace17b5e1ce6ad/crates/node/src/cobalt_handoff.rs) separately requires the signed RBC → ABBA → MVBA → DABC decision certificate and distinct current-registry ML-DSA authorizations, bound to the exact payload, roots, prior ratification and activation height. Consensus v2 must order an accepted update. This campaign tested that authorization and transition boundary; it did not prove the proposed operator's economic stake or real-world independence.
 
 ## What was attacked
 
