@@ -1,0 +1,94 @@
+{
+  "date": "2026-09-07",
+  "article": "https://postfiat.org/blog/trustless-single-stock-option-indices/",
+  "baseline_website_commit": "345cc9bec5d623d557dbf220b8ba337ef37b4fa0",
+  "baseline": {
+    "document_sha256": "426bebce6e1c1fe531262b0eb46c826a87aa1a5bb3cca938cef426672877c063",
+    "overall": 81.4,
+    "gpt": 82.4,
+    "fable": 77.0,
+    "glm": 84.8
+  },
+  "method": "Standard TIH prompt: Rate this document on a scale of 1-100. Output the score and your reasoning. Five fresh reviews per model per candidate, 15 per round. Published Markdown format includes descriptions of all twelve figures; later candidates also embed their rendered images. Text models are not a visual-design audit.",
+  "models": {
+    "gpt": "gpt-5.6-sol",
+    "fable": "anthropic/claude-fable-5",
+    "glm": "z-ai/glm-5.2"
+  },
+  "gate_rule": "GPT average stays flat or improves; average of Fable and GLM improves versus the current passing baseline. Numeric TIH compare_score_gate applied without regex interpretation of model outputs.",
+  "candidates": [
+    {
+      "candidate": "01",
+      "document_sha256": "56561a388d2ba427c5462cd99a3b6fb68811f02616c605183532453d940aab2c",
+      "overall": 83.06666666666666,
+      "gpt": 86.2,
+      "fable": 77.6,
+      "glm": 85.4,
+      "gate": {
+        "decision": "promote",
+        "rationale": "GPT baseline=82.40 candidate=86.20 flat=True; Frontier baseline=80.90 candidate=81.50 improved=True."
+      },
+      "baseline_group": "continuous-exposure-published-20260907",
+      "summary": "Address repeated criticism with precise market-activity framing, explicit roll accounting, verification scope and concise product terms; improve diagram exports."
+    },
+    {
+      "candidate": "02",
+      "document_sha256": "be564fdedd8acf07da3b81a714020b17a98b650bff1ade2512fe1915b46f4f89",
+      "overall": 81.8,
+      "gpt": 87.0,
+      "fable": 80.4,
+      "glm": 78.0,
+      "gate": {
+        "decision": "reject",
+        "rationale": "GPT baseline=86.20 candidate=87.00 flat=True; Frontier baseline=81.50 candidate=79.20 improved=False."
+      },
+      "baseline_group": "candidate-01",
+      "summary": "Clarify verification early, add reconciled premium and maturity diagnostics, remove repeated scope prose, and embed complete figures with concise descriptions."
+    },
+    {
+      "candidate": "03",
+      "document_sha256": "2ed623b15b10a600cc110ab3967d19ec878315b3bae2f71afe29ee18fa969b57",
+      "overall": 83.2,
+      "gpt": 87.4,
+      "fable": 81.0,
+      "glm": 81.2,
+      "gate": {
+        "decision": "reject",
+        "rationale": "GPT baseline=86.20 candidate=87.40 flat=True; Frontier baseline=81.50 candidate=81.10 improved=False."
+      },
+      "baseline_group": "candidate-01",
+      "summary": "Define the enforceable proof claim and custody responsibilities in one map; explain existing market scale versus token adoption and quantify the already-illustrated call outcomes."
+    },
+    {
+      "candidate": "04",
+      "document_sha256": "a836fb670cdbe34736f207d00c54f31aea66895a2a565b0c51301604732a323b",
+      "overall": 82.2,
+      "gpt": 86.6,
+      "fable": 80.0,
+      "glm": 80.0,
+      "gate": {
+        "decision": "reject",
+        "rationale": "GPT baseline=86.20 candidate=86.60 flat=True; Frontier baseline=81.50 candidate=80.00 improved=False."
+      },
+      "baseline_group": "candidate-01",
+      "summary": "Focus the explanation on a reusable spot-options primitive; keep market evidence distinct from adoption, add sourced demo rulebook mechanics, and cut repeated scope and legal prose."
+    },
+    {
+      "candidate": "05",
+      "document_sha256": "9840790daf6d97b87e16a6e048f44e8859624dc7299b9e7c5c46c38589c17ee7",
+      "overall": 83.46666666666667,
+      "gpt": 86.6,
+      "fable": 81.2,
+      "glm": 82.6,
+      "gate": {
+        "decision": "promote",
+        "rationale": "GPT baseline=86.20 candidate=86.60 flat=True; Frontier baseline=81.50 candidate=81.90 improved=True."
+      },
+      "baseline_group": "candidate-01",
+      "summary": "Retain the concise passing prose and add verified stock-price and maturity context plus embedded diagram exports; discard longer rejected scope expansions."
+    }
+  ],
+  "selected_candidate": "05",
+  "selected_sha256": "9840790daf6d97b87e16a6e048f44e8859624dc7299b9e7c5c46c38589c17ee7",
+  "decision": "Publish candidate05, the highest-scoring passing candidate; retain the owner demand-led brief and exact title. No invented adoption estimates, return forecasts, portfolio rules, backtests, fee schedule or fund legal setup."
+}

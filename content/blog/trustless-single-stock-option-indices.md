@@ -1,7 +1,7 @@
 ---
 title: "A Framework for Trustless Single Stock Option Indices"
 date: 2026-09-07T00:00:00Z
-lastmod: 2026-09-07T19:18:26Z
+lastmod: 2026-09-07T20:17:33Z
 draft: false
 type: "blog"
 url: "/blog/trustless-single-stock-option-indices/"
@@ -9,7 +9,7 @@ aliases: ["/research/single-stock-options-trackers/"]
 breadcrumb_label: "Post Fiat Blog"
 breadcrumb_url: "/blog/"
 summary: "Call options already attract billions. An options NAVCoin brings that demand on-chain through one spot token that continuously rebalances and rolls a single stock's call exposure."
-description: "A spot token for a continuously maintained single-stock call strategy. The $8.05 billion NVDA and Micron premium market, automatic rebalancing, Ethereum distribution and Post Fiat verification."
+description: "A spot token for a continuously maintained single-stock call strategy. Measured call-market activity, roll accounting, Ethereum distribution and independently verifiable Post Fiat calculations."
 author: "Post Fiat"
 options_tee: true
 categories: ["Post Fiat Research"]
@@ -20,16 +20,17 @@ tags: ["Options", "Convexity", "NAVCoin", "Ethereum", "Uniswap", "TEE", "Post Fi
 market a simple on-chain product: a spot token that continuously maintains a
 single stock's call exposure.**
 
-The proposed **options NAVCoin** holds a portfolio of fully paid calls. Its
-rulebook handles contract selection, rebalancing and replacement as options age.
-The investor holds one Ethereum token through successive baskets and trades it
-on Uniswap. Post Fiat supplies the verification infrastructure behind the strategy
-and, in the full product, its backing and share accounting.
+The proposed **options NAVCoin** holds a portfolio of fully paid calls. A
+published rulebook specifies contract selection, rebalancing and replacement as
+options age. The investor holds one token through successive baskets. Post Fiat
+supplies the verification infrastructure behind the strategy and, in the full
+product, its backing and share accounting.
 
-**The business case starts with existing demand.** Buyers pay for the possibility
-of a large upside payoff with a defined amount at risk. That payoff can be worth
-buying even when its expected financial return is negative. The product's value
-is making this exposure easy to access and maintain in a wallet.
+**The business case starts with existing demand.** Buyers already pay for the
+possibility of a large upside payoff with a defined amount at risk. A token
+serves that buying behavior by making the exposure easy to access and maintain
+in a wallet. Its usefulness comes from the desired payoff and the convenience
+of owning it; the calls can have negative expected financial returns.
 
 Our initial sizing found **$8.05 billion of outstanding at-the-money and
 out-of-the-money call premium value in Nvidia and Micron alone**. The opportunity
@@ -38,7 +39,7 @@ exchanges and other applications can integrate as a spot asset.
 
 {{< options-tee-diagram kind="spot" >}}
 
-## An $8 billion starting market in two stocks
+## $8 billion of outstanding call value in two stocks
 
 **For these two stocks, listed calls dwarf the tracked equity-perp market.**
 We measured every returned call expiration in the full Schwab chains for NVDA
@@ -59,17 +60,25 @@ perpetual observations September 7. Premium value is open interest × 100 shares
 
 {{< options-tee-diagram kind="market" >}}
 
-**The premium base is the relevant starting point for a funded options product:**
-the fund's capital buys options. The notional shows the underlying stock exposure
-those contracts reference. On that measure, the selected calls represent roughly
+**The premium base measures the value of existing call positions:** capital in a
+funded options product would own that kind of asset. The notional measures the
+stock exposure those contracts reference. The selected call notional is roughly
 237 times NVDA's reported perp OI and 134 times Micron's—about **181 times
-combined**, using the reported venue totals.
+combined**. These are indicative comparisons with tracked venues; exchange OI
+counting conventions vary.
 
-An illustrative asset base equal to **1% of the two-stock premium value would be
-$80.45 million**. This illustrates the scale of a product serving a small share of the measured market. The wider addressable category extends across single-stock
-calls and the repeated purchases that maintain those positions over time.
-For context, OCC reported **8.27 billion single-stock option contracts traded
-in 2025**, covering calls and puts, up **26.8%** from 2024.
+The $8.05 billion includes calls held outright and within spreads and hedges.
+It establishes the scale of existing activity. The captured stock references
+were $230.36 for NVDA and $1,016.59 for MU; over 80% of each premium total
+comes from options expiring after 2026. **The initial customer is someone
+already buying and rolling single-stock calls who values access through a spot
+token.** How many such buyers adopt the product depends on its strategy, fees,
+liquidity and distribution.
+
+The activity also repeats over time. OCC reported **8.27 billion single-stock
+option contracts traded in 2025**, covering calls and puts, up **26.8%** from
+2024. That annual trading count provides context for the ongoing market; the
+table above measures the value outstanding in a two-stock snapshot.
 [OCC annual volume](https://www.theocc.com/newsroom/views/2026/01-05-occ-annual-2025-and-december-2025-volume).
 
 The product opportunity is a standard spot interface for that ongoing activity:
@@ -90,16 +99,26 @@ across those expirations.**
 
 The rulebook specifies the eligible maturities and strikes, premium allocation,
 position sizing and roll conditions. Each observation produces a **target**:
-the contracts and quantities the strategy should hold. Actual holdings can then
-be reconciled against that target. In the funded product, replacement premiums
-and trading costs are paid from portfolio assets and reflected in NAV.
+the contracts and quantities the strategy should hold. In the funded product,
+the portfolio operator executes the rebalance through the broker, and actual
+holdings are reconciled against that target. Replacement purchases use portfolio
+assets. The token holder has no automatic obligation to add capital.
 
 {{< options-tee-diagram kind="roll" >}}
 
+**Illustrative roll accounting:** a portfolio starts with $80 of old calls and
+$20 of cash. It sells the old calls for $80, then buys $85 of replacement calls.
+It now holds $85 of calls and $15 of cash: the same $100 NAV before execution
+costs. A hypothetical $1 total trading cost leaves $99 of net assets. Buying
+the new calls exchanges cash for an asset; subsequent price changes, time decay,
+implied volatility and fees change its value. This is arithmetic to explain the
+mechanism; the $1 is an illustrative cost assumption.
+
 The demonstrated Nvidia and Micron strategies each selected five calls in a
-common expiration. The engine applies explicit rules to each stock separately.
-This makes the product repeatable: its identity stays attached to its published
-method while the basket evolves.
+common expiration. Their historical selection parameters are in the
+[demo record](/research/options-tee-indices/demo-record.json). Each stock has its
+own basket. The product's identity stays attached to its published method while
+its holdings evolve.
 
 ## Why package it as a spot token?
 
@@ -140,9 +159,9 @@ $10 per share loses at most $10 and earns $30 if the stock finishes at $140.
 | Options NAVCoin | Rolling upside convexity with a defined capital commitment | The portfolio maintains fully funded calls under its rulebook |
 
 A fully paid call can survive a temporary drawdown and participate in a recovery
-before expiry. A leveraged perp may liquidate during that drawdown. The call
-buyer pays premium for this payoff; time decay, implied volatility and rolling
-costs affect the token's NAV, and the entire investment can be lost. Perp holders
+before expiry. A leveraged perp may liquidate during that drawdown. Each call
+still has a finite life, and a rolling basket's results depend on successive
+purchases and sales. The entire token investment can be lost. Perp holders
 manage margin and funding, which can be paid or received.
 [Liquidation](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/liquidations)
 and [funding mechanics](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding).
@@ -158,7 +177,9 @@ The broker holds the actual calls and brokerage cash. Post Fiat checks the
 strategy evidence and supplies the canonical verification and accounting layer
 in the NAVCoin design. Ethereum contracts represent investor ownership, hold
 settlement USDC and enforce authenticated issuance and settlement authorizations.
-The investor holds the ERC-20; Uniswap supplies the secondary market.
+Ethereum and Uniswap are the proposed distribution route, subject to the
+product's holder and transfer terms. An ERC-20 balance represents the investor's
+shares; pool trades transfer those shares between holders.
 
 **NAV per token = (options value + cash − liabilities and accrued fees)
 ÷ valid token supply.**
@@ -175,8 +196,9 @@ Uniswap, or request settlement against portfolio value. Subscriptions and
 redemptions give traders a way to arbitrage premiums and discounts. Their costs,
 timing and availability determine how closely the market follows NAV.
 
-The token can trade while the options market is closed. Primary settlement can
-use a queue tied to the fund's valuation and cash settlement process.
+The token can trade while the options market is closed, when the last verified
+NAV may be stale and the market price can diverge. Primary settlement can use a
+queue tied to the fund's valuation and cash settlement process.
 [ERC-7540](https://eips.ethereum.org/EIPS/eip-7540) provides a standard interface
 for this request-and-claim pattern. Earlier NAVCoin research also describes
 [a model with bounded market support and no standing redemption right](https://github.com/postfiatorg/postfiatorg.github.io/blob/main/content/blog/navcoin-collateralization.md).
@@ -189,13 +211,19 @@ An investor wants the strategy they bought. A wallet wants a result it can check
 A fund administrator wants calculations it can reconcile. A shared proof gives
 all three a common answer to **“Were these rules applied to these inputs?”**
 
+**Trustless verification applies to the declared calculation.** A verifier can
+check it independently using the proof and registered policy. The underlying
+listed options remain in broker custody, with ownership rights defined by the
+fund's documents.
+
 {{< options-tee-diagram kind="pipeline" >}}
 
-The measured collector runs in an AWS Nitro enclave and obtains the brokerage
-inputs over TLS. Hardware attestation identifies its software and binds its
-input statements. The SP1 program verifies those bindings and computes the
-target. Its proof lets other systems check the calculation while the full
-brokerage response remains private.
+The collector, a program that fetches the brokerage inputs, runs inside an AWS
+Nitro enclave and uses an encrypted TLS connection. Hardware attestation
+identifies its software and binds its input statements. A program in the SP1
+proving system checks those bindings and computes the target. Its proof lets
+other systems check the calculation while the full brokerage response remains
+private.
 [AWS attestation](https://docs.aws.amazon.com/enclaves/latest/user/set-up-attestation.html),
 [SP1](https://docs.succinct.xyz/docs/sp1/introduction).
 
@@ -203,17 +231,18 @@ Try the verification walkthrough:
 
 {{< options-tee-diagram kind="verification" >}}
 
-The registered method, inputs and output commitments travel together. A changed
-claim fails the corresponding check, and an accepted run has a unique receipt.
-PFTL records that shared result for applications to consume.
+The registered method, inputs and output commitments travel together. Changing
+the parameters, inputs or target invalidates the corresponding check. An
+accepted run has a unique receipt on the Post Fiat ledger, PFTL. Every wallet
+and application can verify that same receipt instead of relying on an
+operator's assertion about which strategy ran.
 
 {{< options-tee-diagram kind="ledger" >}}
 
-This is how verification supports distribution: every integrating application
-can rely on the same specified calculation and accepted history. The full
-NAVCoin extends that discipline to reserves, liabilities, token supply and
-settlement. Post Fiat supplies common verification infrastructure across the
-family of products; Ethereum supplies wallet access and trading liquidity.
+This common record lets applications integrate a strategy without recreating
+its administrator's calculation process. The full NAVCoin architecture extends
+the evidence model to reserves, liabilities, token supply and settlement. Each
+additional claim needs its own authenticated evidence and acceptance checks.
 
 ## What is built, and the path to the funded token
 
@@ -227,18 +256,33 @@ including restart/replay, the CLI and viewer.
 **The demonstrated component is the strategy calculation and proof.** The funded
 token adds live execution, custody, account reconciliation, reserve valuation,
 share issuance and its chosen settlement terms. The demo used hypothetical
-capital; brokerage orders and investor token issuance are the next product work.
+capital. A funded implementation must connect executed holdings to the accepted
+targets, value those holdings and reconcile assets, liabilities and issued
+shares before authorizing investor issuance or settlement.
 [Demo record](/research/options-tee-indices/demo-record.json),
 [implementation PR](https://github.com/postfiatorg/postfiatl1v2/pull/38),
 [verification map](https://github.com/postfiatorg/postfiatl1v2/blob/c1b3a6bec14b4fe76bc3e4f95fecd4b9b0691f53/docs/yolo/target-receipt-v1.md#where-verification-lives).
 
-The trust boundary is concrete. Listed options remain in broker custody, with
-holder rights established by the fund arrangement. Proofs verify specified
-computations over authenticated evidence; their assurance depends on the data
-source, measured code, hardware, cryptography and ledger finality. The completed
-target proof covers strategy construction. The funded product also needs
-verified holdings and working settlement. Those are the remaining engineering
-and custody responsibilities.
+The assurance rests on the brokerage data source, the measured collector's
+correctness, Nitro hardware attestation, the proof program and cryptography,
+and ledger finality. The operator and broker remain responsible for execution
+and custody. A target receipt proves the calculation covered by those inputs;
+evidence of actual fills and backing belongs to the funded implementation.
+
+**Product terms complete the architecture.** Fund and share documents must
+establish rights to portfolio assets, custody and segregation, fees, permitted
+holders and transfers, and settlement. They must also define valuation during
+market closures and treatment of exercise and corporate actions. The issuer
+needs appropriate offering, fund and adviser treatment and a compatible
+distribution route. The SEC staff's January 28, 2026 statement explains that
+tokenization preserves the application of securities law and that ownership
+rights depend on the structure; this staff position has no independent legal
+force. The SEC's private-fund
+overview describes exemption and adviser considerations relevant to evaluating
+one possible structure. A legal wrapper and fee schedule remain product-design
+work.
+[SEC staff statement](https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities),
+[SEC fund-formation overview](https://www.sec.gov/about/starting-private-fund).
 
 ## A product family built around demand for convexity
 
@@ -272,8 +316,20 @@ Premium value is `sum(openInterest × 100 × (bid + ask) / 2)`. It measures the
 current value of outstanding long calls, including positions used in spreads
 and hedges. Historical premiums paid and incremental buying demand are different
 measures. Underlying notional is `sum(openInterest × 100 × stock reference
-price)`; delta-adjusted notional is $36.54B combined. The $8.05B observation sizes
-two stocks, and the 1% example is an arithmetic scale illustration.
+price)`; delta-adjusted notional is $36.54B combined. The $8.05B observation
+measures outstanding positions in two stocks. The ATM/OTM selection used for
+this market sizing is separate from the demonstrated strategy's selection
+parameters.
+
+The source stock reference prices are $230.36 for NVDA and $1,016.59 for MU.
+Dividing each stock's total premium value by its selected open interest and
+100-share multiplier gives the open-interest-weighted midpoint: $9.83 per
+underlying share for NVDA and $78.41 for MU, respectively 4.27% and 7.71% of the
+reference prices. Selected expiries run from September 9, 2026 through December
+15, 2028. Expiries after 2026 account for 84.65% of NVDA premium value and 82.70%
+of MU premium value. These price, maturity and aggregate figures were
+independently reconciled to the original retained captures using the unchanged
+`strike >= underlyingPrice` selection.
 
 Perpetual totals are September 7 observations from PerpEquities, covering 26 of
 33 NVDA markets and 25 of 30 MU markets with reported OI. Exchange one-sided and

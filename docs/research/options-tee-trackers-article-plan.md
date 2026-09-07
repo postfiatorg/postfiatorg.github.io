@@ -127,3 +127,38 @@ five interactive scenarios, keyboard controls, no-JavaScript reading, blog
 discovery and Markdown/clipboard parity. Product and roll diagrams were visually
 inspected. The PR and Pages workflow record publication, followed by a live-page
 check including exact deployed Markdown parity.
+
+## September 7: systematic TIH improvement
+
+The owner requested systematic improvement after a fresh standard TIH assessment
+of 81.40/100. The binding editorial goal remains a product primitive serving
+existing call demand: continuing single-stock call exposure held as a spot token.
+The article keeps its exact title and avoids a positive-expected-return thesis.
+
+Five candidates were evaluated with fifteen fresh scores each. GPT, Fable and
+GLM each contribute five reviews. The full experiment table and hashes are in
+[the scoring record](options-tee-trackers-tih-20260907.json). Candidate05 is the
+selected passing version: overall83.47, GPT86.60, Fable81.20 and GLM82.60. The
+TIH comparison rule holds GPT flat or higher and improves the combined Fable/GLM
+average against the current passing baseline. Longer candidates with additional
+trust and risk framing did not pass; they were not published.
+
+The selected changes distinguish measured call activity from token adoption,
+explain portfolio accounting during a roll, define proof/custody responsibilities
+and add a compact product-terms paragraph. A read-only recheck from the retained
+authenticated Schwab captures reconciled all published market totals and supplied
+stock-price, average-premium and maturity context. The original chain selection
+and all portfolio rules are unchanged. Source quotes and recovery material remain
+private; only derived aggregates enter the article.
+
+The article retains twelve responsive/interactive figures. Its Markdown and
+clipboard exports now embed actual PNG figures with concise descriptions. Run
+`scripts/export_options_diagrams.py` against the locally served Hugo build after
+changing diagram markup, captions or CSS, then rebuild Hugo to include the PNGs.
+The figure manifest records the generated assets.
+
+Validation covers Hugo0.148.1, both repository content checks, aggregate and
+figure-manifest reconciliation, 1280px/390px rendering, five interactive cases,
+keyboard/no-JavaScript behavior, source notes, Markdown/clipboard parity and
+embedded image availability. Publish through the repository PR and Pages
+workflow and verify the deployed Markdown and all article assets.

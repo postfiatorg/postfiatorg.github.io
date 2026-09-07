@@ -3,72 +3,72 @@
     "number": "01",
     "title": "One token maintains the call exposure.",
     "caption": "Product design: a spot asset representing a continuously rebalanced portfolio of fully paid calls.",
-    "description": "An investor buys one Ethereum NAVCoin for a chosen single-stock call strategy. The portfolio rebalances and replaces aging contracts under a published rulebook while the investor keeps the same wallet asset. Replacement premiums and trading costs come from portfolio assets. The token can be held, transferred and traded through a Uniswap pair. The opportunity is to serve existing demand for calls through a simple on-chain asset."
+    "description": "One Ethereum token represents a single-stock call strategy. The portfolio replaces contracts using its own assets; investors hold and trade the same token through successive rolls."
   },
   "market": {
     "number": "02",
     "title": "Two stocks already support billions in call premium.",
     "caption": "Snapshot: Schwab September 4 quotes; reported perpetual OI on September 7, 2026. Source notes define the measures and coverage.",
-    "description": "NVDA has $3.625984092 billion and MU $4.4193337695 billion of outstanding ATM/OTM call premium value, totaling $8.0453178615 billion. Call underlying notional is $84.98832732 billion for NVDA and $57.295215718 billion for MU. Reported tracked-venue perpetual OI is $359.2651769 million and $428.2793365 million respectively. Premium value and notional are distinct measures. A scale illustration equal to 1% of the measured call premium is $80.45 million of assets."
+    "description": "Outstanding ATM/OTM premium value totals $8.05 billion: NVDA $3.63B and MU $4.42B. Their call underlying notionals are $84.99B and $57.30B, versus reported tracked perp OI of $359.3M and $428.3M. The two panels distinguish premium value from underlying notional."
   },
   "basket": {
     "number": "03",
     "title": "One stock. A basket of calls.",
     "caption": "Illustrated basket based on the demonstrated five-call design. The rulebook defines allocation and residual cash.",
-    "description": "One company supplies the options universe. The demonstrated rulebook selects five calls in a common expiration, with residual cash after premium budgeting and whole-contract sizing. The target specifies quantities for maintaining that company’s options strategy."
+    "description": "The demonstrated strategy selects five calls on one company in one expiration. Whole-contract sizing leaves residual cash. The rulebook defines the basket; actual holdings require execution."
   },
   "roll": {
     "number": "04",
     "title": "The contracts change. The investor keeps the token.",
-    "caption": "The rulebook determines decision dates, retention and roll conditions.",
-    "description": "An initial basket establishes the call strategy. New observations inform retention or resizing. When the roll condition is met, a new eligible expiry and basket replace the old contracts. The investor keeps the same token through successive rebalances and expirations. Replacement premiums and trading costs are paid from portfolio assets."
+    "caption": "Roll timing follows the rulebook. Accounting amounts illustrate asset replacement and trading costs.",
+    "description": "Form the basket, retain or rebalance it, then replace it when the rule triggers. In the accounting example, $80 calls plus $20 cash become $85 replacement calls plus $15 cash; a $1 trading cost leaves $99."
   },
   "products": {
     "number": "05",
     "title": "Why the spot format is useful.",
     "caption": "The spot interface puts an options strategy inside the existing wallet and trading workflow.",
-    "description": "Investors choose a stock and budget while the portfolio maintains the call basket. Wallets and exchanges integrate an ERC-20 balance and trading pair. Liquidity providers create markets in portfolio shares, and product builders reuse the strategy engine and verification machinery across single-stock offerings."
+    "description": "Investors hold one maintained strategy. Wallets and exchanges integrate its ERC-20 shares. Liquidity providers trade the shares, and builders reuse the verification system for additional stocks."
   },
   "payoff": {
     "number": "06",
     "title": "Pay for convexity. Define the amount at risk.",
     "caption": "Illustrative single-call expiry payoff per underlying share, before fees. The tracker maintains a rolling basket of calls.",
-    "description": "A call with a $100 strike and $10 premium has expiry profit max(stock price minus $100, zero) minus $10 per underlying share. Maximum loss is $10; breakeven is $110; a $140 stock price yields $30 profit. The chart explains the payoff shape. A fully paid call requires no maintenance-margin top-ups; option premium and subsequent rolling costs affect the portfolio value."
+    "description": "A $100-strike call bought for $10 has expiry profit max(stock price minus $100, zero) minus $10 per share. Maximum loss is $10; breakeven is $110; a $140 finish yields $30 profit. This plots payoff, without assigning outcome probabilities."
   },
   "navcoin": {
     "number": "07",
     "title": "One portfolio. Three responsibilities.",
     "caption": "NAVCoin product architecture: brokerage assets, Post Fiat verification, and Ethereum ownership and markets.",
-    "description": "The broker holds actual calls and cash. Post Fiat checks authenticated strategy and reserve evidence and supplies canonical NAV and supply accounting in the product design. Ethereum contracts authenticate the accepted authorizations and enforce issuance and settlement. Investors hold an ERC-20 portfolio claim and trade it through Uniswap. Cash movement follows the fund settlement process."
+    "description": "The broker holds calls and cash. In the full NAVCoin architecture, Post Fiat verifies accounting evidence and Ethereum enforces issuance and settlement authorizations. Investors hold portfolio shares and access a secondary market."
   },
   "redemption": {
     "number": "08",
     "title": "Two exits with different mechanics.",
     "caption": "A redeemable model offers market trading and primary settlement. Product terms determine timing and costs.",
-    "description": "A Uniswap sale exchanges existing tokens for USDC at the pool’s available price. Primary redemption locks shares, values the claim, settles cash and reconciles reserves and shares. Pending claims remain accounted for. Subscriptions and redemptions support arbitrage between the portfolio NAV and the secondary-market price, subject to costs and availability."
+    "description": "A Uniswap sale transfers existing tokens at the pool price. Primary redemption locks shares, values the claim, settles cash and reconciles assets and supply. Pending claims remain accounted for."
   },
   "pipeline": {
     "number": "09",
     "title": "Three jobs: collect, prove, record.",
     "caption": "Measured collection binds the inputs. The proof checks the calculation. The ledger records the accepted result.",
-    "description": "Schwab sends its response over TLS to the measured collector inside AWS Nitro, through a parent relay. The enclave normalizes inputs and signs binding statements. The SP1 program verifies attestation and input bindings and recalculates the target. PFTL verifies the public proof and records a receipt while detailed inputs remain private."
+    "description": "Schwab inputs travel over TLS into a measured Nitro collector. SP1 checks attestation and input bindings, computes the target, and produces a proof. PFTL verifies and records the accepted receipt."
   },
   "verification": {
     "number": "10",
     "title": "Check the strategy you bought.",
     "caption": "Interactive illustration of the registered-run acceptance checks.",
-    "description": "The original result can pass when it matches registration, proof and unused-run checks. A changed rulebook or input commitment conflicts with registration. Altered target bytes invalidate the proof. Submitting an already consumed run is rejected. The walkthrough illustrates these checks in the page."
+    "description": "Interactive checks accept a matching registered run. Changed rules or inputs fail registration checks, altered target bytes fail proof verification, and a consumed run fails replay checks."
   },
   "ledger": {
     "number": "11",
     "title": "A shared record for every accepted target.",
     "caption": "The receipt lifecycle is implemented and locally qualified.",
-    "description": "Registration identifies the allowed program, method, inputs, submitter and run. After activation, consensus verifies the submitted proof and records a receipt with inclusion and finality evidence. Applications query the same accepted history instead of maintaining separate accounts of the operator’s calculation."
+    "description": "A registered run binds its program, method and inputs. Consensus verifies the submitted proof, records a receipt and supplies an accepted history for applications to query. This lifecycle is locally qualified."
   },
   "status": {
     "number": "12",
     "title": "The core calculation is proven. Build the funded product around it.",
     "caption": "September 6, 2026 demonstration; the linked record contains the effective parameters and qualification evidence.",
-    "description": "MU and NVDA each produced five November 20 call targets from real retained attested Schwab inputs. Real Nitro/SP1 proofs, independent replay and isolated local four-validator receipts passed. The next product stages establish live holdings and custody, verified NAV and share accounting, Ethereum issuance and Uniswap access. The demonstration used hypothetical capital."
+    "description": "September 6, 2026: MU and NVDA each produced five November 20 call targets. Attested inputs, real proofs, independent replay and local four-validator receipts passed. The funded product adds holdings, custody, NAV, issuance and settlement; the demo used hypothetical capital."
   }
 }
