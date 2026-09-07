@@ -1,9 +1,9 @@
 {
   "spot": {
     "number": "01",
-    "title": "Call-option exposure, held as a spot asset.",
-    "caption": "Product design: fully funded call portfolios issued as transferable shares.",
-    "description": "An investor chooses one stock and a capital budget. An Ethereum NAVCoin represents a portfolio of fully paid calls maintained under a published rulebook. The token can be held, transferred and traded through a Uniswap pair. The design limits a fully paid holder’s loss to the amount invested plus fees, with the possibility of losing the entire investment."
+    "title": "One token maintains the call exposure.",
+    "caption": "Product design: a spot asset representing a continuously rebalanced portfolio of fully paid calls.",
+    "description": "An investor buys one Ethereum NAVCoin for a chosen single-stock call strategy. The portfolio rebalances and replaces aging contracts under a published rulebook while the investor keeps the same wallet asset. Replacement premiums and trading costs come from portfolio assets. The token can be held, transferred and traded through a Uniswap pair. The opportunity is to serve existing demand for calls through a simple on-chain asset."
   },
   "market": {
     "number": "02",
@@ -11,29 +11,29 @@
     "caption": "Snapshot: Schwab September 4 quotes; reported perpetual OI on September 7, 2026. Source notes define the measures and coverage.",
     "description": "NVDA has $3.625984092 billion and MU $4.4193337695 billion of outstanding ATM/OTM call premium value, totaling $8.0453178615 billion. Call underlying notional is $84.98832732 billion for NVDA and $57.295215718 billion for MU. Reported tracked-venue perpetual OI is $359.2651769 million and $428.2793365 million respectively. Premium value and notional are distinct measures. A scale illustration equal to 1% of the measured call premium is $80.45 million of assets."
   },
-  "payoff": {
-    "number": "03",
-    "title": "Pay for convexity. Define the amount at risk.",
-    "caption": "Illustrative single-call expiry payoff per underlying share, before fees. The tracker maintains a rolling basket of calls.",
-    "description": "A call with a $100 strike and $10 premium has expiry profit max(stock price minus $100, zero) minus $10 per underlying share. Maximum loss is $10; breakeven is $110; a $140 stock price yields $30 profit. The fully paid call has no maintenance-margin liquidation during a temporary drawdown and can participate in a subsequent recovery before expiry."
-  },
-  "products": {
-    "number": "04",
-    "title": "Why the spot format is useful.",
-    "caption": "The spot interface puts an options strategy inside the existing wallet and trading workflow.",
-    "description": "Investors choose a stock and budget while the portfolio maintains the call basket. Wallets and exchanges integrate an ERC-20 balance and trading pair. Liquidity providers create markets in portfolio shares, and product builders reuse the strategy engine and verification machinery across single-stock offerings."
-  },
   "basket": {
-    "number": "05",
+    "number": "03",
     "title": "One stock. A basket of calls.",
     "caption": "Illustrated basket based on the demonstrated five-call design. The rulebook defines allocation and residual cash.",
     "description": "One company supplies the options universe. The demonstrated rulebook selects five calls in a common expiration, with residual cash after premium budgeting and whole-contract sizing. The target specifies quantities for maintaining that company’s options strategy."
   },
   "roll": {
-    "number": "06",
-    "title": "Keep the strategy; replace aging contracts.",
+    "number": "04",
+    "title": "The contracts change. The investor keeps the token.",
     "caption": "The rulebook determines decision dates, retention and roll conditions.",
-    "description": "An initial basket establishes the call strategy. New observations inform retention or resizing. When the roll condition is met, a new eligible expiry and basket replace the old contracts. The stock and strategy identity continue as individual contracts change."
+    "description": "An initial basket establishes the call strategy. New observations inform retention or resizing. When the roll condition is met, a new eligible expiry and basket replace the old contracts. The investor keeps the same token through successive rebalances and expirations. Replacement premiums and trading costs are paid from portfolio assets."
+  },
+  "products": {
+    "number": "05",
+    "title": "Why the spot format is useful.",
+    "caption": "The spot interface puts an options strategy inside the existing wallet and trading workflow.",
+    "description": "Investors choose a stock and budget while the portfolio maintains the call basket. Wallets and exchanges integrate an ERC-20 balance and trading pair. Liquidity providers create markets in portfolio shares, and product builders reuse the strategy engine and verification machinery across single-stock offerings."
+  },
+  "payoff": {
+    "number": "06",
+    "title": "Pay for convexity. Define the amount at risk.",
+    "caption": "Illustrative single-call expiry payoff per underlying share, before fees. The tracker maintains a rolling basket of calls.",
+    "description": "A call with a $100 strike and $10 premium has expiry profit max(stock price minus $100, zero) minus $10 per underlying share. Maximum loss is $10; breakeven is $110; a $140 stock price yields $30 profit. The chart explains the payoff shape. A fully paid call requires no maintenance-margin top-ups; option premium and subsequent rolling costs affect the portfolio value."
   },
   "navcoin": {
     "number": "07",
