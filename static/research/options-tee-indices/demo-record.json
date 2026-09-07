@@ -1,0 +1,71 @@
+{
+  "schema": "postfiat.research.options_tracker_demo.v1",
+  "demonstratedAt": "2026-09-06",
+  "scope": "Portfolio targets and real private proofs with isolated local PFTL receipt qualification; no brokerage orders or external network deployment",
+  "sourceMarketDate": "2026-09-04",
+  "sourceObservationsPerStock": 1,
+  "sourceQuoteAgeBoundSeconds": 172800,
+  "haltFacts": "Explicit no-halts demo assumptions, not exchange-certified halt surveillance",
+  "startingState": {
+    "hypotheticalSettledOptionsCashUsdPerTracker": 100000,
+    "initialPositions": 0
+  },
+  "parameters": {
+    "basket_size": 5,
+    "displayed_size_cap": 20,
+    "displayed_size_weight_ppb": 100000000,
+    "maximum_moneyness_ppb": 1100000000,
+    "maximum_quote_age_seconds": 172800,
+    "maximum_relative_spread_bps": 800,
+    "minimum_moneyness_ppb": 900000000,
+    "minimum_open_interest": 500,
+    "minimum_session_volume": 100,
+    "minimum_two_sided_size": 1,
+    "observation_count": 1,
+    "open_interest_cap": 5000,
+    "open_interest_weight_ppb": 200000000,
+    "per_contract_valid_quotes": 1,
+    "roll_dte": 30,
+    "scheduled_time_tolerance_seconds": 30,
+    "schema": "postfiat.yolo.portfolio_parameters.v1",
+    "spread_weight_ppb": 500000000,
+    "strike_retention_rank": 8,
+    "successor_maximum_dte": 833,
+    "successor_minimum_dte": 31,
+    "target_dte": 60,
+    "target_premium_ppb": 900000000,
+    "volume_cap": 1000,
+    "volume_weight_ppb": 200000000
+  },
+  "series": [
+    {
+      "symbol": "MU",
+      "status": "TARGET_COMPUTED",
+      "selectedCallPositions": 5,
+      "selectedExpiration": "2026-11-20",
+      "proofSha256": "471ffa42e1c53c092afb1179b6606cbf31ed69be73690c93bf03d4d5265e4b9b",
+      "receiptRegistrationId": "b0ba1fce49db5769487ce0f9364d552f2351b69218c7bda458c5903d0c7662023bf4ab8ff53ee0e24405872aaee643c9",
+      "localReceiptConfirmed": true,
+      "independentVerificationPassed": true,
+      "fourValidatorReplayVerified": true,
+      "nativeReplayMatchesProofPublicValues": true
+    },
+    {
+      "symbol": "NVDA",
+      "status": "TARGET_COMPUTED",
+      "selectedCallPositions": 5,
+      "selectedExpiration": "2026-11-20",
+      "proofSha256": "548858f5d8ee68cd309196756f5ee6cca43312e937ea5bbbc004bdedc6385b0a",
+      "receiptRegistrationId": "4594e71fc94ca02828db48653395d603a63e9e889cdbb0796ca62ae0e0aa9012aeca0f737ec20c8ede2ca040d139eecb",
+      "localReceiptConfirmed": true,
+      "independentVerificationPassed": true,
+      "fourValidatorReplayVerified": true,
+      "nativeReplayMatchesProofPublicValues": true
+    }
+  ],
+  "navMeasuredRevision": "b464843e4c7c6ce912b24be78809578642ff8937",
+  "pftlProofSourceRevision": "d3aeb780bff327bc2d9734226770aba7433ba5d9",
+  "demoSpecCommitment": "d19bab42a06a3835036e0cbfbb7e9b8cd83169f054b16523db914e1e68a6ed7c",
+  "sourceQualificationReportSha256": "fd2615b618abcac1239c077e5e20dad1ff78972481adbe9b09b6335dee1039d1",
+  "publicFieldsOnly": true
+}

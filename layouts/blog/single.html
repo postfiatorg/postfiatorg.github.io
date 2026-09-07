@@ -41,6 +41,10 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  {{ if .Params.options_tee }}
+  <link rel="stylesheet" href="{{ "research/options-tee-indices/diagrams.css" | relURL }}">
+  <script defer src="{{ "research/options-tee-indices/diagrams.js" | relURL }}"></script>
+  {{ end }}
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -109,6 +113,7 @@
   {{ $copyRawContentRebalance := replace $copyRawContentReplay "{{< agentic-index-diagram kind=\"rebalance\" >}}" $agenticRebalanceDescription }}
   {{ $copyRawContentAtp := replace $copyRawContentRebalance "{{< agentic-index-diagram kind=\"atp\" >}}" $agenticAtpDescription }}
   {{ $copyRawContent := replace $copyRawContentAtp "{{< agentic-index-diagram kind=\"pftl\" >}}" $agenticPftlDescription }}
+  {{ $copyRawContent = partial "options-tee/markdown.html" (dict "page" . "text" $copyRawContent) }}
   {{ $articleMarkdown := printf "# %s\n\nDate: %s\nURL: %s\nSummary: %s\n\n%s" .Title (.Date.Format "January 2, 2006") .Permalink (.Summary | plainify) $copyRawContent }}
   <script id="articleMarkdownSource" type="application/json">{{ $articleMarkdown | jsonify }}</script>
   <script>

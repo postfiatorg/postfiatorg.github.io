@@ -1,0 +1,62 @@
+{
+  "basket": {
+    "number": "01",
+    "title": "One stock. A basket of calls.",
+    "caption": "Each tracker has its own underlier and rulebook. Call A\u2013E are illustrative labels, not actual contracts or a trade recommendation.",
+    "description": "One company supplies the options universe. A declared rulebook selects five call positions in the demonstrated design, plus residual cash. The result is an options-strategy target for that company; it does not promise one-for-one stock tracking."
+  },
+  "roll": {
+    "number": "02",
+    "title": "Keep the strategy; replace aging contracts.",
+    "caption": "Conceptual roll sequence. The rulebook determines actual decision dates, retention and roll conditions.",
+    "description": "At an initial decision, eligible calls form a basket. As time passes, the rules may retain or resize positions. When the roll condition is met, a new eligible expiry and basket replace the old one. The underlier stays the same while contracts change."
+  },
+  "rulebook": {
+    "number": "03",
+    "title": "A target is the output of a declared recipe.",
+    "caption": "Commitments identify exact records. Reviewing the underlying methodology remains a human and product-governance responsibility.",
+    "description": "Methodology and parameters, an authenticated input collection, and supplied prior positions/cash feed the deterministic calculation. The output is a target basket and its commitment. Changing a bound input or rule changes what is being proved."
+  },
+  "pipeline": {
+    "number": "04",
+    "title": "Three jobs: collect, prove, record.",
+    "caption": "The parent relays encrypted network traffic. TLS terminates inside the enclave; the proof guest verifies attested normalized-input bindings, not a TLS transcript.",
+    "description": "Schwab sends a TLS response to the measured collector in an AWS Nitro enclave through a parent relay. The enclave normalizes inputs, calculates a target and signs input-binding statements. SP1 checks attestation/provenance and recalculates the target; private proving runs inside Nitro in this demonstration. PFTL verifies the public proof and records a receipt."
+  },
+  "privacy": {
+    "number": "05",
+    "title": "Public evidence, controlled disclosure.",
+    "caption": "Public commitments and metadata can reveal information. Hashing is not encryption; authorized parties can recover retained private records for replay.",
+    "description": "The private side contains full source responses, normalized inputs, position details and the proof witness. Encrypted copies support authorized replay. The public side contains the proof, the fixed 408-byte commitment/status/count interface and registration/receipt/finality metadata."
+  },
+  "verification": {
+    "number": "06",
+    "title": "What happens if the operator changes the claim?",
+    "caption": "Interactive explanation of acceptance rules. This page does not execute a cryptographic verifier or submit transactions.",
+    "description": "The original registered result can pass. Substituting the rulebook or input commitment conflicts with registration. Altering the target public bytes invalidates the proof. Reusing an already consumed registration rejects even if the original proof is valid. These checks do not establish investment merit or actual holdings."
+  },
+  "trust": {
+    "number": "07",
+    "title": "The boundary of the guarantee.",
+    "caption": "Verification removes a specific operator claim from the trust budget. It does not remove every dependency of an investment product.",
+    "description": "Verifiable: exact method/input binding, attested collector identity, deterministic target calculation and receipt uniqueness. Still assumed or separately established: rulebook merit, source-data accuracy, AWS attestation and measured-code correctness, cryptographic/setup assumptions, ledger consensus, and any future brokerage custody/execution/redemption."
+  },
+  "ledger": {
+    "number": "08",
+    "title": "Give every accepted target a common address.",
+    "caption": "The receipt lifecycle is implemented and locally qualified. This demonstration did not deploy or activate it on an external PFTL network.",
+    "description": "After compatible deployment and governance activation, register the permitted program, method, input commitments, submitter and future run activation. Submit the real proof after activation. Consensus checks it and stores the receipt with transaction inclusion and finality evidence. Clients pin the chain, registration and program when querying."
+  },
+  "products": {
+    "number": "09",
+    "title": "One strategy engine, several possible products.",
+    "caption": "The upper box is the demonstrated primitive. The lower boxes are potential integrations requiring their own execution, custody and product controls.",
+    "description": "A verifiable target plus receipt can feed a model-portfolio service, a managed account, or a fund/tokenized tracker. Managed accounts need orders and holdings reconciliation. Funds or tokens additionally need custody, valuation, share accounting and subscription/redemption arrangements."
+  },
+  "status": {
+    "number": "10",
+    "title": "What exists today, and what comes next.",
+    "caption": "Status of the September 6 demonstration. No investor capital was deployed and no brokerage orders were sent.",
+    "description": "Demonstrated: real retained attested Schwab inputs for MU and NVDA; target quantities for five calls each with November 20 expiry; real Nitro/SP1 proofs; independent replay; isolated local four-validator receipts, CLI and viewer. Next product work: external network rollout, ongoing data collection, and any selected live execution/custody/product wrapper."
+  }
+}
