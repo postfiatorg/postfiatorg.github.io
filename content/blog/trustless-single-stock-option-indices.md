@@ -1,11 +1,12 @@
 ---
-title: "Single-Stock Options Trackers"
+title: "A Framework for Trustless Single Stock Option Indices"
 date: 2026-09-07T00:00:00Z
 draft: false
 type: "blog"
-url: "/research/single-stock-options-trackers/"
-breadcrumb_label: "Post Fiat Research"
-breadcrumb_url: "/research/"
+url: "/blog/trustless-single-stock-option-indices/"
+aliases: ["/research/single-stock-options-trackers/"]
+breadcrumb_label: "Post Fiat Blog"
+breadcrumb_url: "/blog/"
 summary: "A financial primitive for maintaining options exposure to one company—with explicit portfolio rules, private market data, and a result that anyone can verify."
 description: "A visual explanation of single-stock options trackers: rolling call baskets, trusted execution environments, zero-knowledge proofs, Post Fiat receipts, and the boundary between verifiable rules and a funded investment product."
 author: "Post Fiat"
