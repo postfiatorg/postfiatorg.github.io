@@ -60,3 +60,43 @@ The update keeps the existing title and canonical URL. It changes the article,
 diagram assets and this publication record; the earlier NAVCoin drafts remain
 drafts and no market-data capture is published. The branch PR and Pages run are
 the deployment record, followed by a live-page and asset check.
+
+## September 7: product thesis and market sizing
+
+The owner found the expanded article repetitive about limitations and unclear
+about product value. The revised editorial objective is explicit: explain a
+spot-held primitive for the existing call-premium market, with fully funded
+upside exposure and loss limited to invested capital plus fees.
+
+This update publishes derived market aggregates authorized by that request.
+The raw Schwab chains, brokerage details and recovery material remain private.
+The earlier record above describes the previous publication, which did not
+include this market sizing.
+
+- Lead with what the investor buys, why the payoff is useful, and the measured
+  market. Explain investor, wallet, exchange and liquidity-provider benefits.
+- Distinguish outstanding premium value, underlying notional and reported perp
+  OI through positive definitions. Preserve exact source dates and coverage in
+  the public aggregate record and an expandable methodology note.
+- Treat the two-stock measurement as a measured starting market. Label the 1%
+  arithmetic example as illustrative scale; do not invent global premium TAM,
+  expected adoption, fee rates or portfolio rules.
+- Use one concise implementation/trust section. Remove repeated negatives from
+  introductions, diagrams and transitions; support the product thesis with
+  explicit mechanics, evidence and use cases throughout.
+- Replace three technical-boundary diagrams with a product overview, market
+  sizing figure and single-call expiry payoff. Keep twelve diagrams, with
+  desktop/mobile chart layouts and text descriptions in Markdown/clipboard.
+
+The rewrite reduces the source article from 3,076 to about 2,040 words. Market
+aggregates reconcile to the prior calculation: $8,045,317,861.50 premium value,
+$142,283,543,038 call underlying notional and $787,544,513.37 tracked reported
+perp OI. The public source record includes formulas, dates, coverage and the
+independent Hyperliquid subset. The chart script builds only from this record.
+
+Validation includes Hugo 0.148.1, both repository content checks, exact aggregate
+reconciliation, responsive chart selection, desktop/mobile visual inspection,
+all five interactive cases, keyboard/no-JavaScript reading, expandable source
+notes, canonical/blog links and exact Markdown/clipboard descriptions. Publish
+through the repository PR and Pages workflow, then verify the live article and
+all five new data/chart assets.

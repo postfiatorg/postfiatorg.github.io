@@ -1,74 +1,74 @@
 {
-  "basket": {
+  "spot": {
     "number": "01",
-    "title": "One stock. A basket of calls.",
-    "caption": "Each tracker has its own underlier and rulebook. Call A–E are illustrative labels, not actual contracts or a trade recommendation.",
-    "description": "One company supplies the options universe. A declared rulebook selects five call positions in the demonstrated design, plus residual cash. The result is an options-strategy target for that company; it does not promise one-for-one stock tracking."
+    "title": "Call-option exposure, held as a spot asset.",
+    "caption": "Product design: fully funded call portfolios issued as transferable shares.",
+    "description": "An investor chooses one stock and a capital budget. An Ethereum NAVCoin represents a portfolio of fully paid calls maintained under a published rulebook. The token can be held, transferred and traded through a Uniswap pair. The design limits a fully paid holder’s loss to the amount invested plus fees, with the possibility of losing the entire investment."
   },
-  "roll": {
+  "market": {
     "number": "02",
-    "title": "Keep the strategy; replace aging contracts.",
-    "caption": "Conceptual roll sequence. The rulebook determines actual decision dates, retention and roll conditions.",
-    "description": "At an initial decision, eligible calls form a basket. As time passes, the rules may retain or resize positions. When the roll condition is met, a new eligible expiry and basket replace the old one. The underlier stays the same while contracts change."
+    "title": "Two stocks already support billions in call premium.",
+    "caption": "Snapshot: Schwab September 4 quotes; reported perpetual OI on September 7, 2026. Source notes define the measures and coverage.",
+    "description": "NVDA has $3.625984092 billion and MU $4.4193337695 billion of outstanding ATM/OTM call premium value, totaling $8.0453178615 billion. Call underlying notional is $84.98832732 billion for NVDA and $57.295215718 billion for MU. Reported tracked-venue perpetual OI is $359.2651769 million and $428.2793365 million respectively. Premium value and notional are distinct measures. A scale illustration equal to 1% of the measured call premium is $80.45 million of assets."
   },
-  "navcoin": {
+  "payoff": {
     "number": "03",
-    "title": "One portfolio. Three responsibilities.",
-    "caption": "Proposed options NAVCoin integration. Listed options remain at the broker; Ethereum holds the token and settlement assets. Evidence arrows are not asset transfers or a completed bridge.",
-    "description": "Broker custody holds actual calls and brokerage cash. Authenticated account evidence feeds Post Fiat strategy and reserve verification, including NAV and valid supply. Ethereum contracts must authenticate the accepted authorizations before issuance or settlement. Investors hold an ERC-20 portfolio claim and trade it through a NAVCoin/USDC Uniswap pool. Brokerage cash movement is a separate settlement process. Portfolio backing, token supply and pool liquidity are distinct quantities."
-  },
-  "redemption": {
-    "number": "04",
-    "title": "Two exits with different mechanics.",
-    "caption": "The redemption path is a proposed product choice. Market trades can occur while primary settlement is pending; neither route guarantees a fixed dollar price or execution at the latest published NAV.",
-    "description": "Selling on Uniswap exchanges existing tokens for USDC at the available pool price, without requiring the fund to sell options. Primary redemption in a redeemable design locks shares, values the claim, completes required cash settlement and reconciles the payment, shares and remaining reserves. Pending claims remain accounted for. Subscriptions and redemptions can narrow a market premium or discount when costs, access and settlement allow; publishing NAV alone cannot enforce the pool price."
-  },
-  "rulebook": {
-    "number": "05",
-    "title": "A target is the output of a declared recipe.",
-    "caption": "Commitments identify exact records. Reviewing the underlying methodology remains a human and product-governance responsibility.",
-    "description": "Methodology and parameters, an authenticated input collection, and supplied prior positions/cash feed the deterministic calculation. The output is a target basket and its commitment. Changing a bound input or rule changes what is being proved."
-  },
-  "pipeline": {
-    "number": "06",
-    "title": "Three jobs: collect, prove, record.",
-    "caption": "The parent relays encrypted network traffic. TLS terminates inside the enclave; the proof guest verifies attested normalized-input bindings, not a TLS transcript.",
-    "description": "Schwab sends a TLS response to the measured collector in an AWS Nitro enclave through a parent relay. The enclave normalizes inputs, calculates a target and signs input-binding statements. SP1 checks attestation/provenance and recalculates the target; private proving runs inside Nitro in this demonstration. PFTL verifies the public proof and records a receipt."
-  },
-  "privacy": {
-    "number": "07",
-    "title": "Public evidence, controlled disclosure.",
-    "caption": "Public commitments and metadata can reveal information. Hashing is not encryption; authorized parties can recover retained private records for replay.",
-    "description": "The private side contains full source responses, normalized inputs, position details and the proof witness. Encrypted copies support authorized replay. The public side contains the proof, the fixed 408-byte commitment/status/count interface and registration/receipt/finality metadata."
-  },
-  "verification": {
-    "number": "08",
-    "title": "What happens if the operator changes the claim?",
-    "caption": "Interactive explanation of acceptance rules. This page does not execute a cryptographic verifier or submit transactions.",
-    "description": "The original registered result can pass. Substituting the rulebook or input commitment conflicts with registration. Altering the target public bytes invalidates the proof. Reusing an already consumed registration rejects even if the original proof is valid. These checks do not establish investment merit or actual holdings."
-  },
-  "trust": {
-    "number": "09",
-    "title": "The boundary of the guarantee.",
-    "caption": "Verification removes a specific operator claim from the trust budget. It does not remove every dependency of an investment product.",
-    "description": "Verifiable: exact method/input binding, attested collector identity, deterministic target calculation and receipt uniqueness. Still assumed or separately established: rulebook merit, source-data accuracy, AWS attestation and measured-code correctness, cryptographic/setup assumptions, ledger consensus, and any future brokerage custody/execution/redemption."
-  },
-  "ledger": {
-    "number": "10",
-    "title": "Give every accepted target a common address.",
-    "caption": "The receipt lifecycle is implemented and locally qualified. This demonstration did not deploy or activate it on an external PFTL network.",
-    "description": "After compatible deployment and governance activation, register the permitted program, method, input commitments, submitter and future run activation. Submit the real proof after activation. Consensus checks it and stores the receipt with transaction inclusion and finality evidence. Clients pin the chain, registration and program when querying."
+    "title": "Pay for convexity. Define the amount at risk.",
+    "caption": "Illustrative single-call expiry payoff per underlying share, before fees. The tracker maintains a rolling basket of calls.",
+    "description": "A call with a $100 strike and $10 premium has expiry profit max(stock price minus $100, zero) minus $10 per underlying share. Maximum loss is $10; breakeven is $110; a $140 stock price yields $30 profit. The fully paid call has no maintenance-margin liquidation during a temporary drawdown and can participate in a subsequent recovery before expiry."
   },
   "products": {
+    "number": "04",
+    "title": "Why the spot format is useful.",
+    "caption": "The spot interface puts an options strategy inside the existing wallet and trading workflow.",
+    "description": "Investors choose a stock and budget while the portfolio maintains the call basket. Wallets and exchanges integrate an ERC-20 balance and trading pair. Liquidity providers create markets in portfolio shares, and product builders reuse the strategy engine and verification machinery across single-stock offerings."
+  },
+  "basket": {
+    "number": "05",
+    "title": "One stock. A basket of calls.",
+    "caption": "Illustrated basket based on the demonstrated five-call design. The rulebook defines allocation and residual cash.",
+    "description": "One company supplies the options universe. The demonstrated rulebook selects five calls in a common expiration, with residual cash after premium budgeting and whole-contract sizing. The target specifies quantities for maintaining that company’s options strategy."
+  },
+  "roll": {
+    "number": "06",
+    "title": "Keep the strategy; replace aging contracts.",
+    "caption": "The rulebook determines decision dates, retention and roll conditions.",
+    "description": "An initial basket establishes the call strategy. New observations inform retention or resizing. When the roll condition is met, a new eligible expiry and basket replace the old contracts. The stock and strategy identity continue as individual contracts change."
+  },
+  "navcoin": {
+    "number": "07",
+    "title": "One portfolio. Three responsibilities.",
+    "caption": "NAVCoin product architecture: brokerage assets, Post Fiat verification, and Ethereum ownership and markets.",
+    "description": "The broker holds actual calls and cash. Post Fiat checks authenticated strategy and reserve evidence and supplies canonical NAV and supply accounting in the product design. Ethereum contracts authenticate the accepted authorizations and enforce issuance and settlement. Investors hold an ERC-20 portfolio claim and trade it through Uniswap. Cash movement follows the fund settlement process."
+  },
+  "redemption": {
+    "number": "08",
+    "title": "Two exits with different mechanics.",
+    "caption": "A redeemable model offers market trading and primary settlement. Product terms determine timing and costs.",
+    "description": "A Uniswap sale exchanges existing tokens for USDC at the pool’s available price. Primary redemption locks shares, values the claim, settles cash and reconciles reserves and shares. Pending claims remain accounted for. Subscriptions and redemptions support arbitrage between the portfolio NAV and the secondary-market price, subject to costs and availability."
+  },
+  "pipeline": {
+    "number": "09",
+    "title": "Three jobs: collect, prove, record.",
+    "caption": "Measured collection binds the inputs. The proof checks the calculation. The ledger records the accepted result.",
+    "description": "Schwab sends its response over TLS to the measured collector inside AWS Nitro, through a parent relay. The enclave normalizes inputs and signs binding statements. The SP1 program verifies attestation and input bindings and recalculates the target. PFTL verifies the public proof and records a receipt while detailed inputs remain private."
+  },
+  "verification": {
+    "number": "10",
+    "title": "Check the strategy you bought.",
+    "caption": "Interactive illustration of the registered-run acceptance checks.",
+    "description": "The original result can pass when it matches registration, proof and unused-run checks. A changed rulebook or input commitment conflicts with registration. Altered target bytes invalidate the proof. Submitting an already consumed run is rejected. The walkthrough illustrates these checks in the page."
+  },
+  "ledger": {
     "number": "11",
-    "title": "One strategy engine, several possible products.",
-    "caption": "The upper box is the demonstrated primitive. The lower boxes are potential integrations requiring their own execution, custody and product controls.",
-    "description": "A verifiable target plus receipt can feed a model-portfolio service, a managed account, or a fund/tokenized tracker. Managed accounts need orders and holdings reconciliation. Funds or tokens additionally need custody, valuation, share accounting and subscription/redemption arrangements."
+    "title": "A shared record for every accepted target.",
+    "caption": "The receipt lifecycle is implemented and locally qualified.",
+    "description": "Registration identifies the allowed program, method, inputs, submitter and run. After activation, consensus verifies the submitted proof and records a receipt with inclusion and finality evidence. Applications query the same accepted history instead of maintaining separate accounts of the operator’s calculation."
   },
   "status": {
     "number": "12",
-    "title": "What exists today, and what comes next.",
-    "caption": "Status of the September 6 demonstration. No investor capital was deployed and no brokerage orders were sent.",
-    "description": "Demonstrated: real retained attested Schwab inputs for MU and NVDA; target quantities for five calls each with November 20 expiry; real Nitro/SP1 proofs; independent replay; isolated local four-validator receipts, CLI and viewer. Next product work: external network rollout, ongoing data collection, and any selected live execution/custody/product wrapper."
+    "title": "The core calculation is proven. Build the funded product around it.",
+    "caption": "September 6, 2026 demonstration; the linked record contains the effective parameters and qualification evidence.",
+    "description": "MU and NVDA each produced five November 20 call targets from real retained attested Schwab inputs. Real Nitro/SP1 proofs, independent replay and isolated local four-validator receipts passed. The next product stages establish live holdings and custody, verified NAV and share accounting, Ethereum issuance and Uniswap access. The demonstration used hypothetical capital."
   }
 }
