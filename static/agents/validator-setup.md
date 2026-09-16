@@ -55,10 +55,9 @@ Default target:
 
 - Network: `testnet`
 - Node role: validator
-- Docker image family: `agtipft/postfiatd:testnet-light-latest`
-- Current recommended explicit version as of 2026-05-01: `agtipft/postfiatd:testnet-light-1.0.4`
+- Docker image: `agtipft/postfiatd:testnet-light-latest`, the rolling tag that always points at the current testnet release
 
-Do not use older XRPL-style `3.0.0` images for Post Fiat Dynamic UNL eligibility. Official Post Fiat validator builds are `v1.0.0` or newer.
+Do not pin the image to a version number. Hotfixes ship on the rolling tag, and a pinned node silently stays behind because `docker compose pull` finds nothing new. Do not use older XRPL-style `3.0.0` images for Post Fiat Dynamic UNL eligibility. Official Post Fiat validator builds are `v1.0.0` or newer.
 
 ## Inputs the Agent Needs
 
@@ -246,13 +245,7 @@ HOSTNAME=$(hostname)
 EOF
 ```
 
-Optional explicit pin to the current recommended testnet build:
-
-```bash
-sed -i 's#agtipft/postfiatd:${NETWORK:-devnet}-light-latest#agtipft/postfiatd:testnet-light-1.0.4#' docker-compose.yml
-```
-
-If you do not pin, the compose file uses `agtipft/postfiatd:${NETWORK:-devnet}-light-latest`, which becomes `agtipft/postfiatd:testnet-light-latest` when `NETWORK=testnet`.
+Leave the image line as downloaded. The compose file uses `agtipft/postfiatd:${NETWORK:-devnet}-light-latest`, which becomes `agtipft/postfiatd:testnet-light-latest` when `NETWORK=testnet`.
 
 ## 4. Start the Node
 
@@ -456,9 +449,16 @@ if info.get("pubkey_validator") != expected_public_key:
 Expected for a healthy validator after sync:
 
 ```text
-build_version: 1.0.4
+build_version: <current testnet release>
 server_state: proposing
 pubkey_validator: <PUBLIC_KEY>
+```
+
+The foundation RPC node always runs the current release, so compare your `build_version` against it:
+
+```bash
+curl -s https://rpc.testnet.postfiat.org -X POST -H "Content-Type: application/json" \
+  -d '{"method": "server_info", "params": [{}]}' | python3 -m json.tool | grep '"build_version"'
 ```
 
 `server_state` may temporarily be `disconnected`, `connected`, `syncing`, or `full` while the node starts and catches up. If `server_state` is `full` but not `proposing`, inspect `validator_info`, `consensus_info`, and token configuration before declaring the node healthy.
@@ -526,15 +526,24 @@ synched: True
 
 ## 10. Upgrade Procedure After Fresh Install
 
-For unpinned `latest` setups:
+Upgrades are announced in the validator Discord channel. Run the commands from the node directory, the one that holds `docker-compose.yml`. Anywhere else, Docker Compose fails with `no configuration file provided: not found`.
 
 ```bash
 cd "$POSTFIATD_DIR"
+grep 'image:' docker-compose.yml
 docker compose pull
 docker compose up -d
 ```
 
-For pinned setups, edit `docker-compose.yml` to the recommended tag, then run the same pull/up sequence.
+The `image:` line must end in `-light-latest`. If an earlier version of this guide led you to pin a version number such as `testnet-light-1.0.4`, change the line back to `agtipft/postfiatd:${NETWORK:-devnet}-light-latest` before pulling. A pinned node is skipped by `docker compose pull` and stays on the old release without any error.
+
+If you do not remember where the node directory is, the running container knows:
+
+```bash
+docker inspect postfiatd --format '{{ index .Config.Labels "com.docker.compose.project.working_dir" }}'
+```
+
+Some releases need one extra step, such as a second restart. The announcement says so, and the details live in the release's document under `docs/` in the postfiatd repository.
 
 Always verify after an upgrade:
 
