@@ -61,8 +61,7 @@ Default target is a fresh Post Fiat testnet validator using Docker Compose and t
 
 - Network: `testnet`
 - Compose file: `https://raw.githubusercontent.com/postfiatorg/postfiatd/main/scripts/docker-compose-external-validator.yml`
-- Default image from compose: `agtipft/postfiatd:testnet-light-latest`
-- Current recommended explicit tag as of 2026-05-01: `agtipft/postfiatd:testnet-light-1.0.4`
+- Image from compose: `agtipft/postfiatd:testnet-light-latest`, the rolling tag; do not pin a version number, hotfixes ship on the rolling tag
 - Public peer port: TCP `2559`
 - Admin ports should remain firewalled from the public internet: `5005`, `6005`, `6006`, `50051`
 
