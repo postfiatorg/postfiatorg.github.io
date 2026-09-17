@@ -95,6 +95,26 @@ AIC’s differentiation must exceed “AI builds an index.” [Solactive ARTIS](
 
 ## 2. Commercial route and launch economics
 
+### Market evidence: a social trading interface can earn meaningful fees
+
+**FOMO is a useful Level 1 comparable.** Its investor, Index Ventures, reported more than 600,000 users and $4bn of first-year trading volume when announcing its $75m Series B on 22 June 2026. It describes visible portfolios, live performance and creators with audiences above 100,000 followers. This supports a distribution thesis: people discover ideas through other people, then pay for convenient execution. [Index Ventures](https://www.indexventures.com/perspectives/on-chain-trading-goes-mainstream-fomos-75-million-series-b/).
+
+FOMO’s terms charge for buys and sells, with spot fees shown before confirmation and a separate 0.05% perps charge. Its affiliate program offers ongoing commissions on referred trading. These are useful precedents for repeat distribution income; AIC attributes that income to a published index rather than simply a signup link. [FOMO terms, §§7–8](https://fomo.family/terms); [affiliate program](https://fomo.family/affiliates).
+
+**DeFiLlama snapshot retrieved 17 September 2026:** $31.31m fees, $27.84m protocol revenue and $7.227bn spot volume over 30 days, plus $1.829bn perp volume. Its revenue definition excludes referrals but does not establish company profit after payroll, vendors and other operating costs. The roughly **88.9% fee retention is not an audited gross margin**. Annualizing that particular 30-day window at 365/30 gives about $381m fees/$339m revenue; it is a volatile run-rate illustration, not trailing-year revenue or a forecast. [DeFiLlama metrics and methodology](https://defillama.com/protocol/fomo).
+
+For AIC, size the opportunity from **fee-bearing executed notional**. At the proposed 20bp fee, 20% direct costs and an equal split of the remainder:
+
+| Monthly executed notional | Gross fees | Creator pool | AIC before overhead |
+|---:|---:|---:|---:|
+| $10m | $20,000 | $8,000 | $8,000 |
+| $100m | $200,000 | $80,000 | $80,000 |
+| $1bn | $2m | $800,000 | $800,000 |
+
+The $100m scenario is approximately 1.4% of FOMO’s observed spot volume, a scale comparison rather than a market-share forecast. AIC must earn its own volume: thematic equity baskets have different turnover, eligible users and trading costs from crypto speculation.
+
+**The product implication:** offer creators a public track record, shareable investment identity, discovery through Corbanu’s research audience and repeat earnings from followed portfolios. Followers get understandable themes and convenient execution. FOMO supports this interface-and-distribution model; it does not prove demand for AI-generated indices. NAVCoin fees on retained TVL and paid API creation remain separate revenue lines.
+
 ### One execution agreement, one defined revenue pool
 
 **The preferred route is for Hugo to negotiate direct Ondo access and AIC’s right to collect the proposed 20bp origination charge.** Alex reports that Felix approached him about its partner program; Felix is the commercial alternative and the current implemented adapter.
@@ -133,7 +153,7 @@ AIC contribution = D − creator payout
 
 The ledger sums actual fills. The formula is a steady-assets planning approximation; retention, market moves, contributions and route choice change the realized result.
 
-**Sample index: $1m followed assets**, 20bp on each buy/sell, all modeled rebalances executed through AIC. For continuity with the earlier illustration, direct costs are 20% of gross receipts and the remaining pool is split equally. Thus creator and AIC each receive 40% of gross before their own further expenses.
+**Sample index: $1m followed assets**, 20bp on each buy/sell, all modeled rebalances executed through AIC. Assume direct costs of 20% of gross receipts and an equal split of the remaining pool. Thus creator and AIC each receive 40% of gross before their own further expenses.
 
 | Turnover case | Annual one-way turnover | Rebalance buys + sells | Annual gross recurring fees | Creator / AIC each |
 |---|---:|---:|---:|---:|
@@ -144,7 +164,7 @@ The ledger sums actual fills. The formula is a steady-assets planning approximat
 
 These columns exclude entry and exit. **Initial funding adds $2,000 gross and $800 each**; a later full exit adds the same if the fee applies. The monthly curated example therefore produces **$14,000 gross and $5,600 each in year one**. Across three years with steady assets, initial entry and final exit, it produces **$40,000 gross and $16,000 each**. At $10m of participating assets, those amounts scale tenfold.
 
-The earlier $0.80 per $1,000 figure describes one purchase under these illustrative costs and split. It is not the creator’s lifetime income from that capital. Recurring income depends on maintaining an audience whose assets continue following useful updates. At 50% rebalance participation, the recurring columns halve. Higher turnover also raises investor trading costs; the methodology and follower decisions drive trades, not a fee-generation target.
+Under these assumptions, a single $1,000 purchase pays the creator $0.80; subsequent executed trades add to lifetime income. Recurring income depends on maintaining an audience whose assets continue following useful updates. At 50% rebalance participation, the recurring columns halve. Higher turnover also raises investor trading costs; the methodology and follower decisions drive trades, not a fee-generation target.
 
 A creator should be able to see assets following the index, actual rebalance participation, gross receipts, deductions and earned payouts. Alex owns testing this proposition: useful research plus a social track record attracts followers; maintained portfolios and reliable execution retain them. Track portfolio turnover separately from customers leaving.
 
@@ -323,7 +343,7 @@ Free research/model access covers learning, local evaluation and permitted indep
 
 Within Level 1a, keep hosted creation and external license receipts in separate subaccounts. External contracts may use metered production generations/updates or a negotiated product royalty, with deployment IDs, reporting, audit, cure and continuity terms. This does not encumber independently developed indices or upstream base-model freedoms.
 
-Alex’s Kimi analogy describes free access paired with commercial monetization; **DeepSeek V4.1 Flash is the proposed technical base**. Kimi K2’s actual license requires attribution at large scale and supplies no index royalty precedent. AIC’s restricted commercial-use contribution would be **source-available/dual-licensed**. Counsel must check the selected base-model license, training rights and AIC’s ownership before release. [Kimi license](https://huggingface.co/moonshotai/Kimi-K2-Instruct/blob/cc613312db6692a12f650552166d3bf1d09e936a/LICENSE); [Open Source Definition](https://opensource.org/osd).
+The model combines free research access with paid commercial use; **DeepSeek V4.1 Flash is the proposed technical base**. Kimi K2’s actual license requires attribution at large scale and supplies no index royalty precedent. AIC’s restricted commercial-use contribution would be **source-available/dual-licensed**. Counsel must check the selected base-model license, training rights and AIC’s ownership before release. [Kimi license](https://huggingface.co/moonshotai/Kimi-K2-Instruct/blob/cc613312db6692a12f650552166d3bf1d09e936a/LICENSE); [Open Source Definition](https://opensource.org/osd).
 
 Fine-tuning adds company knowledge; **runtime qualification establishes replayability**. SGLang alone is insufficient: exact replay depends on weights, tokenizer, quantization, kernels, hardware, batching, prompts and input bytes. Restricted datasets may limit who can replay an index. Publish that access boundary. [Cross-hardware replay research](https://postfiat.org/blog/sglang-cross-hardware-replay/).
 
