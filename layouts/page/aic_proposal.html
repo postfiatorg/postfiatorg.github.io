@@ -1,0 +1,5 @@
+{{- with resources.Get "research/aic-proposal.html" -}}
+  {{- .Content | safeHTML -}}
+{{- else -}}
+  {{- errorf "Missing rendered AI Indexing Company proposal" -}}
+{{- end -}}
