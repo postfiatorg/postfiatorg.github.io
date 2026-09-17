@@ -5,8 +5,8 @@ url: "/research/ai-indexing-company/"
 type: "page"
 layout: "aic_proposal"
 draft: false
-summary: "A researched proposal for an equity-owned AI indexing business: the Corbanu Index API, branded indices, Flare compute, Post Fiat NAVCoins, venue economics and founder structure."
-description: "The complete AI Indexing Company discussion proposal, with nine diagrams, source links and a downloadable PDF. Commercial terms are proposals, not agreements."
+summary: "Retail thematic index creation on corbanu.com: link a social identity, choose deterministic or hosted generation, publish and share, buy through Felix, and earn creator payouts. Includes a verifiable fine-tuned model with commercial-use licensing."
+description: "The AI Indexing Company retail V0 proposal: social indices, Felix basket execution, creator marketing-P&L payouts and verifiable fine-tuned model licensing. Includes diagrams, sources and PDF."
 author: "Post Fiat"
 breadcrumb_label: "Research"
 breadcrumb_url: "/research/"
@@ -24,36 +24,54 @@ tags:
 
 ## Founder proposal for Alex and Hugo
 
-**Research cut: 16 September 2026 · Discussion draft · All commercial terms below are proposals, not agreements.**
+**Retail V0 revision: 17 September 2026 · Research observations dated individually · Discussion draft · Commercial terms remain proposals, not agreements.**
 
 ### Decision brief
 
-**Build an equity-owned index company whose first product is the Corbanu Index API.** A customer describes an investment concept, chooses a supported universe and model, inspects the evidence, and receives a versioned, licensable index. Start with the existing tokenized-equity workflow; expand to US and international equities as data rights and coverage permit. Use the GoodAlexander DOOM Index as the first branded showcase.
+**Build an equity-owned index company whose V0 is a retail product hosted on corbanu.com.** Anyone can begin with a theme, generate an index, link it to their social identity, choose deterministic or non-deterministic generation, and publish a page they can share. Other users can buy that index’s supported basket through a single Felix purchase flow. Each index has an attributed marketing-P&L account that pays its creator a disclosed share. **Level 1a monetizes that same infrastructure immediately: users pay per thematic index creation through their funded Corbanu API key.** This is usage-based API revenue, not an institutional sales-led product.
 
-The mission is to make financial indices easier to create, understand, verify and use. AI can turn unstructured company information into explicit selection rules and weights. The long-term vision is to turn a tradable idea into accessible exposure with minimal friction. The first product sells the index and its maintenance; financial products built on that index have additional requirements.
+The mission is to make financial indices easier to create, understand, verify and use. AI can turn unstructured company information into explicit selection rules and weights. The long-term vision is to turn a tradable idea into accessible exposure with minimal friction. The first product turns creation and sharing into distribution: useful indices attract buyers, attributable marketing economics fund creator payouts, and creators have a reason to publish more useful work. The verifiable fine-tuned model supports the revenue ladder below: free research access to the licensed model contribution, paid Corbanu API execution, and paid rights for external commercial tradable-index use.
 
 **Alex contributes product, existing methodology, engineering leadership and distribution. Hugo contributes company formation and administration, commercial partnerships, capital formation and access to Flare infrastructure.** Post Fiat licenses relevant NAVCoin technology; Flare supplies a separately specified attested-compute service. Neither parent company, community, treasury nor token becomes an asset of AIC by implication.
 
-**Launch the API first; develop a partner-perp opportunity alongside it.** Hugo is right that a successful perp needs dependable weights, a defensible price oracle and a venue with liquidity. Those are distinct deliverables. An existing deployer can supply the venue and stake while AIC supplies the branded index. The current 500,000-HYPE requirement makes operating a new HIP-3 DEX a capital business, not a small extension of an API startup.
+**Launch the retail create–share–buy–earn loop first; develop a partner-perp opportunity alongside it.** Hugo is right that a successful perp needs dependable weights, a defensible price oracle and a venue with liquidity. Those are distinct deliverables. An existing deployer can supply the venue and stake while AIC supplies the branded index. The current 500,000-HYPE requirement makes operating a new HIP-3 DEX a capital business, not a small extension of an API startup.
 
 **Proposed initial deal:** Alex up to 48%, Hugo up to 32%, employee option pool 20%, fully diluted before outside financing. Founder allocations combine time-vesting shares and measurable contribution tranches. Infrastructure access alone does not earn an unconditional ownership grant. An independent director certifies disputed milestones and related-party terms.
 
 **Proposed working arrangement:** one engineer based in an Abu Dhabi office, with founders committing scheduled in-person product and commercial sessions. Post Fiat remains Alex’s main effort; Flare remains Hugo’s main effort. The company must function with those constraints. Argentina is the alternative office if recruitment and total cost materially improve, not a route around financial regulation.
 
-**What agreement authorizes:** a funded 90-day API pilot, a data-rights workstream, one index-licensing sales effort and a bounded FCC oracle qualification. It does not authorize a token sale, customer custody, a proprietary exchange, or a live stock-backed NAVCoin.
+**Initial delivery scope:** Level 1 retail spot execution and creator payouts on corbanu.com; Level 1a metered thematic creation billed through Corbanu API keys; and the verifiable fine-tuned-model release and license workstream. Funded launch requires the venue, data and creator-program permissions described below. A company token, customer custody, a proprietary exchange and a live NAVCoin are separate future decisions.
 
-**What must be resolved before signing:** parent-IP permissions; founder commitments and earn-in; initial cash; company domicile and operating permissions; Tiingo/transcript rights; and Hugo’s explicit acceptance that Post Fiat competes with XRP in its public narrative.
+**What must be resolved before signing:** parent-IP permissions; founder commitments and earn-in; initial cash; company domicile and operating permissions; Tiingo/transcript rights; Felix affiliate and creator-payout terms; and Hugo’s acceptance of Post Fiat’s competitive XRP narrative.
+
+### The business model: seven defined revenue streams
+
+| Level | What the user buys or does | How the indexing company earns |
+|---|---|---|
+| **Level 1 — Spot execution** | Log onto corbanu.com, connect a wallet, create or select an index, and get filled on its underlying spot basket through Felix | Collected affiliate/retailer economics attributable to the index are split between the creator beneficiary and AIC |
+| **Level 1a — API revenue** | Pay per thematic index creation through the Corbanu API, using a funded corbanu.com API key | A metered index-creation charge; distinct from affiliate revenue on subsequent trades |
+| **Level 2 — Synthetic spot ETF execution** | Buy one spot NAVCoin representing the index, instead of buying all constituent spot positions | The NAVCoin series’ disclosed product economics: agreed origination/redemption, management or licensing fees, with the chosen schedule explicit before launch |
+| **Level 3 — Perpetual swap listings** | Trade a perpetual swap on a listed index | The negotiated index/deployer revenue share or listing license described in the venue agreement |
+| **Level 4 — Auto-rebalanced UltraShort perp indices** | Buy a maintained index product built from short perpetual-swap exposures | The series’ disclosed index/product fees; funding and trading P&L remain portfolio economics unless expressly part of an agreed fee |
+| **Level 4b — Auto-rebalanced YOLO options indices** | Buy a maintained options-index product with automatic strategy rebalancing | The series’ disclosed index/product fees; option trades, rolls and reserve maintenance implement the product |
+| **Level 4c — Leveraged bond indices** | Buy a leveraged bond-index product, such as a **leveraged datacenter bond index** | The series’ disclosed index/product fees, with financing costs separately accounted for |
+
+**These are the revenue streams.** Levels 1 and 1a launch the retail business; the following levels expand what users can buy. The precise fee rates and partner splits remain commercial terms to negotiate.
+
+The critical distinction is what the customer holds: **Level 1 holds the basket’s separate spot assets; Level 2 holds one spot NAVCoin; Level 3 trades a perp; Levels 4/4b/4c package maintained strategy exposure.** Corbanu supplies the retail front end. The API and verifiable model are shared production infrastructure and monetized access to that infrastructure.
+
+
 
 ---
 
 ## 1. Why this collaboration should exist
 
-Alex can build and market an index API without Flare. Hugo has explicitly acknowledged that FCC is unnecessary for basic index licensing and copy trading. The collaboration is valuable if Hugo shortens the path from useful indices to paying institutional customers, funded product distribution and reliable financial infrastructure.
+Alex can build and market an index API without Flare. Hugo has explicitly acknowledged that FCC is unnecessary for basic index licensing and copy trading. The collaboration is valuable if Hugo turns Alex’s retail product and distribution into a functioning creator economy: venue economics, data rights, payout operations, legal setup and capital, followed by product TVL and institutional distribution.
 
 The offer should therefore be reciprocal: Alex is not giving away ownership for a mandatory hosting dependency; Hugo is not underwriting an open-ended engineering project with no deliverables. AIC earns its existence through three combined advantages:
 
 1. **A product already in motion:** Corbanu’s research surface, index creation workflow, data packets and distribution.
-2. **A commercial operator:** a founder accountable for legal setup, data deals, venue agreements, institutional sales and capital.
+2. **A commercial operator:** a founder accountable for legal setup, data deals, venue agreements, creator-payment operations and capital.
 3. **A route from index to investable product:** verified computation, licensed data, qualified oracles and eventually Post Fiat NAVCoin reserve and supply controls.
 
 AIC’s defensibility will come from licensed company data, quality of methodology, useful products, operating history, brands, customer relationships and execution. A downloadable model or a TEE is not, by itself, a durable commercial moat.
@@ -74,7 +92,7 @@ flowchart LR
     Hugo["Hugo\nAdministration, sales and capital"] --> AIC
     PFT["Post Fiat\nLicensed NAVCoin technology"] --> AIC
     Flare["Flare\nContracted TEE services"] --> AIC
-    AIC --> Buyers["API clients, index licensees\nand approved product partners"]
+    AIC --> Buyers["Retail creators and buyers\nLater model and index licensees"]
     Content["Corbanu content business\nAdvertising remains outside AIC"] -. marketing agreement .-> AIC
 ```
 
@@ -85,11 +103,11 @@ flowchart LR
 | Inside the proposed company | Retained outside the company |
 |---|---|
 | New AIC index-product code, customer contracts, licensed branded-index revenue, AIC-owned fine-tunes where rights allow | Pre-existing Corbanu, navstrategies, Post Fiat, Flare and third-party IP |
-| AIC API subscriptions, commercial index licenses, agreed oracle and product royalties | Corbanu advertising, sponsorship and unrelated editorial revenue |
+| Index-attributed marketing receipts and creator payout pool; model/index licenses; agreed oracle and product royalties | General Corbanu advertising, sponsorship and unrelated editorial revenue |
 | New engineer’s work within the agreed AIC scope | Alex’s general trading P&L, unrelated strategies and Post Fiat token holdings |
 | Contractual rights to approved parent technology and brands | Control of Post Fiat/Flare networks, treasuries, roadmaps or public narratives |
 
-Corbanu.com should develop into a research and content franchise comparable in ambition to Citrini. It can market AIC and host an index creator, but an AIC customer is not entitled to Corbanu’s advertising income. A written distribution agreement should price any paid placements, define attribution, and preserve editorial independence.
+**Corbanu.com is the V0 product home**, as well as a research/content franchise comparable in ambition to Citrini. Its index pages, creator profiles and buy flows are the consumer surface of AIC. General Corbanu advertising and editorial revenue remain outside AIC; the specific marketing/affiliate receipts attributable to an index are assigned to its creator-program pool by written agreement. An index sponsorship enters that pool only if its contract explicitly says so. The existing exclusion of general ad revenue must not erase the new creator-payout product.
 
 ## 2. What already exists
 
@@ -108,101 +126,159 @@ This assessment combines fetched repository heads, explicitly identified local w
 
 The live catalog observation was captured at **23:46 UTC on September 16, 2026**. Its distinction between hosted output and deterministic output should become customer-facing product language. See the [Corbanu catalog](https://api.corbanu.com/v2/indexes/catalog), [deterministic-index research](https://postfiat.org/blog/deterministic-financial-indices/), and [trustless single-stock options research](https://postfiat.org/blog/trustless-single-stock-option-indices/).
 
-## 3. The 90-day MVP
+## 3. Retail V0: create, share, buy and earn
 
-### The first buyer and offer
+### The user and the experience
 
-Target a **small institutional issuer or investment platform that needs a maintained thematic-equity index**, rather than a mass-market trader expecting free stock picks. Its purchasing problem is the cost of assembling company evidence, maintaining methodology and operating a usable feed. The first sales test is whether it will pay for that work before AIC assumes custody or derivative-market risk.
+V0 serves **retail creators and the people who follow their ideas**. A creator might describe “companies building the AI power grid,” generate candidate holdings, refine the theme, link an X account, and publish a branded index page. A reader arriving from a shared link can inspect the idea and buy the supported basket through Felix. The creator earns from that index’s attributable marketing P&L. An institutional procurement process is not the entry point.
 
-Proposed offers, to test rather than advertise as established prices:
+The product lives on **corbanu.com**, using the existing Corbanu Index API for generation, versioning and execution preparation. **Index generation is metered under Level 1a:** the user pays per thematic index creation with a funded Corbanu API key. The interface shows the creation charge and available credit before starting. Publishing, sharing and trading attribution are distinct operations; no enterprise subscription or procurement process is required. A sponsored creation allowance can be offered explicitly, but is a subsidy rather than the business model.
 
-| Offer | Initial price hypothesis | Included scope and boundary |
-|---|---:|---|
-| Design-partner pilot | **$5,000 for 30 days**, paid upfront | Two named research indices, up to 20 full research recalculations total, weekday deterministic price/weight-file delivery where qualified, and four support hours; no redistribution or financial-product issuance right |
-| Production research API | **$2,000/month**, three-month minimum | Same two-index/20-recalculation envelope; additional compute requires a displayed quote; third-party data entitlements separately identified |
-| Tradable-index license | **$25,000/year minimum**, plus a negotiated product royalty where justified | One named product and venue; publication/redistribution rights only after upstream licenses and product approval |
+### The complete creator and buyer journey
 
-“Recalculation” means one chosen model scoring one approved universe, capped at the contracted constituent count. Continuous price updates do not rerun the language model. Large universes, fine-tunes and new transcript sourcing are priced separately. The existing free Corbanu preview can remain a marketing surface under a separate agreement; it does not commit AIC to unlimited free inference.
-
-**Economic gate:** each paid API contract must show at least 60% contribution margin after attributable data, inference, storage and support labor. At $2,000/month, those direct costs must be at most $800. A test cost envelope is $300 attributable data, $200 inference for 20 recalculations ($10 each), $100 storage/serving and $200 support (four hours at $50). These are break-even design allowances, not measured costs; rights minima are allocated over signed paying customers, never hoped-for future users. If a full-universe run cannot fit $10, quote that run separately or raise the contracted price. Report both contribution margin and total operating loss. Ten such customers produce $20,000 MRR and at least $12,000 contribution, not necessarily company break-even. The pilot spends to learn; it should end with **two independently paying $5,000 pilots and one signed $24,000 annualized API or $25,000 index-license contract**, or a written decision to narrow/stop. Deposits from founders or affiliates do not satisfy demand validation.
-
-Hugo owns the buyer pipeline: 15 qualified institutional conversations by day 30, three design partners by day 45, and paid conversions by day 90. Alex supplies demonstrations and the DOOM audience channel. These are proposed operating targets, not claims of existing customer interest. Market makers and deployers belong in a parallel partner pipeline; they are not interchangeable with paying API customers.
-
-### One primary customer journey
-
-A researcher, adviser, issuer or sophisticated investor describes a concept, selects a universe and model, and receives a reviewable index draft. They can compare models and revisions, see missing inputs, lock a version and obtain an API feed or licensed publication package. Trading is a separately enabled action for eligible users and supported instruments.
+1. **Create from a theme.** Enter a name, thesis and preferred universe; choose a model; inspect the proposed constituents, weights and evidence. The creator controls the methodology choices. No hidden portfolio rules are introduced.
+2. **Choose the generation mode.** Select **Deterministic / verifiable** for a qualified pinned model/runtime with replay evidence, or **Hosted / non-deterministic** for flexible model generation without a replay guarantee. Both modes can produce published, executable indices once the relevant flow is qualified. The mode is visible on every index page.
+3. **Link a social identity.** Verify control of an optional social account through the provider’s supported authorization/proof flow. Show the account, creator name and payout identity on the profile. Linking an account neither proves expertise nor authorizes automatic posting.
+4. **Preview and publish.** Review holdings, supported buy coverage, methodology, costs and creator compensation. Publish a permanent shareable URL, social preview card and immutable version identifier. Drafts remain private until the creator publishes.
+5. **Share and discover.** Share to X or another social channel; readers can follow the creator, browse themes and compare indices. Performance displays distinguish historical simulations, published-index performance and realized investor results.
+6. **Buy through Felix.** Select an amount, review the basket quote and total costs, and confirm one coordinated purchase flow. Eligible, onboarded users should not have to reconstruct and enter every constituent manually. The interface records partial fills and remaining cash.
+7. **Earn and return.** Each index’s creator dashboard shows attributable receipts, permitted cost deductions, pending adjustments and settled payout. Creators return to improve their published work, explain updates and reach new buyers.
 
 ```mermaid
-flowchart LR
-    Idea["Describe a concept"] --> Scope["Choose universe\nand model"]
-    Scope --> Preview["Review constituents,\nweights and evidence"]
-    Preview --> Compare["Compare revisions\nand missing coverage"]
-    Compare --> Lock["Lock methodology\nand input manifest"]
-    Lock --> API["API / licensed index feed"]
-    Lock -. eligibility and execution gates .-> Trade["Supported wallet exposure"]
+flowchart TB
+    Theme["Choose a theme, universe and model"] --> Mode["Deterministic or hosted generation"]
+    Mode --> Profile["Link social identity\nReview and publish on corbanu.com"]
+    Profile --> Share["Share index page\nDiscover and follow creators"]
+    Share --> Buy["Buy the basket through Felix"]
+    Buy --> Revenue["Attribute collected marketing receipts\nCalculate and pay creator share"]
+    Revenue --> Profile
 ```
 
-*Figure 2. Index creation is the MVP’s complete workflow. A publication does not imply that every constituent can be bought through the app.*
+*Figure 2. The retail loop is the V0: creation creates distribution, purchases create attributable economics, and creator payouts encourage participation.*
 
-### Three universes, honest coverage
+### What “one click” means
 
-| Universe | MVP commitment | What unlocks expansion |
-|---|---|---|
-| **Tokenized equities** | Improve the existing supported universe, instrument mapping, live pricing, model comparison and explainable exclusions | Supported venue contracts, eligibility, correct token-to-underlying conversion and funded execution qualification |
-| **US equities** | Provide an explicitly enumerated research universe; SEC-derived fundamentals and licensed company material; publish a coverage report | Point-in-time membership, corporate actions, exchange data rights, transcript contracts and missing-data policy |
-| **International equities** | Provide the same API contract and a limited, named initial coverage set; report unavailable countries/companies | Local filings, languages, IFRS/local-GAAP treatment, currencies, ADR ratios, listing identity and country-specific data rights |
+The product promise is **one buy action on the shared index page**, carrying the chosen basket and budget into Felix. It is not a promise of one blockchain transaction or the removal of necessary account checks. First use can require eligibility checks, Felix onboarding, wallet connection, funding, allowance approvals and signatures. The current integration can execute constituents separately; settlement can be partial. Show the full state and let the buyer explicitly approve any changed quote or composition.
 
-Proposed engineering coverage packs make the pilot concrete: **Tokenized-current** is the published eligible instrument manifest from the existing adapter; **US-100** is the 100 largest current SEC-reporting US ordinary-equity issuers for which the licensed packet has complete required inputs, ranked by current capitalization solely to bound test coverage; **International-10** tests TSM, ASML, NVO, TM, SONY, SAP, HSBC, RIO, SHEL and UL via their US-listed instruments and mapped primary companies. These are coverage tests, not recommended portfolios or permission to market an index under another provider’s brand. Publish exact identifiers, as-of dates and exclusions; do not fill missing names with proxies. International local-market listings remain a later expansion. If rights or completeness prevent a pack, label it incomplete and reduce the pilot’s supported scope.
+The aspiration is that anyone who discovers an index can use the same simple flow. Actual trading is available to users and instruments supported by Felix and the applicable access rules. Unsupported constituents must be disclosed before confirmation; never silently turn an unavailable basket into a different portfolio. Research-only indices can still be published and shared, with the buy action clearly unavailable. [Felix account and execution mechanics](https://usefelix.gitbook.io/docs/trading-products/spot-equities).
 
-“Full US” and “full international” are coverage objectives. They must not appear as shipped claims until the coverage manifest supports them. Model switching should be fast for research; a live licensed index must retain a frozen version until its published change procedure takes effect.
+The observed catalog currently gates external funds on deterministic execution and reports funded fills unverified. **That is an existing implementation limit, not the proposed product policy.** To enable hosted/non-deterministic indices for buying, qualify a path that binds the buyer’s approval to a frozen published output, quote and version. Do not simply remove the guard. Choosing a mode must not let a creator retroactively alter a basket already approved for purchase.
 
-### Deliverables and acceptance
+### Creator payouts from index marketing P&L
 
-- **Reliable API:** durable jobs, resumable work, billing visibility, reproducible input snapshots, versioned outputs and documented failure states. No silent substitution of models or missing companies.
-- **Index contract:** universe, scoring rule, weighting rule, rebalance schedule, corporate-action handling, exclusions, concentration constraints chosen by the creator, and model/runtime identifiers. There is no hidden default portfolio strategy.
-- **Comparison interface:** constituent and weight differences between versions, source timestamps and model costs. An AI explanation is traceable to input material, not offered as proof of truth.
-- **Publication package:** index card, methodology, identifier, calculation feed, version history and commercial license. Private research is private by default; public publication requires explicit consent.
-- **Commercial proof:** the paid-conversion and margin gates above, with customer-level cost records rather than revenue alone.
-- **Index-quality checks:** no future-dated source leakage in dated tests; every weight sums to the documented integer total; a reference calculator reproduces corporate actions and rebalance continuity; missing prices fail visibly; model changes produce a constituent/weight diff. The chosen methodology explicitly states price versus total return, dividends, splits, currency conversion and delistings before publication. A model-generated portfolio is not labeled superior because it passed software checks.
-- **DOOM demonstration:** Alex publishes one clearly labeled proprietary index with a change log and transparent treatment of discretionary decisions. AIC receives a negotiated license; ownership of Alex’s name and pre-existing concept remains with Alex.
+Every published index has a stable attribution ID and a creator beneficiary. Its creator-program terms define the share rate before monetization. Free, unpublished or untraded indices can accrue zero; publishing is not a guaranteed payment.
 
-The proposed API reliability test runs the ten agreed test indices at 15-minute intervals during a disclosed eight-hour weekday window for 30 calendar days. The denominator is every scheduled index-run; success means a valid artifact within five minutes of its deadline, with at least **99.5% success and every miss visible**. Separately complete ten simulated outage/restore exercises and retain the full results. Research model jobs use separately displayed deadlines. This yields enough observations to measure the target rather than rounding one daily job into a misleading percentage. This is an internal API target, not a sufficient derivatives-oracle service commitment. A single delayed research index and a stale leveraged-market oracle have very different consequences.
+**Proposed accounting definition, subject to the commercial agreements:**
 
-### Changes to Hugo’s initial MVP
+```text
+Index marketing P&L
+  = collected, contractually attributable marketing/affiliate receipts
+  - refunds, reversals and documented directly attributable external costs
 
-| Hugo’s proposal | Recommended treatment |
+Creator payout
+  = disclosed creator share × max(0, settled index marketing P&L)
+```
+
+“Receipts” can include an agreed Felix retailer/affiliate payment, a distribution partner payment or an explicitly included index campaign. Felix’s customer origination fee is **not automatically AIC revenue**. There is no assumed revenue-share agreement or verified 20bp entitlement today. Buyer trading profits, the value of customer deposits and a hypothetical token price are not marketing P&L.
+
+Cost deductions are specified in advance: partner pass-throughs, attributable refunds, approved campaign spend and directly metered costs where the creator terms permit them. General corporate salaries, unrelated Corbanu losses and discretionary overhead cannot be allocated to erase an index payout. Creator compensation itself is not deducted before calculating its own base. The creator share is a contractual variable, not an agreed number in this draft.
+
+Illustration only: $100 collected receipts minus $20 approved direct costs leaves $80. A hypothetical 50% creator share pays $40 and leaves $40 for AIC. Neither the rate nor those receipts is a claim about Felix’s current terms.
+
+Bind attribution to the index/version shown in the accepted buy quote and the resulting venue receipt, not merely a browser cookie or self-reported referral. One receipt funds one defined pool; a shared link and a fork must not both claim 100% of it. Proposed fork policy: a new publication gets a new ID, preserves source credit, and receives future attribution only for purchases of that new version. Any upstream royalty must be disclosed before publishing.
+
+Provide a monthly statement and payout after the contract’s settlement/reversal window. Keep pending and settled balances separate, specify treatment of post-payment reversals, and retain a dispute trail. Apply controls for self-dealing, wash activity, duplicate identities and abusive attribution. Creators earn for genuine distribution and use, not cycling their own funds to manufacture rewards. Creator eligibility and payment information can require checks even when public browsing and index drafting do not.
+
+### Coverage and deterministic choice
+
+Start the executable experience with the supported tokenized-stock universe. Broader US and international equities remain creation/research targets as licensed data coverage expands. Every index page states which constituents can actually be bought through Felix. “Full US” and “full international” are objectives, not current coverage claims.
+
+A deterministic index fixes the model weights, tokenizer, prompt, input packet, runtime and allowed update procedure. Publication follows a successful qualified replay; an unavailable verifier cannot produce a verified badge. A hosted index freezes the selected output and records provenance but makes no independent replay promise. Both preserve published versions. Model/mode changes create a new version with clear notice; neither mode quietly rewrites history or triggers an unapproved purchase.
+
+### V0 acceptance and launch evidence
+
+- **Creation and identity:** a retail user creates an index without an enterprise sales process, links a social account, previews and publishes a working share page.
+- **Choice that means something:** both generation modes work under their stated guarantees; verification failures are visible; a frozen hosted output cannot mutate inside a buyer-approved order.
+- **Purchase:** an eligible user arriving through the share link completes a funded Felix basket flow under explicit testing authorization; costs, failures, approvals, partial fills and receipts reconcile.
+- **Creator economics:** the venue/marketing contracts establish a real receipt source; an attributed receipt reconciles to the index statement and an actual eligible creator payout. A simulated ledger is not a paid creator.
+- **Repeat use:** measure creator activation, published indices, share-to-buy conversion, returning buyers, creator retention and repeat purchases—not institutional contract count.
+- **Reliability:** maintain an observed 30-day record of scheduled index updates, visible stale/missing states, backup recovery and payout reconciliation. Set service deadlines per flow before measurement; a social page and a live purchase quote require different limits.
+- **DOOM flagship:** GoodAlexander publishes the first recognizable index using the same page, share and buy experience. It can be discretionary and honestly labeled; its source brand/methodology rights remain explicitly licensed.
+
+Track activated creators, published indices, funded buyers, repeat purchases, retained positions, settled creator payouts, affiliate receipts and paid API creations. Report Level 1 contribution after creator payouts separately from Level 1a generation revenue and compute/data cost. Do not count test wallets, employees or circular self-trading as retail adoption. Set numerical operating targets after measuring the existing funnel; institutional contract counts and invented enterprise price points are not V0 acceptance criteria.
+
+### Changes to Hugo’s first MVP
+
+| Proposed element | Retail V0 treatment |
 |---|---|
-| Generate indices and upload to FCC | Generate using the existing API; qualify FCC as a deployment option rather than a universal prerequisite |
-| Copy trading with rebalance prompts | Preserve the existing wallet path; add prompts only after eligibility, funded-flow and partial-fill handling are qualified |
-| Popular indices become perps | Build a partner listing package in parallel; launch only after oracle, venue, liquidity and legal acceptance |
-| AI helper, cards, social, rankings | Keep helper, cards and transparent sharing; defer token-based rankings and trading-revenue promises |
-| Deterministic updates first | Use frozen rules for operational updates; model-assisted research can iterate freely before publication |
-| Private methodology | Permit private research; licensed/live products need auditable access for the administrator, verifier and venue |
+| AI creation and index cards | Core: thematic creation, social identity, public pages, provenance and version history on corbanu.com |
+| Copy trading | Core: one coordinated Felix basket-buy flow from a shared page |
+| Deterministic-only updates | User chooses a qualified deterministic or clearly labeled hosted index; each published version remains fixed and buyer-approved |
+| Popular indices become perps | Later expansion after oracle, venue, liquidity and legal acceptance |
+| Upload everything to FCC | Qualify FCC for the roles it usefully performs; retail creation is not dependent on universal FCC hosting |
+| Tokens or staking for ranking | V0 incentives are index-attributed creator payouts; no creator coin or company token is required |
+| Private research | Supported before publication; executable public pages disclose holdings/methodology and compensation as required |
 
-## 4. Product lines and their economics
+## 4. How the revenue ladder works
 
-**Only the API and index-license rows are funded product work in the pilot.** Oracle qualification is a capped experiment. The remaining lines are strategic options requested for this proposal; they carry no implied hiring, build or launch commitment. Decide the next product using paid demand and incremental margin, not the number of technically possible wrappers.
+### Level 1: spot index execution and affiliate P&L
 
-| Product | Buyer / source of revenue | Sequence and constraint |
-|---|---|---|
-| **Corbanu Index API** | Researchers, advisers, fintechs and issuers; subscription, usage or enterprise contract | First. Sell productivity, data quality and maintained outputs |
-| **Branded index licensing** | Issuer, exchange or product sponsor; minimum annual license plus negotiated usage/AUM/volume royalty | First commercial expansion; DOOM is the showcase |
-| **Bloomberg publication** | Visibility and institutional adoption; revenue comes from the underlying license, not merely appearing on a terminal | Hugo’s BD workstream; negotiate index identifiers, distribution and rights |
-| **Replayable index service** | Clients requiring independently checkable calculations; service and support license | Qualified models first; verified and hosted outputs clearly distinguished |
-| **Oracle service** | Venues and issuers paying for timely, auditable price/index feeds | Separate data rights, operating SLA and liability budget |
-| **Partner-listed perps** | Contractual share of actual deployer receipts or fixed index license | No assumption AIC receives all exchange fees or funding |
-| **Stock-backed NAVCoins** | Product-management, index and technology fees within an approved issuer structure | Custody, investor rights, administrator and legal permissions precede launch |
-| **Single-stock options indices** | Rolling options exposure licensed to a product issuer; potentially premium product fees | Research exists; costly execution, rolls, option rights and proof cadence still matter |
-| **UltraShort / leveraged bonds** | Specialized issuer licenses and possible management fees | Later; funding, borrow, duration, liquidation and path dependence need distinct designs |
-| **Execution service** | Disclosed service fee or contracted execution economics | Potentially valuable independently; brokerage/arranging/management perimeter must be resolved |
+The first financial product is buying the underlying spot basket. A user logs into corbanu.com, connects a wallet, creates or chooses an index and is routed to fills through Felix. Sharing a creator’s index distributes that same executable basket. The platform records the creator beneficiary, index version, accepted quote and resulting venue receipts.
 
-Bloomberg already supports index data licensing; publication is a business-development task, not an automatic consequence of creating an API. [Bloomberg index licensing](https://www.bloomberg.com/professional/products/indices/resources/index-data-licensing/).
+AIC and the creator split the **actual affiliate economics** earned from that activity. The payout ledger in §3 distinguishes gross partner receipts, agreed direct costs, settled profit and each beneficiary’s share. This revenue is neither the buyer’s investment return nor ownership of Corbanu’s general advertising business. The fee/split contract must exist before the app advertises an earned payout.
 
-### The execution opportunity
+A systematic limit-order entry system can improve the Level 1 fill experience. It is execution technology within the retail business: compare all-in fees, spread, gas, missed fills, drift and completion time. It does not replace the index or create a new revenue level. Order types and routing are deployed only after the supported venue flow is qualified.
 
-An index identifies desired holdings. A separate execution policy decides how to acquire or dispose of them. AIC should test whether systematic limit orders and patient basket completion reduce all-in implementation cost enough to create a differentiated service. Benchmark the complete result: fees, spread, gas, financing, missed fills, market drift and time to completion. A lower displayed fee with large unfilled exposure is not better execution.
+### Level 1a: pay-per-creation thematic API
 
-For a future fund, a regulated manager could route among broker fills, tokenized-stock venues and negotiated OTC inventory, subject to mandate and conflict controls. The administrator reconciles actual holdings to the target; temporary cash and tracking error remain visible. Discretionary execution is compatible with fixed index weights if the mandate makes that distinction explicit. It is not permission to change the portfolio’s investment thesis silently.
+Users fund a Corbanu account and authorize requests with its API key. Each requested thematic index creation has a disclosed price or accepted maximum cost; the service reserves the relevant credit, performs the generation and settles the charge to a durable job/receipt. Retries of the same idempotent job must not become new paid creations. The price contract states what counts as completion, how cancellation/failure is treated and when unused reservation is released.
+
+Model selection and the universe can affect the quoted creation cost. An explicit new generation or update can incur a new charge; viewing, sharing or buying an already published index must not silently regenerate and rebill it. Wallet trading funds and Corbanu API credit are separate balances.
+
+This stream has its own economics:
+
+```text
+Level 1a revenue = settled paid index-creation charges
+Level 1a contribution = that revenue - attributable inference/data/serving costs
+```
+
+The API key is the credential authorizing use of funded credit; the key itself is not money. The product should nevertheless feel like the existing Corbanu API experience: fund the key’s account, create an index, receive its output and charge receipt.
+
+### Level 2: synthetic spot ETF execution through NAVCoins
+
+Develop NAVCoins as basic index primitives. The retail user buys **one spot NAVCoin outright**, representing the maintained index, instead of separately acquiring every underlying position. The NAVCoin can hold the required basket in its reserve structure and represent net portfolio value under the published policy.
+
+“Synthetic spot ETF” describes the intended ETF-like user experience; it is not a claim that the token is already a registered exchange-traded fund. Define the series’ investor claim, reserve custody, valuation, supply, redemption and fee schedule. Do not imply that Level 2 necessarily uses a derivative backing: a stock index NAVCoin can be backed by actual spot assets. §9 explains the proof and MetaMask overlay.
+
+AIC earns the contracted product economics. Choose and disclose which origination/redemption, management and/or index-license fees actually apply; do not stack unspecified charges. Market making or execution rebates are additional receipts only where a real agreement provides them. A secondary token trade does not necessarily mint/redeem shares or create an origination fee.
+
+### Level 3: perpetual swap listings
+
+List indices as perpetual swaps through a qualified venue/deployer. AIC supplies the index/methodology and agreed oracle responsibilities; a partner can supply the HIP-3 deployment, stake and market infrastructure. Revenue is the contracted share of deployer receipts or index-license fee. §8 distinguishes this from HYPE staking capital, market-maker capital, customer funding payments and gross trading volume.
+
+### Level 4: auto-rebalanced UltraShort perpetual-swap indices
+
+Create index products whose defined short-perp exposures are automatically rebalanced. The consumer acquires the maintained exposure rather than manually managing all underlying short positions. The product can use a NAVCoin representation where appropriate; it is not the same as simply listing an index perp under Level 3.
+
+Specify the target exposure, rebalance trigger, collateral, funding, liquidation and unwind policy for each series. AIC earns disclosed index/product fees. Negative funding or a profitable short position is not automatically company fee revenue. Existing [UltraShort research](https://postfiat.org/blog/trustless-ultrashort-tokens/) is the starting design evidence, not a production launch.
+
+### Level 4b: auto-rebalanced YOLO options indices
+
+Create options-index products that maintain and automatically rebalance their defined options exposure. Single-stock YOLO call indices are an initial expression of the existing research. The user buys the maintained product rather than researching and manually rolling each option.
+
+AIC earns the agreed index/product fees. The product must implement its stated options methodology, execution, rolls, valuation and reserve proof; no new strike, expiry, weighting, leverage or risk rule is invented by this proposal. Fully paid options can still lose their entire premium. The existing TEE/proof work and market sizing support development, not a claim that live options issuance is qualified.
+
+### Level 4c: leveraged bond indices
+
+Create maintained leveraged bond-index products. A **leveraged datacenter bond index** is the concrete proposed example: exposure to the defined datacenter-related bond universe, with leverage and financing specified in its methodology.
+
+AIC earns the product’s disclosed index/management/origination economics as agreed for that series. Before launch, define bond eligibility, prices, interest accrual, duration, credit events, financing, collateral, liquidity, leverage and rebalance policy. Those parameters are not set here. Financing cost and losses belong in investor NAV; they cannot be omitted to make an index’s apparent return attractive.
+
+### Distribution and shared technology
+
+The GoodAlexander DOOM Index is the flagship for Level 1 adoption and can later support other levels. Publishing indices on Bloomberg is Hugo’s distribution/BD workstream for the relevant product, not a replacement for retail V0 or a separate invented revenue level. [Bloomberg index licensing](https://www.bloomberg.com/professional/products/indices/resources/index-data-licensing/).
+
+The Corbanu API, SEC/transcript packets, IPFS evidence, replayable model releases, FCC and Post Fiat reserve technology are shared capabilities. Their responsibilities and proof limits follow below. The company is paid for the seven streams above; technical infrastructure is valuable insofar as it makes those streams useful, reliable and economical.
 
 ### Market opportunity without inflated TAM
 
@@ -254,15 +330,35 @@ SGLang provides a serving environment. Exact replay additionally depends on mode
 
 A live index should publish a manifest identifying all material versions. Model changes create a new approved methodology version with notice and an effective time. If a scheduled AI refresh fails, the previously disclosed fallback applies: hold existing weights, flag stale status or suspend the dependent product. Silently switching models is prohibited.
 
-### A company-knowledge fine-tune
+### Verifiable fine-tuned generation supporting the revenue ladder
 
-A useful research program is a DeepSeek V4.1 Flash fine-tune or adapter trained on licensed company material and expert-labeled index tasks. It might improve consistency, explainability and inference cost. Its value must be measured against the base model on held-out companies and dates, citation accuracy, leakage, stability and cost. Start only after rights and economics justify it; a massive checkpoint is not automatically the cheapest way to serve an index API.
+Alongside the execution levels and Level 1a API, AIC ships a named model product with a release and license contract: **a company-knowledge fine-tune for generating indices that can be independently replayed**. It serves the Corbanu creator interface and developers who want to build their own index products. DeepSeek V4.1 Flash is the proposed base to evaluate; it is not yet a qualified deterministic fine-tune.
+
+A release package includes the base-model/license identity, AIC-owned fine-tune or adapter, tokenizer and weight hashes, a licensed company-knowledge manifest, the SGLang/runtime image, supported hardware/batch configuration, test vectors, evaluation results and a verifier runner. Every generated index binds its published weights to that release and its actual input packet. Replay checks the exact output; a signature alone cannot replace replay.
+
+The deliverables are (1) a rights-cleared training set and baseline evaluation, (2) a bounded fine-tuned candidate, (3) independently reproduced index-generation outputs on the declared runtime, and (4) a usable free/commercial license package with registration and reporting. Measure held-out company/date accuracy, citation quality, leakage, stability, index-construction usefulness and cost. The retail app can start with currently qualified base models and hosted options while this product is qualified; do not present a base-model demo as a shipped fine-tune.
 
 Thomson Reuters’ **Thomson technical report** is a concrete precedent for continued training of an institution-controlled model. It identifies Qwen3.5-397B and Qwen3.6-35B bases, full-weight updates, data curation and professional evaluations. It estimates under **$450,000 for the final large-model training run**, but approximately **$40m for total development**, including reusable research, infrastructure, staff and partners. These are the authors’ reported costs, not AIC quotes. The lesson is to build rights-cleared data, evaluations and a repeatable release process before scaling training; it is not that a $450,000 budget recreates Thomson. The report does not establish DeepSeek index performance or exact replay. [Thomson technical report, introduction, pp. 2–3](https://www.thomsonreuters.com/content/dam/ewp-m/documents/thomsonreuters/en/pdf/reports/thomson-technical-report.pdf).
 
-The proposed “free except when used to create a tradable index” license is **source-available or dual-licensed**, not open source under the Open Source Definition’s prohibition on field-of-use restrictions. Kimi K2’s reviewed modified MIT license has a large-scale attribution condition; it is not a precedent for an index royalty. AIC cannot revoke permissive rights in an upstream base model. It can license its own separable adapters, curated proprietary datasets, updates, trademarks and service. Authorized independent verifiers must receive the exact weights, runtime and inputs needed for replay, or the claim must be narrowed to attested private execution. A verifier NDA or paid license is compatible with controlled access; it is not permission to claim public reproducibility while withholding essential artifacts. Counsel must test whether training licenses permit downloadable weights and whether output-based restrictions are enforceable. [Open Source Definition](https://opensource.org/osd); [Kimi K2 license](https://huggingface.co/moonshotai/Kimi-K2-Instruct/blob/cc613312db6692a12f650552166d3bf1d09e936a/LICENSE).
+### Free access; paid commercial index use
 
-**A fine-tune does not solve numerical replay.** Any new weights require the same qualification as the original model. Keep the MVP capable of using a qualified open model while this research proceeds.
+The commercial principle is **free research access to the model contribution, paid hosted index creation under Level 1a, and paid licensing for external commercial tradable-index use**. “Free model” describes the license allowance for research; it does not promise free hosted compute or free Corbanu API generations. Proposed license classes make that usable:
+
+| Use | Proposed treatment |
+|---|---|
+| Learning, local evaluation, non-commercial research and independent verification | Free model/adapter license, subject to the upstream license and applicable data rights; users provide their own compute, or use a displayed hosted free allowance |
+| Retail creation through Corbanu | Pay the Level 1a per-creation API charge using funded Corbanu credit. The platform agreement also covers the necessary model rights; no separate surprise model royalty is added to the creator’s payout |
+| Buying an existing Corbanu index | Level 1 affiliate economics apply to the fill. Buying must not trigger a second index-creation charge or an undisclosed duplicate model royalty |
+| External service or operator using the AIC fine-tune to generate, maintain, sell or execute real-money index portfolios, including fee-free products | Commercial license required before activation; register the deployment and index IDs and agree the usage/royalty schedule and reporting |
+| Redistribution of the AIC fine-tune, adapters or restricted company material | Allowed only to the extent expressly granted; preserve required notices and downstream terms. Base-model freedoms remain intact |
+
+A commercial trigger is tied to **use of the licensed AIC contribution**, including its covered derivatives, to operate a tradable index or provide that capability to others. It is not a claim to royalties on all indices, every independently written model or the permissively licensed base checkpoint. Personal offline experimentation remains free; when a generated index is put into actual commercial/real-money service, the applicable platform or external license must cover it.
+
+For external users, propose a published schedule using metered production generations/updates, with an alternative contracted product royalty for issuers. The exact rates need cost measurements and signed terms; no invented Kimi royalty is inserted here. Registration records the model release, index/deployment identifiers, customer operator, reporting period and permitted uses. Contracts specify audits, cure periods, termination, existing-product continuity and limits on sublicensing. Hashes establish which artifact ran; they do not automatically collect money or make an off-platform contractual restriction self-enforcing.
+
+This implements the desired free-adoption/paid-use business model. **Kimi is a commercial analogy, not the legal template:** the reviewed Kimi K2 modified-MIT license contains a large-scale attribution condition, not a tradable-index royalty. A field-of-use restriction should be called **source-available or dual-licensed**, rather than OSI open source. Counsel must confirm AIC can license the fine-tune/adapter and that training-data permissions allow its release. [Kimi K2 license](https://huggingface.co/moonshotai/Kimi-K2-Instruct/blob/cc613312db6692a12f650552166d3bf1d09e936a/LICENSE); [Open Source Definition](https://opensource.org/osd).
+
+Authorized verifiers need the exact weights, runtime and permitted inputs for the replay claim being offered. Public model availability does not authorize publication of licensed transcripts. Where data access is restricted, state who can reproduce the index and under what license. Fine-tuning adds company knowledge; **runtime qualification provides replayability**. Neither eliminates the other workstream.
 
 ## 6. What FCC adds—and what it does not
 
@@ -294,7 +390,7 @@ flowchart TB
 
 ### A bounded FCC engagement
 
-Propose a 30-day technical qualification alongside the API pilot. **Hugo must secure a named Flare/FCC implementation engineer and service owner; no Flare staff time is assumed committed.** Flare’s proposed contribution supplies the environment, pricing, verification instructions and incident responsibilities. AIC’s engineer contributes at most five working days to the narrow oracle/packet interface. If that staffing or access is unavailable by day 15, postpone the FCC experiment and continue the API. The same engineer is not responsible for independently rebuilding a production oracle network.
+Propose a 30-day technical qualification alongside the retail launch. **Hugo must secure a named Flare/FCC implementation engineer and service owner; no Flare staff time is assumed committed.** Flare’s proposed contribution supplies the environment, pricing, verification instructions and incident responsibilities. AIC’s engineer integrates the narrow oracle/packet interface within a separately agreed work allocation. If that staffing or access is unavailable by day 15, postpone the FCC experiment and continue the API. The same engineer is not expected to independently rebuild a production oracle network.
 
 Acceptance should include independent verification of the approved image; restart and restore; stale-input rejection; key compromise response; anti-rollback checks; a missed-weight-update exercise; and failover across the failure domains actually offered. AIC compares this result with the existing Nitro implementation on measured cost and operational burden.
 
@@ -460,7 +556,9 @@ On **September 15, 2026**, the Senate’s vote on cloture on the motion to proce
 
 The SEC’s August 18 Regulation Crypto Assets release is a **proposal**. Its contemplated treatment of certain crypto-asset investment-contract offerings does not automatically authorize tokenized stocks, pooled investment funds or equity derivatives. Incorporating outside the US does not remove US-facing offering, solicitation or derivatives questions. [SEC proposal announcement](https://www.sec.gov/newsroom/press-releases/2026-76-sec-proposes-new-regulation-crypto-assets), [proposed rule](https://www.sec.gov/files/rules/proposed/2026/33-11434.pdf).
 
-The proposed initial perimeter is **invitation-only B2B research/API pilots contracted with established UAE professional businesses**, subject to a written ADGM/UAE activity opinion. No retail investment execution, custody, discretionary management, NAVCoin issuance, paid investor referrals or US/UK/EU financial-product marketing is activated by the pilot. Existing Corbanu editorial content remains separate; AIC does not treat that global audience as automatically eligible product customers. Public DOOM material initially presents methodology/research, with financial-product promotion held for review. Hugo retains local corporate/regulatory counsel by day 10 and obtains a written go/no-go for this exact scope before paid service starts; Alex enforces the resulting product/access rules. Broader countries enter only through a documented expansion decision. Do not make the business depend on a hoped-for US exemption.
+The initial product is **retail creation, social publication, paid API generation, Felix spot execution and creator affiliate payouts**. Hugo’s legal work must address those actual flows, rather than replace them with an invitation-only institutional service. Map where users can browse/create, publish financial promotions, execute supported instruments and receive compensation. Keep these permissions distinct.
+
+Corbanu should offer a common retail flow with venue-required onboarding and jurisdiction/instrument checks. “Anyone can buy from a share link” is the UX objective, not a claim that Felix can legally serve every jurisdiction. Do not assume US, UK, EU or UAE retail permissions merely because AIC incorporates offshore. Creator revenue sharing and paid promotion need review before payout activation. Formation in Abu Dhabi and global retail distribution are separate questions. Alex implements the resulting access rules; Hugo owns obtaining the required counsel and counterparties.
 
 ### Legal lifts by product
 
@@ -468,7 +566,7 @@ The proposed initial perimeter is **invitation-only B2B research/API pilots cont
 |---|---|
 | **Research/index API** | Data and model licenses; index/IP contract; analysis of adviser/benchmark-provider status and customer use; privacy and cybersecurity terms |
 | **Public social indices** | Clear methodology, hypothetical/live performance separation, conflicts, promotions policy, creator identity/IP terms and moderation |
-| **Creator bounties** | Separate fixed research/bug-bounty compensation from inducements to invest; review referral, solicitation, adviser-endorsement and revenue-share rules |
+| **Creator affiliate-P&L payouts** | Review the actual revenue-sharing/referral and financial-promotion program; define payout eligibility, compensation disclosure, attribution, reversals and payment/tax obligations |
 | **Wallet execution / discretionary routing** | Determine whether AIC arranges, advises, brokers, manages or only supplies software; jurisdiction and instrument eligibility; best-execution/conflict obligations where applicable |
 | **Index perps** | Venue/operator and market eligibility, oracle duties, derivatives classification, market surveillance and restrictions on access/marketing |
 | **Stock/option NAVCoins** | Fund/securities structure, issuer, manager, custody, administrator, investor rights, offering documents, AML/KYC, valuation, redemption and audited controls |
@@ -476,14 +574,14 @@ The proposed initial perimeter is **invitation-only B2B research/API pilots cont
 
 The SEC has specifically examined whether index and information providers may fall within investment-adviser rules; an “API” label is not dispositive. US derivatives treatment also distinguishes broad security indices from single securities and narrow indices. Obtain an instrument-specific analysis rather than assuming all products are ordinary crypto perps. [SEC information-provider inquiry](https://www.sec.gov/files/rules/other/2022/ia-6050.pdf); [CFTC/SEC definitions fact sheet](https://www.cftc.gov/sites/default/files/idc/groups/public/%40newsroom/documents/file/fd_factsheet_final.pdf).
 
-For launch, prefer fixed bounties for documented research or software contributions, with no token and no promise of trading-fee income. Even then, review the actual communication and services. Paid promotion of an investment product is different from a code contribution. If creators later receive royalties, publish compensation/conflicts and use written eligibility and compliance terms. [SEC marketing-rule guide](https://www.sec.gov/resources-small-businesses/small-business-compliance-guides/investment-adviser-marketing).
+**Creator affiliate-P&L sharing is part of Level 1.** It is not replaced by fixed research bounties. Use written creator terms, show compensation/conflicts on index pages, substantiate performance claims and obtain the jurisdiction-specific permissions for promotion and payouts. A general code-bounty policy does not establish permission for investment referrals. [SEC marketing-rule guide](https://www.sec.gov/resources-small-businesses/small-business-compliance-guides/investment-adviser-marketing).
 
 ### Domicile and office recommendation
 
 | Option | Best use | Decision |
 |---|---|---|
 | **ADGM / Abu Dhabi** | Equity operating company, founder proximity, institutional BD and a real office; financial permissions as activities require | Preferred operating base. Obtain written scope/cost advice before formation |
-| **Guernsey** | Potential future regulated fund/issuer and administrator ecosystem for tokenized investment interests | Strong candidate for a product vehicle; do not add it to the API pilot without need |
+| **Guernsey** | Potential future regulated fund/issuer and administrator ecosystem for tokenized investment interests | Strong candidate for a product vehicle; do not add it to the retail launch without need |
 | **Hugo’s existing BVI shell** | Potential holding company if clean and commercially useful | Diligence first; convenience does not outweigh ownership, tax, substance or licensing problems |
 | **Argentina** | Engineering office and conventional local corporate structure; possible later local-market product work | Alternative operating location if cost/recruiting wins; separate from fund domicile |
 | **DAO / autonomous foundation** | Specialized governance or ecosystem assets | Not the default for a founder-led, equity-funded company with employees and customers |
@@ -502,7 +600,7 @@ An autonomous agent can perform bounded company tasks; it does not replace accou
 flowchart TB
     Owners["Alex, Hugo and employee pool"] --> Equity["Equity company\nPreferred ADGM structure, subject to advice"]
     Equity --> Office["Abu Dhabi operating office\nProduct, sales and administration"]
-    Equity --> API["API and index licenses"]
+    Equity --> API["Corbanu retail execution\nPaid API creation and creator payouts"]
     Equity -. later only .-> Issuer["Approved product issuer / fund\nGuernsey or another selected domicile"]
     Issuer --> Custody["Manager, administrator\nand reserve custody"]
     Alternative["BVI holding shell or Argentina office\nUse only if diligence shows a benefit"] -. alternative structuring .-> Equity
@@ -525,20 +623,20 @@ This is an opening offer designed around Alex’s existing product and distribut
 
 Time-vesting shares: proposed four years from signing, one-year cliff, monthly thereafter, with **no automatic backdating**. The 60/40 split of the founder pool recognizes Alex’s existing product/distribution and Hugo’s prospective company-building role; it does not convey either parent’s IP. Contribution options have the deadlines below, a 24-month absolute long-stop and no discretionary deadline extension by the benefiting founder. On certification, half the tranche vests immediately and half monthly over the next 12 months of agreed service. On departure, unearned and service-unvested rights lapse; vested options have a 12-month exercise window, capped by their original expiry; exercised vested shares remain owned by the founder. Apply only a narrowly defined, legally enforceable fraud remedy to vested ownership, not a discretionary bad-leaver forfeiture. Unearned/cancelled allocations return to an unallocated reserve, not automatically to the other founder or the employee pool. Future financing dilutes all fully diluted allocations proportionally unless shareholders expressly agree otherwise. The employee pool is separate from founder earn-in.
 
-| Founder tranche | Proposed evidence for earning it |
+| Founder contribution | Evidence to use in a negotiated earn-in schedule |
 |---|---|
-| Alex 6%: usable index product | Section 3 technical acceptance, reproducible cost records and two independent evaluator acceptance reports; payment/sales conversion is assessed separately, so Hugo’s sales work cannot block earned product equity; due within 6 months |
-| Alex 6%: company-owned execution capacity | Engineer employed for 90 days; AIC IP assignment; paid backup operator restores and runs the service from documentation; no founder-only production dependency; due within 9 months |
-| Alex 6%: distribution and product adoption | At least five unaffiliated paying customers and $100,000 cumulative collected AIC revenue attributable to Alex-led channels, net of refunds; at least three customers retained for 90 days; due within 24 months |
-| Hugo 4%: operating/legal foundation | Functioning bank account, written pilot legal perimeter, executed minimum viable data/parent permissions and an accountable administrative process; due within 3 months. Cleared pilot funding is a start condition, not itself an equity-earning service |
-| Hugo 4%: commercial distribution | Two unaffiliated institutional license contracts sourced by Hugo, each at least $25,000 annual committed value; first invoices paid and no convenience cancellation during the first year; due within 12 months |
-| Hugo 4%: capital and sustained distribution | Split into **2%** for at least $1m new third-party primary equity cash beyond pilot funding, and **2%** for $250,000 annualized contracted index/API royalties from Hugo-sourced unaffiliated clients, with three months’ cash receipts at that rate; each due within 24 months. This rewards the core business without requiring a fund launch |
+| Alex: retail product delivery | Working create–publish–share–buy journey, social linking, both honestly labeled generation modes and qualified execution |
+| Alex: API and model delivery | Paid per-index API creation with correct credit/job accounting; fine-tuned release, evaluation and replay evidence under usable license terms |
+| Alex: team and distribution | Engineer hired and delivery/support established; DOOM and creator launch; measurable retail adoption and attributed execution |
+| Hugo: operating foundation | Entity, administration, funding, data/technology permissions and legal coverage for the actual retail business |
+| Hugo: affiliate and commercial rails | Executed venue affiliate terms, creator-payout arrangements and working settlement/accounting; later venue-listing agreements |
+| Hugo: capital and TVL | Financing and durable product assets for the NAVCoin/strategy stages, measured separately from perp volume or marketing clicks |
 
-These thresholds are opening negotiating terms. Hiring alone is not worth a 6% grant: Alex’s second tranche buys a transferable operating capability. Hugo’s financing and recurring-revenue targets are separate. If a NAVCoin is approved later, Hugo also owns a proposed **$10m external AUM retained for 90 days** distribution target; resulting AIC royalties count toward his revenue hurdle, but transient TVL, perp volume and OI do not substitute for revenue. Do not reward gross volume, transient deposits or affiliated circular capital as durable revenue. Revenue is assigned to a source channel in the CRM before the contract is signed. Jointly sourced contracts receive a fixed 50/50 attribution unless the independent director approves another split in advance; each dollar is counted only once across founder sales milestones. Raised capital excludes customer deposits, token sales, in-kind services and founder/affiliate money. The independent director certifies milestones after reviewing the technical evaluator or accountant’s report. The definitive schedule names an external independent expert at signing to resolve evidence disputes or act during a director vacancy; no dependent grant is issued until that appointment is agreed. A vacancy does not stop evidence submission or erase work completed on time. Neither founder can withhold sign-off on the other’s objectively satisfied milestone.
+The ownership percentages above remain an opening proposal. Define objective acceptance and earn-in amounts around these retail, technology, operating and capital contributions before signing. Affiliate receipts, API creation revenue, product TVL and perp volume are different measures; do not substitute one for another or count circular founder funding as customer demand. An independent director or agreed external expert verifies disputed milestones.
 
 ### Operating commitments and governance
 
-Alex owns product direction, engineering hiring, methodology and marketing; proposed commitment **12 hours/week**. Hugo owns administration, legal coordination, capital raising, institutional BD and venue negotiations; proposed commitment **10 hours/week**. Both attend a weekly 60-minute decision meeting and an in-person two-day operating session each month. The first engineer works full time in the office and owns day-to-day delivery. The engineer and paid backup coverage, not two part-time founders, carry service continuity. Four weeks below commitment without agreed leave pauses further service vesting after a written cure notice. These terms accommodate the primacy of Post Fiat and Flare; neither founder promises to relocate full time.
+Alex owns product direction, engineering hiring, methodology and marketing. Hugo owns administration, legal coordination, capital formation, venue/affiliate agreements and gathering product TVL. Agree a practical in-person schedule around an Abu Dhabi office and a full-time engineer. Post Fiat remains Alex’s main effort and Flare remains Hugo’s main effort. Assign day-to-day support explicitly rather than assuming founder availability.
 
 Propose a three-person board: Alex, Hugo and an independent appointed jointly within 30 days. Ordinary decisions require two votes within the approved budget. Issuing securities, borrowing above $50,000, selling core IP, entering regulated products or changing the mandate requires both founder directors’ approval while each retains at least 10%. A related-party contract requires the disinterested founder plus the independent director; the benefiting founder abstains. For an unresolved reserved matter, hold the status quo, mediate within 30 days and commission an independent fair-value assessment if separation is requested. No automatic shotgun purchase. If no consensual buyout emerges within 90 days, fund an orderly customer wind-down from the reserve and preserve paid-up licenses for existing obligations. Draft the valuation, customer-protection and insolvency mechanics with counsel before signing.
 
@@ -548,7 +646,7 @@ The proposed background-IP schedule is intentionally non-exclusive:
 |---|---|
 | Existing Alex-controlled index code/methodology | AIC receives a perpetual, worldwide, non-exclusive right to use, modify and maintain the listed assets for indexing, sublicense outputs and transfer that license with a sale of AIC. Source delivery is required; no termination for founder departure or loss of a brand license. No pilot royalty beyond founder equity. Third-party-owned code requires its owner’s assent. No general navstrategies trading IP assignment |
 | Corbanu brand/content funnel and DOOM name | Revocable-for-cause brand license with 12-month customer transition; no advertising revenue share. New paid campaigns require a written budget; ordinary agreed pilot placements are the founder contribution |
-| Post Fiat NAVCoin technology | Existing open-source rights remain available to everyone. Separately required support: proposed $0 during the API pilot, then quoted work orders; later proprietary technology royalties require a product-specific agreement approved as a related-party transaction |
+| Post Fiat NAVCoin technology | Existing open-source rights remain available to everyone. Separately required support: proposed $0 during the retail launch, then quoted work orders; later proprietary technology royalties require a product-specific agreement approved as a related-party transaction |
 | Flare/FCC | Proposed credited or at-cost pilot access, then a transparent service-price schedule; no API exclusivity. Exportable state, verifiable artifacts and at least 90 days’ migration assistance on ordinary termination |
 | New AIC engineer/model work | Owned by AIC within assigned scope; upstream licenses and training-data restrictions persist; no automatic assignment back to either parent |
 
@@ -564,58 +662,53 @@ Parent-technology contracts should define background IP, paid services, contribu
 
 Equity fits the expected business: customers pay for products, owners share distributable profits, and employees earn options. A token would introduce distribution, governance, disclosure and incentive-design work before product-market fit. It also risks blurring AIC with PFT and FLR. A future NAVCoin is an investment-product interest, not AIC’s corporate equity or an automatic fee-sharing meme token.
 
-## 12. Work plan, budget and gates
+## 12. Delivery sequence and launch evidence
 
-### Proposed 90-day pilot budget
+The sequence follows the revenue ladder. **Levels 1 and 1a are the initial product.** Levels 2, 3, 4, 4b and 4c are explicit product lines with their own implementation and launch work. Their implementation is organized around retail adoption, execution quality and product readiness.
 
-| Use | Planning allowance |
-|---|---:|
-| Engineer and tightly scoped specialist support | $60,000 |
-| Corporate/product-perimeter counsel | $30,000 |
-| Data pilot and licensing allowance | $20,000 |
-| Compute, storage and monitoring | $10,000 |
-| Office/setup/travel allowance | $10,000 |
-| Contingency | $20,000 |
-| **Total cash authorization ceiling** | **$150,000** |
-
-These are planning allowances, not obtained quotes. No founder salary, regulated-product launch, HIP-3 stake or market-making capital is included. If counsel or data rights exceed the allowance, reduce scope or approve new funding.
-
-**Proposed funding responsibility:** Hugo arranges the $150,000 and has cleared cash in the company account before the pilot starts. Preferred instrument is a documented unsecured shareholder/strategic bridge loan: 0% for 12 months, 5% simple annual interest thereafter, 24-month maturity, no automatic equity conversion or additional founder vesting, and no Alex/Post Fiat guarantee. It is subordinated to customer obligations and ordinary third-party trade creditors; repayment cannot leave less than three months of operating cash while trading. In a wind-down, statutory priorities apply and the lender takes its agreed creditor rank ahead of shareholder distributions. At month 18 the board must refinance, agree an extension or plan orderly closure before maturity; no silent perpetual rollover. If a third party requires equity instead, both founders approve its separately priced dilution before signing. This is a proposed obligation, not a statement that Hugo has agreed or must personally lend. If no funding is secured within 30 days, the pilot does not commence and no cash-dependent tranche is earned.
-
-Target post-pilot fixed operating burn is **at most $35,000/month**, excluding separately funded regulated products. Day 75 is a provisional financing decision based on observed costs and pipeline; day 90 is the final commercial-gate decision. Continue beyond day 90 only with those gates met and six months of committed runway (up to $210,000 at that ceiling), or a separately approved smaller plan. The $150,000 pilot ceiling is not a claim of self-funding or long-term break-even. The $20,000 contingency first protects service wind-down and customer obligations.
-
-**Clock definition:** allow up to 30 calendar days before the pilot for formation, cleared funding, an accepted engineer start date and minimum lawful data access. Pilot day 1 begins only when those prerequisites hold; otherwise no open-ended unfunded build starts. The day 1–15 legal work finalizes the exact customer/activity perimeter before paid service. The technical observation period begins by day 45, leaving time for fixes and commercial conversion. Founder milestone deadlines run from the signed definitive agreement, not a silently movable pilot start.
-
-| Period | Alex / engineer | Hugo | Decision evidence |
+| Stage | Alex / engineering | Hugo / commercial and operations | Evidence for moving forward |
 |---|---|---|---|
-| Days 1–15 | Inventory reusable code and rights; freeze MVP contract; select engineer | Entity/legal scope, funding, data counterparties and parent permissions | Signed pilot budget, IP schedule and customer/geography perimeter |
-| Days 16–45 | Improve API, coverage reports and comparison UX; draft DOOM methodology | Three design partners; Tiingo/transcript negotiations; venue/oracle conversations | Demonstrated API workflow; written data position; FCC qualification report |
-| Days 46–75 | Operational observation, cost measurement and failure recovery; customer fixes | Convert paid pilots; obtain Bloomberg/venue requirements and next-stage funding | Customer-level contribution margin; six-month runway decision |
-| Days 76–90 | Release accepted API package; product and support handover | Close annual contract or explain failed demand | Two paid pilots plus annual conversion; go/narrow/stop decision |
+| **Level 1** | Corbanu wallet connection, thematic creator, social profiles, publishing, Felix basket execution, attribution ledger and payout UI | Felix affiliate agreement, creator terms, retail-access permissions, payout operations and data rights | Eligible funded basket fills; receipts reconcile; creator and AIC shares are actually settled |
+| **Level 1a** | Funded API-key account, quoted per-creation charge, durable generation jobs, idempotent billing and outputs | Data/model commercial rights and payment terms | Paid thematic creation settles once; failures/refunds and balances reconcile; cost per generation is measured |
+| **Level 2** | NAVCoin index primitive, spot purchase, reserve/supply controls and wallet experience | Issuer/manager, custody, capital/TVL, valuation and redemption arrangements | One spot NAVCoin can be bought under a defined investor claim; reserves, supply and fees reconcile |
+| **Level 3** | Venue-approved index/oracle feed and operational monitoring | Perp listing, revenue share, stake/deployer and liquidity agreement | Venue acceptance, tested oracle operations and actual trading-fee settlement |
+| **Level 4** | Auto-rebalanced UltraShort perp strategy product | Financing/collateral counterparties, distribution and product permissions | Approved methodology, working rebalance/closeout, risk and fee accounting |
+| **Level 4b** | Auto-rebalanced YOLO options product and reserve evidence | Options/broker/data rights, issuer arrangements and distribution | Authorized fills/rolls, NAV/proof reconciliation and product-fee reporting |
+| **Level 4c** | Leveraged bond-index implementation, beginning with the proposed datacenter-bond concept | Bond sourcing, financing, valuation, issuer and distribution arrangements | Approved universe/methodology, executable financing, reliable valuation and product-fee reporting |
 
-### Expansion gates
+The **fine-tuned model** has a parallel release track: rights-cleared training material, company-knowledge candidate, held-out evaluation, reproducible generation on its declared SGLang configuration, and free/research versus paid/commercial license terms. It supports Level 1a and the creation of indices across the ladder. Do not label a release verifiable until the specific fine-tune passes replay qualification.
 
-**Perp:** written venue acceptance; licensed prices and methodology; tested oracle operations; MM commitment; instrument/geography counsel; signed revenue share. No new DEX stake in the pilot.
+### Funding and measurement
 
-**NAVCoin:** approved issuer and reserve account; enforceable investor rights; administrator and withdrawal controls; qualified proof/supply/mint-redemption path; security review; funded operational acceptance under explicit authorization.
+Approve an engineering, data, legal, compute, office and payout-operations budget against this retail scope. Price Level 1a per index creation; agree the Level 1 affiliate and creator splits; set the fee schedule for each later product before launch. No enterprise subscription, institutional pilot fee or negotiated minimum license replaces those revenue streams.
 
-**Options/shorts/bonds:** separate methodology and risk review, realistic execution/roll study, qualified data, issuer demand and viable economics. No use of attractive market-size figures to bypass these gates.
+Hugo leads arranging operating capital and later product TVL. Neither Post Fiat’s treasury nor either founder’s personal guarantee is committed by this document. Separate operating runway from customer assets, HYPE stake, MM inventory and fund reserve capital.
 
-**Fine-tune:** training rights, baseline comparison and affordable inference/replay plan. It remains optional if a licensed API and qualified existing model already solve the customer problem.
+Track each stream separately: Level 1 collected affiliate receipts and creator payouts; Level 1a creation charges and compute cost; Level 2 NAVCoin assets/fees; Level 3 listing/deployer receipts; and each Level 4 series’ product fees, financing and investor NAV. Free model downloads, social impressions and simulated trades do not substitute for revenue.
 
-Stop or narrow the project if data rights cannot be obtained, customers will not pay, neither founder supplies the promised operating time, or FCC integration consumes the API runway without a commercial case. Failure to qualify FCC does not kill the independent index API; failure to establish legal/data rights does block the affected product.
+### Product-specific launch conditions
+
+**Level 1/1a:** supported retail access, data rights, a qualified funded Felix path, executed affiliate terms, creator compensation policy, accurate per-creation API billing and auditable receipts. Hosted generation can be executable only when the frozen-output/buyer-approval path is qualified; no false deterministic badge.
+
+**Level 2:** approved legal claim, custody/administrator, reserve and liability policy, qualified NAV/supply/mint-redemption controls and funded acceptance under explicit authorization.
+
+**Level 3:** licensed pricing, numeric venue-approved oracle operating policy, market maker/deployer commitments, instrument eligibility and agreed fee share.
+
+**Levels 4/4b/4c:** user-approved strategy methodology, required venue/broker permissions, financing and execution, tested rebalancing and closeout, and accurate NAV/fee disclosures. No unspecified leverage, option selection or portfolio rule is inferred here.
+
+The launch sequence is governed by working retail execution, real affiliate economics, paid API use and readiness of each product.
 
 ## 13. Proposed response to Hugo
 
-> I propose that we form the AI Indexing Company as an equity business focused on creating, maintaining and licensing useful AI-generated indices. The first release improves the existing Corbanu Index API, with a DOOM flagship and a clear path from tokenized equities to broader US and international coverage.
+> The AI Indexing Company starts as a retail business on corbanu.com. A user connects a wallet, creates or selects a thematic index, links a social account, chooses deterministic or hosted generation, publishes it and lets others buy the basket through Felix. The index’s affiliate P&L is shared between its creator and the indexing company.
 >
-> I will lead the product, hire the engineer and drive marketing. You will lead the company setup, commercial partnerships and capital formation. Post Fiat and Flare remain our respective main efforts. Their technology comes through explicit agreements, and Corbanu’s advertising business stays outside this company.
+> Level 1 is those spot fills. Level 1a is paid thematic index creation through a funded Corbanu API key. Level 2 is buying one spot NAVCoin instead of every underlying holding. Level 3 is perp listings. Level 4 is auto-rebalanced UltraShort perp indices; 4b is auto-rebalanced YOLO options indices; 4c is leveraged bond indices, including a leveraged datacenter bond index.
 >
-> I agree that dependable oracle infrastructure matters for perps. Let’s qualify FCC against a narrow operating specification while you secure a venue and liquidity proposal. The first perp should use a partner deployer rather than require us to finance 500,000 HYPE ourselves.
+> The verifiable company-knowledge fine-tune supports this business. We provide free research access to our model contribution, charge for hosted API creation, and license external commercial tradable-index use. Replayability and the commercial license need concrete, separate deliverables.
 >
-> I suggest an Abu Dhabi office, founder equity that rewards delivered contributions, and a meaningful employee pool. The attached opening structure is 48% Alex, 32% Hugo and 20% employees, with founder vesting and milestone tranches. We can negotiate the numbers alongside the actual commitments.
+> I lead product, hire the engineer and do the marketing. You lead administration, counterparties, capital and gathering TVL. Post Fiat supplies agreed NAVCoin technology and Flare supplies qualified TEE capabilities. Post Fiat and Flare remain our main efforts, and Corbanu’s general ad business stays outside the deal.
 >
-> Before signing, we should settle the data rights, parent-IP terms, funding, domicile and milestones. We should also explicitly acknowledge Post Fiat’s competitive stance toward XRP so that no one discovers that conflict after the company exists.
+> Let’s structure equity and founder earn-in around those contributions, with an in-person operating office. We need the actual affiliate split, API creation price, data rights, technology agreements and product permissions to ship this retail business.
 
 ---
 
