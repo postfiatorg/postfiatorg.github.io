@@ -1,5 +1,5 @@
 ---
-title: "The AI Indexing Company: Founder Proposal"
+title: "The AI Indexing Company: Business Proposal"
 date: 2026-09-17T00:00:00Z
 url: "/research/ai-indexing-company/"
 type: "page"
@@ -22,17 +22,17 @@ tags:
 
 # The AI Indexing Company
 
-## Founder proposal for Alex and Hugo
+## Product and commercial proposal
 
-**17 September 2026 · Founder discussion draft · Research observations dated individually**
+**17 September 2026 · Public product proposal · Founder subscription terms are maintained separately**
 
 ## 1. The business: turn a theme into something people can buy
 
-The **AI Indexing Company (AIC)** will begin with a retail product on **corbanu.com**. A creator describes an investment theme, chooses a model and universe, generates an index, and publishes a shareable page. An eligible follower reviews the holdings and costs, then buys the supported basket through one coordinated wallet flow. The creator and AIC share the resulting **index distribution revenue**. Separately, users pay per thematic index creation through a funded Corbanu API key.
+The **AI Indexing Company (AIC)** will begin with a retail product on **corbanu.com**. A creator describes an investment theme, chooses a model and universe, generates an index, and publishes a shareable page. An eligible follower reviews the holdings and costs, then buys the supported basket through one coordinated wallet flow. The creator and AIC share **index distribution revenue from each qualifying trade—entry, rebalancing buys and sells, and exit**. Separately, users pay per thematic index creation through a funded Corbanu API key.
 
-The initial customers are retail creators and their followers. Published indices turn investment ideas into exposure people can inspect and buy. The launch will test paid creation, repeat buying and creator earnings.
+The initial customers are retail creators and their followers. Published indices turn investment ideas into exposure people can inspect and buy. The launch will test paid creation, assets following an index, rebalance participation, retention and creator earnings.
 
-**Alex owns product, engineering hiring and marketing. Hugo owns administration, business development, legal and counterparties, capital and later product TVL.** Post Fiat supplies licensed NAVCoin technology; Flare supplies contracted trusted execution environment (TEE) services through **Flare Confidential Compute (FCC)**. Post Fiat remains Alex’s main effort, and Flare remains Hugo’s.
+**Alex owns product, engineering hiring and marketing. Hugo owns administration, business development, legal and counterparties, capital and later product TVL.** Post Fiat would supply NAVCoin technology under agreed licenses; Flare would supply trusted execution environment (TEE) services under an agreed contract through **Flare Confidential Compute (FCC)**. Post Fiat remains Alex’s main effort, and Flare remains Hugo’s.
 
 **The decision now is to agree the Level 1/1a launch, its funding and founder service commitments.** One engineer delivers that launch in sequence. The model release and later financial products receive separate work allocations.
 
@@ -42,7 +42,7 @@ The initial customers are retail creators and their followers. Published indices
 |---|---|---|
 | **1 — Spot basket execution** | Creates or selects an index on corbanu.com and purchases its separate supported spot constituents | Index distribution revenue, shared between creator and AIC after agreed costs |
 | **1a — Paid thematic creation** | Pays per index creation through a funded Corbanu API key | Metered creation charges; commercial model licenses tracked separately within the API/model-access business |
-| **2 — Spot NAVCoin index primitives** | Buys one spot NAVCoin representing the index instead of purchasing every constituent separately | The series’ disclosed origination/redemption, management or licensing economics |
+| **2 — Spot NAVCoin index primitives** | Buys one spot NAVCoin representing the index instead of purchasing every constituent separately | Recurring fees on average NAV/TVL, like an ETF business; any separate execution or entry/exit charges are disclosed |
 | **3 — Perpetual listings** | Trades a perpetual swap on an index | Contracted listing/index license or deployer revenue share |
 | **4 — Auto-rebalanced UltraShort perp indices** | Buys maintained exposure built from short perpetual positions | Disclosed index/product fees |
 | **4b — Auto-rebalanced YOLO options indices** | Buys maintained, automatically rebalanced options exposure | Disclosed index/product fees |
@@ -99,7 +99,7 @@ AIC’s differentiation must exceed “AI builds an index.” [Solactive ARTIS](
 
 **The preferred route is for Hugo to negotiate direct Ondo access and AIC’s right to collect the proposed 20bp origination charge.** Alex reports that Felix approached him about its partner program; Felix is the commercial alternative and the current implemented adapter.
 
-The **20bp target is gross collection before costs and creator payouts**; the rate and direct Ondo rights remain to negotiate. Hugo must establish who can collect the charge, who onboards customers, AIC’s identity-checking and distributor obligations, supported users/instruments, and the settlement process. [Ondo API](https://docs.ondo.finance/api-reference/overview); [Felix spot-equity mechanics](https://usefelix.gitbook.io/docs/trading-products/spot-equities).
+The **20bp target is gross collection before costs and creator payouts**; the rate and direct Ondo rights remain to negotiate. Hugo must secure the right to collect it on buys and sells, including index rebalances, and establish customer onboarding, AIC’s distributor obligations, supported instruments, attribution and settlement. [Ondo API](https://docs.ondo.finance/api-reference/overview); [Felix spot-equity mechanics](https://usefelix.gitbook.io/docs/trading-products/spot-equities).
 
 Use **index distribution revenue** consistently:
 
@@ -111,55 +111,74 @@ Customer deposits and investment returns stay outside this revenue pool. General
 
 Before assigning execution integration, Hugo obtains comparable terms and Alex estimates the build for each route. Both founders approve the route using permitted retail access, retained economics, creator payouts and integration effort. If neither offer works, paid creation and publication can proceed while execution remains unavailable.
 
-### Creator and AIC reconciliation
+### Creator income is earned over the index’s life
 
-Each index has a stable attribution ID, beneficiary and disclosed share rate. For fee-bearing executed notional **V**:
+An index is a maintained portfolio. Followers buy it, trade its updates and eventually exit. AIC targets a fee on **each executed side**. A $100 sale followed by a $100 replacement purchase therefore creates $200 of fee-bearing notional; a displayed rebalance that nobody executes creates none.
+
+The historical reference comes from the existing **NavStrategies fundamental-index evaluation**:
+
+- **S&P membership:** 113 quarter-end transitions from March 1998 to June 2026 averaged **1.2212% of names entering per quarter**. Assuming equal-sized replacements gives a **4.885% annual one-way replacement proxy**. This is member-count churn, not measured dollar turnover of the cap-weighted S&P 500; it omits reweighting within surviving names.
+- **Fundamental index:** the evaluation separately measured **6.7104% one-way weight turnover per rebalance**, or **26.842% annualized** at four rebalances. Weight changes generate trading even when most constituents stay.
+- **Creator-curated indices:** model higher activity as a sensitivity, here 25% one-way turnover quarterly or monthly. These are commercial scenarios, not backtested creator behavior or proposed portfolio rules.
+
+One-way turnover is half the sum of absolute weight changes. For a self-financing rebalance, buying plus selling is twice that amount. With steady average followed assets **B**, annual one-way turnover **u**, routed rebalance participation **p**, new purchases **E** and exits **X**:
 
 ```text
-Gross index distribution revenue G = V × collected fee rate
-Settled distributable pool D = G − reversals − agreed direct costs
+Annual fee-bearing notional V = E + X + 2 × p × u × B
+Gross distribution revenue G = fee rate × V
+Distributable pool D = G − reversals − agreed direct costs
 Creator payout = creator share s × max(0, D)
-AIC Level 1 contribution = D − creator payout
+AIC contribution = D − creator payout
 ```
 
-Permitted deductions are agreed in advance: provider pass-throughs, attributable refunds, approved campaign spend and directly metered costs where the creator contract permits them. General salaries, unrelated losses and discretionary overhead cannot erase a creator payout. If the pool is negative, that loss remains visible in AIC’s accounts.
+The ledger sums actual fills. The formula is a steady-assets planning approximation; retention, market moves, contributions and route choice change the realized result.
 
-For illustration, **$100 of receipts less $20 of direct costs, split equally**, leaves $40 each for creator and AIC:
+**Sample index: $1m followed assets**, 20bp on each buy/sell, all modeled rebalances executed through AIC. For continuity with the earlier illustration, direct costs are 20% of gross receipts and the remaining pool is split equally. Thus creator and AIC each receive 40% of gross before their own further expenses.
 
-| Fee-bearing executed notional | Gross at 20bp | Creator / AIC each: no direct costs, 50% split | Creator / AIC each: costs equal 20% of receipts, 50% split |
-|---:|---:|---:|---:|
-| $100,000 | $200 | $100 / $100 | $80 / $80 |
-| $1 million | $2,000 | $1,000 / $1,000 | $800 / $800 |
-| $10 million | $20,000 | $10,000 / $10,000 | $8,000 / $8,000 |
+| Turnover case | Annual one-way turnover | Rebalance buys + sells | Annual gross recurring fees | Creator / AIC each |
+|---|---:|---:|---:|---:|
+| S&P membership proxy | 4.885% | $97,699 | $195 | $78 / $78 |
+| Fundamental-index research | 26.842% | $536,835 | $1,074 | $429 / $429 |
+| Curated: 25% quarterly | 100% | $2m | $4,000 | $1,600 / $1,600 |
+| Curated: 25% monthly | 300% | $6m | $12,000 | $4,800 / $4,800 |
 
-*Illustrative sensitivity: 20bp gross fees, a 50% creator share and either zero costs or costs of 20% of receipts. Actual rates, costs and volumes remain to establish.*
+These columns exclude entry and exit. **Initial funding adds $2,000 gross and $800 each**; a later full exit adds the same if the fee applies. The monthly curated example therefore produces **$14,000 gross and $5,600 each in year one**. Across three years with steady assets, initial entry and final exit, it produces **$40,000 gross and $16,000 each**. At $10m of participating assets, those amounts scale tenfold.
 
-The incentive is thin at small purchase sizes: in the cost-bearing illustration, a creator earns **$0.80 per $1,000** of attributed purchases. Creation charges and distribution effort therefore matter.
+The earlier $0.80 per $1,000 figure describes one purchase under these illustrative costs and split. It is not the creator’s lifetime income from that capital. Recurring income depends on maintaining an audience whose assets continue following useful updates. At 50% rebalance participation, the recurring columns halve. Higher turnover also raises investor trading costs; the methodology and follower decisions drive trades, not a fee-generation target.
 
-Let **A** be a creator’s total creation charges, **s** the creator share, and **d** direct costs and reversals per dollar of executed notional. At a positive net fee rate, the purchases needed to recover creation charges are:
+A creator should be able to see assets following the index, actual rebalance participation, gross receipts, deductions and earned payouts. Alex owns testing this proposition: useful research plus a social track record attracts followers; maintained portfolios and reliable execution retain them. Track portfolio turnover separately from customers leaving.
 
-```text
-Creator break-even notional = A ÷ [s × (fee rate − d)]
-```
+**Inputs still to negotiate:** fees on each direction and rebalance, creator share, provider costs and reversal rules. The table is a sensitivity, not a rate agreement, return forecast or promise of income. Detailed definitions and provenance: [turnover model](https://postfiat.org/research/ai-indexing-company/turnover-model.md).
 
-In the cost-bearing example, **d = 0.0004** and each $1 of creation charges requires $1,250 of purchases to recover. Alex should test demand for research utility and distribution income separately. Sponsored creation allowances count as budgeted subsidies.
+### NAVCoins add recurring fees on TVL
+
+For Level 2, the customer owns one portfolio unit. The business earns a disclosed recurring fee on **average fee-bearing NAV/TVL**, like an ETF manager. It does not require an investor to trade the unit repeatedly.
+
+| Average TVL | 25bp annual fee | 50bp annual fee | 100bp annual fee |
+|---|---:|---:|---:|
+| $1m | $2,500 | $5,000 | $10,000 |
+| $10m | $25,000 | $50,000 | $100,000 |
+| $50m | $125,000 | $250,000 | $500,000 |
+| $100m | $250,000 | $500,000 | $1,000,000 |
+
+Rates are illustrative. Gross product fees accrue over the period assets are held; custody, administration, data, reserve trading and any manager/creator share determine retained AIC revenue. **Level 1 monetizes executed turnover; Level 2 monetizes maintained TVL.** A portfolio may migrate between the two products. Do not count its assets or fees twice without a genuine, disclosed additional service and charge.
 
 ### Paid creation and operating break-even
 
 Level 1a requires a displayed price or accepted maximum charge **before** a funded request runs. Credit is reserved, the generation receives a durable job ID, and completion settles once. Idempotent retries do not rebill; cancellations, failures and unused reservations follow the price contract. Viewing, sharing or buying an existing index does not silently regenerate it. API credit is separate from wallet trading funds.
 
-For a common monthly period, let **N** be paid creations, **P** their average settled charge, **c** measured attributable inference/data/serving cost per creation, **L** external model-license contribution and **O** operating overhead. Allocate each expense once between **d**, **c** and **O**. Set **L = 0** for planning until a collectible licensing contract exists:
+For a common monthly period, let **N** be paid creations, **P** their average settled charge, **c** direct cost per creation, **d** execution costs/reversals per traded dollar, **L** external model-license contribution, **M** net NAVCoin fee contribution, and **O** operating overhead. Allocate each expense once. Set **L** and **M** to zero until the relevant contracts and live fee-bearing product exist:
 
 ```text
 Monthly operating contribution
-  = D − s × max(0, D) + N × (P − c) + L − O
+  = D − s × max(0, D) + N × (P − c) + L + M − O
 where D = V × (fee rate − d)
 ```
 
 If the retained execution rate is positive, the notional required to cover the remaining cost base is:
 
 ```text
-V required = max(0, O − N × (P − c) − L)
+V required = max(0, O − N × (P − c) − L − M)
              ÷ [(fee rate − d) × (1 − s)]
 ```
 
@@ -217,38 +236,15 @@ Required operating funding
 
 Unsigned pipeline revenue does not reduce the funding requirement. Customer assets, fund reserves, any later Hyperliquid deployment stake in its HYPE token, and market-maker inventory are separate capital pools.
 
-**Hugo owns securing operating funding.** Before signing, record the provider, amount, timing and financing terms, plus the scope/spending response if funding falls short. This proposal creates no personal guarantee or parent-treasury commitment. Alex names daily support and backup coverage; Hugo owns counterparty and payout escalation.
+The private founder schedule specifies the financing proposal and opening budget. Hugo owns the entity, funding process and counterparty/payout escalation; Alex owns engineering costs, daily support and backup coverage. Operating capital remains separate from customer assets and parent treasuries.
 
 Alex measures creator activation, paid creation, publication, share-to-buy conversion, returning buyers, retained creators and settled payouts, excluding employees, test wallets and circular trades. Before the public experiment, both founders record numerical demand, margin, reliability and spending thresholds from the measured funnel and quoted costs. At review, continue, narrow or reprice only with a credible contribution path; otherwise stop spending on the unvalidated scope. A functioning creation service may continue without representing unqualified execution as live.
 
 ## 4. Founder structure and company boundaries
 
-### Proposed ownership and earn-in
+### Ownership and founder commitments
 
-| Fully diluted allocation before outside financing | Time-vesting shares | Contribution options | Maximum |
-|---|---:|---:|---:|
-| **Alex** | 30% | 18% | **48%** |
-| **Hugo** | 20% | 12% | **32%** |
-| **Employee option pool** | — | — | **20%** |
-
-The 60/40 founder-pool split recognizes Alex’s existing product/distribution and Hugo’s company-building contribution. It does not value or transfer either parent network.
-
-Proposed time vesting is four years from signing, with a one-year cliff and monthly vesting thereafter. Contribution milestones must be certified within 24 months of signing. On certification, half of the tranche vests immediately and half over the following 12 months of agreed service; that service period may extend beyond the certification deadline.
-
-The contribution pools are **not yet allocated into executable tranches**. Before signing, both founders complete these fields, with disputed acceptance determined by the independent director or agreed expert:
-
-| Contribution | Acceptance basis | Fields still to agree |
-|---|---|---|
-| Alex: retail delivery | Qualified publication, both honestly labeled modes and funded execution | Share of Alex’s 18%; acceptance date; provider-dependent exclusions |
-| Alex: API/model | Correct paid billing; separately qualified model release and license package | Separate allocations and dates so the deferred model cannot obscure API delivery |
-| Alex: team/distribution | Engineer, support, DOOM and measured creator adoption | Allocation, evidence threshold and date |
-| Hugo: operating foundation | Entity, funding, rights, administration and actual retail permissions | Share of Hugo’s 12%; cash/service obligations and date |
-| Hugo: commercial rails | Approved route, enforceable fee/payout rights and reconciled settlement | Allocation/date; credit for an approved alternative; Alex’s integration dependency |
-| Hugo: capital/TVL | Financing and durable product assets for authorized later products | Allocation/date and measurement; distinguish TVL from volume |
-
-The benefiting founder cannot extend their own deadlines. A blocked dependency is documented and jointly amended, replaced or allowed to lapse; it is not silently deemed delivered. Existing code counts only when usable rights and delivery obligations are accepted.
-
-On departure, unearned and service-unvested rights lapse. Vested options have a 12-month exercise window capped by original expiry; exercised vested shares remain owned. Use a narrow enforceable fraud remedy, not discretionary bad-leaver confiscation. Cancelled allocations return to an unallocated reserve, not automatically to the other founder or employee pool. Financing dilutes the fully diluted allocations proportionally unless expressly agreed otherwise.
+AIC is proposed as a separate equity company with an employee option pool. Founder subscriptions, cash amounts, share allocations and contribution schedules are maintained in the private founder proposal. Cash ownership, ongoing service and delivered contributions are treated separately. Alex owns product and distribution; Hugo owns administration, counterparties and capital. Parent assets enter through approved agreements.
 
 ### Working arrangement and governance
 
@@ -416,7 +412,7 @@ Variational instead uses an OLP counterparty and hedging operation; its publishe
 
 ### Level 2: NAVCoins need both reserve controls and investor rights
 
-A NAVCoin is a spot index primitive with an ETF-like experience, not a claim of registered ETF status. It can be backed by actual spot holdings; derivative backing is not inherent.
+A NAVCoin combines a spot index unit, reserve controls and the recurring TVL-fee model in §2. The ETF analogy describes the experience and revenue model; the legal wrapper and investor rights require their own approval.
 
 ```mermaid
 flowchart TB
@@ -461,7 +457,7 @@ OCC reports **8.27bn equity-option contracts in 2025, up 26.8%**, plus 5.68bn ET
 
 The September options research snapshot totals **$8.045bn** ATM/OTM call premium open interest for NVDA/MU, **$142.283bn** underlying notional and **$787.6m** tracked on-chain perp open interest. Premium uses open interest × 100 × midpoint across returned expiries; hedges and long-dated positions are included. These are snapshots of outstanding positions, not annual trading volume or revenue. [Evidence](https://postfiat.org/blog/trustless-single-stock-option-indices/).
 
-At a hypothetical 50bp annual product fee, $10m/$50m/$100m retained assets generate $50k/$250k/$500k gross annually before costs. These magnitudes reinforce the need for quotes and distribution evidence.
+The recurring NAVCoin fee sensitivities in §2 apply to approved portfolio wrappers; each later strategy also needs its own financing, trading and service-cost model.
 
 API and index licensing, including potential [Bloomberg distribution](https://www.bloomberg.com/professional/products/indices/resources/index-data-licensing/), are Hugo’s later BD channels.
 
