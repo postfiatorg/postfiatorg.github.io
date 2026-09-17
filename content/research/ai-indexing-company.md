@@ -5,8 +5,8 @@ url: "/research/ai-indexing-company/"
 type: "page"
 layout: "aic_proposal"
 draft: false
-summary: "Retail thematic index creation on corbanu.com: link a social identity, choose deterministic or hosted generation, publish and share, buy through Felix, and earn creator payouts. Includes a verifiable fine-tuned model with commercial-use licensing."
-description: "The AI Indexing Company retail V0 proposal: social indices, Felix basket execution, creator marketing-P&L payouts and verifiable fine-tuned model licensing. Includes diagrams, sources and PDF."
+summary: "Retail thematic index creation on corbanu.com: link a social identity, choose deterministic or hosted generation, publish and share, buy through the preferred direct Ondo route, and earn creator payouts. Includes a verifiable fine-tuned model with commercial-use licensing."
+description: "The AI Indexing Company retail V0 proposal: social indices, direct Ondo distribution, creator marketing-P&L payouts and verifiable fine-tuned model licensing. Includes diagrams, sources and PDF."
 author: "Post Fiat"
 breadcrumb_label: "Research"
 breadcrumb_url: "/research/"
@@ -28,7 +28,7 @@ tags:
 
 ### Decision brief
 
-**Build an equity-owned index company whose V0 is a retail product hosted on corbanu.com.** Anyone can begin with a theme, generate an index, link it to their social identity, choose deterministic or non-deterministic generation, and publish a page they can share. Other users can buy that index’s supported basket through a single Felix purchase flow. Each index has an attributed marketing-P&L account that pays its creator a disclosed share. **Level 1a monetizes that same infrastructure immediately: users pay per thematic index creation through their funded Corbanu API key.** This is usage-based API revenue, not an institutional sales-led product.
+**Build an equity-owned index company whose V0 is a retail product hosted on corbanu.com.** Anyone can begin with a theme, generate an index, link it to their social identity, choose deterministic or non-deterministic generation, and publish a page they can share. Other users can buy that index’s supported basket through one Corbanu purchase flow. **The preferred commercial route is a direct Ondo partnership: Hugo negotiates access and the right for AIC to capture the proposed 20bp origination economics directly.** Alex reports that Felix has approached him about its partner program; that is an alternative route, while the existing Felix integration remains the current implementation. Each index has an attributed marketing-P&L account that pays its creator a disclosed share. **Level 1a monetizes that same infrastructure immediately: users pay per thematic index creation through their funded Corbanu API key.** This is usage-based API revenue, not an institutional sales-led product.
 
 The mission is to make financial indices easier to create, understand, verify and use. AI can turn unstructured company information into explicit selection rules and weights. The long-term vision is to turn a tradable idea into accessible exposure with minimal friction. The first product turns creation and sharing into distribution: useful indices attract buyers, attributable marketing economics fund creator payouts, and creators have a reason to publish more useful work. The verifiable fine-tuned model supports the revenue ladder below: free research access to the licensed model contribution, paid Corbanu API execution, and paid rights for external commercial tradable-index use.
 
@@ -42,13 +42,13 @@ The mission is to make financial indices easier to create, understand, verify an
 
 **Initial delivery scope:** Level 1 retail spot execution and creator payouts on corbanu.com; Level 1a metered thematic creation billed through Corbanu API keys; and the verifiable fine-tuned-model release and license workstream. Funded launch requires the venue, data and creator-program permissions described below. A company token, customer custody, a proprietary exchange and a live NAVCoin are separate future decisions.
 
-**What must be resolved before signing:** parent-IP permissions; founder commitments and earn-in; initial cash; company domicile and operating permissions; Tiingo/transcript rights; Felix affiliate and creator-payout terms; and Hugo’s acceptance of Post Fiat’s competitive XRP narrative.
+**What must be resolved before signing:** parent-IP permissions; founder commitments and earn-in; initial cash; company domicile and operating permissions; Tiingo/transcript rights; direct Ondo distribution/origination and creator-payout terms; and Hugo’s acceptance of Post Fiat’s competitive XRP narrative.
 
 ### The business model: seven defined revenue streams
 
 | Level | What the user buys or does | How the indexing company earns |
 |---|---|---|
-| **Level 1 — Spot execution** | Log onto corbanu.com, connect a wallet, create or select an index, and get filled on its underlying spot basket through Felix | Collected affiliate/retailer economics attributable to the index are split between the creator beneficiary and AIC |
+| **Level 1 — Spot execution** | Log onto corbanu.com, connect a wallet, create or select an index, and get filled on its underlying spot basket, preferably through a direct Ondo relationship negotiated by Hugo | Direct origination economics (20bp target), or agreed affiliate/retailer economics attributable to the index are split between the creator beneficiary and AIC |
 | **Level 1a — API revenue** | Pay per thematic index creation through the Corbanu API, using a funded corbanu.com API key | A metered index-creation charge; distinct from affiliate revenue on subsequent trades |
 | **Level 2 — Synthetic spot ETF execution** | Buy one spot NAVCoin representing the index, instead of buying all constituent spot positions | The NAVCoin series’ disclosed product economics: agreed origination/redemption, management or licensing fees, with the chosen schedule explicit before launch |
 | **Level 3 — Perpetual swap listings** | Trade a perpetual swap on a listed index | The negotiated index/deployer revenue share or listing license described in the venue agreement |
@@ -130,7 +130,7 @@ The live catalog observation was captured at **23:46 UTC on September 16, 2026**
 
 ### The user and the experience
 
-V0 serves **retail creators and the people who follow their ideas**. A creator might describe “companies building the AI power grid,” generate candidate holdings, refine the theme, link an X account, and publish a branded index page. A reader arriving from a shared link can inspect the idea and buy the supported basket through Felix. The creator earns from that index’s attributable marketing P&L. An institutional procurement process is not the entry point.
+V0 serves **retail creators and the people who follow their ideas**. A creator might describe “companies building the AI power grid,” generate candidate holdings, refine the theme, link an X account, and publish a branded index page. A reader arriving from a shared link can inspect the idea and buy the supported basket through Corbanu’s execution flow, preferably using direct Ondo access. The creator earns from that index’s attributable marketing P&L. An institutional procurement process is not the entry point.
 
 The product lives on **corbanu.com**, using the existing Corbanu Index API for generation, versioning and execution preparation. **Index generation is metered under Level 1a:** the user pays per thematic index creation with a funded Corbanu API key. The interface shows the creation charge and available credit before starting. Publishing, sharing and trading attribution are distinct operations; no enterprise subscription or procurement process is required. A sponsored creation allowance can be offered explicitly, but is a subsidy rather than the business model.
 
@@ -141,7 +141,7 @@ The product lives on **corbanu.com**, using the existing Corbanu Index API for g
 3. **Link a social identity.** Verify control of an optional social account through the provider’s supported authorization/proof flow. Show the account, creator name and payout identity on the profile. Linking an account neither proves expertise nor authorizes automatic posting.
 4. **Preview and publish.** Review holdings, supported buy coverage, methodology, costs and creator compensation. Publish a permanent shareable URL, social preview card and immutable version identifier. Drafts remain private until the creator publishes.
 5. **Share and discover.** Share to X or another social channel; readers can follow the creator, browse themes and compare indices. Performance displays distinguish historical simulations, published-index performance and realized investor results.
-6. **Buy through Felix.** Select an amount, review the basket quote and total costs, and confirm one coordinated purchase flow. Eligible, onboarded users should not have to reconstruct and enter every constituent manually. The interface records partial fills and remaining cash.
+6. **Buy through Corbanu.** Select an amount, review the basket quote and total costs, and confirm one coordinated purchase flow. Eligible, onboarded users should not have to reconstruct and enter every constituent manually. The interface records partial fills and remaining cash.
 7. **Earn and return.** Each index’s creator dashboard shows attributable receipts, permitted cost deductions, pending adjustments and settled payout. Creators return to improve their published work, explain updates and reach new buyers.
 
 ```mermaid
@@ -149,7 +149,7 @@ flowchart TB
     Theme["Choose a theme, universe and model"] --> Mode["Deterministic or hosted generation"]
     Mode --> Profile["Link social identity\nReview and publish on corbanu.com"]
     Profile --> Share["Share index page\nDiscover and follow creators"]
-    Share --> Buy["Buy the basket through Felix"]
+    Share --> Buy["Buy the basket on Corbanu\nPreferred route: direct Ondo"]
     Buy --> Revenue["Attribute collected marketing receipts\nCalculate and pay creator share"]
     Revenue --> Profile
 ```
@@ -158,9 +158,9 @@ flowchart TB
 
 ### What “one click” means
 
-The product promise is **one buy action on the shared index page**, carrying the chosen basket and budget into Felix. It is not a promise of one blockchain transaction or the removal of necessary account checks. First use can require eligibility checks, Felix onboarding, wallet connection, funding, allowance approvals and signatures. The current integration can execute constituents separately; settlement can be partial. Show the full state and let the buyer explicitly approve any changed quote or composition.
+The product promise is **one buy action on the shared index page**, carrying the chosen basket and budget into the selected execution route. Direct Ondo access is the preferred business arrangement; the current implemented adapter uses Felix. It is not a promise of one blockchain transaction or the removal of necessary account checks. First use can require eligibility checks, the selected provider’s onboarding, wallet connection, funding, allowance approvals and signatures. The current integration can execute constituents separately; settlement can be partial. Show the full state and let the buyer explicitly approve any changed quote or composition.
 
-The aspiration is that anyone who discovers an index can use the same simple flow. Actual trading is available to users and instruments supported by Felix and the applicable access rules. Unsupported constituents must be disclosed before confirmation; never silently turn an unavailable basket into a different portfolio. Research-only indices can still be published and shared, with the buy action clearly unavailable. [Felix account and execution mechanics](https://usefelix.gitbook.io/docs/trading-products/spot-equities).
+The aspiration is that anyone who discovers an index can use the same simple flow. Actual trading is available to users and instruments supported by the contracted execution provider and the applicable access rules. Unsupported constituents must be disclosed before confirmation; never silently turn an unavailable basket into a different portfolio. Research-only indices can still be published and shared, with the buy action clearly unavailable. [Felix account and execution mechanics](https://usefelix.gitbook.io/docs/trading-products/spot-equities).
 
 The observed catalog currently gates external funds on deterministic execution and reports funded fills unverified. **That is an existing implementation limit, not the proposed product policy.** To enable hosted/non-deterministic indices for buying, qualify a path that binds the buyer’s approval to a frozen published output, quote and version. Do not simply remove the guard. Choosing a mode must not let a creator retroactively alter a basket already approved for purchase.
 
@@ -179,11 +179,13 @@ Creator payout
   = disclosed creator share × max(0, settled index marketing P&L)
 ```
 
-“Receipts” can include an agreed Felix retailer/affiliate payment, a distribution partner payment or an explicitly included index campaign. Felix’s customer origination fee is **not automatically AIC revenue**. There is no assumed revenue-share agreement or verified 20bp entitlement today. Buyer trading profits, the value of customer deposits and a hypothetical token price are not marketing P&L.
+**Preferred economics: AIC contracts directly with Ondo and captures the proposed 20bp origination charge itself, rather than depending on a Felix affiliate split. Hugo owns negotiating this relationship.** Alex reports that Felix has reached out about its partner program; retain that as a commercial alternative and use the existing integration as implementation evidence. The direct Ondo arrangement and 20bp economics are negotiating targets, not signed terms.
+
+“Receipts” primarily means the origination/distribution fees AIC actually collects under that direct arrangement. Agreed Felix affiliate payments, other distribution payments or explicitly included index campaigns can also contribute where used. The collected amount, less the permitted direct costs below, funds the creator/AIC split; **20bp is the target gross origination charge, not AIC’s retained margin after creator payouts and costs**. Buyer trading profits and customer deposits are not marketing P&L.
 
 Cost deductions are specified in advance: partner pass-throughs, attributable refunds, approved campaign spend and directly metered costs where the creator terms permit them. General corporate salaries, unrelated Corbanu losses and discretionary overhead cannot be allocated to erase an index payout. Creator compensation itself is not deducted before calculating its own base. The creator share is a contractual variable, not an agreed number in this draft.
 
-Illustration only: $100 collected receipts minus $20 approved direct costs leaves $80. A hypothetical 50% creator share pays $40 and leaves $40 for AIC. Neither the rate nor those receipts is a claim about Felix’s current terms.
+Illustration only: $100 collected receipts minus $20 approved direct costs leaves $80. A hypothetical 50% creator share pays $40 and leaves $40 for AIC. Neither the example creator split nor those receipts is a claim about agreed Ondo or Felix terms.
 
 Bind attribution to the index/version shown in the accepted buy quote and the resulting venue receipt, not merely a browser cookie or self-reported referral. One receipt funds one defined pool; a shared link and a fork must not both claim 100% of it. Proposed fork policy: a new publication gets a new ID, preserves source credit, and receives future attribution only for purchases of that new version. Any upstream royalty must be disclosed before publishing.
 
@@ -191,7 +193,7 @@ Provide a monthly statement and payout after the contract’s settlement/reversa
 
 ### Coverage and deterministic choice
 
-Start the executable experience with the supported tokenized-stock universe. Broader US and international equities remain creation/research targets as licensed data coverage expands. Every index page states which constituents can actually be bought through Felix. “Full US” and “full international” are objectives, not current coverage claims.
+Start the executable experience with the supported tokenized-stock universe. Broader US and international equities remain creation/research targets as licensed data coverage expands. Every index page states which constituents can actually be bought through the selected execution route. “Full US” and “full international” are objectives, not current coverage claims.
 
 A deterministic index fixes the model weights, tokenizer, prompt, input packet, runtime and allowed update procedure. Publication follows a successful qualified replay; an unavailable verifier cannot produce a verified badge. A hosted index freezes the selected output and records provenance but makes no independent replay promise. Both preserve published versions. Model/mode changes create a new version with clear notice; neither mode quietly rewrites history or triggers an unapproved purchase.
 
@@ -199,7 +201,7 @@ A deterministic index fixes the model weights, tokenizer, prompt, input packet, 
 
 - **Creation and identity:** a retail user creates an index without an enterprise sales process, links a social account, previews and publishes a working share page.
 - **Choice that means something:** both generation modes work under their stated guarantees; verification failures are visible; a frozen hosted output cannot mutate inside a buyer-approved order.
-- **Purchase:** an eligible user arriving through the share link completes a funded Felix basket flow under explicit testing authorization; costs, failures, approvals, partial fills and receipts reconcile.
+- **Purchase:** an eligible user arriving through the share link completes a funded basket flow on the contracted route under explicit testing authorization; costs, failures, approvals, partial fills and receipts reconcile.
 - **Creator economics:** the venue/marketing contracts establish a real receipt source; an attributed receipt reconciles to the index statement and an actual eligible creator payout. A simulated ledger is not a paid creator.
 - **Repeat use:** measure creator activation, published indices, share-to-buy conversion, returning buyers, creator retention and repeat purchases—not institutional contract count.
 - **Reliability:** maintain an observed 30-day record of scheduled index updates, visible stale/missing states, backup recovery and payout reconciliation. Set service deadlines per flow before measurement; a social page and a live purchase quote require different limits.
@@ -212,7 +214,7 @@ Track activated creators, published indices, funded buyers, repeat purchases, re
 | Proposed element | Retail V0 treatment |
 |---|---|
 | AI creation and index cards | Core: thematic creation, social identity, public pages, provenance and version history on corbanu.com |
-| Copy trading | Core: one coordinated Felix basket-buy flow from a shared page |
+| Copy trading | Core: one coordinated basket-buy flow from a shared page; prefer direct Ondo, with the existing Felix integration as an alternative |
 | Deterministic-only updates | User chooses a qualified deterministic or clearly labeled hosted index; each published version remains fixed and buyer-approved |
 | Popular indices become perps | Later expansion after oracle, venue, liquidity and legal acceptance |
 | Upload everything to FCC | Qualify FCC for the roles it usefully performs; retail creation is not dependent on universal FCC hosting |
@@ -223,7 +225,7 @@ Track activated creators, published indices, funded buyers, repeat purchases, re
 
 ### Level 1: spot index execution and affiliate P&L
 
-The first financial product is buying the underlying spot basket. A user logs into corbanu.com, connects a wallet, creates or chooses an index and is routed to fills through Felix. Sharing a creator’s index distributes that same executable basket. The platform records the creator beneficiary, index version, accepted quote and resulting venue receipts.
+The first financial product is buying the underlying spot basket. A user logs into corbanu.com, connects a wallet, creates or chooses an index and is routed to spot fills. The preferred route is AIC’s own direct Ondo distribution relationship, negotiated by Hugo to capture the proposed 20bp origination charge. Felix has approached Alex about a partner program and remains a commercial alternative with an existing adapter. Sharing a creator’s index distributes that same executable basket. The platform records the creator beneficiary, index version, accepted quote and resulting venue receipts.
 
 AIC and the creator split the **actual affiliate economics** earned from that activity. The payout ledger in §3 distinguishes gross partner receipts, agreed direct costs, settled profit and each beneficiary’s share. This revenue is neither the buyer’s investment return nor ownership of Corbanu’s general advertising business. The fee/split contract must exist before the app advertises an earned payout.
 
@@ -481,9 +483,13 @@ Variational is a different model. Its Omni Liquidity Provider is the counterpart
 
 Variational’s RFQ design also includes quote acceptance and maker approval before settlement. Compare a binding RFQ spread and available size against an order book’s depth, fees and slippage; headline fees alone are insufficient. [RFQ mechanics](https://docs.variational.io/variational-protocol/key-concepts/trading-via-rfq).
 
-### Felix as competitor and current distribution rail
+### Direct Ondo partnership: Hugo’s commercial deliverable
 
-Felix provides tokenized equity exposure through Ondo and already supplies part of Corbanu’s practical execution path. Alex reports a 20bp origination charge; the reviewed public page did not establish that current rate. Verify the contract fee and an actual eligible firm quote before printing a competitor price comparison.
+**AIC should pursue Ondo directly and capture the proposed 20bp origination economics itself.** Alex reports that Felix has reached out about its partner program, but his preferred structure is to own the distribution relationship and share the resulting index economics between creators and AIC. Felix remains an alternative route and the existing technical integration; it is not a required commercial intermediary.
+
+**Hugo owns this work:** obtain Ondo’s direct distributor/API terms; negotiate whether AIC may set and collect the 20bp charge; establish supported jurisdictions, instruments and settlement/onboarding responsibilities; and secure the attribution, reporting and creator-payout permissions needed for the retail product. The deliverable is an executable commercial agreement and a workable funds/fee flow. Alex and the engineer implement the resulting integration. Compare the net economics and implementation requirements against Felix’s offered partner terms.
+
+Alex’s 20bp figure is the commercial target informed by his account of Felix’s origination fee. The reviewed public page did not independently establish that fee, and direct Ondo access does not automatically confer the same economics. Record the agreed charge, Ondo/provider costs and creator split explicitly. At a 20bp gross charge, $1 million of fee-bearing executed notional produces $2,000 of gross receipts before those costs and payouts; this is illustrative arithmetic, not a volume forecast or signed entitlement.
 
 AIC can compete on transparent coverage, better basket construction, model choice, provenance and implementation quality. It should not promise a larger executable universe merely by listing more research names. The current coverage is determined by actual supported instruments and legal access, not a generic global-equity database.
 
@@ -556,9 +562,9 @@ On **September 15, 2026**, the Senate’s vote on cloture on the motion to proce
 
 The SEC’s August 18 Regulation Crypto Assets release is a **proposal**. Its contemplated treatment of certain crypto-asset investment-contract offerings does not automatically authorize tokenized stocks, pooled investment funds or equity derivatives. Incorporating outside the US does not remove US-facing offering, solicitation or derivatives questions. [SEC proposal announcement](https://www.sec.gov/newsroom/press-releases/2026-76-sec-proposes-new-regulation-crypto-assets), [proposed rule](https://www.sec.gov/files/rules/proposed/2026/33-11434.pdf).
 
-The initial product is **retail creation, social publication, paid API generation, Felix spot execution and creator affiliate payouts**. Hugo’s legal work must address those actual flows, rather than replace them with an invitation-only institutional service. Map where users can browse/create, publish financial promotions, execute supported instruments and receive compensation. Keep these permissions distinct.
+The initial product is **retail creation, social publication, paid API generation, spot execution through the preferred direct Ondo relationship and creator revenue sharing**. Hugo’s legal work must address those actual flows, rather than replace them with an invitation-only institutional service. Map where users can browse/create, publish financial promotions, execute supported instruments and receive compensation. Keep these permissions distinct.
 
-Corbanu should offer a common retail flow with venue-required onboarding and jurisdiction/instrument checks. “Anyone can buy from a share link” is the UX objective, not a claim that Felix can legally serve every jurisdiction. Do not assume US, UK, EU or UAE retail permissions merely because AIC incorporates offshore. Creator revenue sharing and paid promotion need review before payout activation. Formation in Abu Dhabi and global retail distribution are separate questions. Alex implements the resulting access rules; Hugo owns obtaining the required counsel and counterparties.
+Corbanu should offer a common retail flow with venue-required onboarding and jurisdiction/instrument checks. “Anyone can buy from a share link” is the UX objective, not a claim that Ondo, Felix or AIC can legally serve every jurisdiction. Do not assume US, UK, EU or UAE retail permissions merely because AIC incorporates offshore. Creator revenue sharing and paid promotion need review before payout activation. Formation in Abu Dhabi and global retail distribution are separate questions. Alex implements the resulting access rules; Hugo owns obtaining the required counsel and counterparties.
 
 ### Legal lifts by product
 
@@ -629,14 +635,14 @@ Time-vesting shares: proposed four years from signing, one-year cliff, monthly t
 | Alex: API and model delivery | Paid per-index API creation with correct credit/job accounting; fine-tuned release, evaluation and replay evidence under usable license terms |
 | Alex: team and distribution | Engineer hired and delivery/support established; DOOM and creator launch; measurable retail adoption and attributed execution |
 | Hugo: operating foundation | Entity, administration, funding, data/technology permissions and legal coverage for the actual retail business |
-| Hugo: affiliate and commercial rails | Executed venue affiliate terms, creator-payout arrangements and working settlement/accounting; later venue-listing agreements |
+| Hugo: direct Ondo and commercial rails | Executed direct Ondo distributor/API agreement targeting AIC’s own 20bp origination charge, with creator-payout permissions and working settlement/accounting; compare Felix’s partner offer as an alternative; later venue-listing agreements |
 | Hugo: capital and TVL | Financing and durable product assets for the NAVCoin/strategy stages, measured separately from perp volume or marketing clicks |
 
 The ownership percentages above remain an opening proposal. Define objective acceptance and earn-in amounts around these retail, technology, operating and capital contributions before signing. Affiliate receipts, API creation revenue, product TVL and perp volume are different measures; do not substitute one for another or count circular founder funding as customer demand. An independent director or agreed external expert verifies disputed milestones.
 
 ### Operating commitments and governance
 
-Alex owns product direction, engineering hiring, methodology and marketing. Hugo owns administration, legal coordination, capital formation, venue/affiliate agreements and gathering product TVL. Agree a practical in-person schedule around an Abu Dhabi office and a full-time engineer. Post Fiat remains Alex’s main effort and Flare remains Hugo’s main effort. Assign day-to-day support explicitly rather than assuming founder availability.
+Alex owns product direction, engineering hiring, methodology and marketing. Hugo owns administration, legal coordination, capital formation, **the direct Ondo partnership and negotiation of AIC’s proposed 20bp origination economics**, other venue agreements and gathering product TVL. Agree a practical in-person schedule around an Abu Dhabi office and a full-time engineer. Post Fiat remains Alex’s main effort and Flare remains Hugo’s main effort. Assign day-to-day support explicitly rather than assuming founder availability.
 
 Propose a three-person board: Alex, Hugo and an independent appointed jointly within 30 days. Ordinary decisions require two votes within the approved budget. Issuing securities, borrowing above $50,000, selling core IP, entering regulated products or changing the mandate requires both founder directors’ approval while each retains at least 10%. A related-party contract requires the disinterested founder plus the independent director; the benefiting founder abstains. For an unresolved reserved matter, hold the status quo, mediate within 30 days and commission an independent fair-value assessment if separation is requested. No automatic shotgun purchase. If no consensual buyout emerges within 90 days, fund an orderly customer wind-down from the reserve and preserve paid-up licenses for existing obligations. Draft the valuation, customer-protection and insolvency mechanics with counsel before signing.
 
@@ -668,7 +674,7 @@ The sequence follows the revenue ladder. **Levels 1 and 1a are the initial produ
 
 | Stage | Alex / engineering | Hugo / commercial and operations | Evidence for moving forward |
 |---|---|---|---|
-| **Level 1** | Corbanu wallet connection, thematic creator, social profiles, publishing, Felix basket execution, attribution ledger and payout UI | Felix affiliate agreement, creator terms, retail-access permissions, payout operations and data rights | Eligible funded basket fills; receipts reconcile; creator and AIC shares are actually settled |
+| **Level 1** | Corbanu wallet connection, thematic creator, social profiles, publishing, direct Ondo execution integration (existing Felix adapter as alternative), attribution ledger and payout UI | Direct Ondo agreement targeting AIC’s own 20bp origination economics; compare Felix partner terms; creator terms, retail-access permissions, payout operations and data rights | Eligible funded basket fills; receipts reconcile; creator and AIC shares are actually settled |
 | **Level 1a** | Funded API-key account, quoted per-creation charge, durable generation jobs, idempotent billing and outputs | Data/model commercial rights and payment terms | Paid thematic creation settles once; failures/refunds and balances reconcile; cost per generation is measured |
 | **Level 2** | NAVCoin index primitive, spot purchase, reserve/supply controls and wallet experience | Issuer/manager, custody, capital/TVL, valuation and redemption arrangements | One spot NAVCoin can be bought under a defined investor claim; reserves, supply and fees reconcile |
 | **Level 3** | Venue-approved index/oracle feed and operational monitoring | Perp listing, revenue share, stake/deployer and liquidity agreement | Venue acceptance, tested oracle operations and actual trading-fee settlement |
@@ -680,15 +686,15 @@ The **fine-tuned model** has a parallel release track: rights-cleared training m
 
 ### Funding and measurement
 
-Approve an engineering, data, legal, compute, office and payout-operations budget against this retail scope. Price Level 1a per index creation; agree the Level 1 affiliate and creator splits; set the fee schedule for each later product before launch. No enterprise subscription, institutional pilot fee or negotiated minimum license replaces those revenue streams.
+Approve an engineering, data, legal, compute, office and payout-operations budget against this retail scope. Price Level 1a per index creation; negotiate Level 1 direct Ondo origination economics and the creator/AIC split; set the fee schedule for each later product before launch. No enterprise subscription, institutional pilot fee or negotiated minimum license replaces those revenue streams.
 
 Hugo leads arranging operating capital and later product TVL. Neither Post Fiat’s treasury nor either founder’s personal guarantee is committed by this document. Separate operating runway from customer assets, HYPE stake, MM inventory and fund reserve capital.
 
-Track each stream separately: Level 1 collected affiliate receipts and creator payouts; Level 1a creation charges and compute cost; Level 2 NAVCoin assets/fees; Level 3 listing/deployer receipts; and each Level 4 series’ product fees, financing and investor NAV. Free model downloads, social impressions and simulated trades do not substitute for revenue.
+Track each stream separately: Level 1 collected origination/distribution receipts, any affiliate receipts and creator payouts; Level 1a creation charges and compute cost; Level 2 NAVCoin assets/fees; Level 3 listing/deployer receipts; and each Level 4 series’ product fees, financing and investor NAV. Free model downloads, social impressions and simulated trades do not substitute for revenue.
 
 ### Product-specific launch conditions
 
-**Level 1/1a:** supported retail access, data rights, a qualified funded Felix path, executed affiliate terms, creator compensation policy, accurate per-creation API billing and auditable receipts. Hosted generation can be executable only when the frozen-output/buyer-approval path is qualified; no false deterministic badge.
+**Level 1/1a:** supported retail access, data rights, a qualified funded execution path, executed direct Ondo distribution/origination terms (or an agreed Felix alternative), creator compensation policy, accurate per-creation API billing and auditable receipts. Hosted generation can be executable only when the frozen-output/buyer-approval path is qualified; no false deterministic badge.
 
 **Level 2:** approved legal claim, custody/administrator, reserve and liability policy, qualified NAV/supply/mint-redemption controls and funded acceptance under explicit authorization.
 
@@ -700,7 +706,7 @@ The launch sequence is governed by working retail execution, real affiliate econ
 
 ## 13. Proposed response to Hugo
 
-> The AI Indexing Company starts as a retail business on corbanu.com. A user connects a wallet, creates or selects a thematic index, links a social account, chooses deterministic or hosted generation, publishes it and lets others buy the basket through Felix. The index’s affiliate P&L is shared between its creator and the indexing company.
+> The AI Indexing Company starts as a retail business on corbanu.com. A user connects a wallet, creates or selects a thematic index, links a social account, chooses deterministic or hosted generation, publishes it and lets others buy the basket on Corbanu. Felix has approached me about its partner program, but I would prefer that we go directly to Ondo and capture the proposed 20bp origination economics ourselves. Negotiating that direct relationship is your job. The index’s resulting distribution P&L is shared between its creator and the indexing company.
 >
 > Level 1 is those spot fills. Level 1a is paid thematic index creation through a funded Corbanu API key. Level 2 is buying one spot NAVCoin instead of every underlying holding. Level 3 is perp listings. Level 4 is auto-rebalanced UltraShort perp indices; 4b is auto-rebalanced YOLO options indices; 4c is leveraged bond indices, including a leveraged datacenter bond index.
 >
@@ -708,7 +714,7 @@ The launch sequence is governed by working retail execution, real affiliate econ
 >
 > I lead product, hire the engineer and do the marketing. You lead administration, counterparties, capital and gathering TVL. Post Fiat supplies agreed NAVCoin technology and Flare supplies qualified TEE capabilities. Post Fiat and Flare remain our main efforts, and Corbanu’s general ad business stays outside the deal.
 >
-> Let’s structure equity and founder earn-in around those contributions, with an in-person operating office. We need the actual affiliate split, API creation price, data rights, technology agreements and product permissions to ship this retail business.
+> Let’s structure equity and founder earn-in around those contributions, with an in-person operating office. We need the direct Ondo terms, actual origination charge and creator split, API creation price, data rights, technology agreements and product permissions to ship this retail business.
 
 ---
 
@@ -752,4 +758,4 @@ A commit identifier does not authenticate an uncommitted artifact: those are lab
 - [NAVCoin Ethereum](https://postfiat.org/blog/navcoin-ethereum/), [collateralization](https://postfiat.org/blog/navcoin-collateralization/), and [counterparty risk](https://postfiat.org/blog/navcoin-counterparty-risk/): reserve technology, product variants and limits.
 - [Replayable prediction-market oracles](https://postfiat.org/blog/prediction-market-replayable-oracles/): related evidence architecture, not an equity-perp oracle certification.
 
-**Evidence still required:** executed Tiingo/transcript permissions; verified Felix fee quote; FCC production support and SLA; current venue listing economics; broker consent for any tokenized reserve vehicle; jurisdiction-specific legal opinions; customer willingness to pay; and live funded execution acceptance. Those are assigned commercial/technical work items, not claims that this research has already resolved them.
+**Evidence still required:** executed Tiingo/transcript permissions; direct Ondo agreement and confirmed origination economics, with Felix’s partner offer as a comparison; FCC production support and SLA; current venue listing economics; broker consent for any tokenized reserve vehicle; jurisdiction-specific legal opinions; customer willingness to pay; and live funded execution acceptance. Those are assigned commercial/technical work items, not claims that this research has already resolved them.
