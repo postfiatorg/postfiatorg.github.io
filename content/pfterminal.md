@@ -1,5 +1,8 @@
 ---
 type: "page"
+build:
+  render: never
+  list: never
 layout: "pfterminal"
 url: "/terminal/"
 title: "PFTerminal — The AI terminal that answers to you"

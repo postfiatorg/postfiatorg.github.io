@@ -1,5 +1,8 @@
 ---
 type: "page"
+build:
+  render: never
+  list: never
 layout: "pfterminal-preview"
 url: "/research/pfterminal-design-preview/"
 title: "PFTerminal benchmark-first design preview"
