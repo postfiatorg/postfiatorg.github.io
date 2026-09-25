@@ -19,6 +19,8 @@ tags:
   - XRPL
 ---
 
+{{< post-video src="/video/cobalt-who-writes-the-list.mp4" poster="/video/cobalt-who-writes-the-list.jpg" title="Who Writes the List? Cobalt in three minutes, presented by Soojin Lee, Post Fiat's AI presenter" duration="2:50" >}}Since this post, Cobalt has been active on Post Fiat's controlled devnet from height 916; see [Cobalt: Further Evaluation](/blog/cobalt-further-evaluation/).{{< /post-video >}}
+
 ## In One Page
 
 Post Fiat has implemented **Cobalt** — the asynchronous BFT governance protocol Ripple published in 2018 and never deployed — end to end on our devnet, and published the evidence bundle so the question of whether to adopt it can be argued from artifacts rather than a whitepaper section.

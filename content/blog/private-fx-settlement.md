@@ -20,6 +20,8 @@ tags:
   - Batch Auctions
 ---
 
+{{< post-video src="/video/nobody-pays-first.mp4" poster="/video/nobody-pays-first.jpg" title="Nobody Pays First: this proposal as a three-minute game run, narrated by Soojin Lee, Post Fiat's AI presenter" duration="3:08" >}}It ends on the live pfUSDC–pNOK swap documented in [A Controlled Private FX Swap](/private-fx-executed-pnok/).{{< /post-video >}}
+
 ## Two payments, an afternoon apart
 
 Late in the afternoon of 26 June 1974, the German banking supervisor withdrew the licence of Bankhaus Herstatt, a mid-sized private bank in Cologne, and ordered it into liquidation. It was mid-morning in New York. Herstatt's foreign-exchange counterparties had paid Deutschmarks into Frankfurt hours earlier and were waiting on the dollars owed against them, due in New York that afternoon. The marks were trapped in the estate. The dollars never came. Banks that watched it happen began holding their own payments until they had seen the other side's arrive, and for a few weeks the plumbing of international finance ran backwards: everyone waiting, no one paying first.
