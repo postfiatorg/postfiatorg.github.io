@@ -96,7 +96,7 @@ tags:
 
 In 2017 crypto's two largest networks were a payment system that cleared about seven transactions a second and a smart-contract chain used mostly to sell tokens. In 2026, dollar stablecoins move trillions of dollars a month. The depository that settles American equities runs a tokenization service on a blockchain. A decentralized exchange lists perpetual futures on the S&P 500. The US Treasury holds a Strategic Bitcoin Reserve.
 
-It is written for a technical reader who knows distributed systems and data infrastructure but has watched crypto only from the outside. Each year has five parts: what was **built**, what was **decided** (law, courts, regulators, politics), a **diagram**, the **status** of those technologies as of September 2026, and **reading**. Coverage follows market value and design significance: a development gets space if it moved a top-50 asset, created a new category, or changed the law, so a few mid-cap networks (Zcash, NEAR, Bittensor, World) get room because they are the clearest examples of a technology. The publisher, Post Fiat Foundation, runs a network in the XRP family; see the disclosure at the end. Topics that span several years are explained once, in the year they mattered most, and the explanation carries forward to today.
+This primer is written for a technical reader who knows distributed systems and data infrastructure but has watched crypto only from the outside. Each year has five parts: what was **built**, what was **decided** (law, courts, regulators, politics), a **diagram**, the **status** of those technologies as of September 2026, and **reading**. Coverage follows market value and design significance: a development gets space if it moved a top-50 asset, created a new category, or changed the law, so a few mid-cap networks (Zcash, NEAR, Bittensor, World) get room because they are the clearest examples of a technology. The publisher, Post Fiat Foundation, runs a network in the XRP family; see the disclosure at the end. Topics that span several years are explained once, in the year they mattered most, and the explanation carries forward to today.
 
 ### The map
 
@@ -110,7 +110,7 @@ The year-by-year sections below follow technology and law. This section follows 
 
 Three facts dominate the picture.
 
-1. **Three assets are most of the market.** Bitcoin ($1.69 trillion), ether ($328 billion) and stablecoins ($285 billion) make up 80% of all crypto value.
+1. **Three assets are most of the market.** Bitcoin ($1.69 trillion), ether ($328 billion) and stablecoins ($285 billion in total) make up 80% of all crypto value.
 2. **Size and liquidity diverge.** XRP is worth $95 billion and trades $3.7 billion a day. Bittensor's TAO is worth $3.6 billion and trades $0.28 billion. TAO has the better growth story (16x in three years against XRP's 3.5x), and XRP has 13 times the daily liquidity. Canton's CC is worth $4.9 billion and trades $24 million a day, which makes it large on paper and thin in practice.
 3. **Stablecoins are the medium of trade.** USDT trades $71 billion a day, more than twice bitcoin's volume, because most crypto trades are priced against a dollar token.
 
@@ -155,7 +155,7 @@ About nine of every ten dollars traded in crypto are derivatives, mostly perpetu
 
 **Oracles.** Oracle tokens are worth $11.6 billion, and LINK is 93% of that. Chainlink secures most of the value that depends on outside data (see [2026 (II)](#2026-ii-oracles-and-prediction-markets-pricing-the-outside-world)), yet LINK trades 73% below its 2021 high.
 
-**Prediction markets.** The largest venues are private companies. Kalshi was valued at [$22 billion in May](https://www.legalsportsreport.com/275374/polymarket-valuation-hits-21b-on-new-1b-funding-round/) and has sought up to [$40 billion](https://www.coindesk.com/business/2026/06/24/kalshi-targets-a-massive-usd40-billion-valuation-widening-lead-over-rival-polymarket). Polymarket raised [$1 billion at $21 billion](https://www.bloomberg.com/news/articles/2026-08-31/polymarket-funding-round-led-by-1789-values-firm-at-21-billion) in September, and ICE owns about 22% of it. Together they traded [$45 billion of contracts in August](https://www.theblock.co/news/business/2026-09-02-kalshi-polymarkets-volume-falls-august-413309). At about $43 billion combined, the category would rank sixth among the sectors above, and none of it is in a token.
+**Prediction markets.** The largest venues are private companies. Kalshi was valued at [$22 billion in May](https://finance.yahoo.com/markets/stocks/articles/kalshi-raises-1b-22b-valuation-131717311.html) and has sought up to [$40 billion](https://www.coindesk.com/business/2026/06/24/kalshi-targets-a-massive-usd40-billion-valuation-widening-lead-over-rival-polymarket). Polymarket raised [$1 billion at $21 billion](https://www.bloomberg.com/news/articles/2026-08-31/polymarket-funding-round-led-by-1789-values-firm-at-21-billion) in September, and ICE owns about 22% of it. Together they traded [$45 billion of contracts in August](https://www.theblock.co/news/business/2026-09-02-kalshi-polymarkets-volume-falls-august-413309). At about $43 billion combined, the category would rank sixth among the sectors above, and none of it is in a token.
 
 **Stablecoins.** Stablecoins total $285 billion: USDT $184 billion and USDC $74 billion. The gap between their issuers is the widest valuation spread in the industry.
 
@@ -226,7 +226,7 @@ Bitcoin had its constitutional crisis the same year. Miners and large companies 
 <circle cx="430" cy="88" r="5" fill="#f5a524"/><text x="395" y="112" font-size="12.5">BSV split · 2018</text>
 </svg></div><div class="pfp-cap">Economic nodes enforced SegWit; the big-block faction left as Bitcoin Cash.</div></div>
 
-**Status.** Most Bitcoin transactions now use SegWit or Taproot outputs. Bitcoin Cash is worth $6.1 billion against bitcoin's $1.68 trillion.
+**Status.** Most Bitcoin transactions now use SegWit or Taproot outputs. Bitcoin Cash is worth $6.2 billion against bitcoin's $1.69 trillion.
 
 **Reading.** [SEC, *Report of Investigation: The DAO* (2017)](https://www.sec.gov/litigation/investreport/34-81207.pdf). [BIP 141, *Segregated Witness*](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki). Jonathan Bier, *The Blocksize War* (2021).
 
@@ -456,7 +456,7 @@ A market for block building grew around the protocol. With MEV-Boost, specialize
 
 **Solana and Hyperliquid.**
 - **Pump.fun** (January) let anyone launch a token on a bonding curve in seconds. The resulting memecoin boom pushed Solana's DEX volume past Ethereum's for long stretches.
-- **Hyperliquid**, a perpetual futures exchange on its own chain, airdropped about 31% of its HYPE supply to users in November, with no venture allocation. HYPE is now worth $21.5 billion.
+- **Hyperliquid**, a perpetual futures exchange on its own chain, airdropped about 31% of its HYPE supply to users in November, with no venture allocation. HYPE is now worth $22.3 billion.
 
 **Avalanche9000** (December) turned Avalanche's "subnets" into sovereign L1s. They pay a continuous fee (about 1.33 AVAX a month per validator) instead of posting 2,000 AVAX of stake, which cut launch cost by roughly 99%. Cardano's Chang hard fork (September) moved it to on-chain governance.
 
@@ -471,7 +471,7 @@ A market for block building grew around the protocol. With MEV-Boost, specialize
 **Status.**
 - **ETFs** hold a large share of all bitcoin and are now a core channel for institutional ownership. Staking inside US ETFs arrived in late 2025.
 - **USDe** grew to about $14 billion, then shrank to $4.9 billion after the October 2025 crash (see below).
-- **Avalanche's** L1 model has drawn institutional deployments: fund tokenization on Spruce with T. Rowe Price and WisdomTree, and Japan's Progmat moving about $2 billion of assets from Corda. AVAX itself trades at $4.8 billion, far below its peak.
+- **Avalanche's** L1 model has drawn institutional deployments: fund tokenization on Spruce with T. Rowe Price and WisdomTree, and Japan's Progmat moving about $2 billion of assets from Corda. AVAX itself trades at $4.9 billion, far below its peak.
 
 **Reading.** [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844). Babylon, *Bitcoin Staking* litepaper. [Robin Linus, *BitVM* (2023)](https://bitvm.org). Ethena documentation. SEC, spot bitcoin ETP approval order (Jan 2024).
 
@@ -521,7 +521,7 @@ A market for block building grew around the protocol. With MEV-Boost, specialize
 - **Criticism.** In March 2025, during the JELLY incident, the validator set delisted a manipulated market and settled it at a chosen price. That exposed how much discretion a small validator set holds.
 - **HIP-3** (13 October 2025) lets anyone who stakes 500,000 HYPE deploy their own perpetual market. Trade.xyz used it to list stock and index perps: single US stocks, the XYZ100 index and, under a license signed in March 2026, the S&P 500. It holds more than 90% of HIP-3 open interest.
 - **HIP-4** (May 2026) added outcome contracts.
-- **Scale.** Hyperliquid runs roughly $170–245 billion of perp volume a month with about $9 billion of open interest.
+- **Scale.** Hyperliquid traded about $185 billion of perps in the 30 days to 20 August 2026 and holds about $12 billion of open interest.
 
 **Lighter** made the opposite design choice.
 - **Design.** It is an Ethereum ZK rollup specialized for trading. Order matching and liquidations run inside circuits, so every fill carries a validity proof. Retail trading carries zero fees.
@@ -620,7 +620,7 @@ The agencies moved without it:
 
 **Built.**
 - **DTCC.** DTCC received SEC no-action relief in December 2025. On 15 July 2026, [more than 30 firms took part](https://www.dtcc.com/press-releases/2026/dtcc-turns-tokenization-into-reality) in live trades of DTC-custodied stocks, ETFs and Treasuries, settled on DTCC's private Besu network and on **Canton**. The full DTCC Tokenization Service is scheduled for October.
-- **Canton**, built by Digital Asset, is a network of permissioned participants. It gives *sub-transaction privacy*: each party sees only the parts of a transaction it is party to. A "Global Synchronizer" orders transactions across institutions. Its token, CC, is worth $5 billion.
+- **Canton**, built by Digital Asset, is a network of permissioned participants. It gives *sub-transaction privacy*: each party sees only the parts of a transaction it is party to. A "Global Synchronizer" orders transactions across institutions. Its token, CC, is worth $4.9 billion.
 - **Robinhood Chain** mainnet launched on 1 July.
 - **Exchange stakes.** ICE invested in OKX at a $25 billion valuation, and Nasdaq put $100 million into Kraken.
 - **Scale.** Tokenized real-world assets total about $46 billion.
@@ -683,13 +683,13 @@ On 29 May 2026, [Shielded Labs](https://shieldedlabs.net/ironwood/) researcher T
 2. The NU6.2 hard fork (3 June) corrected the circuit and restored the pool.
 3. **Ironwood** activated with NU6.3 on 28 July at block 3,428,143. It is a new pool that reuses the patched Orchard design with fresh note trees and nullifier sets, formal verification and quantum-recoverable notes. Orchard became withdrawal-only.
 
-The **turnstile** limits the damage. Zcash tracks every pool's total balance publicly, and no pool can pay out more than went into it. The turnstile cannot prove that no counterfeit was ever minted inside Orchard, but it traps any that was. Fake ZEC would compete with real ZEC for Orchard's capped balance, and the last holders to leave would bear the loss, which is why the migration was pushed hard. Developers found no evidence of exploitation. By 10 September, 88% of Orchard's ZEC had moved to Ironwood.
+The **turnstile** limits the damage. Zcash tracks every pool's total balance publicly, and no pool can pay out more than went into it. The turnstile cannot prove that no counterfeit was ever minted inside Orchard; it caps what can leave. Fake ZEC would compete with real ZEC for Orchard's capped balance, and the last holders to leave would bear the loss, which is why the migration was pushed hard. Developers found no evidence of exploitation. By 10 September, 88% of Orchard's ZEC had moved to Ironwood.
 
 **Status.**
 - About 4.9 million ZEC, 29% of supply, is shielded.
 - The **NU7** coinholder vote [closed on 14 September](https://crypto.news/zcash-holders-back-25-second-blocks-in-nu7-vote/). Only Ironwood balances counted, and ballots were encrypted. About 2.4 million of 3.6 million eligible ZEC voted: 99.9% for 25-second blocks (from 75), 98.9% for keeping bitcoin-style halvings. Features unfinished by 30 September drop out. No activation height is set.
 - The legacy zcashd node has been retired in favor of the Zebra-based stack.
-- ZEC fell by about half after the disclosure, then recovered. At $24.2 billion it is the ninth-largest crypto asset.
+- ZEC fell by about half after the disclosure, then recovered. At $24.5 billion it is the ninth-largest crypto asset.
 - **Monero** ($10.2 billion) is private by default using ring signatures. It is preparing a major upgrade (FCMP++) that enlarges each transaction's anonymity set to the whole chain. In August 2025 it survived a hashrate-majority stunt by the Qubic project that reorganized six blocks.
 
 **NEAR Intents and TEEs.**
@@ -706,7 +706,7 @@ The trade-off is explicit. A TEE is fast and general-purpose, but the user trust
 
 Developer liability is still unsettled. The Storm retrial is pending, and CLARITY's §604 protection stalled with the bill.
 
-<div class="pfp-fig"><div class="pfp-title">Zcash turnstile: counterfeit stays trapped in its pool</div><div style="display:flex;justify-content:center"><div class="pfp-node "><b>Transparent ZEC</b><small>public balances</small></div></div><div class="pfp-down">↕ &nbsp;&nbsp; ↕ &nbsp;&nbsp; ↕</div><div class="pfp-grid3"><div class="pfp-node "><b>Sapling</b><small>2018 · balance tracked publicly</small></div><div class="pfp-node pfp-a"><b>Orchard</b><small>2022 · withdraw-only since July 2026</small></div><div class="pfp-node pfp-g"><b>Ironwood</b><small>2026 · active pool, formally verified</small></div></div><div class="pfp-box pfp-b" style="margin-top:.6rem;text-align:center"><b style="margin:0">Rule: withdrawals from a pool ≤ deposits into it</b></div><div class="pfp-cap">The turnstile cannot prove no fake ZEC was minted inside Orchard, but any that was cannot leave the pool.</div></div>
+<div class="pfp-fig"><div class="pfp-title">Zcash turnstile: no pool pays out more than it took in</div><div style="display:flex;justify-content:center"><div class="pfp-node "><b>Transparent ZEC</b><small>public balances</small></div></div><div class="pfp-down">↕ &nbsp;&nbsp; ↕ &nbsp;&nbsp; ↕</div><div class="pfp-grid3"><div class="pfp-node "><b>Sapling</b><small>2018 · balance tracked publicly</small></div><div class="pfp-node pfp-a"><b>Orchard</b><small>2022 · withdraw-only since July 2026</small></div><div class="pfp-node pfp-g"><b>Ironwood</b><small>2026 · active pool, formally verified</small></div></div><div class="pfp-box pfp-b" style="margin-top:.6rem;text-align:center"><b style="margin:0">Rule: withdrawals from a pool ≤ deposits into it</b></div><div class="pfp-cap">Fake ZEC minted inside Orchard could leave only by displacing real ZEC there, so the loss stays with Orchard holders and total supply cannot inflate.</div></div>
 
 <div class="pfp-fig"><div class="pfp-title">NEAR Confidential Intents</div><div class="pfp-row pfp-flow"><div class="pfp-node pfp-b"><b>User signs an intent</b><small>“10 ZEC for ≤ 5,000 USDC”</small></div><span class="pfp-arr">→</span><div class="pfp-node pfp-p"><b>Private shard</b><small>permissioned validators; solvers quote; best fill settles; state hidden</small></div><span class="pfp-arr">→</span><div class="pfp-node pfp-g"><b>Native BTC / ETH / ZEC</b><small>via Chain Signatures (MPC) + TEE bridge</small></div></div><div class="pfp-note" style="margin-top:.55rem">Trust: chip vendor + attestation + operator set · no client-side zero-knowledge proof</div></div>
 
