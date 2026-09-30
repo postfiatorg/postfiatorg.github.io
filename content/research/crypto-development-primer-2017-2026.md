@@ -14,27 +14,72 @@ tags:
   - Regulation
 ---
 
+<style>
+.pfp-fig{margin:1.7rem 0 2.1rem;padding:1.15rem 1.15rem .95rem;border:1px solid var(--border);border-radius:14px;background:var(--entry);font-size:.86rem;line-height:1.38;color:var(--primary)}
+.pfp-title{font-weight:700;font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--secondary);margin:0 0 .85rem}
+.pfp-sub{font-weight:700;font-size:.8rem;margin:1rem 0 .5rem;color:var(--primary)}
+.pfp-cap{font-size:.76rem;color:var(--secondary);margin-top:.8rem}
+.pfp-row{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+.pfp-node{padding:.45rem .7rem;border-radius:9px;border:1px solid var(--border);background:var(--theme);min-width:0}
+.pfp-node b{display:block;font-size:.83rem;line-height:1.25}
+.pfp-node small{display:block;color:var(--secondary);font-size:.73rem;line-height:1.3;margin-top:.1rem}
+.pfp-arr{color:var(--secondary);font-size:1rem;padding:0 .1rem;flex:0 0 auto}
+.pfp-flow{flex-wrap:nowrap;align-items:stretch}
+.pfp-flow>.pfp-node{flex:1 1 0}
+.pfp-flow>.pfp-arr{align-self:center}
+.pfp-api{font-size:.74rem;color:var(--secondary);flex:0 0 auto;align-self:center}
+.pfp-down{text-align:center;color:var(--secondary);font-size:1rem;line-height:1;margin:.35rem 0}
+.pfp-grid2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.pfp-grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem}
+.pfp-grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+@media (max-width:640px){.pfp-flow{flex-direction:column}.pfp-flow>.pfp-arr{transform:rotate(90deg);text-align:center}.pfp-grid2,.pfp-grid3{grid-template-columns:1fr}.pfp-grid4{grid-template-columns:1fr 1fr}.pfp-layer{grid-template-columns:1fr!important}.pfp-nowrap{flex-wrap:wrap!important}}
+.pfp-chip{display:inline-block;padding:.16rem .55rem;border-radius:99px;font-size:.74rem;margin:.12rem .08rem;border:1px solid var(--border);background:var(--theme);white-space:nowrap}
+.pfp-layer{display:grid;grid-template-columns:6.6rem 1fr;gap:.6rem;align-items:center;padding:.5rem 0;border-top:1px dashed var(--border)}
+.pfp-layer:first-of-type{border-top:0}
+.pfp-lab{font-weight:700;font-size:.7rem;letter-spacing:.07em;text-transform:uppercase}
+.pfp-g{border-color:rgba(35,197,142,.55)!important;background:rgba(35,197,142,.11)!important}
+.pfp-b{border-color:rgba(71,148,255,.55)!important;background:rgba(71,148,255,.11)!important}
+.pfp-a{border-color:rgba(245,165,36,.6)!important;background:rgba(245,165,36,.12)!important}
+.pfp-r{border-color:rgba(239,93,93,.6)!important;background:rgba(239,93,93,.12)!important}
+.pfp-p{border-color:rgba(163,124,240,.6)!important;background:rgba(163,124,240,.12)!important}
+.pfp-tg{color:#23c58e}.pfp-tb{color:#4794ff}.pfp-ta{color:#f5a524}.pfp-tr{color:#ef5d5d}.pfp-tp{color:#a37cf0}.pfp-ts{color:var(--secondary)}
+.pfp-dash{border-style:dashed!important}
+.pfp-box{border:1px solid var(--border);border-radius:11px;padding:.7rem .8rem;background:var(--theme)}
+.pfp-box>b{display:block;margin-bottom:.45rem}
+.pfp-box .pfp-node{background:var(--entry)}
+.pfp-tl{position:relative;margin-left:.4rem;padding-left:1.1rem;border-left:2px solid rgba(127,127,127,.35)}
+.pfp-tli{position:relative;display:grid;grid-template-columns:2.9rem 1fr;gap:.4rem;align-items:baseline;padding:.3rem 0}
+.pfp-tli .pfp-chip{margin-left:.35rem;white-space:normal}
+.pfp-tli:before{content:"";position:absolute;left:-1.5rem;top:.66rem;width:.62rem;height:.62rem;border-radius:50%;background:var(--secondary)}
+.pfp-tli.pfp-hot:before{background:#23c58e}
+.pfp-yr{font-weight:700;font-variant-numeric:tabular-nums;min-width:2.6rem}
+.pfp-step{display:grid;grid-template-columns:1.6rem 1fr;gap:.5rem;align-items:start;padding:.3rem 0}
+.pfp-num{width:1.45rem;height:1.45rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;background:rgba(71,148,255,.18);color:#4794ff}
+.pfp-seg{display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.pfp-seg>div{padding:.4rem .55rem;font-size:.76rem;text-align:center;border-right:1px solid var(--border)}
+.pfp-seg>div:last-child{border-right:0}
+.pfp-bar{display:grid;grid-template-columns:5.6rem 1fr 4.4rem;gap:.55rem;align-items:center;padding:.3rem 0}
+.pfp-track{height:.95rem;border-radius:99px;background:var(--theme);border:1px solid var(--border);overflow:hidden}
+.pfp-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#4794ff,#23c58e)}
+.pfp-val{font-variant-numeric:tabular-nums;text-align:right;font-weight:700}
+.pfp-link{flex:1;min-width:4.5rem;text-align:center;font-size:.72rem;color:var(--secondary);border-bottom:2px solid rgba(245,165,36,.75);padding-bottom:.15rem;margin:0 .15rem}
+.pfp-note{font-size:.76rem;color:var(--secondary)}
+.pfp-svg{width:100%;height:auto;display:block}
+.pfp-scroll{overflow-x:auto}
+.pfp-scroll .pfp-svg{min-width:540px}
+.pfp-svg text{fill:var(--primary);font-family:inherit}
+.pfp-svg .m{fill:var(--secondary)}
+.pfp-svg .ln{stroke:var(--secondary);fill:none}
+.pfp-svg .bx{fill:var(--theme);stroke:var(--border)}
+</style>
+
 In 2017 crypto's two largest networks were a payment system that cleared about seven transactions a second and a smart-contract chain used mostly to sell tokens. In 2026, dollar stablecoins move trillions of dollars a month. The depository that settles American equities runs a tokenization service on a blockchain. A decentralized exchange lists perpetual futures on the S&P 500. The US Treasury holds a Strategic Bitcoin Reserve.
 
 It is written for a technical reader who knows distributed systems and data infrastructure but has watched crypto only from the outside. Each year has five parts: what was **built**, what was **decided** (law, courts, regulators, politics), a **diagram**, the **status** of those technologies as of September 2026, and **reading**. Coverage follows market value and design significance: a development gets space if it moved a top-50 asset, created a new category, or changed the law, so a few mid-cap networks (Zcash, NEAR, Bittensor, World) get room because they are the clearest examples of a technology. The publisher, Post Fiat Foundation, runs a network in the XRP family; see the disclosure at the end. Topics that span several years are explained once, in the year they mattered most, and the explanation carries forward to today.
 
 ### The map
 
-```
-                 WHAT GOT BUILT, 2017 -> 2026
-
- POLITICS   DAO Report . Libra backlash . Tornado sanctions . ETFs
-            . MiCA . GENIUS Act . SEC-CFTC split . CLARITY stall
- ------------------------------------------------------------------
- MARKETS    ICOs -> AMMs/DeFi -> perp DEXs -> tokenized stocks
- MONEY      Tether -> USDC -> Terra (failed) -> regulated dollars
- PRIVACY    Sapling -> Orchard -> Ironwood . mixers . TEEs
- PROOFS     SNARKs -> rollups -> zkVMs -> real-time proving
- SETTLEMENT Bitcoin (PoW) . Ethereum (PoS) . Solana . Avalanche
-            . BNB . XRPL . Tron . Hyperliquid . NEAR . Canton
- SUPPORT    oracles . storage (Arweave, Filecoin) . identity
-            (World) . AI markets (Bittensor) . restaking
-```
+<div class="pfp-fig"><div class="pfp-title">The map: what got built, 2017 → 2026</div><div class="pfp-layer"><div class="pfp-lab pfp-tp">Politics</div><div><span class="pfp-chip pfp-p">DAO Report</span><span class="pfp-chip pfp-p">Libra backlash</span><span class="pfp-chip pfp-p">Tornado sanctions</span><span class="pfp-chip pfp-p">Spot ETFs</span><span class="pfp-chip pfp-p">MiCA</span><span class="pfp-chip pfp-p">GENIUS Act</span><span class="pfp-chip pfp-p">SEC–CFTC split</span><span class="pfp-chip pfp-p">CLARITY stall</span></div></div><div class="pfp-layer"><div class="pfp-lab pfp-ta">Markets</div><div><span class="pfp-chip pfp-a">ICOs</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-a">AMMs / DeFi</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-a">Perp DEXs</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-a">Tokenized stocks</span></div></div><div class="pfp-layer"><div class="pfp-lab pfp-tg">Money</div><div><span class="pfp-chip pfp-g">Tether</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-g">USDC</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-g">Terra (failed)</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-g">Regulated dollars</span></div></div><div class="pfp-layer"><div class="pfp-lab pfp-tb">Privacy</div><div><span class="pfp-chip pfp-b">Sapling</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-b">Orchard</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-b">Ironwood</span> <span class="pfp-chip pfp-b">Mixers</span><span class="pfp-chip pfp-b">TEEs</span></div></div><div class="pfp-layer"><div class="pfp-lab pfp-tb">Proofs</div><div><span class="pfp-chip pfp-b">SNARKs</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-b">Rollups</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-b">zkVMs</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-b">Real-time proving</span></div></div><div class="pfp-layer"><div class="pfp-lab pfp-ts">Settlement</div><div><span class="pfp-chip ">Bitcoin (PoW)</span><span class="pfp-chip ">Ethereum (PoS)</span><span class="pfp-chip ">Solana</span><span class="pfp-chip ">Avalanche</span><span class="pfp-chip ">BNB</span><span class="pfp-chip ">XRPL</span><span class="pfp-chip ">Tron</span><span class="pfp-chip ">Hyperliquid</span><span class="pfp-chip ">NEAR</span><span class="pfp-chip ">Canton</span></div></div><div class="pfp-layer"><div class="pfp-lab pfp-ts">Support</div><div><span class="pfp-chip ">Oracles</span><span class="pfp-chip ">Storage (Arweave, Filecoin)</span><span class="pfp-chip ">Identity (World)</span><span class="pfp-chip ">AI markets (Bittensor)</span><span class="pfp-chip ">Restaking</span></div></div><div class="pfp-cap">Each layer depends on the ones below it; politics shaped all of them.</div></div>
 
 ### The scoreboard, 30 September 2026
 
@@ -99,16 +144,19 @@ Bitcoin had its constitutional crisis the same year. Miners and large companies 
 - In September China banned ICOs and closed its domestic exchanges.
 - In December CBOE and CME listed cash-settled bitcoin futures. This was the first regulated US bitcoin derivative, and it later anchored the argument for spot ETFs. Bitcoin peaked near $19,800 that month.
 
-```
- SegWit: signatures leave the transaction ID
-
- legacy   [inputs + SIGNATURES + outputs] -> txid  (third party can alter)
- SegWit   [inputs + outputs]              -> txid  (fixed)
-          [witness: SIGNATURES]  weighted at 1/4 -> more room per block
-
- 1 Aug 2017  BTC --+-- SegWit (24 Aug) --- Taproot (2021) ---> today
-                   +-- BCH (8 MB blocks) --- BSV split (2018)
-```
+<div class="pfp-fig"><div class="pfp-title">SegWit: signatures leave the transaction ID</div><div class="pfp-grid2"><div class="pfp-box"><b>Legacy transaction</b><div class="pfp-seg"><div style="flex:1">inputs</div><div class="pfp-r" style="flex:1.3">signatures</div><div style="flex:1">outputs</div></div><div class="pfp-note" style="margin-top:.45rem">All three are hashed into the txid, so a third party can tweak a signature and change the ID before it confirms.</div></div><div class="pfp-box"><b>SegWit transaction</b><div class="pfp-seg"><div style="flex:1">inputs</div><div style="flex:1">outputs</div></div><div class="pfp-seg pfp-g" style="margin-top:.35rem"><div style="flex:1">witness: signatures · counted at ¼ weight</div></div><div class="pfp-note" style="margin-top:.45rem">The txid is fixed, and the discount leaves more room per block.</div></div></div><div class="pfp-sub">Who followed which rules</div><div class="pfp-scroll"><svg class="pfp-svg" viewBox="0 0 680 120" role="img" aria-label="Bitcoin fork tree">
+<path class="ln" stroke-width="2.5" d="M10 42 H150"/>
+<path stroke="#23c58e" stroke-width="2.5" fill="none" d="M150 42 H660"/>
+<path stroke="#f5a524" stroke-width="2.5" fill="none" d="M150 42 C175 42 175 88 200 88 H540"/>
+<circle cx="150" cy="42" r="6" fill="#4794ff"/>
+<text x="10" y="30" font-size="13" font-weight="700">BTC</text>
+<text x="140" y="68" font-size="12" class="m" text-anchor="end">1 Aug 2017</text>
+<circle cx="265" cy="42" r="5" fill="#23c58e"/><text x="225" y="30" font-size="12.5">SegWit · 24 Aug 2017</text>
+<circle cx="455" cy="42" r="5" fill="#23c58e"/><text x="420" y="30" font-size="12.5">Taproot · 2021</text>
+<text x="612" y="30" font-size="12.5" font-weight="700">today</text>
+<text x="205" y="112" font-size="12.5">BCH · 8 MB blocks</text>
+<circle cx="430" cy="88" r="5" fill="#f5a524"/><text x="395" y="112" font-size="12.5">BSV split · 2018</text>
+</svg></div><div class="pfp-cap">Economic nodes enforced SegWit; the big-block faction left as Bitcoin Cash.</div></div>
 
 **Status.** Most Bitcoin transactions now use SegWit or Taproot outputs. Bitcoin Cash is worth $6.1 billion against bitcoin's $1.68 trillion.
 
@@ -128,18 +176,7 @@ Bitcoin had its constitutional crisis the same year. Miners and large companies 
 - **Hinman speech.** In June, SEC official William Hinman said ether had become "sufficiently decentralized" to fall outside securities law. The speech gave the industry its working theory of how a token stops being a security. It was later a central exhibit in the Ripple case.
 - **ICO settlements.** In November the SEC settled with Airfox and Paragon, which had to register their tokens and offer refunds.
 
-```
- Lightning: pay across a channel graph, touch the chain rarely
-
-   Alice ==[ch 0.5 BTC]== Bob ==[ch 1.0 BTC]== Carol
-
-   Carol picks secret R, gives Alice H = hash(R)
-   Alice -> Bob    HTLC: 0.0101 BTC if R shown before block t+40
-   Bob   -> Carol  HTLC: 0.0100 BTC if R shown before block t+20
-   Carol reveals R -> Bob claims -> Alice's HTLC settles
-
-   on-chain: channel opens, closes, disputes only
-```
+<div class="pfp-fig"><div class="pfp-title">Lightning: pay across a channel graph, touch the chain rarely</div><div class="pfp-row pfp-nowrap" style="flex-wrap:nowrap"><div class="pfp-node pfp-b"><b>Alice</b><small>payer</small></div><div class="pfp-link">channel · 0.5 BTC</div><div class="pfp-node "><b>Bob</b><small>routing node</small></div><div class="pfp-link">channel · 1.0 BTC</div><div class="pfp-node pfp-g"><b>Carol</b><small>payee</small></div></div><div class="pfp-sub">Alice pays Carol 0.01 BTC through Bob</div><div class="pfp-step"><div class="pfp-num">1</div><div>Carol picks a secret R and gives Alice its hash H.</div></div><div class="pfp-step"><div class="pfp-num">2</div><div>Alice → Bob: 0.0101 BTC, claimable with R before block t+40. Bob keeps 0.0001 as a fee.</div></div><div class="pfp-step"><div class="pfp-num">3</div><div>Bob → Carol: 0.0100 BTC, claimable with R before block t+20.</div></div><div class="pfp-step"><div class="pfp-num">4</div><div>Carol reveals R to get paid; Bob uses the same R to collect from Alice.</div></div><div class="pfp-cap">On-chain transactions happen only when channels open, close or are disputed.</div></div>
 
 **Status.** Public Lightning capacity is a few thousand BTC, and most retail use runs through custodial wallets such as Cash App and Strike. For dollar payments, stablecoins won that market. Sapling's proof system still secures older Zcash notes, while newer ones live in Orchard and Ironwood (see 2022 and 2026).
 
@@ -158,17 +195,7 @@ Tether moved onto **Tron**, whose cheap transfers made it the main rail for doll
 - **Tether.** The New York Attorney General sued Bitfinex and Tether in April over an $850 million hole that had been covered with Tether reserves. The case settled in 2021 for $18.5 million plus mandatory reserve disclosures. This began the proof-of-reserves thread, which runs through 2022 and ends in a Big Four audit in 2026.
 - **Telegram.** The SEC won an order halting Telegram's $1.7 billion TON token. The community relaunched the chain without Telegram.
 
-```
- The stablecoin lineage: each shock wrote a rule
-
- 2014 Tether ----> 2018 USDC (attested) ----> 2019 LIBRA (backlash)
-                                                  |
- 2021 President's Working Group: "issuers should be banks"
-                                                  |
- 2022 Terra collapses (algorithmic)   2023 SVB: USDC to $0.87
-                                                  |
- 2024 MiCA (EU) ---> 2025 GENIUS Act (US) ---> 2026 rulemaking
-```
+<div class="pfp-fig"><div class="pfp-title">The stablecoin lineage: each shock wrote a rule</div><div class="pfp-tl"><div class="pfp-tli"><span class="pfp-yr">2014</span><span>Tether launches the first dollar token</span></div><div class="pfp-tli"><span class="pfp-yr">2018</span><span>USDC launches with monthly attestations</span></div><div class="pfp-tli"><span class="pfp-yr">2019</span><span>Libra announced; finance ministers push back<span class="pfp-chip pfp-g">a sovereignty question</span></span></div><div class="pfp-tli"><span class="pfp-yr">2021</span><span>President's Working Group report<span class="pfp-chip pfp-g">issuers should be supervised like banks</span></span></div><div class="pfp-tli"><span class="pfp-yr">2022</span><span>Terra's algorithmic dollar collapses<span class="pfp-chip pfp-g">algorithmic designs barred</span></span></div><div class="pfp-tli"><span class="pfp-yr">2023</span><span>SVB fails; USDC trades at $0.87<span class="pfp-chip pfp-g">reserve quality and custody rules</span></span></div><div class="pfp-tli pfp-hot"><span class="pfp-yr">2024</span><span>MiCA stablecoin rules apply in the EU</span></div><div class="pfp-tli pfp-hot"><span class="pfp-yr">2025</span><span>GENIUS Act signed in the US</span></div><div class="pfp-tli pfp-hot"><span class="pfp-yr">2026</span><span>GENIUS rulemaking; Tether's first full audit</span></div></div></div>
 
 **Status.** Libra's premise, a dollar token used worldwide, came true through Tether, Circle and Tron rather than Facebook.
 
@@ -197,20 +224,16 @@ Tether moved onto **Tron**, whose cheap transfers made it the main rail for doll
 - **Treasuries.** MicroStrategy bought $250 million of bitcoin in August and invented the corporate bitcoin treasury.
 - **Halving.** The May halving cut the bitcoin block reward to 6.25 BTC.
 
-```
- Uniswap v2: a price curve instead of an order book
-
-  y |*                       x * y = k
-    | *                      buy X  -> pool gains Y, loses X
-    |  *                     price  = y / x at the pool's point
-    |    *                   bigger trade -> further along the
-    |       *                                curve -> more slippage
-    |           *  *   *
-    +------------------------ x
-
- Arweave: pay once        fee -> endowment -> miners paid as needed
- Filecoin: rent storage   deal + collateral -> PoRep -> PoSt, ongoing
-```
+<div class="pfp-fig"><div class="pfp-title">Uniswap v2: a price curve instead of an order book</div><div class="pfp-grid2"><div><svg class="pfp-svg" viewBox="0 0 400 250" role="img" aria-label="Constant product curve">
+<path class="ln" stroke-width="1.2" d="M30 12 V215 H385"/>
+<path stroke="#4794ff" stroke-width="3" fill="none" d="M30.0 20.0 L35.5 51.7 L41.0 74.3 L46.5 91.2 L52.0 104.4 L57.5 115.0 L63.0 123.6 L68.5 130.8 L74.0 136.9 L79.5 142.1 L85.0 146.7 L90.5 150.6 L96.0 154.1 L101.5 157.2 L107.0 160.0 L112.5 162.5 L118.0 164.8 L123.5 166.8 L129.0 168.7 L134.5 170.4 L140.0 172.0 L145.5 173.5 L151.0 174.8 L156.5 176.1 L162.0 177.2 L167.5 178.3 L173.0 179.4 L178.5 180.3 L184.0 181.2 L189.5 182.1 L195.0 182.9 L200.5 183.6 L206.0 184.3 L211.5 185.0 L217.0 185.6 L222.5 186.2 L228.0 186.8 L233.5 187.4 L239.0 187.9 L244.5 188.4 L250.0 188.9 L255.5 189.3 L261.0 189.8 L266.5 190.2 L272.0 190.6 L277.5 191.0 L283.0 191.4 L288.5 191.7 L294.0 192.1 L299.5 192.4 L305.0 192.7 L310.5 193.0 L316.0 193.3 L321.5 193.6 L327.0 193.9 L332.5 194.2 L338.0 194.4 L343.5 194.7 L349.0 194.9 L354.5 195.2 L360.0 195.4"/>
+<path stroke="#f5a524" stroke-width="2" stroke-dasharray="4 4" fill="none" d="M57.5 115.0 V162.5 H112.5"/>
+<circle cx="57.5" cy="115.0" r="6" fill="#23c58e"/><circle cx="112.5" cy="162.5" r="6" fill="#f5a524"/>
+<text x="67.5" y="119.0" font-size="12">pool before</text>
+<text x="122.5" y="152.5" font-size="12">after a big trade</text>
+<text x="290" y="190" font-size="14" font-weight="700">x · y = k</text>
+<text x="372" y="234" font-size="12" class="m">x</text><text x="14" y="22" font-size="12" class="m">y</text>
+</svg></div><div style="display:flex;flex-direction:column;gap:.5rem;justify-content:center"><div class="pfp-node "><b>Price = y ÷ x</b><small>the ratio of the pool's two reserves</small></div><div class="pfp-node "><b>Buy X</b><small>the pool gains Y, loses X, and moves along the curve</small></div><div class="pfp-node pfp-a"><b>Bigger trade, more slippage</b><small>the curve bends harder the further you go</small></div></div></div><div class="pfp-sub">Two ways to pay for decentralized storage</div><div class="pfp-grid2"><div class="pfp-box pfp-g"><b>Arweave: pay once</b><span class="pfp-chip pfp-g">Upfront fee</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-g">Endowment</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-g">Miners paid as needed</span></div><div class="pfp-box pfp-b"><b>Filecoin: rent storage</b><span class="pfp-chip pfp-b">Deal + collateral</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-b">Proof of replication</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-b">Proof of spacetime, ongoing</span></div></div></div>
 
 **Status.** AMMs remain the core of on-chain spot trading, and Uniswap (UNI, $5.5 billion) is still the reference design. Solana, BNB Chain and Avalanche all survive, with different results (see 2025–26). Arweave stores about 347 TiB and launched AO, a parallel compute layer, in February 2025. Filecoin launched Onchain Cloud, a paid hot-storage service, in January 2026. Its committed capacity is far larger than the storage users actually pay for.
 
@@ -250,18 +273,7 @@ Taproot also removed the old limit on script size. Two years later that enabled 
 
 Bitcoin peaked at $69,000 in November, with the whole market near $3 trillion.
 
-```
- Rollups: execute elsewhere, settle on Ethereum
-
-   users -> sequencer -> batch of txs
-                            |
-            +---------------+----------------+
-            | data (calldata, later blobs)   | new state root
-            v                                v
-   ETHEREUM L1: stores data, holds bridge, checks correctness by
-     optimistic: 7-day window for anyone to submit fraud proof
-     ZK:         validity proof verified at once
-```
+<div class="pfp-fig"><div class="pfp-title">Rollups: execute elsewhere, settle on Ethereum</div><div class="pfp-row pfp-flow"><div class="pfp-node "><b>Users</b></div><span class="pfp-arr">→</span><div class="pfp-node pfp-b"><b>Sequencer</b><small>orders transactions</small></div><span class="pfp-arr">→</span><div class="pfp-node "><b>Batch</b></div></div><div class="pfp-down">↓</div><div class="pfp-grid2"><div class="pfp-node "><b>Transaction data</b><small>calldata, later blobs</small></div><div class="pfp-node "><b>New state root</b><small>commitment to the result</small></div></div><div class="pfp-down">↓</div><div class="pfp-box pfp-g"><b>Ethereum L1: stores the data, holds the bridge, checks correctness</b><div class="pfp-grid2"><div class="pfp-node pfp-a"><b>Optimistic rollups</b><small>assume valid; anyone can submit a fraud proof within ~7 days</small></div><div class="pfp-node pfp-b"><b>ZK rollups</b><small>validity proof verified on arrival</small></div></div></div></div>
 
 **Status.** Most Ethereum user activity now happens on rollups. Base (Coinbase), Arbitrum and Optimism lead. Most major rollups have reached "stage 1" decentralization, meaning working fraud or validity proofs with a security council able to override them. Taproot adoption is broad, and Taproot is the foundation for most current Bitcoin proposals.
 
@@ -296,24 +308,27 @@ A market for block building grew around the protocol. With MEV-Boost, specialize
 - **Executive order.** In March, Executive Order 14067 ordered a whole-of-government study, including a central bank digital currency (CBDC).
 - **MiCA.** The EU reached political agreement on MiCA in June.
 
-```
- Ethereum proof of stake after the Merge
+<div class="pfp-fig"><div class="pfp-title">Ethereum proof of stake after the Merge</div><div class="pfp-scroll"><svg class="pfp-svg" viewBox="0 0 680 110" role="img" aria-label="Slots and epochs">
+<text x="10" y="20" font-size="12.5" font-weight="700">Epoch N</text><text x="342" y="20" font-size="12.5" font-weight="700">Epoch N+1</text>
+<rect x="10" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.95"/><rect x="20" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="30" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="40" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="50" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="60" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="70" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="80" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="90" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.95"/><rect x="100" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="110" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="120" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="130" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="140" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="150" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="160" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="170" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.95"/><rect x="180" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="190" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="200" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="210" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="220" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="230" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="240" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="250" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.95"/><rect x="260" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="270" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="280" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="290" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="300" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="310" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="320" y="30" width="8" height="26" rx="2" fill="#4794ff" opacity="0.55"/><rect x="342" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.95"/><rect x="352" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="362" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="372" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="382" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="392" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="402" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="412" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="422" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.95"/><rect x="432" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="442" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="452" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="462" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="472" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="482" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="492" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="502" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.95"/><rect x="512" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="522" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="532" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="542" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="552" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="562" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="572" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="582" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.95"/><rect x="592" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="602" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="612" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="622" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="632" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="642" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/><rect x="652" y="30" width="8" height="26" rx="2" fill="#23c58e" opacity="0.55"/>
+<path class="ln" stroke-width="1.5" d="M10 68 V76 H668 V68"/>
+<text x="10" y="98" font-size="12" class="m">1 slot = 12 s · 1 epoch = 32 slots = 6.4 min</text>
+<text x="668" y="98" font-size="12" text-anchor="end">finality ≈ 2 epochs (~13 min)</text>
+</svg></div><div class="pfp-sub">Two clients, one node</div><div class="pfp-row pfp-flow"><div class="pfp-node pfp-b"><b>Execution client</b><small>EVM, transactions, state</small></div><span class="pfp-api">⇄ Engine API ⇄</span><div class="pfp-node pfp-g"><b>Consensus client</b><small>validators, attestations, fork choice</small></div></div><div class="pfp-sub">Block building today (MEV-Boost, outside the protocol)</div><div class="pfp-row pfp-flow"><div class="pfp-node "><b>Builders</b><small>assemble blocks and bid</small></div><span class="pfp-arr">→</span><div class="pfp-node pfp-a"><b>Relay</b><small>trusted middleman</small></div><span class="pfp-arr">→</span><div class="pfp-node "><b>Proposer</b><small>picks the highest bid</small></div></div><div class="pfp-cap">Reverting a finalized block would require destroying at least a third of all stake.</div></div>
 
- slot = 12s   epoch = 32 slots (6.4 min)   finality ~ 2 epochs
-
- [execution client] <-- engine API --> [consensus client]
-  EVM, txs, state                        validators, attestations
-          ^                                      |
-          |    builder -> relay -> proposer picks best bid (MEV-Boost)
-
- Proof of reserves: Merkle sum tree
-
-            root: sum = 1,000 BTC   <- published; assets >= 1,000?
-             /                 \
-       sum 600               sum 400
-       /     \               /     \
-    you:50  u2:550        u3:100  u4:300   <- you verify your leaf
-```
+<div class="pfp-fig"><div class="pfp-title">Proof of reserves: a Merkle sum tree</div><div class="pfp-scroll"><svg class="pfp-svg" viewBox="0 0 640 230" role="img" aria-label="Merkle sum tree">
+<path class="ln" stroke-width="1.5" d="M320 54 L170 108 M320 54 L470 108 M170 138 L90 188 M170 138 L250 188 M470 138 L390 188 M470 138 L550 188"/>
+<path stroke="#23c58e" stroke-width="3" fill="none" d="M320 54 L170 108 M170 138 L90 188"/>
+<rect x="205" y="12" width="230" height="42" rx="9" fill="rgba(71,148,255,.16)" stroke="#4794ff"/>
+<text x="320" y="30" font-size="12.5" text-anchor="middle" font-weight="700">root · sum 1,000 BTC</text>
+<text x="320" y="46" font-size="11" text-anchor="middle" class="m">published; on-chain assets ≥ 1,000?</text>
+<rect x="115" y="108" width="110" height="30" rx="8" class="bx"/><text x="170" y="128" font-size="12.5" text-anchor="middle">sum 600</text>
+<rect x="415" y="108" width="110" height="30" rx="8" class="bx"/><text x="470" y="128" font-size="12.5" text-anchor="middle">sum 400</text>
+<rect x="45" y="188" width="90" height="30" rx="8" fill="rgba(35,197,142,.18)" stroke="#23c58e"/><text x="90" y="208" font-size="12.5" text-anchor="middle" font-weight="700">you · 50</text>
+<rect x="205" y="188" width="90" height="30" rx="8" class="bx"/><text x="250" y="208" font-size="12.5" text-anchor="middle">u2 · 550</text>
+<rect x="345" y="188" width="90" height="30" rx="8" class="bx"/><text x="390" y="208" font-size="12.5" text-anchor="middle">u3 · 100</text>
+<rect x="505" y="188" width="90" height="30" rx="8" class="bx"/><text x="550" y="208" font-size="12.5" text-anchor="middle">u4 · 300</text>
+</svg></div><div class="pfp-cap">You check the green path from your balance to the published root. The proof cannot show liabilities left out of the tree, or assets borrowed for the snapshot.</div></div>
 
 **Status.** Close to 30% of all ETH is staked. Liquid-staking tokens (Lido's stETH, Coinbase's cbETH) are standard collateral. Terra's failure is written into the GENIUS Act's ban on algorithmic stablecoins. Proof of reserves is now routine at large exchanges, and in 2026 Tether moved beyond it to a full audit.
 
@@ -343,21 +358,9 @@ A market for block building grew around the protocol. With MEV-Boost, specialize
 - **Tornado Cash.** Its developers were indicted in August.
 - **MiCA** became EU law in June.
 
-```
- Restaking: one stake, several promises
+<div class="pfp-fig"><div class="pfp-title">Restaking: one stake, several promises</div><div class="pfp-node pfp-b"><b>ETH stake</b><small>native, or a liquid staking token</small></div><div class="pfp-down">↓</div><div class="pfp-node pfp-p"><b>EigenLayer contracts</b><small>allocate a slice of stake to each service</small></div><div class="pfp-down">↓</div><div class="pfp-node "><b>Operators</b><small>run each service's software</small></div><div class="pfp-down">↓</div><div class="pfp-grid4"><div class="pfp-node pfp-a"><b>EigenDA</b><small>own slashing rule</small></div><div class="pfp-node pfp-a"><b>Oracle</b><small>own slashing rule</small></div><div class="pfp-node pfp-a"><b>Bridge</b><small>own slashing rule</small></div><div class="pfp-node pfp-a"><b>AI coprocessor</b><small>own slashing rule</small></div></div></div>
 
-   ETH stake (native or liquid token)
-         |
-   EigenLayer contracts --- allocate slice of stake per service
-         |
-   operators run -> [EigenDA] [oracle] [bridge] [AI coprocessor]
-                        |        |        |          |
-                  each service defines its own slashing rule
-
- World ID: prove "unique human", reveal nothing else
-   Orb -> iris code -> secret shares across parties -> unique? yes
-   phone holds World ID -> ZK proof + per-app nullifier -> app
-```
+<div class="pfp-fig"><div class="pfp-title">World ID: prove “unique human,” reveal nothing else</div><div class="pfp-sub" style="margin-top:0">Enrollment</div><div class="pfp-row pfp-flow"><div class="pfp-node "><b>Orb</b><small>iris scan</small></div><span class="pfp-arr">→</span><div class="pfp-node "><b>Iris code</b></div><span class="pfp-arr">→</span><div class="pfp-node "><b>Secret shares</b><small>split across parties</small></div><span class="pfp-arr">→</span><div class="pfp-node pfp-g"><b>Unique?</b><small>checked jointly; no party sees the code</small></div></div><div class="pfp-sub">Use</div><div class="pfp-row pfp-flow"><div class="pfp-node pfp-b"><b>Phone holds World ID</b></div><span class="pfp-arr">→</span><div class="pfp-node "><b>ZK proof + per-app nullifier</b></div><span class="pfp-arr">→</span><div class="pfp-node "><b>App</b><small>learns only: verified, unique, first time here</small></div></div></div>
 
 **Status.**
 - **Restaking.** EigenLayer added slashing in April 2025 and "redistributable" slashing in July 2025, and rebranded as EigenCloud around verifiable compute and AI. Restaked value peaked around $15–20 billion and sits near $5 billion. Competitor Symbiotic holds roughly $1–1.5 billion. No major slashing event has occurred, so the model's central promise remains largely untested.
@@ -395,17 +398,7 @@ A market for block building grew around the protocol. With MEV-Boost, specialize
 - **MiCA.** Stablecoin rules took effect in June, and the full regime in December. Tether chose to stay unauthorized, and EU exchanges delisted USDT for European users in early 2025.
 - **Privacy prosecutions.** The Samourai Wallet founders were arrested in April and later sentenced to prison. The Fifth Circuit ruled for Tornado Cash users in November.
 
-```
- EIP-4844: blobs, a cheap and temporary data lane
-
-   rollup batch --> blob (~128 KB), priced in its own fee market
-                      |
-   beacon block ------+-- commitment (KZG) kept forever
-                      +-- blob data kept ~18 days, then pruned
-
-   2024 Dencun: 3 target / 6 max blobs per block
-   2025 Fusaka: PeerDAS -> nodes sample blobs, limits keep rising
-```
+<div class="pfp-fig"><div class="pfp-title">EIP-4844: blobs, a cheap and temporary data lane</div><div class="pfp-row pfp-flow"><div class="pfp-node "><b>Rollup batch</b></div><span class="pfp-arr">→</span><div class="pfp-node pfp-b"><b>Blob</b><small>~128 KB, priced in its own fee market</small></div><span class="pfp-arr">→</span><div class="pfp-node "><b>Beacon block</b></div></div><div class="pfp-down">↓</div><div class="pfp-grid2"><div class="pfp-node pfp-g"><b>KZG commitment</b><small>kept forever</small></div><div class="pfp-node pfp-a"><b>Blob data</b><small>pruned after ~18 days</small></div></div><div class="pfp-sub">Capacity</div><div class="pfp-tl"><div class="pfp-tli"><span class="pfp-yr">2024</span><span>Dencun: 3 target / 6 max blobs per block</span></div><div class="pfp-tli pfp-hot"><span class="pfp-yr">2025</span><span>Fusaka: PeerDAS, where nodes sample slices instead of downloading every blob; limits keep rising</span></div></div></div>
 
 **Status.**
 - **ETFs** hold a large share of all bitcoin and are now a core channel for institutional ownership. Staking inside US ETFs arrived in late 2025.
@@ -443,20 +436,7 @@ A market for block building grew around the protocol. With MEV-Boost, specialize
 - **Interest.** Issuers cannot pay interest to holders. Whether exchanges and affiliates may pay "rewards" became the fight that stalled the next bill.
 - **Securities status.** Payment stablecoins are neither securities nor commodities.
 
-```
- GENIUS Act: who may issue a US payment stablecoin
-
-             +---------------- permitted issuer ----------------+
-             | bank subsidiary | OCC nonbank | state (<$10B)    |
-             +-----------------+-------------+------------------+
-                             |
-   reserves 1:1: cash . deposits . T-bills <=93d . repo . gov MMF
-   monthly reserve report (accountant-examined, CEO/CFO certified)
-   >$50B -> annual audit     BSA/AML + freeze capability
-   no interest to holders    holders first in insolvency
-   algorithmic "stablecoins" -> barred
-   foreign issuer -> comparable regime + Treasury finding
-```
+<div class="pfp-fig"><div class="pfp-title">GENIUS Act: who may issue a US payment stablecoin</div><div class="pfp-grid3"><div class="pfp-node pfp-b"><b>Bank subsidiary</b><small>an insured bank's stablecoin arm</small></div><div class="pfp-node pfp-b"><b>OCC-licensed nonbank</b><small>federal charter</small></div><div class="pfp-node pfp-b"><b>State-qualified issuer</b><small>under $10B outstanding</small></div></div><div class="pfp-down">↓</div><div class="pfp-grid2"><div class="pfp-node pfp-g"><b>Reserves 1:1</b><small>cash · deposits · T-bills ≤93 days · repo · government money funds</small></div><div class="pfp-node pfp-g"><b>Monthly reserve report</b><small>accountant-examined, CEO/CFO certified</small></div><div class="pfp-node "><b>Over $50B outstanding</b><small>annual audited financial statements</small></div><div class="pfp-node "><b>BSA/AML + freeze capability</b><small>issuers are financial institutions</small></div><div class="pfp-node pfp-a"><b>No interest to holders</b><small>rewards paid by exchanges: the CLARITY fight</small></div><div class="pfp-node "><b>Holders first in insolvency</b><small>priority claim on reserves</small></div><div class="pfp-node pfp-r"><b>Algorithmic stablecoins</b><small>barred as payment stablecoins</small></div><div class="pfp-node pfp-a"><b>Foreign issuers</b><small>comparable regime + Treasury finding</small></div></div><div class="pfp-cap">Effective by 18 January 2027 at the latest; final rules are still pending.</div></div>
 
 **Status.** Rulemaking is late. [The 18 July 2026 deadline for final rules passed](https://crypto.news/the-genius-act-turned-one-by-missing-its-own-deadline/) with ten proposals and no final rules, four of the proposals from Treasury and two from the OCC. The OCC says it will finalize in November 2026. Treasury had yet to issue, as of August, the foreign-regime finding that USDT itself needs to keep serving US businesses. The act takes effect on the earlier of 18 January 2027 or 120 days after final rules. The stablecoin market is about $285–315 billion. USDT has roughly 60–65% of it, but USDC moved more on-chain volume in 2025.
 
@@ -495,24 +475,7 @@ The lessons: oracle design matters more than matching speed, auto-deleveraging i
 
 SOL fell from $228 to about $104 by February 2026.
 
-```
- Two ways to put an exchange on-chain
-
- HYPERLIQUID (own L1)                LIGHTER (Ethereum ZK rollup)
- HyperBFT validators                 sequencer matches orders
-   -> HyperCore: books, margin,        -> circuit proves matching,
-      liquidations as state               liquidations, balances
-   -> HyperEVM: contracts read books   -> proof verified on Ethereum
-   -> HIP-3: staked builders list      -> exit hatch: withdraw via
-      stocks, indexes, anything           L1 if the operator stalls
- trust: validator set                trust: circuits, contracts,
-                                            upgrade keys, Ethereum
-
- Tokenized stock routes
-   real share at broker -> 1:1 token (Ondo, xStocks)   spot, custody
-   broker's own ledger  -> token (Robinhood EU)         spot, platform
-   no share at all      -> perp on price (xyz, Lighter) derivative
-```
+<div class="pfp-fig"><div class="pfp-title">Two ways to put an exchange on-chain</div><div class="pfp-grid2"><div class="pfp-box pfp-g"><b>Hyperliquid · its own L1</b><div class="pfp-node "><b>HyperBFT validators</b></div><div class="pfp-down">↓</div><div class="pfp-node "><b>HyperCore</b><small>order books, margin, liquidations as state</small></div><div class="pfp-down">↓</div><div class="pfp-node "><b>HyperEVM</b><small>contracts read the books</small></div><div class="pfp-down">↓</div><div class="pfp-node "><b>HIP-3</b><small>staked builders list stocks, indexes, anything</small></div><div class="pfp-note" style="margin-top:.55rem">Trust: the validator set</div></div><div class="pfp-box pfp-b"><b>Lighter · Ethereum ZK rollup</b><div class="pfp-node "><b>Sequencer</b><small>matches orders</small></div><div class="pfp-down">↓</div><div class="pfp-node "><b>Circuit</b><small>proves matching, liquidations, balances</small></div><div class="pfp-down">↓</div><div class="pfp-node "><b>Proof verified on Ethereum</b></div><div class="pfp-down">↓</div><div class="pfp-node "><b>Exit hatch</b><small>withdraw via L1 if the operator stalls</small></div><div class="pfp-note" style="margin-top:.55rem">Trust: circuits, contracts, upgrade keys, Ethereum</div></div></div><div class="pfp-sub">Three routes to a tokenized stock</div><div class="pfp-row pfp-flow"><div class="pfp-node "><b>Real share at a broker</b></div><span class="pfp-arr">→</span><div class="pfp-node pfp-g"><b>1:1 token</b><small>Ondo, xStocks · spot, custodial</small></div></div><div style="height:.4rem"></div><div class="pfp-row pfp-flow"><div class="pfp-node "><b>Broker's own ledger</b></div><span class="pfp-arr">→</span><div class="pfp-node pfp-b"><b>Stock token</b><small>Robinhood EU · spot, platform</small></div></div><div style="height:.4rem"></div><div class="pfp-row pfp-flow"><div class="pfp-node "><b>No share at all</b></div><span class="pfp-arr">→</span><div class="pfp-node pfp-a"><b>Perp on the price</b><small>trade.xyz, Lighter · derivative</small></div></div></div>
 
 **Status.** HIP-3 open interest peaked around $3.2 billion in June 2026 and sat near $1.9 billion in late September. Perp DEXs now take a meaningful share of global crypto derivatives. Stock perps trade on weekends while the underlying is closed; that gap is both the product and the risk.
 
@@ -547,20 +510,9 @@ TAO has a 21 million cap and bitcoin-style halvings. The first, in December 2025
 - **Solana.** Firedancer, Jump's independent validator client written from scratch in C, reached mainnet in December 2025. Solana validators voted in September 2025 to adopt **Alpenglow**, which replaces Proof of History and TowerBFT with a new voting protocol (Votor) and targets finality around 150 ms instead of about 12.8 seconds.
 - **NEAR** halved its inflation to 2.5%.
 
-```
- Cost to prove one Ethereum block (Ethproofs)
+<div class="pfp-fig"><div class="pfp-title">Cost to prove one Ethereum block (Ethproofs, log scale)</div><div class="pfp-bar"><span>Jan 2025</span><div class="pfp-track"><div class="pfp-fill" style="width:97%"></div></div><span class="pfp-val">$1.69</span></div><div class="pfp-bar"><span>Dec 2025</span><div class="pfp-track"><div class="pfp-fill" style="width:39%"></div></div><span class="pfp-val">$0.04</span></div><div class="pfp-bar"><span>Sep 2026</span><div class="pfp-track"><div class="pfp-fill" style="width:7%"></div></div><span class="pfp-val"><$0.005</span></div><div class="pfp-sub">Why it fell</div><span class="pfp-chip pfp-b">Small 31/64-bit fields</span><span class="pfp-chip pfp-b">Sumcheck + lookups</span><span class="pfp-chip pfp-b">RISC-V zkVMs</span><span class="pfp-chip pfp-b">GPUs</span><span class="pfp-chip pfp-b">Recursion</span><div class="pfp-cap">Roughly a 99.7% fall in 20 months; real-time proving (under 12 s) arrived in May 2025.</div></div>
 
- Jan 2025  $1.69    ################################################
- Dec 2025  $0.04    #
- Sep 2026 <$0.005   .
- why: small fields + sumcheck/lookups + RISC-V zkVMs + GPUs + recursion
-
- Bittensor subnet loop
-   subnet task -> miners produce -> validators score -> weights
-        ^                                                 |
-   alpha/TAO pool <- stakers route capital   Yuma Consensus -> emissions
-                                          (41 miner / 41 val / 18 owner)
-```
+<div class="pfp-fig"><div class="pfp-title">Bittensor's subnet loop</div><div class="pfp-row pfp-flow"><div class="pfp-node pfp-p"><b>Subnet task</b><small>inference, training, data</small></div><span class="pfp-arr">→</span><div class="pfp-node "><b>Miners</b><small>do the work</small></div><span class="pfp-arr">→</span><div class="pfp-node "><b>Validators</b><small>score miners</small></div><span class="pfp-arr">→</span><div class="pfp-node "><b>Yuma Consensus</b><small>clips outliers, sets weights</small></div><span class="pfp-arr">→</span><div class="pfp-node pfp-g"><b>Emissions</b><small>41% miners · 41% validators · 18% owner</small></div></div><div class="pfp-note" style="margin-top:.55rem">↺ Stakers route TAO into each subnet's alpha pool, which sets how much that subnet earns next.</div></div>
 
 **Status.**
 - **Bittensor.** Subnet revenue from outside customers reached about $43 million in Q1 2026. That is real revenue, though small against a $3.5 billion token. In April 2026 [Covenant AI left](https://www.falconx.io/newsroom/state-of-bittensor-subnet-adoption-trends-network-mechanics-and-covenants-departure). It ran three top subnets, including Templar, which had just trained a 72-billion-parameter model across the open internet. It called the governance "decentralization theatre" and sold about 37,000 TAO on the way out. Bittensor answered in May with "Conviction," which locks subnet owners' emissions.
@@ -605,24 +557,7 @@ The agencies moved without it:
 - **Exchange stakes.** ICE invested in OKX at a $25 billion valuation, and Nasdaq put $100 million into Kraken.
 - **Scale.** Tokenized real-world assets total about $46 billion.
 
-```
- US crypto oversight, September 2026
-
-                 CONGRESS
-   GENIUS (law, rules pending)    CLARITY (House yes, Senate 49-50)
-          |                                   |
-   OCC/Fed/FDIC/Treasury                 [stalled]
-   stablecoin issuers
-                 SEC  <---- MOU + joint interpretation ---->  CFTC
-   5-category token taxonomy             listed spot + perps on DCMs
-   Innovation Exemption (tokenized       staff letters 26-05/09/25
-     stocks on permissioned AMMs)        "passive software" relief
-   DLT transfer agents (proposed)
-   Regulation Crypto Assets (proposed)
-
- Tokenized equity rails:  DTCC -> Besu + Canton   Nasdaq -> tokenized
-   Ondo / xStocks -> Ethereum, Solana             Robinhood -> own chain
-```
+<div class="pfp-fig"><div class="pfp-title">US crypto oversight, September 2026</div><div class="pfp-box pfp-p"><b>Congress</b><div class="pfp-grid2"><div class="pfp-node pfp-g"><b>GENIUS Act</b><small>law since July 2025; final rules pending</small></div><div class="pfp-node pfp-r"><b>CLARITY Act</b><small>House 294–134; Senate cloture failed 49–50</small></div></div></div><div class="pfp-down">↓</div><div class="pfp-grid3"><div class="pfp-box"><b>Bank regulators</b><div class="pfp-note">OCC · Fed · FDIC · NCUA · Treasury</div><div style="margin-top:.4rem"><span class="pfp-chip ">Stablecoin issuers</span><span class="pfp-chip ">Trust charters</span></div></div><div class="pfp-box pfp-b"><b>SEC</b><div><span class="pfp-chip ">5-category token taxonomy</span><span class="pfp-chip ">Innovation Exemption</span><span class="pfp-chip ">Nasdaq tokenized trading</span><span class="pfp-chip ">DLT transfer agents (proposed)</span><span class="pfp-chip ">Reg Crypto Assets (proposed)</span></div></div><div class="pfp-box pfp-g"><b>CFTC</b><div><span class="pfp-chip ">Listed spot + perps on DCMs</span><span class="pfp-chip ">Letters 26-05 · 26-09 · 26-25</span><span class="pfp-chip ">Passive-software relief</span></div></div></div><div class="pfp-note" style="text-align:center;margin-top:.45rem">SEC ⇄ CFTC: MOU + binding joint interpretation (March 2026)</div><div class="pfp-sub">Tokenized equity rails</div><span class="pfp-chip pfp-a">DTCC → Besu + Canton</span><span class="pfp-chip pfp-a">Nasdaq → same order book</span><span class="pfp-chip pfp-a">Ondo / xStocks → Ethereum, Solana, BNB</span><span class="pfp-chip pfp-a">Robinhood → own chain</span></div>
 
 **Status.** The US now has a working split between the SEC and the CFTC, built from binding interpretations, exemptive orders and staff letters rather than statute. A future administration could change all of it. Tokenized stocks are small next to US equity markets (about $3 billion against about $60 trillion), but incumbents are building the settlement infrastructure. That is the difference from 2017, when every token was an outsider.
 
@@ -669,22 +604,9 @@ The trade-off is explicit. A TEE is fast and general-purpose, but the user trust
 
 Developer liability is still unsettled. The Storm retrial is pending, and CLARITY's §604 protection stalled with the bill.
 
-```
- Zcash turnstile: counterfeit stays trapped in its pool
+<div class="pfp-fig"><div class="pfp-title">Zcash turnstile: counterfeit stays trapped in its pool</div><div style="display:flex;justify-content:center"><div class="pfp-node "><b>Transparent ZEC</b><small>public balances</small></div></div><div class="pfp-down">↕ &nbsp;&nbsp; ↕ &nbsp;&nbsp; ↕</div><div class="pfp-grid3"><div class="pfp-node "><b>Sapling</b><small>2018 · balance tracked publicly</small></div><div class="pfp-node pfp-a"><b>Orchard</b><small>2022 · withdraw-only since July 2026</small></div><div class="pfp-node pfp-g"><b>Ironwood</b><small>2026 · active pool, formally verified</small></div></div><div class="pfp-box pfp-b" style="margin-top:.6rem;text-align:center"><b style="margin:0">Rule: withdrawals from a pool ≤ deposits into it</b></div><div class="pfp-cap">The turnstile cannot prove no fake ZEC was minted inside Orchard, but any that was cannot leave the pool.</div></div>
 
-   transparent ZEC <---> [Sapling pool]  public balance: tracked
-                   <---> [Orchard pool]  public balance: tracked
-                   <---> [Ironwood pool] public balance: tracked
-   rule: withdrawals from a pool <= deposits into it
-
- NEAR Confidential Intents
-
-   user signs intent --> private shard (permissioned validators)
-                           solvers quote -> best fill settles
-                           state hidden from public
-   assets on BTC/ETH/ZEC <-- Chain Signatures (MPC) + TEE bridge
-   trust: chip vendor + attestation + operator set (no client ZK)
-```
+<div class="pfp-fig"><div class="pfp-title">NEAR Confidential Intents</div><div class="pfp-row pfp-flow"><div class="pfp-node pfp-b"><b>User signs an intent</b><small>“10 ZEC for ≤ 5,000 USDC”</small></div><span class="pfp-arr">→</span><div class="pfp-node pfp-p"><b>Private shard</b><small>permissioned validators; solvers quote; best fill settles; state hidden</small></div><span class="pfp-arr">→</span><div class="pfp-node pfp-g"><b>Native BTC / ETH / ZEC</b><small>via Chain Signatures (MPC) + TEE bridge</small></div></div><div class="pfp-note" style="margin-top:.55rem">Trust: chip vendor + attestation + operator set · no client-side zero-knowledge proof</div></div>
 
 **Reading.** [Shielded Labs, *Ironwood*](https://shieldedlabs.net/ironwood/). [Crypto Briefing, Ironwood activation](https://cryptobriefing.com/zcash-activates-ironwood-upgrade-after-orchard-security-flaw/). [Zcash ZIPs](https://zips.z.cash). [NEAR, *Confidential Intents*](https://www.near.org/blog/confidential-intents). US Treasury, illicit-finance risk assessment (2026). Monero FCMP++ research.
 
@@ -708,19 +630,7 @@ The next fork, **Hegotá**, centers on FOCIL (EIP-7805), fork-choice-enforced in
 - **Data.** Bitcoin Core v30 (October 2025) loosened its default policy on OP_RETURN data. Node software Knots rejected the change. BIP-110, which would cap data at the consensus level, has minimal miner support. This is the Ordinals culture war reaching node policy.
 - **Quantum.** A [Google Quantum AI paper](https://research.google/blog/safeguarding-cryptocurrency-by-disclosing-quantum-vulnerabilities-responsibly/) (March 2026, with Ethereum Foundation and Stanford co-authors) estimated that fewer than 500,000 physical qubits could break Bitcoin's elliptic-curve signatures in minutes, roughly 20 times fewer than earlier estimates. No machine near that size exists. By the paper's count about 6.9 million BTC, roughly a third of supply, sits in outputs whose public keys are already exposed, including early coins and reused addresses. [BIP-360](https://github.com/bitcoin/bips/blob/master/bip-0360.mediawiki) (P2MR) was merged into the BIP repository in February 2026. It protects only coins whose keys stay hidden until spent; full protection needs post-quantum signatures, and no migration has been scheduled. Every major chain faces the same problem, and the ones that adopt lattice signatures such as ML-DSA early will avoid a forced migration later.
 
-```
- Quantum exposure on Bitcoin (simplified)
-
-  exposed now   P2PK (early coins), reused addresses, Taproot key path
-                -> public key on-chain -> ~6.9M BTC (paper)
-  exposed later P2PKH/P2WPKH -> key revealed only when spent
-                -> vulnerable in the mempool window
-  proposed      BIP-360 P2MR -> hide keys; PQ signatures later
-
- Ethereum forks
-  Merge 22 -> Shapella 23 -> Dencun 24 -> Pectra 25 -> Fusaka 25
-    -> Glamsterdam (ePBS + BALs, Sepolia 6 Oct) -> Hegota (FOCIL)
-```
+<div class="pfp-fig"><div class="pfp-title">Quantum exposure on Bitcoin (simplified)</div><div class="pfp-seg" style="margin-bottom:.4rem"><div class="pfp-r" style="flex:6.9">exposed now · ~6.9M BTC</div><div class="pfp-a" style="flex:13">key hidden until spent · ~13M BTC</div></div><div class="pfp-note">Of ~19.9M BTC mined. Exposure count from the Google Quantum AI paper (March 2026).</div><div class="pfp-grid3" style="margin-top:.6rem"><div class="pfp-node pfp-r"><b>Exposed now</b><small>early pay-to-pubkey coins, reused addresses, Taproot key path</small></div><div class="pfp-node pfp-a"><b>Exposed when spent</b><small>hashed-key outputs, vulnerable in the mempool window</small></div><div class="pfp-node pfp-g"><b>Proposed: BIP-360 P2MR</b><small>hides keys; post-quantum signatures come later</small></div></div><div class="pfp-sub">Ethereum forks</div><div><span class="pfp-chip ">Merge · 2022</span> <span class="pfp-arr">→</span> <span class="pfp-chip ">Shapella · 2023</span> <span class="pfp-arr">→</span> <span class="pfp-chip ">Dencun · 2024</span> <span class="pfp-arr">→</span> <span class="pfp-chip ">Pectra · 2025</span> <span class="pfp-arr">→</span> <span class="pfp-chip ">Fusaka · Dec 2025</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-b pfp-dash">Glamsterdam · ePBS + BALs · Sepolia 6 Oct</span> <span class="pfp-arr">→</span> <span class="pfp-chip pfp-dash">Hegotá · FOCIL · next</span></div></div>
 
 **Status.** Ethereum's gas limit is rising and Glamsterdam is entering public testing. Solana's two biggest changes, Firedancer and Alpenglow, are partly shipped. Bitcoin is changing slowly, as designed, which makes quantum migration its hardest open problem.
 
