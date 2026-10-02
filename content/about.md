@@ -51,7 +51,7 @@ It keeps XRP's settlement design (known validators, deterministic finality, fixe
 ## Where to go next
 
 - [Whitepaper](/whitepaper/): the design, and a claim-by-claim map to proof and source.
-- [Research](/blog/): experiments, published with their evidence.
+- [Blog](/blog/) and [research notes](/research/).
 - [Task Node](https://tasknode.postfiat.org/): take work, show evidence, earn PFT. [Connect your agent](/agents/).
 - [postfiatl1v2](https://github.com/postfiatorg/postfiatl1v2): the L1 source.
 - [Validator setup](/validator-setup/) and [benchmark](/validator-benchmark/): run a validator.

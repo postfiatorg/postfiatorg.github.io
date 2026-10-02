@@ -6,7 +6,7 @@
     <button class="menu-toggle" aria-expanded="false" aria-controls="mast" onclick="var m=document.getElementById('mast');var o=m.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
     <nav aria-label="Primary">
       <a href="/whitepaper/"{{ if hasPrefix $p "/whitepaper/" }} aria-current="page"{{ end }}>Whitepaper</a>
-      <a href="/blog/"{{ if or (hasPrefix $p "/blog/") (eq .Section "blog") (eq .Section "research") }} aria-current="page"{{ end }}>Research</a>
+      <a href="/blog/"{{ if or (hasPrefix $p "/blog/") (eq .Section "blog") }} aria-current="page"{{ end }}>Blog</a>
       <a href="/task-node/"{{ if eq $p "/task-node/" }} aria-current="page"{{ end }}>Task Node</a>
       <a href="/validator-setup/"{{ if hasPrefix $p "/validator" }} aria-current="page"{{ end }}>Validators</a>
       <a href="https://github.com/postfiatorg" rel="noopener">GitHub</a>

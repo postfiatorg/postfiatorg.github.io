@@ -28,4 +28,4 @@ Operators can join the XRPL-derived public testnet today with the [validator set
 ## Read first
 
 - [Whitepaper](/whitepaper/): how it works, claim by claim.
-- [Research](/blog/): experiments, published with their evidence.
+- [Blog](/blog/) and [research notes](/research/).

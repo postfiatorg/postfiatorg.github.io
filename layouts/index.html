@@ -196,16 +196,16 @@
   <section class="sec" aria-labelledby="writing-title">
     <div class="wrap">
       <div class="sec-head">
-        <span class="label">Research</span>
+        <span class="label">Blog</span>
         <h2 class="display d-l" id="writing-title">Recent work, published with its evidence.</h2>
       </div>
-      {{ $posts := where (where site.RegularPages "Section" "in" (slice "blog" "research")) "Params.hide_from_blog" "!=" true }}
+      {{ $posts := where (where site.RegularPages "Section" "blog") "Params.hide_from_blog" "!=" true }}
       <ul class="index">
         {{ range first 6 $posts.ByDate.Reverse }}
         <li><a href="{{ .RelPermalink }}"><span class="d">{{ .Date.Format "2006-01-02" }}</span><span><span class="t">{{ .Title }}</span>{{ with .Params.summary }}<span class="s">{{ . | plainify | truncate 160 }}</span>{{ end }}</span><span class="go">→</span></a></li>
         {{ end }}
       </ul>
-      <div class="btns mt-m"><a class="btn" href="/blog/">All research <span class="ar">→</span></a></div>
+      <div class="btns mt-m"><a class="btn" href="/blog/">All posts <span class="ar">→</span></a></div>
     </div>
   </section>
 

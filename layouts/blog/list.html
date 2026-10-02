@@ -11,12 +11,12 @@
   (dict "key" "gov" "name" "Consensus & governance" "re" "cobalt|governance|unl|validator|replay|latency|fastpay|oracle|determinis|consensus|qwen")
   (dict "key" "navcoin" "name" "NAVCoins & portfolios" "re" "navcoin|\\bnav\\b|a651|a666|ind(ex|ices|exing)|option|ultrashort|glass|leverage|portfolio|counterparty")
   (dict "key" "net" "name" "Network & community" "re" ".") }}
-{{ $posts := where (where site.RegularPages "Section" "in" (slice "blog" "research")) "Params.hide_from_blog" "!=" true }}
+{{ $posts := where .Pages "Params.hide_from_blog" "!=" true }}
 <main id="main">
   <header class="doc-head">
     <div class="wrap" style="max-width:var(--max)">
-      <p class="label">Post Fiat · Research</p>
-      <h1 class="mt-s">Research &amp; writing</h1>
+      <p class="label">Post Fiat · Blog</p>
+      <h1 class="mt-s">{{ .Title }}</h1>
       <p class="sub">Design notes, experiments and evidence, each published with what you would need to check it.</p>
     </div>
   </header>

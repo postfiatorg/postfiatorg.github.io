@@ -1,0 +1,16 @@
+{{- if .Store.Get "hasMermaid" }}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    flowchart: { curve: 'basis', htmlLabels: true, padding: 14 },
+    themeVariables: {
+      fontFamily: 'Newsreader, Georgia, serif', fontSize: '16px',
+      background: '#f2eee5', primaryColor: '#ebe6da', primaryBorderColor: '#10191d', primaryTextColor: '#10191d',
+      secondaryColor: '#e3ddcd', tertiaryColor: '#f2eee5', lineColor: '#2c3437', edgeLabelBackground: '#f2eee5',
+      clusterBkg: '#ebe6da', clusterBorder: '#cfc8b6'
+    }
+  });
+</script>
+{{- end }}
