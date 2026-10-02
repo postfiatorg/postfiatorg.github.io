@@ -8,7 +8,12 @@
 <main id="main">
 
   <section class="hero" aria-labelledby="hero-title">
-    <div class="plate" role="img" aria-label="Ink engraving of a colonnade of validator towers beside a spiral ledger" style="background-image:image-set(url('/images/ink/hero-900.webp') 1x, url('/images/ink/hero.webp') 2x)"></div>
+    <div class="plate plate-video" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="auto" poster="/video/hero/hero-poster.webp" disablepictureinpicture>
+        <source src="/video/hero/hero-loop-1280.mp4" type="video/mp4" media="(max-width: 900px)">
+        <source src="/video/hero/hero-loop-1920.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="wrap inner">
       <p class="label kicker"><b>XRP 2.0</b><span class="sep"> &nbsp;/&nbsp; </span>Private &nbsp;·&nbsp; Quantum-resistant &nbsp;·&nbsp; Fixed supply</p>
       <h1 class="display d-xxl" id="hero-title">The internet of value for the superintelligent&nbsp;era.</h1>
@@ -226,6 +231,10 @@
     document.getElementById('vhs-note').textContent = 'live';
   } catch (e) {}
 })();
+</script>
+<script>
+(() => { const v = document.querySelector('.plate-video video'); if (!v) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData) { v.removeAttribute('autoplay'); v.pause(); v.preload = 'none'; } })();
 </script>
 </body>
 </html>
