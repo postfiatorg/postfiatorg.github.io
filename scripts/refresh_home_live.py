@@ -8,9 +8,6 @@ Writes:
       30d agreement >= 0.99, ledger = max current_index). This file is both
       the JS fallback payload and the source for the statically rendered
       validator card.
-  data/task_feed_snapshot.json
-      The most recent public Task Node feed items, rendered statically into
-      the homepage at build time and live-refreshed by JS in the browser.
 
 Run before a deploy (or on a schedule) to keep the no-JS view current:
   python3 scripts/refresh_home_live.py
@@ -25,10 +22,7 @@ import urllib.request
 
 REPO = pathlib.Path(__file__).resolve().parents[1]
 VHS_URL = "https://vhs.testnet.postfiat.org/v1/network/validators/test"
-FEED_URL = "https://pftasks-api.fly.dev/activity/public-feed?limit=24"
 STATS_PATH = REPO / "static" / "benchmarks" / "live-testnet-validator-stats.json"
-FEED_PATH = REPO / "data" / "task_feed_snapshot.json"
-FEED_ITEMS = 8
 
 
 def fetch_json(url: str) -> dict:
@@ -83,69 +77,6 @@ def build_validator_stats(payload: dict, now_iso: str) -> dict:
     }
 
 
-def display_time(iso: str) -> str:
-    # Always include the year: undated or year-less timestamps next to a
-    # dated whitepaper read as inconsistent to careful reviewers.
-    try:
-        stamp = dt.datetime.fromisoformat(iso.replace("Z", "+00:00"))
-    except ValueError:
-        return "UTC"
-    return stamp.strftime("%b %-d, %Y, %H:%M UTC")
-
-
-def diversify_by_actor(raw_items: list, limit: int, per_actor: int = 2) -> list:
-    """Prefer a mix of contributors over a single node's burst of activity."""
-    picked: list = []
-    counts: dict[str, int] = {}
-    deferred: list = []
-    for item in raw_items:
-        actor = str(item.get("actor") or "node")
-        if counts.get(actor, 0) < per_actor:
-            picked.append(item)
-            counts[actor] = counts.get(actor, 0) + 1
-        else:
-            deferred.append(item)
-        if len(picked) >= limit:
-            return picked
-    return (picked + deferred)[:limit]
-
-
-def build_feed_snapshot(payload: dict, now_iso: str) -> dict:
-    items = []
-    for item in diversify_by_actor(payload.get("items", []), FEED_ITEMS):
-        title = (item.get("title") or item.get("summary") or "Task Node update").strip()
-        summary = (item.get("summary") or "").strip()
-        if title.endswith("...") and summary:
-            title = summary
-        items.append(
-            {
-                "category": str(item.get("category") or item.get("type") or "network")
-                .replace("_", " ")
-                .strip(),
-                "timestamp": item.get("timestamp") or "",
-                "display_time": display_time(item.get("timestamp") or ""),
-                "title": title[:132],
-                "summary": summary[:150],
-                "actor": (item.get("actor") or "node").strip(),
-                "tickers": [str(t).lstrip("$") for t in (item.get("tickers") or [])][:4],
-                "links": [
-                    {
-                        "label": (link.get("label") or "PFTL proof").strip(),
-                        "url": link.get("url") or "",
-                    }
-                    for link in (item.get("links") or [])
-                    if str(link.get("url") or "").startswith("https://")
-                ][:2],
-            }
-        )
-    return {
-        "generated_at": now_iso,
-        "generated_at_display": display_time(now_iso),
-        "source": FEED_URL,
-        "items": items,
-    }
-
-
 def main() -> int:
     now_iso = (
         dt.datetime.now(dt.timezone.utc).isoformat(timespec="milliseconds")
@@ -158,11 +89,6 @@ def main() -> int:
         f"{stats['publishing_domain_count']} domains, "
         f"ledger {stats['latest_ledger_index']:,} -> {STATS_PATH.relative_to(REPO)}"
     )
-
-    feed = build_feed_snapshot(fetch_json(FEED_URL), now_iso)
-    FEED_PATH.parent.mkdir(parents=True, exist_ok=True)
-    FEED_PATH.write_text(json.dumps(feed, indent=2) + "\n", encoding="utf-8")
-    print(f"task feed: {len(feed['items'])} items -> {FEED_PATH.relative_to(REPO)}")
     return 0
 
 

@@ -617,7 +617,7 @@
     }
     .task-feed-preview{
       position:relative;
-      min-height:500px;
+      min-height:340px;
       padding:18px clamp(58px, 9vw, 126px);
       overflow-x:auto;
       overflow-y:hidden;
@@ -638,7 +638,7 @@
     .feed-preview-item{
       position:relative;
       flex:0 0 clamp(390px, 42vw, 540px);
-      min-height:398px;
+      min-height:250px;
       display:flex;
       flex-direction:column;
       padding:22px;
@@ -718,23 +718,6 @@
     }
     .feed-preview-item p{margin:0;color:var(--pale-2)}
     .feed-actor{display:block;margin-top:12px;color:rgba(221,255,220,.42)}
-    .feed-preview-tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:7px;
-      margin-top:16px;
-    }
-    .feed-preview-tags span{
-      display:inline-flex;
-      align-items:center;
-      min-height:27px;
-      border:1px solid rgba(127,238,100,.38);
-      border-radius:999px;
-      padding:5px 9px;
-      color:var(--green);
-      font-size:.74rem;
-      font-weight:700;
-    }
     .feed-preview-links{
       display:flex;
       flex-wrap:wrap;
@@ -1759,7 +1742,7 @@
       .task-feed-carousel::before,
       .task-feed-carousel::after{display:none}
       .task-feed-preview{
-        min-height:430px;
+        min-height:300px;
         padding:12px 44px 18px;
         mask-image:none;
         -webkit-overflow-scrolling:touch;
@@ -1767,7 +1750,7 @@
       .feed-carousel-track{gap:12px}
       .feed-preview-item{
         flex-basis:calc(100vw - 84px);
-        min-height:390px;
+        min-height:240px;
         padding:18px;
       }
       .feed-nav{
@@ -1888,12 +1871,12 @@
       .task-feed-header .section-title{font-size:clamp(2.05rem, 10.5vw, 3rem)}
       .task-feed-copy{font-size:1rem}
       .task-feed-preview{
-        min-height:410px;
+        min-height:290px;
         padding-inline:34px;
       }
       .feed-preview-item{
         flex-basis:calc(100vw - 88px);
-        min-height:370px;
+        min-height:230px;
         padding:16px;
       }
       .feed-nav{
@@ -2352,9 +2335,9 @@
               <div class="task-feed-actions">
                 <div class="feed-status" aria-label="Task Node feed status" aria-live="polite">
                   <span class="mono">Operating stream</span>
-                  <p>Snapshot from {{ site.Data.task_feed_snapshot.generated_at_display }}; refreshes live in your browser.</p>
+                  <p>Live from the Task Node Hive. Updated {{ site.Data.task_feed_snapshot.generated_at_display }}.</p>
                 </div>
-                <a class="btn dark" href="https://agtico.github.io/task-node-feed/" target="_blank" rel="noopener">View full feed</a>
+                <a class="btn dark" href="https://tasknode.postfiat.org/#hive" target="_blank" rel="noopener">Open the Hive</a>
               </div>
             </div>
             <div class="task-feed-carousel" data-feed-carousel>
@@ -2368,11 +2351,6 @@
                 <h3>{{ .title }}</h3>
                 <p>{{ .summary }}</p>
                 <span class="feed-actor mono">{{ .actor }}</span>
-                {{ with .tickers }}
-                <div class="feed-preview-tags">
-                  {{ range . }}<span>${{ . }}</span>{{ end }}
-                </div>
-                {{ end }}
                 {{ with .links }}
                 <div class="feed-preview-links">
                   {{ range . }}<a class="feed-preview-link" href="{{ .url }}" target="_blank" rel="noopener">{{ .label }} <span aria-hidden="true">&rsaquo;</span></a>{{ end }}
@@ -2586,15 +2564,12 @@
     window.addEventListener('resize', requestSystemSync);
     requestSystemSync();
 
-    const taskFeedUrl = 'https://pftasks-api.fly.dev/activity/public-feed?limit=24';
-    const taskFeedSnapshotUrl = 'https://agtico.github.io/task-node-feed/';
     const taskFeedCarousel = document.querySelector('[data-feed-carousel]');
     const taskFeedRoot = document.querySelector('.task-feed-preview');
     const appExplorer = document.querySelector('[data-app-explorer]');
     const appPrevButton = document.querySelector('[data-app-prev]');
     const appNextButton = document.querySelector('[data-app-next]');
-    let taskFeedTrack = taskFeedRoot?.querySelector('.feed-carousel-track') || null;
-    const feedStatus = document.querySelector('.feed-status');
+    const taskFeedTrack = taskFeedRoot?.querySelector('.feed-carousel-track') || null;
     const feedPrevButton = document.querySelector('[data-feed-prev]');
     const feedNextButton = document.querySelector('[data-feed-next]');
     const feedDots = document.querySelector('.feed-dots');
@@ -2608,12 +2583,6 @@
     function cleanText(value, fallback = ''){
       const text = String(value || '').replace(/\s+/g, ' ').trim();
       return text || fallback;
-    }
-
-    function truncateText(value, maxChars){
-      const text = cleanText(value);
-      if(text.length <= maxChars) return text;
-      return `${text.slice(0, Math.max(1, maxChars - 3)).trimEnd()}...`;
     }
 
     function formatFeedDate(value){
@@ -2768,13 +2737,6 @@
       }
     }
 
-    function textElement(tagName, className, text){
-      const element = document.createElement(tagName);
-      if(className) element.className = className;
-      element.textContent = text;
-      return element;
-    }
-
     function scrollAppExplorer(direction){
       if(!appExplorer) return;
       const card = appExplorer.querySelector('.app-card');
@@ -2782,33 +2744,8 @@
       appExplorer.scrollBy({left:direction * amount, behavior:'smooth'});
     }
 
-    function validFeedLinks(item){
-      if(!Array.isArray(item.links)) return [];
-      return item.links.filter((link) => {
-        try{
-          const url = new URL(link.url, window.location.origin);
-          return url.protocol === 'https:' || url.protocol === 'http:';
-        }catch{
-          return false;
-        }
-      });
-    }
-
-    function ensureFeedTrack(){
-      if(!taskFeedRoot) return null;
-      if(!taskFeedTrack) taskFeedTrack = taskFeedRoot.querySelector('.feed-carousel-track');
-      if(!taskFeedTrack){
-        taskFeedTrack = document.createElement('div');
-        taskFeedTrack.className = 'feed-carousel-track';
-        while(taskFeedRoot.firstChild) taskFeedTrack.appendChild(taskFeedRoot.firstChild);
-        taskFeedRoot.appendChild(taskFeedTrack);
-      }
-      return taskFeedTrack;
-    }
-
     function getFeedCards(){
-      const track = ensureFeedTrack();
-      return track ? Array.from(track.querySelectorAll('.feed-preview-item')) : [];
+      return taskFeedTrack ? Array.from(taskFeedTrack.querySelectorAll('.feed-preview-item')) : [];
     }
 
     function updateFeedCarouselState(){
@@ -2907,125 +2844,6 @@
       startFeedAutoplay();
     }
 
-    function readSnapshotItem(element){
-      const links = Array.from(element.querySelectorAll('.feed-link')).slice(0, 2).map((link) => ({
-        label:cleanText(link.textContent, 'PFTL proof').replace(/[\u203a>]$/,'').trim(),
-        url:link.href
-      }));
-
-      return {
-        category:cleanText(element.querySelector('.feed-category')?.textContent, 'network'),
-        timestamp:element.querySelector('time')?.getAttribute('datetime') || '',
-        actor:cleanText(element.querySelector('.feed-actor')?.textContent, 'node'),
-        title:cleanText(element.querySelector('h2')?.textContent, 'Task Node update'),
-        summary:cleanText(element.querySelector('p')?.textContent),
-        tickers:Array.from(element.querySelectorAll('.ticker-chip')).map((tag) => cleanText(tag.textContent).replace(/^\$/,'')),
-        links
-      };
-    }
-
-    async function fetchAgtiSnapshot(){
-      const response = await fetch(taskFeedSnapshotUrl, {cache:'no-store'});
-      if(!response.ok) return null;
-      const html = await response.text();
-      const doc = new DOMParser().parseFromString(html, 'text/html');
-      const items = Array.from(doc.querySelectorAll('.feed-item')).map(readSnapshotItem);
-      if(!items.length) return null;
-      const total = Number.parseInt(cleanText(doc.querySelector('.feed-status strong')?.textContent), 10) || items.length;
-      return {
-        items,
-        total,
-        statusText:'Synced from AGTI Task Node Feed.'
-      };
-    }
-
-    function renderFeedCard(item){
-      const article = document.createElement('article');
-      article.className = 'feed-preview-item';
-      const summary = cleanText(item.summary);
-      const title = cleanText(item.title, summary || 'Task Node update');
-      const cardTitle = title.endsWith('...') && summary ? summary : title;
-
-      article.appendChild(textElement('div', 'feed-preview-meta mono', cleanText(item.category, cleanText(item.type, 'network')).replace(/_/g, ' ')));
-
-      const time = textElement('time', 'mono', formatFeedDate(item.timestamp));
-      if(item.timestamp) time.dateTime = item.timestamp;
-      article.appendChild(time);
-
-      article.appendChild(textElement('h3', '', truncateText(cardTitle, 132) || 'Task Node update'));
-      article.appendChild(textElement('p', '', truncateText(summary, 150)));
-      article.appendChild(textElement('span', 'feed-actor mono', cleanText(item.actor, 'node')));
-
-      const tickers = Array.isArray(item.tickers) ? item.tickers.slice(0, 4) : [];
-      if(tickers.length){
-        const tags = document.createElement('div');
-        tags.className = 'feed-preview-tags';
-        tickers.forEach((ticker) => tags.appendChild(textElement('span', '', `$${cleanText(ticker)}`)));
-        article.appendChild(tags);
-      }
-
-      const links = validFeedLinks(item).slice(0, 2);
-      if(links.length){
-        const linkRow = document.createElement('div');
-        linkRow.className = 'feed-preview-links';
-        links.forEach((link) => {
-          const anchor = textElement('a', 'feed-preview-link', `${cleanText(link.label, 'PFTL proof')} `);
-          anchor.href = link.url;
-          anchor.target = '_blank';
-          anchor.rel = 'noopener';
-          const marker = document.createElement('span');
-          marker.setAttribute('aria-hidden', 'true');
-          marker.textContent = '>';
-          anchor.appendChild(marker);
-          linkRow.appendChild(anchor);
-        });
-        article.appendChild(linkRow);
-      }
-
-      return article;
-    }
-
-    function updateFeedStatus(feed){
-      if(!feedStatus) return;
-      const detail = feedStatus.querySelector('p');
-      if(detail){
-        if(feed.statusText){
-          detail.textContent = feed.statusText;
-          return;
-        }
-        const generated = feed.generated_at ? formatFeedDate(feed.generated_at) : 'UTC';
-        detail.textContent = `Live from ${cleanText(feed.model, 'activity-channel')}; refreshed ${generated}.`;
-      }
-    }
-
-    function renderTaskFeed(feed){
-      if(!taskFeedRoot) return;
-      const items = Array.isArray(feed.items) ? feed.items : [];
-      if(!items.length) return;
-      const track = ensureFeedTrack();
-      if(!track) return;
-      track.replaceChildren(...items.slice(0, 10).map(renderFeedCard));
-      setupTaskCarousel(true);
-      updateFeedStatus(feed);
-    }
-
-    async function refreshTaskFeed(){
-      if(!taskFeedRoot) return;
-      try{
-        const response = await fetch(taskFeedUrl, {cache:'no-store', headers:{Accept:'application/json'}});
-        if(!response.ok) throw new Error('Task feed API unavailable');
-        const feed = await response.json();
-        renderTaskFeed(feed);
-      }catch{
-        try{
-          const feed = await fetchAgtiSnapshot();
-          if(feed) renderTaskFeed(feed);
-        }catch{
-          // Static feed cards remain visible if the public activity surfaces are unavailable.
-        }
-      }
-    }
-
     taskFeedRoot?.addEventListener('scroll', () => {
       if(feedScrollRaf) return;
       feedScrollRaf = window.requestAnimationFrame(syncFeedIndexFromScroll);
@@ -3054,8 +2872,6 @@
 
     refreshLiveValidatorStats();
     setupTaskCarousel();
-    refreshTaskFeed();
-    window.setInterval(refreshTaskFeed, 30000);
 
     function injectBrandCubeFields(){
       const positions = [
