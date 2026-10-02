@@ -1492,9 +1492,7 @@
       display:flex;
       width:max-content;
       will-change:transform;
-    }
-    .community-card-track.is-looping{
-      animation:communityMarquee 54s linear infinite;
+      animation:communityMarquee var(--community-loop,54s) linear infinite;
     }
     .community-viewport:hover .community-card-track,
     .community-viewport:focus-within .community-card-track{animation-play-state:paused}
@@ -1504,7 +1502,6 @@
     }
     .community-card{
       flex:0 0 clamp(330px,28vw,420px);
-      min-height:650px;
       display:flex;
       flex-direction:column;
       border-right:1px solid rgba(0,0,0,.16);
@@ -1534,29 +1531,10 @@
       flex-direction:column;
       padding:20px;
     }
-    .community-card-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:12px;
-    }
     .community-slug{
       color:#334330;
       font-size:.78rem;
       letter-spacing:.02em;
-    }
-    .community-profile-link{
-      color:#0a0a0a;
-      font-size:.82rem;
-      border-bottom:1px solid rgba(0,0,0,.24);
-    }
-    .community-card-link-row{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      justify-content:flex-end;
-      white-space:nowrap;
     }
     .community-card h3{
       margin:0 0 9px;
@@ -1565,7 +1543,6 @@
       font-weight:550;
     }
     .community-summary{
-      min-height:44px;
       margin:0 0 18px;
       color:#536250;
       font-size:.96rem;
@@ -1575,93 +1552,17 @@
       -webkit-box-orient:vertical;
       overflow:hidden;
     }
-    .community-panel-title{
-      margin:0;
-      font-size:.9rem;
-      font-weight:650;
-    }
-    .community-panel-subtitle{
-      margin:3px 0 13px;
-      color:#687765;
-      font-size:.78rem;
-    }
-    .community-knowledge-list{
+    .community-stats{
       display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
       gap:1px;
-      margin:0 0 18px;
-      padding:0;
-      list-style:none;
+      margin:auto 0 0;
       border:1px solid rgba(0,0,0,.13);
       background:rgba(0,0,0,.13);
     }
-    .community-knowledge-list li{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      gap:12px;
-      align-items:center;
-      min-height:34px;
-      padding:8px 10px;
-      background:var(--light);
-      color:#263424;
-      font-size:.82rem;
-      line-height:1.18;
-    }
-    .community-knowledge-list strong{
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-      font-weight:500;
-    }
-    .community-knowledge-list span{
-      color:#0a0a0a;
-      font-size:.72rem;
-      font-weight:700;
-    }
-    .community-tickers{
-      margin-top:auto;
-      padding-top:16px;
-      border-top:1px solid rgba(0,0,0,.14);
-    }
-    .community-ticker-title{
-      margin-bottom:10px;
-      color:#566554;
-      font-size:.75rem;
-    }
-    .community-ticker-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-    .community-ticker{
-      display:inline-flex;
-      align-items:center;
-      min-height:30px;
-      padding:6px 10px;
-      border:1px solid rgba(0,0,0,.2);
-      border-radius:999px;
-      color:#182018;
-      font-size:.82rem;
-      font-weight:650;
-    }
-    .community-card-actions{
-      display:flex;
-      gap:14px;
-      margin-top:18px;
-      font-size:.86rem;
-    }
-    .community-card-actions a{
-      color:#0a0a0a;
-      border-bottom:1px solid rgba(0,0,0,.24);
-    }
-    .community-card-placeholder{
-      flex:0 0 min(420px,86vw);
-      min-height:520px;
-      display:grid;
-      place-items:center;
-      padding:30px;
-      color:#4f604d;
-      border-right:1px solid rgba(0,0,0,.16);
-    }
+    .community-stats div{padding:10px;background:var(--light)}
+    .community-stats dt{color:#566554;font-size:.72rem}
+    .community-stats dd{margin:2px 0 0;color:#0a0a0a;font-size:1.05rem;font-weight:650}
     @keyframes communityMarquee{
       from{transform:translateX(0)}
       to{transform:translateX(-50%)}
@@ -1951,7 +1852,6 @@
         min-height:0;
       }
       .community-card-body{padding:17px}
-      .community-knowledge-list strong{white-space:normal}
       .final-cta{
         padding:72px 0 58px;
         overflow:hidden;
@@ -2494,14 +2394,14 @@
 
       <section class="community-band" id="community" aria-labelledby="community-title">
         <div class="container community-shell">
-          <div class="community-slug-strip mono" data-community-slugs aria-label="Public Task Node profile slugs">
+          <div class="community-slug-strip mono" aria-label="Task Node member wallets">
             {{ range (unmarshal (readFile "static/tasknode/community-profiles.json")).cards }}<span>{{ .public_slug }}</span>{{ end }}
           </div>
           <div class="community-header">
             <div>
               <p class="section-kicker mono">Community</p>
               <h2 class="community-title" id="community-title">Join Post Fiat's community.</h2>
-              <p class="community-copy">Published Task Node profiles show semi-anonymous contributors, public NFT identity artifacts, demonstrated skills, and the tradeable tickers most associated with their all-time work.</p>
+              <p class="community-copy">Live from the Task Node directory: contributors, their profile NFTs, and the network work they have done.</p>
             </div>
             <div class="community-actions">
               <a class="btn dark" href="https://tasknode.postfiat.org" target="_blank" rel="noopener">Open Task Node</a>
@@ -2510,47 +2410,29 @@
           </div>
         </div>
         <div class="community-viewport" role="region" aria-label="Public Task Node profile cards" tabindex="0">
-          <div class="community-card-track" data-community-track>
-            {{ $profiles := (unmarshal (readFile "static/tasknode/community-profiles.json")).cards }}
-            <div class="community-card-group">
+          {{ $profiles := (unmarshal (readFile "static/tasknode/community-profiles.json")).cards }}
+          <div class="community-card-track" style="--community-loop:{{ mul (len $profiles) 7 }}s">
+            {{ range $copy := slice false true }}
+            <div class="community-card-group"{{ if $copy }} aria-hidden="true"{{ end }}>
               {{ range $profiles }}
               <article class="community-card">
-                <a class="community-nft-link" href="{{ .profile_url }}" target="_blank" rel="noopener" aria-label="Open {{ .display_name }} public Task Node profile">
-                  <img src="{{ .nft_image_url }}" alt="{{ .display_name }} public profile NFT" loading="lazy" decoding="async">
+                <a class="community-nft-link" href="{{ .profile_url }}" target="_blank" rel="noopener"{{ if $copy }} tabindex="-1"{{ end }} aria-label="Open {{ .display_name }} on Task Node">
+                  <img src="{{ .nft_image_url }}" alt="{{ .display_name }} profile NFT" width="512" height="512" loading="lazy" decoding="async">
                 </a>
                 <div class="community-card-body">
-                  <div class="community-card-top">
-                    <span class="community-slug mono">{{ .public_slug }}</span>
-                    <div class="community-card-link-row">
-                      <a class="community-profile-link" href="{{ .profile_url }}" target="_blank" rel="noopener">View profile</a>
-                      {{ with .nft_mint_url }}<a class="community-profile-link" href="{{ . }}" target="_blank" rel="noopener">NFT mint</a>{{ end }}
-                    </div>
-                  </div>
+                  <span class="community-slug mono">{{ .public_slug }}</span>
                   <h3>{{ .display_name }}</h3>
-                  <p class="community-summary">{{ .summary }}</p>
-                  <p class="community-panel-title">Demonstrated Skills</p>
-                  <p class="community-panel-subtitle">Based on all-time task completion analysis</p>
-                  <ul class="community-knowledge-list">
-                    {{ range first 8 (.expert_knowledge | default (slice)) }}
-                    <li><strong>{{ .domain }}</strong><span>{{ .confidence }}</span></li>
-                    {{ end }}
-                  </ul>
-                  <div class="community-tickers">
-                    <div class="community-ticker-title mono">Associated tickers, top 3</div>
-                    <div class="community-ticker-row">
-                      {{ range first 3 (.associated_tickers | default (slice)) }}
-                      <span class="community-ticker mono" title="{{ .name }} - {{ .relevance }}% relevance">${{ .symbol }}</span>
-                      {{ end }}
-                    </div>
-                  </div>
-                  <div class="community-card-actions">
-                    {{ with .nft_mint_url }}<a href="{{ . }}" target="_blank" rel="noopener">NFT mint &gt;</a>{{ end }}
-                    <a href="{{ .profile_url }}" target="_blank" rel="noopener">Public profile &gt;</a>
-                  </div>
+                  {{ with .creature }}<p class="community-summary">{{ . }}</p>{{ end }}
+                  <dl class="community-stats">
+                    <div><dt>Network tasks</dt><dd class="mono">{{ .network_tasks }}</dd></div>
+                    <div><dt>PFT earned</dt><dd class="mono">{{ .pft_earned }}</dd></div>
+                    <div><dt>Alignment 7d</dt><dd class="mono">{{ .alignment }}</dd></div>
+                  </dl>
                 </div>
               </article>
               {{ end }}
             </div>
+            {{ end }}
           </div>
         </div>
       </section>
@@ -2706,11 +2588,8 @@
 
     const taskFeedUrl = 'https://pftasks-api.fly.dev/activity/public-feed?limit=24';
     const taskFeedSnapshotUrl = 'https://agtico.github.io/task-node-feed/';
-    const communityProfileUrl = '/tasknode/community-profiles.json';
     const taskFeedCarousel = document.querySelector('[data-feed-carousel]');
     const taskFeedRoot = document.querySelector('.task-feed-preview');
-    const communityTrack = document.querySelector('[data-community-track]');
-    const communitySlugs = document.querySelector('[data-community-slugs]');
     const appExplorer = document.querySelector('[data-app-explorer]');
     const appPrevButton = document.querySelector('[data-app-prev]');
     const appNextButton = document.querySelector('[data-app-next]');
@@ -2901,152 +2780,6 @@
       const card = appExplorer.querySelector('.app-card');
       const amount = card ? card.getBoundingClientRect().width + 18 : appExplorer.clientWidth * .82;
       appExplorer.scrollBy({left:direction * amount, behavior:'smooth'});
-    }
-
-    function safeHttpUrl(value){
-      try{
-        const url = new URL(value, window.location.origin);
-        return (url.protocol === 'https:' || url.protocol === 'http:') ? url.href : '';
-      }catch{
-        return '';
-      }
-    }
-
-    function renderCommunityCard(profile, duplicate = false){
-      const article = document.createElement('article');
-      article.className = 'community-card';
-
-      const profileUrl = safeHttpUrl(profile.profile_url) || 'https://tasknode.postfiat.org';
-      const mintUrl = safeHttpUrl(profile.nft_mint_url);
-      const imageUrl = safeHttpUrl(profile.nft_image_url);
-      const displayName = cleanText(profile.display_name, cleanText(profile.nft_name, 'Task Node contributor'));
-      const publicSlug = cleanText(profile.public_slug, 'node');
-
-      const imageLink = document.createElement('a');
-      imageLink.className = 'community-nft-link';
-      imageLink.href = profileUrl;
-      imageLink.target = '_blank';
-      imageLink.rel = 'noopener';
-      imageLink.setAttribute('aria-label', `Open ${displayName} public Task Node profile`);
-      const image = document.createElement('img');
-      image.src = imageUrl;
-      image.alt = `${displayName} public profile NFT`;
-      image.loading = 'lazy';
-      image.decoding = 'async';
-      imageLink.appendChild(image);
-      article.appendChild(imageLink);
-
-      const body = document.createElement('div');
-      body.className = 'community-card-body';
-
-      const top = document.createElement('div');
-      top.className = 'community-card-top';
-      top.appendChild(textElement('span', 'community-slug mono', publicSlug));
-      const topLinks = document.createElement('div');
-      topLinks.className = 'community-card-link-row';
-      const profileAnchor = textElement('a', 'community-profile-link', 'View profile');
-      profileAnchor.href = profileUrl;
-      profileAnchor.target = '_blank';
-      profileAnchor.rel = 'noopener';
-      topLinks.appendChild(profileAnchor);
-      if(mintUrl){
-        const mintTopAnchor = textElement('a', 'community-profile-link', 'NFT mint');
-        mintTopAnchor.href = mintUrl;
-        mintTopAnchor.target = '_blank';
-        mintTopAnchor.rel = 'noopener';
-        topLinks.appendChild(mintTopAnchor);
-      }
-      top.appendChild(topLinks);
-      body.appendChild(top);
-
-      body.appendChild(textElement('h3', '', displayName));
-      body.appendChild(textElement('p', 'community-summary', cleanText(profile.summary, 'Public Task Node profile with minted NFT evidence.')));
-      body.appendChild(textElement('p', 'community-panel-title', 'Demonstrated Skills'));
-      body.appendChild(textElement('p', 'community-panel-subtitle', 'Based on all-time task completion analysis'));
-
-      const knowledgeList = document.createElement('ul');
-      knowledgeList.className = 'community-knowledge-list';
-      (Array.isArray(profile.expert_knowledge) ? profile.expert_knowledge : []).slice(0, 8).forEach((entry) => {
-        const item = document.createElement('li');
-        item.appendChild(textElement('strong', '', cleanText(entry.domain, 'Task evidence')));
-        item.appendChild(textElement('span', '', cleanText(entry.confidence, 'High')));
-        knowledgeList.appendChild(item);
-      });
-      body.appendChild(knowledgeList);
-
-      const tickerPanel = document.createElement('div');
-      tickerPanel.className = 'community-tickers';
-      tickerPanel.appendChild(textElement('div', 'community-ticker-title mono', 'Associated tickers, top 3'));
-      const tickerRow = document.createElement('div');
-      tickerRow.className = 'community-ticker-row';
-      (Array.isArray(profile.associated_tickers) ? profile.associated_tickers : []).slice(0, 3).forEach((ticker) => {
-        const symbol = cleanText(ticker.symbol);
-        if(!symbol) return;
-        const chip = textElement('span', 'community-ticker mono', `$${symbol}`);
-        const name = cleanText(ticker.name);
-        const relevance = Number(ticker.relevance);
-        if(name || Number.isFinite(relevance)){
-          chip.title = [name, Number.isFinite(relevance) ? `${relevance}% relevance` : ''].filter(Boolean).join(' - ');
-        }
-        tickerRow.appendChild(chip);
-      });
-      tickerPanel.appendChild(tickerRow);
-      body.appendChild(tickerPanel);
-
-      const actions = document.createElement('div');
-      actions.className = 'community-card-actions';
-      if(mintUrl){
-        const mintAnchor = textElement('a', '', 'NFT mint >');
-        mintAnchor.href = mintUrl;
-        mintAnchor.target = '_blank';
-        mintAnchor.rel = 'noopener';
-        actions.appendChild(mintAnchor);
-      }
-      const publicAnchor = textElement('a', '', 'Public profile >');
-      publicAnchor.href = profileUrl;
-      publicAnchor.target = '_blank';
-      publicAnchor.rel = 'noopener';
-      actions.appendChild(publicAnchor);
-      body.appendChild(actions);
-
-      article.appendChild(body);
-
-      if(duplicate){
-        article.querySelectorAll('a').forEach((anchor) => { anchor.tabIndex = -1; });
-      }
-      return article;
-    }
-
-    function renderCommunityProfiles(payload){
-      if(!communityTrack) return;
-      const profiles = Array.isArray(payload?.cards) ? payload.cards.filter(Boolean) : [];
-      if(!profiles.length) return;
-
-      if(communitySlugs){
-        communitySlugs.replaceChildren(...profiles.map((profile) => textElement('span', '', cleanText(profile.public_slug, 'node'))));
-      }
-
-      const primaryGroup = document.createElement('div');
-      primaryGroup.className = 'community-card-group';
-      profiles.forEach((profile) => primaryGroup.appendChild(renderCommunityCard(profile)));
-
-      const duplicateGroup = document.createElement('div');
-      duplicateGroup.className = 'community-card-group';
-      duplicateGroup.setAttribute('aria-hidden', 'true');
-      profiles.forEach((profile) => duplicateGroup.appendChild(renderCommunityCard(profile, true)));
-
-      communityTrack.replaceChildren(primaryGroup, duplicateGroup);
-      communityTrack.classList.add('is-looping');
-    }
-
-    async function refreshCommunityProfiles(){
-      if(!communityTrack) return;
-      try{
-        const payload = await fetchJsonWithTimeout(communityProfileUrl, 8000);
-        renderCommunityProfiles(payload);
-      }catch{
-        // The loading card remains visible if the public static profile snapshot is unavailable.
-      }
     }
 
     function validFeedLinks(item){
@@ -3320,7 +3053,6 @@
     reducedMotionQuery.addEventListener?.('change', restartFeedAutoplay);
 
     refreshLiveValidatorStats();
-    refreshCommunityProfiles();
     setupTaskCarousel();
     refreshTaskFeed();
     window.setInterval(refreshTaskFeed, 30000);
