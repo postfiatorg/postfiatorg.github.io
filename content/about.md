@@ -39,7 +39,7 @@ It is built so that you can privately swap any asset on chain at low cost and ho
 
 ## Networks
 
-**Post Fiat L1 (postfiatl1v2).** NAVCoins, private swaps, the pfUSDC bridge and Cobalt governance. A666 opened at NAV $1.000000 and completed a 20-minute Ethereum mainnet round trip.
+**Post Fiat L1 (postfiatl1v2).** Verified cross-chain assets (NAVCoins), private swaps, the pfUSDC bridge to Ethereum, and Cobalt governance of the validator set.
 
 **Post Fiat validator network (postfiatd).** 53 validators, 39 of them with verified domains, publishing a model-assisted validator list.
 

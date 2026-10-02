@@ -1,0 +1,26 @@
+<script>
+// Plates come alive: hover on desktop, in-view on touch. Clips load only when first needed.
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData) return;
+  const figs = document.querySelectorAll('figure[data-anim]');
+  const ensure = f => {
+    let v = f.querySelector('video.anim');
+    if (!v) {
+      v = Object.assign(document.createElement('video'), {muted: true, loop: true, playsInline: true, preload: 'auto', className: 'anim', src: f.dataset.anim});
+      v.setAttribute('aria-hidden', 'true');
+      v.addEventListener('playing', () => f.classList.add('alive'));
+      (f.querySelector('img')?.parentElement === f ? f.querySelector('img') : f.firstChild).after(v);
+    }
+    return v;
+  };
+  const fit = (f, v) => { const i = f.querySelector('img'); if (i) { v.style.top = i.offsetTop + 'px'; v.style.height = i.offsetHeight + 'px'; } };
+  const play = f => { const v = ensure(f); fit(f, v); v.play().catch(() => {}); };
+  const stop = f => { f.classList.remove('alive'); f.querySelector('video.anim')?.pause(); };
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    figs.forEach(f => { f.addEventListener('mouseenter', () => play(f)); f.addEventListener('mouseleave', () => stop(f)); });
+  } else {
+    const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? play(e.target) : stop(e.target)), {threshold: .6});
+    figs.forEach(f => io.observe(f));
+  }
+})();
+</script>

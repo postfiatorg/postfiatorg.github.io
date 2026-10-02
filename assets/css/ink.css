@@ -555,3 +555,10 @@ h1,h2,.display{text-wrap:balance}
   .hero .plate-video video{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%),linear-gradient(0deg,transparent 0,#000 8%,#000 92%,transparent 100%);-webkit-mask-composite:source-in;
     mask-image:linear-gradient(90deg,transparent 0,#000 12%),linear-gradient(0deg,transparent 0,#000 8%,#000 92%,transparent 100%);mask-composite:intersect}
 }
+
+/* Plates come alive on hover / in view */
+figure[data-anim]{position:relative;overflow:hidden}
+figure[data-anim] video.anim{position:absolute;left:0;top:0;width:100%;object-fit:cover;opacity:0;transition:opacity .45s ease;pointer-events:none}
+
+figure[data-anim].alive video.anim{opacity:1}
+@media (hover:hover){figure[data-anim]{cursor:crosshair}}
