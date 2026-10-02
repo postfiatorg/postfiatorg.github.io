@@ -1,0 +1,33 @@
+{{- $title := cond .IsHome site.Title (printf "%s · Post Fiat" .Title) -}}
+{{- $desc := cond .IsHome site.Params.description (.Params.summary | default .Summary | plainify | htmlUnescape | truncate 220) -}}
+{{- $img := .Params.image | default "images/ink/hero-og.jpg" | absURL -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="icon" href="/favicon.ico">
+<meta name="theme-color" content="#f2eee5">
+<meta property="og:site_name" content="Post Fiat">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:image" content="{{ $img }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@postfiatorg">
+<link rel="alternate" type="text/plain" title="LLM instructions" href="https://postfiat.org/llms.txt">
+<link rel="alternate" type="application/json" title="Machine-readable project summary" href="https://postfiat.org/postfiat-project.json">
+{{ with .OutputFormats.Get "markdown" }}<link rel="alternate" type="text/markdown" href="{{ .RelPermalink }}">{{ end }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
+{{- $css := resources.Get "css/ink.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- if .Params.math }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+  onload="renderMathInElement(document.querySelector('.prose'),{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>
+{{- end }}
+{{ partial "google_analytics.html" . }}

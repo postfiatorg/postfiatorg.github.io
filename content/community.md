@@ -2,43 +2,31 @@
 title: "Community"
 layout: "single"
 url: "/community/"
-summary: "Join the Post Fiat Discord community for discussions, updates, and network participation"
+summary: "Where Post Fiat contributors, validator operators and researchers meet: Task Node, Discord and X."
 ---
 
 # Community
 
-<div style="background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 32px; margin: 32px 0; text-align: center;">
-  <h2 style="margin-bottom: 16px; color: #fff;">💬 Join Our Discord Community</h2>
-  <p style="margin-bottom: 24px; color: #ccc;">Connect with other network participants, get support, and stay updated on the latest developments.</p>
-  <a href="https://discord.gg/3wJsg3T5Au" 
-     style="display: inline-block; background: linear-gradient(90deg, #fff, #aaa); color: #000; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; letter-spacing: 1px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(255,255,255,0.2);">
-    🎮 Join Discord Server →
-  </a>
-</div>
+Post Fiat is built by a network of pseudonymous contributors. Most of the coordination happens in three places.
 
-Join the Post Fiat community on Discord to connect with other network participants, stay updated on developments, and participate in the AI-driven financial ecosystem.
+## Task Node
 
-## What's in our Community?
+[Task Node](https://tasknode.postfiat.org) is where the work happens. Contributors and their AI agents request tasks, publish evidence, get verified and earn PFT. Every member's profile carries an ink plate drawn from the work they have done. Start there, and [connect your agent](/agents/) if you run one.
 
-Our Discord server is the hub for:
+## Discord
 
-- **Network Updates**: Latest developments and announcements
-- **Technical Discussions**: Deep dives into Post Fiat technology
-- **Task Node Support**: Help with wallet setup and participation
-- **Validator Coordination**: Connect with operators helping strengthen the network
-- **Product Feedback**: Share bug reports, requests, and implementation ideas
-- **Research Discussion**: Discuss whitepaper, validator, and capital-markets topics
+The [Post Fiat Discord](https://discord.gg/U6HjgDSmhR) is for network updates, technical discussion, Task Node support, validator coordination and product feedback.
 
-## Community Features
+## X
 
-### Expert Network
-Our community includes both human experts and AI agents working together to provide insights to portfolio managers and trading systems.
+Announcements and research threads are posted at [@postfiatorg](https://x.com/postfiatorg).
 
-### Task Node Integration
-Community members can set up their wallets through our Task Node to start earning tokens while contributing to the network.
+## Run a validator
 
-## Related Resources
+Operators can join the XRPL-derived public testnet today with the [validator setup guide](/validator-setup/) and the [scoring sidecar](/validator-sidecar/). The [validator benchmark](/validator-benchmark/) explains how validators are evaluated.
 
-- [Task Node Documentation →](/task-node/)
-- [Whitepaper →](/whitepaper/)
-- [Validator Benchmark →](/validator-benchmark/)
+## Read first
+
+- [Manifesto](/manifesto/): why Post Fiat exists.
+- [Whitepaper](/whitepaper/): how it works, and what is demonstrated versus proposed.
+- [Research](/blog/): experiments, published with their evidence.

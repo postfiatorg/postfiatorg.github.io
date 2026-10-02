@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{ partial "ink/head.html" . }}
+</head>
+<body>
+{{ partial "ink/mast.html" . }}
+<main id="main">
+  {{ $toc := and (gt (len .TableOfContents) 200) (ne .Params.show_toc false) }}
+    <header class="doc-head{{ if not $toc }} solo{{ end }}">
+    <div class="wrap">
+      <p class="label">Post Fiat{{ with .Params.kicker }} · {{ . }}{{ end }}</p>
+      <h1 class="mt-s">{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="sub">{{ . | plainify }}</p>{{ end }}
+    </div>
+  </header>
+  <div class="doc-layout{{ if not $toc }} solo{{ end }}">
+    {{ if $toc }}<aside class="toc" aria-label="Contents"><details open><summary class="label">Contents</summary>{{ .TableOfContents }}</details></aside>{{ end }}
+    <article class="prose page-prose">
+      {{ .Content }}
+    </article>
+  </div>
+</main>
+{{ partial "ink/foot.html" . }}
+{{ if $toc }}{{ partial "ink/toc-spy.html" . }}{{ end }}
+</body>
+</html>

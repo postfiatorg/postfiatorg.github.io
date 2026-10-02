@@ -1,32 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ .Title }} | Post Fiat</title>
-  <meta name="description" content="{{ .Summary | plainify }}" />
-  <link rel="canonical" href="{{ .Permalink }}" />
-  <link rel="alternate" type="text/markdown" href="{{ .Permalink }}index.md" title="Markdown version">
-  <link rel="alternate" type="text/plain" title="LLM instructions" href="https://postfiat.org/llms.txt" />
-  <meta property="og:title" content="{{ .Title }}" />
-  <meta property="og:description" content="{{ .Summary | plainify }}" />
-  <meta property="og:url" content="{{ .Permalink }}" />
-  <meta property="og:type" content="article" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+  {{ partial "ink/head.html" . }}
   <style>
-    :root{--black:#000;--surface:#101410;--pale:#ddffdc;--pale-2:#bad8b6;--muted:#83917f;--green:#7fee64;--line:rgba(221,255,220,.18);--max:1340px;--reading:920px}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--pale);background:#000;font-family:"Inter Tight",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55;overflow-x:hidden}
-    body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(221,255,220,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(221,255,220,.025) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(180deg,rgba(0,0,0,.74),transparent 78%);z-index:0}body::after{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 50% -8%,rgba(127,238,100,.16),transparent 34%),linear-gradient(180deg,transparent 0%,#000 72%);z-index:0}
-    a{color:inherit}button{font:inherit}.page{position:relative;z-index:1}.container{width:min(calc(100% - 32px),var(--max));margin-inline:auto}.skip-link{position:absolute;left:16px;top:16px;z-index:200;padding:10px 14px;border-radius:999px;background:var(--green);color:#000;transform:translateY(-150%)}.skip-link:focus{transform:translateY(0)}
-    .site-header{position:sticky;top:18px;z-index:50;width:min(calc(100% - 28px),var(--max));margin:18px auto 0}.nav-shell{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;min-height:54px;padding:9px 10px;border:1px solid rgba(221,255,220,.12);border-radius:999px;background:rgba(25,30,26,.88);backdrop-filter:blur(18px);box-shadow:0 14px 40px rgba(0,0,0,.34)}.brand{display:flex;align-items:center;gap:10px;min-width:0;padding-left:12px;text-decoration:none;font-weight:700}.brand img{width:30px;height:30px;object-fit:contain}.brand span{font-size:1.02rem;white-space:nowrap}.nav-links{display:flex;align-items:center;justify-content:center;gap:24px}.nav-links a,.nav-actions a{color:var(--pale);text-decoration:none;font-size:.88rem;opacity:.9;transition:color .18s ease,opacity .18s ease}.nav-links a:hover,.nav-actions a:hover,.nav-links a[aria-current=page]{color:var(--green);opacity:1}.nav-actions{display:flex;align-items:center;justify-content:flex-end;gap:14px}.signup-link{display:inline-flex;align-items:center;gap:8px;padding:4px 4px 4px 10px;border-radius:999px;color:var(--green)!important;overflow:hidden}.signup-link .arrow{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#000}.menu-button{display:none;width:36px;height:36px;border:0;border-radius:50%;background:transparent;color:var(--pale);align-items:center;justify-content:center;justify-self:end;cursor:pointer;gap:4px;flex-direction:column}.menu-button span,.menu-button::before,.menu-button::after{content:"";display:block;width:18px;height:1.5px;background:currentColor;border-radius:4px}.menu-button[aria-expanded=true] span{opacity:0}.menu-button[aria-expanded=true]::before{transform:translateY(5.5px) rotate(45deg)}.menu-button[aria-expanded=true]::after{transform:translateY(-5.5px) rotate(-45deg)}
-    main{padding:56px 0 92px}.article-shell{width:min(100%,var(--reading));margin:0 auto}.post-header{padding:48px 0 30px;border-bottom:1px solid var(--line);margin-bottom:34px}.breadcrumb{display:inline-flex;margin-bottom:24px;color:var(--green);font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;text-decoration:none;text-transform:uppercase;letter-spacing:.08em}.post-header h1{max-width:880px;margin:0 0 18px;color:var(--pale);font-size:clamp(2.7rem,6vw,5.6rem);line-height:.94;font-weight:650;letter-spacing:0;text-wrap:balance}.post-summary{max-width:760px;margin:0 0 22px;color:var(--pale-2);font-size:1.16rem;line-height:1.55}.post-meta{display:flex;flex-wrap:wrap;gap:10px 14px;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem}.post-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.post-tags span{border:1px solid rgba(127,238,100,.25);border-radius:999px;padding:4px 9px;color:var(--green);font-size:.75rem}
-    .post-actions{display:flex;align-items:center;gap:10px;margin-top:22px}.copy-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:40px;padding:9px 14px;border:1px solid rgba(127,238,100,.34);border-radius:999px;background:rgba(127,238,100,.08);color:var(--green);font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;font-weight:650;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease}.copy-button:hover{border-color:rgba(127,238,100,.72);background:rgba(127,238,100,.14);color:var(--pale);transform:translateY(-1px)}.copy-button svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
-    .post-toc{margin:0 0 34px;border:1px solid var(--line);border-radius:8px;background:rgba(16,20,16,.72);overflow:hidden}.post-toc summary{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:52px;padding:14px 18px;color:var(--pale);cursor:pointer;font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;font-weight:650;text-transform:uppercase;letter-spacing:.08em;list-style:none}.post-toc summary::-webkit-details-marker{display:none}.post-toc summary::after{content:"+";display:grid;place-items:center;width:28px;height:28px;border:1px solid rgba(127,238,100,.32);border-radius:50%;color:var(--green);font-family:"Inter Tight",system-ui,sans-serif;font-size:1rem;line-height:1}.post-toc[open] summary{border-bottom:1px solid rgba(221,255,220,.12)}.post-toc[open] summary::after{content:"-"}.post-toc-body{padding:16px 18px 18px}.post-toc #TableOfContents ul{margin:0;padding:0;list-style:none}.post-toc #TableOfContents ul ul{margin:.45rem 0 0 1rem;padding-left:1rem;border-left:1px solid rgba(221,255,220,.12)}.post-toc #TableOfContents li{margin:.34rem 0}.post-toc #TableOfContents a{color:var(--pale-2);text-decoration:none;border-bottom:0;font-size:.96rem;line-height:1.35}.post-toc #TableOfContents a:hover{color:var(--green)}
-    .post-content{color:var(--pale-2);font-size:1.08rem;line-height:1.8}.post-content>:first-child{margin-top:0}.post-content h2{margin:3.4rem 0 1rem;padding-top:1.1rem;border-top:1px solid rgba(221,255,220,.16);color:var(--pale);font-size:clamp(1.55rem,2.4vw,2.15rem);line-height:1.12;font-weight:580}.post-content h3{margin:2.1rem 0 .72rem;color:var(--pale);font-size:1.24rem;line-height:1.28;font-weight:650}.post-content h4{margin:1.45rem 0 .55rem;color:var(--pale);font-size:1.04rem;font-weight:650}.post-content p,.post-content ul,.post-content ol,.post-content table,.post-content blockquote{margin:0 0 1.1rem}.post-content ul,.post-content ol{padding-left:1.25rem}.post-content li{margin:.32rem 0}.post-content strong{color:var(--pale)}.post-content a{color:var(--green);text-decoration:none;border-bottom:1px solid rgba(127,238,100,.36)}.post-content a:hover{color:var(--pale);border-bottom-color:rgba(221,255,220,.65)}.post-content blockquote{padding:1rem 1.15rem;border-left:3px solid rgba(127,238,100,.72);background:rgba(127,238,100,.06);color:var(--pale)}.post-content code{padding:.15rem .4rem;border-radius:6px;background:rgba(221,255,220,.08);color:var(--pale);font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em}.post-content pre{overflow:auto;padding:1rem 1.1rem;border:1px solid rgba(221,255,220,.12);border-radius:8px;background:#070a07}.post-content pre code{padding:0;background:transparent}.post-content table{display:block;width:100%;overflow-x:auto;border-collapse:collapse;border-spacing:0;border:1px solid rgba(221,255,220,.14);border-radius:8px;background:rgba(221,255,220,.025)}.post-content thead{background:rgba(127,238,100,.08)}.post-content th,.post-content td{padding:.84rem .9rem;border-bottom:1px solid rgba(221,255,220,.1);text-align:left;vertical-align:top;min-width:140px}.post-content tbody tr:last-child td{border-bottom:none}.post-content .MathJax{color:var(--pale)}.post-content .research-diagram{margin:2rem 0 2.2rem}.post-content .research-diagram img{display:block;width:100%;height:auto;border:1px solid rgba(221,255,220,.16);border-radius:8px;background:#050805}.post-content .research-diagram figcaption{margin:.7rem 0 0;color:var(--muted);font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;line-height:1.55}
-    @media(max-width:1080px){.nav-shell{grid-template-columns:1fr auto}.nav-links,.nav-actions{display:none}.menu-button{display:flex}.nav-shell.is-open{border-radius:28px}.nav-shell.is-open .nav-links,.nav-shell.is-open .nav-actions{display:flex;grid-column:1/-1;justify-content:flex-start;flex-wrap:wrap;padding:8px 12px 10px;gap:12px 20px}}@media(max-width:720px){.container{width:min(calc(100% - 18px),var(--max))}.site-header{top:8px;width:min(calc(100% - 16px),var(--max));margin-top:8px}.brand img{width:26px;height:26px}.brand span{font-size:.94rem}main{padding:34px 0 72px}.post-header{padding-top:34px}.post-header h1{font-size:clamp(2.55rem,15vw,4rem)}.post-toc summary{padding:13px 14px}.post-toc-body{padding:14px}.post-content{font-size:1rem;line-height:1.74}.post-content h2{margin-top:2.8rem}.nav-shell.is-open .nav-links,.nav-shell.is-open .nav-actions{align-items:stretch;flex-direction:column;gap:2px;padding:8px 14px 14px}.nav-shell.is-open .nav-links a,.nav-shell.is-open .nav-actions a{border-top:1px solid rgba(221,255,220,.08);padding:9px 0}}
-    @media(max-width:720px){.post-actions{align-items:stretch}.copy-button{width:100%;min-height:44px}}
     {{ with resources.Get "css/extended/pfterminal-research.css" }}{{ .Content | safeCSS }}{{ end }}
     {{ with resources.Get "css/extended/agentic-index.css" }}{{ .Content | safeCSS }}{{ end }}
   </style>
@@ -46,51 +22,34 @@
   <script defer src="{{ "research/options-tee-indices/diagrams.js" | relURL }}"></script>
   {{ end }}
 </head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="page">
-    {{ partial "site_nav.html" . }}
-    <main id="main" class="container">
-      <article class="article-shell">
-        <header class="post-header">
-          {{ $breadcrumbLabel := .Params.breadcrumb_label | default "Research Blog" }}
-          {{ $breadcrumbURL := .Params.breadcrumb_url | default "/blog/" }}
-          <a class="breadcrumb" href="{{ $breadcrumbURL }}">{{ $breadcrumbLabel }}</a>
-          <h1>{{ .Title }}</h1>
-          <p class="post-summary">{{ .Summary }}</p>
-          <div class="post-meta">
-            <span>{{ .Date.Format "January 2, 2006" }}</span>
-            {{ with .Params.categories }}<span>{{ index . 0 }}</span>{{ end }}
-          </div>
-          {{ with .Params.tags }}
-            <div class="post-tags" aria-label="Tags">
-              {{ range . }}<span>{{ . }}</span>{{ end }}
-            </div>
-          {{ end }}
-          <div class="post-actions">
-            <button class="copy-button" id="copyArticleButton" type="button">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="9" y="9" width="13" height="13" rx="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span id="copyArticleLabel" data-default-label="Copy for LLM">Copy for LLM</span>
-            </button>
-          </div>
-        </header>
-        {{ if and .TableOfContents (ne .Params.show_toc false) }}
-          <details class="post-toc" open>
-            <summary>Table of Contents</summary>
-            <div class="post-toc-body">
-              {{ .TableOfContents }}
-            </div>
-          </details>
-        {{ end }}
-        <div class="post-content">
-          {{ .Content }}
+<body class="article">
+  {{ partial "ink/mast.html" . }}
+  <main id="main">
+    {{ $breadcrumbLabel := .Params.breadcrumb_label | default (cond (eq .Section "research") "Research note" "Research") }}
+    {{ $breadcrumbURL := .Params.breadcrumb_url | default "/blog/" }}
+    {{ $toc := and (gt (len .TableOfContents) 80) (ne .Params.show_toc false) }}
+    <header class="doc-head{{ if not $toc }} solo{{ end }}">
+      <div class="wrap">
+        <p class="label"><a href="{{ $breadcrumbURL }}" style="text-decoration:none">{{ $breadcrumbLabel }}</a> &nbsp;/&nbsp; {{ .Date.Format "2 January 2006" }}{{ with .Params.categories }} &nbsp;/&nbsp; {{ index . 0 }}{{ end }}{{ if .ReadingTime }} &nbsp;/&nbsp; {{ .ReadingTime }} min read{{ end }}</p>
+        <h1 class="mt-s">{{ .Title }}</h1>
+        {{ with .Params.summary | default .Summary }}<p class="sub">{{ . | plainify | htmlUnescape }}</p>{{ end }}
+        <div class="meta">
+          <button class="copy-btn" id="copyArticleButton" type="button"><span id="copyArticleLabel" data-default-label="Copy for LLM">Copy for LLM</span></button>
+          {{ with .OutputFormats.Get "markdown" }}<a class="copy-btn" style="text-decoration:none" href="{{ .RelPermalink }}">Markdown</a>{{ end }}
         </div>
+      </div>
+    </header>
+    <div class="doc-layout{{ if not $toc }} solo{{ end }}">
+      {{ if $toc }}
+      <aside class="toc" aria-label="Contents"><details open><summary class="label">Contents</summary>{{ .TableOfContents }}</details></aside>
+      {{ end }}
+      <article class="prose">
+        {{ .Content }}
       </article>
-    </main>
-  </div>
+    </div>
+  </main>
+  {{ partial "ink/foot.html" . }}
+  {{ partial "ink/toc-spy.html" . }}
   {{ $replayRiskDescription := "[Interactive diagram: Common Signal / Human Checks]\nThe page includes a simulator showing the replay pipeline as packet -> rule floor -> replay hash -> residual validator checks -> vote. Sliders let the reader vary validator count, verification rate, human catch probability, unchecked-follow rate, replay miss rate, and rotating deep-review seats. The intended lesson is that Qwen is one common signal; the safety tail comes from validators who still verify, challenge, fork, or override after the replay output is public." }}
   {{ $originationWorkbenchDescription := "[Interactive diagram: Origination Replay Workbench]\nThe page includes a three-view workbench comparing status-quo XRPL amendment origination with a public replayable origination packet. The visual shows private agenda formation -> amendment-shaped option -> validator vote on one side, and public packet -> pinned Qwen/SGLang replay -> forkable work item on the other. It displays the article's evidence counts: 31/46 direct Ripple-authored amendment XLS rows, 27 unresolved amendment packets, 138/138 schema-valid H200 replay runs, 27/27 main raw-output convergence, and three fork controls that changed both label and output hash. The diagram's point is that Origination Replay makes the upstream menu inspectable and forkable without claiming that an LLM should decide whether an amendment should pass." }}
   {{ $trustStateTransitionDescription := "[Diagram: trust as published file vs trust as protocol state]\nLeft branch: a publisher signs vl.json; operators may copy it or miss it; servers can hold different UNLs; overlap is assumed outside the protocol; the change is a new file and transition safety is not protocol-checkable. Right branch: Cobalt commits registry root G_t, trust-graph root T_t, and checker root chi_t as state; a transition packet G_t -> G_t+1 must pass local quorum inequalities, linkedness closure, old-new quorum intersection > B, bounded complete cover, and validation by old rules chi_t. Any failed check keeps G_t active; all checks passing activates G_t+1 with a replayable witness." }}
@@ -117,8 +76,6 @@
   {{ $articleMarkdown := printf "# %s\n\nDate: %s\nURL: %s\nSummary: %s\n\n%s" .Title (.Date.Format "January 2, 2006") .Permalink (.Summary | plainify) $copyRawContent }}
   <script id="articleMarkdownSource" type="application/json">{{ $articleMarkdown }}</script>
   <script>
-    const navShell=document.getElementById("navShell"),menuButton=document.getElementById("menuButton");
-    if(navShell&&menuButton){menuButton.addEventListener("click",()=>{const e=menuButton.getAttribute("aria-expanded")==="true";menuButton.setAttribute("aria-expanded",String(!e));menuButton.setAttribute("aria-label",e?"Open menu":"Close menu");navShell.classList.toggle("is-open",!e)})}
     const copyArticleButton=document.getElementById("copyArticleButton"),copyArticleLabel=document.getElementById("copyArticleLabel"),articleMarkdownSource=document.getElementById("articleMarkdownSource");
     const fallbackCopy=(text)=>{const area=document.createElement("textarea");area.value=text;area.setAttribute("readonly","");area.style.position="fixed";area.style.top="0";area.style.left="-9999px";document.body.appendChild(area);area.select();const copied=document.execCommand("copy");document.body.removeChild(area);return copied};
     if(copyArticleButton&&copyArticleLabel&&articleMarkdownSource){copyArticleButton.addEventListener("click",async()=>{const originalLabel=copyArticleLabel.dataset.defaultLabel||"Copy for LLM";try{const markdown=JSON.parse(articleMarkdownSource.textContent||"\"\"");if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(markdown)}else if(!fallbackCopy(markdown)){throw new Error("Clipboard unavailable")}copyArticleLabel.textContent="Copied"}catch(error){copyArticleLabel.textContent="Copy Failed"}window.setTimeout(()=>{copyArticleLabel.textContent=originalLabel},1800)})}

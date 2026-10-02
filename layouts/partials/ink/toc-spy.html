@@ -1,0 +1,24 @@
+<script>
+(() => {
+  const toc = document.querySelector('.toc'); if (!toc) return;
+  const links = [...toc.querySelectorAll('a[href^="#"]')]; if (!links.length) return;
+  const heads = links.map(a => document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)))).filter(Boolean);
+  const desktop = window.matchMedia('(min-width:1081px)');
+  if (!desktop.matches) toc.querySelector('details')?.removeAttribute('open');
+  let raf = 0;
+  const update = () => {
+    raf = 0;
+    let cur = heads[0];
+    for (const h of heads) { if (h.getBoundingClientRect().top <= 120) cur = h; else break; }
+    links.forEach(a => a.classList.remove('on'));
+    toc.querySelectorAll('li.open').forEach(li => li.classList.remove('open'));
+    const a = links.find(l => decodeURIComponent(l.getAttribute('href').slice(1)) === cur?.id);
+    if (!a) return;
+    a.classList.add('on');
+    for (let li = a.closest('li'); li && toc.contains(li); li = li.parentElement.closest('li')) li.classList.add('open');
+    if (desktop.matches) { const r = a.getBoundingClientRect(), t = toc.getBoundingClientRect(); if (r.top < t.top + 40 || r.bottom > t.bottom - 40) toc.scrollTop += r.top - t.top - t.height / 3; }
+  };
+  addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, {passive:true});
+  update();
+})();
+</script>

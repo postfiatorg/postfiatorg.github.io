@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{ partial "ink/head.html" . }}
+</head>
+<body>
+{{ partial "ink/mast.html" . }}
+<main id="main">
+  <header class="doc-head"><div class="wrap"><p class="label">Post Fiat</p><h1 class="mt-s">{{ .Title }}</h1>{{ with .Description }}<p class="sub">{{ . }}</p>{{ end }}</div></header>
+  <div class="wrap" style="padding:48px 0 120px">
+    {{ with .Content }}<div class="prose" style="max-width:var(--read);margin-bottom:40px">{{ . }}</div>{{ end }}
+    <ul class="index">
+      {{ range .Pages.ByDate.Reverse }}
+      <li><a href="{{ .RelPermalink }}"><span class="d">{{ .Date.Format "2006-01-02" }}</span><span><span class="t">{{ .Title }}</span>{{ with .Params.summary | default .Summary }}<span class="s">{{ . | plainify | htmlUnescape | truncate 180 }}</span>{{ end }}</span><span class="go">→</span></a></li>
+      {{ end }}
+    </ul>
+  </div>
+</main>
+{{ partial "ink/foot.html" . }}
+</body>
+</html>

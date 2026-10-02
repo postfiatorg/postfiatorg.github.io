@@ -1,0 +1,17 @@
+{{- $p := .RelPermalink -}}
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast" id="mast">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Post Fiat home"><img src="/media-kit/logo.svg" alt=""><span>Post Fiat</span></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="mast" onclick="var m=document.getElementById('mast');var o=m.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
+    <nav aria-label="Primary">
+      <a href="/manifesto/"{{ if eq $p "/manifesto/" }} aria-current="page"{{ end }}>Manifesto</a>
+      <a href="/whitepaper/"{{ if hasPrefix $p "/whitepaper/" }} aria-current="page"{{ end }}>Whitepaper</a>
+      <a href="/blog/"{{ if or (hasPrefix $p "/blog/") (eq .Section "blog") (eq .Section "research") }} aria-current="page"{{ end }}>Research</a>
+      <a href="/task-node/"{{ if eq $p "/task-node/" }} aria-current="page"{{ end }}>Task Node</a>
+      <a href="/validator-setup/"{{ if hasPrefix $p "/validator" }} aria-current="page"{{ end }}>Validators</a>
+      <a href="https://github.com/postfiatorg" rel="noopener">GitHub</a>
+      <a class="cta" href="https://tasknode.postfiat.org" rel="noopener">Join Task Node</a>
+    </nav>
+  </div>
+</header>
