@@ -1,0 +1,58 @@
+<svg viewBox="0 0 1200 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Standard liquidity around NAV</title>
+  <desc id="desc">The primary market mints and burns at NAV. The public pool concentrates liquidity in a band around NAV. A keeper sells when the pool is above NAV and buys when it is below, then squares inventory at NAV.</desc>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d100b"/><stop offset="1" stop-color="#050604"/></linearGradient>
+    <radialGradient id="wash" cx="70%" cy="12%" r="76%"><stop offset="0" stop-color="#d6f750" stop-opacity=".11"/><stop offset="1" stop-color="#d6f750" stop-opacity="0"/></radialGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#d6f750"/></marker>
+    <marker id="arrowv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#c4b0f5"/></marker>
+    <marker id="arrowm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#98a08d"/></marker>
+    <style>
+      .sans{font-family:Inter,"Helvetica Neue",Arial,sans-serif}.mono{font-family:Menlo,Consolas,monospace}.kicker{font-size:12px;letter-spacing:2.6px}.label{font-size:11px;letter-spacing:1.8px}.title{font-size:29px;font-weight:700;letter-spacing:-.5px}.node-title{font-size:16px;font-weight:700}.copy{font-size:12.5px}.big{font-size:22px;font-weight:700}.muted{fill:#98a08d}.paper{fill:#eef1e6}.lime{fill:#d6f750}.violet{fill:#c4b0f5}.red{fill:#f08a7a}
+    </style>
+  </defs>
+  <rect x="2" y="2" width="1196" height="636" rx="28" fill="url(#panel)"/>
+  <rect x="2" y="2" width="1196" height="636" rx="28" fill="url(#wash)"/>
+  <rect x="2" y="2" width="1196" height="636" rx="28" fill="none" stroke="#fff" stroke-opacity=".09"/>
+  <text x="52" y="58" class="mono kicker lime">PIECE 02 · STANDARD LIQUIDITY</text>
+  <text x="52" y="98" class="sans title paper">Markets built to sit on the proven number</text>
+  <text x="52" y="126" class="sans copy muted">Primary market at NAV + liquidity banded around NAV + a keeper = price cannot drift past the arbitrage cost</text>
+  <line x1="120" y1="300" x2="1080" y2="300" stroke="#98a08d" stroke-opacity=".6"/>
+  <text x="1080" y="328" class="mono label muted" text-anchor="end">pool price</text>
+  <rect x="470" y="230" width="260" height="70" rx="10" fill="#d6f750" fill-opacity=".14" stroke="#d6f750" stroke-opacity=".5"/>
+  <text x="600" y="258" class="mono label lime" text-anchor="middle">LIQUIDITY BAND</text>
+  <text x="600" y="280" class="sans copy paper" text-anchor="middle">tight, because NAV moves slowly</text>
+  <line x1="600" y1="210" x2="600" y2="310" stroke="#d6f750" stroke-width="2"/>
+  <text x="600" y="202" class="mono label lime" text-anchor="middle">N  (proven NAV)</text>
+  <text x="270" y="328" class="sans copy muted" text-anchor="middle">below NAV</text>
+  <text x="930" y="328" class="sans copy muted" text-anchor="middle">above NAV</text>
+  <path d="M920 270 C860 190 760 190 740 240" stroke="#c4b0f5" stroke-width="1.6" fill="none" marker-end="url(#arrowv)"/>
+  <text x="930" y="182" class="mono label violet" text-anchor="middle">KEEPER SELLS</text>
+  <text x="930" y="202" class="sans copy muted" text-anchor="middle">pool above NAV</text>
+  <path d="M280 270 C340 190 440 190 460 240" stroke="#c4b0f5" stroke-width="1.6" fill="none" marker-end="url(#arrowv)"/>
+  <text x="270" y="182" class="mono label violet" text-anchor="middle">KEEPER BUYS</text>
+  <text x="270" y="202" class="sans copy muted" text-anchor="middle">pool below NAV</text>
+  <rect x="52" y="380" width="330" height="180" rx="15" fill="#0b0d09" stroke="#d6f750" stroke-opacity=".55"/>
+  <text x="72" y="409" class="mono label lime">PRIMARY MARKET</text>
+  <text x="72" y="437" class="sans node-title paper">Mint and burn at N</text>
+  <text x="72" y="461" class="sans copy muted">new units against new money at NAV</text>
+  <text x="72" y="480" class="sans copy muted">burn units for a pro-rata slice of</text>
+  <text x="72" y="499" class="sans copy muted">the reserve at NAV</text>
+  <text x="72" y="518" class="sans copy muted">sets the anchor for everyone</text>
+  <rect x="435" y="380" width="330" height="180" rx="15" fill="#0b0d09" stroke="#fff" stroke-opacity=".16"/>
+  <text x="455" y="409" class="mono label lime">PUBLIC POOL</text>
+  <text x="455" y="437" class="sans node-title paper">Instant trades near N</text>
+  <text x="455" y="461" class="sans copy muted">wrapped NAVCoin / USDC</text>
+  <text x="455" y="480" class="sans copy muted">Uniswap v4 on Ethereum</text>
+  <text x="455" y="499" class="sans copy muted">liquidity concentrated in the band</text>
+  <text x="455" y="518" class="sans copy muted">same template for every NAVCoin</text>
+  <rect x="818" y="380" width="330" height="180" rx="15" fill="#0b0d09" stroke="#c4b0f5" stroke-opacity=".16"/>
+  <text x="838" y="409" class="mono label lime">KEEPER</text>
+  <text x="838" y="437" class="sans node-title paper">Closes the gap</text>
+  <text x="838" y="461" class="sans copy muted">sells above NAV, buys below</text>
+  <text x="838" y="480" class="sans copy muted">squares inventory at NAV through</text>
+  <text x="838" y="499" class="sans copy muted">the primary market</text>
+  <text x="838" y="518" class="sans copy muted">max gap ≈ round-trip cost</text>
+  <path d="M983 560 L983 584 L217 584 L217 564" stroke="#c4b0f5" stroke-width="1.6" fill="none" marker-end="url(#arrowv)" stroke-dasharray="5 5"/>
+  <text x="600" y="604" class="mono label violet" text-anchor="middle">keeper inventory squared at NAV through the primary market</text>
+</svg>

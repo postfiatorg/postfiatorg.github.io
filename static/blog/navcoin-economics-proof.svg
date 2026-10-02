@@ -1,0 +1,74 @@
+<svg viewBox="0 0 1200 660" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Standard NAVCoin reserve proof</title>
+  <desc id="desc">Reserve accounts on several venues are read at a fixed block, valued under a published policy and netted by a zero-knowledge program. The output is one reserve packet with V, S and N that validators verify before NAV is accepted.</desc>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d100b"/><stop offset="1" stop-color="#050604"/></linearGradient>
+    <radialGradient id="wash" cx="70%" cy="12%" r="76%"><stop offset="0" stop-color="#d6f750" stop-opacity=".11"/><stop offset="1" stop-color="#d6f750" stop-opacity="0"/></radialGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#d6f750"/></marker>
+    <marker id="arrowv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#c4b0f5"/></marker>
+    <marker id="arrowm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#98a08d"/></marker>
+    <style>
+      .sans{font-family:Inter,"Helvetica Neue",Arial,sans-serif}.mono{font-family:Menlo,Consolas,monospace}.kicker{font-size:12px;letter-spacing:2.6px}.label{font-size:11px;letter-spacing:1.8px}.title{font-size:29px;font-weight:700;letter-spacing:-.5px}.node-title{font-size:16px;font-weight:700}.copy{font-size:12.5px}.big{font-size:22px;font-weight:700}.muted{fill:#98a08d}.paper{fill:#eef1e6}.lime{fill:#d6f750}.violet{fill:#c4b0f5}.red{fill:#f08a7a}
+    </style>
+  </defs>
+  <rect x="2" y="2" width="1196" height="656" rx="28" fill="url(#panel)"/>
+  <rect x="2" y="2" width="1196" height="656" rx="28" fill="url(#wash)"/>
+  <rect x="2" y="2" width="1196" height="656" rx="28" fill="none" stroke="#fff" stroke-opacity=".09"/>
+  <text x="52" y="58" class="mono kicker lime">PIECE 01 · PROOF OF RESERVES</text>
+  <text x="52" y="98" class="sans title paper">Any strategy, one packet, one check</text>
+  <text x="52" y="126" class="sans copy muted">Messy reserves in → the same six fields out → validators verify → NAV is a property of the ledger</text>
+  <rect x="52" y="176" width="250" height="94" rx="15" fill="#0b0d09" stroke="#fff" stroke-opacity=".16"/>
+  <text x="72" y="205" class="mono label lime">FELIX ACCOUNT</text>
+  <text x="72" y="233" class="sans node-title paper">BMNR stock</text>
+  <text x="72" y="257" class="sans copy muted">tokenized shares, Ethereum</text>
+  <rect x="52" y="286" width="250" height="94" rx="15" fill="#0b0d09" stroke="#fff" stroke-opacity=".16"/>
+  <text x="72" y="315" class="mono label lime">HYPERLIQUID ACCOUNT</text>
+  <text x="72" y="343" class="sans node-title paper">BMNR perp short</text>
+  <text x="72" y="367" class="sans copy muted">position, margin, PnL</text>
+  <rect x="52" y="396" width="250" height="94" rx="15" fill="#0b0d09" stroke="#fff" stroke-opacity=".16"/>
+  <text x="72" y="425" class="mono label lime">CASH WALLET</text>
+  <text x="72" y="453" class="sans node-title paper">USDC</text>
+  <text x="72" y="477" class="sans copy muted">Ethereum and Arbitrum</text>
+  <rect x="52" y="506" width="250" height="94" rx="15" fill="#0b0d09" stroke="#fff" stroke-opacity=".16" stroke-dasharray="6 6"/>
+  <text x="72" y="535" class="mono label lime">ANY PROVABLE ACCOUNT</text>
+  <text x="72" y="563" class="sans node-title paper">Aave, spot, XMR …</text>
+  <text x="72" y="587" class="sans copy muted">same pipeline, new reader</text>
+  <rect x="372" y="236" width="270" height="260" rx="15" fill="#0b0d09" stroke="#d6f750" stroke-opacity=".55"/>
+  <text x="392" y="265" class="mono label lime">SP1 RESERVE PROOF</text>
+  <text x="392" y="293" class="sans node-title paper">Read, value, net</text>
+  <text x="392" y="317" class="sans copy muted">every account at one fixed block</text>
+  <text x="392" y="336" class="sans copy muted">each position under the</text>
+  <text x="392" y="355" class="sans copy muted">published valuation policy</text>
+  <text x="392" y="374" class="sans copy muted">assets minus liabilities</text>
+  <text x="392" y="393" class="sans copy muted">→ one zero-knowledge proof</text>
+  <path d="M302 223 C340 223 340 366 370 366" stroke="#98a08d" stroke-width="1.6" fill="none" marker-end="url(#arrowm)"/>
+  <path d="M302 333 C340 333 340 366 370 366" stroke="#98a08d" stroke-width="1.6" fill="none" marker-end="url(#arrowm)"/>
+  <path d="M302 443 C340 443 340 366 370 366" stroke="#98a08d" stroke-width="1.6" fill="none" marker-end="url(#arrowm)"/>
+  <path d="M302 553 C340 553 340 366 370 366" stroke="#98a08d" stroke-width="1.6" fill="none" marker-end="url(#arrowm)"/>
+  <rect x="712" y="196" width="230" height="340" rx="15" fill="#0b0d09" stroke="#d6f750" stroke-opacity=".55"/>
+  <text x="732" y="225" class="mono label lime">RESERVE PACKET</text>
+  <text x="732" y="262" class="mono copy lime">V</text>
+  <text x="800" y="262" class="sans copy paper">verified net assets</text>
+  <text x="732" y="302" class="mono copy lime">S</text>
+  <text x="800" y="302" class="sans copy paper">circulating supply</text>
+  <text x="732" y="342" class="mono copy lime">N</text>
+  <text x="800" y="342" class="sans copy paper">NAV = floor(V / S)</text>
+  <text x="732" y="382" class="mono copy lime">epoch</text>
+  <text x="800" y="382" class="sans copy paper">which snapshot</text>
+  <text x="732" y="422" class="mono copy lime">policy</text>
+  <text x="800" y="422" class="sans copy paper">valuation rules hash</text>
+  <text x="732" y="462" class="mono copy lime">profile</text>
+  <text x="800" y="462" class="sans copy paper">program + accounts</text>
+  <path d="M644 366 L708 366" stroke="#d6f750" stroke-width="1.6" fill="none" marker-end="url(#arrow)"/>
+  <rect x="1000" y="236" width="150" height="260" rx="15" fill="#0b0d09" stroke="#fff" stroke-opacity=".16"/>
+  <text x="1020" y="265" class="mono label lime">VALIDATORS</text>
+  <text x="1020" y="293" class="sans node-title paper">Verify</text>
+  <text x="1020" y="317" class="sans copy muted">proof valid?</text>
+  <text x="1020" y="336" class="sans copy muted">packet fresh?</text>
+  <text x="1020" y="355" class="sans copy muted">N = V / S?</text>
+  <text x="1020" y="374" class="sans copy muted">then accept</text>
+  <text x="1020" y="393" class="sans copy muted">the epoch</text>
+  <path d="M944 366 L996 366" stroke="#d6f750" stroke-width="1.6" fill="none" marker-end="url(#arrow)"/>
+  <text x="712" y="580" class="sans copy paper">Every NAVCoin publishes these same fields.</text>
+  <text x="712" y="600" class="sans copy muted">Wallets, pools and lenders integrate once.</text>
+</svg>
