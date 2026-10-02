@@ -5,7 +5,7 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    - cron: "17 */6 * * *" # refresh community cards from the Task Node directory
+    - cron: "17 * * * *" # hourly: refresh the Hive feed and community cards from Task Node
 
 permissions:
   contents: read
@@ -38,8 +38,8 @@ jobs:
       - name: Install Node.js deps
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
 
-      - name: Sync community cards from Task Node
-        run: node scripts/sync_community_profiles.mjs || echo "::warning::Task Node directory unavailable; using committed community snapshot"
+      - name: Sync Hive feed and community cards from Task Node
+        run: node scripts/sync_tasknode.mjs || echo "::warning::Task Node unavailable; using committed snapshots"
 
       - name: Check relay-wallet guidance surfaces
         run: node scripts/check_relay_wallet_guidance.mjs
