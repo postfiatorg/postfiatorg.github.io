@@ -24,8 +24,9 @@ const pfpCid = new Map(directory.map((member) => [member.accountId, member.heroN
 
 // 512px thumbnails are generated on first request (HTTP 202 while warming).
 // Wait until each is served; fall back to the full image so no card is broken.
-async function nftImageUrl(cid) {
-  const thumbnail = `${origin}/api/profile/nft/pfp/${encodeURIComponent(cid)}?size=512`;
+async function nftImageUrl(cid, size = 512) {
+  // v=2: earlier 512px URLs served blurry upscales and are cached as immutable.
+  const thumbnail = `${origin}/api/profile/nft/pfp/${encodeURIComponent(cid)}?size=${size}&v=2`;
   for (let attempt = 0; attempt < 8; attempt += 1) {
     const result = await fetch(thumbnail, { signal: AbortSignal.timeout(30_000) }).catch(() => null);
     await result?.arrayBuffer().catch(() => null);
@@ -70,14 +71,20 @@ console.log(`Synced ${items.length} Hive feed items.`);
 const members = directory.slice(0, maxCards);
 if (members.length < 4) throw new Error(`Task Node directory returned only ${members.length} members with NFTs`);
 const cards = await Promise.all(members.map(async (member) => {
-  const art = member.heroNft.metadataJson?.art || {};
   const wallet = String(member.wallet || '');
+  const displayName = member.handle ? `@${member.handle}` : member.displayName || 'Task Node member';
+  const profile = member.profile || {};
+  const hiRes = await nftImageUrl(member.heroNft.imageCid, 1024);
   return {
     public_slug: wallet ? `${wallet.slice(0, 6)}…${wallet.slice(-4)}` : 'Task Node member',
-    display_name: member.handle ? `@${member.handle}` : member.displayName || 'Task Node member',
+    display_name: displayName,
+    role_title: profile.roleTitle && profile.roleTitle !== displayName ? profile.roleTitle : '',
+    summary: profile.summary || '',
+    skills: profile.skills || [],
     profile_url: `${origin}/#/profile?account=${encodeURIComponent(member.accountId)}`,
     nft_image_url: await nftImageUrl(member.heroNft.imageCid),
-    creature: art.creature ? `${art.creature} · Hyperstition ${art.hyperstition ?? 0}` : '',
+    nft_image_2x_url: hiRes.includes('size=1024') ? hiRes : '',
+    creature: member.heroNft.metadataJson?.art?.creature || '',
     network_tasks: Number(member.networkTasks) || 0,
     pft_earned: Math.round(Number(member.rewards) || 0).toLocaleString('en-US'),
     alignment: Number.isFinite(member.alignment) ? member.alignment : '—',
