@@ -18,39 +18,9 @@ async function taskNodeDocument(path) {
   return (await response.json()).document || {};
 }
 
-// Hive feed: the latest contributor actions across active Hive boards. The value
-// accountability board is an internal compliance check, not network work.
-const hiveProjects = Object.values((await taskNodeDocument('/api/hive/projects')).projects || {})
-  .filter((project) => project.id !== 'board_value_accountability');
-const taskPft = new Map(hiveProjects.flatMap((project) => project.tasks || []).map((task) => [task.taskId, Number(task.pft) || 0]));
-const actions = {
-  rewarded: (pft) => (pft ? `Rewarded ${pft.toLocaleString('en-US')} PFT.` : 'Rewarded.'),
-  verification_response_submitted: () => 'Submitted evidence for verification.',
-  verification_requested: () => 'The verifier asked for more evidence.',
-  accepted: () => 'Accepted the task.',
-};
-const items = hiveProjects.flatMap((project) => project.activity || [])
-  .filter((event) => actions[event.action] && event.task && event.updatedAt)
-  .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
-  .filter((event, _, all) => all.filter((other) => other.accountId === event.accountId && other.updatedAt >= event.updatedAt).length <= 2) // mix contributors
-  .slice(0, maxFeedItems)
-  .map((event) => ({
-    category: event.project,
-    timestamp: event.updatedAt,
-    display_time: utc(event.updatedAt),
-    title: event.task,
-    summary: actions[event.action](taskPft.get(event.taskId)),
-    actor: event.hasPublicProfile ? (event.hiveHandle ? `@${event.hiveHandle}` : event.displayName) : 'Task Node member',
-    links: event.proofTxHash ? [{ label: 'PFTL proof', url: `${explorer}${encodeURIComponent(event.proofTxHash)}` }] : [],
-  }));
-if (items.length < 3) throw new Error(`Task Node Hive returned only ${items.length} feed items`);
-const now = new Date().toISOString();
-writeJson('data/task_feed_snapshot.json', { generated_at: now, generated_at_display: utc(now), source: `${origin}/api/hive/projects`, items });
-console.log(`Synced ${items.length} Hive feed items.`);
-
-// Community cards: public, discoverable members with a profile NFT, in directory rank order.
-const members = ((await taskNodeDocument('/api/directory/leaderboard')).operators || []).filter((member) => member.heroNft?.imageCid).slice(0, maxCards);
-if (members.length < 4) throw new Error(`Task Node directory returned only ${members.length} members with NFTs`);
+// Public, discoverable members with a Task Node profile NFT (PFP), in directory rank order.
+const directory = ((await taskNodeDocument('/api/directory/leaderboard')).operators || []).filter((member) => member.heroNft?.imageCid);
+const pfpCid = new Map(directory.map((member) => [member.accountId, member.heroNft.imageCid]));
 
 // 512px thumbnails are generated on first request (HTTP 202 while warming).
 // Wait until each is served; fall back to the full image so no card is broken.
@@ -65,6 +35,40 @@ async function nftImageUrl(cid) {
   return `${origin}/api/profile/nft/image/${encodeURIComponent(cid)}`;
 }
 
+// Hive feed: the latest contributor actions across active Hive boards. The value
+// accountability board is an internal compliance check, not network work.
+const hiveProjects = Object.values((await taskNodeDocument('/api/hive/projects')).projects || {})
+  .filter((project) => project.id !== 'board_value_accountability');
+const taskPft = new Map(hiveProjects.flatMap((project) => project.tasks || []).map((task) => [task.taskId, Number(task.pft) || 0]));
+const actions = {
+  rewarded: (pft) => (pft ? `Rewarded ${pft.toLocaleString('en-US')} PFT.` : 'Rewarded.'),
+  verification_response_submitted: () => 'Submitted evidence for verification.',
+  verification_requested: () => 'The verifier asked for more evidence.',
+  accepted: () => 'Accepted the task.',
+};
+const feedEvents = hiveProjects.flatMap((project) => project.activity || [])
+  .filter((event) => actions[event.action] && event.task && event.updatedAt)
+  .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+  .filter((event, _, all) => all.filter((other) => other.accountId === event.accountId && other.updatedAt >= event.updatedAt).length <= 2) // mix contributors
+  .slice(0, maxFeedItems);
+const items = await Promise.all(feedEvents.map(async (event) => ({
+    category: event.project,
+    timestamp: event.updatedAt,
+    display_time: utc(event.updatedAt),
+    title: event.task,
+    summary: actions[event.action](taskPft.get(event.taskId)),
+    actor: event.hasPublicProfile ? (event.hiveHandle ? `@${event.hiveHandle}` : event.displayName) : 'Task Node member',
+    pfp_url: event.hasPublicProfile && pfpCid.has(event.accountId) ? await nftImageUrl(pfpCid.get(event.accountId)) : '',
+    links: event.proofTxHash ? [{ label: 'PFTL proof', url: `${explorer}${encodeURIComponent(event.proofTxHash)}` }] : [],
+  })));
+if (items.length < 3) throw new Error(`Task Node Hive returned only ${items.length} feed items`);
+const now = new Date().toISOString();
+writeJson('data/task_feed_snapshot.json', { generated_at: now, generated_at_display: utc(now), source: `${origin}/api/hive/projects`, items });
+console.log(`Synced ${items.length} Hive feed items.`);
+
+// Community cards: the top-ranked members with a PFP.
+const members = directory.slice(0, maxCards);
+if (members.length < 4) throw new Error(`Task Node directory returned only ${members.length} members with NFTs`);
 const cards = await Promise.all(members.map(async (member) => {
   const art = member.heroNft.metadataJson?.art || {};
   const wallet = String(member.wallet || '');

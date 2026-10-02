@@ -660,6 +660,8 @@
         box-shadow .22s ease;
       will-change:transform, opacity, filter;
     }
+    .feed-preview-item.has-pfp{padding-right:172px}
+    .feed-pfp{position:absolute;top:22px;right:22px;width:128px;height:128px;object-fit:cover;border:1px solid rgba(127,238,100,.28);border-radius:8px;background:#0d120d}
     .feed-preview-item::before{
       content:"";
       position:absolute;
@@ -1753,6 +1755,8 @@
         min-height:240px;
         padding:18px;
       }
+      .feed-preview-item.has-pfp{padding-right:110px}
+      .feed-pfp{top:18px;right:18px;width:76px;height:76px}
       .feed-nav{
         width:38px;
         height:38px;
@@ -2345,7 +2349,8 @@
               <div class="task-feed-preview" role="region" aria-label="Recent Task Node updates carousel" tabindex="0">
                 <div class="feed-carousel-track">
               {{ range site.Data.task_feed_snapshot.items }}
-              <article class="feed-preview-item">
+              <article class="feed-preview-item{{ if .pfp_url }} has-pfp{{ end }}">
+                {{ with .pfp_url }}<img class="feed-pfp" src="{{ . }}" alt="" width="512" height="512" loading="lazy" decoding="async">{{ end }}
                 <div class="feed-preview-meta mono">{{ .category }}</div>
                 <time class="mono" datetime="{{ .timestamp }}">{{ .display_time }}</time>
                 <h3>{{ .title }}</h3>
