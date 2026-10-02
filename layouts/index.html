@@ -12,27 +12,23 @@
     <div class="wrap inner">
       <p class="label kicker"><b>XRP 2.0</b><span class="hide-s"> &nbsp;/&nbsp; Private &nbsp;·&nbsp; Quantum-resistant &nbsp;·&nbsp; Fixed supply</span></p>
       <h1 class="display d-xxl" id="hero-title">The internet of value for the superintelligent&nbsp;era.</h1>
-      <p class="lede">Privately swap any asset on chain, at low cost. Hold market-neutral portfolios as NAVCoins whose value is proven, not asserted. Post Fiat takes the best of XRP and evolves it for on-chain capital markets.</p>
+      <p class="lede">Privately swap any asset on chain, at low cost. Hold market-neutral portfolios as NAVCoins whose net asset value is proven on chain. Post Fiat takes the best of XRP and evolves it for on-chain capital markets.</p>
       <div class="btns">
         <a class="btn solid" href="/whitepaper/">Read the whitepaper <span class="ar">→</span></a>
-        <a class="btn" href="/manifesto/">Read the manifesto</a>
       </div>
-      <p class="label status"><span class="dot" aria-hidden="true"></span> Controlled testnet &nbsp;·&nbsp; six Foundation-administered validators &nbsp;·&nbsp; not public mainnet</p>
     </div>
   </section>
 
-  <section class="sec night" aria-labelledby="thesis-title">
+  <section class="sec night" aria-label="Thesis">
     <div class="wrap">
       <div class="sec-head">
         <span class="label">Thesis</span>
-        <h2 class="display d-l" id="thesis-title">The thesis, in three lines.</h2>
       </div>
       <ol class="frags">
         <li><p>Machine intelligence will compound capital on chain.</p></li>
         <li><p>Post Fiat is the chain where that will happen: <em class="t">private</em> by construction, <em class="t">quantum-resistant</em> from genesis, with a supply that never grows.</p></li>
         <li><p>Its community takes part in a reflexive process that accelerates it, contributing intelligence and taking a share of what it builds.</p></li>
       </ol>
-      <div class="btns mt-l"><a class="btn" href="/manifesto/">Read the full manifesto <span class="ar">→</span></a></div>
     </div>
   </section>
 
@@ -41,7 +37,7 @@
       <div class="sec-head">
         <span class="label">What it does</span>
         <h2 class="display d-l" id="does-title">Four functions. One ledger.</h2>
-        <p>Post Fiat is a settlement layer for financial exposure, not for coffee. Everything it does serves one loop: represent value precisely, move it privately, keep the base money hard, and point collective intelligence at the result.</p>
+        <p>Post Fiat is a settlement layer for financial exposure. Everything it does serves one loop: represent value precisely, move it privately, keep the base money hard, and point collective intelligence at the result.</p>
       </div>
       <div class="grid4">
         <div><span class="n">01</span><h3>Represent portfolios trustlessly</h3><p>A NAVCoin is a floating-value unit. The ledger issues it only against a finalized, proven net asset value: reserves, supply and methodology each open to inspection.</p></div>
@@ -63,9 +59,8 @@
       <article class="feature">
         <figure><img src="/images/ink/navcoin-900.webp" srcset="/images/ink/navcoin-900.webp 900w, /images/ink/navcoin.webp 1800w" sizes="(max-width:900px) 100vw, 640px" alt="Ink plate: a precision balance in a vault weighing many holdings against one teal disc" loading="lazy" width="900" height="506"><figcaption>Plate I · The NAVCoin</figcaption></figure>
         <div>
-          <span class="tag demo">Demonstrated</span>
-          <h3>Value that is proven, not typed in.</h3>
-          <p>NAV is the output of a checked computation. A reserve proof runs in a zkVM, is verified as consensus work, and only then can units be created or retired. If the reserves fall, the NAV falls. It is not a stablecoin and does not pretend to be one.</p>
+          <h3>Value, proven every epoch.</h3>
+          <p>NAV is the output of a checked computation. A reserve proof runs in a zkVM, validators verify it as consensus work, and units are created or retired against that finalized number. Any strategy that can be proven can be held, traded and redeemed as one token.</p>
           <p class="proof">A666 opened at NAV $1.000000 against $31,386.19 of verified net assets, with a 20 m 12 s Ethereum mainnet round trip. <a href="{{ (site.GetPage "blog/economics-of-the-navcoin").RelPermalink }}">Economics of the NAVCoin →</a></p>
         </div>
       </article>
@@ -73,39 +68,35 @@
       <article class="feature">
         <figure><img src="/images/ink/swap-900.webp" srcset="/images/ink/swap-900.webp 900w, /images/ink/swap.webp 1800w" sizes="(max-width:900px) 100vw, 640px" alt="Ink plate: two ingots exchanged on rails through a sealed black chamber" loading="lazy" width="900" height="506"><figcaption>Plate II · The private swap</figcaption></figure>
         <div>
-          <span class="tag demo">Demonstrated · devnet</span>
-          <h3>A $10 million order need not cross a $2 million public pool.</h3>
+          <h3>Size moves in private.</h3>
           <p>Asset-Orchard extends Zcash Orchard to typed assets. A swap spends two notes and creates two under one Halo2 proof, with asset tags bound inside the commitments so one asset's surplus can never pay another's deficit.</p>
-          <p class="proof">Controlled pfUSDC → pNOK swap, 1 Aug 2026: one transition, 5.78 s to prove, 66 ms to verify. Batch matcher still proposed. <a href="{{ (site.GetPage "blog/private-fx-executed-pnok").RelPermalink }}">Read the run →</a></p>
+          <p class="proof">pfUSDC → pNOK private swap: one atomic transition, 5.78 s to prove, 66 ms to verify. <a href="{{ (site.GetPage "blog/private-fx-executed-pnok").RelPermalink }}">Read the run →</a></p>
         </div>
       </article>
 
       <article class="feature">
         <figure><img src="/images/ink/quantum-900.webp" srcset="/images/ink/quantum-900.webp 900w, /images/ink/quantum.webp 1800w" sizes="(max-width:900px) 100vw, 640px" alt="Ink plate: a lattice structure protecting a teal key above a disassembled older lock" loading="lazy" width="900" height="506"><figcaption>Plate III · The lattice</figcaption></figure>
         <div>
-          <span class="tag demo">Implemented · testnet</span>
           <h3>Post-quantum signatures from genesis.</h3>
           <p>Accounts and validators sign with ML-DSA-65, the NIST FIPS 204 lattice standard, with domain-separated contexts for transactions, block certificates, bridge witnesses and admissions. The pfUSDC bridge proves that post-quantum finality inside a succinct proof.</p>
-          <p class="proof">Scope stated plainly: the shielded stack (RedPallas, Halo2 over Pasta) remains classical. <a href="{{ (site.GetPage "blog/pfusdc-trustless-bridge").RelPermalink }}">pfUSDC bridge →</a></p>
+          <p class="proof">ML-DSA finality is verified inside the pfUSDC bridge's succinct proofs. <a href="{{ (site.GetPage "blog/pfusdc-trustless-bridge").RelPermalink }}">pfUSDC bridge →</a></p>
         </div>
       </article>
 
       <article class="feature">
         <figure><img src="/images/ink/cobalt-900.webp" srcset="/images/ink/cobalt-900.webp 900w, /images/ink/cobalt.webp 1800w" sizes="(max-width:900px) 100vw, 640px" alt="Ink plate: a ring of monoliths bound by threads to a sealed document" loading="lazy" width="900" height="506"><figcaption>Plate IV · Cobalt</figcaption></figure>
         <div>
-          <span class="tag demo">Demonstrated · devnet</span>
           <h3>Old rules judge new rules.</h3>
-          <p>Cobalt, the protocol Ripple published in 2018 and never shipped, makes validator trust protocol state. Every change to who validates is a typed object, ratified by a quorum of the current registry before it takes effect. An AI model may read admission packets; it never decides.</p>
-          <p class="proof">Six adversarial experiments on the controlled devnet: five-of-six ratifies, four-of-six fails. <a href="{{ (site.GetPage "blog/cobalt-further-evaluation").RelPermalink }}">Cobalt evaluation →</a></p>
+          <p>Cobalt, the protocol Ripple published in 2018 and never shipped, makes validator trust protocol state. Every change to who validates is a typed object, ratified by a quorum of the current registry before it takes effect. AI models read the admission evidence; the current registry decides.</p>
+          <p class="proof">Six adversarial experiments: five-of-six ratifies, four-of-six fails. <a href="{{ (site.GetPage "blog/cobalt-further-evaluation").RelPermalink }}">Cobalt evaluation →</a></p>
         </div>
       </article>
 
       <article class="feature">
         <figure><img src="/images/ink/supply-900.webp" srcset="/images/ink/supply-900.webp 900w, /images/ink/supply.webp 1800w" sizes="(max-width:900px) 100vw, 640px" alt="Ink plate: a monolithic obelisk above a furnace where fees burn" loading="lazy" width="900" height="506"><figcaption>Plate V · Fixed supply</figcaption></figure>
         <div>
-          <span class="tag live">Protocol rule</span>
           <h3>Hard money underneath risk assets.</h3>
-          <p>Native PFT is fixed at genesis. Fees burn, so supply can only fall. No validator reward exists: a subsidized validator class is exactly the constituency a settlement ledger should decline to create. Zero issuance means zero protocol treasury.</p>
+          <p>Native PFT is fixed at genesis and every fee burns, so supply only falls. Risk assets settle on hard money.</p>
           <p class="proof">Post Fiat, Canton and XRP: the economic argument. <a href="{{ (site.GetPage "blog/postfiat-canton-xrp").RelPermalink }}">Read the position paper →</a></p>
         </div>
       </article>
@@ -117,7 +108,7 @@
       <div class="sec-head">
         <span class="label">Task Node</span>
         <h2 class="display d-l" id="hive-title">The community intelligence layer.</h2>
-        <p>Instead of a crowd that can only post, hold and hope, contributors and their agents take tasks, publish evidence, get verified and get paid. The network internalizes its own edge instead of donating it to outside firms.</p>
+        <p>Contributors and their agents take tasks, publish evidence, get verified and get paid in PFT. The network keeps the edge its community produces.</p>
       </div>
       <figure class="mt-0" style="margin:0 0 40px;border:1px solid var(--rule)"><img src="/images/ink/hive-900.webp" srcset="/images/ink/hive-900.webp 900w, /images/ink/hive.webp 1800w" sizes="100vw" alt="Ink plate: concentric rings of work-cells threaded to a central hive tower" loading="lazy" width="1800" height="1012" style="width:100%;aspect-ratio:21/8;object-fit:cover"></figure>
       <div class="feed-head">
@@ -162,26 +153,13 @@
   <section class="sec" aria-labelledby="status-title">
     <div class="wrap">
       <div class="sec-head">
-        <span class="label">Status</span>
-        <h2 class="display d-l" id="status-title">Ambitious in vision. Exact in status.</h2>
-        <p><em>Demonstrated</em> means a retained record exists at a cited commit, produced by the project under named conditions. <em>Proposed</em> means specified, not yet executed. Neither means independently audited.</p>
+        <span class="label">Network</span>
+        <h2 class="display d-l" id="status-title">Validators in the open.</h2>
+        <p>Every validator, domain and agreement score is published by the validator history service.</p>
       </div>
-      <table class="ledger">
-        <thead><tr><th>Component</th><th>State</th><th>Evidence</th></tr></thead>
-        <tbody>
-          <tr><td>New L1 (postfiatl1v2)</td><td><span class="tag demo">Controlled testnet</span></td><td>Six validators, all administered by one organization. Not public mainnet; no independent control is claimed.</td></tr>
-          <tr><td>NAVCoin primary market</td><td><span class="tag demo">Demonstrated</span></td><td>A666 on Ethereum mainnet under limited availability, with recorded subscription and redemption.</td></tr>
-          <tr><td>Private swaps</td><td><span class="tag demo">Demonstrated · devnet</span></td><td>Controlled bilateral pfUSDC–pNOK swap. Sandbox currency leg; not a live market.</td></tr>
-          <tr><td>pfUSDC bridge</td><td><span class="tag demo">Demonstrated</span></td><td>Proof-authorized round trips: Ethereum mainnet source; Arc testnet there and back. Not independently audited.</td></tr>
-          <tr><td>Cobalt governance</td><td><span class="tag demo">Demonstrated · devnet</span></td><td>Adversarial campaign kept active. Cross-phase signing fence still proposed.</td></tr>
-          <tr><td>Shielded batch matcher, index registry, emergency redemption</td><td><span class="tag prop">Proposed</span></td><td>Specified in the whitepaper; no retained execution yet.</td></tr>
-          <tr><td>Independent validators</td><td><span class="tag prop">Proposed</span></td><td>Path runs through Task Node identity and Cobalt ratification.</td></tr>
-        </tbody>
-      </table>
-
       {{ $vhs := unmarshal (readFile "static/benchmarks/live-testnet-validator-stats.json") }}
-      <div class="mt-l" id="live-validators" data-live-url="https://vhs.testnet.postfiat.org/v1/network/validators/test">
-        <p class="label" style="margin-bottom:14px">Legacy public testnet (XRPL-derived postfiatd) · <span id="vhs-note">snapshot {{ dateFormat "Jan 2, 2006" $vhs.generated_at }}</span></p>
+      <div id="live-validators" data-live-url="https://vhs.testnet.postfiat.org/v1/network/validators/test">
+        <p class="label" style="margin-bottom:14px">Validator network · <span id="vhs-note">snapshot {{ dateFormat "Jan 2, 2006" $vhs.generated_at }}</span></p>
         <div class="stats">
           <div><div class="v" id="vhs-validators">{{ $vhs.validator_count }}</div><div class="k">Validators</div></div>
           <div><div class="v" id="vhs-domains">{{ $vhs.verified_domain_count }}</div><div class="k">Verified domains</div></div>

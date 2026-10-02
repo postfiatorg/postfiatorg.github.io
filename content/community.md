@@ -27,6 +27,5 @@ Operators can join the XRPL-derived public testnet today with the [validator set
 
 ## Read first
 
-- [Manifesto](/manifesto/): why Post Fiat exists.
-- [Whitepaper](/whitepaper/): how it works, and what is demonstrated versus proposed.
+- [Whitepaper](/whitepaper/): how it works, claim by claim.
 - [Research](/blog/): experiments, published with their evidence.

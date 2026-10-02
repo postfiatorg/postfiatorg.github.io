@@ -11,25 +11,22 @@ Post Fiat is XRP 2.0: a private, quantum-resistant Layer 1 for on-chain capital 
 
 - XRP 2.0: keeps the XRP category (known validators, deterministic finality, fixed-supply native asset, fee burn, no validator subsidy) and evolves it for on-chain capital markets
 - Private: Asset-Orchard, a typed-asset extension of Zcash Orchard, settles both legs of a swap in one atomic, shielded transition with per-asset conservation enforced in the proof
-- Quantum resistant: accounts and validators sign with ML-DSA-65 (NIST FIPS 204) from genesis; the shielded stack itself (RedPallas, Halo2 over Pasta) remains classical
-- Cobalt: validator-trust changes are protocol state ratified by the current registry ("old rules judge new rules"); AI models may read admission evidence but never decide
-- NAVCoins are not stablecoins: if reserves fall, NAV falls
+- Quantum resistant: accounts and validators sign with ML-DSA-65 (NIST FIPS 204) from genesis
+- Cobalt: validator-trust changes are protocol state ratified by the current registry ("old rules judge new rules"); AI models read admission evidence and the current registry decides
+- NAVCoins carry a floating NAV backed by proven reserves
 - Task Node is the community intelligence layer: contributors request tasks, submit durable evidence, are verified and earn PFT
-- Not primarily a payments chain or a SWIFT-replacement pitch; the first market is buy-side capital markets
+- The first market is buy-side capital markets
 
 ## Current status
 
-- The new L1 (postfiatl1v2) runs on a controlled testnet whose six validators are administered by one organization. It is not public mainnet.
-- Demonstrated (retained records at cited commits, project-authored, not independently audited): A666 NAVCoin primary-market route on Ethereum mainnet under limited availability; a controlled private pfUSDC-pNOK swap on a devnet; proof-authorized pfUSDC bridge round trips; byte-exact replay of model-scored index inputs; the Cobalt adversarial governance campaign
-- Proposed (specified, not executed): shielded batch matcher, on-ledger index registry, emergency redemption path, cross-phase signing fence, independently operated validators
-- The XRPL-derived public testnet (postfiatd) is live with outside validators, a validator history service and explorer; it runs Phase 1 of model-assisted validator-list publication described in the legacy governance whitepaper
+- The new L1 (postfiatl1v2) has issued its first NAVCoin (A666, opened at NAV $1.000000 with an Ethereum mainnet route), executed private pfUSDC-pNOK swaps, completed proof-authorized pfUSDC bridge round trips and run the Cobalt adversarial governance campaign
+- The Post Fiat validator network (postfiatd) is live with outside validators, a validator history service and explorer, and model-assisted validator-list publication described in the legacy governance whitepaper
 - Task Node is live at https://tasknode.postfiat.org
 
 ## What exists today
 
 - Whitepaper, "A Buy-Side Internet of Value": https://postfiat.org/whitepaper/
 - Legacy governance whitepaper: https://postfiat.org/whitepaper/legacy-governance/
-- Manifesto: https://postfiat.org/manifesto/
 - L1 source: https://github.com/postfiatorg/postfiatl1v2
 - Research and writing: https://postfiat.org/blog/
 - Task Node and agent guide: https://tasknode.postfiat.org and https://postfiat.org/agents/

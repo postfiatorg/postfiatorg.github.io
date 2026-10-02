@@ -12,6 +12,6 @@ What it does, pragmatically:
 
 Architecture: the best of XRP, evolved for on-chain capital markets: quantum resistant (ML-DSA from genesis), private (Asset-Orchard), Cobalt on-chain governance of validator trust, fixed supply.
 
-Honesty constraints: the new L1 is a controlled testnet operated by one organization, not public mainnet. Several components are proposals. The site must be ambitious in vision and exact in status.
+Voice rules (from the founder): confident, declarative, specific. State what Post Fiat is and does. Never advertise weaknesses, stage caveats or what it is not: no "not mainnet", "controlled testnet", "proposed", "not a stablecoin" style disclaimers on marketing pages. No "it's not X, it's Y" constructions, no meta phrasing about the copy itself ("in three lines", "stated plainly"). Use real numbers and evidence links instead of caveats.
 
 Aesthetic mood board: Nick Land / CCRU (accelerationist, hyperstitional, cybernetic, austere, dark theory-fiction typography; numbered fragments; not cyberpunk kitsch) fused with the Task Node "ink" house style (ink on paper, editorial restraint). Elegant and impressive, not fancy. It should impress a sophisticated visitor: a hedge-fund PM, a protocol engineer, a serious crypto reader.

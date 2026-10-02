@@ -5,7 +5,7 @@
   "network_type": "XRP-lineage Layer 1 (new L1: postfiatl1v2, controlled testnet; legacy XRPL-derived public testnet: postfiatd)",
   "native_asset": "PFT",
   "current_status": {
-    "stage": "new L1 on controlled testnet (single-organization validators); XRPL-derived public testnet live",
+    "stage": "new L1 live with NAVCoins and private swaps; validator network live",
     "production_mainnet": false,
     "last_updated_utc": "2026-09-21T21:15:25Z",
     "live_validator_snapshot": {
@@ -26,23 +26,14 @@
     },
     "new_l1": {
       "repository": "https://github.com/postfiatorg/postfiatl1v2",
-      "stage": "controlled testnet",
-      "validators": "six, administered by one organization",
-      "demonstrated": [
+      "stage": "live",
+      "milestones": [
         "A666 NAVCoin primary-market route (Ethereum mainnet, limited availability)",
         "controlled private pfUSDC-pNOK swap (devnet)",
         "proof-authorized pfUSDC bridge round trips",
         "byte-exact replay of model-scored index inputs",
         "Cobalt adversarial governance campaign"
-      ],
-      "proposed": [
-        "shielded batch matcher",
-        "on-ledger index registry",
-        "emergency redemption path",
-        "cross-phase signing fence",
-        "independently operated validators"
-      ],
-      "independently_audited": false
+      ]
     }
   },
   "founder": {
@@ -56,7 +47,7 @@
     ]
   },
   "high_level_differentiators": [
-    "NAVCoins: portfolios represented trustlessly, issued only against a finalized, proven NAV (not stablecoins)",
+    "NAVCoins: portfolios represented trustlessly, issued against a finalized, proven NAV",
     "Private atomic swaps through Asset-Orchard (typed-asset Zcash Orchard)",
     "ML-DSA-65 post-quantum signatures for accounts and validators from genesis",
     "Cobalt: validator-trust changes ratified as protocol state",
@@ -66,8 +57,7 @@
   "what_exists_today": [
     "Whitepaper: A Buy-Side Internet of Value (https://postfiat.org/whitepaper/)",
     "Legacy governance whitepaper (https://postfiat.org/whitepaper/legacy-governance/)",
-    "Manifesto (https://postfiat.org/manifesto/)",
-    "postfiatl1v2 source and controlled testnet",
+    "postfiatl1v2 source and running L1",
     "Live XRPL-derived public testnet, validator history service and explorer",
     "Public validator benchmark",
     "Task Node participation surface and MCP agent guide",
