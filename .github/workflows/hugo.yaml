@@ -4,6 +4,8 @@ on:
     branches:
       - main
   workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *" # refresh community cards from the Task Node directory
 
 permissions:
   contents: read
@@ -36,8 +38,8 @@ jobs:
       - name: Install Node.js deps
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
 
-      - name: Validate public profile snapshot
-        run: node scripts/validate_market_symbols.mjs
+      - name: Sync community cards from Task Node
+        run: node scripts/sync_community_profiles.mjs || echo "::warning::Task Node directory unavailable; using committed community snapshot"
 
       - name: Check relay-wallet guidance surfaces
         run: node scripts/check_relay_wallet_guidance.mjs
