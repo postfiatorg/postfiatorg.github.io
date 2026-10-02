@@ -1522,7 +1522,7 @@
       letter-spacing:.02em;
     }
     .community-card h3{
-      margin:0 0 9px;
+      margin:8px 0 6px;
       font-size:1.28rem;
       line-height:1.12;
       font-weight:550;
@@ -1533,10 +1533,14 @@
       font-size:.96rem;
       line-height:1.48;
       display:-webkit-box;
-      -webkit-line-clamp:2;
+      -webkit-line-clamp:4;
       -webkit-box-orient:vertical;
       overflow:hidden;
     }
+    .community-role{margin:0 0 10px;color:#263424;font-size:.92rem;font-weight:600}
+    .community-panel-title{margin:0 0 8px;font-size:.78rem;font-weight:650;text-transform:uppercase;letter-spacing:.06em;color:#566554}
+    .community-skill-list{display:grid;gap:1px;margin:0 0 18px;padding:0;list-style:none;border:1px solid rgba(0,0,0,.13);background:rgba(0,0,0,.13)}
+    .community-skill-list li{padding:8px 10px;background:var(--light);color:#263424;font-size:.84rem;line-height:1.25}
     .community-stats{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
@@ -2400,12 +2404,17 @@
               {{ range $profiles }}
               <article class="community-card">
                 <a class="community-nft-link" href="{{ .profile_url }}" target="_blank" rel="noopener"{{ if $copy }} tabindex="-1"{{ end }} aria-label="Open {{ .display_name }} on Task Node">
-                  <img src="{{ .nft_image_url }}" alt="{{ .display_name }} profile NFT" width="512" height="512" loading="lazy" decoding="async">
+                  <img src="{{ .nft_image_url }}"{{ if .nft_image_2x_url }} srcset="{{ .nft_image_url }} 512w, {{ .nft_image_2x_url }} 1024w" sizes="(max-width: 720px) 100vw, 420px"{{ end }} alt="{{ .display_name }} profile NFT" width="512" height="512" loading="lazy" decoding="async">
                 </a>
                 <div class="community-card-body">
-                  <span class="community-slug mono">{{ .public_slug }}</span>
+                  <span class="community-slug mono">{{ .public_slug }}{{ with .creature }} · {{ . }}{{ end }}</span>
                   <h3>{{ .display_name }}</h3>
-                  {{ with .creature }}<p class="community-summary">{{ . }}</p>{{ end }}
+                  {{ with .role_title }}<p class="community-role">{{ . }}</p>{{ end }}
+                  {{ with .summary }}<p class="community-summary">{{ . }}</p>{{ end }}
+                  {{ with .skills }}
+                  <p class="community-panel-title">Demonstrated skills</p>
+                  <ul class="community-skill-list">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+                  {{ end }}
                   <dl class="community-stats">
                     <div><dt>Network tasks</dt><dd class="mono">{{ .network_tasks }}</dd></div>
                     <div><dt>PFT earned</dt><dd class="mono">{{ .pft_earned }}</dd></div>
