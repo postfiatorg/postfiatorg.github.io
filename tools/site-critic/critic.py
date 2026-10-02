@@ -49,6 +49,19 @@ def jpeg_b64(png: Path, width: int = 1280) -> str:
         return base64.b64encode(Path(t.name).read_bytes()).decode()
 
 
+COST_LOG = HERE / "runs" / "cost_log.jsonl"
+
+
+def log_cost(model: str, raw: dict):
+    u = raw.get("usage") or {}
+    rec = {"model": model, "cost_usd": u.get("cost"),
+           "input_tokens": u.get("prompt_tokens", u.get("input_tokens")),
+           "output_tokens": u.get("completion_tokens", u.get("output_tokens"))}
+    COST_LOG.parent.mkdir(exist_ok=True)
+    with COST_LOG.open("a") as f:
+        f.write(json.dumps(rec) + "\n")
+
+
 def page_images(run: Path, page: str, max_desktop: int = 6, max_mobile: int = 3):
     shots = []
     for name, cap, w in (("desktop", max_desktop, 1280), ("mobile", max_mobile, 390)):
@@ -88,6 +101,7 @@ def call_lane(lane: str, prompt: str, images) -> str:
             {"model": model, "input": [{"role": "user", "content": content}], "max_output_tokens": 12000},
             key("openai"),
         )
+        log_cost(model, raw)
         if isinstance(raw.get("output_text"), str):
             return raw["output_text"]
         return "\n".join(
@@ -102,9 +116,11 @@ def call_lane(lane: str, prompt: str, images) -> str:
             "model": model,
             "messages": [{"role": "user", "content": content}],
             "max_tokens": 12000,
+            "usage": {"include": True},
         },
         key("openrouter"),
     )
+    log_cost(model, raw)
     return raw["choices"][0]["message"]["content"]
 
 
@@ -118,9 +134,9 @@ def parse_score(text: str) -> dict:
     return {"score_out_of_100": None, "explanation": text}
 
 
-def score(run: Path, page: str, lanes, runs: int):
+def score(run: Path, page: str, lanes, runs: int, hero: bool = False):
     prompt = PROMPT
-    images = page_images(run, page)
+    images = page_images(run, page, 1, 1) if hero else page_images(run, page)
     jobs = [(lane, i) for lane in lanes for i in range(runs)]
     out = []
 
@@ -196,11 +212,12 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("score"); s.add_argument("--run", required=True); s.add_argument("--page", required=True)
     s.add_argument("--runs", type=int, default=1); s.add_argument("--lanes", default="gpt,fable,opus")
+    s.add_argument("--hero", action="store_true", help="send only the first desktop and mobile screen (cheap; for hero/tagline tests)")
     v = sub.add_parser("video"); v.add_argument("--run", required=True); v.add_argument("--page", required=True)
     c = sub.add_parser("compare"); c.add_argument("--base", required=True); c.add_argument("--cand", required=True); c.add_argument("--page", required=True)
     a = ap.parse_args()
     if a.cmd == "score":
-        summary, out = score(Path(a.run), a.page, a.lanes.split(","), a.runs)
+        summary, out = score(Path(a.run), a.page, a.lanes.split(","), a.runs, a.hero)
         for r in out:
             if "verdict" in r:
                 vd = r["verdict"]

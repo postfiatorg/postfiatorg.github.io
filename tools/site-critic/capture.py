@@ -10,6 +10,7 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
+H1_OVERRIDE = None
 VIEWPORTS = {"desktop": (1440, 900), "mobile": (390, 844)}
 
 
@@ -48,6 +49,8 @@ def capture_page(browser, base, path, out: Path, video: bool):
             page.evaluate(f"window.scrollTo({{top:{y},behavior:'instant'}})")
             page.wait_for_timeout(150)
         page.evaluate("window.scrollTo({top:0,behavior:'instant'})")
+        if H1_OVERRIDE is not None:
+            page.evaluate("t => { const h = document.querySelector('h1'); if (h) h.textContent = t; }", H1_OVERRIDE)
         page.wait_for_timeout(600)
         if name == "desktop":
             (out / f"{slug(path)}.text.txt").write_text(page.inner_text("body"))
@@ -102,7 +105,10 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--pages", nargs="+", default=["/"])
     ap.add_argument("--video", action="store_true")
+    ap.add_argument("--h1", default=None, help="replace the page's first <h1> text before capture (tagline experiments)")
     a = ap.parse_args()
+    global H1_OVERRIDE
+    H1_OVERRIDE = a.h1
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as p:
