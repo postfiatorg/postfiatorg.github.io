@@ -9,7 +9,7 @@
   const update = () => {
     raf = 0;
     let cur = heads[0];
-    for (const h of heads) { if (h.getBoundingClientRect().top <= 120) cur = h; else break; }
+    for (const h of heads) { if (h.getBoundingClientRect().top <= innerHeight * 0.3) cur = h; else break; }
     links.forEach(a => a.classList.remove('on'));
     toc.querySelectorAll('li.open').forEach(li => li.classList.remove('open'));
     const a = links.find(l => decodeURIComponent(l.getAttribute('href').slice(1)) === cur?.id);

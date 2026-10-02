@@ -32,6 +32,23 @@ def capture_page(browser, base, path, out: Path, video: bool):
         page.goto(base + path, wait_until="networkidle", timeout=60000)
         page.add_style_tag(content="html{scroll-behavior:auto!important}")
         page.wait_for_timeout(1200)
+        # Dismiss cookie/consent banners so judges see the site, not the banner.
+        for label in ("Deny", "Reject all", "Reject", "Decline", "Allow all", "Accept all", "Accept", "I agree", "Got it"):
+            btn = page.get_by_role("button", name=label, exact=True)
+            if btn.count():
+                try:
+                    btn.first.click(timeout=2000)
+                    page.wait_for_timeout(800)
+                    break
+                except Exception:
+                    pass
+        # Walk the page once so lazy-loaded and scroll-triggered content renders before capture.
+        h0 = page.evaluate("document.documentElement.scrollHeight")
+        for y in range(0, h0, 600):
+            page.evaluate(f"window.scrollTo({{top:{y},behavior:'instant'}})")
+            page.wait_for_timeout(150)
+        page.evaluate("window.scrollTo({top:0,behavior:'instant'})")
+        page.wait_for_timeout(600)
         if name == "desktop":
             (out / f"{slug(path)}.text.txt").write_text(page.inner_text("body"))
         full = out / f"{slug(path)}.{name}.full.png"

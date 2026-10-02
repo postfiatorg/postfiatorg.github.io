@@ -28,25 +28,31 @@ It is built so that you can privately swap any asset on chain at low cost and ho
 
 ## How it differs from XRP
 
-It keeps XRP's settlement design (known validators, deterministic finality, fixed supply, fee burn, no validator subsidy) and changes three things. Validator-trust changes become protocol state ratified by **Cobalt**. Accounts and validators sign with post-quantum **ML-DSA** from genesis. Settlement can run privately through **Asset-Orchard**. Its first market is buy-side capital markets.
+| | XRP Ledger | Post Fiat |
+|---|---|---|
+| Validator trust | Published list file | Protocol state, ratified by Cobalt |
+| Signatures | Classical | ML-DSA-65, post-quantum, from genesis |
+| Settlement | Transparent | Private atomic swaps (Asset-Orchard) |
+| Instruments | Issued tokens | NAVCoins with proven reserves |
+| Native supply | Fixed, fees burn | Fixed, fees burn |
+| First market | Payments | Buy-side capital markets |
 
 ## Networks
 
-| Network | What runs there |
-|---|---|
-| Post Fiat L1 (postfiatl1v2) | NAVCoins, private swaps, the pfUSDC bridge and Cobalt governance. A666 has opened at NAV $1.000000 and completed a 20-minute Ethereum mainnet round trip. |
-| Post Fiat validator network (postfiatd) | 53 validators across 42 publishing domains, with model-assisted validator-list publication. |
+**Post Fiat L1 (postfiatl1v2).** NAVCoins, private swaps, the pfUSDC bridge and Cobalt governance. A666 opened at NAV $1.000000 and completed a 20-minute Ethereum mainnet round trip.
+
+**Post Fiat validator network (postfiatd).** 53 validators, 39 of them with verified domains, publishing a model-assisted validator list.
 
 ## The validator network, in figures
 
 <div class="stats" style="margin:1.6em 0 .6em">
   <div><div class="v">53</div><div class="k">Validators</div></div>
-  <div><div class="v">39</div><div class="k">Verified domains</div></div>
-  <div><div class="v">52<small style="font-size:.4em"> / 53</small></div><div class="k">24h agreement ≥ 99.9%</div></div>
-  <div><div class="v">46<small style="font-size:.4em"> / 53</small></div><div class="k">30d agreement ≥ 99%</div></div>
+  <div><div class="v">39</div><div class="k">Domain-verified</div></div>
+  <div><div class="v">52<small style="font-size:.4em"> / 53</small></div><div class="k">99.9% agree · 24h</div></div>
+  <div><div class="v">46<small style="font-size:.4em"> / 53</small></div><div class="k">99% agree · 30d</div></div>
 </div>
 
-<p class="muted" style="font-size:15px">Snapshot of September 21, 2026 from the <a href="https://vhs.testnet.postfiat.org/v1/network/validators/test">validator history service</a>, also shown in the <a href="https://explorer.testnet.postfiat.org/network/validators">testnet explorer</a>. 42 publishing domains.</p>
+<p class="muted" style="font-size:15px">Snapshot of September 21, 2026 from the <a href="https://vhs.testnet.postfiat.org/v1/network/validators/test">validator history service</a>, also shown in the <a href="https://explorer.testnet.postfiat.org/network/validators">testnet explorer</a>.</p>
 
 ## Where to go next
 

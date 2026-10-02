@@ -2,5 +2,7 @@
 {{- $n := "" -}}
 {{- if .legacy -}}
 {{- $n = `<div class="notice"><span class="label">Legacy paper</span>This is the original governance whitepaper for the XRPL-derived network, preserved as published. The current design of Post Fiat, including NAVCoins, private swaps, Cobalt and post-quantum signatures, is in the <a href="/whitepaper/">current whitepaper</a>.</div>` -}}
+{{- else -}}
+{{- $n = `<div class="glance" aria-label="Key figures"><div><b>$$1.000000</b><span>A666 opening NAV</span></div><div><b>20 m 12 s</b><span>Ethereum mainnet round trip</span></div><div><b>66 ms</b><span>Private swap proof verification</span></div><div><b>ML-DSA-65</b><span>Signatures from genesis</span></div></div>` -}}
 {{- end -}}
 {{- replaceRE `(<h2[ >])` (printf "%s$1" $n) .content 1 | safeHTML -}}
