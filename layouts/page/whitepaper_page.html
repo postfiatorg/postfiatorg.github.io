@@ -25,12 +25,7 @@
   <div class="doc-layout">
     <aside class="toc" aria-label="Contents"><details open><summary class="label">Contents</summary>{{ $contentPage.TableOfContents }}</details></aside>
     <article class="prose paper">
-      {{ if $legacy }}
-      <div class="notice"><span class="label">Legacy paper</span>This is the original governance whitepaper for the XRPL-derived network, preserved as published. The current design of Post Fiat, including NAVCoins, private swaps, Cobalt and post-quantum signatures, is in the <a href="/whitepaper/">current whitepaper</a>.</div>
-      {{ else }}
-      <div class="notice"><span class="label">Status</span>The new L1 runs on a controlled testnet whose validators are administered by one organization; it is not public mainnet. In this paper <em>demonstrated</em> means a retained record exists at a cited commit; <em>proposed</em> means specified but not executed. Neither means independently audited.{{ with .Params.source_repo }} Published from <a href="https://github.com/{{ . }}/blob/{{ $.Params.source_commit }}/{{ $.Params.source_path }}" rel="noopener">{{ . }} · {{ $.Params.source_path }} @ {{ $.Params.source_commit }}</a>.{{ end }}</div>
-      {{ end }}
-      {{ $contentPage.Content }}
+      {{ partial "ink/paper-notice.html" (dict "page" . "legacy" $legacy "content" $contentPage.Content) }}
     </article>
   </div>
 </main>

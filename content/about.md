@@ -17,7 +17,7 @@ keywords:
 
 Post Fiat is XRP 2.0: a private, quantum-resistant Layer 1 for on-chain capital markets. Machine intelligence will compound capital on chain, and Post Fiat is built to be where that happens.
 
-In practice, it lets you privately swap any asset on chain at low cost and hold market-neutral portfolios as NAVCoins whose value is proven rather than asserted. Underneath sits a fixed-supply native asset and Task Node, a network of pseudonymous contributors.
+It is built so that you can privately swap any asset on chain at low cost and hold market-neutral portfolios as NAVCoins whose value is proven rather than asserted, on a fixed-supply native asset, with Task Node as its network of pseudonymous contributors. Today the new L1 runs on a controlled testnet operated by one organization; the [status](#status) section says exactly what has been demonstrated.
 
 ## What it does
 
@@ -34,10 +34,10 @@ It keeps XRP's settlement design (known validators, deterministic finality, fixe
 
 Two networks are in play, at different stages.
 
-| Network | Stage | What runs there |
-|---|---|---|
-| New L1 (postfiatl1v2) | Controlled testnet, six validators administered by one organization. Not public mainnet. | NAVCoins, private swaps, pfUSDC bridge, Cobalt governance |
-| XRPL-derived testnet (postfiatd) | Public testnet with outside validators | Phase 1 of model-assisted validator-list publication |
+| Network | Stage and scope |
+|---|---|
+| New L1 (postfiatl1v2) | Controlled testnet; six validators administered by one organization; not public mainnet. Runs NAVCoins, private swaps, the pfUSDC bridge and Cobalt governance. |
+| XRPL-derived testnet (postfiatd) | Public testnet with outside validators. Runs Phase 1 of model-assisted validator-list publication. |
 
 On the new L1, NAVCoin primary-market accounting (A666), a private pfUSDC–pNOK swap, proof-authorized pfUSDC round trips and the Cobalt adversarial campaign are **demonstrated**: retained records exist at cited commits. The shielded batch matcher, on-ledger index registry, emergency redemption path and independently operated validators are **proposed**. Nothing is independently audited yet.
 

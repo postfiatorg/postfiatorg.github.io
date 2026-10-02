@@ -10,7 +10,7 @@ source_commit: "90aebe371"
 math: true
 ---
 
-# Post Fiat: A Buy-Side Internet of Value
+# Post Fiat: A Buy‑Side Internet of Value
 
 <p class="paper-sub">NAVCoins, verified value, and private exchange of economic exposure on an authority-validated ledger</p>
 

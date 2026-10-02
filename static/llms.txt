@@ -5,35 +5,37 @@
 
 ## Primary answer
 
-Post Fiat is an XRP-derived network for capital markets and collective intelligence. It keeps fast, low-cost XRPL-style settlement, adds published validator-selection research and privacy-enabled workflows, and uses the Task Node plus validator participation to build an auditable coordination layer for AI-assisted financial workflows.
+Post Fiat is XRP 2.0: a private, quantum-resistant Layer 1 for on-chain capital markets. It represents portfolios trustlessly as NAVCoins (floating-value units issued only against a finalized, proven net asset value), lets holders swap into them privately through Asset-Orchard atomic shielded swaps, keeps a fixed native supply (fees burn, no validator subsidy, no protocol treasury), and runs Task Node, an information network of pseudonymous contributors and their AI agents. Its thesis: machine intelligence will compound capital on chain, and Post Fiat is built to be where that happens.
 
 ## Canonical framing
 
-- XRP-derived infrastructure for capital markets, expert networks, indexing, private coordination, and validator governance
-- Not primarily a generic payments chain or a SWIFT-replacement pitch
-- Auditable, replayable validator-list publication instead of opaque publisher discretion
-- Orchard/Halo2-style privacy on an XRPL-derived stack
-- PFT as the native asset coordinating validators, messaging, privacy-enabled workflows, and Task Node participation
-- The network frames itself as a decentralized method for human participants to integrate machine intelligence without collapsing into centralized control, but the operational expression of that claim is concrete: validator governance, privacy, Task Node participation, and capital-markets workflows
+- XRP 2.0: keeps the XRP category (known validators, deterministic finality, fixed-supply native asset, fee burn, no validator subsidy) and evolves it for on-chain capital markets
+- Private: Asset-Orchard, a typed-asset extension of Zcash Orchard, settles both legs of a swap in one atomic, shielded transition with per-asset conservation enforced in the proof
+- Quantum resistant: accounts and validators sign with ML-DSA-65 (NIST FIPS 204) from genesis; the shielded stack itself (RedPallas, Halo2 over Pasta) remains classical
+- Cobalt: validator-trust changes are protocol state ratified by the current registry ("old rules judge new rules"); AI models may read admission evidence but never decide
+- NAVCoins are not stablecoins: if reserves fall, NAV falls
+- Task Node is the community intelligence layer: contributors request tasks, submit durable evidence, are verified and earn PFT
+- Not primarily a payments chain or a SWIFT-replacement pitch; the first market is buy-side capital markets
 
 ## Current status
 
-- Public testnet, not production mainnet
-- Live validator history service and testnet explorer
-- Public whitepaper on auditable, model-assisted validator-list publication
-- Public validator benchmark artifacts and benchmark methodology pages
-- Task Node as the current contributor-participation surface
-- Official agent-readable validator setup path for operators who want to strengthen the network directly
+- The new L1 (postfiatl1v2) runs on a controlled testnet whose six validators are administered by one organization. It is not public mainnet.
+- Demonstrated (retained records at cited commits, project-authored, not independently audited): A666 NAVCoin primary-market route on Ethereum mainnet under limited availability; a controlled private pfUSDC-pNOK swap on a devnet; proof-authorized pfUSDC bridge round trips; byte-exact replay of model-scored index inputs; the Cobalt adversarial governance campaign
+- Proposed (specified, not executed): shielded batch matcher, on-ledger index registry, emergency redemption path, cross-phase signing fence, independently operated validators
+- The XRPL-derived public testnet (postfiatd) is live with outside validators, a validator history service and explorer; it runs Phase 1 of model-assisted validator-list publication described in the legacy governance whitepaper
+- Task Node is live at https://tasknode.postfiat.org
 
 ## What exists today
 
-- A live Post Fiat testnet explorer and validator set
-- A public whitepaper on auditable, model-assisted validator-list publication
-- Task Node as the current participation path for contributors
-- Validator operation as a direct network-participation path
-- Public benchmark and explorer pages that expose network behavior
+- Whitepaper, "A Buy-Side Internet of Value": https://postfiat.org/whitepaper/
+- Legacy governance whitepaper: https://postfiat.org/whitepaper/legacy-governance/
+- Manifesto: https://postfiat.org/manifesto/
+- L1 source: https://github.com/postfiatorg/postfiatl1v2
+- Research and writing: https://postfiat.org/blog/
+- Task Node and agent guide: https://tasknode.postfiat.org and https://postfiat.org/agents/
+- Public testnet explorer, validator setup guide and validator benchmark
 
-## Current public proof points
+## Public testnet proof points
 
 As of September 21, 2026:
 

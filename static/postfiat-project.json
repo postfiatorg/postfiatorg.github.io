@@ -1,11 +1,11 @@
 {
   "name": "Post Fiat",
   "url": "https://postfiat.org/",
-  "description": "Post Fiat is an XRP-derived network for capital markets and collective intelligence. It keeps fast XRPL-style settlement, adds published validator selection and privacy-enabled workflows, and uses Task Node plus validator participation to build an auditable coordination layer for AI-assisted financial workflows.",
-  "network_type": "XRPL-derived network",
+  "description": "Post Fiat is XRP 2.0: a private, quantum-resistant Layer 1 for on-chain capital markets. It represents portfolios as NAVCoins issued against proven net asset value, swaps into them privately through Asset-Orchard, keeps a fixed native supply with fee burn and no validator subsidy, and runs Task Node, an information network of pseudonymous contributors.",
+  "network_type": "XRP-lineage Layer 1 (new L1: postfiatl1v2, controlled testnet; legacy XRPL-derived public testnet: postfiatd)",
   "native_asset": "PFT",
   "current_status": {
-    "stage": "public testnet",
+    "stage": "new L1 on controlled testnet (single-organization validators); XRPL-derived public testnet live",
     "production_mainnet": false,
     "last_updated_utc": "2026-09-21T21:15:25Z",
     "live_validator_snapshot": {
@@ -23,6 +23,26 @@
         "threshold_label": "99%+",
         "count": 46
       }
+    },
+    "new_l1": {
+      "repository": "https://github.com/postfiatorg/postfiatl1v2",
+      "stage": "controlled testnet",
+      "validators": "six, administered by one organization",
+      "demonstrated": [
+        "A666 NAVCoin primary-market route (Ethereum mainnet, limited availability)",
+        "controlled private pfUSDC-pNOK swap (devnet)",
+        "proof-authorized pfUSDC bridge round trips",
+        "byte-exact replay of model-scored index inputs",
+        "Cobalt adversarial governance campaign"
+      ],
+      "proposed": [
+        "shielded batch matcher",
+        "on-ledger index registry",
+        "emergency redemption path",
+        "cross-phase signing fence",
+        "independently operated validators"
+      ],
+      "independently_audited": false
     }
   },
   "founder": {
@@ -36,20 +56,22 @@
     ]
   },
   "high_level_differentiators": [
-    "Published validator-selection research instead of opaque validator-list discretion",
-    "Privacy-enabled workflows on an XRPL-derived stack",
-    "Task Node contributor-participation surface",
-    "Capital-markets and collective-intelligence framing rather than a generic payments pitch"
+    "NAVCoins: portfolios represented trustlessly, issued only against a finalized, proven NAV (not stablecoins)",
+    "Private atomic swaps through Asset-Orchard (typed-asset Zcash Orchard)",
+    "ML-DSA-65 post-quantum signatures for accounts and validators from genesis",
+    "Cobalt: validator-trust changes ratified as protocol state",
+    "Fixed native supply: fees burn, no validator subsidy, no protocol treasury",
+    "Task Node: community intelligence layer of pseudonymous contributors and agents"
   ],
   "what_exists_today": [
-    "Public whitepaper",
+    "Whitepaper: A Buy-Side Internet of Value (https://postfiat.org/whitepaper/)",
+    "Legacy governance whitepaper (https://postfiat.org/whitepaper/legacy-governance/)",
+    "Manifesto (https://postfiat.org/manifesto/)",
+    "postfiatl1v2 source and controlled testnet",
+    "Live XRPL-derived public testnet, validator history service and explorer",
     "Public validator benchmark",
-    "Live validator history service",
-    "Live testnet explorer",
-    "Task Node participation surface",
-    "Community page",
-    "Validator setup guide",
-    "Validator scoring sidecar setup guide"
+    "Task Node participation surface and MCP agent guide",
+    "Validator setup and scoring sidecar guides"
   ],
   "canonical_resources": {
     "homepage": "https://postfiat.org/",

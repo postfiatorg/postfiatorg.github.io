@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{ partial "ink/head.html" . }}
+<style>
+  /* PaperMod variables mapped onto the ink palette, for layouts that still define a "main" block. */
+  :root{--gap:24px;--content-gap:20px;--nav-width:1024px;--main-width:900px;--header-height:60px;--footer-height:60px;--radius:2px;
+    --theme:var(--paper);--entry:var(--paper-2);--primary:var(--ink);--secondary:var(--ink-3);--tertiary:var(--rule-soft);--content:var(--ink);--code-block-bg:var(--night);--code-bg:var(--paper-2);--border:var(--rule)}
+</style>
+</head>
+<body class="legacy-main">
+{{ partial "ink/mast.html" . }}
+<main id="main" class="wrap" style="padding:48px 0 120px">
+{{ block "main" . }}{{ end }}
+</main>
+{{ partial "ink/foot.html" . }}
+</body>
+</html>
