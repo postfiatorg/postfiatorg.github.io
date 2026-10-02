@@ -1,6 +1,6 @@
 """Vision critic panel for rendered pages.
 
-Adapted from the Text Improvement Harness (judge lanes, strict JSON verdicts, promote gate)
+Adapted from the Text Improvement Harness (judge lanes, promote gate). The prompt is rubric.md, verbatim
 and the video-gate process (plain questions about real footage, verbatim transcripts kept).
 
 Usage:
@@ -33,8 +33,7 @@ LANES = {
 VIDEO_MODEL = "google/gemini-3.5-flash"
 FRONTIER = ("fable", "opus")
 
-RUBRIC = (HERE / "rubric.md").read_text()
-BRIEF = (HERE / "brief.md").read_text()
+PROMPT = (HERE / "rubric.md").read_text().strip()
 
 
 def key(provider: str) -> str:
@@ -86,7 +85,7 @@ def call_lane(lane: str, prompt: str, images) -> str:
             content += [{"type": "input_text", "text": label}, {"type": "input_image", "image_url": f"data:image/jpeg;base64,{b}"}]
         raw = post(
             "https://api.openai.com/v1/responses",
-            {"model": model, "input": [{"role": "user", "content": content}], "text": {"format": {"type": "json_object"}}, "max_output_tokens": 12000},
+            {"model": model, "input": [{"role": "user", "content": content}], "max_output_tokens": 12000},
             key("openai"),
         )
         if isinstance(raw.get("output_text"), str):
@@ -101,10 +100,7 @@ def call_lane(lane: str, prompt: str, images) -> str:
         "https://openrouter.ai/api/v1/chat/completions",
         {
             "model": model,
-            "messages": [
-                {"role": "system", "content": "Return only valid JSON."},
-                {"role": "user", "content": content},
-            ],
+            "messages": [{"role": "user", "content": content}],
             "max_tokens": 12000,
         },
         key("openrouter"),
@@ -112,18 +108,18 @@ def call_lane(lane: str, prompt: str, images) -> str:
     return raw["choices"][0]["message"]["content"]
 
 
-def parse_json(text: str) -> dict:
-    m = re.search(r"\{.*\}", text, re.S)
-    return json.loads(m.group(0) if m else text)
+def parse_score(text: str) -> dict:
+    """Pull the 0-100 score out of a free-text answer; keep the whole answer as the explanation."""
+    pats = [r"(\d{1,3})\s*(?:/|out of)\s*100", r"[Ss]core[^0-9\n]{0,20}(\d{1,3})", r"\b(\d{1,3})\b"]
+    for pat in pats:
+        m = re.search(pat, text)
+        if m and 0 <= int(m.group(1)) <= 100:
+            return {"score_out_of_100": int(m.group(1)), "explanation": text}
+    return {"score_out_of_100": None, "explanation": text}
 
 
 def score(run: Path, page: str, lanes, runs: int):
-    meta = json.loads((run / "manifest.json").read_text())
-    rec = next(r for r in meta if (r["path"].strip("/").replace("/", "__") or "home") == page)
-    text_path = run / f"{page}.text.txt"
-    visible = text_path.read_text()[:12000] if text_path.exists() else ""
-    prompt = RUBRIC.format(brief=BRIEF, path=rec["path"], visible_text=visible or "(not captured)",
-                           facts=json.dumps({k: {kk: v[kk] for kk in ("height", "horizontal_overflow", "console_errors")} for k, v in rec["shots"].items()}))
+    prompt = PROMPT
     images = page_images(run, page)
     jobs = [(lane, i) for lane in lanes for i in range(runs)]
     out = []
@@ -132,7 +128,7 @@ def score(run: Path, page: str, lanes, runs: int):
         lane, i = job
         try:
             txt = call_lane(lane, prompt, images)
-            return {"lane": lane, "run": i, "model": LANES[lane][1], "verdict": parse_json(txt), "raw": txt}
+            return {"lane": lane, "run": i, "model": LANES[lane][1], "verdict": parse_score(txt), "raw": txt}
         except Exception as e:  # keep the panel going; record the failure verbatim
             return {"lane": lane, "run": i, "model": LANES[lane][1], "error": str(e)[:1200]}
 
@@ -150,7 +146,8 @@ def summarize(out):
     by = {}
     for r in out:
         if "verdict" in r:
-            by.setdefault(r["lane"], []).append(float(r["verdict"].get("score_out_of_100", 0)))
+            if r["verdict"].get("score_out_of_100") is not None:
+                by.setdefault(r["lane"], []).append(float(r["verdict"]["score_out_of_100"]))
     lane_mean = {k: round(statistics.mean(v), 2) for k, v in by.items()}
     frontier = [lane_mean[k] for k in FRONTIER if k in lane_mean]
     return {
@@ -161,12 +158,7 @@ def summarize(out):
     }
 
 
-VIDEO_QUESTION = (
-    "This is a screen recording of a visitor scrolling through one page of a website. "
-    "Would a sophisticated first-time visitor (an investor or engineer) come away impressed? Why or why not? "
-    "Be specific and brutally honest about what you see: layout, typography, motion, rhythm between sections, "
-    "anything that looks broken, cheap, generic or templated. Answer in plain prose."
-)
+VIDEO_QUESTION = PROMPT
 
 
 def video(run: Path, page: str):
@@ -212,8 +204,7 @@ def main():
         for r in out:
             if "verdict" in r:
                 vd = r["verdict"]
-                print(f"[{r['lane']}] {vd.get('score_out_of_100')}  worst: {vd.get('worst_thing','')[:300]}")
-                print(f"        next: {vd.get('one_best_next_edit','')[:300]}")
+                print(f"[{r['lane']}] {vd.get('score_out_of_100')}")
             else:
                 print(f"[{r['lane']}] ERROR {r['error'][:300]}")
         print(json.dumps(summary))
