@@ -14,3 +14,13 @@
     </nav>
   </div>
 </header>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const mast = document.getElementById('mast'); const nights = [...document.querySelectorAll('.night')];
+  if (!mast || !nights.length) return;
+  let raf = 0;
+  const check = () => { raf = 0; const y = mast.getBoundingClientRect().bottom - 1;
+    mast.classList.toggle('dark', nights.some(n => { const r = n.getBoundingClientRect(); return r.top <= y && r.bottom >= y; })); };
+  addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(check); }, {passive:true}); check();
+});
+</script>
