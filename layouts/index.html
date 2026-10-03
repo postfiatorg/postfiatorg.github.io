@@ -15,7 +15,7 @@
       </video>
     </div>
     <div class="wrap inner">
-      <p class="label kicker"><b>XRP 2.0</b><span class="sep"> &nbsp;/&nbsp; </span>Private &nbsp;·&nbsp; Quantum-resistant &nbsp;·&nbsp; Fixed supply</p>
+      <p class="label kicker"><b>XRP 2.0</b><span class="sep"> &nbsp;/&nbsp; </span><span class="kw">Private</span><span class="kd"> · </span><span class="kw">Quantum-resistant</span><span class="kd"> · </span><span class="kw">Fixed supply</span></p>
       <h1 class="display d-xxl" id="hero-title">The internet of value for the superintelligent&nbsp;era.</h1>
       <p class="lede">Bring assets in from any chain, prove what backs them, and trade them privately for a fraction of what public markets cost you. Post Fiat is XRP, rebuilt for trading and holding real portfolios on chain.</p>
       <div class="btns">
@@ -23,6 +23,12 @@
         <a class="btn" href="https://discord.gg/U6HjgDSmhR" rel="noopener">Join the Discord</a>
         <a class="btn" href="https://x.com/postfiatorg" rel="noopener">Follow on X</a>
       </div>
+      {{ $vhs := unmarshal (readFile "static/benchmarks/live-testnet-validator-stats.json") }}
+      <ul class="trust" aria-label="Network at a glance">
+        <li><b>{{ $vhs.validator_count }}</b> validators</li>
+        <li><b>3,000+</b> community members</li>
+        <li><b>Open source</b> on <a href="https://github.com/postfiatorg" rel="noopener">GitHub</a></li>
+      </ul>
     </div>
   </section>
 
@@ -78,7 +84,7 @@
           </div>
         </article>
         <article class="card">
-          <figure data-anim="/video/plates/cobalt.mp4"><img src="/images/ink/cobalt-900.webp" srcset="/images/ink/cobalt-900.webp 900w, /images/ink/cobalt-1400.webp 1400w" sizes="(max-width:900px) 100vw, 600px" alt="Ink plate: a ring of monoliths bound by threads to a sealed document" loading="lazy" width="900" height="506"><figcaption>Plate IV · Cobalt</figcaption></figure>
+          <figure data-anim="/video/plates/cobalt.mp4"><img src="/images/ink/cobalt-900.webp" srcset="/images/ink/cobalt-900.webp 900w, /images/ink/cobalt-1400.webp 1400w" sizes="(max-width:900px) 100vw, 600px" alt="Ink plate: a ring of monoliths bound by threads to a sealed document" loading="lazy" width="900" height="506"><figcaption>Plate IV · Validator governance</figcaption></figure>
           <div class="card-body">
           <h3>Know exactly who runs the network.</h3>
           <p>The validator list lives on chain. Adding or removing a validator takes a vote of the existing set, recorded for anyone to check, so no single company can quietly change who settles your trades.</p>

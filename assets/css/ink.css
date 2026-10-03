@@ -594,3 +594,28 @@ figure[data-anim].alive video.anim{opacity:1}
 .night + .sec{padding-top:clamp(56px,7vw,96px)}
 .uses + .sec,.uses ~ .night{padding-top:clamp(56px,7vw,96px)}
 .papers a:first-child .go{color:#5fc3c5}
+
+/* Trust row under the hero buttons */
+.trust{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 28px;font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--ink-2)}
+.trust b{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:0;color:var(--ink);margin-right:6px}
+.trust a{color:var(--teal-ink)}
+/* Kicker items never split mid-phrase */
+.kicker .kw{white-space:nowrap}
+@media (max-width:820px){.kicker .kd{margin:0 2px}}
+/* Consistent section rhythm */
+.sec{padding:clamp(64px,7vw,104px) 0}
+.sec-tight{padding:clamp(48px,5vw,72px) 0}
+.sec-head{margin-bottom:clamp(32px,4vw,56px)}
+/* Mobile hero: an intentional, taller crop on the X-braced towers */
+@media (max-width:820px){
+  .hero .plate-video{height:78vw}
+  .hero .plate-video video{height:100%;object-fit:cover;object-position:58% 60%}
+}
+@media (max-width:820px){
+  .kicker .kd{display:none}
+  .kicker .kw + .kw{margin-left:14px}
+  .trust{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:4px 22px;font-size:11.5px;margin-top:22px}
+  .trust b{display:block;font-size:24px;margin:0}
+  .trust li:last-child b{font-size:20px;line-height:1.2}
+}
+@media (max-width:820px){.kicker .kw{margin-right:16px;display:inline-block}}
