@@ -59,7 +59,7 @@ status:
   - area: "NAVCoins"
     tag: "demo"
     state: "Limited availability"
-    detail: "A666 is deployed with an Ethereum-mainnet route: pfUSDC, proof-gated wA666 and a wA666/USDC Uniswap v4 pool. General availability is not open. See [NAVCoins](gh:docs/navcoins/index.md)."
+    detail: "A666 is deployed with an Ethereum-mainnet route: pfUSDC, proof-gated wA666 and a wA666/USDC Uniswap v4 pool. General availability is not open. Its reserve proof uses the legacy `sp1-groth16` verifier, which does not bind the epoch or observation time, and is relative to the six-validator checkpoint committee. See [NAVCoins](gh:docs/navcoins/index.md)."
   - area: "Coinbase custody of PQ keys"
     tag: "prop"
     state: "Coinbase roadmap"

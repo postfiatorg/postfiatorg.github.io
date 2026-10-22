@@ -2,7 +2,8 @@
   <div class="wrap">
     <div>
       <a class="brand" href="/"><img src="/media-kit/logo.svg" alt=""><span>Post Fiat</span></a>
-      <p>The private, quantum-resistant internet of value for the superintelligent era.</p>
+      {{ if eq .Section "listings" }}<p>Post Fiat L1: post-quantum account and validator signatures; transparent by default, with an optional shielded pool in alpha.</p>
+      {{ else }}<p>The private, quantum-resistant internet of value for the superintelligent era.</p>{{ end }}
     </div>
     <div>
       <h4>Read</h4>
