@@ -1,0 +1,22 @@
+[Unit]
+Description=Post Fiat listings monitor (freshness checks, TIH scoring, red-team review)
+Documentation=https://github.com/postfiatorg/postfiatorg.github.io/tree/main/ops/listings-monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# Defaults. ~/.config/postfiat-listings-monitor/monitor.env overrides them
+# (see monitor.env.example next to this file). Without that file the monitor
+# checks the live site and reads the listing docs from GitHub main.
+Environment=PFLM_SCRIPT=%h/repos/postfiatorg.github.io/ops/listings-monitor/run_monitor.py
+Environment=PFLM_ARGS=
+EnvironmentFile=-%h/.config/postfiat-listings-monitor/monitor.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=PYTHONUNBUFFERED=1
+# --mode auto runs the full gate on Mondays (UTC) and the cheap gate on other days.
+# Exit 1 = a hard check failed (the unit shows as failed); exit 3 = the monitor could not run.
+ExecStart=/usr/bin/python3 ${PFLM_SCRIPT} --mode auto $PFLM_ARGS
+TimeoutStartSec=4h
+Nice=10
+UMask=0077

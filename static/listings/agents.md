@@ -10,7 +10,7 @@ Post Fiat L1 (PFTL) is a Rust Layer 1 settlement chain in the operating shape of
 
 - ML-DSA-65 (NIST FIPS 204) post-quantum signatures for accounts and validators, from genesis. ML-DSA-65 is the only account signature.
 - An optional Orchard/Halo2 shielded pool, built on the upstream Zcash crates, with selective-disclosure tools.
-- NAVCoins: floating-value assets that can be issued only against a finalized, proven net asset value.
+- NAVCoins: floating-value assets issued against reserve records finalized on chain. The asset's profile sets the verifier: SP1 zero-knowledge proofs for some assets, on-ledger balances or attestations for others. The live A666 NAVCoin still uses the legacy `sp1-groth16` verifier.
 
 Validator-set changes are ratified on chain by Cobalt; block finality is Consensus v2. PFTL is a new codebase, not a fork of `rippled`. The older Post Fiat chain, `postfiatd`, is a separate XRPL-derived network.
 

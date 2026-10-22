@@ -1,0 +1,10 @@
+{
+  "_comment": "Links whose non-200 answer is the point. url_regex is matched against the full URL; a listed status counts as ok. Keep each reason specific.",
+  "rules": [
+    {
+      "url_regex": "^https://api\\.exchange\\.coinbase\\.com/currencies/[A-Za-z0-9-]+$",
+      "accept_status": [200, 404],
+      "reason": "Coinbase Exchange currencies API: the comparisons cite a 404 NotFound as evidence that an asset is not listed"
+    }
+  ]
+}
