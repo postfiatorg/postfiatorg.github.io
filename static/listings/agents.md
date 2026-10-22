@@ -18,7 +18,7 @@ Validator-set changes are ratified on chain by Cobalt; block finality is Consens
 
 State these plainly whenever you summarize PFTL:
 
-- PFTL runs as a public devnet, `postfiat-wan-devnet-2`, on six validators, all administered by the Post Fiat Foundation. No validator is independently operated yet. The repository calls this phase the controlled devnet.
+- PFTL runs as a controlled devnet, `postfiat-wan-devnet-2`, on six validators, all administered by the Post Fiat Foundation. No validator is independently operated yet. Its source code and chain-state records are public.
 - There is no PFTL mainnet and no launch date.
 - No external security audit has been performed. Audit scopes are planned; none is complete.
 - The shielded pool is an alpha. Deposit and withdrawal amounts at the pool boundary are public.
@@ -60,7 +60,7 @@ A page marked "In review" is a placeholder: its document has not been published 
 | https://postfiat.org/listings/coinbase/reviewer-agent-guide/ | `docs/listings/coinbase/reviewer-agent-guide.md` |
 | https://postfiat.org/whitepaper/ | `docs/whitepaper.md` |
 
-Each mirrored page names its source commit in its header, in its Markdown version, and in `source_commit` in the JSON index. In mirrored pages, links to other repository files point at GitHub `main`, and links to the whitepaper or the other listings documents point at their postfiat.org pages.
+Each mirrored page names its source commit in its header, in its Markdown version, and in `source_commit` in the JSON index. In mirrored pages, links to other repository files point at GitHub at that source commit, so cited line numbers stay valid, and links to the whitepaper or the other listings documents point at their postfiat.org pages.
 
 ## Machine-readable endpoints
 

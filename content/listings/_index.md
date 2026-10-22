@@ -11,9 +11,9 @@ repo: "postfiatorg/postfiatl1v2"
 design_docs_ref: "main"
 # Every design_docs path was checked with `git cat-file -e public/main:<path>`
 # at this commit; scripts/sync_listings_docs.py re-checks them on every run.
-design_docs_checked_commit: "325afbdbf"
+design_docs_checked_commit: "a2516a1b8"
 
-honesty: "PFTL runs today as a public devnet, `postfiat-wan-devnet-2`, on six validators that the Post Fiat Foundation administers. There is no mainnet, and no external security audit has been performed."
+honesty: "PFTL runs today as a controlled devnet, `postfiat-wan-devnet-2`, on six validators that the Post Fiat Foundation administers. Its source code and chain-state records are public. There is no mainnet, and no external security audit has been performed."
 
 cards:
   - label: "Plan"
@@ -38,7 +38,7 @@ cards:
 status:
   - area: "Network"
     tag: "live"
-    state: "Public devnet"
+    state: "Controlled devnet"
     detail: "`postfiat-wan-devnet-2`: six validators, all administered by the Post Fiat Foundation; five of six commit a block. No validator is independently operated yet. Height, release and freshness are in [chain-state-current.md](gh:docs/status/chain-state-current.md)."
   - area: "Mainnet"
     tag: "prop"

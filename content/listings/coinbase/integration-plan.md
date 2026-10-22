@@ -10,10 +10,9 @@ listing: "coinbase"
 status: "published"
 source_repo: "postfiatorg/postfiatl1v2"
 source_path: "docs/listings/coinbase/integration-plan.md"
-source_commit: "ac7a49822"
+source_commit: "61106cce2"
 source_branch: "listings/coinbase-integration-plan-20261022"
-source_dirty: true
-links_ref: "main"
+links_ref: "61106cce29cb54551427cb27a46036aaa544c85b"
 date: 2026-10-22
 lastmod: 2026-10-22
 aliases: ["/listings/coinbase/"]
@@ -21,18 +20,22 @@ aliases: ["/listings/coinbase/"]
 
 Prepared for the Coinbase Digital Asset Listings team, 2026-10-22.
 
-- **Start here:** the [Post Fiat whitepaper](https://postfiat.org/whitepaper/) ([source](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/whitepaper.md)).
+- **Start here:** the [Post Fiat whitepaper](https://postfiat.org/whitepaper/) ([source](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/whitepaper.md)).
 - **Code:** [github.com/postfiatorg/postfiatl1v2](https://github.com/postfiatorg/postfiatl1v2).
 - **Companion documents:**
   - [Comparisons with XRP, Zcash and post-quantum chains](/listings/coinbase/comparisons/);
   - [a reviewer guide for AI agents](/listings/coinbase/reviewer-agent-guide/).
 - **Web:** [postfiat.org/listings](https://postfiat.org/listings/).
 
-> **Status, stated plainly.** Post Fiat L1 (PFTL) runs today as a public
+All repository links in this document point to the public GitHub repository.
+
+> **Status, stated plainly.** Post Fiat L1 (PFTL) runs today as a controlled
 > development network, `postfiat-wan-devnet-2`, on six validators that the
-> Post Fiat Foundation administers. It is not a production mainnet. **No
+> Post Fiat Foundation administers. Its source code and chain-state records
+> are public ([chain-state-current.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/status/chain-state-current.md)).
+> It is not a production mainnet. **No
 > external security audit has been performed.** The repository says so in
-> [SECURITY.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/SECURITY.md), and this plan treats audits as required
+> [SECURITY.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/SECURITY.md), and this plan treats audits as required
 > work, not as a formality. Every claim below points to the code or document
 > that supports it, so a reviewer can check it.
 
@@ -41,14 +44,15 @@ Prepared for the Coinbase Digital Asset Listings team, 2026-10-22.
 1. **What it is.** PFTL is a Rust Layer 1 in the operating shape of the XRP
    Ledger. It has known validators, deterministic finality, a fixed-supply
    native asset (PFT) and burned fees, plus three things XRPL does not have:
-   - post-quantum (ML-DSA-65) account and validator signatures;
+   - post-quantum ML-DSA-65 account and validator signatures;
    - an Orchard/Halo2 shielded pool;
-   - NAVCoins, assets that can only be issued against zero-knowledge
-     proofs of reserves.
+   - NAVCoins, assets that can only be issued against zero-knowledge proofs
+     of reserves.
 2. **How Coinbase would integrate it.** Through the transparent ledger only:
    - run Coinbase-operated nodes;
    - treat one commit certificate with an accepted receipt as final;
-   - use one deposit address per customer, or a memo-tagged payment;
+   - use one deposit address per customer; memo-tagged deposits become
+     possible once the RPC returns memo contents, as described in section 4.4;
    - sign with ML-DSA-65.
 
    The shielded pool can stay out of scope, as Coinbase already does for
@@ -60,15 +64,16 @@ Prepared for the Coinbase Digital Asset Listings team, 2026-10-22.
    - The validator set is Foundation-run.
    - Coinbase custody cannot yet sign ML-DSA-65 transactions.
 
-   Section 8 turns each of these into a deliverable with an exit test.
-4. **The two review surfaces that matter most.**
-   - **Cobalt**, which governs validator-set changes. A party able to change
-     the validator set is the "central authority" case in Coinbase's
-     security framework.
-   - **The NAVCoin reserve-proof circuits**, which decide whether a NAVCoin
-     can be issued.
+   Section 8 maps these blockers to phased deliverables and exit tests.
+4. **The main protocol review surfaces.**
+   - **Cobalt** governs validator-set changes. A party able to change the
+     validator set is the “central authority” case in Coinbase's security
+     framework.
+   - **The NAVCoin reserve-proof circuits** decide whether a NAVCoin can be
+     issued. NAVCoins are outside the native PFT integration, but Coinbase
+     requested their mechanics at the zero-knowledge-proof level.
 
-   Both are described down to their trust assumptions in section 5.
+   Section 5 states the trust assumptions for both.
 5. **Interim path.** Until native PFT can be held in Coinbase custody, an
    ERC-20 representation of PFT on Ethereum or Base is possible with the
    bridge machinery already deployed for the A666 NAVCoin. Its trust model is
@@ -77,22 +82,22 @@ Prepared for the Coinbase Digital Asset Listings team, 2026-10-22.
 ## 2. What Post Fiat L1 is
 
 The [whitepaper](https://postfiat.org/whitepaper/) is the full description.
-The [architecture overview](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/architecture/overview.md) divides the
+The [architecture overview](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/architecture/overview.md) divides the
 protocol into four planes:
 
 | Plane | What it does | Where to read |
 |---|---|---|
-| Consensus v2 | Orders and finalizes blocks with prepare/precommit BFT certificates | [finality.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/architecture/finality.md) |
-| FastPay / FastSwap | Certificate lanes for prefunded objects, settled with validator certificates outside block ordering | [settlement-lanes.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/architecture/settlement-lanes.md) |
-| Cobalt | Ratifies changes to the validator registry and trust graph | [cobalt.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/governance/cobalt.md) |
-| Orchard privacy | Shielded deposits, spends and withdrawals with Halo2 proofs | [privacy overview](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/privacy/overview.md) |
+| Consensus v2 | Orders and finalizes blocks with prepare/precommit BFT certificates | [finality.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/architecture/finality.md) |
+| FastPay / FastSwap | Certificate lanes for prefunded objects, settled with validator certificates outside block ordering | [settlement-lanes.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/architecture/settlement-lanes.md) |
+| Cobalt | Ratifies changes to the validator registry and trust graph | [cobalt.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/governance/cobalt.md) |
+| Orchard privacy | Shielded deposits, spends and withdrawals with Halo2 proofs | [privacy overview](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/privacy/overview.md) |
 
 The native asset is PFT. One PFT is 1,000,000 atoms
-([faucet runbook](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/runbooks/faucet-testnet-transactions.md)). Two facts
+([faucet runbook](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/runbooks/faucet-testnet-transactions.md)). Two facts
 about supply:
 
 - **Fixed at genesis.** Native PFT is created only at genesis
-  ([core_chain.rs](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/types/src/core_chain.rs),
+  ([core_chain.rs](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/crates/types/src/core_chain.rs),
   `GENESIS_NATIVE_SUPPLY_ATOMS`).
 - **No new issuance.** All fees burn, and validators receive no subsidy
   ([whitepaper](/whitepaper/)).
@@ -100,13 +105,15 @@ about supply:
 The devnet genesis supply is fixed in code at 1,000,000,000 atoms. The
 published target for the production network is 100 billion PFT
 ([postfiat.org/llms.txt](https://postfiat.org/llms.txt)). The production
-genesis specification must reconcile the two numbers before any listing review.
+genesis specification must reconcile the two numbers before any listing
+review.
 
 PFTL is a new codebase. It is not a fork of `rippled`. The older Post Fiat
 chain, [postfiatd](https://github.com/postfiatorg/postfiatd), *is* a `rippled`
 fork and runs as a public testnet with about fifty community validators. Its
 scored operators are the intended source of PFTL's first independent
-validators ([launch spec](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/architecture/l1v2-testnet-genesis-and-launch-spec.md)).
+validators
+([launch spec](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/architecture/l1v2-testnet-genesis-and-launch-spec.md)).
 The [comparisons document](/listings/coinbase/comparisons/) covers what PFTL keeps from XRP and
 what it changes.
 
@@ -114,22 +121,23 @@ what it changes.
 
 | Item | Value | Source |
 |---|---|---|
-| Network | `postfiat-wan-devnet-2`, genesis `ce22ca8c…e90a9` | [chain-state-current.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/status/chain-state-current.md) |
-| Validators | 6, all Foundation-administered; commit quorum 5 of 6 | [chain-state-current.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/status/chain-state-current.md), [finality.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/architecture/finality.md) |
-| Release | `store-handle-20261021`, deployed 2026-10-21 one validator at a time, height 1137 | [chain-state-current.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/status/chain-state-current.md) |
-| Blocks | Produced on demand, so height grows with use, not wall-clock time | [chain-state-current.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/status/chain-state-current.md) |
-| Real value on the network | Ethereum-mainnet routes for pfUSDC and the A666 NAVCoin, in limited availability | [NAVCoins](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/navcoins/index.md) |
-| Public testnet gates | Gate Zero conditions Z1–Z3 open | [testnet-path.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/status/testnet-path.md) |
+| Network | `postfiat-wan-devnet-2`, genesis `ce22ca8c…e90a9` | [chain-state-current.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/status/chain-state-current.md) |
+| Validators | 6, all Foundation-administered; commit quorum 5 of 6 | [chain-state-current.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/status/chain-state-current.md), [finality.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/architecture/finality.md) |
+| Release | `store-handle-20261021`, deployed 2026-10-21 one validator at a time, height 1137 | [chain-state-current.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/status/chain-state-current.md) |
+| Blocks | Produced on demand, so height grows with use, not wall-clock time | [chain-state-current.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/status/chain-state-current.md) |
+| Real value on the network | Ethereum-mainnet routes for pfUSDC and the A666 NAVCoin, in limited availability | [NAVCoins](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/navcoins/index.md) |
+| Public testnet gates | Gate Zero conditions Z1–Z3 open | [testnet-path.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/status/testnet-path.md) |
 
 **How releases are shipped.**
+
 1. Two clean builds must produce the same executable hash.
-2. A signed deployment manifest and a signed canary backup are made; the
+2. A signed deployment manifest and a signed canary backup are made. The
    backup is fully replayed to the same state root.
 3. The release rolls out one validator at a time with
    `scripts/postfiat-safe-rollout`.
 
 Each release has its own deployment record in the repository
-([release process](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/release-process.md)).
+([release process](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/release-process.md)).
 
 ## 4. How a Coinbase integration would work
 
@@ -151,20 +159,20 @@ This section follows the checks Coinbase publishes:
 
 - **Building a node.** Coinbase builds `postfiat-node` from source
   (`cargo build --release -p postfiat-node`) and runs it on x86-64 Linux under
-  systemd ([operator runbook](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/runbooks/public-operator-runbook.md)).
+  systemd ([operator runbook](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/runbooks/public-operator-runbook.md)).
 - **Catching up and verifying history.** A non-validating node catches up
   with `rpc-catch-up-certified-delta`. It checks every block's commit
-  certificate itself, so it does not trust whichever peer served the data.
-  That is the "trustless node operation" property Coinbase's framework
-  requires.
+  certificate itself rather than trusting the peer that served the data.
+  Validator governance remains a separate trust assumption.
 - **Public RPC.** It binds to loopback and is reached through an
   operator-run authenticated TLS edge. Writes are off unless
   `--allow-mempool-submit` is set
-  ([public RPC policy](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/runbooks/public-rpc-operator-policy.md)).
+  ([public RPC policy](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/runbooks/public-rpc-operator-policy.md)).
 
 Gaps:
-- **No published hardware sizing**, and no signed release binary that
-  outside operators can download.
+
+- **No published hardware sizing.**
+- **No signed release binary** that outside operators can download.
 - **No outside validators yet.** The devnet does not accept validators from
   outside the Foundation.
 
@@ -173,52 +181,56 @@ Section 8 schedules all three.
 ### 4.2 Finality and confirmations
 
 **What finality means.**
-- Finality is deterministic. A block is final once it has a commit quorum
-  certificate: `q = floor(2n/3) + 1` precommits from `n` validators, which
-  tolerates `f = floor((n-1)/3)` faults
-  ([finality.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/architecture/finality.md)).
-- Views change only through signed timeout certificates, and no fork choice
+
+- Under the stated BFT fault assumptions, finality is deterministic. A block
+  is final once it has a commit quorum certificate:
+  `q = floor(2n/3) + 1` precommits from `n` validators, which tolerates
+  `f = floor((n-1)/3)` faults
+  ([finality.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/architecture/finality.md)).
+- Views change only through signed timeout certificates, and no fork-choice
   rule can reverse a committed block.
 
 **What Coinbase must check.**
-- A certified block can contain rejected transactions, so a deposit is
-  credited only when the `tx` query shows a final block **and** an accepted
-  receipt ([RPC overview](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/rpc/overview.md)).
+
+- A certified block can contain rejected transactions. Coinbase should credit
+  a deposit only when the `tx` query shows a final block **and** an accepted
+  receipt ([RPC overview](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/rpc/overview.md)).
 - The recommended confirmation count is therefore one certificate. This is
   comparable to Coinbase's XRP setting of zero confirmations
   ([Coinbase currencies API](https://api.exchange.coinbase.com/currencies/XRP)).
 
 **Liveness history.** Coinbase should read these before treating the network
 as stable:
+
 - The chain stopped after height 924 because of a validator-registry defect
-  ([postmortem](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/postmortems/devnet-registry-continuation-wedge-2026-08-31.md)).
+  ([postmortem](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/postmortems/devnet-registry-continuation-wedge-2026-08-31.md)).
 - It stopped again at height 1036 after a FastPay payment, in September 2026.
 - A storage campaign in October found that finality latency grew with chain
   height. The 2026-10-21 release removes the cause that campaign identified.
 
 Losing two of six validators halts the chain rather than weakening the
-quorum. That is safe, but it means availability depends on validator
-independence (section 5.1).
+quorum. That is safe, but availability depends on validator independence
+(section 5.1).
 
 ### 4.3 Addresses, keys and signatures
 
 | Property | PFTL today | Source |
 |---|---|---|
-| Account and validator signatures | ML-DSA-65 (FIPS 204) only: 1,952-byte public keys, 3,309-byte signatures | [crypto_provider](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/crypto_provider/src/lib.rs), [FIPS 204](https://csrc.nist.gov/pubs/fips/204/final) |
-| Address | `pf` + hex of the first 20 bytes of SHA3-384(`"postfiat.address.v1"` ‖ 0x00 ‖ public key) | [crypto_provider](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/crypto_provider/src/lib.rs) |
+| Account and validator signatures | ML-DSA-65 (FIPS 204) only: 1,952-byte public keys, 3,309-byte signatures | [crypto_provider](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/crates/crypto_provider/src/lib.rs), [FIPS 204](https://csrc.nist.gov/pubs/fips/204/final) |
+| Address | `pf` + hex of the first 20 bytes of SHA3-384(`"postfiat.address.v1"` ‖ 0x00 ‖ public key) | [crypto_provider](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/crates/crypto_provider/src/lib.rs) |
 | Checksum | None | same |
-| Key binding | An account's public key is bound at its first spend; no rotation yet | [key rotation boundary](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/specs/account-key-rotation-boundary.md) |
-| Wallet derivation | SHA3-384 over domain, algorithm, chain id, account index, role and seed, so the same seed gives different addresses on different chains | [wallet_sdk.rs](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/rpc_sdk/src/wallet_sdk.rs) |
-| Transaction envelope | `postfiat.transfer.v1`, with chain, genesis and version domain checks | [envelope spec](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/specs/transparent-transaction-envelope.md) |
+| Key binding | An account's public key is bound at its first spend; no rotation yet | [key rotation boundary](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/specs/account-key-rotation-boundary.md) |
+| Wallet derivation | SHA3-384 over domain, algorithm, chain id, account index, role and seed, so the same seed gives different addresses on different chains | [wallet_sdk.rs](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/crates/rpc_sdk/src/wallet_sdk.rs) |
+| Transaction envelope | `postfiat.transfer.v1`, with chain, genesis and version domain checks | [envelope spec](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/specs/transparent-transaction-envelope.md) |
 
 Two properties matter for an exchange.
 
 - **Mistyped addresses.** There is no checksum, and transfers do not validate
-  the recipient's format, so a mistyped address receives funds that nobody can
-  spend.
+  the recipient's format. A mistyped address therefore receives funds that
+  nobody can spend.
   - Before integration, PFTL will add a checksummed address encoding and
     reject malformed recipients at admission and execution.
-  - It will publish test vectors for both (section 8, phase 1).
+  - It will publish test vectors for both in section 8, phase 1.
 - **Watch-only addresses.** ML-DSA has no BIP32-style public derivation, so
   Coinbase cannot generate deposit addresses from a watch-only root.
   - Each deposit address comes from a key the custodian generates.
@@ -227,51 +239,57 @@ Two properties matter for an exchange.
 
 ### 4.4 Deposits and attribution
 
-Two supported patterns:
+Two patterns are possible:
 
-1. **One deposit address per customer.** This is what the
-   [custody model](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/specs/wallet-exchange-custody-model.md) recommends,
+1. **One deposit address per customer. This works today.** It is what the
+   [custody model](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/specs/wallet-exchange-custody-model.md) recommends,
    because v1 transfers carry no memo.
-2. **One shared address plus a memo.** `payment_v2` carries up to four memos
-   with 512 bytes in total
-   ([core_chain.rs](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/types/src/core_chain.rs)). XRPL's
-   `RequireDest` flag makes the ledger reject untagged payments
-   ([XRPL tags](https://xrpl.org/docs/concepts/transactions/source-and-destination-tags)).
-   PFTL has no equivalent yet, so a sender who omits the memo would create an
-   unattributed deposit.
+2. **One shared address plus a memo. Available after phase 1.**
+   - `payment_v2` carries up to four memos with 512 bytes in total
+     ([core_chain.rs](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/crates/types/src/core_chain.rs)).
+   - **The RPC does not return memo text yet.** Account history returns only
+     a hash of a payment's memos
+     ([block_finality.rs](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/crates/node/src/block_finality.rs)), so
+     Coinbase could not read a tag from the RPC.
+   - **Nothing rejects untagged payments.** XRPL's `RequireDest` flag makes
+     the ledger reject them
+     ([XRPL tags](https://xrpl.org/docs/concepts/transactions/source-and-destination-tags)).
+     PFTL has no equivalent yet, so an omitted memo would create an
+     unattributed deposit.
 
-Phase 1 of section 8 adds a destination-tag rule: an account flag that makes
-the ledger reject payments without a well-formed tag.
+Phase 1 makes the second pattern workable. It adds memo contents to `tx` and
+`account_tx`, plus an account flag that rejects payments without a well-formed
+tag.
 
 **Reconciliation.**
+
 - `account_tx` returns indexed account history
-  ([account history](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/rpc/account-history.md)).
+  ([account history](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/rpc/account-history.md)).
 - **Known gap.** The index reads only transparent batches
-  ([block_finality.rs](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/node/src/block_finality.rs)), so a
-  shielded-pool withdrawal that credits a Coinbase address would not appear in
-  that address's history.
+  ([block_finality.rs](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/crates/node/src/block_finality.rs)). A
+  shielded-pool withdrawal that credits a Coinbase address would not appear
+  in that address's history.
 - Until the index is fixed, Coinbase would need to reconcile balances with
-  the `account` query. Phase 1 fixes it.
+  the `account` query. Phase 1 fixes the index.
 
 ### 4.5 Withdrawals, fees and sequence numbers
 
 | Rule | Value | Source |
 |---|---|---|
-| Transfer fee | 1 atom per 512 bytes of the signed transaction, minimum 1 atom | [entrypoints.rs](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/execution/src/entrypoints.rs) |
+| Transfer fee | 1 atom per 512 bytes of the signed transaction, minimum 1 atom | [entrypoints.rs](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/crates/execution/src/entrypoints.rs) |
 | New-account surcharge | 10 atoms when the recipient does not exist yet | same |
 | Account reserve | 10 atoms | same |
 | Fee destination | Burned | same |
-| Sequence | Must equal the account's sequence plus one; the mempool accepts chained sequences | same, [mempool](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/node/src/mempool_proposals.rs) |
-| Fee quote | `transfer_fee_quote` before signing | [RPC methods](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/rpc/methods.md) |
+| Sequence | Must equal the account's sequence plus one; the mempool accepts chained sequences | same, [mempool](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/crates/node/src/mempool_proposals.rs) |
+| Fee quote | `transfer_fee_quote` before signing | [RPC methods](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/rpc/methods.md) |
 
-Fees are small and deterministic. A post-quantum signature makes a transfer a
-few kilobytes, so a typical transfer costs a few dozen atoms (millionths of a
-PFT).
+Fees are deterministic and depend on signed transaction size. ML-DSA
+signatures make transfers a few kilobytes.
 
 ### 4.6 RPC and the Mesh API
 
 - **The node's RPC.** One JSON request per TCP connection
-  ([Python client](https://github.com/postfiatorg/postfiatl1v2/blob/main/python/postfiat_rpc/client.py)).
+  ([Python client](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/python/postfiat_rpc/client.py)).
 - **Methods.**
   - Reads: `status`, `ledger`, `blocks`, `receipts`, `tx`, `account`,
     `account_tx`, `fee`.
@@ -279,13 +297,13 @@ PFT).
   - Signed writes: `mempool_submit_signed_transfer` and
     `mempool_submit_signed_payment_v2`.
 
-  All are listed in [docs/rpc/methods.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/rpc/methods.md).
+  All are listed in [docs/rpc/methods.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/rpc/methods.md).
 - **SDKs.** A Rust SDK and a Python package handle quote-bound signing and
   finality decoding.
 
 Coinbase's public integration interface for native chains is the
-[Mesh specification](https://github.com/coinbase/mesh-specifications), formerly
-Rosetta. It has two parts and two conformance tests:
+[Mesh specification](https://github.com/coinbase/mesh-specifications),
+formerly Rosetta. It has two parts and two conformance tests:
 
 | Mesh part | What it covers | Conformance test |
 |---|---|---|
@@ -298,9 +316,10 @@ curve type on 2026-07-23
 ([PR #129](https://github.com/coinbase/mesh-specifications/pull/129)), so the
 specification can already describe PFTL's signatures.
 
-Phase 2 of section 8 delivers a Mesh implementation, `postfiat-mesh`:
-- it uses PFTL's certified-block and receipt model;
-- it passes both `check:data` and `check:construction` against a public test
+Phase 2 delivers a Mesh implementation, `postfiat-mesh`, that:
+
+- uses PFTL's certified-block and receipt model;
+- passes both `check:data` and `check:construction` against a public test
   network with a faucet.
 
 ### 4.7 Custody and signing
@@ -320,8 +339,10 @@ Both plans are described in
 
 There are two realistic custody routes:
 
-1. **HSM-based ML-DSA signing for PFT.** This is how Fireblocks rotated a live
-   NEAR account to ML-DSA-65. It can work before lattice MPC exists. PFTL will
+1. **HSM-based ML-DSA signing for PFT.** Fireblocks rotated a live NEAR
+   account to ML-DSA-65 this way, through PKCS#11 with kryoptic, an
+   open-source software HSM; a hardware HSM with ML-DSA support would use the
+   same interface. It can work before lattice MPC exists. PFTL will
    provide:
    - a reference signer behind PKCS#11 or a remote-signing interface;
    - deterministic test vectors;
@@ -330,28 +351,21 @@ There are two realistic custody routes:
    transfer-only testing on a public test network.
 
 PFTL will not add a classical signature path to the account model just to fit
-today's custody. That would remove the property that sets it apart. The
-post-quantum guarantee covers:
+today's custody. Section 5.3 states the exact limits of the post-quantum
+coverage.
 
-| Component | Post-quantum? |
-|---|---|
-| Account and validator authorization | Yes |
-| Orchard spend signatures (RedPallas) | No, classical |
-| Halo2 proofs | No, classical |
-| SP1 Groth16 proofs over BN254 | No, classical |
-| Ethereum contracts | No, classical |
-
-Sources: [quantum authorization](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/quantum/authorization.md),
-[signature sizes](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/quantum/signature-size-and-certificates.md). The
+Sources: [quantum authorization](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/quantum/authorization.md),
+[signature sizes](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/quantum/signature-size-and-certificates.md). The
 repository currently contradicts itself about SLH-DSA recovery keys:
-[quantum/authorization.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/quantum/authorization.md) describes them,
-and [SECURITY.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/SECURITY.md) says the path is not implemented.
+[quantum/authorization.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/quantum/authorization.md) describes them,
+and [SECURITY.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/SECURITY.md) says the path is not implemented.
 Treat that path as not implemented until it is fixed in phase 1.
 
 ### 4.8 The shielded pool
 
 **How the pool works**
-([deposit, spend, withdraw](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/privacy/deposit-spend-withdraw.md)):
+([deposit, spend, withdraw](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/privacy/deposit-spend-withdraw.md)):
+
 1. **Deposit.** A transparent deposit burns transparent principal and mints a
    shielded note.
 2. **Spend.** Private spends move notes inside the pool.
@@ -361,10 +375,11 @@ Treat that path as not implemented until it is fixed in phase 1.
 **What stays public:** deposit and withdrawal amounts, assets, endpoints and
 timing.
 
-**What a holder can disclose.**
-- Individual outputs, without handing over keys
-  ([disclosure](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/privacy/disclosure.md)).
-- A viewing key, for wider review.
+**What a holder can disclose:**
+
+- individual outputs, without handing over keys
+  ([disclosure](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/privacy/disclosure.md));
+- a viewing key, for wider review.
 
 **Recommended scope for Coinbase.** Transparent only. This mirrors how
 Coinbase supports Zcash: it receives from transparent and shielded addresses
@@ -372,7 +387,8 @@ and sends only to transparent addresses
 ([Coinbase ZEC](https://www.coinbase.com/price/zcash)). Shielded transaction
 creation is off by default on public RPC.
 
-**Three points Coinbase's compliance review will raise.**
+**Three points Coinbase's compliance review will raise:**
+
 1. **The 2026 Zcash Orchard soundness bug** (GHSA-ww9q-8r59-xv46).
    - PFTL builds on `orchard` 0.14.0 and `halo2_gadgets` 0.5.0, the patched
      versions (`Cargo.lock`).
@@ -388,9 +404,9 @@ creation is off by default on public RPC.
      is a legal question. Post Fiat will obtain counsel's opinion before a
      listing application.
 
-**Maturity.** The pool is described as a "shielded privacy alpha". Its
+**Maturity.** The pool is described as a “shielded privacy alpha.” Its
 external circuit audit is an open release gate
-([release gates](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/status/release-gate-inventory.md)).
+([release gates](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/status/release-gate-inventory.md)).
 
 ### 4.9 Upgrades and incident communication
 
@@ -398,8 +414,8 @@ external circuit audit is an open release gate
   a signed manifest, two matching builds and a one-validator-at-a-time
   rollout.
 - **Records.** Releases and incidents are written up in the repository: the
-  [chain state log](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/status/chain-state-current.md) and
-  [postmortems](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/postmortems/devnet-registry-continuation-wedge-2026-08-31.md).
+  [chain state log](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/status/chain-state-current.md) and
+  [postmortems](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/postmortems/devnet-registry-continuation-wedge-2026-08-31.md).
 - **Coinbase notice.** For Coinbase, Post Fiat will add:
   - a release notice at least 14 days before any consensus change;
   - a named contact for Coinbase;
@@ -415,83 +431,89 @@ validators to collude. Who controls PFTL's validator set is therefore the
 first question.
 
 **What Cobalt is.**
+
 - Cobalt is the protocol PFTL uses to approve changes to the validator
   registry and trust graph. It is adapted from MacBrough's Ripple Research
   paper ([arXiv:1802.07240](https://arxiv.org/abs/1802.07240);
-  [reference notes](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/references/cobalt-bft-governance-in-open-networks.md)).
-- It does not order blocks or finalize transactions. Consensus v2 does
-  that ([cobalt.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/governance/cobalt.md)).
-- It became active at height 916. An adversarial verification campaign (E1–E6)
-  closed with a decision to keep it active. Its one open item is that the
-  operator set is still Foundation-administered
-  ([adversarial results](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/governance/cobalt-adversarial-verification-results.md)).
+  [reference notes](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/references/cobalt-bft-governance-in-open-networks.md)).
+- It does not order blocks or finalize transactions. Consensus v2 does that
+  ([cobalt.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/governance/cobalt.md)).
+- It became active at height 916. An adversarial verification campaign
+  (E1–E6) closed with a decision to keep it active. Its one open item is that
+  the operator set is still Foundation-administered
+  ([adversarial results](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/governance/cobalt-adversarial-verification-results.md)).
 
 **Trust today.** All six validators are Foundation-administered. The commit
-quorum is 5 of 6, so the Foundation controls consensus. The documents say this
-shows protocol capability, not operator decentralization.
+quorum is 5 of 6, so the Foundation controls consensus. The documents say
+this shows protocol capability, not operator decentralization.
 
-**What must change before Coinbase relies on it.**
+**What must change before Coinbase relies on it:**
+
 - **Independent validators.** Validators from independent operators, drawn
-  from the scored PFT Ledger (postfiatd) operators. Each binds its existing
+  from the scored PFT Ledger (`postfiatd`) operators. Each binds its existing
   validator key to a new ML-DSA-65 key through an identity receipt
-  ([genesis registry path](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/architecture/genesis-registry-proposal-path.md)).
+  ([genesis registry path](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/architecture/genesis-registry-proposal-path.md)).
 - **A published validator charter.** Who can propose changes, under what
   quorum, with what notice, and how Coinbase is informed.
-- **An external audit** of Consensus v2 and Cobalt: the ordering rules, view
-  changes, signing-round safety, and the registry-change protocol (section 6).
+- **An external audit** of Consensus v2 and Cobalt: ordering rules, view
+  changes, signing-round safety and the registry-change protocol (section 6).
 
 **Signing-round fence.** One fix needs a single clear answer:
-- The architecture document says the cross-phase signing fence is
-  implemented as `require_consensus_v2_monotone_round`
-  ([signing rounds](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/architecture/consensus-signing-rounds.md)).
+
+- The architecture document says the cross-phase signing fence is implemented
+  as `require_consensus_v2_monotone_round`
+  ([signing rounds](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/architecture/consensus-signing-rounds.md)).
 - The whitepaper calls it a proposed rule.
-- The [defect inventory](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/review/defect-inventory-20260910.md) has rows
+- The [defect inventory](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/review/defect-inventory-20260910.md) has rows
   pointing both ways.
 
-Phase 1 settles it against the deployed code and corrects the documents.
+Phase 1 settles the issue against the deployed code and corrects the
+documents.
 
 ### 5.2 NAVCoins at the zero-knowledge-proof level
 
-**What a NAVCoin is.**
-- A NAVCoin is an issued asset with a floating net asset value. It is not a
-  stablecoin.
-- NAV = (haircut-weighted holdings − liabilities) ÷ valid supply
-  ([NAVCoins](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/navcoins/index.md), [whitepaper](/whitepaper/)).
-- New supply can be issued only after a reserve proof has been verified
-  on-chain ([reserve primitives](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/navcoins/reserve-primitives.md)).
+This section is included because Coinbase asked about NAVCoin mechanics at
+the zero-knowledge-proof level; NAVCoins are not part of the native PFT
+integration.
 
-**How a reserve proof is built.** The
-[open reserve-proof kit](https://github.com/postfiatorg/postfiatl1v2/blob/main/tools/nav-reserve-proof/README.md) is an
-SP1 6.3.1 zkVM guest
-([SP1 proof types](https://docs.succinct.xyz/docs/sp1/generating-proofs/proof-types)):
+A NAVCoin is an issued asset with a floating net asset value, not a
+stablecoin. NAV is haircut-weighted holdings minus liabilities, divided by
+valid supply
+([NAVCoins](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/navcoins/index.md), [whitepaper](/whitepaper/)).
+New supply can be issued only after an on-chain reserve-proof verification
+([reserve primitives](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/navcoins/reserve-primitives.md)).
 
-1. **Manifest.** A content-addressed manifest lists 1–64 reserve sources.
-   Each source has a quantity policy, a valuation policy and a trust class.
-2. **Quantity evidence.** Each source supplies evidence of how much is held.
-   The open EVM adapter, `evm-erc20-bft-checkpoint-mpt-v1`, verifies an
-   ERC-20 balance-slot Merkle-Patricia proof against an EVM state root. The
-   state root is signed by a quorum of ML-DSA-65 checkpoint validators.
-3. **Valuation evidence.** Each source also supplies separate valuation
-   evidence, such as an EVM Chainlink state proof or a protocol price receipt.
-4. **Arithmetic and bindings.** The guest checks gross assets, liabilities,
-   net assets and the trust-bucket totals. It binds the chain, NAVCoin,
-   profile, policy, manifest, units, epoch and observation interval.
-5. **Output.** A fixed 584-byte public-values record, wrapped in a Groth16
+The [open reserve-proof kit](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/tools/nav-reserve-proof/README.md) uses
+an SP1 6.3.1 zkVM guest
+([SP1 proof types](https://docs.succinct.xyz/docs/sp1/generating-proofs/proof-types)).
+Its proof flow is:
+
+1. A content-addressed manifest lists 1–64 reserve sources, each with a
+   quantity policy, valuation policy and trust class.
+2. Quantity evidence proves how much each source holds. The open
+   `evm-erc20-bft-checkpoint-mpt-v1` adapter verifies an ERC-20 balance-slot
+   Merkle-Patricia proof against an EVM state root signed by a quorum of
+   ML-DSA-65 checkpoint validators.
+3. Separate valuation evidence supplies values, such as an EVM Chainlink
+   state proof or a protocol price receipt.
+4. The guest checks gross assets, liabilities, net assets and trust-bucket
+   totals. It binds the chain, NAVCoin, profile, policy, manifest, units,
+   epoch and observation interval.
+5. It produces a fixed 584-byte public-values record wrapped in a Groth16
    proof.
-6. **On-chain verification.** PFTL verifies the proof before the NAV epoch can
-   finalize. Only the `sp1-nav-reserve-v1` verifier kind binds genesis, asset,
-   profile, epoch and observation age
-   ([nav_sp1_verifier.rs](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/execution/src/nav_sp1_verifier.rs)).
-7. **Primary market.** Holders mint and redeem near NAV. For A666 that is
-   1.005 × NAV to mint and 0.9995 × NAV to redeem.
+6. PFTL verifies the proof before finalizing the NAV epoch. Only the
+   `sp1-nav-reserve-v1` verifier kind binds genesis, asset, profile, epoch and
+   observation age
+   ([nav_sp1_verifier.rs](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/crates/execution/src/nav_sp1_verifier.rs)).
+7. Holders mint and redeem near NAV. For A666, minting is 1.005 × NAV and
+   redemption is 0.9995 × NAV.
 
-**What "cryptographic" means here.** Each quantity proof is cryptographic
-*relative to a disclosed checkpoint committee*: the six PFTL validators with a
-five-vote threshold. It is not trustless Ethereum finality. The kit says so
-itself.
+Each quantity proof is cryptographic *relative to a disclosed checkpoint
+committee*: the six PFTL validators with a five-vote threshold. It is not
+trustless Ethereum finality. The kit says so itself.
 
 **Known gaps**
-([mechanics review](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/review/nav-reserve-proof-mechanics-review-20260924.md)):
+([mechanics review](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/review/nav-reserve-proof-mechanics-review-20260924.md)):
 
 | Gap | What it means |
 |---|---|
@@ -500,21 +522,22 @@ itself.
 | A1 | Aave debt completeness is not proven |
 
 The successor guest fixes all three
-([proposal](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/review/nav-reserve-proof-successor-proposal-20260924.md),
+([proposal](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/review/nav-reserve-proof-successor-proposal-20260924.md),
 [PR #49](https://github.com/postfiatorg/postfiatl1v2/pull/49)). It was approved
 on 2026-10-20 on three conditions:
+
 - its build is re-pinned past the freshness fix;
-- its continuous-integration (CI) failures are fixed;
+- its continuous-integration failures are fixed;
 - it is re-reviewed.
 
-**What Coinbase would actually see.** NAVCoins appear on Ethereum as ERC-20
-wrappers, such as wA666. The verifier contract checks a governed BFT
-checkpoint or an SP1 receipt proof of PFTL finality
-([PFTLReceiptFinalityVerifierV1](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/ethereum-contracts/src/PFTLReceiptFinalityVerifierV1.sol)).
+NAVCoins appear on Ethereum as ERC-20 wrappers, such as wA666. The verifier
+contract checks a governed BFT checkpoint or an SP1 receipt proof of PFTL
+finality
+([PFTLReceiptFinalityVerifierV1](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/crates/ethereum-contracts/src/PFTLReceiptFinalityVerifierV1.sol)).
 
-**Questions for counsel.** NAVCoins raise issuer, securities and
-reserve-custody questions. They are not part of this native PFT integration.
-They are listed in section 9 because Coinbase's legal review will ask.
+NAVCoins raise issuer, securities and reserve-custody questions. They remain
+outside this native PFT integration and appear in section 9 because
+Coinbase's legal review will ask.
 
 ### 5.3 What is post-quantum, and what is not
 
@@ -527,39 +550,39 @@ They are listed in section 9 because Coinbase's legal review will ask.
 | Reserve-proof wrapper | SP1 Groth16 over BN254 | No |
 | Ethereum contracts | Ethereum signatures | No |
 
-The claim is limited to authorization: who can move an account's funds and who
-can sign a block. The ML-DSA implementation is the vendored `fips204` crate,
-version 0.4.6. An independent review of that integration is part of the audit
-scope in section 6.
+The claim is limited to authorization: who can move an account's funds and
+who can sign a block. The ML-DSA implementation is the vendored `fips204`
+crate, version 0.4.6. An independent review of that integration is part of
+the audit scope in section 6.
 
 ## 6. Security and audit status
 
 | Item | Status | Source |
 |---|---|---|
-| External audit of the protocol | **None yet** | [SECURITY.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/SECURITY.md) |
-| Bug bounty | None; reports go through GitHub private advisories, acknowledged within 72 hours | [SECURITY.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/SECURITY.md) |
-| Release gates | 4 done, 16 open, 1 unknown | [release-gate-inventory.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/status/release-gate-inventory.md) |
-| Defect inventory | 142 rows: 27 P1, 77 P2, 38 P3, no P0 | [defect-inventory-20260910.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/review/defect-inventory-20260910.md) |
-| Validator key custody | Plaintext key files on Foundation hosts; HSM custody is an open gate | [release-gate-inventory.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/status/release-gate-inventory.md) |
-| Security incidents | One, SEC-20260930-01, closed 2026-10-01 | [closure note](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/security/SEC-20260930-01-closure.md) |
+| External audit of the protocol | **None yet** | [SECURITY.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/SECURITY.md) |
+| Bug bounty | None; reports go through GitHub private advisories, acknowledged within 72 hours | [SECURITY.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/SECURITY.md) |
+| Release gates | 4 done, 16 open, 1 unknown | [release-gate-inventory.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/status/release-gate-inventory.md) |
+| Defect inventory | 142 rows: 27 P1, 77 P2, 38 P3, no P0 | [defect-inventory-20260910.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/review/defect-inventory-20260910.md) |
+| Validator key custody | Plaintext key files on Foundation hosts; HSM custody is an open gate | [release-gate-inventory.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/status/release-gate-inventory.md) |
+| Security incidents | One, SEC-20260930-01, closed 2026-10-01 | [closure note](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/security/SEC-20260930-01-closure.md) |
 
-Post Fiat will commission four audits before applying for a listing, each from
-a firm with published work in that area:
+Post Fiat will commission four audits before applying for a listing, each
+from a firm with published work in that area:
 
 1. **Consensus v2 and Cobalt.** Safety, liveness, view changes, signing-round
    safety and validator-registry changes.
 2. **Cryptography integration.** ML-DSA-65 key handling, address derivation,
    transaction envelopes and domain separation.
-3. **Shielded pool.** The Orchard and Asset-Orchard circuits, the pinned
-   verifying keys and the turnstile accounting. The existing
-   [h_action audit scope](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/security/orchard-h-action-binding-audit-scope.md)
+3. **Shielded pool.** The Orchard and Asset-Orchard circuits, pinned verifying
+   keys and turnstile accounting. The existing
+   [h_action audit scope](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/security/orchard-h-action-binding-audit-scope.md)
    is the starting point.
-4. **Bridge and reserve proofs.** The SP1 guests, the checkpoint committee
-   rules and the Ethereum verifier contracts.
+4. **Bridge and reserve proofs.** The SP1 guests, checkpoint committee rules
+   and Ethereum verifier contracts.
 
-Post Fiat will publish each report with its remediation record, which is what
-Coinbase's pre-flight checklist asks for. It will also open a bug bounty for
-the in-scope code once the first audit closes.
+Post Fiat will publish each report with its remediation record, as required
+by Coinbase's pre-flight checklist. It will also open a bug bounty for the
+in-scope code once the first audit closes.
 
 ## 7. Comparison with chains Coinbase already supports
 
@@ -570,107 +593,132 @@ brief:
 |---|---|---|---|---|
 | Finality | Deterministic, UNL agreement above 80% | Probabilistic proof of work | Proof of stake | Deterministic BFT certificate, quorum ⌊2n/3⌋+1 |
 | Account signatures | secp256k1, Ed25519 | ECDSA, plus RedPallas inside the shielded pool | NEAR: ML-DSA-65 keys since July 2026. Algorand: Falcon | ML-DSA-65 only |
-| Deposit attribution | Destination tags | Per-address | Per-address or memo | Per-address, or a memo through `payment_v2` |
+| Deposit attribution | Destination tags | Per-address | Per-address or memo | Per-address today; `payment_v2` memos after phase 1 |
 | Privacy | None | Optional shielded pools | None | Optional Orchard pool with disclosure tools |
 | Coinbase support | Listed, with destination tags | Listed; withdrawals to transparent addresses only | Listed | Not listed |
 
-**Compared with XRP.** For Coinbase's XRP team, the operating model is
-familiar: known validators, fast deterministic settlement, a fixed-supply
-native asset and burned fees. Four things are new:
-- the post-quantum keys and signature sizes;
-- the per-customer address default, in place of required destination tags;
+**Compared with XRP.** The operating model is familiar to Coinbase's XRP
+team: known validators, fast deterministic settlement, a fixed-supply native
+asset and burned fees. Four things are new:
+
+- post-quantum keys and signature sizes;
+- per-customer addresses by default, instead of required destination tags;
 - the optional shielded pool;
-- the absence, so far, of a Mesh implementation.
+- the current absence of a Mesh implementation.
 
 ## 8. Integration roadmap
 
-Each phase has an exit test that Coinbase or an outside party can check
-independently.
+Each phase has an owner, dependencies and an exit test that Coinbase or an
+outside party can check independently. Calendar dates are not committed in
+this version; Post Fiat will publish a dated schedule after Coinbase answers
+the questions in section 9.
 
-**Phase 0: a complete review package (now).**
-- This plan, the comparisons, the reviewer guide and the
-  [listings page](https://postfiat.org/listings/).
-- Read access to the public devnet for Coinbase engineers.
-- A named technical contact.
+### Phase 0: a complete review package
 
-*Exit:* Coinbase's reviewers can answer every technical question in their
-pre-flight checklist from the repository.
+- **Owner:** Post Fiat
+- **Depends on:** None
+- **Deliverables:**
+  - this plan, the comparisons, the reviewer guide and the
+    [listings page](https://postfiat.org/listings/);
+  - read access to the devnet for Coinbase engineers;
+  - a named technical contact.
+- **Exit test:** Coinbase's reviewers can answer every technical question in
+  their pre-flight checklist from the repository.
 
-**Phase 1: fix what blocks exchange integration.**
-- A checksummed address encoding, with malformed recipients rejected at
-  admission and execution, and published test vectors.
-- An account flag that makes the ledger reject untagged payments, like XRPL's
-  `RequireDest`.
-- Indexing of shielded withdrawals that credit a transparent account.
-- Regenerated and published Orchard verifying keys.
-- Resolution of the documentation contradictions noted above: the SLH-DSA
-  recovery keys and the signing fence.
+### Phase 1: fix what blocks exchange integration
 
-*Exit:* the tests and vectors are merged, deployed in a release, and visible
-in the deployment record.
+- **Owner:** Post Fiat
+- **Depends on:** Phase 0
+- **Deliverables:**
+  - a checksummed address encoding, with malformed recipients rejected at
+    admission and execution, and published test vectors;
+  - memo contents returned by `tx` and `account_tx`;
+  - an account flag that makes the ledger reject untagged payments, like
+    XRPL's `RequireDest`;
+  - indexing of shielded withdrawals that credit a transparent account;
+  - regenerated and published Orchard verifying keys;
+  - resolution of the SLH-DSA recovery-key and signing-fence documentation
+    contradictions.
+- **Exit test:** The tests and vectors are merged, deployed in a release and
+  visible in the deployment record.
 
-**Phase 2: a test network Coinbase can integrate against.**
-- A public test network with a faucet, Coinbase-run nodes and published
-  hardware sizing.
-- `postfiat-mesh` passing `mesh-cli check:data` and `check:construction`.
-- A reference ML-DSA-65 signer for HSM-based custody.
+### Phase 2: a test network Coinbase can integrate against
 
-*Exit:* Coinbase engineers run the Mesh checks themselves and they pass.
+- **Owner:** Both
+- **Depends on:** Phase 1
+- **Deliverables:**
+  - a public test network with a faucet, Coinbase-run nodes and published
+    hardware sizing;
+  - `postfiat-mesh` passing `mesh-cli check:data` and `check:construction`;
+  - a reference ML-DSA-65 signer for HSM-based custody.
+- **Exit test:** Coinbase engineers run the Mesh checks themselves and they
+  pass.
 
-**Phase 3: audits and a bug bounty.**
-- The four audits in section 6, with remediation published.
-- A bug bounty for the in-scope code.
+### Phase 3: audits and a bug bounty
 
-*Exit:* the audit reports are public, and every critical or high finding is
-closed or has a written disposition.
+- **Owner:** Post Fiat
+- **Depends on:** Phases 1 and 2
+- **Deliverables:**
+  - the four audits in section 6, with remediation published;
+  - a bug bounty for the in-scope code.
+- **Exit test:** Every critical and high finding is fixed and re-verified by
+  the auditor; medium findings are fixed or explicitly risk-accepted in
+  writing.
 
-**Phase 4: an independent mainnet.**
-- A production genesis with the published PFT supply.
-- Independent validator operators under a published charter.
-- HSM validator-key custody and signed public binaries.
-- A notice and communication process for Coinbase.
+### Phase 4: an independent mainnet
 
-*Exit:* no single party, the Foundation included, controls a commit quorum or
-the validator registry.
+- **Owner:** Post Fiat
+- **Depends on:** Phase 3; native Coinbase custody also depends on the
+  Coinbase post-quantum signing pipeline described in section 4.7 unless
+  HSM-based signing is accepted
+- **Deliverables:**
+  - a production genesis with the published PFT supply;
+  - independent validator operators under a published charter;
+  - HSM validator-key custody and signed public binaries;
+  - a notice and communication process for Coinbase.
+- **Exit test:** No single operator or affiliated group controls more than
+  `f` validators, enough to halt the chain, let alone a commit quorum or the
+  validator registry.
 
-**Interim path: PFT as an ERC-20.**
+### Interim path: PFT as an ERC-20
 
-Coinbase lists Ethereum and Base tokens with far less custom work than a
-native chain. PFTL already runs the machinery a wrapped PFT would need:
+Coinbase lists Ethereum and Base tokens with less custom work than a native
+chain. PFTL already runs the machinery a wrapped PFT would need:
 
 - the route contracts used for the A666 NAVCoin;
 - the governed bridge-signing committee verifier
-  ([PFTLUniswapHandoffController](https://github.com/postfiatorg/postfiatl1v2/blob/main/crates/ethereum-contracts/src/PFTLUniswapHandoffController.sol));
+  ([PFTLUniswapHandoffController](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/crates/ethereum-contracts/src/PFTLUniswapHandoffController.sol));
 - the SP1 receipt-finality verifier.
 
 A wrapped PFT route would lock PFT on PFTL and mint an equal amount of an
-ERC-20 on Ethereum or Base, against a verified PFTL finality proof.
+ERC-20 on Ethereum or Base against a verified PFTL finality proof.
 
 The trust model would match wA666's: the ERC-20 is only as strong as the PFTL
-validator committee that signs the checkpoints. So it does not replace phase 4.
-It is a way to give Coinbase customers access to PFT before native custody of
-ML-DSA-65 is available. Post Fiat will scope this route only if Coinbase
-indicates it would consider the ERC-20.
+validator committee that signs the checkpoints. It therefore does not
+replace phase 4. It would give Coinbase customers access to PFT before native
+custody of ML-DSA-65 is available. Post Fiat will scope this route only if
+Coinbase indicates that it would consider the ERC-20.
 
 ## 9. What we ask of Coinbase
 
 1. **Which route.** Is a native integration through HSM-based ML-DSA-65
    signing realistic before PQ-CoreKMS, or should PFT plan on the ERC-20
    interim route until then?
-2. **Requirements beyond Mesh.** Coinbase's minimum requirements for a native
-   chain integration that go beyond the published Mesh checks: archive depth,
-   reorg policy and monitoring.
-3. **Preferred audit firms.** Coinbase's preferred auditors, or required
-   scope, for consensus and zero-knowledge circuit audits.
-4. **Questions for counsel.** Coinbase's view on the legal questions Post
-   Fiat will answer through counsel:
+2. **Requirements beyond Mesh.** What minimum requirements for a native-chain
+   integration go beyond the published Mesh checks, including archive depth,
+   reorg policy and monitoring?
+3. **Preferred audit firms.** Does Coinbase have preferred auditors or
+   required scope for consensus and zero-knowledge circuit audits?
+4. **Questions for counsel.** What is Coinbase's view on the legal questions
+   Post Fiat will answer through counsel:
    - PFT's legal classification;
    - the optional shielded pool under MiCA and AMLR;
-   - NAVCoin issuer and reserve structure.
+   - NAVCoin issuer and reserve structure?
 
 ## 10. References
 
 **Coinbase**
+
 - [Listing process guide](https://www.coinbase.com/blog/A-Guide-to-the-Digital-Asset-Listing-Process-at-Coinbase) (2025-09-10) and [listings page](https://www.coinbase.com/listings)
 - [Digital Asset Security Assessment Framework](https://www.coinbase.com/blog/reviewing-blockchain-designs-to-determine-confidence-in-custodiability) (2022-11-29)
 - [Mesh specifications](https://github.com/coinbase/mesh-specifications), [mesh-cli](https://github.com/coinbase/mesh-cli), [ml_dsa_65 curve type, PR #129](https://github.com/coinbase/mesh-specifications/pull/129)
@@ -678,6 +726,7 @@ indicates it would consider the ERC-20.
 - [Coinbase XRP network configuration](https://api.exchange.coinbase.com/currencies/XRP); [Zcash support](https://www.coinbase.com/price/zcash)
 
 **Standards, research and regulation**
+
 - [NIST FIPS 204 (ML-DSA)](https://csrc.nist.gov/pubs/fips/204/final)
 - [MacBrough, Cobalt: BFT Governance in Open Networks](https://arxiv.org/abs/1802.07240)
 - [SP1 proof types](https://docs.succinct.xyz/docs/sp1/generating-proofs/proof-types)
@@ -687,7 +736,8 @@ indicates it would consider the ERC-20.
 - [XRPL source and destination tags](https://xrpl.org/docs/concepts/transactions/source-and-destination-tags)
 
 **Post Fiat**
-- [Whitepaper](https://postfiat.org/whitepaper/) · [architecture overview](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/architecture/overview.md) · [finality](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/architecture/finality.md) · [settlement lanes](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/architecture/settlement-lanes.md) · [Cobalt](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/governance/cobalt.md)
-- [Transaction envelope](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/specs/transparent-transaction-envelope.md) · [custody model](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/specs/wallet-exchange-custody-model.md) · [RPC methods](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/rpc/methods.md) · [operator runbook](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/runbooks/public-operator-runbook.md)
-- [Privacy overview](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/privacy/overview.md) · [disclosure](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/privacy/disclosure.md) · [NAVCoins](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/navcoins/index.md) · [reserve-proof kit](https://github.com/postfiatorg/postfiatl1v2/blob/main/tools/nav-reserve-proof/README.md)
-- [Quantum authorization](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/quantum/authorization.md) · [SECURITY.md](https://github.com/postfiatorg/postfiatl1v2/blob/main/SECURITY.md) · [release gates](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/status/release-gate-inventory.md) · [defect inventory](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/review/defect-inventory-20260910.md) · [chain state log](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/status/chain-state-current.md)
+
+- [Whitepaper](https://postfiat.org/whitepaper/) · [architecture overview](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/architecture/overview.md) · [finality](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/architecture/finality.md) · [settlement lanes](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/architecture/settlement-lanes.md) · [Cobalt](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/governance/cobalt.md)
+- [Transaction envelope](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/specs/transparent-transaction-envelope.md) · [custody model](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/specs/wallet-exchange-custody-model.md) · [RPC methods](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/rpc/methods.md) · [operator runbook](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/runbooks/public-operator-runbook.md)
+- [Privacy overview](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/privacy/overview.md) · [disclosure](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/privacy/disclosure.md) · [NAVCoins](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/navcoins/index.md) · [reserve-proof kit](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/tools/nav-reserve-proof/README.md)
+- [Quantum authorization](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/quantum/authorization.md) · [SECURITY.md](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/SECURITY.md) · [release gates](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/status/release-gate-inventory.md) · [defect inventory](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/review/defect-inventory-20260910.md) · [chain state log](https://github.com/postfiatorg/postfiatl1v2/blob/61106cce29cb54551427cb27a46036aaa544c85b/docs/status/chain-state-current.md)
