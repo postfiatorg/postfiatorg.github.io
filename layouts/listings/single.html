@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{ partial "ink/head.html" . }}
+</head>
+<body>
+{{ partial "ink/mast.html" . }}
+{{ $inReview := eq .Params.status "in-review" }}
+{{ $repo := .Params.source_repo }}
+{{ $src := "" }}{{ with $repo }}{{ $src = printf "https://github.com/%s/blob/%s/%s" . $.Params.source_commit $.Params.source_path }}{{ end }}
+<main id="main">
+  {{ $toc := and (not $inReview) (gt (len .TableOfContents) 200) (ne .Params.show_toc false) }}
+  <header class="doc-head{{ if not $toc }} solo{{ end }}">
+    <div class="wrap">
+      <p class="label"><a href="/listings/" style="text-decoration:none">Post Fiat · Listings</a>{{ with .Params.kicker }} · {{ . }}{{ end }}</p>
+      <h1 class="mt-s">{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="sub">{{ . | plainify }}</p>{{ end }}
+      <div class="meta">
+        {{ if $inReview }}<span class="tag prop">In review</span> <span class="label">Will mirror <span class="keep">{{ .Params.source_path }}</span></span>
+        {{ else if $repo }}<span class="label">Source: <b class="keep"><a href="{{ $src }}" rel="noopener" title="{{ .Params.source_path }}{{ with .Params.source_branch }} on {{ . }}{{ end }}">{{ $repo }} @ {{ .Params.source_commit }}</a></b>{{ if .Params.source_dirty }} · uncommitted draft{{ end }}</span>
+        <span class="label"><span class="keep">{{ .Params.source_path }}</span></span>{{ end }}
+        {{ if not .Lastmod.IsZero }}<span class="label">Updated <b>{{ .Lastmod.Format "2006-01-02" }}</b></span>{{ end }}
+      </div>
+      <div class="paper-tools mt-m">
+        {{ with .OutputFormats.Get "markdown" }}<a class="copy-btn" style="text-decoration:none" href="{{ .RelPermalink }}">Download .md</a>{{ end }}
+        {{ if and $repo (not $inReview) }}<a class="copy-btn" style="text-decoration:none" href="{{ $src }}" rel="noopener">Source</a>{{ end }}
+        <a class="copy-btn" style="text-decoration:none" href="/listings/">All listings documents</a>
+      </div>
+    </div>
+  </header>
+  <div class="doc-layout{{ if not $toc }} solo{{ end }}">
+    {{ if $toc }}<aside class="toc" aria-label="Contents"><details open><summary class="label">Contents</summary>{{ .TableOfContents }}</details></aside>{{ end }}
+    <article class="prose page-prose">
+      {{ if $inReview }}<div class="notice"><span class="label">Placeholder</span>{{ .Content }}</div>{{ else }}{{ .Content }}{{ end }}
+    </article>
+  </div>
+</main>
+{{ partial "ink/foot.html" . }}
+{{ partial "ink/mermaid.html" . }}
+{{ if $toc }}{{ partial "ink/toc-spy.html" . }}{{ end }}
+</body>
+</html>

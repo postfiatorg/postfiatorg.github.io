@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{ partial "ink/head.html" . }}
+</head>
+<body>
+{{ partial "ink/mast.html" . }}
+{{ $repo := .Params.repo | default "postfiatorg/postfiatl1v2" }}
+{{ $ref := .Params.design_docs_ref | default "main" }}
+{{ $gh := printf "https://github.com/%s/blob/%s/" $repo $ref }}
+<main id="main" class="listings">
+  <header class="doc-head">
+    <div class="wrap" style="max-width:var(--max)">
+      <p class="label">Post Fiat · Listings</p>
+      <h1 class="mt-s">{{ .Params.heading | default .Title }}</h1>
+      {{ with .Params.summary }}<p class="sub">{{ . }}</p>{{ end }}
+      <div class="meta">
+        <span class="label">Status as of <b>{{ .Lastmod.Format "January 2, 2006" }}</b></span>
+        <span class="label">Source <b class="keep"><a href="https://github.com/{{ $repo }}" rel="noopener">{{ $repo }}</a></b></span>
+      </div>
+      <div class="paper-tools mt-m">
+        {{ with .OutputFormats.Get "markdown" }}<a class="copy-btn" style="text-decoration:none" href="{{ .RelPermalink }}">Markdown</a>{{ end }}
+        {{ with .OutputFormats.Get "json" }}<a class="copy-btn" style="text-decoration:none" href="{{ .RelPermalink }}">JSON index</a>{{ end }}
+        <a class="copy-btn" style="text-decoration:none" href="/listings/agents.md">Agent guide</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap" style="padding:48px 0 8px">
+    <div class="prose" style="max-width:var(--read)">{{ .Content }}</div>
+    {{ with .Params.honesty }}<div class="notice" style="max-width:var(--read);margin:8px 0 0"><span class="label">Status, plainly</span>{{ . | $.RenderString }}</div>{{ end }}
+  </div>
+
+  <section class="sec sec-tight" id="coinbase" aria-labelledby="coinbase-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Coinbase</span>
+        <h2 class="display d-m" id="coinbase-title">For the Coinbase listing team</h2>
+        <p>Start with the integration plan. The comparisons and the reviewer guide are written to be read alongside it.</p>
+      </div>
+      <div class="starts">
+        {{ range .Params.cards }}
+        {{ $p := site.GetPage .page }}
+        {{ $draft := and $p (eq $p.Params.status "in-review") }}
+        <a href="{{ with $p }}{{ .RelPermalink }}{{ else }}{{ .page }}/{{ end }}"><span class="label">{{ .label }}{{ if $draft }} · In review{{ end }}</span><strong>{{ .title }}</strong><span>{{ .text }}</span></a>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-tight" id="status" aria-labelledby="status-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Status</span>
+        <h2 class="display d-m" id="status-title">What runs today, and what does not</h2>
+        <p><span class="tag live">Live</span> runs now. <span class="tag demo">Demonstrated</span> runs in a limited or alpha form. <span class="tag prop">Not yet</span> is planned or depends on someone else. As of {{ .Lastmod.Format "January 2, 2006" }}.</p>
+      </div>
+      <table class="ledger">
+        <thead><tr><th scope="col">Area</th><th scope="col">State</th><th scope="col">Detail</th></tr></thead>
+        <tbody>
+          {{ range .Params.status }}
+          <tr><td>{{ .area }}</td><td class="st"><span class="tag {{ .tag }}">{{ .state }}</span></td><td>{{ replace .detail "](gh:" (printf "](%s" $gh) | $.RenderString }}</td></tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec sec-tight" id="design-docs" aria-labelledby="docs-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Design</span>
+        <h2 class="display d-m" id="docs-title">Key design documents</h2>
+        <p>Primary sources in <a href="https://github.com/{{ $repo }}" rel="noopener">{{ $repo }}</a>, linked at <code>{{ $ref }}</code>. Each states its own status and limits.</p>
+      </div>
+      <ul class="index">
+        {{ range .Params.design_docs }}
+        <li><a href="{{ $gh }}{{ .path }}" rel="noopener"><span class="d">{{ .group }}</span><span><span class="t">{{ .title }}</span><span class="s">{{ .summary }}</span><span class="p">{{ .path }}</span></span><span class="go">↗</span></a></li>
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec sec-tight" id="agents" aria-labelledby="agents-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Agents</span>
+        <h2 class="display d-m" id="agents-title">For AI agents</h2>
+        {{ with .Params.agents_intro }}<p>{{ . | $.RenderString (dict "display" "inline") }}</p>{{ end }}
+      </div>
+      <ul class="index">
+        {{ range .Params.agents }}
+        <li><a href="{{ .path }}"><span class="d">{{ .format }}</span><span><span class="t">{{ .path }}</span><span class="s">{{ .text }}</span></span><span class="go">→</span></a></li>
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec sec-tight" id="contact" aria-labelledby="contact-title" style="border-bottom:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Contact</span>
+        <h2 class="display d-m" id="contact-title">Questions</h2>
+        {{ with .Params.contact }}<p>{{ replace . "](gh:" (printf "](%s" $gh) | $.RenderString (dict "display" "inline") }}</p>{{ end }}
+      </div>
+    </div>
+  </section>
+</main>
+{{ partial "ink/foot.html" . }}
+</body>
+</html>

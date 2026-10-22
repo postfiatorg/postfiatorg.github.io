@@ -1,0 +1,30 @@
+{{- /* One page of the listings index as a dict, for layouts/listings/list.json. */ -}}
+{{- $p := . -}}
+{{- $md := "" -}}
+{{- with $p.OutputFormats.Get "markdown" }}{{ $md = .Permalink }}{{ end -}}
+{{- $gh := "" -}}
+{{- $status := $p.Params.status | default "published" -}}
+{{- with $p.Params.source_repo -}}
+  {{- if eq $status "in-review" -}}
+    {{- $gh = printf "https://github.com/%s" . -}}
+  {{- else -}}
+    {{- $gh = printf "https://github.com/%s/blob/%s/%s" . $p.Params.source_commit $p.Params.source_path -}}
+  {{- end -}}
+{{- end -}}
+{{- $updated := "" -}}
+{{- if not $p.Lastmod.IsZero }}{{ $updated = $p.Lastmod.Format "2006-01-02" }}{{ end -}}
+{{- return dict
+  "title" $p.Title
+  "url" $p.Permalink
+  "markdown_url" $md
+  "github_url" $gh
+  "summary" ($p.Params.summary | default $p.Summary | plainify | htmlUnescape)
+  "status" $status
+  "kind" (cond (isset $p.Params "source_repo") "mirror" "page")
+  "source_repo" ($p.Params.source_repo | default "")
+  "source_path" ($p.Params.source_path | default "")
+  "source_commit" ($p.Params.source_commit | default "")
+  "source_branch" ($p.Params.source_branch | default "")
+  "source_dirty" ($p.Params.source_dirty | default false)
+  "updated" (cond (eq $updated "") nil $updated)
+-}}

@@ -1,0 +1,85 @@
+{{- $base := strings.TrimSuffix "/" site.BaseURL -}}
+{{- $repo := .Params.repo | default "postfiatorg/postfiatl1v2" -}}
+{{- $ref := .Params.design_docs_ref | default "main" -}}
+{{- $gh := printf "https://github.com/%s/blob/%s/" $repo $ref -}}
+{{- $raw := printf "https://raw.githubusercontent.com/%s/%s/" $repo $ref -}}
+{{- $checked := .Params.design_docs_checked_commit | default "" -}}
+{{- $updated := .Lastmod.Format "2006-01-02" -}}
+
+{{- $pages := slice -}}
+{{- range .RegularPages.ByWeight -}}
+  {{- $pages = $pages | append (partial "listings/page-entry.html" .) -}}
+{{- end -}}
+{{- with site.GetPage "/whitepaper" -}}
+  {{- $pages = $pages | append (partial "listings/page-entry.html" .) -}}
+{{- end -}}
+
+{{- $docs := slice -}}
+{{- range .Params.design_docs -}}
+  {{- $docs = $docs | append (dict
+    "title" .title
+    "group" .group
+    "path" .path
+    "url" (printf "%s%s" $gh .path)
+    "github_url" (printf "%s%s" $gh .path)
+    "markdown_url" (printf "%s%s" $raw .path)
+    "summary" .summary
+    "status" (printf "published on %s" $ref)
+    "source_repo" $repo
+    "source_path" .path
+    "source_commit" $checked
+    "updated" $updated) -}}
+{{- end -}}
+
+{{- $status := slice -}}
+{{- range .Params.status -}}
+  {{- $md := replace .detail "](gh:" (printf "](%s" $gh) -}}
+  {{- $status = $status | append (dict
+    "area" .area
+    "state" .state
+    "tag" .tag
+    "detail" ($md | $.RenderString | plainify | htmlUnescape)
+    "detail_markdown" $md) -}}
+{{- end -}}
+
+{{- $agents := slice -}}
+{{- range .Params.agents -}}
+  {{- $agents = $agents | append (dict "format" .format "url" (printf "%s%s" $base .path) "summary" .text) -}}
+{{- end -}}
+
+{{- $index := dict
+  "schema" "postfiat.listings.index.v1"
+  "title" (.Params.heading | default .Title)
+  "url" .Permalink
+  "markdown_url" (printf "%s/listings/index.md" $base)
+  "json_url" (printf "%s/listings/index.json" $base)
+  "agents_guide_url" (printf "%s/listings/agents.md" $base)
+  "summary" .Params.summary
+  "updated" $updated
+  "status_plainly" (.Params.honesty | $.RenderString | plainify | htmlUnescape)
+  "project" (dict
+    "name" "Post Fiat L1"
+    "short_name" "PFTL"
+    "native_asset" "PFT"
+    "repository" (printf "https://github.com/%s" $repo)
+    "whitepaper" (printf "%s/whitepaper/" $base)
+    "network" "postfiat-wan-devnet-2"
+    "network_stage" "public devnet"
+    "validators" 6
+    "validator_operators" "Post Fiat Foundation (all six)"
+    "production_mainnet" false
+    "externally_audited" false)
+  "status" $status
+  "pages" $pages
+  "key_design_documents" $docs
+  "design_documents_ref" $ref
+  "design_documents_checked_commit" $checked
+  "agent_resources" $agents
+  "field_notes" (dict
+    "pages.source_commit" "Short commit of the source repository the page was copied from. For in-review placeholders, the commit at which the document was not yet present."
+    "pages.source_dirty" "True when the copied text had uncommitted changes in the source checkout, so source_commit does not contain it."
+    "pages.updated" "Last commit date of the source document, or null for placeholders and pages without a date."
+    "key_design_documents.updated" "Date the path was last verified to exist at design_documents_checked_commit. The document on the linked ref may be newer.")
+  "contact" (replace .Params.contact "](gh:" (printf "](%s" $gh) | $.RenderString | plainify | htmlUnescape)
+-}}
+{{- jsonify (dict "indent" "  ") $index -}}
