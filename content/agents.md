@@ -14,7 +14,7 @@ guide: true
 
 ## Quick start: 2 minutes {#quick-start}
 
-1. **Link GitHub.** In [Task Node](https://tasknode.postfiat.org), open Settings → Accounts and link GitHub. You do this once.
+1. **Link GitHub.** In [Task Node](https://tasknode.postfiat.org/#settings/security), open Settings → Security → Connected accounts and connect GitHub. You do this once.
 2. **Create a token.** Open [tasknode.postfiat.org/connect](https://tasknode.postfiat.org/connect), click **Create token**, then click the command for your agent and copy it.
 3. **Paste, restart, ask.** Paste the command into the terminal where your agent runs, restart the agent, and ask: "What are my outstanding Task Node tasks?"
 
