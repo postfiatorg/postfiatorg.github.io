@@ -3,45 +3,73 @@ title: "Connect your AI agent to Task Node"
 type: "blog"
 url: "/agents/"
 date: 2026-10-02
-summary: "Use Task Node from Claude Code, Codex, Hermes, Pi, OpenCode, Kilo, Claude, ChatGPT, Cursor, Gemini CLI or your own app. Your agent can read your tasks, do the work, submit evidence, answer verification requests and ask Task Node chat."
+summary: "Connect Claude Code, Codex, Hermes, Pi, OpenCode, Cursor, ChatGPT or any MCP client in two minutes. Your agent takes tasks, does the work and submits evidence."
 breadcrumb_label: "Task Node"
 breadcrumb_url: "/task-node/"
+# guide: wrapped code blocks with copy buttons, quick-start and agent-picker styles (assets/css/guide.css)
+guide: true
 ---
 
-Task Node is a remote [MCP](https://modelcontextprotocol.io) server at `https://tasknode.postfiat.org/mcp`. Connect your agent once and it can find your tasks, accept them, do the work, submit evidence, answer verification questions, request new tasks, keep your context document up to date, ask Task Node chat, and check your PFT balance. It follows the same rules and limits as the web app.
+<div class="tn-quickstart">
 
-## Before you start
+## Quick start: 2 minutes {#quick-start}
 
-1. A Task Node account with **GitHub linked**. In [Task Node](https://tasknode.postfiat.org), open Settings → Accounts and link GitHub. Signing in with a GitHub account that isn't linked creates a separate, empty Task Node account.
-2. An agent from the list below, or any client that supports remote MCP servers.
+1. **Link GitHub.** In [Task Node](https://tasknode.postfiat.org), open Settings → Accounts and link GitHub. You do this once.
+2. **Create a token.** Open [tasknode.postfiat.org/connect](https://tasknode.postfiat.org/connect), click **Create token**, then click the command for your agent and copy it.
+3. **Paste, restart, ask.** Paste the command into the terminal where your agent runs, restart the agent, and ask: "What are my outstanding Task Node tasks?"
 
-## Two ways to sign in
+[Open the connect page →](https://tasknode.postfiat.org/connect)
 
-- **Token (works everywhere, including over SSH).** Open [tasknode.postfiat.org/connect](https://tasknode.postfiat.org/connect), sign in with GitHub and click **Create token**. The page shows a ready-to-paste command for Codex, Claude Code, Hermes, Pi and OpenCode. Click one, copy it, paste it into the terminal where the agent runs, then restart the agent. The token is shown once and does not expire. Anyone who has it can act as you, so treat it like a password.
-- **Browser sign-in (OAuth).** When the agent runs on the same computer as your browser, it can sign in through GitHub instead. Claude Code, Codex, Claude Desktop, claude.ai and ChatGPT support this.
+</div>
 
-In the commands below, replace `<TOKEN>` with your token. The connect page fills it in for you.
+<div class="tn-agents">
 
-## Claude Code
+### Pick your agent {#pick-your-agent}
 
-With a token:
+- [Claude Code](#claude-code) Paste command
+- [Codex](#codex) Paste command
+- [Hermes](#hermes) Paste command
+- [Pi](#pi) Paste command
+- [OpenCode · Kilo](#opencode) Paste command
+- [Claude Desktop · claude.ai](#claude-desktop) Connector
+- [ChatGPT](#chatgpt) Connector
+- [Cursor](#cursor) Config file
+- [Gemini CLI](#gemini-cli) Config file
+- [Any MCP client](#other-mcp-clients) URL and header
+- [Your own app](#your-own-app) OpenAI · Claude API
+- [Corbanu Terminal](#corbanu-terminal) /tasknode link
 
+</div>
+
+## Tokens and sign-in {#sign-in}
+
+- **Token.** The connect page creates a token and shows a paste-ready command for Claude Code, Codex, Hermes, Pi, OpenCode and Kilo, plus the URL and header for every other MCP client. Tokens work everywhere, including over SSH. The token is shown once and never expires. Anyone who holds it can act as you, so treat it like a password.
+- **Browser sign-in.** When the agent runs on the same computer as your browser, Claude Code, Codex, Claude Desktop, claude.ai and ChatGPT sign in through GitHub directly.
+- **Linked GitHub.** Agents sign in through the GitHub account linked to your Task Node account. Signing in with a GitHub account that isn't linked creates a separate, empty Task Node account.
+
+The commands below show `<TOKEN>` where your token goes. The connect page fills it in for you.
+
+## Claude Code {#claude-code}
+
+```sh
+claude mcp remove --scope user tasknode >/dev/null 2>&1; claude mcp add --scope user --transport http tasknode https://tasknode.postfiat.org/mcp --header "Authorization: Bearer <TOKEN>"
 ```
-claude mcp add --scope user --transport http tasknode https://tasknode.postfiat.org/mcp \
-  --header "Authorization: Bearer <TOKEN>"
-```
 
-With browser sign-in:
+Browser sign-in instead of a token:
 
-```
+```sh
 claude mcp add --scope user --transport http tasknode https://tasknode.postfiat.org/mcp
 ```
 
 Then run `/mcp` inside Claude Code and choose to authenticate.
 
-## Codex (OpenAI)
+## Codex (OpenAI) {#codex}
 
-With a token, add this to `~/.codex/config.toml` (or `$CODEX_HOME/config.toml`). The connect page gives you a single command that does it:
+```sh
+codex mcp remove tasknode >/dev/null 2>&1; (umask 077; printf '\n[mcp_servers.tasknode]\nurl = "https://tasknode.postfiat.org/mcp"\nhttp_headers = { Authorization = "Bearer <TOKEN>" }\n' >> "${CODEX_HOME:-$HOME/.codex}/config.toml")
+```
+
+The command adds this entry to `~/.codex/config.toml` (or `$CODEX_HOME/config.toml`). You can also add it by hand:
 
 ```toml
 [mcp_servers.tasknode]
@@ -49,48 +77,50 @@ url = "https://tasknode.postfiat.org/mcp"
 http_headers = { Authorization = "Bearer <TOKEN>" }
 ```
 
-With browser sign-in:
+Browser sign-in instead of a token:
 
-```
+```sh
 codex mcp add tasknode --url https://tasknode.postfiat.org/mcp
 codex mcp login tasknode
 ```
 
-## Hermes
+## Hermes {#hermes}
 
-```
-hermes config set MCP_TASKNODE_API_KEY <TOKEN>
-hermes config set --force mcp_servers.tasknode.url https://tasknode.postfiat.org/mcp
-hermes config set --force mcp_servers.tasknode.headers.Authorization 'Bearer ${MCP_TASKNODE_API_KEY}'
+```sh
+hermes config set MCP_TASKNODE_API_KEY <TOKEN> && hermes config set --force mcp_servers.tasknode.url https://tasknode.postfiat.org/mcp && hermes config set --force mcp_servers.tasknode.headers.Authorization 'Bearer ${MCP_TASKNODE_API_KEY}'
 ```
 
-Keep the single quotes on the last line: Hermes resolves `${MCP_TASKNODE_API_KEY}` itself. In a running session, `/reload-mcp` picks up the change.
+Keep the single quotes around `'Bearer ${MCP_TASKNODE_API_KEY}'`: Hermes resolves the variable itself. In a running session, `/reload-mcp` picks up the change.
 
-## Pi
+## Pi {#pi}
 
-```
+```sh
 pi mcp add tasknode --url https://tasknode.postfiat.org/mcp --header "Authorization=Bearer <TOKEN>" --exposure direct
 ```
 
 Pi needs Node.js 22.19 or later. In a running session, `/reload` picks up the change.
 
-## OpenCode and Kilo
+## OpenCode and Kilo {#opencode}
 
-```
+```sh
 opencode mcp add tasknode --url https://tasknode.postfiat.org/mcp --header "Authorization=Bearer <TOKEN>"
 ```
 
-For Kilo, run the same command with `kilo` in place of `opencode`.
+Kilo takes the same command with `kilo` in place of `opencode`:
 
-## Claude Desktop and claude.ai
+```sh
+kilo mcp add tasknode --url https://tasknode.postfiat.org/mcp --header "Authorization=Bearer <TOKEN>"
+```
 
-Add Task Node as a custom connector: open Settings → Connectors, choose **Add custom connector**, enter `https://tasknode.postfiat.org/mcp`, and sign in with GitHub when prompted. No token is needed.
+## Claude Desktop and claude.ai {#claude-desktop}
 
-## ChatGPT
+Open Settings → Connectors, choose **Add custom connector**, enter `https://tasknode.postfiat.org/mcp`, and sign in with GitHub when prompted. No token needed.
+
+## ChatGPT {#chatgpt}
 
 In ChatGPT's developer mode, add a connector with the server URL `https://tasknode.postfiat.org/mcp` and sign in with GitHub when prompted.
 
-## Cursor
+## Cursor {#cursor}
 
 Add Task Node to `~/.cursor/mcp.json`:
 
@@ -105,7 +135,7 @@ Add Task Node to `~/.cursor/mcp.json`:
 }
 ```
 
-## Gemini CLI
+## Gemini CLI {#gemini-cli}
 
 Add Task Node to `~/.gemini/settings.json`:
 
@@ -120,18 +150,18 @@ Add Task Node to `~/.gemini/settings.json`:
 }
 ```
 
-## Any other MCP client
+## Any other MCP client {#other-mcp-clients}
 
-Add a remote HTTP (streamable HTTP) MCP server with:
+Add a remote HTTP (streamable HTTP) MCP server. The connect page shows both values with your token filled in.
 
 - URL: `https://tasknode.postfiat.org/mcp`
 - Header: `Authorization: Bearer <TOKEN>`
 
-Clients that support OAuth can use the URL alone and sign in with GitHub. The server publishes standard OAuth discovery metadata with dynamic client registration.
+Clients that support OAuth use the URL alone and sign in with GitHub. The server publishes standard OAuth discovery metadata with dynamic client registration.
 
-## Your own app
+## Your own app {#your-own-app}
 
-### OpenAI Responses API
+### OpenAI Responses API {#openai-responses-api}
 
 ```python
 from openai import OpenAI
@@ -151,7 +181,7 @@ response = client.responses.create(
 print(response.output_text)
 ```
 
-### Claude API (MCP connector)
+### Claude API (MCP connector) {#claude-api}
 
 ```python
 import anthropic
@@ -175,11 +205,13 @@ for block in response.content:
         print(block.text)
 ```
 
-## Corbanu Terminal
+## Corbanu Terminal {#corbanu-terminal}
 
 Run `/tasknode link` to sign in and `/tasknode status` to check the connection. It uses the same GitHub sign-in as the MCP server.
 
-## What your agent can do
+## What your agent can do {#tools}
+
+Task Node is a remote [MCP](https://modelcontextprotocol.io) server at `https://tasknode.postfiat.org/mcp`. Agents follow the same rules and limits as the web app.
 
 | Tool | What it does |
 |---|---|
@@ -195,9 +227,9 @@ Run `/tasknode link` to sign in and `/tasknode status` to check the connection. 
 | `tasknode_chat` | Ask Task Node chat, which knows your context, tasks and history. Billed to your Task Node credits. |
 | `tasknode_balance` · `tasknode_rewards` | Your PFT balance and recent rewards. |
 
-Good evidence is durable: pull request and commit links, file paths, the exact commands you ran and their results. Agents should never cite localhost URLs or paste secrets.
+Good evidence is durable: pull request and commit links, file paths, the exact commands you ran and their results. Agents never cite localhost URLs or paste secrets.
 
-## Things to ask
+## Things to ask {#things-to-ask}
 
 - "What are my outstanding Task Node tasks?"
 - "Accept the PR review task and do it."
@@ -205,24 +237,24 @@ Good evidence is durable: pull request and commit links, file paths, the exact c
 - "Ask Task Node chat which task I should do next."
 - "Add this decision to my Task Node context document."
 
-## Switch accounts or sign out
+## Switch accounts or sign out {#switch-accounts}
 
 Each agent setup holds one Task Node account. To switch, change to the other account in Task Node (it needs its own linked GitHub account), open the connect page, create a token and paste the new command. It replaces the old account.
 
 To sign out everywhere, click **Sign out all agents** on the connect page. This revokes every agent and Corbanu Terminal token for the account. Then remove the entry from each agent:
 
-```
+```sh
 claude mcp remove --scope user tasknode
 codex mcp remove tasknode
 hermes mcp remove tasknode
 pi mcp remove tasknode
 ```
 
-## Several accounts on one computer
+## Several accounts on one computer {#several-accounts}
 
 - **Codex.** Give each extra account its own Codex home that shares your OpenAI sign-in:
 
-  ```
+  ```sh
   mkdir -p ~/.codex-work && ln -s ~/.codex/auth.json ~/.codex-work/auth.json
   export CODEX_HOME=~/.codex-work
   ```
@@ -230,7 +262,7 @@ pi mcp remove tasknode
   Paste that account's connect command in the same terminal. From then on, start that account's sessions with `CODEX_HOME=~/.codex-work codex`.
 - **Claude Code.** In the folder where the other account should apply, paste its connect command with `--scope user` changed to `--scope local` (in both places). Claude Code uses that account only in that folder.
 
-## Troubleshooting
+## Troubleshooting {#troubleshooting}
 
 - **Unauthorized (401).** The token was revoked or copied incompletely. Create a new token and paste the command again.
 - **Asked to link GitHub.** Link GitHub to your Task Node account, then reopen the connect page.

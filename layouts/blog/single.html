@@ -5,6 +5,7 @@
   <style>
     {{ with resources.Get "css/extended/pfterminal-research.css" }}{{ .Content | safeCSS }}{{ end }}
     {{ with resources.Get "css/extended/agentic-index.css" }}{{ .Content | safeCSS }}{{ end }}
+    {{- if .Params.guide }}{{ with resources.Get "css/guide.css" }}{{ .Content | safeCSS }}{{ end }}{{ end }}
   </style>
   <script>
     window.MathJax = {
@@ -43,7 +44,7 @@
       {{ if $toc }}
       <aside class="toc" aria-label="Contents"><details open><summary class="label">Contents</summary>{{ .TableOfContents }}</details></aside>
       {{ end }}
-      <article class="prose">
+      <article class="prose{{ if .Params.guide }} guide{{ end }}">
         {{ .Content }}
       </article>
     </div>
@@ -51,6 +52,18 @@
   {{ partial "ink/foot.html" . }}
 {{ partial "ink/mermaid.html" . }}
   {{ partial "ink/toc-spy.html" . }}
+  {{- if .Params.guide }}
+  <script>
+    (()=>{const names={sh:"Terminal",bash:"Terminal",toml:"TOML",json:"JSON",python:"Python"};
+    const fallback=(text)=>{const area=document.createElement("textarea");area.value=text;area.setAttribute("readonly","");area.style.position="fixed";area.style.left="-9999px";document.body.appendChild(area);area.select();const ok=document.execCommand("copy");area.remove();return ok};
+    document.querySelectorAll(".prose.guide pre").forEach((pre)=>{const code=pre.querySelector("code");if(!code)return;
+      const block=document.createElement("div"),bar=document.createElement("div"),label=document.createElement("span"),button=document.createElement("button");
+      block.className="code-block";bar.className="code-bar";label.textContent=names[code.dataset.lang]||"";
+      button.type="button";button.className="code-copy";button.textContent="Copy";button.setAttribute("aria-label","Copy "+(label.textContent||"code").toLowerCase()+" block");
+      button.addEventListener("click",async()=>{const text=code.textContent.replace(/\n+$/,"");let ok=false;try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);ok=true}else{ok=fallback(text)}}catch(error){ok=fallback(text)}button.textContent=ok?"Copied":"Select and copy";button.classList.toggle("done",ok);setTimeout(()=>{button.textContent="Copy";button.classList.remove("done")},1600)});
+      bar.append(label,button);pre.before(block);block.append(bar,pre)})})();
+  </script>
+  {{- end }}
   {{ $replayRiskDescription := "[Interactive diagram: Common Signal / Human Checks]\nThe page includes a simulator showing the replay pipeline as packet -> rule floor -> replay hash -> residual validator checks -> vote. Sliders let the reader vary validator count, verification rate, human catch probability, unchecked-follow rate, replay miss rate, and rotating deep-review seats. The intended lesson is that Qwen is one common signal; the safety tail comes from validators who still verify, challenge, fork, or override after the replay output is public." }}
   {{ $originationWorkbenchDescription := "[Interactive diagram: Origination Replay Workbench]\nThe page includes a three-view workbench comparing status-quo XRPL amendment origination with a public replayable origination packet. The visual shows private agenda formation -> amendment-shaped option -> validator vote on one side, and public packet -> pinned Qwen/SGLang replay -> forkable work item on the other. It displays the article's evidence counts: 31/46 direct Ripple-authored amendment XLS rows, 27 unresolved amendment packets, 138/138 schema-valid H200 replay runs, 27/27 main raw-output convergence, and three fork controls that changed both label and output hash. The diagram's point is that Origination Replay makes the upstream menu inspectable and forkable without claiming that an LLM should decide whether an amendment should pass." }}
   {{ $trustStateTransitionDescription := "[Diagram: trust as published file vs trust as protocol state]\nLeft branch: a publisher signs vl.json; operators may copy it or miss it; servers can hold different UNLs; overlap is assumed outside the protocol; the change is a new file and transition safety is not protocol-checkable. Right branch: Cobalt commits registry root G_t, trust-graph root T_t, and checker root chi_t as state; a transition packet G_t -> G_t+1 must pass local quorum inequalities, linkedness closure, old-new quorum intersection > B, bounded complete cover, and validation by old rules chi_t. Any failed check keeps G_t active; all checks passing activates G_t+1 with a replayable witness." }}

@@ -1,0 +1,59 @@
+/* Guide pages (front matter `guide: true`, rendered by layouts/blog/single.html).
+   Quick-start box, agent picker, wrapped code blocks with copy buttons.
+   Every rule is scoped to .prose.guide so other pages' code blocks are untouched. */
+
+/* Anchored headings clear the sticky mast (and the sticky contents bar on small screens). */
+.prose.guide [id]{scroll-margin-top:84px}
+@media (max-width:820px){.prose.guide [id]{scroll-margin-top:118px}}
+
+/* Quick start */
+.prose.guide .tn-quickstart{border:1px solid var(--ink);background:var(--paper-2);padding:30px 34px 34px;margin:0 0 30px}
+.prose.guide .tn-quickstart h2{border:0;padding:0;margin:0 0 22px;font-size:clamp(30px,2.6vw,38px)}
+.prose.guide .tn-quickstart ol{list-style:none;counter-reset:qs;padding:0;margin:0 0 28px}
+.prose.guide .tn-quickstart li{counter-increment:qs;position:relative;margin:0 0 16px;padding-left:50px;line-height:1.5}
+.prose.guide .tn-quickstart li:last-child{margin-bottom:0}
+.prose.guide .tn-quickstart li::before{content:counter(qs);position:absolute;left:0;top:-1px;width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:14px;font-weight:600;line-height:32px;text-align:center}
+.prose.guide .tn-quickstart > p:last-child{margin:0}
+.prose.guide .tn-quickstart > p:last-child > a{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:16px 24px;background:var(--ink);color:var(--paper);border:1px solid var(--ink);overflow-wrap:normal;transition:background .15s,border-color .15s}
+.prose.guide .tn-quickstart > p:last-child > a:hover{background:var(--teal-ink);border-color:var(--teal-ink)}
+@media (min-width:900px){
+  /* Heading and button share the top row so the button sits above the fold. */
+  .prose.guide .tn-quickstart{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:24px;align-items:center}
+  .prose.guide .tn-quickstart h2{grid-column:1;grid-row:1;margin:0}
+  .prose.guide .tn-quickstart > p:last-child{grid-column:2;grid-row:1}
+  .prose.guide .tn-quickstart ol{grid-column:1 / -1;grid-row:2;margin:24px 0 0}
+}
+
+/* Pick your agent */
+.prose.guide .tn-agents{margin:0 0 8px}
+.prose.guide .tn-agents h3{font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin:0 0 12px}
+.prose.guide .tn-agents ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.prose.guide .tn-agents li{position:relative;margin:0;padding:10px 14px 11px;border:1px solid var(--rule);background:var(--paper);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;line-height:1.4;color:var(--ink-3);transition:border-color .15s,background .15s}
+.prose.guide .tn-agents li:hover{border-color:var(--ink);background:var(--paper-2)}
+.prose.guide .tn-agents a{display:block;margin-bottom:3px;font-family:var(--serif);font-size:18px;font-weight:500;letter-spacing:0;text-transform:none;line-height:1.25;color:var(--ink);text-decoration:none}
+.prose.guide .tn-agents a::after{content:"";position:absolute;inset:0}
+@media (max-width:640px){
+  .prose.guide .tn-quickstart{padding:22px 20px 24px}
+  .prose.guide .tn-quickstart li{padding-left:44px}
+  .prose.guide .tn-quickstart li::before{width:30px;height:30px;line-height:30px;font-size:13px}
+  .prose.guide .tn-quickstart > p:last-child > a{display:flex;justify-content:center;padding:15px 14px;font-size:12.5px}
+  .prose.guide .tn-agents ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .prose.guide .tn-agents a{font-size:16.5px}
+}
+
+/* Code: wrap long commands inside the column; copy button in a slim bar. */
+.prose.guide pre{white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;overflow-x:auto}
+.prose.guide pre code{white-space:inherit;overflow-wrap:inherit;word-break:inherit}
+.prose.guide pre code .line{display:block;padding-left:2ch;text-indent:-2ch}
+.prose.guide .code-block{margin:1.2em 0;background:var(--night);border-radius:2px}
+.prose.guide .code-block pre{margin:0;padding-top:8px}
+.prose.guide .code-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 10px 0 20px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--night-ink-2)}
+.prose.guide .code-copy{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--night-ink);background:none;border:1px solid var(--night-rule);padding:6px 11px;min-height:30px;cursor:pointer;transition:border-color .15s,background .15s}
+.prose.guide .code-copy:hover{border-color:var(--night-ink)}
+.prose.guide .code-copy.done{border-color:var(--teal);color:#7fd3cf}
+@media (max-width:640px){
+  .prose.guide pre{font-size:13px;padding:14px 16px}
+  .prose.guide .code-block pre{padding-top:6px}
+  .prose.guide .code-bar{padding-left:16px}
+  .prose.guide .code-copy{min-height:36px}
+}
