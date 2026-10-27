@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{ partial "ink/head.html" . }}
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/exchange-integration/page.css">
+</head>
+<body>
+{{ partial "ink/mast.html" . }}
+<div id="xi-root">
+<main id="main">
+  <section class="hero xi-hero" aria-labelledby="xi-lock-title">
+    <div class="plate" role="img" aria-label="Ink plate: X-braced towers along a long hall, with a ribbon of blocks overhead" style="background-image:image-set(url('/images/ink/hero-900.webp') 1x, url('/images/ink/hero-1400.webp') 2x)"></div>
+    <div class="wrap inner">
+      <p class="label kicker"><b>Exchange integration</b><span class="sep"> &nbsp;/&nbsp; </span><span class="kw">Post Fiat L1</span><span class="kd"> · </span><span class="kw">PFT</span></p>
+      <h1 class="display d-xl" id="xi-lock-title">This page is password protected.</h1>
+      <p class="lede">Enter the password you were given. The page is encrypted and opens in your browser; nothing is sent to a server.</p>
+      <form class="xi-lockform" id="xi-lockform">
+        <label class="label" for="xi-pw">Password</label>
+        <div class="xi-lockrow">
+          <input id="xi-pw" name="password" type="password" autocomplete="current-password" autofocus required>
+          <button class="btn solid" type="submit">Open the page <span class="ar">→</span></button>
+        </div>
+        <p class="xi-lockmsg" id="xi-lockmsg" role="status" aria-live="polite"></p>
+      </form>
+      <noscript><p class="xi-lockmsg">This page decrypts in the browser, so it needs JavaScript.</p></noscript>
+    </div>
+  </section>
+</main>
+</div>
+{{ partial "ink/foot.html" . }}
+<script type="module" src="/exchange-integration/unlock.js"></script>
+</body>
+</html>
