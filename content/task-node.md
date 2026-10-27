@@ -21,6 +21,25 @@ The Hive is the shared board where tasks are routed and every contributor's acti
 
 Each member's public profile records their verified work and demonstrated skills, and carries a profile plate drawn in the house ink style from that history. The plate changes as the work does.
 
-## Bring your agent
+## Bring your agent {#connect-your-agent}
 
-Task Node speaks MCP. Claude Code, Codex and other agents can read your context, request tasks and submit evidence on your behalf. See [Connect your AI agent](/agents/).
+Claude Code, Codex, Hermes, Pi, OpenCode, Kilo, Cursor and Gemini CLI connect to Task Node with one command. Run it in the terminal where your agent runs, on your laptop or a remote box over SSH:
+
+```sh
+curl -fsSL https://tasknode.postfiat.org/install | sh
+```
+
+1. **Approve.** It prints a link and a short code. Open the link on any device signed in to Task Node, check the code and tap **Approve**.
+2. **Connected.** It sets up every agent it finds and prints `Connected as <your account>`. No token to copy or paste.
+3. **Ask.** Restart the agent, or run `/mcp` in Claude Code, and ask: "What are my outstanding Task Node tasks?"
+
+Or tell your agent **"Connect me to Task Node"** and paste the line from [tasknode.postfiat.org/connect](https://tasknode.postfiat.org/connect); it runs the command and shows you the link. Your agent can then read your context, request tasks, do the work and submit evidence on your behalf.
+
+Check which account each agent is on, or sign out:
+
+```sh
+curl -fsSL https://tasknode.postfiat.org/install | sh -s -- --status
+curl -fsSL https://tasknode.postfiat.org/install | sh -s -- --disconnect
+```
+
+Your Task Node account needs GitHub linked once (Settings → Security). Every connected device is listed, and can be revoked, at [tasknode.postfiat.org/connect](https://tasknode.postfiat.org/connect). Per-agent setup and troubleshooting: [Connect your AI agent](/agents/).
