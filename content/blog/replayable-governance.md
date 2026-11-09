@@ -2,7 +2,7 @@
 title: "Replayable Governance"
 date: 2026-11-09T00:00:00Z
 draft: true
-summary: "Post Fiat wants to be the premier network for machine-driven governance. We can now run a frontier open-weight model so that independent machines produce the same answer byte for byte. That makes machine judgment checkable. It does not yet make it correct, and this post says where the gaps are."
+summary: "Post Fiat is running an experiment in algorithmic governance: the decisions that advance the network go to a pinned model, every exchange is published, and anyone can replay the answers byte for byte."
 categories:
   - Post Fiat Research
 tags:
@@ -10,85 +10,45 @@ tags:
   - Governance
   - Replay
   - DeepSeek
-  - DeepInfer
 ---
 
-Post Fiat exists to make machine-driven governance work. We want it to be the network where decisions that matter are made by models anyone can check, in the open, with receipts.
+Post Fiat is running an experiment in algorithmic governance. The decisions that advance the network go to a pinned AI model in public: what to build next, how to use the treasury, when to launch the token. Every question, answer and challenge is logged, and anyone can replay the model's answers byte for byte.
 
-That ambition has a problem, and it is better to state it than to hide it. Replayable machine judgment is not yet safe to hand to validators. The case for it is still strong, and on November 8 and 9 we took a concrete step toward it.
+## The problem
 
-## Why machine judgment
+Every crypto network is governed by a committee, whether it admits it or keeps quiet about it. Bitcoin changes through the maintainers of Bitcoin Core, Ethereum through its core developers, and the XRP Ledger through validators following lists published by a handful of organizations.
 
-Fiat systems rest on judiciaries, regulators and committees. Their judgment is human, and human judgment can be swayed, captured and bribed. The XRPL inherits that model: the decisions that shape the network come out of small groups whose reasoning is mostly invisible.
+The decisions that move a token's value usually sit one level higher, inside the companies and foundations around a chain. In 2025 Ripple agreed to acquire the prime broker Hidden Road for $1.25 billion. That decision carried heavy implications for XRP, and XRP holders had no visibility into it: no published reasoning, no record of the alternatives considered, and no way to contest it. Treasury sales, ecosystem funds and roadmap bets across the market follow the same pattern.
 
-A large language model is a different kind of judge. You cannot take a frontier model to dinner. Its dispositions come from training data at a scale no single actor controls, and as that data grows, gaming what goes into the model gets harder. Market pressure also pushes commercial models toward neutrality, because a model that visibly favors one side loses users. Where models do refuse to be neutral, the refusals cluster around legal and cybersecurity harms: fraud, theft, exploitation. For a monetary network, those are the biases you want.
+## The experiment
 
-What Post Fiat adds is replay. If a model's answer can be reproduced exactly by anyone, the judgment stops being an oracle you trust and becomes a computation you can check.
+Post Fiat runs its strategic decisions through a public process:
 
-## What does not work yet
+1. The operator submits the question and the facts behind it.
+2. A pinned model answers: DeepSeek V4.1 Flash, at a fixed revision, with fixed settings and a fixed seed.
+3. The operator challenges the answer, and the model revises it.
+4. Every submission, answer and challenge goes into a hash-chained log, published with the receipts needed to replay it.
 
-At the validator level it is not clear that replayable governance is appropriate today. Three problems stand in the way.
+Model inference usually varies from run to run. We run the model on [DeepInfer](https://github.com/deepseek-ai/DeepInfer), DeepSeek's open-source inference runtime, with batch-invariant kernels, so the same input produces the same output bytes on independent machines. A pair of four-GPU machines costs about $65 an hour and is ready in about 11 minutes.
 
-- **Shared models erode validator independence.** Replay works best when every validator runs the same model with the same configuration. Then one model's mistake becomes every validator's mistake, and errors cascade instead of cancelling out.
-- **Prompt injection is an open attack surface.** Governance inputs come from people with an interest in the outcome. Text crafted to steer a model can arrive inside a proposal, a filing or a comment, and we have not mapped how far that surface extends.
-- **Replayability does not guarantee correctness.** A wrong decision can be replayed perfectly. If a core governance decision is wrong, being able to reproduce it is useful for audit, but it does not undo the decision.
+[![How deterministic replay works across runs: ordinary inference drifts because batches change the order of arithmetic; Post Fiat pins the model, runtime, batch-invariant kernels, seed and prompt, so two machines and eight GPUs return identical bytes, published with receipts and a verifier.](/blog/replayable-governance-determinism.svg)](https://github.com/deepseek-ai/DeepInfer)
 
-We cannot credibly say this is a solved problem. We are also unwilling to abandon the premise. Algorithmic, model-enabled decision-making is the reason Post Fiat exists, and dropping it would gut the project. So we are starting a dedicated effort: transparent, replayable governance, built in public, with every step published alongside the evidence needed to check it.
+## Why it works
 
-## What makes it possible now
+**Anyone can check the record.** A committee transcript records what people said, and nobody can re-run the people. A pinned model can be re-run. Stakeholders can feed the published inputs to the same configuration and get the same answer, instead of trusting the operator's account.
 
-Model inference is usually not reproducible. Batching, kernel selection and floating-point ordering change from run to run, so the same prompt can produce different text on different machines, or on the same machine twice.
+**Steering becomes visible.** Models sometimes produce bad answers, and someone has to correct them. Here every correction is part of the record. Stakeholders can read what the operator pushed on and what the model changed, and judge whether each change followed an argument or simple pressure. A committee lobbies in private; on Post Fiat the steering is the published artifact.
 
-We run DeepSeek V4.1 Flash, a frontier open-weight model, on DeepInfer with batch-invariant kernels. Everything that can move is pinned:
+**The process creates a compliance loop.** The model recommends, and subsequent decisions and public evidence show whether the operator followed the recommendation. Community members, stakeholders and counterparties can judge over time whether the actors behave in good faith. Early runs say little on their own, but the evidence compounds, and every decision followed or departed from sharpens the picture.
 
-- the checkpoint revision;
-- the runtime build and its patches;
-- the parallel layout;
-- the sampling configuration, at temperature zero with a fixed seed;
-- the prompt template.
+**It improves on two axes.** Strong exchanges become precedent in a versioned constitution that future decisions must cite, and the models applying it get better every year. The models we use today are the weakest we will ever use.
 
-Each machine has four NVIDIA B200 GPUs. Under that configuration, the same input produces the same output tokens and the same raw bytes on independent machines and on every GPU within them. A pair of machines rents for about $65 an hour, and loads the model about 11 minutes after launch.
+## The evidence so far
 
-## Evidence one: a 452-company index
+On November 8 two independent machines scored a 452-company equity index. Each generated 1,033,095 output tokens across 455 model calls, and both produced identical token sequences, identical scores and the same 29 holdings, for about $72 of compute.
 
-On November 8 we scored a 452-company equity index on two independent machines. The mandate was thematic: rank companies by how closely their business models align with a stated policy agenda, and by how much they would gain from it.
+On November 9 we put a real governance question to the same setup. goodalexander submitted Post Fiat's status and asked for the priorities that maximize the network's value over 1, 3, 5 and 10 years, then challenged the answer nine times. The model revised its advice under challenge, withdrawing a token-launch date that had no metrics behind it, and every answer came back byte-identical across eight GPUs on two machines. The [governance page](/governance/) publishes the full conversation, 88 per-GPU receipts and a verifier anyone can run.
 
-Each machine generated 1,033,095 output tokens across 455 model calls. The two machines produced identical raw output token sequences, the same scores for every company, and the same 29 holdings with the same weights. Compute cost was about $72. A model made hundreds of judgment calls, and a second machine reproduced every one of them exactly.
+## What remains open
 
-## Evidence two: the governance log
-
-We then asked the same pair of machines an open question about Post Fiat itself. goodalexander submitted a status-only description of the project and asked for the priorities that maximize the network's fully diluted value at 1, 3, 5 and 10 years. Nine follow-ups came after the first answer.
-
-All ten answers were byte-identical across eight GPUs on two machines. The [governance page](/governance/) publishes the full conversation together with its evidence:
-
-- 88 per-GPU receipts;
-- a hash-chained log in which each entry commits to the one before it;
-- a short verifier that anyone can run to check every claim on the page.
-
-## What the conversation taught us
-
-Our first observation is that governance by model works best as a dialectic. The opening answer was confident and partly wrong. Then the operator pushed back on specific assumptions:
-
-- a token generation date with no metrics behind it;
-- where the newsletter audience came from;
-- whether paid research fits the project;
-- the NAVCoin's dependence on the Layer 1;
-- investors' token rights.
-
-Each challenge produced a better answer. By the end the model had withdrawn its date-driven token recommendation, separated the token from the chain, and treated investor obligations as binding. The replay log shows exactly how the reasoning moved and what moved it.
-
-## Open problems
-
-Four problems surfaced, and we think each has a credible path forward.
-
-**The model is too agreeable.** When an operator pushes, a model tends to concede. Some of the revisions in our conversation were genuine corrections; others may have been deference. Governance needs a fixed reference that holds against pressure: a deterministic constitution that every conversation must adhere to, and that the model checks its answers against.
-
-**Starting a process is itself a form of centralization.** Today one operator decides which questions reach the model. That is a real concentration of power. It is still far better than an opaque committee, because every question, every answer and every follow-up is published and replayable. Over time the trigger should become more objective, through rules for what must be submitted, by whom, and when.
-
-**Initial conditions dominate outcomes.** The first submission frames everything that follows, and a human wrote it. If the goal is machine governance, the starting point is not machine-made. The weight of initial conditions shrinks over repeated rounds, but only if the operator actually follows the process's recommendations. Adherence is the mechanism.
-
-**Model intelligence caps decision quality.** In our testing, Qwen 27B was not capable enough to engage reliably with governance questions. Only the DeepSeek models have delivered reasoning strong enough to be worth replaying at an affordable cost. That ceiling will rise. The models we use today are the weakest we will ever use, and replay infrastructure built now carries forward to every stronger model.
-
-## What comes next
-
-Replay makes machine judgment checkable. Correctness, independence and resistance to manipulation are still ahead of us, and they are the problems we intend to work on in the open. Every governance decision will appear on the governance page with its receipts, so anyone can follow the work and check it.
+This is an experiment, and its hardest questions are ahead: who may submit questions, how decisions become binding, how to show the log is complete, and how to defend the inputs against manipulation. Replay settles one question, whether the record is real. The next ones get answered in public, on the governance page, one decision at a time.
