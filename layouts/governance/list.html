@@ -18,7 +18,7 @@
     {{ with .Content }}<details class="gov-explainer"><summary>How Post Fiat governance works</summary><div class="gov-body prose">{{ . }}</div></details>{{ end }}
     {{ range .Pages.ByDate.Reverse }}
     <section class="gov-entry">
-      <p class="gov-date">{{ .Date.Format "2 January 2006" }}{{ with .Params.entry }} · {{ . }}{{ end }}</p>
+      <p class="gov-date">{{ .Date.Format "2 January 2006" }}{{ with .Params.entry }} · {{ . }}{{ end }}{{ with .Params.operator }} · Submitted by {{ . }}{{ end }}</p>
       <h2 class="gov-headline"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
       {{ with .Params.summary }}<p class="gov-dek">{{ . }}</p>{{ end }}
       <div class="prose" style="max-width:none">{{ .Content }}</div>

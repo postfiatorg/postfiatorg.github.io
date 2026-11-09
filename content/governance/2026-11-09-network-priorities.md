@@ -3,6 +3,7 @@ title: "Network priorities, decided by replayable judgment"
 date: 2026-11-09T00:00:00Z
 draft: false
 entry: "Entry 001"
+operator: "goodalexander"
 summary: "The operator asked a pinned DeepSeek model for the priorities that maximize Post Fiat's fully diluted value over 1, 3, 5 and 10 years, then asked five follow-ups. Eight GPUs on two machines returned the same answers byte for byte."
 breadcrumb_label: "Governance"
 breadcrumb_url: "/governance/"
@@ -10,7 +11,7 @@ show_toc: false
 ---
 
 <details class="gov-turn operator">
-<summary><span class="who">Operator</span><span class="what">Original submission</span><span class="meta">9 Nov 2026 01:08 UTC · log entry 10 · 2,309 words</span></summary>
+<summary><span class="who">Operator · goodalexander</span><span class="what">Original submission</span><span class="meta">9 Nov 2026 01:08 UTC · log entry 10 · 2,309 words</span></summary>
 <div class="gov-body">
 
 # Post Fiat: Status and Priorities
@@ -143,7 +144,7 @@ Do not restart Corbanu or market governance as a profit line. Governance is the 
 </details>
 
 <details class="gov-turn operator">
-<summary><span class="who">Operator</span><span class="what">Follow-up questions</span><span class="meta">9 Nov 2026 01:19 UTC · log entry 11</span></summary>
+<summary><span class="who">Operator · goodalexander</span><span class="what">Follow-up questions</span><span class="meta">9 Nov 2026 01:19 UTC · log entry 11</span></summary>
 <div class="gov-body">
 
 <p class="gov-note">Site note, not part of the submission: the model keeps no memory between requests, so this input also carried the original submission and the model's previous answer verbatim, ahead of the questions below. The full input is in log entry 11.</p>
