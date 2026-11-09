@@ -43,6 +43,12 @@ Model inference usually varies from run to run. We run the model on [DeepInfer](
 
 **It improves on two axes.** Strong exchanges become precedent in a versioned constitution that future decisions must cite, and the models applying it get better every year. The models we use today are the weakest we will ever use.
 
+## Decision correctness
+
+Over time, this system posits that a transparent, iterative and replayable process will beat an opaque, human-driven one. Take a developer corporation choosing its business focus. The process forces management to state the reason for the initial decision and the iteration behind it, model output included. That shrinks the surface area for value destruction: a value-destroying decision is far easier to make in private than in public.
+
+The process is more than AI judgment. It is a reproducible template for decision-making, and it improves as the models strengthen. The counterfactual matters most. Skipping the process leaves every decision just as consequential: decisions still shape protocols financially and technically, but they happen in darkness, beyond scrutiny. That base case carries explicitly negative expected value, and it is a centralization vector.
+
 ## The evidence so far
 
 On November 8 two independent machines scored a 452-company equity index. Each generated 1,033,095 output tokens across 455 model calls, and both produced identical token sequences, identical scores and the same 29 holdings, for about $72 of compute.
