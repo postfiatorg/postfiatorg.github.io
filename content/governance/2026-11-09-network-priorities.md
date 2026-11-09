@@ -146,7 +146,7 @@ Do not restart Corbanu or market governance as a profit line. Governance is the 
 <summary><span class="who">Operator</span><span class="what">Follow-up questions</span><span class="meta">9 Nov 2026 01:19 UTC · log entry 11</span></summary>
 <div class="gov-body">
 
-The follow-up message carried the original submission and the model's previous answer verbatim, followed by these questions. The model keeps no memory between requests, so the whole context travels in the input and anyone can replay it.
+<p class="gov-note">Site note, not part of the submission: the model keeps no memory between requests, so this input also carried the original submission and the model's previous answer verbatim, ahead of the questions below. The full input is in log entry 11.</p>
 
 1. Every token is a community, and the Post Fiat community primarily uses Task Node as its interface. The story around Post Fiat as a network is a move toward post-human judgment. How do you think about gutting the user-facing applications and the deterministic judgment elements?
 
