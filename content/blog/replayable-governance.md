@@ -20,6 +20,19 @@ Every crypto network is governed by a committee, whether it admits it or keeps q
 
 The decisions that move a token's value usually sit one level higher, inside the companies and foundations around a chain. In 2025 Ripple agreed to acquire the prime broker Hidden Road for $1.25 billion. That decision carried heavy implications for XRP, and XRP holders had no visibility into it: no published reasoning, no record of the alternatives considered, and no way to contest it. Treasury sales, ecosystem funds and roadmap bets across the market follow the same pattern.
 
+## Where the material decisions happen
+
+A typical crypto network has two layers of decision-making, and only the smaller one is public.
+
+| Layer | Who decides | What they decide | How visible |
+|---|---|---|---|
+| Development company or foundation | Founder, executives, insiders and early investors | Treasury and token sales, acquisitions, partnerships, exchange listings, hiring, the product roadmap | Private, seen only through announcements |
+| Blockchain | Validators and on-chain votes | Protocol upgrades, amendments and parameters | Public and recorded |
+
+On-chain governance covers the second layer only, and that layer is a small share of the decisions that are economically material to the token. The XRP Ledger shows the split clearly. Its validators vote on protocol amendments, and each amendment needs more than 80% support for two weeks. Those same validators have no say over Ripple. Ripple controls the release and sale of the XRP it holds in escrow, chose to acquire Hidden Road, and sets the strategy that drives demand for XRP. The token's economics are shaped overwhelmingly by the behavior of the company, and the company's decisions happen out of view.
+
+The same structure repeats across the market: transparent votes on code, and private decisions on everything that moves the price. Post Fiat applies its public, replayable process to the first layer, the company decisions that on other networks never reach a vote.
+
 ## The experiment
 
 Post Fiat runs its strategic decisions through a public process:
@@ -55,7 +68,7 @@ A skeptic will ask whether the operator could run the model many times and publi
 
 1. **Determinism removes the reroll.** The same input always produces the same output. The operator can change the answer only by changing the question, and the question is published alongside the answer.
 2. **A selected output still beats none.** Even a favorable answer puts reasoning on the record, where readers can examine and dispute it. An opaque process puts nothing on the record.
-3. **The benchmark is the alternative.** Every system has flaws. The fair comparison is with what networks do today, where consequential decisions happen with no process and no record at all.
+3. **The benchmark is the alternative.** Every system has flaws. The fair comparison is with what networks do today. Their on-chain votes cover protocol upgrades, while the company decisions that matter most to token holders happen with no process and no record at all.
 4. **Holders keep the final say.** Critics could say the founder might cherry-pick output to justify a specific decision. Any such cherry-picking would sit in plain view in the prompt chain. Economic actors who suspect an unfair process, or see it drifting, can sell their tokens, just as they could on any other network. The founder and the development company also have every incentive to run an effective process: the Layer 1 differentiates itself through better governance, and a visibly rigged or inept process would quickly destroy market value.
 
 ## The evidence so far
