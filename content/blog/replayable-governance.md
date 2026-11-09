@@ -24,10 +24,7 @@ The decisions that move a token's value usually sit one level higher, inside the
 
 A typical crypto network has two layers of decision-making, and only the smaller one is public.
 
-| Layer | Who decides | What they decide | How visible |
-|---|---|---|---|
-| Development company or foundation | Founder, executives, insiders and early investors | Treasury and token sales, acquisitions, partnerships, exchange listings, hiring, the product roadmap | Private, seen only through announcements |
-| Blockchain | Validators and on-chain votes | Protocol upgrades, amendments and parameters | Public and recorded |
+[![Development company versus token: the company, owned by the founder, executives and equity investors, decides treasury and token sales, acquisitions, partnerships, business development, roadmap and fee capture, answers only to its private board and drives most of the token's value; token holders and the chain vote only on protocol code and have essentially zero oversight of the company. On Post Fiat, development company decisions go through a public, replayable process that token holders can read and audit.](/blog/replayable-governance-devcorp.svg)](/blog/replayable-governance-devcorp.svg)
 
 On-chain governance covers the second layer only, and that layer is a small share of the decisions that are economically material to the token. The pattern holds across virtually every major chain:
 
