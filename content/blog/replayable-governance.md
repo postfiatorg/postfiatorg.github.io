@@ -36,7 +36,7 @@ On-chain governance covers the second layer only, and that layer is a small shar
 - **Bittensor** runtime upgrades have run through a multisig controlled by the Opentensor Foundation, which also builds the software and sets the roadmap. Its founder has published a plan to decentralize governance by the end of 2027.
 - **The XRP Ledger** validators vote on amendments, each needing more than 80% support for two weeks. Ripple separately unlocks up to 1 billion XRP from escrow each month and decides how much to sell, and it acquired the prime broker Hidden Road for $1.25 billion, paid partly in XRP, to build out its institutional business.
 
-In each case, centralized business and treasury operations largely determine protocol value, incentives and fee capture, business development included, with no visibility to the chain and little meaningful intersection with its governance.
+Even where on-chain voting exists, it covers the protocol's code. When a foundation decides to invest in a project, back an ecosystem team, or court a traditional exchange or institution, no governance process happens at all: no proposal, no vote, no published reasoning. Yet those decisions, along with treasury management, incentives, fee capture and business development, drive most of what the token is worth. The vast majority of price-relevant decisions on every major chain never pass through governance of any kind.
 
 The same structure repeats across the market: transparent votes on code, and private decisions on everything that moves the price. Post Fiat applies its public, replayable process to the first layer, the company decisions that on other networks never reach a vote.
 
