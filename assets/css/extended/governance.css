@@ -27,3 +27,12 @@
 .gov-code{font-family:var(--mono);font-size:12px;margin:18px 0 0;padding-top:10px;border-top:1px dashed var(--rule)}
 .gov-code a{margin-right:14px}
 .gov-note{font-family:var(--mono);font-size:12px;line-height:1.6;color:#5b6466;border-left:2px solid var(--rule);padding:6px 0 6px 12px;margin:14px 0 18px}
+.gov-convo{border:1px solid var(--rule);padding:18px 22px 20px;margin:0 0 14px;background:var(--paper)}
+.gov-convo-meta{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--teal-ink);margin:0 0 12px}
+.gov-conversation{margin:18px 0 0}
+.gov-conversation>summary{cursor:pointer;list-style:none;display:inline-flex;gap:12px;align-items:baseline;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--ink);padding:10px 16px}
+.gov-conversation>summary::-webkit-details-marker{display:none}
+.gov-conversation>summary::before{content:"+";font-family:var(--mono)}
+.gov-conversation[open]>summary::before{content:"\2212"}
+.gov-conversation>summary .meta{text-transform:none;letter-spacing:0;color:#5b6466}
+.gov-convo-body{padding:16px 0 0}
