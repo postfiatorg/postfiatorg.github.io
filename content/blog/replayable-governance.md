@@ -29,7 +29,14 @@ A typical crypto network has two layers of decision-making, and only the smaller
 | Development company or foundation | Founder, executives, insiders and early investors | Treasury and token sales, acquisitions, partnerships, exchange listings, hiring, the product roadmap | Private, seen only through announcements |
 | Blockchain | Validators and on-chain votes | Protocol upgrades, amendments and parameters | Public and recorded |
 
-On-chain governance covers the second layer only, and that layer is a small share of the decisions that are economically material to the token. The XRP Ledger shows the split clearly. Its validators vote on protocol amendments, and each amendment needs more than 80% support for two weeks. Those same validators have no say over Ripple. Ripple controls the release and sale of the XRP it holds in escrow, chose to acquire Hidden Road, and sets the strategy that drives demand for XRP. The token's economics are shaped overwhelmingly by the behavior of the company, and the company's decisions happen out of view.
+On-chain governance covers the second layer only, and that layer is a small share of the decisions that are economically material to the token. The pattern holds across virtually every major chain:
+
+- **Ethereum** settles protocol changes through Ethereum Improvement Proposals and the core developers. The Ethereum Foundation separately manages a large ETH treasury, sells ETH, funds research and grants, and shapes ecosystem priorities, with no vote from the chain.
+- **Solana** validators weigh in on some protocol changes. The Solana Foundation separately runs the stake delegation program that shapes validator economics, funds the ecosystem and leads business development, and the core engineering teams set the client roadmap.
+- **Bittensor** governs runtime changes through its own on-chain mechanisms. The Opentensor Foundation separately builds the software, sets the roadmap and leads business development.
+- **The XRP Ledger** validators vote on amendments, each needing more than 80% support for two weeks. Ripple separately controls the release and sale of the XRP it holds in escrow, chose to acquire Hidden Road, and sets the strategy that drives demand for XRP.
+
+In each case, centralized business and treasury operations largely determine protocol value, incentives and fee capture, business development included, with no visibility to the chain and little meaningful intersection with its governance.
 
 The same structure repeats across the market: transparent votes on code, and private decisions on everything that moves the price. Post Fiat applies its public, replayable process to the first layer, the company decisions that on other networks never reach a vote.
 
