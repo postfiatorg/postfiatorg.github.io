@@ -56,7 +56,7 @@ A skeptic will ask whether the operator could run the model many times and publi
 1. **Determinism removes the reroll.** The same input always produces the same output. The operator can change the answer only by changing the question, and the question is published alongside the answer.
 2. **A selected output still beats none.** Even a favorable answer puts reasoning on the record, where readers can examine and dispute it. An opaque process puts nothing on the record.
 3. **The benchmark is the alternative.** Every system has flaws. The fair comparison is with what networks do today, where consequential decisions happen with no process and no record at all.
-4. **Holders keep the final say.** If the process produces garbage, holders can see it and sell the token. Markets can price published reasoning; private reasoning leaves them guessing.
+4. **Holders keep the final say.** Critics could say the founder might cherry-pick output to justify a specific decision. Any such cherry-picking would sit in plain view in the prompt chain. Economic actors who suspect an unfair process, or see it drifting, can sell their tokens, just as they could on any other network. The founder and the development company also have every incentive to run an effective process: the Layer 1 differentiates itself through better governance, and a visibly rigged or inept process would quickly destroy market value.
 
 ## The evidence so far
 
