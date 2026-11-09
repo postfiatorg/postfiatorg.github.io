@@ -31,10 +31,10 @@ A typical crypto network has two layers of decision-making, and only the smaller
 
 On-chain governance covers the second layer only, and that layer is a small share of the decisions that are economically material to the token. The pattern holds across virtually every major chain:
 
-- **Ethereum** settles protocol changes through Ethereum Improvement Proposals and the core developers. The Ethereum Foundation separately manages a large ETH treasury, sells ETH, funds research and grants, and shapes ecosystem priorities, with no vote from the chain.
-- **Solana** validators weigh in on some protocol changes. The Solana Foundation separately runs the stake delegation program that shapes validator economics, funds the ecosystem and leads business development, and the core engineering teams set the client roadmap.
-- **Bittensor** governs runtime changes through its own on-chain mechanisms. The Opentensor Foundation separately builds the software, sets the roadmap and leads business development.
-- **The XRP Ledger** validators vote on amendments, each needing more than 80% support for two weeks. Ripple separately controls the release and sale of the XRP it holds in escrow, chose to acquire Hidden Road, and sets the strategy that drives demand for XRP.
+- **Ethereum** settles protocol changes through Ethereum Improvement Proposals and the core developers. The Ethereum Foundation separately runs a large ETH treasury under its own treasury policy: in the first half of 2026 it sold about 20,000 ETH, roughly $45 million, to fund research, grants and operations, and it decides how much to stake and spend. None of that goes to a vote on the chain.
+- **Solana** added stake-weighted on-chain governance votes in July 2026, so validators and stakers can now vote on protocol proposals. The Solana Foundation separately decides which validators receive its delegated stake, about 5% of all staked SOL across more than 300 validators, funds the ecosystem and leads business development.
+- **Bittensor** runtime upgrades have run through a multisig controlled by the Opentensor Foundation, which also builds the software and sets the roadmap. Its founder has published a plan to decentralize governance by the end of 2027.
+- **The XRP Ledger** validators vote on amendments, each needing more than 80% support for two weeks. Ripple separately unlocks up to 1 billion XRP from escrow each month and decides how much to sell, and it acquired the prime broker Hidden Road for $1.25 billion, paid partly in XRP, to build out its institutional business.
 
 In each case, centralized business and treasury operations largely determine protocol value, incentives and fee capture, business development included, with no visibility to the chain and little meaningful intersection with its governance.
 
