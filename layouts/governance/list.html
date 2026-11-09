@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{ partial "ink/head.html" . }}
+</head>
+<body>
+{{ partial "ink/mast.html" . }}
+<main id="main">
+  <header class="doc-head">
+    <div class="wrap" style="max-width:var(--max)">
+      <p class="label">Post Fiat · Governance</p>
+      <h1 class="mt-s">{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="sub">{{ . }}</p>{{ end }}
+    </div>
+  </header>
+  <div class="wrap" style="padding:48px 0 120px">
+    {{ with .Content }}<div class="prose" style="margin-bottom:56px">{{ . }}</div>{{ end }}
+    <ul class="index posts">
+      {{ range .Pages.ByDate.Reverse }}
+      <li><a href="{{ .RelPermalink }}"><span class="d">{{ .Date.Format "Jan 02" }}<br><span class="th">{{ .Params.entry | default "Decision" }}</span></span><span><span class="t">{{ .Title }}</span>{{ with .Params.summary | default .Summary }}<span class="s">{{ . | plainify | htmlUnescape }}</span>{{ end }}</span><span class="go">→</span></a></li>
+      {{ end }}
+    </ul>
+  </div>
+</main>
+{{ partial "ink/foot.html" . }}
+</body>
+</html>

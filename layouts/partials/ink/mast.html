@@ -7,6 +7,7 @@
     <nav aria-label="Primary">
       <a href="/whitepaper/"{{ if hasPrefix $p "/whitepaper/" }} aria-current="page"{{ end }}>Whitepaper</a>
       <a href="/blog/"{{ if or (hasPrefix $p "/blog/") (eq .Section "blog") }} aria-current="page"{{ end }}>Blog</a>
+      <a href="/governance/"{{ if hasPrefix $p "/governance/" }} aria-current="page"{{ end }}>Governance</a>
       <a href="/task-node/"{{ if eq $p "/task-node/" }} aria-current="page"{{ end }}>Task Node</a>
       <a href="/validator-setup/"{{ if hasPrefix $p "/validator" }} aria-current="page"{{ end }}>Validators</a>
       <a href="https://github.com/postfiatorg" rel="noopener">GitHub</a>
