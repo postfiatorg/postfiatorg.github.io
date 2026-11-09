@@ -49,6 +49,15 @@ Over time, this system posits that a transparent, iterative and replayable proce
 
 The process is more than AI judgment. It is a reproducible template for decision-making, and it improves as the models strengthen. The counterfactual matters most. Skipping the process leaves every decision just as consequential: decisions still shape protocols financially and technically, but they happen in darkness, beyond scrutiny. We think that base case carries negative expected value for token holders, for three reasons. Mistakes made in private go uncorrected for longer, because nobody outside the room sees them in time to object. Management can favor its own interests over the network's at low cost, because nobody can compare the decision with the reasoning behind it. And holders who carry the downside without seeing the reasoning have to price in that uncertainty. Concentrating consequential decisions in a closed room is also a centralization vector, whatever the network's validator count.
 
+## The cherry-picking objection
+
+A skeptic will ask whether the operator could run the model many times and publish the answer they like. Four points answer it.
+
+1. **Determinism removes the reroll.** The same input always produces the same output. The operator can change the answer only by changing the question, and the question is published alongside the answer.
+2. **A selected output still beats none.** Even a favorable answer puts reasoning on the record, where readers can examine and dispute it. An opaque process puts nothing on the record.
+3. **The benchmark is the alternative.** Every system has flaws. The fair comparison is with what networks do today, where consequential decisions happen with no process and no record at all.
+4. **Holders keep the final say.** If the process produces garbage, holders can see it and sell the token. Markets can price published reasoning; private reasoning leaves them guessing.
+
 ## The evidence so far
 
 On November 8 two independent machines scored a 452-company equity index. Each generated 1,033,095 output tokens across 455 model calls, and both produced identical token sequences, identical scores and the same 29 holdings, for about $72 of compute.
