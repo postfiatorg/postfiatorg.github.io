@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 {{ partial "ink/head.html" . }}
+{{ with resources.Get "css/extended/governance.css" }}<style>{{ .Content | safeCSS }}</style>{{ end }}
 </head>
 <body>
 {{ partial "ink/mast.html" . }}
@@ -14,12 +15,15 @@
     </div>
   </header>
   <div class="wrap" style="padding:48px 0 120px">
-    {{ with .Content }}<div class="prose" style="margin-bottom:56px">{{ . }}</div>{{ end }}
-    <ul class="index posts">
-      {{ range .Pages.ByDate.Reverse }}
-      <li><a href="{{ .RelPermalink }}"><span class="d">{{ .Date.Format "Jan 02" }}<br><span class="th">{{ .Params.entry | default "Decision" }}</span></span><span><span class="t">{{ .Title }}</span>{{ with .Params.summary | default .Summary }}<span class="s">{{ . | plainify | htmlUnescape }}</span>{{ end }}</span><span class="go">→</span></a></li>
-      {{ end }}
-    </ul>
+    {{ with .Content }}<details class="gov-explainer"><summary>How Post Fiat governance works</summary><div class="gov-body prose">{{ . }}</div></details>{{ end }}
+    {{ range .Pages.ByDate.Reverse }}
+    <section class="gov-entry">
+      <p class="gov-date">{{ .Date.Format "2 January 2006" }}{{ with .Params.entry }} · {{ . }}{{ end }}</p>
+      <h2 class="gov-headline"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      {{ with .Params.summary }}<p class="gov-dek">{{ . }}</p>{{ end }}
+      <div class="prose" style="max-width:none">{{ .Content }}</div>
+    </section>
+    {{ end }}
   </div>
 </main>
 {{ partial "ink/foot.html" . }}

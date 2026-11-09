@@ -1,0 +1,28 @@
+.gov-explainer{margin:0 0 56px}
+.gov-explainer>summary,.gov-turn>summary{cursor:pointer;list-style:none}
+.gov-explainer>summary::-webkit-details-marker,.gov-turn>summary::-webkit-details-marker{display:none}
+.gov-explainer>summary{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--rule);padding:10px 14px;display:inline-block}
+.gov-explainer>summary::before,.gov-turn>summary::before{content:"+";display:inline-block;width:1.1em;font-family:var(--mono)}
+.gov-explainer[open]>summary::before,.gov-turn[open]>summary::before{content:"\2212"}
+.gov-explainer .gov-body{padding:18px 0 0}
+.gov-entry{border-top:2px solid var(--ink);padding:22px 0 40px;margin:0 0 24px}
+.gov-entry .gov-date{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-ink);margin:0}
+.gov-entry h2.gov-headline{font-family:var(--display);font-size:clamp(30px,4vw,44px);line-height:1.08;margin:8px 0 10px;border:0;padding:0}
+.gov-entry h2.gov-headline a{text-decoration:none;color:inherit}
+.gov-entry .gov-dek{margin:0 0 22px;font-style:italic}
+.gov-turn{border:1px solid var(--rule);margin:0 0 12px;background:var(--paper)}
+.gov-turn>summary{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;padding:14px 16px}
+.gov-turn .who{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border:1px solid currentColor}
+.gov-turn .what{font-weight:600}
+.gov-turn .meta{font-family:var(--mono);font-size:11px;color:#5b6466;margin-left:auto}
+.gov-turn .gov-body{padding:4px 22px 18px;border-top:1px solid var(--rule-soft)}
+.gov-turn.model{background:#e8f1ef;border-color:var(--teal);border-left:4px solid var(--teal)}
+.gov-turn.model .who{color:var(--teal-ink)}
+.gov-turn.model .gov-body{border-top-color:#bcd8d4}
+.gov-turn.operator .who{color:var(--oxblood)}
+.gov-turn.proof .who{color:var(--ink)}
+.gov-turn .gov-body h1,.gov-turn .gov-body h2{font-size:22px;margin:22px 0 8px;border:0;padding:0}
+.gov-turn .gov-body h3{font-size:18px}
+.gov-turn .gov-body table{font-size:14px}
+.gov-code{font-family:var(--mono);font-size:12px;margin:18px 0 0;padding-top:10px;border-top:1px dashed var(--rule)}
+.gov-code a{margin-right:14px}

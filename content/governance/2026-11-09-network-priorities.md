@@ -3,47 +3,15 @@ title: "Network priorities, decided by replayable judgment"
 date: 2026-11-09T00:00:00Z
 draft: false
 entry: "Entry 001"
-summary: "The operator put Post Fiat's status and open questions to a pinned DeepSeek model and asked for the priorities that maximize the network's fully diluted value over 1, 3, 5 and 10 years. Two independent machines, eight GPUs in total, returned the same answer byte for byte, twice. The full exchange, every receipt and a verifier are published here."
+summary: "The operator asked a pinned DeepSeek model for the priorities that maximize Post Fiat's fully diluted value over 1, 3, 5 and 10 years, then asked five follow-ups. Eight GPUs on two machines returned the same answers byte for byte."
 breadcrumb_label: "Governance"
 breadcrumb_url: "/governance/"
 show_toc: false
 ---
 
-Post Fiat replaces governance by committee with governance by deterministic judgment. A question goes to a pinned open-weight model under a fixed configuration. Independent machines answer it, and the answer counts only if their output bytes match. Anyone can rerun the check from the published receipts.
-
-This first entry is a prioritization decision. The operator submitted a status document covering the Layer 1, NAVCoins, GoodAlexander, Task Node and the paused Corbanu work, and asked the model for the prioritization that maximizes the fully diluted value of Post Fiat within 1, 3, 5 and 10 years. The operator then asked five follow-up questions. Both answers came back identical on all eight GPUs across two physical machines.
-
-## How the decision was made
-
-| Component | Pinned value |
-|---|---|
-| Model | `deepseek-ai/DeepSeek-V4.1-Flash-1017` at revision `1bae0e1088993b9b82de08f59de5be5a34e42170` |
-| Runtime | DeepInfer, prebuilt `inferencekey/deepinfer-sm100-cu132` at `6c4ae0ee7c49502a09241faf4abbc515ce4fe17a`, base commit `9bd9cf2` with the qualified runtime patches |
-| Native profile SHA-256 | `86d00e37d77030484f396d1dc62bebb5efa4c7d5fa36152e7ad3deaeff3704ae` |
-| Hardware | Two independent Vast machines (156164 and 156229), each with four NVIDIA B200 GPUs; every GPU rank answers every question |
-| Sampling | Temperature 0 (runtime clamp 1e-5), top-p 1.0, no top-k, seed 438916795, up to 16,384 output tokens |
-| Reasoning effort | 75 of 100 |
-| System prompt | "You are a helpful assistant." |
-
-The same pair of machines had already reproduced a 452-company index scoring job byte for byte on 8 November 2026, about one million output tokens per machine.
-
-## The decision
-
-The model's revised priority order, after the follow-ups:
-
-1. GoodAlexander trade ideas and sponsorship.
-2. NAVCoin checkout with a treasury-seeded strategy NAVCoin.
-3. A metrics dashboard.
-4. The Layer 1 checkout-critical path and a Base-wrapped PFT for exchange liquidity.
-5. A focused Task Node and community surface.
-6. Scaling treasury trading within risk limits as the NAVCoin accretion engine.
-
-It recommended keeping the Layer 1 and Task Node, holding token generation for late Q1 2027 unless demand signals appear sooner, and keeping AGTI's operating business separate from the commodity network.
-
-## Exchange 1: the operator's question
-
-<details>
-<summary><strong>Full status document submitted to the model</strong> (governance log entry 10)</summary>
+<details class="gov-turn operator">
+<summary><span class="who">Operator</span><span class="what">Original submission</span><span class="meta">9 Nov 2026 01:08 UTC · log entry 10 · 2,309 words</span></summary>
+<div class="gov-body">
 
 # Post Fiat: Status and Priorities
 
@@ -142,9 +110,13 @@ We will not restart Corbanu or market governance as a source of profit.
 
 Please provide the relevant prioritization and thinking that maximizes network value of Post Fiat. Assume that the optimization function is the fully diluted value of Post Fiat within 1, 3, 5 and 10 years. Keep your answer to 1 single spaced page.
 
+<p class="gov-code">Code: <a href="/governance/2026-11-09-network-priorities/receipts/entry-10/primary-rank0.json">primary receipt</a><a href="/governance/2026-11-09-network-priorities/receipts/entry-10/replay-rank0.json">replay receipt</a><a href="/governance/2026-11-09-network-priorities/log-entries.jsonl">log entry 10</a><a href="/governance/2026-11-09-network-priorities/verify.py">verify.py</a></p>
+</div>
 </details>
 
-### The model's answer
+<details class="gov-turn model">
+<summary><span class="who">DeepSeek V4.1 Flash</span><span class="what">Answer</span><span class="meta">4,924 tokens · 8 of 8 GPUs byte-identical · sha256 6b33b812c6b6</span></summary>
+<div class="gov-body">
 
 **Recommendation:** Maximize FDV by making Post Fiat legible as a distribution-led, fee-generating capital-markets network with a credible L1 trust layer. FDV is not maximized by the earliest token date or by private trading Sharpe; it is maximized by visible demand, repeat usage, fee capture, security credibility, and runway. Sequence: **distribution → product → metrics → platform → cost control → balance-sheet scaling.**
 
@@ -166,11 +138,15 @@ Please provide the relevant prioritization and thinking that maximizes network v
 
 Do not restart Corbanu or market governance as a profit line. Governance is the trust layer; revenue must come from trading, GoodAlexander, and NAVCoin fees.
 
-## Exchange 2: the operator's follow-ups
+<p class="gov-code">Code: <a href="/governance/2026-11-09-network-priorities/receipts/entry-10/primary-rank0.json">primary receipt</a><a href="/governance/2026-11-09-network-priorities/receipts/entry-10/replay-rank0.json">replay receipt</a><a href="/governance/2026-11-09-network-priorities/log-entries.jsonl">log entry 10</a><a href="/governance/2026-11-09-network-priorities/verify.py">verify.py</a></p>
+</div>
+</details>
 
-The follow-up message contained the original document and the model's previous answer, verbatim, followed by these questions. The model keeps no memory between requests, so the whole context travels in the input and anyone can replay it.
+<details class="gov-turn operator">
+<summary><span class="who">Operator</span><span class="what">Follow-up questions</span><span class="meta">9 Nov 2026 01:19 UTC · log entry 11</span></summary>
+<div class="gov-body">
 
-Operator follow-up questions:
+The follow-up message carried the original submission and the model's previous answer verbatim, followed by these questions. The model keeps no memory between requests, so the whole context travels in the input and anyone can replay it.
 
 1. Every token is a community, and the Post Fiat community primarily uses Task Node as its interface. The story around Post Fiat as a network is a move toward post-human judgment. How do you think about gutting the user-facing applications and the deterministic judgment elements?
 
@@ -182,7 +158,13 @@ Operator follow-up questions:
 
 5. I do not have infinite energy. The crypto fundraising environment is poor, and we have had a very hard time hiring and retaining quality talent. With AI-driven development that is increasingly unnecessary, and we have leaned heavily into AI-driven workflows. Raising capital is not an option, so cash-flowing activities are the only feasible way to expand the team or attract world-class talent. Factor this in.
 
-### The model's answer
+<p class="gov-code">Code: <a href="/governance/2026-11-09-network-priorities/receipts/entry-11/primary-rank0.json">primary receipt</a><a href="/governance/2026-11-09-network-priorities/receipts/entry-11/replay-rank0.json">replay receipt</a><a href="/governance/2026-11-09-network-priorities/log-entries.jsonl">log entry 11</a><a href="/governance/2026-11-09-network-priorities/verify.py">verify.py</a></p>
+</div>
+</details>
+
+<details class="gov-turn model">
+<summary><span class="who">DeepSeek V4.1 Flash</span><span class="what">Answer to follow-ups</span><span class="meta">3,370 tokens · 8 of 8 GPUs byte-identical · sha256 9375dd9f2127</span></summary>
+<div class="gov-body">
 
 **Revised recommendation.** Do not gut Task Node or pause the L1. Post Fiat’s FDV depends on a two-engine structure: AGTI’s cash-flowing centralized business—GoodAlexander, trading, front-end—funds and seeds the network; the L1/NAVCoin/Task Node network converts that audience into a commodity-like, fee-burning, replayable capital-markets system. The binding constraints are cash, attention, and security credibility—not token date. Horizon logic: 1 year = cash flow + checkout; 3 years = external NAVCoin TVL + validator decentralization; 5 years = fee burn + multiple NAVCoin strategies; 10 years = replayable judgment as the trust layer for on-chain capital markets.
 
@@ -198,9 +180,25 @@ Operator follow-up questions:
 
 **Revised priority order:** (1) GoodAlexander trade ideas + sponsorship; (2) NAVCoin checkout with treasury-seeded strategy NAVCoin; (3) metrics dashboard; (4) L1 checkout-critical path + Base wrapper; (5) focused Task Node/community; (6) scale treasury trading within limits as the NAVCoin accretion engine. Monthly three: external NAVCoin TVL/volume/fees; GoodAlexander subscriber→buyer/contributor conversion; net burn/runway. This maximizes FDV by building a real commodity network with visible demand—not a newsletter or a private trading book.
 
-## Proof that the answers are byte-identical
+<p class="gov-code">Code: <a href="/governance/2026-11-09-network-priorities/receipts/entry-11/primary-rank0.json">primary receipt</a><a href="/governance/2026-11-09-network-priorities/receipts/entry-11/replay-rank0.json">replay receipt</a><a href="/governance/2026-11-09-network-priorities/log-entries.jsonl">log entry 11</a><a href="/governance/2026-11-09-network-priorities/verify.py">verify.py</a></p>
+</div>
+</details>
 
-Each GPU rank wrote a receipt holding the question, the rendered prompt hash, the input token IDs, every output token ID and the raw output bytes. The tables list the first 12 hex digits of each rank's SHA-256 hashes; the full values are in the receipts. A single differing byte on any GPU would change its hashes.
+<details class="gov-turn proof">
+<summary><span class="who">Evidence</span><span class="what">Proof and replay</span><span class="meta">16 receipts · hash-chained log · verifier</span></summary>
+<div class="gov-body">
+
+**Pinned configuration**
+
+| Component | Value |
+|---|---|
+| Model | `deepseek-ai/DeepSeek-V4.1-Flash-1017` at `1bae0e1088993b9b82de08f59de5be5a34e42170` |
+| Runtime | DeepInfer prebuilt `inferencekey/deepinfer-sm100-cu132` at `6c4ae0ee7c49502a09241faf4abbc515ce4fe17a`, base `9bd9cf2` with the qualified runtime patches |
+| Native profile SHA-256 | `86d00e37d77030484f396d1dc62bebb5efa4c7d5fa36152e7ad3deaeff3704ae` |
+| Hardware | Vast machines 156164 and 156229, four NVIDIA B200 GPUs each; every GPU rank answers every question |
+| Sampling | Temperature 0 (runtime clamp 1e-5), top-p 1.0, no top-k, seed 438916795, up to 16,384 output tokens |
+| Reasoning effort | 75 of 100 |
+| System prompt | "You are a helpful assistant." |
 
 **Entry 10**: 4,924 output tokens, raw output SHA-256 `6b33b812c6b67091e6b87257e8a54794b675277a4112ed7d086896bb0d2db595`, log entry `bfa3642e5736b4289057e33b27ab2cdbcdd63817af07d76496a97c0d586f336c`.
 
@@ -228,31 +226,15 @@ Each GPU rank wrote a receipt holding the question, the rendered prompt hash, th
 | 156229 (replay) | 2 | `4bc5ef885440` | `9375dd9f2127` |
 | 156229 (replay) | 3 | `4bc5ef885440` | `9375dd9f2127` |
 
-## Check it yourself
+Hashes show the first 12 hex digits; the full values are in the receipts. A single differing byte on any GPU would change its hashes.
 
-Download the evidence bundle:
+**Check it yourself.** Download [log-entries.jsonl](/governance/2026-11-09-network-priorities/log-entries.jsonl), the receipts under `receipts/entry-10/` and `receipts/entry-11/` (`primary-rank0.json` to `replay-rank3.json`), [verify.py](/governance/2026-11-09-network-priorities/verify.py) and [SHA256SUMS](/governance/2026-11-09-network-priorities/SHA256SUMS), then run `python3 verify.py`. It recomputes each log entry's hash and chain link, rebuilds the rendered prompt from the logged question, and confirms identical input token IDs, output token IDs and raw bytes on all eight GPUs across two machines. With `pip install tokenizers` and the model's `tokenizer.json`, `--tokenizer tokenizer.json` also re-tokenizes the prompt.
 
-- [log-entries.jsonl](/governance/2026-11-09-network-priorities/log-entries.jsonl): the two hash-chained log entries
-- [receipts/entry-10/](/governance/2026-11-09-network-priorities/receipts/entry-10/primary-rank0.json) and [receipts/entry-11/](/governance/2026-11-09-network-priorities/receipts/entry-11/primary-rank0.json): sixteen GPU receipts, named `primary-rank0.json` through `replay-rank3.json`
-- [verify.py](/governance/2026-11-09-network-priorities/verify.py): the verifier, standard-library Python
-- [SHA256SUMS](/governance/2026-11-09-network-priorities/SHA256SUMS): checksums for every file
+**Replay it yourself.** On four NVIDIA B200 GPUs with NVLink: download the model at the pinned revision and hash-check every shard; install the pinned DeepInfer prebuilt with the qualified runtime patches (identified by the native profile SHA-256 above, not yet included in this bundle); set `DEEPINFER_BATCH_INVARIANT=1`, `DEEPINFER_ENABLE_MTP_VARLEN=0`, `DEEPINFER_USE_NEXTN_DECODE=0`, `DEEPINFER_OVERRIDE_NUM_EXTRA_EXPERTS=0`, `DEEPINFER_EXPERT_REARRANGEMENT_STEP_INTERVAL=0`, `DEEPINFER_ENGRAM_LOCAL=1`, `DEEPINFER_NCCL_NVLS_ENABLE=0` and `DEEPINFER_YOCO_PREFILL_TRUNCATION_MODE=off`; launch with expert parallel 4, data parallel 4, context parallel 1, a 65,536-token context and GPU memory utilization 0.85; then submit any receipt's `input_token_ids` with its `effective_sampling` and compare your output hashes.
 
-Then run:
+This shows identical output on two machines and eight GPUs running the same pinned configuration. A different GPU type, runtime build or model revision needs its own qualification before it can claim the same bytes.
 
-```bash
-python3 verify.py
-```
+<p class="gov-code">Code: <a href="/governance/2026-11-09-network-priorities/receipts/entry-10/primary-rank0.json">primary receipt</a><a href="/governance/2026-11-09-network-priorities/receipts/entry-10/replay-rank0.json">replay receipt</a><a href="/governance/2026-11-09-network-priorities/log-entries.jsonl">log entry 10</a><a href="/governance/2026-11-09-network-priorities/verify.py">verify.py</a><a href="/governance/2026-11-09-network-priorities/SHA256SUMS">SHA256SUMS</a></p>
+</div>
+</details>
 
-The verifier recomputes each log entry's hash and its link to the previous entry. It rebuilds the rendered prompt from the logged question and checks it against every receipt. It confirms that all eight ranks received identical input token IDs and produced identical output token IDs and raw bytes, on two distinct machines and eight distinct GPUs. It also checks that the published answer is the receipt's answer channel. With `pip install tokenizers` and the model's `tokenizer.json`, `python3 verify.py --tokenizer tokenizer.json` also re-tokenizes the prompt and checks the input token IDs.
-
-## Replay it yourself
-
-To regenerate the answers rather than check the receipts, run the pinned configuration above on four NVIDIA B200 GPUs with NVLink:
-
-1. Download the model at the pinned revision and hash-check every shard.
-2. Install the pinned DeepInfer prebuilt and apply the qualified runtime patches. The runtime patches and launch profile are identified by the native profile SHA-256 above and are not yet included in this bundle.
-3. Set the pinned environment: `DEEPINFER_BATCH_INVARIANT=1`, `DEEPINFER_ENABLE_MTP_VARLEN=0`, `DEEPINFER_USE_NEXTN_DECODE=0`, `DEEPINFER_OVERRIDE_NUM_EXTRA_EXPERTS=0`, `DEEPINFER_EXPERT_REARRANGEMENT_STEP_INTERVAL=0`, `DEEPINFER_ENGRAM_LOCAL=1`, `DEEPINFER_NCCL_NVLS_ENABLE=0`, `DEEPINFER_YOCO_PREFILL_TRUNCATION_MODE=off`.
-4. Launch with expert parallel 4, data parallel 4, context parallel 1, 65,536-token context and GPU memory utilization 0.85.
-5. Submit the `input_token_ids` from any receipt with the receipt's `effective_sampling`, and compare your output token IDs and raw bytes with the published hashes.
-
-This demonstrates identical output on two machines and eight GPUs running the same pinned configuration. A different GPU type, runtime build or model revision requires its own qualification before it can claim the same bytes.

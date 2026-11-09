@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   {{ partial "ink/head.html" . }}
+{{ with resources.Get "css/extended/governance.css" }}<style>{{ .Content | safeCSS }}</style>{{ end }}
   <style>
     {{ with resources.Get "css/extended/pfterminal-research.css" }}{{ .Content | safeCSS }}{{ end }}
     {{ with resources.Get "css/extended/agentic-index.css" }}{{ .Content | safeCSS }}{{ end }}
