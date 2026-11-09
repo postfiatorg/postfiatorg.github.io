@@ -13,15 +13,13 @@ show_toc: false
 <div class="gov-convo">
 <p class="gov-convo-meta">9 November 2026, 15:03 to 15:42 UTC · Operator: goodalexander · Model: DeepSeek V4.1 Flash · 10 exchanges · 88 GPU receipts</p>
 
-<p class="gov-actions-label">Next actions · prescribed by the model in its final answer (log entry 24)</p>
+<p class="gov-actions-label">Next actions · summarized from the model's guidance (log entries 15 and 24)</p>
 
-1. **Audit the obligations.** Get counsel to review investor token rights, use-of-proceeds restrictions and whether a Base ERC-20 representation of PFT satisfies delivery, before cutting or pivoting anything.
-2. **Write a one-page Minimum Viable Delivery scope.** Keep the obligation-critical token, legal and distribution work and the smallest Layer 1 and NAVCoin base: six-validator devnet stability, ML-DSA-65, Asset-Orchard swaps, SP1 NAV proofs, the replay log, wallet and recovery, the private swap path and audit scoping. Freeze everything else.
-3. **Launch one measurable GoodAlexander conversion loop this week.** Trade ideas with affiliate and referral links plus an explicit NAVCoin waitlist, tracked from click to funded account to referral revenue to waitlist conversion.
-4. **Stand up a single cash, runway and revenue dashboard.** Decide the engineer's retention against 30 to 60 day obligation-critical milestones.
-5. **Talk to investors transparently, with a written options memo.** Renegotiate in the open before any obligation slips.
-
-<p class="gov-actions-note">Standing from earlier in the session: token generation waits on five readiness gates (eight weeks of dashboard metrics, a measured demand loop for PFT, a NAVCoin swap path with measured volume and fees, completed audits, and a legal opinion with a distribution plan). Late Q1 2027 holds only if the gates are met.</p>
+1. **Set investor communication on Layer 1 sequencing and the Base token.** Confirm with counsel how the Base ERC-20 representation of PFT relates to investor token rights, then share the sequencing with investors in writing.
+2. **Evaluate Layer 1 engineering requirements and timelines per the above.** Scope the Layer 1 and NAVCoin work the sequencing depends on: six-validator devnet stability, ML-DSA-65, Asset-Orchard swaps, SP1 NAV proofs, the replay log, wallet and recovery, the private swap path and audits. Sequence the rest of the roadmap behind it.
+3. **Launch one measurable GoodAlexander conversion loop.** Trade ideas with affiliate and referral links plus a NAVCoin waitlist, tracked from click to funded account to waitlist conversion.
+4. **Stand up a single metrics dashboard.** One place for conversion, product and financial metrics, with engineering milestones set on a 30 to 60 day cadence.
+5. **Gate token generation on readiness.** Eight weeks of dashboard metrics, a measured demand loop for PFT, a NAVCoin swap path with measured volume and fees, completed audits, and a legal opinion with a distribution plan. Late Q1 2027 holds when the gates are met.
 
 <details class="gov-conversation">
 <summary>Open the conversation <span class="meta">submission, answer and 9 follow-ups</span></summary>
