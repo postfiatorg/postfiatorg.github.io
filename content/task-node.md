@@ -11,7 +11,7 @@ Task Node turns a community's research, code and judgment into accountable work:
 
 ## How verification works
 
-Contributors cite durable artifacts: commits, pull requests, files, exact commands and their results. A verifier then asks one specific follow-up question, and the contributor must answer it exactly. A verified answer releases the reward.
+Contributors cite durable artifacts: commits, pull requests, files, exact commands and their results. Some tasks, often a first one, instead ask which wallet is linked to your account: quote the full `r...` address shown under [Wallet in Task Node](https://tasknode.postfiat.org/#wallet). A verifier then asks one specific follow-up question, and the contributor must answer it exactly. A verified answer releases the reward.
 
 ## The Hive
 
