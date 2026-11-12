@@ -1,0 +1,191 @@
+{{- $kind := .Get "kind" | default "mechanism" -}}
+{{- $ids := dict "mechanism" "b23m" "bob" "b23b" "alice" "b23a" "proof-comparison" "b23p" -}}
+{{- $id := index $ids $kind | default "b23x" -}}
+<figure class="b23f b23f--{{ $kind }}" aria-labelledby="{{ $id }}-title" aria-describedby="{{ $id }}-cap {{ $id }}-sr">
+  {{- if not (.Page.Store.Get "b23fStyle") }}{{ .Page.Store.Set "b23fStyle" true }}
+  <style>
+    .b23f{--b-ink:var(--ink,#10191d);--b-ink2:var(--ink-2,#2c3437);--b-mut:var(--ink-3,#474d4f);--b-rule:var(--rule,#cfc8b6);--b-soft:var(--rule-soft,#ded8c9);--b-card:#fbf9f4;--b-bg:var(--paper-2,#ebe6da);--b-mono:var(--mono,ui-monospace,Menlo,monospace);--c-schwab:#8a5a00;--c-chain:var(--teal,#057f82);--c-reserve:#2e6b34;--c-market:#5a3f9a;margin:2rem 0 2.25rem;scroll-margin-top:96px}
+    .b23f *{box-sizing:border-box}
+    .b23f-shell{border:1px solid var(--b-rule);border-radius:8px;background:var(--b-bg)}
+    .b23f-inner{padding:18px}
+    .b23f .b23f-eyebrow{margin:0 0 .4rem;color:var(--c-chain);font:600 .7rem/1.2 var(--b-mono);letter-spacing:.12em;text-transform:uppercase}
+    .b23f .b23f-title{margin:0 0 16px;max-width:680px;color:var(--b-ink);font-size:1.05rem;font-weight:600;line-height:1.4}
+    .b23f-lane{--lane:var(--c-chain);margin:0 0 12px;padding:11px 12px 13px;border:1px solid var(--b-soft);border-left:3px solid var(--lane);border-radius:6px;background:rgba(255,255,255,.45)}
+    .b23f-lane:last-of-type{margin-bottom:0}
+    .b23f-lane--schwab{--lane:var(--c-schwab)}
+    .b23f-lane--chain{--lane:var(--c-chain)}
+    .b23f-lane--reserve{--lane:var(--c-reserve)}
+    .b23f-lane--market{--lane:var(--c-market)}
+    .b23f .b23f-lane-k{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px;margin:0 0 10px;color:var(--lane);font:650 .7rem/1.3 var(--b-mono);letter-spacing:.09em;text-transform:uppercase}
+    .b23f-lane-k small{color:var(--b-mut);font:500 .66rem/1.3 var(--b-mono);letter-spacing:.05em}
+    .b23f .b23f-flow{display:flex;align-items:stretch;margin:0;padding:0;list-style:none}
+    .b23f .b23f-step{position:relative;flex:1 1 0;min-width:0;margin:0;padding:0 16px 0 0;color:var(--lane)}
+    .b23f-step::after{content:"";position:absolute;top:14px;right:4px;width:7px;height:7px;border-top:1.5px solid var(--lane);border-right:1.5px solid var(--lane);transform:rotate(45deg)}
+    .b23f .b23f-step:last-child{padding-right:0}
+    .b23f-step:last-child::after{display:none}
+    .b23f-box{height:100%;padding:9px 10px;border:1px solid var(--b-soft);border-radius:6px;background:var(--b-card)}
+    .b23f-box strong{display:block;color:var(--b-ink);font-size:.86rem;font-weight:600;line-height:1.3}
+    .b23f-box > span{display:block;margin-top:.3rem;color:var(--b-ink2);font-size:.8rem;line-height:1.45}
+    .b23f-box .b23f-n{display:inline-grid;place-items:center;min-width:20px;height:20px;margin:0 6px 0 0;padding:0 4px;border:1px solid var(--lane);border-radius:999px;color:var(--lane);font:650 .62rem/1 var(--b-mono);vertical-align:1px}
+    .b23f-fx{display:inline-block;margin-top:9px;padding:2px 8px;border:1px solid var(--lane);border-radius:999px;color:var(--lane);font:650 .62rem/1.4 var(--b-mono);font-style:normal;letter-spacing:.05em;text-transform:uppercase}
+    .b23f .b23f-join{margin:-2px 0 10px 14px;color:var(--b-mut);font:500 .7rem/1.3 var(--b-mono);letter-spacing:.04em}
+    .b23f-join i{margin-right:6px;font-style:normal;color:var(--b-ink)}
+    .b23f-legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;color:var(--b-mut);font:500 .7rem/1.3 var(--b-mono)}
+    .b23f-legend b{display:inline-block;width:10px;height:10px;margin-right:6px;border-radius:2px;vertical-align:-1px}
+    .b23f-grid{display:grid;grid-template-columns:1fr 1.15fr 1.15fr 1.2fr 1.15fr;border:1px solid var(--b-soft);border-radius:6px;overflow:hidden;background:var(--b-card)}
+    .b23f-grid > div{padding:9px 10px;border-bottom:1px solid var(--b-soft);color:var(--b-ink2);font-size:.78rem;line-height:1.45}
+    .b23f-grid .b23f-h{color:var(--b-mut);font:650 .62rem/1.3 var(--b-mono);letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,.03)}
+    .b23f-grid .b23f-sys{color:var(--b-ink);font-weight:600;font-size:.82rem}
+    .b23f-grid .b23f-sys small{display:block;margin-top:.2rem;color:var(--b-mut);font:500 .64rem/1.3 var(--b-mono);font-weight:500}
+    .b23f-grid .b23f-us{background:rgba(5,127,130,.08);border-bottom:0}
+    .b23f-grid .b23f-us.b23f-sys{color:var(--c-chain)}
+    .b23f-grid .b23f-us.b23f-enf{color:var(--c-reserve);font-weight:600}
+    .b23f figcaption{margin:.65rem 0 0;color:var(--b-mut);font-family:var(--b-mono);font-size:.76rem;line-height:1.5}
+    .b23f-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:760px){
+      .b23f-inner{padding:12px}
+      .b23f .b23f-flow{flex-direction:column}
+      .b23f .b23f-step{padding:0 0 18px 0}
+      .b23f-step::after{top:auto;right:auto;left:18px;bottom:6px;transform:rotate(135deg)}
+      .b23f .b23f-step:last-child{padding-bottom:0}
+      .b23f-grid{display:block;border:0;background:transparent}
+      .b23f-grid .b23f-h{display:none}
+      .b23f-grid > div{border:1px solid var(--b-soft);border-top:0;background:var(--b-card)}
+      .b23f-grid > div::before{content:attr(data-k);display:block;margin-bottom:.15rem;color:var(--b-mut);font:650 .6rem/1.3 var(--b-mono);letter-spacing:.08em;text-transform:uppercase}
+      .b23f-grid .b23f-sys{margin-top:12px;border-top:1px solid var(--b-soft);border-radius:6px 6px 0 0}
+      .b23f-grid .b23f-sys::before{display:none}
+      .b23f-grid .b23f-us{border:1px solid rgba(5,127,130,.3);border-top:0}
+    }
+  </style>
+  {{- end }}
+  <div class="b23f-shell" role="img" aria-labelledby="{{ $id }}-title">
+    <div class="b23f-inner">
+{{- if eq $kind "mechanism" }}
+      <p class="b23f-eyebrow">B23 &middot; how the account becomes NAV</p>
+      <div id="{{ $id }}-title" class="b23f-title">One Schwab account, read once a day, committed on PFTL. Supply moves only against the finalized figure.</div>
+      <section class="b23f-lane b23f-lane--schwab" aria-label="Off-chain: the Schwab account">
+        <div class="b23f-lane-k">Off-chain <small>reported by Schwab</small></div>
+        <ol class="b23f-flow">
+          <li class="b23f-step"><div class="b23f-box"><strong><span class="b23f-n">1</span>Schwab account</strong><span>Stocks, cash, margin loan and short positions in one brokerage account.</span></div></li>
+          <li class="b23f-step"><div class="b23f-box"><strong><span class="b23f-n">2</span>Daily read at a fixed cutoff</strong><span>Net liquidation value exactly as Schwab reports it. No adjustments.</span></div></li>
+        </ol>
+      </section>
+      <p class="b23f-join"><i>&darr;</i> signed PFTL transaction</p>
+      <section class="b23f-lane b23f-lane--chain" aria-label="On-chain: reserve packet, NAV epoch, mint">
+        <div class="b23f-lane-k">On PFTL <small>enforced by consensus</small></div>
+        <ol class="b23f-flow">
+          <li class="b23f-step"><div class="b23f-box"><strong><span class="b23f-n">3</span>Reserve packet</strong><span>Account value, cutoff time, account identity and hashes of positions, cash and liabilities.</span></div></li>
+          <li class="b23f-step"><div class="b23f-box"><strong><span class="b23f-n">4</span>NAV epoch</strong><span>NAV per B23 = account value &divide; B23 supply. Each epoch replaces the last.</span></div></li>
+          <li class="b23f-step"><div class="b23f-box"><strong><span class="b23f-n">5</span>Mint at NAV</strong><span>Only the issuer, only on the current epoch, never past the packet's supply.</span><em class="b23f-fx b23f-fx--up">supply &uarr;</em></div></li>
+        </ol>
+      </section>
+      <section class="b23f-lane b23f-lane--reserve" aria-label="On-chain: the PFUSDC reserve">
+        <div class="b23f-lane-k">PFUSDC reserve <small>separate from the account</small></div>
+        <ol class="b23f-flow">
+          <li class="b23f-step"><div class="b23f-box"><strong>Issuer adds PFUSDC</strong><span>No B23 is minted.</span></div></li>
+          <li class="b23f-step"><div class="b23f-box"><strong>Holder burns B23 at NAV</strong><span>Receives NAV minus x bps. The x bps go to the management wallet in the same transaction.</span><em class="b23f-fx b23f-fx--down">supply &darr; reserve &darr;</em></div></li>
+        </ol>
+      </section>
+      <div class="b23f-legend"><span><b style="background:var(--c-schwab)"></b>reported by Schwab, committed on-chain</span><span><b style="background:var(--c-chain)"></b>ledger state, checked by every validator</span><span><b style="background:var(--c-reserve)"></b>PFUSDC held on-chain</span></div>
+{{- else if eq $kind "bob" }}
+      <p class="b23f-eyebrow">Bob &middot; buyer &middot; inside Task Node</p>
+      <div id="{{ $id }}-title" class="b23f-title">USDC enters from MetaMask, becomes PFUSDC by proof, and buys B23 on the market.</div>
+      <section class="b23f-lane b23f-lane--schwab" aria-label="Ethereum side, signed in MetaMask">
+        <div class="b23f-lane-k">Ethereum <small>signed in MetaMask</small></div>
+        <ol class="b23f-flow">
+          <li class="b23f-step"><div class="b23f-box"><strong><span class="b23f-n">1</span>Connect MetaMask</strong><span>Task Node shows Bob's PFTL address as the deposit recipient.</span></div></li>
+          <li class="b23f-step"><div class="b23f-box"><strong><span class="b23f-n">2a</span>Approve and deposit USDC</strong><span>USDC goes into the PFUSDC vault, bound to Bob's PFTL address.</span></div></li>
+        </ol>
+      </section>
+      <p class="b23f-join"><i>&darr;</i> SP1 proof of Ethereum finality and the deposit</p>
+      <section class="b23f-lane b23f-lane--chain" aria-label="PFTL side, Task Node wallet">
+        <div class="b23f-lane-k">PFTL <small>Task Node wallet, ML-DSA keys</small></div>
+        <ol class="b23f-flow">
+          <li class="b23f-step"><div class="b23f-box"><strong><span class="b23f-n">2b</span>PFUSDC credited</strong><span>PFTL verifies the proof and credits exactly the deposited amount. A replay is rejected.</span></div></li>
+          <li class="b23f-step"><div class="b23f-box"><strong><span class="b23f-n">3</span>Buy B23 on the market</strong><span>Bob's PFUSDC bid fills against a sell offer. Existing B23 moves to Bob.</span><em class="b23f-fx b23f-fx--none">supply unchanged</em></div></li>
+        </ol>
+      </section>
+      <div class="b23f-legend"><span><b style="background:var(--c-schwab)"></b>Ethereum transaction</span><span><b style="background:var(--c-chain)"></b>PFTL transaction</span></div>
+{{- else if eq $kind "alice" }}
+      <p class="b23f-eyebrow">Alice &middot; issuer &middot; inside Task Node, no MetaMask</p>
+      <div id="{{ $id }}-title" class="b23f-title">Three separate jobs: mint against the account, stock the reserve, run a market.</div>
+      <section class="b23f-lane b23f-lane--chain" aria-label="Lane 1: mint at NAV">
+        <div class="b23f-lane-k">1 &middot; Mint at NAV <small>issuer account</small></div>
+        <ol class="b23f-flow">
+          <li class="b23f-step"><div class="b23f-box"><strong>Submit reserve packet</strong><span>The daily Schwab read, signed on PFTL.</span></div></li>
+          <li class="b23f-step"><div class="b23f-box"><strong>Finalize NAV epoch</strong><span>NAV and the supply the account supports.</span></div></li>
+          <li class="b23f-step"><div class="b23f-box"><strong>Mint B23</strong><span>Up to the finalized supply.</span><em class="b23f-fx b23f-fx--up">supply &uarr;</em></div></li>
+        </ol>
+      </section>
+      <section class="b23f-lane b23f-lane--reserve" aria-label="Lane 2: the PFUSDC reserve">
+        <div class="b23f-lane-k">2 &middot; PFUSDC reserve <small>exit at NAV</small></div>
+        <ol class="b23f-flow">
+          <li class="b23f-step"><div class="b23f-box"><strong>Add PFUSDC</strong><span>Top up at any time. Mints no B23.</span><em class="b23f-fx">reserve &uarr;</em></div></li>
+          <li class="b23f-step"><div class="b23f-box"><strong>Set the fee, x bps</strong><span>Changeable at any time, no redeploy.</span></div></li>
+          <li class="b23f-step"><div class="b23f-box"><strong>Holders burn B23</strong><span>NAV &minus; x bps to the holder, x bps to the management wallet. Capped by the reserve.</span><em class="b23f-fx b23f-fx--down">supply &darr; reserve &darr;</em></div></li>
+        </ol>
+      </section>
+      <section class="b23f-lane b23f-lane--market" aria-label="Lane 3: the market">
+        <div class="b23f-lane-k">3 &middot; Market <small>holder account, separate from issuer</small></div>
+        <ol class="b23f-flow">
+          <li class="b23f-step"><div class="b23f-box"><strong>Post sell offer</strong><span>B23 for PFUSDC on PFTL's order book. Cancel any unfilled part.</span></div></li>
+          <li class="b23f-step"><div class="b23f-box"><strong>Buyers fill it</strong><span>B23 moves to the buyer, PFUSDC to Alice. Price set by the two sides.</span><em class="b23f-fx b23f-fx--none">supply and reserve unchanged</em></div></li>
+        </ol>
+      </section>
+{{- else if eq $kind "proof-comparison" }}
+      <p class="b23f-eyebrow">Proof of reserves &middot; five designs</p>
+      <div id="{{ $id }}-title" class="b23f-title">Every design reads an account somebody else controls. They differ in who reads it and what the chain does with the answer.</div>
+      <div class="b23f-grid" role="table" aria-label="Proof of reserves comparison">
+        <div class="b23f-h" role="columnheader">System</div><div class="b23f-h" role="columnheader">Source &amp; observer</div><div class="b23f-h" role="columnheader">Published proof</div><div class="b23f-h" role="columnheader">On-chain enforcement</div><div class="b23f-h" role="columnheader">Remaining risk</div>
+        <div class="b23f-sys" role="rowheader">Ethena<small>custodian attestations</small></div>
+        <div data-k="Source &amp; observer">Each integrated custodian reports on the assets it holds.</div>
+        <div data-k="Published proof">Monthly report: existence, control and value of the backing assets.</div>
+        <div class="b23f-enf" data-k="On-chain enforcement">None.</div>
+        <div data-k="Remaining risk">Monthly snapshot of assets; supply is compared elsewhere.</div>
+        <div class="b23f-sys" role="rowheader">Ethena<small>weekly proof of reserves</small></div>
+        <div data-k="Source &amp; observer">Custodian, exchange and chain data read inside an AWS Nitro enclave; outside attestors check it.</div>
+        <div data-k="Published proof">Weekly enclave-signed answers: backing vs USDe supply, delta neutrality, approved assets.</div>
+        <div class="b23f-enf" data-k="On-chain enforcement">None described; the proof is not a mint gate.</div>
+        <div data-k="Remaining risk">API-reported balances; a week between proofs.</div>
+        <div class="b23f-sys" role="rowheader">Chaos Labs<small>proof-of-reserve oracle</small></div>
+        <div data-k="Source &amp; observer">On-chain collateral plus off-chain custodian and exchange data, read by Chaos Labs.</div>
+        <div data-k="Published proof">Reserves, cross-chain supply and a collateralization signal, on-chain.</div>
+        <div class="b23f-enf" data-k="On-chain enforcement">Readable by any contract; acting on it is up to the integrator.</div>
+        <div data-k="Remaining risk">Trust in the operator's off-chain inputs.</div>
+        <div class="b23f-sys" role="rowheader">Chainlink<small>Proof of Reserve feed</small></div>
+        <div data-k="Source &amp; observer">An auditor, custodian or issuer API, relayed by Chainlink node operators.</div>
+        <div data-k="Published proof">A reserve figure in an on-chain feed.</div>
+        <div class="b23f-enf" data-k="On-chain enforcement">Optional: the consuming contract may cap or pause minting.</div>
+        <div data-k="Remaining risk">Often a single source; Chainlink requires consumers to add their own safeguards.</div>
+        <div class="b23f-sys b23f-us" role="rowheader">B23 on PFTL<small>Schwab-backed NAVCoin</small></div>
+        <div class="b23f-us" data-k="Source &amp; observer">Schwab's net liquidation value, read at a fixed daily cutoff by the issuer's reader.</div>
+        <div class="b23f-us" data-k="Published proof">Reserve packet on PFTL each epoch, signed with ML-DSA.</div>
+        <div class="b23f-us b23f-enf" data-k="On-chain enforcement">Consensus: mint capped by the packet, current epoch only, reserve exits at NAV with the fee split in one receipt.</div>
+        <div class="b23f-us" data-k="Remaining risk">One reader; Schwab signs nothing; the account can change after the read.</div>
+      </div>
+{{- end }}
+    </div>
+  </div>
+  <figcaption id="{{ $id }}-cap">
+{{- if eq $kind "mechanism" -}}
+  Figure 1. The account value is reported by Schwab and committed on PFTL. Everything after the packet is ledger state that every validator checks. The PFUSDC reserve is a separate on-chain pool that pays holders who burn B23 at NAV.
+{{- else if eq $kind "bob" -}}
+  Figure 2. Bob's journey. MetaMask signs only the Ethereum deposit. The PFUSDC credit is authorized by a zero-knowledge proof, and the B23 purchase is an order-book trade that moves existing B23.
+{{- else if eq $kind "alice" -}}
+  Figure 3. Alice's journey. Minting raises supply, the reserve lowers it when holders burn B23, and the market only moves B23 between wallets. The three run on separate lanes with separate accounts.
+{{- else if eq $kind "proof-comparison" -}}
+  Figure 4. Five proof-of-reserves designs, from the source of the number to what the chain does with it. Sources are listed at the end of the post.
+{{- end -}}
+  </figcaption>
+  <p id="{{ $id }}-sr" class="b23f-sr">
+{{- if eq $kind "mechanism" -}}
+  Diagram: Off-chain, a Schwab brokerage account holds stocks, cash, a margin loan and short positions. Once a day at a fixed cutoff, its net liquidation value is read exactly as Schwab reports it. A signed PFTL transaction carries that value as a reserve packet with the cutoff time, account identity and hashes of positions, cash and liabilities. Finalizing the packet opens a NAV epoch where NAV per B23 equals account value divided by B23 supply. The issuer then mints B23 at NAV on the current epoch, never past the packet's supply. Separately, the issuer adds PFUSDC to an on-chain reserve without minting B23, and any holder can burn B23 at NAV against it, receiving NAV minus x basis points while the x basis points go to a management wallet in the same transaction.
+{{- else if eq $kind "bob" -}}
+  Diagram: Bob connects MetaMask in Task Node, approves and deposits USDC into the PFUSDC vault on Ethereum bound to his PFTL address, an SP1 proof of Ethereum finality and the deposit is verified on PFTL, exactly the deposited amount is credited as PFUSDC, and Bob buys B23 with PFUSDC on the PFTL order book. The purchase moves existing B23 and does not change supply.
+{{- else if eq $kind "alice" -}}
+  Diagram with three lanes. Lane 1, mint at NAV from the issuer account: submit the daily reserve packet, finalize the NAV epoch, mint B23 up to the finalized supply. Lane 2, PFUSDC reserve: add PFUSDC without minting B23, set the fee x basis points at any time, holders burn B23 and receive NAV minus x basis points while the management wallet receives x basis points, capped by the reserve. Lane 3, market from a holder account separate from the issuer: post a B23 for PFUSDC sell offer, buyers fill it, supply and reserve are unchanged.
+{{- else if eq $kind "proof-comparison" -}}
+  Comparison. Ethena custodian attestations: custodians report monthly on existence, control and value of assets; no on-chain enforcement. Ethena weekly proof of reserves: custodian, exchange and chain data read in an AWS Nitro enclave and checked by outside attestors; weekly signed answers on backing versus supply, delta neutrality and approved assets; not a mint gate. Chaos Labs: reserves, cross-chain supply and a collateralization signal published on-chain; integrators decide whether to act. Chainlink Proof of Reserve: a reserve figure from an auditor, custodian or issuer API in an on-chain feed; consuming contracts may cap or pause minting and must add their own safeguards. B23: Schwab's net liquidation value read at a fixed daily cutoff and committed as a reserve packet on PFTL; consensus caps minting by the packet, uses only the current epoch, and pays reserve exits at NAV with the fee split in one receipt; one reader, no Schwab signature, and the account can change after the read.
+{{- end -}}
+  </p>
+</figure>
