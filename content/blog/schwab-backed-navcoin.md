@@ -42,7 +42,7 @@ NAV is rounded down to a fixed number of decimals, so supply times NAV can sit a
 
 **4. Mint at NAV.** Only the issuer can mint. Every mint names the current epoch and its packet hash. Consensus checks both and enforces the packet's supply cap.
 
-The opening mint covers the whole account. B23 started with 2,000 B23 issued against a single $2,000 wire. That wire was already part of the account balance, so those 2,000 B23 are part of the opening supply, not extra. From the opening epoch on, every B23 tracks an equal share of the whole account.
+B23's first 2,000 coins were minted against one $2,000 wire into the account. The opening mint then extends B23 to the whole account balance. Those first 2,000 B23 count inside the opening supply, because the wire is already part of that balance. From the opening epoch on, every B23 tracks an equal share of the whole account.
 
 ### What anyone can check on PFTL
 
@@ -136,12 +136,9 @@ B23 ties a fixed daily read to a permanent record, a supply cap and visible rese
 
 ### In B23's rules today
 
-- **A fixed cutoff and a fixed measure.** The reader uses Schwab's reported net liquidation value at the same time each day.
-- **Permanent packets.** Each packet commits to account identity, cutoff, value and the hashes behind it. Later records for that cutoff can be checked against those hashes.
-- **A backing check and a supply cap.** Consensus applies the packet's arithmetic and issuance rules.
-- **Current epoch checks.** Mints and burns name the current epoch and packet. Reserve burns also carry a maximum NAV age in the route policy.
-- **Visible, atomic payments.** The reserve is on-chain. Each completed burn pays the holder and management wallet together.
-- **A separate market.** Order-book trades never change supply or NAV.
+- **A fixed cutoff and Schwab's own figure.** The read happens at the same time every day and uses Schwab's net liquidation value without adjustment, so nobody picks the moment or the method.
+- **A permanent, checkable record.** Each packet commits to the account's identity, the cutoff, the value and the hashes behind it. Any later statement for that cutoff can be checked against it, and history cannot be rewritten.
+- **Supply and payments under consensus.** The backing check, supply cap, current-epoch rule and reserve payment rules described above run in every validator, on every transaction.
 
 ### The next layers
 
