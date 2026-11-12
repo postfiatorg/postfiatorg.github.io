@@ -2,7 +2,7 @@
 title: "How a Schwab-Backed NAVCoin Works"
 date: 2026-11-12T00:00:00Z
 draft: false
-summary: "B23 is a native PFTL asset that trades to the net asset value of a Charles Schwab brokerage account. The issuer commits the account value on-chain each day. Consensus enforces the packet's supply cap, and holders can convert B23 back to PFUSDC at NAV through an on-chain reserve."
+summary: "B23 is a native PFTL asset that trades to the net asset value of a Charles Schwab brokerage account. The issuer commits the account value on-chain each day. Holders can burn B23 at NAV, less a small fee, against an on-chain PFUSDC reserve that the issuer stocks."
 categories:
   - Post Fiat Research
 tags:
@@ -42,7 +42,7 @@ NAV is rounded down to a fixed number of decimals, so supply times NAV can sit a
 
 **4. Mint at NAV.** Only the issuer can mint. Every mint names the current epoch and its packet hash. Consensus checks both and enforces the packet's supply cap.
 
-Before the account-wide mint, B23 was first issued against a single $2,000 wire into the account, measured from Schwab's transaction record. The opening mint is against the whole account balance. Those 2,000 B23 are part of that opening supply, not an addition to it. That wire was already in the account, so it counts once. From the opening epoch on, every B23 tracks an equal share of the whole account, not a particular deposit.
+The opening mint covers the whole account. B23 started with 2,000 B23 issued against a single $2,000 wire. That wire was already part of the account balance, so those 2,000 B23 are part of the opening supply, not extra. From the opening epoch on, every B23 tracks an equal share of the whole account.
 
 ### What anyone can check on PFTL
 
@@ -52,7 +52,7 @@ Before the account-wide mint, B23 was first issued against a single $2,000 wire 
 - The current epoch and packet used by each mint and burn at NAV.
 - PFUSDC in the reserve, the fee setting and every payment out.
 
-**Under the hood.** The PFTL transactions are `nav_reserve_submit`, `nav_epoch_finalize` and `nav_mint_at_nav`. The backing rule is [`validate_nav_reserve_collateralization`](https://github.com/postfiatorg/postfiatl1v2/blob/ccf960139a49652c84b1e2c2e90b5405fe0b1d8d/crates/types/src/market_nav_asset_types.rs#L999-L1041). A mint naming a stale epoch fails with [`nav_epoch_mismatch`](https://github.com/postfiatorg/postfiatl1v2/blob/ccf960139a49652c84b1e2c2e90b5405fe0b1d8d/crates/execution/src/nav_vault_asset_execution.rs#L8278). The supply-cap check in PFTL's NAV mint rule rejects a mint past packet supply with [`nav_supply_cap_exceeded`](https://github.com/postfiatorg/postfiatl1v2/blob/ccf960139a49652c84b1e2c2e90b5405fe0b1d8d/crates/execution/src/nft_escrow_asset_execution.rs#L2449). Market offers use `offer_create` and `offer_cancel` on PFTL's native order book.
+**Under the hood.** The PFTL transactions are `nav_reserve_submit`, `nav_epoch_finalize` and `nav_mint_at_nav`. The backing rule is [`validate_nav_reserve_collateralization`](https://github.com/postfiatorg/postfiatl1v2/blob/ccf960139a49652c84b1e2c2e90b5405fe0b1d8d/crates/types/src/market_nav_asset_types.rs#L999-L1041). A mint naming a stale epoch fails with [`nav_epoch_mismatch`](https://github.com/postfiatorg/postfiatl1v2/blob/ccf960139a49652c84b1e2c2e90b5405fe0b1d8d/crates/execution/src/nav_vault_asset_execution.rs#L8278). The `nav_mint_at_nav` handler rejects a mint past packet supply with [`nav_supply_cap_exceeded`](https://github.com/postfiatorg/postfiatl1v2/blob/ccf960139a49652c84b1e2c2e90b5405fe0b1d8d/crates/execution/src/nft_escrow_asset_execution.rs#L2449). Market offers use `offer_create` and `offer_cancel` on PFTL's native order book.
 
 ## Three operations, three different effects
 
@@ -108,7 +108,7 @@ Alice is the issuer. She works on PFTL inside Task Node.
 
 **1. Mint B23 against the Schwab account.** Alice submits the day's signed packet and finalizes the NAV epoch. She then mints at NAV using that packet.
 
-**2. Set up the reserve.** Alice adds PFUSDC and sets the fee *x*. From then on any holder can burn B23 at NAV minus *x* basis points, and the management wallet receives the fee on every burn. Task Node gives her controls to add PFUSDC or change *x* at any time.
+**2. Set up the reserve.** Alice adds PFUSDC and sets the fee *x*. Task Node gives her controls to add PFUSDC or change *x* at any time.
 
 **3. Put up a market.** Alice posts a sell offer on PFTL's order book from a holder account separate from the issuer account. PFTL keeps issuing and trading apart by requiring that separation. She can cancel any unfilled part of the offer.
 
@@ -152,14 +152,6 @@ B23 ties a fixed daily read to a permanent record, a supply cap and visible rese
 - **Origin proofs.** A TLS transcript proof shows that the bytes of the read came from Schwab's servers.
 - **Withdrawal controls.** Money leaving the account is restricted to pre-agreed destinations, and the restriction itself can be checked.
 
-## Two routes for USDC: Ethereum and Arc
-
-Bob uses Ethereum mainnet because his USDC is there. PFTL also has an entry route from Arc, Circle's Ethereum-compatible chain, for users who hold USDC there. Both routes produce PFUSDC without changing the Schwab account, NAV, B23 reserve or market. PFTL's Arc route has run end to end on Arc testnet, and B23 enters from Ethereum.
-
-- **Finality.** Ethereum finalizes in minutes. Arc finalizes each block in under a second using Tendermint-style BFT consensus, a method for validators to agree on blocks, among an approved validator set.
-- **Proof checks.** The Ethereum SP1 proof checks Ethereum finality and the deposit. The Arc proof checks validator signatures and the deposit receipt against a validator set fixed by PFTL governance.
-- **Steps from Ethereum.** The direct route is approve, deposit and wait for PFUSDC. Going through Arc first adds a transfer through Circle's Cross-Chain Transfer Protocol, or CCTP. Circle lists roughly 15 to 19 minutes for a standard transfer or about 20 seconds for a fast one.
-
 ## What this does not prove
 
 - **The packet is issuer-signed, not Schwab-signed.** The chain proves which packet finalized and whether transactions obeyed it. It does not prove that the submitted figure matches Schwab's API at the cutoff.
@@ -181,5 +173,3 @@ Bob uses Ethereum mainnet because his USDC is there. PFTL also has an entry rout
 - Chaos Labs, oracles: <https://chaoslabs.xyz/oracles>
 - Chainlink, SmartData and Proof of Reserve feeds: <https://docs.chain.link/data-feeds/smartdata>
 - Chainlink, selecting data feeds and single-source providers: <https://docs.chain.link/data-feeds/selecting-data-feeds>
-- Arc, consensus layer: <https://docs.arc.io/arc/concepts/consensus-layer>
-- Circle, CCTP finality and block confirmations: <https://developers.circle.com/cctp/concepts/finality-and-block-confirmations>
