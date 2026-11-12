@@ -16,7 +16,7 @@ tags:
 
 B23 is a NAVCoin backed by a Charles Schwab brokerage account. It is a native asset on PFTL, the Post Fiat L1 blockchain, and it trades to NAV. Its **net asset value**, or NAV, is the account value behind each B23.
 
-The issuer records that value on-chain each day. PFTL turns the record into rules for issuing B23 and paying holders who burn it. Every signature on PFTL uses ML-DSA, a post-quantum signature scheme.
+Each day at a fixed cutoff, the issuer reads Schwab's figure for the account and commits it on-chain in a signed packet. PFTL turns that packet into rules for issuing B23 and paying holders who burn it. Every signature on PFTL uses ML-DSA, a post-quantum signature scheme.
 
 ## The short version
 
@@ -50,7 +50,7 @@ The opening mint is against the whole account balance. The 2,000 B23 minted earl
 - The current epoch and packet used by each mint and burn at NAV.
 - PFUSDC in the reserve, the fee setting and every payment out.
 
-**Under the hood.** The PFTL transactions are `nav_reserve_submit`, `nav_epoch_finalize` and `nav_mint_at_nav`. A mint naming a stale epoch fails with `nav_epoch_mismatch`. A mint past packet supply fails with `nav_supply_cap_exceeded`. Market offers use `offer_create` and `offer_cancel` on PFTL's native order book.
+**Under the hood.** The PFTL transactions are `nav_reserve_submit`, `nav_epoch_finalize` and `nav_mint_at_nav`. The backing rule is [`validate_nav_reserve_collateralization`](https://github.com/postfiatorg/postfiatl1v2/blob/ccf960139a49652c84b1e2c2e90b5405fe0b1d8d/crates/types/src/market_nav_asset_types.rs#L999-L1041). A mint naming a stale epoch fails with [`nav_epoch_mismatch`](https://github.com/postfiatorg/postfiatl1v2/blob/ccf960139a49652c84b1e2c2e90b5405fe0b1d8d/crates/execution/src/nav_vault_asset_execution.rs#L8278). A mint past packet supply fails with [`nav_supply_cap_exceeded`](https://github.com/postfiatorg/postfiatl1v2/blob/ccf960139a49652c84b1e2c2e90b5405fe0b1d8d/crates/execution/src/nft_escrow_asset_execution.rs#L2449). Market offers use `offer_create` and `offer_cancel` on PFTL's native order book.
 
 ## Three operations, three different effects
 
@@ -171,6 +171,7 @@ Bob uses Ethereum mainnet because his USDC is there. PFTL also has an entry rout
 
 ## Sources
 
+- Post Fiat L1 (PFTL) source, public `main`: <https://github.com/postfiatorg/postfiatl1v2>
 - Ethena, custodian attestations: <https://docs.ethena.fi/resources/custodian-attestations>
 - Ethena, "Custodian Attestations of Assets Backing USDe: September": <https://ethena.fi/blog/custodian-attestations-of-assets-backing-usde-september-3>
 - Ethena, "USDe Proof of Reserves Launch": <https://paragraph.com/@ethena-labs/usde-proof-of-reserves-launch>
