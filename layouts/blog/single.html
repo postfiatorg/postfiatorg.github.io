@@ -54,7 +54,7 @@
   {{ partial "ink/toc-spy.html" . }}
   {{- if .Params.guide }}
   <script>
-    (()=>{const names={sh:"Terminal",bash:"Terminal",toml:"TOML",json:"JSON",python:"Python"};
+    (()=>{const names={sh:"Terminal",bash:"Terminal",toml:"TOML",json:"JSON",python:"Python",text:"Paste to your agent"};
     const fallback=(text)=>{const area=document.createElement("textarea");area.value=text;area.setAttribute("readonly","");area.style.position="fixed";area.style.left="-9999px";document.body.appendChild(area);area.select();const ok=document.execCommand("copy");area.remove();return ok};
     document.querySelectorAll(".prose.guide pre").forEach((pre)=>{const code=pre.querySelector("code");if(!code)return;
       const block=document.createElement("div"),bar=document.createElement("div"),label=document.createElement("span"),button=document.createElement("button");
