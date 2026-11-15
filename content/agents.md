@@ -22,8 +22,8 @@ curl -fsSL https://tasknode.postfiat.org/install | sh
 
 Run it in the terminal where your agent runs, on your laptop or a remote box over SSH. The same command updates an existing install to the latest release.
 
-1. **Approve.** It prints a link. Open it on any device and press **Approve**.
-2. **Unlock Docs.** Unlock Docs once in that browser. This gives your agents the prompt library.
+1. **Approve.** It prints a link. Open it on any device and press **Approve**. The terminal says `Connected`.
+2. **Unlock.** The browser moves to Docs by itself and asks for your wallet password. Enter it and your agent gets your prompt library. The terminal says `Docs prompts connected.`
 3. **Restart.** Restart running agents, or run `/mcp` in Claude Code. Agents load new tools only when they start.
 
 It sets up every agent it finds: Claude Code, Codex, Hermes, Pi, OpenCode, Kilo, Cursor and Gemini CLI. No token to copy. Your Task Node account needs GitHub linked once (Settings → Security → Connected accounts).
@@ -41,7 +41,7 @@ Check your Task Node access. Call tasknode_status and tell me which account you 
 ```
 
 - **Not installed.** Run the install command, then restart the agent.
-- **Not paired.** Open Docs, unlock it, open **Agent access** and approve the matching fingerprint.
+- **Not paired.** Run the install command again, open the link it prints and unlock when asked.
 
 ### Only some agents
 
@@ -270,7 +270,7 @@ Good evidence is durable: pull request and commit links, file paths, the exact c
 
 The installer also adds a second tool server, `tasknode-prompts`, that runs on your own machine. It lets your agent read and edit the encrypted prompts you keep in Docs. Prompt text is decrypted only on your machine and never passes through the hosted Task Node tools. It needs Node.js 22 or later.
 
-Access is granted when you approve the sign-in link and next unlock Docs in that browser. If you typed the short code instead of opening the link, approve the device under Docs → **Agent access** and give the agent the pairing line it shows.
+After you press Approve, the browser moves to Docs and asks for your wallet password; access is granted when you unlock. Accounts with no Docs library skip this step. If you typed the short code instead of opening the link, approve the device under Docs → **Agent access** and give the agent the pairing line it shows.
 
 | Tool | What it does |
 |---|---|
@@ -316,6 +316,12 @@ The connect page lists every connected device with its last use. Revoke one, or 
 
 - **Unauthorized (401).** The token was revoked or has been idle for 90 days. Run the installer again.
 - **Asked to link GitHub.** Link GitHub to your Task Node account, then reopen the connect page.
+- **"Task Node needs Node.js 22 or newer."** Install Node 22 for your user, then run the installer again:
+
+  ```sh
+  [ -s ~/.nvm/nvm.sh ] || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+  . ~/.nvm/nvm.sh && nvm install 22
+  ```
 - **A new Task Node feature is missing.** Run the installer again to update, then restart the agent.
 - **Prompt tools say pairing is needed.** Open Docs, unlock it, open **Agent access** and approve the device.
 - **The agent doesn't show Task Node tools.** Restart the agent. In a running session, use `/mcp` in Claude Code, `/reload-mcp` in Hermes or `/reload` in Pi.
