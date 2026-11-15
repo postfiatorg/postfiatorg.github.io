@@ -14,19 +14,46 @@ guide: true
 
 ## Quick start: one command {#quick-start}
 
-Run this in the terminal where your agent runs, on your laptop or a remote box over SSH:
+### Install or update
 
 ```sh
 curl -fsSL https://tasknode.postfiat.org/install | sh
 ```
 
-1. **Approve.** It prints a link and a code. Open the link on any device, check the code and tap **Approve**.
-2. **Done.** It sets up every agent it finds (Claude Code, Codex, Hermes, Pi, OpenCode, Kilo, Cursor, Gemini CLI) and prints `Connected as <your account>`. No token to copy.
-3. **Ask.** Restart the agent, or run `/mcp` in Claude Code, and ask: "What are my outstanding Task Node tasks?"
+Run it in the terminal where your agent runs, on your laptop or a remote box over SSH. The same command updates an existing install to the latest release.
 
-Or just tell your agent: **"Connect me to Task Node"** and paste the line from [tasknode.postfiat.org/connect](https://tasknode.postfiat.org/connect).
+1. **Approve.** It prints a link. Open it on any device and press **Approve**.
+2. **Unlock Docs.** Unlock Docs once in that browser. This gives your agents the prompt library.
+3. **Restart.** Restart running agents, or run `/mcp` in Claude Code. Agents load new tools only when they start.
 
-Your Task Node account needs GitHub linked once (Settings → Security → Connected accounts).
+It sets up every agent it finds: Claude Code, Codex, Hermes, Pi, OpenCode, Kilo, Cursor and Gemini CLI. No token to copy. Your Task Node account needs GitHub linked once (Settings → Security → Connected accounts).
+
+### Check what is connected
+
+```sh
+curl -fsSL https://tasknode.postfiat.org/install | sh -s -- --status
+```
+
+### Ask an agent to check itself
+
+```text
+Check your Task Node access. Call tasknode_status and tell me which account you are on. Then call prompt_list and tell me how many prompts it returns. If the tasknode or tasknode-prompts tools are missing, say "not installed". If prompt_list says pairing is needed, say "not paired" and show me the device fingerprint. Do not print any tokens.
+```
+
+- **Not installed.** Run the install command, then restart the agent.
+- **Not paired.** Open Docs, unlock it, open **Agent access** and approve the matching fingerprint.
+
+### Only some agents
+
+```sh
+curl -fsSL https://tasknode.postfiat.org/install | sh -s -- --agent claude,codex
+```
+
+### Sign out
+
+```sh
+curl -fsSL https://tasknode.postfiat.org/install | sh -s -- --disconnect
+```
 
 [Open the connect page →](https://tasknode.postfiat.org/connect)
 
@@ -239,6 +266,21 @@ Task Node is a remote [MCP](https://modelcontextprotocol.io) server at `https://
 
 Good evidence is durable: pull request and commit links, file paths, the exact commands you ran and their results. Agents never cite localhost URLs or paste secrets.
 
+## Prompt library {#prompts}
+
+The installer also adds a second tool server, `tasknode-prompts`, that runs on your own machine. It lets your agent read and edit the encrypted prompts you keep in Docs. Prompt text is decrypted only on your machine and never passes through the hosted Task Node tools. It needs Node.js 22 or later.
+
+Access is granted when you approve the sign-in link and next unlock Docs in that browser. If you typed the short code instead of opening the link, approve the device under Docs → **Agent access** and give the agent the pairing line it shows.
+
+| Tool | What it does |
+|---|---|
+| `prompt_list` | List your prompts. |
+| `prompt_read` | Read one prompt. |
+| `prompt_create` · `prompt_edit` | Create a prompt, or change it with an exact-text replacement. |
+| `prompt_save_version` · `prompt_history` | Save a version and read earlier ones. |
+| `prompt_stats` | Editing time and activity over 7 or 30 days. |
+| `prompt_pair` | Finish manual pairing with the code from Docs. |
+
 ## Things to ask {#things-to-ask}
 
 - "What are my outstanding Task Node tasks?"
@@ -274,5 +316,7 @@ The connect page lists every connected device with its last use. Revoke one, or 
 
 - **Unauthorized (401).** The token was revoked or has been idle for 90 days. Run the installer again.
 - **Asked to link GitHub.** Link GitHub to your Task Node account, then reopen the connect page.
+- **A new Task Node feature is missing.** Run the installer again to update, then restart the agent.
+- **Prompt tools say pairing is needed.** Open Docs, unlock it, open **Agent access** and approve the device.
 - **The agent doesn't show Task Node tools.** Restart the agent. In a running session, use `/mcp` in Claude Code, `/reload-mcp` in Hermes or `/reload` in Pi.
 - **Pi won't start.** Pi needs Node.js 22.19 or later.
