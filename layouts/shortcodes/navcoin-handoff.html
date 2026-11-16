@@ -1,0 +1,178 @@
+{{- $part := .Get "part" | default "funding" -}}
+{{- if not (.Page.Scratch.Get "nh-css") -}}
+{{- .Page.Scratch.Set "nh-css" true -}}
+<style>
+  .nh{--nh-ink:var(--ink,#10191d);--nh-ink2:var(--ink-3,#5a6062);--nh-rule:var(--rule,#cfc8b6);--nh-paper:var(--paper-2,#ebe6da);--nh-card:#fbf9f3;--nh-proof:#057f82;--nh-proof-bg:#e2f0ee;--nh-attest:#8a5a00;--nh-attest-bg:#f6ead0;--nh-op:#7a1f1f;--nh-op-bg:#f3dedb;--nh-off:#6b6f70;--nh-off-bg:#e6e3da;--nh-mono:var(--mono,"JetBrains Mono",ui-monospace,Menlo,monospace);margin:2rem 0 2.4rem;color:var(--nh-ink)}
+  .nh *{box-sizing:border-box}
+  .nh-frame{border:1px solid var(--nh-rule);border-radius:10px;background:var(--nh-paper);padding:18px}
+  .nh-eyebrow{margin:0 0 4px;font:600 11px/1.3 var(--nh-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--nh-ink2)}
+  .nh-title{margin:0 0 14px;font-size:19px;line-height:1.3;font-weight:600}
+  .nh code{font-family:var(--nh-mono);font-size:.84em;background:transparent;padding:0;color:inherit;word-break:break-word}
+  .nh-legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:0 0 14px;padding:0;list-style:none;font-size:13px;color:var(--nh-ink2)}
+  .nh-legend li{display:flex;align-items:center;gap:6px;margin:0}
+  .nh-tag{display:inline-block;border-radius:999px;padding:2px 9px;font:600 10.5px/1.5 var(--nh-mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+  .nh-tag--proof{background:var(--nh-proof-bg);color:var(--nh-proof)}
+  .nh-tag--attest{background:var(--nh-attest-bg);color:var(--nh-attest)}
+  .nh-tag--op{background:var(--nh-op-bg);color:var(--nh-op)}
+  .nh-tag--live{background:var(--nh-proof-bg);color:var(--nh-proof)}
+  .nh-tag--wait{background:var(--nh-attest-bg);color:var(--nh-attest)}
+  .nh-tag--off{background:var(--nh-off-bg);color:var(--nh-off)}
+  .nh-rail{display:grid;gap:0;margin:0;padding:0;list-style:none;counter-reset:nh}
+  .nh-step{position:relative;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;padding:0 0 16px;margin:0;counter-increment:nh}
+  .nh-step::before{content:counter(nh);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--nh-ink);background:var(--nh-card);font:600 13px/1 var(--nh-mono);z-index:1}
+  .nh-step::after{content:"";position:absolute;left:16.5px;top:34px;bottom:0;width:1.5px;background:var(--nh-rule)}
+  .nh-step:last-child{padding-bottom:0}
+  .nh-step:last-child::after{display:none}
+  .nh-card{min-width:0;overflow-wrap:anywhere;border:1px solid var(--nh-rule);border-left:4px solid var(--nh-off);border-radius:8px;background:var(--nh-card);padding:11px 13px}
+  .nh-card--proof{border-left-color:var(--nh-proof)}
+  .nh-card--attest{border-left-color:var(--nh-attest)}
+  .nh-card--op{border-left-color:var(--nh-op)}
+  .nh-card-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px;margin:0 0 4px}
+  .nh-card-head strong{font-size:15.5px;line-height:1.3}
+  .nh-where{font:500 11px/1.4 var(--nh-mono);color:var(--nh-ink2);text-transform:uppercase;letter-spacing:.07em}
+  .nh-card p{margin:.25rem 0 0;font-size:14px;line-height:1.5;color:var(--nh-ink)}
+  .nh-card p.nh-why{color:var(--nh-ink2)}
+  .nh-ref{margin:.5rem 0 0;padding:.45rem 0 0;border-top:1px dashed var(--nh-rule);font:500 12px/1.55 var(--nh-mono);color:var(--nh-ink2)}
+  .nh-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .nh-cell{border:1px solid var(--nh-rule);border-radius:8px;background:var(--nh-card);padding:11px 12px;min-width:0}
+  .nh .nh-cell h4{margin:6px 0 3px;font:600 14.5px/1.3 var(--serif,Georgia,serif);letter-spacing:0;text-transform:none;color:var(--nh-ink)}
+  .nh-cell p{margin:0;font-size:13px;line-height:1.45;color:var(--nh-ink2)}
+  .nh-split{display:flex;height:30px;border-radius:6px;overflow:hidden;border:1px solid var(--nh-rule);background:var(--nh-card)}
+  .nh-split span{display:block;height:100%}
+  .nh-split .s-attest{background:var(--nh-attest)}
+  .nh-split .s-op{background:var(--nh-op);min-width:5px}
+  .nh-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0 0}
+  .nh-num{border-top:2px solid var(--nh-ink);padding-top:7px;min-width:0}
+  .nh-num b{display:block;font:600 19px/1.2 var(--nh-mono);font-variant-numeric:tabular-nums;word-break:break-word}
+  .nh-num span{display:block;margin-top:3px;font-size:12.5px;line-height:1.4;color:var(--nh-ink2)}
+  .nh figcaption,.nh-cap{margin:.7rem 0 0;font-size:13px;line-height:1.5;color:var(--nh-ink2)}
+  @media(max-width:760px){.nh-frame{padding:13px}.nh-board{grid-template-columns:1fr}.nh-nums{grid-template-columns:1fr 1fr}.nh-step{grid-template-columns:28px minmax(0,1fr);gap:9px}.nh-step::before{width:28px;height:28px;font-size:12px}.nh-step::after{left:13.5px;top:28px}}
+</style>
+{{- end -}}
+
+{{- if eq $part "status" -}}
+<figure class="nh" aria-label="Status of each part of the Schwab NAVCoin, 16 November 2026">
+  <div class="nh-frame">
+    <p class="nh-eyebrow">Status board · 16 November 2026</p>
+    <p class="nh-title">What is running, what is deployed but idle, and what is not built</p>
+    <div class="nh-board">
+      <div class="nh-cell"><span class="nh-tag nh-tag--live">Live</span><h4>Daily enclave reading</h4><p>Runs unattended at 17:55 UTC. Three readings accepted by the network.</p></div>
+      <div class="nh-cell"><span class="nh-tag nh-tag--live">Live</span><h4>USDC in, PFUSDC out</h4><p>Ethereum deposit credited on Post Fiat after a finality proof. About 23 minutes.</p></div>
+      <div class="nh-cell"><span class="nh-tag nh-tag--live">Live</span><h4>Create and cash in</h4><p>Create at NAV plus 0.5 percent. Cash in at NAV minus 0.05 percent, up to the reserve.</p></div>
+      <div class="nh-cell"><span class="nh-tag nh-tag--live">Live</span><h4>Order book</h4><p>97 B24 on offer at $1.00 against PFUSDC.</p></div>
+      <div class="nh-cell"><span class="nh-tag nh-tag--live">Live</span><h4>Coin pages and gallery</h4><p>Price, verification split, history and liquidity for four coins. Test deployment.</p></div>
+      <div class="nh-cell"><span class="nh-tag nh-tag--wait">Deployed, idle</span><h4>Ethereum token wB24</h4><p>Contract deployed. One test coin minted from a real proof. Minting paused.</p></div>
+      <div class="nh-cell"><span class="nh-tag nh-tag--wait">Deployed, empty</span><h4>Uniswap v4 pool</h4><p>Initialised at $1.00 with a 0.05 percent fee. No liquidity yet.</p></div>
+      <div class="nh-cell"><span class="nh-tag nh-tag--off">Not built</span><h4>Ethereum back to native</h4><p>Returning wB24 to Post Fiat needs the next network release.</p></div>
+      <div class="nh-cell"><span class="nh-tag nh-tag--off">Not built</span><h4>USDC withdrawal for new deposits</h4><p>The vault pays only the earlier bridge setting. A matching exit must be built and proven.</p></div>
+    </div>
+  </div>
+</figure>
+
+{{- else if eq $part "funding" -}}
+<figure class="nh" aria-label="How one dollar of USDC becomes a Schwab NAVCoin, step by step, with the check that guards each step">
+  <div class="nh-frame">
+    <p class="nh-eyebrow">Funding path</p>
+    <p class="nh-title">From USDC in MetaMask to a Schwab NAVCoin, and on to Uniswap</p>
+    <ul class="nh-legend">
+      <li><span class="nh-tag nh-tag--proof">Proof</span> a contract or the validators check a cryptographic proof</li>
+      <li><span class="nh-tag nh-tag--attest">Attested</span> sealed hardware signs what it read</li>
+      <li><span class="nh-tag nh-tag--op">Operator</span> a person or key must act</li>
+    </ul>
+    <ol class="nh-rail">
+      <li class="nh-step"><div class="nh-card nh-card--proof">
+        <div class="nh-card-head"><strong>Deposit USDC into the vault</strong><span class="nh-where">Ethereum mainnet</span></div>
+        <p>The buyer approves USDC and calls <code>depositV2</code> with their Post Fiat address, a nonce and the route it is meant for.</p>
+        <p class="nh-why">The vault has no admin withdrawal and no upgrade path. It pays out only against a proof.</p>
+        <p class="nh-ref">crates/ethereum-contracts/src/ERC20BridgeVaultL1.sol:127 · payout :191</p>
+      </div></li>
+      <li class="nh-step"><div class="nh-card nh-card--proof">
+        <div class="nh-card-head"><strong>Prove the deposit is final on Ethereum</strong><span class="nh-where">Off-chain prover</span></div>
+        <p>A zero-knowledge program checks Ethereum's own finality signatures and the deposit event, and outputs one small proof.</p>
+        <p class="nh-why">Anyone can run the prover. It cannot produce a proof for a deposit that did not finalise.</p>
+        <p class="nh-ref">programs/pfusdc-eth-mainnet-ingress/src/lib.rs:285, :336</p>
+      </div></li>
+      <li class="nh-step"><div class="nh-card nh-card--proof">
+        <div class="nh-card-head"><strong>Validators verify the proof and credit PFUSDC</strong><span class="nh-where">Post Fiat</span></div>
+        <p>Each validator verifies the proof against the pinned Ethereum finality state, then credits PFUSDC to the buyer. A repeated or stale deposit is rejected.</p>
+        <p class="nh-why">No operator signature can credit a deposit.</p>
+        <p class="nh-ref">crates/execution/src/nav_vault_asset_execution.rs:1232, :1424 · stale check :1954</p>
+      </div></li>
+      <li class="nh-step"><div class="nh-card nh-card--proof">
+        <div class="nh-card-head"><strong>Create B24 at NAV plus 0.5 percent</strong><span class="nh-where">Post Fiat</span></div>
+        <p>The buyer's PFUSDC moves into protocol custody and new B24 is minted at the latest finalised NAV. The route's supply cap and issue capacity bound every mint.</p>
+        <p class="nh-why">The cash goes to the protocol, not to an issuer wallet. It appears in the next reading as backing.</p>
+        <p class="nh-ref">crates/execution/src/nav_vault_asset_execution.rs:4729 · caps :4070, :4577</p>
+      </div></li>
+      <li class="nh-step"><div class="nh-card nh-card--proof">
+        <div class="nh-card-head"><strong>Export to Ethereum as wB24</strong><span class="nh-where">Post Fiat to Ethereum</span></div>
+        <p>Native B24 is locked. A proof of that finalised Post Fiat receipt is accepted by a verifier contract, and only then does the controller mint the same amount of wB24.</p>
+        <p class="nh-why">Wrapped supply can never exceed native coins locked behind it.</p>
+        <p class="nh-ref">crates/ethereum-contracts/src/PFTLReceiptFinalityVerifierV2.sol:229 · PFTLUniswapHandoffController.sol:1615, :1753</p>
+      </div></li>
+      <li class="nh-step"><div class="nh-card nh-card--op">
+        <div class="nh-card-head"><strong>Seed and trade the Uniswap v4 pool</strong><span class="nh-where">Ethereum mainnet</span></div>
+        <p>USDC and wB24 are placed in a narrow band around NAV. Buyers swap USDC for wB24 like any other token.</p>
+        <p class="nh-why">Seeding is a liquidity decision by the pool owner. The owner can withdraw that position at any time.</p>
+        <p class="nh-ref">Pool and token addresses are in the reference table below</p>
+      </div></li>
+    </ol>
+  </div>
+  <figcaption>Steps 1 to 5 are enforced by proofs. Step 6 is ordinary liquidity provision.</figcaption>
+</figure>
+
+{{- else if eq $part "reserve" -}}
+<figure class="nh" aria-label="How the Schwab account balance becomes a number the network accepts">
+  <div class="nh-frame">
+    <p class="nh-eyebrow">Reserve path</p>
+    <p class="nh-title">How the Schwab balance reaches the chain every day</p>
+    <ol class="nh-rail">
+      <li class="nh-step"><div class="nh-card nh-card--attest">
+        <div class="nh-card-head"><strong>A sealed enclave reads Schwab</strong><span class="nh-where">AWS Nitro</span></div>
+        <p>A measured image holds a read-only Schwab key, opens the connection itself and reads the account's net liquidation value.</p>
+        <p class="nh-why">The operator cannot see inside the enclave or edit what it read.</p>
+        <p class="nh-ref">navstrategies: containers/yolo-nitro/ · navstrategies/yolo_indices/nav_reading.py</p>
+      </div></li>
+      <li class="nh-step"><div class="nh-card nh-card--attest">
+        <div class="nh-card-head"><strong>The hardware signs the result</strong><span class="nh-where">AWS Nitro</span></div>
+        <p>The attestation document names the exact image that ran and carries the reading. It chains to Amazon's root certificate.</p>
+        <p class="nh-ref">tools/nav-reserve-proof/crates/reserve-proof-types/src/yolo_nitro.rs:164</p>
+      </div></li>
+      <li class="nh-step"><div class="nh-card nh-card--proof">
+        <div class="nh-card-head"><strong>A proof wraps the attestation</strong><span class="nh-where">Off-chain prover</span></div>
+        <p>A zero-knowledge program verifies the signature chain and the image measurement, then outputs the reserve figures in the network's standard form.</p>
+        <p class="nh-ref">tools/nav-reserve-proof/programs/b23-nav-guest/src/main.rs:5 · reserve-proof-types/src/b23_nav.rs:141</p>
+      </div></li>
+      <li class="nh-step"><div class="nh-card nh-card--proof">
+        <div class="nh-card-head"><strong>Validators verify and record the split</strong><span class="nh-where">Post Fiat</span></div>
+        <p>Every validator checks the proof against the program key pinned in the coin's proof profile. The reading is stored with separate fields for proven, attested and operator-reported value.</p>
+        <p class="nh-why">A reading without a valid proof is rejected. A reading that ages past its limit halts the coin.</p>
+        <p class="nh-ref">crates/execution/src/nav_sp1_verifier.rs:86 · nav_vault_asset_execution.rs:3000 · types/src/account_owned_asset_types.rs:813-823</p>
+      </div></li>
+    </ol>
+  </div>
+  <figcaption>This proves what Schwab told a known program, untouched. It does not prove Schwab is right. That is why the coin is labelled Attested, not Proven.</figcaption>
+</figure>
+
+{{- else if eq $part "split" -}}
+<figure class="nh" aria-label="B24 verification split: 99.995 percent attested, 0.005 percent reported">
+  <div class="nh-frame">
+    <p class="nh-eyebrow">B24 at block 1370 · 16 November 2026</p>
+    <p class="nh-title">What backs the coin, and how each part is verified</p>
+    <div class="nh-split" role="img" aria-label="99.995 percent attested, 0.005 percent reported">
+      <span class="s-attest" style="flex:99.995"></span><span class="s-op" style="flex:.005"></span>
+    </div>
+    <ul class="nh-legend" style="margin-top:10px;margin-bottom:0">
+      <li><span class="nh-tag nh-tag--attest">Attested 99.995%</span> $420,302.38 read from Schwab by the enclave</li>
+      <li><span class="nh-tag nh-tag--op">Reported 0.005%</span> 21 PFUSDC cash reserve held by the protocol</li>
+      <li><span class="nh-tag nh-tag--proof">Proven 0%</span> a brokerage account cannot be proven from outside</li>
+    </ul>
+    <div class="nh-nums">
+      <div class="nh-num"><b>$1.000000</b><span>NAV per coin</span></div>
+      <div class="nh-num"><b>420,323.38</b><span>B24 outstanding</span></div>
+      <div class="nh-num"><b>3</b><span>readings accepted since launch on 14 November</span></div>
+      <div class="nh-num"><b>1 / 1</b><span>wB24 minted on Ethereum / native B24 locked behind it</span></div>
+    </div>
+  </div>
+</figure>
+{{- end -}}
