@@ -63,6 +63,38 @@ What this means for a user:
 - **The numbers on screen come from the network.** Balances, NAV, the verification split and history are read from the validators, not from a Task Node database.
 - **One wallet per Task Node account.** Switching accounts never shows or overwrites another account's wallet.
 
+## The original NAVCoin: A666
+
+B24 is the second kind of NAVCoin. The first was A666, which is still live. A666 is backed by a working portfolio spread across six networks, and it is where the proof system was built.
+
+{{< navcoin-handoff part="portfolio" >}}
+
+The amount held is proven cryptographically for five of the six parts. Only the Solana stake relies on an attested reading. Dollar values are proven for the two parts that have an on-chain price source and attested for the rest.
+
+A666 has 31,519 coins outstanding at a NAV of $1.167, nine accepted readings, and a wrapped token with a Uniswap v4 pool on Ethereum mainnet.
+
+### A multi-asset on-chain portfolio as the next coin type
+
+A666 and B24 sit at opposite ends. A666 holds assets that live on public networks, so most of it can be proven outright. B24 holds assets inside a brokerage, so it can only be attested.
+
+The natural next coin is a larger, deliberately built version of A666: a multi-asset portfolio held entirely on-chain. Because every position is on a public network, such a coin can aim for a split that is mostly Proven, with no enclave and no broker in the trust path.
+
+What already exists for it:
+
+- **A reader for each kind of position**: lending, perpetuals, staking, spot and Monero. These are the six files in the diagram above.
+- **A combining program** that nets assets against debt and outputs one figure with its split.
+- **The same chain rules B24 uses** for creation, cash-in, staleness and the Ethereum wrapper.
+
+What a new portfolio coin needs: a manifest naming its positions, a reading schedule, and its own Ethereum route. A new kind of position needs a new reader.
+
+## Private swaps
+
+Everything above happens in public. The network also has a shielded pool, so a NAVCoin can be held and swapped without revealing the holder, the asset or the amount.
+
+{{< navcoin-handoff part="private" >}}
+
+The private path was proven on the test network in June and July 2026, including a 250 USDC run through every step. It is not yet offered for B24, and the Task Node wallet has no private tab. Turning it on for a coin is a matter of enabling its route for the shielded pool and adding the screens, not of building the cryptography.
+
 ## What you trust, step by step
 
 | Step | Enforced by | You trust |
@@ -76,6 +108,26 @@ What this means for a user:
 | Uniswap liquidity | Uniswap v4 | The pool owner, for depth only |
 
 The weakest link is the brokerage itself. No proof can look inside Schwab. The design narrows that trust to one question, "did Schwab report this figure to this exact program", and answers it with hardware.
+
+## Review surface
+
+This is what a reviewer should read, in order of how much money or trust depends on it. Paths are in the code index at the end.
+
+| Priority | Area | The question to answer | Where |
+| --- | --- | --- | --- |
+| 1 | Deposit proof | Can PFUSDC ever be credited without a real, final Ethereum deposit? Can one deposit be credited twice? | `programs/pfusdc-eth-mainnet-ingress/src/lib.rs`, `nav_vault_asset_execution.rs:1232` |
+| 1 | Bridge vault | Is there any way to move USDC out other than a valid proof? | `ERC20BridgeVaultL1.sol:127`, `:191` |
+| 1 | Creation and cash-in | Can coins be minted beyond the caps, or cashed in beyond the reserve? Is the fee always paid in the same transaction? | `nav_vault_asset_execution.rs:4729`, `:4070`, `:4577` |
+| 1 | Ethereum wrapper | Can wB24 be minted without a locked native coin behind it? Can one receipt mint twice? | `PFTLReceiptFinalityVerifierV2.sol:229`, `PFTLUniswapHandoffController.sol:1615`, `:1753` |
+| 2 | Enclave reading | Does the proof pin the exact enclave image? What can the machine's operator change without detection? | `yolo_nitro.rs:164`, `b23_nav.rs:141`, `containers/yolo-nitro/` |
+| 2 | Proof verification on chain | Is every reading bound to the program key in the coin's profile? What happens to a stale reading? | `nav_sp1_verifier.rs:86`, `nav_vault_asset_execution.rs:3000` |
+| 2 | Verification split | Can a reading claim more Proven or Attested value than its proof supports? | `account_owned_asset_types.rs:813`, `gallery/model.js:10` |
+| 3 | Task Node relay | Can the server see or forward key material? Can a signed-out or cross-site request reach the network? | `server/l1/gateway.js:49`, `custody-boundary.js` |
+| 3 | Browser wallet | Is the seed ever stored or sent unencrypted? Does switching accounts isolate wallets? | `lib/vault.js:137`, `core.js:54` |
+| 3 | Daily job | What happens when a run fails, and who is told? Does the spending cap stop it silently? | `ops/b24-live/daily.py` |
+| 4 | Private path | Does the shielded swap conserve each asset? Is a private order bound to a fresh reading? | `orchard_state_application.rs:1131`, `nav_vault_asset_execution.rs:4950` |
+
+Known gaps a reviewer will find, listed so they are not rediscovered: the withdrawal path for new deposits and the Ethereum-to-native return are not built; five of six validators sign Ethereum-side approvals with no spare; the launch needed a manual repair three times for a known network bug; and none of this code is on the public main line yet.
 
 ## Live numbers
 
@@ -130,6 +182,12 @@ Line numbers are from the branches below. This work has not yet been merged into
 | Accept a Post Fiat receipt on Ethereum | `crates/ethereum-contracts/src/PFTLReceiptFinalityVerifierV2.sol:229` |
 | Mint wrapped coins from an accepted receipt | `crates/ethereum-contracts/src/PFTLUniswapHandoffController.sol:1615` |
 | Daily reading job | `ops/b24-live/daily.py` |
+| A666: combine six positions into one figure | `tools/nav-reserve-proof/crates/reserve-proof-types/src/lib.rs:488` |
+| A666: position readers | `aave_v3.rs`, `hyperliquid_receipt.rs`, `near_receipt.rs`, `evm_spot.rs`, `monero_reserve.rs`, `solana_stake.rs` in the same folder |
+| Private swap: circuit and proof check | `crates/privacy_orchard/src/asset_orchard_circuit.rs`, `asset_orchard_action_builders.rs:264` |
+| Private swap: apply and check accounting | `crates/node/src/orchard_state_application.rs:961`, `:1131` |
+| Private create and cash-in at NAV | `crates/execution/src/nav_vault_asset_execution.rs:4950`, `:5151` |
+| Shield and unshield | `crates/node/src/orchard_state_application.rs:1393`, `:1523` |
 | Task Node: relay and request checks | `server/l1/gateway.js:49` |
 | Task Node: allowed network calls | `src/features/wallet/l1/lib/rpc-methods.js` |
 | Task Node: key material never leaves the browser | `src/features/wallet/l1/lib/custody-boundary.js` |
