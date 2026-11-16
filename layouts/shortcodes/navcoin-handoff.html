@@ -45,6 +45,17 @@
   .nh-num{border-top:2px solid var(--nh-ink);padding-top:7px;min-width:0}
   .nh-num b{display:block;font:600 19px/1.2 var(--nh-mono);font-variant-numeric:tabular-nums;word-break:break-word}
   .nh-num span{display:block;margin-top:3px;font-size:12.5px;line-height:1.4;color:var(--nh-ink2)}
+  .nh-arch{display:grid;grid-template-columns:minmax(0,1fr) 26px minmax(0,1fr) 26px minmax(0,1fr);align-items:stretch;gap:0}
+  .nh-zone{border:1px solid var(--nh-rule);border-top:4px solid var(--nh-ink);border-radius:8px;background:var(--nh-card);padding:11px 12px;min-width:0;overflow-wrap:anywhere}
+  .nh-zone--key{border-top-color:var(--nh-proof)}
+  .nh-zone h4{margin:2px 0 6px;font:600 15px/1.3 var(--serif,Georgia,serif);letter-spacing:0;text-transform:none;color:var(--nh-ink)}
+  .nh-zone ul{margin:0;padding:0 0 0 1.05em;font-size:13.5px;line-height:1.5}
+  .nh-zone li{margin:0 0 .25em}
+  .nh-arrow{display:grid;place-items:center;font:600 16px/1 var(--nh-mono);color:var(--nh-ink2)}
+  .nh-arrow small{display:none}
+  .nh-surfaces{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+  .nh-surfaces .nh-card{border-left-color:var(--nh-ink)}
+  @media(max-width:760px){.nh-arch{grid-template-columns:1fr}.nh-arrow{padding:5px 0;transform:rotate(90deg)}.nh-surfaces{grid-template-columns:1fr}}
   .nh figcaption,.nh-cap{margin:.7rem 0 0;font-size:13px;line-height:1.5;color:var(--nh-ink2)}
   @media(max-width:760px){.nh-frame{padding:13px}.nh-board{grid-template-columns:1fr}.nh-nums{grid-template-columns:1fr 1fr}.nh-step{grid-template-columns:28px minmax(0,1fr);gap:9px}.nh-step::before{width:28px;height:28px;font-size:12px}.nh-step::after{left:13.5px;top:28px}}
 </style>
@@ -174,5 +185,66 @@
       <div class="nh-num"><b>1 / 1</b><span>wB24 minted on Ethereum / native B24 locked behind it</span></div>
     </div>
   </div>
+</figure>
+{{- else if eq $part "tasknode" -}}
+<figure class="nh" aria-label="How the Task Node wallet reaches the network: keys stay in the browser, the server only relays signed requests">
+  <div class="nh-frame">
+    <p class="nh-eyebrow">Task Node integration</p>
+    <p class="nh-title">Keys stay in the browser. The Task Node relays. The network decides.</p>
+    <div class="nh-arch">
+      <div class="nh-zone nh-zone--key">
+        <span class="nh-tag nh-tag--proof">Holds the keys</span>
+        <h4>The user's browser</h4>
+        <ul>
+          <li>Creates the quantum-resistant Post Fiat key and signs every transaction locally.</li>
+          <li>Stores the seed encrypted with the user's passphrase, one vault per Task Node account.</li>
+          <li>Talks to MetaMask directly for the Ethereum deposit.</li>
+        </ul>
+        <p class="nh-ref">src/features/wallet/l1/core.js:54 · lib/vault.js:137, :208 · bridge/evm.js:14</p>
+      </div>
+      <div class="nh-arrow" aria-hidden="true">→</div>
+      <div class="nh-zone">
+        <span class="nh-tag nh-tag--off">Relays only</span>
+        <h4>Task Node server</h4>
+        <ul>
+          <li>Accepts requests only from a signed-in session on the same site.</li>
+          <li>Passes on a fixed list of read and submit calls. Anything else is refused.</li>
+          <li>Rejects any request that contains a seed, private key, backup or passphrase.</li>
+        </ul>
+        <p class="nh-ref">server/l1/gateway.js:49, :54, :75 · lib/rpc-methods.js · lib/custody-boundary.js</p>
+      </div>
+      <div class="nh-arrow" aria-hidden="true">→</div>
+      <div class="nh-zone">
+        <span class="nh-tag nh-tag--proof">Enforces the rules</span>
+        <h4>Post Fiat network</h4>
+        <ul>
+          <li>Checks the signature and the rules from the funding path above.</li>
+          <li>Returns a receipt. The wallet shows success only on an accepted receipt.</li>
+        </ul>
+        <p class="nh-ref">Six validators, release 4</p>
+      </div>
+    </div>
+    <div class="nh-surfaces">
+      <div class="nh-card"><div class="nh-card-head"><strong>Wallet</strong><span class="nh-where">Home · Send · Activity</span></div>
+        <p>Shows PFT, PFUSDC and NAVCoin balances read from the network, sends PFT, and lists history. Create, unlock, import and encrypted backup.</p>
+        <p class="nh-ref">src/features/wallet/l1/L1WalletView.jsx:17 · WalletHome.jsx · Send.jsx · server/l1/history.js</p></div>
+      <div class="nh-card"><div class="nh-card-head"><strong>Bridge</strong><span class="nh-where">USDC to PFUSDC</span></div>
+        <p>Connect MetaMask, approve, deposit. The screen then follows the deposit through finality, proving and the credit, about 23 minutes end to end.</p>
+        <p class="nh-ref">src/features/wallet/l1/bridge/index.jsx · controller.js · server/l1/bridge-routes.js</p></div>
+      <div class="nh-card"><div class="nh-card-head"><strong>Buy</strong><span class="nh-where">Order book or create</span></div>
+        <p>One Buy box. An order that fits the coins on offer fills from the order book. A larger order switches to creating new coins at NAV plus the fee, with a review screen first.</p>
+        <p class="nh-ref">src/features/wallet/l1/market/index.jsx:146 · primary/model.js:17, :26 · primary/CreateReview.jsx</p></div>
+      <div class="nh-card"><div class="nh-card-head"><strong>Cash in</strong><span class="nh-where">Coin to PFUSDC</span></div>
+        <p>Quotes NAV times the cash-in rate, capped at the reserve, then submits. The fee is paid to the management wallet in the same transaction.</p>
+        <p class="nh-ref">src/features/wallet/l1/redeem/model.js:10 · redeem/index.jsx</p></div>
+      <div class="nh-card"><div class="nh-card-head"><strong>NAVCoin gallery</strong><span class="nh-where">All coins</span></div>
+        <p>Lists every NAVCoin the network knows, discovered from the chain. Each row shows NAV, size and the proven, attested and reported split computed from the latest reading.</p>
+        <p class="nh-ref">server/l1/navcoin-registry.js:7 · src/features/wallet/l1/gallery/model.js:10</p></div>
+      <div class="nh-card"><div class="nh-card-head"><strong>Coin page and snapshot checks</strong><span class="nh-where">No sign-in needed</span></div>
+        <p>A shareable page per coin: price, split, history, liquidity and the live Uniswap pool. Every past reading links to its own page with the proof hash, program key and decoded values.</p>
+        <p class="nh-ref">server/l1/navcoin-profile.js:66, :104, :136 · server/l1/profile/ethereum.js · src/features/wallet/l1/profile/index.jsx</p></div>
+    </div>
+  </div>
+  <figcaption>Issuer actions (mint, top up the reserve, change the fee) are deliberately not in the Task Node. They run from the command line so the issuer key never enters a browser.</figcaption>
 </figure>
 {{- end -}}
