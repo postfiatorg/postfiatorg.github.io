@@ -56,6 +56,15 @@
   .nh-surfaces{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
   .nh-surfaces .nh-card{border-left-color:var(--nh-ink)}
   @media(max-width:760px){.nh-arch{grid-template-columns:1fr}.nh-arrow{padding:5px 0;transform:rotate(90deg)}.nh-surfaces{grid-template-columns:1fr}}
+  .nh-legs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .nh-leg{border:1px solid var(--nh-rule);border-radius:8px;background:var(--nh-card);padding:10px 12px;min-width:0;overflow-wrap:anywhere}
+  .nh .nh-leg h4{margin:0 0 2px;font:600 15px/1.3 var(--serif,Georgia,serif);letter-spacing:0;text-transform:none;color:var(--nh-ink)}
+  .nh-leg .nh-where{display:block;margin-bottom:7px}
+  .nh-leg dl{display:grid;grid-template-columns:auto 1fr;gap:4px 8px;margin:0;font-size:13px;align-items:center}
+  .nh-leg dt{color:var(--nh-ink2)}
+  .nh-leg dd{margin:0}
+  .nh-sum{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:12px;padding:10px 12px;border:1px dashed var(--nh-ink2);border-radius:8px;font-size:14px;line-height:1.45}
+  @media(max-width:760px){.nh-legs{grid-template-columns:1fr}}
   .nh figcaption,.nh-cap{margin:.7rem 0 0;font-size:13px;line-height:1.5;color:var(--nh-ink2)}
   @media(max-width:760px){.nh-frame{padding:13px}.nh-board{grid-template-columns:1fr}.nh-nums{grid-template-columns:1fr 1fr}.nh-step{grid-template-columns:28px minmax(0,1fr);gap:9px}.nh-step::before{width:28px;height:28px;font-size:12px}.nh-step::after{left:13.5px;top:28px}}
 </style>
@@ -247,4 +256,55 @@
   </div>
   <figcaption>Issuer actions (mint, top up the reserve, change the fee) are deliberately not in the Task Node. They run from the command line so the issuer key never enters a browser.</figcaption>
 </figure>
+{{- else if eq $part "portfolio" -}}
+<figure class="nh" aria-label="A666: one coin backed by six positions on six networks, each checked separately and combined in one proof">
+  <div class="nh-frame">
+    <p class="nh-eyebrow">A666 · the original NAVCoin</p>
+    <p class="nh-title">One coin, six positions, one proof</p>
+    <div class="nh-legs">
+      <div class="nh-leg"><h4>Aave loan and collateral</h4><span class="nh-where">Arbitrum</span><dl><dt>Amount held</dt><dd><span class="nh-tag nh-tag--proof">Proven</span></dd><dt>Dollar value</dt><dd><span class="nh-tag nh-tag--proof">Proven</span></dd></dl><p class="nh-ref">aave_v3.rs:321</p></div>
+      <div class="nh-leg"><h4>Hyperliquid account</h4><span class="nh-where">HyperEVM / HyperCore</span><dl><dt>Amount held</dt><dd><span class="nh-tag nh-tag--proof">Proven</span></dd><dt>Dollar value</dt><dd><span class="nh-tag nh-tag--proof">Proven</span></dd></dl><p class="nh-ref">hyperliquid_receipt.rs:300</p></div>
+      <div class="nh-leg"><h4>NEAR staking</h4><span class="nh-where">NEAR</span><dl><dt>Amount held</dt><dd><span class="nh-tag nh-tag--proof">Proven</span></dd><dt>Dollar value</dt><dd><span class="nh-tag nh-tag--attest">Attested</span></dd></dl><p class="nh-ref">near_receipt.rs:492</p></div>
+      <div class="nh-leg"><h4>EVM spot holdings</h4><span class="nh-where">Ethereum</span><dl><dt>Amount held</dt><dd><span class="nh-tag nh-tag--proof">Proven</span></dd><dt>Dollar value</dt><dd><span class="nh-tag nh-tag--attest">Attested</span></dd></dl><p class="nh-ref">evm_spot.rs:214</p></div>
+      <div class="nh-leg"><h4>Monero reserve</h4><span class="nh-where">Monero</span><dl><dt>Amount held</dt><dd><span class="nh-tag nh-tag--proof">Proven</span></dd><dt>Dollar value</dt><dd><span class="nh-tag nh-tag--attest">Attested</span></dd></dl><p class="nh-ref">monero_reserve.rs:216</p></div>
+      <div class="nh-leg"><h4>Solana stake</h4><span class="nh-where">Solana</span><dl><dt>Amount held</dt><dd><span class="nh-tag nh-tag--attest">Attested</span></dd><dt>Dollar value</dt><dd><span class="nh-tag nh-tag--attest">Attested</span></dd></dl><p class="nh-ref">solana_stake.rs:395</p></div>
+    </div>
+    <div class="nh-sum"><span class="nh-tag nh-tag--proof">One proof</span> A single zero-knowledge program checks all six parts, subtracts the debt, and outputs one net asset value with the split. The validators verify that one proof.</div>
+    <p class="nh-ref" style="border-top:0">tools/nav-reserve-proof/crates/reserve-proof-types/src/lib.rs:488 · programs/reserve-proof-guest/src/main.rs · crates/execution/src/nav_sp1_verifier.rs:86</p>
+  </div>
+  <figcaption>File names in the tiles are under tools/nav-reserve-proof/crates/reserve-proof-types/src/. No wallet address or position size is published; the proof reveals only the totals.</figcaption>
+</figure>
+
+{{- else if eq $part "private" -}}
+<figure class="nh" aria-label="How a private NAVCoin swap works: shield, swap inside the shielded pool, unshield">
+  <div class="nh-frame">
+    <p class="nh-eyebrow">Private swaps</p>
+    <p class="nh-title">Public at the edges, hidden in the middle</p>
+    <ol class="nh-rail">
+      <li class="nh-step"><div class="nh-card nh-card--proof">
+        <div class="nh-card-head"><strong>Shield</strong><span class="nh-where">Public to private</span></div>
+        <p>A holder moves PFUSDC or a NAVCoin from their public balance into the shielded pool. The amount entering is public, so total supply stays checkable.</p>
+        <p class="nh-ref">crates/node/src/orchard_state_application.rs:1393</p>
+      </div></li>
+      <li class="nh-step"><div class="nh-card nh-card--proof">
+        <div class="nh-card-head"><strong>Swap inside the pool</strong><span class="nh-where">Private</span></div>
+        <p>Two parties exchange one asset for another. The transaction carries a zero-knowledge proof and encrypted notes. Observers cannot see which assets, how much, or who.</p>
+        <p class="nh-why">The proof shows that, for each asset, what went in equals what came out. The validators verify it and reject a note that was already spent.</p>
+        <p class="nh-ref">crates/privacy_orchard/src/asset_orchard_circuit.rs · asset_orchard_action_builders.rs:264 · crates/node/src/orchard_state_application.rs:961, :1131</p>
+      </div></li>
+      <li class="nh-step"><div class="nh-card nh-card--proof">
+        <div class="nh-card-head"><strong>Create or cash in privately at NAV</strong><span class="nh-where">Private, priced by the public reading</span></div>
+        <p>A shielded holder can create new coins or cash in at the latest finalised NAV. The order is tied to that reading and to the route's current terms, and is refused if the reading is stale.</p>
+        <p class="nh-ref">crates/execution/src/nav_vault_asset_execution.rs:4950, :5151</p>
+      </div></li>
+      <li class="nh-step"><div class="nh-card nh-card--proof">
+        <div class="nh-card-head"><strong>Unshield</strong><span class="nh-where">Private to public</span></div>
+        <p>The holder moves value back to a public balance, or out through the bridge. The amount leaving is public again.</p>
+        <p class="nh-ref">crates/node/src/orchard_state_application.rs:1523 · asset_orchard_action_builders.rs:661</p>
+      </div></li>
+    </ol>
+  </div>
+  <figcaption>The reserve proof and total supply stay public throughout. Privacy covers who holds and trades the coin, not what backs it.</figcaption>
+</figure>
+
 {{- end -}}
