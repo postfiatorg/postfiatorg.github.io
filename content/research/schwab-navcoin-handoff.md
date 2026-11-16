@@ -51,6 +51,18 @@ The funding path covers new money. The reserve path covers the brokerage account
 
 {{< navcoin-handoff part="reserve" >}}
 
+## How it appears in the Task Node
+
+The consumer side lives inside the Task Node as a wallet with six surfaces. The design rule is simple: the browser holds the keys and signs, the Task Node server only relays, and the network enforces every rule shown above.
+
+{{< navcoin-handoff part="tasknode" >}}
+
+What this means for a user:
+
+- **The Task Node never has custody.** A compromised Task Node server cannot move a user's coins, because it never sees a key and the network accepts only signed transactions.
+- **The numbers on screen come from the network.** Balances, NAV, the verification split and history are read from the validators, not from a Task Node database.
+- **One wallet per Task Node account.** Switching accounts never shows or overwrites another account's wallet.
+
 ## What you trust, step by step
 
 | Step | Enforced by | You trust |
@@ -118,7 +130,17 @@ Line numbers are from the branches below. This work has not yet been merged into
 | Accept a Post Fiat receipt on Ethereum | `crates/ethereum-contracts/src/PFTLReceiptFinalityVerifierV2.sol:229` |
 | Mint wrapped coins from an accepted receipt | `crates/ethereum-contracts/src/PFTLUniswapHandoffController.sol:1615` |
 | Daily reading job | `ops/b24-live/daily.py` |
-| Coin page data | Task Node `server/l1/navcoin-profile.js` |
+| Task Node: relay and request checks | `server/l1/gateway.js:49` |
+| Task Node: allowed network calls | `src/features/wallet/l1/lib/rpc-methods.js` |
+| Task Node: key material never leaves the browser | `src/features/wallet/l1/lib/custody-boundary.js` |
+| Task Node: local signing | `src/features/wallet/l1/core.js:54` |
+| Task Node: encrypted vault per account | `src/features/wallet/l1/lib/vault.js:137` |
+| Task Node: MetaMask deposit | `src/features/wallet/l1/bridge/evm.js:14` |
+| Task Node: buy from book or create | `src/features/wallet/l1/market/index.jsx:146` |
+| Task Node: cash-in quote | `src/features/wallet/l1/redeem/model.js:10` |
+| Task Node: coin discovery | `server/l1/navcoin-registry.js:7` |
+| Task Node: verification split | `src/features/wallet/l1/gallery/model.js:10` |
+| Task Node: coin page and snapshot data | `server/l1/navcoin-profile.js:66` |
 
 ## Open items
 
