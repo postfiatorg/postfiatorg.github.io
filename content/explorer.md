@@ -5,5 +5,5 @@ summary: "Read the Post Fiat devnet: NAVCoins and their NAV checks, private and 
 type: "page"
 layout: "explorer"
 url: "/explorer/"
-explorer_api: "https://postfiatfoundationv2.taila4ec45.ts.net:10000/api/explorer/v1"
+explorer_api: "https://postfiat-explorer-api.fly.dev/api/explorer/v1"
 ---
