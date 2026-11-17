@@ -39,14 +39,14 @@ The design follows measured use. Both tables come from a full read of each chain
 
 | Lens | Operations on chain | Count |
 | --- | --- | ---: |
-| **Bridge** (USDC ↔ PFUSDC) | `vault_bridge_deposit_propose`, `_finalize`, `_claim`, `_attest`, `_fast_ingress_lifecycle`, `_burn_to_redeem`, `_redeem_settle`, `_nav_subscription_allocate`, `_bucket_impair` | 346 |
+| **Bridge** (USDC ↔ PFUSDC) | `vault_bridge_deposit_propose`, `_finalize`, `_claim`, `_attest`, `_fast_ingress_lifecycle`, `_burn_to_redeem`, `_redeem_settle`, `_nav_subscription_allocate`, `_bucket_impair` | 344 |
 | **Payments** | `transparent_transfer` (PFT), `issued_payment` (assets), `trust_set` | 318 |
 | **NAVCoin market** (create and cash in at NAV, Ethereum handoff) | `pftl_uniswap_order_reserve`, `_order_release`, `_primary_subscribe`, `_primary_subscribe_v2`, `_primary_redeem`, `_export_debit`, `_destination_consume`, `_return_import`, `_redemption_fund`, route `_init`, `_init_v2`, `_epoch_advance`, `_pause` | 285 |
 | **Private** (shielded pool) | `asset_orchard_ingress_v2`, `shielded_swap_v1`, `asset_orchard_private_egress_v1`, `asset_orchard_private_primary_issue_v1`, `_private_primary_redeem_v1`, `asset_orchard_egress_v1` | 178 |
 | **NAV checks** | `nav_profile_register`, `nav_asset_register`, `nav_attestor_register`, `nav_reserve_submit`, `nav_reserve_attest`, `nav_epoch_finalize`, `nav_mint_at_nav`, `nav_redeem_at_nav`, `nav_redeem_settle`, `nav_halt`, `asset_create`, `asset_burn` | 180 |
 | **Swaps and orders** | `offer_create`, `offer_cancel`, atomic swaps, `fx_fix_register_v1`, `fx_fix_reservation_create_v1`, `market_ops_*` | 77 |
 | **Fast lane** | owned deposits, committee control, anchor checkpoints | 60 |
-| **Network** (governance) | amendments, bridge route profile activations, validator key rotations, authority transitions, storage activation | 42 |
+| **Network** (governance) | amendments, bridge route profile activations, validator key rotations, authority transitions, storage activation | 44 |
 
 Receipts: 1,391 accepted, 49 fast-lane deposits applied, 15 offers filled, the rest
 rejections with a stated reason. A rejection is a first-class result and is shown as one.
