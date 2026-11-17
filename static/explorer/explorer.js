@@ -3,7 +3,7 @@
   const root = document.getElementById('ex');
   if (!root) return;
   const API = (root.dataset.api || '/api/explorer/v1').replace(/\/$/, '');
-  const LENS = { bridge: 'Bridge', payments: 'Payments', navmarket: 'NAVCoin market', private: 'Private', navchecks: 'NAV checks', market: 'Swaps', fastlane: 'Fast lane', network: 'Network' };
+  const LENS = { bridge: 'Bridge', payments: 'Payments', navmarket: 'Coin market', private: 'Private', navchecks: 'NAV checks', market: 'Swaps', fastlane: 'Fast lane', network: 'Network' };
   const JOURNEY = { deposit: 'USDC deposit', withdrawal: 'USDC withdrawal', create: 'NAVCoin creation', export: 'Bridge to Ethereum', return: 'Return from Ethereum' };
   let meta = null, timer = null, lastTop = null, seq = 0;
 
@@ -36,9 +36,10 @@
   const copyBtn = (v) => `<button class="copy" data-copy="${esc(v)}">Copy</button>`;
   const hashRow = (v) => `<span class="hash" title="${esc(v)}">${esc(v)}</span>${copyBtn(v)}`;
   const etherscan = (e) => { if (!e || !e.tx) return ''; const h = e.tx.startsWith('0x') ? e.tx : '0x' + e.tx; const base = { 1: 'https://etherscan.io', 11155111: 'https://sepolia.etherscan.io', 42161: 'https://arbiscan.io' }[e.chain_id] || 'https://etherscan.io'; return `<a class="hash" href="${base}/tx/${esc(h)}" rel="noopener" target="_blank">${short(h, 10, 6)} ↗</a>`; };
-  const seals = (block, small) => { const voted = new Set((block.header?.votes || []).map((v) => v.validator)); const all = block.header?.validators || [...voted]; return `<span class="seals${small ? ' small' : ''}">${all.map((v) => `<span class="seal${voted.has(v) ? ' on' : ''}${v === block.proposer ? ' prop' : ''}" title="${esc(v)}${voted.has(v) ? ': recorded accepting vote' : ': no vote recorded'}${v === block.proposer ? ' (proposer)' : ''}"><i></i>${small ? '' : esc(v.replace('validator-', 'v'))}</span>`).join('')}</span>`; };
-  const dots = (steps) => `<span class="jmini">${steps.map((s) => `<i class="${esc(s.state)}" title="${esc(s.label)}: ${esc(s.state)}"></i>`).join('')}</span>`;
-  const spark = (vals) => { vals = (vals || []).map(Number).filter((v) => isFinite(v)); if (vals.length < 2) return '<svg class="spark" viewBox="0 0 120 30"><path d="M2 15H118"/></svg>'; const lo = Math.min(...vals), hi = Math.max(...vals), sp = hi - lo || 1; const pt = (v, i) => [2 + (116 * i) / (vals.length - 1), 26 - (22 * (v - lo)) / sp]; const d = vals.map((v, i) => `${i ? 'L' : 'M'}${pt(v, i).map((n) => n.toFixed(1)).join(' ')}`).join(''); const [lx, ly] = pt(vals[vals.length - 1], vals.length - 1); return `<svg class="spark" viewBox="0 0 120 30" aria-hidden="true"><path d="${d}"/><circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="2.2"/></svg>`; };
+  const seals = (block, small) => { const voted = new Set((block.header?.votes || []).map((v) => v.validator)); const all = block.header?.validators || [...voted]; return `<span class="marks${small ? ' small' : ''}">${all.map((v) => `<span class="mark${voted.has(v) ? ' done' : ' none'}${v === block.proposer ? ' prop' : ''}" title="${esc(v)}${voted.has(v) ? ': recorded accepting vote' : ': no vote recorded'}${v === block.proposer ? ' (proposer)' : ''}"><i></i>${small ? '' : `<b>${esc(v.replace('validator-', 'v'))}</b><em>${v === block.proposer ? 'proposed' : voted.has(v) ? 'voted' : 'no vote'}</em>`}</span>`).join('')}</span>`; };
+  const STEP = { done: 'done', unknown: 'on Ethereum, not read', pending: 'waiting', 'not-started': 'not started', rejected: 'refused', mismatched: 'mismatch' };
+  const dots = (steps) => `<span class="marks small">${steps.map((s) => `<span class="mark ${esc(s.state)}" title="${esc(s.label)}: ${esc(STEP[s.state] || s.state)}"><i></i></span>`).join('')}</span>`;
+  const spark = (vals) => { vals = (vals || []).map(Number).filter((v) => isFinite(v) && v > 0); if (vals.length < 2) return '<svg class="spark" viewBox="0 0 120 30"><path d="M2 15H118"/></svg>'; const last = vals[vals.length - 1]; const half = Math.max(last * 0.005, Math.max(...vals.map((v) => Math.abs(v - last))) * 1.15); const lo = last - half, sp = 2 * half; const pt = (v, i) => [2 + (116 * i) / (vals.length - 1), 26 - (22 * (v - lo)) / sp]; const d = vals.map((v, i) => `${i ? 'L' : 'M'}${pt(v, i).map((n) => n.toFixed(1)).join(' ')}`).join(''); const [lx, ly] = pt(last, vals.length - 1); return `<svg class="spark" viewBox="0 0 120 30" aria-hidden="true"><path d="${d}"/><circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="2.2"/></svg>`; };
   const json = (o) => esc(JSON.stringify(o, null, 2)).replace(/&quot;([a-zA-Z0-9_]+)&quot;:/g, '<span class="k">&quot;$1&quot;</span>:');
 
   async function get(path) {
@@ -73,8 +74,8 @@
     const top = d.stream[0]?.id; const fresh = lastTop && top !== lastTop && !lens; lastTop = top;
     return page(`
       <section class="ex-hero">
-        <div class="big"><small>Devnet · ${esc(d.network.chain_id)} · block</small><span class="num">${num(d.height)}</span></div>
-        <p class="lede">The latest block was agreed ${when(d.tip_time) || 'recently'}. Every block carries the recorded votes of its validators, signed with post-quantum signatures. Read any operation as a sentence, then check the record behind it.</p>
+        <div class="big"><small>Devnet · ${esc(d.network.chain_id)} · latest block</small><span class="num">${num(d.height)}</span><span class="since">${d.tip_time ? ago(d.tip_time) : ''}</span></div>
+        <div><p class="status-line"><span class="dot"></span>${d.latest_blocks[0] ? `${d.latest_blocks[0].votes} of 6 validators voted on it` : 'Live'} · blocks are made when there is something to record</p><p class="lede">Every block carries the recorded votes of its validators, signed with post-quantum signatures. Read any operation as a sentence, then check the record behind it.</p></div>
       </section>
       <div class="stats">
         <div><div class="v num">${num(d.ops)}</div><div class="k">Operations</div></div>
@@ -82,12 +83,12 @@
         <div><div class="v num">${d.coins.filter((c) => c.listed).length}</div><div class="k">NAVCoins listed</div></div>
         <div><div class="v num">${(d.shielded_share * 100).toFixed(1)}%</div><div class="k">Blocks that are private</div></div>
       </div>
-      ${section('What the network is doing', lens ? link('/', 'Show everything') : '<span class="label">All operations since block 1 · bars are relative to the largest · select one to filter</span>')}
-      <div class="lenses" role="group" aria-label="Filter by lens">${d.lenses.map((l) => `<button data-lens="${l.lens}" aria-pressed="${lens === l.lens}" title="${num(l.count)} of ${num(d.ops)} operations"><span class="v num">${num(l.count)}</span><span class="k">${esc(LENS[l.lens])}</span><span class="bar"><i style="width:${Math.max(3, (100 * l.count) / max).toFixed(1)}%"></i></span></button>`).join('')}</div>
+      ${section('What the network is doing', lens ? link('/', 'Show everything') : '<span class="hint">All operations since block 1</span>')}
+      <div class="lenses" role="group" aria-label="Filter by lens">${d.lenses.map((l) => `<button data-lens="${l.lens}" aria-pressed="${lens === l.lens}" title="${num(l.count)} of ${num(d.ops)} operations (${((100 * l.count) / d.ops).toFixed(0)}%)"><span class="v num">${num(l.count)}</span><span class="k">${esc(LENS[l.lens])}</span><span class="bar"><i style="width:${Math.max(3, (100 * l.count) / max).toFixed(1)}%"></i></span><span class="cta">${lens === l.lens ? 'Clear filter ×' : 'Filter →'}</span></button>`).join('')}</div>
       <div class="cols">
         <div>${section(lens ? esc(LENS[lens]) : 'Latest operations', link(`/stream${lens ? `?lens=${lens}` : ''}`, 'All →'))}<ul class="stream" id="ex-stream">${stream.map((o, i) => opLine(o, fresh && i === 0)).join('') || '<li class="ex-empty">Nothing yet.</li>'}</ul></div>
         <div>${section('Latest blocks', link('/blocks', 'All →'))}
-          <ul class="rows">${d.latest_blocks.map((b) => `<li><a class="rowlink" href="#/block/${b.height}" aria-label="Block ${b.height}"></a><span class="a">${num(b.height)}</span><span class="b">${b.n_ops} ${esc(b.kind)} operation${b.n_ops === 1 ? '' : 's'} · ${esc(b.proposer)}</span><span class="c">${b.votes} of 6 votes<small>${when(b.time)}</small></span></li>`).join('')}</ul>
+          <ul class="rows">${d.latest_blocks.slice(0, 6).map((b) => `<li><a class="rowlink" href="#/block/${b.height}" aria-label="Block ${b.height}"></a><span class="a">${num(b.height)}</span><span class="b">${esc(b.proposer)}<small>${b.n_ops} ${esc(b.kind)} op${b.n_ops === 1 ? '' : 's'}</small></span><span class="c">${seals({ header: { votes: [], validators: [] }, proposer: '' }, true)}${b.votes}/6 · ${when(b.time)}</span></li>`).join('')}</ul>
           ${section('NAVCoins', link('/coins', 'All →'))}
           <ul class="rows">${d.coins.filter((c) => c.listed).map((c) => `<li><a class="rowlink" href="#/coin/${esc(c.asset_id)}" aria-label="${esc(c.code)}"></a><span class="a">${esc(c.code)}</span><span class="b">${usd(c.nav_per_unit, c.nav_decimals, 6)}${c.retired ? ' · retired' : ''}</span><span class="c">${spark(c.spark)}</span></li>`).join('')}</ul>
           ${section('Latest journeys', link('/journeys', 'All →'))}
@@ -138,7 +139,7 @@
   function journeyPanel(j) {
     if (!j) return '';
     return section(esc(JOURNEY[j.kind] || 'Journey'), link(`/journey/${j.kind}/${j.key}`, 'Open journey →')) +
-      `<div class="journey">${j.steps.map((s) => `<div class="jstep ${esc(s.state)}"><span class="m"></span><div class="l">${esc(s.label)}</div><div class="n">${
+      `<div class="journey">${j.steps.map((s) => `<div class="jstep ${esc(s.state)}"><span class="mark ${esc(s.state)}"><i></i></span><div class="l">${esc(s.label)}</div><div class="n">${
         s.state === 'done' ? `Done · ${link(`/tx/${s.op}`, 'block ' + num(s.height))}${s.time ? '<br>' + when(s.time) : ''}` : s.state === 'rejected' ? `Rejected · ${link(`/tx/${s.op}`, esc(s.code || ''))}` : s.state === 'unknown' ? `Not checked${s.eth ? '<br>' + etherscan(s.eth) : ''}` : s.state === 'pending' ? 'Pending' : 'Not started'}</div></div>`).join('')}</div>
       <p class="ex-note">${j.steps.some((s) => s.state === 'unknown') ? 'This build does not read Ethereum. Ethereum steps show "not checked", and any hash shown is the one the network recorded, not a confirmation.' : ''}</p>`;
   }
@@ -146,7 +147,7 @@
   async function tx(id) {
     const d = await get(`/tx/${id}`); if (!d) return notFound('No operation with that ID.');
     const o = d.op, b = d.block, raw = o.raw?.unsigned || o.raw || {};
-    const skip = new Set(['chain_id', 'genesis_hash', 'protocol_version', 'address_namespace', 'signature_algorithm_id', 'transaction_kind']);
+    const skip = new Set(['chain_id', 'genesis_hash', 'protocol_version', 'address_namespace', 'signature_algorithm_id', 'transaction_kind', 'fee']);
     const val = (k, v) => {
       if (v == null || v === '') return '<span class="muted">–</span>';
       if (typeof v === 'object') return `<span class="mono">${esc(JSON.stringify(v)).slice(0, 600)}</span>`;
@@ -154,18 +155,18 @@
       if (/^pf[0-9a-f]{40}$/.test(sv)) return addr(sv, o.party_labels?.[sv]);
       if (k.endsWith('asset_id') && sv.length === 96) return `${link(`/coin/${sv}`, esc(o.asset_names?.[sv] || 'asset'))} <span class="hash">${short(sv, 10, 6)}</span>`;
       if (/_hash$|_root$|_id$|nonce|digest|commitment|nullifier|anchor/.test(k) && sv.length > 30) return `<span class="hash" title="${esc(sv)}">${short(sv, 16, 8)}</span>${copyBtn(sv)}`;
-      if (/atoms$|^amount$|_amount$/.test(k) && /^\d+$/.test(sv)) return `<span class="num">${units(sv)}</span> <span class="muted mono">${num(sv)} atoms</span>`;
+      if (/atoms$|^amount$|_amount$/.test(k) && /^\d+$/.test(sv)) return `<span class="num">${units(sv)}</span><span class="sub2">${num(sv)} atoms, the ledger's smallest unit</span>`;
       if (k === 'fee') return `<span class="num">${num(sv)}</span> atoms of PFT`;
       return esc(sv);
     };
     const byAddr = new Map(); for (const p of o.parties || []) byAddr.set(p.address, [...(byAddr.get(p.address) || []), p.role]);
     const grouped = [...byAddr.entries()];
     const partyKeys = new Set((o.parties || []).map((p) => p.role));
-    const fields = Object.entries(raw).filter(([k, v]) => !skip.has(k) && !(partyKeys.has(k) && typeof v === 'string' && v.startsWith('pf'))).map(([k, v]) => `<div>${esc(k.replace(/_/g, ' '))}</div><div>${val(k, v)}</div>`).join('');
+    const fields = Object.entries(raw).filter(([k, v]) => !skip.has(k) && !(partyKeys.has(k) && typeof v === 'string' && v.startsWith('pf'))).map(([k, v]) => `<div>${esc(k.replace(/_atoms$/, '').replace(/_/g, ' '))}</div><div>${val(k, v)}</div>`).join('');
     const priv = o.privacy ? `${section('What the public can see')}<div class="privbox"><div class="ps"><div><b>Public</b>${o.privacy.public.map((x) => `<span>${esc(x)}</span>`).join('')}</div><div><b>Not published</b>${o.privacy.sealed.map((x) => `<span>${esc(x)}</span>`).join('')}</div></div></div>` : '';
     return page(head(`Devnet · ${esc(LENS[o.lens] || o.lens)} · ${esc(o.kind.replace(/_/g, ' '))}`, sent(o, true), '',
       `<div class="ex-meta">${o.lens === 'private' ? '<span class="tag sealed">Sealed</span>' : ''}${resultTag(o, true)}${b ? levelTag(b.evidence) : ''}<span class="label">${link(`/block/${o.height}`, 'Block ' + num(o.height), 'lk')}${b?.time ? ` · ${when(b.time)} · ${esc(utc(b.time))}` : ''}${o.fee != null ? ` · fee ${num(o.fee)} atoms of PFT` : ''}</span></div>
-       <div class="ex-meta">${b ? `<span class="label">Votes ${b.votes} of 6</span>${seals(b, true)}<span class="legend">filled: voted · empty: no vote · ringed: proposer</span>` : ''}${o.tx_id ? `<span class="label">Transaction</span><span class="hash" title="${esc(o.tx_id)}">${short(o.tx_id, 16, 10)}</span>${copyBtn(o.tx_id)}` : ''}</div>
+       <dl class="facts">${o.tx_id ? `<div><dt>Transaction</dt><dd><span class="hash" title="${esc(o.tx_id)}">${short(o.tx_id, 14, 10)}</span>${copyBtn(o.tx_id)}</dd></div>` : ''}${b ? `<div><dt>Validator votes</dt><dd><span title="Filled: recorded accepting vote. Empty: no vote recorded. Ringed: proposer.">${seals(b, true)}</span> ${b.votes} of 6, proposed by ${esc(b.proposer)}</dd></div>` : ''}</dl>
        ${o.accepted === false ? `<p class="sub ox">The network refused this operation: ${esc(o.message || o.code)}.</p>` : ''}`, 'sentence') +
       priv + journeyPanel(d.journey) +
       (grouped.length ? section('Parties') + `<div class="kv">${grouped.map(([a, roles]) => `<div>${esc(roles.join(', ').replace(/_/g, ' '))}</div><div>${addr(a, o.party_labels?.[a])}</div>`).join('')}</div>` : '') +
@@ -179,13 +180,16 @@
     const d = await get(`/account/${a}`); if (!d) return notFound();
     const live = d.live || {};
     const held = (live.lines || []).filter((l) => Number(l.balance) > 0); const empty = (live.lines || []).length - held.length;
+    const known = (l) => l.listed || (l.code === 'PFUSDC' && l.issuer === 'pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8');
+    const main = held.filter(known).sort((a, b) => (a.code === 'PFUSDC') - (b.code === 'PFUSDC')), other = held.filter((l) => !known(l)); const pf = main.filter((l) => l.code === 'PFUSDC');
+    const lineRow = (l) => `<tr><td>${link(`/coin/${l.asset_id}`, esc(l.code), 'lk')} ${l.listed ? '<span class="tag lvl">Listed NAVCoin</span>' : known(l) ? `<span class="tag lvl">Bridge series ${esc(l.asset_id.slice(0, 4))}</span>` : '<span class="tag prop">Unlisted</span>'} <span class="hash" title="${esc(l.asset_id)}">asset ${short(l.asset_id, 8, 4)}</span></td><td class="r num">${fixed(l.balance, l.precision)}</td></tr>`;
     const seen = {}; for (const l of held) seen[l.code] = (seen[l.code] || 0) + 1; const dup = new Set(Object.keys(seen).filter((k) => seen[k] > 1));
     return page(head(`Devnet · account${d.label ? ' · ' + esc(d.label) : ''}`, `<span class="mono" style="font-size:.46em;letter-spacing:0">${esc(a)}</span>${copyBtn(a)}`,
       d.op_count ? `${num(d.op_count)} operation${d.op_count === 1 ? '' : 's'} since block ${num(d.first_height)}.` : 'No operations name this address yet.', '') +
       section('Balances') + (live.error ? `<p class="ex-note">${esc(live.error)}.</p>` : `<table class="ledger tight"><thead><tr><th>Asset</th><th class="r">Balance</th></tr></thead><tbody>
         <tr><td>PFT <span class="tag lvl">Network token</span></td><td class="r num">${fixed(live.balance, 6)}</td></tr>
-        ${held.map((l) => `<tr><td>${link(`/coin/${l.asset_id}`, esc(l.code), 'lk')} ${l.listed ? '<span class="tag lvl">Listed NAVCoin</span>' : l.code === 'PFUSDC' && l.issuer === 'pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8' ? '<span class="tag lvl">Bridge series</span>' : '<span class="tag prop">Unlisted</span>'} <span class="hash" title="${esc(l.asset_id)}">asset ${short(l.asset_id, 8, 4)}</span></td><td class="r num">${fixed(l.balance, l.precision)}</td></tr>`).join('')}
-        </tbody></table><p class="ex-note">Read from the validators at block ${num(live.read_at_height)}. Sequence ${num(live.sequence)}.${empty ? ` ${empty} line${empty === 1 ? '' : 's'} with a zero balance ${empty === 1 ? 'is' : 'are'} not shown.` : ''}${dup.size ? ' Assets that share a name are different assets. Only those marked as listed or as a bridge series are the ones the wallet uses; the ID tells the rest apart.' : ''}</p>`) +
+        ${main.map(lineRow).join('')}${pf.length > 1 ? `<tr class="total"><td>PFUSDC across ${pf.length} bridge series</td><td class="r num">${fixed(pf.reduce((n, l) => n + Number(l.balance), 0), 6)}</td></tr>` : ''}
+        </tbody></table>${other.length ? `<h3 class="subhead">Unlisted assets</h3><p class="ex-note warn">These are not listed NAVCoins or bridge PFUSDC. An unlisted asset can carry the same name as a listed one. Check the asset ID before trusting a name.</p><table class="ledger tight dim"><tbody>${other.map(lineRow).join('')}</tbody></table>` : ''}<p class="ex-note">Read from the validators at block ${num(live.read_at_height)}. Sequence ${num(live.sequence)}.${empty ? ` ${empty} line${empty === 1 ? '' : 's'} with a zero balance ${empty === 1 ? 'is' : 'are'} not shown.` : ''}</p>`) +
       section('Operations') + `<ul class="stream">${d.ops.map((o) => opLine(o)).join('') || '<li class="ex-empty">None.</li>'}</ul>`);
   }
 
@@ -198,20 +202,15 @@
       section('Listed') + table(listed) + (other.length ? section('Earlier and test coins') + table(other) + '<p class="ex-note">Coins registered on the network during development. They are shown because they are on the ledger.</p>' : ''));
   }
 
+  // One bar per check: how far the NAV sits from $1.00, in hundredths of a percent, on a fixed ±0.5% scale.
   function navChart(c) {
     const pts = c.checks.filter((x) => x.nav_per_unit != null); if (pts.length < 2) return '';
-    const W = 1000, H = 260, L = 70, R = 20, T = 20, B = 34; const vals = pts.map((x) => Number(x.nav_per_unit) / 10 ** c.nav_decimals);
-    const vmin = Math.min(...vals), vmax = Math.max(...vals), mid = (vmin + vmax) / 2; const half = Math.max((vmax - vmin) * 0.65, mid * 0.005); let lo = mid - half, hi = mid + half;
-    const x = (i) => L + ((W - L - R) * i) / (pts.length - 1), y = (v) => T + (H - T - B) * (1 - (v - lo) / (hi - lo));
-    const ticks = [lo + (hi - lo) * 0.1, (lo + hi) / 2, hi - (hi - lo) * 0.1];
-    return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="NAV per coin at each check">
-      ${ticks.map((t) => `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(t).toFixed(1)}" y2="${y(t).toFixed(1)}"/><text x="${L - 8}" y="${(y(t) + 4).toFixed(1)}" text-anchor="end">$${t.toFixed(t < 10 ? 4 : 2)}</text>`).join('')}
-      <path class="line" d="${vals.map((v, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join('')}"/>
-      ${vals.map((v, i) => `<circle class="pt${i === vals.length - 1 ? ' last' : ''}" cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="4"><title>Epoch ${pts[i].epoch}, block ${pts[i].height}: $${v}</title></circle>`).join('')}
-      <text x="${L}" y="${H - 10}">Epoch ${esc(pts[0].epoch)} · block ${num(pts[0].height)}</text><text x="${W - R}" y="${H - 10}" text-anchor="end">Epoch ${esc(pts[pts.length - 1].epoch)} · block ${num(pts[pts.length - 1].height)}</text></svg>`;
+    const vals = pts.map((x) => Number(x.nav_per_unit) / 10 ** c.nav_decimals); const ref = Math.abs(vals[vals.length - 1] - 1) < 0.05 ? 1 : vals[0];
+    const dev = vals.map((v) => ((v - ref) / ref) * 100); const scale = Math.max(0.5, ...dev.map(Math.abs)) ;
+    return `<div class="devs" role="img" aria-label="Deviation of NAV from ${ref === 1 ? '$1.00' : 'the first check'} at each check"><div class="devs-key">${ref === 1 ? 'Distance from $1.00' : 'Change since the first check'} at each check · scale ±${scale.toFixed(1)}%</div>${pts.map((x, i) => `<a class="dev" href="#/tx/${esc(x.op)}" title="Epoch ${esc(x.epoch)}, block ${x.height}"><span class="e">Epoch ${esc(x.epoch)}</span><span class="track"><i class="${dev[i] < 0 ? 'neg' : 'pos'}" style="${dev[i] < 0 ? 'right' : 'left'}:50%;width:${Math.max(0.4, (Math.abs(dev[i]) / scale) * 50).toFixed(2)}%"></i></span><span class="v">${dev[i] === 0 ? '0.000' : (dev[i] > 0 ? '+' : '−') + Math.abs(dev[i]).toFixed(3)}%</span><span class="n">$${vals[i].toFixed(6)}</span></a>`).join('')}</div>`;
   }
-
-  function navRange(c) { const v = c.checks.map((x) => Number(x.nav_per_unit)).filter((x) => x > 0); if (v.length < 2) return ''; const lo = Math.min(...v), hi = Math.max(...v); return `<span class="label">Range across ${v.length} checks: ${(((hi - lo) / lo) * 100).toFixed(3)}% · chart spans at least ±0.5%</span>`; }
+  function navBar(c, x) { const v = c.checks.map((k) => Number(k.nav_per_unit)).filter((k) => k > 0); const lo = Math.min(...v), hi = Math.max(...v); if (hi === lo) return '<span class="quiet">no change</span>'; const pos = ((Number(x.nav_per_unit) - lo) / (hi - lo)) * 100; return `<span class="rng" title="Lowest ${usd(lo, c.nav_decimals, 6)}, highest ${usd(hi, c.nav_decimals, 6)}"><i style="left:${pos.toFixed(1)}%"></i></span>`; }
+  function navRange(c) { const v = c.checks.map((x) => Number(x.nav_per_unit)).filter((x) => x > 0); if (v.length < 2) return ''; const lo = Math.min(...v), hi = Math.max(...v); return `<span class="hint">Lowest to highest across ${v.length} checks: ${(((hi - lo) / lo) * 100).toFixed(3)}%</span>`; }
   async function coin(id) {
     const c = await get(`/coin/${id}`); if (!c) return notFound('No asset with that name or ID.');
     if (c.plain_asset) return page(head('Devnet · asset', esc(c.code || short(c.asset_id)), esc(c.name || ''), '') + `<div class="kv"><div>Asset ID</div><div>${hashRow(c.asset_id)}</div><div>Issuer</div><div>${addr(c.issuer)}</div><div>Precision</div><div>${esc(c.precision)}</div><div>Holders</div><div>${num(c.detail?.holder_count)}</div></div>` + section('Operations') + `<ul class="stream">${c.ops.map((o) => opLine(o)).join('')}</ul>`);
@@ -221,13 +220,14 @@
     return page(head(`Devnet · NAVCoin${c.retired ? ' · retired' : ''}`, esc(c.code), esc(c.description || c.name || ''),
       `<div class="ex-meta">${c.halted ? '<span class="tag rej">Halted</span>' : ''}${c.verifier_kind ? `<span class="tag demo">${esc(c.verifier_kind)}</span>` : ''}${fresh ? `<span class="label">Last check ${esc(fresh)}</span>` : ''}</div>`) +
       `<div class="stats"><div><div class="v num">${usd(c.nav_per_unit, c.nav_decimals, 6)}</div><div class="k">NAV per coin</div></div><div><div class="v num">${units(c.supply, c.precision, 0).replace(/\.00$/, '')}</div><div class="k">Supply at last check</div></div><div><div class="v num">${usd(c.net_assets, c.nav_decimals, 0).replace(/\.00$/, '')}</div><div class="k">Reserves at last check</div></div><div><div class="v num">${c.checks.length}</div><div class="k">NAV checks</div></div></div>` +
-      section('NAV checks', navRange(c)) + navChart(c) +
-      `<table class="ledger tight"><thead><tr><th>Epoch</th><th>NAV per coin</th><th>Reserves</th><th>Supply</th><th>Block</th><th>Result</th></tr></thead><tbody>
-      ${[...c.checks].reverse().map((x) => `<tr><td>${link(`/tx/${x.op}`, 'Epoch ' + esc(x.epoch))}</td><td class="num">${usd(x.nav_per_unit, c.nav_decimals, 6)}</td><td class="num">${usd(x.net_assets, c.nav_decimals)}</td><td class="num">${units(x.supply, c.precision, 2)}</td><td>${link(`/block/${x.height}`, num(x.height))}</td><td>${x.accepted === false ? '<span class="tag rej">Rejected</span>' : '<span class="tag ok">Accepted</span>'}</td></tr>`).join('')}
+      `<div class="kv compact"><div>Asset ID</div><div>${hashRow(c.asset_id)}</div><div>Issuer</div><div>${addr(c.issuer)}</div></div>` +
+      section('NAV checks', navRange(c)) +
+      `<table class="ledger tight"><thead><tr><th>Epoch</th><th>NAV per coin</th><th>Move within the observed range</th><th>Reserves</th><th>Supply</th><th>Block</th><th>Result</th></tr></thead><tbody>
+      ${[...c.checks].reverse().map((x) => `<tr><td>${link(`/tx/${x.op}`, 'Epoch ' + esc(x.epoch))}</td><td class="num">${usd(x.nav_per_unit, c.nav_decimals, 6)}</td><td>${navBar(c, x)}</td><td class="num">${usd(x.net_assets, c.nav_decimals)}</td><td class="num">${units(x.supply, c.precision, 2)}</td><td>${link(`/block/${x.height}`, num(x.height))}</td><td>${x.accepted === false ? '<span class="tag rej">Rejected</span>' : '<span class="quiet">Accepted</span>'}</td></tr>`).join('')}
       </tbody></table><p class="ex-note">A check is a reserve reading submitted with its proof. "Accepted" means the validators accepted the submission under the coin's proof profile; it is the network's result, not the explorer's own check of the proof.</p>` +
       (c.routes?.length ? section('Ethereum') + `<div class="kv">${c.routes.map((r) => `<div>Route</div><div class="mono">${esc(r.route_id)}</div>${r.wrapped_token ? `<div>Wrapped token</div><div><a class="hash" target="_blank" rel="noopener" href="https://etherscan.io/token/${esc(r.wrapped_token)}">${esc(r.wrapped_token)} ↗</a></div>` : ''}${r.controller ? `<div>Controller</div><div><a class="hash" target="_blank" rel="noopener" href="https://etherscan.io/address/${esc(r.controller)}">${esc(r.controller)} ↗</a></div>` : ''}`).join('')}</div>` : '') +
-      section(`Operations`, link(`/stream?asset=${c.asset_id}`, `All ${num(c.op_count)} →`)) + `<ul class="stream">${c.ops.map((o) => opLine(o)).join('')}</ul>` +
-      `<div class="kv" style="margin-top:28px"><div>Asset ID</div><div>${hashRow(c.asset_id)}</div><div>Issuer</div><div>${addr(c.issuer)}</div></div>`);
+      section(`Operations`, link(`/stream?asset=${c.asset_id}`, `All ${num(c.op_count)} →`)) + `<ul class="stream">${collapse(c.ops).slice(0, 15).map((o) => opLine(o)).join('')}</ul><p class="ex-note">Showing the latest of ${num(c.op_count)}. ${link(`/stream?asset=${c.asset_id}`, 'See all operations for ' + esc(c.code) + ' →', 'lk')}</p>` +
+      '');
   }
 
   async function privatePage() {
@@ -245,11 +245,11 @@
   async function journeys(q) {
     const kind = q.get('kind') || ''; const d = await get(`/journeys?kind=${kind}`);
     return page(head('Devnet', 'Journeys', 'One thing a person did, across every step it took. A deposit is a transaction on Ethereum and three operations here; it reads as one line.') +
-      `<p class="legend block"><span class="jmini"><i class="done"></i></span> step done on this network &nbsp; <span class="jmini"><i class="unknown"></i></span> step on Ethereum, not read by the explorer &nbsp; <span class="jmini"><i class="pending"></i></span> waiting &nbsp; <span class="jmini"><i class="rejected"></i></span> refused. "Complete" means every step is done. "Complete on the network" means every step here is done and the Ethereum step was not checked.</p>` +
+      `<ul class="key"><li><span class="mark done"><i></i></span>Done on this network</li><li><span class="mark unknown"><i></i></span>On Ethereum, not read by the explorer</li><li><span class="mark pending"><i></i></span>Waiting</li><li><span class="mark rejected"><i></i></span>Refused</li></ul>` +
       `<div class="chips"><a class="chip" href="#/journeys" aria-current="${!kind}">All</a>${Object.entries(JOURNEY).map(([k, v]) => `<a class="chip" href="#/journeys?kind=${k}" aria-current="${kind === k}">${esc(v)}${d.counts[k] ? ' · ' + d.counts[k] : ''}</a>`).join('')}</div>
       <table class="ledger tight"><thead><tr><th>Blocks</th><th>When</th><th>Journey</th><th>What happened</th><th>Steps</th><th>State</th></tr></thead><tbody>
-      ${d.journeys.map((j) => `<tr><td>${num(j.first_height)}${j.last_height !== j.first_height ? '–' + num(j.last_height) : ''}</td><td>${when(j.time)}</td><td>${link(`/journey/${j.kind}/${j.key}`, esc(JOURNEY[j.kind]), 'lk')}</td><td>${esc(j.headline)}</td><td>${dots(j.steps)}</td><td><span class="tag ${j.summary === 'rejected' ? 'rej' : j.summary === 'in progress' ? 'demo' : 'ok'}">${esc(j.summary)}</span></td></tr>`).join('')}
-      </tbody></table>`);
+      ${d.journeys.map((j) => `<tr><td>${num(j.first_height)}${j.last_height !== j.first_height ? '–' + num(j.last_height) : ''}</td><td>${when(j.time)}</td><td>${link(`/journey/${j.kind}/${j.key}`, esc(JOURNEY[j.kind]), 'lk')}</td><td>${esc(j.headline)}</td><td>${dots(j.steps)}</td><td>${j.summary === 'rejected' ? '<span class="tag rej">Refused</span>' : j.summary === 'in progress' ? '<span class="tag demo">In progress</span>' : `<span class="quiet">${j.summary === 'complete' ? 'Complete' : 'Done here'}</span>`}</td></tr>`).join('')}
+      </tbody></table><p class="ex-note">"Done here" means every step on this network is done. Steps on Ethereum are not read by this build, so they are never shown as done.</p>`);
   }
   async function journeyPage(kind, key) {
     const j = await get(`/journey/${kind}/${key}`); if (!j) return notFound('No journey with that key.');
