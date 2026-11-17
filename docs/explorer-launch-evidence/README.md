@@ -70,3 +70,17 @@ Exact prompt, sent with ten screenshots (eight at 1440 px wide, two at 390 px wi
 3. **Chrome on our private network is blocked from the data.** The data address is a Tailscale funnel. For a visitor on the same tailnet it resolves to a private address, and Chrome refuses a public page reading a private address. Visitors outside the tailnet are not affected. The fix is to serve the data from the Task Node domain: https://github.com/postfiatorg/tasknode/pull/410, which is **open and not merged**. Its checks fail on `npm audit` because of advisory GHSA-fc5q-39xc-vjpf against `picomatch`, a build-time dependency of Vite with no patched release; the production dependency audit is clean. The pull request is held until that gate is resolved.
 
 Also: block times before the explorer started come from one validator's vote records, and task rewards and profile NFTs are not on this chain yet, so they do not appear.
+
+## 7. Why 1,486 operations have 1,482 receipts
+
+Counted again through the public address: 1,486 operations, of which 1,485 carry a transaction ID and 1 does not; the 1,485 IDs contain 1,482 distinct values.
+
+| Cause | Operations | Extra operations |
+| --- | --- | ---: |
+| One governance block with two operations and one receipt | `928-0` (amendment) has the receipt `183fa3d6…c447e`; `928-1` (storage commitment activation) has none | 1 |
+| One receipt ID reused by three governance blocks | `940-0`, `941-0`, `945-0` (bridge route profile activations) | 2 |
+| One receipt ID reused by two governance blocks | `64-0`, `66-0` (bridge route profile activations) | 1 |
+| **Total** | | **4** |
+
+1,482 + 4 = 1,486. Every case is a governance block; no payment, bridge, market or private operation shares a receipt. The raw block responses are in [receipt-gap.json](receipt-gap.json), fetched from `/block/64`, `/block/66`, `/block/940`, `/block/941`, `/block/945` and `/block/928`.
+Reproduce: page `/stream` to the end, collect `tx_id`; `null` appears once and two IDs appear more than once.
