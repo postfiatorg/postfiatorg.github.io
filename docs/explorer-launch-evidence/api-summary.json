@@ -1,0 +1,1427 @@
+{
+ "ok": true,
+ "meta": {
+  "index_height": 1436,
+  "chain_height": 1436,
+  "built_at": 1794938029.770048,
+  "status_age": 4.9
+ },
+ "data": {
+  "network": {
+   "chain_id": "postfiat-wan-devnet-2",
+   "validators": 6,
+   "build": "ac91a1f4"
+  },
+  "height": 1436,
+  "tip_seen_at": null,
+  "blocks": 1436,
+  "ops": 1486,
+  "lenses": [
+   {
+    "lens": "bridge",
+    "count": 344
+   },
+   {
+    "lens": "payments",
+    "count": 318
+   },
+   {
+    "lens": "navmarket",
+    "count": 285
+   },
+   {
+    "lens": "private",
+    "count": 178
+   },
+   {
+    "lens": "navchecks",
+    "count": 180
+   },
+   {
+    "lens": "market",
+    "count": 77
+   },
+   {
+    "lens": "fastlane",
+    "count": 60
+   },
+   {
+    "lens": "network",
+    "count": 44
+   }
+  ],
+  "block_kinds": {
+   "governance": 43,
+   "shielded": 160,
+   "transparent": 1233
+  },
+  "shielded_share": 0.1114,
+  "rejected": 16,
+  "addresses": 73,
+  "assets": 15,
+  "proposers": [
+   {
+    "proposer": "validator-0",
+    "blocks": 240
+   },
+   {
+    "proposer": "validator-1",
+    "blocks": 239
+   },
+   {
+    "proposer": "validator-2",
+    "blocks": 240
+   },
+   {
+    "proposer": "validator-3",
+    "blocks": 239
+   },
+   {
+    "proposer": "validator-4",
+    "blocks": 240
+   },
+   {
+    "proposer": "validator-5",
+    "blocks": 238
+   }
+  ],
+  "coins": [
+   {
+    "asset_id": "521c6c630bb48d4a37ab4a7bd4900dd2caa2d9e99499e452da3c7ce75b3d74b62d20e18555642bec32174498cbee5e2c",
+    "code": "A666",
+    "name": "Post Fiat NAVCoin a666",
+    "precision": 6,
+    "issuer": "pffcb93d9f87a843a8aa34e1adf241f5d58143e81b",
+    "slug": "a666",
+    "description": "A NAVCoin linked to an Ethereum wrapped token.",
+    "retired": false,
+    "nav_decimals": 8,
+    "listed": true,
+    "nav_per_unit": 116736912,
+    "finalized_epoch": 9,
+    "halted": false,
+    "verifier_kind": "sp1-groth16",
+    "max_snapshot_age_blocks": 900,
+    "active": true,
+    "routes": [
+     {
+      "route_id": "pftl-a666-ethereum-wA666-usdc-v1",
+      "asset_id": "521c6c630bb48d4a37ab4a7bd4900dd2caa2d9e99499e452da3c7ce75b3d74b62d20e18555642bec32174498cbee5e2c",
+      "settlement_asset_id": "02c46a36eb0da3516b4d8affea8f4028ad3f36825a3e8f0e009ea9dbbbcfb3c233f6830bd5221fe2717fb6a1a7005d7b",
+      "coin": "A666",
+      "ethereum_chain_id": 1,
+      "wrapped_token": "0xee4c92edb03efdd9b519339edc19ad70c69a9be5",
+      "controller": "0x9a0262c0572fb4db08765408eb225e207f40c3d9",
+      "pool_id": null
+     }
+    ],
+    "last_check_height": 1108,
+    "supply": 31519438511,
+    "net_assets": 3679481931346,
+    "spark": [
+     100000000,
+     90103113,
+     90115750,
+     90115750,
+     90234207,
+     90353505,
+     90248000,
+     103523693,
+     116736912
+    ],
+    "n_checks": 9
+   },
+   {
+    "asset_id": "52285e4ded1d58113cfaa12bbc034b8b10213f699b3224c74160450229d6bf7ccfe505c78f2599d975ae2ecf98f7d8af",
+    "code": "B24",
+    "name": "Schwab NAVCoin B24",
+    "precision": 6,
+    "issuer": "pffcb93d9f87a843a8aa34e1adf241f5d58143e81b",
+    "slug": "b24",
+    "description": "Backed by a Schwab brokerage account.",
+    "retired": false,
+    "nav_decimals": 6,
+    "listed": true,
+    "nav_per_unit": 999922,
+    "finalized_epoch": 6,
+    "halted": false,
+    "verifier_kind": "sp1-nav-reserve-v1",
+    "max_snapshot_age_blocks": 1000,
+    "active": true,
+    "routes": [
+     {
+      "route_id": "pftl-b24-ethereum-wB24-usdc-v1",
+      "asset_id": "52285e4ded1d58113cfaa12bbc034b8b10213f699b3224c74160450229d6bf7ccfe505c78f2599d975ae2ecf98f7d8af",
+      "settlement_asset_id": "02c46a36eb0da3516b4d8affea8f4028ad3f36825a3e8f0e009ea9dbbbcfb3c233f6830bd5221fe2717fb6a1a7005d7b",
+      "coin": "B24",
+      "ethereum_chain_id": 1,
+      "wrapped_token": "0x540fda223a2198690d31920a921a0b9dff335dbf",
+      "controller": "0x2c7db4c2ff8514334f62e6630226e95e72fa6056",
+      "pool_id": null
+     }
+    ],
+    "last_check_height": 1381,
+    "supply": 420323380000,
+    "net_assets": 420290900000,
+    "spark": [
+     1000000,
+     1000000,
+     1000000,
+     999859,
+     999845,
+     999922
+    ],
+    "n_checks": 6
+   },
+   {
+    "asset_id": "43b9ba500a8cc04b13a10f35c3187ff09fdf52a3accfb507226144dcbe2ef14f4b2e1d555c62bbdf63e5cf3e7e8231cc",
+    "code": "BMNRC",
+    "name": "BMNR Carry NAVCoin",
+    "precision": 6,
+    "issuer": "pf9bd7958a0779f4de39e871878bbd6552dc461c3f",
+    "slug": "bmnrc",
+    "description": "A NAVCoin linked to an Ethereum wrapped token.",
+    "retired": false,
+    "nav_decimals": 8,
+    "listed": true,
+    "nav_per_unit": 100000000,
+    "finalized_epoch": 1,
+    "halted": false,
+    "verifier_kind": "sp1-nav-reserve-v1",
+    "max_snapshot_age_blocks": 900,
+    "active": true,
+    "routes": [
+     {
+      "route_id": "pftl-bmnrc-ethereum-wBMNRC-usdc-v1",
+      "asset_id": "43b9ba500a8cc04b13a10f35c3187ff09fdf52a3accfb507226144dcbe2ef14f4b2e1d555c62bbdf63e5cf3e7e8231cc",
+      "settlement_asset_id": "02c46a36eb0da3516b4d8affea8f4028ad3f36825a3e8f0e009ea9dbbbcfb3c233f6830bd5221fe2717fb6a1a7005d7b",
+      "coin": "BMNRC",
+      "ethereum_chain_id": 1,
+      "wrapped_token": "0x8804b6f3a842acf291e57235efda1812e515174b",
+      "controller": "0xca88fc8f873e2b59c1e1b3c86578aa36090469a7",
+      "pool_id": null
+     }
+    ],
+    "last_check_height": 1099,
+    "supply": 640585238,
+    "net_assets": 64058523893,
+    "spark": [
+     100000000
+    ],
+    "n_checks": 1
+   },
+   {
+    "asset_id": "ca7845134c8e95819082fcd2f1612808e20a37dfabab98dab120f99fd2c54c18ffb50d98c0664480420c881773244627",
+    "code": "B23",
+    "name": "Post Fiat NAVCoin - Schwab brokerage account (facility proof)",
+    "precision": 6,
+    "issuer": "pffcb93d9f87a843a8aa34e1adf241f5d58143e81b",
+    "slug": "b23",
+    "description": "Backed by a Schwab brokerage account.",
+    "retired": true,
+    "nav_decimals": 6,
+    "listed": true,
+    "nav_per_unit": 1002487,
+    "finalized_epoch": 3,
+    "halted": true,
+    "verifier_kind": "sp1-nav-reserve-v1",
+    "max_snapshot_age_blocks": 1000,
+    "active": true,
+    "routes": [
+     {
+      "route_id": "pftl-pfdep-schwab-primary-pfusdc-v1",
+      "asset_id": "ca7845134c8e95819082fcd2f1612808e20a37dfabab98dab120f99fd2c54c18ffb50d98c0664480420c881773244627",
+      "settlement_asset_id": "02c46a36eb0da3516b4d8affea8f4028ad3f36825a3e8f0e009ea9dbbbcfb3c233f6830bd5221fe2717fb6a1a7005d7b",
+      "coin": "B23",
+      "ethereum_chain_id": 1,
+      "wrapped_token": "0xee4c92edb03efdd9b519339edc19ad70c69a9be5",
+      "controller": "0x9a0262c0572fb4db08765408eb225e207f40c3d9",
+      "pool_id": null
+     }
+    ],
+    "last_check_height": 1299,
+    "supply": 419230350000,
+    "net_assets": 420273150000,
+    "spark": [
+     1000000,
+     1000000,
+     1002487
+    ],
+    "n_checks": 3
+   },
+   {
+    "asset_id": "de8d3d78aca83f7000632cbd3dd06edd30d105085d16eef1696f9e1707908ec9209239080d21ca1c0cecc36ca6f966b6",
+    "code": "a651",
+    "name": "Demo NAVCoin a651 canonical USD 1",
+    "precision": 6,
+    "issuer": "pffcb93d9f87a843a8aa34e1adf241f5d58143e81b",
+    "slug": null,
+    "description": null,
+    "retired": false,
+    "nav_decimals": 6,
+    "listed": false,
+    "nav_per_unit": 1000000,
+    "finalized_epoch": 3,
+    "halted": false,
+    "verifier_kind": "multi-fetch-quorum",
+    "max_snapshot_age_blocks": 1000,
+    "active": true,
+    "routes": [],
+    "last_check_height": 58,
+    "supply": 45702464581,
+    "net_assets": 4570246458128,
+    "spark": [
+     1000000
+    ],
+    "n_checks": 1
+   },
+   {
+    "asset_id": "300bf48a63a94770b6e67817f88cd1abf77e7f592a061e15682d7fd9973260af4c2e631e32df3c2c402b7d2fe272a293",
+    "code": "a666",
+    "name": "Bridge-aware NAVCoin a666",
+    "precision": 6,
+    "issuer": "pffcb93d9f87a843a8aa34e1adf241f5d58143e81b",
+    "slug": null,
+    "description": null,
+    "retired": false,
+    "nav_decimals": 6,
+    "listed": false,
+    "nav_per_unit": 155261103440,
+    "finalized_epoch": 2,
+    "halted": false,
+    "verifier_kind": "multi-fetch-quorum",
+    "max_snapshot_age_blocks": 1000,
+    "active": true,
+    "routes": [
+     {
+      "route_id": "pftl-a666-ce22-sepolia-wA666-usdc-controlled-20260723-v1",
+      "asset_id": "300bf48a63a94770b6e67817f88cd1abf77e7f592a061e15682d7fd9973260af4c2e631e32df3c2c402b7d2fe272a293",
+      "settlement_asset_id": "02c46a36eb0da3516b4d8affea8f4028ad3f36825a3e8f0e009ea9dbbbcfb3c233f6830bd5221fe2717fb6a1a7005d7b",
+      "coin": "a666",
+      "ethereum_chain_id": 11155111,
+      "wrapped_token": "0xf226c4f3d01ba63900032ad72203e09ca6a62cb3",
+      "controller": "0xeaf7503663a901c4e2ebad4fb90c6f17d2a06764",
+      "pool_id": null
+     }
+    ],
+    "last_check_height": 308,
+    "supply": 200000,
+    "net_assets": 31052220688,
+    "spark": [
+     1000000,
+     155261103440
+    ],
+    "n_checks": 2
+   },
+   {
+    "asset_id": "1489e9672c5901432631094e5b2070291f7441820651f0cae3946131d62eeca3753eced417af6e37928c0554cafc76b6",
+    "code": "PFDEP",
+    "name": "Post Fiat NAVCoin - Schwab attributed deposits",
+    "precision": 6,
+    "issuer": "pffcb93d9f87a843a8aa34e1adf241f5d58143e81b",
+    "slug": null,
+    "description": null,
+    "retired": false,
+    "nav_decimals": 6,
+    "listed": false,
+    "nav_per_unit": 1000000,
+    "finalized_epoch": 1,
+    "halted": true,
+    "verifier_kind": "placeholder",
+    "max_snapshot_age_blocks": 1000,
+    "active": true,
+    "routes": [],
+    "last_check_height": 1175,
+    "supply": 2000000000,
+    "net_assets": 2000000000,
+    "spark": [
+     1000000
+    ],
+    "n_checks": 1
+   },
+   {
+    "asset_id": "42cb574dcf156f906ce424f8555eac83c7dde33e48c44f4ef6307df705edfe036f69b1d437e8b7c630dd325684965a0c",
+    "code": "a651",
+    "name": "Demo NAVCoin a651",
+    "precision": 6,
+    "issuer": "pffcb93d9f87a843a8aa34e1adf241f5d58143e81b",
+    "slug": null,
+    "description": null,
+    "retired": false,
+    "nav_decimals": 6,
+    "listed": false,
+    "nav_per_unit": 820000000,
+    "finalized_epoch": 2,
+    "halted": true,
+    "verifier_kind": "ledger-transparent",
+    "max_snapshot_age_blocks": 1000,
+    "active": true,
+    "routes": [],
+    "last_check_height": 47,
+    "supply": 1000000,
+    "net_assets": 820000000,
+    "spark": [
+     820000000,
+     820000000
+    ],
+    "n_checks": 2
+   },
+   {
+    "asset_id": "629f1ba8f36963662d6e36243aea85627787cd72d41a9e92c5f01b60e3e68c1b951af771d16780bf13c4036b8d2a4996",
+    "code": "PFETH",
+    "name": "PostFiat WETH Bridge Asset",
+    "precision": 9,
+    "issuer": "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8",
+    "slug": null,
+    "description": null,
+    "retired": false,
+    "nav_decimals": 6,
+    "listed": false,
+    "nav_per_unit": 1000000,
+    "finalized_epoch": 5,
+    "halted": false,
+    "verifier_kind": "sp1-groth16",
+    "max_snapshot_age_blocks": 900,
+    "active": true,
+    "routes": [],
+    "last_check_height": 969,
+    "supply": 5000000,
+    "net_assets": 5000000,
+    "spark": [
+     1000000,
+     1000000,
+     1000000
+    ],
+    "n_checks": 3
+   },
+   {
+    "asset_id": "02c46a36eb0da3516b4d8affea8f4028ad3f36825a3e8f0e009ea9dbbbcfb3c233f6830bd5221fe2717fb6a1a7005d7b",
+    "code": "PFUSDC",
+    "name": "proof-native pfUSDC",
+    "precision": 6,
+    "issuer": "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8",
+    "slug": null,
+    "description": null,
+    "retired": false,
+    "nav_decimals": 6,
+    "listed": false,
+    "nav_per_unit": 1000000,
+    "finalized_epoch": 62,
+    "halted": false,
+    "verifier_kind": "sp1-groth16",
+    "max_snapshot_age_blocks": 900,
+    "active": true,
+    "routes": [],
+    "last_check_height": 301,
+    "supply": 1000010,
+    "net_assets": 1000010,
+    "spark": [
+     1000000,
+     1000000,
+     1000000,
+     1000000,
+     1000000,
+     1000000,
+     1000000,
+     1000000,
+     1000000,
+     1000000
+    ],
+    "n_checks": 10
+   }
+  ],
+  "latest_blocks": [
+   {
+    "height": 1436,
+    "kind": "transparent",
+    "proposer": "validator-2",
+    "view": 0,
+    "hash": "b7bac6b913d7f050ccc8baefabd119cba3c75ae00a5108b483be4937cc96956be90f975231ded0efc67f7f4ee82b5f6a",
+    "votes": 5,
+    "quorum": 5,
+    "n_ops": 1,
+    "time": 1794930163.0,
+    "time_source": "validator vote record",
+    "evidence": "cross-checked",
+    "headline": "5.00 PFUSDC credited to pf574de1\u20269eaa from a bridge deposit"
+   },
+   {
+    "height": 1435,
+    "kind": "transparent",
+    "proposer": "validator-1",
+    "view": 0,
+    "hash": "6cf9561d1aae0afb12f3915e695c3b05d8ccf8faea62321576b217f3b10494f9cff4110bfc24e6cf9db057bb020e2b91",
+    "votes": 5,
+    "quorum": 5,
+    "n_ops": 1,
+    "time": 1794930145.0,
+    "time_source": "validator vote record",
+    "evidence": "cross-checked",
+    "headline": "Deposit finalized for PFUSDC"
+   },
+   {
+    "height": 1434,
+    "kind": "transparent",
+    "proposer": "validator-0",
+    "view": 0,
+    "hash": "c99c1469fe7ae6bd67441624d5856f747679fcef340b63bdbb6528f47c54ffb6c5de991b082f8284a09e2f70b9aad091",
+    "votes": 5,
+    "quorum": 5,
+    "n_ops": 1,
+    "time": 1794930114.0,
+    "time_source": "validator vote record",
+    "evidence": "cross-checked",
+    "headline": "Deposit proposed: 5.00 USDC from 0xf83e21\u2026d0be on chain 1 for pf574de1\u20269eaa"
+   },
+   {
+    "height": 1433,
+    "kind": "transparent",
+    "proposer": "validator-5",
+    "view": 0,
+    "hash": "339df041584abb0dee47337b9688add8b9bf5d7d3cefad454857386c188aa3cfeec3199a59285280a0b0505f10836b56",
+    "votes": 5,
+    "quorum": 5,
+    "n_ops": 1,
+    "time": 1794929437.0,
+    "time_source": "validator vote record",
+    "evidence": "cross-checked",
+    "headline": "0.50 PFT sent from pfd50f37\u20260aff to pf564258\u2026f01a"
+   },
+   {
+    "height": 1432,
+    "kind": "transparent",
+    "proposer": "validator-4",
+    "view": 0,
+    "hash": "43079cc2f5e33a2090bbe2b07a9cfe55827aac84cbbfb4827262dd4f4ff1a36152075814b3a3bd4f44bf3ef7d3c26082",
+    "votes": 5,
+    "quorum": 5,
+    "n_ops": 1,
+    "time": 1794929316.0,
+    "time_source": "validator vote record",
+    "evidence": "cross-checked",
+    "headline": "0.50 PFT sent from pfd50f37\u20260aff to pf574de1\u20269eaa"
+   },
+   {
+    "height": 1431,
+    "kind": "transparent",
+    "proposer": "validator-3",
+    "view": 0,
+    "hash": "e41b15e1d6f5e4ab97fd103e36fead7b33fb0796aaa1d71109e9235ed8dc072aa68059091edd0f85192cb35b0bcba7ce",
+    "votes": 5,
+    "quorum": 5,
+    "n_ops": 1,
+    "time": 1794929117.0,
+    "time_source": "validator vote record",
+    "evidence": "cross-checked",
+    "headline": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b"
+   },
+   {
+    "height": 1430,
+    "kind": "transparent",
+    "proposer": "validator-2",
+    "view": 0,
+    "hash": "476c84c30e3c1d54fcebc20cfe0e6b331a31f115f9ab320744737e415b88f856f4ba6b466c18ca9f7eb107593883c82e",
+    "votes": 5,
+    "quorum": 5,
+    "n_ops": 1,
+    "time": 1794928907.0,
+    "time_source": "validator vote record",
+    "evidence": "cross-checked",
+    "headline": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b"
+   },
+   {
+    "height": 1429,
+    "kind": "transparent",
+    "proposer": "validator-1",
+    "view": 0,
+    "hash": "672e5850d2a5366077635459f51bc2a313ceb0a8976584672e1c0148ab92ce148888fd2b3768dbcb4cb37c50d9fb7ac1",
+    "votes": 5,
+    "quorum": 5,
+    "n_ops": 1,
+    "time": 1794928784.0,
+    "time_source": "validator vote record",
+    "evidence": "cross-checked",
+    "headline": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b"
+   }
+  ],
+  "tip_time": 1794930163.0,
+  "latest_journeys": [
+   {
+    "kind": "deposit",
+    "key": "78ba38bf5a227426aaae91b5b1df99d710a6e9d6ba46b65b69b5c328778f39810eb9af40a060e334ed42a1646c0dc5fa",
+    "summary": "complete on the network",
+    "headline": "5.00 PFUSDC credited to pf574de1\u20269eaa from a bridge deposit",
+    "first_height": 1434,
+    "last_height": 1436,
+    "steps": [
+     {
+      "label": "USDC deposited on the source chain",
+      "state": "unknown"
+     },
+     {
+      "label": "Deposit proposed with its proof",
+      "state": "done"
+     },
+     {
+      "label": "Deposit finalized",
+      "state": "done"
+     },
+     {
+      "label": "PFUSDC credited",
+      "state": "done"
+     }
+    ],
+    "time": 1794930163.0
+   },
+   {
+    "kind": "withdrawal",
+    "key": "1328fe7c3061c4ddef1d878c68ab3c9b01b55bcec118c85598dc0ade7697cdc489ed3073fd028432525915f1bec2ce4c",
+    "summary": "complete on the network",
+    "headline": "1.49 PFUSDC burned to withdraw USDC to 0x9a33a9\u20267d50",
+    "first_height": 1419,
+    "last_height": 1419,
+    "steps": [
+     {
+      "label": "PFUSDC burned",
+      "state": "done"
+     },
+     {
+      "label": "USDC paid out on the destination chain",
+      "state": "unknown"
+     }
+    ],
+    "time": 1794921260.0
+   },
+   {
+    "kind": "create",
+    "key": "fc5219bf4048c6828b971085fa64a907482f2d02d88da1f5a212d5cb4090c229a46c69e7c36c97b44c563e5bb7735008",
+    "summary": "complete",
+    "headline": "1.00 B24 created for 1.00 PFUSDC at a NAV of $0.999922",
+    "first_height": 1415,
+    "last_height": 1417,
+    "steps": [
+     {
+      "label": "Creation reserved",
+      "state": "done"
+     },
+     {
+      "label": "NAVCoin created at NAV",
+      "state": "done"
+     }
+    ],
+    "time": 1794920284.0
+   },
+   {
+    "kind": "withdrawal",
+    "key": "33962ff0586d5114836d0bd15822a1731464eede6d8f64088bc38d0eb3cd90d275648ecf237c4ceedfccbcd74ec436bf",
+    "summary": "complete on the network",
+    "headline": "0.50 PFUSDC burned to withdraw USDC to 0x9a33a9\u20267d50",
+    "first_height": 1413,
+    "last_height": 1413,
+    "steps": [
+     {
+      "label": "PFUSDC burned",
+      "state": "done"
+     },
+     {
+      "label": "USDC paid out on the destination chain",
+      "state": "unknown"
+     }
+    ],
+    "time": 1794918773.0
+   },
+   {
+    "kind": "deposit",
+    "key": "4c958066f0f845b49b7e083aa1956039f4e223213ce2050effe5f0b422e2acc4aa29aa543bec9378195635afe224e8a3",
+    "summary": "complete on the network",
+    "headline": "2.00 PFUSDC credited to pf8b30d2\u2026c2c8 from a bridge deposit",
+    "first_height": 1410,
+    "last_height": 1412,
+    "steps": [
+     {
+      "label": "USDC deposited on the source chain",
+      "state": "unknown"
+     },
+     {
+      "label": "Deposit proposed with its proof",
+      "state": "done"
+     },
+     {
+      "label": "Deposit finalized",
+      "state": "done"
+     },
+     {
+      "label": "PFUSDC credited",
+      "state": "done"
+     }
+    ],
+    "time": 1794918362.0
+   },
+   {
+    "kind": "deposit",
+    "key": "3a1fcc6f79bb058102bbf4809f764bae313b58cf9dc8bd040fae9014969625a212876bb2a9692b08dc045ef5bfef03e0",
+    "summary": "complete on the network",
+    "headline": "4.00 PFUSDC credited to pf5866a1\u2026bad4 from a bridge deposit",
+    "first_height": 1404,
+    "last_height": 1406,
+    "steps": [
+     {
+      "label": "USDC deposited on the source chain",
+      "state": "unknown"
+     },
+     {
+      "label": "Deposit proposed with its proof",
+      "state": "done"
+     },
+     {
+      "label": "Deposit finalized",
+      "state": "done"
+     },
+     {
+      "label": "PFUSDC credited",
+      "state": "done"
+     }
+    ],
+    "time": 1794909451.0
+   }
+  ],
+  "stream": [
+   {
+    "id": "1436-0",
+    "height": 1436,
+    "tx_id": "64291e8a1c9d6c8bdb299fc3cc44a5292deb7da39e83069a55b3e1997f9a3fe0d13a8444c6499f2fe3e2399ab065c0d3",
+    "kind": "vault_bridge_deposit_claim",
+    "lens": "bridge",
+    "sentence": "5.00 PFUSDC credited to pf574de1\u20269eaa from a bridge deposit",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 53,
+    "journey": {
+     "kind": "deposit",
+     "key": "78ba38bf5a227426aaae91b5b1df99d710a6e9d6ba46b65b69b5c328778f39810eb9af40a060e334ed42a1646c0dc5fa"
+    },
+    "addrs": [
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8",
+     "pf574de1f3cfa74cb6c1330647172ccf104f8e9eaa"
+    ],
+    "time": 1794930163.0
+   },
+   {
+    "id": "1435-0",
+    "height": 1435,
+    "tx_id": "062f5383bd780b905ee3350b6de28ff88095b8e71ef7b22e903fc995b9212b24c803177cc5a0e0b2fa00388bb420e2a0",
+    "kind": "vault_bridge_deposit_finalize",
+    "lens": "bridge",
+    "sentence": "Deposit finalized for PFUSDC",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": {
+     "kind": "deposit",
+     "key": "78ba38bf5a227426aaae91b5b1df99d710a6e9d6ba46b65b69b5c328778f39810eb9af40a060e334ed42a1646c0dc5fa"
+    },
+    "addrs": [
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8"
+    ],
+    "time": 1794930145.0
+   },
+   {
+    "id": "1434-0",
+    "height": 1434,
+    "tx_id": "4dd53a6849ae1fb1d4f164fc1a582c66a37a9605cb2aeef56b6308caa240901c0d297bbc5fef34fa337ffc8df7686f74",
+    "kind": "vault_bridge_deposit_propose",
+    "lens": "bridge",
+    "sentence": "Deposit proposed: 5.00 USDC from 0xf83e21\u2026d0be on chain 1 for pf574de1\u20269eaa",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 34,
+    "journey": {
+     "kind": "deposit",
+     "key": "78ba38bf5a227426aaae91b5b1df99d710a6e9d6ba46b65b69b5c328778f39810eb9af40a060e334ed42a1646c0dc5fa"
+    },
+    "addrs": [
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8",
+     "pf574de1f3cfa74cb6c1330647172ccf104f8e9eaa",
+     "0xe7a432a28b20621a70e845c7f202004cf98e7a2c",
+     "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+     "0xf83e211a14f95c152634d7d22dbbaa1f0a77d0be"
+    ],
+    "time": 1794930114.0
+   },
+   {
+    "id": "1433-0",
+    "height": 1433,
+    "tx_id": "798c26d0ae4c68e124da555a1b3794bf720ea5b8be51e2d3b3e57d6e3f8c059c8f5e545e84d5041bd7a92bd67cd66c4f",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.50 PFT sent from pfd50f37\u20260aff to pf564258\u2026f01a",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 32,
+    "journey": null,
+    "addrs": [
+     "pfd50f37d1493054883b62722dd9d2a8f675690aff",
+     "pf564258e452588edf9da2af6ee21dfebb6dadf01a"
+    ],
+    "time": 1794929437.0
+   },
+   {
+    "id": "1432-0",
+    "height": 1432,
+    "tx_id": "e25aa87f8b1e28991f2d14a35d3197b5fde3fdc1b8c8ddc4236e6acec92cb9689a5bde0a1e36997cfda4f7b06e9b4509",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.50 PFT sent from pfd50f37\u20260aff to pf574de1\u20269eaa",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 32,
+    "journey": null,
+    "addrs": [
+     "pfd50f37d1493054883b62722dd9d2a8f675690aff",
+     "pf574de1f3cfa74cb6c1330647172ccf104f8e9eaa"
+    ],
+    "time": 1794929316.0
+   },
+   {
+    "id": "1431-0",
+    "height": 1431,
+    "tx_id": "95ecfcae53d4f90f2a50605337c13f9071605c52810224862657be995d2bff6bb7e8d439bec53e75b244b4ff3a4e2ace",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": null,
+    "addrs": [
+     "pfab9b9228942e5c529633a13aa271d5297bec6353",
+     "pfee68d0a5a89e8f554bcd942d2f38659f45bfab1b"
+    ],
+    "time": 1794929117.0
+   },
+   {
+    "id": "1430-0",
+    "height": 1430,
+    "tx_id": "75df9d30e8f06b3015109e1d0b53e22a4308ccce64a0cbb850d8673503a56996aac8d61bd363c64d0d562111d47f3b99",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": null,
+    "addrs": [
+     "pfab9b9228942e5c529633a13aa271d5297bec6353",
+     "pfee68d0a5a89e8f554bcd942d2f38659f45bfab1b"
+    ],
+    "time": 1794928907.0
+   },
+   {
+    "id": "1429-0",
+    "height": 1429,
+    "tx_id": "a3e3e74f8ace21a9f1f3c292ee41fc7dd5b812b1f1b0c8c9cf02d0714068491320944a2b55a4ecd1ba2e8767d7970e7c",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": null,
+    "addrs": [
+     "pfab9b9228942e5c529633a13aa271d5297bec6353",
+     "pfee68d0a5a89e8f554bcd942d2f38659f45bfab1b"
+    ],
+    "time": 1794928784.0
+   },
+   {
+    "id": "1428-0",
+    "height": 1428,
+    "tx_id": "0f8967cc62b9b648b62ca09acb806fed14ca792c05bc804e704743c01383969dbdca788b75b0ffeb44d6fefdeff7c632",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": null,
+    "addrs": [
+     "pfab9b9228942e5c529633a13aa271d5297bec6353",
+     "pfee68d0a5a89e8f554bcd942d2f38659f45bfab1b"
+    ],
+    "time": 1794928442.0
+   },
+   {
+    "id": "1427-0",
+    "height": 1427,
+    "tx_id": "c2de9cf301358d2776ee20ae3b87948d4b24ff4d2025021d2402888c5c32bcfe1f3a7fd99d04845f3e333d600b7c46c9",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": null,
+    "addrs": [
+     "pfab9b9228942e5c529633a13aa271d5297bec6353",
+     "pfee68d0a5a89e8f554bcd942d2f38659f45bfab1b"
+    ],
+    "time": 1794927992.0
+   },
+   {
+    "id": "1426-0",
+    "height": 1426,
+    "tx_id": "52888a069d96b52b8bf2c67a04960c6dddb36f7700f557a00e23b090cb3962362f4610ce82d8ca2604301bdba0ac1a0f",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": null,
+    "addrs": [
+     "pfab9b9228942e5c529633a13aa271d5297bec6353",
+     "pfee68d0a5a89e8f554bcd942d2f38659f45bfab1b"
+    ],
+    "time": 1794927520.0
+   },
+   {
+    "id": "1425-0",
+    "height": 1425,
+    "tx_id": "b2e2b182904700c4dafac242e92961980e2baf4813343e9e2ef0e3d22669654d49a1c97bb17e60645e9ad696de2ea111",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": null,
+    "addrs": [
+     "pfab9b9228942e5c529633a13aa271d5297bec6353",
+     "pfee68d0a5a89e8f554bcd942d2f38659f45bfab1b"
+    ],
+    "time": 1794927049.0
+   },
+   {
+    "id": "1424-0",
+    "height": 1424,
+    "tx_id": "5343127f0ee1bb161550704507a0e98667e95b3afc37852caea4c23baa4c6f3768005cdd9d4ceb847d682b437b9a179f",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": null,
+    "addrs": [
+     "pfab9b9228942e5c529633a13aa271d5297bec6353",
+     "pfee68d0a5a89e8f554bcd942d2f38659f45bfab1b"
+    ],
+    "time": 1794926569.0
+   },
+   {
+    "id": "1423-0",
+    "height": 1423,
+    "tx_id": "98403c884acc95607511e2981f706edd48bf3af7e434e526e6ccc7435de195885db4310b4dcec6942206d1db746a69ff",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": null,
+    "addrs": [
+     "pfab9b9228942e5c529633a13aa271d5297bec6353",
+     "pfee68d0a5a89e8f554bcd942d2f38659f45bfab1b"
+    ],
+    "time": 1794926147.0
+   },
+   {
+    "id": "1422-0",
+    "height": 1422,
+    "tx_id": "5e2c7cdbe5b665caded74f0d5a7286c664f5b1c61357ef9ddf09e442fde529fdd1ba3b8576755586a04207473636f10b",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.10 PFT sent from pfab9b92\u20266353 to pfee68d0\u2026ab1b",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": null,
+    "addrs": [
+     "pfab9b9228942e5c529633a13aa271d5297bec6353",
+     "pfee68d0a5a89e8f554bcd942d2f38659f45bfab1b"
+    ],
+    "time": 1794925815.0
+   },
+   {
+    "id": "1421-0",
+    "height": 1421,
+    "tx_id": "397710070f4e94ae5dc796c32354abc016553909e9e2ee9976d90dcbe383687ee53e062974a263fba1197bc4a5f745a1",
+    "kind": "offer_create",
+    "lens": "market",
+    "sentence": "Offer: sell 1.00 PFUSDC for 1.00 B24",
+    "accepted": true,
+    "code": "filled",
+    "fee": 24,
+    "journey": null,
+    "addrs": [
+     "pfb6cd28f27bf1703b2d012700652c7538540a913f"
+    ],
+    "time": 1794921900.0
+   },
+   {
+    "id": "1420-0",
+    "height": 1420,
+    "tx_id": "d754dd89d0be787bd2e0e25042c941fc5b84405318e618fc22a8dd5b1b7e3e1ab842bf070e5688f14ba45d2963ed3628",
+    "kind": "trust_set",
+    "lens": "payments",
+    "sentence": "Line opened for B24 by pfb6cd28\u2026913f, limit 1.00",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 32,
+    "journey": null,
+    "addrs": [
+     "pfb6cd28f27bf1703b2d012700652c7538540a913f",
+     "pffcb93d9f87a843a8aa34e1adf241f5d58143e81b"
+    ],
+    "time": 1794921670.0
+   },
+   {
+    "id": "1419-0",
+    "height": 1419,
+    "tx_id": "1328fe7c3061c4ddef1d878c68ab3c9b01b55bcec118c85598dc0ade7697cdc489ed3073fd028432525915f1bec2ce4c",
+    "kind": "vault_bridge_burn_to_redeem",
+    "lens": "bridge",
+    "sentence": "1.49 PFUSDC burned to withdraw USDC to 0x9a33a9\u20267d50",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 23,
+    "journey": {
+     "kind": "withdrawal",
+     "key": "1328fe7c3061c4ddef1d878c68ab3c9b01b55bcec118c85598dc0ade7697cdc489ed3073fd028432525915f1bec2ce4c"
+    },
+    "addrs": [
+     "pf8b30d23906a8fbeab9d7244c8a45fa57d389c2c8",
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8",
+     "0x9a33a96c2a718555a8996accbf37c8999e497d50"
+    ],
+    "time": 1794921260.0
+   },
+   {
+    "id": "1418-0",
+    "height": 1418,
+    "tx_id": "17948e142b0cce681ec738c63840ede1faf5e036d249b1a5d6366e5537ae843dff4f308c41f266d77345269063a4ef8a",
+    "kind": "pftl_uniswap_primary_redeem",
+    "lens": "navmarket",
+    "sentence": "1.00 B24 cashed in at NAV for at least 1.00 PFUSDC",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 23,
+    "journey": null,
+    "addrs": [
+     "pf8b30d23906a8fbeab9d7244c8a45fa57d389c2c8"
+    ],
+    "time": 1794921065.0
+   },
+   {
+    "id": "1417-0",
+    "height": 1417,
+    "tx_id": "bc4719878e363b24cf0a7dd690ccac674119b0a45cacb6c90e8ece8bdfed0e5281990dd7a6ebef0520ed0905dd497d20",
+    "kind": "pftl_uniswap_order_release",
+    "lens": "navmarket",
+    "sentence": "Unused B24 creation reservation released",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": {
+     "kind": "create",
+     "key": "fc5219bf4048c6828b971085fa64a907482f2d02d88da1f5a212d5cb4090c229a46c69e7c36c97b44c563e5bb7735008"
+    },
+    "addrs": [
+     "pf8b30d23906a8fbeab9d7244c8a45fa57d389c2c8"
+    ],
+    "time": 1794920284.0
+   },
+   {
+    "id": "1416-0",
+    "height": 1416,
+    "tx_id": "9dd4bf5a8a0edad35c3a86199631762f7a713d833cf5950f9d279052bcbf6e79fedd92514045b97262da20b2f75ab208",
+    "kind": "pftl_uniswap_primary_subscribe_v2",
+    "lens": "navmarket",
+    "sentence": "1.00 B24 created for 1.00 PFUSDC at a NAV of $0.999922",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 23,
+    "journey": {
+     "kind": "create",
+     "key": "fc5219bf4048c6828b971085fa64a907482f2d02d88da1f5a212d5cb4090c229a46c69e7c36c97b44c563e5bb7735008"
+    },
+    "addrs": [
+     "pf8b30d23906a8fbeab9d7244c8a45fa57d389c2c8"
+    ],
+    "time": 1794920203.0
+   },
+   {
+    "id": "1415-0",
+    "height": 1415,
+    "tx_id": "5994cf8bccb07180e1846d0e54cfff66973534ed73308da5cc00b698bca472886a9801da136aa218840e61cca797e923",
+    "kind": "pftl_uniswap_order_reserve",
+    "lens": "navmarket",
+    "sentence": "Reserved the right to create 1.00 B24, paying up to 1.00 PFUSDC",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 23,
+    "journey": {
+     "kind": "create",
+     "key": "fc5219bf4048c6828b971085fa64a907482f2d02d88da1f5a212d5cb4090c229a46c69e7c36c97b44c563e5bb7735008"
+    },
+    "addrs": [
+     "pf8b30d23906a8fbeab9d7244c8a45fa57d389c2c8",
+     "0x2c7db4c2ff8514334f62e6630226e95e72fa6056"
+    ],
+    "time": 1794919661.0
+   },
+   {
+    "id": "1414-0",
+    "height": 1414,
+    "tx_id": "bc6766e741915fd13f5ccdd1a628b8a0ad42d72e95399f6e5b83213630e24ce483f18a8824bd7abdc8f3d182a76ac7db",
+    "kind": "trust_set",
+    "lens": "payments",
+    "sentence": "Line opened for B24 by pf8b30d2\u2026c2c8, limit 1.00",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 32,
+    "journey": null,
+    "addrs": [
+     "pf8b30d23906a8fbeab9d7244c8a45fa57d389c2c8",
+     "pffcb93d9f87a843a8aa34e1adf241f5d58143e81b"
+    ],
+    "time": 1794919512.0
+   },
+   {
+    "id": "1413-0",
+    "height": 1413,
+    "tx_id": "33962ff0586d5114836d0bd15822a1731464eede6d8f64088bc38d0eb3cd90d275648ecf237c4ceedfccbcd74ec436bf",
+    "kind": "vault_bridge_burn_to_redeem",
+    "lens": "bridge",
+    "sentence": "0.50 PFUSDC burned to withdraw USDC to 0x9a33a9\u20267d50",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 23,
+    "journey": {
+     "kind": "withdrawal",
+     "key": "33962ff0586d5114836d0bd15822a1731464eede6d8f64088bc38d0eb3cd90d275648ecf237c4ceedfccbcd74ec436bf"
+    },
+    "addrs": [
+     "pf8b30d23906a8fbeab9d7244c8a45fa57d389c2c8",
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8",
+     "0x9a33a96c2a718555a8996accbf37c8999e497d50"
+    ],
+    "time": 1794918773.0
+   },
+   {
+    "id": "1412-0",
+    "height": 1412,
+    "tx_id": "2272ff505eb6e555e19ab639a27b53cac5ee2b9dec59ec97a1677105f52ef51f7e74e042088083127939d5a9214f591b",
+    "kind": "vault_bridge_deposit_claim",
+    "lens": "bridge",
+    "sentence": "2.00 PFUSDC credited to pf8b30d2\u2026c2c8 from a bridge deposit",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 53,
+    "journey": {
+     "kind": "deposit",
+     "key": "4c958066f0f845b49b7e083aa1956039f4e223213ce2050effe5f0b422e2acc4aa29aa543bec9378195635afe224e8a3"
+    },
+    "addrs": [
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8",
+     "pf8b30d23906a8fbeab9d7244c8a45fa57d389c2c8"
+    ],
+    "time": 1794918362.0
+   },
+   {
+    "id": "1411-0",
+    "height": 1411,
+    "tx_id": "97acc699547af1854c78bb5bff54bde6c66d285f3e66e9cad9c7471fcd170f4a657ae338712ad336ac17278c53869d80",
+    "kind": "vault_bridge_deposit_finalize",
+    "lens": "bridge",
+    "sentence": "Deposit finalized for PFUSDC",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": {
+     "kind": "deposit",
+     "key": "4c958066f0f845b49b7e083aa1956039f4e223213ce2050effe5f0b422e2acc4aa29aa543bec9378195635afe224e8a3"
+    },
+    "addrs": [
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8"
+    ],
+    "time": 1794918347.0
+   },
+   {
+    "id": "1410-0",
+    "height": 1410,
+    "tx_id": "169638375105dd03cdec70f9bd2f351e4639a61d67f9a75023be9a85f795946da8b2f0dbbf8631a23daa848dff5ac8a1",
+    "kind": "vault_bridge_deposit_propose",
+    "lens": "bridge",
+    "sentence": "Deposit proposed: 2.00 USDC from 0x9a33a9\u20267d50 on chain 1 for pf8b30d2\u2026c2c8",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 34,
+    "journey": {
+     "kind": "deposit",
+     "key": "4c958066f0f845b49b7e083aa1956039f4e223213ce2050effe5f0b422e2acc4aa29aa543bec9378195635afe224e8a3"
+    },
+    "addrs": [
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8",
+     "pf8b30d23906a8fbeab9d7244c8a45fa57d389c2c8",
+     "0xe7a432a28b20621a70e845c7f202004cf98e7a2c",
+     "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+     "0x9a33a96c2a718555a8996accbf37c8999e497d50"
+    ],
+    "time": 1794918316.0
+   },
+   {
+    "id": "1409-0",
+    "height": 1409,
+    "tx_id": "826b8c8dd417fd6a6cc92f1347a24ed6ab978088ea20bebf21f55b9505a1a758f1dba783fdcb29881ce567aaee5156d6",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.50 PFT sent from pfd50f37\u20260aff to pf8b30d2\u2026c2c8",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 32,
+    "journey": null,
+    "addrs": [
+     "pfd50f37d1493054883b62722dd9d2a8f675690aff",
+     "pf8b30d23906a8fbeab9d7244c8a45fa57d389c2c8"
+    ],
+    "time": 1794914016.0
+   },
+   {
+    "id": "1408-0",
+    "height": 1408,
+    "tx_id": "998a2db1ed0976a0f0dacea0d36501744be07e648422bcc12f5728784ec096023181f77487174dd2aa12fa2ea939207a",
+    "kind": "offer_create",
+    "lens": "market",
+    "sentence": "Offer: sell 3.00 PFUSDC for 3.00 B24",
+    "accepted": true,
+    "code": "filled",
+    "fee": 24,
+    "journey": null,
+    "addrs": [
+     "pf5866a1d051a7928b61d05c9f9eaee23e14cfbad4"
+    ],
+    "time": 1794910881.0
+   },
+   {
+    "id": "1407-0",
+    "height": 1407,
+    "tx_id": "4441148219fd5767ae9fa498ee2df0e4ac5b9d132e57f641a210d44bd0de4fee2c562bb275f2341406b4bbd156c860ed",
+    "kind": "trust_set",
+    "lens": "payments",
+    "sentence": "Line opened for B24 by pf5866a1\u2026bad4, limit 4.00",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 32,
+    "journey": null,
+    "addrs": [
+     "pf5866a1d051a7928b61d05c9f9eaee23e14cfbad4",
+     "pffcb93d9f87a843a8aa34e1adf241f5d58143e81b"
+    ],
+    "time": 1794910726.0
+   },
+   {
+    "id": "1406-0",
+    "height": 1406,
+    "tx_id": "0c859c70ed65b1603c5b6337b58902edb1240de2ed93e348ddac8d05e090620e7250405bf23ad3fdb35b4c14b4f40971",
+    "kind": "vault_bridge_deposit_claim",
+    "lens": "bridge",
+    "sentence": "4.00 PFUSDC credited to pf5866a1\u2026bad4 from a bridge deposit",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 53,
+    "journey": {
+     "kind": "deposit",
+     "key": "3a1fcc6f79bb058102bbf4809f764bae313b58cf9dc8bd040fae9014969625a212876bb2a9692b08dc045ef5bfef03e0"
+    },
+    "addrs": [
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8",
+     "pf5866a1d051a7928b61d05c9f9eaee23e14cfbad4"
+    ],
+    "time": 1794909451.0
+   },
+   {
+    "id": "1405-0",
+    "height": 1405,
+    "tx_id": "de4406ee33d9e1b5bc2df181a09dc7ebb37fdfac1451c325c27f8b076d1930f97881b3ac6b851373d36c337da01befbc",
+    "kind": "vault_bridge_deposit_finalize",
+    "lens": "bridge",
+    "sentence": "Deposit finalized for PFUSDC",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": {
+     "kind": "deposit",
+     "key": "3a1fcc6f79bb058102bbf4809f764bae313b58cf9dc8bd040fae9014969625a212876bb2a9692b08dc045ef5bfef03e0"
+    },
+    "addrs": [
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8"
+    ],
+    "time": 1794909435.0
+   },
+   {
+    "id": "1404-0",
+    "height": 1404,
+    "tx_id": "96b2369e5775069c260dbfe3b12870fbd69b028fb32cd0a6607334308bf68118be72a3d3bd164980dfa8f8802988c6a8",
+    "kind": "vault_bridge_deposit_propose",
+    "lens": "bridge",
+    "sentence": "Deposit proposed: 4.00 USDC from 0xf8631f\u2026d69d on chain 1 for pf5866a1\u2026bad4",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 34,
+    "journey": {
+     "kind": "deposit",
+     "key": "3a1fcc6f79bb058102bbf4809f764bae313b58cf9dc8bd040fae9014969625a212876bb2a9692b08dc045ef5bfef03e0"
+    },
+    "addrs": [
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8",
+     "pf5866a1d051a7928b61d05c9f9eaee23e14cfbad4",
+     "0xe7a432a28b20621a70e845c7f202004cf98e7a2c",
+     "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+     "0xf8631f2edc1e6fef481c89cab600abd1a9cbd69d"
+    ],
+    "time": 1794909400.0
+   },
+   {
+    "id": "1403-0",
+    "height": 1403,
+    "tx_id": "809e7f56b86b0eba44ed008ff9c4fafdbecbe1206b0a3988414eaa693bab2b028d43fca2d2a614bcf0ddaf90870d2e4c",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.50 PFT sent from pfd50f37\u20260aff to pf5866a1\u2026bad4",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 32,
+    "journey": null,
+    "addrs": [
+     "pfd50f37d1493054883b62722dd9d2a8f675690aff",
+     "pf5866a1d051a7928b61d05c9f9eaee23e14cfbad4"
+    ],
+    "time": 1794907737.0
+   },
+   {
+    "id": "1402-0",
+    "height": 1402,
+    "tx_id": "985d8cddf3a4a32fc0b6840ed135a2a334a5401f93bb3635c8ac4b0a2632810bb57f377c1e512f0a57246067d81265a1",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.50 PFT sent from pfd50f37\u20260aff to pf7a528a\u20265bb6",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 32,
+    "journey": null,
+    "addrs": [
+     "pfd50f37d1493054883b62722dd9d2a8f675690aff",
+     "pf7a528ad4f020224a3f6b54170e7c115476fe5bb6"
+    ],
+    "time": 1794897497.0
+   },
+   {
+    "id": "1401-0",
+    "height": 1401,
+    "tx_id": "490a9e790d8329f1146d2e007ce571c5d16a5ef8bd5b102e5df6e159a9256a1d977d2e180cf4beb93701b6c33ccf8a56",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.50 PFT sent from pfd50f37\u20260aff to pf1aa72e\u20265f92",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 32,
+    "journey": null,
+    "addrs": [
+     "pfd50f37d1493054883b62722dd9d2a8f675690aff",
+     "pf1aa72e57e38e19e77116f74c7820ffc46ed95f92"
+    ],
+    "time": 1794888380.0
+   },
+   {
+    "id": "1400-0",
+    "height": 1400,
+    "tx_id": "773d5387f61f022feae25e43c4aad906059f6bad5b55536464194c9b18c44545437852da3bb10df390fe372d607c22da",
+    "kind": "vault_bridge_deposit_claim",
+    "lens": "bridge",
+    "sentence": "5.00 PFUSDC credited to pfb6cd28\u2026913f from a bridge deposit",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 53,
+    "journey": {
+     "kind": "deposit",
+     "key": "9b382d9f683dc01f433e78a20714f6bbc756012d1a03c2f05c553e626683a500088f78bef351db06bca8580ab9a79ebb"
+    },
+    "addrs": [
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8",
+     "pfb6cd28f27bf1703b2d012700652c7538540a913f"
+    ],
+    "time": 1794876801.0
+   },
+   {
+    "id": "1399-0",
+    "height": 1399,
+    "tx_id": "ecafc6e5df194141aafbb7b548ca87b66cbaef552681ed5a6c5c1188fd21bf5fb88e1885cff6c672734550fdecb2544c",
+    "kind": "vault_bridge_deposit_finalize",
+    "lens": "bridge",
+    "sentence": "Deposit finalized for PFUSDC",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 22,
+    "journey": {
+     "kind": "deposit",
+     "key": "9b382d9f683dc01f433e78a20714f6bbc756012d1a03c2f05c553e626683a500088f78bef351db06bca8580ab9a79ebb"
+    },
+    "addrs": [
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8"
+    ],
+    "time": 1794876782.0
+   },
+   {
+    "id": "1398-0",
+    "height": 1398,
+    "tx_id": "70e15f5fd12d43c710704d048eb6e68ba137e45cc4b769dc80cdc43b0763dca9c81fefe0c29e694019f802eeea51508b",
+    "kind": "vault_bridge_deposit_propose",
+    "lens": "bridge",
+    "sentence": "Deposit proposed: 5.00 USDC from 0x0c30d0\u2026b882 on chain 1 for pfb6cd28\u2026913f",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 34,
+    "journey": {
+     "kind": "deposit",
+     "key": "9b382d9f683dc01f433e78a20714f6bbc756012d1a03c2f05c553e626683a500088f78bef351db06bca8580ab9a79ebb"
+    },
+    "addrs": [
+     "pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8",
+     "pfb6cd28f27bf1703b2d012700652c7538540a913f",
+     "0xe7a432a28b20621a70e845c7f202004cf98e7a2c",
+     "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+     "0x0c30d0a57f4f9bc035ca8e8be6bd2abae054b882"
+    ],
+    "time": 1794876751.0
+   },
+   {
+    "id": "1397-0",
+    "height": 1397,
+    "tx_id": "57aac7ee5525924581c20817f1c806b6a3601c8ff3c7cf91561d1110df9cd28c48af2b492c9d86995f9ab3628c48f3f7",
+    "kind": "transparent_transfer",
+    "lens": "payments",
+    "sentence": "0.50 PFT sent from pfd50f37\u20260aff to pfb0360f\u2026cc75",
+    "accepted": true,
+    "code": "accepted",
+    "fee": 32,
+    "journey": null,
+    "addrs": [
+     "pfd50f37d1493054883b62722dd9d2a8f675690aff",
+     "pfb0360fae3bd1fe60be8927eb0fec50d3bd4fcc75"
+    ],
+    "time": 1794873711.0
+   }
+  ]
+ }
+}
