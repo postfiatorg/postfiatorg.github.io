@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{ partial "ink/head.html" . }}
+<link rel="stylesheet" href="{{ "explorer/explorer.css" | relURL }}?v={{ now.Unix }}">
+</head>
+<body>
+{{ partial "ink/mast.html" . }}
+<div class="ex-bar" id="ex-bar">
+  <div class="wrap">
+    <a class="ex-title" href="#/">Explorer</a>
+    <form class="ex-search" id="ex-search" role="search">
+      <label class="visually-hidden" for="ex-q">Search</label>
+      <input id="ex-q" type="search" autocomplete="off" spellcheck="false" placeholder="Block, tx, address, coin">
+      <button type="submit" aria-label="Search">→</button>
+    </form>
+    <div class="ex-pulse" id="ex-pulse" aria-live="polite"><span class="dot"></span>Connecting</div>
+    <nav class="ex-nav" id="ex-nav" aria-label="Explorer sections"></nav>
+  </div>
+</div>
+<main id="main">
+  <div id="ex" data-api="{{ .Params.explorer_api | default "/api/explorer/v1" }}">
+    <noscript><div class="wrap ex-page"><p class="lede">The explorer reads the ledger live and needs JavaScript.</p></div></noscript>
+  </div>
+</main>
+{{ partial "ink/foot.html" . }}
+<script src="{{ "explorer/explorer.js" | relURL }}?v={{ now.Unix }}" defer></script>
+</body>
+</html>
