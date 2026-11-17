@@ -8,6 +8,7 @@
       <a href="/whitepaper/"{{ if hasPrefix $p "/whitepaper/" }} aria-current="page"{{ end }}>Whitepaper</a>
       <a href="/blog/"{{ if or (hasPrefix $p "/blog/") (eq .Section "blog") }} aria-current="page"{{ end }}>Blog</a>
       <a href="/task-node/"{{ if eq $p "/task-node/" }} aria-current="page"{{ end }}>Task Node</a>
+      <a href="/explorer/"{{ if hasPrefix $p "/explorer/" }} aria-current="page"{{ end }}>Explorer</a>
       <a href="/validator-setup/"{{ if hasPrefix $p "/validator" }} aria-current="page"{{ end }}>Validators</a>
       <a href="https://github.com/postfiatorg" rel="noopener">GitHub</a>
       <a class="cta" href="https://tasknode.postfiat.org" rel="noopener">Join Task Node</a>
