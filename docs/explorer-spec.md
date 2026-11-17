@@ -1,16 +1,13 @@
 # Post Fiat Explorer: specification
 
-**Status:** version 1 of this specification, 17 November 2026. It describes the explorer at
-`postfiat.org/explorer/`, linked from the Task Node wallet.
+**Status:** version 2 of this specification, 17 November 2026. It describes the explorer at
+`postfiat.org/explorer/`, linked from the Task Node wallet. Version 2 covers the new chain
+only, at the owner's direction; the original `postfiatd` chain is out of scope.
 
 ## 1. What it is
 
-The Post Fiat Explorer is the public window onto two networks:
-
-1. **The devnet** (`postfiat-wan-devnet-2`), the new Post Fiat ledger. NAVCoins, PFUSDC,
-   private swaps and the Ethereum bridge live here.
-2. **The Task Node network** (the original `postfiatd` chain, network 2025). Task rewards,
-   content pointers and profile NFTs live here.
+The Post Fiat Explorer is the public window onto the devnet (`postfiat-wan-devnet-2`), the
+new Post Fiat ledger. NAVCoins, PFUSDC, private swaps and the Ethereum bridge live here.
 
 A reader lands on a transaction and sees a sentence, then the evidence:
 
@@ -26,13 +23,12 @@ can I check it myself.
 | --- | --- | --- |
 | Wallet user | A link in the Task Node wallet after a transaction | Proof that the deposit, swap or withdrawal went through, and where the funds are now |
 | NAVCoin holder | A coin page | The history of NAV checks for the coin and the reserves behind it |
-| Task Node contributor | A reward notice | The reward payment, the task it paid for, and the content pointer |
 | Reviewer or auditor | A report or a tweet | Raw fields, hashes, validator signatures, and a way to recompute |
 | Curious visitor | postfiat.org | A sense of what the network does, shown live |
 
 ## 3. What people do on these networks
 
-The design follows measured use. Both tables come from a full read of each chain on
+The design follows measured use. The table comes from a full read of the chain on
 17 November 2026.
 
 ### 3.1 Devnet: 1,486 operations in 1,436 blocks, 73 addresses, 15 assets
@@ -50,20 +46,6 @@ The design follows measured use. Both tables come from a full read of each chain
 
 Receipts: 1,391 accepted, 49 fast-lane deposits applied, 15 offers filled, the rest
 rejections with a stated reason. A rejection is a first-class result and is shown as one.
-
-### 3.2 Task Node network: 2,092 transactions in the last 6,000 ledgers (about 6.7 hours)
-
-| Lens | Transaction | Count |
-| --- | --- | ---: |
-| **Payments** | `Payment` in PFT between accounts | 1,674 |
-| **Profile NFTs** | `NFTokenMint` with an `ipfs://` URI, `NFTokenBurn` | 401 |
-| **Task rewards** | `Payment` carrying a `pf.ptr` memo of kind REWARD: an IPFS content ID, a task ID and flags | 16 |
-| **Network** | `UNLModify` (validator list changes) | 1 |
-
-The `pf.ptr` memo (format `v4`) is the Task Node's on-chain pointer. It names an IPFS content
-ID, a content kind (task, task update, submission, chat, context, reward, policy, identity,
-asset, document, system), an optional task, thread or context ID, and flags (encrypted,
-public, ephemeral, tombstone, multipart). The explorer decodes all of it.
 
 ## 4. Principles
 
@@ -90,7 +72,6 @@ public, ephemeral, tombstone, multipart). The explorer decodes all of it.
 - **Stream:** the latest operations as sentences, newest first, updating live.
 - **Latest blocks:** height, proposer, kind, operations, votes.
 - **NAVCoins:** one line per coin with NAV, supply, last check and a sparkline of NAV.
-- **Network switch:** Devnet or Task Node network. The choice is in the URL.
 
 ### 5.2 Block
 
@@ -129,8 +110,7 @@ block's operations as sentences and its receipts.
 
 Address, PFT balance and sequence, asset balances with value where a NAV exists, open
 offers, and the account's operations as sentences. Known addresses carry a role label
-(issuer of B24, bridge issuer, faucet, validator). On the Task Node network, public
-contributor handles from the Task Node leaderboard label their wallets.
+(issuer of B24, bridge issuer, faucet, validator). Addresses are always shown in full.
 
 ### 5.5 NAVCoin
 
@@ -179,22 +159,11 @@ Open offers by pair, fills, cancellations, atomic swaps and fixed-rate reservati
 Validators with blocks proposed and votes cast; governance amendments in order with the
 height each took effect; fast-lane committee events.
 
-### 5.10 Task Node network
+### 5.10 Search
 
-- **Rewards:** each reward payment as "2.70 PFT paid to @handle for task `task_097c…`",
-  with the content ID and its flags. Encrypted content is labelled encrypted and is never
-  fetched.
-- **Pointers:** all `pf.ptr` memos by kind.
-- **Profile NFTs:** mints and burns with the image when the URI resolves on the public
-  gateway.
-- **Payments** and **validator list changes**.
-- Ledger and transaction pages with close time, result and fee.
-
-### 5.11 Search
-
-One box. It accepts a block height, a ledger index, a transaction ID, a `pf…` or `r…`
-address, an asset ID or name (B24), a route ID, a deposit ID, an IPFS content ID, a task ID,
-or an Ethereum transaction hash, and goes straight to the page.
+One box. It accepts a block height, a transaction ID, a `pf…` address, an asset ID or name
+(B24), a route ID, a deposit or journey ID, or an Ethereum transaction hash, and goes
+straight to the page.
 
 ## 6. Design
 
@@ -213,6 +182,8 @@ palette.
 | Private | Night sections (`#0b0f10`) carry everything shielded, so privacy has its own look |
 | Motion | A new row draws its rule left to right once; the live dot pulses; nothing else moves |
 | Hashes | Shortened as `ab12cd34…ef56`, full value on hover and on copy |
+| Addresses | Never shortened. Full, in mono, linked, including inside sentences |
+| Italics | None. Emphasis is by weight, size or the accent |
 | Time | Relative with the exact UTC time on hover |
 
 The masthead and footer are the site's own partials. The page works at 360 px wide, with
@@ -230,8 +201,7 @@ Explorer API  /api/explorer/v1/…   (public, cached, no sign-in)
         │
 Indexer service (loopback, beside the validators)
    ├── SQLite index: blocks, operations, receipts, journeys, accounts, NAV checks
-   ├── tails the devnet through the validators' read RPC
-   └── tails the Task Node network through its public RPC
+   └── tails the devnet through the validators' read RPC
 ```
 
 **Why an index.** A read from a validator costs 3 to 5 seconds (measured) and returns at
@@ -244,10 +214,6 @@ chain tip every 5 seconds and reads only new blocks. For each block it stores a 
 (no signature bytes, votes by validator), the batch payload, and the receipts. It derives
 the lens, the sentence, the parties, the assets and the journey key for each operation. It
 refreshes coin state (NAV, supply, routes) once per new block.
-
-**Task Node network tail.** The indexer follows validated ledgers from
-`rpc.testnet.postfiat.org`, stores transactions, decodes `pf.ptr` memos and NFT URIs, and
-reads the public Task Node leaderboard hourly for handle labels.
 
 **API.** Read-only GET endpoints returning JSON:
 
@@ -262,7 +228,6 @@ reads the public Task Node leaderboard hourly for handle labels.
 | `/journeys?kind=` and `/journey/{key}` | Journeys and their steps |
 | `/private` | Shielded share and actions |
 | `/network` | Validators, amendments |
-| `/tasknode/summary`, `/tasknode/stream`, `/tasknode/tx/{hash}`, `/tasknode/account/{r}` | The Task Node network lens |
 | `/search?q=` | The page a query resolves to |
 
 Responses carry `Cache-Control: public, max-age=5` and the height they were built at.
@@ -376,8 +341,6 @@ each:
 - **Ethereum:** for bridge and handoff steps, the timestamp of the finalized Ethereum block.
 - **Order:** for older blocks, the height alone.
 
-The Task Node network has ledger close times, and they are used as they are.
-
 ## 12. Acceptance
 
 The explorer is correct when all of these hold:
@@ -396,8 +359,7 @@ The explorer is correct when all of these hold:
    Ethereum at a finalized block, with the same amount (0.25 USDC) and recipient as the burn.
 6. **Privacy holds.** No page shows an amount, asset or party that the chain does not
    publish for a shielded action.
-7. **Rewards decode.** A reward on the Task Node network shows its content ID, task ID and
-   flags exactly as the memo carries them.
+7. **Addresses are whole.** No page shows a shortened address.
 8. **States are honest.** With the Ethereum provider switched off, Ethereum steps show
    "not checked" and no journey shows as complete.
 9. **Disagreement is visible.** In a test where the second validator's answer is altered,
@@ -415,20 +377,18 @@ The explorer is correct when all of these hold:
 3. NAVCoin pages and NAV check history.
 4. Journeys for the bridge and the NAVCoin market.
 5. Private page.
-6. Task Node network lens.
-7. Market and Network pages.
-8. Publication behind the relay and the link from the Task Node wallet.
-9. Signature verification of every certificate with the node's verifier, which unlocks the
+6. Market and Network pages.
+7. Publication behind the relay and the link from the Task Node wallet.
+8. Signature verification of every certificate with the node's verifier, which unlocks the
    Verified level.
 
 ## 14. Limits of version 1
 
 - Devnet block times before the indexer's first day are unknown; those blocks show height
   only.
-- The public Task Node RPC keeps about 80,000 ledgers (roughly four days). Older history
-  needs the archive node.
+- Task rewards, content pointers and profile NFTs are not on the new chain yet. When Task
+  Node activity moves to it, those operations get their own lens here.
 - Ethereum reading arrives in build step 4. Until then every Ethereum step shows "not
   checked".
-- Encrypted pointer content is never opened. The explorer shows that it exists and where.
 - Balances come from the validators at the current height; historical balances are not
   reconstructed.

@@ -4,7 +4,6 @@
   if (!root) return;
   const API = (root.dataset.api || '/api/explorer/v1').replace(/\/$/, '');
   const LENS = { bridge: 'Bridge', payments: 'Payments', navmarket: 'NAVCoin market', private: 'Private', navchecks: 'NAV checks', market: 'Swaps and orders', fastlane: 'Fast lane', network: 'Network' };
-  const TN_KIND = { reward: 'Task rewards', pointer: 'Pointers', nft: 'Profile NFTs', payment: 'Payments', network: 'Network', other: 'Other' };
   const JOURNEY = { deposit: 'USDC deposit', withdrawal: 'USDC withdrawal', create: 'NAVCoin creation', export: 'Bridge to Ethereum', return: 'Return from Ethereum' };
   let meta = null, timer = null, lastTop = null, seq = 0;
 
@@ -25,8 +24,9 @@
   const ago = (t) => { if (!t) return ''; const s = Math.max(0, Date.now() / 1000 - t); if (s < 90) return `${Math.round(s)} seconds ago`; if (s < 5400) return `${Math.round(s / 60)} minutes ago`; if (s < 129600) return `${Math.round(s / 3600)} hours ago`; return `${Math.round(s / 86400)} days ago`; };
   const utc = (t) => (t ? new Date(t * 1000).toISOString().replace('T', ' ').slice(0, 19) + ' UTC' : '');
   const link = (route, text, cls = '') => `<a href="#${route}"${cls ? ` class="${cls}"` : ''}>${text}</a>`;
-  const addr = (a, label) => (a ? link(`/account/${a}`, label ? `${esc(label)} <span class="mono">${short(a, 6, 4)}</span>` : short(a, 10, 6), 'hash') + `<span title="${esc(a)}"></span>` : '–');
-  const taddr = (a, label) => (a ? link(`/tasknode/account/${a}`, label ? `@${esc(label)}` : short(a, 8, 5), 'hash') : '–');
+  const addr = (a, label) => (a ? (label ? `${esc(label)} ` : '') + link(`/account/${a}`, esc(a), 'hash') : '–');
+  // Sentences arrive with shortened addresses; put the full ones back, linked.
+  const sent = (o, linked) => { let h = esc(o.sentence); for (const a of o.addrs || []) { const tok = esc(`${a.slice(0, 8)}…${a.slice(-4)}`); if (!h.includes(tok)) continue; const full = `<span class="ad">${esc(a)}</span>`; h = h.split(tok).join(linked ? (a.startsWith('pf') ? `<a class="ad" href="#/account/${esc(a)}">${esc(a)}</a>` : `<a class="ad" href="https://etherscan.io/address/${esc(a)}" target="_blank" rel="noopener">${esc(a)}</a>`) : full); } return h; };
   const resultTag = (o) => o.accepted === false ? `<span class="tag rej" title="${esc(o.code || '')}">Rejected</span>` : o.accepted === true ? `<span class="tag ok">${esc(o.code === 'filled' ? 'Filled' : 'Accepted')}</span>` : '<span class="tag prop">No receipt</span>';
   const levelTag = (e) => `<span class="tag ${e === 'disputed' ? 'rej' : 'lvl'}" title="How far the explorer has checked this record">${esc(e === 'cross-checked' ? 'Cross-checked' : e === 'disputed' ? 'Disputed' : 'Reported')}</span>`;
   const copyBtn = (v) => `<button class="copy" data-copy="${esc(v)}">Copy</button>`;
@@ -52,8 +52,7 @@
     el.className = 'ex-pulse' + (behind > 2 ? ' behind' : '');
     el.innerHTML = `<span class="dot"></span>Index at <b>${num(meta.index_height)}</b> · chain at <b>${num(meta.chain_height)}</b>${behind > 2 ? ` · ${behind} blocks behind` : ''}`;
   }
-  const opLine = (o, isNew) => `<li class="${o.lens === 'private' ? 'private' : ''}${isNew ? ' new' : ''}"><a href="#/tx/${esc(o.id)}"><span class="h">${num(o.height)}</span><span class="s">${esc(o.sentence)}<small>${esc(LENS[o.lens] || o.lens)}${o.journey ? ' · ' + esc(JOURNEY[o.journey.kind] || '') : ''}</small></span><span>${o.lens === 'private' ? '<span class="tag sealed">Sealed</span>' : resultTag(o)}</span></a></li>`;
-  const tnLine = (t, isNew) => `<li class="${isNew ? 'new' : ''}"><a href="#/tasknode/tx/${esc(t.hash)}"><span class="h">${num(t.ledger)}</span><span class="s">${esc(t.sentence)}<small>${esc(TN_KIND[t.kind] || t.kind)} · ${esc((t.time || '').replace(/^2026-/, ''))}</small></span><span>${t.result && t.result !== 'tesSUCCESS' ? `<span class="tag rej">${esc(t.result)}</span>` : '<span class="tag ok">Validated</span>'}</span></a></li>`;
+  const opLine = (o, isNew) => `<li class="${o.lens === 'private' ? 'private' : ''}${isNew ? ' new' : ''}"><a href="#/tx/${esc(o.id)}"><span class="h">${num(o.height)}</span><span class="s">${sent(o)}<small>${esc(LENS[o.lens] || o.lens)}${o.journey ? ' · ' + esc(JOURNEY[o.journey.kind] || '') : ''}</small></span><span>${o.lens === 'private' ? '<span class="tag sealed">Sealed</span>' : resultTag(o)}</span></a></li>`;
   const head = (label, title, sub, extra = '', cls = '') => `<header class="ex-head"><span class="label">${label}</span><h1 class="${cls}">${title}</h1>${sub ? `<p class="sub">${sub}</p>` : ''}${extra}</header>`;
   const section = (title, more = '') => `<div class="ex-h2"><h2>${title}</h2>${more}</div>`;
   const page = (html, flush) => `<div class="wrap ex-page${flush ? ' flush' : ''}">${html}</div>`;
@@ -157,7 +156,7 @@
     };
     const fields = Object.entries(raw).filter(([k]) => !skip.has(k)).map(([k, v]) => `<div>${esc(k.replace(/_/g, ' '))}</div><div>${val(k, v)}</div>`).join('');
     const priv = o.privacy ? `${section('What the public can see')}<div class="privbox"><div class="ps"><div><b>Public</b>${o.privacy.public.map((x) => `<span>${esc(x)}</span>`).join('')}</div><div><b>Sealed</b>${o.privacy.sealed.map((x) => `<span>${esc(x)}</span>`).join('')}</div></div></div>` : '';
-    return page(head(`Devnet · ${esc(LENS[o.lens] || o.lens)} · ${esc(o.kind.replace(/_/g, ' '))}`, esc(o.sentence), '',
+    return page(head(`Devnet · ${esc(LENS[o.lens] || o.lens)} · ${esc(o.kind.replace(/_/g, ' '))}`, sent(o, true), '',
       `<div class="ex-meta">${o.lens === 'private' ? '<span class="tag sealed">Sealed</span>' : ''}${resultTag(o)}${b ? levelTag(b.evidence) : ''}<span class="label">${link(`/block/${o.height}`, 'Block ' + num(o.height))}${b?.observed_at ? ` · <span title="${utc(b.observed_at)}">${ago(b.observed_at)}</span>` : ''}${o.fee != null ? ` · fee ${num(o.fee)} atoms` : ''}</span>${b ? seals(b, true) : ''}</div>
        ${o.accepted === false ? `<p class="sub ox">The network refused this operation: ${esc(o.message || o.code)}.</p>` : o.message ? `<p class="sub">${esc(o.message)}.</p>` : ''}`, 'sentence') +
       priv + journeyPanel(d.journey) +
@@ -228,7 +227,7 @@
       <div><span class="label">Devnet · private</span><h1 class="display d-l" style="margin-top:14px">${num(d.shielded_blocks)} of ${num(d.blocks)} blocks are sealed.</h1><p class="sub lede" style="margin-top:18px">A private action proves it is valid without saying what it is. This page shows exactly what the ledger publishes for each one, and names what it keeps sealed.</p>
       <div class="chips">${d.kinds.map((k) => `<span class="chip" style="color:var(--night-ink);border-color:var(--night-rule)">${esc(names[k.kind] || k.kind)} · ${k.n}</span>`).join('')}</div></div></div>
       ${section('Latest private actions')}
-      <div class="sealed-grid">${d.ops.map((o) => `<a class="sealed" href="#/tx/${esc(o.id)}"><div class="h">Block ${num(o.height)} · ${esc(names[o.kind] || o.kind)}</div><div class="s">${esc(o.sentence)}</div><div class="ps"><div><b>Public</b>${(o.privacy?.public || []).map((x) => `<span>${esc(x)}</span>`).join('')}</div><div><b>Sealed</b>${(o.privacy?.sealed || []).map((x) => `<span>${esc(x)}</span>`).join('')}</div></div></a>`).join('')}</div>
+      <div class="sealed-grid">${d.ops.map((o) => `<a class="sealed" href="#/tx/${esc(o.id)}"><div class="h">Block ${num(o.height)} · ${esc(names[o.kind] || o.kind)}</div><div class="s">${sent(o)}</div><div class="ps"><div><b>Public</b>${(o.privacy?.public || []).map((x) => `<span>${esc(x)}</span>`).join('')}</div><div><b>Sealed</b>${(o.privacy?.sealed || []).map((x) => `<span>${esc(x)}</span>`).join('')}</div></div></a>`).join('')}</div>
     </div></section>`;
   }
 
@@ -253,71 +252,19 @@
       section('Rule changes and governance') + `<ul class="stream">${d.governance.map((o) => opLine(o)).join('')}</ul>`);
   }
 
-  // ── pages: Task Node network ───────────────────────────────────────────────
-  async function tnHome(q) {
-    const kind = q.get('kind') || ''; const d = await get('/tasknode/summary');
-    const stream = kind ? (await get(`/tasknode/stream?kind=${kind}`)).txs.slice(0, 20) : d.stream;
-    const t = d.totals || {};
-    return page(`
-      <section class="ex-hero"><div class="big"><small>Task Node network · ledger</small><span class="num">${num(d.tip)}</span></div>
-      <p class="lede">The original Post Fiat chain, where contributors are paid for verified work. Rewards carry a pointer to the task they paid for. Profile plates are minted as NFTs.</p></section>
-      <div class="stats">
-        <div><div class="v num">${num(t.operators)}</div><div class="k">Contributors, all time</div></div>
-        <div><div class="v num">${num(t.tasksRewarded)}</div><div class="k">Tasks rewarded, all time</div></div>
-        <div><div class="v num">${num(Math.round(t.pftDistributed || 0))}</div><div class="k">PFT paid, all time</div></div>
-        <div><div class="v num">${num(d.tx_count)}</div><div class="k">Transactions indexed</div></div>
-      </div>
-      <p class="ex-note">The three all-time figures come from the Task Node's public leaderboard. Everything below is read from the chain: ${num(d.tx_count)} transactions in ledgers ${num(d.first_ledger)} to ${num(d.last_ledger)} (${esc(d.first_time || '')} to ${esc(d.last_time || '')}).</p>
-      ${section('What people are doing')}
-      <div class="chips"><a class="chip" href="#/tasknode" aria-current="${!kind}">All</a>${Object.entries(TN_KIND).filter(([k]) => d.kinds[k]).map(([k, v]) => `<a class="chip" href="#/tasknode?kind=${k}" aria-current="${kind === k}">${esc(v)} · ${num(d.kinds[k])}</a>`).join('')}</div>
-      <div class="cols"><div><ul class="stream">${stream.map((x) => tnLine(x)).join('') || '<li class="ex-empty">Nothing in the indexed window yet.</li>'}</ul><div class="pager">${link(`/tasknode/stream${kind ? `?kind=${kind}` : ''}`, 'All →', 'btn')}</div></div>
-      <div>${section('Latest rewards')}${d.recent_rewards.length ? `<ul class="stream">${d.recent_rewards.map((x) => tnLine(x)).join('')}</ul>` : '<p class="ex-note">No reward payments in the indexed window yet. They appear here as they are paid.</p>'}
-      ${section('Latest NFT mints')}<table class="ledger tight"><tbody>${d.recent_nfts.map((x) => `<tr><td>${link(`/tasknode/tx/${x.hash}`, num(x.ledger))}</td><td>${taddr(x.account, x.account_label)}</td><td class="mono">${esc(short(x.uri || '', 22, 6))}</td></tr>`).join('') || '<tr><td class="muted">None yet.</td></tr>'}</tbody></table></div></div>`);
-  }
-  async function tnStream(q) {
-    const kind = q.get('kind') || '', before = q.get('before') || ''; const d = await get(`/tasknode/stream?kind=${kind}&before=${before}`);
-    return page(head('Task Node network', 'Transactions', 'Newest first.') + `<div class="chips"><a class="chip" href="#/tasknode/stream" aria-current="${!kind}">All</a>${Object.entries(TN_KIND).map(([k, v]) => `<a class="chip" href="#/tasknode/stream?kind=${k}" aria-current="${kind === k}">${esc(v)}</a>`).join('')}</div><ul class="stream">${d.txs.map((x) => tnLine(x)).join('') || '<li class="ex-empty">Nothing here.</li>'}</ul><div class="pager">${d.next ? link(`/tasknode/stream?kind=${kind}&before=${d.next}`, 'Older →', 'btn') : ''}</div>`);
-  }
-  async function tnTx(hash) {
-    const t = await get(`/tasknode/tx/${hash}`); if (!t) return notFound('That transaction is outside the indexed window.');
-    const p = t.pointer;
-    return page(head(`Task Node network · ${esc(TN_KIND[t.kind] || t.kind)} · ${esc(t.type)}`, esc(t.sentence), '',
-      `<div class="ex-meta">${t.result === 'tesSUCCESS' ? '<span class="tag ok">Validated</span>' : `<span class="tag rej">${esc(t.result)}</span>`}<span class="label">${link(`/tasknode/ledger/${t.ledger}`, 'Ledger ' + num(t.ledger))} · ${esc(t.time || '')} · fee ${num(t.fee)} drops</span></div>`, 'sentence') +
-      (p ? section('Content pointer') + `<div class="kv"><div>Kind</div><div>${esc(p.kind)}</div><div>IPFS content ID</div><div>${hashRow(p.cid)}</div>${p.task_id ? `<div>Task</div><div class="mono">${esc(p.task_id)}</div>` : ''}${p.thread_id ? `<div>Thread</div><div class="mono">${esc(p.thread_id)}</div>` : ''}${p.context_id ? `<div>Context</div><div class="mono">${esc(p.context_id)}</div>` : ''}<div>Flags</div><div>${(p.flags || []).map((f) => `<span class="tag ${f === 'encrypted' ? 'sealed' : 'demo'}">${esc(f)}</span>`).join(' ') || 'none'}</div><div>Memo format</div><div class="mono">pf.ptr ${esc(p.format || '')} · schema ${esc(p.schema)}</div></div><p class="ex-note">${(p.flags || []).includes('encrypted') ? 'The content is encrypted. The explorer shows that it exists and where; it does not fetch or open it.' : 'The content is public on IPFS.'}</p>` : '') +
-      (t.uri ? section('Token') + `<div class="kv"><div>URI</div><div class="mono">${esc(t.uri)}</div>${t.tx.NFTokenTaxon != null ? `<div>Taxon</div><div>${esc(t.tx.NFTokenTaxon)}</div>` : ''}</div>` : '') +
-      section('Parties') + `<div class="kv"><div>From</div><div>${taddr(t.account, t.account_label)} <span class="hash">${esc(t.account)}</span></div>${t.dest ? `<div>To</div><div>${taddr(t.dest, t.dest_label)} <span class="hash">${esc(t.dest)}</span></div>` : ''}${t.amount != null ? `<div>Amount</div><div class="num">${units(t.amount)} PFT</div>` : ''}</div>` +
-      `<details class="fold"><summary>Raw record</summary><pre class="raw">${json(t.tx)}</pre></details>` +
-      `<div class="verify"><span class="label"><b>Check it yourself</b> · evidence level: reported</span><div>Read from the public node. This call returns the same transaction with its validated result:</div><code>curl -s https://rpc.testnet.postfiat.org -d '{"method":"tx","params":[{"transaction":"${esc(t.hash)}"}]}'</code></div>
-      <div class="kv" style="margin-top:24px"><div>Hash</div><div>${hashRow(t.hash)}</div></div>`);
-  }
-  async function tnAccount(a) {
-    const d = await get(`/tasknode/account/${a}`); const live = d.live || {};
-    return page(head(`Task Node network · account`, d.label?.handle ? `@${esc(d.label.handle)}` : `<span class="mono" style="font-size:.5em">${esc(a)}</span>`, d.label?.handle ? `<span class="mono">${esc(a)}</span>` : '', `<div class="ex-meta">${copyBtn(a)}</div>`) +
-      `<div class="stats"><div><div class="v num">${live.balance != null ? units(live.balance, 6, 2) : '–'}</div><div class="k">PFT balance</div></div><div><div class="v num">${d.label?.tasks != null ? num(d.label.tasks) : '–'}</div><div class="k">Tasks rewarded, all time</div></div><div><div class="v num">${live.minted != null ? num(live.minted) : '–'}</div><div class="k">NFTs minted</div></div><div><div class="v num">${num(d.txs.length)}</div><div class="k">Transactions in window</div></div></div>
-      ${live.error ? `<p class="ex-note">${esc(live.error)}.</p>` : ''}` + section('Transactions') + `<ul class="stream">${d.txs.map((x) => tnLine(x)).join('') || '<li class="ex-empty">None in the indexed window.</li>'}</ul>`);
-  }
-  async function tnLedger(n) {
-    const d = await get(`/tasknode/ledger/${n}`);
-    return page(head('Task Node network', `Ledger ${num(d.ledger)}`, d.time ? `Closed ${esc(d.time)}.` : 'No indexed transactions in this ledger.') + `<ul class="stream">${d.txs.map((x) => tnLine(x)).join('')}</ul>`);
-  }
-
-  const notFound = (msg) => page(head('Explorer', 'Nothing here.', esc(msg || 'That page does not exist on either network.')) + `<div class="btns">${link('/', 'Back to the devnet', 'btn solid')}</div>`);
+  const notFound = (msg) => page(head('Explorer', 'Nothing here.', esc(msg || 'That page does not exist.')) + `<div class="btns">${link('/', 'Back to the devnet', 'btn solid')}</div>`);
 
   // ── router ─────────────────────────────────────────────────────────────────
   const routes = [
     [/^\/$/, home], [/^\/stream$/, streamPage], [/^\/blocks$/, blocks], [/^\/block\/(\d+)$/, block], [/^\/tx\/([^/]+)$/, tx], [/^\/account\/([^/]+)$/, accountPage],
     [/^\/coins$/, coinsPage], [/^\/coin\/([^/]+)$/, coin], [/^\/private$/, privatePage], [/^\/journeys$/, journeys], [/^\/journey\/([a-z]+)\/([^/]+)$/, journeyPage], [/^\/network$/, network],
-    [/^\/tasknode$/, tnHome], [/^\/tasknode\/stream$/, tnStream], [/^\/tasknode\/tx\/([^/]+)$/, tnTx], [/^\/tasknode\/account\/([^/]+)$/, tnAccount], [/^\/tasknode\/ledger\/(\d+)$/, tnLedger],
   ];
   function parse() { const raw = location.hash.replace(/^#/, '') || '/'; const [path, qs = ''] = raw.split('?'); return { path: path || '/', q: new URLSearchParams(qs), raw }; }
   function chrome(path) {
-    const tn = path.startsWith('/tasknode');
-    document.querySelectorAll('.ex-switch a').forEach((a) => a.setAttribute('aria-current', String((a.dataset.net === 'tasknode') === tn)));
     const nav = document.getElementById('ex-nav');
-    const items = tn ? [['/tasknode', 'Overview'], ['/tasknode/stream?kind=reward', 'Rewards'], ['/tasknode/stream?kind=nft', 'NFTs'], ['/tasknode/stream?kind=payment', 'Payments'], ['/tasknode/stream', 'All transactions']]
-      : [['/', 'Overview'], ['/stream', 'Operations'], ['/blocks', 'Blocks'], ['/coins', 'NAVCoins'], ['/journeys', 'Journeys'], ['/private', 'Private'], ['/network', 'Network']];
+    const items = [['/', 'Overview'], ['/stream', 'Operations'], ['/blocks', 'Blocks'], ['/coins', 'NAVCoins'], ['/journeys', 'Journeys'], ['/private', 'Private'], ['/network', 'Network']];
     const here = location.hash.replace(/^#/, '') || '/';
-    nav.innerHTML = items.map(([r, t]) => `<a href="#${r}"${here === r || (r !== '/' && r !== '/tasknode' && here.split('?')[0] === r) ? ' aria-current="page"' : ''}>${t}</a>`).join('');
+    nav.innerHTML = items.map(([r, t]) => `<a href="#${r}"${here === r || (r !== '/' && here.split('?')[0] === r) ? ' aria-current="page"' : ''}>${t}</a>`).join('');
   }
   async function render(soft) {
     const { path, q } = parse(); const mine = ++seq; chrome(path);
@@ -333,7 +280,7 @@
       if (!soft) root.innerHTML = page(head('Explorer', 'The explorer service is not answering.', 'The page will try again on its own. Nothing is wrong with the network because of this.'));
     }
     clearTimeout(timer);
-    const live = path === '/' || path === '/tasknode';
+    const live = path === '/';
     timer = setTimeout(() => { if (!document.hidden) render(true); else timer = setTimeout(() => render(true), 6000); }, live ? 6000 : 30000);
   }
   addEventListener('hashchange', () => { lastTop = null; render(false); });
@@ -345,7 +292,7 @@
   });
   document.getElementById('ex-search')?.addEventListener('submit', async (e) => {
     e.preventDefault(); const input = e.target.querySelector('input'); const q = input.value.trim(); if (!q) return;
-    try { const r = await get(`/search?q=${encodeURIComponent(q)}`); if (r?.route) { location.hash = '#' + r.route; input.value = ''; } else { input.value = ''; input.placeholder = 'Nothing on either network matches that'; } } catch { pulse(false); }
+    try { const r = await get(`/search?q=${encodeURIComponent(q)}`); if (r?.route) { location.hash = '#' + r.route; input.value = ''; } else { input.value = ''; input.placeholder = 'Nothing on the network matches that'; } } catch { pulse(false); }
   });
   render(false);
 })();
