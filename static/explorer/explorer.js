@@ -32,15 +32,19 @@
   const sent = (o) => { let h = esc(o.sentence); for (const a of o.addrs || []) { const tok = esc(`${a.slice(0, 8)}…${a.slice(-4)}`); if (!h.includes(tok)) continue; h = h.split(tok).join(a.startsWith('pf') ? `<a class="ad" href="#/account/${esc(a)}" title="${esc(a)}">${tok}</a>` : `<a class="ad" href="https://etherscan.io/address/${esc(a)}" target="_blank" rel="noopener" title="${esc(a)}">${tok}</a>`); } return h; };
   // Success is the normal case and gets no chip. Only exceptions are marked.
   const resultTag = (o, always) => o.accepted === false ? `<span class="tag rej" title="${esc(o.code || '')}">Rejected</span>` : o.code === 'filled' ? '<span class="tag fill">Filled</span>' : o.accepted == null ? '<span class="tag prop">No receipt</span>' : always ? '<span class="tag ok">Accepted</span>' : '';
-  const levelTag = (e) => `<span class="tag ${e === 'disputed' ? 'rej' : 'lvl'}" title="How far the explorer has checked this record">${esc(e === 'cross-checked' ? 'Cross-checked' : e === 'disputed' ? 'Disputed' : 'Reported')}</span>`;
+  const levelTag = (e) => `<span class="tag ${e === 'disputed' ? 'rej' : 'lvl'}" title="How far the explorer has checked this record">${esc(e === 'cross-checked' ? 'Cross-checked' : e === 'disputed' ? 'Disputed' : e === 'linked to parent' ? 'Linked to parent' : 'Reported')}</span>`;
   const copyBtn = (v) => `<button class="copy" data-copy="${esc(v)}">Copy</button>`;
   const hashRow = (v) => `<span class="hash" title="${esc(v)}">${esc(v)}</span>${copyBtn(v)}`;
   const etherscan = (e) => { if (!e || !e.tx) return ''; const h = e.tx.startsWith('0x') ? e.tx : '0x' + e.tx; const base = { 1: 'https://etherscan.io', 11155111: 'https://sepolia.etherscan.io', 42161: 'https://arbiscan.io' }[e.chain_id] || 'https://etherscan.io'; return `<a class="hash" href="${base}/tx/${esc(h)}" rel="noopener" target="_blank">${short(h, 10, 6)} ↗</a>`; };
   const seals = (block, small) => { const voted = new Set((block.header?.votes || []).map((v) => v.validator)); const all = block.header?.validators || [...voted]; return `<span class="marks${small ? ' small' : ''}">${all.map((v) => `<span class="mark${voted.has(v) ? ' done' : ' none'}${v === block.proposer ? ' prop' : ''}" title="${esc(v)}${voted.has(v) ? ': recorded accepting vote' : ': no vote recorded'}${v === block.proposer ? ' (proposer)' : ''}"><i></i>${small ? '' : `<b>${esc(v.replace('validator-', 'v'))}</b><em>${v === block.proposer ? 'proposed' : voted.has(v) ? 'voted' : 'no vote'}</em>`}</span>`).join('')}</span>`; };
-  const STEP = { done: 'done', unknown: 'on Ethereum, not read', pending: 'waiting', 'not-started': 'not started', rejected: 'refused', mismatched: 'mismatch' };
+  const STEP = { done: 'done', unknown: 'on Ethereum, not read', pending: 'waiting', 'not-started': 'not started', rejected: 'refused', mismatched: 'mismatch', 'no receipt': 'no receipt', released: 'released' };
   const dots = (steps) => `<span class="marks small">${steps.map((s) => `<span class="mark ${esc(s.state)}" title="${esc(s.label)}: ${esc(STEP[s.state] || s.state)}"><i></i></span>`).join('')}</span>`;
   const spark = (vals) => { vals = (vals || []).map(Number).filter((v) => isFinite(v) && v > 0); if (vals.length < 2) return '<svg class="spark" viewBox="0 0 120 30"><path d="M2 15H118"/></svg>'; const last = vals[vals.length - 1]; const half = Math.max(last * 0.005, Math.max(...vals.map((v) => Math.abs(v - last))) * 1.15); const lo = last - half, sp = 2 * half; const pt = (v, i) => [2 + (116 * i) / (vals.length - 1), 26 - (22 * (v - lo)) / sp]; const d = vals.map((v, i) => `${i ? 'L' : 'M'}${pt(v, i).map((n) => n.toFixed(1)).join(' ')}`).join(''); const [lx, ly] = pt(last, vals.length - 1); return `<svg class="spark" viewBox="0 0 120 30" aria-hidden="true"><path d="${d}"/><circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="2.2"/></svg>`; };
   const json = (o) => esc(JSON.stringify(o, null, 2)).replace(/&quot;([a-zA-Z0-9_]+)&quot;:/g, '<span class="k">&quot;$1&quot;</span>:');
+
+  // Precision by asset ID, for an API that does not send it with the operation.
+  let coinPrec = null;
+  const coinPrecisions = () => (coinPrec ??= get('/coins').then((d) => Object.fromEntries((d?.coins || []).map((c) => [c.asset_id, c.precision]))).catch(() => ({})));
 
   async function get(path) {
     const res = await fetch(API + path, { cache: 'no-store' });
@@ -134,19 +138,24 @@
   }
 
   const checkPanel = (evidence, call, what) => `<div class="verify"><span class="label"><b>Check it yourself</b> · evidence level: ${esc(evidence === 'cross-checked' ? 'cross-checked' : evidence || 'reported')}</span>
-    <div>${evidence === 'cross-checked' ? 'Two validators report the same block hash and state root, and this block links to the one before it.' : evidence === 'disputed' ? 'Two validators answered differently for this block.' : 'Read from one validator.'} That detects a validator answering differently from another. It does not by itself establish that the certificate is valid. Sent to any validator, this call ${what}:</div><code>${esc(call)}</code></div>`;
+    <div>${evidence === 'cross-checked' ? 'Two validators report the same block hash and state root. That detects a validator answering differently from another.' : evidence === 'disputed' ? 'Two validators answered differently for this block.' : evidence === 'linked to parent' ? 'Read from one validator. Its parent hash matches the block before it; no second validator was compared.' : 'Read from one validator.'} It does not by itself establish that the certificate is valid. Sent to any validator, this call ${what}:</div><code>${esc(call)}</code></div>`;
 
   function journeyPanel(j) {
     if (!j) return '';
     return section(esc(JOURNEY[j.kind] || 'Journey'), link(`/journey/${j.kind}/${j.key}`, 'Open journey →')) +
       `<div class="journey">${j.steps.map((s) => `<div class="jstep ${esc(s.state)}"><span class="mark ${esc(s.state)}"><i></i></span><div class="l">${esc(s.label)}</div><div class="n">${
-        s.state === 'done' ? `Done · ${link(`/tx/${s.op}`, 'block ' + num(s.height))}${s.time ? '<br>' + when(s.time) : ''}` : s.state === 'rejected' ? `Rejected · ${link(`/tx/${s.op}`, esc(s.code || ''))}` : s.state === 'unknown' ? `Not checked${s.eth ? '<br>' + etherscan(s.eth) : ''}` : s.state === 'pending' ? 'Pending' : 'Not started'}</div></div>`).join('')}</div>
-      <p class="ex-note">${j.steps.some((s) => s.state === 'unknown') ? 'This build does not read Ethereum. Ethereum steps show "not checked", and any hash shown is the one the network recorded, not a confirmation.' : ''}</p>`;
+        s.state === 'done' ? `Done · ${s.op ? link(`/tx/${s.op}`, 'block ' + num(s.height)) : `on Ethereum${s.eth?.block ? ', block ' + num(s.eth.block) : ''}<br>${etherscan(s.eth)}`}${s.time ? '<br>' + when(s.time) : ''}` : s.state === 'rejected' ? `Rejected · ${link(`/tx/${s.op}`, esc(s.code || ''))}` : s.state === 'unknown' ? `Not checked${s.eth ? '<br>' + etherscan(s.eth) : ''}` : s.state === 'pending' ? 'Pending' : s.state === 'not-started' ? 'Not started' : `${esc((STEP[s.state] || s.state).replace(/^./, (c) => c.toUpperCase()))}${s.op ? ' · ' + link(`/tx/${s.op}`, 'block ' + num(s.height)) : ''}`}</div></div>`).join('')}</div>
+      ${j.trip?.sentence ? `<p class="ex-note"><b>${esc(j.trip.sentence)}</b></p>` : ''}<p class="ex-note">${ethNote(j.steps)}</p>`;
   }
+  // Steps on Ethereum that are still open: the old build never reads them; a build that reads Ethereum says why it has no match yet.
+  const ethNote = (steps) => { const open = steps.filter((s) => s.state === 'unknown'); if (!open.length) return ''; return open.some((s) => !s.note || /not read by this build/.test(s.note)) ? 'This build does not read Ethereum. Ethereum steps show "not checked", and any hash shown is the one the network recorded, not a confirmation.' : open.map((s) => esc(s.note)).join(' '); };
 
   async function tx(id) {
     const d = await get(`/tx/${id}`); if (!d) return notFound('No operation with that ID.');
     const o = d.op, b = d.block, raw = o.raw?.unsigned || o.raw || {};
+    const precs = o.asset_precision || await coinPrecisions();
+    // The asset of an amount field: its own *_asset_id, else the operation's asset_id, else its only asset.
+    const prec = (k) => { const base = k.replace(/(_?amount)?(_atoms)?$/, ''); const id = raw[base ? `${base}_asset_id` : 'asset_id'] || raw.asset_id || (o.assets?.length === 1 ? o.assets[0] : null); return precs[id] ?? 6; };
     const skip = new Set(['chain_id', 'genesis_hash', 'protocol_version', 'address_namespace', 'signature_algorithm_id', 'transaction_kind', 'fee']);
     const val = (k, v) => {
       if (v == null || v === '') return '<span class="muted">–</span>';
@@ -155,7 +164,7 @@
       if (/^pf[0-9a-f]{40}$/.test(sv)) return addr(sv, o.party_labels?.[sv]);
       if (k.endsWith('asset_id') && sv.length === 96) return `${link(`/coin/${sv}`, esc(o.asset_names?.[sv] || 'asset'))} <span class="hash">${short(sv, 10, 6)}</span>`;
       if (/_hash$|_root$|_id$|nonce|digest|commitment|nullifier|anchor/.test(k) && sv.length > 30) return `<span class="hash" title="${esc(sv)}">${short(sv, 16, 8)}</span>${copyBtn(sv)}`;
-      if (/atoms$|^amount$|_amount$/.test(k) && /^\d+$/.test(sv)) return `<span class="num">${units(sv)}</span><span class="sub2">${num(sv)} atoms, the ledger's smallest unit</span>`;
+      if (/atoms$|^amount$|_amount$/.test(k) && /^\d+$/.test(sv)) return `<span class="num">${units(sv, prec(k), prec(k))}</span><span class="sub2">${num(sv)} atoms, the ledger's smallest unit</span>`;
       if (k === 'fee') return `<span class="num">${num(sv)}</span> atoms of PFT`;
       return esc(sv);
     };
@@ -195,9 +204,9 @@
 
   async function coinsPage() {
     const d = await get('/coins');
-    const row = (c) => `<tr><td>${link(`/coin/${c.asset_id}`, esc(c.code))}${c.retired ? ' <span class="tag prop">Retired</span>' : ''}${c.halted ? ' <span class="tag rej">Halted</span>' : ''}</td><td class="num">${usd(c.nav_per_unit, c.nav_decimals, 6)}</td><td class="num">${units(c.supply, c.precision, 2)}</td><td class="num">${usd(c.net_assets, c.nav_decimals)}</td><td>${c.checks.length} · last at ${c.last_check_height ? link(`/block/${c.last_check_height}`, num(c.last_check_height)) : '–'}</td><td>${spark(c.checks.map((x) => x.nav_per_unit))}</td></tr>`;
+    const row = (c) => `<tr><td>${link(`/coin/${c.asset_id}`, esc(c.code))}${c.retired ? ' <span class="tag prop">Retired</span>' : ''}${c.halted ? ' <span class="tag rej">Halted</span>' : ''}</td><td class="num">${usd(c.nav_per_unit, c.nav_decimals, 6)}</td><td class="num">${units(c.supply, c.precision, 2)}${c.ledger_supply != null ? `<span class="sub2">${units(c.ledger_supply, c.precision, 2)} on the ledger now</span>` : ''}</td><td class="num">${usd(c.net_assets, c.nav_decimals)}</td><td>${c.checks.length} · last at ${c.last_check_height ? link(`/block/${c.last_check_height}`, num(c.last_check_height)) : '–'}</td><td>${spark(c.checks.map((x) => x.nav_per_unit))}</td></tr>`;
     const listed = d.coins.filter((c) => c.listed), other = d.coins.filter((c) => !c.listed);
-    const table = (rows) => `<table class="ledger tight"><thead><tr><th>Coin</th><th>NAV per coin</th><th>Supply</th><th>Reserves</th><th>NAV checks</th><th></th></tr></thead><tbody>${rows.map(row).join('')}</tbody></table>`;
+    const table = (rows) => `<table class="ledger tight"><thead><tr><th>Coin</th><th>NAV per coin</th><th>Supply at last check</th><th>Reserves</th><th>NAV checks</th><th></th></tr></thead><tbody>${rows.map(row).join('')}</tbody></table>`;
     return page(head('Devnet', 'NAVCoins', 'A NAVCoin trades at the value of the reserves behind it. Each NAV check is a reading of those reserves, submitted with a proof and finalized by the validators.') +
       section('Listed') + table(listed) + (other.length ? section('Earlier and test coins') + table(other) + '<p class="ex-note">Coins registered on the network during development. They are shown because they are on the ledger.</p>' : ''));
   }
@@ -248,7 +257,7 @@
       `<ul class="key"><li><span class="mark done"><i></i></span>Done on this network</li><li><span class="mark unknown"><i></i></span>On Ethereum, not read by the explorer</li><li><span class="mark pending"><i></i></span>Waiting</li><li><span class="mark rejected"><i></i></span>Refused</li></ul>` +
       `<div class="chips"><a class="chip" href="#/journeys" aria-current="${!kind}">All</a>${Object.entries(JOURNEY).map(([k, v]) => `<a class="chip" href="#/journeys?kind=${k}" aria-current="${kind === k}">${esc(v)}${d.counts[k] ? ' · ' + d.counts[k] : ''}</a>`).join('')}</div>
       <table class="ledger tight"><thead><tr><th>Blocks</th><th>When</th><th>Journey</th><th>What happened</th><th>Steps</th><th>State</th></tr></thead><tbody>
-      ${d.journeys.map((j) => `<tr><td>${num(j.first_height)}${j.last_height !== j.first_height ? '–' + num(j.last_height) : ''}</td><td>${when(j.time)}</td><td>${link(`/journey/${j.kind}/${j.key}`, esc(JOURNEY[j.kind]), 'lk')}</td><td>${esc(j.headline)}</td><td>${dots(j.steps)}</td><td>${j.summary === 'rejected' ? '<span class="tag rej">Refused</span>' : j.summary === 'in progress' ? '<span class="tag demo">In progress</span>' : `<span class="quiet">${j.summary === 'complete' ? 'Complete' : 'Done here'}</span>`}</td></tr>`).join('')}
+      ${d.journeys.map((j) => `<tr><td>${num(j.first_height)}${j.last_height !== j.first_height ? '–' + num(j.last_height) : ''}</td><td>${when(j.time)}</td><td>${link(`/journey/${j.kind}/${j.key}`, esc(JOURNEY[j.kind]), 'lk')}</td><td>${esc(j.headline)}${j.trip?.sentence ? `<span class="sub2">${esc(j.trip.sentence)}</span>` : ''}</td><td>${dots(j.steps)}</td><td>${j.summary === 'rejected' ? '<span class="tag rej">Refused</span>' : j.summary === 'in progress' ? '<span class="tag demo">In progress</span>' : `<span class="quiet">${j.summary === 'complete' ? 'Complete' : j.summary === 'complete on the network' ? 'Done here' : esc(String(j.summary).replace(/^./, (c) => c.toUpperCase()))}</span>`}</td></tr>`).join('')}
       </tbody></table><p class="ex-note">"Done here" means every step on this network is done. Steps on Ethereum are not read by this build, so they are never shown as done.</p>`);
   }
   async function journeyPage(kind, key) {
