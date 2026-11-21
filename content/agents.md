@@ -80,7 +80,7 @@ curl -fsSL https://tasknode.postfiat.org/install | sh -s -- --disconnect
 
 ## Tokens and sign-in {#sign-in}
 
-- **Token.** The connect page creates a token and shows a paste-ready command for Claude Code, Codex, Hermes, Pi, OpenCode and Kilo, plus the URL and header for every other MCP client. Tokens work everywhere, including over SSH. The token is shown once and never expires. Anyone who holds it can act as you, so treat it like a password.
+- **Token.** The connect page creates a token and shows a paste-ready command for Claude Code, Codex, Hermes, Pi, OpenCode and Kilo, plus the URL and header for every other MCP client. Tokens work everywhere, including over SSH. The token is shown once. By default, it expires after 90 days without use; using it refreshes that window. It can also be revoked at any time. After expiry or revocation, [reconnect](#troubleshooting) to get a new token. Anyone who holds it can act as you, so treat it like a password.
 - **Browser sign-in.** When the agent runs on the same computer as your browser, Claude Code, Codex, Claude Desktop, claude.ai and ChatGPT sign in through GitHub directly.
 - **Linked GitHub.** Agents sign in through the GitHub account linked to your Task Node account. Signing in with a GitHub account that isn't linked creates a separate, empty Task Node account.
 
@@ -314,7 +314,7 @@ The connect page lists every connected device with its last use. Revoke one, or 
 
 ## Troubleshooting {#troubleshooting}
 
-- **Unauthorized (401).** The token was revoked or has been idle for 90 days. Run the installer again.
+- **Unauthorized (401).** The token may have been revoked or expired after 90 days without use (the default inactivity limit). Using a valid token refreshes that window; an expired or revoked token needs to be replaced. Run the [installer](#quick-start) again, open its link and approve with the GitHub account linked to your Task Node account, then restart the agent. For manual token setup, create a new token on the [connect page](https://tasknode.postfiat.org/connect) and replace the old token in your agent's configuration. For browser sign-in, authenticate again from your MCP client.
 - **Asked to link GitHub.** Link GitHub to your Task Node account, then reopen the connect page.
 - **"Task Node needs Node.js 22 or newer."** Install Node 22 for your user, then run the installer again:
 
