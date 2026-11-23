@@ -12,6 +12,15 @@
       <p class="label">Post Fiat{{ with .Params.kicker }} · {{ . }}{{ end }}</p>
       <h1 class="mt-s">{{ .Title }}</h1>
       {{ with .Params.summary }}<p class="sub">{{ . | plainify }}</p>{{ end }}
+      {{- with .Params.copyMarkdownHref }}
+      {{- $btnLabel := $.Params.copyMarkdownButton | default "Copy for LLM" -}}
+      {{- $btnStatus := $.Params.copyMarkdownStatus | default "Markdown copied." -}}
+      <div class="btns" style="margin-top:18px;align-items:center" data-copy-markdown-widget>
+        <button class="btn solid" type="button" style="cursor:pointer" data-copy-markdown-button data-copy-url="{{ . }}" data-copy-success="{{ $btnStatus }}">{{ $btnLabel }}</button>
+        <a class="btn" href="{{ . }}">Raw Markdown</a>
+        <span class="label" data-copy-status aria-live="polite" style="margin-left:4px"></span>
+      </div>
+      {{- end }}
     </div>
   </header>
   <div class="doc-layout{{ if not $toc }} solo{{ end }}">
@@ -24,5 +33,54 @@
 {{ partial "ink/foot.html" . }}
 {{ partial "ink/mermaid.html" . }}
 {{ if $toc }}{{ partial "ink/toc-spy.html" . }}{{ end }}
+{{- if .Params.copyMarkdownHref }}
+<script>
+(() => {
+  if (window.__pftInkCopyMarkdownLoaded) return;
+  window.__pftInkCopyMarkdownLoaded = true;
+  const fallbackCopy = (text) => {
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.setAttribute('readonly', '');
+    area.style.position = 'fixed';
+    area.style.top = '0';
+    area.style.left = '-9999px';
+    document.body.appendChild(area);
+    area.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(area);
+    return ok;
+  };
+  document.addEventListener('click', async (event) => {
+    const button = event.target.closest('[data-copy-markdown-button]');
+    if (!button) return;
+    const widget = button.closest('[data-copy-markdown-widget]');
+    const status = widget?.querySelector('[data-copy-status]');
+    const url = button.dataset.copyUrl;
+    if (!url) return;
+    const prev = button.textContent;
+    try {
+      button.disabled = true;
+      if (status) status.textContent = 'Loading Markdown…';
+      const resp = await fetch(url, { cache: 'no-store' });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      const text = (await resp.text()).trim();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else if (!fallbackCopy(text)) {
+        throw new Error('Clipboard unavailable');
+      }
+      button.textContent = 'Copied!';
+      if (status) status.textContent = button.dataset.copySuccess || 'Markdown copied.';
+      setTimeout(() => { button.textContent = prev; }, 2200);
+    } catch (err) {
+      if (status) status.textContent = 'Copy failed — use Raw Markdown link.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+})();
+</script>
+{{- end }}
 </body>
 </html>

@@ -15,6 +15,10 @@ tags:
   - SP1
   - Proof of Reserves
   - Schwab
+copyMarkdownHref: "/research/flaretee_spec/index.md"
+copyMarkdownButton: "Copy for LLM"
+copyMarkdownDescription: "Copy the full Markdown spec (with commit-pinned code links) and paste into your favorite LLM."
+copyMarkdownStatus: "Copied Markdown for LLM."
 draft: false
 ---
 
