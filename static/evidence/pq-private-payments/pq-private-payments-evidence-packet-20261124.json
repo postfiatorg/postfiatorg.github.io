@@ -62,6 +62,9 @@
       "circuit_id": "orchard.action.v2",
       "action_count": 2,
       "proof_bytes": 7264,
+      "canonical_binary_fields_bytes": 9145,
+      "canonical_binary_fields_with_optional_compact_and_binding_bytes": 9297,
+      "verify_scope": "verify_serialized_orchard_action (cached VK; verifies Halo 2 proof + RedPallas spend-auth and binding signatures)",
       "action_build_and_prove_ms": 9474,
       "verifying_key_build_ms": 3265,
       "verify_1c_med_ms": 43,
@@ -99,11 +102,17 @@
   },
   "wire_and_storage_bytes": {
     "standalone_non_mint_expected": 138461,
+    "standalone_non_mint_proof_only_expected": 134813,
     "standalone_non_mint_max": 140476,
     "standalone_signed_deposit_expected": 143722,
     "standalone_signed_deposit_max": 145737,
     "l1_profile2_pfusdc_pay_vector": 137860,
+    "l1_profile2_pfusdc_pay_proof_only": 134140,
     "l1_profile2_pfusdc_exit_vector": 138724,
+    "like_for_like_ratios_vs_orchard_2_action": {
+      "proof_only_ratio": 18.47,
+      "full_binary_transfer_ratio": 15.07
+    },
     "l1_profile2_m8_rehearsal_largest_body": 144397,
     "l1_profile2_m8_rehearsal_largest_charged": 145140,
     "l1_worst_case_redb_ceiling": 146546,
