@@ -1,41 +1,64 @@
 {
-  "packet_version": "2026-11-24-consolidated",
+  "packet_version": "2026-11-24-consolidated-v2",
   "protocol": "Peel-Binius-Shielded (PFSH02, L1 Profile 2)",
-  "status": "Consolidated release candidate on public/main; all engineering gates green; external cryptographic audit & governance activation height H open",
+  "status": "Pre-audit release candidate on feat/pq-payments-production-candidate (rebased/merged atop public/main 994589467); blocked on external cryptographic audit, production-genesis cut + 2^24-leaf restart checkpointing, and signed governance vote for height H",
   "repository": "https://github.com/postfiatorg/postfiatl1v2",
+  "host_environment": {
+    "cpu_model": "AMD EPYC Processor (32 vCPUs, KVM hypervisor)",
+    "cpu_flags_relevant": ["pclmulqdq", "avx2", "sha_ni", "aes"]
+  },
   "consolidated_branch": {
     "branch": "feat/pq-payments-production-candidate",
-    "head_commit": "d2a83d1d5a04a27091b66c8c02c155b55fab88de",
+    "head_commit": "2ae8c8e02cdd39e5ed0ed84dd8a8d57241005fac",
+    "rust_l1_commit": "d2a83d1d5a04a27091b66c8c02c155b55fab88de",
     "base_public_main": "994589467",
     "merged_components": [
       "public/fix/main-checks-20261123 (PR #209, fixes 4 pre-existing main tests)",
       "feat/peel-binius-shielded-pq (PR #207, M1-M8 PQ private payments)",
       "pq/private-issued-asset-fee (48d01e795, L1 Profile 2 payerless issued-asset fees)",
       "public/fix/pq-cheap-checks-first-20261123 (PR #211, cheap pool checks before proof verification)",
-      "Hardening commit d2a83d1d5 (54-mul Go purego & Rust portable kernels, parallel 4-proof block verification, GMP22 H4 sub-hop closure, on-chain key-pinning doc, updated check_math.py & verify_circuit_equivalence.py)"
+      "Hardening commit d2a83d1d5 (54-mul Karatsuba portable kernels, parallel 4-proof block verification, GMP22 H4 sub-hop closure, on-chain key-pinning doc, updated check_math.py & verify_circuit_equivalence.py)",
+      "Pure-Go verifier optimization commit 2ae8c8e02 (single-step mulC32Inline, inlined Karatsuba loop, register-based RingSwitchLinearMap.applyPortable)"
     ]
   },
   "test_verification_20261124": {
-    "verify_sh_7_stage": "ALL 7/7 PASSED (CPU 2; Rust 21.56-22.17 ms, Go PCLMUL 34.46-35.66 ms, full 2^24 rollover 20.52 ms Rust / 32.15 ms Go)",
+    "verify_sh_7_stage": "ALL 7/7 PASSED (CPU 9; Rust 21.56-21.93 ms, Go PCLMUL 32.87-33.34 ms, full 2^24 rollover 20.21 ms Rust / 31.26 ms Go)",
     "postfiat_privacy_binius_accel": "9 passed, 0 failed",
     "postfiat_privacy_binius_portable": "9 passed, 0 failed",
     "postfiat_privacy_binius_wallet": "8 passed, 0 failed",
     "postfiat_storage_pq_archive": "1 passed, 0 failed",
     "python_cli_test_pq_wallet_cli": "9 passed, 0 failed",
-    "postfiat_node_lib_full": "750 passed, 0 failed, 45 ignored",
+    "postfiat_node_lib_full": "750 passed, 0 failed, 45 pre-existing ignored (0 of 45 touch PQ payments; all 45 are opt-in external-bridge/Solana/Base-Sepolia/Anvil/legacy-disk tests)",
     "postfiat_node_m8_six_validator_rehearsal_profile2": "1 passed, 0 failed (60.26s, worst_uncached_verify_l1_ms=22.443 ms, 4-proof block charged=578304 B)"
   },
   "benchmarks_ms_20261124": {
-    "standalone_rust_1core_accel": { "range": "21.56-22.17", "full_tree_rollover": 20.52 },
-    "standalone_go_1core_pclmul": { "range": "34.46-35.66", "full_tree_rollover": 32.15 },
-    "standalone_go_1core_purego_50_trials": { "median_range": "46.94-48.90", "p95": 50.32, "max": 50.77, "gate": "PASS (< 50 ms median, down from 58.87 ms)" },
-    "validator_accel_1core_1tx": { "median_range": "23.58-24.06", "p95_range": "23.78-36.91", "max": 37.17, "gate": "PASS (< 50 ms)" },
-    "validator_accel_1core_4tx": { "median_range": "92.94-102.20", "max": 107.53, "gate": "PASS (< 200 ms)" },
-    "validator_accel_4core_parallel_4tx": { "median_range": "49.82-69.75", "max": 102.10, "gate": "PASS (< 200 ms)" },
-    "validator_portable_1core_1tx": { "median_range": "36.84-37.76", "p95_range": "37.73-39.22", "max_warm": 39.27, "max_cold_outlier": 50.33, "gate": "PASS (med & p95 < 50 ms)" },
-    "validator_portable_1core_4tx": { "median_range": "145.48-147.64", "p95_range": "148.13-155.38", "max": 161.93, "gate": "PASS (< 200 ms every trial)" },
-    "validator_portable_4core_parallel_4tx": { "median_range": "68.84-85.57", "p95_range": "86.41-96.24", "max": 106.64, "gate": "PASS (< 200 ms)" },
-    "proving_rust": { "sixteen_threads_s": 2.64, "thirtytwo_threads_s": 2.90, "one_core_s": "25.5-28.0", "peak_rss_mib": "547-562" }
+    "standalone_rust_1core_accel_50_trials": {
+      "mint": { "med": 20.42, "p95": 20.99, "max": 22.98 },
+      "hop1": { "med": 20.35, "p95": 26.45, "max": 33.81 },
+      "hop2": { "med": 20.43, "p95": 24.01, "max": 31.18 },
+      "full_tree_rollover": 20.21,
+      "gate": "PASS (< 50 ms med/p95/max)"
+    },
+    "standalone_go_1core_pclmul_50_trials": {
+      "mint": { "med": 31.11, "p95": 31.99, "max": 32.45 },
+      "hop1": { "med": 30.82, "p95": 31.18, "max": 31.78 },
+      "hop2": { "med": 30.95, "p95": 31.94, "max": 32.35 },
+      "full_tree_rollover": 31.26,
+      "gate": "PASS (< 50 ms med/p95/max)"
+    },
+    "standalone_go_1core_purego_50_trials": {
+      "mint": { "med": 43.03, "p95": 43.69, "max": 44.08 },
+      "hop1": { "med": 43.08, "p95": 43.72, "max": 43.84 },
+      "hop2": { "med": 42.76, "p95": 43.52, "max": 43.67 },
+      "gate": "PASS (< 50 ms med/p95/max across all 150 trials, down from 71.50 ms)"
+    },
+    "validator_accel_1core_1tx": { "per_condition_medians": "23.58-24.06", "p95_range": "23.78-36.91", "max": 37.17, "gate": "PASS (< 50 ms)" },
+    "validator_accel_1core_4tx": { "per_condition_medians": "92.94-102.20", "p95_range": "93.89-104.08", "max": 107.53, "gate": "PASS (< 200 ms)" },
+    "validator_accel_4core_parallel_4tx": { "per_condition_medians": "49.82-69.75", "p95_range": "73.26-87.64", "max": 102.10, "gate": "PASS (< 200 ms)" },
+    "validator_portable_1core_1tx": { "per_condition_medians": "36.84-37.76", "p95_range": "37.73-39.22", "max_warm": 39.27, "max_cold_outlier": 50.33, "gate": "PASS med/p95/warm max (1 cold-cache outlier)" },
+    "validator_portable_1core_4tx": { "per_condition_medians": "145.48-147.64", "p95_range": "148.13-155.38", "max": 161.93, "gate": "PASS (< 200 ms)" },
+    "validator_portable_4core_parallel_4tx": { "per_condition_medians": "68.84-85.57", "p95_range": "86.41-96.24", "max": 106.64, "gate": "PASS (< 200 ms)" },
+    "proving_rust": { "sixteen_threads_s": 2.64, "one_core_med_s": "24.61-24.71", "one_core_p95_s": "26.29-27.24", "one_core_max_s": 27.68, "peak_rss_mib": "547-562" }
   },
   "wire_and_storage_bytes": {
     "standalone_non_mint_expected": 138461,
@@ -64,9 +87,9 @@
       "state_root_prefix": "246d6113...124be4b8e6"
     }
   },
-  "remaining_pre_activation_items": [
-    "External cryptographic audit of the new proof system (Theorems 1A, 1B, 2A, Conjecture A.4, Theorem 5 non-standard assumptions, and Rust/Go/L1 code).",
-    "Production release targeting the live chain genesis & governed pfUSDC series (currently restricted to disposable rehearsal genesis).",
-    "Governance vote setting live activation height H after all validators install the reviewed release."
+  "remaining_pre_activation_gates": [
+    "External cryptographic and code audit (Theorems 1A, 1B, 2A, Conjecture A.4, Theorem 5 non-standard assumptions, and Rust/Go/L1 settlement code).",
+    "Production-genesis release cut (replacing disposable rehearsal genesis guard with live genesis & governed pfUSDC series) plus production-scale (2^24-leaf) node restart & index-checkpoint measurements.",
+    "Signed BFT-supermajority governance vote setting live activation height H after all validators install the audited release."
   ]
 }
