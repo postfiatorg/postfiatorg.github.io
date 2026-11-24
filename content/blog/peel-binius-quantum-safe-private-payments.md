@@ -1,7 +1,7 @@
 ---
 title: "PFSH02: Experimental Curve-Free Private Payments for Post Fiat L1"
 date: 2026-11-24T00:00:00Z
-draft: false
+draft: true
 summary: "Engineering report, same-host Orchard comparison (n = 50 proving and verification), Lean 4 formalization, and security-status assessment for Peel-Binius-Shielded (PFSH02)—an unaudited experimental prototype replacing elliptic curves in Post Fiat L1's private-payment stack."
 aliases:
   - /peel-binius-curve-free-private-payments/
