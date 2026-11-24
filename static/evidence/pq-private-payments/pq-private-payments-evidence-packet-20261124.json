@@ -56,6 +56,19 @@
     "postfiat_node_m8_six_validator_rehearsal_profile2": "1 passed, 0 failed (60.26s, worst_uncached_verify_l1_ms=22.443 ms, 4-proof block charged=578304 B)"
   },
   "benchmarks_ms_20261124": {
+    "same_host_orchard_baseline_50_trials": {
+      "command": "ITERATIONS=50 taskset -c 2 cargo run --release --locked -p postfiat-privacy-orchard --example orchard_verification_budget",
+      "proof_system_id": "postfiat.privacy.orchard-halo2.v2",
+      "circuit_id": "orchard.action.v2",
+      "action_count": 2,
+      "proof_bytes": 7264,
+      "action_build_and_prove_ms": 9474,
+      "verifying_key_build_ms": 3265,
+      "verify_1c_med_ms": 43,
+      "verify_1c_p95_ms": 44,
+      "verify_1c_max_ms": 44,
+      "report_hash": "b4d43930dfe7568398222b749ddc751118a07f09dfa8fcedc7b7fe4deb7689f9b444f72d655116ed17ad6ce71d0fa53f"
+    },
     "standalone_rust_1core_accel_50_trials": {
       "mint": { "med": 20.42, "p95": 20.99, "max": 22.98 },
       "hop1": { "med": 20.35, "p95": 26.45, "max": 33.81 },

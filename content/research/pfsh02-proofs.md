@@ -21,7 +21,21 @@ draft: false
 
 *Companion formal appendix to [PFSH02: Experimental Curve-Free Private Payments for Post Fiat L1](/blog/peel-binius-quantum-safe-private-payments/). Pinned specification source: [`docs/security/peel-binius-shielded-pq-payments.md`](https://github.com/postfiatorg/postfiatl1v2/blob/26e5a10a5d6f8087b0d20a44b646e88e0042a382/docs/security/peel-binius-shielded-pq-payments.md) and Lean 4 formalization [`formal/lean/`](https://github.com/postfiatorg/postfiatl1v2/tree/26e5a10a5d6f8087b0d20a44b646e88e0042a382/formal/lean) on branch `feat/pq-payments-production-candidate` (`26e5a10a5`).*
 
-**Review & Lean 4 formalization status:** Nine Lean 4 (`v4.20.0`) + Mathlib modules (`2,729` LOC, zero `sorry`s, zero custom axioms—`[propext, Classical.choice, Quot.sound]` only) kernel-check the exact-rational parameters (`Params.lean`), greedy peeling (`Peel.lean`), dual-polynomial binding / `K_32` subfield inheritance / ring-switching (`DualBinding.lean`), rank-3 operator norm & readout (`Rank3Op.lean`), compressed-oracle superposition reduction & telescoping (`CompressedOracle.lean`), unopened-leaf bijection / capped PoW / `Sim_IOP` bijections (`ZeroKnowledge.lean`), ledger supply conservation (`ValueConservation.lean`), Appendix A.4's `E_3` bound & Cases A/B/C trichotomy (`ConjectureA4.lean`), and Mode 3 key-pinning / Theorems 4–5 hybrids (`AuthAndPrivacy.lean`). External peer review remains required for model-to-code fidelity, external literature interfaces (BCIKS20 Thm 6.2, GHHM21 Thm 1, AHU19 Thm 3, and real-`Sim_BCS`-to-`B^H` view equivalence), and the non-standard primitive assumptions (`IK-CCA`, `IR-PRF`, `JointPRF`, `PRG`, `Hide`).
+**Review & Lean 4 formalization status:** Nine Lean 4 (`v4.20.0`) + Mathlib modules (`2,729` LOC, zero `sorry`s, zero custom axioms—`[propext, Classical.choice, Quot.sound]` only) kernel-check the core mathematical derivations below. External peer review remains required for model-to-code fidelity, external literature interfaces (BCIKS20 Thm 6.2, GHHM21 Thm 1, AHU19 Thm 3, and real-`Sim_BCS`-to-`B^H` view equivalence), and the non-standard primitive assumptions (`IK-CCA`, `IR-PRF`, `JointPRF`, `PRG`, `Hide`).
+
+## 0. Lean 4 Formal Proof Suite (`formal/lean/`, 2,729 LOC)
+
+| Module | Spec Target | Key Kernel-Verified Theorems (0 `sorry`s, 0 custom axioms) |
+| --- | --- | --- |
+| `PFSH02/Params.lean` | `check_math.py`, Tables 1–2 | `L_max_exact` (`⌊√(2/ρ)⌋ = 86`), `johnson_margin_m3`, `coeff_3652_upper`, `wire_margins_exact`, `conservation_66bit_no_overflow`, `p34_lt_inv_2_302`, `eps_curve_sq_lt_inv_2_610`, `theorem2A_Q64/Q80/Q96` |
+| `PFSH02/Peel.lean` | App. A.1, Lemma 1 (`Peel(M)`) | `step_sqrt_decrease`, `peel_sqrt_telescoping`, `pfsh02_peel_list_bound` (`k ≤ 86`), `peel_case1_agreement_strict`, `peel_case2_bciks_hypotheses`, `peel_case2_curve_monotone` |
+| `PFSH02/DualBinding.lean` | App. A.1, Lemmas 2, 3 & 4 | `lemma2_bad_pt_union_bound`, `lemma2_dual_binding`, `lemma3_subfield_inheritance` (Lagrange `K_32` inheritance), `lemma4_gamma_soundness`, `lemma4_rho_rs_soundness` |
+| `PFSH02/Rank3Op.lean` | App. A.3, Lemma A.3.0 & A.3.4(b) | `opO_rank3_identity`, `opO_symmetric`, `entry_norm_bound` (`≤ √(8p)`), `exit_norm_bound` (`≤ √(8p)`), `readout_error_exact` (`2/N − 1/N² < 2/N`) |
+| `PFSH02/CompressedOracle.lean` | App. A.3, Lemmas A.3.1–A.3.4 & Thm 2A | `blockDiag_norm_le`, `pointwise_both_directions_bound`, `lemmaA31_tree_invariance`, `sum_sqrt_le_two_thirds`, `amplitude_telescoping`, `theorem2A_telescoped_bound` |
+| `PFSH02/ZeroKnowledge.lean` | §3.4 & App. B (Lemmas 1.1–1.2, Thm 1B) | `lemma11_unopened_leaf_bijection` (`5,216` bits), `one_sub_pow_le_exp`, `lemma12_pow_tv_bound` (`TV < 2^-182`), `sim_iop_bijections`, `theorem1B_Q96_bound` |
+| `PFSH02/ValueConservation.lean` | §4.1, Theorem 3 (3a & 3b) | `genesis_invariant`, `step_preserves_invariant`, `theorem3a_shielded_conservation`, `theorem3b_joint_conservation_burned`, `theorem3b_joint_conservation_credited` |
+| `PFSH02/ConjectureA4.lean` | App. A.4, Theorem 2B (`B^H`) | `monotone_exit_norm_zero`, `theoremA4_E3_bound` (`≤ 8 Q_eff² p_E3`), `escape_permanence`, `appendixA4_caseA/B/C`, `appendixA4_exhaustive_trichotomy` |
+| `PFSH02/AuthAndPrivacy.lean` | §§4.2–4.3, Theorems 4 & 5 | `mode3_key_pinned_eliminates_160bit` (0 axioms), `mode3_forge_dichotomy`, `theorem4_hybrid_bound`, `symmetric_five_game_hybrid`, `theorem5_global_privacy` (incl. GMP22 sub-hop `(v)`) |
 
 ---
 
