@@ -27,7 +27,7 @@ tags:
 <div class="glance">
   <div><b>Unaudited · Conj. A.4</b><span>Auth rests on unproven Conj. A.4 (theft risk); conservation does not</span></div>
   <div><b>137,860 B · 146,580 B</b><span>Measured private pay vs. worst-case archived deposit (149,130 B cap)</span></div>
-  <div><b>45.2 ms · 108.4 ms</b><span>Largest observed single-tx verify (med 20.4–39.6 ms) &amp; 4-tx parallel block max</span></div>
+  <div><b>45.2 ms · 108.4 ms</b><span>Single-tx verify max (med 20.4–43.1 ms) &amp; 4-tx parallel block max (1c portable seq: 208.0 ms)</span></div>
   <div><b>750 pass · 7 / 7</b><span>`postfiat-node` (0 fail; 45 non-PQ ignored) &amp; standalone Rust/Go/Python suite</span></div>
 </div>
 
@@ -46,7 +46,7 @@ Removing elliptic curves carries steep bandwidth, proving, and throughput costs.
 | **Core hardness assumptions** | Discrete log on Pasta curves (Halo 2) | SHAKE256, `3×SHA-512`, ML-KEM-1024, ML-DSA-65 + **unproven Conj. A.4** & non-standard hash/KEM assumptions |
 | **Elliptic-curve quantum exposure** | Retroactive note decryption + future proof forgery | No elliptic curves; post-quantum security **unverified** (conditional QROM bounds unreviewed) |
 | **Private transfer size** | ~2–5 KB | **137,860 B** measured (`140,476 B` worst-case non-mint ceiling) |
-| **Single-core verification** | Low single-digit ms | **20.4–39.6 ms** per-condition medians; **45.23 ms** largest observed max across all backends |
+| **Single-core verification** | Low single-digit ms | **20.4–43.1 ms** per-condition medians across Rust/Go/purego/validator; **45.23 ms** largest observed max |
 | **Client proving (1 core)** | ~1–3 s | **24.61–24.71 s** median (`27.68 s` max), `~550 MiB` RSS |
 | **Client proving (16 threads)** | — | **2.64 s** (EPYC server; browser/mobile untested) |
 | **Block & epoch limits** | Higher density | `≤ 4` PQ txs/block (theoretical ceiling `4–8 tx/s` at `0.5–1 s` blocks); `8,388,608` txs/epoch (`~97.1 days` at `1 tx/s`, **`12–24 days`** at ceiling) |
@@ -209,7 +209,7 @@ cargo test --release --locked -p postfiat-node --bin postfiat-node -- pq_payment
 No activation date is set; PFSH02 remains disabled on mainnet until all three gates close and the final release commit reproduces every artifact:
 
 1. **Independent cryptographic resolution and code audit:** External cryptographers must publish a written review covering **Theorem 3** (value conservation, including `Peel(M)`, Theorem 1A, and Theorem 2A / App. A.3 QROM extraction), **Theorem 4 Modes 1–3** (spend and deposit authorization, including Theorem 1B / App. B QROM ZK and SHAKE256 `JointPRF`/`PRG`), **Theorem 5** (confidentiality), and the Rust/Go/L1 settlement code. Activation is blocked until **Conjecture A.4** is resolved—either by a peer-reviewed proof under explicitly accepted assumptions or by protocol redesign—an accepted multi-transaction confidentiality scope is documented, and every high/critical audit finding is closed on the release commit.
-2. **Production-genesis cut and scale validation:** Replace the disposable rehearsal genesis/series lock (`pq_rehearsal_domain`) with mainnet genesis and the live `pfUSDC` series; implement and verify bounded-time node restart and index checkpointing at multi-million-note (`2^24`-leaf) scale (cold restart currently walks historical pair pages); and measure real browser-WASM/mobile client proving and multi-node sustained-load behavior.
+2. **Production-genesis cut, hardware qualification, and scale validation:** Replace the disposable rehearsal genesis/series lock (`pq_rehearsal_domain`) with mainnet genesis and the live `pfUSDC` series; enforce a validator minimum-hardware baseline (`PCLMULQDQ` support or `≥ 4` verification cores so attacker-crafted 4-proof invalid batches stay under `200 ms`); implement and verify bounded-time node restart and index checkpointing at multi-million-note (`2^24`-leaf) scale (cold restart currently walks historical pair pages); and measure real browser-WASM/mobile client proving and multi-node sustained-load behavior.
 3. **Validator upgrade, governance vote, and Orchard migration plan:** After all validators install the audited production release binary pinned to the final release commit, ratify a BFT-supermajority governance amendment choosing live activation height \(H\), paired with user-facing migration tooling and explicit privacy guidance for exiting the legacy Orchard pool.
 
 ---
