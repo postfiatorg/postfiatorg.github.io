@@ -1,6 +1,6 @@
 <svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t3 d3">
   <title id="t3">Conditional QROM Security Regimes vs. Quantum Query Budget Q</title>
-  <desc id="d3">Log-log plot comparing PFSH02 conditional QROM extraction bound, QROM zero-knowledge bound, SHAKE256 384-bit BHT collision reference, and the 160-bit account-address second-preimage weak link across quantum query budgets Q from 2^48 to 2^128.</desc>
+  <desc id="d3">Log-log plot comparing PFSH02 conditional QROM extraction bound, QROM zero-knowledge bound, SHAKE256 384-bit BHT collision reference, and the 160-bit unpinned account-address second-preimage regime (for brand-new accounts prior to first ML-DSA-65 key pinning) across quantum query budgets Q from 2^48 to 2^128.</desc>
   <defs>
     <style>
       .disp { font-family: "Instrument Serif", Georgia, serif; fill: #10191d; }
@@ -114,11 +114,11 @@
   <rect x="742" y="240" width="292" height="22" fill="#f2eee5" stroke="#057f82" stroke-width="1"/>
   <text x="888" y="255" text-anchor="middle" class="mono note teal">QROM ZK (Thm 1B, P=2³²): 2⁻¹⁵⁰·⁶⁰ (PoW cap)</text>
 
-  <!-- 160-bit weak link callout -->
+  <!-- 160-bit unpinned address callout -->
   <circle cx="298" cy="434.7" r="6" fill="#7a1f1f"/>
-  <rect x="130" y="424" width="158" height="44" fill="#f2eee5" stroke="#7a1f1f" stroke-width="1.2"/>
-  <text x="140" y="442" class="mono note ox" font-weight="600">160-bit Addr: ~2⁻³²</text>
-  <text x="140" y="458" class="mono axis ox">Vacuous at Q = 2⁸⁰</text>
+  <rect x="122" y="424" width="166" height="44" fill="#f2eee5" stroke="#7a1f1f" stroke-width="1.2"/>
+  <text x="131" y="442" class="mono note ox" font-weight="600">Unpinned 160b: ~2⁻³²</text>
+  <text x="131" y="458" class="mono axis ox">Key-pinned: ML-DSA-65</text>
 
   <!-- Legend Box -->
   <rect x="42" y="542" width="1116" height="34" fill="#ebe6da" stroke="#cfc8b6"/>
@@ -132,5 +132,5 @@
   <text x="588" y="563" class="mono axis">384b BHT Coll. Ref (32Q³/2³⁸⁴)</text>
 
   <line x1="844" y1="559" x2="872" y2="559" stroke="#7a1f1f" stroke-width="3.2"/>
-  <text x="880" y="563" class="mono axis ox">160-bit L1 Acct Addr (Mode 3)</text>
+  <text x="880" y="563" class="mono axis ox">160-bit Unpinned Addr (Mode 3)</text>
 </svg>

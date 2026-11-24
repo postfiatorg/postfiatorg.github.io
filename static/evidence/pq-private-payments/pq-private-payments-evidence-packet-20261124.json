@@ -1,125 +1,72 @@
 {
-  "packet_version": "2026-11-24",
-  "protocol": "Peel-Binius-Shielded (PFSH02)",
-  "status": "Rehearsed prototype; switched off on all public chains; external cryptographic review open",
+  "packet_version": "2026-11-24-consolidated",
+  "protocol": "Peel-Binius-Shielded (PFSH02, L1 Profile 2)",
+  "status": "Consolidated release candidate on public/main; all engineering gates green; external cryptographic audit & governance activation height H open",
   "repository": "https://github.com/postfiatorg/postfiatl1v2",
-  "branches": {
-    "pr_207_base": {
-      "branch": "feat/peel-binius-shielded-pq",
-      "pr_url": "https://github.com/postfiatorg/postfiatl1v2/pull/207",
-      "head_commit": "a87887001e342252ac456e56085668a2de108df7",
-      "merge_base_with_main": "071b6dc461efc7a9105b2d3cac6acd3686901e7d",
-      "commits_behind_public_main": 129,
-      "l1_profile": "profile_1_public_payer_for_issued_spends"
-    },
-    "issued_asset_fee_followup": {
-      "branch": "pq/private-issued-asset-fee",
-      "head_commit": "48d01e795",
-      "commits_ahead_of_pr_207": 47,
-      "l1_profile": "profile_2_inner_asset_fee_collector_pot"
-    },
-    "independent_check_and_fixes": {
-      "review_branch_private_pr_41": "1ce59c98556e2970dff1a5c31371e7ba69317a25",
-      "cheap_checks_first_pr_211": "e779ef95cc6d5defe141d14b1a45521a8ce68d07",
-      "status_page_corrections_pr_210": "8ab36a13919ceb1d67a4e052a47f7b92b532508e",
-      "main_checks_repair_pr_209": "5636b07a5"
-    }
+  "consolidated_branch": {
+    "branch": "feat/pq-payments-production-candidate",
+    "head_commit": "d2a83d1d5a04a27091b66c8c02c155b55fab88de",
+    "base_public_main": "994589467",
+    "merged_components": [
+      "public/fix/main-checks-20261123 (PR #209, fixes 4 pre-existing main tests)",
+      "feat/peel-binius-shielded-pq (PR #207, M1-M8 PQ private payments)",
+      "pq/private-issued-asset-fee (48d01e795, L1 Profile 2 payerless issued-asset fees)",
+      "public/fix/pq-cheap-checks-first-20261123 (PR #211, cheap pool checks before proof verification)",
+      "Hardening commit d2a83d1d5 (54-mul Go purego & Rust portable kernels, parallel 4-proof block verification, GMP22 H4 sub-hop closure, on-chain key-pinning doc, updated check_math.py & verify_circuit_equivalence.py)"
+    ]
   },
-  "rehearsal_pins": {
-    "node_and_spec_revision": "f0a44680e6435fb87a7392f75677a86d3ba5d5fe",
-    "rehearsal_source_revision": "e7fa39058489b7a237ca98c008392099eac378c2",
-    "r64_original_revision": "674dbb18a29931d9ae749d28270e3c6cc508795a",
-    "r64_binary_sha256": "95d5b237c991f57a9ea122e110f6a2d0c017bf9ca0a85315b2359ecba3b017d1",
-    "m4_pre_activation_revision": "b8c8a44031090f4965e9f735fa3348fe010907d1",
-    "m4_binary_sha256": "9bcf884221c809569dc0b6cbdde6d0c73d0d229a6686567815a31b200f58ba65",
-    "candidate_pq_wallet_binary_sha256": "5a51087560361e1577ac30ea0780589038275db7ebedfe3497bf280bc554d772"
+  "test_verification_20261124": {
+    "verify_sh_7_stage": "ALL 7/7 PASSED (CPU 2; Rust 21.56-22.17 ms, Go PCLMUL 34.46-35.66 ms, full 2^24 rollover 20.52 ms Rust / 32.15 ms Go)",
+    "postfiat_privacy_binius_accel": "9 passed, 0 failed",
+    "postfiat_privacy_binius_portable": "9 passed, 0 failed",
+    "postfiat_privacy_binius_wallet": "8 passed, 0 failed",
+    "postfiat_storage_pq_archive": "1 passed, 0 failed",
+    "python_cli_test_pq_wallet_cli": "9 passed, 0 failed",
+    "postfiat_node_lib_full": "750 passed, 0 failed, 45 ignored",
+    "postfiat_node_m8_six_validator_rehearsal_profile2": "1 passed, 0 failed (60.26s, worst_uncached_verify_l1_ms=22.443 ms, 4-proof block charged=578304 B)"
+  },
+  "benchmarks_ms_20261124": {
+    "standalone_rust_1core_accel": { "range": "21.56-22.17", "full_tree_rollover": 20.52 },
+    "standalone_go_1core_pclmul": { "range": "34.46-35.66", "full_tree_rollover": 32.15 },
+    "standalone_go_1core_purego_50_trials": { "median_range": "46.94-48.90", "p95": 50.32, "max": 50.77, "gate": "PASS (< 50 ms median, down from 58.87 ms)" },
+    "validator_accel_1core_1tx": { "median_range": "23.58-24.06", "p95_range": "23.78-36.91", "max": 37.17, "gate": "PASS (< 50 ms)" },
+    "validator_accel_1core_4tx": { "median_range": "92.94-102.20", "max": 107.53, "gate": "PASS (< 200 ms)" },
+    "validator_accel_4core_parallel_4tx": { "median_range": "49.82-69.75", "max": 102.10, "gate": "PASS (< 200 ms)" },
+    "validator_portable_1core_1tx": { "median_range": "36.84-37.76", "p95_range": "37.73-39.22", "max_warm": 39.27, "max_cold_outlier": 50.33, "gate": "PASS (med & p95 < 50 ms)" },
+    "validator_portable_1core_4tx": { "median_range": "145.48-147.64", "p95_range": "148.13-155.38", "max": 161.93, "gate": "PASS (< 200 ms every trial)" },
+    "validator_portable_4core_parallel_4tx": { "median_range": "68.84-85.57", "p95_range": "86.41-96.24", "max": 106.64, "gate": "PASS (< 200 ms)" },
+    "proving_rust": { "sixteen_threads_s": 2.64, "thirtytwo_threads_s": 2.90, "one_core_s": "25.5-28.0", "peak_rss_mib": "547-562" }
+  },
+  "wire_and_storage_bytes": {
+    "standalone_non_mint_expected": 138461,
+    "standalone_non_mint_max": 140476,
+    "standalone_signed_deposit_expected": 143722,
+    "standalone_signed_deposit_max": 145737,
+    "l1_profile2_pfusdc_pay_vector": 137860,
+    "l1_profile2_pfusdc_exit_vector": 138724,
+    "l1_profile2_m8_rehearsal_largest_body": 144397,
+    "l1_profile2_m8_rehearsal_largest_charged": 145140,
+    "l1_worst_case_redb_ceiling": 146546,
+    "l1_worst_case_jsonl_ceiling": 146580,
+    "archival_ceiling": 149130,
+    "headroom_redb": 2584,
+    "headroom_jsonl": 2550
   },
   "chain_replays": {
-    "r64_validator3_archive": {
-      "heights": "1..1734",
+    "r64_validator3_archive_1734_blocks": {
       "genesis": "ce22ca8c932da0998b484483a09647138a30e0bf44408dd49a8d6d452787ad25521aff3ed334da07e150a7233a3e90a9",
       "final_block": "910c744852de4203274bd606859edaccdc27e25181223a1dd07cf2f62da3de048ffef8e427dcf229a00cbb8225121e40",
       "final_state_root": "a7b1185e94bf0e224a3944be4aaba896618594823ba2225399dad2148f6611fe527ce6a60a7852f94c8bc154a90dfe56",
-      "all_rows_sha256": "c28eb87280050e96e996ad5c9e8c2eae12f2fb9774438f3a7b5f1295ef155910",
-      "native_pft_supply_reconciled": "999,954,296 live + 45,671 receipt fees + 33 FastPay fees = 1,000,000,000 genesis"
+      "all_rows_sha256": "c28eb87280050e96e996ad5c9e8c2eae12f2fb9774438f3a7b5f1295ef155910"
     },
-    "independent_live_devnet_replay_20261123": {
-      "heights": "1..1754",
+    "live_devnet_replay_1754_blocks": {
       "tip_prefix": "519bbc0c...6642de9",
-      "state_root_prefix": "246d6113...124be4b8e6",
-      "matched_all_six_live_validators": true
-    },
-    "fresh_six_validator_rehearsal": {
-      "disposable_genesis": "e9c735eecfc4550f152330b52f782de84eea2aa7d59dc7e9e317718ed2ba28473854f0cb7c6c972f7f2825ba944b72e8",
-      "activation_height_H": 6,
-      "pause_height": 29,
-      "final_height": 30,
-      "final_state_root": "d26fd217c54d1ac47ec3a4694acf8eeb425eaef846e4a1f35fd485d423d107bae8702c339bf1094ee4d2e96cb46373ba",
-      "unupgraded_m4_halt": "error: verify-blocks failed: unsupported governance amendment kind `pq_payment_rehearsal_v1`"
+      "state_root_prefix": "246d6113...124be4b8e6"
     }
   },
-  "cryptographic_parameters": {
-    "field_tower": "GF(2) < K_16 < K_32 < E = GF(2^384)",
-    "active_witness_rows": 447014,
-    "total_constraints_N_C": 2192844,
-    "keccak_f1600_permutations": 56,
-    "merkle_depth": 24,
-    "epoch_capacity_leaves": 16777216,
-    "reed_solomon_degree_bound_D": 565,
-    "evaluation_domain_n": 2097152,
-    "code_rate_rho": "565 / 2097152 (0.000269413)",
-    "peel_list_size_L_max": 86,
-    "column_openings_t": 52,
-    "pow_bits": 20,
-    "pow_cap_M_pow": 134217728,
-    "compiler_oracle_output_bits": 1536,
-    "compiler_internal_state_bits": 512,
-    "mt1_digest_bits": 384,
-    "verifier_queries_kappa_v": 963
-  },
-  "conditional_security_bounds": {
-    "note": "Extraction (Thm 2A) is conditional on unreviewed App. A.1-A.3; SE (Conj 2B) is conditional on conjecture App. A.4; ZK (Thm 1B) is conditional on unreviewed App. B; Privacy (Thm 5) has unquantified non-standard assumptions.",
-    "Q_2_64": {
-      "extraction_log2": -170.98,
-      "simulation_extractability_log2": -170.97,
-      "zero_knowledge_P_2_32_log2": -150.6,
-      "shake256_384b_bht_ref_log2": -187.0,
-      "account_address_160b_2nd_preimage_ref_log2": -32.0
-    },
-    "Q_2_80": {
-      "extraction_log2": -137.55,
-      "simulation_extractability_log2": -137.55,
-      "zero_knowledge_P_2_32_log2": -150.6,
-      "shake256_384b_bht_ref_log2": -139.0,
-      "account_address_160b_2nd_preimage_ref": "vacuous"
-    },
-    "Q_2_96": {
-      "extraction_log2": -92.25,
-      "simulation_extractability_log2": -92.25,
-      "zero_knowledge_P_2_32_log2": -150.6,
-      "shake256_384b_bht_ref_log2": -91.0,
-      "account_address_160b_2nd_preimage_ref": "vacuous"
-    },
-    "crossover_log2_Q": 81.28,
-    "triviality_log2_Q": 126.75
-  },
-  "benchmarks_ms": {
-    "standalone_rust_1core": { "min": 20.58, "max": 21.88, "independent_repro_range": "21.4-22.8 (cold spikes 34.5-41.4)" },
-    "standalone_go_pclmul_1core": { "min": 30.61, "max": 36.92, "independent_repro_median": 32.2 },
-    "standalone_go_purego_1core": { "median": 58.87, "independent_repro_median": 58.0, "status": "over_50ms_budget" },
-    "validator_accelerated_1_action": { "median": 25.37, "p95": 30.96, "max": 31.49 },
-    "validator_accelerated_4_actions": { "median": 143.58, "p95": 166.13, "max": 166.23 },
-    "validator_portable_1_action": { "median": 38.96, "max": 54.50, "rejected_max": 55.32, "status": "missed_50ms_gate_when_cold" },
-    "validator_portable_4_actions": { "median_range": "154.56-200.88", "max_rejected": 252.53, "status": "missed_200ms_gate" },
-    "six_validator_round_4_proofs_ms": { "rehearsal": 979.44, "m5": 1034.87, "ordinary_baseline": "305.82-844.65" },
-    "proving_rust": { "one_core_s": "25.5-27.97", "sixteen_cores_s": "2.64-2.90", "peak_rss_mib": "547-562" }
-  },
-  "open_launch_blockers": [
-    "External cryptographic and code review not yet engaged (covers Thm 1A / App A.1-A.2, App A.3, Conj A.4, App B, Thm 5 ML-KEM implicit rejection, and 160-bit account address binding).",
-    "Code is pinned to disposable rehearsal genesis postfiat-pfsh02-m1-disposable and dev pfUSDC series; live launch requires a dedicated release.",
-    "PR #207 is 129 commits behind public/main; pq/private-issued-asset-fee (profile 2), PR #211 (cheap checks first), and PR #210 (status corrections) must be consolidated.",
-    "Four pre-existing failing workspace tests on main (fixed in unmerged PR #209).",
-    "Portable backend missed 50 ms single / 200 ms 4-proof timing gates when cold; full-tree 2^24-leaf node memory & restart time unmeasured on-chain.",
-    "Founder authorization and governance vote for a live activation height H."
+  "remaining_pre_activation_items": [
+    "External cryptographic audit of the new proof system (Theorems 1A, 1B, 2A, Conjecture A.4, Theorem 5 non-standard assumptions, and Rust/Go/L1 code).",
+    "Production release targeting the live chain genesis & governed pfUSDC series (currently restricted to disposable rehearsal genesis).",
+    "Governance vote setting live activation height H after all validators install the reviewed release."
   ]
 }

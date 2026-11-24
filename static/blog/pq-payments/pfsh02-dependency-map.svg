@@ -46,7 +46,7 @@
   <text x="440" y="186" class="mono label teal">THEOREM 4 · AUTHORIZATION</text>
   <text x="440" y="210" class="serif b-title">No Theft, Redirection, or Mint Spoof</text>
   <text x="440" y="232" class="mono tiny">Modes 1–2 rely on Conj. A.4 + ZK + JointPRF</text>
-  <text x="440" y="250" class="mono tiny ox">Mode 3 weak link: 160-bit account address</text>
+  <text x="440" y="250" class="mono tiny teal">Mode 3: ML-DSA-65 pinned on-chain (160b unpinned only)</text>
 
   <!-- Thm 5 -->
   <rect x="806" y="162" width="352" height="104" fill="#ebe6da" stroke="#7a1f1f" stroke-width="1.5"/>
@@ -106,8 +106,8 @@
   <text x="626" y="496" class="mono label ox">[NON-STANDARD / UNQUANTIFIED ASSUMPTIONS &amp; GAPS]</text>
   <text x="626" y="518" class="mono small">• ML-KEM-1024 FIPS-203 IK-CCA (proven for Kyber, not FIPS-203 delta)</text>
   <text x="626" y="536" class="mono small">• SHAKE256 JointPRF, dummy PRG, commitment Hide (key in middle of sponge)</text>
-  <text x="626" y="554" class="mono small">• Implicit-rejection scanning gap in Thm 5 final hybrid (GMP22; repairable)</text>
-  <text x="626" y="570" class="mono small">• Single-tx privacy game only (no multi-hop unlinkability proof; 160b L1 addr)</text>
+  <text x="626" y="554" class="mono small">• GMP22 implicit-rejection sub-hop (v) added in spec (pending review)</text>
+  <text x="626" y="570" class="mono small">• Single-tx privacy game (no multi-hop proof); unpinned 160b addr only</text>
 
   <!-- Dependency Arrows (Middle -> Top) -->
   <!-- A.1-A.2 -> A.3 -->
