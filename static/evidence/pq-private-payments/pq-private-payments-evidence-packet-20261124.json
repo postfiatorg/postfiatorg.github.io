@@ -9,7 +9,7 @@
   },
   "consolidated_branch": {
     "branch": "feat/pq-payments-production-candidate",
-    "head_commit": "26e5a10a5d6f8087b0d20a44b646e88e0042a382",
+    "head_commit": "d78f8f102d7779e2d49315c6441b5b54c67a0a7c",
     "rust_go_code_commit": "ec58522dcf66c85680242efa98b96d733d5b0c3e",
     "base_public_main": "994589467",
     "merged_components": [
@@ -20,7 +20,8 @@
       "Hardening commit d2a83d1d5 (54-mul Karatsuba portable kernels, parallel 4-proof block verification, GMP22 H4 sub-hop closure, on-chain key-pinning doc, updated check_math.py & verify_circuit_equivalence.py)",
       "Pure-Go verifier optimization commit 2ae8c8e02 (single-step mulC32Inline, inlined Karatsuba loop, register-based RingSwitchLinearMap.applyPortable)",
       "Rust portable verifier optimization commit ec58522dc (single-step mulC32 + bounds-free portable RingSwitchLinearMap)",
-      "Lean 4 + Mathlib formal proof library commit 26e5a10a5 (formal/lean/, 9 modules, 2,729 LOC, 0 sorrys, 0 custom axioms)"
+      "Lean 4 + Mathlib formal proof library commit 26e5a10a5 (formal/lean/, 9 modules, 2,729 LOC, 0 sorrys, 0 custom axioms)",
+      "Same-host n=50 Orchard proving-only & 4-bundle BatchValidator benchmark example commit d78f8f102 (orchard_proving_and_batch_budget.rs)"
     ]
   },
   "lean4_formal_verification": {
@@ -57,20 +58,43 @@
   },
   "benchmarks_ms_20261124": {
     "same_host_orchard_baseline_50_trials": {
-      "command": "ITERATIONS=50 taskset -c 2 cargo run --release --locked -p postfiat-privacy-orchard --example orchard_verification_budget",
+      "command": "RAYON_NUM_THREADS=1 PROVE_ITERS=50 VERIFY_ITERS=50 taskset -c 2 cargo run --release --locked -p postfiat-privacy-orchard --example orchard_proving_and_batch_budget",
       "proof_system_id": "postfiat.privacy.orchard-halo2.v2",
       "circuit_id": "orchard.action.v2",
       "action_count": 2,
       "proof_bytes": 7264,
       "canonical_binary_fields_bytes": 9145,
       "canonical_binary_fields_with_optional_compact_and_binding_bytes": 9297,
-      "verify_scope": "verify_serialized_orchard_action (cached VK; verifies Halo 2 proof + RedPallas spend-auth and binding signatures)",
-      "action_build_and_prove_ms": 9474,
-      "verifying_key_build_ms": 3265,
-      "verify_1c_med_ms": 43,
-      "verify_1c_p95_ms": 44,
-      "verify_1c_max_ms": 44,
-      "report_hash": "b4d43930dfe7568398222b749ddc751118a07f09dfa8fcedc7b7fe4deb7689f9b444f72d655116ed17ad6ce71d0fa53f"
+      "verify_scope": "verify_serialized_orchard_action (cached VK; Halo 2 proof + RedPallas spend-auth & binding sigs) and orchard::bundle::BatchValidator (4 bundles = 8 actions)",
+      "one_core_cpu2_n50": {
+        "proving_key_build_ms": 4041.65,
+        "verifying_key_build_ms": 3227.89,
+        "action_build_only_med_ms": 12.56,
+        "proving_only_cached_pk_med_ms": 5126.84,
+        "proving_only_cached_pk_p95_ms": 5658.15,
+        "proving_only_cached_pk_max_ms": 6330.18,
+        "single_bundle_verify_med_ms": 44.26,
+        "single_bundle_verify_p95_ms": 47.01,
+        "single_bundle_verify_max_ms": 47.82,
+        "four_bundle_batch_validator_med_ms": 87.36,
+        "four_bundle_batch_validator_p95_ms": 90.48,
+        "four_bundle_batch_validator_max_ms": 93.96,
+        "report_hash": "bca209777c898ebde2dce4c726c8c93f138e0af3a9c2668b664f334e10ecec865a46b1debe69661739e1656ab8cbe5d4"
+      },
+      "four_core_cpu0_3_n50_verify": {
+        "four_bundle_batch_validator_med_ms": 34.54,
+        "four_bundle_batch_validator_p95_ms": 34.65,
+        "four_bundle_batch_validator_max_ms": 34.75,
+        "single_bundle_verify_med_ms": 19.09,
+        "report_hash": "a7f1070ad45634c624366e50f540dff762f0545fbd06c8112e63e51035075de8a540215187cfe3d693bb3ce2d8d75ef7"
+      },
+      "sixteen_thread_n50": {
+        "proving_only_cached_pk_med_ms": 1285.55,
+        "proving_only_cached_pk_p95_ms": 1357.4,
+        "proving_only_cached_pk_max_ms": 1416.85,
+        "four_bundle_batch_validator_med_ms": 24.14,
+        "report_hash": "e8dc6e4d664d9ece191e235ebb1b8a415f5219b872fefce9975fabb9cfb1262a7526376f4501535e00b2557498ee9e39"
+      }
     },
     "standalone_rust_1core_accel_50_trials": {
       "mint": { "med": 20.42, "p95": 20.99, "max": 22.98 },
