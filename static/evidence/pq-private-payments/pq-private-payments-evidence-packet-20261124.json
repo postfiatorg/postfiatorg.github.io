@@ -1,7 +1,7 @@
 {
-  "packet_version": "2026-11-24-pfsh03-v5-lean4",
-  "protocol": "Peel-Binius-Shielded (PFSH03, External Per-Note ML-DSA-65 Spend Auth + L1 Profile 2)",
-  "status": "Unaudited experimental prototype on branch feat/pq-payments-production-candidate (commit 51e7d9687, cleanly mergeable atop public/main 994589467); Theorem 4-PFSH03 eliminates Appendix A.4 / Theorem 2B, QROM ZK, and JointPRF from spend authorization via external per-note FIPS-204 ML-DSA-65 signatures; mathematical core kernel-verified in Lean 4 + Mathlib (9 modules, 2,837 LOC, 0 sorrys, 0 custom axioms); disabled on mainnet pending external cryptographic & code audit, production-genesis cut + scale validation, and BFT-supermajority governance vote for height H",
+  "packet_version": "2026-11-24-pfsh03-v6-hardened",
+  "protocol": "Peel-Binius-Shielded (PFSH03, External Per-Note ML-DSA-65 Spend Auth + L1 Profile 2 + Audit Hardening)",
+  "status": "Unaudited experimental prototype on branch feat/pq-payments-production-candidate (commit be1f77877, cleanly mergeable atop public/main 994589467); targets ~126-bit QROM soundness (Q_break = 2^126.75) conditional on unmodified-oracle Theorem 2A, FIPS-204 ML-DSA-65, and 384-bit CR; mathematical core kernel-verified in Lean 4 + Mathlib (9 modules, 2,847 LOC, 0 sorrys, 0 custom axioms, incl. three_block_sha512_qro_reduction); disabled on mainnet pending external cryptographic, DoS & code audit, production-genesis cut + mobile/scale validation, and BFT-supermajority governance vote for height H",
   "repository": "https://github.com/postfiatorg/postfiatl1v2",
   "host_environment": {
     "cpu_model": "AMD EPYC Processor (32 vCPUs, KVM hypervisor)",
@@ -9,7 +9,7 @@
   },
   "consolidated_branch": {
     "branch": "feat/pq-payments-production-candidate",
-    "head_commit": "51e7d96870b5e0e926d89b8d273b12eb3e750aa0",
+    "head_commit": "be1f778779450db1bf3a61f281da14d423a295c3",
     "base_public_main": "994589467",
     "merged_components": [
       "public/fix/main-checks-20261123 (PR #209, fixes 4 pre-existing main tests)",
@@ -17,17 +17,48 @@
       "pq/private-issued-asset-fee (48d01e795, L1 Profile 2 payerless issued-asset fees)",
       "public/fix/pq-cheap-checks-first-20261123 (PR #211, cheap pool checks before proof verification)",
       "Hardening & portable kernel optimizations (d2a83d1d5, 2ae8c8e02, ec58522dc)",
-      "Lean 4 + Mathlib formal proof library (26e5a10a5, extended in 51e7d9687 to 2,837 LOC)",
+      "Lean 4 + Mathlib formal proof library (26e5a10a5, extended in 51e7d9687 & be1f77877 to 2,847 LOC)",
       "Same-host n=50 Orchard proving-only & 4-bundle BatchValidator benchmark example (d78f8f102)",
-      "PFSH03 external per-note FIPS-204 ML-DSA-65 spend authorization + multi-tx adaptive Theorem 5-PFSH03 (51e7d9687)"
+      "PFSH03 external per-note FIPS-204 ML-DSA-65 spend authorization + multi-tx adaptive Theorem 5-PFSH03 (51e7d9687)",
+      "PFSH03 audit hardening: two-tier exit-safe pause + 7-day auto-expiring emergency exit-freeze, fail-fast DoS Rust/Go verifier + 4-thread abort, 3xSHA-512 QRO Lean reduction, low-RSS subtree-streaming prover (-37% RSS), ARM64 PMULL, WASM32+SIMD128 V8 baseline, pruned pq_bodies_v1 storage, expanded Z3 pk_hash0/1 differential wiring check, strict prepare_pq_account_debit_pinned (be1f77877)"
     ]
+  },
+  "concrete_bit_security": {
+    "headline_target": "~126-bit post-quantum QROM soundness (Q_break = 2^126.75, governed by 384-bit proof-tree collisions above Q = 2^81.28)",
+    "extraction_bounds_L1": {
+      "Q_2_64": "2^-170.98",
+      "Q_2_80": "2^-137.55",
+      "Q_2_96": "2^-92.25"
+    },
+    "conditional_on": [
+      "Unreviewed single-oracle QROM extraction (Theorem 2A / App. A.1-A.3) + BCIKS20 Thm 6.2",
+      "FIPS-204 ML-DSA-65 EUF-CMA (NIST Level 3)",
+      "384-bit SHAKE256/SHA-384 collision resistance & SHA-512/SHA-384 separation",
+      "Model-to-code fidelity of Rust/Go verifiers and 56-permutation circuit wiring"
+    ],
+    "sub_126_exception": "Unpinned brand-new public L1 deposit accounts (~80-bit quantum address preimage until first key-pinning tx; strict enforcement available via prepare_pq_account_debit_pinned)"
+  },
+  "two_tier_governance_circuit_breaker": {
+    "standard_pause_amendment": "pq_payment_rehearsal_v1 (value = 0)",
+    "standard_pause_quorum": "floor(2n/3) + 1 (5/6 in rehearsal)",
+    "standard_pause_effect": "Halts Mode::Shield and Mode::Internal while keeping Mode::Exit OPEN (preserving last active issued-asset exit fee via pq_issued_fee_for_mode)",
+    "emergency_exit_freeze_amendment": "pq_exit_freeze_until_v1 (value = freeze_until_height)",
+    "emergency_exit_freeze_quorum": "min(n, floor(5n/6) + 1) (6/6 unanimous in rehearsal)",
+    "emergency_exit_freeze_max_duration_blocks": 604800,
+    "emergency_exit_freeze_auto_expiry": "Auto-expires at freeze_until + 1 (~7 days max at 1 s blocks; indefinite freeze is consensus-invalid)"
+  },
+  "pruned_storage_pq_bodies": {
+    "api": "NodeStore::prune_pq_bodies (crates/storage/src/pq_archive.rs)",
+    "reclaimed_per_payment_bytes": 149582,
+    "disk_reduction_pct": "~95% (~150 KB -> ~4 KB/tx retained in pq_pool output pages, commitments, envelopes, and global nullifiers)",
+    "projected_pruned_daily_growth_at_ceiling": "~1.3-2.4 GiB/day (vs ~48-88 GiB/day full archive)"
   },
   "lean4_formal_verification": {
     "toolchain": "leanprover/lean4:v4.20.0",
     "mathlib_rev": "v4.20.0",
     "path": "formal/lean/",
     "modules": 9,
-    "total_lines": 2837,
+    "total_lines": 2847,
     "sorry_count": 0,
     "custom_axioms": 0,
     "kernel_axioms_used": ["propext", "Classical.choice", "Quot.sound"],
@@ -37,7 +68,7 @@
       "Peel.lean": "Lemma 1 exact 4-line telescoping, k<=86, Case 1 (0<=n'<=2D), Case 2 BCIKS20 hypotheses & curve monotonicity",
       "DualBinding.lean": "Lemmas 2, 3, 4: Bad_pt union bound, A_both<=A_prox<=D_u & dual-poly binding, Lagrange K_32 subfield inheritance, ring-switch gamma & rho_rs soundness",
       "Rank3Op.lean": "Lemma A.3.0 rank-3 self-adjoint operator O_s, entry & exit norm <= sqrt(8p), Lemma A.3.4(b) readout error 2/N - 1/N^2 < 2/N",
-      "CompressedOracle.lean": "Lemmas A.3.1-A.3.4 & Theorem 2A: block-diagonal superposition norm reduction, tree-invariance, both-directions capacity, sum sqrt(q) <= (2/3)(Q+1)^(3/2) telescoping",
+      "CompressedOracle.lean": "three_block_sha512_qro_reduction ([propext] only: zero-query-blowup 3xSHA-512 -> 1,536-bit QRO), Lemmas A.3.1-A.3.4 & Theorem 2A block-diagonal superposition norm reduction, tree-invariance, both-directions capacity, sum sqrt(q) <= (2/3)(Q+1)^(3/2) telescoping",
       "ZeroKnowledge.lean": "Lemmas 1.1-1.2 & Theorem 1B: 5,216-bit unopened-leaf bijection, capped-PoW TV < 2^-182, Sim_IOP bijections, Theorem 1B Q=2^96 bound (privacy only in PFSH03)",
       "ValueConservation.lean": "Theorem 3 (3a shielded-pool & 3b joint burned/credited conservation) by full transaction induction",
       "ConjectureA4.lean": "Retired legacy PFSH02 Appendix A.4 wrapper (unused by any PFSH03 theorem)",
@@ -45,14 +76,14 @@
     }
   },
   "test_verification_20261124_pfsh03": {
-    "verify_sh_7_stage": "ALL 7/7 PASSED (Rust 21.87-22.52 ms, 39/39 named adversarial controls incl. 4 ML-DSA-65 spend-auth attacks + 150/150 fuzz mutations, Go PCLMUL 33.17-44.22 ms, Go purego, delivery-helper ML-DSA-65 + ML-KEM-1024 cross-check, full 2^24 rollover, check_math.py, Z3)",
-    "postfiat_privacy_binius_accel": "9 passed, 0 failed",
-    "postfiat_privacy_binius_portable": "9 passed, 0 failed",
+    "verify_sh_7_stage": "ALL 7/7 PASSED (Rust 21.82-22.11 ms, 39/39 named adversarial controls incl. 4 ML-DSA-65 spend-auth attacks + 150/150 fuzz mutations, Go PCLMUL 32.58-33.24 ms, Go purego, delivery-helper ML-DSA-65 + ML-KEM-1024 cross-check, full 2^24 rollover, check_math.py, Z3 5.4.1 with z3_pfsh03_56perm_pk_hash_wiring = unsat+rust_go_diff_verified)",
+    "postfiat_privacy_binius_accel": "10 passed, 0 failed (incl. fail_fast_dos_rejects_bad_sig_bad_pow_and_aborts_siblings)",
+    "postfiat_privacy_binius_portable": "10 passed, 0 failed",
     "postfiat_privacy_binius_wallet": "8 passed, 0 failed (plus Go cmd/delivery PASS)",
-    "postfiat_storage_pq_archive": "1 passed, 0 failed (160,000 B cap; redb ceiling 157,068 B / JSONL ceiling 157,102 B)",
-    "python_cli_test_pq_wallet_cli": "9 passed, 0 failed (8 finalized payments across epoch rollover, 92 RPC secret-leakage checks, 8 pinned 1-core proofs 25.00 s med / 28.22 s max / 585,352 KiB peak RSS)",
-    "postfiat_node_lib_full": "750 passed, 0 failed, 45 pre-existing ignored (0 of 45 touch PQ payments)",
-    "postfiat_node_m8_six_validator_rehearsal_pfsh03": "1 passed, 0 failed (32.57 s, worst_uncached_verify_l1_ms=22.194 ms, largest_body=155,159 B, largest_charged=155,902 B, 4-proof block charged=621,112 B <= 640,000 B)"
+    "postfiat_storage_pq_archive": "2 passed, 0 failed (160,000 B cap + prune_pq_bodies_reclaims_verified_proof_blobs_and_preserves_kept_ids)",
+    "python_cli_test_pq_wallet_cli": "9 passed, 0 failed (8 finalized payments across epoch rollover, 92 RPC secret-leakage checks)",
+    "postfiat_node_lib_full": "751 passed, 0 failed, 45 pre-existing ignored (0 of 45 touch PQ payments; incl. two_tier_pq_pause_keeps_exits_open_and_emergency_freeze_auto_expires)",
+    "postfiat_node_m8_six_validator_rehearsal_pfsh03": "1 passed, 0 failed (32.06 s, worst_uncached_verify_l1_ms=24.377 ms, largest_body=155,159 B, largest_charged=155,902 B, 4-proof block charged=621,112 B <= 640,000 B)"
   },
   "benchmarks_ms_20261124_pfsh03": {
     "same_host_orchard_baseline_50_trials": {
@@ -112,13 +143,39 @@
       "hop2": { "med": 45.42, "p95": 46.44, "max": 48.47 },
       "target_50ms_max": "MET (all 150 trials <= 48.47 ms)"
     },
+    "fail_fast_dos_rejection_ms": {
+      "bad_ml_dsa_65_spend_sig_med_ms": 0.221,
+      "valid_sig_bad_20bit_pow_or_transcript_med_ms": 0.530,
+      "valid_sig_valid_pow_corrupted_final_merkle_med_ms": 15.334,
+      "cooperative_4thread_sibling_abort_ms": 0.0002
+    },
     "validator_accel_1core_1tx": { "per_condition_medians": "24.54-25.13", "p95_range": "24.77-37.92", "max": 38.01, "target_50ms_max": "MET" },
     "validator_portable_1core_1tx": { "per_condition_medians": "36.90-37.83", "p95_range": "37.67-45.46", "max": 45.52, "target_50ms_max": "MET (all 168 warm+cold trials <= 45.52 ms)" },
     "validator_accel_4core_parallel_4tx": { "per_condition_medians": "47.35-47.78", "p95_range": "47.56-65.93", "max": 88.36, "target_200ms_max": "MET" },
     "validator_portable_4core_parallel_4tx": { "per_condition_medians": "79.22-79.69", "p95_range": "79.41-80.07", "max": 107.76, "target_200ms_max": "MET" },
-    "validator_accel_1core_sequential_4tx": { "per_condition_medians": "95.47-140.89", "p95_range": "96.31-190.15", "max_valid": 135.38, "max_invalid_burst": 209.43, "note": "Single-core sequential invalid cold burst touched 209.43 ms; 4-core parallel accel max is 88.36 ms" },
+    "validator_accel_1core_sequential_4tx": { "per_condition_medians": "95.47-140.89", "p95_range": "96.31-190.15", "max_valid": 135.38, "max_invalid_burst": 209.43, "note": "Pre-fail-fast single-core sequential invalid cold burst touched 209.43 ms; fail-fast hardening + 4-core parallel accel (max 88.36 ms) + Gate 1 DoS audit scope address this" },
     "validator_portable_1core_sequential_4tx": { "per_condition_medians": "146.57-147.90", "p95_range": "147.88-184.70", "max_valid": 185.36, "max_invalid_burst": 195.28, "note": "Tight against 200 ms on 1 core; Gate 2 requires >= 4 verification cores" },
-    "proving_rust_pfsh03": { "sixteen_threads_n10_med_s": 2.71, "sixteen_threads_n10_max_s": 2.81, "one_core_n10_med_s": 24.62, "one_core_n10_max_s": 26.81, "wallet_cli_8_pinned_med_s": 25.00, "wallet_cli_8_pinned_max_s": 28.22, "peak_rss_mib": 571.6 }
+    "proving_rust_pfsh03": {
+      "baseline_sixteen_threads_n10_med_s": 2.71,
+      "baseline_one_core_n10_med_s": 24.62,
+      "baseline_peak_rss_mib": 571.6,
+      "subtree_streaming_sixteen_threads_n3_med_s": 2.66,
+      "subtree_streaming_sixteen_threads_peak_rss_mib": 361.2,
+      "subtree_streaming_one_core_med_s": 25.67,
+      "subtree_streaming_one_core_peak_rss_mib": 354.7,
+      "rss_reduction_pct": -37.0,
+      "arm64_pmull_kernels": "Implemented (vmull_p64 branchless Karatsuba in field.rs); real ARM64 device qualification in Gate 2"
+    },
+    "wasm32_simd128_v8_1thread": {
+      "engine": "Node.js v20.20.2 (V8 WASM32 +simd128, 1 thread, CPU 2)",
+      "wasm_binary_bytes": 849531,
+      "tx_bytes": 149558,
+      "wasm_prove_1thread_s": 39.36,
+      "wasm_verify_med_ms": 70.80,
+      "wasm_verify_max_ms": 232.72,
+      "wasm_linear_memory_mib": 378.9,
+      "node_rss_mib": 521.7
+    }
   },
   "wire_and_storage_bytes_pfsh03": {
     "standalone_non_mint_expected": 148983,
@@ -158,8 +215,8 @@
     }
   },
   "remaining_pre_activation_gates": [
-    "Independent external cryptographic & code audit covering Theorem 3 (value conservation), Theorem 4-PFSH03 (external ML-DSA-65 spend auth + unmodified-oracle Theorem 2A), Theorem 5-PFSH03 (multi-tx adaptive privacy + remaining KEM/SHAKE256 privacy assumptions), Lean 4 model-to-code correspondence, and Rust/Go/L1 settlement code.",
-    "Production-genesis release cut (live genesis & governed pfUSDC series), validator hardware qualification (>= 4 verification cores verified < 200 ms on 4-proof invalid batches), bounded-time 2^24-leaf node restart/index-checkpoint validation, and browser/mobile client benchmarks.",
-    "BFT-supermajority governance vote setting live activation height H after all validators install the audited production release, plus wallet-enforced account key pinning and Orchard-to-PFSH03 migration tooling."
+    "Independent external cryptographic, DoS & code audit covering Theorem 3 (value conservation), Theorem 4-PFSH03 (external ML-DSA-65 spend auth + unmodified-oracle Theorem 2A + 3xSHA-512/SHA-384 boundary + pk_hash0/1 wiring), Theorem 5-PFSH03 (multi-tx adaptive privacy + remaining KEM/SHAKE256 privacy assumptions), adversarial invalid-proof flooding & mempool backpressure, Lean 4 model-to-code correspondence, and Rust/Go/L1 settlement & two-tier governance code.",
+    "Production-genesis release cut (live genesis & governed pfUSDC series), validator hardware qualification (x86-64 & ARM64 >= 4 verification cores verified < 200 ms on 4-proof invalid batches), bounded-time 2^24-leaf node restart/index-checkpoint validation, and iOS/Android mobile WebView + multi-threaded WASM proving benchmarks.",
+    "BFT-supermajority governance vote setting live activation height H after all validators install the audited production release, plus wallet-enforced account key pinning (prepare_pq_account_debit_pinned) and Orchard-to-PFSH03 migration tooling."
   ]
 }
