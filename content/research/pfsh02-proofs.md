@@ -16,7 +16,7 @@ tags:
   - Privacy
 copyMarkdownHref: "/research/pfsh02-proofs/index.md"
 copyMarkdownButton: "Copy for LLM"
-draft: false
+draft: true
 ---
 
 *Companion formal appendix to [PFSH02: Experimental Curve-Free Private Payments for Post Fiat L1](/blog/peel-binius-quantum-safe-private-payments/). Pinned specification source: [`docs/security/peel-binius-shielded-pq-payments.md`](https://github.com/postfiatorg/postfiatl1v2/blob/26e5a10a5d6f8087b0d20a44b646e88e0042a382/docs/security/peel-binius-shielded-pq-payments.md) and Lean 4 formalization [`formal/lean/`](https://github.com/postfiatorg/postfiatl1v2/tree/26e5a10a5d6f8087b0d20a44b646e88e0042a382/formal/lean) on branch `feat/pq-payments-production-candidate` (`26e5a10a5`).*
