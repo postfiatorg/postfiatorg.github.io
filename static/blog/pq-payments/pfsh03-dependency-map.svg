@@ -1,0 +1,122 @@
+<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t4 d4">
+  <title id="t4">What Rests on What: PFSH03 Cryptographic Trust and Failure Blast-Radius Map</title>
+  <desc id="d4">Dependency graph showing that in PFSH03 both Value Conservation (Theorem 3) and Spend/Deposit Authorization (Theorem 4-PFSH03) bypass Appendix A.4 completely, reducing Spend Authorization directly to NIST FIPS-204 ML-DSA-65 EUF-CMA plus unmodified-oracle Theorem 2A.</desc>
+  <defs>
+    <marker id="arr4" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 Z" fill="#2c3437"/>
+    </marker>
+    <marker id="arr4-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 Z" fill="#057f82"/>
+    </marker>
+    <style>
+      .disp { font-family: "Instrument Serif", Georgia, serif; fill: #10191d; }
+      .serif { font-family: "Newsreader", Georgia, serif; fill: #2c3437; }
+      .mono { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+      .kicker { font-size: 11.5px; letter-spacing: 2px; font-weight: 600; fill: #03585a; }
+      .label { font-size: 10.5px; letter-spacing: 1.4px; font-weight: 600; fill: #5a6062; }
+      .h-title { font-size: 31px; fill: #10191d; }
+      .sub { font-size: 14.5px; fill: #5a6062; font-style: italic; }
+      .b-title { font-size: 17px; fill: #10191d; font-weight: 600; }
+      .small { font-size: 11.5px; fill: #2c3437; }
+      .tiny { font-size: 10.5px; fill: #5a6062; }
+      .inv { fill: #f2eee5; }
+      .teal { fill: #03585a; }
+      .ox { fill: #7a1f1f; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="620" fill="#f2eee5"/>
+  <rect x="14" y="14" width="1172" height="592" fill="none" stroke="#cfc8b6" stroke-width="1.5"/>
+
+  <text x="42" y="50" class="mono kicker">FIGURE 04 · PFSH03 PROOF-OBLIGATION AUDIT &amp; BLAST RADIUS</text>
+  <text x="42" y="85" class="disp h-title">What Rests on What: Moving Spend Auth onto ML-DSA-65 + Theorem 2A</text>
+  <text x="42" y="109" class="serif sub">PFSH03 retires App. A.4, but both Conservation (Thm 3) and Spend Auth (Thm 4) still share the unaudited Thm 2A extraction layer.</text>
+  <line x1="42" y1="124" x2="1158" y2="124" stroke="#10191d" stroke-width="1.5"/>
+
+  <text x="42" y="150" class="mono label">USER-FACING LEDGER PROPERTIES (PFSH03)</text>
+
+  <!-- Thm 3 -->
+  <rect x="42" y="162" width="352" height="104" fill="#10191d" stroke="#10191d"/>
+  <text x="58" y="186" class="mono label" fill="#7fd3d5">THEOREM 3 · VALUE CONSERVATION</text>
+  <text x="58" y="210" class="serif b-title inv">No Inflation &amp; No Double Spend</text>
+  <text x="58" y="232" class="mono tiny" fill="#cfc8b6">Uses Thm 2A only (ZERO App. A.4 / ZK)</text>
+  <text x="58" y="250" class="mono tiny" fill="#7fd3d5">Failure risk: forged notes / drained pool</text>
+
+  <!-- Thm 4 (UPGRADED!) -->
+  <rect x="424" y="162" width="352" height="104" fill="#10191d" stroke="#057f82" stroke-width="2"/>
+  <text x="440" y="186" class="mono label" fill="#7fd3d5">THEOREM 4-PFSH03 · AUTHORIZATION</text>
+  <text x="440" y="210" class="serif b-title inv">No Theft, Hijack, or Mint Spoof</text>
+  <text x="440" y="232" class="mono tiny" fill="#cfc8b6">ML-DSA-65 EUF-CMA + Thm 2A + 384b CR</text>
+  <text x="440" y="250" class="mono tiny" fill="#7fd3d5">ZERO App. A.4 · ZERO ZK · ZERO JointPRF</text>
+
+  <!-- Thm 5 -->
+  <rect x="806" y="162" width="352" height="104" fill="#ebe6da" stroke="#7a1f1f" stroke-width="1.5"/>
+  <text x="822" y="186" class="mono label ox">THEOREM 5-PFSH03 · MULTI-TX PRIVACY</text>
+  <text x="822" y="210" class="serif b-title">Adaptive q_c-Tx Confidentiality</text>
+  <text x="822" y="232" class="mono tiny">Fresh keys drop JointPRF; uses Thm 1B + KEM</text>
+  <text x="822" y="250" class="mono tiny ox">Static-addr reuse links spends; metadata visible</text>
+
+  <!-- MIDDLE ROW -->
+  <text x="42" y="302" class="mono label">PROOF MODULES PENDING INDEPENDENT EXTERNAL AUDIT (APPENDICES A &amp; B)</text>
+
+  <rect x="42" y="314" width="262" height="108" fill="#f2eee5" stroke="#10191d" stroke-width="1.4" stroke-dasharray="6 3"/>
+  <text x="56" y="336" class="mono label teal">[LEAN-CHECKED · UNREV.] A.1–A.2</text>
+  <text x="56" y="358" class="serif b-title">Thm 1A: 34-Rd IOP</text>
+  <text x="56" y="378" class="mono tiny">Peel(M) list bound (86) +</text>
+  <text x="56" y="394" class="mono tiny">Ring-Switch + RBR State_KS</text>
+  <text x="56" y="410" class="mono tiny ox">If broken: classical forgery</text>
+
+  <rect x="326" y="314" width="262" height="108" fill="#f2eee5" stroke="#057f82" stroke-width="1.6" stroke-dasharray="6 3"/>
+  <text x="340" y="336" class="mono label teal">[LEAN-CHECKED · UNREV.] APP. A.3</text>
+  <text x="340" y="358" class="serif b-title">Thm 2A: QROM Ext</text>
+  <text x="340" y="378" class="mono tiny">Unmodified-oracle compressed DB</text>
+  <text x="340" y="394" class="mono tiny">Feeds BOTH Thm 3 &amp; Thm 4-PFSH03</text>
+  <text x="340" y="410" class="mono tiny ox">If broken: quantum forgery</text>
+
+  <!-- RETIRED App A.4 -->
+  <rect x="610" y="314" width="262" height="108" fill="#e6e1d6" stroke="#9b988f" stroke-width="1.2" stroke-dasharray="3 3"/>
+  <text x="624" y="336" class="mono label">RETIRED IN PFSH03 · APP. A.4</text>
+  <text x="624" y="358" class="serif b-title" fill="#7a7770">App. A.4 (Unused)</text>
+  <text x="624" y="378" class="mono tiny">Legacy PFSH02 SE conjecture.</text>
+  <text x="624" y="394" class="mono tiny">NO PFSH03 theorem depends on it.</text>
+  <text x="624" y="410" class="mono tiny teal">Replaced by FIPS-204 ML-DSA-65</text>
+
+  <rect x="894" y="314" width="264" height="108" fill="#f2eee5" stroke="#10191d" stroke-width="1.4" stroke-dasharray="6 3"/>
+  <text x="908" y="336" class="mono label ox">[LEAN-CHECKED · UNREV.] APP. B</text>
+  <text x="908" y="358" class="serif b-title">Thm 1B: QROM ZK</text>
+  <text x="908" y="378" class="mono tiny">Sim_IOP + 5,216b leaf O2H +</text>
+  <text x="908" y="394" class="mono tiny">capped PoW + 68-step GHHM21</text>
+  <text x="908" y="410" class="mono tiny ox">Privacy only (never funds safety)</text>
+
+  <!-- BOTTOM ROW -->
+  <text x="42" y="460" class="mono label">FOUNDATIONAL LAYER: STANDARD NIST ANCHORS VS. REMAINING PRIVACY ASSUMPTIONS</text>
+
+  <rect x="42" y="472" width="546" height="108" fill="#ebe6da" stroke="#057f82" stroke-width="1.6"/>
+  <text x="58" y="496" class="mono label teal">[PUBLISHED ANCHORS &amp; NIST STANDARDS — FUNDS SAFETY]</text>
+  <text x="58" y="518" class="mono small">• FIPS-204 ML-DSA-65 EUF-CMA: spend auth (all slots) &amp; pinned deposits</text>
+  <text x="58" y="536" class="mono small">• BCIKS20 Thm 6.2 (FOCS '20 / JACM '23): RS curve proximity (Johnson)</text>
+  <text x="58" y="554" class="mono small">• Zha19 / CFHL21 / GHHM21 / AHU19: QROM compressed oracle, O2H, reprog.</text>
+  <text x="58" y="570" class="mono small">• FIPS-202 SHAKE256, FIPS-180-4 SHA-512/384, FIPS-203 ML-KEM-1024, AES-GCM</text>
+
+  <rect x="610" y="472" width="548" height="108" fill="#f9ecea" stroke="#7a1f1f" stroke-width="1.6"/>
+  <text x="626" y="496" class="mono label ox">[REMAINING NON-STANDARD ASSUMPTIONS (PRIVACY ONLY) &amp; AUDIT GAPS]</text>
+  <text x="626" y="518" class="mono small">• ML-KEM-1024 FIPS-203 IK-CCA &amp; IR-PRF (privacy only, not funds safety)</text>
+  <text x="626" y="536" class="mono small">• SHAKE256 Hide &amp; dummy PRG (JointPRF removed for fresh per-note keys)</text>
+  <text x="626" y="554" class="mono small">• Static-address reuse links spends on-chain; unpinned brand-new 160b acct</text>
+  <text x="626" y="570" class="mono small">• Lean 4 models not mechanically linked to Rust/Go binaries (audit needed)</text>
+
+  <!-- Dependency Arrows -->
+  <line x1="304" y1="368" x2="322" y2="368" stroke="#2c3437" stroke-width="1.4" marker-end="url(#arr4)"/>
+  <!-- A.3 -> Thm 3 -->
+  <path d="M400 314 L400 290 L218 290 L218 270" stroke="#10191d" stroke-width="1.8" fill="none" marker-end="url(#arr4)"/>
+  <!-- A.3 -> Thm 4-PFSH03 -->
+  <path d="M510 314 L510 290 L570 290 L570 270" stroke="#057f82" stroke-width="2" fill="none" marker-end="url(#arr4-teal)"/>
+  <!-- NIST ML-DSA-65 (bottom-left) directly up to Thm 4-PFSH03 -->
+  <path d="M555 472 L555 446 L600 446 L600 270" stroke="#057f82" stroke-width="2.2" fill="none" marker-end="url(#arr4-teal)"/>
+  <!-- App B -> Thm 5 ONLY -->
+  <path d="M980 314 L980 270" stroke="#2c3437" stroke-width="1.6" fill="none" marker-end="url(#arr4)"/>
+  <!-- Bottom -> Middle -->
+  <line x1="173" y1="472" x2="173" y2="426" stroke="#057f82" stroke-width="1.5" marker-end="url(#arr4)"/>
+  <line x1="457" y1="472" x2="457" y2="426" stroke="#057f82" stroke-width="1.5" marker-end="url(#arr4)"/>
+  <line x1="1026" y1="472" x2="1026" y2="426" stroke="#7a1f1f" stroke-width="1.5" marker-end="url(#arr4)"/>
+</svg>
