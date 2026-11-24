@@ -19,7 +19,7 @@ copyMarkdownButton: "Copy for LLM"
 draft: false
 ---
 
-*Companion formal appendix to [Peel-Binius-Shielded (PFSH02): Experimental Post-Quantum Private Payments for Post Fiat L1](/blog/peel-binius-quantum-safe-private-payments/). Pinned specification source: [`docs/security/peel-binius-shielded-pq-payments.md`](https://github.com/postfiatorg/postfiatl1v2/blob/ec58522dcf66c85680242efa98b96d733d5b0c3e/docs/security/peel-binius-shielded-pq-payments.md) on branch `feat/pq-payments-production-candidate` (`ec58522dc`).*
+*Companion formal appendix to [PFSH02: Experimental Curve-Free Private Payments for Post Fiat L1](/blog/peel-binius-quantum-safe-private-payments/). Pinned specification source: [`docs/security/peel-binius-shielded-pq-payments.md`](https://github.com/postfiatorg/postfiatl1v2/blob/ec58522dcf66c85680242efa98b96d733d5b0c3e/docs/security/peel-binius-shielded-pq-payments.md) on branch `feat/pq-payments-production-candidate` (`ec58522dc`).*
 
 **Review status:** Every new argument below (Theorems 1A, 1B, 2A, and the updated Theorem 5 sub-hop) awaits external peer review; Conjecture 2B (Appendix A.4) is stated explicitly as a conjecture; and Theorem 5 includes four unquantified non-standard assumptions (`IK-CCA` for FIPS-203 ML-KEM-1024, `JointPRF`, dummy `PRG`, and `Hide` for SHAKE256) plus `IR-PRF` for ML-KEM implicit rejection.
 
