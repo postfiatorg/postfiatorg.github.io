@@ -1,0 +1,160 @@
+<svg viewBox="0 0 1200 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t2 d2">
+  <title id="t2">PFSH02 Wire Budget and 34-Round Peel-Binius IOP Pipeline</title>
+  <desc id="d2">Top panel breaks down the 138.5 KB expected and 145.7 KB worst-case signed deposit wire against the 149,130 B archival ceiling. Bottom panel traces all 34 interactive rounds and exact per-round soundness errors.</desc>
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 Z" fill="#10191d"/>
+    </marker>
+    <style>
+      .disp { font-family: "Instrument Serif", Georgia, serif; fill: #10191d; }
+      .serif { font-family: "Newsreader", Georgia, serif; fill: #2c3437; }
+      .mono { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+      .kicker { font-size: 11.5px; letter-spacing: 2px; font-weight: 600; fill: #03585a; }
+      .label { font-size: 10.5px; letter-spacing: 1.4px; font-weight: 600; fill: #5a6062; }
+      .h-title { font-size: 32px; fill: #10191d; }
+      .sub { font-size: 14.5px; fill: #5a6062; font-style: italic; }
+      .small { font-size: 11px; fill: #2c3437; }
+      .tiny { font-size: 10px; fill: #5a6062; }
+      .inv { fill: #f2eee5; }
+      .teal { fill: #03585a; }
+      .ox { fill: #7a1f1f; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="640" fill="#f2eee5"/>
+  <rect x="14" y="14" width="1172" height="612" fill="none" stroke="#cfc8b6" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="42" y="52" class="mono kicker">FIGURE 02 · WIRE ACCOUNTING &amp; 34-ROUND IOP SCHEDULE</text>
+  <text x="42" y="88" class="disp h-title">Inside a 138.5 KB Transaction &amp; Its 34-Round Proof Schedule</text>
+  <text x="42" y="112" class="serif sub">Every proof sits inside a hard 149,130-byte archival ceiling (12 GiB/day at 1 tx/s) with 963 verifier oracle queries.</text>
+  <line x1="42" y1="128" x2="1158" y2="128" stroke="#10191d" stroke-width="1.5"/>
+
+  <!-- TOP PANEL: Wire Size Budget Bar (scale: 149,130 B = 1,080 px => 0.007242 px/B) -->
+  <text x="42" y="156" class="mono label">A. BYTE-EXACT WIRE BUDGET VS. 149,130-BYTE ARCHIVAL CEILING</text>
+
+  <!-- Bar background (ceiling = 1080 px, x=42..1122) -->
+  <rect x="42" y="172" width="1080" height="54" fill="#ebe6da" stroke="#cfc8b6" stroke-width="1"/>
+  <!-- Header 3,648 B = 26.4 px -->
+  <rect x="42" y="172" width="26.4" height="54" fill="#10191d"/>
+  <!-- Fixed Proof 59,916 B = 433.9 px -->
+  <rect x="68.4" y="172" width="433.9" height="54" fill="#03585a"/>
+  <!-- Opened Columns 38,896 B = 281.7 px -->
+  <rect x="502.3" y="172" width="281.7" height="54" fill="#057f82"/>
+  <!-- Pruned Merkle Siblings (worst-case 38,016 B = 275.3 px; expected 36,001 B = 260.7 px) -->
+  <rect x="784.0" y="172" width="260.7" height="54" fill="#2c3437"/>
+  <rect x="1044.7" y="172" width="14.6" height="54" fill="#5a6062"/>
+  <!-- Optional ML-DSA-65 Mint Auth 5,261 B = 38.1 px -->
+  <rect x="1059.3" y="172" width="38.1" height="54" fill="#7a1f1f"/>
+
+  <!-- Ceiling tick -->
+  <line x1="1122" y1="164" x2="1122" y2="236" stroke="#7a1f1f" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="1122" y="158" text-anchor="end" class="mono small ox">CEILING: 149,130 B</text>
+
+  <!-- Inside bar labels -->
+  <text x="285" y="196" text-anchor="middle" class="mono small inv" font-weight="600">FIXED PROOF FIELDS</text>
+  <text x="285" y="213" text-anchor="middle" class="mono tiny" fill="#d9e7e7">59,916 B (Sumchecks + v_prox + v_open)</text>
+
+  <text x="643" y="196" text-anchor="middle" class="mono small inv" font-weight="600">52 OPENED COLUMNS</text>
+  <text x="643" y="213" text-anchor="middle" class="mono tiny" fill="#d9e7e7">38,896 B (52 × 748 B)</text>
+
+  <text x="914" y="196" text-anchor="middle" class="mono small inv" font-weight="600">PRUNED MT₁ SIBLINGS</text>
+  <text x="914" y="213" text-anchor="middle" class="mono tiny" fill="#cfc8b6">36,001 B exp / 38,016 B max</text>
+
+  <!-- Legend below bar -->
+  <rect x="42" y="242" width="12" height="12" fill="#10191d"/>
+  <text x="60" y="252" class="mono small">Header + Envelopes: 3,648 B (incl. 2×1,670 B ML-KEM)</text>
+
+  <rect x="470" y="242" width="12" height="12" fill="#7a1f1f"/>
+  <text x="488" y="252" class="mono small ox">Deposit ML-DSA-65 Auth (mints only): +5,261 B → 145,737 B max</text>
+
+  <text x="1122" y="252" text-anchor="end" class="mono small teal">Headroom: 8,654 B (pay) / 3,393 B (mint)</text>
+
+  <!-- Divider -->
+  <line x1="42" y1="276" x2="1158" y2="276" stroke="#cfc8b6" stroke-width="1"/>
+
+  <!-- BOTTOM PANEL: 34-Round IOP Flow (2 rows of 4 boxes = 8 stages) -->
+  <text x="42" y="302" class="mono label">B. 34-ROUND INTERACTIVE ORACLE PROOF &amp; PER-ROUND SOUNDNESS BOUNDS (L_max = 86, |E| = 2³⁸⁴)</text>
+
+  <!-- Row 1: Rounds 1 -> 2 -> 3..21 -> 22 -->
+  <!-- Stage 1 -->
+  <rect x="42" y="318" width="250" height="118" fill="#ebe6da" stroke="#10191d" stroke-width="1.2"/>
+  <text x="56" y="340" class="mono label teal">ROUND 1 · STMT</text>
+  <text x="56" y="360" class="serif" font-size="16" font-weight="600" fill="#10191d">Commit MT₁ &amp; Masks</text>
+  <text x="56" y="380" class="mono tiny">163 K₃₂ rows + B_pcs, B_prox</text>
+  <text x="56" y="396" class="mono tiny">Height-21 tree (n = 2²¹), S_G1, S_m2</text>
+  <text x="56" y="420" class="mono small" fill="#10191d">State_KS(tr₁) := 0</text>
+
+  <!-- Stage 2 -->
+  <rect x="328" y="318" width="250" height="118" fill="#ebe6da" stroke="#10191d" stroke-width="1.2"/>
+  <text x="342" y="340" class="mono label teal">ROUND 2 · C02 (α ∈ E)</text>
+  <text x="342" y="360" class="serif" font-size="16" font-weight="600" fill="#10191d">Single-α Circuit Batch</text>
+  <text x="342" y="380" class="mono tiny">Batches all N_C = 2,192,844</text>
+  <text x="342" y="396" class="mono tiny">Group A + B + C constraints</text>
+  <text x="342" y="420" class="mono small teal">ε₂ ≤ 86·(N_C−1)/2³⁸⁴ = 2⁻³⁵⁶·⁵¹</text>
+
+  <!-- Stage 3 -->
+  <rect x="614" y="318" width="250" height="118" fill="#ebe6da" stroke="#10191d" stroke-width="1.2"/>
+  <text x="628" y="340" class="mono label teal">ROUNDS 3–21 · C03–C21</text>
+  <text x="628" y="360" class="serif" font-size="16" font-weight="600" fill="#10191d">19-Round Sumcheck 1</text>
+  <text x="628" y="380" class="mono tiny">Degree-3 Chi constraints over 2¹⁹</text>
+  <text x="628" y="396" class="mono tiny">Blinded by CFS17 mask G₁ (rank 58)</text>
+  <text x="628" y="420" class="mono small teal">ε_k ≤ 86·3 / 2³⁸⁴ = 2⁻³⁷⁵·⁹⁹ / rd</text>
+
+  <!-- Stage 4 -->
+  <rect x="900" y="318" width="258" height="118" fill="#ebe6da" stroke="#10191d" stroke-width="1.2"/>
+  <text x="914" y="340" class="mono label teal">ROUND 22 · C22 (τ ∈ E)</text>
+  <text x="914" y="360" class="serif" font-size="16" font-weight="600" fill="#10191d">Degree-2 Eval Hiding</text>
+  <text x="914" y="380" class="mono tiny">Hides w_x(r₁) via w_x + τ·m_x</text>
+  <text x="914" y="396" class="mono tiny">Rejects if τ == 0 or r₁[d] == 0</text>
+  <text x="914" y="420" class="mono small teal">ε₂₂ ≤ 86·2 / 2³⁸⁴ = 2⁻³⁷⁶·⁵⁷</text>
+
+  <!-- Row 1 Arrows -->
+  <line x1="292" y1="377" x2="324" y2="377" stroke="#10191d" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="578" y1="377" x2="610" y2="377" stroke="#10191d" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="864" y1="377" x2="896" y2="377" stroke="#10191d" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- Connector Row 1 -> Row 2 -->
+  <path d="M1029 436 L1029 456 L167 456 L167 472" stroke="#10191d" stroke-width="1.4" fill="none" stroke-dasharray="5 3" marker-end="url(#arr2)"/>
+
+  <!-- Row 2: Rounds 23-24 -> 25-32 -> 33a/b -> 34 -->
+  <!-- Stage 5 -->
+  <rect x="42" y="476" width="250" height="118" fill="#ebe6da" stroke="#10191d" stroke-width="1.2"/>
+  <text x="56" y="498" class="mono label teal">ROUNDS 23–24 · γ, ρ_rs</text>
+  <text x="56" y="518" class="serif" font-size="16" font-weight="600" fill="#10191d">Ring-Switch Reduction</text>
+  <text x="56" y="538" class="mono tiny">3D-Karatsuba verifier (13,122 muls)</text>
+  <text x="56" y="554" class="mono tiny">Powers ρ_rs⁰..ρ_rs³⁸⁶ (Lemma 4)</text>
+  <text x="56" y="578" class="mono small teal">ε₂₃ = 2⁻³⁷⁵·⁵⁷ · ε₂₄ = 2⁻³⁶⁸·⁹⁸</text>
+
+  <!-- Stage 6 -->
+  <rect x="328" y="476" width="250" height="118" fill="#ebe6da" stroke="#10191d" stroke-width="1.2"/>
+  <text x="342" y="498" class="mono label teal">ROUNDS 25–32 · C25–C32</text>
+  <text x="342" y="518" class="serif" font-size="16" font-weight="600" fill="#10191d">8-Round Sumcheck 2</text>
+  <text x="342" y="538" class="mono tiny">256 virtual rows (16 mask rows)</text>
+  <text x="342" y="554" class="mono tiny">Jacobian rank 17/17 (deg ≤ 112)</text>
+  <text x="342" y="578" class="mono small teal">ε_k ≤ 86·2 / 2³⁸⁴ = 2⁻³⁷⁶·⁵⁷ / rd</text>
+
+  <!-- Stage 7 -->
+  <rect x="614" y="476" width="250" height="118" fill="#f2eee5" stroke="#057f82" stroke-width="1.8"/>
+  <text x="628" y="498" class="mono label teal">ROUNDS 33a–33b · λ_p, λ_o</text>
+  <text x="628" y="518" class="serif" font-size="16" font-weight="600" fill="#10191d">Peel(M) + BCIKS20 Curve</text>
+  <text x="628" y="538" class="mono tiny">Johnson range (m'=3, ρ=565/2²¹)</text>
+  <text x="628" y="554" class="mono tiny">Sends v_prox &amp; v_open (deg &lt; 565)</text>
+  <text x="628" y="578" class="mono small teal">ε₃₃a = 2⁻³⁰⁵·⁷⁹ · ε₃₃b = 2⁻³⁷⁷·⁵⁷</text>
+
+  <!-- Stage 8 -->
+  <rect x="900" y="476" width="258" height="118" fill="#10191d" stroke="#10191d" stroke-width="1.5"/>
+  <text x="914" y="498" class="mono label" fill="#7fd3d5">ROUND 34 · H_C4 + 20-BIT PoW</text>
+  <text x="914" y="518" class="serif" font-size="16" font-weight="600" fill="#f2eee5">52 Column Spot-Checks</text>
+  <text x="914" y="538" class="mono tiny" fill="#cfc8b6">Capped M_pow = 2²⁷ nonces (48 B)</text>
+  <text x="914" y="554" class="mono tiny" fill="#cfc8b6">Pure IOP: (√2ρ)⁵² = 2⁻²⁸²·³¹</text>
+  <text x="914" y="578" class="mono small" fill="#7fd3d5">With PoW: p₃₄ = 2⁻³⁰²·³¹ (dominant)</text>
+
+  <!-- Row 2 Arrows -->
+  <line x1="292" y1="535" x2="324" y2="535" stroke="#10191d" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="578" y1="535" x2="610" y2="535" stroke="#10191d" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="864" y1="535" x2="896" y2="535" stroke="#10191d" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- Footer -->
+  <text x="42" y="616" class="mono tiny">All bounds recomputed via check_math.py &amp; kernel-checked in Lean 4 (formal/lean/, commit 26e5a10a5, 2026-11-24). Verifier query cap κ_v = 963.</text>
+</svg>

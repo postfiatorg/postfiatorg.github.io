@@ -1,0 +1,166 @@
+{
+  "packet_version": "2026-11-24-consolidated-v4-lean4",
+  "protocol": "Peel-Binius-Shielded (PFSH02, L1 Profile 2)",
+  "status": "Unaudited experimental prototype on branch feat/pq-payments-production-candidate (cleanly mergeable atop public/main 994589467); mathematical core kernel-verified in Lean 4 + Mathlib (9 modules, 2,729 LOC, 0 sorrys, 0 custom axioms); disabled on mainnet pending external cryptographic & code audit, production-genesis cut + scale validation, and BFT-supermajority governance vote for height H",
+  "repository": "https://github.com/postfiatorg/postfiatl1v2",
+  "host_environment": {
+    "cpu_model": "AMD EPYC Processor (32 vCPUs, KVM hypervisor)",
+    "cpu_flags_relevant": ["pclmulqdq", "avx2", "sha_ni", "aes"]
+  },
+  "consolidated_branch": {
+    "branch": "feat/pq-payments-production-candidate",
+    "head_commit": "d78f8f102d7779e2d49315c6441b5b54c67a0a7c",
+    "rust_go_code_commit": "ec58522dcf66c85680242efa98b96d733d5b0c3e",
+    "base_public_main": "994589467",
+    "merged_components": [
+      "public/fix/main-checks-20261123 (PR #209, fixes 4 pre-existing main tests)",
+      "feat/peel-binius-shielded-pq (PR #207, M1-M8 PQ private payments)",
+      "pq/private-issued-asset-fee (48d01e795, L1 Profile 2 payerless issued-asset fees)",
+      "public/fix/pq-cheap-checks-first-20261123 (PR #211, cheap pool checks before proof verification)",
+      "Hardening commit d2a83d1d5 (54-mul Karatsuba portable kernels, parallel 4-proof block verification, GMP22 H4 sub-hop closure, on-chain key-pinning doc, updated check_math.py & verify_circuit_equivalence.py)",
+      "Pure-Go verifier optimization commit 2ae8c8e02 (single-step mulC32Inline, inlined Karatsuba loop, register-based RingSwitchLinearMap.applyPortable)",
+      "Rust portable verifier optimization commit ec58522dc (single-step mulC32 + bounds-free portable RingSwitchLinearMap)",
+      "Lean 4 + Mathlib formal proof library commit 26e5a10a5 (formal/lean/, 9 modules, 2,729 LOC, 0 sorrys, 0 custom axioms)",
+      "Same-host n=50 Orchard proving-only & 4-bundle BatchValidator benchmark example commit d78f8f102 (orchard_proving_and_batch_budget.rs)"
+    ]
+  },
+  "lean4_formal_verification": {
+    "toolchain": "leanprover/lean4:v4.20.0",
+    "mathlib_rev": "v4.20.0",
+    "path": "formal/lean/",
+    "modules": 9,
+    "total_lines": 2729,
+    "sorry_count": 0,
+    "custom_axioms": 0,
+    "kernel_axioms_used": ["propext", "Classical.choice", "Quot.sound"],
+    "build_command": "cd formal/lean && lake exe cache get && lake build PFSH02",
+    "module_summary": {
+      "Params.lean": "L_max=86, Johnson margin 7/6<sqrt(2), 3.652 coeff, wire margins, 66-bit no-overflow, p_34, eps_curve, Theorem 2A bounds at Q=2^64/2^80/2^96",
+      "Peel.lean": "Lemma 1 exact 4-line telescoping, k<=86, Case 1 (0<=n'<=2D), Case 2 BCIKS20 hypotheses & curve monotonicity",
+      "DualBinding.lean": "Lemmas 2, 3, 4: Bad_pt union bound, A_both<=A_prox<=D_u & dual-poly binding, Lagrange K_32 subfield inheritance, ring-switch gamma & rho_rs soundness",
+      "Rank3Op.lean": "Lemma A.3.0 rank-3 self-adjoint operator O_s, entry & exit norm <= sqrt(8p), Lemma A.3.4(b) readout error 2/N - 1/N^2 < 2/N",
+      "CompressedOracle.lean": "Lemmas A.3.1-A.3.4 & Theorem 2A: block-diagonal superposition norm reduction, tree-invariance, both-directions capacity, sum sqrt(q) <= (2/3)(Q+1)^(3/2) telescoping",
+      "ZeroKnowledge.lean": "Lemmas 1.1-1.2 & Theorem 1B: 5,216-bit unopened-leaf bijection, capped-PoW TV < 2^-182, Sim_IOP bijections, Theorem 1B Q=2^96 bound",
+      "ValueConservation.lean": "Theorem 3 (3a shielded-pool & 3b joint burned/credited conservation) by full transaction induction",
+      "ConjectureA4.lean": "Appendix A.4 / Theorem 2B inside wrapper B^H: monotone E_3 exit=0 & Pr[E_3]<=8*Q_eff^2*p_E3, escape permanence, exhaustive Cases A/B/C trichotomy",
+      "AuthAndPrivacy.lean": "Theorem 4 Mode 3 key-pinning dichotomy (zero axioms), 2-hop Theorem 4 accounting, symmetric 5-game Theorem 5 hybrid incl. GMP22 sub-hop (v)"
+    }
+  },
+  "test_verification_20261124": {
+    "verify_sh_7_stage": "ALL 7/7 PASSED (CPU 9; Rust 21.56-21.93 ms, Go PCLMUL 32.87-33.34 ms, full 2^24 rollover 20.21 ms Rust / 31.26 ms Go)",
+    "postfiat_privacy_binius_accel": "9 passed, 0 failed",
+    "postfiat_privacy_binius_portable": "9 passed, 0 failed",
+    "postfiat_privacy_binius_wallet": "8 passed, 0 failed",
+    "postfiat_storage_pq_archive": "1 passed, 0 failed",
+    "python_cli_test_pq_wallet_cli": "9 passed, 0 failed",
+    "postfiat_node_lib_full": "750 passed, 0 failed, 45 pre-existing ignored (0 of 45 touch PQ payments)",
+    "postfiat_node_m8_six_validator_rehearsal_profile2": "1 passed, 0 failed (60.26s, worst_uncached_verify_l1_ms=22.443 ms, 4-proof block charged=578304 B)"
+  },
+  "benchmarks_ms_20261124": {
+    "same_host_orchard_baseline_50_trials": {
+      "command": "RAYON_NUM_THREADS=1 PROVE_ITERS=50 VERIFY_ITERS=50 taskset -c 2 cargo run --release --locked -p postfiat-privacy-orchard --example orchard_proving_and_batch_budget",
+      "proof_system_id": "postfiat.privacy.orchard-halo2.v2",
+      "circuit_id": "orchard.action.v2",
+      "action_count": 2,
+      "proof_bytes": 7264,
+      "canonical_binary_fields_bytes": 9145,
+      "canonical_binary_fields_with_optional_compact_and_binding_bytes": 9297,
+      "verify_scope": "verify_serialized_orchard_action (cached VK; Halo 2 proof + RedPallas spend-auth & binding sigs) and orchard::bundle::BatchValidator (4 bundles = 8 actions)",
+      "one_core_cpu2_n50": {
+        "proving_key_build_ms": 4041.65,
+        "verifying_key_build_ms": 3227.89,
+        "action_build_only_med_ms": 12.56,
+        "proving_only_cached_pk_med_ms": 5126.84,
+        "proving_only_cached_pk_p95_ms": 5658.15,
+        "proving_only_cached_pk_max_ms": 6330.18,
+        "single_bundle_verify_med_ms": 44.26,
+        "single_bundle_verify_p95_ms": 47.01,
+        "single_bundle_verify_max_ms": 47.82,
+        "four_bundle_batch_validator_med_ms": 87.36,
+        "four_bundle_batch_validator_p95_ms": 90.48,
+        "four_bundle_batch_validator_max_ms": 93.96,
+        "report_hash": "bca209777c898ebde2dce4c726c8c93f138e0af3a9c2668b664f334e10ecec865a46b1debe69661739e1656ab8cbe5d4"
+      },
+      "four_core_cpu0_3_n50_verify": {
+        "four_bundle_batch_validator_med_ms": 34.54,
+        "four_bundle_batch_validator_p95_ms": 34.65,
+        "four_bundle_batch_validator_max_ms": 34.75,
+        "single_bundle_verify_med_ms": 19.09,
+        "report_hash": "a7f1070ad45634c624366e50f540dff762f0545fbd06c8112e63e51035075de8a540215187cfe3d693bb3ce2d8d75ef7"
+      },
+      "sixteen_thread_n50": {
+        "proving_only_cached_pk_med_ms": 1285.55,
+        "proving_only_cached_pk_p95_ms": 1357.4,
+        "proving_only_cached_pk_max_ms": 1416.85,
+        "four_bundle_batch_validator_med_ms": 24.14,
+        "report_hash": "e8dc6e4d664d9ece191e235ebb1b8a415f5219b872fefce9975fabb9cfb1262a7526376f4501535e00b2557498ee9e39"
+      }
+    },
+    "standalone_rust_1core_accel_50_trials": {
+      "mint": { "med": 20.42, "p95": 20.99, "max": 22.98 },
+      "hop1": { "med": 20.35, "p95": 26.45, "max": 33.81 },
+      "hop2": { "med": 20.43, "p95": 24.01, "max": 31.18 },
+      "full_tree_rollover": 20.21,
+      "target_50ms_max": "MET"
+    },
+    "standalone_go_1core_pclmul_50_trials": {
+      "mint": { "med": 31.11, "p95": 31.99, "max": 32.45 },
+      "hop1": { "med": 30.82, "p95": 31.18, "max": 31.78 },
+      "hop2": { "med": 30.95, "p95": 31.94, "max": 32.35 },
+      "full_tree_rollover": 31.26,
+      "target_50ms_max": "MET"
+    },
+    "standalone_go_1core_purego_50_trials": {
+      "mint": { "med": 43.03, "p95": 43.69, "max": 44.08 },
+      "hop1": { "med": 43.08, "p95": 43.72, "max": 43.84 },
+      "hop2": { "med": 42.76, "p95": 43.52, "max": 43.67 },
+      "target_50ms_max": "MET (all 150 trials <= 44.08 ms)"
+    },
+    "validator_accel_1core_1tx": { "per_condition_medians": "23.58-24.06", "p95_range": "23.78-36.91", "max": 37.17, "target_50ms_max": "MET" },
+    "validator_portable_1core_1tx": { "per_condition_medians": "36.96-39.64", "p95_range": "38.70-44.45", "max": 45.23, "target_50ms_max": "MET (all 168 warm+cold trials <= 45.23 ms)" },
+    "validator_accel_4core_parallel_4tx": { "per_condition_medians": "49.82-69.75", "p95_range": "73.26-87.64", "max": 102.10, "target_200ms_max": "MET" },
+    "validator_portable_4core_parallel_4tx": { "per_condition_medians": "78.76-85.05", "p95_range": "88.14-99.01", "max": 108.44, "target_200ms_max": "MET" },
+    "validator_accel_1core_sequential_4tx": { "per_condition_medians": "92.94-102.20", "p95_range": "93.89-104.08", "max": 107.53, "target_200ms_max": "MET" },
+    "validator_portable_1core_sequential_4tx": { "per_condition_medians": "145.43-161.96", "p95_range": "147.20-201.97", "max_valid": 180.30, "max_invalid_burst": 207.96, "note": "Missed on invalid burst (> 200 ms); Gate 2 requires PCLMULQDQ or >= 4 verification cores" },
+    "proving_rust": { "sixteen_threads_s": 2.64, "one_core_med_s": "24.61-24.71", "one_core_p95_s": "26.29-27.24", "one_core_max_s": 27.68, "peak_rss_mib": "547-562" }
+  },
+  "wire_and_storage_bytes": {
+    "standalone_non_mint_expected": 138461,
+    "standalone_non_mint_proof_only_expected": 134813,
+    "standalone_non_mint_max": 140476,
+    "standalone_signed_deposit_expected": 143722,
+    "standalone_signed_deposit_max": 145737,
+    "l1_profile2_pfusdc_pay_vector": 137860,
+    "l1_profile2_pfusdc_pay_proof_only": 134140,
+    "l1_profile2_pfusdc_exit_vector": 138724,
+    "like_for_like_ratios_vs_orchard_2_action": {
+      "proof_only_ratio": 18.47,
+      "full_binary_transfer_ratio": 15.07
+    },
+    "l1_profile2_m8_rehearsal_largest_body": 144397,
+    "l1_profile2_m8_rehearsal_largest_charged": 145140,
+    "l1_worst_case_redb_ceiling": 146546,
+    "l1_worst_case_jsonl_ceiling": 146580,
+    "archival_ceiling": 149130,
+    "headroom_private_pay_exit": 8654,
+    "headroom_redb_deposit": 2584,
+    "headroom_jsonl_deposit": 2550
+  },
+  "chain_replays": {
+    "r64_validator3_archive_1734_blocks": {
+      "genesis": "ce22ca8c932da0998b484483a09647138a30e0bf44408dd49a8d6d452787ad25521aff3ed334da07e150a7233a3e90a9",
+      "final_block": "910c744852de4203274bd606859edaccdc27e25181223a1dd07cf2f62da3de048ffef8e427dcf229a00cbb8225121e40",
+      "final_state_root": "a7b1185e94bf0e224a3944be4aaba896618594823ba2225399dad2148f6611fe527ce6a60a7852f94c8bc154a90dfe56",
+      "all_rows_sha256": "c28eb87280050e96e996ad5c9e8c2eae12f2fb9774438f3a7b5f1295ef155910"
+    },
+    "live_devnet_replay_1754_blocks": {
+      "tip_prefix": "519bbc0c...6642de9",
+      "state_root_prefix": "246d6113...124be4b8e6"
+    }
+  },
+  "remaining_pre_activation_gates": [
+    "Independent external cryptographic review covering Theorems 3, 4 (Modes 1-3 + App. A.4 real-to-wrapper bridge), and 5 (plus multi-tx composition scope), Lean 4 model-to-code correspondence, and Rust/Go/L1 settlement code.",
+    "Production-genesis release cut (live genesis & governed pfUSDC series), validator hardware floor (PCLMULQDQ or >= 4 verification cores), bounded-time 2^24-leaf node restart/index-checkpoint validation, and browser/mobile client benchmarks.",
+    "BFT-supermajority governance vote setting live activation height H after all validators install the audited production release, plus Orchard-to-PFSH02 migration guidance."
+  ]
+}

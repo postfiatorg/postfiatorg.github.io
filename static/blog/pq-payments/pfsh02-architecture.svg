@@ -1,0 +1,159 @@
+<svg viewBox="0 0 1200 680" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t1 d1">
+  <title id="t1">Peel-Binius-Shielded (PFSH02) End-to-End Architecture &amp; Disjoint Cryptographic Stack</title>
+  <desc id="d1">Shows how Deposits (ML-DSA-65 signed), Private Transfers (L1 Profile 2 with zero public signer and governed inner fee to collector pot), and Exits interact with per-asset Depth-24 SHAKE256 note trees, global nullifiers, ML-KEM-1024 stealth envelopes, and the disjoint 3x SHA-512 compiler oracle.</desc>
+  <defs>
+    <marker id="arr-ink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 Z" fill="#10191d"/>
+    </marker>
+    <marker id="arr-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 Z" fill="#057f82"/>
+    </marker>
+    <marker id="arr-ox" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 Z" fill="#7a1f1f"/>
+    </marker>
+    <style>
+      .disp { font-family: "Instrument Serif", Georgia, serif; fill: #10191d; }
+      .serif { font-family: "Newsreader", Georgia, serif; fill: #2c3437; }
+      .mono { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+      .kicker { font-size: 11.5px; letter-spacing: 2px; font-weight: 600; fill: #03585a; }
+      .label { font-size: 10.5px; letter-spacing: 1.5px; font-weight: 600; fill: #5a6062; }
+      .h-title { font-size: 32px; fill: #10191d; }
+      .sub { font-size: 14.5px; fill: #5a6062; font-style: italic; }
+      .b-title { font-size: 18px; fill: #10191d; font-weight: 600; }
+      .copy { font-size: 13px; fill: #2c3437; }
+      .small { font-size: 11.5px; fill: #5a6062; }
+      .teal { fill: #03585a; }
+      .ox { fill: #7a1f1f; }
+      .inv { fill: #f2eee5; }
+      .inv-sub { fill: #cfc8b6; }
+    </style>
+  </defs>
+
+  <!-- Ivory paper frame -->
+  <rect x="0" y="0" width="1200" height="680" fill="#f2eee5"/>
+  <rect x="14" y="14" width="1172" height="652" fill="none" stroke="#cfc8b6" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="42" y="52" class="mono kicker">FIGURE 01 · PROTOCOL ARCHITECTURE · PFSH02 (L1 PROFILE 2)</text>
+  <text x="42" y="90" class="disp h-title">Zero Elliptic Curves: Unified Shielded Lifecycle &amp; Disjoint Hash Boundary</text>
+  <text x="42" y="114" class="serif sub">Deposits authenticate via ML-DSA-65; internal spends omit all public accounts and pay governed asset fees inside the proof.</text>
+  <line x1="42" y1="130" x2="1158" y2="130" stroke="#10191d" stroke-width="1.5"/>
+
+  <!-- LEFT COLUMN: 3 Transaction Modes -->
+  <text x="42" y="156" class="mono label">1. UNIFORM 66-BIT TRANSACTION MODES</text>
+
+  <!-- Deposit Box -->
+  <rect x="42" y="168" width="320" height="128" fill="#ebe6da" stroke="#10191d" stroke-width="1.2"/>
+  <rect x="42" y="168" width="5" height="128" fill="#057f82"/>
+  <text x="60" y="192" class="mono label teal">SHIELD (DEPOSIT) · v_mint &gt; 0</text>
+  <text x="60" y="214" class="serif b-title">Public Account → Private Notes</text>
+  <text x="60" y="236" class="serif copy">• Signed with ML-DSA-65 (5,261 B suffix)</text>
+  <text x="60" y="254" class="serif copy">• Dummy inputs (is_dummy = 1, v_in = 0)</text>
+  <text x="60" y="272" class="serif copy">• Recipient A &amp; blinding R stay hidden</text>
+  <text x="60" y="288" class="mono small teal">Public: source acct, v_mint (ML-DSA-65 pinned)</text>
+
+  <!-- Private Transfer Box (Highlighted) -->
+  <rect x="42" y="314" width="320" height="148" fill="#10191d" stroke="#10191d" stroke-width="1.5"/>
+  <rect x="42" y="314" width="5" height="148" fill="#057f82"/>
+  <text x="60" y="338" class="mono label" fill="#7fd3d5">PRIVATE PAY (PROFILE 2) · NO SIGNER</text>
+  <text x="60" y="362" class="serif b-title inv">2 Private Inputs → 2 Private Outputs</text>
+  <text x="60" y="384" class="serif copy inv-sub">• Zero public sender account, key, or sig</text>
+  <text x="60" y="402" class="serif copy inv-sub">• PFT fee burned; pfUSDC fee paid in asset</text>
+  <text x="60" y="420" class="serif copy inv-sub">  atoms inside proof → collector pot</text>
+  <text x="60" y="446" class="mono small" fill="#7fd3d5">Public: asset, epoch, anchor, fee, sn₀/₁, c₀/₁</text>
+
+  <!-- Unshield Box -->
+  <rect x="42" y="480" width="320" height="124" fill="#ebe6da" stroke="#10191d" stroke-width="1.2"/>
+  <rect x="42" y="480" width="5" height="124" fill="#057f82"/>
+  <text x="60" y="504" class="mono label teal">UNSHIELD (EXIT) · v_unshield &gt; 0</text>
+  <text x="60" y="526" class="serif b-title">Private Notes → Public Account</text>
+  <text x="60" y="548" class="serif copy">• Partial or full exit to unshield_dest</text>
+  <text x="60" y="566" class="serif copy">• Profile 2 omits public fee payer on exit</text>
+  <text x="60" y="584" class="serif copy">• Reserve guard: exit ≤ asset pool reserve</text>
+
+  <!-- CENTER COLUMN: Prover / Circuit & Disjoint Oracle -->
+  <text x="410" y="156" class="mono label">2. DISJOINT CRYPTOGRAPHIC BOUNDARY</text>
+
+  <!-- In-circuit SHAKE256 box -->
+  <rect x="410" y="168" width="370" height="202" fill="#f2eee5" stroke="#057f82" stroke-width="1.8"/>
+  <rect x="410" y="168" width="370" height="28" fill="#057f82"/>
+  <text x="424" y="187" class="mono label inv">IN-CIRCUIT: FIPS-202 SHAKE256 (KECCAK-f[1600])</text>
+
+  <text x="426" y="218" class="serif b-title">R_pay: 447,014 Rows · 2,192,844 Constraints</text>
+  <text x="426" y="242" class="mono small">• 56 Keccak-f[1600] permutations (1 perm/hash)</text>
+  <text x="426" y="260" class="mono small">  A = H_A(S), Coin = H_Coin(A,v,R), SN = H_SN(S,C)</text>
+  <text x="426" y="278" class="mono small">  2 × Depth-24 Merkle paths (48 H_Node perms)</text>
+  <text x="426" y="298" class="mono small">• 66-bit exact conservation in ℤ (Z3-verified):</text>
+  <rect x="426" y="308" width="338" height="28" fill="#ebe6da" stroke="#cfc8b6"/>
+  <text x="595" y="326" text-anchor="middle" class="mono small" fill="#10191d">v_in0 + v_in1 + v_mint = v_out0 + v_out1 + fee + v_unsh</text>
+  <text x="426" y="356" class="serif small">5-column Chi-only layout; booleanity forced by K₃₂ packing</text>
+
+  <!-- Disjoint separator -->
+  <line x1="410" y1="386" x2="780" y2="386" stroke="#7a1f1f" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <rect x="506" y="375" width="178" height="22" fill="#f2eee5"/>
+  <text x="595" y="390" text-anchor="middle" class="mono small ox">ZERO SHARED PERMUTATION</text>
+
+  <!-- Compiler Oracle box -->
+  <rect x="410" y="404" width="370" height="200" fill="#ebe6da" stroke="#10191d" stroke-width="1.5"/>
+  <rect x="410" y="404" width="370" height="28" fill="#10191d"/>
+  <text x="424" y="423" class="mono label inv">COMPILER QRO: 3 × SHA-512 (1,536-BIT OUTPUT)</text>
+
+  <text x="426" y="454" class="serif b-title">Peel-Binius 34-Round BCS Compiler</text>
+  <text x="426" y="478" class="mono small">• Field tower: GF(2) ⊂ K₁₆ ⊂ K₃₂ ⊂ E = GF(2³⁸⁴)</text>
+  <text x="426" y="496" class="mono small">• Single height-21 tree MT₁ (n = 2²¹, 48 B digests)</text>
+  <text x="426" y="514" class="mono small">• 512-bit internal Fiat-Shamir state (0 wire bytes)</text>
+  <text x="426" y="532" class="mono small">• Round-34: 20-bit PoW + 52 column openings</text>
+  <text x="426" y="556" class="serif copy teal">Dual verification: Rust (~22 ms) · Go (~32 ms PCLMUL)</text>
+  <text x="426" y="576" class="mono small">Wire: ~138.5 KB (non-mint) / ~143.7 KB (deposit)</text>
+  <text x="426" y="592" class="mono small">Hard ceiling: 149,130 B · ≤ 4 payments / block</text>
+
+  <!-- RIGHT COLUMN: On-Chain State & 0-Round Recipient Delivery -->
+  <text x="828" y="156" class="mono label">3. L1 POOL STATE &amp; 0-ROUND DELIVERY</text>
+
+  <!-- Per-Asset Pool State -->
+  <rect x="828" y="168" width="330" height="218" fill="#ebe6da" stroke="#10191d" stroke-width="1.2"/>
+  <text x="846" y="194" class="mono label teal">ISOLATED PER-ASSET SHIELDED POOLS</text>
+  <text x="846" y="218" class="serif b-title">Depth-24 Epoch Trees + Global Sets</text>
+
+  <!-- Mini tree boxes -->
+  <rect x="846" y="232" width="140" height="58" fill="#f2eee5" stroke="#057f82"/>
+  <text x="856" y="252" class="mono small teal">PFT Pool</text>
+  <text x="856" y="269" class="mono small">2²⁴ leaves/epoch</text>
+  <text x="856" y="283" class="mono small">Fees burned</text>
+
+  <rect x="1000" y="232" width="140" height="58" fill="#f2eee5" stroke="#057f82"/>
+  <text x="1010" y="252" class="mono small teal">pfUSDC Series</text>
+  <text x="1010" y="269" class="mono small">2²⁴ leaves/epoch</text>
+  <text x="1010" y="283" class="mono small">Fee → Collector</text>
+
+  <text x="846" y="314" class="serif copy">• Epoch rollover at 2²⁴ notes (~97d @ 1 tx/s, 2/tx)</text>
+  <text x="846" y="332" class="serif copy">• Frozen epochs stay spendable forever (256 roots)</text>
+  <text x="846" y="350" class="serif copy">• Global unpruned SpentSN set prevents double spend</text>
+  <text x="846" y="368" class="serif copy">• Governance gate: off until height H; pausable</text>
+
+  <!-- 0-Round ML-KEM Stealth Delivery -->
+  <rect x="828" y="404" width="330" height="200" fill="#f2eee5" stroke="#10191d" stroke-width="1.5"/>
+  <rect x="828" y="404" width="330" height="28" fill="#03585a"/>
+  <text x="844" y="423" class="mono label inv">0-ROUND STEALTH RECEIVE (1,670 B / OUTPUT)</text>
+
+  <text x="846" y="454" class="serif b-title">FIPS-203 ML-KEM-1024 + AES-256-GCM</text>
+  <text x="846" y="478" class="mono small">1. (ss, ct_kem) ← ML-KEM-1024.Encaps(ek)</text>
+  <text x="846" y="496" class="mono small">2. K, N ← HMAC-SHA-384(ss, label‖ct‖Coin)</text>
+  <text x="846" y="514" class="mono small">3. ct_aead ← AES-GCM(K, N, aad=Coin, v‖R)</text>
+  <text x="846" y="538" class="serif copy">• Recipient offline; scans at 4,700–8,900 out/s</text>
+  <text x="846" y="556" class="serif copy">• Verifies H_Coin(A, v, R) == Coin before accept</text>
+  <text x="846" y="578" class="mono small ox">Caveat: FIPS-203 IK-CCA is [NonStd]; no</text>
+  <text x="846" y="593" class="mono small ox">forward secrecy if static dk leaks later.</text>
+
+  <!-- Connectors -->
+  <path d="M362 232 L406 232" stroke="#10191d" stroke-width="1.6" fill="none" marker-end="url(#arr-ink)"/>
+  <path d="M362 388 L406 388" stroke="#057f82" stroke-width="2" fill="none" marker-end="url(#arr-teal)"/>
+  <path d="M362 542 L406 542" stroke="#10191d" stroke-width="1.6" fill="none" marker-end="url(#arr-ink)"/>
+
+  <path d="M780 268 L824 268" stroke="#057f82" stroke-width="1.8" fill="none" marker-end="url(#arr-teal)"/>
+  <path d="M780 504 L824 504" stroke="#10191d" stroke-width="1.6" fill="none" marker-end="url(#arr-ink)"/>
+
+  <!-- Footer note -->
+  <text x="42" y="646" class="mono small">SOURCE: docs/security/peel-binius-shielded-pq-payments.md &amp; feat/pq-payments-production-candidate (26e5a10a5) · Post Fiat L1 Research</text>
+  <text x="1158" y="646" text-anchor="end" class="mono small ox">STATUS: UNAUDITED EXPERIMENTAL PROTOTYPE</text>
+</svg>

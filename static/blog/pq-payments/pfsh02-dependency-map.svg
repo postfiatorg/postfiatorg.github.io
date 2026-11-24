@@ -1,0 +1,128 @@
+<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t4 d4">
+  <title id="t4">What Rests on What: PFSH02 Cryptographic Trust and Failure Blast-Radius Map</title>
+  <desc id="d4">Dependency graph showing which security claims (Value Conservation Theorem 3, Authorization Theorem 4, Privacy Theorem 5) rely on published anchors, unreviewed new proofs, the A.4 conjecture, and unquantified non-standard assumptions.</desc>
+  <defs>
+    <marker id="arr4" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 Z" fill="#2c3437"/>
+    </marker>
+    <style>
+      .disp { font-family: "Instrument Serif", Georgia, serif; fill: #10191d; }
+      .serif { font-family: "Newsreader", Georgia, serif; fill: #2c3437; }
+      .mono { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+      .kicker { font-size: 11.5px; letter-spacing: 2px; font-weight: 600; fill: #03585a; }
+      .label { font-size: 10.5px; letter-spacing: 1.4px; font-weight: 600; fill: #5a6062; }
+      .h-title { font-size: 31px; fill: #10191d; }
+      .sub { font-size: 14.5px; fill: #5a6062; font-style: italic; }
+      .b-title { font-size: 17px; fill: #10191d; font-weight: 600; }
+      .small { font-size: 11.5px; fill: #2c3437; }
+      .tiny { font-size: 10.5px; fill: #5a6062; }
+      .inv { fill: #f2eee5; }
+      .teal { fill: #03585a; }
+      .ox { fill: #7a1f1f; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="620" fill="#f2eee5"/>
+  <rect x="14" y="14" width="1172" height="592" fill="none" stroke="#cfc8b6" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="42" y="50" class="mono kicker">FIGURE 04 · PROOF-OBLIGATION AUDIT &amp; BLAST RADIUS</text>
+  <text x="42" y="85" class="disp h-title">What Rests on What: Separating Soundness, Auth, and Privacy</text>
+  <text x="42" y="109" class="serif sub">Value conservation (Theorem 3) avoids both the A.4 conjecture and zero-knowledge; privacy carries the widest unquantified trust surface.</text>
+  <line x1="42" y1="124" x2="1158" y2="124" stroke="#10191d" stroke-width="1.5"/>
+
+  <!-- TOP ROW: Three User-Facing Security Theorems -->
+  <text x="42" y="150" class="mono label">USER-FACING LEDGER PROPERTIES (SECTION 4)</text>
+
+  <!-- Thm 3 -->
+  <rect x="42" y="162" width="352" height="104" fill="#10191d" stroke="#10191d"/>
+  <text x="58" y="186" class="mono label" fill="#7fd3d5">THEOREM 3 · VALUE CONSERVATION</text>
+  <text x="58" y="210" class="serif b-title inv">No Inflation &amp; No Double Spend</text>
+  <text x="58" y="232" class="mono tiny" fill="#cfc8b6">Does NOT use App. A.4 or App. B (ZK)</text>
+  <text x="58" y="250" class="mono tiny" fill="#7fd3d5">Failure risk: forged notes / drained pool</text>
+
+  <!-- Thm 4 -->
+  <rect x="424" y="162" width="352" height="104" fill="#ebe6da" stroke="#10191d" stroke-width="1.5"/>
+  <text x="440" y="186" class="mono label teal">THEOREM 4 · AUTHORIZATION</text>
+  <text x="440" y="210" class="serif b-title">No Theft, Redirection, or Mint Spoof</text>
+  <text x="440" y="232" class="mono tiny">Modes 1–2 rely on Conj. A.4 + ZK + JointPRF</text>
+  <text x="440" y="250" class="mono tiny teal">Mode 3: ML-DSA-65 pinned on-chain (160b unpinned only)</text>
+
+  <!-- Thm 5 -->
+  <rect x="806" y="162" width="352" height="104" fill="#ebe6da" stroke="#7a1f1f" stroke-width="1.5"/>
+  <text x="822" y="186" class="mono label ox">THEOREM 5 · PRIVACY (LEAST SUPPORTED)</text>
+  <text x="822" y="210" class="serif b-title">Sender, Recipient &amp; Amount Hiding</text>
+  <text x="822" y="232" class="mono tiny">Does NOT use App. A.3 or App. A.4</text>
+  <text x="822" y="250" class="mono tiny ox">Vulnerable to harvest-now-decrypt-later; no #</text>
+
+  <!-- MIDDLE ROW: Unreviewed / Conjecture Bridges -->
+  <text x="42" y="302" class="mono label">NEW PROJECT ARGUMENTS PENDING EXTERNAL REVIEW (APPENDICES A &amp; B)</text>
+
+  <!-- App A.1-A.2 -->
+  <rect x="42" y="314" width="262" height="108" fill="#f2eee5" stroke="#10191d" stroke-width="1.4" stroke-dasharray="6 3"/>
+  <text x="56" y="336" class="mono label ox">[UNREVIEWED] · APP. A.1–A.2</text>
+  <text x="56" y="358" class="serif b-title">Thm 1A: 34-Rd IOP</text>
+  <text x="56" y="378" class="mono tiny">Peel(M) list bound (86) +</text>
+  <text x="56" y="394" class="mono tiny">Ring-Switch + RBR State_KS</text>
+  <text x="56" y="410" class="mono tiny ox">If broken: classical forgery</text>
+
+  <!-- App A.3 -->
+  <rect x="326" y="314" width="262" height="108" fill="#f2eee5" stroke="#10191d" stroke-width="1.4" stroke-dasharray="6 3"/>
+  <text x="340" y="336" class="mono label ox">[UNREVIEWED] · APP. A.3</text>
+  <text x="340" y="358" class="serif b-title">Thm 2A: QROM Ext</text>
+  <text x="340" y="378" class="mono tiny">Single-oracle compressed DB</text>
+  <text x="340" y="394" class="mono tiny">Rank-3 norm √8p + PoW gate</text>
+  <text x="340" y="410" class="mono tiny ox">If broken: quantum forgery</text>
+
+  <!-- App A.4 -->
+  <rect x="610" y="314" width="262" height="108" fill="#f9ecea" stroke="#7a1f1f" stroke-width="1.8"/>
+  <text x="624" y="336" class="mono label ox">[CONJECTURE] · APP. A.4</text>
+  <text x="624" y="358" class="serif b-title ox">Conj. 2B: Multi-Proof SE</text>
+  <text x="624" y="378" class="mono tiny">Classical overlay B^H over</text>
+  <text x="624" y="394" class="mono tiny">adaptive simulated proofs</text>
+  <text x="624" y="410" class="mono tiny ox">No published anchor; sketch only</text>
+
+  <!-- App B -->
+  <rect x="894" y="314" width="264" height="108" fill="#f2eee5" stroke="#10191d" stroke-width="1.4" stroke-dasharray="6 3"/>
+  <text x="908" y="336" class="mono label ox">[UNREVIEWED] · APP. B</text>
+  <text x="908" y="358" class="serif b-title">Thm 1B: QROM ZK</text>
+  <text x="908" y="378" class="mono tiny">Sim_IOP + 5,216b leaf O2H +</text>
+  <text x="908" y="394" class="mono tiny">capped PoW + 68-step GHHM21</text>
+  <text x="908" y="410" class="mono tiny ox">If broken: secrets / links leak</text>
+
+  <!-- BOTTOM ROW: Published Anchors vs Non-Standard Primitive Assumptions -->
+  <text x="42" y="460" class="mono label">FOUNDATIONAL LAYER: PUBLISHED THEOREMS VS. UNQUANTIFIED NON-STANDARD ASSUMPTIONS</text>
+
+  <!-- Published Anchors -->
+  <rect x="42" y="472" width="546" height="108" fill="#ebe6da" stroke="#057f82" stroke-width="1.6"/>
+  <text x="58" y="496" class="mono label teal">[PUBLISHED ANCHORS &amp; NIST STANDARDS]</text>
+  <text x="58" y="518" class="mono small">• BCIKS20 Thm 6.2 (FOCS '20 / JACM '23): RS curve proximity (Johnson bound)</text>
+  <text x="58" y="536" class="mono small">• Zha19 / CFHL21 / GHHM21 / AHU19: QROM compressed oracle, O2H, reprog.</text>
+  <text x="58" y="554" class="mono small">• FIPS-202 SHAKE256, FIPS-180-4 SHA-512/384, FIPS-203 ML-KEM-1024,</text>
+  <text x="58" y="570" class="mono small">  FIPS-204 ML-DSA-65, SP 800-38D AES-256-GCM, HMAC-SHA-384</text>
+
+  <!-- Non-Standard Assumptions -->
+  <rect x="610" y="472" width="548" height="108" fill="#f9ecea" stroke="#7a1f1f" stroke-width="1.6"/>
+  <text x="626" y="496" class="mono label ox">[NON-STANDARD / UNQUANTIFIED ASSUMPTIONS &amp; GAPS]</text>
+  <text x="626" y="518" class="mono small">• ML-KEM-1024 FIPS-203 IK-CCA (proven for Kyber, not FIPS-203 delta)</text>
+  <text x="626" y="536" class="mono small">• SHAKE256 JointPRF, dummy PRG, commitment Hide (key in middle of sponge)</text>
+  <text x="626" y="554" class="mono small">• GMP22 implicit-rejection sub-hop (v) added in spec (pending review)</text>
+  <text x="626" y="570" class="mono small">• Single-tx privacy game (no multi-hop proof); unpinned 160b addr only</text>
+
+  <!-- Dependency Arrows (Middle -> Top) -->
+  <!-- A.1-A.2 -> A.3 -->
+  <line x1="304" y1="368" x2="322" y2="368" stroke="#2c3437" stroke-width="1.4" marker-end="url(#arr4)"/>
+  <!-- A.3 -> A.4 -->
+  <line x1="588" y1="368" x2="606" y2="368" stroke="#2c3437" stroke-width="1.4" marker-end="url(#arr4)"/>
+  <!-- A.3 -> Thm 3 -->
+  <path d="M400 314 L400 290 L218 290 L218 270" stroke="#10191d" stroke-width="1.8" fill="none" marker-end="url(#arr4)"/>
+  <!-- A.4 -> Thm 4 -->
+  <path d="M700 314 L700 290 L600 290 L600 270" stroke="#7a1f1f" stroke-width="1.8" fill="none" marker-end="url(#arr4)"/>
+  <!-- App B -> Thm 4 & Thm 5 -->
+  <path d="M980 314 L980 270" stroke="#2c3437" stroke-width="1.6" fill="none" marker-end="url(#arr4)"/>
+  <path d="M940 314 L940 282 L640 282 L640 270" stroke="#2c3437" stroke-width="1.2" stroke-dasharray="4 3" fill="none" marker-end="url(#arr4)"/>
+  <!-- Bottom -> Middle -->
+  <line x1="173" y1="472" x2="173" y2="426" stroke="#057f82" stroke-width="1.5" marker-end="url(#arr4)"/>
+  <line x1="457" y1="472" x2="457" y2="426" stroke="#057f82" stroke-width="1.5" marker-end="url(#arr4)"/>
+  <line x1="1026" y1="472" x2="1026" y2="426" stroke="#7a1f1f" stroke-width="1.5" marker-end="url(#arr4)"/>
+</svg>
