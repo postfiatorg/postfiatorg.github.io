@@ -1,0 +1,29 @@
+{{- $config := site.Data.governance_metrics -}}
+{{- $live := site.Data.governance_metrics_live -}}
+<div class="governance-metrics">
+  {{- if $live }}
+  <p class="governance-metrics-updated">Task Node figures computed {{ $live.generated_at_display }} from <a href="{{ $live.source }}">{{ $live.source }}</a>.</p>
+  {{- end }}
+  {{- range $config.groups }}
+  <section class="governance-metrics-group" id="{{ .id }}">
+    <h2>{{ .title }}</h2>
+    <p>{{ .intro }}</p>
+    <table>
+      <thead><tr><th>Metric</th><th>Value</th><th>Definition</th><th>Reporting period</th><th>Source</th></tr></thead>
+      <tbody>
+      {{- range .metrics }}
+        {{- $value := .value -}}
+        {{- if and .live $live }}{{ $value = index $live.values .live }}{{ end -}}
+        <tr>
+          <td>{{ .name }}</td>
+          <td>{{ if $value }}<strong>{{ $value }}</strong>{{ else }}<em>Not connected</em>{{ end }}</td>
+          <td>{{ .definition }}</td>
+          <td>{{ .period }}</td>
+          <td>{{ if .source_url }}<a href="{{ .source_url }}">{{ .source }}</a>{{ else }}{{ .source }}{{ end }}</td>
+        </tr>
+      {{- end }}
+      </tbody>
+    </table>
+  </section>
+  {{- end }}
+</div>

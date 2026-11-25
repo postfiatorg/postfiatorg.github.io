@@ -1,0 +1,109 @@
+# Governance metrics dashboard input (/metrics/).
+# Edit this file to update a value. Rules:
+# - Every metric has a definition, a reporting period and a source a reader can open.
+# - A metric with no feed has `value: null`; the page shows "Not connected".
+# - `live:` names a figure computed from the public Task Node API by
+#   scripts/sync_tasknode.mjs into data/governance_metrics_live.json at build time.
+# - No private financial data, credentials or personal information.
+governance_note: https://github.com/postfiatorg/postfiatorg.github.io/blob/feat/governance-section/content/governance/2026-11-09-network-priorities.md
+groups:
+  - id: conversion
+    title: Conversion
+    intro: "Readers becoming contributors and NAVCoin users: the GoodAlexander funnel in Governance Entry 001."
+    metrics:
+      - name: GoodAlexander followers on X
+        definition: Followers of the @goodalexander account on X.
+        period: Point in time, 9 November 2026
+        source: Governance Entry 001 status table
+        source_url: https://github.com/postfiatorg/postfiatorg.github.io/blob/feat/governance-section/content/governance/2026-11-09-network-priorities.md
+        value: "174,600"
+      - name: Newsletter subscribers
+        definition: Subscribers to the goodalexander.com newsletter (Beehiiv).
+        period: Point in time, 9 November 2026
+        source: Governance Entry 001 status table
+        source_url: https://github.com/postfiatorg/postfiatorg.github.io/blob/feat/governance-section/content/governance/2026-11-09-network-priorities.md
+        value: "about 1,500"
+      - name: Follower to Task Node contributor conversion
+        definition: Share of new Task Node contributors in a period who arrived from a GoodAlexander link.
+        period: Monthly
+        source: Campaign-tagged links into Task Node signup
+        value: null
+      - name: Trade idea referral clicks
+        definition: Clicks on campaign-tagged broker referral links in published trade ideas.
+        period: 72 hours after each trade-idea thread
+        source: Referral link analytics
+        value: null
+      - name: Referred funded accounts
+        definition: Broker or exchange accounts funded through a campaign referral link.
+        period: 72 hours after each trade-idea thread
+        source: Referral partner reporting
+        value: null
+      - name: NAVCoin waitlist signups
+        definition: Sign-ups to the public NAVCoin interest list.
+        period: Cumulative
+        source: NAVCoin waitlist form
+        value: null
+  - id: product
+    title: Product
+    intro: Whether people use Task Node, the Layer 1 and NAVCoins.
+    metrics:
+      - name: Network tasks paid
+        definition: Network tasks on the public Hive boards whose reward was paid.
+        period: Trailing 30 days at build time
+        source: Task Node public Hive API
+        source_url: https://tasknode.postfiat.org/api/hive/projects
+        live: rewarded_tasks_30d
+      - name: Contributors paid
+        definition: Distinct contributors paid for at least one network task.
+        period: Trailing 30 days at build time
+        source: Task Node public Hive API
+        source_url: https://tasknode.postfiat.org/api/hive/projects
+        live: paid_contributors_30d
+      - name: Open Wanted items
+        definition: Items on the Hive boards' Wanted lists with no task yet, the work Post Fiat needs done now.
+        period: Point in time at build time
+        source: Task Node public Hive API
+        source_url: https://tasknode.postfiat.org/api/hive/projects
+        live: open_wanted_items
+      - name: Layer 1 validators
+        definition: Validators producing blocks on the Post Fiat Layer 1 devnet.
+        period: Point in time, 25 November 2026
+        source: postfiatl1v2 Network Status
+        source_url: https://github.com/postfiatorg/postfiatl1v2/blob/693e426e167a937135f5da55f6093670b76b5376/docs/status/network-status.md
+        value: "6 (all Foundation-administered)"
+      - name: NAVCoin swap volume
+        definition: Value of NAVCoin swaps settled on the Layer 1.
+        period: Monthly
+        source: Layer 1 swap receipts
+        value: null
+  - id: financial
+    title: Financial
+    intro: Reserves and revenue behind the network. Public figures only; trading results stay private by policy.
+    metrics:
+      - name: NAVCoin a666 reserve NAV
+        definition: Net asset value of the a666 NAVCoin reserve, verified on-chain.
+        period: Point in time, 9 November 2026
+        source: Governance Entry 001 status table
+        source_url: https://github.com/postfiatorg/postfiatorg.github.io/blob/feat/governance-section/content/governance/2026-11-09-network-priorities.md
+        value: "$31,052"
+      - name: PFT paid to contributors
+        definition: PFT paid for network tasks on the public Hive boards.
+        period: Trailing 30 days at build time
+        source: Task Node public Hive API
+        source_url: https://tasknode.postfiat.org/api/hive/projects
+        live: pft_paid_30d
+      - name: NAVCoin swap fees
+        definition: Swap fees accrued to the front end.
+        period: Monthly
+        source: Layer 1 swap receipts
+        value: null
+      - name: Advertising and sponsorship revenue
+        definition: GoodAlexander advertising and sponsorship revenue.
+        period: Monthly
+        source: Not built (Governance Entry 001)
+        value: null
+      - name: Treasury runway
+        definition: Months of operation the treasury covers at the current monthly burn.
+        period: Monthly
+        source: Not reported (Governance Entry 001)
+        value: null

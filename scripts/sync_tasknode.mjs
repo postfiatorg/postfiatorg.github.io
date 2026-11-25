@@ -67,6 +67,28 @@ const now = new Date().toISOString();
 writeJson('data/task_feed_snapshot.json', { generated_at: now, generated_at_display: utc(now), source: `${origin}/api/hive/projects`, items });
 console.log(`Synced ${items.length} Hive feed items.`);
 
+// Governance metrics (/metrics/): Task Node figures computed from the same
+// public Hive document. Trailing windows are counted from this build.
+{
+  const since = Date.now() - 30 * 24 * 3600 * 1000;
+  const rewarded = hiveProjects.flatMap((project) => project.tasks || [])
+    .filter((task) => task.state === 'rewarded' && Date.parse(task.updatedAt || task.createdAt || 0) >= since);
+  const openWanted = hiveProjects.flatMap((project) => project.wanted || []).filter((item) => item.state === 'open').length;
+  const pftPaid = rewarded.reduce((sum, task) => sum + (Number(task.pft) || 0), 0);
+  writeJson('data/governance_metrics_live.json', {
+    generated_at: now,
+    generated_at_display: utc(now),
+    source: `${origin}/api/hive/projects`,
+    values: {
+      rewarded_tasks_30d: rewarded.length.toLocaleString('en-US'),
+      paid_contributors_30d: new Set(rewarded.map((task) => task.assigneeAccountId || task.assignee).filter(Boolean)).size.toLocaleString('en-US'),
+      open_wanted_items: openWanted.toLocaleString('en-US'),
+      pft_paid_30d: `${Math.round(pftPaid).toLocaleString('en-US')} PFT`,
+    },
+  });
+  console.log('Synced governance metrics.');
+}
+
 // Community cards: the top-ranked members with a PFP.
 const members = directory.slice(0, maxCards);
 if (members.length < 4) throw new Error(`Task Node directory returned only ${members.length} members with NFTs`);
