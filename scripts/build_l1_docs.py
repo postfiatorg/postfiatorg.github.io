@@ -41,6 +41,92 @@ def extract_yaml_list(mkdocs_text: str, key: str) -> list[str]:
     return items
 
 
+def quote_mermaid_line_labels(line: str) -> str:
+    """Wrap unquoted Mermaid rectangle node labels containing (), [] in double quotes.
+
+    Mermaid 11 rejects unquoted parentheses or brackets inside `NodeId[label]`
+    syntax (e.g. `ceil(10000 / k)` or `[E#]`), rendering a 'Syntax error in text'
+    SVG and leaking an error div onto document.body during instant navigation.
+    """
+    out: list[str] = []
+    i = 0
+    n = len(line)
+    while i < n:
+        ch = line[i]
+        # Look for an identifier followed immediately by '['
+        if ch.isalpha() or ch == "_":
+            j = i
+            while j < n and (line[j].isalnum() or line[j] in "_-"):
+                j += 1
+            if j < n and line[j] == "[":
+                # Skip special Mermaid shapes: [[subroutine]], [(cyl)], [/trapezoid/], [\trapezoid\], ["already quoted"]
+                if j + 1 < n and line[j + 1] in ('"', "[", "(", "/", "\\"):
+                    out.append(line[i : j + 1])
+                    i = j + 1
+                    continue
+                # Find matching closing ']' with bracket depth tracking
+                depth = 1
+                k = j + 1
+                while k < n and depth > 0:
+                    if line[k] == "[":
+                        depth += 1
+                    elif line[k] == "]":
+                        depth -= 1
+                    k += 1
+                if depth == 0:
+                    inner = line[j + 1 : k - 1]
+                    if any(c in inner for c in "()[]"):
+                        safe_inner = inner.replace('"', "#quot;")
+                        out.append(f'{line[i:j]}["{safe_inner}"]')
+                        i = k
+                        continue
+            out.append(line[i:j])
+            i = j
+            continue
+        out.append(ch)
+        i += 1
+    return "".join(out)
+
+
+def sanitize_mermaid_blocks(text: str) -> tuple[str, int]:
+    """Sanitize ```mermaid blocks in a markdown file; returns (new_text, changed_lines)."""
+    lines = text.splitlines(keepends=True)
+    in_mermaid = False
+    changed = 0
+    for idx, raw in enumerate(lines):
+        stripped = raw.strip()
+        if not in_mermaid:
+            if stripped.startswith("```mermaid"):
+                in_mermaid = True
+            continue
+        if stripped.startswith("```"):
+            in_mermaid = False
+            continue
+        ending = "\r\n" if raw.endswith("\r\n") else ("\n" if raw.endswith("\n") else "")
+        body = raw[: len(raw) - len(ending)] if ending else raw
+        fixed = quote_mermaid_line_labels(body)
+        if fixed != body:
+            lines[idx] = fixed + ending
+            changed += 1
+    return "".join(lines), changed
+
+
+def sanitize_staged_docs(docs_root: Path) -> int:
+    total = 0
+    for md in docs_root.rglob("*.md"):
+        try:
+            text = md.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            continue
+        if "```mermaid" not in text:
+            continue
+        fixed, count = sanitize_mermaid_blocks(text)
+        if count:
+            md.write_text(fixed, encoding="utf-8")
+            total += count
+    return total
+
+
 def run(cmd: list[str], cwd: Path, env: dict[str, str] | None = None) -> None:
     print("+", " ".join(cmd), flush=True)
     subprocess.run(cmd, cwd=str(cwd), env=env, check=True)
@@ -74,6 +160,10 @@ def build(l1_dir: Path, out_dir: Path, site_url: str, skip_evidence_index: bool 
 
         if not skip_evidence_index and (stage / "scripts" / "docs-site-evidence-index").exists():
             run(["bash", str(stage / "scripts" / "docs-site-evidence-index")], cwd=stage)
+
+        quoted_lines = sanitize_staged_docs(stage / "docs")
+        if quoted_lines:
+            print(f"Quoted {quoted_lines} Mermaid node label line(s) for Mermaid 11 compatibility", flush=True)
 
         # Copy Post Fiat Ink overlay assets into staged docs/assets/
         css_dst = stage / "docs" / "assets" / "stylesheets" / "postfiat-ink.css"
