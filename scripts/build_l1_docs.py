@@ -184,10 +184,12 @@ def build(l1_dir: Path, out_dir: Path, site_url: str, skip_evidence_index: bool 
         if "assets/javascripts/postfiat-ink.js" not in extra_js:
             extra_js.append("assets/javascripts/postfiat-ink.js")
 
+        shutil.copy2(THEME_DIR / "evidence_links.py", stage / "evidence_links.py")
         overlay_lines = [
             "INHERIT: mkdocs.yml",
             "site_name: Post Fiat L1 Docs",
             f"site_url: {site_url}",
+            "hooks: [evidence_links.py]",
             "theme:",
             f"  custom_dir: {overrides_dst.name}",
             "extra_css:",
@@ -205,6 +207,7 @@ def build(l1_dir: Path, out_dir: Path, site_url: str, skip_evidence_index: bool 
 
         env = os.environ.copy()
         env["POSTFIAT_DOCS_SITE_URL"] = site_url
+        env["POSTFIAT_L1_DOCS_CHECKOUT"] = str(l1_dir)
         mkdocs_bin = shutil.which("mkdocs") or sys.executable
         if mkdocs_bin == sys.executable:
             cmd = [sys.executable, "-m", "mkdocs", "build", "--strict", "-f", str(overlay_yml), "-d", str(out_dir)]

@@ -1,73 +1,68 @@
 #!/usr/bin/env python3
-"""Verify every /docs/l1/... link rendered on /docs/ resolves to a built MkDocs HTML page."""
-
-from __future__ import annotations
-
-import html.parser
-import sys
+"""Verify links from the Hugo docs hub and every published L1 article."""
+from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlsplit
+import sys
+from urllib.parse import unquote, urljoin, urlsplit
+
+BASE = "https://postfiat.org"
+PREFIX = "/docs/l1/"
 
 
-class LinkExtractor(html.parser.HTMLParser):
-    def __init__(self) -> None:
+class Page(HTMLParser):
+    def __init__(self, hub=False):
         super().__init__()
-        self.hrefs: list[str] = []
+        self.hub = hub
+        self.article = False
+        self.hrefs = []
+        self.ids = set()
 
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        if tag == "a":
-            for k, v in attrs:
-                if k == "href" and v:
-                    self.hrefs.append(v)
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "article":
+            self.article = True
+        if attrs.get("id"):
+            self.ids.add(attrs["id"])
+        if tag == "a" and (self.article or self.hub) and attrs.get("href"):
+            self.hrefs.append(attrs["href"])
+
+    def handle_endtag(self, tag):
+        if tag == "article":
+            self.article = False
 
 
-def main() -> int:
-    public_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("public")
-    docs_index = public_dir / "docs" / "index.html"
-    if not docs_index.is_file():
-        print(f"FAIL: missing {docs_index}", file=sys.stderr)
-        return 1
-
-    parser = LinkExtractor()
-    parser.feed(docs_index.read_text(encoding="utf-8"))
-
+def validate(public):
+    site = public / "docs/l1"
+    hub = public / "docs/index.html"
+    pages = {}
+    for path in [hub, *sorted(site.rglob("*.html"))]:
+        page = Page(hub=path == hub)
+        page.feed(path.read_text(encoding="utf-8"))
+        pages[path] = page
+    if len(pages) < 2 or not (site / "search/search_index.json").is_file():
+        raise ValueError("Missing published L1 pages or search index")
+    errors = set()
     checked = 0
-    missing: list[str] = []
-    seen: set[str] = set()
-    for href in parser.hrefs:
-        path = urlsplit(href).path
-        if not path.startswith("/docs/l1/"):
-            continue
-        if path in seen:
-            continue
-        seen.add(path)
-        checked += 1
-        rel = path.lstrip("/")
-        target = public_dir / rel
-        if target.is_dir():
-            target = target / "index.html"
-        elif not target.exists() and not rel.endswith(".html"):
-            target = public_dir / rel / "index.html"
-        if not target.is_file():
-            missing.append(f"{path} -> {target}")
-
-    if checked == 0:
-        print("FAIL: no /docs/l1/ links found in /docs/index.html", file=sys.stderr)
-        return 1
-    if missing:
-        print("FAIL: broken /docs/l1/ links found:", file=sys.stderr)
-        for item in missing:
-            print(f"  - {item}", file=sys.stderr)
-        return 1
-
-    search_idx = public_dir / "docs" / "l1" / "search" / "search_index.json"
-    if not search_idx.is_file():
-        print(f"FAIL: missing MkDocs search index at {search_idx}", file=sys.stderr)
-        return 1
-
-    print(f"OK: {checked} unique /docs/l1/ links verified in {docs_index}; MkDocs search index present ({search_idx.stat().st_size} bytes)")
-    return 0
+    for source, page in pages.items():
+        base = BASE + "/" + source.relative_to(public).as_posix()
+        for href in page.hrefs:
+            link = urlsplit(urljoin(base, href))
+            if link.netloc != "postfiat.org" or not link.path.startswith(PREFIX):
+                continue
+            path = public / unquote(link.path).lstrip("/")
+            if path.is_dir():
+                path = path / "index.html"
+            checked += 1
+            if not path.is_file() or (link.fragment and path in pages
+                                      and unquote(link.fragment) not in pages[path].ids):
+                errors.add(f"{source.relative_to(public)} -> {href}")
+    if not any(urlsplit(urljoin(BASE + "/docs/", href)).path.startswith(PREFIX) for href in pages[hub].hrefs):
+        errors.add("Docs hub has no L1 links")
+    for error in sorted(errors):
+        print(error, file=sys.stderr)
+    print(f"{len(pages)-1} L1 HTML files, {checked} internal link references, {len(errors)} invalid")
+    return not errors
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(0 if validate(Path(sys.argv[1] if len(sys.argv) > 1 else "public")) else 1)
