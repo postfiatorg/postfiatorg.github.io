@@ -1,0 +1,277 @@
+/* Post Fiat — Hyperstitional Ink overlay for MkDocs Material (/docs/l1/)
+   Overrides MkDocs Material's attribute-scoped palette variables cleanly so
+   header, sidebar, links, tables, and search harmonize with PostFiat.org. */
+
+:root,
+[data-md-color-scheme="default"],
+[data-md-color-primary="black"],
+[data-md-color-accent="teal"] {
+  --pf-paper: #f2eee5;
+  --pf-paper-2: #ebe6da;
+  --pf-paper-3: #e3ddcd;
+  --pf-ink: #10191d;
+  --pf-ink-2: #2c3437;
+  --pf-ink-3: #5a6062;
+  --pf-rule: #cfc8b6;
+  --pf-rule-soft: #ded8c9;
+  --pf-teal: #057f82;
+  --pf-teal-ink: #03585a;
+  --pf-night: #0b0f10;
+  --pf-night-ink: #e9e4d8;
+
+  --md-text-font: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --md-code-font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --md-primary-fg-color: #f2eee5;
+  --md-primary-fg-color--light: #ebe6da;
+  --md-primary-fg-color--dark: #e3ddcd;
+  --md-primary-bg-color: #10191d;
+  --md-primary-bg-color--light: #2c3437;
+
+  --md-accent-fg-color: #057f82;
+  --md-accent-fg-color--transparent: rgba(5, 127, 130, 0.12);
+  --md-accent-bg-color: #f2eee5;
+
+  --md-default-bg-color: #f2eee5;
+  --md-default-bg-color--light: rgba(242, 238, 229, 0.85);
+  --md-default-bg-color--lighter: rgba(242, 238, 229, 0.54);
+  --md-default-bg-color--lightest: rgba(242, 238, 229, 0.18);
+
+  --md-default-fg-color: #10191d;
+  --md-default-fg-color--light: #2c3437;
+  --md-default-fg-color--lighter: #5a6062;
+  --md-default-fg-color--lightest: #cfc8b6;
+
+  --md-typeset-a-color: #03585a;
+  --md-code-bg-color: #ebe6da;
+  --md-code-fg-color: #10191d;
+  --md-footer-bg-color: #0b0f10;
+  --md-footer-bg-color--dark: #0b0f10;
+  --md-footer-fg-color: #e9e4d8;
+  --md-footer-fg-color--light: #a9a89f;
+}
+
+body,
+.md-main,
+.md-container {
+  background-color: var(--pf-paper);
+  color: var(--pf-ink);
+}
+
+/* Top return bar to PostFiat.org */
+.md-banner {
+  background-color: var(--pf-night);
+  color: var(--pf-night-ink);
+  border-bottom: 1px solid #2a3133;
+}
+.md-banner__inner {
+  margin: 0 auto;
+  padding: 0.34rem 0.8rem;
+}
+.pf-site-bar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--md-code-font);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pf-site-bar__left,
+.pf-site-bar__links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.md-banner .pf-site-bar a {
+  color: #e9e4d8 !important;
+  text-decoration: none !important;
+}
+.md-banner .pf-site-bar a:hover {
+  color: #5fc3c5 !important;
+}
+.md-banner .pf-site-bar a.pf-site-bar__hub {
+  color: #5fc3c5 !important;
+}
+.pf-site-bar__home {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+.pf-site-bar__sep {
+  color: #5a6062;
+}
+@media (max-width: 640px) {
+  .pf-site-bar__links {
+    display: none;
+  }
+}
+
+/* Ivory paper MkDocs header */
+.md-header {
+  background-color: var(--pf-paper) !important;
+  color: var(--pf-ink) !important;
+  border-bottom: 1px solid var(--pf-rule);
+  box-shadow: none !important;
+}
+.md-header__title,
+.md-header__button,
+.md-header__source,
+.md-source,
+.md-source__repository,
+.md-source__fact,
+.md-source__icon {
+  color: var(--pf-ink) !important;
+}
+.md-header__topic {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--pf-ink) !important;
+}
+.md-search__form {
+  background-color: var(--pf-paper-2) !important;
+  border: 1px solid var(--pf-rule);
+  border-radius: 2px;
+}
+.md-search__form:hover {
+  background-color: var(--pf-paper-3) !important;
+}
+.md-search__input,
+.md-search__input::placeholder,
+.md-search__icon {
+  color: var(--pf-ink) !important;
+  font-family: var(--md-code-font);
+  font-size: 0.72rem;
+}
+.md-search__output {
+  background-color: var(--pf-paper);
+  border: 1px solid var(--pf-rule);
+}
+.md-search-result__meta {
+  background-color: var(--pf-paper-2);
+  color: var(--pf-ink-3);
+  font-family: var(--md-code-font);
+  font-size: 0.65rem;
+}
+.md-search-result mark {
+  color: var(--pf-teal-ink);
+  background: rgba(5, 127, 130, 0.14);
+}
+
+/* Sidebar navigation — eliminate white Material gradient mask */
+.md-sidebar--primary {
+  border-right: 1px solid var(--pf-rule-soft);
+}
+.md-nav--primary .md-nav__title,
+.md-nav--secondary .md-nav__title,
+.md-nav__title {
+  background: var(--pf-paper) !important;
+  box-shadow: none !important;
+  font-family: var(--md-code-font);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pf-ink-3) !important;
+}
+.md-nav__link {
+  font-family: var(--md-text-font);
+  font-size: 0.82rem;
+  color: var(--pf-ink-2);
+}
+.md-nav__link--active,
+.md-nav__link:focus,
+.md-nav__link:hover {
+  color: var(--pf-teal-ink) !important;
+}
+.md-nav__item--section > .md-nav__link {
+  font-family: var(--md-code-font);
+  font-size: 0.65rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--pf-ink);
+}
+
+/* Editorial typography in main content */
+.md-typeset {
+  font-size: 0.94rem;
+  line-height: 1.66;
+  color: var(--pf-ink);
+}
+.md-typeset h1 {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2.1rem, 3.6vw, 3.1rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--pf-ink);
+  margin-bottom: 0.75em;
+}
+.md-typeset h2 {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.2vw, 1.95rem);
+  line-height: 1.15;
+  color: var(--pf-ink);
+  padding-top: 0.45em;
+  border-top: 1px solid var(--pf-rule);
+}
+.md-typeset h3 {
+  font-family: var(--md-text-font);
+  font-weight: 600;
+  color: var(--pf-ink);
+}
+.md-typeset a {
+  color: var(--pf-teal-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--pf-rule);
+}
+.md-typeset a:hover {
+  color: var(--pf-teal);
+  text-decoration-color: var(--pf-teal);
+}
+
+/* Tables & code blocks */
+.md-typeset table:not([class]) {
+  background-color: var(--pf-paper);
+  border: 1px solid var(--pf-rule);
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 0.82rem;
+}
+.md-typeset table:not([class]) th {
+  background-color: var(--pf-paper-2);
+  color: var(--pf-ink);
+  font-family: var(--md-code-font);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--pf-ink);
+}
+.md-typeset table:not([class]) td {
+  border-top: 1px solid var(--pf-rule-soft);
+}
+.md-typeset code {
+  background-color: var(--pf-paper-2);
+  border: 1px solid var(--pf-rule-soft);
+  border-radius: 2px;
+  font-size: 0.8em;
+}
+.md-typeset pre > code {
+  background-color: var(--pf-night);
+  color: var(--pf-night-ink);
+  border: 1px solid #2a3133;
+  border-radius: 2px;
+}
+.md-typeset .admonition,
+.md-typeset details {
+  background-color: var(--pf-paper-2);
+  border-color: var(--pf-teal);
+  box-shadow: none;
+  border-radius: 2px;
+}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block announce %}
+  <div class="pf-site-bar">
+    <div class="pf-site-bar__inner">
+      <div class="pf-site-bar__left">
+        <a class="pf-site-bar__home" href="/">Post Fiat</a>
+        <span class="pf-site-bar__sep" aria-hidden="true">/</span>
+        <a class="pf-site-bar__hub" href="/docs/">← Docs Hub</a>
+      </div>
+      <nav class="pf-site-bar__links" aria-label="Post Fiat site links">
+        <a href="/whitepaper/">Whitepaper</a>
+        <a href="/blog/">Blog</a>
+        <a href="/agents/">Agents</a>
+        <a href="/explorer/">Explorer</a>
+        <a href="https://github.com/postfiatorg/postfiatl1v2" rel="noopener">GitHub ↗</a>
+      </nav>
+    </div>
+  </div>
+{% endblock %}
