@@ -67,6 +67,9 @@ jobs:
       - name: Install L1 MkDocs dependencies
         run: python -m pip install --disable-pip-version-check --require-hashes -r _l1v2/requirements-docs.txt
 
+      - name: Test L1 evidence heading links
+        run: python -m unittest discover -s tests -p test_l1_evidence_links.py
+
       - name: Build postfiatl1v2 MkDocs into /docs/l1/
         run: |
           python3 scripts/build_l1_docs.py \
