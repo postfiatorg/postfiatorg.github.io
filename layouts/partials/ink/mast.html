@@ -6,6 +6,7 @@
     <button class="menu-toggle" aria-expanded="false" aria-controls="mast" onclick="var m=document.getElementById('mast');var o=m.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
     <nav aria-label="Primary">
       <a href="/whitepaper/"{{ if hasPrefix $p "/whitepaper/" }} aria-current="page"{{ end }}>Whitepaper</a>
+      <a href="/docs/"{{ if hasPrefix $p "/docs/" }} aria-current="page"{{ end }}>Docs</a>
       <a href="/blog/"{{ if or (hasPrefix $p "/blog/") (eq .Section "blog") }} aria-current="page"{{ end }}>Blog</a>
       <a href="/task-node/"{{ if eq $p "/task-node/" }} aria-current="page"{{ end }}>Task Node</a>
       <a href="/explorer/"{{ if hasPrefix $p "/explorer/" }} aria-current="page"{{ end }}>Explorer</a>

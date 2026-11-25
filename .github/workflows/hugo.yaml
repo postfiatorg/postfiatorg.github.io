@@ -48,7 +48,33 @@ jobs:
         env:
           HUGO_ENV: production
         run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
-        
+
+      - name: Checkout postfiatl1v2 docs source
+        uses: actions/checkout@v4
+        with:
+          repository: postfiatorg/postfiatl1v2
+          ref: main
+          path: _l1v2
+          fetch-depth: 1
+
+      - name: Setup Python for L1 MkDocs
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: _l1v2/requirements-docs.txt
+
+      - name: Install L1 MkDocs dependencies
+        run: python -m pip install --disable-pip-version-check --require-hashes -r _l1v2/requirements-docs.txt
+
+      - name: Build postfiatl1v2 MkDocs into /docs/l1/
+        run: |
+          python3 scripts/build_l1_docs.py \
+            --l1-dir _l1v2 \
+            --out-dir public/docs/l1 \
+            --site-url "${{ steps.pages.outputs.base_url }}/docs/l1/"
+          python3 scripts/verify_docs_links.py public
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

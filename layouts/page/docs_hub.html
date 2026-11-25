@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{ partial "ink/head.html" . }}
+{{- $dcss := resources.Get "css/docs-hub.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $dcss.RelPermalink }}" integrity="{{ $dcss.Data.Integrity }}">
+</head>
+<body>
+{{ partial "ink/mast.html" . }}
+
+<main id="main">
+  <header class="docs-hero">
+    <div class="wrap">
+      <div class="docs-kicker">
+        <span class="label">Post Fiat · Documentation</span>
+        <span class="docs-pill"><span class="dot" aria-hidden="true"></span> Browsable MkDocs · Synced from postfiatl1v2</span>
+      </div>
+      <h1 class="display d-xl">Documentation,<br><em class="t">simply put.</em></h1>
+      <p class="lede">Start with plain-English guides to how Post Fiat works, how to connect a wallet or AI agent, and how to run a validator — or step straight into the full, searchable <code>postfiatl1v2</code> engineering reference.</p>
+      <div class="btns">
+        <a class="btn solid" href="/docs/l1/">Browse L1 Engineering Docs <span class="ar">→</span></a>
+        <a class="btn" href="/docs/l1/start/first-day/">First Day Guide</a>
+        <a class="btn" href="/agents/">Connect an Agent</a>
+        <a class="docs-src-link" href="https://github.com/postfiatorg/postfiatl1v2/tree/main/docs" rel="noopener">Source on GitHub ↗</a>
+      </div>
+
+      <div class="docs-search-wrap">
+        <form class="docs-search" id="docs-search-form" action="/docs/l1/" method="get" role="search" aria-label="Filter or search Post Fiat documentation">
+          <div class="docs-search-field">
+            <svg class="docs-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="search" id="docs-filter" name="q" placeholder="Filter guides below, or press Enter to search all L1 docs…" autocomplete="off" aria-label="Filter or search documentation">
+            <kbd class="docs-kbd" aria-hidden="true">/</kbd>
+          </div>
+          <button type="submit" class="btn">Search L1 Docs →</button>
+        </form>
+        <p class="docs-search-meta" id="docs-search-meta">Type to filter the curated guide index below, or submit to search every page in <b>postfiatl1v2</b>.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="docs-start" aria-labelledby="docs-start-heading">
+    <div class="wrap">
+      <div class="docs-strip-head">
+        <h2 class="label" id="docs-start-heading"><b>Start here</b> · Four doors into the network</h2>
+        <a class="label" href="/docs/l1/" style="text-decoration:none;color:var(--teal-ink)">Open full MkDocs sidebar →</a>
+      </div>
+      <div class="docs-start-grid">
+        <a class="docs-start-card" href="/docs/l1/start/first-day/">
+          <span class="n">01 · Onboarding</span>
+          <h3>First Day</h3>
+          <p>Where each Rust crate lives, how to build and run the local devnet, and which documents are current.</p>
+          <span class="go">Read First Day →</span>
+        </a>
+        <a class="docs-start-card" href="/docs/l1/architecture/overview/">
+          <span class="n">02 · Architecture</span>
+          <h3>How L1 Works</h3>
+          <p>Four protocol planes: certified ordering, FastPay object lanes, Cobalt governance, and shielded privacy.</p>
+          <span class="go">Read Overview →</span>
+        </a>
+        <a class="docs-start-card" href="/docs/l1/python/quickstart/">
+          <span class="n">03 · Build</span>
+          <h3>RPC &amp; Python</h3>
+          <p>Query blocks, inspect receipts, and submit signed transactions with the Python client and Rust SDK.</p>
+          <span class="go">Open Quickstart →</span>
+        </a>
+        <a class="docs-start-card" href="/docs/l1/status/network-status/">
+          <span class="n">04 · Truth</span>
+          <h3>Network Status</h3>
+          <p>What is running today, what has been verified with file-backed evidence, and what gates remain open.</p>
+          <span class="go">Check Status →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="docs-chapters-sec" aria-labelledby="docs-map-heading">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:clamp(32px,4vw,52px)">
+        <span class="label" id="docs-map-heading"><b>The Map</b> · Six chapters</span>
+        <div>
+          <h2 class="display d-l">Browse by what you are trying to do.</h2>
+          <p>Every L1 link opens directly inside the browsable MkDocs reference at <code>/docs/l1/</code> with full sidebar navigation, diagrams, copyable code blocks, and instant search.</p>
+        </div>
+      </div>
+
+      <div class="docs-chapters" id="docs-chapters">
+
+        <article class="docs-chapter" data-chapter>
+          <span class="docs-chapter-num">01 · Essentials</span>
+          <h2>Start Here</h2>
+          <p class="docs-chapter-desc">Get oriented in ten minutes — plain terminology, repository shape, and the high-level thesis.</p>
+          <ul class="docs-list">
+            <li data-terms="first day onboarding build test crates devnet start"><a href="/docs/l1/start/first-day/"><span><span class="docs-item-title">First Day</span><span class="docs-item-sub">Workspace layout, local build commands, and where to begin.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="glossary terms definitions vocabulary navcoin cobalt fastpay"><a href="/docs/l1/start/glossary/"><span><span class="docs-item-title">Glossary</span><span class="docs-item-sub">Plain definitions for Post Fiat terms and protocol primitives.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="repo map repository crates scripts directory layout"><a href="/docs/l1/start/repo-map/"><span><span class="docs-item-title">Repository Map</span><span class="docs-item-sub">How crates, Python tools, scripts, and reports fit together.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="release process qualification gates deployment"><a href="/docs/l1/release-process/"><span><span class="docs-item-title">Release Process</span><span class="docs-item-sub">How candidate builds are qualified, signed, and promoted.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="whitepaper buy side internet of value thesis economics"><a href="/whitepaper/"><span><span class="docs-item-title">Whitepaper</span><span class="docs-item-sub">A Buy-Side Internet of Value — the full economic and protocol paper.</span></span><span class="docs-item-tag">PostFiat.org →</span></a></li>
+          </ul>
+        </article>
+
+        <article class="docs-chapter" data-chapter>
+          <span class="docs-chapter-num">02 · Core Protocol</span>
+          <h2>Architecture &amp; Quantum Safety</h2>
+          <p class="docs-chapter-desc">How transactions order, finalize, store state, and stay safe against quantum adversaries from day one.</p>
+          <ul class="docs-list">
+            <li data-terms="architecture overview four planes consensus ordering fastpay cobalt privacy"><a href="/docs/l1/architecture/overview/"><span><span class="docs-item-title">Architecture Overview</span><span class="docs-item-sub">The four protocol planes and how they interact end to end.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="transaction lifecycle mempool batch execution receipt"><a href="/docs/l1/architecture/transaction-lifecycle/"><span><span class="docs-item-title">Transaction Lifecycle</span><span class="docs-item-sub">From signed submission to deterministic execution and receipt.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="settlement lanes fastpay fastswap object certificates"><a href="/docs/l1/architecture/settlement-lanes/"><span><span class="docs-item-title">Settlement Lanes</span><span class="docs-item-sub">Consensus batches alongside prefunded FastPay and FastSwap lanes.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="finality quorum certificates consensus signing rounds v2"><a href="/docs/l1/architecture/finality/"><span><span class="docs-item-title">Finality &amp; Signing Rounds</span><span class="docs-item-sub">Deterministic quorum certificates and validator round rules.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="state storage redb database persistence scaling"><a href="/docs/l1/architecture/state-and-storage/"><span><span class="docs-item-title">State &amp; Storage</span><span class="docs-item-sub">Transactional redb storage, state roots, and retention bounds.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="post quantum authorization ml-dsa-65 fips 204 signatures lattice"><a href="/docs/l1/quantum/authorization/"><span><span class="docs-item-title">Post-Quantum Authorization</span><span class="docs-item-sub">ML-DSA-65 signatures, certificate sizes, and wallet implications.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="pft token on base bridge external lanes lock release"><a href="/docs/l1/architecture/pft-token-on-base/"><span><span class="docs-item-title">PFT Token on Base</span><span class="docs-item-sub">Cross-chain lock/release architecture and export boundaries.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+          </ul>
+        </article>
+
+        <article class="docs-chapter" data-chapter>
+          <span class="docs-chapter-num">03 · Developers</span>
+          <h2>Integrate &amp; Build</h2>
+          <p class="docs-chapter-desc">Talk to a node over JSON-RPC, sign transactions in Python or Rust, build wallets, or wire up AI agents.</p>
+          <ul class="docs-list">
+            <li data-terms="rpc overview tcp json read write methods policy"><a href="/docs/l1/rpc/overview/"><span><span class="docs-item-title">RPC Overview &amp; Methods</span><span class="docs-item-sub">Read-first TCP JSON-RPC, controlled write policy, and method coverage.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="python client quickstart sdk wallet xrp style examples"><a href="/docs/l1/python/quickstart/"><span><span class="docs-item-title">Python Client Quickstart</span><span class="docs-item-sub">Install postfiat_rpc, query state, and submit signed transactions.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="exchange integration guide custody deposits withdrawals"><a href="/docs/l1/integrate/exchange-guide/"><span><span class="docs-item-title">Exchange Integration Guide</span><span class="docs-item-sub">Deposits, finality checks, custody boundaries, and reconciliation.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="addresses keys signatures checksums format envelope"><a href="/docs/l1/integrate/addresses-keys-signatures/"><span><span class="docs-item-title">Addresses, Keys &amp; Signatures</span><span class="docs-item-sub">Address encoding, ML-DSA key derivation, and envelope signing.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="wallets transparent web shielded recovery phrase mnemonic"><a href="/docs/l1/wallets/web-wallet/"><span><span class="docs-item-title">Wallets (Web, Transparent &amp; Shielded)</span><span class="docs-item-sub">Browser wallet flows, recovery phrases, and shielded note scanning.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="agents mcp task node claude codex antigravity cursor cli"><a href="/agents/"><span><span class="docs-item-title">Connect an AI Agent (MCP)</span><span class="docs-item-sub">Hook Claude Code, Codex, Antigravity, or Cursor into Task Node.</span></span><span class="docs-item-tag">PostFiat.org →</span></a></li>
+          </ul>
+        </article>
+
+        <article class="docs-chapter" data-chapter>
+          <span class="docs-chapter-num">04 · Financial &amp; Private Primitives</span>
+          <h2>Privacy, NAVCoins &amp; Governance</h2>
+          <p class="docs-chapter-desc">Shielded asset swaps, reserve-proven portfolio tokens, and on-chain validator governance.</p>
+          <ul class="docs-list">
+            <li data-terms="privacy overview orchard halo2 shielded deposit spend withdraw"><a href="/docs/l1/privacy/overview/"><span><span class="docs-item-title">Privacy Overview</span><span class="docs-item-sub">Typed-asset shielded transfers, atomic swaps, and security boundaries.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="disclosure assurance receipts metadata anonymity correlation bounds"><a href="/docs/l1/privacy/disclosure/"><span><span class="docs-item-title">Selective Disclosure &amp; Anonymity Bounds</span><span class="docs-item-sub">Viewing keys, assurance receipts, and empirical linkage limits.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="navcoins overview portfolio tokens a666 bmnrc create swap"><a href="/docs/l1/navcoins/"><span><span class="docs-item-title">NAVCoins Overview</span><span class="docs-item-sub">Floating-NAV portfolio tokens backed by verified cross-chain reserves.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="proof of reserves primitives venues verification"><a href="/docs/l1/navcoins/reserve-primitives/"><span><span class="docs-item-title">Proof-of-Reserve Primitives</span><span class="docs-item-sub">How backing across Ethereum, Hyperliquid, and brokers is checked.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="cobalt governance validator registry constitution unl"><a href="/docs/l1/governance/cobalt/"><span><span class="docs-item-title">Cobalt Governance</span><span class="docs-item-sub">Protocol-state validator governance: old rules judge new rules.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="yolo target receipts options reserve profile"><a href="/docs/l1/yolo/target-receipt-v1/"><span><span class="docs-item-title">YOLO Target Receipts</span><span class="docs-item-sub">Signed target-receipt specification and governance activation boundary.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+          </ul>
+        </article>
+
+        <article class="docs-chapter" data-chapter>
+          <span class="docs-chapter-num">05 · Infrastructure</span>
+          <h2>Validators &amp; Operations</h2>
+          <p class="docs-chapter-desc">Deploy, monitor, roll out, and recover validators safely with two-user signer isolation.</p>
+          <ul class="docs-list">
+            <li data-terms="validators overview launch operations monitors history retention"><a href="/docs/l1/validators/overview/"><span><span class="docs-item-title">L1 Validator Overview</span><span class="docs-item-sub">Separate software signer, double-sign guard, and deployment checks.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="public operator runbook day two incident response"><a href="/docs/l1/runbooks/public-operator-runbook/"><span><span class="docs-item-title">Public Operator Runbook</span><span class="docs-item-sub">Step-by-step operating, monitoring, and day-two procedures.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="safe validator rollout signed deployment manifest snapshot recovery"><a href="/docs/l1/runbooks/safe-validator-rollout/"><span><span class="docs-item-title">Safe Rollout &amp; Snapshot Recovery</span><span class="docs-item-sub">Signed manifests, verified restarts, and emergency key rotation.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="two user signer policy public rpc operator deploy sheet"><a href="/docs/l1/runbooks/public-rpc-operator-policy/"><span><span class="docs-item-title">Two-User Signer &amp; RPC Policy</span><span class="docs-item-sub">Isolating signing keys from network-facing RPC processes.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="testnet validator setup postfiatd guide sidecar benchmark"><a href="/validator-setup/"><span><span class="docs-item-title">Testnet Validator Setup</span><span class="docs-item-sub">Join the live Post Fiat validator network (postfiatd) + sidecar guide.</span></span><span class="docs-item-tag">PostFiat.org →</span></a></li>
+            <li data-terms="validator sidecar benchmark performance monitoring"><a href="/validator-sidecar/"><span><span class="docs-item-title">Validator Sidecar &amp; Benchmark</span><span class="docs-item-sub">Relay wallet sidecar setup and live validator benchmarking.</span></span><span class="docs-item-tag">PostFiat.org →</span></a></li>
+          </ul>
+        </article>
+
+        <article class="docs-chapter" data-chapter>
+          <span class="docs-chapter-num">06 · Verification &amp; Auditability</span>
+          <h2>Security, Status &amp; Records</h2>
+          <p class="docs-chapter-desc">File-backed proof packets, threat models, launch gates, and chronological engineering logs.</p>
+          <ul class="docs-list">
+            <li data-terms="network status master state chain state current bridge audit map"><a href="/docs/l1/status/network-status/"><span><span class="docs-item-title">Network Status &amp; Master State</span><span class="docs-item-sub">Up-to-date summary of deployed components and open items.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="release gate inventory testnet path public launch boundary"><a href="/docs/l1/status/release-gate-inventory/"><span><span class="docs-item-title">Release Gate Inventory</span><span class="docs-item-sub">Every technical gate required before public mainnet launch.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="security overview threat model audit scope verifying keys redaction"><a href="/docs/l1/security/"><span><span class="docs-item-title">Security &amp; Threat Model</span><span class="docs-item-sub">Audit inventory, launch boundaries, and redaction policy.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="evidence index controlled testnet cobalt privacy latency performance"><a href="/docs/l1/evidence/"><span><span class="docs-item-title">Evidence Index</span><span class="docs-item-sub">File-backed receipts and benchmarks for every protocol claim.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="engineering records handoffs plans reviews postmortems status log"><a href="/docs/l1/handoffs/"><span><span class="docs-item-title">Engineering Handoffs &amp; Records</span><span class="docs-item-sub">Point-in-time handoffs, plans, review packets, and postmortems.</span></span><span class="docs-item-tag">L1 Docs →</span></a></li>
+            <li data-terms="research papers pfsh03 proofs appendix blog notes"><a href="/research/"><span><span class="docs-item-title">Research Notes &amp; Proofs</span><span class="docs-item-sub">Long-form cryptographic papers, PFSH03 proofs, and design notes.</span></span><span class="docs-item-tag">PostFiat.org →</span></a></li>
+          </ul>
+        </article>
+
+      </div>
+
+      <div class="docs-empty" id="docs-empty" aria-live="polite">
+        <p>No curated guide on this summary page matches <strong id="docs-empty-q"></strong>. The full <code>postfiatl1v2</code> MkDocs site indexes every specification, runbook, and engineering record.</p>
+        <a class="btn solid" id="docs-empty-go" href="/docs/l1/">Search full L1 docs →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec night" aria-labelledby="docs-provenance-heading">
+    <div class="wrap">
+      <div class="docs-build-grid">
+        <div>
+          <span class="label" id="docs-provenance-heading"><b>Single Source of Truth</b></span>
+          <h2 class="display d-m mt-s">Compiled directly from <code>postfiatl1v2</code>.</h2>
+          <p class="mt-s">Rather than maintaining a copy that quietly drifts behind the code, <code>postfiat.org/docs/l1/</code> is generated automatically from <a href="https://github.com/postfiatorg/postfiatl1v2" rel="noopener"><code>postfiatorg/postfiatl1v2</code></a> using its own <code>mkdocs.yml</code>, strict link validation, and redaction policy on every site build.</p>
+          <p class="mt-s">Prefer reading offline or reviewing a branch locally? Three commands build and serve the exact same browsable site on your machine.</p>
+          <div class="docs-build-links">
+            <a href="/docs/l1/">Open /docs/l1/ →</a>
+            <a href="https://github.com/postfiatorg/postfiatl1v2/blob/main/mkdocs.yml" rel="noopener">mkdocs.yml ↗</a>
+            <a href="/llms.txt">llms.txt</a>
+          </div>
+        </div>
+
+        <div class="docs-code-card">
+          <div class="docs-code-head">
+            <span class="label">Run L1 Docs Locally</span>
+            <button type="button" class="docs-copy-btn" id="docs-copy-btn">Copy</button>
+          </div>
+          <pre><code id="docs-local-cmd">git clone https://github.com/postfiatorg/postfiatl1v2.git
+cd postfiatl1v2
+python3 -m pip install --require-hashes -r requirements-docs.txt
+scripts/docs-site-build
+scripts/docs-site-serve --host 127.0.0.1 --port 8088</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{{ partial "ink/foot.html" . }}
+
+<script>
+(() => {
+  const input = document.getElementById('docs-filter');
+  const form = document.getElementById('docs-search-form');
+  const meta = document.getElementById('docs-search-meta');
+  const empty = document.getElementById('docs-empty');
+  const emptyQ = document.getElementById('docs-empty-q');
+  const emptyGo = document.getElementById('docs-empty-go');
+  const chapters = [...document.querySelectorAll('[data-chapter]')];
+  const items = [...document.querySelectorAll('.docs-list li')];
+  const defaultMeta = meta.innerHTML;
+
+  function applyFilter() {
+    const raw = input.value.trim();
+    const q = raw.toLowerCase();
+    if (!q) {
+      items.forEach(li => { li.hidden = false; });
+      chapters.forEach(ch => { ch.hidden = false; });
+      empty.classList.remove('show');
+      meta.innerHTML = defaultMeta;
+      return;
+    }
+    const tokens = q.split(/\s+/).filter(Boolean);
+    let shown = 0;
+    chapters.forEach(ch => {
+      const lis = [...ch.querySelectorAll('.docs-list li')];
+      let chShown = 0;
+      lis.forEach(li => {
+        const hay = (li.textContent + ' ' + (li.dataset.terms || '')).toLowerCase();
+        const hit = tokens.every(t => hay.includes(t));
+        li.hidden = !hit;
+        if (hit) { chShown++; shown++; }
+      });
+      ch.hidden = chShown === 0;
+    });
+    if (shown === 0) {
+      emptyQ.textContent = '"' + raw + '"';
+      emptyGo.href = '/docs/l1/?q=' + encodeURIComponent(raw);
+      empty.classList.add('show');
+      meta.textContent = '0 curated matches — press Enter to search the full L1 MkDocs index.';
+    } else {
+      empty.classList.remove('show');
+      meta.innerHTML = 'Showing <b>' + shown + '</b> matching guide' + (shown === 1 ? '' : 's') + ' — press Enter to search every page in <b>postfiatl1v2</b>.';
+    }
+  }
+
+  input.addEventListener('input', applyFilter);
+  form.addEventListener('submit', e => {
+    const raw = input.value.trim();
+    if (!raw) return;
+    e.preventDefault();
+    window.location.href = '/docs/l1/?q=' + encodeURIComponent(raw);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement !== input && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) {
+      e.preventDefault();
+      input.focus();
+    } else if (e.key === 'Escape' && document.activeElement === input && input.value) {
+      input.value = '';
+      applyFilter();
+    }
+  });
+
+  const copyBtn = document.getElementById('docs-copy-btn');
+  const localCmd = document.getElementById('docs-local-cmd');
+  if (copyBtn && localCmd && navigator.clipboard) {
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(localCmd.textContent).then(() => {
+        copyBtn.textContent = 'Copied';
+        setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1600);
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
