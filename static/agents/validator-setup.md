@@ -148,17 +148,73 @@ sudo ufw --force enable
 sudo ufw status verbose
 ```
 
-Add Docker `DOCKER-USER` rate limits for peer traffic:
+Add Docker `DOCKER-USER` rate limits for peer traffic. Traffic to a port Docker publishes is forwarded past UFW's input rules, so the limits for TCP `2559` go in Docker's `DOCKER-USER` chain. Rules added there with plain `iptables` are not saved and are gone after a reboot, so install them as a small idempotent script that a oneshot unit runs after Docker starts:
 
 ```bash
-sudo iptables -F DOCKER-USER 2>/dev/null || true
-sudo iptables -I DOCKER-USER -j RETURN
-sudo iptables -I DOCKER-USER -p tcp --dport 2559 -m state --state NEW -j DROP
-sudo iptables -I DOCKER-USER -p tcp --dport 2559 -m state --state NEW -m limit --limit 100/second --limit-burst 50 -j ACCEPT
-sudo iptables -I DOCKER-USER -p tcp --dport 2559 -m connlimit --connlimit-above 50 -j DROP
-sudo iptables -I DOCKER-USER -p tcp --dport 2559 -m state --state ESTABLISHED,RELATED -j ACCEPT
+sudo tee /usr/local/sbin/postfiat-docker-user.sh >/dev/null <<'EOF'
+#!/bin/sh
+# Re-apply the TCP 2559 DOCKER-USER limits. Safe to run any number of times:
+# it removes only the chain's TCP 2559 rules and its RETURN rule, keeps every
+# other DOCKER-USER rule, then appends the 2559 rules and RETURN (RETURN last).
+set -eu
+C=DOCKER-USER
+iptables -w -N "$C" 2>/dev/null || true
+# delete by rule number, highest first (line 1 of `iptables -S` is the chain)
+iptables -w -S "$C" |
+  awk -v r="-A $C -j RETURN" 'NR > 1 && (/--dport 2559 / || $0 == r) { print NR - 1 }' |
+  sort -rn |
+  while read -r n; do iptables -w -D "$C" "$n"; done
+iptables -w -A "$C" -p tcp --dport 2559 -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -w -A "$C" -p tcp --dport 2559 -m connlimit --connlimit-above 50 -j DROP
+iptables -w -A "$C" -p tcp --dport 2559 -m state --state NEW -m limit --limit 100/second --limit-burst 50 -j ACCEPT
+iptables -w -A "$C" -p tcp --dport 2559 -m state --state NEW -j DROP
+iptables -w -A "$C" -j RETURN
+EOF
+sudo chmod 755 /usr/local/sbin/postfiat-docker-user.sh
+
+sudo tee /etc/systemd/system/postfiat-docker-user.service >/dev/null <<'EOF'
+[Unit]
+Description=Post Fiat TCP 2559 DOCKER-USER rate limits
+After=docker.service
+Requires=docker.service
+PartOf=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/postfiat-docker-user.sh
+
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo systemctl daemon-reload
+sudo systemctl enable postfiat-docker-user.service
+sudo systemctl restart postfiat-docker-user.service
 sudo iptables -L DOCKER-USER -n -v
 ```
+
+`PartOf=docker.service` re-runs the script whenever Docker restarts, and `restart` (not `start`) re-applies the rules when the unit was already active.
+
+Check the rules at any time, and again after a reboot. The check is read-only and exits non-zero if anything is missing:
+
+```bash
+sudo sh -s <<'EOF'
+want='-A DOCKER-USER -p tcp -m tcp --dport 2559 -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A DOCKER-USER -p tcp -m tcp --dport 2559 -m connlimit --connlimit-above 50 --connlimit-mask 32 --connlimit-saddr -j DROP
+-A DOCKER-USER -p tcp -m tcp --dport 2559 -m state --state NEW -m limit --limit 100/sec --limit-burst 50 -j ACCEPT
+-A DOCKER-USER -p tcp -m tcp --dport 2559 -m state --state NEW -j DROP'
+rules=$(iptables -w -S DOCKER-USER) || { echo "FAIL: cannot read the DOCKER-USER chain"; exit 1; }
+got=$(printf '%s\n' "$rules" | grep -e '--dport 2559 ' || true)
+[ "$got" = "$want" ] || { echo "FAIL: TCP 2559 rules missing, changed or out of order"; exit 1; }
+n=$(printf '%s\n' "$rules" | grep -c -x -e '-A DOCKER-USER -j RETURN' || true)
+last=$(printf '%s\n' "$rules" | tail -n 1)
+if [ "$n" != 1 ] || [ "$last" != '-A DOCKER-USER -j RETURN' ]; then echo "FAIL: RETURN must appear once, as the last rule"; exit 1; fi
+systemctl is-enabled --quiet postfiat-docker-user.service || { echo "FAIL: postfiat-docker-user.service is not enabled"; exit 1; }
+echo "OK: TCP 2559 DOCKER-USER limits present, RETURN last, unit enabled"
+EOF
+```
+
+The expected lines are how `iptables -S` (1.8, Ubuntu 22.04 and newer) prints the rules above.
 
 Expected security posture:
 
