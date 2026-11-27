@@ -214,11 +214,11 @@ opened = open_envelope(
 
 ---
 
-## 4. What Ships Next
+## 4. Wallet and settlement evidence
 
-Everything verified above runs over standard `payment_v2` consensus blocks today. Two follow-on tracks are in review to extend this exact `pf.ptr` v5 wire format:
+The nine receipts cover native `payment_v2` on devnet-2. The wallet and payment lanes have separate verification requirements.
 
-- **Production constant-time wallet clients:** Rust/WASM browser signing and X-Wing decapsulation ([`postfiatl1v2#303`](https://github.com/postfiatorg/postfiatl1v2/pull/303)) and native Mac wallet views ([`tasknode-apple#41`](https://github.com/postfiatorg/tasknode-apple/pull/41)).
-- **Sub-second FastPay & x402 agent payments:** **FastPay** is Post Fiat's owned-object payment lane targeting `~200 ms` quorum finality; [`postfiatl1v2#295`](https://github.com/postfiatorg/postfiatl1v2/pull/295) adds anti-bloat computation/new-object fees and indexes FastPay transfers into `account_tx` by immutable `order_hash`, unlocking fast Task Node reward payouts ([`tasknode#450`](https://github.com/postfiatorg/tasknode/pull/450)) and connecting our **x402** facilitator (HTTP `402 Payment Required` settlement for AI agent API calls, merged in `tools/x402-facilitator/` and currently tested against in-memory harnesses) to live devnet-2 validators. We will publish dedicated FastPay and x402 benchmarks once `#295` deploys.
+- **Wallets.** The Rust wallet has merged signing and key-derivation support, and the Mac app has merged its message views. Private-envelope interoperability still requires a sender and reader test in each runtime. [Rust wallet changes](https://github.com/postfiatorg/postfiatl1v2/pull/303) · [Mac wallet changes](https://github.com/postfiatorg/tasknode-apple/pull/41)
+- **FastPay and x402.** Train A proposes FastPay fee changes and indexing by order hash. The x402 RPC adapter has merged with a fixture-based test suite. The outstanding live test must connect a committee-certified order to its indexed payment and receipt. The approximately 200 ms quorum-finality figure is a target. [Train A](https://github.com/postfiatorg/postfiatl1v2/pull/295) · [x402 adapter](https://github.com/postfiatorg/postfiatl1v2/pull/312)
 
 Full protobuf schemas, domain-separation constants, and x402 header formats live in the [Post-Quantum Message Protocol Technical Guide](/docs/message-protocol/) and [`docs/specs/message-protocol-v1.md`](https://github.com/postfiatorg/postfiatl1v2/blob/main/docs/specs/message-protocol-v1.md).
