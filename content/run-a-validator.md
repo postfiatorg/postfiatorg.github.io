@@ -19,6 +19,14 @@ copyMarkdownStatus: "Full L1v2 validator guide copied."
 copyMarkdownId: "pftL1v2ValidatorCopyTool"
 ---
 
+> **Status on 27 November 2026: not yet open to outside operators.** This page describes how the program will work. Parts of it are built and not yet released, so you cannot follow it end to end today:
+>
+> - **Not released yet:** the signed release channel, `postfiat-node upgrade`, `postfiat-node top`, the read-replica RPC profiles, `postfiat-node tasknode-bind`, and the three-observer uptime feed. They are in review ([postfiatl1v2#286](https://github.com/postfiatorg/postfiatl1v2/pull/286), [#290](https://github.com/postfiatorg/postfiatl1v2/pull/290)).
+> - **Not built yet:** the commands to apply and be ratified as a validator.
+> - **Running today:** six Foundation validators on `postfiat-wan-devnet-2`. The uptime rule and the 14 days of grace are not enforced yet, and the $20 monthly credit is not paid yet.
+>
+> The hardware numbers below are estimates until the measured ones are published.
+
 > **Looking for the legacy `postfiatd` testnet chain?** See the [Legacy Testnet Validator Setup (`/validator-setup/`)](/validator-setup/). This page is the single canonical guide for **`postfiatl1v2`** validators and read-replica RPC nodes.
 
 ## Overview & Rewards
