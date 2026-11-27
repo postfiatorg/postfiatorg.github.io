@@ -1,11 +1,11 @@
 {
-  "schema": "pf-message-protocol-devnet2-evidence-v2",
+  "schema": "pf-message-protocol-devnet2-evidence-v3",
   "chain_id": "postfiat-wan-devnet-2",
-  "generated_at_utc": "2026-11-27T17:22:28Z",
+  "generated_at_utc": "2026-11-27T19:27:34Z",
   "test_harness_disclosure": {
-    "wire_codec": "python/postfiat_rpc/message_protocol.py (merged in postfiatl1v2#289, commit 3c10aa0513)",
+    "wire_codec": "python/postfiat_rpc/message_protocol.py & wallet-proxy/message-protocol.js (merged in postfiatl1v2#289, #310, #316)",
     "crypto_backends_used_in_harness": "kyber-py==1.2.0 (ML_KEM_768 / FIPS 203), cryptography (X25519), pycryptodome (ChaCha20_Poly1305 with 24-byte XChaCha20 nonce), dilithium-py==1.5.1 (ML_DSA_65 / FIPS 204) \u2014 pure-Python reference test backends (not constant-time production implementations)",
-    "production_wallet_backend": "Rust/WASM crates/wallet_wasm (postfiatl1v2#303, in review)"
+    "production_wallet_backend": "Rust/WASM crates/wallet_wasm (merged in postfiatl1v2#303) & native Mac tasknode-apple (merged in tasknode-apple#40)"
   },
   "wallets_public": {
     "alice": {
@@ -132,6 +132,61 @@
       "memo_total_bytes": 54,
       "envelope_bytes": 8047,
       "eve_rejected": "MessageProtocolError: no matching RecipientWrap for recipient_key_id"
+    },
+    "block_1932_x402_inline_payment": {
+      "ok": true,
+      "height": 1932,
+      "tx_id": "58e0b81cc73fcea82340ad0cd7dcacc53baf84a1aef7127badf0942a0bfba6d8c33233eac45365fd9cbec3ff58a5a5b4",
+      "verified_validators": 6,
+      "confirmed_6_of_6": true,
+      "sender": "pf6d2d0a000bb5c1feda7da2df955cfe0a78c788c9",
+      "destination": "pf721bb3b98bceeeebfb835d97dac6a7b4a72c797a",
+      "amount_atoms": 100,
+      "fee_atoms": 22,
+      "memo_total_bytes": 51,
+      "request_method": "GET",
+      "request_path": "/api/v1/signal",
+      "request_hash_sha256_hex": "a2dcbd98d1be1350f2c1524e97f1068208bbe938b64ea15b59d115d1947acaff",
+      "onchain_memo_request_hash_verified": true,
+      "http_flow": {
+        "step1_unauthenticated_status": 402,
+        "payment_required_header_bytes": 259,
+        "step2_paid_status": 200,
+        "payment_response_settled": true,
+        "payment_response_finalized_height": 1932,
+        "payment_response_amount_atoms": 100,
+        "step3a_exact_header_replay_status": 400,
+        "step3a_exact_header_replay_code": "unknown_challenge_nonce",
+        "step3b_nonce_swap_replay_status": 400,
+        "step3b_nonce_swap_replay_code": "order_nonce_mismatch",
+        "step3c_spent_store_replay_status": 409,
+        "step3c_spent_store_replay_code": "payment_already_spent"
+      }
+    },
+    "block_1933_hardened_blinded_sealed_cek_commit": {
+      "verified_at_utc": "2026-11-27T19:27:34Z",
+      "chain_id": "postfiat-wan-devnet-2",
+      "height": 1933,
+      "tx_id": "1b18d35a9170707f988e146d51d5bb0f99a30c182be60d5e07fc0549343763f0abe9d954433e7ac7d3e212d14c09e319",
+      "fee_atoms": 22,
+      "cid": "bafkreibixrx2bfpjmlwtaioitq6clpplb55hnbdyj2rpq5tpnf3x2agsiy",
+      "sender": "pfef21b496662a755d19c7c04fc37a8ed8af86a091",
+      "onchain_destination": "pfef21b496662a755d19c7c04fc37a8ed8af86a091",
+      "destination_equals_sender": true,
+      "envelope_bytes": 8100,
+      "memo_total_bytes": 54,
+      "cek_commitment_hex": "dcbc36ca0d00e9156fe34fda58afe1960c5126c7145b7530abdcb260ab9c1b9a",
+      "cek_commitment_verified": true,
+      "blinded_sealed_tags_hex": [
+        "7152e1ef6b39c1140a3ced7bedcd830aa869b6f141fdc86ba442e4e42d2d26f7",
+        "b6dcd27606ef283bcba16150aa48af715974435c008a5d79c364563f46403684"
+      ],
+      "static_key_ids_absent_from_wire": true,
+      "bob_rotated_key_epoch": 1,
+      "bob_epoch1_decrypted": true,
+      "bob_epoch0_seed_key_rejected": "no matching RecipientWrap for recipient_key_id",
+      "epoch_rollback_downgrade_rejected": "MessageKeyBinding key_epoch rollback rejected: got 0 < min_known_epoch 1",
+      "eve_rejected": "no matching RecipientWrap for recipient_key_id"
     }
   },
   "measured_wire_sizes": {
@@ -175,7 +230,10 @@
     "wrong_chain_id_replay_error": "MessageProtocolError: Envelope chain_id mismatch: got 'postfiat-wan-devnet-2', expected 'postfiat-mainnet-1'",
     "foreign_sender_reanchor_error": "MessageProtocolError: Foreign re-anchor rejected: header.sender_account pf6d2d0a000bb5c1feda7da2df955cfe0a78c788c9 != anchoring tx.from pf31e18f9533fc38839234a90aeb25629ebaac093a",
     "spoofed_sender_account_pubkey_mismatch_error": "MessageProtocolError: Envelope sender_pubkey address pf31e18f9533fc38839234a90aeb25629ebaac093a != header.sender_account pf6d2d0a000bb5c1feda7da2df955cfe0a78c788c9",
-    "all_9_enforced_in_sdk_open_envelope_or_manifest": true
+    "all_9_enforced_in_sdk_open_envelope_or_manifest": true,
+    "wrong_cek_substitution_error": "MessageProtocolError: XWingEncryptionHeader.cek_commitment mismatch",
+    "key_epoch_rollback_downgrade_error": "MessageKeyBinding key_epoch rollback rejected: got 0 < min_known_epoch 1",
+    "epoch0_seed_key_on_epoch1_message_error": "no matching RecipientWrap for recipient_key_id"
   },
   "final_chain_status": {
     "chain_id": "postfiat-wan-devnet-2",
@@ -200,5 +258,131 @@
     "tx_count": 9,
     "fee_breakdown": "8 x 22 atoms (54-76 B memos) + 1 x 23 atoms (100 B Block 1929 multipart memo) = 199 atoms",
     "xwing_key_id_bytes": 32
+  },
+  "benchmarks_and_interop": {
+    "generated_at_utc": "2026-11-27T19:22:19.150Z",
+    "runtime": "Node.js v20.20.2 (@noble/post-quantum)",
+    "platform": "linux/x64",
+    "primitives": {
+      "ml_dsa_65_sign": {
+        "n": 40,
+        "mean_ms": 9.998,
+        "p50_ms": 7.693,
+        "p95_ms": 21.845,
+        "p99_ms": 24.039,
+        "ops_per_sec": 100
+      },
+      "ml_dsa_65_verify": {
+        "n": 40,
+        "mean_ms": 2.139,
+        "p50_ms": 2.039,
+        "p95_ms": 2.879,
+        "p99_ms": 3.222,
+        "ops_per_sec": 467.5
+      },
+      "xwing_encap": {
+        "n": 40,
+        "mean_ms": 2.584,
+        "p50_ms": 2.407,
+        "p95_ms": 4.093,
+        "p99_ms": 4.577,
+        "ops_per_sec": 387
+      },
+      "xwing_decap": {
+        "n": 40,
+        "mean_ms": 2.827,
+        "p50_ms": 2.687,
+        "p95_ms": 4.689,
+        "p99_ms": 5.161,
+        "ops_per_sec": 353.7
+      }
+    },
+    "envelopes": {
+      "private_1_reader_seal": {
+        "n": 20,
+        "mean_ms": 12.96,
+        "p50_ms": 13.686,
+        "p95_ms": 23.154,
+        "p99_ms": 23.154,
+        "ops_per_sec": 77.2
+      },
+      "private_1_reader_open": {
+        "n": 20,
+        "mean_ms": 5.131,
+        "p50_ms": 4.958,
+        "p95_ms": 6.501,
+        "p99_ms": 6.501,
+        "ops_per_sec": 194.9
+      },
+      "private_10_readers_seal": {
+        "n": 20,
+        "mean_ms": 35.089,
+        "p50_ms": 31.882,
+        "p95_ms": 62.07,
+        "p99_ms": 62.07,
+        "ops_per_sec": 28.5
+      },
+      "private_10_readers_open": {
+        "n": 20,
+        "mean_ms": 5.63,
+        "p50_ms": 5.582,
+        "p95_ms": 6.279,
+        "p99_ms": 6.279,
+        "ops_per_sec": 177.6
+      },
+      "blinded_sealed_2_readers_seal": {
+        "n": 20,
+        "mean_ms": 14.196,
+        "p50_ms": 10.932,
+        "p95_ms": 50.515,
+        "p99_ms": 50.515,
+        "ops_per_sec": 70.4
+      },
+      "blinded_sealed_2_readers_trial_decap_open": {
+        "n": 20,
+        "mean_ms": 6.505,
+        "p50_ms": 5.712,
+        "p95_ms": 11.283,
+        "p99_ms": 11.283,
+        "ops_per_sec": 153.7
+      },
+      "manifest_320kib_3chunks_split": {
+        "n": 15,
+        "mean_ms": 3.773,
+        "p50_ms": 3.353,
+        "p95_ms": 6.382,
+        "p99_ms": 6.382,
+        "ops_per_sec": 265
+      },
+      "manifest_320kib_3chunks_reassemble": {
+        "n": 15,
+        "mean_ms": 3.599,
+        "p50_ms": 3.483,
+        "p95_ms": 4.559,
+        "p99_ms": 4.559,
+        "ops_per_sec": 277.9
+      }
+    },
+    "cross_language_js_to_python_interop": {
+      "ok": true,
+      "js_sealed_opened_in_python_real_mldsa65": true,
+      "plaintext": "cross-runtime-js-to-python-blinded-sealed-cek-commit",
+      "cek_commitment_bytes": 32,
+      "blinded_tags_hide_static_id": true
+    },
+    "x402_http_load_and_adversarial_storm": {
+      "e2e_402_pay_200_fastpay_in_process_quorum": {
+        "n": 30,
+        "mean_ms": 42.662,
+        "p50_ms": 42.454,
+        "p95_ms": 65.006,
+        "p99_ms": 70.659,
+        "ops_per_sec": 23.4
+      },
+      "concurrent_replay_storm_requests": 200,
+      "concurrent_replay_storm_rejected": 200,
+      "concurrent_replay_storm_elapsed_ms": 261.95,
+      "concurrent_replay_storm_reject_ops_per_sec": 763.5
+    }
   }
 }
