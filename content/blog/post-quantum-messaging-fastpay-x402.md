@@ -47,22 +47,17 @@ Post Fiat L1v2 splits every message into two parts:
 Every visibility mode—public announcement, 1-to-1 private chat, multi-recipient group dispatch, sealed drop, or multi-chunk attachment—follows the same pipeline:
 
 ```mermaid
-flowchart LR
-    subgraph Client["Sender Wallet or AI Agent"]
-      A["Plaintext body<br/>(protobuf or canonical JSON)"] --> B{"Visibility?"}
-      B -- "PRIVATE / SEALED" --> C["Generate 32 B CEK<br/>Encrypt with XChaCha20-Poly1305<br/>Wrap CEK per reader via X-Wing"]
-      B -- "PUBLIC" --> D["Unencrypted body bytes"]
-      C --> E["Sign raw wire bytes<br/>with ML-DSA-65 (FIPS 204)"]
-      D --> E
-      E --> F["Compute IPFS CIDv1 raw<br/>(36 B binary SHA-256) offline"]
-    end
-    F --> G["Encode pf.ptr v5 memo<br/>(lowercase hex, <= 256 B)"]
-    G --> H["Anchor on postfiatl1v2<br/>(FastPay or payment_v2)"]
+flowchart TD
+    A["Plaintext body<br/>(protobuf or JSON)"]
+    A -- "PRIVATE / SEALED" --> C["XChaCha20-Poly1305 body<br/>X-Wing 32 B CEK wrap"]
+    A -- "PUBLIC" --> D["Unencrypted body bytes"]
+    C --> E["ML-DSA-65 sign raw bytes<br/>Compute 36 B CIDv1 offline"]
+    D --> E
+    E --> F["pf.ptr v5 memo (51–100 B)<br/>Anchor: FastPay / payment_v2"]
     E -. "async pin" .-> P[("IPFS / Block Store")]
-    H --> I["account_tx & Explorer"]
+    F --> I["Wallet reads memo<br/>& fetches raw CID block"]
     P --> I
-    I --> J["Verify CID, ML-DSA-65 sig,<br/>chain_id & sender binding"]
-    J --> K["Decrypt locally in wallet<br/>(never on explorer)"]
+    I --> J["Verify CID, ML-DSA-65 sig,<br/>chain_id & sender binding<br/>Decrypt locally in wallet"]
 ```
 
 ### Three Load-Bearing Decisions
@@ -208,18 +203,18 @@ The trailing `+ inputs` charges 1 atom per consumed input to bound UTXO-style va
 
 ```mermaid
 sequenceDiagram
-    participant Agent as AI Agent / MCP Client
-    participant API as Resource Server & Facilitator
-    participant Val as Validator Committee (3-of-4)
+    participant Agent as AI Agent
+    participant API as API & Facilitator
+    participant Val as Validators (3-of-4)
 
-    Agent->>API: POST /mcp (tool request)
-    API-->>Agent: 402 Payment Required + PAYMENT-REQUIRED (protobuf)
-    Agent->>Agent: Check budget & price guard<br/>Sign native FastPay order or payment_v2<br/>with 51 B inline pf.ptr v5 request_hash
-    Agent->>API: Retry POST /mcp + PAYMENT-SIGNATURE
-    API->>API: Verify payer ML-DSA-65 sig,<br/>request_hash memo & replay store
-    API->>Val: Collect >= 2f+1 ML-DSA-65 quorum votes<br/>& signed apply acknowledgments
-    Val-->>API: Finality certificate + indexed 48 B order_hash
-    API-->>Agent: 200 OK + PAYMENT-RESPONSE (receipt & digest)
+    Agent->>API: POST /mcp
+    API-->>Agent: 402 + PAYMENT-REQUIRED<br/>(protobuf terms)
+    Note over Agent: Check budget & price<br/>Sign FastPay / payment_v2<br/>+ 51 B inline request_hash
+    Agent->>API: Retry POST /mcp<br/>+ PAYMENT-SIGNATURE
+    Note over API: Verify payer ML-DSA-65 sig,<br/>memo & replay store
+    API->>Val: Collect >= 2f+1 ML-DSA-65<br/>votes & apply acks
+    Val-->>API: Finality cert +<br/>48 B order_hash
+    API-->>Agent: 200 OK + PAYMENT-RESPONSE
 ```
 
 Three design details bound risk for autonomous agents:
