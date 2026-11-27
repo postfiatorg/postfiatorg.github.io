@@ -12,6 +12,8 @@ summary: "Simply put documentation for Post Fiat: understand the architecture, i
 Everything you need to understand Post Fiat, integrate with the network, run a validator, or inspect the L1 source — backed by the full, searchable [`postfiatl1v2` engineering documentation](/docs/l1/) built directly from GitHub.
 
 - **Browse full L1 engineering docs (MkDocs):** [/docs/l1/](/docs/l1/)
+- **Run a Validator (L1v2 canonical guide):** [/run-a-validator/](/run-a-validator/)
+- **Finance Hub Access Guide:** [/finance-hub/](/finance-hub/)
 - **First Day onboarding:** [/docs/l1/start/first-day/](/docs/l1/start/first-day/)
 - **Architecture overview:** [/docs/l1/architecture/overview/](/docs/l1/architecture/overview/)
 - **RPC & Python quickstart:** [/docs/l1/python/quickstart/](/docs/l1/python/quickstart/)

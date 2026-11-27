@@ -386,9 +386,20 @@ The explorer is correct when all of these hold:
 
 - Devnet block times before the indexer's first day are unknown; those blocks show height
   only.
-- Task rewards, content pointers and profile NFTs are not on the new chain yet. When Task
-  Node activity moves to it, those operations get their own lens here.
 - Ethereum reading arrives in build step 4. Until then every Ethereum step shows "not
   checked".
 - Balances come from the validators at the current height; historical balances are not
   reconstructed.
+
+## 15. Wave 1 protocol views (Phase 0 Contracts C1 & C4)
+
+Four new hash-routed views and embedded panels extend the explorer to match the frozen Phase 0
+contracts (`postfiat.message.v1`, `postfiat.governance.v1`, `postfiat.nft.v1`, and Train A/B RPCs)
+using pure contract helpers in `static/explorer/explorer-contracts.js`:
+
+| View | Routes | Frozen Contract / RPC Backing | Security & Honesty Invariants |
+| --- | --- | --- | --- |
+| **Messages** | `#/messages`, `#/message/{id}`, plus Message panel on `#/tx/{id}` | `pf.ptr` v5 (`70662e707472` / `7635`), legacy v4, `account_tx` v6 & `tx` keyed by immutable FastPay `order_hash` | Shows `"Task reward"` badge **only** when `sender_verified === true`, visibility is `private`, schema is `pf.reward.v1`, and sender matches the pinned Task Node payout key (outsider `pf.reward.v1` renders strictly as *Private message*). Public text escaped & capped at 64 KiB; media click-to-load; private/sealed envelopes never decrypted in browser. |
+| **Governance Archive** | `#/governance`, `#/governance/{session_id}` | `postfiat.governance.v1` (`ProtocolSnapshot`, `GovernancePacket`, `SessionTranscript`, `GovernanceMinutes`, `RulingAnchor`) | Renders only sessions anchored by a pinned `AuthorityBinding` account. Visually isolates Pass 1 decisions/deliverables from Pass 2 quoted community input, shows carry-over deliverable scorecards, and records deterministic ruling replay hashes. |
+| **NFTs** | `#/nfts`, `#/nft/{nft_id}`, plus NFTs grid on `#/account/{addr}` | `postfiat.nft.v1` (`pf.nft.metadata.v1`, `pf.nft.claim.v1`, `pf.nft.provenance.v1`) + paginated `account_nfts` / `issuer_nfts` / `nft_info` (`cursor`/`next_cursor`/`total_count`) | Always pairs full `issuer` + `collection_id` (never collection name alone). Displays live one-hash (`SHA3-384(raw_envelope) == metadata_hash`) + `envelope.sender == nft.issuer` + ML-DSA-65 verification status, bit-63 migrated serial detection, offline-verifiable `claim_cid` / `burn_proof_bundle_cid`, and renders `PIN_ONLY` strictly as *Recorded Provenance*. |
+| **Identity Card** | `#/identities`, `#/identity/{query}`, plus embedded card on `#/account/{addr}` | `postfiat-identity-lookup-v1` (`identity_info`, `identity_by_nostr`, `identity_by_handle`, `identity_by_link`) | Separates consensus-verified links (`validator_node`, `old_chain_account`, `agent_controller`) from non-unique client-verified claims (`custom_nip05`, `evm_address`, `solana_address`). Surfaces `pending_reconfirmation`, stale validator indicators, compromised Nostr key tombstones, and 2-of-3 registrar reassignment history. |

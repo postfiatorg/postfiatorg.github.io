@@ -20,6 +20,8 @@ copyMarkdownId: "pftValidatorCopyTool"
 # Fresh Validator Setup
 
 > Install a fresh Post Fiat testnet validator, bind it to a domain, publish proof, and verify that the node is proposing.
+>
+> **Running on the new `postfiatl1v2` chain?** Use the canonical [Run a Post Fiat Validator (L1v2) guide (`/run-a-validator/`)](/run-a-validator/) for `postfiat-node`, read-replica RPC profiles, `upgrade`, `top`, and active-liveness rewards.
 
 ## Codex Operator Quick Start
 

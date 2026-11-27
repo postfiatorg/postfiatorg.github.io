@@ -395,3 +395,40 @@ time{white-space:nowrap}
 @media (max-width:640px){.rows li{grid-template-columns:64px minmax(0,1fr) auto}.rows .c{font-size:12px}.rng{width:100%}}
 .status-line{display:block;line-height:1.6}
 .status-line .dot{margin-right:10px;vertical-align:middle}
+
+/* Wave 1 protocol panels: Messages, Governance Archive, NFTs, Identity Cards (ink palette only) */
+.tag.reward{color:var(--paper);background:var(--teal-ink);border-color:var(--teal-ink)}
+.tag.priv{color:var(--ink);background:var(--paper-2);border-color:var(--ink)}
+.proto-card{border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0;margin-top:8px}
+.proto-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.proto-badges{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.proto-empty{border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:26px 0;margin-top:8px}
+.proto-empty h3{font-family:var(--display);font-size:28px;line-height:1.15;margin-bottom:10px}
+.proto-empty p{font-size:16.5px;color:var(--ink-2);max-width:48em;margin:0 0 14px}
+.proto-rules{margin:14px 0 0;padding-left:20px;color:var(--ink-2);font-size:15.5px;line-height:1.6;max-width:52em}
+.proto-rules li{margin-bottom:8px}
+.msg-sealed-note{background:var(--paper-2);border-left:2px solid var(--teal);padding:14px 16px;margin-bottom:14px}
+.msg-sealed-note p{margin:10px 0 0;font-size:15.5px;color:var(--ink-2)}
+.msg-meta-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;font-size:13.5px;color:var(--ink-2)}
+.msg-warn{border-left:2px solid var(--oxblood);padding:10px 14px;background:var(--paper-2);font-size:15px;color:var(--ink-2);margin-bottom:14px}
+.msg-body{font-family:var(--mono);font-size:13px;line-height:1.55;background:var(--paper-2);border:1px solid var(--rule);padding:14px 16px;overflow:auto;max-height:420px;white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 14px}
+.msg-media{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.msg-media-item{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--rule);padding:8px 12px;font-family:var(--mono);font-size:12px}
+.gov-pass2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;border-top:1px solid var(--rule);padding-top:16px}
+.gov-quote{border-left:2px solid var(--rule);padding:4px 0 4px 14px}
+.gov-quote b{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
+.gov-quote p{margin:6px 0;font-size:15.5px;color:var(--ink-2)}
+@media (max-width:760px){.gov-pass2{grid-template-columns:1fr}}
+.nft-title{font-family:var(--display);font-size:21px;line-height:1.2;color:var(--ink);margin-top:10px}
+.nft-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.nft-detail{margin-top:16px}
+.nft-art-frame{aspect-ratio:1;background:var(--paper-2);border:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px;text-align:center;overflow:hidden}
+.nft-art-frame img{width:100%;height:100%;object-fit:contain}
+.nft-attrs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.nft-attr{border:1px solid var(--rule);padding:10px 12px}
+.nft-attr span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.nft-attr b{display:block;font-size:15.5px;color:var(--ink);margin-top:4px;font-weight:500}
+.id-title{font-family:var(--display);font-size:clamp(26px,3vw,38px);line-height:1.1;margin-top:6px;overflow-wrap:anywhere}
+.id-lookup{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--ink);padding-bottom:10px;margin:14px 0 28px;flex-wrap:wrap}
+.id-lookup input{flex:1;min-width:240px;border:0;background:transparent;font-family:var(--mono);font-size:13.5px;color:var(--ink);padding:8px 2px;outline:none}
+.id-lookup input::placeholder{color:var(--ink-4)}
