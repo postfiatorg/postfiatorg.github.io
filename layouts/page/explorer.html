@@ -19,7 +19,7 @@
   </div>
 </div>
 <main id="main">
-  <div id="ex" data-api="{{ .Params.explorer_api | default "/api/explorer/v1" }}">
+  <div id="ex" data-payout-pubkey="{{ .Params.explorer_payout_pubkey | default "" }}" data-api="{{ .Params.explorer_api | default "/api/explorer/v1" }}">
     <noscript><div class="wrap ex-page"><p class="lede">The explorer reads the ledger live and needs JavaScript.</p></div></noscript>
   </div>
 </main>
