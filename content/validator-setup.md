@@ -543,6 +543,168 @@ proposing: True
 synched: True
 ```
 
+### Continuous health check
+
+The checks above run once. To keep checking after setup, install a small read-only script and a systemd timer that runs it every five minutes. The script asks the node for `server_info` over the loopback admin port (the same `docker exec postfiatd curl` call as above), changes nothing, and prints one `CHECK` line per check and a `RESULT` line:
+
+- `state`: `server_state` is one of `OK_STATES` (default `full proposing validating`)
+- `validated_ledger_age`: the last validated ledger is at most `MAX_LEDGER_AGE` seconds old (default `60`)
+- `peers`: at least `MIN_PEERS` peers (default `3`)
+- `complete_ledgers`: well formed, and the newest range holds at least `MIN_LEDGERS` ledgers (default `64`)
+
+Exit status: `0` OK, `1` FAIL (a check failed), `2` UNKNOWN (no usable answer: container not running, RPC unreachable, unparsable reply, or an invalid threshold). Any non-zero exit marks the service run as failed, so problems show up in `systemctl --failed` and the journal.
+
+```bash
+sudo tee /usr/local/bin/postfiat-healthcheck >/dev/null <<'EOF'
+#!/bin/sh
+# postfiat-healthcheck: read-only health check of the local postfiatd node.
+# Exit 0 = OK, 1 = FAIL (a check failed), 2 = UNKNOWN (no usable answer).
+# Override thresholds in the environment or in /etc/default/postfiat-healthcheck.
+CONTAINER="${CONTAINER:-postfiatd}"
+OK_STATES="${OK_STATES:-full proposing validating}"
+MAX_LEDGER_AGE="${MAX_LEDGER_AGE:-60}"
+MIN_PEERS="${MIN_PEERS:-3}"
+MIN_LEDGERS="${MIN_LEDGERS:-64}"
+RPC_TIMEOUT="${RPC_TIMEOUT:-10}"
+export OK_STATES MAX_LEDGER_AGE MIN_PEERS MIN_LEDGERS
+
+if ! out="$(docker exec "$CONTAINER" curl -s -m "$RPC_TIMEOUT" http://localhost:5005/ -X POST \
+  -H "Content-Type: application/json" -d '{"method": "server_info", "params": [{}]}')"; then
+  echo "CHECK rpc UNKNOWN server_info via docker exec $CONTAINER failed"
+  echo "RESULT UNKNOWN"
+  exit 2
+fi
+
+printf '%s' "$out" | python3 -c '
+import json, os, re, sys
+
+
+def unknown(msg):
+    print("CHECK " + msg)
+    print("RESULT UNKNOWN")
+    sys.exit(2)
+
+
+limits = {}
+for name in ("MAX_LEDGER_AGE", "MIN_PEERS", "MIN_LEDGERS"):
+    value = os.environ[name]
+    if not re.fullmatch(r"[0-9]+", value):
+        unknown(f"config UNKNOWN {name}={value!r} is not a whole number")
+    limits[name] = int(value)
+ok_states = os.environ["OK_STATES"].split()
+
+try:
+    info = json.load(sys.stdin)["result"]["info"]
+except (ValueError, KeyError, TypeError):
+    unknown("rpc UNKNOWN reply has no result.info")
+if not isinstance(info, dict):
+    unknown("rpc UNKNOWN reply has no result.info")
+
+fails = 0
+
+
+def check(name, ok, detail):
+    global fails
+    verdict = "OK" if ok else "FAIL"
+    print(f"CHECK {name} {verdict} {detail}")
+    fails += 0 if ok else 1
+
+
+def whole(v):
+    return type(v) is int
+
+
+state = info.get("server_state")
+want = " ".join(ok_states)
+check("state", state in ok_states, f"{state} (want one of: {want})")
+
+age = (info.get("validated_ledger") or {}).get("age")
+limit = limits["MAX_LEDGER_AGE"]
+check("validated_ledger_age", whole(age) and age <= limit, f"{age} s (max {limit})")
+
+peers = info.get("peers")
+limit = limits["MIN_PEERS"]
+check("peers", whole(peers) and peers >= limit, f"{peers} (min {limit})")
+
+ledgers = info.get("complete_ledgers", "")
+limit = limits["MIN_LEDGERS"]
+span = 0
+if re.fullmatch(r"[0-9]+(-[0-9]+)?(,[0-9]+(-[0-9]+)?)*", ledgers):
+    first, _, last = ledgers.split(",")[-1].partition("-")
+    span = int(last or first) - int(first) + 1
+check("complete_ledgers", span >= limit, f"{ledgers} (newest range {span}, min {limit})")
+
+print("RESULT OK" if fails == 0 else f"RESULT FAIL {fails}")
+sys.exit(1 if fails else 0)
+'
+EOF
+sudo chmod 0755 /usr/local/bin/postfiat-healthcheck
+
+sudo tee /etc/systemd/system/postfiat-healthcheck.service >/dev/null <<'EOF'
+[Unit]
+Description=Post Fiat node health check (read-only)
+After=docker.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/default/postfiat-healthcheck
+ExecStart=/usr/local/bin/postfiat-healthcheck
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=full
+EOF
+
+sudo tee /etc/systemd/system/postfiat-healthcheck.timer >/dev/null <<'EOF'
+[Unit]
+Description=Run the Post Fiat node health check every 5 minutes
+
+[Timer]
+OnCalendar=*:0/5
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now postfiat-healthcheck.timer
+```
+
+To change a threshold or the container name, put the variables in `/etc/default/postfiat-healthcheck` (for example `MIN_PEERS=5` or `CONTAINER=postfiatd-sentry`, one `NAME=value` per line); the next timer run picks them up. For a validator, `OK_STATES=proposing` is the strict setting once it proposes.
+
+Run it once now (through the service, so the same settings apply as on the timer) and see the result, the timer and any failure:
+
+```bash
+sudo systemctl start postfiat-healthcheck.service; echo "exit $?"
+journalctl -u postfiat-healthcheck.service -n 12 -o cat --no-pager
+systemctl list-timers postfiat-healthcheck.timer --no-pager
+systemctl --failed --no-pager
+```
+
+Expected on a healthy node: `exit 0`, the newest run in the journal shows every `CHECK` line as `OK` and `RESULT OK`, and `systemctl --failed` lists no `postfiat-healthcheck.service`. `systemctl status postfiat-healthcheck.service` and `journalctl -u postfiat-healthcheck.service --since -1h` show earlier runs.
+
+Alerting hook (optional): the timer only makes failures visible on the host. To be told about them, add `OnFailure=` to the service with a drop-in that starts a unit of your own, for example one that sends a message through your alerting tool:
+
+```ini
+# /etc/systemd/system/postfiat-healthcheck.service.d/alert.conf
+[Unit]
+OnFailure=my-alert@%n.service
+```
+
+`my-alert@.service` is yours to write; run `sudo systemctl daemon-reload` after adding the drop-in.
+
+To remove the health check:
+
+```bash
+sudo systemctl disable --now postfiat-healthcheck.timer
+sudo rm -f /etc/systemd/system/postfiat-healthcheck.timer /etc/systemd/system/postfiat-healthcheck.service
+sudo rm -rf /etc/systemd/system/postfiat-healthcheck.service.d
+sudo rm -f /usr/local/bin/postfiat-healthcheck /etc/default/postfiat-healthcheck
+sudo rm -f /var/lib/systemd/timers/stamp-postfiat-healthcheck.timer
+sudo systemctl daemon-reload
+sudo systemctl reset-failed postfiat-healthcheck.service 2>/dev/null || true
+```
+
 ## 10. Upgrade Procedure After Fresh Install
 
 Upgrades are announced in the validator Discord channel. Run the commands from the node directory, the one that holds `docker-compose.yml`. Anywhere else, Docker Compose fails with `no configuration file provided: not found`.
