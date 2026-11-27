@@ -1,7 +1,7 @@
 {
   "schema": "pf-message-protocol-devnet2-evidence-v2",
   "chain_id": "postfiat-wan-devnet-2",
-  "generated_at_utc": "2026-11-27T16:58:31Z",
+  "generated_at_utc": "2026-11-27T17:22:28Z",
   "test_harness_disclosure": {
     "wire_codec": "python/postfiat_rpc/message_protocol.py (merged in postfiatl1v2#289, commit 3c10aa0513)",
     "crypto_backends_used_in_harness": "kyber-py==1.2.0 (ML_KEM_768 / FIPS 203), cryptography (X25519), pycryptodome (ChaCha20_Poly1305 with 24-byte XChaCha20 nonce), dilithium-py==1.5.1 (ML_DSA_65 / FIPS 204) \u2014 pure-Python reference test backends (not constant-time production implementations)",
@@ -27,8 +27,8 @@
     "charlie": {
       "address": "pfef21b496662a755d19c7c04fc37a8ed8af86a091",
       "initial_balance_atoms": 200000,
-      "final_balance_atoms": 199734,
-      "final_sequence": 3,
+      "final_balance_atoms": 199712,
+      "final_sequence": 4,
       "xwing_key_id": "0971617dec92fd69b653bdbb061e2efe17e8f95846514724b0d4ad2e1d535bf9",
       "key_binding_valid": true
     },
@@ -113,6 +113,25 @@
       "memo_total_bytes": 76,
       "envelope_bytes": 8077,
       "eve_rejected": "MessageProtocolError: no matching RecipientWrap for recipient_key_id"
+    },
+    "block_1931_sealed_self_payment_clean": {
+      "ok": true,
+      "height": 1931,
+      "tx_id": "0644e520405d20b848edb24ed5e5af609cae22ae218c2b7e281f47857d854e22347e4cbc1e49b03fe10c1c3531e46cbe",
+      "cid": "bafkreihfhilg4s73dp34xvg5njsrln2pl7lbvxk3c4qs3lrsospxukds6e",
+      "sender": "pfef21b496662a755d19c7c04fc37a8ed8af86a091",
+      "onchain_destination": "pfef21b496662a755d19c7c04fc37a8ed8af86a091",
+      "destination_equals_sender": true,
+      "recipient_absent_from_onchain_account_tx": true,
+      "recipient_accounts_omitted_in_header": true,
+      "thread_id_omitted": true,
+      "reply_to_cid_omitted": true,
+      "bob_discovered_from_sender_account_tx_and_decrypted": true,
+      "fee_atoms": 22,
+      "memo_data_bytes": 46,
+      "memo_total_bytes": 54,
+      "envelope_bytes": 8047,
+      "eve_rejected": "MessageProtocolError: no matching RecipientWrap for recipient_key_id"
     }
   },
   "measured_wire_sizes": {
@@ -139,6 +158,11 @@
       "envelope_bytes": 8077,
       "memo_data_bytes": 68,
       "memo_total_bytes": 76
+    },
+    "sealed_self_payment_clean_2wraps": {
+      "envelope_bytes": 8047,
+      "memo_data_bytes": 46,
+      "memo_total_bytes": 54
     }
   },
   "negative_controls": {
@@ -150,14 +174,15 @@
     "chunk_1bit_aead_tamper_error": "MessageProtocolError: XChaCha20-Poly1305 authentication failed",
     "wrong_chain_id_replay_error": "MessageProtocolError: Envelope chain_id mismatch: got 'postfiat-wan-devnet-2', expected 'postfiat-mainnet-1'",
     "foreign_sender_reanchor_error": "MessageProtocolError: Foreign re-anchor rejected: header.sender_account pf6d2d0a000bb5c1feda7da2df955cfe0a78c788c9 != anchoring tx.from pf31e18f9533fc38839234a90aeb25629ebaac093a",
-    "spoofed_sender_account_pubkey_mismatch_error": "MessageProtocolError: Envelope sender_pubkey address pf31e18f9533fc38839234a90aeb25629ebaac093a != header.sender_account pf6d2d0a000bb5c1feda7da2df955cfe0a78c788c9"
+    "spoofed_sender_account_pubkey_mismatch_error": "MessageProtocolError: Envelope sender_pubkey address pf31e18f9533fc38839234a90aeb25629ebaac093a != header.sender_account pf6d2d0a000bb5c1feda7da2df955cfe0a78c788c9",
+    "all_9_enforced_in_sdk_open_envelope_or_manifest": true
   },
   "final_chain_status": {
     "chain_id": "postfiat-wan-devnet-2",
     "genesis_hash": "ce22ca8c932da0998b484483a09647138a30e0bf44408dd49a8d6d452787ad25521aff3ed334da07e150a7233a3e90a9",
-    "height": 1930,
-    "block_tip_hash": "94731796878850b5509fc9d2adbfecc8862c6ba4713bbc9c17b87899978d2076da30b6684cd8eb2c2ce2ffb6da9bdc69",
-    "state_root": "a7248db228fb08e1b3c03e37413a1f77b598d26b93e4517751e66324ee579d680dd181478ec6a808ec0c2eb7cd9f750e",
+    "height": 1931,
+    "block_tip_hash": "50bee456c3b4ec22e5aef08dd4d2840881473cd739959ab57d33815edd3a26b161eb289ef0663509f2702cedac895ab3",
+    "state_root": "c2cb24725266f7ae5528d7057336f199a3fecdad835cf6157909885038be6f8b496be03d578e9920d484c8381abfe09a",
     "validator_count": 6,
     "mempool_pending": [
       0,
@@ -170,10 +195,10 @@
   },
   "reconciliation": {
     "initial_total_atoms": 800000,
-    "final_total_atoms": 799823,
-    "total_fees_burned_atoms": 177,
-    "tx_count": 8,
-    "fee_breakdown": "7 x 22 atoms (76-byte memos) + 1 x 23 atoms (100-byte Block 1929 multipart memo) = 177 atoms",
+    "final_total_atoms": 799801,
+    "total_fees_burned_atoms": 199,
+    "tx_count": 9,
+    "fee_breakdown": "8 x 22 atoms (54-76 B memos) + 1 x 23 atoms (100 B Block 1929 multipart memo) = 199 atoms",
     "xwing_key_id_bytes": 32
   }
 }
