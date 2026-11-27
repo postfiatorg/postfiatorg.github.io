@@ -567,7 +567,7 @@ cat "$REC"
 grep -q '^repo_digest=.*@sha256:' "$REC" && echo "recorded $REC"
 ```
 
-The last line must print `recorded pre-upgrade-...txt`. If it prints nothing, the running image has no registry digest; stop and ask in the validator Discord channel before upgrading. Then upgrade:
+The last line must print `recorded pre-upgrade-...txt`. If it prints nothing, the record is incomplete: either no container named `postfiatd` is running, or its image has no registry digest. Fix that or ask in the validator Discord channel before upgrading. Then upgrade:
 
 ```bash
 docker compose pull
