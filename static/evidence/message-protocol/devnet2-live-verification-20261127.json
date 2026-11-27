@@ -1,0 +1,204 @@
+{
+  "schema": "pf-message-protocol-devnet2-evidence-v2",
+  "chain_id": "postfiat-wan-devnet-2",
+  "generated_at_utc": "2026-11-27T17:22:28Z",
+  "test_harness_disclosure": {
+    "wire_codec": "python/postfiat_rpc/message_protocol.py (merged in postfiatl1v2#289, commit 3c10aa0513)",
+    "crypto_backends_used_in_harness": "kyber-py==1.2.0 (ML_KEM_768 / FIPS 203), cryptography (X25519), pycryptodome (ChaCha20_Poly1305 with 24-byte XChaCha20 nonce), dilithium-py==1.5.1 (ML_DSA_65 / FIPS 204) \u2014 pure-Python reference test backends (not constant-time production implementations)",
+    "production_wallet_backend": "Rust/WASM crates/wallet_wasm (postfiatl1v2#303, in review)"
+  },
+  "wallets_public": {
+    "alice": {
+      "address": "pf6d2d0a000bb5c1feda7da2df955cfe0a78c788c9",
+      "initial_balance_atoms": 200000,
+      "final_balance_atoms": 199711,
+      "final_sequence": 4,
+      "xwing_key_id": "ab3230536886467ef0c2be38ccebd569c919fd1ed6e0df8490c810d8886fce07",
+      "key_binding_valid": true
+    },
+    "bob": {
+      "address": "pf721bb3b98bceeeebfb835d97dac6a7b4a72c797a",
+      "initial_balance_atoms": 200000,
+      "final_balance_atoms": 200378,
+      "final_sequence": 1,
+      "xwing_key_id": "e5f40742cfcb516bfe0dd6ab404dec932e52f7b88a9c4ca19a2b86b9c659edba",
+      "key_binding_valid": true
+    },
+    "charlie": {
+      "address": "pfef21b496662a755d19c7c04fc37a8ed8af86a091",
+      "initial_balance_atoms": 200000,
+      "final_balance_atoms": 199712,
+      "final_sequence": 4,
+      "xwing_key_id": "0971617dec92fd69b653bdbb061e2efe17e8f95846514724b0d4ad2e1d535bf9",
+      "key_binding_valid": true
+    },
+    "eve": {
+      "address": "pf31e18f9533fc38839234a90aeb25629ebaac093a",
+      "initial_balance_atoms": 200000,
+      "final_balance_atoms": 200000,
+      "final_sequence": 0,
+      "xwing_key_id": "16c7a1ebd8d24137e30ef5b879c4078caf3b428cdd3ff760ed3e3066097b59cd",
+      "key_binding_valid": true
+    }
+  },
+  "onchain_transactions": {
+    "block_1923_private_1to1": {
+      "ok": true,
+      "height": 1923,
+      "tx_id": "c8b7f540228331c773f0be66d92bac47a4e34c91b75a0c2b43cac53052a561cd97afcbc62b69fb7c0a3a280760ace3f2",
+      "cid": "bafkreihx2tfnjrdfjk6w7fq5pmnauaamtqxzjlghnqtl5cjconrfniulnu",
+      "fee_atoms": 22,
+      "bob_decrypted": true,
+      "alice_sender_copy_decrypted": true,
+      "eve_rejected": "MessageProtocolError: no matching RecipientWrap for recipient_key_id"
+    },
+    "block_1924_private_group": {
+      "ok": true,
+      "height": 1924,
+      "tx_id": "1484c78c9e02475ff867b3db9199b6a9671066bdb1d871a93cff64a60f92dcd0f093c709fa0b069340b9ac56fe212791",
+      "cid": "bafkreihdokv7wfjd6r5kyu7tf2itbij5ug4c5wt57ei2fuoqspuo77p7zq",
+      "bob_decrypted": true,
+      "charlie_decrypted": true,
+      "eve_rejected": "MessageProtocolError: no matching RecipientWrap for recipient_key_id"
+    },
+    "blocks_1925_1926_multisender_thread": {
+      "ok": true,
+      "thread_id": "live-thread-f9815b56",
+      "bob_reply_height": 1925,
+      "bob_reply_tx_id": "253342e9861bf78a1ec1668870c62b7032ff27c2600f61c6987d50afa21eb484674095af11ea033f77c29804a0a4e85b",
+      "charlie_reply_height": 1926,
+      "charlie_reply_tx_id": "0483906c1b57b5bc224d91985fcfe07bbe5ddf55ae5e80e6e8dc9a4bc20eaeb67b93a4b79beca33938fe399ebf2452ea",
+      "distinct_senders_verified": 3
+    },
+    "block_1927_sealed_direct": {
+      "ok": true,
+      "height": 1927,
+      "tx_id": "4a999c08f0be5bd9a8b280cea75f7a21d784746d2b856ade7eb3d393c3be98c194ff4800ea57544340beef331696f808",
+      "cid": "bafkreih5m3t44nh5kck6z4tfvxgboslafij73seqadfebd2ela6abg6gui",
+      "recipient_accounts_omitted": true,
+      "eve_rejected": "MessageProtocolError: no matching RecipientWrap for recipient_key_id"
+    },
+    "block_1928_public_signed": {
+      "ok": true,
+      "height": 1928,
+      "tx_id": "c57ead3054861bff84e8947884f5672a14f92bd7b2f039fe440cc276be7977eaf010197eb4892e061178a0246ea963c3",
+      "cid": "bafkreie3x6km7obhasbkx3yl5xy2uzogjbskpwjkwbrdd3tgefnbs4kwz4"
+    },
+    "block_1929_multipart_manifest_320kib": {
+      "ok": true,
+      "height": 1929,
+      "tx_id": "697117e66111cb057813e1451e970c2cd946b99eed50a05765ad37e5ca6bed72172746a602f9f354d2229df056055444",
+      "manifest_cid": "bafkreifuhlb5nq4hjokl7t3edyfzh6yn2drvqdksr5gz5hruwqhh2cqrha",
+      "chunk_cids": [
+        "bafkreiegkschilopdhomw5nxxqxh4ixr6byj35wlvepebgx7rhxdecpoa4",
+        "bafkreig3v6si5nng7rj42h6gs5752zrjvn64xaso6dytl44o5lgz475aki",
+        "bafkreihnzshsdmr4j34x5pgfxlisgybrsylakfy3oais2i3k2u3qt6bwx4"
+      ],
+      "plaintext_bytes": 327680,
+      "sha256": "b7c24200fd34add746ead05ac40a733900fa81356c31aebe3ebcb3a1c608317b"
+    },
+    "block_1930_sealed_self_payment": {
+      "ok": true,
+      "height": 1930,
+      "tx_id": "6fa3b8e19af9772b7011075af87e114ba87d0ae397f18d7738f398d08674a1dac33b0acc72ee0a90a4b42f62305fc4f0",
+      "cid": "bafkreib2ktfa6ducqfyuh4fx627acjfutace7eudkxduceizjetj5bkhdi",
+      "sender": "pfef21b496662a755d19c7c04fc37a8ed8af86a091",
+      "onchain_destination": "pfef21b496662a755d19c7c04fc37a8ed8af86a091",
+      "destination_equals_sender": true,
+      "recipient_absent_from_onchain_account_tx": true,
+      "recipient_accounts_omitted_in_header": true,
+      "bob_discovered_from_sender_account_tx_and_decrypted": true,
+      "fee_atoms": 22,
+      "memo_data_bytes": 68,
+      "memo_total_bytes": 76,
+      "envelope_bytes": 8077,
+      "eve_rejected": "MessageProtocolError: no matching RecipientWrap for recipient_key_id"
+    },
+    "block_1931_sealed_self_payment_clean": {
+      "ok": true,
+      "height": 1931,
+      "tx_id": "0644e520405d20b848edb24ed5e5af609cae22ae218c2b7e281f47857d854e22347e4cbc1e49b03fe10c1c3531e46cbe",
+      "cid": "bafkreihfhilg4s73dp34xvg5njsrln2pl7lbvxk3c4qs3lrsospxukds6e",
+      "sender": "pfef21b496662a755d19c7c04fc37a8ed8af86a091",
+      "onchain_destination": "pfef21b496662a755d19c7c04fc37a8ed8af86a091",
+      "destination_equals_sender": true,
+      "recipient_absent_from_onchain_account_tx": true,
+      "recipient_accounts_omitted_in_header": true,
+      "thread_id_omitted": true,
+      "reply_to_cid_omitted": true,
+      "bob_discovered_from_sender_account_tx_and_decrypted": true,
+      "fee_atoms": 22,
+      "memo_data_bytes": 46,
+      "memo_total_bytes": 54,
+      "envelope_bytes": 8047,
+      "eve_rejected": "MessageProtocolError: no matching RecipientWrap for recipient_key_id"
+    }
+  },
+  "measured_wire_sizes": {
+    "private_1to1_2wraps": {
+      "envelope_bytes": 8162,
+      "memo_data_bytes": 68,
+      "memo_total_bytes": 76
+    },
+    "private_group_3wraps": {
+      "envelope_bytes": 9539
+    },
+    "sealed_direct_2wraps": {
+      "envelope_bytes": 8075
+    },
+    "public_signed_0wraps": {
+      "envelope_bytes": 5488
+    },
+    "multipart_manifest_3wraps": {
+      "envelope_bytes": 9832,
+      "memo_data_bytes": 92,
+      "memo_total_bytes": 100
+    },
+    "sealed_self_payment_2wraps": {
+      "envelope_bytes": 8077,
+      "memo_data_bytes": 68,
+      "memo_total_bytes": 76
+    },
+    "sealed_self_payment_clean_2wraps": {
+      "envelope_bytes": 8047,
+      "memo_data_bytes": 46,
+      "memo_total_bytes": 54
+    }
+  },
+  "negative_controls": {
+    "envelope_tampered_sig_error": "MessageProtocolError: Envelope raw-byte signature verification failed",
+    "envelope_tampered_cid_error": "MessageProtocolError: IPFS CIDv1 raw multibase mismatch",
+    "manifest_chunk_reorder_error": "MessageProtocolError: IPFS CIDv1 raw binary digest mismatch",
+    "manifest_chunk_truncation_error": "MessageProtocolError: block count does not match manifest.chunks length",
+    "chunk_index_aad_splice_error": "MessageProtocolError: XChaCha20-Poly1305 authentication failed",
+    "chunk_1bit_aead_tamper_error": "MessageProtocolError: XChaCha20-Poly1305 authentication failed",
+    "wrong_chain_id_replay_error": "MessageProtocolError: Envelope chain_id mismatch: got 'postfiat-wan-devnet-2', expected 'postfiat-mainnet-1'",
+    "foreign_sender_reanchor_error": "MessageProtocolError: Foreign re-anchor rejected: header.sender_account pf6d2d0a000bb5c1feda7da2df955cfe0a78c788c9 != anchoring tx.from pf31e18f9533fc38839234a90aeb25629ebaac093a",
+    "spoofed_sender_account_pubkey_mismatch_error": "MessageProtocolError: Envelope sender_pubkey address pf31e18f9533fc38839234a90aeb25629ebaac093a != header.sender_account pf6d2d0a000bb5c1feda7da2df955cfe0a78c788c9",
+    "all_9_enforced_in_sdk_open_envelope_or_manifest": true
+  },
+  "final_chain_status": {
+    "chain_id": "postfiat-wan-devnet-2",
+    "genesis_hash": "ce22ca8c932da0998b484483a09647138a30e0bf44408dd49a8d6d452787ad25521aff3ed334da07e150a7233a3e90a9",
+    "height": 1931,
+    "block_tip_hash": "50bee456c3b4ec22e5aef08dd4d2840881473cd739959ab57d33815edd3a26b161eb289ef0663509f2702cedac895ab3",
+    "state_root": "c2cb24725266f7ae5528d7057336f199a3fecdad835cf6157909885038be6f8b496be03d578e9920d484c8381abfe09a",
+    "validator_count": 6,
+    "mempool_pending": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "reconciliation": {
+    "initial_total_atoms": 800000,
+    "final_total_atoms": 799801,
+    "total_fees_burned_atoms": 199,
+    "tx_count": 9,
+    "fee_breakdown": "8 x 22 atoms (54-76 B memos) + 1 x 23 atoms (100 B Block 1929 multipart memo) = 199 atoms",
+    "xwing_key_id_bytes": 32
+  }
+}
