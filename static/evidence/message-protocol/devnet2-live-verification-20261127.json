@@ -147,7 +147,10 @@
     "manifest_chunk_reorder_error": "MessageProtocolError: IPFS CIDv1 raw binary digest mismatch",
     "manifest_chunk_truncation_error": "MessageProtocolError: block count does not match manifest.chunks length",
     "chunk_index_aad_splice_error": "MessageProtocolError: XChaCha20-Poly1305 authentication failed",
-    "chunk_1bit_aead_tamper_error": "MessageProtocolError: XChaCha20-Poly1305 authentication failed"
+    "chunk_1bit_aead_tamper_error": "MessageProtocolError: XChaCha20-Poly1305 authentication failed",
+    "wrong_chain_id_replay_error": "MessageProtocolError: Envelope chain_id mismatch: got 'postfiat-wan-devnet-2', expected 'postfiat-mainnet-1'",
+    "foreign_sender_reanchor_error": "MessageProtocolError: Foreign re-anchor rejected: header.sender_account pf6d2d0a000bb5c1feda7da2df955cfe0a78c788c9 != anchoring tx.from pf31e18f9533fc38839234a90aeb25629ebaac093a",
+    "spoofed_sender_account_pubkey_mismatch_error": "MessageProtocolError: Envelope sender_pubkey address pf31e18f9533fc38839234a90aeb25629ebaac093a != header.sender_account pf6d2d0a000bb5c1feda7da2df955cfe0a78c788c9"
   },
   "final_chain_status": {
     "chain_id": "postfiat-wan-devnet-2",

@@ -20,7 +20,7 @@ tags:
 
 > **Scope & deployment status (27 November 2026):**
 > - **Merged on `main`:** Canonical protobuf schemas (`proto/postfiat/message/v1/message.proto`, [`postfiatl1v2#288`](https://github.com/postfiatorg/postfiatl1v2/pull/288)), Python & JavaScript codecs and x402/MCP facilitator code ([`postfiatl1v2#289`](https://github.com/postfiatorg/postfiatl1v2/pull/289)), and block-explorer decoding views ([`postfiatorg.github.io#56`](https://github.com/postfiatorg/postfiatorg.github.io/pull/56)).
-> - **Verified live on `postfiat-wan-devnet-2` (Blocks `1923–1930`):** **Eight** live `payment_v2` transactions carrying `pf.ptr` v5 memos (7 encrypted messages—including 1-to-1, multi-recipient group, 3-sender thread, direct `SEALED`, **self-payment `SEALED`**, and a 320 KiB 3-chunk encrypted manifest—plus 1 `PUBLIC` signed dispatch), alongside pre-block key-binding checks and 6 local negative tamper controls. The live run exercised the merged `python/postfiat_rpc/message_protocol.py` wire codec using pure-Python reference crypto libraries (`kyber-py==1.2.0`, `dilithium-py==1.5.1`, `pycryptodome`, `cryptography`)—**not** the production constant-time Rust/WASM wallet backend. Full raw receipts are published at [`devnet2-live-verification-20261127.json`](/evidence/message-protocol/devnet2-live-verification-20261127.json).
+> - **Verified live on `postfiat-wan-devnet-2` (Blocks `1923–1930`):** **Eight** live `payment_v2` transactions carrying `pf.ptr` v5 memos (7 encrypted messages—including 1-to-1, multi-recipient group, 3-sender thread, direct `SEALED`, **self-payment `SEALED`**, and a 320 KiB 3-chunk encrypted manifest—plus 1 `PUBLIC` signed dispatch), alongside pre-block key-binding checks and 9 local negative controls (tampering, chunk attacks, cross-chain replay, spoofed sender, and foreign re-anchoring). The live run exercised the merged `python/postfiat_rpc/message_protocol.py` wire codec using pure-Python reference crypto libraries (`kyber-py==1.2.0`, `dilithium-py==1.5.1`, `pycryptodome`, `cryptography`)—**not** the production constant-time Rust/WASM wallet backend. Full raw receipts are published at [`devnet2-live-verification-20261127.json`](/evidence/message-protocol/devnet2-live-verification-20261127.json).
 > - **Built & in review (not yet live on devnet-2):** Sub-second FastPay fee floors and `order_hash` indexing in `account_tx` ([`postfiatl1v2#295`](https://github.com/postfiatorg/postfiatl1v2/pull/295)), browser Rust/WASM crypto ([`postfiatl1v2#303`](https://github.com/postfiatorg/postfiatl1v2/pull/303)), Task Node FastPay reward payouts ([`tasknode#450`](https://github.com/postfiatorg/tasknode/pull/450)), and connecting the x402 facilitator from unit/refusal harnesses to live FastPay validators.
 
 <div class="glance">
@@ -114,6 +114,27 @@ Post-quantum encryption protects ciphertext confidentiality against a future qua
 
 **Critical `SEALED` limitation (`recipient_key_id` linkability):** Even when anchored via a self-payment (so the recipient's address never appears in any block or in the recipient's `account_tx`, as verified in Block `1930`), `XWingEncryptionHeader` still carries a static 32-byte `recipient_key_id` per reader wrap so wallets can find their wrap in $O(1)$ without trial-decapsulating every wrap. If a recipient's `MessageKeyBinding` (mapping `account ↔ xwing_public_key ↔ key_id`) is published in a public directory or on-chain identity record, an observer who joins the directory against IPFS envelopes can still link a `SEALED` envelope back to that recipient's `key_id`. True unlinkable anonymous messaging requires single-use ephemeral KEM keys or trial decapsulation without static `key_id`s, which `postfiat.message.v1` does not claim to provide.
 
+### Signature Scope, Anchor Binding, Re-Anchoring & Key Distribution
+
+- **Exact signed preimage (`envelope_signing_preimage`):** Every envelope signature signs the length-prefixed raw-byte concatenation:
+
+  ```text
+  "postfiat-l1-v2/message-envelope/v1" || 0x00 ||
+  uint32_be(version) ||
+  uint32_be(len(header_bytes)) || header_bytes ||
+  uint32_be(len(encryption_header_bytes)) || encryption_header_bytes ||
+  uint32_be(len(body_bytes)) || body_bytes
+  ```
+
+  Because `header_bytes` encodes `MessageHeader`—which carries `chain_id`, `sender_account`, `created_at_unix_ms`, `visibility`, `schema_name`, `thread_id`, and `reply_to_cid`—the ML-DSA-65 signature binds `chain_id` and `sender_account` for **all** visibilities, including `PUBLIC` messages (where `encryption_header_bytes` is empty). Length-prefixing each section prevents cross-field boundary ambiguity.
+- **Disjoint domain separation across key uses:** Although a wallet reuses its ML-DSA-65 account keypair across L1 transactions, message envelopes, and key bindings, each surface uses a disjoint domain separator: FIPS 204 context `postfiat-l1-v2/tx/v1` for L1 transactions, prefix `postfiat-l1-v2/message-envelope/v1` for envelopes, and prefix `postfiat-l1-v2/message-key-bind/v1` for `MessageKeyBinding` records. A signature from one surface cannot validate on another.
+- **Why signatures are PQ-only (`ML-DSA-65`) while encryption is hybrid (`X-Wing`):** Confidentiality faces a decades-long retroactive ("harvest-now, decrypt-later") exposure window, so hybrid X-Wing hedges both ML-KEM-768 and X25519 for only 32 extra bytes per wrap. Authentication only requires unforgeability *at verification time* before BFT block finalization, and Post Fiat L1v2 accounts are already native ML-DSA-65—using the same account key lets verifiers derive the L1 address directly from `envelope.sender_pubkey` without maintaining a second classical signing key.
+- **Mandatory caller-level anchor binding & re-anchoring rules:** Because the envelope CID must be computed offline *before* creating the anchoring transaction, `tx_id` and block height are **not** inside the signed preimage—and `open_envelope()` in the wire codec verifies only the CID and ML-DSA-65 signature over raw bytes. Every wallet, explorer, and application verifier **must** enforce three additional checks against the L1 transaction context:
+  1. `header.chain_id == expected_chain_id` (stops cross-chain replay, e.g., devnet envelopes re-anchored on mainnet);
+  2. `derive_l1_account_address(envelope.sender_pubkey) == header.sender_account` where address derivation is `"pf" || hex(SHA3-384("postfiat.address.v1\x00" || sender_pubkey)[:20])` (stops a signer from forging another user's `sender_account` in `MessageHeader`); and
+  3. `header.sender_account == anchoring_tx.from` (stops third-party CID re-anchoring: if Eve copies Alice's valid Block `1923` CID into Eve's own transaction, Alice's envelope signature still verifies, so verifiers reject foreign anchors unless `header.sender_account == anchoring_tx.from`—and deduplicate repeated self-anchors by `(cid, sender_account)`).
+- **Key-binding distribution for unfunded (`0 PFT`) wallets:** At onboarding, a `0 PFT` wallet signs its `MessageKeyBinding` (`chain_id`, `account`, `xwing_public_key`, `key_id`, `created_at_unix_ms`, `key_epoch`) with its ML-DSA-65 account key and posts it to Task Node's onboarding registry. Recipients verify `derive_l1_account_address(account_pubkey) == account`, `key_id == SHA-256(xwing_public_key)`, and the ML-DSA-65 signature—so Task Node cannot forge a key binding for an address it does not control. However, until the user funds their wallet and publishes an on-chain identity record, Task Node acts as the distribution directory and could theoretically withhold a binding or serve a stale `key_epoch`; once published on-chain, the on-chain identity record is authoritative and clients cross-check against it.
+
 ### Forward-Secrecy Tradeoff, Key Compromise & Rotation
 
 - **Zero-balance bootstrap vs. forward secrecy:** New users start with `0 PFT` and cannot submit an on-chain identity transaction before receiving their first Task Node reward. To let a brand-new wallet receive an encrypted first payout—and recover message history from one backup phrase—the default bootstrap X-Wing keypair is derived deterministically from the wallet's master seed (`HKDF-SHA256`, domain `postfiat-l1-v2/message-key/v1`), bound by an ML-DSA-65 `MessageKeyBinding` (`postfiat-l1-v2/message-key-bind/v1`).
@@ -121,13 +142,15 @@ Post-quantum encryption protects ciphertext confidentiality against a future qua
 - **Rotation & revocation path:** `MessageKeyBinding` includes a monotonically increasing `key_epoch`. Once a wallet is funded and active, it can publish a fresh non-seed-derived (or rotated-epoch) X-Wing keypair and retire prior epochs so new incoming messages stop encrypting to older keys. However, retiring a key only protects *future* messages; already-anchored ciphertexts remain bound to the key that wrapped them, and automated epoch rotation / revocation UX is still wallet-level rollout work rather than an L1 consensus primitive.
 - **Reader policy:** Task Node is included as an encrypted reader only on Task Node lifecycle/reward schemas that the server must process—never on user-to-user messages or shielded transfers.
 
-### Recipient Discovery (Group & Self-Payment Sealed Messages)
+### Recipient Discovery & Discovery Privacy Tradeoffs
 
-When a message has multiple recipients (e.g., `Alice → [Bob, Charlie]` anchored to `Bob` in Block `1924`) or uses a self-payment anchor (`Charlie → Charlie` in Block `1930`), non-payee recipients will **not** see the transaction in their own `account_tx` history. Discovery relies on one of three mechanisms depending on the application:
+When a message has multiple recipients (e.g., `Alice → [Bob, Charlie]` anchored to `Bob` in Block `1924`) or uses a self-payment anchor (`Charlie → Charlie` in Block `1930`), non-payee recipients will **not** see the transaction in their own `account_tx` history. Each discovery mechanism carries its own metadata tradeoff:
 
-1. **Sender-indexed polling:** Participants in a known channel or contact list poll the sender's `account_tx` (as demonstrated in Block `1930`, where Bob discovers Charlie's self-payment sealed drop from Charlie's `account_tx` and matches his `recipient_key_id`).
-2. **Off-chain relay notification:** An authenticated relay (such as `relay.postfiat.org`, packaged in `ops/nostr-relay/` in `postfiatl1v2#289`) or application server forwards a lightweight `(tx_id, cid)` hint to group members; recipients still verify the CID and ML-DSA-65 signature against L1 before trusting it.
-3. **Indexer key-ID scan:** An opt-in inbox indexer scans `pf.ptr` v5 pointers and indexes `recipient_key_id` tags for subscribed wallets.
+| Discovery Mechanism | How Recipients Learn `(tx_id, cid)` | What Leaks to Infrastructure Observers | Recommended Fit |
+| --- | --- | --- | --- |
+| **Sender-indexed polling** | Poll `account_tx` for known contacts/channels and match `recipient_key_id` (Block `1930`) | RPC node observes which sender addresses a client polls (mitigated by running a local node or batch-polling) | Small trusted groups or local-node users |
+| **Off-chain relay hint** | Relay (`relay.postfiat.org`, `ops/nostr-relay/`) or app server pushes `(tx_id, cid)` hint; client still verifies CID + ML-DSA-65 on L1 | Relay operator learns push timing and subscriber graph (cannot forge or decrypt payloads) | Interactive chats and Task Node notifications |
+| **Opt-in `key_id` indexer** | Indexer scans `pf.ptr` v5 pointers and serves matches for subscribed 32-byte `recipient_key_id`s | Indexer learns subscriber `key_id` watchlists and query timing | Public/semi-public inboxes where convenience outweighs watch-graph privacy |
 
 ### Off-Chain IPFS Pinning & Availability
 
@@ -191,6 +214,9 @@ Each transaction below was signed by the sender's ML-DSA-65 key, anchored via `p
 | **Chunk truncation (`[0, 1]`)** | Block `1929` 3-chunk manifest | `MessageProtocolError: block count does not match manifest.chunks length` |
 | **Chunk-index AAD splice (chunk 1 decrypted under slot 0 AAD)** | Block `1929` chunk 1 (bypassing CID check) | `MessageProtocolError: XChaCha20-Poly1305 authentication failed` |
 | **1-bit ciphertext tamper on chunk 1** | Block `1929` chunk 1 (bypassing CID check) | `MessageProtocolError: XChaCha20-Poly1305 authentication failed` |
+| **Cross-chain replay (`wrong chain_id`)** | Block `1923` envelope verified against `postfiat-mainnet-1` | `MessageProtocolError: Envelope chain_id mismatch: got 'postfiat-wan-devnet-2', expected 'postfiat-mainnet-1'` |
+| **Foreign-sender CID re-anchoring** | Alice's Block `1923` CID verified with Eve as `anchoring_tx.from` | `MessageProtocolError: Foreign re-anchor rejected: header.sender_account pf6d2d… != anchoring tx.from pf31e1…` |
+| **Spoofed `sender_account` in header** | Eve signs with Eve's ML-DSA-65 key claiming Alice's address | `MessageProtocolError: Envelope sender_pubkey address pf31e1… != header.sender_account pf6d2d…` |
 
 ### Python Harness Example (Self-Payment `SEALED` + Sender-Indexed Discovery)
 
@@ -289,7 +315,7 @@ sequenceDiagram
 | --- | --- | --- |
 | **Canonical `.proto` schemas & 48-byte SHA3-384 vectors** | **Merged on `main`** (`223769bdc9`) | [`postfiatl1v2#288`](https://github.com/postfiatorg/postfiatl1v2/pull/288) · `proto/postfiat/message/v1/message.proto` |
 | **Python & JS codecs, x402 facilitator, MCP wrapper, relay packaging** | **Merged on `main`** (`3c10aa0513`) | [`postfiatl1v2#289`](https://github.com/postfiatorg/postfiatl1v2/pull/289) · `python/postfiat_rpc/message_protocol.py` · `wallet-proxy/message-protocol.js` |
-| **Live 6-validator devnet-2 run (`payment_v2`, `pf.ptr` v5)** | **Executed (Blocks `1923–1930`, 8 txs + 6 negative controls)** | [`devnet2-live-verification-20261127.json`](/evidence/message-protocol/devnet2-live-verification-20261127.json) *(test-only Python crypto backends)* |
+| **Live 6-validator devnet-2 run (`payment_v2`, `pf.ptr` v5)** | **Executed (Blocks `1923–1930`, 8 txs + 9 negative controls)** | [`devnet2-live-verification-20261127.json`](/evidence/message-protocol/devnet2-live-verification-20261127.json) *(test-only Python crypto backends)* |
 | **Explorer Message views & technical guide** | **Live on postfiat.org** | [`postfiatorg.github.io#56`](https://github.com/postfiatorg/postfiatorg.github.io/pull/56) · [`/docs/message-protocol/`](/docs/message-protocol/) |
 | **FastPay fee floor & `order_hash` `account_tx` indexing** | **Open PR (CI green, final review)** | [`postfiatl1v2#295`](https://github.com/postfiatorg/postfiatl1v2/pull/295) |
 | **Production Rust/WASM wallet crypto, Task Node FastPay payouts & Mac UI** | **Open PRs (CI green, pending devnet-2 cutover)** | [`postfiatl1v2#303`](https://github.com/postfiatorg/postfiatl1v2/pull/303) · [`tasknode#450`](https://github.com/postfiatorg/tasknode/pull/450) · [`tasknode-apple#41`](https://github.com/postfiatorg/tasknode-apple/pull/41) |
