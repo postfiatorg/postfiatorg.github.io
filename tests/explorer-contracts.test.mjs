@@ -5,7 +5,7 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const C = require('../static/explorer/explorer-contracts.js');
 
-const PINNED_PAYOUT_PUBKEY = 'a1'.repeat(64);
+const PINNED_PAYOUT_PUBKEY = 'a1'.repeat(1952);
 const PINNED_PAYOUT_ACCOUNT = 'pf1111111111111111111111111111111111111111';
 const OUTSIDER_ACCOUNT = 'pf9999999999999999999999999999999999999999';
 
@@ -43,11 +43,18 @@ test('Spoof-proof Task reward badge enforces verified sender + private + pinned 
     visibility: 'private',
     sender_verified: true,
     sender_pubkey_hex: PINNED_PAYOUT_PUBKEY,
+    tx_from: PINNED_PAYOUT_ACCOUNT,
     sender_account: PINNED_PAYOUT_ACCOUNT,
   }, pinned);
   assert.equal(legit.is_task_reward, true);
   assert.equal(legit.label, 'Task reward');
   assert.equal(legit.spoofed_reward, false);
+  const indexed = { visibility: 'private', schema_id: 201, sender_verified: true,
+    pinned_tasknode_payout_key_matched: true, sender_pubkey_hex: PINNED_PAYOUT_PUBKEY,
+    sender_account: PINNED_PAYOUT_ACCOUNT, tx_from: PINNED_PAYOUT_ACCOUNT };
+  assert.equal(C.classifyMessageBadge(indexed).is_task_reward, false);
+  assert.equal(C.classifyMessageBadge({ ...indexed, tx_from: OUTSIDER_ACCOUNT }, pinned).is_task_reward, false);
+  assert.equal(C.classifyMessageBadge({ ...indexed, schema_id: 0, content_kind: 6 }, pinned).is_task_reward, false);
 
   // Outsider spoofing pf.reward.v1 MUST render strictly as Private message
   const spoofed = C.classifyMessageBadge({

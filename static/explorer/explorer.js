@@ -3,6 +3,7 @@
   const root = document.getElementById('ex');
   if (!root) return;
   const C = window.PFTExplorerContracts || {};
+  const payoutPins = { tasknode_payout_pubkeys: [root.dataset.payoutPubkey || ''] };
   const API = (root.dataset.api || '/api/explorer/v1').replace(/\/$/, '');
   const LENS = {
     bridge: 'Bridge',
@@ -55,6 +56,7 @@
   // ── helpers ────────────────────────────────────────────────────────────────
   const esc = (v) => (C.escHtml ? C.escHtml(v) : String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])));
   const short = (v, h = 8, t = 4) => { v = String(v ?? ''); return v.length <= h + t + 1 ? v : `${v.slice(0, h)}…${v.slice(-t)}`; };
+  const shortHtml = (value, head, tail) => esc(short(value, head, tail));
   const num = (v) => (v == null ? '–' : Number(v).toLocaleString('en-US'));
   const units = (atoms, precision = 6, max = 6) => {
     if (atoms == null || atoms === '') return '–';
@@ -71,14 +73,14 @@
   const when = (t) => (t ? `<time datetime="${new Date(t * 1000).toISOString()}" title="${utc(t)}">${ago(t)}</time>` : '');
   const utc = (t) => (t ? new Date(t * 1000).toISOString().replace('T', ' ').slice(0, 19) + ' UTC' : '');
   const whenMs = (ms) => (ms ? when(Number(ms) / 1000) : '');
-  const link = (route, text, cls = '') => `<a href="#${route}"${cls ? ` class="${cls}"` : ''}>${text}</a>`;
+  const link = (route, text, cls = '') => `<a href="#${esc(route)}"${cls ? ` class="${cls}"` : ''}>${text}</a>`;
   const addr = (a, label) => (a ? (label ? `${esc(label)} ` : '') + link(`/account/${a}`, esc(a), 'hash lk') : '–');
   const sent = (o) => { let h = esc(o.sentence); for (const a of o.addrs || []) { const tok = esc(`${a.slice(0, 8)}…${a.slice(-4)}`); if (!h.includes(tok)) continue; h = h.split(tok).join(a.startsWith('pf') ? `<a class="ad" href="#/account/${esc(a)}" title="${esc(a)}">${tok}</a>` : `<a class="ad" href="https://etherscan.io/address/${esc(a)}" target="_blank" rel="noopener" title="${esc(a)}">${tok}</a>`); } return h; };
   const resultTag = (o, always) => o.accepted === false ? `<span class="tag rej" title="${esc(o.code || '')}">Rejected</span>` : o.code === 'filled' ? '<span class="tag fill">Filled</span>' : o.accepted == null ? '<span class="tag prop">No receipt</span>' : always ? '<span class="tag ok">Accepted</span>' : '';
   const levelTag = (e) => `<span class="tag ${e === 'disputed' ? 'rej' : 'lvl'}" title="How far the explorer has checked this record">${esc(e === 'cross-checked' ? 'Cross-checked' : e === 'disputed' ? 'Disputed' : e === 'linked to parent' ? 'Linked to parent' : 'Reported')}</span>`;
   const copyBtn = (v) => `<button class="copy" data-copy="${esc(v)}">Copy</button>`;
   const hashRow = (v) => (v ? `<span class="hash" title="${esc(v)}">${esc(v)}</span>${copyBtn(v)}` : '<span class="muted">–</span>');
-  const etherscan = (e) => { if (!e || !e.tx) return ''; const h = e.tx.startsWith('0x') ? e.tx : '0x' + e.tx; const base = { 1: 'https://etherscan.io', 11155111: 'https://sepolia.etherscan.io', 42161: 'https://arbiscan.io' }[e.chain_id] || 'https://etherscan.io'; return `<a class="hash" href="${base}/tx/${esc(h)}" rel="noopener" target="_blank">${short(h, 10, 6)} ↗</a>`; };
+  const etherscan = (e) => { if (!e || !e.tx) return ''; const h = e.tx.startsWith('0x') ? e.tx : '0x' + e.tx; const base = { 1: 'https://etherscan.io', 11155111: 'https://sepolia.etherscan.io', 42161: 'https://arbiscan.io' }[e.chain_id] || 'https://etherscan.io'; return `<a class="hash" href="${base}/tx/${esc(h)}" rel="noopener" target="_blank">${shortHtml(h, 10, 6)} ↗</a>`; };
   const seals = (block, small) => { const voted = new Set((block.header?.votes || []).map((v) => v.validator)); const all = block.header?.validators || [...voted]; return `<span class="marks${small ? ' small' : ''}">${all.map((v) => `<span class="mark${voted.has(v) ? ' done' : ' none'}${v === block.proposer ? ' prop' : ''}" title="${esc(v)}${voted.has(v) ? ': recorded accepting vote' : ': no vote recorded'}${v === block.proposer ? ' (proposer)' : ''}"><i></i>${small ? '' : `<b>${esc(v.replace('validator-', 'v'))}</b><em>${v === block.proposer ? 'proposed' : voted.has(v) ? 'voted' : 'no vote'}</em>`}</span>`).join('')}</span>`; };
   const STEP = { done: 'done', unknown: 'on Ethereum, not read', pending: 'waiting', 'not-started': 'not started', rejected: 'refused', mismatched: 'mismatch', 'no receipt': 'no receipt', released: 'released' };
   const dots = (steps) => `<span class="marks small">${steps.map((s) => `<span class="mark ${esc(s.state)}" title="${esc(s.label)}: ${esc(STEP[s.state] || s.state)}"><i></i></span>`).join('')}</span>`;
@@ -108,7 +110,7 @@
   }
   const msgBadgeForOp = (o) => {
     if (!o.message) return '';
-    const b = C.classifyMessageBadge ? C.classifyMessageBadge(o.message) : { label: 'Message', cls: 'ok' };
+    const b = C.classifyMessageBadge ? C.classifyMessageBadge(o.message, payoutPins) : { label: 'Message', cls: 'ok' };
     return `<span class="tag ${esc(b.cls)}" title="${b.is_task_reward ? 'Verified official Task Node payout key' : esc(b.label)}">${esc(b.label)}</span>`;
   };
   const opLine = (o, isNew) => `<li class="${isNew ? 'new' : ''}${o.accepted === false ? ' rejected' : ''}"><a class="rowlink" href="#/tx/${esc(o.id)}" aria-label="Open operation in block ${o.height}"></a><span class="h">${o.count > 1 ? `${num(o.first)}–${num(o.height)}` : num(o.height)}<small>${when(o.time)}</small></span><span class="s">${sent(o)}${o.count > 1 ? ` <span class="times">× ${o.count}</span>` : ''}<small>${esc(LENS[o.lens] || o.lens)}${o.journey ? ' · ' + esc(JOURNEY[o.journey.kind] || '') : ''}${o.order_hash ? ' · FastPay' : ''}</small></span><span class="st">${o.message ? msgBadgeForOp(o) : o.lens === 'private' ? '<span class="tag sealed">Sealed</span>' : resultTag(o)}</span><span class="go" aria-hidden="true">→</span></li>`;
@@ -122,7 +124,7 @@
   // ── shared Wave 1 protocol panels (Messages, Identity, NFTs) ───────────────
   function renderMessagePanel(m, opts = {}) {
     if (!m) return '';
-    const badge = C.classifyMessageBadge ? C.classifyMessageBadge(m) : { label: 'Message', cls: 'ok', visibility: 'unknown', sender_verified: false, is_task_reward: false };
+    const badge = C.classifyMessageBadge ? C.classifyMessageBadge(m, payoutPins) : { label: 'Message', cls: 'ok', visibility: 'unknown', sender_verified: false, is_task_reward: false };
     const cid = m.cid_multibase || m.pointer?.cid_multibase || '';
     const schema = m.schema_name || m.header?.schema_name || '';
     const kindCode = m.content_kind ?? m.pointer?.content_kind ?? m.header?.content_kind;
@@ -165,7 +167,7 @@
           ${m.pointer_version === 'v4' ? '<span class="tag prop">Legacy pf.ptr v4</span>' : '<span class="tag ok">pf.ptr v5</span>'}
           ${m.cipher_suite ? `<span class="tag ok">${esc(m.cipher_suite)}</span>` : ''}
         </div>
-        ${!opts.hideLink && m.id ? link(`/message/${esc(m.id)}`, 'Inspect message →', 'lk mono') : ''}
+        ${!opts.hideLink && m.id ? link(`/message/${encodeURIComponent(m.id)}`, 'Inspect message →', 'lk mono') : ''}
       </div>
       ${bodyHtml}
       ${mediaHtml}
@@ -175,7 +177,7 @@
         ${cid ? `<div>Envelope CID (CIDv1 raw)</div><div>${hashRow(cid)}</div>` : ''}
         ${m.sender_account ? `<div>Envelope sender</div><div>${addr(m.sender_account)}</div>` : ''}
         ${orderHash ? `<div>FastPay order hash</div><div>${hashRow(orderHash)}</div>` : ''}
-        ${certDigest ? `<div>FastPay certificate digest</div><div><span class="hash" title="${esc(certDigest)}">${short(certDigest, 16, 8)}</span>${copyBtn(certDigest)} <span class="quiet">(informational)</span></div>` : ''}
+        ${certDigest ? `<div>FastPay certificate digest</div><div><span class="hash" title="${esc(certDigest)}">${shortHtml(certDigest, 16, 8)}</span>${copyBtn(certDigest)} <span class="quiet">(informational)</span></div>` : ''}
       </div>
     </div>`;
   }
@@ -209,8 +211,8 @@
         <div>L1v2 account</div><div>${addr(id.account)}</div>
         <div>Nostr pubkey (x-only)</div><div>${hashRow(id.nostr_pubkey)}</div>
         ${fullHandle ? `<div>Registered handle</div><div class="mono">${esc(fullHandle)}</div>` : ''}
-        ${id.avatar_nft_id ? `<div>Profile NFT avatar</div><div>${link(`/nft/${esc(id.avatar_nft_id)}`, esc(id.avatar_nft_id), 'hash lk')}</div>` : ''}
-        ${id.message_key ? `<div>X-Wing message key</div><div><span class="hash" title="${esc(id.message_key)}">${short(id.message_key, 18, 10)}</span>${copyBtn(id.message_key)} <span class="quiet">1,216 B post-quantum KEM</span></div>` : ''}
+        ${id.avatar_nft_id ? `<div>Profile NFT avatar</div><div>${link(`/nft/${encodeURIComponent(id.avatar_nft_id)}`, esc(id.avatar_nft_id), 'hash lk')}</div>` : ''}
+        ${id.message_key ? `<div>X-Wing message key</div><div><span class="hash" title="${esc(id.message_key)}">${shortHtml(id.message_key, 18, 10)}</span>${copyBtn(id.message_key)} <span class="quiet">1,216 B post-quantum KEM</span></div>` : ''}
         ${id.pq_receive_address ? `<div>Shielded receive address</div><div>${hashRow(id.pq_receive_address)}</div>` : ''}
         ${(id.relays || []).length ? `<div>Relays</div><div>${id.relays.map((r) => `<span class="tag ok">${esc(r)}</span>`).join(' ')}</div>` : ''}
         <div>Minted / updated</div><div class="num">Block ${id.created_at_height ? link(`/block/${id.created_at_height}`, num(id.created_at_height)) : '–'} · updated ${id.updated_at_height ? link(`/block/${id.updated_at_height}`, num(id.updated_at_height)) : '–'}</div>
@@ -340,9 +342,9 @@
       if (typeof v === 'object') return `<span class="mono">${esc(JSON.stringify(v)).slice(0, 600)}</span>`;
       const sv = String(v);
       if (/^pf[0-9a-f]{40}$/.test(sv)) return addr(sv, o.party_labels?.[sv]);
-      if (k.endsWith('asset_id') && sv.length === 96) return `${link(`/coin/${sv}`, esc(o.asset_names?.[sv] || 'asset'))} <span class="hash">${short(sv, 10, 6)}</span>`;
+      if (k.endsWith('asset_id') && sv.length === 96) return `${link(`/coin/${sv}`, esc(o.asset_names?.[sv] || 'asset'))} <span class="hash">${shortHtml(sv, 10, 6)}</span>`;
       if (k === 'nft_id' && sv.length === 96) return link(`/nft/${sv}`, esc(sv), 'hash lk');
-      if (/_hash$|_root$|_id$|nonce|digest|commitment|nullifier|anchor/.test(k) && sv.length > 30) return `<span class="hash" title="${esc(sv)}">${short(sv, 16, 8)}</span>${copyBtn(sv)}`;
+      if (/_hash$|_root$|_id$|nonce|digest|commitment|nullifier|anchor/.test(k) && sv.length > 30) return `<span class="hash" title="${esc(sv)}">${shortHtml(sv, 16, 8)}</span>${copyBtn(sv)}`;
       if (/atoms$|^amount$|_amount$/.test(k) && /^\d+$/.test(sv)) return `<span class="num">${units(sv, prec(k), prec(k))}</span><span class="sub2">${num(sv)} atoms, the ledger's smallest unit</span>`;
       if (k === 'fee') return `<span class="num">${num(sv)}</span> atoms of PFT`;
       return esc(sv);
@@ -361,7 +363,7 @@
         : '';
     return page(head(`Devnet · ${esc(LENS[o.lens] || o.lens)} · ${esc(o.kind.replace(/_/g, ' '))}`, sent(o, true), '',
       `<div class="ex-meta">${o.message ? msgBadgeForOp(o) : ''}${o.lens === 'private' ? '<span class="tag sealed">Sealed</span>' : ''}${resultTag(o, true)}${b ? levelTag(b.evidence) : ''}<span class="label">${link(`/block/${o.height}`, 'Block ' + num(o.height), 'lk')}${b?.time ? ` · ${when(b.time)} · ${esc(utc(b.time))}` : ''}${o.fee != null ? ` · fee ${num(o.fee)} atoms of PFT` : ''}</span></div>
-       <dl class="facts">${o.tx_id ? `<div><dt>${o.order_hash ? 'FastPay order hash' : 'Transaction'}</dt><dd><span class="hash" title="${esc(o.tx_id)}">${short(o.tx_id, 14, 10)}</span>${copyBtn(o.tx_id)}</dd></div>` : ''}${o.certificate_digest ? `<div><dt>Certificate digest</dt><dd><span class="hash" title="${esc(o.certificate_digest)}">${short(o.certificate_digest, 14, 10)}</span>${copyBtn(o.certificate_digest)}</dd></div>` : ''}${b ? `<div><dt>Validator votes</dt><dd><span title="Filled: recorded accepting vote. Empty: no vote recorded. Ringed: proposer.">${seals(b, true)}</span> ${b.votes} of 6, proposed by ${esc(b.proposer)}</dd></div>` : ''}</dl>
+       <dl class="facts">${o.tx_id ? `<div><dt>${o.order_hash ? 'FastPay order hash' : 'Transaction'}</dt><dd><span class="hash" title="${esc(o.tx_id)}">${shortHtml(o.tx_id, 14, 10)}</span>${copyBtn(o.tx_id)}</dd></div>` : ''}${o.certificate_digest ? `<div><dt>Certificate digest</dt><dd><span class="hash" title="${esc(o.certificate_digest)}">${shortHtml(o.certificate_digest, 14, 10)}</span>${copyBtn(o.certificate_digest)}</dd></div>` : ''}${b ? `<div><dt>Validator votes</dt><dd><span title="Filled: recorded accepting vote. Empty: no vote recorded. Ringed: proposer.">${seals(b, true)}</span> ${b.votes} of 6, proposed by ${esc(b.proposer)}</dd></div>` : ''}</dl>
        ${o.accepted === false ? `<p class="sub ox">The network refused this operation: ${esc(o.message || o.code)}.</p>` : ''}`, 'sentence') +
       msgSection + priv + journeyPanel(d.journey) +
       (grouped.length ? section('Parties') + `<div class="kv">${grouped.map(([a, roles]) => `<div>${esc(roles.join(', ').replace(/_/g, ' '))}</div><div>${addr(a, o.party_labels?.[a])}</div>`).join('')}</div>` : '') +
@@ -381,7 +383,7 @@
     const held = (live.lines || []).filter((l) => Number(l.balance) > 0); const empty = (live.lines || []).length - held.length;
     const known = (l) => l.listed || (l.code === 'PFUSDC' && l.issuer === 'pf23d8831301aa1cce6fdd7bf4a2db2aead1619ba8');
     const main = held.filter(known).sort((a, b) => (a.code === 'PFUSDC') - (b.code === 'PFUSDC')), other = held.filter((l) => !known(l)); const pf = main.filter((l) => l.code === 'PFUSDC');
-    const lineRow = (l) => `<tr><td>${link(`/coin/${l.asset_id}`, esc(l.code), 'lk')} ${l.listed ? '<span class="tag lvl">Listed NAVCoin</span>' : known(l) ? `<span class="tag lvl">Bridge series ${esc(l.asset_id.slice(0, 4))}</span>` : '<span class="tag prop">Unlisted</span>'} <span class="hash" title="${esc(l.asset_id)}">asset ${short(l.asset_id, 8, 4)}</span></td><td class="r num">${fixed(l.balance, l.precision)}</td></tr>`;
+    const lineRow = (l) => `<tr><td>${link(`/coin/${l.asset_id}`, esc(l.code), 'lk')} ${l.listed ? '<span class="tag lvl">Listed NAVCoin</span>' : known(l) ? `<span class="tag lvl">Bridge series ${esc(l.asset_id.slice(0, 4))}</span>` : '<span class="tag prop">Unlisted</span>'} <span class="hash" title="${esc(l.asset_id)}">asset ${shortHtml(l.asset_id, 8, 4)}</span></td><td class="r num">${fixed(l.balance, l.precision)}</td></tr>`;
     const identity = d.identity || idRes?.identity || null;
     const acctNfts = d.nfts || nftsRes?.nfts || [];
     return page(head(`Devnet · account${d.label ? ' · ' + esc(d.label) : ''}`, `<span class="mono" style="font-size:.46em;letter-spacing:0">${esc(a)}</span>${copyBtn(a)}`,
@@ -414,17 +416,17 @@
     const items = d?.messages || [];
     const listHtml = items.length
       ? `<ul class="stream">${items.map((m) => {
-          const badge = C.classifyMessageBadge ? C.classifyMessageBadge(m) : { label: 'Message', cls: 'ok' };
+          const badge = C.classifyMessageBadge ? C.classifyMessageBadge(m, payoutPins) : { label: 'Message', cls: 'ok' };
           const idKey = m.id || m.order_hash || m.tx_id;
           const title = badge.is_task_reward
-            ? `Task reward${m.amount_display ? ' · ' + esc(m.amount_display) : ''}${m.recipient_account ? ` to ${short(m.recipient_account, 8, 4)}` : ''}`
+            ? `Task reward${m.amount_display ? ' · ' + esc(m.amount_display) : ''}${m.recipient_account ? ` to ${shortHtml(m.recipient_account, 8, 4)}` : ''}`
             : badge.visibility === 'public' && m.summary
               ? esc(m.summary)
               : `${esc(badge.label)}${m.schema_name ? ' · ' + esc(m.schema_name) : ''}`;
           return `<li>
             <a class="rowlink" href="#/message/${esc(idKey)}" aria-label="Open message ${esc(idKey)}"></a>
             <span class="h">${m.height ? num(m.height) : 'FastPay'}<small>${when(m.time)}</small></span>
-            <span class="s">${title}<small>${esc(m.pointer_version === 'v4' ? 'pf.ptr v4' : 'pf.ptr v5')}${m.order_hash ? ' · FastPay order ' + short(m.order_hash, 10, 6) : ''}${m.cid_multibase ? ' · ' + short(m.cid_multibase, 12, 6) : ''}</small></span>
+            <span class="s">${title}<small>${esc(m.pointer_version === 'v4' ? 'pf.ptr v4' : 'pf.ptr v5')}${m.order_hash ? ' · FastPay order ' + shortHtml(m.order_hash, 10, 6) : ''}${m.cid_multibase ? ' · ' + shortHtml(m.cid_multibase, 12, 6) : ''}</small></span>
             <span class="st"><span class="tag ${esc(badge.cls)}">${esc(badge.label)}</span>${badge.sender_verified ? ' <span class="tag lvl">Verified</span>' : ''}</span>
             <span class="go" aria-hidden="true">→</span>
           </li>`;
@@ -448,16 +450,16 @@
     if (!d) {
       const txFallback = await getOptional(`/tx/${encodeURIComponent(id)}`);
       if (txFallback) return tx(id);
-      return page(head('Devnet · Message', `Message ${short(id, 14, 10)}`, 'This message pointer is not in the explorer index yet.', '') +
+      return page(head('Devnet · Message', `Message ${shortHtml(id, 14, 10)}`, 'This message pointer is not in the explorer index yet.', '') +
         checkPanel('reported', `{"method":"tx","params":{"tx_id":"${id}"}}`, 'returns the transaction or FastPay order_hash receipt with raw memos') +
         `<div class="btns" style="margin-top:20px">${link('/messages', '← All messages', 'btn')}</div>`);
     }
     const m = d.message || d;
-    const badge = C.classifyMessageBadge ? C.classifyMessageBadge(m) : { label: 'Message', cls: 'ok' };
+    const badge = C.classifyMessageBadge ? C.classifyMessageBadge(m, payoutPins) : { label: 'Message', cls: 'ok' };
     return page(head(`Devnet · Message · ${esc(m.pointer_version === 'v4' ? 'pf.ptr v4' : 'pf.ptr v5')}`,
       esc(badge.is_task_reward ? 'Verified Task reward payout' : (m.summary || badge.label)),
       m.height ? `Anchored at block ${num(m.height)}${m.time ? ' · ' + utc(m.time) : ''}.` : '',
-      `<div class="ex-meta">${m.tx_id ? link(`/tx/${esc(m.tx_id)}`, 'Open transaction →', 'btn sm') : ''}${link('/messages', '← All messages', 'btn sm')}</div>`) +
+      `<div class="ex-meta">${m.tx_id ? link(`/tx/${encodeURIComponent(m.tx_id)}`, 'Open transaction →', 'btn sm') : ''}${link('/messages', '← All messages', 'btn sm')}</div>`) +
       renderMessagePanel(m, { hideLink: true }) +
       `<details class="fold"><summary>Raw envelope metadata</summary><pre class="raw">${json(m)}</pre></details>` +
       checkPanel(m.evidence || 'reported', `{"method":"tx","params":{"tx_id":"${m.order_hash || m.tx_id || id}"}}`, 'returns the anchored transaction or FastPay order_hash receipt'));
@@ -520,7 +522,7 @@
       `<div class="ex-meta">
         <span class="tag ${authorized ? 'lvl' : 'rej'}">${authorized ? 'Pinned authority verified' : 'Unauthorized anchor'}</span>
         <span class="tag ok">${esc(GOV_STATE_LABELS[s.state || minutes.state] || s.state || 'Published')}</span>
-        ${s.anchor_tx_id ? link(`/tx/${esc(s.anchor_tx_id)}`, 'Anchor transaction →', 'btn sm') : ''}
+        ${s.anchor_tx_id ? link(`/tx/${encodeURIComponent(s.anchor_tx_id)}`, 'Anchor transaction →', 'btn sm') : ''}
         ${link('/governance', '← Governance Archive', 'btn sm')}
       </div>`) +
       (!authorized ? '<div class="ex-banner">Warning: this session was not anchored by a pinned authorized governance account.</div>' : '') +
@@ -616,7 +618,7 @@
   async function nftDetail(nftId) {
     const d = await getOptional(`/nft/${encodeURIComponent(nftId)}`);
     if (!d) {
-      return page(head('Devnet · NFT', `NFT ${short(nftId, 14, 10)}`, 'This NFT is not in the explorer index yet.', '') +
+      return page(head('Devnet · NFT', `NFT ${shortHtml(nftId, 14, 10)}`, 'This NFT is not in the explorer index yet.', '') +
         checkPanel('reported', `{"method":"nft_info","params":{"nft_id":"${nftId}"}}`, 'returns the on-chain NFT record directly from a validator') +
         `<div class="btns" style="margin-top:20px">${link('/nfts', '← All NFTs', 'btn')}</div>`);
     }
@@ -697,7 +699,7 @@
             <td>${link(`/identity/${encodeURIComponent(fullHandle || id.account)}`, esc(fullHandle || short(id.account, 10, 6)), 'lk')}</td>
             <td><span class="tag ok">${esc(id.identity_kind || 'human')}</span></td>
             <td>${addr(id.account)}</td>
-            <td class="mono">${short(id.nostr_pubkey, 10, 6)}</td>
+            <td class="mono">${shortHtml(id.nostr_pubkey, 10, 6)}</td>
             <td class="num">${num((id.links || []).length)}</td>
             <td><span class="tag ${id.status === 'revoked' ? 'rej' : 'lvl'}">${esc(id.status || 'active')}</span></td>
           </tr>`;
@@ -739,7 +741,7 @@
     const id = d.identity;
     const fullHandle = id.handle ? `${id.handle}@${id.registered_namespace || 'tasknode.postfiat.org'}` : id.account;
     return page(head('Devnet · Pillar 6 · Identity Card', esc(fullHandle), `On-chain ${esc(id.identity_kind || 'human')} identity anchored on ${esc(d.chain_id || 'postfiatl1v2')}.`,
-      `<div class="ex-meta">${link(`/account/${esc(id.account)}`, 'Open account →', 'btn sm')}${link('/identities', '← Search identities', 'btn sm')}</div>`) +
+      `<div class="ex-meta">${link(`/account/${encodeURIComponent(id.account)}`, 'Open account →', 'btn sm')}${link('/identities', '← Search identities', 'btn sm')}</div>`) +
       renderIdentityCard(id, {
         compromised_nostr_pubkey: d.compromised_nostr_pubkey,
         validatorStates: d.validator_states,

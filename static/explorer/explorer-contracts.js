@@ -96,7 +96,7 @@
     if (!msg || typeof msg !== 'object') return 'unknown';
     if (msg.pointer && typeof msg.pointer.flags === 'number') {
       const checked = validatePointerFlags(msg.pointer.flags);
-      if (checked.valid) return checked.visibility;
+      return checked.valid ? checked.visibility : 'unknown';
     }
     const raw = String(msg.visibility || msg.header?.visibility || '').toLowerCase();
     if (raw === 'public' || raw === 'visibility_public') return 'public';
@@ -121,17 +121,14 @@
     const kind = Number(msg?.content_kind ?? msg?.pointer?.content_kind ?? msg?.header?.content_kind ?? 0);
     const senderVerified = msg?.sender_verified === true;
 
-    const isRewardSchema = schema === 'pf.reward.v1' || schemaId === 201 || kind === 6;
+    const isRewardSchema = (schema === 'pf.reward.v1' && (!schemaId || schemaId === 201)) || (!schema && schemaId === 201);
 
-    let pinnedMatch = msg?.pinned_tasknode_payout_key_matched === true;
-    if (!pinnedMatch && pinnedConfig) {
-      const pk = String(msg?.sender_pubkey_hex || msg?.envelope?.sender_pubkey_hex || '').toLowerCase();
-      const acc = String(msg?.sender_account || msg?.header?.sender_account || '').toLowerCase();
-      const pubkeys = (pinnedConfig.tasknode_payout_pubkeys || []).map((x) => String(x).toLowerCase());
-      const accounts = (pinnedConfig.tasknode_payout_accounts || []).map((x) => String(x).toLowerCase());
-      if (pk && pubkeys.includes(pk)) pinnedMatch = true;
-      else if (acc && accounts.includes(acc)) pinnedMatch = true;
-    }
+    const pk = String(msg?.sender_pubkey_hex || msg?.envelope?.sender_pubkey_hex || '').toLowerCase();
+    const account = msg?.header?.sender_account || msg?.sender_account;
+    const txSender = msg?.tx?.from || msg?.tx_from;
+    const pinnedMatch = /^[0-9a-f]{3904}$/.test(pk) && typeof account === 'string' &&
+      account.length > 0 && account === txSender &&
+      (pinnedConfig?.tasknode_payout_pubkeys || []).some((key) => String(key).toLowerCase() === pk);
 
     if (senderVerified && vis === 'private' && isRewardSchema && pinnedMatch) {
       return {
