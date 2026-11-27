@@ -528,11 +528,16 @@ synched: True
 
 Upgrades are announced in the validator Discord channel. Run the commands from the node directory, the one that holds `docker-compose.yml`. Anywhere else, Docker Compose fails with `no configuration file provided: not found`.
 
-Before pulling, record the image the node runs now, so you can return to it if the new release misbehaves. This writes a dated file into the node directory with the image ID and its registry digest:
-
 ```bash
 cd "$POSTFIATD_DIR"
 grep 'image:' docker-compose.yml
+```
+
+The `image:` line must end in `-light-latest`. If an earlier version of this guide led you to pin a version number such as `testnet-light-1.0.4`, change the line back to `agtipft/postfiatd:${NETWORK:-devnet}-light-latest` before pulling. A pinned node is skipped by `docker compose pull` and stays on the old release without any error.
+
+Before pulling, record the image the node runs now, so you can return to it if the new release misbehaves. This writes a dated file into the node directory with the image ID and its registry digest:
+
+```bash
 REC="pre-upgrade-$(date -u +%Y%m%dT%H%M%SZ).txt"
 IMAGE_ID=$(docker inspect postfiatd --format '{{.Image}}')
 REPO_DIGEST=$(docker image inspect "$IMAGE_ID" --format '{{index .RepoDigests 0}}')
@@ -547,8 +552,6 @@ The last line must print `recorded pre-upgrade-...txt`. If it prints nothing, th
 docker compose pull
 docker compose up -d
 ```
-
-The `image:` line must end in `-light-latest`. If an earlier version of this guide led you to pin a version number such as `testnet-light-1.0.4`, change the line back to `agtipft/postfiatd:${NETWORK:-devnet}-light-latest` before pulling. A pinned node is skipped by `docker compose pull` and stays on the old release without any error.
 
 If you do not remember where the node directory is, the running container knows:
 
@@ -571,30 +574,37 @@ docker exec postfiatd curl -s http://localhost:5005/ -X POST \
 
 Roll back only when the new release is clearly at fault and the validator channel has not announced a fix. A rollback runs the older release against a database the newer one has already written. If the release's announcement or its document under `docs/` mentions a database, config or protocol format change, do not roll back on your own; ask in the validator Discord channel first.
 
-The rollback pins the old image by digest in `docker-compose.override.yml`, which Docker Compose reads automatically next to `docker-compose.yml`. The downloaded `docker-compose.yml` stays unchanged. If an override file already exists, it holds your own settings: the first command stops, and you must add the `image:` line under `services: postfiatd:` by hand instead of overwriting the file.
+The rollback pins the old image by digest in `docker-compose.override.yml`, which Docker Compose reads automatically next to `docker-compose.yml`. The downloaded `docker-compose.yml` stays unchanged. Set `REC` to the record written before the upgrade you are undoing:
 
 ```bash
 cd "$POSTFIATD_DIR"
 ls pre-upgrade-*.txt
-REC=pre-upgrade-YYYYMMDDTHHMMSSZ.txt   # the record written before the upgrade you are undoing
-test ! -e docker-compose.override.yml || { echo "docker-compose.override.yml exists: edit it by hand"; false; }
+REC=pre-upgrade-YYYYMMDDTHHMMSSZ.txt
 REPO_DIGEST=$(sed -n 's/^repo_digest=//p' "$REC")
-printf 'services:\n  postfiatd:\n    image: %s\n' "$REPO_DIGEST" > docker-compose.override.yml
-docker compose config | grep 'image:'
-docker compose up -d
+if [ -e docker-compose.override.yml ]; then
+  echo "docker-compose.override.yml exists: not changed, add the image line by hand"
+elif [ -z "$REPO_DIGEST" ]; then
+  echo "no repo_digest in $REC: nothing changed"
+else
+  printf 'services:\n  postfiatd:\n    image: %s\n' "$REPO_DIGEST" > docker-compose.override.yml
+  docker compose config | grep 'image:'
+  docker compose up -d
+fi
 docker inspect postfiatd --format '{{.Image}}'
 sed -n 's/^image_id=//p' "$REC"
 ```
 
 `docker compose config` must show the `@sha256:` digest from the record, and the last two lines must print the same image ID. Then run the `server_info` check above: `server_state` should return to `full` (or `proposing`) and `build_version` should show the old release.
 
-While the override exists the node is pinned: `docker compose pull` leaves it on the recorded image, the same silent behavior as a pinned version tag. Keep the pin only until the fixed release is announced.
+If an override file already exists, it holds your own settings, so the block leaves it and the node unchanged and the last two lines differ. Add `image: <repo_digest from the record>` to the `postfiatd` service in that file by hand, then run `docker compose up -d` and compare the two image IDs again.
+
+While the override pins the image, `docker compose pull` leaves the node on the recorded image, the same silent behavior as a pinned version tag. Keep the pin only until the fixed release is announced.
 
 The old image normally stays on the host after an upgrade, so the rollback needs no download. `docker image prune` deletes it, because the pull moved the `-light-latest` tag to the new image. Do not prune images until you are satisfied with an upgrade. If the old image is gone, `docker compose up -d` downloads it again by digest, which works only while Docker Hub still holds that digest.
 
 ### Returning to the Rolling Tag
 
-When the fixed release is announced, remove the override this procedure created and upgrade as usual. Record the running image first, as at the start of this section, so this upgrade can be undone too.
+When the fixed release is announced, record the running image as at the start of this section, so this upgrade can be undone too. Then remove the override this procedure created and upgrade as usual. If you added the `image:` line to your own override file instead, delete only that line rather than the file.
 
 ```bash
 cd "$POSTFIATD_DIR"
