@@ -104,9 +104,12 @@ Every tagged public release (`linux-x86_64` and `linux-aarch64`) publishes:
 ### Pin the Release Keyset and Verify the Binary
 
 1. Install the pinned 2-of-3 release keyset (`postfiat.release_keyset.v1`) at `/etc/postfiat/release-keyset.json` (`0644`, `root:root`) and the 3-observer trust keyset at `/etc/postfiat/observer-keyset.json` (`0644`, `root:root`). Verify keyset fingerprints out-of-band against the signed release announcement.
-2. Fetch the release manifest and architecture-matched binary:
+2. Provision a previously authenticated release verifier at `/usr/local/libexec/postfiat-release-verifier`, owned by root. This is a trusted build of `postfiat-node` with the `release-manifest-verify` command. On first installation it must come through an independently authenticated distribution or reproducible build. Keep it separate from the candidate. When the verifier and pinned keyset are available, run these commands in Bash:
 
 ```bash
+set -euo pipefail
+stage=$(mktemp -d)
+trap 'rm -rf -- "$stage"' EXIT
 ARCH="$(uname -m)"
 case "$ARCH" in
   x86_64)  PF_ARCH="linux-x86_64" ;;
@@ -115,19 +118,18 @@ case "$ARCH" in
 esac
 
 RELEASE_BASE="https://releases.postfiat.org/latest"
-curl -fsSL "$RELEASE_BASE/release-manifest.json" -o /tmp/release-manifest.json
-curl -fsSL "$RELEASE_BASE/postfiat-node-${PF_ARCH}" -o /tmp/postfiat-node
-chmod 0755 /tmp/postfiat-node
+curl -fsSL "$RELEASE_BASE/release-manifest.json" -o "$stage/release-manifest.json"
+curl -fsSL "$RELEASE_BASE/postfiat-node-${PF_ARCH}" -o "$stage/postfiat-node"
+
 
 # Fail-closed 2-of-3 ML-DSA-65 signature + SHA-256 verification before installing:
-/tmp/postfiat-node deployment-manifest-verify \
-  --manifest-file /tmp/release-manifest.json \
-  --trusted-publisher-key-file /etc/postfiat/release-keyset.json \
-  --runtime-binary-file /tmp/postfiat-node
+/usr/local/libexec/postfiat-release-verifier release-manifest-verify \
+  --manifest-file "$stage/release-manifest.json" \
+  --keyset-file /etc/postfiat/release-keyset.json \
+  --runtime-binary-file "$stage/postfiat-node"
 
-sudo install -m 0755 -o root -g root /tmp/postfiat-node /usr/local/bin/postfiat-node
-sudo install -m 0644 -o root -g root /tmp/release-manifest.json /etc/postfiat/release-manifest.json
-rm -f /tmp/postfiat-node /tmp/release-manifest.json
+sudo install -m 0755 -o root -g root "$stage/postfiat-node" /usr/local/bin/postfiat-node
+sudo install -m 0644 -o root -g root "$stage/release-manifest.json" /etc/postfiat/release-manifest.json
 ```
 
 ---
@@ -267,9 +269,9 @@ StartLimitBurst=5
 Type=simple
 User=postfiat-rpc
 Group=postfiat-rpc
-ExecStartPre=/usr/local/bin/postfiat-node deployment-manifest-verify \
+ExecStartPre=/usr/local/libexec/postfiat-release-verifier release-manifest-verify \
   --manifest-file /etc/postfiat/release-manifest.json \
-  --trusted-publisher-key-file /etc/postfiat/release-keyset.json \
+  --keyset-file /etc/postfiat/release-keyset.json \
   --runtime-binary-file /usr/local/bin/postfiat-node
 ExecStart=/usr/local/bin/postfiat-node rpc-serve \
   --rpc-profile public-replica \
