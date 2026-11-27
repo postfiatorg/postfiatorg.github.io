@@ -681,6 +681,7 @@ sudo systemctl disable --now postfiat-healthcheck.timer
 sudo rm -f /etc/systemd/system/postfiat-healthcheck.timer /etc/systemd/system/postfiat-healthcheck.service
 sudo rm -rf /etc/systemd/system/postfiat-healthcheck.service.d
 sudo rm -f /usr/local/bin/postfiat-healthcheck /etc/default/postfiat-healthcheck
+sudo rm -f /var/lib/systemd/timers/stamp-postfiat-healthcheck.timer
 sudo systemctl daemon-reload
 sudo systemctl reset-failed postfiat-healthcheck.service 2>/dev/null || true
 ```
