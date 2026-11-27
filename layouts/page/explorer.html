@@ -11,7 +11,7 @@
     <a class="ex-title" href="#/">Explorer</a>
     <form class="ex-search" id="ex-search" role="search">
       <label class="visually-hidden" for="ex-q">Search</label>
-      <input id="ex-q" type="search" autocomplete="off" spellcheck="false" placeholder="Block, tx, address, coin">
+      <input id="ex-q" type="search" autocomplete="off" spellcheck="false" placeholder="Block, tx, address, coin, handle, NFT">
       <button type="submit" aria-label="Search">→</button>
     </form>
     <div class="ex-pulse" id="ex-pulse" aria-live="polite"><span class="dot"></span>Connecting</div>
@@ -24,6 +24,7 @@
   </div>
 </main>
 {{ partial "ink/foot.html" . }}
+<script src="{{ "explorer/explorer-contracts.js" | relURL }}?v={{ now.Unix }}" defer></script>
 <script src="{{ "explorer/explorer.js" | relURL }}?v={{ now.Unix }}" defer></script>
 </body>
 </html>
