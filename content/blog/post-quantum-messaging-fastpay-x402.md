@@ -1,8 +1,8 @@
 ---
-title: "Post-Quantum Messaging, FastPay & x402 on Post Fiat L1v2"
+title: "Post-Quantum Messaging, FastPay & x402 on the Post Fiat Ledger"
 date: 2026-11-27T00:00:00Z
 draft: false
-summary: "How Post Fiat L1v2 anchors post-quantum encrypted messages, FastPay payouts, and x402 agent payments using canonical protobufs, X-Wing + key-committing AEAD, blinded SEALED tags, and epoch-rotatable keys."
+summary: "How the Post Fiat Ledger anchors post-quantum encrypted messages, FastPay payouts, and x402 agent payments using canonical protobufs, X-Wing + key-committing AEAD, blinded SEALED tags, and epoch-rotatable keys."
 author: "Post Fiat"
 categories:
   - Engineering
@@ -19,7 +19,7 @@ tags:
 
 When wallets, validators, and AI agents coordinate work on a blockchain, payments rarely travel alone. A task payout carries a receipt; a governance vote carries a disclosure packet; two wallets exchange an encrypted thread. Putting kilobytes of encrypted payloads directly into consensus blocks does not scale—especially with post-quantum cryptography, where a single ML-DSA-65 public key and signature already take 5,261 bytes.
 
-Post Fiat L1v2 splits every message into two parts:
+The Post Fiat Ledger splits every message into two parts:
 
 1. **A compact on-chain pointer (51–100 bytes)** inside a normal transaction memo, anchoring existence, ordering, and a cryptographic fingerprint.
 2. **A signed, optionally encrypted off-chain envelope (6,883 bytes for a 1-reader private message)** stored as a content-addressed IPFS block (CIDv1 `raw`), fetched and decrypted locally by wallets—never on a block explorer.
@@ -36,7 +36,7 @@ Post Fiat L1v2 splits every message into two parts:
 ### Key Terms
 
 - **`pf.ptr` memo:** A structured Post Fiat transaction memo (`memo_type = "pf.ptr"`, `memo_format = "v5"`) carrying a compact protobuf `Pointer` to an off-chain IPFS envelope or an inline request hash.
-- **`payment_v2`:** Post Fiat L1v2's standard consensus-finalized account transfer transaction.
+- **`payment_v2`:** Post Fiat's standard consensus-finalized account transfer transaction.
 - **FastPay:** Post Fiat's consensusless payment lane for owned objects, where a payer collects `>= 2f+1` validator ML-DSA-65 approval votes directly to assemble a finality certificate without waiting for block consensus.
 - **Task Node:** The application server that coordinates contributor work on Post Fiat and settles `PFT` reward payouts over FastPay with attached encrypted receipts.
 
@@ -87,7 +87,7 @@ preimage = "postfiat-l1-v2/message-envelope/v1\x00"
         || uint32_be(len(body_bytes))              || body_bytes
 ```
 
-3. **Stay strictly under the 256-byte on-chain memo cap:** `postfiatl1v2` caps transactions at 4 memos, 256 decoded bytes per memo, 512 total memo bytes, and lowercase hex only. A `pf.ptr` v5 memo uses 6 bytes for `memo_type` (`"pf.ptr"`), 2 bytes for `memo_format` (`"v5"`), and `memo_data` for canonical protobuf `Pointer` bytes carrying either a 36-byte binary CIDv1 `raw` identifier (`0x01 0x55 0x12 0x20 || sha256`) or a 32-byte inline SHA-256 `request_hash`. Total memo sizes (type + format + `memo_data`) are:
+3. **Stay strictly under the 256-byte on-chain memo cap:** The Post Fiat Ledger caps transactions at 4 memos, 256 decoded bytes per memo, 512 total memo bytes, and lowercase hex only. A `pf.ptr` v5 memo uses 6 bytes for `memo_type` (`"pf.ptr"`), 2 bytes for `memo_format` (`"v5"`), and `memo_data` for canonical protobuf `Pointer` bytes carrying either a 36-byte binary CIDv1 `raw` identifier (`0x01 0x55 0x12 0x20 || sha256`) or a 32-byte inline SHA-256 `request_hash`. Total memo sizes (type + format + `memo_data`) are:
    - **51 bytes** (`43 B` `memo_data`) for an inline x402 32-byte SHA-256 `request_hash`
    - **54 bytes** (`46 B` `memo_data`) for an unthreaded IPFS pointer
    - **67 bytes** (`59 B` `memo_data`) with an 11-byte thread ID (`"thread-4021"`), or **76 bytes** (`68 B` `memo_data`) with a 20-byte thread ID
@@ -185,7 +185,7 @@ Both **network I/O** and **CPU** matter at scale. Scanning 1,000 2-reader `SEALE
 
 ## 4. FastPay Anchoring & Crash-Safe Payouts
 
-Most messaging traffic on Post Fiat L1v2 anchors alongside **FastPay** transfers rather than waiting for full consensus blocks. On Post Fiat L1v2, `1 PFT = 1,000,000 atoms`, and FastPay enforces a Sui-inspired minimum fee:
+Most messaging traffic on the Post Fiat Ledger anchors alongside **FastPay** transfers rather than waiting for full consensus blocks. On Post Fiat, `1 PFT = 1,000,000 atoms`, and FastPay enforces a Sui-inspired minimum fee:
 
 ```text
 min_fee_atoms = 25 + ceil(tx_bytes / 512) + max(0, outputs - inputs) * 1,000 + inputs
