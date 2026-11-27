@@ -227,7 +227,9 @@ Three design details bound risk for autonomous agents:
 
 ## 6. Benchmarks & SDK Verification
 
-All microbenchmarks below were measured single-threaded in **`Node.js v20.20.2`** using pure-JS **`@noble/post-quantum@0.7.1`** on an **`AMD EPYC` `linux/x64`** host, warmed up before timing (15 warmup iterations per crypto benchmark). The x402 row runs the full client, facilitator, and four mock validator RPC endpoints over **localhost HTTP in one Node.js process**—measuring pure-JS cryptographic overhead and HTTP framing rather than WAN latency or parallel Rust validator execution.
+### Cryptographic Microbenchmarks (Localhost, Pure JS)
+
+Measured single-threaded in **`Node.js v20.20.2`** using pure-JS **`@noble/post-quantum@0.7.1`** on an **`AMD EPYC` `linux/x64`** host, warmed up before timing (15 warmup iterations per crypto benchmark). The localhost x402 row runs client, facilitator, and four mock validator RPC endpoints in one Node.js process to isolate pure-JS cryptographic overhead and HTTP framing:
 
 | Operation (`Node.js v20.20.2`, `@noble/post-quantum@0.7.1`) | Samples | p50 | p95 | Throughput |
 | --- | ---: | ---: | ---: | ---: |
@@ -237,11 +239,24 @@ All microbenchmarks below were measured single-threaded in **`Node.js v20.20.2`*
 | Blinded `SEALED` 2-reader `sealEnvelope` / `openEnvelope`<sup>2</sup> | `100` | `12.16 ms` / `4.85 ms` | `22.26 ms` / `5.46 ms` | `73.5` / `201.8 ops/s` |
 | `PRIVATE` 10-reader `sealEnvelope` / `openEnvelope` | `100` | `31.67 ms` / `5.23 ms` | `47.57 ms` / `6.22 ms` | `29.4` / `186.3 ops/s` |
 | `320 KiB` 3-chunk `Manifest` (`128 KiB` chunks) split / reassemble<sup>3</sup> | `50` | `3.12 ms` / `2.63 ms` | `3.41 ms` / `3.97 ms` | `330.9` / `351.9 ops/s` |
-| x402 `402 → FastPay ML-DSA → 3-of-4 quorum → 200`<sup>4</sup> | `50` | `192.07 ms` | `250.79 ms` | `5.1 calls/s` *(single-thread)* |
+| x402 `402 → FastPay ML-DSA → 3-of-4 quorum → 200` (localhost mock)<sup>4</sup> | `50` | `192.07 ms` | `250.79 ms` | `5.1 calls/s` *(single-thread)* |
 
-<sub><sup>1</sup> ML-DSA-65 signing uses rejection sampling, producing the wider p50-to-p95 spread (5.66 ms vs. 14.57 ms) and sample-to-sample variance visible across `sealEnvelope` runs.<br/><sup>2</sup> `SEALED` trial-decapsulation stops at the first matching blinded tag (4.85 ms on a first-slot hit); each additional non-matching wrap adds one 2.60 ms X-Wing decapsulation, scaling linearly with reader count.<br/><sup>3</sup> Exercised with 128 KiB chunks (3 chunks) to benchmark multi-chunk manifest assembly directly, although single envelopes allow up to 1 MiB.<br/><sup>4</sup> Single-process localhost simulation runs client, facilitator, and all four committee validators serially in one JS thread (~30+ pure-JS ML-DSA-65 sign/verify calls per round trip); production validators sign and verify in parallel in native Rust.</sub>
+<sub><sup>1</sup> ML-DSA-65 signing uses rejection sampling, producing the wider p50-to-p95 spread (5.66 ms vs. 14.57 ms) and sample-to-sample variance visible across `sealEnvelope` runs.<br/><sup>2</sup> `SEALED` trial-decapsulation stops at the first matching blinded tag (4.85 ms on a first-slot hit); each additional non-matching wrap adds one 2.60 ms X-Wing decapsulation, scaling linearly with reader count.<br/><sup>3</sup> Exercised with 128 KiB chunks (3 chunks) to benchmark multi-chunk manifest assembly directly, although single envelopes allow up to 1 MiB.<br/><sup>4</sup> Single-process localhost simulation runs client, facilitator, and all four committee validators serially in one JS thread (~30+ pure-JS ML-DSA-65 sign/verify calls per round trip).</sub>
 
-Cross-language test vectors are verified across Rust, JavaScript, and Python in CI (an independent third-party cryptographic audit has not yet been published), and end-to-end live verification on `postfiat-wan-devnet-2` across `PUBLIC`, `PRIVATE`, multi-recipient, threaded, 320 KiB 3-chunk manifest, blinded `SEALED` (with rotated `epoch 1` keys), and x402 `402 → 200` flows is archived in [`devnet2-live-verification-20261127.json`](/evidence/message-protocol/devnet2-live-verification-20261127.json).
+### Live WAN Devnet Benchmarks (6 Rust Validators, `5-of-6` Quorum)
+
+Measured end-to-end against the live 6-validator `postfiat-wan-devnet-2` Rust fleet (`committee_epoch = 1`, `5-of-6` ML-DSA-65 FastPay quorum; TCP RTT from the client host ranges from `1.2 ms` to the co-located validator to `190.7–230.9 ms` to transcontinental quorum validators). Every transfer and x402 call verified `5/5` distinct active-committee ML-DSA-65 votes and `5/5` signed `FastPayApplyAckV1` acknowledgments:
+
+| Live WAN Operation (`postfiat-wan-devnet-2`, `5-of-6` Rust Quorum) | Samples | p50 | p95 | Min / Max |
+| --- | ---: | ---: | ---: | ---: |
+| FastPay v3 `owned_sign_v3` (`5-of-6` ML-DSA-65 quorum votes) | `15` | `1.13 s` | `2.67 s` | `0.95 s` / `2.67 s` |
+| FastPay v3 `owned_apply_v3` (`5-of-6` signed `FastPayApplyAckV1`) | `15` | `5.61 s` | `7.94 s` | `4.56 s` / `7.94 s` |
+| **FastPay v3 total end-to-end WAN finality** | `15` | **`6.80 s`** | **`9.16 s`** | `5.71 s` / `9.16 s` |
+| **x402 `402 → FastPay ML-DSA → 5-of-6 Rust quorum → 200`** | `10` | **`7.34 s`** | **`15.43 s`** | `6.31 s` / `15.43 s` |
+
+Comparing the two tables pinpoints where wall-clock time actually goes today: post-quantum cryptography is cheap (`~5–12 ms` per operation in pure JS, faster in native Rust), and `owned_sign_v3` on the co-located `1.2 ms` validator takes `375 ms` p50 (`1.13 s` across the `231 ms` transcontinental quorum). The bulk of current live finality (`4.6–5.4 s` per validator on `owned_apply_v3`, even at `1.2 ms` RTT) comes from the validator's current per-RPC full `16 MB` ledger read/clone and speculative-effect persistence path—not ML-DSA-65 verification. Moving FastPay apply to an incremental in-memory owned-object overlay is the path from current multi-second devnet finality down to the sub-second WAN RTT floor.
+
+Cross-language test vectors are verified across Rust, JavaScript, and Python in CI (an independent third-party cryptographic audit has not yet been published). Full live verification datasets from `postfiat-wan-devnet-2` are archived in [`devnet2-live-verification-20261127.json`](/evidence/message-protocol/devnet2-live-verification-20261127.json) (end-to-end `PUBLIC`, `PRIVATE`, multi-recipient, threaded, 320 KiB 3-chunk manifest, blinded `SEALED`, and rotated `epoch 1` flows) and [`devnet2-wan-fastpay-x402-20261127.json`](/evidence/message-protocol/devnet2-wan-fastpay-x402-20261127.json) (live WAN FastPay v3 and x402 order hashes plus per-validator RPC timings).
 
 ### Verifying & Decrypting an Anchored Envelope (Python SDK)
 
