@@ -3,7 +3,7 @@
 Canonical HTML page: https://postfiat.org/docs/fastpay/
 Canonical Markdown page: https://postfiat.org/agents/fastpay.md
 
-**FastPay** is the Post Fiat Ledger's consensusless payment lane for prefunded single-owner `PFT` objects (`1 PFT = 1,000,000 atoms`). Instead of waiting for block consensus, the payer (or an x402 facilitator) collects `>= 2f+1` distinct validator ML-DSA-65 approval votes directly to form a finality certificate in **one network round trip** (`25.6 ms` co-located; `274 ms` 1-RTT certificate finality and `319 ms` steady-state x402 `402 -> 200` settlement across a 3-continent `5-of-6` WAN quorum).
+**FastPay** is the Post Fiat Ledger's consensusless payment lane for prefunded single-owner `PFT` objects (`1 PFT = 1,000,000 atoms`). Instead of waiting for block consensus, the payer (or an x402 facilitator) collects `q = n - f` distinct validator ML-DSA-65 approval votes directly to form a finality certificate in **one network round trip** (`11.7 ms` co-located `owned_sign_v3`; `273 ms` p50 / `307 ms` p95 direct 1-RTT certificate finality and `322 ms` p50 / `350 ms` p95 x402 `402 -> 200` settlement across a 3-continent `5-of-5` active WAN quorum in a 6-node fleet, with `9.33 calls/s` across `K = 8` concurrent `OwnedObjectPool` calls).
 
 ---
 
@@ -11,18 +11,18 @@ Canonical Markdown page: https://postfiat.org/agents/fastpay.md
 
 | Use Case | Recommended Lane | Why |
 | --- | --- | --- |
-| Pay-per-call AI agent APIs & MCP tools (`x402`) | **FastPay (`OwnedTransferOrderV3`)** | Sub-second 1-RTT certificate finality (`~319 ms` WAN), immutable `order_hash` deduplication, 51-byte inline `request_hash` memo |
-| High-frequency `PFT` payouts & micropayments | **FastPay (`OwnedTransferOrderV3`)** | Consensusless parallel settlement with an `OwnedObjectPool`; indexed directly in `account_tx` and `tx` by `order_hash` |
+| Pay-per-call AI agent APIs & MCP tools (`x402`) | **FastPay (`OwnedTransferOrderV3`)** | Sub-second 1-RTT certificate finality (`322 ms` p50 / `350 ms` p95 WAN), immutable `order_hash` deduplication, 51-byte inline `request_hash` memo |
+| High-frequency `PFT` payouts & micropayments | **FastPay (`OwnedTransferOrderV3`)** | Consensusless parallel settlement with an `OwnedObjectPool` (`9.33 calls/s` at `K = 8`); indexed directly in `account_tx` and `tx` by `order_hash` |
 | Anchoring `pf.ptr` v5 messages with sub-second confirmation | **FastPay self-transfer or transfer** | Carries up to 4 memos (`<= 256 B` each, lowercase hex) without waiting for block consensus |
 | Transfers from an unwrapped account balance | **Consensus (`payment_v2`)** | No prior owned-object funding step needed |
 | Issued assets (`pfUSDC`, NAVCoins), escrows, NFTs, DEX offers | **Consensus (`issued_payment_v2`, etc.)** | FastPay v3 moves native `PFT` owned objects only |
 
 ### Choosing 1-RTT (`certificate`) vs. 2-RTT (`applied_quorum`) Finality
 
-| Finality Mode | Network Hops | WAN p50 (`5-of-6`) | When to Use |
+| Finality Mode | Network Hops | WAN p50 / p95 (`5-of-5` active) | When to Use |
 | --- | --- | ---: | --- |
-| **`certificate` (1-RTT)** | `owned_sign_v3` quorum (`>= 2f+1` votes) -> durable facilitator WAL `fsync` -> synchronous co-located validator apply -> async background quorum apply | **`274 ms`** direct / **`319 ms`** x402 | Default for x402 facilitators and paid APIs with a durable `FileCertificateStore` WAL and background apply worker. Funds are cryptographically locked by `>= 2f+1` validators before HTTP `200` returns. |
-| **`applied_quorum` (2-RTT)** | `owned_sign_v3` quorum + `owned_apply_v3` signed `FastPayApplyAckV1` quorum (`>= 2f+1` acks) | **`565 ms`** direct | Use when the caller must immediately spend the new output/change object across remote validators without a pre-split `OwnedObjectPool`, or when requiring `account_tx` indexing visibility before returning. |
+| **`certificate` (1-RTT)** | `owned_sign_v3` quorum (`>= 2f+1` votes) -> durable facilitator WAL `fsync` -> synchronous co-located validator apply -> async background quorum apply | **`273 / 307 ms`** direct / **`322 / 350 ms`** x402 | Default for x402 facilitators and paid APIs with a durable `FileCertificateStore` WAL and background apply worker. Funds are cryptographically locked by `>= 2f+1` validators before HTTP `200` returns. |
+| **`applied_quorum` (2-RTT)** | `owned_sign_v3` quorum + `owned_apply_v3` signed `FastPayApplyAckV1` quorum (`>= 2f+1` acks) | **`564 / 596 ms`** direct | Use when the caller must immediately spend the new output/change object across remote validators without a pre-split `OwnedObjectPool`, or when requiring `account_tx` indexing visibility before returning. |
 
 ---
 
@@ -57,9 +57,9 @@ min_fee_atoms = 25
               + inputs
 ```
 
-- **1-in / 1-out sweep** (`~5.8 KB` ML-DSA-65 signed order): `38 atoms` (`0.000038 PFT`)
-- **1-in / 2-out transfer with change**: `1,038 atoms` (`0.001038 PFT`)
-- **Multi-input merge** (up to 2,048 inputs): base + byte fee + 1 atom per input, zero new-object surcharge
+- **1-in / 1-out sweep** (`4,582 B` unsigned canonical order, `ceil / 512 = 9`): `35 atoms` (`0.000035 PFT`)
+- **1-in / 2-out transfer with change** (`8,513 B`, `ceil / 512 = 17`): `1,043 atoms` (`0.001043 PFT`)
+- **10-in / 1-out dust merge** (`5,590 B`, `ceil / 512 = 11`, up to 2,048 inputs via JSON-RPC v1): `46 atoms` (`0.000046 PFT`, zero new-object surcharge)
 - Per-account soft cap: **4,096 owned objects** (global ceiling 10,000,000). Merge dust periodically.
 
 ---
@@ -145,7 +145,7 @@ sent = send_fastpay(
     wallet=wallet,
     recipient_public_key_hex=recipient_pubkey_hex,
     amount=5_000,
-    fee=1_038,
+    fee=1_043,
     work_dir=Path("state/fastpay-journal/payout-001"),
 )
 
@@ -158,7 +158,8 @@ unwrapped = unwrap_fastpay(client, wallet=wallet, amount=50_000)
 
 `postfiat-node` exposes **FastPay RPC v2** (`postfiat-fastpay-rpc-v2`) over persistent **TLS 1.3 + mTLS** TCP sockets (`TCP_NODELAY = true`):
 
-- **Framing:** `[u8 version = 2][u32be body_len][canonical protobuf body]`, `64 KiB` cap.
+- **Framing & persistent idle timeout:** `[u8 version = 2][u32be body_len][canonical protobuf body]`, `64 KiB` cap. Idle persistent TLS 1.3 reads use `FASTPAY_V2_IDLE_READ_TIMEOUT_SECS = 300` (decoupled from shorter per-request `--timeout-ms` values) so sockets stay warm across consensus block pauses.
+- **Zero-`redb` hot path:** `owned_locks.wal` (`fdatasync`) + CRC32C-framed `fastpay_speculative_effects_v2.wal` + post-block `chain_tip_generation.v1` / `fastpay_ledger_snapshot.v1.json` sidecars + commit-time WAL pruning keep both steady-state and post-block RPCs off `redb`.
 - **Methods:**
   - `1` (`owned_sign_v3`): **`7,611 B`** on the wire (uses `owner_is_change_recipient` flag to avoid repeating the 1,952-byte pubkey).
   - `2` (`owned_apply_v3_fast`): **`16,716 B`** on the wire (`lock_id` + quorum `votes[]`, backed by a 256-entry validator order LRU).
@@ -216,18 +217,21 @@ Facilitators expose `GET /x402/certificates/:orderHash` to inspect quorum-apply 
 
 ---
 
-## 8. Live 3-Continent WAN Benchmarks (`postfiat-wan-devnet-2`, `5-of-6` Quorum)
+## 8. Live 3-Continent WAN Benchmarks (`postfiat-wan-devnet-2`, 5-of-5 Active Signers in 6-Node Fleet, Unfiltered Across 19 Blocks)
 
-- Co-located validator (`1.2 ms` RTT): `9.6 ms` sign + `15.9 ms` fast apply = **`25.6 ms` combined**
-- Direct FastPay v3 1-RTT certificate finality (`5-of-6` WAN): **`274 ms` p50** (`264 ms` min)
-- Direct FastPay v3 2-RTT applied quorum (`5-of-6` WAN): **`565 ms` p50** (`539 ms` min)
-- Steady-state intra-block x402 `402 -> 200` 1-RTT MCP settlement (`5-of-6` WAN, client co-located with facilitator): **`319 ms` p50**, `344 ms` p95 (`N = 20`, `300-348 ms` min/max; remote agents add `2 x client-to-facilitator RTT`; unfiltered `N = 50` across block anchors saw `351 ms` p50 / `1.51 s` p95 under 5-of-5 active keys)
-- Full evidence JSON: https://postfiat.org/evidence/message-protocol/devnet2-wan-fastpay-x402-20261128.json
+- Co-located validator (`~2 ms` bare RTT): `owned_sign_v3` **`11.7 ms` p50 / `18.3 ms` p95** (`32.1 ms` max); `owned_apply_v3_fast` **`16.6 ms` p50 / `23.0 ms` p95**; `0` hot-path `redb` opens and `0` cache misses across `1,370` server RPCs
+- Direct FastPay v3 1-RTT certificate assembly (WAN, `230 ms` bare max RTT, `N = 50` unfiltered across 7 blocks, 300 s persistent TLS idle timeout): **`273.0 ms` p50 / `306.6 ms` p95** (`258.1 ms` min / `369.1 ms` max; post-block p50 `279.2 ms` vs steady-state `271.9 ms`)
+- Direct FastPay v3 2-RTT applied quorum (WAN, `N = 50` unfiltered across 7 blocks): **`563.8 ms` p50 / `596.0 ms` p95** (`529.1 ms` min / `662.3 ms` max)
+- Full x402 `402 -> 200` 1-RTT MCP settlement (WAN, `N = 50` unfiltered across 7 blocks, co-located client/facilitator; remote agents add `2 x client RTT`): **`321.7 ms` p50 / `350.2 ms` p95** (`298.8 ms` min / `363.8 ms` max; post-block p50 `314.7 ms`, `0` retries, `0` unconfirmed certs)
+- Concurrent `OwnedObjectPool` x402 burst (`K = 8` parallel calls x 4 waves = `32` settlements): **`851.4 ms` p50 wave wall-clock (`9.33 calls/s` mean)**, `602.7 ms` per-call p50 / `865.6 ms` p95, `32/32` succeeded
+- Full evidence JSON: https://postfiat.org/evidence/message-protocol/devnet2-wan-fastpay-x402-20261128-r8.json
 
 ---
 
 ## Related Docs
 
+- FastPay v3 & x402 Engineering Blog: https://postfiat.org/blog/sub-second-post-quantum-fastpay-x402/
+- Post-Quantum Messaging Blog: https://postfiat.org/blog/post-quantum-messaging-fastpay-x402/
 - HTML FastPay Guide: https://postfiat.org/docs/fastpay/
 - Message Protocol & x402 Guide: https://postfiat.org/docs/message-protocol/
 - Connect an AI Agent (MCP): https://postfiat.org/agents/
