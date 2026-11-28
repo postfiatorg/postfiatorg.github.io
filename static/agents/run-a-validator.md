@@ -1,8 +1,9 @@
 # Run a Post Fiat Validator (L1v2)
 
-> **Status on 27 November 2026: not yet open to outside operators.** This page describes how the program will work. Parts of it are built and not yet released, so you cannot follow it end to end today:
+> **Status on 28 November 2026: not yet open to outside operators.** This page describes how the program will work. A first pre-release is out, but you cannot follow this page end to end today:
 >
-> - **Not released yet:** the signed release channel, `postfiat-node upgrade`, `postfiat-node top`, the read-replica RPC profiles, `postfiat-node tasknode-bind`, and the three-observer uptime feed. They are in review ([postfiatl1v2#286](https://github.com/postfiatorg/postfiatl1v2/pull/286), [#290](https://github.com/postfiatorg/postfiatl1v2/pull/290)).
+> - **Released as a pre-release:** [`v0.4.1-devnet2-p3`](https://github.com/postfiatorg/postfiatl1v2/releases/tag/v0.4.1-devnet2-p3) carries signed releases, `postfiat-node upgrade`, `postfiat-node top`, the read-replica RPC profiles and `postfiat-node tasknode-bind`. One developer holds all three release keys today, and the six Foundation validators do not run this release yet. A new node can join from a full snapshot; a pruned snapshot does not work yet ([postfiatl1v2#320](https://github.com/postfiatorg/postfiatl1v2/issues/320)).
+> - **Not running yet:** the three-observer uptime feed and the public read servers. There is no `releases.postfiat.org` yet; releases are on GitHub, and `--channel-url` names the manifest of the release you want.
 > - **Not built yet:** the commands to apply and be ratified as a validator.
 > - **Running today:** six Foundation validators on `postfiat-wan-devnet-2`. The uptime rule and the 14 days of grace are not enforced yet, and the $20 monthly credit is not paid yet.
 >
@@ -103,7 +104,7 @@ Every tagged public release (`linux-x86_64` and `linux-aarch64`) publishes:
 
 ### Pin the Release Keyset and Verify the Binary
 
-1. Install the pinned 2-of-3 release keyset (`postfiat.release_keyset.v1`) at `/etc/postfiat/release-keyset.json` (`0644`, `root:root`) and the 3-observer trust keyset at `/etc/postfiat/observer-keyset.json` (`0644`, `root:root`). Verify keyset fingerprints out-of-band against the signed release announcement.
+1. Install the pinned 2-of-3 release keyset (`postfiat.release_keyset.v1`) at `/etc/postfiat/release-keyset.json` (`0644`, `root:root`) and the 3-observer trust keyset at `/etc/postfiat/observer-keyset.json` (`0644`, `root:root`). The keyset is the root of trust: take it from this site ([`/keys/release-keyset-devnet2-v1.json`](/keys/release-keyset-devnet2-v1.json)), not from the place you download the release. Its SHA-256 is `db8a71a1526f0ac234a209c622743418cb95e56e36e79a0cc197fe786cd99851`; `verify-release` prints the SHA-256 of the keyset it used, and the two must match. Today all three release keys are held by the one Post Fiat developer; two signatures show the release came from that key holder unaltered, not that two people checked it.
 2. Fetch the release manifest and architecture-matched binary:
 
 ```bash
@@ -114,16 +115,27 @@ case "$ARCH" in
   *) echo "Unsupported architecture: $ARCH" >&2; exit 1 ;;
 esac
 
-RELEASE_BASE="https://releases.postfiat.org/latest"
+# The release to install. Releases are listed at
+# https://github.com/postfiatorg/postfiatl1v2/releases
+RELEASE_TAG="v0.4.1-devnet2-p3"
+RELEASE_BASE="https://github.com/postfiatorg/postfiatl1v2/releases/download/$RELEASE_TAG"
 curl -fsSL "$RELEASE_BASE/release-manifest.json" -o /tmp/release-manifest.json
 curl -fsSL "$RELEASE_BASE/postfiat-node-${PF_ARCH}" -o /tmp/postfiat-node
 chmod 0755 /tmp/postfiat-node
 
-# Fail-closed 2-of-3 ML-DSA-65 signature + SHA-256 verification before installing:
-/tmp/postfiat-node deployment-manifest-verify \
+# Check the download BEFORE running anything from it. A first install has no
+# trusted postfiat-node yet, and a binary must not be the one to say it is
+# genuine. verify-release is a short Python script from the source repository
+# (scripts/verify-release at the release tag); it only reads the three files.
+# It checks the two ML-DSA-65 signatures against the pinned keyset, and the
+# binary's size, SHA-256 and architecture against the manifest. It exits
+# non-zero, and you stop, if anything differs.
+curl -fsSL "https://raw.githubusercontent.com/postfiatorg/postfiatl1v2/$RELEASE_TAG/scripts/verify-release" -o verify-release
+python3 -m venv /tmp/pf-verify && /tmp/pf-verify/bin/pip install --quiet dilithium-py==1.5.1
+/tmp/pf-verify/bin/python verify-release \
   --manifest-file /tmp/release-manifest.json \
-  --trusted-publisher-key-file /etc/postfiat/release-keyset.json \
-  --runtime-binary-file /tmp/postfiat-node
+  --keyset-file /etc/postfiat/release-keyset.json \
+  --binary-file /tmp/postfiat-node
 
 sudo install -m 0755 -o root -g root /tmp/postfiat-node /usr/local/bin/postfiat-node
 sudo install -m 0644 -o root -g root /tmp/release-manifest.json /etc/postfiat/release-manifest.json
@@ -181,6 +193,7 @@ Run `--check` first to inspect whether the latest verified release is a **rollin
 
 ```bash
 postfiat-node upgrade --check \
+  --channel-url https://github.com/postfiatorg/postfiatl1v2/releases/download/<release-tag>/release-manifest.json \
   --keyset-file /etc/postfiat/release-keyset.json \
   --data-dir /var/lib/postfiat/validator-0 \
   --signer-guard-dir /var/lib/postfiat/signer-guard \
@@ -191,6 +204,7 @@ postfiat-node upgrade --check \
 
 ```bash
 sudo postfiat-node upgrade \
+  --channel-url https://github.com/postfiatorg/postfiatl1v2/releases/download/<release-tag>/release-manifest.json \
   --keyset-file /etc/postfiat/release-keyset.json \
   --data-dir /var/lib/postfiat/validator-0 \
   --signer-guard-dir /var/lib/postfiat/signer-guard \
@@ -199,8 +213,11 @@ sudo postfiat-node upgrade \
   --service-units postfiat-validator-0.service,postfiat-validator-0-rpc.service \
   --rpc-host 127.0.0.1 \
   --rpc-port 27650 \
-  --health-timeout-ms 60000
+  --health-timeout-ms 60000 \
+  --catch-up-source <another-node-host>:<its-rpc-port>
 ```
+
+`--catch-up-source` names the RPC server of another node of the chain. After a rollback your node is behind by the blocks made while the upgrade was tried, and a validator does not fetch them by itself. With this flag the rollback fetches and verifies them before it restarts the node. Without it, a rolled-back node reports `catch_up_needed` and you run `postfiat-node rpc-catch-up` by hand.
 
 What `postfiat-node upgrade` enforces in strict order:
 
@@ -218,7 +235,7 @@ What `postfiat-node upgrade` enforces in strict order:
 | `2` | Invalid CLI arguments or configuration error |
 | `3` | Security refusal: invalid 2-of-3 signature, checksum mismatch, chain mismatch, or signer-guard path overlap |
 | `4` | Preflight failure: insufficient free disk space (`< 2×` chain data) or unhealthy pre-upgrade state |
-| `5` | Post-upgrade health check failed; automatic binary + chain-state rollback succeeded |
+| `5` | Post-upgrade health check failed; automatic binary + chain-state rollback succeeded. If the report says `catch_up_needed`, the node is behind the chain: catch it up |
 | `6` | Critical: post-upgrade health check failed AND rollback verification failed (operator intervention required) |
 | `10` | `--check` mode: newer verified rolling or non-urgent upgrade available |
 | `11` | `--check` mode: `activation_height` upgrade inside advance warning window (action required before halt height) |
@@ -267,9 +284,9 @@ StartLimitBurst=5
 Type=simple
 User=postfiat-rpc
 Group=postfiat-rpc
-ExecStartPre=/usr/local/bin/postfiat-node deployment-manifest-verify \
+ExecStartPre=/usr/local/bin/postfiat-node release-manifest-verify \
   --manifest-file /etc/postfiat/release-manifest.json \
-  --trusted-publisher-key-file /etc/postfiat/release-keyset.json \
+  --keyset-file /etc/postfiat/release-keyset.json \
   --runtime-binary-file /usr/local/bin/postfiat-node
 ExecStart=/usr/local/bin/postfiat-node rpc-serve \
   --rpc-profile public-replica \
@@ -350,7 +367,7 @@ postfiat-node top \
   --data-dir /var/lib/postfiat/validator-0 \
   --uptime-feed-url https://uptime.postfiat.org/v1/feed.json \
   --observer-keyset-file /etc/postfiat/observer-keyset.json \
-  --release-manifest-url https://releases.postfiat.org/latest/release-manifest.json \
+  --release-manifest-url https://github.com/postfiatorg/postfiatl1v2/releases/download/v0.4.1-devnet2-p3/release-manifest.json \
   --release-keyset-file /etc/postfiat/release-keyset.json
 
 # One-shot JSON snapshot (schema: postfiat-node-top-snapshot-v1) for scripts/alerts:
