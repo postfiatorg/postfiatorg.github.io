@@ -304,12 +304,17 @@ export VALIDATOR_DOMAIN="example.com"
 Run `set_domain` using the fresh master key file. Copy the host backup into the container first so this works even if the container has been recreated or `/root/.ripple` has already been cleaned:
 
 ```bash
-docker exec postfiatd mkdir -p /root/.ripple
-docker cp ./validator-keys.json postfiatd:/root/.ripple/validator-keys.json
-docker exec postfiatd validator-keys set_domain "$VALIDATOR_DOMAIN" | tee ./set-domain-output.txt
-docker cp postfiatd:/root/.ripple/validator-keys.json ./validator-keys.domain.json
-chmod 600 ./validator-keys.domain.json
+(
+  umask 077
+  docker exec postfiatd mkdir -p /root/.ripple
+  docker cp ./validator-keys.json postfiatd:/root/.ripple/validator-keys.json
+  docker exec postfiatd validator-keys set_domain "$VALIDATOR_DOMAIN" | tee ./set-domain-output.txt
+  docker cp postfiatd:/root/.ripple/validator-keys.json ./validator-keys.domain.json
+)
+chmod 600 ./set-domain-output.txt ./validator-keys.domain.json
 ```
+
+`set-domain-output.txt` contains the validator token. The `umask 077` subshell creates new files readable by the owner only, and `chmod 600` also tightens files left by an earlier run, because `tee` and `docker cp` keep or copy the existing file mode instead.
 
 The output contains three important values:
 
@@ -328,7 +333,10 @@ printf 'PUBLIC_KEY=%s\nATTESTATION=%s\n' "$PUBLIC_KEY" "$ATTESTATION"
 Extract the token block into a local file. Treat this file as secret:
 
 ```bash
-sed -n '/^\[validator_token\]/,$p' ./set-domain-output.txt | sed '/^$/d' > ./validator-token.block
+(
+  umask 077
+  sed -n '/^\[validator_token\]/,$p' ./set-domain-output.txt | sed '/^$/d' > ./validator-token.block
+)
 chmod 600 ./validator-token.block
 grep -q '^\[validator_token\]$' ./validator-token.block
 ```
@@ -337,21 +345,28 @@ Do not inline the token through a shell variable. Multi-line validator tokens ar
 
 ## 7. Inject the Validator Token into `postfiatd.cfg`
 
-Use a file-based replace so there is exactly one `[validator_token]` section:
+Use a file-based replace so there is exactly one `[validator_token]` section. Both config copies hold the token once it is injected, so they are created owner-only too; the copied-in `postfiatd.cfg` keeps mode `600` inside the container, which the node (running as root, `user: "0:0"` in the compose file) can still read:
 
 ```bash
 cd "$POSTFIATD_DIR"
-docker cp postfiatd:/etc/postfiatd/postfiatd.cfg ./postfiatd.cfg
+(
+  umask 077
+  docker cp postfiatd:/etc/postfiatd/postfiatd.cfg ./postfiatd.cfg
+  chmod 600 ./postfiatd.cfg
 
-awk '
-  /^\[validator_token\]$/ {skip=1; next}
-  /^\[[^]]+\]$/ {skip=0}
-  !skip {print}
-' ./postfiatd.cfg > ./postfiatd.cfg.new
+  awk '
+    /^\[validator_token\]$/ {skip=1; next}
+    /^\[[^]]+\]$/ {skip=0}
+    !skip {print}
+  ' ./postfiatd.cfg > ./postfiatd.cfg.new
 
-printf '\n' >> ./postfiatd.cfg.new
-cat ./validator-token.block >> ./postfiatd.cfg.new
-printf '\n' >> ./postfiatd.cfg.new
+  {
+    printf '\n'
+    cat ./validator-token.block
+    printf '\n'
+  } >> ./postfiatd.cfg.new
+)
+chmod 600 ./postfiatd.cfg.new
 
 test "$(grep -c '^\[validator_token\]$' ./postfiatd.cfg.new)" -eq 1
 docker cp ./postfiatd.cfg.new postfiatd:/etc/postfiatd/postfiatd.cfg
@@ -364,12 +379,44 @@ After restart, remove master key material from the container:
 docker exec postfiatd rm -rf /root/.ripple
 ```
 
+Check the mode and owner of every token-bearing file on the host and of the config inside the container. This only reads; it prints one line per file and `token file modes OK` when every file is `600` and owned by you (host) or root (container):
+
+```bash
+cd "$POSTFIATD_DIR"
+bad=0
+for f in validator-keys.json validator-keys.domain.json validator-token.block set-domain-output.txt postfiatd.cfg postfiatd.cfg.new; do
+  [ -e "$f" ] || continue
+  stat -c 'host      %a %U:%G %n' "$f"
+  [ "$(stat -c '%a %U' "$f")" = "600 $(id -un)" ] || bad=1
+done
+docker exec postfiatd stat -c 'container %a %U:%G %n' /etc/postfiatd/postfiatd.cfg
+[ "$(docker exec postfiatd stat -c '%a %U' /etc/postfiatd/postfiatd.cfg)" = "600 root" ] || bad=1
+if [ "$bad" = 0 ]; then echo "token file modes OK"; else echo "token file modes NOT OK: chmod 600 the host files listed above; re-run the injection step for the container file"; fi
+```
+
+Once the node is back up with your key, delete the two config copies (re-run this if the node is still starting and nothing is removed):
+
+```bash
+cd "$POSTFIATD_DIR"
+docker exec postfiatd curl -s http://localhost:5005/ -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"method": "server_info", "params": [{}]}' \
+  | PUBLIC_KEY="$PUBLIC_KEY" python3 -c '
+import json, os, sys
+
+info = json.load(sys.stdin)["result"]["info"]
+if info.get("pubkey_validator") != os.environ["PUBLIC_KEY"]:
+    raise SystemExit("pubkey_validator does not match yet: config copies kept")
+' && rm -f ./postfiatd.cfg ./postfiatd.cfg.new && echo "config copies removed"
+```
+
 Keep these files secure and private:
 
 - `$POSTFIATD_DIR/validator-keys.json`
 - `$POSTFIATD_DIR/validator-keys.domain.json`
 - `$POSTFIATD_DIR/validator-token.block`
 - `$POSTFIATD_DIR/set-domain-output.txt`
+- `$POSTFIATD_DIR/postfiatd.cfg` and `$POSTFIATD_DIR/postfiatd.cfg.new` until the step above removes them
 
 Prefer moving private key/token files off the validator host after configuration.
 
