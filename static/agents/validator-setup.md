@@ -583,7 +583,53 @@ Choosing a less crowded provider for your public endpoint is the behavior the di
 
 ### `domain` is empty in `validator_info`
 
-The validator token in `/etc/postfiatd/postfiatd.cfg` probably does not contain the domain manifest. Re-run `validator-keys set_domain`, replace the token using the file-based method, and restart.
+The validator token in `/etc/postfiatd/postfiatd.cfg` probably does not contain the domain manifest. Issue a new token from the newest key file, replace the token using the file-based method, and restart.
+
+Use the newest key file, not the original one. Every `set_domain` or `create_token` run increments `token_sequence` in the key file inside the container, and section 6 saved that updated file as `validator-keys.domain.json`. The original `validator-keys.json` still holds the older sequence, so a re-run from it issues a manifest with a sequence the node has already seen, and the node does not use it.
+
+`set_domain` with the domain the key file already holds prints `The domain name was already set.` and issues no token. In that case the block below runs `validator-keys create_token`, which issues a new token with the next sequence and the same domain. The domain attestation does not change.
+
+Keep a dated backup of the current key file, issue the new token from it, save the updated file as the new `validator-keys.domain.json`, and check that the sequence increased before injecting the token:
+
+```bash
+cd "$POSTFIATD_DIR"
+KEYS=./validator-keys.domain.json
+[ -f "$KEYS" ] || KEYS=./validator-keys.json
+(
+  umask 077
+  BACKUP="./validator-keys.backup-$(date -u +%Y%m%dT%H%M%SZ).json"
+  cp -p "$KEYS" "$BACKUP"
+  chmod 600 "$BACKUP"
+  docker exec postfiatd mkdir -p /root/.ripple
+  docker cp "$KEYS" postfiatd:/root/.ripple/validator-keys.json
+  if [ "$(jq -r '.domain // ""' "$KEYS")" = "$VALIDATOR_DOMAIN" ]; then
+    docker exec postfiatd validator-keys create_token | tee ./set-domain-output.txt
+  else
+    docker exec postfiatd validator-keys set_domain "$VALIDATOR_DOMAIN" | tee ./set-domain-output.txt
+  fi
+  chmod 600 ./set-domain-output.txt
+  docker cp postfiatd:/root/.ripple/validator-keys.json ./validator-keys.domain.json
+  chmod 600 ./validator-keys.domain.json
+  echo "backup: $BACKUP"
+)
+```
+
+Read-only check: the new key file's `token_sequence` must be greater than the backup's and greater than the `seq` of the manifest the node runs now:
+
+```bash
+cd "$POSTFIATD_DIR"
+BACKUPS=(./validator-keys.backup-*.json)
+BACKUP="${BACKUPS[-1]}"
+OLD_SEQ="$(jq -r '.token_sequence' "$BACKUP")"
+NEW_SEQ="$(jq -r '.token_sequence' ./validator-keys.domain.json)"
+NODE_SEQ="$(docker exec postfiatd curl -s http://localhost:5005/ -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"method": "validator_info"}' | jq -r '.result.seq // 0')"
+printf 'token_sequence: backup %s, new %s; running manifest seq: %s\n' "$OLD_SEQ" "$NEW_SEQ" "$NODE_SEQ"
+test "$NEW_SEQ" -gt "$OLD_SEQ" && test "$NEW_SEQ" -gt "$NODE_SEQ" && echo "sequence increase OK"
+```
+
+If the check does not print `sequence increase OK`, do not inject the token. When the running `seq` is not lower than the new `token_sequence` (an older key file was used), run the two blocks again: each run starts from the `validator-keys.domain.json` the previous run saved and adds one to the sequence. When it prints `sequence increase OK`, extract the token block (section 6), inject it (section 7) and confirm `domain` and `seq` with the `validator_info` check in section 9. After a `create_token` run, `ATTESTATION` from section 6 is empty; keep the attestation already published for this domain.
 
 ### Token errors in logs
 
@@ -612,7 +658,7 @@ Fix the firewall immediately. Only SSH and TCP `2559` should be publicly reachab
 
 ### The operator already has validator keys
 
-Do not run `validator-keys create_keys`. Use the existing secure `validator-keys.json`, copy it into `/root/.ripple/validator-keys.json` only temporarily, then run `validator-keys set_domain` or `validator-keys create_token` as needed.
+Do not run `validator-keys create_keys`. Use the newest secure key file for this identity: `validator-keys.domain.json` if `set_domain` or `create_token` has ever been run with it, otherwise `validator-keys.json`. Copy it into `/root/.ripple/validator-keys.json` only temporarily, then run `validator-keys set_domain` or `validator-keys create_token` as needed. Afterwards save the updated `/root/.ripple/validator-keys.json` back as `validator-keys.domain.json`: each run that issues a token increments `token_sequence`, and a key file with an older sequence issues manifests the node does not use. Follow the blocks in "`domain` is empty in `validator_info`" above: they keep a dated backup and check that the sequence increased before the token is injected.
 
 ## Agent Safety Checklist
 
