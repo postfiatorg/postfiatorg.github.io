@@ -245,16 +245,17 @@ Measured single-threaded in **`Node.js v20.20.2`** using pure-JS **`@noble/post-
 
 ### Live WAN Devnet Benchmarks (6 Rust Validators, `5-of-6` Quorum)
 
-Measured end-to-end against the live 6-validator `postfiat-wan-devnet-2` Rust fleet (`committee_epoch = 1`, `5-of-6` ML-DSA-65 FastPay quorum; TCP RTT from the client host ranges from `1.2 ms` to the co-located validator to `190.7–230.9 ms` to transcontinental quorum validators). Every transfer and x402 call verified `5/5` distinct active-committee ML-DSA-65 votes and `5/5` signed `FastPayApplyAckV1` acknowledgments:
+Measured end-to-end over persistent TCP keep-alive connections against the live 6-validator `postfiat-wan-devnet-2` Rust fleet (`committee_epoch = 1`, `5-of-6` ML-DSA-65 FastPay quorum; TCP RTT from the client host ranges from `1.2 ms` to the co-located validator to `190.7–230.9 ms` to transcontinental quorum validators). Every transfer and x402 call verified `5/5` distinct active-committee ML-DSA-65 votes and `5/5` signed `FastPayApplyAckV1` acknowledgments with `0` full-history storage scans:
 
-| Live WAN Operation (`postfiat-wan-devnet-2`, `5-of-6` Rust Quorum) | Samples | p50 | p95 | Min / Max |
+| Live Operation (`postfiat-wan-devnet-2`, Rust Validators) | Samples | p50 | p95 | Min / Max |
 | --- | ---: | ---: | ---: | ---: |
-| FastPay v3 `owned_sign_v3` (`5-of-6` ML-DSA-65 quorum votes) | `15` | `1.13 s` | `2.67 s` | `0.95 s` / `2.67 s` |
-| FastPay v3 `owned_apply_v3` (`5-of-6` signed `FastPayApplyAckV1`) | `15` | `5.61 s` | `7.94 s` | `4.56 s` / `7.94 s` |
-| **FastPay v3 total end-to-end WAN finality** | `15` | **`6.80 s`** | **`9.16 s`** | `5.71 s` / `9.16 s` |
-| **x402 `402 → FastPay ML-DSA → 5-of-6 Rust quorum → 200`** | `10` | **`7.34 s`** | **`15.43 s`** | `6.31 s` / `15.43 s` |
+| Co-located validator (`1.2 ms` RTT) `owned_sign_v3` / `owned_apply_v3` | `15` | `18.1 ms` / `34.3 ms` | `24.1 ms` / `42.4 ms` | `16.2`–`24.1 ms` / `25.0`–`42.4 ms` |
+| FastPay v3 `owned_sign_v3` (`5-of-6` WAN ML-DSA-65 quorum votes) | `15` | `594 ms` | `5.70 s` | `353 ms` / `5.70 s` |
+| FastPay v3 `owned_apply_v3` (`5-of-6` WAN signed `FastPayApplyAckV1`) | `15` | `798 ms` | `1.11 s` | `546 ms` / `1.11 s` |
+| **FastPay v3 total end-to-end WAN finality (`5-of-6` quorum)** | `15` | **`1.49 s`** | **`6.49 s`** | `939 ms` / `6.49 s` |
+| **x402 `402 → FastPay ML-DSA → 5-of-6 Rust quorum → 200` (WAN)** | `10` | **`1.47 s`** | **`4.43 s`** | `1.18 s` / `4.43 s` |
 
-Comparing the two tables pinpoints where wall-clock time actually goes today: post-quantum cryptography is cheap (`~5–12 ms` per operation in pure JS, faster in native Rust), and `owned_sign_v3` on the co-located `1.2 ms` validator takes `375 ms` p50 (`1.13 s` across the `231 ms` transcontinental quorum). The bulk of current live finality (`4.6–5.4 s` per validator on `owned_apply_v3`, even at `1.2 ms` RTT) comes from the validator's current per-RPC full `16 MB` ledger read/clone and speculative-effect persistence path—not ML-DSA-65 verification. Moving FastPay apply to an incremental in-memory owned-object overlay is the path from current multi-second devnet finality down to the sub-second WAN RTT floor.
+Comparing the co-located validator row against the transcontinental quorum rows pinpoints where wall-clock time actually goes: post-quantum cryptography and Rust validator state execution are fast (`18.1 ms` vote + `34.3 ms` certified apply on the `1.2 ms` RTT validator, `~52 ms` combined—well inside a 200 ms regional finality budget). Across the transcontinental `5-of-6` quorum (`191–231 ms` WAN RTTs), total finality (`1.49 s` p50, `939 ms` min; `1.47 s` p50 for full x402 MCP calls) is dominated by wide-area TCP round trips carrying the ML-DSA-65 signed order and 5-vote certificate payloads rather than cryptographic verification or storage execution.
 
 Cross-language test vectors are verified across Rust, JavaScript, and Python in CI (an independent third-party cryptographic audit has not yet been published). Full live verification datasets from `postfiat-wan-devnet-2` are archived in [`devnet2-live-verification-20261127.json`](/evidence/message-protocol/devnet2-live-verification-20261127.json) (end-to-end `PUBLIC`, `PRIVATE`, multi-recipient, threaded, 320 KiB 3-chunk manifest, blinded `SEALED`, and rotated `epoch 1` flows) and [`devnet2-wan-fastpay-x402-20261127.json`](/evidence/message-protocol/devnet2-wan-fastpay-x402-20261127.json) (live WAN FastPay v3 and x402 order hashes plus per-validator RPC timings).
 
