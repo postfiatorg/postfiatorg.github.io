@@ -300,7 +300,7 @@ Measured on the live 6-validator `postfiat-wan-devnet-2` Rust fleet (`5-of-6` ML
 | Co-located validator (`1.2 ms` RTT) `owned_sign_v3` + `owned_apply_v3_fast` | **`9.6 ms` + `15.9 ms`** (`25.6 ms` combined) | `19.1 ms` min |
 | Direct FastPay v3 **1-RTT certificate finality** (`5-of-6` WAN) | **`274 ms`** | `264 ms` min |
 | Direct FastPay v3 **2-RTT applied quorum** (`5-of-6` WAN) | **`565 ms`** | `539 ms` min |
-| Full **x402 `402 → 200` 1-RTT MCP settlement** (WAN, steady-state) | **`319 ms`** | `300 ms` min / **`344 ms` p95** |
+| Full **x402 `402 → 200` 1-RTT MCP settlement** (WAN, intra-block steady-state, client co-located with facilitator) | **`319 ms`** | `300 ms` min / `344 ms` p95 (`N = 20`; remote agents add `2 × client-to-facilitator RTT`) |
 
 Full datasets: [`devnet2-wan-fastpay-x402-20261128.json`](/evidence/message-protocol/devnet2-wan-fastpay-x402-20261128.json).
 
