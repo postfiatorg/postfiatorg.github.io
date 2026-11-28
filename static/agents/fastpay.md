@@ -3,7 +3,7 @@
 Canonical HTML page: https://postfiat.org/docs/fastpay/
 Canonical Markdown page: https://postfiat.org/agents/fastpay.md
 
-**FastPay** is the Post Fiat Ledger's consensusless payment lane for prefunded single-owner `PFT` objects (`1 PFT = 1,000,000 atoms`). Instead of waiting for block consensus, the payer (or an x402 facilitator) collects `>= 2f+1` distinct validator ML-DSA-65 approval votes directly to form a finality certificate in **one network round trip** (`25.6 ms` co-located; `274 ms` 1-RTT certificate finality and `319 ms` steady-state x402 `402 -> 200` settlement across a 3-continent `5-of-6` WAN quorum).
+**FastPay** is the Post Fiat Ledger's consensusless payment lane for prefunded single-owner `PFT` objects (`1 PFT = 1,000,000 atoms`). Instead of waiting for block consensus, the payer (or an x402 facilitator) collects `q = n - f` distinct validator ML-DSA-65 approval votes directly to form a finality certificate in **one network round trip** (`27.0 ms` co-located; `274 ms` 1-RTT certificate finality and `319 ms` x402 `402 -> 200` settlement across a 3-continent `5-of-6` WAN quorum, with sub-second cross-block p95 tails).
 
 ---
 
@@ -57,9 +57,9 @@ min_fee_atoms = 25
               + inputs
 ```
 
-- **1-in / 1-out sweep** (`~5.8 KB` ML-DSA-65 signed order): `38 atoms` (`0.000038 PFT`)
-- **1-in / 2-out transfer with change**: `1,038 atoms` (`0.001038 PFT`)
-- **Multi-input merge** (up to 2,048 inputs): base + byte fee + 1 atom per input, zero new-object surcharge
+- **1-in / 1-out sweep** (`4,582 B` unsigned canonical order, `ceil / 512 = 9`): `35 atoms` (`0.000035 PFT`)
+- **1-in / 2-out transfer with change** (`8,513 B`, `ceil / 512 = 17`): `1,043 atoms` (`0.001043 PFT`)
+- **10-in / 1-out dust merge** (`5,590 B`, `ceil / 512 = 11`, up to 2,048 inputs via JSON-RPC v1): `46 atoms` (`0.000046 PFT`, zero new-object surcharge)
 - Per-account soft cap: **4,096 owned objects** (global ceiling 10,000,000). Merge dust periodically.
 
 ---
@@ -216,18 +216,20 @@ Facilitators expose `GET /x402/certificates/:orderHash` to inspect quorum-apply 
 
 ---
 
-## 8. Live 3-Continent WAN Benchmarks (`postfiat-wan-devnet-2`, `5-of-6` Quorum)
+## 8. Live 3-Continent WAN Benchmarks (`postfiat-wan-devnet-2`, 5-of-5 Active Signers in 6-Node Fleet, Unfiltered Across 14 Blocks)
 
-- Co-located validator (`1.2 ms` RTT): `9.6 ms` sign + `15.9 ms` fast apply = **`25.6 ms` combined**
-- Direct FastPay v3 1-RTT certificate finality (`5-of-6` WAN): **`274 ms` p50** (`264 ms` min)
-- Direct FastPay v3 2-RTT applied quorum (`5-of-6` WAN): **`565 ms` p50** (`539 ms` min)
-- Steady-state intra-block x402 `402 -> 200` 1-RTT MCP settlement (`5-of-6` WAN, client co-located with facilitator): **`319 ms` p50**, `344 ms` p95 (`N = 20`, `300-348 ms` min/max; remote agents add `2 x client-to-facilitator RTT`; unfiltered `N = 50` across block anchors saw `351 ms` p50 / `1.51 s` p95 under 5-of-5 active keys)
-- Full evidence JSON: https://postfiat.org/evidence/message-protocol/devnet2-wan-fastpay-x402-20261128.json
+- Co-located validator (`~2 ms` bare RTT): `owned_sign_v3` **`11.2 ms` p50 / `33.4 ms` p95** (`35.6 ms` max); `owned_apply_v3_fast` **`15.8 ms` p50 / `25.8 ms` p95**; `0` hot-path `redb` opens across 1,040 server RPCs
+- Direct FastPay v3 1-RTT certificate finality (WAN, `230 ms` bare max RTT, `N = 50` unfiltered across 7 blocks, 5-of-5 active signing keys): **`273.7 ms` p50 / `741.2 ms` p95** (`258.2 ms` min / `753.4 ms` max)
+- Direct FastPay v3 2-RTT applied quorum (WAN, `N = 50` unfiltered across 7 blocks): **`565.3 ms` p50 / `1,259.5 ms` p95** (`533.2 ms` min / `1,273.7 ms` max)
+- Full x402 `402 -> 200` 1-RTT MCP settlement (WAN, `N = 50` unfiltered across 7 blocks, client co-located with facilitator; remote agents add `2 x client-to-facilitator RTT`): **`319.4 ms` p50 / `788.2 ms` p95** (`295.4 ms` min / `818.9 ms` max, `0` retries, `0` unconfirmed certs)
+- Full evidence JSON: https://postfiat.org/evidence/message-protocol/devnet2-wan-fastpay-x402-20261128-r7.json
 
 ---
 
 ## Related Docs
 
+- FastPay v3 & x402 Engineering Blog: https://postfiat.org/blog/sub-second-post-quantum-fastpay-x402/
+- Post-Quantum Messaging Blog: https://postfiat.org/blog/post-quantum-messaging-fastpay-x402/
 - HTML FastPay Guide: https://postfiat.org/docs/fastpay/
 - Message Protocol & x402 Guide: https://postfiat.org/docs/message-protocol/
 - Connect an AI Agent (MCP): https://postfiat.org/agents/
