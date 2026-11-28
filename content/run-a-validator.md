@@ -226,8 +226,11 @@ sudo postfiat-node upgrade \
   --service-units postfiat-validator-0.service,postfiat-validator-0-rpc.service \
   --rpc-host 127.0.0.1 \
   --rpc-port 27650 \
-  --health-timeout-ms 60000
+  --health-timeout-ms 60000 \
+  --catch-up-source <another-node-host>:<its-rpc-port>
 ```
+
+`--catch-up-source` names the RPC server of another node of the chain. After a rollback your node is behind by the blocks made while the upgrade was tried, and a validator does not fetch them by itself. With this flag the rollback fetches and verifies them before it restarts the node. Without it, a rolled-back node reports `catch_up_needed` and you run `postfiat-node rpc-catch-up` by hand.
 
 What `postfiat-node upgrade` enforces in strict order:
 
@@ -245,7 +248,7 @@ What `postfiat-node upgrade` enforces in strict order:
 | `2` | Invalid CLI arguments or configuration error |
 | `3` | Security refusal: invalid 2-of-3 signature, checksum mismatch, chain mismatch, or signer-guard path overlap |
 | `4` | Preflight failure: insufficient free disk space (`< 2×` chain data) or unhealthy pre-upgrade state |
-| `5` | Post-upgrade health check failed; automatic binary + chain-state rollback succeeded |
+| `5` | Post-upgrade health check failed; automatic binary + chain-state rollback succeeded. If the report says `catch_up_needed`, the node is behind the chain: catch it up |
 | `6` | Critical: post-upgrade health check failed AND rollback verification failed (operator intervention required) |
 | `10` | `--check` mode: newer verified rolling or non-urgent upgrade available |
 | `11` | `--check` mode: `activation_height` upgrade inside advance warning window (action required before halt height) |
