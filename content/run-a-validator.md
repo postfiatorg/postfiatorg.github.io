@@ -19,9 +19,10 @@ copyMarkdownStatus: "Full L1v2 validator guide copied."
 copyMarkdownId: "pftL1v2ValidatorCopyTool"
 ---
 
-> **Status on 28 November 2026: not yet open to outside operators.** This page describes how the program will work. Parts of it are built and not yet released, so you cannot follow it end to end today:
+> **Status on 28 November 2026: not yet open to outside operators.** This page describes how the program will work. A first pre-release is out, but you cannot follow this page end to end today:
 >
-> - **Not released yet:** the signed release channel, `postfiat-node upgrade`, `postfiat-node top`, the read-replica RPC profiles, `postfiat-node tasknode-bind`, and the three-observer uptime feed. The code is in the repository; no release has been published, and fixes from its review are still going in. A new node also cannot yet be seeded on the devnet ([postfiatl1v2#320](https://github.com/postfiatorg/postfiatl1v2/issues/320)).
+> - **Released as a pre-release:** [`v0.4.1-devnet2-p3`](https://github.com/postfiatorg/postfiatl1v2/releases/tag/v0.4.1-devnet2-p3) carries signed releases, `postfiat-node upgrade`, `postfiat-node top`, the read-replica RPC profiles and `postfiat-node tasknode-bind`. One developer holds all three release keys today, and the six Foundation validators do not run this release yet. A new node can join from a full snapshot; a pruned snapshot does not work yet ([postfiatl1v2#320](https://github.com/postfiatorg/postfiatl1v2/issues/320)).
+> - **Not running yet:** the three-observer uptime feed and the public read servers. There is no `releases.postfiat.org` yet; releases are on GitHub, and `--channel-url` names the manifest of the release you want.
 > - **Not built yet:** the commands to apply and be ratified as a validator.
 > - **Running today:** six Foundation validators on `postfiat-wan-devnet-2`. The uptime rule and the 14 days of grace are not enforced yet, and the $20 monthly credit is not paid yet.
 >
@@ -122,7 +123,7 @@ Every tagged public release (`linux-x86_64` and `linux-aarch64`) publishes:
 
 ### Pin the Release Keyset and Verify the Binary
 
-1. Install the pinned 2-of-3 release keyset (`postfiat.release_keyset.v1`) at `/etc/postfiat/release-keyset.json` (`0644`, `root:root`) and the 3-observer trust keyset at `/etc/postfiat/observer-keyset.json` (`0644`, `root:root`). The keyset is the root of trust: take it from this site, not from the place you download the release, and compare its SHA-256 with the one `verify-release` prints. Today all three release keys are held by the one Post Fiat developer; two signatures show the release came from that key holder unaltered, not that two people checked it.
+1. Install the pinned 2-of-3 release keyset (`postfiat.release_keyset.v1`) at `/etc/postfiat/release-keyset.json` (`0644`, `root:root`) and the 3-observer trust keyset at `/etc/postfiat/observer-keyset.json` (`0644`, `root:root`). The keyset is the root of trust: take it from this site ([`/keys/release-keyset-devnet2-v1.json`](/keys/release-keyset-devnet2-v1.json)), not from the place you download the release. Its SHA-256 is `db8a71a1526f0ac234a209c622743418cb95e56e36e79a0cc197fe786cd99851`; `verify-release` prints the SHA-256 of the keyset it used, and the two must match. Today all three release keys are held by the one Post Fiat developer; two signatures show the release came from that key holder unaltered, not that two people checked it.
 2. Fetch the release manifest and architecture-matched binary:
 
 ```bash
@@ -133,7 +134,10 @@ case "$ARCH" in
   *) echo "Unsupported architecture: $ARCH" >&2; exit 1 ;;
 esac
 
-RELEASE_BASE="https://releases.postfiat.org/latest"
+# The release to install. Releases are listed at
+# https://github.com/postfiatorg/postfiatl1v2/releases
+RELEASE_TAG="v0.4.1-devnet2-p3"
+RELEASE_BASE="https://github.com/postfiatorg/postfiatl1v2/releases/download/$RELEASE_TAG"
 curl -fsSL "$RELEASE_BASE/release-manifest.json" -o /tmp/release-manifest.json
 curl -fsSL "$RELEASE_BASE/postfiat-node-${PF_ARCH}" -o /tmp/postfiat-node
 chmod 0755 /tmp/postfiat-node
@@ -145,7 +149,7 @@ chmod 0755 /tmp/postfiat-node
 # It checks the two ML-DSA-65 signatures against the pinned keyset, and the
 # binary's size, SHA-256 and architecture against the manifest. It exits
 # non-zero, and you stop, if anything differs.
-curl -fsSL "https://raw.githubusercontent.com/postfiatorg/postfiatl1v2/<release-tag>/scripts/verify-release" -o verify-release
+curl -fsSL "https://raw.githubusercontent.com/postfiatorg/postfiatl1v2/$RELEASE_TAG/scripts/verify-release" -o verify-release
 python3 -m venv /tmp/pf-verify && /tmp/pf-verify/bin/pip install --quiet dilithium-py==1.5.1
 /tmp/pf-verify/bin/python verify-release \
   --manifest-file /tmp/release-manifest.json \
@@ -208,6 +212,7 @@ Run `--check` first to inspect whether the latest verified release is a **rollin
 
 ```bash
 postfiat-node upgrade --check \
+  --channel-url https://github.com/postfiatorg/postfiatl1v2/releases/download/<release-tag>/release-manifest.json \
   --keyset-file /etc/postfiat/release-keyset.json \
   --data-dir /var/lib/postfiat/validator-0 \
   --signer-guard-dir /var/lib/postfiat/signer-guard \
@@ -218,6 +223,7 @@ postfiat-node upgrade --check \
 
 ```bash
 sudo postfiat-node upgrade \
+  --channel-url https://github.com/postfiatorg/postfiatl1v2/releases/download/<release-tag>/release-manifest.json \
   --keyset-file /etc/postfiat/release-keyset.json \
   --data-dir /var/lib/postfiat/validator-0 \
   --signer-guard-dir /var/lib/postfiat/signer-guard \
@@ -380,7 +386,7 @@ postfiat-node top \
   --data-dir /var/lib/postfiat/validator-0 \
   --uptime-feed-url https://uptime.postfiat.org/v1/feed.json \
   --observer-keyset-file /etc/postfiat/observer-keyset.json \
-  --release-manifest-url https://releases.postfiat.org/latest/release-manifest.json \
+  --release-manifest-url https://github.com/postfiatorg/postfiatl1v2/releases/download/v0.4.1-devnet2-p3/release-manifest.json \
   --release-keyset-file /etc/postfiat/release-keyset.json
 
 # One-shot JSON snapshot (schema: postfiat-node-top-snapshot-v1) for scripts/alerts:
