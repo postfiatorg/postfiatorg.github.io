@@ -1,20 +1,21 @@
 {
-  "schema": "pf-wan-devnet2-fastpay-x402-bench-v1",
-  "generated_at_utc": "2026-11-27T23:17:55.554Z",
+  "schema": "pf-wan-devnet2-fastpay-x402-bench-v2",
+  "generated_at_utc": "2026-11-28T00:42:23.920Z",
   "chain_id": "postfiat-wan-devnet-2",
-  "release": "train-a-r1",
-  "git_revision": "d65660fa4a8ee6c379505282737326b86c6acc41",
+  "release": "train-a-r3",
+  "git_revision": "b9b02432",
+  "transport": "persistent_tcp_keepalive",
   "storage": {
     "backend": "redb",
     "backend_version": "4.2.0",
-    "bytes_read": 16179152,
+    "bytes_read": 12945036,
     "bytes_written": 0,
     "commitment_version": "postfiat.replicated_state.v2",
     "committed_write_transactions": 0,
     "durable_commit_micros": 0,
-    "finalized_block_hash": "1f62fd9eff33722bde6a9cefcb531486f1742cbe69238c67b1249d5b25ac0ba07f8ef4bb77adc53322eac0f9b8a4f09a",
-    "finalized_height": 1935,
-    "finalized_state_root": "0097e3148ae031bef4f4ea5d37dd69906a7c4fb294bcca977dc1e836fcc95c7fb32bd305b110bd3b04bf33e9689917b0",
+    "finalized_block_hash": "7d09a8d0c4b775229587f7d0d0c7fede14438646dfb9d7a9bde66509f5d69ba58018bf27cfd6071191962ca50cc7396c",
+    "finalized_height": 1941,
+    "finalized_state_root": "b8b6bc555c5061699ec76612c8902d2dada1e2398cef08f75287625d14593e58b0cfa0499192f5f6066df4c256674990",
     "fsync_count": 0,
     "full_history_bytes_read": 0,
     "full_history_records_read": 0,
@@ -24,13 +25,13 @@
     "last_full_verification_height": 927,
     "last_rebuild_height": 927,
     "migration_packet_root": "8aa42f0d6014be2b34efbd2aff90782e1c21856646cbc5d9ede405215ced0401f7b805a86d5b7279205493c806ae8f8e",
-    "ordered_batch_count": 1935,
-    "ordered_history_accumulator": "ee10cf684a531926a7917cf4b05480eba320e7da0e795c1088844be051d3036fc1d8bb926b13bd5efcfccff3a3c5c25c",
-    "pages_read": 15,
+    "ordered_batch_count": 1941,
+    "ordered_history_accumulator": "86de9e85b5499c4efc2b54f1b8c8d188a4956c7ce326d8ac6a5a6111bdd5a39f2f306b6931f50b453812d64ef92f5bb0",
+    "pages_read": 11,
     "pages_written": 0,
-    "read_transactions": 15,
+    "read_transactions": 11,
     "reason_code": "storage_full_verification_stale",
-    "records_read": 14,
+    "records_read": 10,
     "records_written": 0,
     "scheduled_activation_height": 930,
     "schema": "postfiat-storage-status-v1",
@@ -41,165 +42,323 @@
   },
   "committee_epoch": 1,
   "quorum": "5-of-6",
-  "height": 1935,
-  "x402_payee_objects_received": 11,
-  "x402_payee_total_atoms": 11000,
+  "height": 1941,
+  "payee_objects_received": 27,
+  "payee_total_atoms": 2700,
   "fastpay_v3_direct_wan": {
-    "quorum_vote_ms": {
+    "owner_sign_ms": {
       "n": 15,
-      "min": 950,
-      "p50": 1125.8,
-      "p95": 2673.1,
-      "max": 2673.1,
-      "mean": 1207.51
+      "min": 8.26,
+      "p50": 17.49,
+      "p95": 47.56,
+      "max": 47.56,
+      "mean": 20.59
     },
-    "apply_ack_ms": {
+    "quorum_vote_5_of_6_ms": {
       "n": 15,
-      "min": 4560.2,
-      "p50": 5608.8,
-      "p95": 7941.1,
-      "max": 7941.1,
-      "mean": 5838.08
+      "min": 352.63,
+      "p50": 593.98,
+      "p95": 5697,
+      "max": 5697,
+      "mean": 946.43
     },
-    "total_finality_ms": {
+    "quorum_vote_all_6_ms": {
       "n": 15,
-      "min": 5714.3,
-      "p50": 6796.3,
-      "p95": 9157.5,
-      "max": 9157.5,
-      "mean": 7096.95
-    }
+      "min": 358.91,
+      "p50": 706.8,
+      "p95": 5699.69,
+      "max": 5699.69,
+      "mean": 1070.58
+    },
+    "apply_ack_5_of_6_ms": {
+      "n": 15,
+      "min": 546.03,
+      "p50": 798.49,
+      "p95": 1111.83,
+      "max": 1111.83,
+      "mean": 807.23
+    },
+    "apply_ack_all_6_ms": {
+      "n": 15,
+      "min": 546.04,
+      "p50": 820.88,
+      "p95": 1788.93,
+      "max": 1788.93,
+      "mean": 884.11
+    },
+    "total_finality_5_of_6_ms": {
+      "n": 15,
+      "min": 939,
+      "p50": 1488.28,
+      "p95": 6494.11,
+      "max": 6494.11,
+      "mean": 1804.53
+    },
+    "total_finality_all_6_ms": {
+      "n": 15,
+      "min": 939.01,
+      "p50": 1551.85,
+      "p95": 6494.12,
+      "max": 6494.12,
+      "mean": 1881.41
+    },
+    "order_hashes": [
+      "cae28ffc1396c964f69dc064933b80def02edc9b55a3d845d04261e1fe4bfce2d4e4b523109e4b0bba87a2cae61360ac",
+      "7816dc6e58a656a6400de4ad757045258d0b0e37a625e323df8f9a31268f579fa66999d7f7adbe1664a874daa62512e0",
+      "b39ab573cde96698068130a9c10aaa2c9397d7a06d051d8368a71aed9740d5438291bd97c8362cade0c85f16dffff990",
+      "bd73a4ff7f90de1ff05577ee0665cba87b86e11c1be2e8f5e1abb4738f1ef6bbf08b6fec9a3f3b486b1108de6be417ee",
+      "8c0fc403ebfff19c491f76a67a0d0abb5e9f71702320ab1abaf67cd2f2bbacfbf78fd06e631f74f68ca5141e57fe507d",
+      "244e335b94e7639fc3fabf29a196c59cae4966e9f94084491facb8fc2d87d7a29b1f96e2c3bf80671ad43d7d67fefefd",
+      "ebb58a1468b4452581b48b8bd0c301ff2cad29f7c401f282fce42a8bf27cdc06716ac5d91ea70b03186ab60a9e818202",
+      "7a12a802b7920fef4b033676b82c63fc26605af2622334daffc10bc088b7fd7b2b1785e7419299ae0295939a2a05ff2d",
+      "bb25f67ac5825518a44ffefa91336f370235362574fce4d044331ee82060b14cf35d1a0f4a06ac6cbe48e4fadecb3689",
+      "2f66edadd7f3a0552b7640ddeeea194b9efa0455f621a4b7f839e03fb94ab27e4ae2d986276b19b4cee505abe49a2f6d",
+      "355a7604694ce140687d402b188ceeb6312247939612d60d0fe69def255055e66672ac22bf5025ca6bc668425e2fb361",
+      "39712f55ca17668ad1fa9bfe61f6191ac58a124c35f14436a6e7c114046d2d8be859457cc19eed06f2c0d65933acc214",
+      "4314b82795659bff08f461e9a6f136b51ad7a3ff0be34e665907db24b5cbc2ae9022543302b6d40804f954a94115cdfd",
+      "b534c45475757cdee011d7ceb6711ee70fe8966eae1398da5dcecd490836027725db2b0cb4271407a15e21d51e76970d",
+      "39ad6fa647a799877f908928b9565ea84a517262e8cefda6589bd17c048299d888808ff2c699c7d518b3040fba80603b"
+    ]
   },
   "x402_mcp_fastpay_wan": {
     "total_roundtrip_ms": {
       "n": 10,
-      "min": 6305.86,
-      "p50": 7342.1,
-      "p95": 15429.47,
-      "max": 15429.47,
-      "mean": 8574.14
+      "min": 1178.7,
+      "p50": 1470.75,
+      "p95": 4434.35,
+      "max": 4434.35,
+      "mean": 1781.92
     },
     "order_hashes": [
-      "726cdf7e53dc24d6f90ad27ac05e0305f585138f91371019f4e34549b0d2c9444a3499d6f7536ca69ff39c5e4cec38c2",
-      "623c0b8f5ef15fa506b7a7e23e30c100e96a14f74c6732b4ddeee1fe3982bba5cad01590b10556dc274ce8c0a133fb73",
-      "b9cb2a19b0f90248e29bd01be8f786e17ab75dd25b60f9bb13eb5074cb737de638cb0e5dc8d9f8f408db7bea6a65608f",
-      "41b3b314bd432dcd56cb3e12af90096649b3ef7f00a09740f3d3d8ed33fd5fe768d4c75f08bb3962c1a85200ad60b763",
-      "f54fd6caecdbc768c0cab46ea98db1394f5cbcc2fb9c68806c94953401327fbcb9b662c9adeb123ec3e013d97977feec",
-      "4f260018f99c05cf1042296b3448eb09b5ec53dd7102e6616342d68fbce59c9a2eed363f5170af13ea57b83f71894f8c",
-      "a748f419cb9c02f7ca1c1faf090b18301a90b19dd02bd82e41133bc7aa362bc5a43f606757963bb5139980fff6f18385",
-      "c290ee714b353da5bcfb489c734825347d4de59e55f6109bd5ed4ae80c2764a2553ae1feb4e82fb455c60fd408b5cce4",
-      "7c703fcc7214e22d51152eb12222df6b2994c8f35accdea57f97cd9db60c28a594a73dab5658661e2823a6f6782fdc0b",
-      "fc565430c25f18dd9406ca752624d4d8962f2fc9aa54f9f684aec0a1c7cee71f4125eb30d4367157865df300f37fe5bc",
-      "e7d803eb7812bf6ebda5c74587fcaaea60d44183635569865ebf4fd6a5e59a6f744371b9e8ca1ad567948336e3c5f463"
+      "2c2fb2103d4eb9e079cc72b2e832c90d50dee62856a62e54045bc34f347b2b67b2ba9447898f8a91da87d30828fa3422",
+      "b0f1e442d021db1db2a3379a24c698e5576645649b8332e0997085e4eec42500beb5e8ce491251418bc9692e062088f0",
+      "073bfa66c99390b1be93a0c656bc80fecd2d79728d9a4d630b55bd8767cb66a1f749d766f07faebad47a81507a3b20fc",
+      "90f847d1ec7396b3cc10f0006ef10f0200cd8d2c65f51cbd0b85df09dcecfdd55f1a530ce422f08ea87abaf28d7b53ad",
+      "748a1cb6a97528c0de3a75a5638f1994e1f3d0ad6ee0005f96cd8a0f0fe8d4f9fd09ed912ca33254821a5bb0e2943d34",
+      "e194a688f0f536b76f1ea30f144f85be8b6d520811d7367611f868c541e81a234543a2dd646d8eebbd632114a666816d",
+      "63ddfebc8864b63376031aa5f1cd1287106c1c06a0d14e44e92ab5fa840e9584334e646a189b8858e8118279fe8ecd25",
+      "35a8f56a722f8347cdc007327218e2408964526bec6de1a6453645b21d297f609322522a85c30625e78c6183b603c016",
+      "fedb9712ed7d36622a89b788abc02d004a0847ad0037bdc29eb342ad17a0c0f2c4b0bdd4de62fb5a1e4b8b753ed03408",
+      "a2f23beaa15f9a1251394b921250dfd059fc415c6d8416b06d3b13f3f050105c7437c913b1881eeec52fe00b155ecccf"
     ]
+  },
+  "per_validator_direct_rpc_ms": {
+    "validator-0": {
+      "owned_sign_v3": {
+        "n": 15,
+        "min": 241.56,
+        "p50": 474.87,
+        "p95": 694.74,
+        "max": 694.74,
+        "mean": 471.45
+      },
+      "owned_apply_v3": {
+        "n": 15,
+        "min": 256.6,
+        "p50": 656.8,
+        "p95": 752.26,
+        "max": 752.26,
+        "mean": 611.88
+      }
+    },
+    "validator-1": {
+      "owned_sign_v3": {
+        "n": 15,
+        "min": 275.99,
+        "p50": 473.65,
+        "p95": 579.64,
+        "max": 579.64,
+        "mean": 457.19
+      },
+      "owned_apply_v3": {
+        "n": 15,
+        "min": 398.05,
+        "p50": 624.25,
+        "p95": 810.43,
+        "max": 810.43,
+        "mean": 649.17
+      }
+    },
+    "validator-2": {
+      "owned_sign_v3": {
+        "n": 15,
+        "min": 16.17,
+        "p50": 18.08,
+        "p95": 24.11,
+        "max": 24.11,
+        "mean": 19.39
+      },
+      "owned_apply_v3": {
+        "n": 15,
+        "min": 24.97,
+        "p50": 34.3,
+        "p95": 42.41,
+        "max": 42.41,
+        "mean": 33.19
+      }
+    },
+    "validator-3": {
+      "owned_sign_v3": {
+        "n": 15,
+        "min": 254.31,
+        "p50": 494.81,
+        "p95": 5693.45,
+        "max": 5693.45,
+        "mean": 913.04
+      },
+      "owned_apply_v3": {
+        "n": 15,
+        "min": 493.08,
+        "p50": 717.55,
+        "p95": 1106.77,
+        "max": 1106.77,
+        "mean": 758.57
+      }
+    },
+    "validator-4": {
+      "owned_sign_v3": {
+        "n": 15,
+        "min": 346.06,
+        "p50": 535.8,
+        "p95": 586.71,
+        "max": 586.71,
+        "mean": 483.26
+      },
+      "owned_apply_v3": {
+        "n": 15,
+        "min": 540.77,
+        "p50": 626.36,
+        "p95": 815.75,
+        "max": 815.75,
+        "mean": 666.8
+      }
+    },
+    "validator-5": {
+      "owned_sign_v3": {
+        "n": 0,
+        "min": 0,
+        "p50": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0
+      },
+      "owned_apply_v3": {
+        "n": 15,
+        "min": 19.58,
+        "p50": 35.82,
+        "p95": 1788.6,
+        "max": 1788.6,
+        "mean": 162.54
+      }
+    }
   },
   "per_validator_x402_rpc_ms": {
     "validator-0": {
       "owned_sign_v3": {
         "n": 10,
-        "min": 957.38,
-        "p50": 1148.88,
-        "p95": 1534.01,
-        "max": 1534.01,
-        "mean": 1147.81
+        "min": 367.08,
+        "p50": 412.55,
+        "p95": 690.5,
+        "max": 690.5,
+        "mean": 489.37
       },
       "owned_apply_v3": {
         "n": 10,
-        "min": 4391.21,
-        "p50": 5389.94,
-        "p95": 14126.75,
-        "max": 14126.75,
-        "mean": 6235.14
+        "min": 637.74,
+        "p50": 690.44,
+        "p95": 920.76,
+        "max": 920.76,
+        "mean": 725.35
       }
     },
     "validator-1": {
       "owned_sign_v3": {
         "n": 10,
-        "min": 841.96,
-        "p50": 892.06,
-        "p95": 984.16,
-        "max": 984.16,
-        "mean": 896.22
+        "min": 344.74,
+        "p50": 520.65,
+        "p95": 592.13,
+        "max": 592.13,
+        "mean": 499.28
       },
       "owned_apply_v3": {
         "n": 10,
-        "min": 4054.29,
-        "p50": 4272.51,
-        "p95": 11627.88,
-        "max": 11627.88,
-        "mean": 4971.63
+        "min": 559.58,
+        "p50": 589.09,
+        "p95": 815.29,
+        "max": 815.29,
+        "mean": 658.97
       }
     },
     "validator-2": {
       "owned_sign_v3": {
         "n": 10,
-        "min": 327.6,
-        "p50": 375.36,
-        "p95": 425.92,
-        "max": 425.92,
-        "mean": 374.11
+        "min": 18.55,
+        "p50": 24.11,
+        "p95": 47.92,
+        "max": 47.92,
+        "mean": 26.26
       },
       "owned_apply_v3": {
         "n": 10,
-        "min": 4110.47,
-        "p50": 4941.86,
-        "p95": 5915.93,
-        "max": 5915.93,
-        "mean": 4940.13
+        "min": 49.17,
+        "p50": 54.79,
+        "p95": 73.37,
+        "max": 73.37,
+        "mean": 57.14
       }
     },
     "validator-3": {
       "owned_sign_v3": {
         "n": 10,
-        "min": 918.52,
-        "p50": 957,
-        "p95": 1036.62,
-        "max": 1036.62,
-        "mean": 954.06
+        "min": 387.67,
+        "p50": 475.98,
+        "p95": 689.91,
+        "max": 689.91,
+        "mean": 516.87
       },
       "owned_apply_v3": {
         "n": 10,
-        "min": 4193.19,
-        "p50": 4831.75,
-        "p95": 5739.47,
-        "max": 5739.47,
-        "mean": 4887.85
+        "min": 670.96,
+        "p50": 711.65,
+        "p95": 1048.08,
+        "max": 1048.08,
+        "mean": 785.11
       }
     },
     "validator-4": {
       "owned_sign_v3": {
         "n": 10,
-        "min": 899.78,
-        "p50": 970.81,
-        "p95": 1166.14,
-        "max": 1166.14,
-        "mean": 980.09
+        "min": 336.12,
+        "p50": 528.64,
+        "p95": 574.03,
+        "max": 574.03,
+        "mean": 521.16
       },
       "owned_apply_v3": {
         "n": 10,
-        "min": 4141.47,
-        "p50": 4639.71,
-        "p95": 5017.18,
-        "max": 5017.18,
-        "mean": 4496.97
+        "min": 552.21,
+        "p50": 586.21,
+        "p95": 770.72,
+        "max": 770.72,
+        "mean": 654.72
       }
     },
     "validator-5": {
       "owned_sign_v3": {
-        "n": 10,
-        "min": 230.4,
-        "p50": 368.59,
-        "p95": 2013.72,
-        "max": 2013.72,
-        "mean": 693.62
+        "n": 0,
+        "min": 0,
+        "p50": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0
       },
       "owned_apply_v3": {
         "n": 10,
-        "min": 4020.92,
-        "p50": 4638.37,
-        "p95": 6063.84,
-        "max": 6063.84,
-        "mean": 4723.3
+        "min": 36.71,
+        "p50": 51.18,
+        "p95": 89.49,
+        "max": 89.49,
+        "mean": 53.57
       }
     }
   }
