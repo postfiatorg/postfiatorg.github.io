@@ -17,6 +17,8 @@ Everything you need to understand Post Fiat, integrate with the network, run a v
 - **First Day onboarding:** [/docs/l1/start/first-day/](/docs/l1/start/first-day/)
 - **Architecture overview:** [/docs/l1/architecture/overview/](/docs/l1/architecture/overview/)
 - **RPC & Python quickstart:** [/docs/l1/python/quickstart/](/docs/l1/python/quickstart/)
+- **FastPay Guide for Agents & Developers:** [/docs/fastpay/](/docs/fastpay/) (plain Markdown for agents: [/agents/fastpay.md](/agents/fastpay.md))
+- **Post-Quantum Message Protocol & x402 Guide:** [/docs/message-protocol/](/docs/message-protocol/)
 - **Connect an AI agent to Task Node:** [/agents/](/agents/)
 - **Network status & release gates:** [/docs/l1/status/network-status/](/docs/l1/status/network-status/)
 - **Source repository:** https://github.com/postfiatorg/postfiatl1v2/tree/main/docs

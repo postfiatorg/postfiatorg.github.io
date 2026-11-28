@@ -352,6 +352,14 @@ The connect page lists every connected device with its last use. Revoke one, or 
 
   Start that account's sessions with `CODEX_HOME=~/.codex-work codex`.
 
+## Paying for APIs & Tools with FastPay (x402) {#fastpay}
+
+Agents that pay per request for HTTP APIs or MCP tools on the Post Fiat Ledger use **FastPay v3** (`OwnedTransferOrderV3`) with x402 v2 (`402 Payment Required` → `PAYMENT-SIGNATURE` → `200 OK`) for sub-second 1-RTT settlement (`~319 ms` steady-state across a 3-continent `5-of-6` WAN quorum, `25.6 ms` co-located).
+
+- **Full agent & developer guide:** [FastPay Guide for Agents & Developers](/docs/fastpay/)
+- **Direct Markdown for agents:** [`https://postfiat.org/agents/fastpay.md`](/agents/fastpay.md)
+- Covers wrapping/funding `PFT` into owned objects, `OwnedObjectPool` concurrency, `X402HttpClient` / `X402McpClient` budget & term pinning, Python `postfiat_rpc` (`wrap_fastpay` / `send_fastpay` / `unwrap_fastpay`), Direct TLS 1.3 Protobuf RPC v2, and mandatory anti-equivocation crash-recovery rules.
+
 ## Troubleshooting {#troubleshooting}
 
 - **Unauthorized (401).** The token was revoked or has been idle for 90 days. Run the installer again.
