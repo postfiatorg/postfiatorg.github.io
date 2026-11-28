@@ -1,0 +1,210 @@
+{
+  "schema": "pf-wan-devnet2-fastpay-x402-bench-v3",
+  "generated_at_utc": "2026-11-28T02:09:44.557Z",
+  "chain_id": "postfiat-wan-devnet-2",
+  "release": "train-a-r4",
+  "git_revision": "1e6c28e0a",
+  "committee_epoch": 1,
+  "quorum": "5-of-6",
+  "transport": "fastpay_rpc_v2_protobuf_direct_tls13_mtls",
+  "wire_bytes": {
+    "owned_sign_v3_v2": 7611,
+    "owned_apply_v3_fast_v2": 16716,
+    "fast_apply_lru_hits": 250,
+    "fast_apply_lru_fallbacks": 50
+  },
+  "fastpay_v3_direct_wan_v2": {
+    "owner_sign_ms": {
+      "n": 50,
+      "min": 8.17,
+      "p50": 14.55,
+      "p95": 39.53,
+      "max": 48.7,
+      "mean": 19.32
+    },
+    "quorum_vote_5_of_6_ms": {
+      "n": 50,
+      "min": 250.7,
+      "p50": 257.89,
+      "p95": 3728.92,
+      "max": 5970.22,
+      "mean": 665.58
+    },
+    "apply_ack_5_of_6_ms": {
+      "n": 50,
+      "min": 251.39,
+      "p50": 258.66,
+      "p95": 497.89,
+      "max": 1165.38,
+      "mean": 300.48
+    },
+    "cert_finality_1rtt_ms": {
+      "n": 50,
+      "min": 263.85,
+      "p50": 274.48,
+      "p95": 3777.63,
+      "max": 5990.02,
+      "mean": 684.9
+    },
+    "applied_quorum_2rtt_ms": {
+      "n": 50,
+      "min": 539.37,
+      "p50": 565.17,
+      "p95": 4288.82,
+      "max": 7185.45,
+      "mean": 1014.47
+    }
+  },
+  "per_validator_direct_v2_ms": {
+    "validator-0": {
+      "owned_sign_v3": {
+        "n": 50,
+        "min": 246.6,
+        "p50": 252.31,
+        "p95": 3726.48,
+        "max": 5967.9,
+        "mean": 659.6
+      },
+      "owned_apply_v3_fast": {
+        "n": 50,
+        "min": 247.54,
+        "p50": 253.58,
+        "p95": 489.66,
+        "max": 492.5,
+        "mean": 280.59
+      }
+    },
+    "validator-1": {
+      "owned_sign_v3": {
+        "n": 50,
+        "min": 204.95,
+        "p50": 211.09,
+        "p95": 471.28,
+        "max": 842.92,
+        "mean": 246.89
+      },
+      "owned_apply_v3_fast": {
+        "n": 50,
+        "min": 207.92,
+        "p50": 215.3,
+        "p95": 410.85,
+        "max": 415.51,
+        "mean": 238.74
+      }
+    },
+    "validator-2": {
+      "owned_sign_v3": {
+        "n": 50,
+        "min": 7.02,
+        "p50": 9.63,
+        "p95": 352.31,
+        "max": 454,
+        "mean": 51.89
+      },
+      "owned_apply_v3_fast": {
+        "n": 50,
+        "min": 12.06,
+        "p50": 15.94,
+        "p95": 27.87,
+        "max": 33.2,
+        "mean": 17.85
+      }
+    },
+    "validator-3": {
+      "owned_sign_v3": {
+        "n": 50,
+        "min": 245.98,
+        "p50": 246.46,
+        "p95": 527.06,
+        "max": 3252.99,
+        "mean": 333.11
+      },
+      "owned_apply_v3_fast": {
+        "n": 50,
+        "min": 246.29,
+        "p50": 248.74,
+        "p95": 486.89,
+        "max": 492.85,
+        "mean": 278.09
+      }
+    },
+    "validator-4": {
+      "owned_sign_v3": {
+        "n": 50,
+        "min": 204.55,
+        "p50": 205.23,
+        "p95": 450.48,
+        "max": 478.39,
+        "mean": 236.06
+      },
+      "owned_apply_v3_fast": {
+        "n": 50,
+        "min": 206.5,
+        "p50": 208.91,
+        "p95": 404.93,
+        "max": 1162.87,
+        "mean": 247.8
+      }
+    },
+    "validator-5": {
+      "owned_sign_v3": {
+        "n": 0,
+        "min": 0,
+        "p50": 0,
+        "p95": 0,
+        "max": 0,
+        "mean": 0
+      },
+      "owned_apply_v3_fast": {
+        "n": 50,
+        "min": 11.28,
+        "p50": 13.7,
+        "p95": 37.22,
+        "max": 3774.55,
+        "mean": 105.3
+      }
+    }
+  },
+  "x402_mcp_1rtt_certificate_wan_steady_state_n20": {
+    "total_roundtrip_ms": {
+      "n": 20,
+      "min": 300.44,
+      "p50": 319.19,
+      "p95": 344.07,
+      "max": 347.92,
+      "mean": 322.1
+    },
+    "unconfirmed_certs": 0,
+    "apply_retry_total": 0,
+    "final_convergence": {
+      "height": 1961,
+      "state_root": "bb9c76426d6b6911a14c2cc10c2a54e289f0379bd82a3c520230bf69fd5c9e5ff14e4388152bd5b5a82f692f79e07c64",
+      "block_tip_hash": "1bbf7b2f6df215c2f4cc8fb93cd31d0ebfc02bf9b4394e7c9f38dc751a3805720ca4b56bef40ec9475fb441cd65ea602"
+    }
+  },
+  "x402_mcp_1rtt_certificate_wan_cross_block_n50": {
+    "total_roundtrip_ms": {
+      "n": 50,
+      "min": 302.75,
+      "p50": 350.76,
+      "p95": 1506.22,
+      "max": 4515.6,
+      "mean": 550.46
+    },
+    "unconfirmed_certs": 0,
+    "apply_retry_total": 0,
+    "final_convergence": {
+      "height": 1959,
+      "state_root": "bb1f45425bbadf25cd38e51ab2ac539fdc3d50d4fe64d122996be7fd6fb589da93f346a70958583569ba73e705e81213",
+      "block_tip_hash": "19e95a7ad89af4515890202704fa6040ad251b20e1ce628ee5d8fbfff59d1023f5a24657abc8c87cf625685579452127"
+    }
+  },
+  "full_history_scans_all_6": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}
