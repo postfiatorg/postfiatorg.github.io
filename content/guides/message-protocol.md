@@ -8,7 +8,7 @@ date: 2026-11-27
 summary: "Canonical protobuf wire spec (pf.msg.v1, pf.ptr v5), X-Wing post-quantum encryption, Sui-style FastPay fees and account_tx indexing, Task Node reward payouts, and x402 agent payments."
 ---
 
-Post Fiat L1v2 standardizes human, wallet, and AI-agent messaging across one canonical protobuf specification (`postfiatl1v2/proto/pf/`), hybrid post-quantum encryption (**X-Wing**), content-addressed **IPFS** storage, sub-second **FastPay** transport, and **x402** machine-native payments.
+The Post Fiat Ledger standardizes human, wallet, and AI-agent messaging across one canonical protobuf specification (`postfiatl1v2/proto/pf/`), hybrid post-quantum encryption (**X-Wing**), content-addressed **IPFS** storage, sub-second **FastPay** transport, and **x402** machine-native payments.
 
 Pillars 1 (Governance), 4 (NFTs), 6 (On-Chain Identity), 7 (NAVCoin disclosures), and 10 (Hive Mind claim packets) all build on this wire format.
 
@@ -124,8 +124,8 @@ The block explorer decodes public `pf.msg.v1` envelopes using the published prot
 ```json
 {
   "transport": "fastpay_owned_transfer_v3",
-  "order_hash": "<64-hex-immutable-order-hash>",
-  "fee_atoms": 26,
+  "order_hash": "<96-hex-immutable-order-hash>",
+  "fee_atoms": 35,
   "memos": [
     {
       "memo_type": "70662e707472",
@@ -152,7 +152,7 @@ Post Fiat supports **x402 v2** (`PAYMENT-REQUIRED`, `PAYMENT-SIGNATURE`, `PAYMEN
 
 | Scheme | Asset & Lane | Finality | Deduplication Key |
 | --- | --- | --- | --- |
-| `exact` / `pf-fastpay-settled` | Native `PFT` over FastPay | 1-RTT quorum certificate (`~274–319 ms` WAN, `25.6 ms` co-located) | Immutable 48 B `order_hash` |
+| `exact` / `pf-fastpay-settled` | Native `PFT` over FastPay | 1-RTT quorum certificate (`273 ms` p50 / `307 ms` p95 direct WAN; `322 ms` p50 / `350 ms` p95 x402 WAN; `11.7 ms` co-located `owned_sign_v3`) | Immutable 48 B `order_hash` |
 | `exact` (consensus fallback) | `pfUSDC` via `issued_payment_v2` | Ordered consensus accepted receipt | Canonical `tx_hash` |
 
 ### End-to-End Flow
