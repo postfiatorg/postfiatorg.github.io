@@ -18,6 +18,7 @@ These guides document the protocol specifications, wire formats, security bounda
 
 ## Post Fiat L1v2 Core Chain & Local Privacy
 
+- **[FastPay Guide for Agents & Developers](/docs/fastpay/)** — End-to-end agent playbook for FastPay v3 funding, `OwnedObjectPool` concurrency, x402 HTTP/MCP payments, Direct TLS 1.3 Protobuf RPC v2, crash recovery, and safety invariants ([plain Markdown](/agents/fastpay.md)).
 - **[Post-Quantum Message Protocol, FastPay & x402 Guide](/docs/message-protocol/)** — Canonical protobuf envelopes (`pf.msg.v1`), `pf.ptr` v5 memos, X-Wing (`X25519 + ML-KEM-768`) encryption, Sui-style FastPay fees, and x402 agent payments.
 - **[Quantum-Resistant NFT Protocol & Burn-First Migration Guide](/docs/nft-protocol/)** — `pf.nft.metadata.v1`, keyed L1 storage, allowlisted burn-first migration from the old chain, collection policy, and post-quantum threat model.
 - **[Local Mac App (`PFSH03`) Install, Honest Privacy Model & Pause/Exit Guide](/docs/local-mac-app/)** — Native SwiftUI + Rust macOS app, local Seatbelt-sandboxed Binius proving, direct public validator RPC submission, benchmarks, Lean 4 coverage scope, and governance pause/exit runbooks.

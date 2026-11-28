@@ -146,13 +146,13 @@ The block explorer decodes public `pf.msg.v1` envelopes using the published prot
 
 ## 6. Agent Payments via x402 (+ Thin MCP Helper)
 
-Post Fiat supports **x402 v2** (`PAYMENT-REQUIRED`, `PAYMENT-SIGNATURE`, `PAYMENT-RESPONSE`) so APIs and MCP tools can charge AI agents per request with sub-second finality.
+Post Fiat supports **x402 v2** (`PAYMENT-REQUIRED`, `PAYMENT-SIGNATURE`, `PAYMENT-RESPONSE`) so APIs and MCP tools can charge AI agents per request with sub-second finality. For complete copy-pasteable JavaScript, Python, `OwnedObjectPool`, Direct TLS 1.3 Protobuf RPC v2, and crash-safety rules, see the **[FastPay Guide for Agents & Developers](/docs/fastpay/)** ([plain Markdown](/agents/fastpay.md)).
 
 ### Supported Settlement Lanes
 
 | Scheme | Asset & Lane | Finality | Deduplication Key |
 | --- | --- | --- | --- |
-| `exact` / `pf-fastpay-settled` | Native `PFT` over FastPay | ~200ms quorum certificate | Immutable `order_hash` |
+| `exact` / `pf-fastpay-settled` | Native `PFT` over FastPay | 1-RTT quorum certificate (`~274–319 ms` WAN, `25.6 ms` co-located) | Immutable 48 B `order_hash` |
 | `exact` (consensus fallback) | `pfUSDC` via `issued_payment_v2` | Ordered consensus accepted receipt | Canonical `tx_hash` |
 
 ### End-to-End Flow
