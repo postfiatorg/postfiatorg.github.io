@@ -221,7 +221,7 @@ Facilitators expose `GET /x402/certificates/:orderHash` to inspect quorum-apply 
 - Co-located validator (`1.2 ms` RTT): `9.6 ms` sign + `15.9 ms` fast apply = **`25.6 ms` combined**
 - Direct FastPay v3 1-RTT certificate finality (`5-of-6` WAN): **`274 ms` p50** (`264 ms` min)
 - Direct FastPay v3 2-RTT applied quorum (`5-of-6` WAN): **`565 ms` p50** (`539 ms` min)
-- Steady-state x402 `402 -> 200` 1-RTT MCP settlement (`5-of-6` WAN): **`319 ms` p50**, **`344 ms` p95** (`300-348 ms` min/max)
+- Steady-state intra-block x402 `402 -> 200` 1-RTT MCP settlement (`5-of-6` WAN, client co-located with facilitator): **`319 ms` p50**, `344 ms` p95 (`N = 20`, `300-348 ms` min/max; remote agents add `2 x client-to-facilitator RTT`; unfiltered `N = 50` across block anchors saw `351 ms` p50 / `1.51 s` p95 under 5-of-5 active keys)
 - Full evidence JSON: https://postfiat.org/evidence/message-protocol/devnet2-wan-fastpay-x402-20261128.json
 
 ---
