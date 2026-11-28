@@ -19,9 +19,9 @@ copyMarkdownStatus: "Full L1v2 validator guide copied."
 copyMarkdownId: "pftL1v2ValidatorCopyTool"
 ---
 
-> **Status on 27 November 2026: not yet open to outside operators.** This page describes how the program will work. Parts of it are built and not yet released, so you cannot follow it end to end today:
+> **Status on 28 November 2026: not yet open to outside operators.** This page describes how the program will work. Parts of it are built and not yet released, so you cannot follow it end to end today:
 >
-> - **Not released yet:** the signed release channel, `postfiat-node upgrade`, `postfiat-node top`, the read-replica RPC profiles, `postfiat-node tasknode-bind`, and the three-observer uptime feed. They are in review ([postfiatl1v2#286](https://github.com/postfiatorg/postfiatl1v2/pull/286), [#290](https://github.com/postfiatorg/postfiatl1v2/pull/290)).
+> - **Not released yet:** the signed release channel, `postfiat-node upgrade`, `postfiat-node top`, the read-replica RPC profiles, `postfiat-node tasknode-bind`, and the three-observer uptime feed. The code is in the repository; no release has been published, and fixes from its review are still going in. A new node also cannot yet be seeded on the devnet ([postfiatl1v2#320](https://github.com/postfiatorg/postfiatl1v2/issues/320)).
 > - **Not built yet:** the commands to apply and be ratified as a validator.
 > - **Running today:** six Foundation validators on `postfiat-wan-devnet-2`. The uptime rule and the 14 days of grace are not enforced yet, and the $20 monthly credit is not paid yet.
 >
@@ -122,7 +122,7 @@ Every tagged public release (`linux-x86_64` and `linux-aarch64`) publishes:
 
 ### Pin the Release Keyset and Verify the Binary
 
-1. Install the pinned 2-of-3 release keyset (`postfiat.release_keyset.v1`) at `/etc/postfiat/release-keyset.json` (`0644`, `root:root`) and the 3-observer trust keyset at `/etc/postfiat/observer-keyset.json` (`0644`, `root:root`). Verify keyset fingerprints out-of-band against the signed release announcement.
+1. Install the pinned 2-of-3 release keyset (`postfiat.release_keyset.v1`) at `/etc/postfiat/release-keyset.json` (`0644`, `root:root`) and the 3-observer trust keyset at `/etc/postfiat/observer-keyset.json` (`0644`, `root:root`). The keyset is the root of trust: take it from this site, not from the place you download the release, and compare its SHA-256 with the one `verify-release` prints. Today all three release keys are held by the one Post Fiat developer; two signatures show the release came from that key holder unaltered, not that two people checked it.
 2. Fetch the release manifest and architecture-matched binary:
 
 ```bash
@@ -138,11 +138,19 @@ curl -fsSL "$RELEASE_BASE/release-manifest.json" -o /tmp/release-manifest.json
 curl -fsSL "$RELEASE_BASE/postfiat-node-${PF_ARCH}" -o /tmp/postfiat-node
 chmod 0755 /tmp/postfiat-node
 
-# Fail-closed 2-of-3 ML-DSA-65 signature + SHA-256 verification before installing:
-/tmp/postfiat-node deployment-manifest-verify \
+# Check the download BEFORE running anything from it. A first install has no
+# trusted postfiat-node yet, and a binary must not be the one to say it is
+# genuine. verify-release is a short Python script from the source repository
+# (scripts/verify-release at the release tag); it only reads the three files.
+# It checks the two ML-DSA-65 signatures against the pinned keyset, and the
+# binary's size, SHA-256 and architecture against the manifest. It exits
+# non-zero, and you stop, if anything differs.
+curl -fsSL "https://raw.githubusercontent.com/postfiatorg/postfiatl1v2/<release-tag>/scripts/verify-release" -o verify-release
+python3 -m venv /tmp/pf-verify && /tmp/pf-verify/bin/pip install --quiet dilithium-py==1.5.1
+/tmp/pf-verify/bin/python verify-release \
   --manifest-file /tmp/release-manifest.json \
-  --trusted-publisher-key-file /etc/postfiat/release-keyset.json \
-  --runtime-binary-file /tmp/postfiat-node
+  --keyset-file /etc/postfiat/release-keyset.json \
+  --binary-file /tmp/postfiat-node
 
 sudo install -m 0755 -o root -g root /tmp/postfiat-node /usr/local/bin/postfiat-node
 sudo install -m 0644 -o root -g root /tmp/release-manifest.json /etc/postfiat/release-manifest.json
@@ -286,9 +294,9 @@ StartLimitBurst=5
 Type=simple
 User=postfiat-rpc
 Group=postfiat-rpc
-ExecStartPre=/usr/local/bin/postfiat-node deployment-manifest-verify \
+ExecStartPre=/usr/local/bin/postfiat-node release-manifest-verify \
   --manifest-file /etc/postfiat/release-manifest.json \
-  --trusted-publisher-key-file /etc/postfiat/release-keyset.json \
+  --keyset-file /etc/postfiat/release-keyset.json \
   --runtime-binary-file /usr/local/bin/postfiat-node
 ExecStart=/usr/local/bin/postfiat-node rpc-serve \
   --rpc-profile public-replica \
