@@ -293,17 +293,18 @@ Agents handling real `PFT` over FastPay **must** obey these six invariants:
 
 ## 8. Live WAN Performance Profile (`postfiat-wan-devnet-2`)
 
-Measured on the live 6-validator `postfiat-wan-devnet-2` Rust fleet (`5-of-5` active signing keys in epoch 1 with `validator-5` as a non-voting holder—zero straggler tolerance; `1.3–2.4 ms` co-located RTT to `230 ms` bare max transcontinental RTT; direct TLS 1.3 Protobuf v2, append-only `owned_locks.wal` + CRC32C speculative effect WAL, lock-free chain-tip sidecar, post-block snapshot sidecar + commit-time WAL pruning, `0` hot-path `redb` opens across 1,040 server RPCs, `0` full-history storage scans) across an unfiltered workload crossing `14` live consensus blocks (`N = 50` direct + `N = 50` x402):
+Measured on the live 6-validator `postfiat-wan-devnet-2` Rust fleet (`5-of-5` active signing keys in epoch 1 with `validator-5` as a non-voting holder; `1.3–2.4 ms` co-located RTT to `230 ms` bare max transcontinental RTT; direct TLS 1.3 Protobuf v2 with 300 s persistent idle timeout, append-only `owned_locks.wal` + CRC32C speculative effect WAL, lock-free chain-tip sidecar, post-block snapshot sidecar + commit-time WAL pruning, `0` hot-path `redb` opens and `0` cache misses across `1,370` server RPCs, `0` full-history storage scans) across an unfiltered 3-phase run crossing `19` live consensus blocks (`N = 50` direct + `N = 50` sequential x402 + `K = 8` concurrent `OwnedObjectPool` burst):
 
-| Operation (`N = 50` unfiltered cross-block, 5-of-5 active signers) | Min | p50 | p95 | Max |
+| Operation (unfiltered cross-block, 5-of-5 active signers) | Min | p50 | p95 | Max |
 | --- | ---: | ---: | ---: | ---: |
-| Co-located validator (`validator-2`, `~2 ms` RTT) `owned_sign_v3` | `9.0 ms` | **`11.2 ms`** | **`33.4 ms`** | `35.6 ms` |
-| Co-located validator (`validator-2`, `~2 ms` RTT) `owned_apply_v3_fast` | `12.7 ms` | **`15.8 ms`** | **`25.8 ms`** | `95.1 ms` |
-| Direct FastPay v3 **1-RTT certificate finality** (WAN) | `258.2 ms` | **`273.7 ms`** | **`741.2 ms`** | `753.4 ms` |
-| Direct FastPay v3 **2-RTT applied quorum** (WAN) | `533.2 ms` | **`565.3 ms`** | **`1,259.5 ms`** | `1,273.7 ms` |
-| Full **x402 `402 → 200` 1-RTT MCP settlement** (WAN, client co-located with facilitator; remote agents add `2 × client-to-facilitator RTT`) | `295.4 ms` | **`319.4 ms`** | **`788.2 ms`** | `818.9 ms` |
+| Co-located validator (`validator-2`, `~2 ms` RTT) `owned_sign_v3` (`N = 50`) | `9.7 ms` | **`11.7 ms`** | **`18.3 ms`** | `32.1 ms` |
+| Co-located validator (`validator-2`, `~2 ms` RTT) `owned_apply_v3_fast` (`N = 50`) | `13.0 ms` | **`16.6 ms`** | **`23.0 ms`** | `39.9 ms` |
+| Direct FastPay v3 **1-RTT certificate assembly** (`N = 50`, 7 blocks) | `258.1 ms` | **`273.0 ms`** | **`306.6 ms`** | `369.1 ms` |
+| Direct FastPay v3 **2-RTT applied quorum** (`N = 50`, 7 blocks) | `529.1 ms` | **`563.8 ms`** | **`596.0 ms`** | `662.3 ms` |
+| Full **x402 `402 → 200` 1-RTT MCP settlement** (`N = 50`, co-located client/facilitator; remote agents add `2 × client RTT`) | `298.8 ms` | **`321.7 ms`** | **`350.2 ms`** | `363.8 ms` |
+| Concurrent **`OwnedObjectPool` x402 burst** (`K = 8` parallel, `N = 32`, 4 waves) | `316.6 ms` | **`602.7 ms`** | **`865.6 ms`** | `868.5 ms` (`9.33 calls/s` mean) |
 
-Full evidence JSON: [`devnet2-wan-fastpay-x402-20261128-r7.json`](/evidence/message-protocol/devnet2-wan-fastpay-x402-20261128-r7.json).
+Full evidence JSON: [`devnet2-wan-fastpay-x402-20261128-r8.json`](/evidence/message-protocol/devnet2-wan-fastpay-x402-20261128-r8.json).
 
 ---
 

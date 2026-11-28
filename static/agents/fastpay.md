@@ -216,13 +216,14 @@ Facilitators expose `GET /x402/certificates/:orderHash` to inspect quorum-apply 
 
 ---
 
-## 8. Live 3-Continent WAN Benchmarks (`postfiat-wan-devnet-2`, 5-of-5 Active Signers in 6-Node Fleet, Unfiltered Across 14 Blocks)
+## 8. Live 3-Continent WAN Benchmarks (`postfiat-wan-devnet-2`, 5-of-5 Active Signers in 6-Node Fleet, Unfiltered Across 19 Blocks)
 
-- Co-located validator (`~2 ms` bare RTT): `owned_sign_v3` **`11.2 ms` p50 / `33.4 ms` p95** (`35.6 ms` max); `owned_apply_v3_fast` **`15.8 ms` p50 / `25.8 ms` p95**; `0` hot-path `redb` opens across 1,040 server RPCs
-- Direct FastPay v3 1-RTT certificate finality (WAN, `230 ms` bare max RTT, `N = 50` unfiltered across 7 blocks, 5-of-5 active signing keys): **`273.7 ms` p50 / `741.2 ms` p95** (`258.2 ms` min / `753.4 ms` max)
-- Direct FastPay v3 2-RTT applied quorum (WAN, `N = 50` unfiltered across 7 blocks): **`565.3 ms` p50 / `1,259.5 ms` p95** (`533.2 ms` min / `1,273.7 ms` max)
-- Full x402 `402 -> 200` 1-RTT MCP settlement (WAN, `N = 50` unfiltered across 7 blocks, client co-located with facilitator; remote agents add `2 x client-to-facilitator RTT`): **`319.4 ms` p50 / `788.2 ms` p95** (`295.4 ms` min / `818.9 ms` max, `0` retries, `0` unconfirmed certs)
-- Full evidence JSON: https://postfiat.org/evidence/message-protocol/devnet2-wan-fastpay-x402-20261128-r7.json
+- Co-located validator (`~2 ms` bare RTT): `owned_sign_v3` **`11.7 ms` p50 / `18.3 ms` p95** (`32.1 ms` max); `owned_apply_v3_fast` **`16.6 ms` p50 / `23.0 ms` p95**; `0` hot-path `redb` opens and `0` cache misses across `1,370` server RPCs
+- Direct FastPay v3 1-RTT certificate assembly (WAN, `230 ms` bare max RTT, `N = 50` unfiltered across 7 blocks, 300 s persistent TLS idle timeout): **`273.0 ms` p50 / `306.6 ms` p95** (`258.1 ms` min / `369.1 ms` max; post-block p50 `279.2 ms` vs steady-state `271.9 ms`)
+- Direct FastPay v3 2-RTT applied quorum (WAN, `N = 50` unfiltered across 7 blocks): **`563.8 ms` p50 / `596.0 ms` p95** (`529.1 ms` min / `662.3 ms` max)
+- Full x402 `402 -> 200` 1-RTT MCP settlement (WAN, `N = 50` unfiltered across 7 blocks, co-located client/facilitator; remote agents add `2 x client RTT`): **`321.7 ms` p50 / `350.2 ms` p95** (`298.8 ms` min / `363.8 ms` max; post-block p50 `314.7 ms`, `0` retries, `0` unconfirmed certs)
+- Concurrent `OwnedObjectPool` x402 burst (`K = 8` parallel calls x 4 waves = `32` settlements): **`851.4 ms` p50 wave wall-clock (`9.33 calls/s` mean)**, `602.7 ms` per-call p50 / `865.6 ms` p95, `32/32` succeeded
+- Full evidence JSON: https://postfiat.org/evidence/message-protocol/devnet2-wan-fastpay-x402-20261128-r8.json
 
 ---
 
